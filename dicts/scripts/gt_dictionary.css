@@ -1,0 +1,100 @@
+r {
+    display: block;
+    border: 1 solid gray;
+    margin-bottom: 1.33ex;
+    background-color: #eeeeee;
+}
+
+e {
+    display: block;
+    collapsible: yes;
+    not-collapsible-head: 1;
+    margin-bottom: 1.33ex;
+    background-color: #eeeeee;
+}
+
+l {
+	font-weight: bold;
+	color: blue;
+}
+
+lc
+ 	{
+    font-style: italic;
+    font-size: smaller;
+}
+
+lc:before {
+    content: "  ";  
+    font-style: italic;
+    font-size:small;
+}
+
+t + t:before {
+    content: ", ";
+    font-style: italic;
+}
+
+t {
+    display: block;
+    collapsible: yes;
+    not-collapsible-head: 1;
+    margin-bottom: 1.33ex;
+    background-color: white;
+}
+
+
+tg > t:before {
+	display: inline;
+    content: counter(n, decimal) ". ";
+    font-weight: bold;
+}
+
+tg {
+    display: block;
+    collapsible: yes;
+    not-collapsible-head: 1;
+    margin-bottom: 1.33ex;
+    background-color: #eeeeee;
+}
+
+x:after {
+	font-style: italic;
+}
+
+xt:before {
+    font-style: italic;
+    color: gray;
+    vertical-align: super;
+    content: " = ";
+    
+}
+ 
+
+mg {
+    display: block;
+    collapsible: yes;
+    border: 1 solid gray;
+    margin-bottom: 1.33ex;
+    background-color: #ffffff;
+}
+
+/*
+tg {
+    content: "; ";
+}
+*/
+
+xg > x:before {
+    collapsible: yes;
+    border: 1 solid gray;
+    margin-bottom: 1.33ex;
+    background-color: red;
+}
+
+xg:after {
+    display: block;
+    content: "; ";
+    collapsible: yes;
+}
+

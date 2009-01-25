@@ -141,13 +141,6 @@ $(DICT_PATH)/$(BIN)/$(MACDICT): $(DICT_PATH)/$(BIN)/$(DICT_XML) \
 
 
 
-
-
-
-
-
-
-
 # # saxonxsl smenob.xml ../_restruct/MyScripts/transform_nc.xsl > nobsme.xml
 
 
@@ -163,19 +156,15 @@ $(DICT_PATH)/$(BIN)/$(MACDICT): $(DICT_PATH)/$(BIN)/$(DICT_XML) \
 # 	@cd $(MACMAC) && make
 
 
+
 clean:
 	@echo
 	$(CLEAN)
-	rm -f $(DICT_PATH)/$(BIN)/*.xml
+	rm -f $(DICT_PATH)/$(BIN)/*
+	rm -f $(SMETESTING)/$(GEN_TMP)/* $(SMETESTING)/$(DICTWORDS)
 	@echo
 	$(END)
 	@echo
-
-cleann:
-#	@rm -f $(MACMAC)/$(NOBSME)
-
-cleans:
-	@rm -f $(SMETESTING)/*_v.xml $(SMETESTING)/*_n.xml $(SMETESTING)/*_a.xml $(SMETESTING)/*.paradigm $(SMETESTING)/dictwords.txt
 #	@rm -f bin/*fst bin/*dic bin/*lexc bin/*list bin/*html bin/*xml #macdict/smenob.xml macdict/nobsme.xml
 
 

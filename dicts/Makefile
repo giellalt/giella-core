@@ -87,7 +87,7 @@ $(DICT_PATH)/$(BIN)/$(MACDICT): $(DICT_PATH)/$(BIN)/$(DICT_XML) \
 	@echo
 	@echo "*** Generating paradigms. ***"
 	@echo
-	cd $(SMETESTING) && ./cips_gen-paradigms.sh $(DICTWORDS) $(DICT_HOME)/$(SCRIPTS)/$(RESTRPARAD) $(GEN_TMP)
+	cd $(SMETESTING) && ./gen-paradigms.sh $(DICTWORDS) $(DICT_HOME)/$(SCRIPTS)/$(RESTRPARAD) $(GEN_TMP)
 	@echo
 	@echo "*** Processing paradigmes. ***"
 	@echo

@@ -59,6 +59,109 @@
       <result>
 	<xsl:variable name="lemma" select="doc($file)/paradigm/lemma"/>
 	<xsl:variable name="pos" select="doc($file)/paradigm/pos"/>
+
+	<xsl:variable name="mini_paradigm">
+	  <mini_paradigm>
+	    <xsl:for-each select="doc($file)/paradigm/analysis">
+
+	      <xsl:choose>
+		<xsl:when test="$pos = 'a'">
+		  <xsl:choose>
+		    <xsl:when test="./@ms = 'Attr' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		    <xsl:when test="./@ms = 'Pl_Nom' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		    <xsl:when test="./@ms = 'Comp_Sg_Nom' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		    <xsl:when test="./@ms = 'Superl_Sg_Nom' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		  </xsl:choose>
+		</xsl:when>
+
+		<xsl:when test="$pos = 'n' and not(starts-with(./@ms, 'Prop'))">
+		  <xsl:choose>
+		    <xsl:when test="./@ms = 'Sg_Gen' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		    <xsl:when test="./@ms = 'Sg_Ill' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		    <xsl:when test="./@ms = 'Pl_Ill' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		  </xsl:choose>
+		</xsl:when>
+
+		<xsl:when test="$pos = 'n' and starts-with(./@ms, 'Prop')">
+		  <xsl:choose>
+		    <xsl:when test="ends-with(./@ms, 'Gen')">
+		      <xsl:if test="(./@ms = 'Prop_Sg_Gen' and not(. = '')) and 
+				    (./preceding-sibling::analysis[./@ms = 'Prop_Pl_Gen' and not(. = '')] or 
+				    ./following-sibling::analysis[./@ms = 'Prop_Pl_Gen' and not(. = '')])">
+			<xsl:copy-of select="."/>
+		      </xsl:if>
+
+		      <xsl:if test="(./@ms = 'Prop_Pl_Gen' and not(. = '')) and 
+				    not(./preceding-sibling::analysis[./@ms = 'Prop_Sg_Gen' and not(. = '')] or 
+				    ./following-sibling::analysis[./@ms = 'Prop_Sg_Gen' and not(. = '')])">
+			<xsl:copy-of select="."/>
+		      </xsl:if>
+		    </xsl:when>
+
+		    <xsl:when test="ends-with(./@ms, 'Ill')">
+		      <xsl:if test="(./@ms = 'Prop_Sg_Ill' and not(. = '')) and 
+				    (./preceding-sibling::analysis[./@ms = 'Prop_Pl_Ill' and not(. = '')] or 
+				    ./following-sibling::analysis[./@ms = 'Prop_Pl_Ill' and not(. = '')])">
+			<xsl:copy-of select="."/>
+		      </xsl:if>
+
+		      <xsl:if test="(./@ms = 'Prop_Pl_Ill' and not(. = '')) and 
+				    not(./preceding-sibling::analysis[./@ms = 'Prop_Sg_Ill' and not(. = '')] or 
+				    ./following-sibling::analysis[./@ms = 'Prop_Sg_Ill' and not(. = '')])">
+			<xsl:copy-of select="."/>
+		      </xsl:if>
+		    </xsl:when>
+		  </xsl:choose>
+		</xsl:when>
+
+		<xsl:when test="$pos = 'v'">
+		  <xsl:choose>
+		    <xsl:when test="(ends-with(./@ms, 'Ind_Prs_Sg1') or
+				     ends-with(./@ms, 'Ind_Prt_Sg1') or
+				     ends-with(./@ms, 'Ind_Prs_Pl3') or
+				     ends-with(./@ms, 'Ind_Prt_Sg3') or
+				     ends-with(./@ms, 'Ind_Prs_Sg3') or
+				     ends-with(./@ms, 'Ind_Prt_Pl3') or
+				     ends-with(./@ms, 'Ind_Prs_ConNeg'))
+				     and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		  </xsl:choose>
+		</xsl:when>
+		
+		<xsl:when test="$pos = 'num'">
+		  <xsl:choose>
+		    <xsl:when test="./@ms = 'Pl_Nom' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		    <xsl:when test="./@ms = 'Sg_Ill' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		    <xsl:when test="./@ms = 'Pl_Gen' and not(. = '')">
+		      <xsl:copy-of select="."/>
+		    </xsl:when>
+		  </xsl:choose>
+		</xsl:when>
+
+	      </xsl:choose>
+	    </xsl:for-each>
+	  </mini_paradigm>
+	</xsl:variable>
+	
 	<xsl:variable name="interim">
 	  <interim>
 	    <xsl:for-each-group select="doc($file)/paradigm/analysis" group-by="./@ms">
@@ -76,6 +179,8 @@
 	    </xsl:for-each-group>
 	  </interim>
 	</xsl:variable>
+
+	<xsl:copy-of select="$mini_paradigm"/>
 	
 	<xsl:for-each-group select="$interim/interim/anal/wordform" group-by=".">
 	  <e>
@@ -99,7 +204,7 @@
 	</xsl:for-each-group>
       </result>
     </xsl:variable>
-
+    
     <xsl:result-document href="{$path}/{$outputDir}/{$file_name}.{$e}">
       <xsl:copy-of select="$result"/>
     </xsl:result-document>

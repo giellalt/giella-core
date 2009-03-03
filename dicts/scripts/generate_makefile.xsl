@@ -28,11 +28,11 @@
   <xsl:param name="T_LANG" select="'xxx'"/>
   <xsl:param name="DICT_PATH" select="'mac_smenob.xml'"/>
   <xsl:variable name="DICT_NAME" select="concat(myFct:capitalize-first(myFct:mapLang($S_LANG)), '-', myFct:mapLang($T_LANG), ' ordbok')"/>
+  <xsl:variable name="INFO_PLIST" select="concat($S_LANG, $T_LANG, 'Info.plist')"/>
+  <xsl:variable name="CSS_FILE" select="concat($S_LANG, $T_LANG, 'Dictionary.css')"/>
   
   <xsl:template match="/" name="main">
-
     <xsl:text>
-
 #
 # Makefile
 #
@@ -49,8 +49,12 @@ DICT_NAME               =       "</xsl:text>
 DICT_SRC_PATH           =       </xsl:text>
     <xsl:value-of select="$DICT_PATH"/>
     <xsl:text>
-CSS_PATH                =       MyDictionary.css
-PLIST_PATH              =       Info.plist
+CSS_PATH                =       </xsl:text>
+    <xsl:value-of select="$CSS_FILE"/>
+    <xsl:text>
+PLIST_PATH              =       </xsl:text>
+    <xsl:value-of select="$INFO_PLIST"/>
+    <xsl:text>
 
 # DICT_BUILD_OPTS               =
 # Suppress adding supplementary key.

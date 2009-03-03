@@ -37,7 +37,12 @@
   <xsl:variable name="YEAR" select="substring($DATE,1,4)"/>
   <xsl:variable name="COPYRIGHT" select="'Sámi giellatekno and Sámediggi'"/>
   <xsl:variable name="MANUFACTURER" select="'Sámi giellatekno'"/>
-  <xsl:variable name="dictID" select="concat('no.divvun.dictionary.', $S_LANG, $T_LANG)"/>
+  <xsl:variable name="dictID" select="concat('no.divvun.dictionary.', $S_LANG, $T_LANG, 'Dictionary')"/>
+  <xsl:variable name="dictCSS" select="concat($S_LANG, $T_LANG, 'Dictionary.css')"/>
+  <xsl:variable name="dictXSL" select="concat($S_LANG, $T_LANG, 'Dictionary.xsl')"/>
+  <xsl:variable name="dictPREFS" select="concat($S_LANG, $T_LANG, 'Dictionary_prefs.html')"/>
+
+
   
   <xsl:template match="/" name="main">
 
@@ -68,9 +73,24 @@
 	  <xsl:value-of select="$MANUFACTURER"/>
 	</string>
 	<key>DCSDictionaryPrefsHTML</key>
-	<string>MyDictionary_prefs.html</string>
+	<string>
+	  <xsl:value-of select="$dictPREFS"/>
+	</string>
 	<key>DCSDictionaryXSL</key>
-	<string>MyDictionary.xsl</string>
+	<string>
+	  <xsl:value-of select="$dictXSL"/>
+	</string>
+	<key>DCSDictionaryDefaultPrefs</key>
+	<dict>
+	  <key>pronunciation</key>
+	  <string>0</string>
+	  <key>display-column</key>
+	  <string>1</string>
+	  <key>display-picture</key>
+	  <string>1</string>
+	  <key>version</key>
+	  <string>1</string>
+	</dict>
       </dict>
     </plist>
     

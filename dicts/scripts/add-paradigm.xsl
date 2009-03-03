@@ -50,6 +50,7 @@
 	  <xsl:choose>
 	    <xsl:when test="./lg/l = $source_lemma">
 	      <xsl:copy-of select="./lg/analysis"/>
+	      <xsl:copy-of select="../mini_paradigm"/>
 	    </xsl:when>
 	    <xsl:otherwise>
 	    </xsl:otherwise>

@@ -30,8 +30,7 @@ GEN_MAKE    = generate_makefile.xsl
 I_FILE      = Info.plist
 M_FILE      = Makefile
 MACDIR      = macdir
-ORIG_SRC    = src
-SRC         = ShortSrc
+SRC    = src
 BIN         = bin
 SCRIPTS     = scripts
 

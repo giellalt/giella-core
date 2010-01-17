@@ -41,7 +41,7 @@
 <!-- collection('PATH?select=*.xml') -->
 
     <r>
-      <xsl:copy-of select="collection(concat($dir, '?select=*.xml'))/r/e"/>
+      <xsl:copy-of select="collection(concat($dir, '?select=*.xml'))/r/e[not(contains(normalize-space(lg/l), ' '))]"/>
     </r>
   </xsl:template>
   

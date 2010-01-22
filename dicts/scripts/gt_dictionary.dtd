@@ -7,7 +7,7 @@
 <!ELEMENT lg (l,lc*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
-      pos ( a | n | v | adv | po | pr | pron | rel | pers | i | pcle | num | cc | cs | n | prop | x ) #REQUIRED
+      pos ( a | n | v | adv | po | pr | pron | rel | pers | i | pcle | num | cc | cs | prop | x ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | pre | post ) #IMPLIED

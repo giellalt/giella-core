@@ -50,18 +50,16 @@
 	<span d:pr="US">
 	  <!-- it is a word form -->
 	  <xsl:if test="lg/lemma_ref">
+	    <pos_tag>
+	      <i><xsl:value-of select="myFn:mapPOS(substring-before(normalize-space(lg/l/@pos),'_'))"/></i>
+	    </pos_tag>
+	    <!-- 	      <xsl:text> &#149;› </xsl:text> -->
+	    <xsl:text> &#187;</xsl:text>
 	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
 	      <short_ref>
 		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
 	      </short_ref>
 	    </a>
-	    
-	    <xsl:text>                    </xsl:text>
-	    <i> (</i>
-	    <pos_tag>
-	      <i><xsl:value-of select="myFn:mapPOS(substring-before(normalize-space(lg/l/@pos),'_'))"/></i>
-	    </pos_tag>
-	    <i>)</i>
 	  </xsl:if>
 	  <xsl:if test="not(lg/lemma_ref)">
 	    <pos_tag>
@@ -83,16 +81,20 @@
 	      <i><xsl:text>ulikest.</xsl:text></i>
 	    </xsl:if>
 	  </xsl:if>
+	  <xsl:if test="normalize-space(lg/l/@stem) = 'contracted'">
+	    <xsl:text>Klasse </xsl:text>
+	    <i><xsl:text>contracted</xsl:text></i>
+	  </xsl:if>
 	</xsl:if>
       </div>
       
       <div>
-	<br/>
+	<!-- 	<br/> -->
 	<xsl:if test="mg[not(./@lang)]">
 	  <i>
 	    <b>Norsk:</b>
 	  </i>
-	  <br/>
+	  <!-- 	  <br/> -->
 	  <ol>
 	    <xsl:apply-templates select="mg[not(./@lang)]"/>
 	  </ol>
@@ -101,7 +103,7 @@
 	  <i>
 	    <b>Svensk:</b>
 	  </i>
-	  <br/>
+<!-- 	  <br/> -->
 	  <ol>
 	    <xsl:apply-templates select="mg[./@lang='swe']"/>
 	  </ol>
@@ -270,37 +272,37 @@
   <xsl:template match="analysis">
     <xsl:variable name="currentWordForm" select="./wordform/@value"/>
     <xsl:variable name="currentPOS" select="myFn:mapPOS(normalize-space(../../l/@pos))"/>
+    <xsl:variable name="currentMPfeature" select="../../l/@minip"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
     
     <tr>
       <td align="right">
 
-	<morpho_descr>
-	  <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
-	</morpho_descr>
-	
-<!-- 	<xsl:if test="$currentPOS = 'verb'"> -->
-<!-- 	  <xsl:if test="$currentContext = 'mun'"> -->
-<!-- 	    <xsl:choose> -->
-<!-- 	      <xsl:when test="(ends-with(./@ms, 'Ind_Prs_Sg1') or -->
-<!-- 			      ends-with(./@ms, 'Ind_Prt_Sg1') or -->
-<!-- 			      ends-with(./@ms, 'Ind_Prs_ConNeg')) -->
-<!-- 			      and not(. = '')"> -->
-<!-- 		<td align="right"> -->
-<!-- 		  <morpho_descr> -->
-<!-- 		    <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/> -->
-<!-- 		  </morpho_descr> -->
-<!-- 		</td> -->
-<!-- 	      </xsl:when> -->
-<!-- 	    </xsl:choose> -->
-<!-- 	  </xsl:if> -->
-<!-- 	</xsl:if> -->
+	<xsl:if test="not($currentPOS = 'verb')">
+	  <morpho_descr>
+	    <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+	  </morpho_descr>
+	</xsl:if>
 
+	<xsl:if test="$currentPOS = 'verb'">
+	  <xsl:choose>
+	    <xsl:when test="not((ends-with(./@ms, 'Sg1') and
+			    (($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))) or
+			    (ends-with(./@ms, 'Sg3') and $currentMPfeature = 'onlyPl'))">
+	      <morpho_descr>
+		<xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+	      </morpho_descr>
+	    </xsl:when>
+	    <xsl:otherwise>
+	    </xsl:otherwise>
+	  </xsl:choose>
+	</xsl:if>
+	
       </td>
       
       <xsl:if test="$currentPOS = 'verb'">
 	<xsl:choose>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg1')">
+	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg1') and not(($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
@@ -310,7 +312,7 @@
 	      </small>
 	    </td>
 	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg3')">
+	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg3')and not($currentMPfeature = 'onlyPl')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
@@ -330,7 +332,7 @@
 	      </small>
 	    </td>
 	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prt_Sg1')">
+	  <xsl:when test="ends-with(./@ms, 'Ind_Prt_Sg1') and not(($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">

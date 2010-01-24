@@ -42,6 +42,8 @@
     </xsl:variable>
 
     <xsl:variable name="source_mg" select="../mg"/>
+
+    <xsl:variable name="prop_source" select="../@source"/>
     
     <lg>
 
@@ -92,13 +94,18 @@
 	  <r>
 	    <xsl:for-each select="$rest/r/e">
 	      <e>
+		<xsl:if test="./lg/l/@pos = 'prop'">
+		  <xsl:attribute name="source">
+		    <xsl:value-of select="./@source"/>
+		  </xsl:attribute>
+		</xsl:if>
 		<lg>
 		  <l>
 		    <xsl:attribute name="pos">
 		      <xsl:value-of select="concat(./lg/l/@pos, '_wf_', ./lg/lemma_ref)"/>
 		    </xsl:attribute>
 		    
-		    <xsl:if test="l/@pos = 'v'">		    
+		    <xsl:if test="./lg/l/@pos = 'v'">		    
 		      <xsl:if test="not($source_lemma/@class = '')">
 			<xsl:attribute name="class">
 			  <xsl:value-of select="$source_lemma/@class"/>

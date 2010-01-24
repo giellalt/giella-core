@@ -137,7 +137,7 @@
       </div>
       
       <div align="left" d:priority="2">
-	<xsl:if test="lg/mini_paradigm">
+	<xsl:if test="lg/mini_paradigm/analysis/wordform">
 	  <xsl:apply-templates select="lg/mini_paradigm"/>
 	</xsl:if>
       </div>
@@ -164,6 +164,17 @@
 	      </td>
 	    </tr>
 	  </table>
+	</xsl:if>
+      </div>
+
+      <div align="left" d:priority="2">
+	<xsl:if test="normalize-space(./@source) = 'sk'">
+	  <xsl:text>Kilde </xsl:text>
+	  <i><xsl:text>Statens Kartverk</xsl:text></i>
+	</xsl:if>
+	<xsl:if test="normalize-space(./@source) = 'SvSt'">
+	  <xsl:text>Kilde </xsl:text>
+	  <i><xsl:text>Svenske Sametingets nettside</xsl:text></i>
 	</xsl:if>
       </div>
       
@@ -275,30 +286,32 @@
     <xsl:variable name="currentMPfeature" select="../../l/@minip"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
     
-    <tr>
-      <td align="right">
 
-	<xsl:if test="not($currentPOS = 'verb')">
+    <tr>
+      
+      <xsl:if test="not($currentPOS = 'verb')">
+	<td align="right">
 	  <morpho_descr>
 	    <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
 	  </morpho_descr>
-	</xsl:if>
-
-	<xsl:if test="$currentPOS = 'verb'">
-	  <xsl:choose>
-	    <xsl:when test="not((ends-with(./@ms, 'Sg1') and
-			    (($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))) or
-			    (ends-with(./@ms, 'Sg3') and $currentMPfeature = 'onlyPl'))">
+	</td>
+      </xsl:if>
+      
+      <xsl:if test="$currentPOS = 'verb'">
+	<xsl:choose>
+	  <xsl:when test="not((ends-with(./@ms, 'Sg1') and
+			  (($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))) or
+			  (ends-with(./@ms, 'Sg3') and $currentMPfeature = 'onlyPl'))">
+	    <td align="right">
 	      <morpho_descr>
 		<xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
 	      </morpho_descr>
-	    </xsl:when>
-	    <xsl:otherwise>
-	    </xsl:otherwise>
-	  </xsl:choose>
-	</xsl:if>
-	
-      </td>
+	    </td>
+	  </xsl:when>
+	  <xsl:otherwise>
+	  </xsl:otherwise>
+	</xsl:choose>
+      </xsl:if>
       
       <xsl:if test="$currentPOS = 'verb'">
 	<xsl:choose>

@@ -22,7 +22,7 @@
 <!ELEMENT re (#PCDATA) >
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t 
-      pos ( a | a5 | S | m | f | n | v | adv | p | pron | prop | i | cc | cs | im | mpl | fpl | npl | num | pcle | s | x ) #REQUIRED
+      pos ( a | a5 | S | m | f | n | v | adv | p | pr | po | pron | prop | i | cc | cs | im | mpl | fpl | npl | num | pcle | s | x | xxx ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
 >      
 

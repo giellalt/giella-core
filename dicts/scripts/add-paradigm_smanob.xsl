@@ -80,6 +80,11 @@
 	      <xsl:otherwise>
 		<r>
 		  <e>
+		    <xsl:if test="./lg/l/@pos = 'prop'">
+		      <xsl:attribute name="source">
+			<xsl:value-of select="./@source"/>
+		      </xsl:attribute>
+		    </xsl:if>
 		    <xsl:copy-of select="./lg"/>
 		    <xsl:copy-of select="$source_mg"/>
 		  </e>
@@ -94,15 +99,20 @@
 	  <r>
 	    <xsl:for-each select="$rest/r/e">
 	      <e>
-		<xsl:if test="./lg/l/@pos = 'prop'">
+		<xsl:if test="starts-with(./lg/analysis[1], 'Prop')">
 		  <xsl:attribute name="source">
-		    <xsl:value-of select="./@source"/>
+		    <xsl:value-of select="$prop_source"/>
 		  </xsl:attribute>
 		</xsl:if>
 		<lg>
 		  <l>
 		    <xsl:attribute name="pos">
-		      <xsl:value-of select="concat(./lg/l/@pos, '_wf_', ./lg/lemma_ref)"/>
+		      <xsl:if test="starts-with(./lg/analysis[1], 'Prop')">
+			<xsl:value-of select="concat('prop', '_wf_', ./lg/lemma_ref)"/>
+		      </xsl:if>
+		      <xsl:if test="not(starts-with(./lg/analysis[1], 'Prop'))">
+			<xsl:value-of select="concat(./lg/l/@pos, '_wf_', ./lg/lemma_ref)"/>
+		      </xsl:if>
 		    </xsl:attribute>
 		    
 		    <xsl:if test="./lg/l/@pos = 'v'">		    

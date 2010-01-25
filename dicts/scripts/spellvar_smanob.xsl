@@ -45,7 +45,7 @@
   
   <xsl:variable name="e" select="'xml'"/>
   <xsl:variable name="outputDir" select="'CompResults'"/>
-  <xsl:variable name="outFile" select="'spelling_variants'"/>
+  <xsl:variable name="outFile" select="'smanob_spelling'"/>
   
   <!-- get input files -->
   <!-- These paths have to be adjusted accordingly -->
@@ -60,6 +60,7 @@
 	  <r>
 	    <xsl:for-each select="doc($file)/r/e">
 	      <e>
+		<xsl:copy-of select="./@*"/>
 		<lg>
 		  <xsl:copy-of select="./lg/l"/>
 		  <xsl:copy-of select="./lg/lemma_ref"/>

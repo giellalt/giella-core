@@ -81,10 +81,6 @@
 	      <i><xsl:text>ulikest.</xsl:text></i>
 	    </xsl:if>
 	  </xsl:if>
-	  <xsl:if test="normalize-space(lg/l/@stem) = 'contracted'">
-	    <xsl:text>Klasse </xsl:text>
-	    <i><xsl:text>contracted</xsl:text></i>
-	  </xsl:if>
 	</xsl:if>
       </div>
       
@@ -144,6 +140,7 @@
       
       <div align="left" d:priority="2">
 	<xsl:if test="./mg/tg/xg/x and ./mg/tg/xg/xt  and not(./lg/lemma_ref)">
+	<img class="alpha" src="Images/blank.jpg"/>
 	  <table border="0" align="left">
 	    <tr>
 	      <td align="left">
@@ -156,18 +153,22 @@
 	      <td align="left"/>
 	    </tr>
 	    <tr>
-	      <td align="left">
-		<ul>
+<!-- bulleted -->
+<!-- 	      <td align="left"> -->
+<!-- 		<ul> -->
 		  <!-- 		      <xsl:call-template name="exx"/> -->
 		  <xsl:apply-templates select="./mg/tg/xg"/>
-		</ul>
-	      </td>
+<!-- 		</ul> -->
+<!-- 	      </td> -->
 	    </tr>
 	  </table>
 	</xsl:if>
       </div>
 
-      <div align="left" d:priority="2">
+      <!--       <div align="left" d:priority="2"> -->
+      <!--       </div> -->
+      
+      <div align="right" d:priority="2">
 	<xsl:if test="normalize-space(./@source) = 'sk'">
 	  <xsl:text>Kilde </xsl:text>
 	  <i><xsl:text>Statens Kartverk</xsl:text></i>
@@ -176,9 +177,6 @@
 	  <xsl:text>Kilde </xsl:text>
 	  <i><xsl:text>Svenske Sametingets nettside</xsl:text></i>
 	</xsl:if>
-      </div>
-      
-      <div align="right" d:priority="2">
 	<img class="alpha" src="Images/blank.jpg"/>
 	<table border="0" align="right">
 	  <tr>
@@ -229,41 +227,58 @@
 	</xsl:for-each>
       </li>
     </xsl:for-each>
-    <!--     <xsl:if test="./tg/xg and not(lg/lemma_ref)"> -->
-    <!--       <prep_context> -->
-    <!-- 	<i> -->
-    <!-- 	  <b>Eksempler:</b> -->
-    <!-- 	</i> -->
-    <!--       </prep_context> -->
-    <!-- 	<ul> -->
-    <!-- 	  <xsl:apply-templates select="./tg/xg"/> -->
-    <!-- 	</ul> -->
-    <!--     </xsl:if> -->
   </xsl:template>
+
+<!-- bulleted   -->
+<!--   <xsl:template name="exx" match="xg"> -->
+<!--     <li> -->
+<!--       <xsl:apply-templates select="./x"/> -->
+<!--     </li> -->
+<!--   </xsl:template> -->
   
-  <xsl:template name="exx" match="xg">
-    <li>
+<!--   <xsl:template match="x"> -->
+<!--     <i> -->
+<!--       <small> -->
+<!-- 	<xsl:value-of select="normalize-space(.)"/> -->
+<!--       </small> -->
+<!--     </i> -->
+<!--     <br/> -->
+<!--     <xsl:apply-templates select="../xt"/> -->
+<!--   </xsl:template> -->
+  
+<!--   <xsl:template match="xt"> -->
+<!--     <small> -->
+<!--       <xsl:value-of select="normalize-space(.)"/> -->
+<!--     </small> -->
+<!--   </xsl:template> -->
+
+
+  <xsl:template match="xg">
+    <tr>
       <xsl:apply-templates select="./x"/>
-    </li>
+    </tr>
   </xsl:template>
   
   <xsl:template match="x">
-    <i>
-      <small>
+    <td>
+      <i><small>
 	<xsl:value-of select="normalize-space(.)"/>
-      </small>
-    </i>
-    <br/>
-    <xsl:apply-templates select="../xt"/>
+      </small></i>
+      <xsl:apply-templates select="../xt"/>
+    </td>
   </xsl:template>
   
   <xsl:template match="xt">
-    <small>
-      <xsl:value-of select="normalize-space(.)"/>
-    </small>
+    
+    <td align="center"> </td>
+    <td align="center"> </td>
+    <td align="left">
+      <small>
+	<xsl:value-of select="normalize-space(.)"/>
+      </small>
+    </td>
   </xsl:template>
-  
-  
+
   <xsl:template name="m_paradigm" match="mini_paradigm">
     <table border="0" align="left">
       <tr>

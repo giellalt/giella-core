@@ -26,7 +26,7 @@
       nr ( sg | pl ) #IMPLIED
 >      
 
-<!ELEMENT xg ((x,xt?)+)>
+<!ELEMENT xg ((x,xt)+)>
 <!ELEMENT x (#PCDATA)>
 <!ELEMENT xt (#PCDATA)>
 

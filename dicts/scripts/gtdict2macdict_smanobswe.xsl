@@ -53,8 +53,17 @@
 	    <pos_tag>
 	      <i><xsl:value-of select="myFn:mapPOS(substring-before(normalize-space(lg/l/@pos),'_'))"/></i>
 	    </pos_tag>
-	    <!-- 	      <xsl:text> &#149;› </xsl:text> -->
-	    <xsl:text> &#187;</xsl:text>
+
+	    <!-- <xsl:text> &#187;</xsl:text> -->
+	    <!-- <xsl:text> &x2192;</xsl:text> -->
+	    <!-- <xsl:text> &#8594;</xsl:text> -->
+	    
+	    <!-- 	    <small> -->
+	    <!-- 	      <xsl:text> &#9658;</xsl:text> -->
+	    <!-- 	    </small> -->
+	    
+	    <font size="-3">  &#9658;</font>
+	    
 	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
 	      <short_ref>
 		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
@@ -300,7 +309,7 @@
     <xsl:variable name="currentPOS" select="myFn:mapPOS(normalize-space(../../l/@pos))"/>
     <xsl:variable name="currentMPfeature" select="../../l/@minip"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
-    
+    <xsl:variable name="currentTrans" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
 
     <tr>
       
@@ -401,39 +410,85 @@
 	    <td align="left">
 	      <small>
 		<xsl:value-of select="$currentWordForm"/>
-		<xsl:value-of select="concat(' ', '(', 'bïjre', ')')"/>
+		<xsl:value-of select="concat(' ', 'baaktoe')"/>
 	      </small>
 	    </td>
+
+	    <td align="center"> </td>
+	    <td align="center"> </td>
+	    <td align="left">
+	      <small>
+		<i>
+		  <xsl:value-of select="'via '"/>
+		  <xsl:value-of select="$currentTrans"/>
+		</i>
+	      </small>
+	    </td>
+
 	  </xsl:when>
 	  <xsl:when test="ends-with(./@ms, 'Sg_Ill')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<xsl:value-of select="concat('(', 'til', ')', ' ')"/>
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>
+
+	    <td align="center"> </td>
+	    <td align="center"> </td>
+	    <td align="left">
+	      <small>
+		<i>
+		  <xsl:value-of select="'til '"/>
+		  <xsl:value-of select="$currentTrans"/>
+		</i>
+	      </small>
+	    </td>
+
 	  </xsl:when>
 	  <xsl:when test="ends-with(./@ms, 'Sg_Ine')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<xsl:value-of select="concat('(', 'i/på', ')', ' ')"/>
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>
+
+	    <td align="center"> </td>
+	    <td align="center"> </td>
+	    <td align="left">
+	      <small>
+		<i>
+		  <xsl:value-of select="'i/på '"/>
+		  <xsl:value-of select="$currentTrans"/>
+		</i>
+	      </small>
+	    </td>
+
+
 	  </xsl:when>
 	  <xsl:when test="ends-with(./@ms, 'Sg_Ela')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<xsl:value-of select="concat('(', 'fra', ')', ' ')"/>
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>
+
+	    <td align="center"> </td>
+	    <td align="center"> </td>
+	    <td align="left">
+	      <small>
+		<i>
+		  <xsl:value-of select="'fra '"/>
+		  <xsl:value-of select="$currentTrans"/>
+		</i>
+	      </small>
+	    </td>
+
 	  </xsl:when>
 	</xsl:choose>
       </xsl:if>

@@ -56,12 +56,16 @@
 
 	    <!-- <xsl:text> &#187;</xsl:text> -->
 	    <!-- <xsl:text> &x2192;</xsl:text> -->
+
+	    <!-- this works with StarDict too -->
 	    <!-- <xsl:text> &#8594;</xsl:text> -->
-	    
+
+
 	    <!-- 	    <small> -->
 	    <!-- 	      <xsl:text> &#9658;</xsl:text> -->
 	    <!-- 	    </small> -->
-	    
+
+	    <!-- this doesn't work with StarDict -->	    
 	    <font size="-3">  &#9658;</font>
 	    
 	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">

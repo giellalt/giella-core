@@ -43,7 +43,7 @@
 
     <xsl:variable name="source_mg" select="../mg"/>
 
-    <xsl:variable name="prop_source" select="../@source"/>
+    <xsl:variable name="prop_source" select="../@src"/>
     
     <lg>
 
@@ -100,7 +100,7 @@
 	    <xsl:for-each select="$rest/r/e">
 	      <e>
 		<xsl:if test="starts-with(./lg/analysis[1], 'Prop')">
-		  <xsl:attribute name="source">
+		  <xsl:attribute name="src">
 		    <xsl:value-of select="$prop_source"/>
 		  </xsl:attribute>
 		</xsl:if>

@@ -57,17 +57,16 @@
 	    <!-- <xsl:text> &#187;</xsl:text> -->
 	    <!-- <xsl:text> &x2192;</xsl:text> -->
 
+	    <!-- this doesn't work with StarDict -->	    
+	    <!-- <font size="-3">  &#9658;</font> -->
+
 	    <!-- this works with StarDict too -->
 	    <!-- <xsl:text> &#8594;</xsl:text> -->
-
-
-	    <!-- 	    <small> -->
-	    <!-- 	      <xsl:text> &#9658;</xsl:text> -->
-	    <!-- 	    </small> -->
-
-	    <!-- this doesn't work with StarDict -->	    
-	    <font size="-3">  &#9658;</font>
+	    <!-- <small> -->
+	    <!--   <xsl:text>  &#8594;</xsl:text> -->
+	    <!-- </small> -->
 	    
+	    <font size="-3">  &#8594;</font>
 	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
 	      <short_ref>
 		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
@@ -100,19 +99,19 @@
       <div>
 	<!-- 	<br/> -->
 	<xsl:if test="mg[not(./@lang)]">
+	  <!-- 	  <br/> -->
 	  <i>
 	    <b>Norsk:</b>
 	  </i>
-	  <!-- 	  <br/> -->
 	  <ol>
 	    <xsl:apply-templates select="mg[not(./@lang)]"/>
 	  </ol>
 	</xsl:if>
 	<xsl:if test="mg[./@lang='swe']">
+	  <!-- 	  <br/> -->
 	  <i>
 	    <b>Svensk:</b>
 	  </i>
-<!-- 	  <br/> -->
 	  <ol>
 	    <xsl:apply-templates select="mg[./@lang='swe']"/>
 	  </ol>
@@ -182,11 +181,11 @@
       <!--       </div> -->
       
       <div align="right" d:priority="2">
-	<xsl:if test="normalize-space(./@source) = 'sk'">
+	<xsl:if test="normalize-space(./@src) = 'sk'">
 	  <xsl:text>Kilde </xsl:text>
 	  <i><xsl:text>Statens Kartverk</xsl:text></i>
 	</xsl:if>
-	<xsl:if test="normalize-space(./@source) = 'SvSt'">
+	<xsl:if test="normalize-space(./@src) = 'SvSt'">
 	  <xsl:text>Kilde </xsl:text>
 	  <i><xsl:text>Svenske Sametingets nettside</xsl:text></i>
 	</xsl:if>

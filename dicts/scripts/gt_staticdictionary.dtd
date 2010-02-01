@@ -31,10 +31,10 @@
 
 <!ELEMENT analysis ANY >
 <!ATTLIST analysis
-	ms ( Pron_Dem_Pl3_Acc | Pron_Dem_Pl3_Com | Pron_Dem_Pl3_Ela | Pron_Dem_Pl3_Gen | 
-	     Pron_Dem_Pl3_Ill | Pron_Dem_Pl3_Ine | Pron_Dem_Sg3_Acc | 
-	     Pron_Dem_Sg3_Com | Pron_Dem_Sg3_Ela | Pron_Dem_Sg3_Ess | Pron_Dem_Sg3_Gen | 
-	     Pron_Dem_Sg3_Ill | Pron_Dem_Sg3_Ine | Pron_Pers_Du1_Acc | 
+	ms ( Pron_Dem_Pl_Acc | Pron_Dem_Pl_Com | Pron_Dem_Pl_Ela | Pron_Dem_Pl_Gen | 
+	     Pron_Dem_Pl_Ill | Pron_Dem_Pl_Ine | Pron_Dem_Sg_Acc | 
+	     Pron_Dem_Sg_Com | Pron_Dem_Sg_Ela | Pron_Dem_Sg_Ess | Pron_Dem_Sg_Gen | 
+	     Pron_Dem_Sg_Ill | Pron_Dem_Sg_Ine | Pron_Pers_Du1_Acc | 
 	     Pron_Pers_Du1_Com | Pron_Pers_Du1_Ela | Pron_Pers_Du1_Gen | Pron_Pers_Du1_Ill | 
 	     Pron_Pers_Du1_Ine | Pron_Pers_Du2_Acc | Pron_Pers_Du2_Com | 
 	     Pron_Pers_Du2_Ela | Pron_Pers_Du2_Gen | Pron_Pers_Du2_Ill | Pron_Pers_Du2_Ine | 

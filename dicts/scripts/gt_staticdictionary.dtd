@@ -9,6 +9,7 @@
 <!ATTLIST l 
       pos ( v | pron | rel | pers | i | pcle | num | cc | cs | prop | x ) #REQUIRED
       nr ( sg | du | pl ) #IMPLIED
+      pol ( pos | neg ) #IMPLIED
       type ( rel | pers | pre | post | coll | dem | indef | recipr | refl | xx ) #IMPLIED
       case ( acc | ill ) #IMPLIED
       mod ( ind | imp ) #IMPLIED
@@ -58,7 +59,7 @@
 	     Pron_Refl_Sg3_Ill | Pron_Rel_Pl_Acc | Pron_Rel_Pl_Com | Pron_Rel_Pl_Ela | 
 	     Pron_Rel_Pl_Gen | Pron_Rel_Pl_Ill | Pron_Rel_Pl_Ine | 
 	     Pron_Rel_Sg_Acc | Pron_Rel_Sg_Com | Pron_Rel_Sg_Ela | Pron_Rel_Sg_Gen | 
-	     Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine |
+	     Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine | V_ConNeg | 
 	     V_Ind_Prs_Du1 | V_Ind_Prs_Du2 | V_Ind_Prs_Du3 | 
 	     V_Ind_Prs_Pl1 | V_Ind_Prs_Pl2 | V_Ind_Prs_Pl3 | 
 	     V_Ind_Prs_Sg1 | V_Ind_Prs_Sg2 | V_Ind_Prs_Sg3 | 

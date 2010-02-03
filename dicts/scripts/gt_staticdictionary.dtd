@@ -4,7 +4,7 @@
       usage ( mt | dic | ped | other ) #IMPLIED
       src ( nj | other ) #IMPLIED
 >      
-<!ELEMENT lg (l,lemma_ref?,analysis*,mini_paradigm?,lc*) >
+<!ELEMENT lg (l,lemma_ref*,analysis*,mini_paradigm?,lc*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( v | pron | rel | pers | i | pcle | num | cc | cs | prop | x ) #REQUIRED

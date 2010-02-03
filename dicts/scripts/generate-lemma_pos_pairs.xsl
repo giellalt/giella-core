@@ -24,12 +24,14 @@
 		      (@pos = 'v') or
 		      (@pos = 'a') or
 		      (@pos = 'prop') or
+		      (@pos = 'propPl') or
 		      (@pos = 'num')
 		      ]"/><xsl:text>&#x9;</xsl:text><xsl:value-of select="lg/l[
 		      (@pos = 'n') or
 		      (@pos = 'v') or
 		      (@pos = 'a') or
 		      (@pos = 'prop') or
+		      (@pos = 'propPl') or
 		      (@pos = 'num')
 		      ]/@pos"/><xsl:text>&#xA;</xsl:text>
   </xsl:template>

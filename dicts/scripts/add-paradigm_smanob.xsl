@@ -16,7 +16,7 @@
   
   <xsl:param name="gtpath" select="'gogo-input-files'"/>
   <xsl:param name="outputDir" select="'gogo-output-files'"/>
-  <xsl:variable name="allPos" select="'__v__n__prop__a__num__'"/>
+  <xsl:variable name="allPos" select="'__v__n__prop__propPl__a__num__'"/>
   <xsl:variable name="e" select="'xml'"/>
   <!--   <xsl:variable name="outputDir" select="'xml-out'"/> -->
   
@@ -74,17 +74,17 @@
 	  <xsl:for-each select="document($document)/result/e">
 	    <xsl:choose>
 	      <xsl:when test="./lg/l = $source_lemma">
-		<xsl:copy-of select="./lg/analysis"/>
-		<xsl:copy-of select="./lg/spelling"/>
+<!-- 		<xsl:copy-of select="./lg/analysis"/> -->
+<!-- 		<xsl:copy-of select="./lg/spelling"/> -->
 	      </xsl:when>
 	      <xsl:otherwise>
 		<r>
 		  <e>
-		    <xsl:if test="./lg/l/@pos = 'prop'">
-		      <xsl:attribute name="source">
-			<xsl:value-of select="./@source"/>
-		      </xsl:attribute>
-		    </xsl:if>
+<!-- 		    <xsl:if test="./lg/l/@pos = 'prop'"> -->
+<!-- 		      <xsl:attribute name="source"> -->
+<!-- 			<xsl:value-of select="./@source"/> -->
+<!-- 		      </xsl:attribute> -->
+<!-- 		    </xsl:if> -->
 		    <xsl:copy-of select="./lg"/>
 		    <xsl:copy-of select="$source_mg"/>
 		  </e>
@@ -106,9 +106,15 @@
 		</xsl:if>
 		<lg>
 		  <l>
+		  <!-- change this later, this is too ugly -->
 		    <xsl:attribute name="pos">
 		      <xsl:if test="starts-with(./lg/analysis[1], 'Prop')">
-			<xsl:value-of select="concat('prop', '_wf_', ./lg/lemma_ref)"/>
+			<xsl:if test="starts-with(./lg/analysis[1], 'Prop_Sg')">
+			  <xsl:value-of select="concat('prop', '_wf_', ./lg/lemma_ref)"/>
+			</xsl:if>
+			<xsl:if test="starts-with(./lg/analysis[1], 'Prop_Pl')">
+			  <xsl:value-of select="concat('propPl', '_wf_', ./lg/lemma_ref)"/>
+			</xsl:if>
 		      </xsl:if>
 		      <xsl:if test="not(starts-with(./lg/analysis[1], 'Prop'))">
 			<xsl:value-of select="concat(./lg/l/@pos, '_wf_', ./lg/lemma_ref)"/>
@@ -191,6 +197,12 @@
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Ill']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Ine']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Ela']"/>
+      </xsl:if>
+      <xsl:if test="$pos = 'propPl'">
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Gen']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Ill']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Ine']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Ela']"/>
       </xsl:if>
       <xsl:if test="$pos = 'a'">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Pred']"/>

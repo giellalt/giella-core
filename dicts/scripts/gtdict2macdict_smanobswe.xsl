@@ -407,7 +407,7 @@
 
       <xsl:if test="$currentPOS = 'egennavn'">
 	<xsl:choose>
-	  <xsl:when test="ends-with(./@ms, 'Sg_Gen')">
+	  <xsl:when test="ends-with(./@ms, '_Gen')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
@@ -429,7 +429,7 @@
 	    </td>
 
 	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Sg_Ill')">
+	  <xsl:when test="ends-with(./@ms, '_Ill')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
@@ -450,7 +450,7 @@
 	    </td>
 
 	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Sg_Ine')">
+	  <xsl:when test="ends-with(./@ms, '_Ine')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">
@@ -472,7 +472,7 @@
 
 
 	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Sg_Ela')">
+	  <xsl:when test="ends-with(./@ms, '_Ela')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">

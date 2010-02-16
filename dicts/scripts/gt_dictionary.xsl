@@ -8,7 +8,9 @@
  <head><meta charset="UTF-8"/>
  </head>
  <body>
-  <xsl:apply-templates/>
+  <xsl:apply-templates>
+    <xsl:sort select="lg/l" lang="no" />
+  </xsl:apply-templates>
  </body>
 </html>
 </xsl:template>
@@ -23,6 +25,10 @@
  <b>
   <xsl:apply-templates/>
  </b>
+ <sup>
+  <xsl:value-of select="./@pos"/>
+ </sup>
+ <xsl:text> </xsl:text>
 </xsl:template>
 
 <!--
@@ -54,7 +60,9 @@
 </xsl:template>
 
 <xsl:template match="t">
-
+  <xsl:apply-templates/>,
+</xsl:template>
+<xsl:template match="t[last()]">
   <xsl:apply-templates/>
 </xsl:template>
 

@@ -25,12 +25,19 @@
 </xsl:template>
 
 <xsl:template match="ref">
-  Please refer to this source code with the following attribution text:<br/>
+  Please refer to this source code with the following <b>attribution
+  text</b>:<br/>
   "<xsl:apply-templates/>"
 </xsl:template>
 
 <xsl:template match="sourcenote">
   <p><big><b><xsl:apply-templates/></b></big></p>
+</xsl:template>
+
+<xsl:template match="a">
+ <a href="{.}">
+  <xsl:apply-templates/>
+ </a>
 </xsl:template>
 
 <xsl:template match="e">

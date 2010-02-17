@@ -18,6 +18,7 @@
 <xsl:template match="lics">
   Copyright Notes:
   <xsl:apply-templates/>
+  <hr/>
 </xsl:template>
 
 <xsl:template match="lic">

@@ -15,6 +15,24 @@
 </html>
 </xsl:template>
 
+<xsl:template match="lics">
+  Copyright Notes:
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="lic">
+  <pre><xsl:value-of select="."/></pre>
+</xsl:template>
+
+<xsl:template match="ref">
+  Please refer to this source code with the following attribution text:<br/>
+  "<xsl:apply-templates/>"
+</xsl:template>
+
+<xsl:template match="sourcenote">
+  <p><big><b><xsl:apply-templates/></b></big></p>
+</xsl:template>
+
 <xsl:template match="e">
  <p>
   <xsl:apply-templates/>

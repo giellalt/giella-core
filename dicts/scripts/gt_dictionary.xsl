@@ -21,7 +21,7 @@
 </xsl:template>
 
 <xsl:template match="lic">
-  <pre><xsl:value-of select="."/></pre>
+  <pre><xsl:apply-templates/></pre>
 </xsl:template>
 
 <xsl:template match="ref">
@@ -31,7 +31,7 @@
 </xsl:template>
 
 <xsl:template match="sourcenote">
-  <p><big><b><xsl:apply-templates/></b></big></p>
+  <p><bigger><b><xsl:apply-templates/></b></bigger></p>
 </xsl:template>
 
 <xsl:template match="a">

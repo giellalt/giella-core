@@ -16,23 +16,23 @@
 </xsl:template>
 
 <xsl:template match="lics">
-  Copyright Notes:
+  <h4>Copyright Notes</h4>
   <xsl:apply-templates/>
   <hr/>
 </xsl:template>
 
 <xsl:template match="lic">
-  <pre><xsl:apply-templates/></pre>
+  <p><xsl:apply-templates/></p>
 </xsl:template>
 
 <xsl:template match="ref">
-  Please refer to this source code with the following <b>attribution
-  text</b>:<br/>
+  <small>Please refer to this source code with the following <b>attribution
+  text</b>:</small><br/>
   "<xsl:apply-templates/>"
 </xsl:template>
 
 <xsl:template match="sourcenote">
-  <p><bigger><b><xsl:apply-templates/></b></bigger></p>
+  <p><b><xsl:apply-templates/></b></p>
 </xsl:template>
 
 <xsl:template match="a">
@@ -43,7 +43,21 @@
 
 <xsl:template match="e">
  <p>
-  <xsl:apply-templates/>
+  <xsl:apply-templates select="lg"/>
+  <xsl:choose>
+   <xsl:when test="count(./mg) > 1">
+    <ol>
+     <xsl:apply-templates select="mg">
+      <xsl:with-param name="multi" select="1"/>
+     </xsl:apply-templates>
+    </ol>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:apply-templates select="mg">
+     <xsl:with-param name="multi" select="0"/>
+    </xsl:apply-templates>
+   </xsl:otherwise>
+  </xsl:choose>
  </p>
 </xsl:template>
 
@@ -78,7 +92,17 @@
 -->
 
 <xsl:template match="mg">
-  <xsl:apply-templates/>
+  <xsl:param name="multi"/>
+  <xsl:choose>
+   <xsl:when test="$multi = 1">
+    <li>
+     <xsl:apply-templates/>
+    </li>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:apply-templates/>
+   </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="tg">

@@ -1,8 +1,55 @@
-r {
+r, rootdict {
     display: block;
     border: 1 solid gray;
-    margin: 0.5ex;
-    background-color: #eeeeee;
+    margin: 1ex;
+    background-color: #fff;
+}
+
+lics {
+    margin-bottom: 18px;
+    border-bottom: gray;
+}
+
+lics:before {
+    content: "Copyright Notes";
+    display: block;
+    font-weight: bold;
+    margin-bottom: 21px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 21px;
+}
+
+lic {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+ref:before {
+    display: block;
+    content: "Please refer to this source code with the following attribution text:";
+   	font-weight: bold;
+   	font-size: smaller;
+}
+
+ref {
+    display: block;
+    margin-bottom: 18px;
+}
+
+sourcenote {
+    display: block;
+	font-weight: bold;
+    margin-bottom: 18px;
+}
+
+a {
+    color: gray;
+    cursor: auto;
+    display: inline;
+    height: 0px;
+    text-decoration: underline;
 }
 
 e {
@@ -18,8 +65,7 @@ l {
 	color: blue;
 }
 
-lc
- 	{
+lc {
     font-style: italic;
     font-size: smaller;
 }

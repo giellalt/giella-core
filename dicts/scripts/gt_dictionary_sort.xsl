@@ -8,10 +8,17 @@
        method="xml"
        indent="yes"
        encoding="UTF-8"
-       doctype-public="-//XMLmind//DTD nobfkv//FI"
-       doctype-system="../script/nobfkv.dtd"
+       doctype-public="-//DivvunGiellatekno//DTD Dictionaries//Multilingual"
+       doctype-system="../script/gt_dictionary.dtd"
        />
 
+  <!-- This is the real sorting routine:
+       It sorts primarily on lemma groups + lemma (lg/l), and
+       secondarily on articles with only lemma (l). That is, it will
+       correctly sort both variants. Norwegian is chosen as the collating
+       language since there is no support for Sámi yet (although that is
+       not tested, it is just an assumption based on my knowledge about the
+       sorting standardisation process). -->
 <xsl:template match="r">
  <xsl:text>
 </xsl:text>

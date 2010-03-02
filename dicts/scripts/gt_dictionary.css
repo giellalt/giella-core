@@ -5,6 +5,10 @@ r, rootdict {
     background-color: #fff;
 }
 
+lics {
+    display: block;
+}
+
 lics:before {
     content: "Copyright Notes";
     display: block;
@@ -17,8 +21,7 @@ lics:before {
 
 lic {
     display: block;
-    margin-top: 18px;
-    margin-bottom: 18px;
+    margin: 18px;
 }
 
 ref:before {
@@ -30,22 +33,21 @@ ref:before {
 
 ref {
     display: block;
-    margin-bottom: 18px;
+    margin: 18px;
 }
 
 sourcenote {
     display: block;
     font-weight: bold;
-    margin-bottom: 18px;
-    border-bottom: 1px inset gray;
+    margin: 18px;
+    border-bottom: 1px inset gray; /* doesn't work in XMLEditor */
     padding-bottom: 18px;
 }
 
 a {
-    cursor: pointer;
-    cursor: hand;
     display: inline;
-    height: 0px;
+    cursor: pointer; /* cursor isn't supported in XMLEditor */
+    cursor: hand;
 }
 
 e {
@@ -53,12 +55,19 @@ e {
     collapsible: yes;
     not-collapsible-head: 1;
     margin-bottom: 1.33ex;
-    background-color: #eeeeee;
+    counter-reset: meaninggroups;
 }
 
 l {
     font-weight: bold;
-    color: blue;
+}
+l:after {
+    display: inline;
+    content: ' ' attr(pos) ' ' ;
+    font-style: italic;
+    font-size: small;
+    vertical-align: super;
+    color: gray;
 }
 
 lc {
@@ -72,71 +81,58 @@ lc:before {
     font-size:small;
 }
 
-t + t:before {
-    content: ", ";
-    font-style: italic;
-}
-
-t {
-    display: block;
-    collapsible: yes;
-    not-collapsible-head: 1;
-    margin-bottom: 1.33ex;
-    background-color: white;
-}
-
-
-tg > t:before {
+e > mg:before {
 	display: inline;
-    content: counter(n, decimal) ". ";
-    font-weight: bold;
+	counter-increment: meaninggroups;
+    content: counter(meaninggroups, decimal) ". ";
 }
-
-tg {
-    display: block;
-    collapsible: yes;
-    not-collapsible-head: 1;
-    margin-bottom: 1.33ex;
-    background-color: #eeeeee;
-}
-
-x:after {
-	font-style: italic;
-}
-
-xt:before {
-    font-style: italic;
-    color: gray;
-    vertical-align: super;
-    content: " = ";
-    
-}
- 
-
 mg {
     display: block;
     collapsible: yes;
     border: 1 solid gray;
     margin-bottom: 1.33ex;
-    background-color: #ffffff;
+    margin-left: 1.33ex;
 }
 
-/*
+tg + tg:before {
+    content: "; ";
+}
 tg {
-    content: "; ";
+    display: inline;
 }
-*/
 
-xg > x:before {
+t + t:before {
+    content: ", ";
+    font-style: italic;
+}
+t {
+    display: inline;
     collapsible: yes;
-    border: 1 solid gray;
+    not-collapsible-head: 1;
     margin-bottom: 1.33ex;
-    background-color: red;
+    background-color: white;
+}
+t:after {
+    display: inline;
+    font-style: italic;
+    color: gray;
+    vertical-align: super;
+}
+}
+t[pos]:after {
+    content: attr(pos);
 }
 
-xg:after {
-    display: block;
-    content: "; ";
-    collapsible: yes;
+xg:before {
+    content: " ";
 }
 
+xg x {
+    font-style: italic;
+}
+
+xt:before {
+    font-style: italic;
+    color: gray;
+    content: " = ";
+}

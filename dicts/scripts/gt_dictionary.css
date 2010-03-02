@@ -118,7 +118,7 @@ t:after {
     color: gray;
     vertical-align: super;
 }
-}
+
 t[pos]:after {
     content: attr(pos);
 }

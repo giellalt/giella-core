@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 r, rootdict {
     display: block;
     border: 1 solid gray;
@@ -109,9 +111,6 @@ t + t:before {
 }
 t {
     display: inline;
-    collapsible: yes;
-    not-collapsible-head: 1;
-    margin-bottom: 1.33ex;
 }
 t:after {
     display: inline;
@@ -121,7 +120,6 @@ t:after {
     vertical-align: super;
     text-transform: capitalize;
 }
-
 t[pos]:after {
     content: ' ' attr(pos);
 }

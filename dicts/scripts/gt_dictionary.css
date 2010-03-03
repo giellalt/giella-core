@@ -54,19 +54,24 @@ e {
     display: block;
     collapsible: yes;
     not-collapsible-head: 1;
-    margin-bottom: 1.33ex;
+    margin-bottom: 0.5ex;
     counter-reset: meaninggroups;
+    padding: 0.3ex;
+    border: 1px ridge #eee;
 }
+e:nth-child(even) {background-color: #eee}
+e:nth-child(odd)  {border: none}
 
 l {
     font-weight: bold;
 }
 l:after {
     display: inline;
-    content: ' ' attr(pos) ' ' ;
+    content: attr(pos);
     font-style: italic;
     font-size: small;
     vertical-align: super;
+    text-transform: capitalize;
     color: gray;
 }
 
@@ -76,7 +81,6 @@ lc {
 }
 
 lc:before {
-    content: "  ";  
     font-style: italic;
     font-size:small;
 }
@@ -88,8 +92,6 @@ e > mg:before {
 }
 mg {
     display: block;
-    collapsible: yes;
-    border: 1 solid gray;
     margin-bottom: 1.33ex;
     margin-left: 1.33ex;
 }
@@ -110,13 +112,14 @@ t {
     collapsible: yes;
     not-collapsible-head: 1;
     margin-bottom: 1.33ex;
-    background-color: white;
 }
 t:after {
     display: inline;
     font-style: italic;
     color: gray;
+    font-size: small;
     vertical-align: super;
+    text-transform: capitalize;
 }
 
 t[pos]:after {

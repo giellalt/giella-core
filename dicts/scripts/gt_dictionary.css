@@ -67,7 +67,7 @@ l {
 }
 l:after {
     display: inline;
-    content: attr(pos);
+    content: ' ' attr(pos);
     font-style: italic;
     font-size: small;
     vertical-align: super;
@@ -123,7 +123,7 @@ t:after {
 }
 
 t[pos]:after {
-    content: attr(pos);
+    content: ' ' attr(pos);
 }
 
 xg:before {

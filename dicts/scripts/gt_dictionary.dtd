@@ -1,4 +1,15 @@
-<!ELEMENT r (e+) >
+<!ELEMENT r (lics?, e+, xhtml:script?) >
+<!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
+
+<!-- the header -->
+<!ELEMENT lics (lic, ref*, sourcenote*) >
+<!ATTLIST lics xml:space (default|preserve) 'preserve'>
+<!ELEMENT lic (#PCDATA|a)*>
+<!ATTLIST lic xml:lang ( en | nno ) #IMPLIED >
+<!ELEMENT ref (#PCDATA|a)*>
+<!ELEMENT sourcenote (#PCDATA|a)*>
+<!ELEMENT a (#PCDATA)>
+
 <!ELEMENT e (lg,mg+) >
 <!ATTLIST e 
       usage ( mt | dic | ped | other ) #IMPLIED
@@ -34,6 +45,10 @@
 <!ELEMENT x (#PCDATA)>
 <!ELEMENT xt (#PCDATA)>
 
+<!ELEMENT xhtml:script EMPTY >
+<!ATTLIST xhtml:script type CDATA #FIXED "text/javascript" >
+<!ATTLIST xhtml:script src  CDATA #IMPLIED >
+<!ATTLIST xhtml:script xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
 
 <!--
 This document is not quite finished yet...

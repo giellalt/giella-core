@@ -113,6 +113,9 @@ t + t:before {
 t {
     display: inline;
 }
+t + t {
+    margin-left: -.35em;
+}
 t:after {
     display: inline;
     font-style: italic;

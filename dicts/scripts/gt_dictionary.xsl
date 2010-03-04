@@ -8,9 +8,7 @@
  <head><meta charset="UTF-8"/>
  </head>
  <body>
-  <xsl:apply-templates>
-    <xsl:sort select="lg/l" lang="no" />
-  </xsl:apply-templates>
+  <xsl:apply-templates/>
  </body>
 </html>
 </xsl:template>

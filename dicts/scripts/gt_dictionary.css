@@ -104,6 +104,7 @@ tg + tg:before {
 tg {
     display: inline;
 }
+tg + tg {margin-left: -.3em;}
 
 t + t:before {
     content: ", ";

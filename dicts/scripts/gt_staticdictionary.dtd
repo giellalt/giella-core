@@ -1,4 +1,15 @@
-<!ELEMENT r (e+) >
+<!ELEMENT r (lics?, e+, xhtml:script?) >
+<!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
+
+<!-- the header -->
+<!ELEMENT lics (lic, ref*, sourcenote*) >
+<!ATTLIST lics xml:space (default|preserve) 'preserve'>
+<!ELEMENT lic (#PCDATA|a)*>
+<!ATTLIST lic xml:lang ( en | nno ) #IMPLIED >
+<!ELEMENT ref (#PCDATA|a)*>
+<!ELEMENT sourcenote (#PCDATA|a)*>
+<!ELEMENT a (#PCDATA)>
+
 <!ELEMENT e (lg,mg+) >
 <!ATTLIST e 
       usage ( mt | dic | ped | other ) #IMPLIED
@@ -10,7 +21,7 @@
       pos ( v | pron | rel | pers | i | pcle | num | cc | cs | prop | x ) #REQUIRED
       nr ( sg | du | pl ) #IMPLIED
       pol ( pos | neg ) #IMPLIED
-      type ( rel | pers | pre | post | coll | dem | indef | recipr | refl | xx ) #IMPLIED
+      type ( rel | pers | pre | post | coll | dem | indef | recipr | refl | interr | xx ) #IMPLIED
       case ( acc | ill ) #IMPLIED
       mod ( ind | imp ) #IMPLIED
       context CDATA #IMPLIED
@@ -18,63 +29,117 @@
 
 <!ELEMENT lemma_ref (#PCDATA) >
 <!ATTLIST lemma_ref
-		lemmaID ( daah_pron_dem | daate_pron_dem | dah_pron_dem | dah_pron_pers |
-		datne_pron_pers | dijjieh_pron_pers | doete_pron_dem | doh_pron_dem | 
-		dohte_pron_dem | dåtnoeh_pron_pers | dïhte_pron_dem | dïhte_pron_pers | 
-		gie_pron_rel | gieh_pron_rel | guhte_pron_rel | guhth_pron_rel | gåabpa_pron_rel | 
-		gåabpetje_pron_rel | jïjtjemdh_pron_refl | jïjtjeme_pron_refl | jïjtjemse_pron_refl | 
-		mah_pron_rel | manne_pron_pers | mij_pron_rel | mijjieh_pron_pers | 
-		månnoeh_pron_pers | satne_pron_pers | sijjieh_pron_pers | 
-		sinsitniem_pron_recipr | såtnoeh_pron_pers |
-		lea_v | lij_v |
-		allies_v | idtji_v | ij_v | olles_v ) #IMPLIED
+        lemmaID ( daah_pron_dem |
+                  daate_pron_dem |
+                  dah_pron_dem |
+                  dah_pron_pers |
+                  datne_pron_pers |
+                  dijjieh_pron_pers |
+                  doete_pron_dem |
+                  doh_pron_dem |
+                  doeh_pron_dem |
+                  dohte_pron_dem |
+                  dåtnoeh_pron_pers |
+                  dïhte_pron_dem |
+                  dïhte_pron_pers |
+                  gie_pron_rel |
+                  gieh_pron_rel |
+                  guhte_pron_rel |
+                  guhth_pron_rel |
+                  gåabpa_pron_rel |
+                  gåabpetje_pron_rel |
+                  jïjtjemdh_pron_refl |
+                  jïjtjeme_pron_refl |
+                  jïjtjemse_pron_refl |
+                  jïjtjemem_pron_refl |
+                  mah_pron_rel |
+                  manne_pron_pers |
+                  mij_pron_rel |
+                  mijjieh_pron_pers |
+                  mån_pron_pers |
+                  månnoeh_pron_pers |
+                  satne_pron_pers |
+                  sijjieh_pron_pers |
+                  sinsitniem_pron_recipr |
+                  såtnoeh_pron_pers |
+                  lea_v |
+                  lij_v |
+                  allies_v |
+                  idtji_v |
+                  ij_v |
+                  olles_v ) #IMPLIED
 >
 
 <!ELEMENT analysis ANY >
 <!ATTLIST analysis
-	ms ( Pron_Dem_Pl_Acc | Pron_Dem_Pl_Com | Pron_Dem_Pl_Ela | Pron_Dem_Pl_Gen | 
-	     Pron_Dem_Pl_Ill | Pron_Dem_Pl_Ine | Pron_Dem_Sg_Acc | 
-	     Pron_Dem_Sg_Com | Pron_Dem_Sg_Ela | Pron_Dem_Sg_Ess | Pron_Dem_Sg_Gen | 
-	     Pron_Dem_Sg_Ill | Pron_Dem_Sg_Ine | Pron_Pers_Du1_Acc | 
-	     Pron_Pers_Du1_Com | Pron_Pers_Du1_Ela | Pron_Pers_Du1_Gen | Pron_Pers_Du1_Ill | 
-	     Pron_Pers_Du1_Ine | Pron_Pers_Du2_Acc | Pron_Pers_Du2_Com | 
-	     Pron_Pers_Du2_Ela | Pron_Pers_Du2_Gen | Pron_Pers_Du2_Ill | Pron_Pers_Du2_Ine | 
-	     Pron_Pers_Du3_Acc | Pron_Pers_Du3_Com | Pron_Pers_Du3_Ela | 
-	     Pron_Pers_Du3_Gen | Pron_Pers_Du3_Ill | Pron_Pers_Du3_Ine | Pron_Pers_Pl1_Acc | 
-	     Pron_Pers_Pl1_Com | Pron_Pers_Pl1_Ela | Pron_Pers_Pl1_Gen | 
-	     Pron_Pers_Pl1_Ill | Pron_Pers_Pl1_Ine | Pron_Pers_Pl2_Acc | Pron_Pers_Pl2_Com | 
-	     Pron_Pers_Pl2_Ela | Pron_Pers_Pl2_Gen | Pron_Pers_Pl2_Ill | 
-	     Pron_Pers_Pl2_Ine | Pron_Pers_Pl3_Acc | Pron_Pers_Pl3_Com | Pron_Pers_Pl3_Ela | 
-	     Pron_Pers_Pl3_Gen | Pron_Pers_Pl3_Ill | Pron_Pers_Pl3_Ine | 
-	     Pron_Pers_Sg1_Acc | Pron_Pers_Sg1_Com | Pron_Pers_Sg1_Ela | Pron_Pers_Sg1_Gen | 
-	     Pron_Pers_Sg1_Ill | Pron_Pers_Sg1_Ine | Pron_Pers_Sg2_Acc | 
-	     Pron_Pers_Sg2_Com | Pron_Pers_Sg2_Ela | Pron_Pers_Sg2_Gen | Pron_Pers_Sg2_Ill | 
-	     Pron_Pers_Sg2_Ine | Pron_Pers_Sg3_Acc | Pron_Pers_Sg3_Com | 
-	     Pron_Pers_Sg3_Ela | Pron_Pers_Sg3_Ess | Pron_Pers_Sg3_Gen | Pron_Pers_Sg3_Ill | 
-	     Pron_Pers_Sg3_Ine | Pron_Recipr_Acc | Pron_Recipr_Com | 
-	     Pron_Recipr_Ela | Pron_Recipr_Gen | Pron_Recipr_Ill | Pron_Refl_Sg1_Com | 
-	     Pron_Refl_Sg1_Ela | Pron_Refl_Sg1_Gen | Pron_Refl_Sg1_Ill | Pron_Refl_Sg1_Ine |
-	     Pron_Refl_Sg2_Com | Pron_Refl_Sg2_Ela | Pron_Refl_Sg2_Gen | Pron_Refl_Sg2_Ill | 
-	     Pron_Refl_Sg3_Com | Pron_Refl_Sg3_Ela | Pron_Refl_Sg3_Gen |
-	     Pron_Refl_Sg3_Ill | Pron_Rel_Pl_Acc | Pron_Rel_Pl_Com | Pron_Rel_Pl_Ela | 
-	     Pron_Rel_Pl_Gen | Pron_Rel_Pl_Ill | Pron_Rel_Pl_Ine | 
-	     Pron_Rel_Sg_Acc | Pron_Rel_Sg_Com | Pron_Rel_Sg_Ela | Pron_Rel_Sg_Gen | 
-	     Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine | V_ConNeg | 
-	     V_Ind_Prs_Du1 | V_Ind_Prs_Du2 | V_Ind_Prs_Du3 | 
-	     V_Ind_Prs_Pl1 | V_Ind_Prs_Pl2 | V_Ind_Prs_Pl3 | 
-	     V_Ind_Prs_Sg1 | V_Ind_Prs_Sg2 | V_Ind_Prs_Sg3 | 
-	     V_Ind_Prt_Du1 | V_Ind_Prt_Du2 | V_Ind_Prt_Du3 | 
-	     V_Ind_Prt_Pl1 | V_Ind_Prt_Pl2 | V_Ind_Prt_Pl3 | 
-	     V_Ind_Prt_Sg1 | V_Ind_Prt_Sg2 | V_Ind_Prt_Sg3 |
-	     Neg_Imprt_Du1 | Neg_Imprt_Du2 | Neg_Imprt_Du3 | 
-	     Neg_Imprt_Pl1 | Neg_Imprt_Pl2 | Neg_Imprt_Pl3 | 
-	     Neg_Imprt_Sg1 | Neg_Imprt_Sg2 | Neg_Imprt_Sg3 | 
-	     Neg_Ind_Prs_Du1 | Neg_Ind_Prs_Du2 | Neg_Ind_Prs_Du3 | 
-	     Neg_Ind_Prs_Pl1 | Neg_Ind_Prs_Pl2 | Neg_Ind_Prs_Pl3 | 
-	     Neg_Ind_Prs_Sg1 | Neg_Ind_Prs_Sg2 | Neg_Ind_Prs_Sg3 | 
-	     Neg_Ind_Prt_Du1 | Neg_Ind_Prt_Du2 | Neg_Ind_Prt_Du3 | 
-	     Neg_Ind_Prt_Pl1 | Neg_Ind_Prt_Pl2 | Neg_Ind_Prt_Pl3 | 
-	     Neg_Ind_Prt_Sg1 | Neg_Ind_Prt_Sg2 | Neg_Ind_Prt_Sg3 ) #IMPLIED
+    ms ( Pron_Dem_Pl_Acc | Pron_Dem_Pl_Com | Pron_Dem_Pl_Ela | Pron_Dem_Pl_Gen | 
+         Pron_Dem_Pl_Ill | Pron_Dem_Pl_Ine | Pron_Dem_Sg_Acc | 
+         Pron_Dem_Sg_Com | Pron_Dem_Sg_Ela | Pron_Dem_Sg_Ess | Pron_Dem_Sg_Gen | 
+         Pron_Dem_Sg_Ill | Pron_Dem_Sg_Ine |
+
+        Pron_Pers_Sg1 |
+        Pron_Pers_Sg2 |
+        Pron_Pers_Sg3 |
+        Pron_Pers_Du1 |
+        Pron_Pers_Du2 |
+        Pron_Pers_Du3 |
+        Pron_Pers_Pl1 |
+        Pron_Pers_Pl2 |
+        Pron_Pers_Pl3 |
+
+         Pron_Pers_Sg1_Acc | Pron_Pers_Sg1_Gen | Pron_Pers_Sg1_Com | Pron_Pers_Sg1_Ela | 
+         Pron_Pers_Sg1_Ill | Pron_Pers_Sg1_Ine | Pron_Pers_Sg2_Acc | 
+         Pron_Pers_Sg2_Com | Pron_Pers_Sg2_Ela | Pron_Pers_Sg2_Gen | Pron_Pers_Sg2_Ill | 
+         Pron_Pers_Sg2_Ine | Pron_Pers_Sg3_Acc | Pron_Pers_Sg3_Com | 
+         Pron_Pers_Sg3_Ela | Pron_Pers_Sg3_Ess | Pron_Pers_Sg3_Gen | Pron_Pers_Sg3_Ill | 
+         Pron_Pers_Sg3_Ine |
+
+         Pron_Pers_Du1_Acc | 
+         Pron_Pers_Du1_Com | Pron_Pers_Du1_Ela | Pron_Pers_Du1_Gen | Pron_Pers_Du1_Ill | 
+         Pron_Pers_Du1_Ine | Pron_Pers_Du2_Acc | Pron_Pers_Du2_Com | 
+         Pron_Pers_Du2_Ela | Pron_Pers_Du2_Gen | Pron_Pers_Du2_Ill | Pron_Pers_Du2_Ine | 
+         Pron_Pers_Du3_Acc | Pron_Pers_Du3_Com | Pron_Pers_Du3_Ela | 
+         Pron_Pers_Du3_Gen | Pron_Pers_Du3_Ill | Pron_Pers_Du3_Ine |
+
+         Pron_Pers_Pl1_Acc | 
+         Pron_Pers_Pl1_Com | Pron_Pers_Pl1_Ela | Pron_Pers_Pl1_Gen | 
+         Pron_Pers_Pl1_Ill | Pron_Pers_Pl1_Ine | Pron_Pers_Pl2_Acc | Pron_Pers_Pl2_Com | 
+         Pron_Pers_Pl2_Ela | Pron_Pers_Pl2_Gen | Pron_Pers_Pl2_Ill | 
+         Pron_Pers_Pl2_Ine | Pron_Pers_Pl3_Acc | Pron_Pers_Pl3_Com | Pron_Pers_Pl3_Ela | 
+         Pron_Pers_Pl3_Gen | Pron_Pers_Pl3_Ill | Pron_Pers_Pl3_Ine | 
+
+         Pron_Recipr_Acc | Pron_Recipr_Com | 
+         Pron_Recipr_Ela | Pron_Recipr_Gen | Pron_Recipr_Ill |
+
+         Pron_Refl_Sg1_Com | 
+         Pron_Refl_Sg1_Ela | Pron_Refl_Sg1_Gen | Pron_Refl_Sg1_Ill | Pron_Refl_Sg1_Ine |
+         Pron_Refl_Sg2_Com | Pron_Refl_Sg2_Ela | Pron_Refl_Sg2_Gen | Pron_Refl_Sg2_Ill |
+         Pron_Refl_Sg2_Ine |
+         Pron_Refl_Sg3_Com | Pron_Refl_Sg3_Ela | Pron_Refl_Sg3_Gen |
+         Pron_Refl_Sg3_Ill | Pron_Refl_Sg3_Ine |
+
+         Pron_Rel_Pl_Acc | Pron_Rel_Pl_Com | Pron_Rel_Pl_Ela | 
+         Pron_Rel_Pl_Gen | Pron_Rel_Pl_Ill | Pron_Rel_Pl_Ine | 
+         Pron_Rel_Sg_Acc | Pron_Rel_Sg_Com | Pron_Rel_Sg_Ela | Pron_Rel_Sg_Gen | 
+         Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine |
+
+         V_ConNeg | 
+         V_Ind_Prs_Du1 | V_Ind_Prs_Du2 | V_Ind_Prs_Du3 | 
+         V_Ind_Prs_Pl1 | V_Ind_Prs_Pl2 | V_Ind_Prs_Pl3 | 
+         V_Ind_Prs_Sg1 | V_Ind_Prs_Sg2 | V_Ind_Prs_Sg3 | 
+         V_Ind_Prt_Du1 | V_Ind_Prt_Du2 | V_Ind_Prt_Du3 | 
+         V_Ind_Prt_Pl1 | V_Ind_Prt_Pl2 | V_Ind_Prt_Pl3 | 
+         V_Ind_Prt_Sg1 | V_Ind_Prt_Sg2 | V_Ind_Prt_Sg3 |
+
+         Neg_Imprt_Du1 | Neg_Imprt_Du2 | Neg_Imprt_Du3 | 
+         Neg_Imprt_Pl1 | Neg_Imprt_Pl2 | Neg_Imprt_Pl3 | 
+         Neg_Imprt_Sg1 | Neg_Imprt_Sg2 | Neg_Imprt_Sg3 | 
+         Neg_Ind_Prs_Du1 | Neg_Ind_Prs_Du2 | Neg_Ind_Prs_Du3 | 
+         Neg_Ind_Prs_Pl1 | Neg_Ind_Prs_Pl2 | Neg_Ind_Prs_Pl3 | 
+         Neg_Ind_Prs_Sg1 | Neg_Ind_Prs_Sg2 | Neg_Ind_Prs_Sg3 | 
+         Neg_Ind_Prt_Du1 | Neg_Ind_Prt_Du2 | Neg_Ind_Prt_Du3 | 
+         Neg_Ind_Prt_Pl1 | Neg_Ind_Prt_Pl2 | Neg_Ind_Prt_Pl3 | 
+         Neg_Ind_Prt_Sg1 | Neg_Ind_Prt_Sg2 | Neg_Ind_Prt_Sg3 ) #IMPLIED
 >
 
 <!ELEMENT wordform (#PCDATA) >
@@ -98,6 +163,10 @@
 <!ELEMENT x (#PCDATA)>
 <!ELEMENT xt (#PCDATA)>
 
+<!ELEMENT xhtml:script EMPTY >
+<!ATTLIST xhtml:script type CDATA #FIXED "text/javascript" >
+<!ATTLIST xhtml:script src  CDATA #IMPLIED >
+<!ATTLIST xhtml:script xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
 
 <!--
 This document is not quite finished yet...
@@ -119,7 +188,7 @@ Here are the pos tags:
  i  = interjection
  cc  = conjunction
  cs  = subjunction
- im = infinitive mark Ã¥ (nob)
+ im = infinitive mark å (nob)
  s  = sentence, or explanation
  x  = still no pos
 

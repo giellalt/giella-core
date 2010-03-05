@@ -53,7 +53,7 @@ a {
 
 e {
     display: block;
-    margin-bottom: 0.5ex;
+    margin-bottom: 0.3ex;
     counter-reset: meaninggroups;
     padding: 0.3ex;
     border: 1px ridge #eee;
@@ -91,8 +91,14 @@ e > mg:before {
 }
 mg {
     display: block;
-    margin-bottom: 1.33ex;
+    margin-bottom: 0.33ex;
     margin-left: 1.33ex;
+}
+
+e > mg:only-of-type {
+    display: inline;
+    margin-bottom: 0;
+    margin-left: 0;
 }
 
 tg + tg:before {

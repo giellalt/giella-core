@@ -53,8 +53,6 @@ a {
 
 e {
     display: block;
-    collapsible: yes;
-    not-collapsible-head: 1;
     margin-bottom: 0.5ex;
     counter-reset: meaninggroups;
     padding: 0.3ex;

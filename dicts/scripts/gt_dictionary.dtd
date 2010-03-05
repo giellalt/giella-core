@@ -18,7 +18,7 @@
 <!ELEMENT lg (l,lc*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
-      pos ( a | n | npl | v | adv | po | pr | pron | rel | pers | i | pcle | num | cc | cs | prop | x ) #REQUIRED
+      pos ( a | n | npl | v | adv | po | pr | pron | rel | pers | i | pcle | num | cc | cs | prop | propPl | x ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | pre | post ) #IMPLIED
@@ -70,7 +70,7 @@ Here are the pos tags:
  i  = interjection
  cc  = conjunction
  cs  = subjunction
- im = infinitive mark Ã¥ (nob)
+ im = infinitive mark å (nob)
  s  = sentence, or explanation
  x  = still no pos
 

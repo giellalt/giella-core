@@ -94,12 +94,13 @@ e > mg:before {
 	counter-increment: meaninggroups;
     content: counter(meaninggroups, decimal) ". ";
 }
-mg {
+e > mg {
     display: block;
     margin-bottom: 0.2ex;
     margin-left: 1.33ex;
 }
 
+e > mg:only-of-type::before {content: none; content:''; }
 e > mg:only-of-type {
     display: inline;
     margin-bottom: 0;

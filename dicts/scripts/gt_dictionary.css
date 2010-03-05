@@ -37,6 +37,11 @@ ref {
     margin: 18px;
 }
 
+i {
+    display: inline;
+    font-style: italic;
+}
+
 sourcenote {
     display: block;
     font-weight: bold;

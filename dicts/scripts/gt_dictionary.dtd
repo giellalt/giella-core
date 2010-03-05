@@ -6,9 +6,10 @@
 <!ATTLIST lics xml:space (default|preserve) 'preserve'>
 <!ELEMENT lic (#PCDATA|a)*>
 <!ATTLIST lic xml:lang ( en | nno ) #IMPLIED >
-<!ELEMENT ref (#PCDATA|a)*>
+<!ELEMENT ref (#PCDATA|a|i)*>
 <!ELEMENT sourcenote (#PCDATA|a)*>
 <!ELEMENT a (#PCDATA)>
+<!ELEMENT i (#PCDATA)>
 
 <!ELEMENT e (lg,mg+) >
 <!ATTLIST e 
@@ -23,6 +24,8 @@
       context CDATA #IMPLIED
       type ( rel | pers | pre | post ) #IMPLIED
       class ( I | II | III | IV | V | VI ) #IMPLIED
+      stem ( even | odd ) #IMPLIED
+      umlaut ( A | B | C | D | E | F ) #IMPLIED
       p3p CDATA #IMPLIED
       minip ( notSg1 | onlyPl ) #IMPLIED
 >      
@@ -31,6 +34,9 @@
 <!ELEMENT lc (#PCDATA) >
 
 <!ELEMENT mg (tg+) >
+<!ATTLIST mg 
+      lang ( swe | nob ) #IMPLIED
+>      
 <!ELEMENT tg (re?,t+,xg*) >
 
 <!ELEMENT re (#PCDATA) >

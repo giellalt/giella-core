@@ -100,7 +100,7 @@ e > mg {
     margin-left: 1.33ex;
 }
 
-e > mg:only-of-type::before {content: none; content:''; }
+e > mg:only-of-type:before {content: none; content:''; }
 e > mg:only-of-type {
     display: inline;
     margin-bottom: 0;

@@ -26,15 +26,19 @@ lic {
 }
 
 ref:before {
-    display: block;
-    content: "Please refer to this source code with the following attribution text:";
+    display: inline;
+    white-space: pre; /* required to save \A in the next rule*/
+    content: 'Please refer to this source code with the following attribution text:\A"';
    	font-weight: bold;
    	font-size: smaller;
 }
-
 ref {
     display: block;
     margin: 18px;
+}
+ref:after {
+    display: inline;
+    content: '"';
 }
 
 i {
@@ -56,6 +60,7 @@ a {
     cursor: hand;
 }
 
+/* e styling: */
 e {
     display: block;
     margin-bottom: 0.3ex;
@@ -66,12 +71,14 @@ e {
 e:nth-child(even) {background-color: #eee}
 e:nth-child(odd)  {border: none}
 
+/* l styling: */
 l {
     font-weight: bold;
 }
 l:after {
     display: inline;
-    content: ' ' attr(pos);
+    margin-left: 0.5ex;
+    content: attr(pos);
     font-style: italic;
     font-size: small;
     vertical-align: super;
@@ -79,16 +86,13 @@ l:after {
     color: gray;
 }
 
+/* lc styling: */
 lc {
     font-style: italic;
-    font-size: smaller;
+    font-size: small;
 }
 
-lc:before {
-    font-style: italic;
-    font-size:small;
-}
-
+/* mg styling: */
 e > mg:before {
 	display: inline;
 	counter-increment: meaninggroups;
@@ -99,7 +103,6 @@ e > mg {
     margin-bottom: 0.2ex;
     margin-left: 1.33ex;
 }
-
 e > mg:only-of-type:before {content: none; content:''; }
 e > mg:only-of-type {
     display: inline;
@@ -107,6 +110,7 @@ e > mg:only-of-type {
     margin-left: 0;
 }
 
+/* tg styling: */
 tg + tg:before {
     content: "; ";
 }
@@ -114,7 +118,11 @@ tg {
     display: inline;
 }
 tg + tg {margin-left: -.3em;}
+/* The neg. margin is needed to cancel out whitespace (newlines,
+indents) that is collapsed to a single space character, even in
+cases like this where we don't want any space at all. */
 
+/* t styling: */
 t + t:before {
     content: ", ";
     font-style: italic;
@@ -132,15 +140,13 @@ t:after {
     font-size: small;
     vertical-align: super;
     text-transform: capitalize;
+    margin-left: 0.5ex;
 }
 t[pos]:after {
-    content: ' ' attr(pos);
+    content: attr(pos);
 }
 
-xg:before {
-    content: " ";
-}
-
+/* x + xt styling: */
 xg x {
     font-style: italic;
 }

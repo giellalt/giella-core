@@ -132,6 +132,7 @@ wordform:before {
 }
 wordform {
     display: table-cell ;
+    padding: 0px 0.5ex;
 }
 
 /* mg styling: */

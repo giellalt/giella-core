@@ -85,11 +85,46 @@ l:after {
     text-transform: capitalize;
     color: gray;
 }
+l[type]:after {
+    content: attr(pos) ', ' attr(type);
+}
 
 /* lc styling: */
 lc {
     font-style: italic;
     font-size: small;
+}
+
+lg > analysis:before {
+    content: " Analysis: " ;
+    font-size: small;
+    color: gray;
+}
+lg > analysis {
+    display: inline;
+}
+
+/* mini paradigm styling: */
+mini_paradigm:before {
+    display: table-caption ;
+    content: "Mini Paradigm:" ;
+    font-size: small;
+    color: gray;
+}
+mini_paradigm {
+    display: table ;
+    margin-left: 3.5ex;
+}
+analysis {
+    display: table-row ;
+}
+wordform:before {
+    display: inline ;
+    content: 'test: ' ;
+    color: gray;
+}
+wordform {
+    display: table-cell ;
 }
 
 /* mg styling: */
@@ -108,6 +143,11 @@ e > mg:only-of-type {
     display: inline;
     margin-bottom: 0;
     margin-left: 0;
+}
+e > lg + mg:only-of-type {
+    display: block;
+    margin-bottom: 0.2ex;
+    margin-left: 1.33ex;
 }
 
 /* tg styling: */
@@ -146,7 +186,19 @@ t[pos]:after {
     content: attr(pos);
 }
 
-/* x + xt styling: */
+/* xg, x, xt styling: */
+e > lg ~ mg xg {
+    display: block;
+    margin-bottom: 0.2ex;
+    margin-left: 1.33ex;
+}
+e > lg ~ mg xg:before {
+    display: block;
+    color: gray;
+    font-size: small;
+    content: "Usage example:";
+}
+
 xg x {
     font-style: italic;
 }

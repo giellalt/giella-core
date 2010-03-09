@@ -104,6 +104,13 @@ lg > analysis {
     display: inline;
 }
 
+lemma_ref:before {
+    content: "▸ " ;
+}
+lemma_ref {
+    display: inline;
+}
+
 /* mini paradigm styling: */
 mini_paradigm:before {
     display: table-caption ;

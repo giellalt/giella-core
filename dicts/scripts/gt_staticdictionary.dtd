@@ -84,6 +84,17 @@
                   iežat_pron_refl |
                   iehčan_pron_refl |
                   iežan_pron_refl |
+                  nuppiid_pron_recipr |
+                  nuppi_pron_recipr |
+                  guimmiideaset_pron_recipr |
+                  guoimmiset_pron_recipr |
+                  guimmiideattet_pron_recipr |
+                  guoimmádet_pron_recipr |
+                  guimmiideamet_pron_recipr |
+                  guoibmámet_pron_recipr |
+                  guoimmiska_pron_recipr |
+                  guoimmáde_pron_recipr |
+                  guoibmáme_pron_recipr |
                   lea_v |
                   lij_v |
                   allies_v |
@@ -134,6 +145,24 @@
 
          Pron_Recipr_Acc | Pron_Recipr_Com | 
          Pron_Recipr_Ela | Pron_Recipr_Gen | Pron_Recipr_Ill |
+
+         Pron_Recipr_Du_Acc  | Pron_Recipr_Du_Gen  | Pron_Recipr_Du_Ill  |
+         Pron_Recipr_Du_Loc  | Pron_Recipr_Du_Com  | Pron_Recipr_Du_Ess  |
+         Pron_Recipr_Du1_Acc | Pron_Recipr_Du1_Gen | Pron_Recipr_Du1_Ill |
+         Pron_Recipr_Du1_Loc | Pron_Recipr_Du1_Com | Pron_Recipr_Du1_Ess |
+         Pron_Recipr_Du2_Acc | Pron_Recipr_Du2_Gen | Pron_Recipr_Du2_Ill |
+         Pron_Recipr_Du2_Loc | Pron_Recipr_Du2_Com | Pron_Recipr_Du2_Ess |
+         Pron_Recipr_Du3_Acc | Pron_Recipr_Du3_Gen | Pron_Recipr_Du3_Ill |
+         Pron_Recipr_Du3_Loc | Pron_Recipr_Du3_Com | Pron_Recipr_Du3_Ess |
+
+         Pron_Recipr_Pl_Acc  | Pron_Recipr_Pl_Gen  | Pron_Recipr_Pl_Ill  |
+         Pron_Recipr_Pl_Loc  | Pron_Recipr_Pl_Com  | Pron_Recipr_Pl_Ess  |
+         Pron_Recipr_Pl1_Acc | Pron_Recipr_Pl1_Gen | Pron_Recipr_Pl1_Ill |
+         Pron_Recipr_Pl1_Loc | Pron_Recipr_Pl1_Com | Pron_Recipr_Pl1_Ess |
+         Pron_Recipr_Pl2_Acc | Pron_Recipr_Pl2_Gen | Pron_Recipr_Pl2_Ill |
+         Pron_Recipr_Pl2_Loc | Pron_Recipr_Pl2_Com | Pron_Recipr_Pl2_Ess |
+         Pron_Recipr_Pl3_Acc | Pron_Recipr_Pl3_Gen | Pron_Recipr_Pl3_Ill |
+         Pron_Recipr_Pl3_Loc | Pron_Recipr_Pl3_Com | Pron_Recipr_Pl3_Ess |
 
          Pron_Refl_Sg1_Gen | Pron_Refl_Sg1_Com | Pron_Refl_Sg1_Loc |
          Pron_Refl_Sg1_Ela | Pron_Refl_Sg1_Ill | Pron_Refl_Sg1_Ine | Pron_Refl_Sg1_Ess |

@@ -211,6 +211,9 @@ t + t:before {
 t {
     display: inline;
 }
+l + t {
+    margin-left: +.35em;
+}
 t + t {
     margin-left: -.35em;
 }

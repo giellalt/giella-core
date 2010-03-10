@@ -20,10 +20,10 @@
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( a | n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
-            num | cc | cs | prop | propPl | g3 | actor | x ) #REQUIRED
+            num | cc | cs | prop | propPl | g3 | actor | interj | x ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
-      type ( rel | pers | pre | post ) #IMPLIED
+      type ( rel | pers | indef | refl | pre | post ) #IMPLIED
       class ( I | II | III | IV | V | VI ) #IMPLIED
       stem ( even | odd ) #IMPLIED
       umlaut ( A | B | C | D | E | F ) #IMPLIED
@@ -46,7 +46,7 @@
 <!ATTLIST t 
       pos ( a | a5 | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
-            pcle | s    | x  | xxx ) #REQUIRED
+            pcle | s    | interj  | x  | xxx ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
 >      

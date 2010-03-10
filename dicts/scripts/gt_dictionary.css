@@ -88,6 +88,9 @@ l:after {
 l[type]:after {
     content: attr(pos) ', ' attr(type);
 }
+l[type][nr]:after {
+    content: attr(pos) ', ' attr(type) ', ' attr(nr);
+}
 
 /* lc styling: */
 lc {
@@ -109,6 +112,12 @@ lemma_ref:before {
 }
 lemma_ref {
     display: inline;
+}
+lemma_ref:after {
+    display: inline;
+    content: " (" attr(lemmaID) ") ";
+    font-size: small;
+    color: gray;
 }
 
 /* mini paradigm styling: */
@@ -196,6 +205,9 @@ t:after {
 }
 t[pos]:after {
     content: attr(pos);
+}
+t[pos][type]:after {
+    content: attr(pos) ", " attr(type) ;
 }
 
 /* xg, x, xt styling: */

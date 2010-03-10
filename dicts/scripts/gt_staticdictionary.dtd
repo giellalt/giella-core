@@ -23,7 +23,8 @@
       pol ( pos | neg ) #IMPLIED
       type ( rel | pers | pre | post | coll | dem | indef | recipr | refl | interr | xx ) #IMPLIED
       case ( acc | ill ) #IMPLIED
-      mod ( ind | imp ) #IMPLIED
+      mod ( ind | imp | cond ) #IMPLIED
+      persnr ( conneg | sg1 | sg2 | sg3 | du1 | du2 | du3 | pl1 | pl2 | pl3 | inf | prfprc ) #IMPLIED
       context CDATA #IMPLIED
 >      
 
@@ -65,9 +66,17 @@
                   lea_v |
                   lij_v |
                   allies_v |
+                  olles_v |
                   idtji_v |
                   ij_v |
-                  olles_v ) #IMPLIED
+                  allos_v |
+                  ii_v_mun |
+                  leaččan_v_pot |
+                  livččen_v_cond |
+                  ledjen_v |
+                  lean_v_ind |
+                  lehkon_v_imprt |
+                  xxx ) #IMPLIED
 >
 
 <!ELEMENT analysis ANY >
@@ -123,13 +132,35 @@
          Pron_Rel_Sg_Acc | Pron_Rel_Sg_Com | Pron_Rel_Sg_Ela | Pron_Rel_Sg_Gen | 
          Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine |
 
-         V_ConNeg | 
+         V_Inf |
+         V_ConNeg |
+         V_Ind_Prs_ConNeg |
+         V_Ind_Prt_ConNeg |
+         V_Pot_ConNeg |
+         V_Cond_ConNeg |
+
          V_Ind_Prs_Du1 | V_Ind_Prs_Du2 | V_Ind_Prs_Du3 | 
          V_Ind_Prs_Pl1 | V_Ind_Prs_Pl2 | V_Ind_Prs_Pl3 | 
          V_Ind_Prs_Sg1 | V_Ind_Prs_Sg2 | V_Ind_Prs_Sg3 | 
          V_Ind_Prt_Du1 | V_Ind_Prt_Du2 | V_Ind_Prt_Du3 | 
          V_Ind_Prt_Pl1 | V_Ind_Prt_Pl2 | V_Ind_Prt_Pl3 | 
          V_Ind_Prt_Sg1 | V_Ind_Prt_Sg2 | V_Ind_Prt_Sg3 |
+
+         IV_Neg_Ind_Sg1 | IV_Neg_Ind_Sg2 | IV_Neg_Ind_Sg3 |
+         IV_Neg_Ind_Du1 | IV_Neg_Ind_Du2 | IV_Neg_Ind_Du3 |
+         IV_Neg_Ind_Pl1 | IV_Neg_Ind_Pl2 | IV_Neg_Ind_Pl3 |
+
+         V_Pot_Sg1 | V_Pot_Sg2 | V_Pot_Sg3 |
+         V_Pot_Du1 | V_Pot_Du2 | V_Pot_Du3 |
+         V_Pot_Pl1 | V_Pot_Pl2 | V_Pot_Pl3 |
+
+         V_Cond_Sg1 | V_Cond_Sg2 | V_Cond_Sg3 |
+         V_Cond_Du1 | V_Cond_Du2 | V_Cond_Du3 |
+         V_Cond_Pl1 | V_Cond_Pl2 | V_Cond_Pl3 |
+
+         V_Imprt_Sg1 | V_Imprt_Sg2 | V_Imprt_Sg3 |
+         V_Imprt_Du1 | V_Imprt_Du2 | V_Imprt_Du3 |
+         V_Imprt_Pl1 | V_Imprt_Pl2 | V_Imprt_Pl3 |
 
          Neg_Imprt_Du1 | Neg_Imprt_Du2 | Neg_Imprt_Du3 | 
          Neg_Imprt_Pl1 | Neg_Imprt_Pl2 | Neg_Imprt_Pl3 | 

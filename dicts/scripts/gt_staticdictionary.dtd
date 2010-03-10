@@ -26,6 +26,7 @@
       mod ( ind | imp | cond ) #IMPLIED
       persnr ( conneg | sg1 | sg2 | sg3 | du1 | du2 | du3 | pl1 | pl2 | pl3 | inf | prfprc ) #IMPLIED
       context CDATA #IMPLIED
+      illpl ( ok | no ) #IMPLIED
 >      
 
 <!ELEMENT lemma_ref (#PCDATA) >

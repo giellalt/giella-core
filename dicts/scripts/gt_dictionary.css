@@ -113,26 +113,30 @@ lemma_ref {
 
 /* mini paradigm styling: */
 mini_paradigm:before {
-    display: table-caption ;
-    content: "Mini Paradigm:" ;
+    display: block ;
+    content: " Miniparadigm:" ;
     font-size: small;
     color: gray;
 }
 mini_paradigm {
-    display: table ;
-    margin-left: 3.5ex;
+    display: block ;
+    margin-left: 5ex;
 }
-analysis {
-    display: table-row ;
-}
-wordform:before {
+mini_paradigm > analysis:before {
     display: inline ;
-    content: 'test: ' ;
+    content: attr(ms) ' ' ;
     color: gray;
 }
+mini_paradigm > analysis {
+    display: list-item ;
+}
 wordform {
-    display: table-cell ;
-    padding: 0px 0.5ex;
+    display: inline ;
+}
+wordform + wordform:before {
+    display: inline ;
+    content: ', ' ;
+    margin-left: -.3em;
 }
 
 /* mg styling: */

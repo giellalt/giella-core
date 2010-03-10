@@ -72,6 +72,18 @@
                   gii_pron_rel |
                   mat_pron_rel |
                   geat_pron_rel |
+                  iežaset_pron_refl |
+                  iežadet_pron_refl |
+                  iežamet_pron_refl |
+                  iehčamet_pron_refl |
+                  iežaska_pron_refl |
+                  iežade_pron_refl |
+                  iehčame_pron_refl |
+                  iežame_pron_refl |
+                  iežas_pron_refl |
+                  iežat_pron_refl |
+                  iehčan_pron_refl |
+                  iežan_pron_refl |
                   lea_v |
                   lij_v |
                   allies_v |
@@ -123,12 +135,26 @@
          Pron_Recipr_Acc | Pron_Recipr_Com | 
          Pron_Recipr_Ela | Pron_Recipr_Gen | Pron_Recipr_Ill |
 
-         Pron_Refl_Sg1_Com | 
-         Pron_Refl_Sg1_Ela | Pron_Refl_Sg1_Gen | Pron_Refl_Sg1_Ill | Pron_Refl_Sg1_Ine |
-         Pron_Refl_Sg2_Com | Pron_Refl_Sg2_Ela | Pron_Refl_Sg2_Gen | Pron_Refl_Sg2_Ill |
-         Pron_Refl_Sg2_Ine |
-         Pron_Refl_Sg3_Com | Pron_Refl_Sg3_Ela | Pron_Refl_Sg3_Gen |
-         Pron_Refl_Sg3_Ill | Pron_Refl_Sg3_Ine |
+         Pron_Refl_Sg1_Gen | Pron_Refl_Sg1_Com | Pron_Refl_Sg1_Loc |
+         Pron_Refl_Sg1_Ela | Pron_Refl_Sg1_Ill | Pron_Refl_Sg1_Ine | Pron_Refl_Sg1_Ess |
+         Pron_Refl_Sg2_Gen | Pron_Refl_Sg2_Com | Pron_Refl_Sg2_Loc |
+         Pron_Refl_Sg2_Ela | Pron_Refl_Sg2_Ill | Pron_Refl_Sg2_Ine | Pron_Refl_Sg2_Ess |
+         Pron_Refl_Sg3_Gen | Pron_Refl_Sg3_Com | Pron_Refl_Sg3_Loc |
+         Pron_Refl_Sg3_Ela | Pron_Refl_Sg3_Ill | Pron_Refl_Sg3_Ine | Pron_Refl_Sg3_Ess |
+
+         Pron_Refl_Du1_Gen | Pron_Refl_Du1_Com | Pron_Refl_Du1_Loc |
+         Pron_Refl_Du1_Ela | Pron_Refl_Du1_Ill | Pron_Refl_Du1_Ine | Pron_Refl_Du1_Ess |
+         Pron_Refl_Du2_Gen | Pron_Refl_Du2_Com | Pron_Refl_Du2_Loc |
+         Pron_Refl_Du2_Ela | Pron_Refl_Du2_Ill | Pron_Refl_Du2_Ine | Pron_Refl_Du2_Ess |
+         Pron_Refl_Du3_Gen | Pron_Refl_Du3_Com | Pron_Refl_Du3_Loc |
+         Pron_Refl_Du3_Ela | Pron_Refl_Du3_Ill | Pron_Refl_Du3_Ine | Pron_Refl_Du3_Ess |
+
+         Pron_Refl_Pl1_Gen | Pron_Refl_Pl1_Com | Pron_Refl_Pl1_Loc |
+         Pron_Refl_Pl1_Ela | Pron_Refl_Pl1_Ill | Pron_Refl_Pl1_Ine | Pron_Refl_Pl1_Ess |
+         Pron_Refl_Pl2_Gen | Pron_Refl_Pl2_Com | Pron_Refl_Pl2_Loc |
+         Pron_Refl_Pl2_Ela | Pron_Refl_Pl2_Ill | Pron_Refl_Pl2_Ine | Pron_Refl_Pl2_Ess |
+         Pron_Refl_Pl3_Gen | Pron_Refl_Pl3_Com | Pron_Refl_Pl3_Loc |
+         Pron_Refl_Pl3_Ela | Pron_Refl_Pl3_Ill | Pron_Refl_Pl3_Ine | Pron_Refl_Pl3_Ess |
 
          Pron_Rel_Sg_Acc | Pron_Rel_Sg_Com | Pron_Rel_Sg_Ela |
          Pron_Rel_Sg_Gen | Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine | Pron_Rel_Sg_Loc |

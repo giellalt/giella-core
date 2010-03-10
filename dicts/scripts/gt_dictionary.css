@@ -70,6 +70,20 @@ e {
 }
 e:nth-child(even) {background-color: #eee}
 e:nth-child(odd)  {border: none}
+e:after {
+    display: block ;
+    color: gray ;
+    margin-left: 2ex ;
+}
+e[usage]:after {
+    content: "Usage: " attr(usage) ;
+}
+e[src]:after {
+    content: "Source: " attr(src) ;
+}
+e[usage][src]:after {
+    content: "Usage: " attr(usage) ", source: " attr(src) ;
+}
 
 /* l styling: */
 l {
@@ -85,11 +99,17 @@ l:after {
     text-transform: capitalize;
     color: gray;
 }
-l[type]:after {
+l[pos][type]:after {
     content: attr(pos) ', ' attr(type);
 }
-l[type][nr]:after {
+l[pos][type][nr]:after {
     content: attr(pos) ', ' attr(type) ', ' attr(nr);
+}
+l[pos][nr]:after {
+    content: attr(pos) ', ' attr(nr);
+}
+l[pos][illpl]:after {
+    content: attr(pos) ', illpl=' attr(illpl);
 }
 
 /* lc styling: */

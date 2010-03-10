@@ -20,7 +20,7 @@
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( a | n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
-            num | cc | cs | prop | propPl | g3 | x ) #REQUIRED
+            num | cc | cs | prop | propPl | g3 | actor | x ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | pre | post ) #IMPLIED

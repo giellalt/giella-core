@@ -63,6 +63,15 @@
                   sijjieh_pron_pers |
                   sinsitniem_pron_recipr |
                   såtnoeh_pron_pers |
+                  makkár_pron_interr_sg |
+                  makkárat_pron_interr_pl |
+                  goabbá_pron_rel |
+                  goappát_pron_rel |
+                  guđet_pron_rel |
+                  mii_pron_rel |
+                  gii_pron_rel |
+                  mat_pron_rel |
+                  geat_pron_rel |
                   lea_v |
                   lij_v |
                   allies_v |
@@ -86,15 +95,9 @@
          Pron_Dem_Sg_Com | Pron_Dem_Sg_Ela | Pron_Dem_Sg_Ess | Pron_Dem_Sg_Gen | 
          Pron_Dem_Sg_Ill | Pron_Dem_Sg_Ine |
 
-        Pron_Pers_Sg1 |
-        Pron_Pers_Sg2 |
-        Pron_Pers_Sg3 |
-        Pron_Pers_Du1 |
-        Pron_Pers_Du2 |
-        Pron_Pers_Du3 |
-        Pron_Pers_Pl1 |
-        Pron_Pers_Pl2 |
-        Pron_Pers_Pl3 |
+         Pron_Pers_Sg1 | Pron_Pers_Sg2 | Pron_Pers_Sg3 |
+         Pron_Pers_Du1 | Pron_Pers_Du2 | Pron_Pers_Du3 |
+         Pron_Pers_Pl1 | Pron_Pers_Pl2 | Pron_Pers_Pl3 |
 
          Pron_Pers_Sg1_Acc | Pron_Pers_Sg1_Gen | Pron_Pers_Sg1_Com | Pron_Pers_Sg1_Ela | 
          Pron_Pers_Sg1_Ill | Pron_Pers_Sg1_Ine | Pron_Pers_Sg2_Acc | 
@@ -127,10 +130,17 @@
          Pron_Refl_Sg3_Com | Pron_Refl_Sg3_Ela | Pron_Refl_Sg3_Gen |
          Pron_Refl_Sg3_Ill | Pron_Refl_Sg3_Ine |
 
-         Pron_Rel_Pl_Acc | Pron_Rel_Pl_Com | Pron_Rel_Pl_Ela | 
-         Pron_Rel_Pl_Gen | Pron_Rel_Pl_Ill | Pron_Rel_Pl_Ine | 
-         Pron_Rel_Sg_Acc | Pron_Rel_Sg_Com | Pron_Rel_Sg_Ela | Pron_Rel_Sg_Gen | 
-         Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine |
+         Pron_Rel_Sg_Acc | Pron_Rel_Sg_Com | Pron_Rel_Sg_Ela |
+         Pron_Rel_Sg_Gen | Pron_Rel_Sg_Ill | Pron_Rel_Sg_Ine | Pron_Rel_Sg_Loc |
+         Pron_Rel_Pl_Acc | Pron_Rel_Pl_Com | Pron_Rel_Pl_Ela |
+         Pron_Rel_Pl_Gen | Pron_Rel_Pl_Ill | Pron_Rel_Pl_Ine | Pron_Rel_Pl_Loc |
+         Pron_Rel_Ess |
+
+         Pron_Interr_Sg_Acc | Pron_Interr_Sg_Com | Pron_Interr_Sg_Ela |
+         Pron_Interr_Sg_Gen | Pron_Interr_Sg_Ill | Pron_Interr_Sg_Ine | Pron_Interr_Sg_Loc |
+         Pron_Interr_Pl_Acc | Pron_Interr_Pl_Com | Pron_Interr_Pl_Ela |
+         Pron_Interr_Pl_Gen | Pron_Interr_Pl_Ill | Pron_Interr_Pl_Ine | Pron_Interr_Pl_Loc |
+         Pron_Interr_Ess |
 
          V_Inf |
          V_ConNeg |

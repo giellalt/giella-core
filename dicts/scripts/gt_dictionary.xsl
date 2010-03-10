@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output method="html"/>
 
@@ -50,10 +50,13 @@
      </xsl:apply-templates>
     </ol>
    </xsl:when>
-   <xsl:otherwise>
+   <xsl:when test="./mg">
     <xsl:apply-templates select="mg">
      <xsl:with-param name="multi" select="0"/>
     </xsl:apply-templates>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:apply-templates />
    </xsl:otherwise>
   </xsl:choose>
  </p>
@@ -63,9 +66,11 @@
  <b>
   <xsl:apply-templates/>
  </b>
- <sup>
-  <xsl:value-of select="./@pos"/>
- </sup>
+ <xsl:if test="./@pos">
+  <sup>
+   <xsl:value-of select="./@pos"/>
+  </sup>
+ </xsl:if>
  <xsl:text> </xsl:text>
 </xsl:template>
 

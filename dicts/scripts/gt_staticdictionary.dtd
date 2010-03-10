@@ -108,6 +108,20 @@
                   sii_pron_pers    |
                   soai_pron_pers   |
                   son_pron_pers    |
+                  dakkár_pron_dem_sg    |
+                  dakkárat_pron_dem_pl  |
+                  dat_pron_dem_pl       |
+                  dat_pron_dem_sg       |
+                  diekkár_pron_dem_sg   |
+                  diekkárat_pron_dem_pl |
+                  diet_pron_dem_pl      |
+                  diet_pron_dem_sg      |
+                  dot_pron_dem_pl       |
+                  dot_pron_dem_sg       |
+                  duot_pron_dem_pl      |
+                  duot_pron_dem_sg      |
+                  dát_pron_dem_pl       |
+                  dát_pron_dem_sg       |
                   lea_v |
                   lij_v |
                   allies_v |
@@ -126,10 +140,12 @@
 
 <!ELEMENT analysis ANY >
 <!ATTLIST analysis
-    ms ( Pron_Dem_Pl_Acc | Pron_Dem_Pl_Com | Pron_Dem_Pl_Ela | Pron_Dem_Pl_Gen | 
-         Pron_Dem_Pl_Ill | Pron_Dem_Pl_Ine | Pron_Dem_Sg_Acc | 
+    ms (
          Pron_Dem_Sg_Com | Pron_Dem_Sg_Ela | Pron_Dem_Sg_Ess | Pron_Dem_Sg_Gen | 
-         Pron_Dem_Sg_Ill | Pron_Dem_Sg_Ine |
+         Pron_Dem_Sg_Ill | Pron_Dem_Sg_Ine | Pron_Dem_Sg_Loc |
+         Pron_Dem_Pl_Acc | Pron_Dem_Pl_Com | Pron_Dem_Pl_Ela | Pron_Dem_Pl_Gen | 
+         Pron_Dem_Pl_Ill | Pron_Dem_Pl_Ine | Pron_Dem_Sg_Acc | Pron_Dem_Pl_Loc |
+         Pron_Dem_Ess |
 
          Pron_Pers_Sg1 | Pron_Pers_Sg2 | Pron_Pers_Sg3 |
          Pron_Pers_Du1 | Pron_Pers_Du2 | Pron_Pers_Du3 |

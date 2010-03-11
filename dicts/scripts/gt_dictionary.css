@@ -111,6 +111,9 @@ l[pos][nr]:after {
 l[pos][illpl]:after {
     content: attr(pos) ', illpl=' attr(illpl);
 }
+l[pos][context]:after {
+    content: attr(pos) ', ' attr(context);
+}
 
 /* lc styling: */
 lc {

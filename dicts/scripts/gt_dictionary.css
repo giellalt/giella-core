@@ -15,11 +15,9 @@ sourcenote {
     border-bottom: 1px inset gray;
 }
 
-a {
-    display: inline;
+a { display: inline;
     cursor: pointer; /* cursor isn't supported in XMLEditor */
-    cursor: hand;
-}
+    cursor: hand; }
 
 e:nth-child(even) {background-color: #eee}
 e:nth-child(odd)  {border: none}
@@ -28,6 +26,9 @@ l:after {
     text-transform: capitalize;
 }
 
+/* The neg. margin is needed to cancel out whitespace (newlines,
+indents) that is collapsed to a single space character, even in
+cases like this where we don't want any space at all. */
 wordform + wordform:before {
     margin-left: -.3em;
 }

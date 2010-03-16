@@ -1,57 +1,18 @@
 @charset "utf-8";
+@import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE.css";
 
-r, rootdict {
-    display: block;
-    margin: 1ex;
-    background-color: #fff;
-}
+/* The following rules are not working in XML Editor (XXE), but
+   are working fine in modern browsers. We keep them here, and
+   make a separate configuration file for XXE, where these rules
+   are not included. The CSS in the configuration file is imported
+   above, and thus shared between the browsers and XXE.
 
-lics {
-    display: block;
-}
-
-lics:before {
-    content: "Copyright Notes";
-    display: block;
-    font-weight: bold;
-    margin-bottom: 21px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 21px;
-}
-
-lic {
-    display: block;
-    margin: 18px;
-}
-
-ref:before {
-    display: inline;
-    white-space: pre; /* required to save \A in the next rule*/
-    content: 'Please refer to this source code with the following attribution text:\A"';
-   	font-weight: bold;
-   	font-size: smaller;
-}
-ref {
-    display: block;
-    margin: 18px;
-}
-ref:after {
-    display: inline;
-    content: '"';
-}
-
-i {
-    display: inline;
-    font-style: italic;
-}
+   That is: ONLY ADD HERE THINGS THAT ARE UNSUPPORTED IN XXE!
+   All other CSS styling should be added to the shared CSS file
+   in the XXE configuration. */
 
 sourcenote {
-    display: block;
-    font-weight: bold;
-    margin: 18px;
-    border-bottom: 1px inset gray; /* doesn't work in XMLEditor */
-    padding-bottom: 18px;
+    border-bottom: 1px inset gray;
 }
 
 a {
@@ -60,128 +21,17 @@ a {
     cursor: hand;
 }
 
-/* e styling: */
-e {
-    display: block;
-    margin-bottom: 0.3ex;
-    counter-reset: meaninggroups;
-    padding: 0.3ex;
-    border: 1px ridge #eee;
-}
 e:nth-child(even) {background-color: #eee}
 e:nth-child(odd)  {border: none}
-e:after {
-    display: block ;
-    color: gray ;
-    margin-left: 2ex ;
-}
-e[usage]:after {
-    content: "Usage: " attr(usage) ;
-}
-e[src]:after {
-    content: "Source: " attr(src) ;
-}
-e[usage][src]:after {
-    content: "Usage: " attr(usage) ", source: " attr(src) ;
-}
 
-/* l styling: */
-l {
-    font-weight: bold;
-}
 l:after {
-    display: inline;
-    margin-left: 0.5ex;
-    content: attr(pos);
-    font-style: italic;
-    font-size: small;
-    vertical-align: super;
     text-transform: capitalize;
-    color: gray;
-}
-l[pos][type]:after {
-    content: attr(pos) ', ' attr(type);
-}
-l[pos][type][nr]:after {
-    content: attr(pos) ', ' attr(type) ', ' attr(nr);
-}
-l[pos][nr]:after {
-    content: attr(pos) ', ' attr(nr);
-}
-l[pos][illpl]:after {
-    content: attr(pos) ', illpl=' attr(illpl);
-}
-l[pos][context]:after {
-    content: attr(pos) ', ' attr(context);
 }
 
-/* lc styling: */
-lc {
-    font-style: italic;
-    font-size: small;
-}
-
-lg > analysis:before {
-    content: " Analysis: " ;
-    font-size: small;
-    color: gray;
-}
-lg > analysis {
-    display: inline;
-}
-
-lemma_ref:before {
-    content: "▸ " ;
-}
-lemma_ref {
-    display: inline;
-}
-lemma_ref:after {
-    display: inline;
-    content: " (" attr(lemmaID) ") ";
-    font-size: small;
-    color: gray;
-}
-
-/* mini paradigm styling: */
-mini_paradigm:before {
-    display: block ;
-    content: " Miniparadigm:" ;
-    font-size: small;
-    color: gray;
-}
-mini_paradigm {
-    display: block ;
-    margin-left: 5ex;
-}
-mini_paradigm > analysis:before {
-    display: inline ;
-    content: attr(ms) ' ' ;
-    color: gray;
-}
-mini_paradigm > analysis {
-    display: list-item ;
-}
-wordform {
-    display: inline ;
-}
 wordform + wordform:before {
-    display: inline ;
-    content: ', ' ;
     margin-left: -.3em;
 }
 
-/* mg styling: */
-e > mg:before {
-	display: inline;
-	counter-increment: meaninggroups;
-    content: counter(meaninggroups, decimal) ". ";
-}
-e > mg {
-    display: block;
-    margin-bottom: 0.2ex;
-    margin-left: 1.33ex;
-}
 e > mg:only-of-type:before {content: none; content:''; }
 e > mg:only-of-type {
     display: inline;
@@ -195,53 +45,14 @@ e > lg + mg:only-of-type {
 }
 
 /* tg styling: */
-tg + tg:before {
-    content: "; ";
-}
-tg {
-    display: inline;
-}
 tg + tg {margin-left: -.3em;}
-/* The neg. margin is needed to cancel out whitespace (newlines,
-indents) that is collapsed to a single space character, even in
-cases like this where we don't want any space at all. */
-
-re {
-    display: inline;
-    color: gray;
-}
-re:after {
-    content: ": ";
-}
 
 /* t styling: */
-t + t:before {
-    content: ", ";
-    font-style: italic;
-}
-t {
-    display: inline;
-}
-l + t {
-    margin-left: +.35em;
-}
 t + t {
     margin-left: -.35em;
 }
 t:after {
-    display: inline;
-    font-style: italic;
-    color: gray;
-    font-size: small;
-    vertical-align: super;
     text-transform: capitalize;
-    margin-left: 0.5ex;
-}
-t[pos]:after {
-    content: attr(pos);
-}
-t[pos][type]:after {
-    content: attr(pos) ", " attr(type) ;
 }
 
 /* xg, x, xt styling: */
@@ -258,17 +69,5 @@ e > lg ~ mg xg:before {
 }
 
 xg + xg:before {
-    display: inline;
-    content: "; ";
     margin-left: -.3em;
-}
-
-xg x {
-    font-style: italic;
-}
-
-xt:before {
-    font-style: italic;
-    color: gray;
-    content: " = ";
 }

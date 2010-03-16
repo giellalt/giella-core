@@ -39,9 +39,9 @@
 <!ATTLIST mg 
       lang ( swe | nob ) #IMPLIED
 >      
-<!ELEMENT tg (re?,t+,xg*) >
+<!ELEMENT tg (re?,(t*,tf*)+,te?,xg*) >
 
-<!ELEMENT re (#PCDATA) >
+<!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t 
       pos ( a | a5 | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
@@ -50,6 +50,9 @@
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
 >      
+
+<!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
+<!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
 
 <!ELEMENT xg ((x,xt)+)>
 <!ELEMENT x (#PCDATA)>

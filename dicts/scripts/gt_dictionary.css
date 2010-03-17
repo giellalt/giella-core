@@ -49,7 +49,7 @@ e > lg + mg:only-of-type {
 tg + tg {margin-left: -.3em;}
 
 /* t styling: */
-t + t {
+t + t, tf + t, t + tf {
     margin-left: -.35em;
 }
 t:after {

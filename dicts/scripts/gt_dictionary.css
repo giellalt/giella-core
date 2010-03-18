@@ -40,17 +40,12 @@ e > mg:only-of-type {
     margin-left: 0;
 }
 e > lg + mg:only-of-type {
-    display: block;
-    margin-bottom: 0.2ex;
-    margin-left: 1.33ex;
+    display: inline;
 }
 
-/* tg styling: */
-tg + tg {margin-left: -.3em;}
-
-/* t styling: */
-t + t, tf + t, t + tf {
-    margin-left: -.35em;
+/* tg + t styling: */
+tg + tg, t + t, tf + t, t + tf {
+    margin-left: -.3em;
 }
 t:after {
     text-transform: capitalize;

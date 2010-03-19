@@ -44,7 +44,7 @@ e > lg + mg:only-of-type {
 }
 
 /* tg + t styling: */
-tg + tg, t + t, tf + t, t + tf {
+tg + tg, t + t, tf + t, t + tf, tf + tf {
     margin-left: -.3em;
 }
 t:after {

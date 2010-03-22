@@ -1,5 +1,6 @@
 @charset "utf-8";
-@import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE-alt.css";
+@import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE_alt.css";
+@import "gt_dictionary_shared.css";
 
 /* The following rules are not working in XML Editor (XXE), but
    are working fine in modern browsers. We keep them here, and
@@ -11,10 +12,3 @@
    All other CSS styling should be added to the shared CSS file
    in the XXE configuration. */
 
-sourcenote {
-    border-bottom: 1px inset gray;
-}
-
-a { display: inline;
-    cursor: pointer; /* cursor isn't supported in XMLEditor */
-    cursor: hand; }

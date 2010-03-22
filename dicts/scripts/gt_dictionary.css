@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE.css";
+@import "gt_dictionary_shared.css";
 
 /* The following rules are not working in XML Editor (XXE), but
    are working fine in modern browsers. We keep them here, and
@@ -10,14 +11,6 @@
    That is: ONLY ADD HERE THINGS THAT ARE UNSUPPORTED IN XXE!
    All other CSS styling should be added to the shared CSS file
    in the XXE configuration. */
-
-sourcenote {
-    border-bottom: 1px inset gray;
-}
-
-a { display: inline;
-    cursor: pointer; /* cursor isn't supported in XMLEditor */
-    cursor: hand; }
 
 e:nth-child(even) {background-color: #eee}
 e:nth-child(odd)  {border: none}
@@ -43,7 +36,8 @@ e > lg + mg:only-of-type {
     display: inline;
 }
 
-/* tg + t styling: */
+/* negative left marging to counter whitespace always found in
+   the xml data (lineshifts, indents): */
 tg + tg, t + t, tf + t, t + tf, tf + tf {
     margin-left: -.3em;
 }

@@ -1,4 +1,4 @@
-<!ELEMENT r (lics?, e+, xhtml:script?) >
+c<!ELEMENT r (lics?, e+, xhtml:script?) >
 <!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
 
 <!-- the header -->
@@ -19,7 +19,8 @@
 <!ELEMENT lg (l,lc*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
-      pos ( a | n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
+      pos ( a | a1 | a2 | a3 | a4 | a5 | 
+            n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
             num | cc | cs | prop | propPl | g3 | actor | interj | x ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
@@ -39,18 +40,20 @@
 <!ATTLIST mg 
       lang ( swe | nob ) #IMPLIED
 >      
-<!ELEMENT tg (re?,(t*,tf*)+,te?,xg*) >
+<!ELEMENT tg (re?,(t*,stem*,tf*)+,te?,xg*) >
 
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t 
-      pos ( a | a5 | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
+      pos ( a | a1 | a2 | a3 | a4 | a5 | 
+            S  | m  | f  | n  | v  | adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
             pcle | s    | interj  | x  | xxx ) #REQUIRED
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
 >      
 
+<!ELEMENT stem (#PCDATA) > <!-- Translation phrase -->
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
 

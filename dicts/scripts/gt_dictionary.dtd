@@ -47,10 +47,10 @@
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t 
-      pos ( a | a1 | a2 | a3 | a4 | a5 | 
-            S  | m  | f  | n  | v  | adv | p   | pr  | po  |
+      pos ( a | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
             pcle | s    | interj  | x  | xxx ) #REQUIRED
+      decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
 >      

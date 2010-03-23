@@ -16,7 +16,7 @@
       usage ( mt | dic | ped | more | other ) #IMPLIED
       src ( nj | sk | SvSt | other ) #IMPLIED
 >      
-<!ELEMENT lg (l,lc*) >
+<!ELEMENT lg (l,lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( a | a1 | a2 | a3 | a4 | a5 | 
@@ -35,8 +35,11 @@
       status ( sjekk | ok ) #IMPLIED
 >      
 
-
+<!-- lc = lemma comment, misused as stem field -->
 <!ELEMENT lc (#PCDATA) >
+
+<!-- the real stem field -->
+<!ELEMENT stem (#PCDATA) >
 
 <!ELEMENT mg (tg+) >
 <!ATTLIST mg 
@@ -50,12 +53,13 @@
       pos ( a | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
             pcle | s    | interj  | x  | xxx ) #REQUIRED
-      decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
+      decl ( a1 | a2 | a3 | a4 | a5 | ax | 
+              m | m1 | m2 | mx | f | f1 | f2 | fx | n | n1 | nx | x
+           ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
 >      
 
-<!ELEMENT stem (#PCDATA) > <!-- Translation phrase -->
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
 

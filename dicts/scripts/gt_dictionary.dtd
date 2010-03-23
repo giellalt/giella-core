@@ -1,4 +1,4 @@
-c<!ELEMENT r (lics?, e+, xhtml:script?) >
+<!ELEMENT r (lics?, e+, xhtml:script?) >
 <!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
 
 <!-- the header -->

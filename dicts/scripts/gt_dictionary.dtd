@@ -27,7 +27,7 @@
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post ) #IMPLIED
       class ( I | II | III | IV | V | VI ) #IMPLIED
-      stem ( even | odd ) #IMPLIED
+      stem ( even | odd | 2syll | 3syll ) #IMPLIED
       umlaut ( A | B | C | D | E | F ) #IMPLIED
       p3p CDATA #IMPLIED
       minip ( notSg1 | onlyPl ) #IMPLIED

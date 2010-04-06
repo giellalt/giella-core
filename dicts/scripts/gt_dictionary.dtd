@@ -25,7 +25,7 @@
       decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
-      type ( rel | pers | indef | refl | pre | post ) #IMPLIED
+      type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
       class ( I | II | III | IV | V | VI ) #IMPLIED
       stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
       umlaut ( A | B | C | D | E | F ) #IMPLIED

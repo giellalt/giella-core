@@ -45,7 +45,7 @@
 <!ATTLIST mg 
       lang ( swe | nob ) #IMPLIED
 >      
-<!ELEMENT tg (re?,(t*,stem*,tf*)+,te?,xg*, syng?) >
+<!ELEMENT tg (re?, ( (t,stem*,te?)*, (tf, te?)* )+, xg*, syng?) >
 
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ELEMENT t (#PCDATA) >

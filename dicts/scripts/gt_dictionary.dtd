@@ -33,6 +33,8 @@
       minip ( notSg1 | onlyPl ) #IMPLIED
       illpl ( ok | no ) #IMPLIED
       status ( sjekk | ok ) #IMPLIED
+      grad ( pos | comp | sup ) #IMPLIED
+      base CDATA #IMPLIED
 >      
 
 <!-- lc = lemma comment, misused as stem field -->

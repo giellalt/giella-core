@@ -11,6 +11,8 @@ EF   = -it main
 XSL  = net.sf.saxon.Transform
 XQL  = net.sf.saxon.Query
 SSH  = /usr/bin/ssh
+MKDIR = mkdir -p
+SVN   = svn -q
 
 # =========== Paths & files: ============= #
 DICT_HOME     = ../../../words/dicts
@@ -27,12 +29,14 @@ COMPDICT      = collect-dict-parts.xsl
 DICTTOMAC     = dict2macdict_smanob.xsl
 GEN_INFO      = generate_infofile.xsl
 GEN_MAKE      = generate_makefile.xsl
+SORTLICDICT   = sort-dict_add-license.xsl
 I_FILE        = Info.plist
 M_FILE        = Makefile
 MACDIR        = macdir
 SRC           = src
 BIN           = bin
 SCRIPTS       = scripts
+CONCATDIR     = concatsrc
 
 GEN_TMP       = Gen_tmp
 XMLOUT        = XML_out
@@ -40,6 +44,7 @@ XMLPARAD      = xml-rest-paradigm
 PARADLIST     = generate-lemma_pos_pairs.xsl
 RESTRPARAD    = restruct_paradigme.xsl
 ADDPARAD      = add-paradigm.xsl
+CONCATLIC     = concatsrc-license-text.xml
 
 SL_ERROR    = @echo "Error: Source language not specified (e.g., S_LANG=sme)"
 TL_ERROR    = @echo "Error: Target language(s) not specified (e.g., T_LANG=nob or T_LANG=\"nob swe\")"
@@ -63,7 +68,7 @@ DATE = $(shell date +%Y%m%d)
 # 	@echo
 # endif
 
-# Compile the dictionary xml-file by unifing the individual pos-files
+# Compile the dictionary xml-file by unifying the individual pos-files
 $(DICT_PATH)/$(BIN)/$(DICT_XML): $(DICT_PATH)/$(SRC) \
                                     $(SCRIPTS)/$(COMPDICT)
 	@echo 
@@ -153,6 +158,29 @@ $(DICT_PATH)/$(BIN)/$(MACDICT): $(DICT_PATH)/$(BIN)/$(DICT_XML) \
 
 # 	$(XSLT) $(CIPSTEST)/$(NOBSME) $(SCRIPTS)/$(DICTTOMAC) > $@
 # 	@cd $(MACMAC) && make
+
+
+# Sorted and licensed concatenation of all src files, checked into svn for easy
+# browsing of the whole dictionary:
+
+# Short-hand target to make only the unified xml file:
+unified: $(DICT_PATH)/$(CONCATDIR)/$(DICT_XML)
+$(DICT_PATH)/$(CONCATDIR)/$(DICT_XML): $(DICT_PATH)/$(BIN)/$(DICT_XML) \
+									   $(SCRIPTS)/$(SORTLICDICT) \
+									   $(SCRIPTS)/$(CONCATLIC)
+	@$(MKDIR) $(DICT_PATH)/$(CONCATDIR)
+	@echo 
+	$(BEGIN)
+	$(JV) $(MF) $(XSL) $< \
+				$(SCRIPTS)/$(SORTLICDICT) \
+				lic-file=$(CONCATLIC) \
+				> $@
+#	@$(SVN) add $@
+#	@$(SVN) propset svn:mime-type text:xml $@
+#	@$(SVN) ci -m "Automatic check-in of concatenated and sorted source files for online browsing." $@
+	@echo
+	$(END)
+	@echo
 
 
 

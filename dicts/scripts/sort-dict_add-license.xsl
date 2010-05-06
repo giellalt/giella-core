@@ -22,7 +22,7 @@
     <r>
       <xsl:copy-of select="document($lic-file)"/>
       <xsl:apply-templates select="e">
-        <xsl:sort select="lg/l"/>
+        <xsl:sort select="lg/l" lang="no" />
       </xsl:apply-templates>
     </r>
   </xsl:template>

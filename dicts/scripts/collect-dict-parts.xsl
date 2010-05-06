@@ -13,7 +13,7 @@
 	      encoding="UTF-8"
 	      omit-xml-declaration="no"
 	      doctype-system="../../scripts/gt_dictionary.dtd"
-	      doctype-public="-//XMLmind//DTD gt_dictionary//SE"
+	      doctype-public="-//DivvunGiellatekno//DTD Dictionaries//Multilingual"
 	      indent="yes"/>
   
   <xsl:param name="dir" select="'.'"/>
@@ -29,9 +29,9 @@
     <xsl:text>
 </xsl:text>
 
-    <xsl:processing-instruction name="xml-stylesheet">
+    <!--xsl:processing-instruction name="xml-stylesheet">
       <xsl:text>type="text/xsl" href="../../scripts/gt_dictionary.xsl"</xsl:text>
-    </xsl:processing-instruction>
+    </xsl:processing-instruction-->
 
     <!-- why does that '&#xa;' not function? -->
     <xsl:text>

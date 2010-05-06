@@ -175,9 +175,9 @@ $(DICT_PATH)/$(CONCATDIR)/$(DICT_XML): $(DICT_PATH)/$(BIN)/$(DICT_XML) \
 				$(SCRIPTS)/$(SORTLICDICT) \
 				lic-file=$(CONCATLIC) \
 				> $@
-#	@$(SVN) add $@
-#	@$(SVN) propset svn:mime-type text:xml $@
-#	@$(SVN) ci -m "Automatic check-in of concatenated and sorted source files for online browsing." $@
+	$(SVN) add $(DICT_PATH)/$(CONCATDIR)
+	$(SVN) propset svn:mime-type text/xml $@
+	$(SVN) ci -m "Automatic check-in of concatenated and sorted source files for online browsing." $(DICT_PATH)/$(CONCATDIR)
 	@echo
 	$(END)
 	@echo

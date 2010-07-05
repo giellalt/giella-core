@@ -54,36 +54,31 @@ Expected output:
   <xsl:strip-space elements="*"/>
   <xsl:output method="xml"
 	      encoding="UTF-8"
-	      indent="yes"/> <!-- set this to 'no' when the script is working as it
-	                          should to get output formatted as above. -->
+	      indent="no"/>
 
 <!-- Skip all licensing text: (or should we? It could be turned into a comment instead) -->
 <xsl:template match="lics|lic|a|ref|sourcenote"/>
 
-<xsl:template match="e"> <!-- [mg[1]/tg[1]/t[1]] -->
-    <xsl:text>
+<xsl:template match="e[mg[1]/tg[1]/t[1]]">
+<xsl:text>
 </xsl:text>
-    <xsl:for-each select="mg">
-	    <xsl:for-each select="tg">
-		    <xsl:for-each select="t">
-    		    <e>
-    		        <p>
-    		            <l><xsl:value-of select="../../../lg/l"/><s n="{upper-case(../../../lg/l/@pos)}"/></l>
-    		            <r><xsl:value-of select="."/><s n="{../../../lg/l/@pos}"/>
-    		                <s n="{@pos}"/>
-    		            </r>
-    		        </p>
-    		        <par n=""/>
-    		    </e>
-		    </xsl:for-each>
-	    </xsl:for-each>
-    </xsl:for-each>
+    <e>
+        <p>
+            <l><xsl:value-of select="lg/l"/><s n="{upper-case(lg/l/@pos)}"/></l>
+            <r><xsl:value-of select="mg[1]/tg[1]/t[1]"/><s n="{lg/l/@pos}"/>
+                <s n="{mg[1]/tg[1]/t[1]/@pos}"/>
+            </r>
+        </p>
+        <par n=""/>
+    </e>
 </xsl:template>
 
-<!--xsl:template match="e[mg/tg/t[position() &gt; 1]]">
+<xsl:template match="e">
     <xsl:for-each select="mg">
 	    <xsl:for-each select="tg">
 		    <xsl:for-each select="t">
+<xsl:text>
+</xsl:text>
     		    <e slr="{.//t[position()] - 1}">
     		        <p>
     		            <l><xsl:value-of select="../../../lg/l"/><s n="{upper-case(../../../lg/l/@pos)}"/></l>
@@ -96,6 +91,6 @@ Expected output:
 		    </xsl:for-each>
 	    </xsl:for-each>
     </xsl:for-each>
-</xsl:template-->
+</xsl:template>
 
 </xsl:stylesheet>

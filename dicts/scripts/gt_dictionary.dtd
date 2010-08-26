@@ -11,7 +11,7 @@
 <!ELEMENT a (#PCDATA)>
 <!ELEMENT i (#PCDATA)>
 
-<!ELEMENT e (lg,mg+) >
+<!ELEMENT e (lg, apps?, mg+) >
 <!ATTLIST e 
       usage ( mt | dic | ped | more | other ) #IMPLIED
       src ( nj | sk | SvSt | other ) #IMPLIED
@@ -35,6 +35,7 @@
       status ( sjekk | ok ) #IMPLIED
       grad ( pos | comp | sup ) #IMPLIED
       base CDATA #IMPLIED
+      dialect CDATA #IMPLIED
 >      
 
 <!-- lc = lemma comment, misused as stem field -->
@@ -42,12 +43,35 @@
 
 <!-- the real stem field -->
 <!ELEMENT stem (#PCDATA) >
+<!ATTLIST stem 
+      class ( 1 | 2 | 3 | 4 | 5 | 6 | bisyllabic | trisyllabic | contracted ) #REQUIRED
+      vowelchange ( 1 | 2 | 3 | 4 | 5 | 6 | 0 ) #REQUIRED
+      soggi CDATA #IMPLIED
+      rime CDATA #IMPLIED
+>      
 
-<!ELEMENT mg (tg+) >
+<!ELEMENT apps (app+) >
+<!ELEMENT app (sources*) >
+<!ATTLIST app 
+      name ( oahpa | mt ) #REQUIRED
+>   
+<!ELEMENT sources (book*) >
+<!ELEMENT book EMPTY >
+<!ATTLIST book 
+      name CDATA #REQUIRED
+>      
+
+<!ELEMENT semantics (sem*) >
+<!ELEMENT sem EMPTY >
+<!ATTLIST sem
+      class CDATA #REQUIRED
+>      
+
+<!ELEMENT mg (apps?, tg+) >
 <!ATTLIST mg 
       lang ( swe | nob ) #IMPLIED
 >      
-<!ELEMENT tg (re?, ( (t,stem*,te?)*, (tf, te?)* )+, xg*, syng?) >
+<!ELEMENT tg (semantics?, re?, apps?, ( (t,stem*,te?)*, (tf, te?)* )+, xg*, syng?) >
 
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ELEMENT t (#PCDATA) >
@@ -60,6 +84,7 @@
            ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
+      app ( oahpa | mt ) #IMPLIED
 >      
 
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->

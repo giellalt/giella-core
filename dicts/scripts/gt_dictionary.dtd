@@ -84,7 +84,8 @@
            ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
-      app ( oahpa | mt ) #IMPLIED
+      xml:lang ( nob | sme | swe | eng | ger ) #IMPLIED
+      app CDATA #IMPLIED
 >      
 
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->

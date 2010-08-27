@@ -1,6 +1,8 @@
 <!ELEMENT r (lics?, e+, xhtml:script?) >
-<!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
-
+<!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml"      
+	  xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED
+>
+      
 <!-- the header -->
 <!ELEMENT lics (lic, ref*, sourcenote*) >
 <!ATTLIST lics xml:space (default|preserve) 'preserve'>
@@ -84,7 +86,7 @@
            ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       lang ( swe | nob ) #IMPLIED
-      xml:lang ( nob | sme | swe | eng | ger ) #IMPLIED
+      xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED
       app CDATA #IMPLIED
 >      
 

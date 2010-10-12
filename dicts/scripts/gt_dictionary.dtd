@@ -17,6 +17,7 @@
 <!ATTLIST e 
       usage ( mt | dic | ped | more | other ) #IMPLIED
       src ( nj | sk | SvSt | other ) #IMPLIED
+      exclude ( smanob | nobsma ) #IMPLIED
 >      
 <!ELEMENT lg (l,lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
@@ -89,7 +90,10 @@
       lang ( swe | nob ) #IMPLIED
       xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED
       app CDATA #IMPLIED
+      translationcomment CDATA #IMPLIED
 >      
+
+<!-- translationcomment = for Oahpa use -->
 
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->

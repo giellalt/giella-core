@@ -24,7 +24,7 @@
 <!ATTLIST l 
       pos ( a | a1 | a2 | a3 | a4 | a5 | 
             n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
-            num | cc | cs | prop | propPl | g3 | actor | interj | x ) #REQUIRED
+            num | cc | cs | prop | propPl | g3 | actor | interj | phrase | x ) #REQUIRED
       decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
@@ -90,7 +90,8 @@
       lang ( swe | nob ) #IMPLIED
       xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED
       app CDATA #IMPLIED
-      translationcomment CDATA #IMPLIED
+      translationcomment ( yes | no ) "no"
+
 >      
 
 <!-- translationcomment = for Oahpa use -->

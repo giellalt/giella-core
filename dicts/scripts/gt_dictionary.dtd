@@ -29,7 +29,7 @@
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
-      class ( I | II | III | IV | V | VI ) #IMPLIED
+      class ( I | II | III | IV | V | VI ) #IMPLIED <!-- ???? -->
       stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
       umlaut ( A | B | C | D | E | F ) #IMPLIED
       p3p CDATA #IMPLIED
@@ -47,7 +47,7 @@
 <!-- the real stem field -->
 <!ELEMENT stem (#PCDATA) >
 <!ATTLIST stem 
-      class ( 1 | 2 | 3 | 4 | 5 | 6 | bisyllabic | trisyllabic | contracted ) #REQUIRED
+      class ( bisyllabic | trisyllabic | contracted ) #REQUIRED
       vowelchange ( 1 | 2 | 3 | 4 | 5 | 6 | 0 ) #REQUIRED
       soggi CDATA #IMPLIED
       rime CDATA #IMPLIED
@@ -75,28 +75,34 @@
 <!ATTLIST mg 
       lang ( swe | nob ) #IMPLIED
 >      
-<!ELEMENT tg (semantics?, re?, apps?, ( (t,stem*,te?)*, (tf, te?)* )+, xg*, syng?) >
+<!ELEMENT tg (semantics?, re?, apps?, ( (t|tf|te), stem* )+, xg*, syng?) >
 
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ELEMENT t (#PCDATA) >
-<!ATTLIST t 
-      pos ( a | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
+<!ATTLIST t oa ( first | yes | no ) "yes" >
+<!ATTLIST t dict ( yes | no ) "yes" >
+<!ATTLIST t pos ( a | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
-            pcle | s    | interj | phrase | x  | xxx ) #REQUIRED
-      decl ( a1 | a2 | a3 | a4 | a5 | ax | 
-              m | m1 | m2 | mx | f | f1 | f2 | fx | n | n1 | nx | x
-           ) #IMPLIED
-      nr ( sg | pl ) #IMPLIED
-      lang ( swe | nob ) #IMPLIED
-      xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED
-      app CDATA #IMPLIED
-      translationcomment ( yes | no ) "no"
+            pcle | s    | interj | phrase | x  | xxx ) #REQUIRED >
+<!ATTLIST t decl ( a1 | a2 | a3 | a4 | a5 | ax | m | m1 | m2 | mx | 
+                   f | f1 | f2 | fx | n | n1 | nx | x ) #IMPLIED >
+<!ATTLIST t nr ( sg | pl ) #IMPLIED >
+<!ATTLIST t lang ( swe | nob ) #IMPLIED >
+<!ATTLIST t xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
+<!ATTLIST t app CDATA #IMPLIED >
+<!ATTLIST t translationcomment ( yes | no ) "no" >
 
->      
+<!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
-<!-- translationcomment = for Oahpa use -->
+
+<!-- translation_comment = for Oahpa use -->
 
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
+<!ATTLIST tf 
+      oa ( first | yes | no ) "yes"
+      dict (yes | no ) "yes"
+>
+
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
 
 <!ELEMENT xg ((x,xt)+)>

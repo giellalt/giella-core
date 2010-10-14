@@ -13,7 +13,7 @@
 <!ELEMENT a (#PCDATA)>
 <!ELEMENT i (#PCDATA)>
 
-<!ELEMENT e (lg, apps?, mg+) >
+<!ELEMENT e (lg, stem*, apps?, mg+) >
 <!ATTLIST e 
       usage ( mt | dic | ped | more | other ) #IMPLIED
       src ( nj | sk | SvSt | other ) #IMPLIED
@@ -23,13 +23,13 @@
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( a | a1 | a2 | a3 | a4 | a5 | 
-            n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
+            n | npl | v | v1 | v2 | v3 | v4 | v5 | v6 | adv | po | pr | pron | rel | pers | i | pcle |
             num | cc | cs | prop | propPl | g3 | actor | interj | x ) #REQUIRED
       decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
-      class ( I | II | III | IV | V | VI ) #IMPLIED <!-- ???? -->
+      class ( I | II | III | IV | V | VI ) #IMPLIED 
       stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
       umlaut ( A | B | C | D | E | F ) #IMPLIED
       p3p CDATA #IMPLIED
@@ -47,8 +47,8 @@
 <!-- the real stem field -->
 <!ELEMENT stem (#PCDATA) >
 <!ATTLIST stem 
-      class ( bisyllabic | trisyllabic | contracted ) #REQUIRED
-      vowelchange ( 1 | 2 | 3 | 4 | 5 | 6 | 0 ) #REQUIRED
+      class ( bisyllabic | trisyllabic | contracted ) #IMPLIED
+      vowelchange ( 1 | 2 | 3 | 4 | 5 | 6 | 0 ) #IMPLIED
       soggi CDATA #IMPLIED
       rime CDATA #IMPLIED
 >      
@@ -56,32 +56,34 @@
 <!ELEMENT apps (app+) >
 <!ELEMENT app (sources*) >
 <!ATTLIST app 
-      name ( oahpa | mt ) #REQUIRED
+      name ( oahpa | mt ) #IMPLIED
 >   
 <!ELEMENT sources (book*) >
 <!ELEMENT book EMPTY >
 <!ATTLIST book 
-      name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 ) #REQUIRED
+      name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 ) #IMPLIED
 >      
 <!--      name CDATA #REQUIRED -->
 
 <!ELEMENT semantics (sem*) >
 <!ELEMENT sem EMPTY >
 <!ATTLIST sem
-      class CDATA #REQUIRED
+      class CDATA #IMPLIED
 >      
 
 <!ELEMENT mg (apps?, tg+) >
 <!ATTLIST mg 
       lang ( swe | nob ) #IMPLIED
 >      
-<!ELEMENT tg (semantics?, re?, apps?, ( (t|tf|te), stem* )+, xg*, syng?) >
+<!ELEMENT tg (semantics?, re?, apps?, ( ((t, stem*) | tf | te ))+, xg*, syng?) >
 
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
+
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t oa ( first | yes | no ) "yes" >
 <!ATTLIST t dict ( yes | no ) "yes" >
-<!ATTLIST t pos ( a | S  | m  | f  | n  | v  | adv | p   | pr  | po  |
+<!ATTLIST t pos ( a | S  | m  | f  | n  | v  | v1 | v2 | v3 | v4 | v5 | v6 | 
+            adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
             pcle | s    | interj | phrase | x  | xxx ) #REQUIRED >
 <!ATTLIST t decl ( a1 | a2 | a3 | a4 | a5 | ax | m | m1 | m2 | mx | 

@@ -23,7 +23,7 @@
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( a | a1 | a2 | a3 | a4 | a5 | 
-            n | npl | v | v1 | v2 | v3 | v4 | v5 | v6 | adv | po | pr | pron | rel | pers | i | pcle |
+            n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
             num | cc | cs | prop | propPl | g3 | actor | interj | x ) #REQUIRED
       decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
@@ -82,7 +82,7 @@
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t oa ( first | yes | no ) "yes" >
 <!ATTLIST t dict ( yes | no ) "yes" >
-<!ATTLIST t pos ( a | S  | m  | f  | n  | v  | v1 | v2 | v3 | v4 | v5 | v6 | 
+<!ATTLIST t pos ( a | S  | m  | f  | n  | v | 
             adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
             pcle | s    | interj | phrase | x  | xxx ) #REQUIRED >

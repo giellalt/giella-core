@@ -15,7 +15,7 @@
 
 <!ELEMENT e (lg, stem*, apps?, mg+) >
 <!ATTLIST e 
-      usage ( mt | dic | ped | more | other ) #IMPLIED
+      usage ( mt | dic | ped | more | vd | other ) #IMPLIED
       src ( nj | sk | SvSt | other ) #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
 >      
@@ -82,10 +82,10 @@
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t oa ( first | yes | no ) "yes" >
 <!ATTLIST t dict ( yes | no ) "yes" >
-<!ATTLIST t pos ( a | S  | m  | f  | n  | v | 
+<!ATTLIST t pos ( a | S | n  | v | 
             adv | p   | pr  | po  |
-            pron | prop | i  | cc | cs | im | mpl | fpl | npl | num |
-            pcle | s    | interj | phrase | x  | xxx ) #REQUIRED >
+            pron | prop | i  | cc | cs | im | npl | num |
+            pcle | s    | phrase | x  | xxx ) #REQUIRED >
 <!ATTLIST t decl ( a1 | a2 | a3 | a4 | a5 | ax | m | m1 | m2 | mx | 
                    f | f1 | f2 | fx | n | n1 | nx | x ) #IMPLIED >
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >
@@ -100,12 +100,15 @@
 <!-- translation_comment = for Oahpa use -->
 
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
-<!ATTLIST tf 
-      oa ( first | yes | no ) "yes"
-      dict (yes | no ) "yes"
->
+<!ATTLIST tf oa ( first | yes | no ) "yes" >
+<!ATTLIST tf dict (yes | no ) "yes" >
+<!ATTLIST tf lang ( swe | nob ) #IMPLIED >
+<!ATTLIST tf xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
+
 
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
+<!ATTLIST te lang ( swe | nob ) #IMPLIED >
+<!ATTLIST te xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
 
 <!ELEMENT xg ((x,xt)+)>
 <!ELEMENT x (#PCDATA)>

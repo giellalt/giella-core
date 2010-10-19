@@ -92,7 +92,7 @@
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >
 <!ATTLIST t xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
 <!ATTLIST t app CDATA #IMPLIED >
-<!ATTLIST t translationcomment ( yes | no ) "no" >
+<!ATTLIST t tcomm ( yes | no ) "no" >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 

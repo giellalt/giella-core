@@ -25,7 +25,7 @@
 <!ATTLIST l 
       pos ( a | a1 | a2 | a3 | a4 | a5 | 
             n | npl | v | adv | po | pr | pron | rel | pers | i | pcle |
-            num | cc | cs | prop | propPl | g3 | actor | interj | prsprc x ) #REQUIRED
+            num | cc | cs | prop | propPl | g3 | actor | interj | prsprc | x ) #REQUIRED
       decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
@@ -86,7 +86,7 @@
 <!ATTLIST t pos ( a | S | n  | v | 
             adv | p   | pr  | po  |
             pron | prop | i  | cc | cs | im | npl | num |
-            pcle | s  | prsprc  | phrase | x  | xxx ) #REQUIRED >
+            pcle | s  | prsprc | phrase | x  | xxx ) #REQUIRED >
 <!ATTLIST t decl ( a1 | a2 | a3 | a4 | a5 | ax | m | m1 | m2 | mx | 
                    f | f1 | f2 | fx | n | n1 | nx | x ) #IMPLIED >
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >

@@ -20,7 +20,6 @@
 </xsl:text>
     <xsl:element name="{local-name(.)}">
       <xsl:apply-templates select="e|entry">
-        <xsl:sort select="apps/app/sources/book/@name" lang="$sortlang" />
         <xsl:sort select="lg/l" lang="$sortlang" />
         <xsl:sort select="lemma" lang="$sortlang" />
       </xsl:apply-templates>

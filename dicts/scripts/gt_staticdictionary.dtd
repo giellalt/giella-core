@@ -293,9 +293,10 @@
 <!ELEMENT lc (#PCDATA) >
 
 <!ELEMENT mg (tg+) >
-<!ELEMENT tg (re?,t+,xg*) >
+<!ELEMENT tg (re?, (t|te)+,xg*) >
 
 <!ELEMENT re (#PCDATA) >
+<!ELEMENT te (#PCDATA) >
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t 
       pos ( a | a5 | S | m | f | n | v | adv | p | pr | po | pron | prop | i | cc | cs | im | mpl | fpl | npl | num | pcle | s | x | xxx ) #REQUIRED

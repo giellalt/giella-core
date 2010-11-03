@@ -6,7 +6,7 @@
     | 
     | The doublings (twins) are collected based on the <l> element: if two entries N and M have exactly the same <l> element 
     | (i.e., all attributes and lemma string) then N and M are twins.
-    | Hint: to disabiguate to apparent twins put an extra attribute to one of them (or the same attr with two different values)
+    | Hint: to disabiguate two apparent twins put an extra attribute to one of them (or the same attr with two different values)
     +-->
 
 <xsl:stylesheet version="2.0"

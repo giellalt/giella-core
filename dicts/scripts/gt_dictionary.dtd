@@ -20,11 +20,12 @@
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
 >      
-<!ELEMENT lg (l,lc*, stem*) >
+<!ELEMENT lg (l, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( a | n | v | adv | po | pr | pron | rel | pers | i | pcle |
             num | cc | cs | prop | propPl | g3 | actor | interj | prsprc | x ) #REQUIRED
+      attr ( ok | no ) #IMPLIED
       decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
@@ -40,6 +41,9 @@
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED
 >      
+
+<!-- lsub = frequent subform of lemma -->
+<!ELEMENT lsub (#PCDATA) >
 
 <!-- lc = lemma comment, misused as stem field -->
 <!ELEMENT lc (#PCDATA) >

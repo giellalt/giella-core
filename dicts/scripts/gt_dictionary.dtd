@@ -110,6 +110,7 @@
 <!ATTLIST tf oa ( first | yes | no ) "yes" >
 <!ATTLIST tf dict (yes | no ) "yes" >
 <!ATTLIST tf pos ( phrase ) #IMPLIED >
+<!ATTLIST tf gen ( m | f | n ) #IMPLIED >
 <!ATTLIST tf lang ( swe | nob ) #IMPLIED >
 <!ATTLIST tf xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
 

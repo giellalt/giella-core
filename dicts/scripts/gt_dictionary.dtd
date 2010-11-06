@@ -27,7 +27,7 @@
             num | cc | cs | prop | propPl | g3 | actor |  
             prsprc | fp-cmp | lp-cmp | x ) #REQUIRED
       attr ( ok | no ) #IMPLIED
-      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED <!-- i indeclineable -->
+      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
@@ -42,6 +42,8 @@
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED
 >      
+
+<!-- decl: i indeclineable -->
 
 <!-- lsub = frequent subform of lemma -->
 <!ELEMENT lsub (#PCDATA) >
@@ -107,6 +109,7 @@
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
 <!ATTLIST tf oa ( first | yes | no ) "yes" >
 <!ATTLIST tf dict (yes | no ) "yes" >
+<!ATTLIST tf pos ( phrase ) #IMPLIED >
 <!ATTLIST tf lang ( swe | nob ) #IMPLIED >
 <!ATTLIST tf xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
 

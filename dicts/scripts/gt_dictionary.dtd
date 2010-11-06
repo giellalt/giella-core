@@ -92,6 +92,7 @@
             pron | prop | i  | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | x  | xxx ) #REQUIRED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED > <!-- irr irregular -->
+<!ATTLIST t gen ( m | f | n ) #IMPLIED >
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >
 <!ATTLIST t xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >

@@ -24,9 +24,10 @@
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( a | n | v | adv | po | pr | pron | rel | pers | i | pcle |
-            num | cc | cs | prop | propPl | g3 | actor | interj | prsprc | x ) #REQUIRED
+            num | cc | cs | prop | propPl | g3 | actor |  
+            prsprc | fp-cmp | lp-cmp | x ) #REQUIRED
       attr ( ok | no ) #IMPLIED
-      decl ( a1 | a2 | a3 | a4 | a5 | ax | m1 | mx | f1 | f2 | fx | n1 | nx ) #IMPLIED
+      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED <!-- i indeclineable -->
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
@@ -86,12 +87,11 @@
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t oa ( first | yes | no ) "yes" >
 <!ATTLIST t dict ( yes | no ) "yes" >
-<!ATTLIST t pos ( a | S | n  | v | 
-            adv | p   | pr  | po  |
+<!ATTLIST t pos ( a | S  | n  | v | 
+            adv | p | pr | po |
             pron | prop | i  | cc | cs | im | npl | num |
-            pcle | s  | prsprc | phrase | x  | xxx ) #REQUIRED >
-<!ATTLIST t decl ( a1 | a2 | a3 | a4 | a5 | ax | m | m1 | m2 | mx | 
-                   f | f1 | f2 | fx | n | n1 | nx | x ) #IMPLIED >
+            pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | x  | xxx ) #REQUIRED >
+<!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED > <!-- irr irregular -->
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >
 <!ATTLIST t xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >

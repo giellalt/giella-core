@@ -47,6 +47,26 @@
 
 <!-- lsub = frequent subform of lemma -->
 <!ELEMENT lsub (#PCDATA) >
+<!ATTLIST lsub 
+      pos ( a | n | v | adv | po | pr | pron | rel | pers | det | i | pcle |
+            num | cc | cs | prop | propPl | g3 | actor |  
+            prsprc | fp-cmp | lp-cmp | x ) #REQUIRED
+      attr ( ok | no ) #IMPLIED
+      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
+      nr ( sg | pl ) #IMPLIED
+      context CDATA #IMPLIED
+      type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
+      class ( I | II | III | IV | V | VI ) #IMPLIED 
+      stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
+      umlaut ( A | B | C | D | E | F ) #IMPLIED
+      p3p CDATA #IMPLIED
+      minip ( notSg1 | onlyPl ) #IMPLIED
+      illpl ( ok | no ) #IMPLIED
+      status ( sjekk | ok ) #IMPLIED
+      grad ( pos | comp | sup ) #IMPLIED
+      base CDATA #IMPLIED
+      dialect CDATA #IMPLIED
+>      
 
 <!-- lc = lemma comment, misused as stem field -->
 <!ELEMENT lc (#PCDATA) >

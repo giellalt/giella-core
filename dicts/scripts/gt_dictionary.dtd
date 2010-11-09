@@ -23,7 +23,7 @@
 <!ELEMENT lg (l, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
-      pos ( a | n | v | adv | po | pr | pron | rel | pers | i | pcle |
+      pos ( a | n | v | adv | po | pr | pron | rel | pers | det | i | pcle |
             num | cc | cs | prop | propPl | g3 | actor |  
             prsprc | fp-cmp | lp-cmp | x ) #REQUIRED
       attr ( ok | no ) #IMPLIED
@@ -90,7 +90,7 @@
 <!ATTLIST t oa ( first | yes | no ) "yes" >
 <!ATTLIST t dict ( yes | no ) "yes" >
 <!ATTLIST t pos ( a | S  | n  | v | 
-            adv | p | pr | po |
+            adv | p | pr | po | det |
             pron | prop | i  | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | x  | xxx ) #REQUIRED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED > <!-- irr irregular -->
@@ -113,6 +113,7 @@
 <!ATTLIST tf gen ( m | f | n ) #IMPLIED >
 <!ATTLIST tf lang ( swe | nob ) #IMPLIED >
 <!ATTLIST tf xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
+<!ATTLIST tf tcomm ( yes | no ) "no" >
 
 
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
@@ -130,6 +131,8 @@
 <!ATTLIST xhtml:script type CDATA #FIXED "text/javascript" >
 <!ATTLIST xhtml:script src  CDATA #IMPLIED >
 <!ATTLIST xhtml:script xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
+
+
 
 <!--
 This document is not quite finished yet...

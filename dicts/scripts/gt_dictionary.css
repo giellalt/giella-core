@@ -58,6 +58,17 @@ e > lg ~ mg xg:before {
     content: "Usage example:";
 }
 
+e:after {
+    display: block;
+    content: "exclude: ";
+}
+exclude {
+    display: inline;
+    font-style: italic;
+    content: attr(name);
+}
+
+
 xg + xg:before {
     margin-left: -.3em;
 }

@@ -31,7 +31,7 @@
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
-      class ( I | II | III | IV | V | VI ) #IMPLIED 
+      class ( I | II | III | IV | V | VI | xxx ) #IMPLIED 
       stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
       umlaut ( A | B | C | D | E | F ) #IMPLIED
       p3p CDATA #IMPLIED
@@ -105,6 +105,9 @@
 <!ELEMENT tg (semantics?, re?, apps?, ( ((t, stem*) | tf | te ))+, xg*, syng?) >
 
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
+<!ATTLIST re 
+	  xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED
+>
 
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t oa ( first | yes | no ) "yes" >
@@ -139,6 +142,8 @@
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
 <!ATTLIST te lang ( swe | nob ) #IMPLIED >
 <!ATTLIST te xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
+<!ATTLIST te dict (yes | no ) "yes" >
+<!ATTLIST te oa ( first | yes | no ) "yes" >
 
 <!ELEMENT xg ((x,xt)+)>
 <!ELEMENT x (#PCDATA)>

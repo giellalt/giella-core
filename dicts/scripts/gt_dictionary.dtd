@@ -123,6 +123,7 @@
 <!ATTLIST t xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
 <!ATTLIST t app CDATA #IMPLIED >
 <!ATTLIST t tcomm ( yes | no ) "no" >
+<!ATTLIST t stat ( pref ) #IMPLIED >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
@@ -136,7 +137,8 @@
 <!ATTLIST tf gen ( m | f | n ) #IMPLIED >
 <!ATTLIST tf lang ( swe | nob ) #IMPLIED >
 <!ATTLIST tf xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
-<!ATTLIST tf tcomm ( yes | no ) "no" >
+<!ATTLIST tf tcomm ( yes | no ) "no" 
+<!ATTLIST tf stat ( pref ) #IMPLIED >
 
 
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
@@ -144,6 +146,8 @@
 <!ATTLIST te xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
 <!ATTLIST te dict (yes | no ) "yes" >
 <!ATTLIST te oa ( first | yes | no ) "yes" >
+<!ATTLIST te stat ( pref ) #IMPLIED >
+
 
 <!ELEMENT xg ((x,xt)+)>
 <!ELEMENT x (#PCDATA)>

@@ -137,7 +137,7 @@
 <!ATTLIST tf gen ( m | f | n ) #IMPLIED >
 <!ATTLIST tf lang ( swe | nob ) #IMPLIED >
 <!ATTLIST tf xml:lang ( nob | sme | swe | eng | deu ) #IMPLIED >
-<!ATTLIST tf tcomm ( yes | no ) "no" 
+<!ATTLIST tf tcomm ( yes | no ) "no" >
 <!ATTLIST tf stat ( pref ) #IMPLIED >
 
 

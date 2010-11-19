@@ -39,6 +39,7 @@
       minip ( notSg1 | onlyPl ) #IMPLIED
       illpl ( ok | no ) #IMPLIED
       status ( sjekk | ok ) #IMPLIED
+      trans ( IV | TV ) #IMPLIED
       grad ( pos | comp | sup ) #IMPLIED
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED

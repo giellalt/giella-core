@@ -31,7 +31,7 @@
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
-      type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
+      type ( rel | pers | indef | refl | pre | post | ord | TV | IV ) #IMPLIED
       class ( I | II | III | IV | V | VI | xxx ) #IMPLIED 
       stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
       umlaut ( A | B | C | D | E | F ) #IMPLIED
@@ -39,7 +39,6 @@
       minip ( notSg1 | onlyPl ) #IMPLIED
       illpl ( ok | no ) #IMPLIED
       status ( sjekk | ok ) #IMPLIED
-      trans ( IV | TV ) #IMPLIED
       grad ( pos | comp | sup ) #IMPLIED
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED

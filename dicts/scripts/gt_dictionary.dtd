@@ -86,7 +86,7 @@
 <!ATTLIST app 
       name ( oahpa | mt ) #IMPLIED
 >   
-<!ELEMENT sources (book*, frequency*, geography*) >
+<!ELEMENT sources (book*, frequency?, geography*) >
 <!ELEMENT book EMPTY >
 <!ATTLIST book 
       name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 | xxx ) #IMPLIED

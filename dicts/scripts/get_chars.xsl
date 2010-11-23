@@ -52,13 +52,15 @@
   </xsl:function>
   
   <xsl:param name="inFile" select="'gogo_file'"/>
-  <xsl:param name="inDir" select="'../../src'"/>
-  <xsl:variable name="outDir" select="'xxx_out_xxx'"/>
+  <xsl:param name="inDir" select="concat('../', $slang, $tlang, '/src')"/>
+  <!-- the output dir is named 'sorting' and is created in the dir of each lang pair -->
+  <xsl:variable name="outDir" select="concat($slang, $tlang, '/sorting')"/>
   <xsl:variable name="of" select="'xml'"/>
   <xsl:variable name="e" select="$of"/>
   <xsl:variable name="debug" select="'true_gogo'"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
-  <xsl:variable name="lang" select="'sme'"/>
+  <xsl:variable name="slang" select="'sme'"/>
+  <xsl:variable name="tlang" select="'nob'"/>
   
   <xsl:template match="/" name="main">
 
@@ -88,7 +90,7 @@
     </xsl:variable>
     <!-- uniq the characters and sort them by default -->
     <xsl:variable name="abc">
-      <abc xml:lang="{$lang}">
+      <abc xml:lang="{$slang}">
 	<xsl:for-each select="distinct-values(tokenize($solo_letter, ' '))">
 	  <xsl:sort select="."/>
 	  <xsl:if test="not(normalize-space(.) = '')">
@@ -100,7 +102,7 @@
       </abc>
     </xsl:variable>
     
-    <xsl:result-document href="{$outDir}/{$lang}_letters.{$e}" format="{$of}">
+    <xsl:result-document href="{$outDir}/{$slang}_letters.{$e}" format="{$of}">
       <xsl:copy-of select="$abc"/>
     </xsl:result-document>
   </xsl:template>

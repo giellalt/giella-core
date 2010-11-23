@@ -86,10 +86,18 @@
 <!ATTLIST app 
       name ( oahpa | mt ) #IMPLIED
 >   
-<!ELEMENT sources (book*) >
+<!ELEMENT sources (book*, frequency*, geography*) >
 <!ELEMENT book EMPTY >
 <!ATTLIST book 
       name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 | xxx ) #IMPLIED
+>      
+<!ELEMENT frequency EMPTY >
+<!ATTLIST frequency
+      class ( common | rare ) #IMPLIED
+>      
+<!ELEMENT geography EMPTY >
+<!ATTLIST geography
+      class CDATA #IMPLIED
 >      
 <!--      name CDATA #REQUIRED -->
 

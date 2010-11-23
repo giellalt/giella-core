@@ -53,14 +53,15 @@
   
   <xsl:param name="inFile" select="'gogo_file'"/>
   <xsl:param name="inDir" select="concat('../', $slang, $tlang, '/src')"/>
+  <xsl:param name="slang" select="'sme'"/>
+  <xsl:param name="tlang" select="'nob'"/>
   <!-- the output dir is named 'sorting' and is created in the dir of each lang pair -->
-  <xsl:variable name="outDir" select="concat($slang, $tlang, '/sorting')"/>
+  <xsl:param name="outDir" select="concat($slang, $tlang, '/sorting')"/>
+  <xsl:param name="debug" select="'true_gogo'"/>
+
   <xsl:variable name="of" select="'xml'"/>
   <xsl:variable name="e" select="$of"/>
-  <xsl:variable name="debug" select="'true_gogo'"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
-  <xsl:variable name="slang" select="'sme'"/>
-  <xsl:variable name="tlang" select="'nob'"/>
   
   <xsl:template match="/" name="main">
 

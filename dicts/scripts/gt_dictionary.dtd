@@ -45,7 +45,7 @@
       rime CDATA #IMPLIED
       margo CDATA #IMPLIED
       vow CDATA #IMPLIED
-      dihp ( yes ) #IMPLIED
+      diph ( yes ) #IMPLIED
       umlaut ( full ) #IMPLIED
 
 >      

@@ -109,7 +109,7 @@
 
 <!ELEMENT mg (apps?, tg+) >
 <!ATTLIST mg 
-      lang ( swe | nob ) #IMPLIED
+      lang ( sme | nob ) #IMPLIED
 >      
 <!ELEMENT tg (semantics?, re?, apps?, ( ((t, stem*) | tf | te ))+, xg*, syng?) >
 

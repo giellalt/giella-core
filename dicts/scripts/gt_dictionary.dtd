@@ -34,7 +34,6 @@
       type ( rel | pers | indef | refl | pre | post | ord | TV | IV ) #IMPLIED
       class ( I | II | III | IV | V | VI | xxx ) #IMPLIED 
       stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
-      umlaut ( A | B | C | D | E | F ) #IMPLIED
       p3p CDATA #IMPLIED
       minip ( notSg1 | onlyPl ) #IMPLIED
       illpl ( ok | no ) #IMPLIED
@@ -42,6 +41,12 @@
       grad ( pos | comp | sup ) #IMPLIED
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED
+      soggi CDATA #IMPLIED
+      rime CDATA #IMPLIED
+      margo CDATA #IMPLIED
+      vow CDATA #IMPLIED
+      umlaut ( full ) #IMPLIED
+
 >      
 
 <!-- decl: i indeclineable -->
@@ -59,7 +64,6 @@
       type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
       class ( I | II | III | IV | V | VI ) #IMPLIED 
       stem ( even | odd | 2syll | 3syll | weak ) #IMPLIED
-      umlaut ( A | B | C | D | E | F ) #IMPLIED
       p3p CDATA #IMPLIED
       minip ( notSg1 | onlyPl ) #IMPLIED
       illpl ( ok | no ) #IMPLIED
@@ -76,9 +80,6 @@
 <!ELEMENT stem (#PCDATA) >
 <!ATTLIST stem 
       class ( bisyllabic | trisyllabic | contracted ) #IMPLIED
-      vowelchange ( 1 | 2 | 3 | 4 | 5 | 6 | 0 ) #IMPLIED
-      soggi CDATA #IMPLIED
-      rime CDATA #IMPLIED
 >      
 
 <!ELEMENT apps (app+) >

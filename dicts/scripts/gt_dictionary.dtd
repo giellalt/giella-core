@@ -160,6 +160,7 @@
 <!ATTLIST te dict (yes | no ) "yes" >
 <!ATTLIST te oa ( first | yes | no ) "yes" >
 <!ATTLIST te stat ( pref ) #IMPLIED >
+<!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v ) #IMPLIED >
 
 
 <!ELEMENT xg ((x,xt)+)>

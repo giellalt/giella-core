@@ -47,6 +47,7 @@
       vow CDATA #IMPLIED
       diph ( yes ) #IMPLIED
       umlaut ( full ) #IMPLIED
+      num ( pl ) #IMPLIED
 
 >      
 

@@ -26,7 +26,7 @@
       pos ( a | n | v | adv | po | pr | pron | rel | pers | det | i | pcle |
             num | cc | cs | prop | propPl | g3 | actor |  
             prsprc | fp-cmp | lp-cmp | x | xxx | 
-            phrase_n | phrase_a | phrase_v ) #REQUIRED
+            phrase_n | phrase_a | phrase_v | phrase_adv) #REQUIRED
       attr ( ok | no ) #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
       nr ( sg | pl ) #IMPLIED
@@ -128,7 +128,7 @@
             adv | p | pr | po | det |
             pron | prop | i  | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | x  | xxx |
-	    phrase_n | phrase_a | phrase_v ) #REQUIRED >
+	    phrase_n | phrase_a | phrase_v | phrase_adv ) #REQUIRED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED > <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n ) #IMPLIED >
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >
@@ -146,7 +146,7 @@
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
 <!ATTLIST tf oa ( first | yes | no ) "yes" >
 <!ATTLIST tf dict (yes | no ) "yes" >
-<!ATTLIST tf pos ( phrase  | phrase_n | phrase_a | phrase_v ) #IMPLIED >
+<!ATTLIST tf pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
 <!ATTLIST tf gen ( m | f | n ) #IMPLIED >
 <!ATTLIST tf lang ( swe | nob ) #IMPLIED >
 <!ATTLIST tf xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
@@ -160,7 +160,7 @@
 <!ATTLIST te dict (yes | no ) "yes" >
 <!ATTLIST te oa ( first | yes | no ) "yes" >
 <!ATTLIST te stat ( pref ) #IMPLIED >
-<!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v ) #IMPLIED >
+<!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
 
 
 <!ELEMENT xg ((x,xt)+)>

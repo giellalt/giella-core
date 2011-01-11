@@ -6,7 +6,12 @@
     | 
     +-->
 
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="2.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                exclude-result-prefixes="xs xhtml">
+
 
   <xsl:strip-space elements="*"/>
   <xsl:output method="xml"
@@ -41,7 +46,7 @@
 <!-- collection('PATH?select=*.xml') -->
 
     <r>
-      <xsl:copy-of select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='ped' or @src='nj') and not(./mg/tg/t='XXXX') and not(contains(normalize-space(lg/l), ' '))]"/>
+      <xsl:copy-of  copy-namespaces="no" select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX') and not(contains(normalize-space(lg/l), ' '))]"/>
       <!--       <xsl:copy-of select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='ped' or @src='nj') and not(starts-with(./mg/tg/t,'XX'))]"/> -->
     </r>
   </xsl:template>

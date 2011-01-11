@@ -16,6 +16,7 @@
   
   <xsl:param name="gtpath" select="'gogo-input-files'"/>
   <xsl:param name="outputDir" select="'gogo-output-files'"/>
+  <!--  tagging places for a future unification of all add-paradigm scripts: allPos is language dependent -->
   <xsl:variable name="allPos" select="'__n__v__a__prop__actor__num__g3__pron__npl__'"/>
   <xsl:variable name="e" select="'xml'"/>
   <!--   <xsl:variable name="outputDir" select="'xml-out'"/> -->

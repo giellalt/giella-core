@@ -6,7 +6,19 @@
     | 
     +-->
 
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="2.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                exclude-result-prefixes="xs xhtml">
+
+<!--   <xsl:strip-space elements="*"/> -->
+<!--   <xsl:output method="xml" -->
+<!-- 	      encoding="UTF-8" -->
+<!-- 	      omit-xml-declaration="no" -->
+<!-- 	      doctype-system="../../scripts/gt_dictionary.dtd" -->
+<!-- 	      doctype-public="-//XMLmind//DTD gt_dictionary//SE" -->
+<!-- 	      indent="yes"/> -->
 
   <xsl:strip-space elements="*"/>
   <xsl:output method="xml" name="xml"
@@ -30,12 +42,12 @@
 
     <xsl:variable name="out_tmp">
       <r xml:lang="{$srcl}">
-	<xsl:for-each select="for $f in collection(concat($dir, '?select=*.xml'))/r/e return $f">
+	<xsl:for-each select="for $f in collection(concat($dir, '?select=*.xml'))/r/e[not(./lg/l/@pos = 'prop')][not(./lg/l/@pos = 'propPl')] return $f">
 
 	  <xsl:variable name="cel">
 	    <e>
 	      <xsl:copy-of select="./lg" copy-namespaces="no"/>
-	      <xsl:for-each select="./mg">
+	      <xsl:for-each select="./mg[not(./@xml:lang = 'sme')]">
 		<mg>
 		  <xsl:for-each select="./tg">
 		    <tg>

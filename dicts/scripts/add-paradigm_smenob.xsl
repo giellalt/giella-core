@@ -212,6 +212,7 @@
 	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Ill'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill'][./wordform/@value]"/>
       </xsl:if>
+      <!-- both prop and npl to be refined -->
       <xsl:if test="$pos = 'prop'">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Gen'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Ill'][./wordform/@value]"/>

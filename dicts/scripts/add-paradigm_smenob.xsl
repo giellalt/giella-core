@@ -208,9 +208,12 @@
 	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill'][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'num'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Gen'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Ill'][./wordform/@value]"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill'][./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Nom'][./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Gen'][./wordform/@value]"/>
+      </xsl:if>
+      <!-- ask Lene for miniparadigm for pron -->
+      <xsl:if test="$pos = 'pron'">
       </xsl:if>
       <!-- both prop and npl to be refined -->
       <xsl:if test="$pos = 'prop'">

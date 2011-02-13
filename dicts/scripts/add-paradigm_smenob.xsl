@@ -16,8 +16,12 @@
   
   <xsl:param name="gtpath" select="'gogo-input-files'"/>
   <xsl:param name="outputDir" select="'gogo-output-files'"/>
-  <!--  tagging places for a future unification of all add-paradigm scripts: allPos is language dependent -->
+  <!--  tagging places for a future unification of all add-paradigm scripts: allPos is lang dep -->
   <xsl:variable name="allPos" select="'__n__v__a__prop__actor__num__g3__pron__npl__'"/>
+  <xsl:variable name="tab" select="'&#x9;'"/>
+  <xsl:variable name="nl" select="'&#xA;'"/>
+  <xsl:variable name="debug" select="true()"/>
+
   <xsl:variable name="e" select="'xml'"/>
   <!--   <xsl:variable name="outputDir" select="'xml-out'"/> -->
   
@@ -43,17 +47,24 @@
     </xsl:variable>
 
     <xsl:variable name="source_mg" select="../mg"/>
-
     <xsl:variable name="prop_source" select="../@src"/>
     
     <lg>
-
+      <xsl:message terminate="no">
+	<xsl:value-of select="concat('processing ', ./l/text(), ' ___ pos ', ./l/@pos, $nl)"/>
+	<xsl:value-of select="concat('..........................', $nl)"/>
+      </xsl:message>
+      
       <xsl:apply-templates/>
-
+      
+      <!--       <xsl:message terminate="no"> -->
+      <!-- 	<xsl:value-of select="concat('AAT ', ' ____________ ', $nl)"/> -->
+      <!--       </xsl:message> -->
+      
       <xsl:if test="contains($allPos, concat('__', $source_pos, '__'))">
-
+	
 	<!-- <xsl:copy-of select="document($document)/result"/> -->
-
+	
 	<xsl:for-each select="document($document)/result/e">
 	  <xsl:choose>
 	    <xsl:when test="./lg/l = $source_lemma">
@@ -176,12 +187,20 @@
     <xsl:param name="par"/>
     <mini_paradigm>
       <xsl:if test="$pos = 'v'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Sg1']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Sg3']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Pl3']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prt_Sg1']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ger']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'VGen']"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Sg1') and not(contains(./@ms, '/'))]
+			     [./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Sg3') and not(contains(./@ms, '/'))]
+			     [./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Pl3') and not(contains(./@ms, '/'))]
+			     [./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Sg1') and not(contains(./@ms, '/'))]
+			     [./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Sg3') and not(contains(./@ms, '/'))]
+			     [./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Pl3') and not(contains(./@ms, '/'))]
+			     [./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prs_ConNeg') and not(contains(./@ms, '/'))]
+			     [./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'n'">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Gen']"/>
@@ -206,9 +225,9 @@
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Ela']"/>
       </xsl:if>
       <xsl:if test="$pos = 'a'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Pred']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Comp_Sg_Nom']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Superl_Sg_Nom']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Pred'][./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Comp_Sg_Nom'][./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Superl_Sg_Nom'][./wordform/@value]"/>
       </xsl:if>
     </mini_paradigm>
   </xsl:template>

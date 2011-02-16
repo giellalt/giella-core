@@ -21,6 +21,8 @@
   <xsl:variable name="tab" select="'&#x9;'"/>
   <xsl:variable name="nl" select="'&#xA;'"/>
   <xsl:variable name="debug" select="true()"/>
+  <xsl:variable name="logFile" select="'default'"/>
+  <xsl:variable name="logDir" select="'logDir'"/>
 
   <xsl:variable name="e" select="'xml'"/>
   <!--   <xsl:variable name="outputDir" select="'xml-out'"/> -->
@@ -48,6 +50,8 @@
 
     <xsl:variable name="source_mg" select="../mg"/>
     <xsl:variable name="prop_source" select="../@src"/>
+
+    <xsl:variable name="current_e" select=".."/>
     
     <lg>
       <xsl:message terminate="no">
@@ -61,9 +65,25 @@
       <!-- 	<xsl:value-of select="concat('AAT ', ' ____________ ', $nl)"/> -->
       <!--       </xsl:message> -->
       
-      <xsl:if test="contains($allPos, concat('__', $source_pos, '__'))">
+      <xsl:if test="contains($allPos, concat('__', $source_pos, '__')) and not(./l/@pg) and not(./l/@type = 'refl')">
 	
 	<!-- <xsl:copy-of select="document($document)/result"/> -->
+	
+	<xsl:if test="not(doc-available($document))">
+	  <xsl:if test="$debug">
+	    <xsl:message terminate="no">
+	      <xsl:value-of select="concat('%%%%%%%%%%', $nl, 
+				    'No file ', $document, $nl,
+				    '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', $nl)"/>
+	    </xsl:message>
+
+	    <xsl:result-document href="{$logDir}/{$source_lemma}_{$source_pos}.{$e}">
+	      <r flag="no_xml_file_after_paradigm-generation">
+		<xsl:copy-of select=".."/>
+	      </r>
+	    </xsl:result-document>
+	  </xsl:if>
+	</xsl:if>
 	
 	<xsl:for-each select="document($document)/result/e">
 	  <xsl:choose>
@@ -86,17 +106,17 @@
 	  <xsl:for-each select="document($document)/result/e">
 	    <xsl:choose>
 	      <xsl:when test="./lg/l = $source_lemma">
-<!-- 		<xsl:copy-of select="./lg/analysis"/> -->
-<!-- 		<xsl:copy-of select="./lg/spelling"/> -->
+		<!-- 		<xsl:copy-of select="./lg/analysis"/> -->
+		<!-- 		<xsl:copy-of select="./lg/spelling"/> -->
 	      </xsl:when>
 	      <xsl:otherwise>
 		<r>
 		  <e>
-<!-- 		    <xsl:if test="./lg/l/@pos = 'prop'"> -->
-<!-- 		      <xsl:attribute name="source"> -->
-<!-- 			<xsl:value-of select="./@source"/> -->
-<!-- 		      </xsl:attribute> -->
-<!-- 		    </xsl:if> -->
+		    <!-- 		    <xsl:if test="./lg/l/@pos = 'prop'"> -->
+		    <!-- 		      <xsl:attribute name="source"> -->
+		    <!-- 			<xsl:value-of select="./@source"/> -->
+		    <!-- 		      </xsl:attribute> -->
+		    <!-- 		    </xsl:if> -->
 		    <xsl:copy-of select="./lg"/>
 		    <xsl:copy-of select="$source_mg"/>
 		  </e>
@@ -118,7 +138,7 @@
 		</xsl:if>
 		<lg>
 		  <l>
-		  <!-- change this later, this is too ugly -->
+		    <!-- change this later, this is too ugly -->
 		    <xsl:attribute name="pos">
 		      <xsl:if test="starts-with(./lg/analysis[1], 'Prop')">
 			<xsl:if test="starts-with(./lg/analysis[1], 'Prop_Sg')">
@@ -202,7 +222,7 @@
 	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Ind_Prs_ConNeg') and not(contains(./@ms, '/'))]
 			     [./wordform/@value]"/>
       </xsl:if>
-      <xsl:if test="$pos = 'n' or $pos = 'actor' or $pos = 'g3'">
+      <xsl:if test="$pos = 'n' or $pos = 'actor' or $pos = 'g3' or 'pron'">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Gen'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Ill'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill'][./wordform/@value]"/>
@@ -212,17 +232,16 @@
 	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Nom'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Gen'][./wordform/@value]"/>
       </xsl:if>
-      <!-- ask Lene for miniparadigm for pron -->
-      <xsl:if test="$pos = 'pron'">
-      </xsl:if>
-      <!-- both prop and npl to be refined -->
+      <!-- Loc: i/fra -->
       <xsl:if test="$pos = 'prop'">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Gen'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Ill'][./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Sg_Loc'][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'npl'">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Gen'][./wordform/@value]"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Ill'][./wordform/@value]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Pl_Loc'][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'a'">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Attr'][./wordform/@value]"/>

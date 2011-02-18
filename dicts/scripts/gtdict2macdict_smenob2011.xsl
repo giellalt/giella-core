@@ -43,6 +43,7 @@
 
       <!-- to refine here -->
       <d:index d:value="{lg/l}"/>
+      <d:index d:value="{lg/lsub}"/>
       <xsl:for-each select="lg/spellings/spv">
 	<d:index d:value="{.}"/>	
       </xsl:for-each>

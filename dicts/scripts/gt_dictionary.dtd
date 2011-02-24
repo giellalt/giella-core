@@ -115,7 +115,9 @@
       xml:lang ( sme | nob ) #IMPLIED
 >      
 <!ELEMENT tg (semantics?, re?, apps?, ( ((t, stem*) | tf | te ))+, xg*, syng?) >
-
+<!ATTLIST mg 
+      xml:lang ( sme | nob | swe ) #IMPLIED
+>
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ATTLIST re 
 	  xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED

@@ -100,7 +100,7 @@
 >      
 <!ELEMENT geography EMPTY >
 <!ATTLIST geography
-      class CDATA #IMPLIED
+      class ( other | south | mid | north ) #IMPLIED
 >      
 <!--      name CDATA #REQUIRED -->
 

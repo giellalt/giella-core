@@ -20,6 +20,8 @@
 	      encoding="UTF-8"
 	      indent="yes"/>
 
+  <xsl:variable name="debug" select="true()"/>
+  <xsl:variable name="nl" select="'&#xa;'"/>
 
   <xsl:template match="r">
     <d:dictionary
@@ -30,6 +32,15 @@
   </xsl:template>
   
   <xsl:template match="e">
+
+<!--       <xsl:if test="$debug"> -->
+<!--         <xsl:message terminate="no"> -->
+<!--           <xsl:value-of select="concat('%%%%%%%%', $nl)"/> -->
+<!--           <xsl:value-of select="concat('processing  ', ./lg/l, $nl)"/> -->
+<!--           <xsl:value-of select="'%%%%%%%%'"/> -->
+<!--         </xsl:message> -->
+<!--       </xsl:if> -->
+
     <d:entry d:title="{lg/l}">
       <xsl:attribute name="id">
 	<xsl:variable name="attr_values">
@@ -233,6 +244,15 @@
   </xsl:template>
 
   <xsl:template name="m_paradigm" match="mini_paradigm">
+
+      <xsl:if test="not($debug)">
+        <xsl:message terminate="no">
+          <xsl:value-of select="concat('-----------------------------------------', $nl)"/>
+          <xsl:value-of select="concat('mini_paradigm ', $nl)"/>
+          <xsl:value-of select="'-----------------------------------------'"/>
+        </xsl:message>
+      </xsl:if>
+
     <table border="0" align="left">
       <tr>
 	<td align="left">
@@ -251,12 +271,21 @@
   <xsl:template match="analysis">
     <xsl:variable name="currentWordForm" select="./wordform/@value"/>
     <xsl:variable name="currentPOS" select="myFn:mapPOS(normalize-space(../../l/@pos))"/>
-    <xsl:variable name="currentMPfeature" select="../../l/@minip"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
     <xsl:variable name="currentTrans" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
+    <xsl:variable name="currentContext" select="normalize-space(../../l/@context)"/>
 
+    <xsl:if test="$debug">
+      <xsl:message terminate="no">
+	<xsl:value-of select="concat('..........................', $nl)"/>
+	<xsl:value-of select="$currentWordForm"/>
+	<xsl:value-of select="concat('..........................', $nl)"/>
+	<xsl:value-of select="concat('pos ', $currentPOS, ' context ', $currentContext, $nl)"/>
+	<xsl:value-of select="'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'"/>
+      </xsl:message>
+    </xsl:if>
+    
     <tr>
-      
       <xsl:if test="not($currentPOS = 'verb')">
 	<td align="right">
 	  <morpho_descr>
@@ -266,94 +295,198 @@
       </xsl:if>
       
       <xsl:if test="$currentPOS = 'verb'">
-	<xsl:choose>
-	  <xsl:when test="not((ends-with(./@ms, 'Sg1') and
-			  (($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))) or
-			  (ends-with(./@ms, 'Sg3') and $currentMPfeature = 'onlyPl'))">
-	    <td align="right">
-	      <morpho_descr>
-		<xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
-	      </morpho_descr>
-	    </td>
-	  </xsl:when>
-	  <xsl:otherwise>
-	  </xsl:otherwise>
-	</xsl:choose>
-      </xsl:if>
-      
-      <xsl:if test="$currentPOS = 'verb'">
-	<xsl:choose>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg1') and not(($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))">
-	    <td align="center"> </td>
-	    <td align="center"> </td>
-	    <td align="left">
-	      <small>
-		<xsl:value-of select="concat('(', 'odne mun', ')', ' ')"/>
-		<xsl:value-of select="$currentWordForm"/>
-	      </small>
-	    </td>
-	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg3')and not($currentMPfeature = 'onlyPl')">
-	    <td align="center"> </td>
-	    <td align="center"> </td>
-	    <td align="left">
-	      <small>
-		<xsl:value-of select="concat('(', 'odne son', ')', ' ')"/>
-		<xsl:value-of select="$currentWordForm"/>
-	      </small>
-	    </td>
-	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Pl3')">
-	    <td align="center"> </td>
-	    <td align="center"> </td>
-	    <td align="left">
-	      <small>
-		<xsl:value-of select="concat('(', 'odne sii', ')', ' ')"/>
-		<xsl:value-of select="$currentWordForm"/>
-	      </small>
-	    </td>
-	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prt_Sg1') and not(($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))">
-	    <td align="center"> </td>
-	    <td align="center"> </td>
-	    <td align="left">
-	      <small>
-		<xsl:value-of select="concat('(', 'ikte mun', ')', ' ')"/>
-		<xsl:value-of select="$currentWordForm"/>
-	      </small>
-	    </td>
-	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prt_Sg3')and not($currentMPfeature = 'onlyPl')">
-	    <td align="center"> </td>
-	    <td align="center"> </td>
-	    <td align="left">
-	      <small>
-		<xsl:value-of select="concat('(', 'ikte son', ')', ' ')"/>
-		<xsl:value-of select="$currentWordForm"/>
-	      </small>
-	    </td>
-	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prt_Pl3')">
-	    <td align="center"> </td>
-	    <td align="center"> </td>
-	    <td align="left">
-	      <small>
-		<xsl:value-of select="concat('(', 'ikte sii', ')', ' ')"/>
-		<xsl:value-of select="$currentWordForm"/>
-	      </small>
-	    </td>
-	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_ConNeg')">
-	    <td align="center"> </td>
-	    <td align="center"> </td>
-	    <td align="left">
-	      <small>
-		<xsl:value-of select="concat('(', 'in', ')', ' ')"/>
-		<xsl:value-of select="$currentWordForm"/>
-	      </small>
-	    </td>
-	  </xsl:when>
-	</xsl:choose>
+	<xsl:if test="$currentContext = 'mun'">
+	  <xsl:choose>
+	    <xsl:when test="(ends-with(./@ms, 'Ind_Prs_Sg1') or
+			    ends-with(./@ms, 'Ind_Prt_Sg1') or
+			    ends-with(./@ms, 'Ind_Prs_ConNeg'))">
+	      <td align="right">
+		<morpho_descr>
+		  <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+		</morpho_descr>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+	<xsl:if test="$currentContext = 'dat'">
+	  <xsl:choose>
+	    <xsl:when test="(ends-with(./@ms, 'Ind_Prs_Pl3') or
+			    ends-with(./@ms, 'Ind_Prt_Sg3') or
+			    ends-with(./@ms, 'Ind_Prs_ConNeg'))">
+	      <td align="right">
+		<morpho_descr>
+		  <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+		</morpho_descr>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+	<xsl:if test="$currentContext = 'upers'">
+	  <xsl:choose>
+	    <xsl:when test="(ends-with(./@ms, 'Ind_Prs_Sg3') or
+			    ends-with(./@ms, 'Ind_Prt_Sg3') or
+			    ends-with(./@ms, 'Ind_Prs_ConNeg'))">
+	      <td align="right">
+		<morpho_descr>
+		  <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+		</morpho_descr>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+	<xsl:if test="$currentContext = 'sii'">
+	  <xsl:choose>
+	    <xsl:when test="(ends-with(./@ms, 'Ind_Prs_Pl3') or
+			    ends-with(./@ms, 'Ind_Prt_Pl3') or
+			    ends-with(./@ms, 'Ind_Prs_ConNeg'))">
+	      <td align="right">
+		<morpho_descr>
+		  <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+		</morpho_descr>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+<!--       </xsl:if> -->
+
+
+<!--       <xsl:if test="($currentPOS = 'verb')"> -->
+	<xsl:if test="$currentContext = 'mun'">
+	  <xsl:choose>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg1')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'odne ', $currentContext, ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prt_Sg1')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'ikte ', $currentContext, ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_ConNeg')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'in', ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+	<xsl:if test="$currentContext = 'dat'">
+	  <xsl:choose>
+	    <!-- with or without 'odne' here? -->
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_Pl3')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prt_Sg3')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'ikte ', $currentContext, ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_ConNeg')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'ii', ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+	<xsl:if test="$currentContext = 'upers'">
+	  <xsl:choose>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg3')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'odne', ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prt_Sg3')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'ikte', ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_ConNeg')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'ii', ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+	<xsl:if test="$currentContext = 'sii'">
+	  <xsl:choose>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_Pl3')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'odne ', $currentContext, ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prt_Pl3')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'ikte ', $currentContext, ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	    <xsl:when test="ends-with(./@ms, 'Ind_Prs_ConNeg')">
+	      <td align="center"> </td>
+	      <td align="center"> </td>
+	      <td align="left">
+		<small>
+		  <xsl:value-of select="concat('(', 'eai', ')', ' ')"/>
+		  <xsl:value-of select="$currentWordForm"/>
+		</small>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
       </xsl:if>
 
       <xsl:if test="$currentPOS = 'egennavn'">
@@ -425,6 +558,33 @@
 	</xsl:choose>
       </xsl:if>
       
+<!--       <xsl:if test="$currentPOS = 'adj'"> -->
+<!-- 	<xsl:choose> -->
+<!-- 	  <xsl:when test="ends-with(./@ms, '_Gen')"> -->
+<!-- 	    <td align="center"> </td> -->
+<!-- 	    <td align="center"> </td> -->
+<!-- 	    <td align="left"> -->
+<!-- 	      <small> -->
+<!-- 		<xsl:value-of select="$currentWordForm"/> -->
+<!-- 		<xsl:value-of select="concat(' ', 'bokte')"/> -->
+<!-- 	      </small> -->
+<!-- 	    </td> -->
+
+<!-- 	    <td align="center"> </td> -->
+<!-- 	    <td align="center"> </td> -->
+<!-- 	    <td align="left"> -->
+<!-- 	      <small> -->
+<!-- 		<i> -->
+<!-- 		  <xsl:value-of select="'via '"/> -->
+<!-- 		  <xsl:value-of select="$currentTrans"/> -->
+<!-- 		</i> -->
+<!-- 	      </small> -->
+<!-- 	    </td> -->
+<!-- 	  </xsl:when> -->
+<!-- 	</xsl:choose> -->
+<!--       </xsl:if> -->
+
+
       <xsl:if test="not($currentPOS = 'verb') and not($currentPOS = 'egennavn')">
 	<td align="center"> </td>
 	<td align="center"> </td>

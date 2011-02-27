@@ -563,6 +563,7 @@
 	</xsl:choose>
       </xsl:if>
 
+      <!-- todo after latest generation round: ad actor g3 stuff here -->
       <!-- adj. and num. -->
       <xsl:if test="(($currentPOS = 'num.') or ($currentPOS = 'adj.') or ($currentPOS = 'subst.') or ($currentPOS = 'pron.'))">
 	<td align="center"> </td>

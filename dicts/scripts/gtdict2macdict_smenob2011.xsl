@@ -33,14 +33,13 @@
   
   <xsl:template match="e">
 
-<!--       <xsl:if test="$debug"> -->
-<!--         <xsl:message terminate="no"> -->
-<!--           <xsl:value-of select="concat('%%%%%%%%', $nl)"/> -->
-<!--           <xsl:value-of select="concat('processing  ', ./lg/l, $nl)"/> -->
-<!--           <xsl:value-of select="'%%%%%%%%'"/> -->
-<!--         </xsl:message> -->
-<!--       </xsl:if> -->
-
+    <xsl:if test="$debug">
+      <xsl:message terminate="no">
+	<xsl:value-of select="concat('%%%%%%%%', $nl)"/>
+	<xsl:value-of select="concat('processing  ', ./lg/l, $nl)"/>
+      </xsl:message>
+    </xsl:if>
+    
     <d:entry d:title="{lg/l}">
       <xsl:attribute name="id">
 	<xsl:variable name="attr_values">
@@ -185,6 +184,12 @@
 	</xsl:if>
 	<xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
 	  <bf><xsl:value-of select="normalize-space(.)"/></bf>
+	  <xsl:if test="@country">
+	    <bf><xsl:value-of select="concat(' (', normalize-space(./@country), ') ')"/></bf>
+	  </xsl:if>
+	  <xsl:if test="@reg">
+	    <bf><xsl:value-of select="concat(' (', normalize-space(./@reg), ') ')"/></bf>
+	  </xsl:if>
 	  <!-- 				  if ($tgPos = $tgCount) then '.' -->
 	  <xsl:value-of select="if (position() = $tCount) then 
 				if ($tgPos = $tgCount) then ''
@@ -200,12 +205,18 @@
 	<xsl:for-each select="./tg">
 	  <xsl:variable name="tgPos" select="position()"/>
 	  <xsl:variable name="tCount" select="count(./*[(local-name() = 't') or (local-name() = 'tf')])"/>
-	<xsl:if test="./re">
-	  <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
-	</xsl:if>
-
+	  <xsl:if test="./re">
+	    <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
+	  </xsl:if>
+	  
 	  <xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
 	    <bf><xsl:value-of select="normalize-space(.)"/></bf>
+	    <xsl:if test="@country">
+	      <bf><xsl:value-of select="concat(' (', normalize-space(./@country), ') ')"/></bf>
+	    </xsl:if>
+	    <xsl:if test="@reg">
+	      <bf><xsl:value-of select="concat(' (', normalize-space(./@reg), ') ')"/></bf>
+	    </xsl:if>
 	    <!-- 				  if ($tgPos = $tgCount) then '.' -->
 	    <xsl:value-of select="if (position() = $tCount) then 
 				  if ($tgPos = $tgCount) then ''
@@ -244,15 +255,6 @@
   </xsl:template>
 
   <xsl:template name="m_paradigm" match="mini_paradigm">
-
-      <xsl:if test="not($debug)">
-        <xsl:message terminate="no">
-          <xsl:value-of select="concat('-----------------------------------------', $nl)"/>
-          <xsl:value-of select="concat('mini_paradigm ', $nl)"/>
-          <xsl:value-of select="'-----------------------------------------'"/>
-        </xsl:message>
-      </xsl:if>
-
     <table border="0" align="left">
       <tr>
 	<td align="left">
@@ -272,19 +274,22 @@
     <xsl:variable name="currentWordForm" select="./wordform/@value"/>
     <xsl:variable name="currentPOS" select="myFn:mapPOS(normalize-space(../../l/@pos))"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
-    <xsl:variable name="currentTrans" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
     <xsl:variable name="currentContext" select="normalize-space(../../l/@context)"/>
 
-    <xsl:if test="$debug">
-      <xsl:message terminate="no">
-	<xsl:value-of select="concat('..........................', $nl)"/>
-	<xsl:value-of select="$currentWordForm"/>
-	<xsl:value-of select="concat('..........................', $nl)"/>
-	<xsl:value-of select="concat('pos ', $currentPOS, ' context ', $currentContext, $nl)"/>
-	<xsl:value-of select="'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'"/>
-      </xsl:message>
-    </xsl:if>
-    
+    <xsl:variable name="currentTrans">
+      <xsl:variable name="currentTransT" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
+      <xsl:variable name="currentTransPh" select="normalize-space(../../../mg[1]/tg[1]/tf[1])"/>
+	<xsl:value-of select="if (normalize-space($currentTransT) = '') then $currentTransPh else $currentTransT"/>
+    </xsl:variable>
+
+      <xsl:if test="$debug">
+        <xsl:message terminate="no">
+          <xsl:value-of select="concat('............', $nl)"/>
+          <xsl:value-of select="concat('processing  ', $currentWordForm[1], ' currentTranslation ', $currentTrans, $nl)"/>
+          <xsl:value-of select="'............'"/>
+        </xsl:message>
+      </xsl:if>
+
     <tr>
       <xsl:if test="not($currentPOS = 'verb')">
 	<td align="right">
@@ -557,44 +562,26 @@
 	  </xsl:when>
 	</xsl:choose>
       </xsl:if>
-      
-<!--       <xsl:if test="$currentPOS = 'adj'"> -->
-<!-- 	<xsl:choose> -->
-<!-- 	  <xsl:when test="ends-with(./@ms, '_Gen')"> -->
-<!-- 	    <td align="center"> </td> -->
-<!-- 	    <td align="center"> </td> -->
-<!-- 	    <td align="left"> -->
-<!-- 	      <small> -->
-<!-- 		<xsl:value-of select="$currentWordForm"/> -->
-<!-- 		<xsl:value-of select="concat(' ', 'bokte')"/> -->
-<!-- 	      </small> -->
-<!-- 	    </td> -->
 
-<!-- 	    <td align="center"> </td> -->
-<!-- 	    <td align="center"> </td> -->
-<!-- 	    <td align="left"> -->
-<!-- 	      <small> -->
-<!-- 		<i> -->
-<!-- 		  <xsl:value-of select="'via '"/> -->
-<!-- 		  <xsl:value-of select="$currentTrans"/> -->
-<!-- 		</i> -->
-<!-- 	      </small> -->
-<!-- 	    </td> -->
-<!-- 	  </xsl:when> -->
-<!-- 	</xsl:choose> -->
-<!--       </xsl:if> -->
-
-
-      <xsl:if test="not($currentPOS = 'verb') and not($currentPOS = 'egennavn')">
+      <!-- adj. and num. -->
+      <xsl:if test="(($currentPOS = 'num.') or ($currentPOS = 'adj.') or ($currentPOS = 'subst.') or ($currentPOS = 'pron.'))">
 	<td align="center"> </td>
 	<td align="center"> </td>
 	<td align="left">
 	  <small>
 	    <xsl:value-of select="$currentWordForm"/>
+	    <xsl:if test="(($currentPOS = 'num.') and ($currentMS = 'Pl_Nom')) or
+			  (($currentPOS = 'adj.') and ($currentMS = 'Attr') and (not($currentMS = 'none')))">
+	      <xsl:value-of select="concat(' ', '(', $currentContext, ')')"/>
+	    </xsl:if>
+	    
+	    <xsl:if test="(($currentPOS = 'num.') and ($currentMS = 'Pl_Gen'))">
+	      <xsl:value-of select="' (gápmagiid)'"/>
+	    </xsl:if>
+	    
 	  </small>
 	</td>
       </xsl:if>
-
     </tr>
   </xsl:template>
   

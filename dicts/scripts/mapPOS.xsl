@@ -19,7 +19,7 @@
 	</xsl:if>
 	
 	<xsl:if test="(normalize-space($ppooss)='prop')">
-	  <xsl:text>egennavn.</xsl:text>
+	  <xsl:text>egennavn</xsl:text>
 	</xsl:if>
 	
 	<xsl:if test="(normalize-space($ppooss)='a')">
@@ -113,6 +113,10 @@
 	</xsl:if>
 	
 	<xsl:if test="(normalize-space($pos)='prop')">
+	  <xsl:text>egennavn</xsl:text>
+	</xsl:if>
+	
+	<xsl:if test="(normalize-space($pos)='npl')">
 	  <xsl:text>egennavn</xsl:text>
 	</xsl:if>
 	

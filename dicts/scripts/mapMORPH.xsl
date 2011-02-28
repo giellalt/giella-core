@@ -15,7 +15,15 @@
     <xsl:variable name="descr">
       
       <xsl:for-each select="tokenize($pos, '_')">
-	
+		
+	<xsl:if test="(normalize-space(.)='Der/PassL')">
+	  <xsl:text>pass. </xsl:text>
+	</xsl:if>
+
+	<xsl:if test="(normalize-space(.)='Der/PassS')">
+	  <xsl:text>pass. </xsl:text>
+	</xsl:if>
+
 	<xsl:if test="(normalize-space(.)='Sg')">
 	  <xsl:text>sg. </xsl:text>
 	</xsl:if>

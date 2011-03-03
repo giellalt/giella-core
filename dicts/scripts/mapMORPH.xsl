@@ -32,8 +32,12 @@
 	  <xsl:text>pl. </xsl:text>
 	</xsl:if>
 	
+	<xsl:if test="(normalize-space(.)='Actio')">
+	  <xsl:text>aktio </xsl:text>
+	</xsl:if>
+
 	<xsl:if test="(normalize-space(.)='Ess')">
-	  <xsl:text>aktio ess. </xsl:text>
+	  <xsl:text>ess. </xsl:text>
 	</xsl:if>
 	
 	<xsl:if test="(normalize-space(.)='Gen')">
@@ -186,6 +190,14 @@
 
 	<xsl:if test="(normalize-space(.)='ConNeg')">
 	  <xsl:text>neg. </xsl:text>
+	</xsl:if>
+
+	<xsl:if test="(normalize-space(.)='Neg')">
+	  <xsl:text>neg. </xsl:text>
+	</xsl:if>
+
+	<xsl:if test="(normalize-space(.)='Sup')">
+	  <xsl:text>sup. </xsl:text>
 	</xsl:if>
 
 	<xsl:if test="(normalize-space(.)='Der/Pass')">

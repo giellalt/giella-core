@@ -17,7 +17,15 @@
 	<xsl:if test="(normalize-space($ppooss)='n')">
 	  <xsl:text>subst.</xsl:text>
 	</xsl:if>
+
+	<xsl:if test="(normalize-space($pos)='actor')">
+	  <xsl:text>subst.</xsl:text>
+	</xsl:if>
 	
+	<xsl:if test="(normalize-space($pos)='g3')">
+	  <xsl:text>subst.</xsl:text>
+	</xsl:if>
+		
 	<xsl:if test="(normalize-space($ppooss)='prop')">
 	  <xsl:text>egennavn</xsl:text>
 	</xsl:if>
@@ -143,7 +151,39 @@
 	<xsl:if test="(normalize-space($pos)='pron_rel')">
 	  <xsl:text>rel. pron.</xsl:text>
 	</xsl:if>
+
+	<xsl:if test="(normalize-space($pos)='pers')">
+	  <xsl:text>pers.</xsl:text>
+	</xsl:if>
 	
+	<xsl:if test="(normalize-space($pos)='refl')">
+	  <xsl:text>refl.</xsl:text>
+	</xsl:if>
+	
+	<xsl:if test="(normalize-space($pos)='rel')">
+	  <xsl:text>rel.</xsl:text>
+	</xsl:if>
+	
+	<xsl:if test="(normalize-space($pos)='recipr')">
+	  <xsl:text>resipr.</xsl:text>
+	</xsl:if>
+
+	<xsl:if test="(normalize-space($pos)='interr')">
+	  <xsl:text>spørrepron.</xsl:text>
+	</xsl:if>
+	
+	<xsl:if test="(normalize-space($pos)='dem')">
+	  <xsl:text>påpek.</xsl:text>
+	</xsl:if>
+	
+	<xsl:if test="(normalize-space($pos)='actor')">
+	  <xsl:text>subst.</xsl:text>
+	</xsl:if>
+	
+	<xsl:if test="(normalize-space($pos)='g3')">
+	  <xsl:text>subst.</xsl:text>
+	</xsl:if>
+
 	<!--     sme mapping -->
 	
 	<xsl:if test="(normalize-space($pos)='x_sme')">

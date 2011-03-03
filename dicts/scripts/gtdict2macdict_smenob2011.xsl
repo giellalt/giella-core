@@ -53,9 +53,16 @@
 
       <!-- to refine here -->
       <d:index d:value="{lg/l}"/>
-      <d:index d:value="{lg/lsub}"/>
+
+      <xsl:for-each select="lg/lsub">
+	<xsl:if test="not(normalize-space(.) = '')">
+	  <d:index d:value="{.}"/>
+	</xsl:if>
+      </xsl:for-each>
       <xsl:for-each select="lg/spellings/spv">
-	<d:index d:value="{.}"/>	
+	<xsl:if test="not(normalize-space(.) = '')">
+	  <d:index d:value="{.}"/>	
+	</xsl:if>
       </xsl:for-each>
       
       <div d:priority="2"><h1><xsl:value-of select="lg/l"/></h1></div>
@@ -174,6 +181,20 @@
   </xsl:template>
   
   <xsl:template match="mg">
+    <xsl:variable name="cp">
+      <xsl:variable name="wf" select="myFn:mapPOS(substring-before(normalize-space(../lg/l/@pos),'_'))"/>
+      <xsl:variable name="lm" select="myFn:mapPOS(normalize-space(../lg/l/@pos))"/>
+	<xsl:value-of select="if (normalize-space($wf) = '') then $lm else $wf"/>
+    </xsl:variable>
+
+      <xsl:if test="$debug">
+        <xsl:message terminate="no">
+          <xsl:value-of select="concat('......$$$......', $nl)"/>
+          <xsl:value-of select="concat('pos  ', $cp, $nl)"/>
+          <xsl:value-of select="'......$$$......'"/>
+        </xsl:message>
+      </xsl:if>
+
     <xsl:if test="count(../mg) = 1">
       <xsl:variable name="tgCount" select="count(./tg)"/>
       <xsl:for-each select="./tg">
@@ -182,7 +203,10 @@
 	<xsl:if test="./re">
 	  <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
 	</xsl:if>
-	<xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
+	<xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf') or (local-name() = 'te')]">
+	  <xsl:if test="($cp = 'verb') and not(local-name() = 'te')">
+	    <bf><xsl:value-of select="'å '"/></bf>
+	  </xsl:if>
 	  <bf><xsl:value-of select="normalize-space(.)"/></bf>
 	  <xsl:if test="@country">
 	    <bf><xsl:value-of select="concat(' (', normalize-space(./@country), ') ')"/></bf>
@@ -209,7 +233,11 @@
 	    <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
 	  </xsl:if>
 	  
-	  <xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
+	  <xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf') or (local-name() = 'te')]">
+	    <xsl:if test="($cp = 'verb') and not(local-name() = 'te')">
+	      <bf><xsl:value-of select="'å '"/></bf>
+	    </xsl:if>
+
 	    <bf><xsl:value-of select="normalize-space(.)"/></bf>
 	    <xsl:if test="@country">
 	      <bf><xsl:value-of select="concat(' (', normalize-space(./@country), ') ')"/></bf>
@@ -563,7 +591,6 @@
 	</xsl:choose>
       </xsl:if>
 
-      <!-- todo after latest generation round: ad actor g3 stuff here -->
       <!-- adj. and num. -->
       <xsl:if test="(($currentPOS = 'num.') or ($currentPOS = 'adj.') or ($currentPOS = 'subst.') or ($currentPOS = 'pron.'))">
 	<td align="center"> </td>

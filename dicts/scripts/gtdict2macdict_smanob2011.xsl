@@ -309,7 +309,7 @@
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<xsl:value-of select="concat('(', 'daenbiejjien manne', ')', ' ')"/>
+		<xsl:value-of select="concat('(', 'daan biejjien manne', ')', ' ')"/>
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>
@@ -319,7 +319,22 @@
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<xsl:value-of select="concat('(', 'daenbiejjien dïhte', ')', ' ')"/>
+		<xsl:value-of select="concat('(', 'daan biejjien dïhte', ')', ' ')"/>
+		<xsl:value-of select="$currentWordForm"/>
+	      </small>
+	    </td>
+	  </xsl:when>
+	  <xsl:when test="ends-with(./@ms, 'ConNeg')">
+	    <td align="center"> </td>
+	    <td align="center"> </td>
+	    <td align="left">
+	      <small>
+	      <xsl:if test="not($currentMPfeature = 'onlyPl')">
+		<xsl:value-of select="concat('(', 'ij', ')', ' ')"/>
+	      </xsl:if>
+	      <xsl:if test="$currentMPfeature = 'onlyPl'">
+	      		<xsl:value-of select="concat('(', 'eah', ')', ' ')"/>
+	      </xsl:if>
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>
@@ -329,7 +344,7 @@
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<xsl:value-of select="concat('(', 'daenbiejjien dah', ')', ' ')"/>
+		<xsl:value-of select="concat('(', 'daan biejjien dah', ')', ' ')"/>
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>

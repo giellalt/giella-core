@@ -179,10 +179,11 @@
 	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Sg3']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Pl3']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prt_Sg1']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'ConNeg']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Ger']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'VGen']"/>
       </xsl:if>
-      <xsl:if test="$pos = 'n'">
+      <xsl:if test="($pos = 'n') or ($pos = 'pron')">
 	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Gen']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Ill']"/>
 	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill']"/>

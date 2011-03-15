@@ -16,7 +16,7 @@
   
   <xsl:param name="gtpath" select="'gogo-input-files'"/>
   <xsl:param name="outputDir" select="'gogo-output-files'"/>
-  <xsl:variable name="allPos" select="'__v__n__prop__propPl__a__num__'"/>
+  <xsl:variable name="allPos" select="'__v__n__pron__prop__propPl__a__num__'"/>
   <xsl:variable name="e" select="'xml'"/>
   <!--   <xsl:variable name="outputDir" select="'xml-out'"/> -->
   

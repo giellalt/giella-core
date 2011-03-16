@@ -15,7 +15,7 @@
 
 <!ELEMENT e (lg, stem*, apps?, mg+) >
 <!ATTLIST e 
-      usage ( mt | vd | other ) #IMPLIED
+      usage ( mt | vd | dict | other ) #IMPLIED
       src ( nj | sk | SvSt | other ) #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED

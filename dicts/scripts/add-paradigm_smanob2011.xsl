@@ -175,40 +175,40 @@
     <xsl:param name="par"/>
     <mini_paradigm>
       <xsl:if test="$pos = 'v'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Sg1']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Sg3']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Pl3']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prt_Sg1']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'ConNeg']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Ger']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'VGen']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Sg1'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Sg3'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prs_Pl3'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Ind_Prt_Sg1'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'ConNeg'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Ger'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'VGen'][./wordform]"/>
       </xsl:if>
       <xsl:if test="($pos = 'n') or ($pos = 'pron')">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Gen']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Ill']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill']"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Sg_Gen')][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Sg_Ill')][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[ends-with(./@ms, 'Pl_Ill')][./wordform]"/>
       </xsl:if>
       <xsl:if test="$pos = 'num'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Gen']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Ill']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Gen'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Sg_Ill'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Pl_Ill'][./wordform]"/>
       </xsl:if>
       <xsl:if test="$pos = 'prop'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Gen']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Ill']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Ine']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Ela']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Gen'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Ill'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Ine'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Sg_Ela'][./wordform]"/>
       </xsl:if>
       <xsl:if test="$pos = 'propPl'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Gen']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Ill']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Ine']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Ela']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Gen'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Ill'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Ine'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Prop_Plc_Pl_Ela'][./wordform]"/>
       </xsl:if>
       <xsl:if test="$pos = 'a'">
-	<xsl:copy-of select="$par/analysis[./@ms = 'Pred']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Comp_Sg_Nom']"/>
-	<xsl:copy-of select="$par/analysis[./@ms = 'Superl_Sg_Nom']"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Pred'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Comp_Sg_Nom'][./wordform]"/>
+	<xsl:copy-of select="$par/analysis[./@ms = 'Superl_Sg_Nom'][./wordform]"/>
       </xsl:if>
     </mini_paradigm>
   </xsl:template>

@@ -56,9 +56,6 @@
 <!-- lsub = frequent subform of lemma -->
 <!ELEMENT lsub (#PCDATA) >
 <!ATTLIST lsub 
-      pos ( a | n | v | adv | po | pr | pron | rel | pers | det | i | pcle |
-            num | cc | cs | prop | propPl | g3 | actor |  
-            prsprc | fp-cmp | lp-cmp | x ) #REQUIRED
       attr ( ok | no ) #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
       nr ( sg | pl ) #IMPLIED

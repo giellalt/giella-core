@@ -303,6 +303,7 @@
     <xsl:variable name="currentPOS" select="myFn:mapPOS(normalize-space(../../l/@pos))"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
     <xsl:variable name="currentContext" select="normalize-space(../../l/@context)"/>
+    <xsl:variable name="currentIllpl" select="normalize-space(../../l/@illpl)"/>
 
     <xsl:variable name="currentTrans">
       <xsl:variable name="currentTransT" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
@@ -326,7 +327,7 @@
 	  </morpho_descr>
 	</td>
       </xsl:if>
-      
+
       <xsl:if test="$currentPOS = 'verb'">
 	<xsl:if test="$currentContext = 'mun'">
 	  <xsl:choose>
@@ -591,7 +592,21 @@
 	</xsl:choose>
       </xsl:if>
 
-      <!-- adj. and num. -->
+      <!-- subst -->
+      <xsl:if test="(($currentPOS = 'subst.'))">
+	<xsl:if test="$currentIllpl = 'no'">
+	  <xsl:choose>
+	    <xsl:when test="(ends-with(./@ms, 'Sg_Gen') or
+			    ends-with(./@ms, 'Sg_Ill'))">
+	      <td align="right">
+		<morpho_descr>
+		  <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+		</morpho_descr>
+	      </td>
+	    </xsl:when>
+	  </xsl:choose>
+	</xsl:if>
+      
       <xsl:if test="(($currentPOS = 'num.') or ($currentPOS = 'adj.') or ($currentPOS = 'subst.') or ($currentPOS = 'pron.'))">
 	<td align="center"> </td>
 	<td align="center"> </td>

@@ -133,9 +133,13 @@
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >
 <!ATTLIST t xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
+<!ATTLIST t dialect CDATA #IMPLIED >
+<!ATTLIST t nob-stat CDATA #IMPLIED >
+<!ATTLIST t sem-cl CDATA #IMPLIED >
+<!ATTLIST t src CDATA #IMPLIED >
 <!ATTLIST t app CDATA #IMPLIED >
 <!ATTLIST t tcomm ( yes | no ) "no" >
-<!ATTLIST t stat ( pref ) #IMPLIED >
+<!ATTLIST t stat ( pref | non ) #IMPLIED >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 

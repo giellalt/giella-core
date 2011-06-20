@@ -30,6 +30,7 @@
       attr ( ok | no ) #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
       nr ( sg | pl ) #IMPLIED
+      gen_only CDATA #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post | ord | TV | IV ) #IMPLIED
       class ( I | II | III | IV | V | VI | xxx ) #IMPLIED 
@@ -107,7 +108,7 @@
       class CDATA #IMPLIED
 >      
 
-<!ELEMENT mg (apps?, tg+) >
+<!ELEMENT mg (semantics?, apps?, tg+) >
 <!ATTLIST mg 
       xml:lang ( sme | nob ) #IMPLIED
 >      

@@ -13,7 +13,7 @@
 <!ELEMENT a (#PCDATA)>
 <!ELEMENT i (#PCDATA)>
 
-<!ELEMENT e (lg, stem*, apps?, mg+) >
+<!ELEMENT e (lg, stem*, sources?, mg+) >
 <!ATTLIST e 
       usage ( mt | vd | dict | other ) #IMPLIED
       src ( nj | sk | SvSt | other ) #IMPLIED
@@ -82,11 +82,6 @@
       class ( bisyllabic | trisyllabic | contracted ) #IMPLIED
 >      
 
-<!ELEMENT apps (app+) >
-<!ELEMENT app (sources*) >
-<!ATTLIST app 
-      name ( oahpa | mt ) #IMPLIED
->   
 <!ELEMENT sources (book*, frequency?, geography*) >
 <!ELEMENT book EMPTY >
 <!ATTLIST book 
@@ -108,11 +103,11 @@
       class CDATA #IMPLIED
 >      
 
-<!ELEMENT mg (semantics?, apps?, tg+) >
+<!ELEMENT mg (semantics?,  tg+) >
 <!ATTLIST mg 
       xml:lang ( sme | nob ) #IMPLIED
 >      
-<!ELEMENT tg (semantics?, re?, apps?, ( ((t, stem*) | tf | te ))+, xg*, syng?) >
+<!ELEMENT tg (semantics?, re?,  ( ((t, stem*) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
       xml:lang ( sme | nob | swe ) #IMPLIED
 >
@@ -138,7 +133,6 @@
 <!ATTLIST t nob-stat CDATA #IMPLIED >
 <!ATTLIST t sem-cl CDATA #IMPLIED >
 <!ATTLIST t src CDATA #IMPLIED >
-<!ATTLIST t app CDATA #IMPLIED >
 <!ATTLIST t tcomm ( yes | no ) "no" >
 <!ATTLIST t stat ( pref | notpref | perhaps ) "notpref" >
 

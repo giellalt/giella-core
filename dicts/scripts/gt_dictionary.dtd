@@ -109,7 +109,7 @@
 >      
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
-      xml:lang ( sme | nob | swe ) #IMPLIED
+      xml:lang ( sme | sma | nob | swe | eng | deu ) #IMPLIED
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ATTLIST re 

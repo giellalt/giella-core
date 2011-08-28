@@ -40,7 +40,7 @@
   <xsl:variable name="outFile" select="'test-results'"/>
   <xsl:variable name="of" select="'xml'"/>
   <xsl:variable name="e" select="$of"/>
-  <xsl:variable name="debug" select="'true_gogo'"/>
+  <xsl:variable name="debug" select="true()"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
 
   <xsl:template match="/" name="main">
@@ -52,7 +52,7 @@
 	<xsl:variable name="current_dir" select="substring-before(document-uri(.), $current_file)"/>
 	<xsl:variable name="current_location" select="concat($inDir, substring-after($current_dir, $inDir))"/>
 	
-	<xsl:if test="$debug = 'true_gogo'">
+	<xsl:if test="$debug">
 	  <xsl:message terminate="no">
 	    <xsl:value-of select="concat('-----------------------------------------', $nl)"/>
 	    <xsl:value-of select="concat('processing file ', $current_file, $nl)"/>
@@ -80,7 +80,7 @@
 		
 		<!-- 	      <xsl:for-each select=".//e"> -->
 		
-		<!-- 		<xsl:if test="$debug = 'true_gogo'"> -->
+		<!-- 		<xsl:if test="$debug"> -->
 		<!-- 		  <xsl:message terminate="no"> -->
 		<!-- 		    <xsl:value-of select="concat('processing entry ', ./lg/l/text(), $nl)"/> -->
 		<!-- 		    <xsl:value-of select="'.............................................................'"/> -->

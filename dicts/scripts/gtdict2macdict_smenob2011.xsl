@@ -592,7 +592,7 @@
 	</xsl:choose>
       </xsl:if>
 
-      <!-- subst -->
+      <!-- pos=subst & illPl=no-->
       <xsl:if test="(($currentPOS = 'subst.'))">
 	<xsl:if test="$currentIllpl = 'no'">
 	  <xsl:choose>
@@ -606,7 +606,8 @@
 	    </xsl:when>
 	  </xsl:choose>
 	</xsl:if>
-      
+      </xsl:if>
+	
       <xsl:if test="(($currentPOS = 'num.') or ($currentPOS = 'adj.') or ($currentPOS = 'subst.') or ($currentPOS = 'pron.'))">
 	<td align="center"> </td>
 	<td align="center"> </td>

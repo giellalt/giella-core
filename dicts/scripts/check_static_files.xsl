@@ -43,46 +43,48 @@
     <xsl:variable name="output">
       <xsl:for-each select="for $f in collection(concat($inDir,'?recurse=no;select=*.xml;on-error=warning')) return $f">
 	
-	<xsl:variable name="current_file" select="(tokenize(document-uri(.), '/'))[last()]"/>
-	<xsl:variable name="current_dir" select="substring-before(document-uri(.), $current_file)"/>
-	<xsl:variable name="current_location" select="concat($inDir, substring-after($current_dir, $inDir))"/>
-	
-	<xsl:if test="$debug">
-	  <xsl:message terminate="no">
-	    <xsl:value-of select="concat('-----------------------------------------', $nl)"/>
-	    <xsl:value-of select="concat('processing file ', $current_file, $nl)"/>
-	    <xsl:value-of select="'-----------------------------------------'"/>
-	  </xsl:message>
+	<xsl:if test=".//mini_paradigm">
+	  
+	  <xsl:variable name="current_file" select="(tokenize(document-uri(.), '/'))[last()]"/>
+	  <xsl:variable name="current_dir" select="substring-before(document-uri(.), $current_file)"/>
+	  <xsl:variable name="current_location" select="concat($inDir, substring-after($current_dir, $inDir))"/>
+	  
+	  <xsl:if test="$debug">
+	    <xsl:message terminate="no">
+	      <xsl:value-of select="concat('-----------------------------------------', $nl)"/>
+	      <xsl:value-of select="concat('processing file ', $current_file, $nl)"/>
+	      <xsl:value-of select="'-----------------------------------------'"/>
+	    </xsl:message>
+	  </xsl:if>
+	  
+	  <file name="{$current_file}" ls="{count(.//e[.//mini_paradigm])}" ws="{count(.//e[not(.//mini_paradigm)])}">
+	    <ls>
+	      <xsl:for-each select="./r/e[.//mini_paradigm]">
+		
+		<xsl:variable name="dictID">
+		  <xsl:call-template name="getID">
+		    <xsl:with-param name="theLG" select="./lg"/>
+		  </xsl:call-template>
+		</xsl:variable>
+		
+		<xsl:if test="$debug">
+		  <xsl:message terminate="no">
+		    <xsl:value-of select="concat('dictID ', $dictID, $nl)"/>
+		    <xsl:value-of select="'.............................................................................'"/>
+		  </xsl:message>
+		</xsl:if>
+		<l str="{./lg/l}" id="{$dictID}" out="{count(.//mini_paradigm//wordform)}" in="{count(..//lemma_ref[./@lemmaID = $dictID])}"/>
+	      </xsl:for-each>
+	    </ls>
+	    <ws>
+	      <xsl:for-each select="./r/e[not(.//mini_paradigm)]">
+		<w str="{./lg/l}" l_ref="{count(.//lemma_ref)}">
+		  <xsl:copy-of copy-namespaces="no" select=".//lemma_ref"/>
+		</w>
+	      </xsl:for-each>
+	    </ws>
+	  </file>
 	</xsl:if>
-	
-	<file name="{$current_file}" ls="{count(.//e[.//mini_paradigm])}" ws="{count(.//e[not(.//mini_paradigm)])}">
-	  <ls>
-	    <xsl:for-each select="./r/e[.//mini_paradigm]">
-
-	      <xsl:variable name="dictID">
-		<xsl:call-template name="getID">
-		  <xsl:with-param name="theLG" select="./lg"/>
-		</xsl:call-template>
-	      </xsl:variable>
-
-	      <xsl:if test="$debug">
-		<xsl:message terminate="no">
-		  <xsl:value-of select="concat('dictID ', $dictID, $nl)"/>
-		  <xsl:value-of select="'.............................................................................'"/>
-		</xsl:message>
-	      </xsl:if>
-	      <l str="{./lg/l}" id="{$dictID}" out="{count(.//mini_paradigm//wordform)}" in="{count(..//lemma_ref[./@lemmaID = $dictID])}"/>
-	    </xsl:for-each>
-	  </ls>
-	  <ws>
-	    <xsl:for-each select="./r/e[not(.//mini_paradigm)]">
-	      <w str="{./lg/l}" l_ref="{count(.//lemma_ref)}">
-		<xsl:copy-of copy-namespaces="no" select=".//lemma_ref"/>
-	      </w>
-	    </xsl:for-each>
-	  </ws>
-	</file>
-	
       </xsl:for-each>
     </xsl:variable>
     

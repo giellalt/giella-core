@@ -46,15 +46,21 @@
 	<xsl:value-of select="$dictID"/>
       </xsl:attribute>
 
-      <xsl:if test="lg/spellings/spv">
-	<xsl:for-each select="lg/spellings/spv">
-	  <d:index d:value="{.}"/>	
-	</xsl:for-each>
-      </xsl:if>
-      
       <xsl:if test="not(lg/spellings/spv)">
 	<d:index d:value="{lg/l}"/>
       </xsl:if>
+
+      <xsl:for-each select="lg/lsub">
+	<xsl:if test="not(normalize-space(.) = '')">
+	  <d:index d:value="{.}"/>
+	</xsl:if>
+      </xsl:for-each>
+      <xsl:for-each select="lg/spellings/spv">
+	<xsl:if test="not(normalize-space(.) = '')">
+	  <d:index d:value="{.}"/>	
+	</xsl:if>
+      </xsl:for-each>
+
       
       <div d:priority="2"><h1><xsl:value-of select="lg/l"/></h1></div>
       <span class="syntax">

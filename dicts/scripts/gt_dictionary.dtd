@@ -107,7 +107,7 @@
 <!ATTLIST mg 
       xml:lang ( sme | nob ) #IMPLIED
 >      
-<!ELEMENT tg (semantics?, re?,  ( ((t, stem*) | tf | te ))+, xg*, syng?) >
+<!ELEMENT tg (semantics?, re?,  ( ((t, stem*, ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
       xml:lang ( sme | sma | nob | swe | eng | deu ) #IMPLIED
       check CDATA #IMPLIED
@@ -118,14 +118,14 @@
 >
 
 <!ELEMENT t (#PCDATA) >
-<!ATTLIST t oa ( first | yes | no ) "yes" >
-<!ATTLIST t dict ( yes | no ) "yes" >
+<!ATTLIST t oa ( first | yes | no ) #IMPLIED  >
+<!ATTLIST t dict ( yes | no ) #IMPLIED  >
 <!ATTLIST t pos ( a | S  | n  | v | 
             adv | p | pr | po | det |
             pron | prop | i  | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | x  | xxx |
 	    phrase_n | phrase_a | phrase_v | phrase_adv ) #REQUIRED >
-<!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED > <!-- irr irregular -->
+<!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED> <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n ) #IMPLIED >
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >
@@ -139,6 +139,8 @@
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
+<!ELEMENT ref (#PCDATA) >
+<!ATTLIST ref idref CDATA #IMPLIED >
 
 <!-- translation_comment = for Oahpa use -->
 

@@ -140,7 +140,6 @@
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
 <!ELEMENT ref (#PCDATA) >
-<!ATTLIST ref idref CDATA #IMPLIED >
 
 <!-- translation_comment = for Oahpa use -->
 

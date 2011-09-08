@@ -107,7 +107,7 @@
 <!ATTLIST mg 
       xml:lang ( sme | nob ) #IMPLIED
 >      
-<!ELEMENT tg (semantics?, re?,  ( ((t, stem*, ref?) | tf | te ))+, xg*, syng?) >
+<!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
       xml:lang ( sme | sma | nob | swe | eng | deu ) #IMPLIED
       check CDATA #IMPLIED

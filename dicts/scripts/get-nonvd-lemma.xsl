@@ -21,6 +21,11 @@
     <xsl:for-each select="collection(concat($dir, '?select=*.xml'))/r/e[not(@usage='vd')]/lg/l">
       <xsl:value-of select="concat(., $nl)"/>
     </xsl:for-each>
+
+    <xsl:for-each select="collection(concat($dir, '?select=*.xml'))/r/e[not(@usage='vd')]/lg/lsub">
+      <xsl:value-of select="concat(., $nl)"/>
+    </xsl:for-each>
+
   </xsl:template>
   
 </xsl:stylesheet>

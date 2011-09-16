@@ -18,10 +18,8 @@
   <xsl:variable name="nl" select="'&#xa;'"/>
 
   <xsl:template match="/" name="main">
-    <xsl:for-each select="collection(concat($dir, '?select=*.xml'))/r/e/lg/l">
-      <xsl:value-of select="concat(., $nl)"/>
-    </xsl:for-each>
-    <xsl:for-each select="collection(concat($dir, '?select=*.xml'))/r/e/lg/lsub">
+    <xsl:for-each select="collection(concat($dir, '?select=*.xml'))/r/e/lg/l |
+			  collection(concat($dir, '?select=*.xml'))/r/e/lg/lsub">
       <xsl:value-of select="concat(., $nl)"/>
     </xsl:for-each>
   </xsl:template>

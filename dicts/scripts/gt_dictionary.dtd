@@ -165,6 +165,7 @@
 
 <!ELEMENT xg ((x,xt)+)>
 <!ELEMENT x (#PCDATA)>
+<!ATTLIST x src CDATA #IMPLIED >
 <!ELEMENT xt (#PCDATA)>
 
 <!ELEMENT syng (syn+)>

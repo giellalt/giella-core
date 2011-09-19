@@ -167,6 +167,7 @@
 <!ELEMENT x (#PCDATA)>
 <!ATTLIST x src CDATA #IMPLIED >
 <!ELEMENT xt (#PCDATA)>
+<!ATTLIST xt src CDATA #IMPLIED >
 
 <!ELEMENT syng (syn+)>
 <!ELEMENT syn (#PCDATA)>

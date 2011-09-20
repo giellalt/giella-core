@@ -134,8 +134,8 @@
 <!ATTLIST t nob-stat CDATA #IMPLIED >
 <!ATTLIST t sem-cl CDATA #IMPLIED >
 <!ATTLIST t src CDATA #IMPLIED >
-<!ATTLIST t tcomm ( yes | no ) "no" >
-<!ATTLIST t stat ( pref | notpref | perhaps ) "notpref" >
+<!ATTLIST t tcomm ( yes | no ) #IMPLIED  >
+<!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
@@ -144,21 +144,21 @@
 <!-- translation_comment = for Oahpa use -->
 
 <!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
-<!ATTLIST tf oa ( first | yes | no ) "yes" >
-<!ATTLIST tf dict (yes | no ) "yes" >
+<!ATTLIST tf oa ( first | yes | no ) #IMPLIED >
+<!ATTLIST tf dict (yes | no ) #IMPLIED >
 <!ATTLIST tf pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
 <!ATTLIST tf gen ( m | f | n ) #IMPLIED >
 <!ATTLIST tf lang ( swe | nob ) #IMPLIED >
 <!ATTLIST tf xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
-<!ATTLIST tf tcomm ( yes | no ) "no" >
+<!ATTLIST tf tcomm ( yes | no ) #IMPLIED >
 <!ATTLIST tf stat ( pref ) #IMPLIED >
 
 
 <!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
 <!ATTLIST te lang ( swe | nob ) #IMPLIED >
 <!ATTLIST te xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
-<!ATTLIST te dict (yes | no ) "yes" >
-<!ATTLIST te oa ( first | yes | no ) "yes" >
+<!ATTLIST te dict (yes | no ) #IMPLIED >
+<!ATTLIST te oa ( first | yes | no ) #IMPLIED >
 <!ATTLIST te stat ( pref ) #IMPLIED >
 <!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
 

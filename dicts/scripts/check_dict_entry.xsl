@@ -35,7 +35,7 @@
 
   
   <xsl:param name="inFile" select="'gogo_file'"/>
-  <xsl:param name="inDir" select="'ind'"/>
+  <xsl:param name="inDir" select="'../smenob/src'"/>
   <xsl:variable name="outDir" select="'.'"/>
   <xsl:variable name="outFile" select="'test-results'"/>
   <xsl:variable name="of" select="'xml'"/>
@@ -101,6 +101,14 @@
 	      </twins>
 	    </xsl:variable>
 	    <xsl:if test="not(count($twins//lemma) = 0)">
+
+	      <xsl:if test="false()">
+		<xsl:message terminate="no">
+		  <xsl:value-of select="concat('double entries ', $nl , $twins, $nl)"/>
+		  <xsl:value-of select="'.............................................................'"/>
+		</xsl:message>
+	      </xsl:if>
+	      
 	      <xsl:copy-of select="$twins"/>
 	    </xsl:if>
 	  </entries>
@@ -113,6 +121,15 @@
       <test>
 	<xsl:copy-of select="$output"/>
       </test>
+
+      <xsl:if test="true()">
+	<xsl:message terminate="no">
+	  <xsl:value-of select="'.............................................................'"/>
+	  <xsl:value-of select="concat($nl, 'Generated report file ', $outDir, '/', $outFile, '.', $e, $nl)"/>
+	  <xsl:value-of select="'.............................................................'"/>
+	</xsl:message>
+      </xsl:if>
+      
     </xsl:result-document>
     
     

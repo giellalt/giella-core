@@ -45,21 +45,22 @@
       <xsl:copy-of select="document($inFile)/r/@*"/>
       <xsl:for-each select="document($inFile)/r/e">
 
-	<xsl:variable name="generated_data" select="concat('file:', $gtpath, '/', l, '_', l/@pos, '.xml')"/>
-
-	<xsl:if test="doc-available($generated_data)">
-	  <xsl:if test="$debug">
-	    <xsl:message terminate="no">
-	      <xsl:value-of select="concat('=======', $nl, 
-				    'Processing ', $document, $nl,
-				    '=====================================', $nl)"/>
-	    </xsl:message>
-	  </xsl:if>
-	  
-	  <e>
-	    <xsl:copy-of select="./@*"/>
-	  </e>
-	</xsl:if>
+	<xsl:variable name="source_lemma" select="./lg/l"/>
+	<xsl:variable name="source_pos" select="./lg/l/@pos"/>
+	<xsl:variable name="source_id">
+	  <xsl:variable name="attr_values">
+	    <xsl:for-each select="./lg/l/@*">
+	      <xsl:text>_</xsl:text>
+	      <xsl:value-of select="normalize-space(.)" />
+	    </xsl:for-each>
+	  </xsl:variable>
+	  <xsl:value-of select="concat(./lg/l, $attr_values)"/>
+	</xsl:variable>
+	<xsl:variable name="source_mg" select="./mg"/>
+	<xsl:variable name="prop_source" select="./@src"/>
+	<xsl:variable name="current_e" select="."/>
+	
+	<xsl:variable name="generated_data" select="concat('file:', $gtpath, '/', ./lg/l, '_', ./lg/l/@pos, '.xml')"/>
 	
 	<xsl:if test="doc-available($generated_data)">
 	  <xsl:if test="$debug">
@@ -70,30 +71,54 @@
 	    </xsl:message>
 	  </xsl:if>
 	  
+	  <!-- do the job! -->
 	  <e>
 	    <xsl:copy-of select="./@*"/>
 	  </e>
 	</xsl:if>
+	
+	<xsl:if test="not(doc-available($generated_data))">
+	  <xsl:if test="$debug">
+	    <xsl:message terminate="no">
+	      <xsl:value-of select="concat('%%%%%%%%%%', $nl, 
+				    'No ', $document, 'found: trying vv-variants', $nl,
+				    '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', $nl)"/>
+	    </xsl:message>
+	  </xsl:if>
+	  
+	  <xsl:for-each select="('v1', 'v2')">
+	    <xsl:variable name="current_tag" select="."/>
+	    
+	    <xsl:variable name="generated_data_vv" select="concat('file:', $gtpath, '/', ./lg/l, '_', ./lg/l/@pos, '_', $current_tag, '.xml')"/>
+	    
+	    <!-- do the job! -->
+	    <e>
+	      <xsl:copy-of select="./@*"/>
+	    </e>
+	    
+	    <xsl:if test="not(doc-available($generated_data_vv))">
+	      <xsl:if test="$debug">
+		<xsl:message terminate="no">
+		  <xsl:value-of select="concat('%%%%%%%%%%', $nl, 
+					'No ', $document, 'found', $nl,
+					'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', $nl)"/>
+		</xsl:message>
+	      </xsl:if>
+	      
+	      <xsl:result-document href="{$logDir}/{$source_lemma}_{$source_pos}.{$e}">
+		<r flag="no_xml_file_after_paradigm-generation">
+		  <xsl:copy-of copy-namespaces="no" select="."/>
+		</r>
+	      </xsl:result-document>
+	      
+	    </xsl:if>
+	  </xsl:for-each>
+	</xsl:if>
+	
       </xsl:for-each>
     </r>
     
     
-    <xsl:variable name="source_lemma" select="l"/>
-    <xsl:variable name="source_pos" select="l/@pos"/>
-    <xsl:variable name="source_id">
-      <xsl:variable name="attr_values">
-	<xsl:for-each select="l/@*">
-	  <xsl:text>_</xsl:text>
-	  <xsl:value-of select="normalize-space(.)" />
-	</xsl:for-each>
-      </xsl:variable>
-      <xsl:value-of select="concat(l, $attr_values)"/>
-    </xsl:variable>
-
-    <xsl:variable name="source_mg" select="../mg"/>
-    <xsl:variable name="prop_source" select="../@src"/>
-
-    <xsl:variable name="current_e" select=".."/>
 
 
     <xsl:if test="doc-available($document)">

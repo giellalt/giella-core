@@ -80,7 +80,8 @@
 		</xsl:variable>
 		
 		<xsl:variable name="iForms" as="node()*">
-		  <xsl:for-each select="$singleForms/wordform[not(contains(./text(), '-'))]">
+		  <!-- <xsl:for-each select="$singleForms/wordform[not(contains(./text(), '-'))]"> because of the e-påaste et Co. -->
+		  <xsl:for-each select="$singleForms/wordform">
 		    <xsl:variable name="curr_ndl" select="./text()"/>
 		    <wordform>
 		      <xsl:attribute name="value">

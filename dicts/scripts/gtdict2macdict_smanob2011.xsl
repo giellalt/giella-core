@@ -20,6 +20,7 @@
 	      encoding="UTF-8"
 	      indent="yes"/>
 
+  <xsl:variable name="internalRef" select="false()"/>
 
   <xsl:template match="r">
     <d:dictionary
@@ -67,11 +68,21 @@
 	    <!-- </small> -->
 	    
 	    <font size="-3">  &#8594; </font>
-	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
+
+	    <xsl:if test="$internalRef">
+	      <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
+		<short_ref>
+		  <xsl:value-of select="normalize-space(lg/lemma_ref)"/>
+		</short_ref>
+	      </a>
+	    </xsl:if>
+	    
+	    <xsl:if test="not($internalRef)">
 	      <short_ref>
 		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
 	      </short_ref>
-	    </a>
+	    </xsl:if>
+	    
 	  </xsl:if>
 	  <xsl:if test="not(lg/lemma_ref)">
 	    <pos_tag>
@@ -99,7 +110,7 @@
       
       <div>
 	<ol>
-	  <xsl:apply-templates select="mg"/>
+	  <xsl:apply-templates select="mg[not(./@xml:lang)]"/>
 	</ol>
 	<xsl:if test="lg/analysis">
 	  <prep_context>
@@ -136,7 +147,7 @@
       </div>
       
       <div align="left" d:priority="2">
-	<xsl:if test="./mg/tg/xg/x and ./mg/tg/xg/xt  and not(./lg/lemma_ref)">
+	<xsl:if test="./mg[not(./@xml:lang)]/tg[./@xml:lang='nob']/xg/x and ./mg[not(./@xml:lang)]/tg[./@xml:lang='nob']/xg/xt  and not(./lg/lemma_ref)">
 	<img class="alpha" src="Images/blank.jpg"/>
 	  <table border="0" align="left">
 	    <tr>
@@ -154,7 +165,7 @@
 <!-- 	      <td align="left"> -->
 <!-- 		<ul> -->
 		  <!-- 		      <xsl:call-template name="exx"/> -->
-		  <xsl:apply-templates select="./mg/tg/xg"/>
+		  <xsl:apply-templates select="./mg[not(./@xml:lang)]/tg[./@xml:lang='nob']/xg"/>
 <!-- 		</ul> -->
 <!-- 	      </td> -->
 	    </tr>
@@ -184,14 +195,14 @@
     </d:entry>
   </xsl:template>
   
-  <xsl:template match="mg">
-    <xsl:if test="count(../mg) = 1">
-      <xsl:variable name="tgCount" select="count(./tg)"/>
-      <xsl:for-each select="./tg">
+  <xsl:template match="mg[not(./@xml:lang)]">
+    <xsl:if test="count(../mg[not(./@xml:lang)]) = 1">
+      <xsl:variable name="tgCount" select="count(./tg[./@xml:lang='nob'])"/>
+      <xsl:for-each select="./tg[./@xml:lang='nob']">
 	<xsl:variable name="tgPos" select="position()"/>
 	<xsl:variable name="tCount" select="count(./*[(local-name() = 't') or (local-name() = 'tf')])"/>
 	<xsl:if test="./re">
-	  <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
+	  <bf><xsl:value-of select="concat(' (', normalize-space(./re[1]), ') ')"/></bf>
 	</xsl:if>
 	<xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
 	  <bf><xsl:value-of select="normalize-space(.)"/></bf>
@@ -201,19 +212,21 @@
 				else '; '
 				else ', '"/>
 	</xsl:for-each>
+	<xsl:if test="./te">
+	  <bf><i><xsl:value-of select="concat(' ', normalize-space(./te[1]), ' ')"/></i></bf>
+	</xsl:if>
       </xsl:for-each>
     </xsl:if>
     
-    <xsl:if test="count(../mg) &gt; 1">
+    <xsl:if test="count(../mg[not(./@xml:lang)]) &gt; 1">
       <li>
-	<xsl:variable name="tgCount" select="count(./tg)"/>
-	<xsl:for-each select="./tg">
+	<xsl:variable name="tgCount" select="count(./tg[./@xml:lang='nob'])"/>
+	<xsl:for-each select="./tg[./@xml:lang='nob']">
 	  <xsl:variable name="tgPos" select="position()"/>
 	  <xsl:variable name="tCount" select="count(./*[(local-name() = 't') or (local-name() = 'tf')])"/>
-	<xsl:if test="./re">
-	  <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
-	</xsl:if>
-
+	  <xsl:if test="./re">
+	    <bf><xsl:value-of select="concat(' (', normalize-space(./re[1]), ') ')"/></bf>
+	  </xsl:if>
 	  <xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
 	    <bf><xsl:value-of select="normalize-space(.)"/></bf>
 	    <!-- 				  if ($tgPos = $tgCount) then '.' -->
@@ -222,6 +235,9 @@
 				  else '; '
 				  else ', '"/>
 	  </xsl:for-each>
+	  <xsl:if test="./te">
+	    <bf><i><xsl:value-of select="concat(' ', normalize-space(./te[1]), ' ')"/></i></bf>
+	  </xsl:if>
 	</xsl:for-each>
       </li>
     </xsl:if>
@@ -274,7 +290,7 @@
     <xsl:variable name="currentPOS" select="myFn:mapPOS(normalize-space(../../l/@pos))"/>
     <xsl:variable name="currentMPfeature" select="../../l/@minip"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
-    <xsl:variable name="currentTrans" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
+    <xsl:variable name="currentTrans" select="tokenize(normalize-space(../../../mg[not(./@xml:lang)][1]/tg[./@xml:lang='nob'][1]/t[1]), ' ')[1]"/>
 
     <tr>
       
@@ -304,6 +320,15 @@
       
       <xsl:if test="$currentPOS = 'verb'">
 	<xsl:choose>
+	  <xsl:when test="ends-with(./@ms, 'Inf')">
+	    <td align="center"> </td>
+	    <td align="center"> </td>
+	    <td align="left">
+	      <small>
+		<xsl:value-of select="$currentWordForm"/>
+	      </small>
+	    </td>
+	  </xsl:when>
 	  <xsl:when test="ends-with(./@ms, 'Ind_Prs_Sg1') and not(($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))">
 	    <td align="center"> </td>
 	    <td align="center"> </td>

@@ -215,6 +215,9 @@
 	  <bf><xsl:value-of select="concat(' (', normalize-space(./re[1]), ') ')"/></bf>
 	</xsl:if>
 	<xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
+	  <xsl:if test="($cp = 'verb') and not(local-name() = 'te')">
+	    <bf><xsl:value-of select="'å '"/></bf>
+	  </xsl:if>
 	  <bf><xsl:value-of select="normalize-space(.)"/></bf>
 	  <!-- 				  if ($tgPos = $tgCount) then '.' -->
 	  <xsl:value-of select="if (position() = $tCount) then 
@@ -223,6 +226,10 @@
 				else ', '"/>
 	</xsl:for-each>
 	<xsl:if test="./te">
+	  <!-- this should be first tested against the containt of all te elements -->
+	  <!-- 	  <xsl:if test="($cp = 'verb') and not(local-name() = 'te')"> -->
+	  <!-- 	    <bf><i><xsl:value-of select="'å '"/></i></bf> -->
+	  <!-- 	  </xsl:if> -->
 	  <bf><i><xsl:value-of select="concat(' ', normalize-space(./te[1]), ' ')"/></i></bf>
 	</xsl:if>
       </xsl:for-each>
@@ -238,6 +245,9 @@
 	    <bf><xsl:value-of select="concat(' (', normalize-space(./re[1]), ') ')"/></bf>
 	  </xsl:if>
 	  <xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
+	    <xsl:if test="($cp = 'verb') and not(local-name() = 'te')">
+	      <bf><xsl:value-of select="'å '"/></bf>
+	    </xsl:if>
 	    <bf><xsl:value-of select="normalize-space(.)"/></bf>
 	    <!-- 				  if ($tgPos = $tgCount) then '.' -->
 	    <xsl:value-of select="if (position() = $tCount) then 
@@ -246,6 +256,10 @@
 				  else ', '"/>
 	  </xsl:for-each>
 	  <xsl:if test="./te">
+	    <!-- this should be first tested against the containt of all te elements -->
+	    <!-- 	  <xsl:if test="($cp = 'verb') and not(local-name() = 'te')"> -->
+	    <!-- 	    <bf><i><xsl:value-of select="'å '"/></i></bf> -->
+	    <!-- 	  </xsl:if> -->
 	    <bf><i><xsl:value-of select="concat(' ', normalize-space(./te[1]), ' ')"/></i></bf>
 	  </xsl:if>
 	</xsl:for-each>

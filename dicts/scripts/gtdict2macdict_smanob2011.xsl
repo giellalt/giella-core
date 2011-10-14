@@ -21,6 +21,8 @@
 	      indent="yes"/>
 
   <xsl:variable name="internalRef" select="false()"/>
+  <xsl:variable name="debug" select="true()"/>
+  <xsl:variable name="nl" select="'&#xa;'"/>
 
   <xsl:template match="r">
     <d:dictionary
@@ -31,6 +33,14 @@
   </xsl:template>
   
   <xsl:template match="e">
+
+    <xsl:if test="$debug">
+      <xsl:message terminate="no">
+	<xsl:value-of select="concat('%%%%%%%%', $nl)"/>
+	<xsl:value-of select="concat('processing  ', ./lg/l, $nl)"/>
+      </xsl:message>
+    </xsl:if>
+
     <d:entry d:title="{lg/l}">
       <xsl:attribute name="id">
 	<xsl:variable name="attr_values">
@@ -291,10 +301,18 @@
     <xsl:variable name="currentMPfeature" select="../../l/@minip"/>
     <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
     <xsl:variable name="currentTrans" select="tokenize(normalize-space(../../../mg[not(./@xml:lang)][1]/tg[./@xml:lang='nob'][1]/t[1]), ' ')[1]"/>
+    <xsl:variable name="currentIllpl" select="normalize-space(../../l/@illpl)"/>
 
+    <xsl:if test="$debug">
+      <xsl:message terminate="no">
+	<xsl:value-of select="concat('............', $nl)"/>
+	<xsl:value-of select="concat('processing  ', $currentWordForm[1], ' currentTranslation ', $currentTrans, $nl)"/>
+	<xsl:value-of select="'............'"/>
+      </xsl:message>
+    </xsl:if>
+    
     <tr>
-      
-      <xsl:if test="not($currentPOS = 'verb')">
+      <xsl:if test="not($currentPOS = 'verb') and not($currentIllpl = 'no' and ends-with(./@ms, 'Pl_Ill'))">
 	<td align="right">
 	  <morpho_descr>
 	    <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
@@ -498,15 +516,16 @@
       </xsl:if>
       
       <xsl:if test="not($currentPOS = 'verb') and not($currentPOS = 'egennavn')">
-	<td align="center"> </td>
-	<td align="center"> </td>
-	<td align="left">
-	  <small>
-	    <xsl:value-of select="$currentWordForm"/>
-	  </small>
-	</td>
+	<xsl:if test="not($currentIllpl = 'no' and ends-with(./@ms, 'Pl_Ill'))">
+	  <td align="center"> </td>
+	  <td align="center"> </td>
+	  <td align="left">
+	    <small>
+	      <xsl:value-of select="$currentWordForm"/>
+	    </small>
+	  </td>
+	</xsl:if>
       </xsl:if>
-
     </tr>
   </xsl:template>
   

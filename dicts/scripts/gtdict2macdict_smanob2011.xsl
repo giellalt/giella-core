@@ -355,10 +355,19 @@
 	<xsl:choose>
 	  <xsl:when test="not((ends-with(./@ms, 'Sg1') and
 			  (($currentMPfeature = 'notSg1') or ($currentMPfeature = 'onlyPl'))) or
-			  (ends-with(./@ms, 'Sg3') and $currentMPfeature = 'onlyPl'))">
+			  (ends-with(./@ms, 'Sg3') and $currentMPfeature = 'onlyPl') or 
+			  (./@ms = 'PrfPrc'))">
 	    <td align="right">
 	      <morpho_descr>
 		<xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+	      </morpho_descr>
+	    </td>
+	  </xsl:when>
+	  <!-- Extra Wurst for smanob -->
+	  <xsl:when test="./@ms = 'PrfPrc'">
+	    <td align="right">
+	      <morpho_descr>
+		<xsl:value-of select="'perf.'"/>
 	      </morpho_descr>
 	    </td>
 	  </xsl:when>
@@ -433,7 +442,7 @@
 	      </small>
 	    </td>
 	  </xsl:when>
-	  <xsl:when test="ends-with(./@ms, 'Ger')">
+	  <xsl:when test="ends-with(./@ms, 'Ger') or ends-with(./@ms ,'PrfPrc')">
 	    <td align="center"> </td>
 	    <td align="center"> </td>
 	    <td align="left">

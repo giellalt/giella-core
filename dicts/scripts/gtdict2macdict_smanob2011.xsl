@@ -206,6 +206,23 @@
   </xsl:template>
   
   <xsl:template match="mg[not(./@xml:lang)]">
+
+    <xsl:variable name="cp">
+      <xsl:variable name="wf" select="myFn:mapPOS(substring-before(normalize-space(../lg/l/@pos),'_'))"/>
+      <xsl:variable name="lm" select="myFn:mapPOS(normalize-space(../lg/l/@pos))"/>
+	<xsl:value-of select="if (normalize-space($wf) = '') then $lm else $wf"/>
+    </xsl:variable>
+
+      <xsl:if test="$debug">
+        <xsl:message terminate="no">
+          <xsl:value-of select="concat('......$$$......', $nl)"/>
+          <xsl:value-of select="concat('pos  ', $cp, $nl)"/>
+          <xsl:value-of select="'......$$$......'"/>
+        </xsl:message>
+      </xsl:if>
+
+
+
     <xsl:if test="count(../mg[not(./@xml:lang)]) = 1">
       <xsl:variable name="tgCount" select="count(./tg[./@xml:lang='nob'])"/>
       <xsl:for-each select="./tg[./@xml:lang='nob']">

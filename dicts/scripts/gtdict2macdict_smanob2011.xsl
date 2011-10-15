@@ -438,7 +438,7 @@
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<!-- xsl:value-of select="concat('(', 'dïhte lea', ')', ' ')"/ -->
+		<xsl:value-of select="concat('(', 'lea', ')', ' ')"/>
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>
@@ -448,7 +448,7 @@
 	    <td align="center"> </td>
 	    <td align="left">
 	      <small>
-		<xsl:value-of select="concat('(', 'dïhte båata', ')', ' ')"/>
+		<!-- xsl:value-of select="concat('(', 'dïhte båata', ')', ' ')"/ -->
 		<xsl:value-of select="$currentWordForm"/>
 	      </small>
 	    </td>

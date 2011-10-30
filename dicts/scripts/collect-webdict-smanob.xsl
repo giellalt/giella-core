@@ -49,16 +49,17 @@
 	      <xsl:copy-of select="./lg" copy-namespaces="no"/>
 	      <xsl:for-each select="./mg[not(./@xml:lang = 'sme')]">
 		<mg>
-		  <xsl:for-each select="./tg">
+		  <xsl:for-each select="./tg[./@xml:lang = 'nob']">
 		    <tg>
-		      <xsl:copy-of select="./*[./@dict = 'yes']/preceding-sibling::re" copy-namespaces="no"/>
-		      <xsl:copy-of select="./*[./@dict = 'yes']" copy-namespaces="no"/>
+		      <xsl:copy-of select="./*" copy-namespaces="no"/>
 		    </tg>
 		  </xsl:for-each>
 		</mg>
 	      </xsl:for-each>
 	    </e>
 	  </xsl:variable>
+
+	  <!-- this check seems not superfluous, hence no need of a tmp variable for that -->
 
 <!-- 	  <xsl:if test="some $c in $cel/e/mg/tg/* satisfies starts-with($c/local-name(), 't') and not(normalize-space($c) = '')"> -->
 	    <xsl:copy-of select="$cel"/>

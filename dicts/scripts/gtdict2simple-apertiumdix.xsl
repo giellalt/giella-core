@@ -31,6 +31,7 @@
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>
   <xsl:variable name="e" select="$output_format"/>
+  <!-- This means that input file name is the same as output file name: change as you need it -->
   <xsl:variable name="file_name" select="substring-before((tokenize($inFile, '/'))[last()], '.xml')"/>
   <xsl:variable name="debug" select="true()"/>
   <xsl:variable name="nl" select="'&#xa;'"/>

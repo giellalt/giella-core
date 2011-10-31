@@ -2,7 +2,7 @@
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to compile
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main collect-dict-parts.xsl dir=DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main collect-dict-parts.xsl inDir=INPUT_DIR > PATH_TO_OUTPUT_FILE
     | 
     +-->
 
@@ -16,7 +16,7 @@
 	      doctype-public="-//DivvunGiellatekno//DTD Dictionaries//Multilingual"
 	      indent="yes"/>
   
-  <xsl:param name="dir" select="'.'"/>
+  <xsl:param name="inDir" select="'.'"/>
 
   <xsl:template match="/" name="main">
 
@@ -41,7 +41,13 @@
 <!-- collection('PATH?select=*.xml') -->
 
     <r>
-      <xsl:copy-of select="collection(concat($dir, '?select=*.xml'))/r/e[not(contains(normalize-space(lg/l), ' '))][not(contains(normalize-space(lg/l), '_'))][not(contains(normalize-space(lg/l), '?'))][not(contains(normalize-space(lg/l), '('))][not(starts-with(normalize-space(lg/l), '-'))][not(ends-with(normalize-space(lg/l), '-'))][not(normalize-space(lg/l) = '')]"/>
+      <!-- This is an old filter based on the expericenes with the previus dict entry content: use just in case you need it. -->
+      <!-- 
+	   <xsl:copy-of select="collection(concat($inDir, '?select=*.xml'))/r/e[not(contains(normalize-space(lg/l), ' '))][not(contains(normalize-space(lg/l), '_'))][not(contains(normalize-space(lg/l), '?'))][not(contains(normalize-space(lg/l), '('))][not(starts-with(normalize-space(lg/l), '-'))][not(ends-with(normalize-space(lg/l), '-'))][not(normalize-space(lg/l) = '')]"/>
+      -->
+
+      <!-- unrestricted collect: filter if needed! -->
+      <xsl:copy-of copy-namespaces="no" select="collection(concat($inDir, '?recurse=no;select=*.xml'))/r/e"/>
     </r>
   </xsl:template>
   

@@ -115,8 +115,10 @@
 	<xsl:attribute name="cell_count">
 	  <xsl:value-of select="count($theRow//*:Cell[not(normalize-space(.) = '')])"/>
 	</xsl:attribute>
-	
-	<xsl:for-each select="$theRow//*:Cell[not(normalize-space(.) = '')]">
+
+	<!-- as default, don't filter empty cells (semantics = column position) -->	
+	<!-- xsl:for-each select="$theRow//*:Cell[not(normalize-space(.) = '')]" -->
+	<xsl:for-each select="$theRow//*:Cell">
 	  <xsl:message terminate="no">
 	    <xsl:value-of select="concat('Processing column: ', .)"/>
 	  </xsl:message>
@@ -125,7 +127,9 @@
 	    <xsl:attribute name="id">
 	      <xsl:value-of select="position()"/>
 	    </xsl:attribute>
-	    <xsl:value-of select="./*:Data//text()"/>
+	    <!-- as default, don't filter empty cells (semantics = column position) -->	
+	    <!-- xsl:value-of select="./*:Data//text()"/ -->
+	    <xsl:value-of select="./*:Data"/>
 	  </xsl:element>
 	</xsl:for-each>
 	

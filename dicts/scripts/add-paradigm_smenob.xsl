@@ -135,7 +135,8 @@
 		<lg>
 		  <l>
 		    <xsl:attribute name="pos">
-		      <xsl:value-of select="concat(./lg/l/@pos, '_wf_', ./lg/lemma_ref)"/>
+		      <xsl:value-of select="concat($source_pos, '_wf_', ./lg/lemma_ref)"/>
+		      <!-- xsl:value-of select="concat(./lg/l/@pos, '_wf_', ./lg/lemma_ref)"/ -->
 		    </xsl:attribute>
 		    <xsl:value-of select="./lg/l"/>
 		  </l>

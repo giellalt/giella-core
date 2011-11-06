@@ -209,10 +209,11 @@
 	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Loc')][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'a'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Attr')][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Nom')][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Comp_Sg_Nom')][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Superl_Sg_Nom')][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Attr'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Nom'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Comp_Attr'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Comp_Sg_Nom'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Superl_Sg_Nom'][./wordform/@value]"/>
       </xsl:if>
     </mini_paradigm>
   </xsl:template>

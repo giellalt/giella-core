@@ -187,31 +187,31 @@
 			     [./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="($pos = 'n') or ($pos = 'actor') or ($pos = 'g3') or ($pos = 'pron')">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Sg_Gen'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Sg_Ill'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Pl_Ill'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Sg_Gen'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Sg_Ill'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Ill'][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'num'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Sg_Ill'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Pl_Nom'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Pl_Gen'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Sg_Ill'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Nom'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Gen'][./wordform/@value]"/>
       </xsl:if>
       <!-- Loc: i/fra -->
       <xsl:if test="$pos = 'prop'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Sg_Gen'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Sg_Ill'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Sg_Loc'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Sg_Gen'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Sg_Ill'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Sg_Loc'][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'npl'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Pl_Gen'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Pl_Ill'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Pl_Loc'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Gen'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Ill'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Loc'][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'a'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Attr'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Pl_Nom'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Comp_Sg_Nom'][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[./@ms = 'Superl_Sg_Nom'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Attr'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Nom'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Comp_Sg_Nom'][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Superl_Sg_Nom'][./wordform/@value]"/>
       </xsl:if>
     </mini_paradigm>
   </xsl:template>

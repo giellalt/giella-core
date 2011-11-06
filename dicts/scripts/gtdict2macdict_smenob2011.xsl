@@ -20,6 +20,7 @@
 	      encoding="UTF-8"
 	      indent="yes"/>
 
+  <xsl:variable name="internalRef" select="false()"/>
   <xsl:variable name="debug" select="true()"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
 
@@ -87,11 +88,21 @@
 	    <!-- </small> -->
 	    
 	    <font size="-3">  &#8594; </font>
-	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
+
+	    <xsl:if test="$internalRef">
+	      <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
+		<short_ref>
+		  <xsl:value-of select="normalize-space(lg/lemma_ref)"/>
+		</short_ref>
+	      </a>
+	    </xsl:if>
+
+	    <xsl:if test="not($internalRef)">
 	      <short_ref>
 		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
 	      </short_ref>
-	    </a>
+	    </xsl:if>
+
 	  </xsl:if>
 	  <xsl:if test="not(lg/lemma_ref)">
 	    <pos_tag>
@@ -138,6 +149,26 @@
 	  <xsl:apply-templates select="lg/mini_paradigm"/>
 	</xsl:if>
       </div>
+
+      <xsl:if test="lg/l_ref">
+	<div align="left" d:priority="2">
+	  <!-- todo -->
+	  <xsl:if test="$internalRef">
+	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
+	      <cf_ref>
+		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
+	      </cf_ref>
+	    </a>
+	  </xsl:if>
+	  
+	  <xsl:if test="not($internalRef)">
+	    <i><xsl:value-of select="'Se også '"/></i>
+	    <cf_ref>
+	      <xsl:value-of select="substring-before(normalize-space(lg/l_ref), '_')"/>
+	    </cf_ref>
+	  </xsl:if>
+	</div>
+      </xsl:if>
       
       <div align="left" d:priority="2">
 	<xsl:if test="./mg/tg/xg/x and ./mg/tg/xg/xt  and not(./lg/lemma_ref)">
@@ -187,7 +218,7 @@
 	<xsl:value-of select="if (normalize-space($wf) = '') then $lm else $wf"/>
     </xsl:variable>
 
-      <xsl:if test="$debug">
+      <xsl:if test="false()">
         <xsl:message terminate="no">
           <xsl:value-of select="concat('......$$$......', $nl)"/>
           <xsl:value-of select="concat('pos  ', $cp, $nl)"/>
@@ -308,17 +339,17 @@
     <xsl:variable name="currentTrans">
       <xsl:variable name="currentTransT" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
       <xsl:variable name="currentTransPh" select="normalize-space(../../../mg[1]/tg[1]/tf[1])"/>
-	<xsl:value-of select="if (normalize-space($currentTransT) = '') then $currentTransPh else $currentTransT"/>
+      <xsl:value-of select="if (normalize-space($currentTransT) = '') then $currentTransPh else $currentTransT"/>
     </xsl:variable>
-
-      <xsl:if test="$debug">
-        <xsl:message terminate="no">
-          <xsl:value-of select="concat('............', $nl)"/>
-          <xsl:value-of select="concat('processing  ', $currentWordForm[1], ' currentTranslation ', $currentTrans, $nl)"/>
-          <xsl:value-of select="'............'"/>
-        </xsl:message>
-      </xsl:if>
-
+    
+    <xsl:if test="$debug">
+      <xsl:message terminate="no">
+	<xsl:value-of select="concat('............', $nl)"/>
+	<xsl:value-of select="concat('processing  ', $currentWordForm[1], ' currentTranslation ', $currentTrans, $nl)"/>
+	<xsl:value-of select="'............'"/>
+      </xsl:message>
+    </xsl:if>
+    
     <tr>
       <xsl:if test="not($currentPOS = 'verb')">
 	<td align="right">
@@ -609,17 +640,29 @@
       </xsl:if>
 	
       <xsl:if test="(($currentPOS = 'num.') or ($currentPOS = 'adj.') or ($currentPOS = 'subst.') or ($currentPOS = 'pron.'))">
+
+	<xsl:if test="$debug">
+	  <xsl:message terminate="no">
+	    <xsl:value-of select="concat('.............', $nl)"/>
+	    <xsl:value-of select="concat('processing  ', $currentWordForm[1], ' currentMS ', $currentMS, $nl)"/>
+	    <xsl:value-of select="'............'"/>
+	  </xsl:message>
+	</xsl:if>
+	
 	<td align="center"> </td>
 	<td align="center"> </td>
 	<td align="left">
 	  <small>
 	    <xsl:value-of select="$currentWordForm"/>
-	    <xsl:if test="(($currentPOS = 'num.') and ($currentMS = 'Pl_Nom')) or
-			  (($currentPOS = 'adj.') and ($currentMS = 'Attr') and (not($currentMS = 'none')))">
+	    <xsl:if test="(($currentPOS = 'num.') and (substring-after($currentMS, 'num_') = 'Pl_Nom')) or
+			  (($currentPOS = 'adj.') and (substring-after($currentMS, 'a_') = 'Attr') and (not($currentMS = 'none')))">
+
+
+
 	      <xsl:value-of select="concat(' ', '(', $currentContext, ')')"/>
 	    </xsl:if>
 	    
-	    <xsl:if test="(($currentPOS = 'num.') and ($currentMS = 'Pl_Gen'))">
+	    <xsl:if test="(($currentPOS = 'num.') and (substring-after($currentMS, 'num_') = 'Pl_Gen'))">
 	      <xsl:value-of select="' (gápmagiid)'"/>
 	    </xsl:if>
 	    

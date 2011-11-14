@@ -15,15 +15,19 @@
     <xsl:variable name="descr">
       
       <xsl:for-each select="tokenize($pos, '_')">
-		
-	<xsl:if test="(normalize-space(.)='Der/PassL')">
-	  <xsl:text>pass. </xsl:text>
-	</xsl:if>
+	
+        <xsl:if test="(normalize-space(.)='Der/PassL')">
+          <xsl:text>pass. </xsl:text>
+        </xsl:if>
 
-	<xsl:if test="(normalize-space(.)='Der/PassS')">
-	  <xsl:text>pass. </xsl:text>
-	</xsl:if>
+        <xsl:if test="(normalize-space(.)='Der/PassS')">
+          <xsl:text>pass. </xsl:text>
+        </xsl:if>
 
+	<xsl:if test="(normalize-space(.)='Acc/Gen')">
+	  <xsl:text>akk./gen. </xsl:text>
+	</xsl:if>
+	
 	<xsl:if test="(normalize-space(.)='Sg')">
 	  <xsl:text>sg. </xsl:text>
 	</xsl:if>
@@ -31,11 +35,11 @@
 	<xsl:if test="(normalize-space(.)='Pl')">
 	  <xsl:text>pl. </xsl:text>
 	</xsl:if>
-	
-	<xsl:if test="(normalize-space(.)='Actio')">
-	  <xsl:text>aktio </xsl:text>
-	</xsl:if>
 
+        <xsl:if test="(normalize-space(.)='Actio')">
+          <xsl:text>aktio </xsl:text>
+        </xsl:if>
+	
 	<xsl:if test="(normalize-space(.)='Ess')">
 	  <xsl:text>ess. </xsl:text>
 	</xsl:if>
@@ -192,13 +196,13 @@
 	  <xsl:text>neg. </xsl:text>
 	</xsl:if>
 
-	<xsl:if test="(normalize-space(.)='Neg')">
-	  <xsl:text>neg. </xsl:text>
-	</xsl:if>
+        <xsl:if test="(normalize-space(.)='Neg')">
+          <xsl:text>neg. </xsl:text>
+        </xsl:if>
 
-	<xsl:if test="(normalize-space(.)='Sup')">
-	  <xsl:text>sup. </xsl:text>
-	</xsl:if>
+        <xsl:if test="(normalize-space(.)='Sup')">
+          <xsl:text>sup. </xsl:text>
+        </xsl:if>
 
 	<xsl:if test="(normalize-space(.)='Der/Pass')">
 	  <xsl:text>deriv. pass. </xsl:text>
@@ -222,11 +226,11 @@
 	</xsl:if>
 
 	<xsl:if test="(normalize-space(.)='PrfPrc')">
-	  <xsl:text>part. perf. </xsl:text>
+	  <xsl:text>perf. part. </xsl:text>
 	</xsl:if>
 
 	<xsl:if test="(normalize-space(.)='VGen')">
-	  <xsl:text>gen. v. </xsl:text>
+	  <xsl:text>verbgen. </xsl:text>
 	</xsl:if>
 
 	<xsl:if test="(normalize-space(.)='VAbess')">

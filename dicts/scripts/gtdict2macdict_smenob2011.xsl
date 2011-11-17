@@ -144,12 +144,6 @@
 	</xsl:if>
       </div>
       
-      <div align="left" d:priority="2">
-	<xsl:if test="lg/mini_paradigm/analysis/wordform">
-	  <xsl:apply-templates select="lg/mini_paradigm"/>
-	</xsl:if>
-      </div>
-
       <xsl:if test="lg/l_ref">
 	<div align="left" d:priority="2">
 	  <!-- todo -->
@@ -167,12 +161,19 @@
 	      <xsl:value-of select="substring-before(normalize-space(lg/l_ref), '_')"/>
 	    </cf_ref>
 	  </xsl:if>
+	  <img class="alpha" src="Images/blank.jpg"/>
+	</div>
+      </xsl:if>
+      
+      <xsl:if test="lg/mini_paradigm/analysis/wordform">
+	<div align="left" d:priority="2">
+	  <xsl:apply-templates select="lg/mini_paradigm"/>
 	</div>
       </xsl:if>
       
       <div align="left" d:priority="2">
 	<xsl:if test="./mg/tg/xg/x and ./mg/tg/xg/xt  and not(./lg/lemma_ref)">
-	<img class="alpha" src="Images/blank.jpg"/>
+	  <img class="alpha" src="Images/blank.jpg"/>
 	  <table border="0" align="left">
 	    <tr>
 	      <td align="left">
@@ -234,7 +235,7 @@
 	<xsl:if test="./re">
 	  <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
 	</xsl:if>
-	<xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf') or (local-name() = 'te')]">
+	<xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
 	  <xsl:if test="($cp = 'verb') and not(local-name() = 'te')">
 	    <bf><xsl:value-of select="'å '"/></bf>
 	  </xsl:if>
@@ -251,6 +252,14 @@
 				else '; '
 				else ', '"/>
 	</xsl:for-each>
+	  <xsl:if test="./te">
+	    <!-- this should be first tested against the containt of all te elements -->
+	    <!-- 	  <xsl:if test="($cp = 'verb') and not(local-name() = 'te')"> -->
+	    <!-- 	    <bf><i><xsl:value-of select="'å '"/></i></bf> -->
+	    <!-- 	  </xsl:if> -->
+	    <bf><i><xsl:value-of select="concat(' ', normalize-space(./te[1]), ' ')"/></i></bf>
+	  </xsl:if>
+
       </xsl:for-each>
     </xsl:if>
     
@@ -264,7 +273,7 @@
 	    <bf><xsl:value-of select="concat('(', normalize-space(./re[1]), ') ')"/></bf>
 	  </xsl:if>
 	  
-	  <xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf') or (local-name() = 'te')]">
+	  <xsl:for-each select="./*[(local-name() = 't') or (local-name() = 'tf')]">
 	    <xsl:if test="($cp = 'verb') and not(local-name() = 'te')">
 	      <bf><xsl:value-of select="'å '"/></bf>
 	    </xsl:if>
@@ -282,6 +291,13 @@
 				  else '; '
 				  else ', '"/>
 	  </xsl:for-each>
+	  <xsl:if test="./te">
+	    <!-- this should be first tested against the containt of all te elements -->
+	    <!-- 	  <xsl:if test="($cp = 'verb') and not(local-name() = 'te')"> -->
+	    <!-- 	    <bf><i><xsl:value-of select="'å '"/></i></bf> -->
+	    <!-- 	  </xsl:if> -->
+	    <bf><i><xsl:value-of select="concat(' ', normalize-space(./te[1]), ' ')"/></i></bf>
+	  </xsl:if>
 	</xsl:for-each>
       </li>
     </xsl:if>
@@ -332,9 +348,35 @@
   <xsl:template match="analysis">
     <xsl:variable name="currentWordForm" select="./wordform/@value"/>
     <xsl:variable name="currentPOS" select="myFn:mapPOS(normalize-space(../../l/@pos))"/>
-    <xsl:variable name="currentMS" select="normalize-space(./@ms)"/>
     <xsl:variable name="currentContext" select="normalize-space(../../l/@context)"/>
     <xsl:variable name="currentIllpl" select="normalize-space(../../l/@illpl)"/>
+
+    <!-- xsl:variable name="currentMS" select="normalize-space(./@ms)"/ -->
+
+    <xsl:variable name="currentMS">
+      <xsl:variable name="vtags" select="___v1___v2___v3___v4___v5___"/>
+      <xsl:variable name="current_vtag" select="(tokenize(normalize-space(./@ms), '_'))[0]"/>
+      <xsl:if test="contains($vtags, $current_vtag)">
+	<xsl:value-of select="substring-after(./@ms, concat($current_vtag, '_'))"/>
+	<xsl:if test="$debug">
+	  <xsl:message terminate="no">
+	    <xsl:value-of select="concat('vtag detected ', substring-after(./@ms, concat($current_vtag, '_')), $nl)"/>
+	    <xsl:value-of select="'............'"/>
+	  </xsl:message>
+	</xsl:if>
+	
+      </xsl:if>
+      <xsl:if test="not(contains($vtags, $current_vtag))">
+	<xsl:value-of select="./@ms"/>
+	<xsl:if test="$debug">
+	  <xsl:message terminate="no">
+	    <xsl:value-of select="concat('NO vtag detected ', ./@ms, $nl)"/>
+	    <xsl:value-of select="'............'"/>
+	  </xsl:message>
+	</xsl:if>
+      </xsl:if>
+    </xsl:variable>
+
 
     <xsl:variable name="currentTrans">
       <xsl:variable name="currentTransT" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
@@ -345,20 +387,48 @@
     <xsl:if test="$debug">
       <xsl:message terminate="no">
 	<xsl:value-of select="concat('............', $nl)"/>
-	<xsl:value-of select="concat('processing  ', $currentWordForm[1], ' currentTranslation ', $currentTrans, $nl)"/>
+	<xsl:value-of select="concat('checking miniparadigm ', $currentWordForm[1], ' currentTranslation ', $currentTrans, $nl)"/>
 	<xsl:value-of select="'............'"/>
       </xsl:message>
     </xsl:if>
     
     <tr>
       <xsl:if test="not($currentPOS = 'verb')">
-	<td align="right">
-	  <morpho_descr>
-	    <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
-	  </morpho_descr>
-	</td>
+	<!-- pos=subst & illPl=no-->
+	<xsl:if test="(($currentPOS = 'subst.'))">
+	  <xsl:if test="$currentIllpl = 'no'">
+	    <xsl:choose>
+	      <xsl:when test="(ends-with(./@ms, 'Sg_Gen') or
+			      ends-with(./@ms, 'Sg_Ill'))">
+		<td align="right">
+		  <morpho_descr>
+		    <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+		  </morpho_descr>
+		</td>
+	      </xsl:when>
+	      <xsl:otherwise>
+	      </xsl:otherwise>
+	    </xsl:choose>
+	  </xsl:if>
+	  <xsl:if test="not($currentIllpl = 'no')">
+	    <td align="right">
+	      <morpho_descr>
+		<xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+	      </morpho_descr>
+	    </td>
+	  </xsl:if>
+	</xsl:if>
+	
+	<xsl:if test="not($currentPOS = 'subst.')">
+	  <td align="right">
+	    <morpho_descr>
+	      <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+	    </morpho_descr>
+	  </td>
+	</xsl:if>
+	
       </xsl:if>
-
+      
       <xsl:if test="$currentPOS = 'verb'">
 	<xsl:if test="$currentContext = 'mun'">
 	  <xsl:choose>
@@ -624,20 +694,20 @@
       </xsl:if>
 
       <!-- pos=subst & illPl=no-->
-      <xsl:if test="(($currentPOS = 'subst.'))">
+      <!-- xsl:if test="(($currentPOS = 'subst.'))">
 	<xsl:if test="$currentIllpl = 'no'">
 	  <xsl:choose>
 	    <xsl:when test="(ends-with(./@ms, 'Sg_Gen') or
 			    ends-with(./@ms, 'Sg_Ill'))">
 	      <td align="right">
 		<morpho_descr>
-		  <xsl:value-of select="normalize-space(myFn:mapMORPH(./@ms))"/>
+		  <xsl:value-of select="concat('in_if_test', normalize-space(myFn:mapMORPH(./@ms)))"/>
 		</morpho_descr>
 	      </td>
 	    </xsl:when>
 	  </xsl:choose>
 	</xsl:if>
-      </xsl:if>
+      </xsl:if -->
 	
       <xsl:if test="(($currentPOS = 'num.') or ($currentPOS = 'adj.') or ($currentPOS = 'subst.') or ($currentPOS = 'pron.'))">
 
@@ -653,16 +723,19 @@
 	<td align="center"> </td>
 	<td align="left">
 	  <small>
-	    <xsl:value-of select="$currentWordForm"/>
-	    <xsl:if test="(($currentPOS = 'num.') and (substring-after($currentMS, 'num_') = 'Pl_Nom')) or
-			  (($currentPOS = 'adj.') and (substring-after($currentMS, 'a_') = 'Attr') and (not($currentMS = 'none')))">
 
+	    <!-- xsl:value-of select="$currentWordForm"/ -->
 
-
+	    <xsl:if test="not((ends-with($currentMS, 'Pl_Ill')) and ($currentIllpl = 'no'))">
+	      <xsl:value-of select="$currentWordForm"/>
+	    </xsl:if>
+	    
+	    <xsl:if test="(($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Nom') or (substring-after($currentMS, 'NUM_') = 'Pl_Nom')))  or
+			  (($currentPOS = 'adj.') and ((substring-after($currentMS, 'a_') = 'Attr') or (substring-after($currentMS, 'A_') = 'Attr')) and (not($currentMS = 'none')))">
 	      <xsl:value-of select="concat(' ', '(', $currentContext, ')')"/>
 	    </xsl:if>
 	    
-	    <xsl:if test="(($currentPOS = 'num.') and (substring-after($currentMS, 'num_') = 'Pl_Gen'))">
+	    <xsl:if test="(($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Gen') or (substring-after($currentMS, 'NUM_') = 'Pl_Gen')))">
 	      <xsl:value-of select="' (gápmagiid)'"/>
 	    </xsl:if>
 	    

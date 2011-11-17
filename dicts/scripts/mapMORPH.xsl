@@ -16,14 +16,14 @@
       
       <xsl:for-each select="tokenize($pos, '_')">
 	
-        <xsl:if test="(normalize-space(.)='Der/PassL')">
-          <xsl:text>pass. </xsl:text>
-        </xsl:if>
-
-        <xsl:if test="(normalize-space(.)='Der/PassS')">
-          <xsl:text>pass. </xsl:text>
-        </xsl:if>
-
+	<xsl:if test="(normalize-space(.)='Der/n') or (normalize-space(.)='Der/eapmi')">
+	  <xsl:text>pass. </xsl:text>
+	</xsl:if>
+	
+	<xsl:if test="(normalize-space(.)='Der/PassL') or (normalize-space(.)='Der/PassS')">
+	  <xsl:text>pass. </xsl:text>
+	</xsl:if>
+	
 	<xsl:if test="(normalize-space(.)='Acc/Gen')">
 	  <xsl:text>akk./gen. </xsl:text>
 	</xsl:if>

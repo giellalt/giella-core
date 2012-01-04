@@ -1,0 +1,5 @@
+java -Xmx2048m net.sf.saxon.Transform -it main gt_sd2td.xsl inFile=all-merged-pos_sjdrus.xml
+
+java -Xmx2048m net.sf.saxon.Transform -it main gt_mergeEntry_pos_td.xsl inFile=outDir/all-merged-pos_sjdrus_rus.xml
+
+

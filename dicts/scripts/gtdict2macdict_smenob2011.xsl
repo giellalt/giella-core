@@ -528,6 +528,7 @@
 	      <td align="center"> </td>
 	      <td align="left">
 		<small>
+		  <xsl:value-of select="concat('(', 'odne ', $currentContext, ')', ' ')"/>
 		  <xsl:value-of select="$currentWordForm"/>
 		</small>
 	      </td>

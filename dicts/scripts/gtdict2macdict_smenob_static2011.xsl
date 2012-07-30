@@ -21,7 +21,7 @@
 	      indent="yes"/>
 
 
-  <xsl:variable name="internalRef" select="false()"/>
+  <xsl:variable name="internalRef" select="true()"/>
 
   <xsl:template match="r">
     <d:dictionary

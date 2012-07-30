@@ -21,6 +21,8 @@
 	      indent="yes"/>
 
 
+  <xsl:variable name="internalRef" select="false()"/>
+
   <xsl:template match="r">
     <d:dictionary
 	xmlns="http://www.w3.org/1999/xhtml"
@@ -55,6 +57,7 @@
 	  <d:index d:value="{.}"/>
 	</xsl:if>
       </xsl:for-each>
+
       <xsl:for-each select="lg/spellings/spv">
 	<xsl:if test="not(normalize-space(.) = '')">
 	  <d:index d:value="{.}"/>	
@@ -86,11 +89,23 @@
 	      <!-- 	      </small> -->
 	      
 	      <font size="-3">  &#8594; </font>
-	      <a href="x-dictionary:r:{./@lemmaID}">
+
+	      <xsl:if test="$internalRef">
+		<a href="x-dictionary:r:{./@lemmaID}">
+		  <short_ref>
+		    <xsl:value-of select="normalize-space(.)"/>
+		  </short_ref>
+		</a>
+	      </xsl:if>
+
+	      
+	      <xsl:if test="not($internalRef)">
 		<short_ref>
 		  <xsl:value-of select="normalize-space(.)"/>
 		</short_ref>
-	      </a>
+	      </xsl:if>
+	      
+	      
 	      <i>
 		<xsl:value-of select="if (position() = last()) then ''
 				      else 
@@ -148,9 +163,32 @@
 	</xsl:if>
       </div>
       <div align="left" d:priority="2">
+
+	<xsl:if test="lg/l_ref">
+	  <div align="left" d:priority="2">
+	    <!-- todo -->
+	    <xsl:if test="$internalRef">
+	      <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
+		<cf_ref>
+		  <xsl:value-of select="normalize-space(lg/lemma_ref)"/>
+		</cf_ref>
+	      </a>
+	    </xsl:if>
+	    
+	    <xsl:if test="not($internalRef)">
+	      <i><xsl:value-of select="'Se også '"/></i>
+	      <cf_ref>
+		<xsl:value-of select="substring-before(normalize-space(lg/l_ref), '_')"/>
+	      </cf_ref>
+	    </xsl:if>
+	    <img class="alpha" src="Images/blank.jpg"/>
+	  </div>
+	</xsl:if>
+
 	<xsl:if test="lg/mini_paradigm">
 	  <xsl:apply-templates select="lg/mini_paradigm"/>
 	</xsl:if>
+	
 	<xsl:if test="mg/tg/xg and not(mg/tg/xg = '')">
 	  <img class="alpha" src="Images/blank.jpg"/>
 	  <table border="0" align="left">

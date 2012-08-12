@@ -64,6 +64,10 @@
 	</xsl:if>
       </xsl:for-each>
 
+      <xsl:if test="some $node in lg/analysis satisfies (starts-with($node, 'v_') and
+                    (contains($node, 'Ind') or contains($node, 'Cond') or contains($node, 'Pot')))">
+        <d:index d:value="{concat(normalize-space(lg/l), 'go')}"/>
+      </xsl:if>
       
       <div d:priority="2"><h1><xsl:value-of select="lg/l"/></h1></div>
       <span class="syntax">
@@ -175,12 +179,12 @@
 	      </a>
 	    </xsl:if>
 	    
-	    <xsl:if test="not($internalRef)">
+	    <!--xsl:if test="not($internalRef)"-->
 	      <i><xsl:value-of select="'Se også '"/></i>
 	      <cf_ref>
 		<xsl:value-of select="substring-before(normalize-space(lg/l_ref), '_')"/>
 	      </cf_ref>
-	    </xsl:if>
+	    <!--/xsl:if-->
 	    <img class="alpha" src="Images/blank.jpg"/>
 	  </div>
 	</xsl:if>

@@ -20,7 +20,7 @@
 	      encoding="UTF-8"
 	      indent="yes"/>
 
-  <xsl:variable name="internalRef" select="false()"/>
+  <xsl:variable name="internalRef" select="true()"/>
   <xsl:variable name="debug" select="true()"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
 
@@ -65,7 +65,12 @@
 	  <d:index d:value="{.}"/>	
 	</xsl:if>
       </xsl:for-each>
-      
+
+      <xsl:if test="some $node in lg/analysis satisfies (starts-with($node, 'v_') and
+                    (contains($node, 'Ind') or contains($node, 'Cond') or contains($node, 'Pot')))">
+        <d:index d:value="{concat(normalize-space(lg/l), 'go')}"/>
+      </xsl:if>
+
       <div d:priority="2"><h1><xsl:value-of select="lg/l"/></h1></div>
       <span class="syntax">
 	<span d:pr="US">

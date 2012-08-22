@@ -234,48 +234,65 @@
     <xsl:param name="par"/>
     <mini_paradigm>
       <xsl:if test="$pos = 'v'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Sg1') and not(contains(./@ms, '/')) and not(contains(./@ms, 'Allegro'))]
-			     [./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Sg3') and not(contains(./@ms, '/')) and not(contains(./@ms, 'Allegro'))]
-			     [./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Pl3') and not(contains(./@ms, '/')) and not(contains(./@ms, 'Allegro'))]
-			     [./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Sg1') and not(contains(./@ms, '/')) and not(contains(./@ms, 'Allegro'))]
-			     [./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Sg3') and not(contains(./@ms, '/')) and not(contains(./@ms, 'Allegro'))]
-			     [./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Pl3') and not(contains(./@ms, '/')) and not(contains(./@ms, 'Allegro'))]
-			     [./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_ConNeg') and not(contains(./@ms, '/')) and not(contains(./@ms, 'Allegro'))]
-			     [./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Sg1') and not(contains(./@ms, '/'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Sg3') and not(contains(./@ms, '/'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_Pl3') and not(contains(./@ms, '/'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Sg1') and not(contains(./@ms, '/'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Sg3') and not(contains(./@ms, '/'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prt_Pl3') and not(contains(./@ms, '/'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Ind_Prs_ConNeg') and not(contains(./@ms, '/'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="($pos = 'n') or ($pos = 'actor') or ($pos = 'g3') or ($pos = 'pron')">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Gen') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Ill') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Ill') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Gen') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Ill') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Ill') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'num'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Ill') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Nom') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Gen') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Ill') and not(contains(./@ms, 'Use/NVD')) 
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Nom') and not(contains(./@ms, 'Use/NVD')) 
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Gen') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
       </xsl:if>
       <!-- Loc: i/fra -->
       <xsl:if test="$pos = 'prop'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Gen') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Ill') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Loc') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Gen') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Ill') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Sg_Loc') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'npl'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Gen') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Ill') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Loc') and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Gen') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Ill') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[ends-with(./@ms, 'Pl_Loc') and not(contains(./@ms, 'Use/NVD'))
+						  and not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
       </xsl:if>
       <xsl:if test="$pos = 'a'">
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Attr'][not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Nom'][not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Comp_Attr'][not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Comp_Sg_Nom'][not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
-	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Superl_Sg_Nom'][not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Attr'][not(contains(./@ms, 'Use/NVD'))]
+						  [not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Pl_Nom'][not(contains(./@ms, 'Use/NVD'))]
+						  [not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Comp_Attr'][not(contains(./@ms, 'Use/NVD'))]
+						  [not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Comp_Sg_Nom'][not(contains(./@ms, 'Use/NVD'))]
+						  [not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
+	<xsl:copy-of copy-namespaces="no" select="$par/analysis[substring-after(./@ms, concat($pos, '_')) = 'Superl_Sg_Nom'][not(contains(./@ms, 'Use/NVD'))]
+						  [not(contains(./@ms, 'Allegro'))][./wordform/@value]"/>
       </xsl:if>
     </mini_paradigm>
   </xsl:template>

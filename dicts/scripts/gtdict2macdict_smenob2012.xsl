@@ -20,7 +20,7 @@
 	      encoding="UTF-8"
 	      indent="yes"/>
 
-  <xsl:variable name="internalRef" select="true()"/>
+  <xsl:variable name="internalRef" select="false()"/>
   <xsl:variable name="debug" select="true()"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
 
@@ -60,10 +60,16 @@
 	  <d:index d:value="{.}"/>
 	</xsl:if>
       </xsl:for-each>
+      <!-- this is a remaining from the smanob dict, apparently not applicable for sme -->
       <xsl:for-each select="lg/spellings/spv">
 	<xsl:if test="not(normalize-space(.) = '')">
 	  <d:index d:value="{.}"/>	
 	</xsl:if>
+      </xsl:for-each>
+
+      <!-- refining indexing for mwe -->
+      <xsl:for-each select="(tokenize(normalize-space(lg/l), ' '))[position() &gt; 1]">
+	<d:index d:value="{.}"/>	
       </xsl:for-each>
 
       <xsl:if test="some $node in lg/analysis satisfies (starts-with($node, 'v_') and
@@ -96,16 +102,18 @@
 
 	    <xsl:if test="$internalRef">
 	      <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
-		<short_ref>
+		<!--short_ref-->
+		<b>
 		  <xsl:value-of select="normalize-space(lg/lemma_ref)"/>
-		</short_ref>
+		</b>
+		<!--/short_ref-->
 	      </a>
 	    </xsl:if>
 
 	    <xsl:if test="not($internalRef)">
-	      <short_ref>
+	      <b>
 		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
-	      </short_ref>
+	      </b>
 	    </xsl:if>
 
 	  </xsl:if>
@@ -153,18 +161,21 @@
 	<div align="left" d:priority="2">
 	  <!-- todo -->
 	  <xsl:if test="$internalRef">
+	    <i><xsl:value-of select="'Se også '"/></i>
 	    <a href="x-dictionary:r:{lg/lemma_ref/@lemmaID}">
-	      <cf_ref>
+	      <!--cf_ref-->
+	      <b>
 		<xsl:value-of select="normalize-space(lg/lemma_ref)"/>
-	      </cf_ref>
+	      </b>
+	      <!--/cf_ref-->
 	    </a>
 	  </xsl:if>
 	  
 	  <xsl:if test="not($internalRef)">
 	    <i><xsl:value-of select="'Se også '"/></i>
-	    <cf_ref>
+	    <b>
 	      <xsl:value-of select="substring-before(normalize-space(lg/l_ref), '_')"/>
-	    </cf_ref>
+	    </b>
 	  </xsl:if>
 	  <img class="alpha" src="Images/blank.jpg"/>
 	</div>
@@ -359,13 +370,15 @@
     <!-- xsl:variable name="currentMS" select="normalize-space(./@ms)"/ -->
 
     <xsl:variable name="currentMS">
-      <xsl:variable name="vtags" select="___v1___v2___v3___v4___v5___"/>
-      <xsl:variable name="current_vtag" select="(tokenize(normalize-space(./@ms), '_'))[0]"/>
+      <xsl:variable name="vtags" select="'___v1___v2___v3___v4___v5___'"/>
+      <xsl:variable name="current_vtag" select="(tokenize(normalize-space(./@ms), '_'))[1]"/>
+
       <xsl:if test="contains($vtags, $current_vtag)">
 	<xsl:value-of select="substring-after(./@ms, concat($current_vtag, '_'))"/>
+
 	<xsl:if test="$debug">
 	  <xsl:message terminate="no">
-	    <xsl:value-of select="concat('vtag detected ', substring-after(./@ms, concat($current_vtag, '_')), $nl)"/>
+	    <xsl:value-of select="concat('___vtag detected___ ', substring-after(./@ms, concat($current_vtag, '_')),' vtags ', $vtags, $nl)"/>
 	    <xsl:value-of select="'............'"/>
 	  </xsl:message>
 	</xsl:if>
@@ -375,21 +388,20 @@
 	<xsl:value-of select="./@ms"/>
 	<xsl:if test="$debug">
 	  <xsl:message terminate="no">
-	    <xsl:value-of select="concat('NO vtag detected ', ./@ms, $nl)"/>
+	    <xsl:value-of select="concat('NO vtag detected ', ./@ms, ' current_vtag ', $current_vtag, $nl)"/>
 	    <xsl:value-of select="'............'"/>
 	  </xsl:message>
 	</xsl:if>
       </xsl:if>
     </xsl:variable>
-
-
+    
     <xsl:variable name="currentTrans">
       <xsl:variable name="currentTransT" select="tokenize(normalize-space(../../../mg[1]/tg[1]/t[1]), ' ')[1]"/>
       <xsl:variable name="currentTransPh" select="normalize-space(../../../mg[1]/tg[1]/tf[1])"/>
       <xsl:value-of select="if (normalize-space($currentTransT) = '') then $currentTransPh else $currentTransT"/>
     </xsl:variable>
     
-    <xsl:if test="$debug">
+    <xsl:if test="false()">
       <xsl:message terminate="no">
 	<xsl:value-of select="concat('............', $nl)"/>
 	<xsl:value-of select="concat('checking miniparadigm ', $currentWordForm[1], ' currentTranslation ', $currentTrans, $nl)"/>
@@ -732,12 +744,27 @@
 
 	    <!-- xsl:value-of select="$currentWordForm"/ -->
 
-	    <xsl:if test="not((ends-with($currentMS, 'Pl_Ill')) and ($currentIllpl = 'no'))">
+	    <!--xsl:if test="not((ends-with($currentMS, 'Pl_Ill')) and ($currentIllpl = 'no'))"-->
+	    <xsl:if test="not(ends-with($currentMS, 'Pl_Ill')) or (ends-with($currentMS, 'Pl_Ill') and not($currentIllpl = 'no'))">
 	      <xsl:value-of select="$currentWordForm"/>
 	    </xsl:if>
-	    
-	    <xsl:if test="(($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Nom') or (substring-after($currentMS, 'NUM_') = 'Pl_Nom')))  or
-			  (($currentPOS = 'adj.') and ((substring-after($currentMS, 'a_') = 'Attr') or (substring-after($currentMS, 'A_') = 'Attr')) and (not($currentMS = 'none')))">
+	    <!-- to debug -->
+	    <!--xsl:if test="(($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Nom') or (substring-after($currentMS, 'NUM_') = 'Pl_Nom')))  or
+			  (($currentPOS = 'adj.') and ((substring-after($currentMS, 'a_') = 'Attr') or (substring-after($currentMS, 'A_') = 'Attr')))"-->
+
+
+	    <xsl:if test="((($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Nom') or (substring-after($currentMS, 'NUM_') = 'Pl_Nom')))  or
+			  (($currentPOS = 'adj.') and ((substring-after($currentMS, 'a_') = 'Attr') or (substring-after($currentMS, 'A_') = 'Attr')))) and not($currentContext = '')">
+
+	      <xsl:if test="$debug">
+		<xsl:message terminate="no">
+		  <xsl:value-of select="concat('--- check context with num and adj ---', $nl)"/>
+		  <xsl:value-of select="concat('CONTEXT   ', $currentWordForm[1], ' currentMS ', $currentMS, ' currentContex ', $currentContext, $nl)"/>
+		  <xsl:value-of select="'----------------'"/>
+		</xsl:message>
+	      </xsl:if>
+
+
 	      <xsl:value-of select="concat(' ', '(', $currentContext, ')')"/>
 	    </xsl:if>
 	    

@@ -753,7 +753,7 @@
 			  (($currentPOS = 'adj.') and ((substring-after($currentMS, 'a_') = 'Attr') or (substring-after($currentMS, 'A_') = 'Attr')))"-->
 
 
-	    <xsl:if test="((($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Nom') or (substring-after($currentMS, 'NUM_') = 'Pl_Nom')))  or
+	    <xsl:if test="((($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Nom') or (substring-after($currentMS, 'NUM_') = 'Pl_Nom') or (substring-after($currentMS, 'Num_') = 'Pl_Nom')))  or
 			  (($currentPOS = 'adj.') and ((substring-after($currentMS, 'a_') = 'Attr') or (substring-after($currentMS, 'A_') = 'Attr')))) and not($currentContext = '')">
 
 	      <xsl:if test="$debug">
@@ -768,7 +768,8 @@
 	      <xsl:value-of select="concat(' ', '(', $currentContext, ')')"/>
 	    </xsl:if>
 	    
-	    <xsl:if test="(($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Gen') or (substring-after($currentMS, 'NUM_') = 'Pl_Gen')))">
+	    <xsl:if test="(($currentPOS = 'num.') and ((substring-after($currentMS, 'num_') = 'Pl_Gen') or 
+			  (substring-after($currentMS, 'NUM_') = 'Pl_Gen') or (contains($currentMS, '_Num_') and ends-with($currentMS, 'Pl_Gen'))))">
 	      <xsl:value-of select="' (gápmagiid)'"/>
 	    </xsl:if>
 	    

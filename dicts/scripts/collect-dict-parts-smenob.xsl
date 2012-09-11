@@ -2,7 +2,7 @@
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to compile
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main collect-dict-parts.xsl dir=DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main collect-dict-parts.xsl inDir=DIR
     | 
     +-->
 
@@ -46,9 +46,9 @@
 <!-- collection('PATH?select=*.xml') -->
 
     <r>
-      <xsl:copy-of  copy-namespaces="no" select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX')]"/>
-      <!-- xsl:copy-of  copy-namespaces="no" select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX') and not(contains(normalize-space(lg/l), ' '))]"/ -->
-      <!--       <xsl:copy-of select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='ped' or @src='nj') and not(starts-with(./mg/tg/t,'XX'))]"/> -->
+      <xsl:copy-of  copy-namespaces="no" select="collection(concat($inDir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX')]"/>
+      <!-- xsl:copy-of  copy-namespaces="no" select="collection(concat($inDir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX') and not(contains(normalize-space(lg/l), ' '))]"/ -->
+      <!--       <xsl:copy-of select="collection(concat($inDir, '?select=*.xml'))/r/e[(@usage='ped' or @src='nj') and not(starts-with(./mg/tg/t,'XX'))]"/> -->
     </r>
   </xsl:template>
   

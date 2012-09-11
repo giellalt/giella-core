@@ -21,7 +21,7 @@
 	      doctype-public="-//XMLmind//DTD gt_dictionary//SE"
 	      indent="yes"/>
   
-  <xsl:param name="dir" select="'.'"/>
+  <xsl:param name="inDir" select="'gogoDir'"/>
 
   <xsl:template match="/" name="main">
 
@@ -46,7 +46,8 @@
 <!-- collection('PATH?select=*.xml') -->
 
     <r>
-      <xsl:copy-of  copy-namespaces="no" select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX') and not(contains(normalize-space(lg/l), ' '))]"/>
+      <xsl:copy-of  copy-namespaces="no" select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX')]"/>
+      <!-- xsl:copy-of  copy-namespaces="no" select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX') and not(contains(normalize-space(lg/l), ' '))]"/ -->
       <!--       <xsl:copy-of select="collection(concat($dir, '?select=*.xml'))/r/e[(@usage='ped' or @src='nj') and not(starts-with(./mg/tg/t,'XX'))]"/> -->
     </r>
   </xsl:template>

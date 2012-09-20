@@ -43,7 +43,12 @@ def process_chunk(chunk):
 	vals = [a[1] for a in fields]
 	return rows, vals
 
-def main(filename):
+def main(filename, outfile=False):
+	if outfile:
+	    outfile = open(outfile, 'w')
+	else:
+		outfile = sys.stdout
+
 
 	# Count the lines fast
 	with open(filename, 'r') as C:
@@ -75,7 +80,7 @@ def main(filename):
 				# Print the header only once
 				if not header:
 					header = order
-					print >> sys.stdout, ','.join(header).encode('utf-8')
+					print >> outfile, ','.join(header).encode('utf-8')
 
 				r = ','.join(vals).encode('utf-8')
 
@@ -86,7 +91,7 @@ def main(filename):
 					row_probs.append(r)
 				
 				# Print the line
-				print >> sys.stdout, r
+				print >> outfile, r
 
 				# Reset the chunk
 				chunk = []
@@ -104,13 +109,20 @@ def main(filename):
 			print '\n'.join(row_probs)
 
 		print >> sys.stderr, "All rows have %s items." % repr(list(rows))
+	outfile.close()
 
 if __name__ == "__main__":
 	try:
 		filename = sys.argv[1]
 	except:
-		print "Specify a filename." 
+		print "Specify an input filename." 
+		sys.exit()
+
+	try:
+		outfile = sys.argv[2]
+	except:
+		print "Specify an output filename, e.g., algu_xml_to_csv.py input.xml output.csv" 
 		sys.exit()
 	
-	sys.exit(main(filename))
+	sys.exit(main(filename, outfile))
 

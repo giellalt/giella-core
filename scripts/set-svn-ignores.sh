@@ -9,7 +9,7 @@ fi
 if test ! -r $1/und.timestamp ; then
     echo "This script must have a top-level language directory as its only"
     echo "argument, e.g."
-    echo "${GTHOME}/newinfra/gtlangs/fao/"
+    echo "${GTHOME}/langs/fao/"
     exit 1
 fi
 

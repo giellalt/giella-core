@@ -16,14 +16,14 @@ Prepare your environment
 1. define the $GTCORE variable as follows (in ~/.bashrc or similar, but in the
 same file where GTHOME is defined, and ***after*** the definition of GTHOME):
 
-export GTCORE=$GTHOME/newinfra/gtcore
+export GTCORE=$GTHOME/gtcore
 
 2. source ~/.bashrc (or the file you edited) or open a new shell
 
 Basic Installation
 ==================
 
-0. cd $GTHOME/newinfra
+0. cd $GTHOME/langs
 1. ./autogen.sh
 2. ./configure
 3. make
@@ -43,7 +43,7 @@ relevant options:
 
 --prefix=$HOME - installs the built binaries in suitable subdirs of your
                   $HOME dir
---enable-hfst  - turns on and checks for proper support for compiling hfst
+--with-hfst  - turns on and checks for proper support for compiling hfst
                  transducers
 
 `configure' also accepts some other, not widely useful, options.  Run
@@ -59,7 +59,7 @@ the autotools).
 
 To use VPATH building, do the following instead of the Basic Installation:
 
-0. cd $GTHOME/newinfra
+0. cd $GTHOME/langs
 1. ./autogen.sh
 2. mkdir build   # or any other name, it is up to you
 3. cd build      # cd into the dir you just created
@@ -70,8 +70,8 @@ To use VPATH building, do the following instead of the Basic Installation:
 
 This will result in the following directory structure:
 
-newinfra/gtlangs/...       - source files - edit here
-         build/gtlangs/... - makefiles, transducers - do make here
+langs/...       - source files - edit here
+      build/... - makefiles, transducers - do make here
 
 Known bugs with VPATH building
 ------------------------------

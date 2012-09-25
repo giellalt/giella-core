@@ -60,7 +60,7 @@ fi
 # require und for all languages
 if test ! -r und.timestamp ; then
     echo "This script must be run from the top-level language directory;"
-    echo "e.g. ${GTHOME}/newinfra/gtlangs/fao/"
+    echo "e.g. ${GTHOME}/langs/fao/"
     exit 1
 fi
 

@@ -1,0 +1,8 @@
+# This regex removes tags we do not want in the ordinary $(GTLANG).fst
+# That is, we do not give them as output from analysis
+
+# These tags are used to mark up strings converted to numbers and oposite.
+# They should be removed from most transducers.
+0 <- %+String,
+0 <- %+NumNum
+;

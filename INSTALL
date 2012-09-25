@@ -1,0 +1,91 @@
+Installation Instructions
+*************************
+
+Copyright (C) 1994, 1995, 1996, 1999, 2000, 2001, 2002, 2004, 2005,
+2006 Free Software Foundation, Inc.
+
+This file is free documentation; the Free Software Foundation gives
+unlimited permission to copy, distribute and modify it.
+
+This document describes how to setup and use the new Giellatekno/Divvun
+infrastructure.
+
+Prepare your environment
+========================
+
+1. define the $GTCORE variable as follows (in ~/.bashrc or similar, but in the
+same file where GTHOME is defined, and ***after*** the definition of GTHOME):
+
+export GTCORE=$GTHOME/newinfra/gtcore
+
+2. source ~/.bashrc (or the file you edited) or open a new shell
+
+Basic Installation
+==================
+
+0. cd $GTHOME/newinfra
+1. ./autogen.sh
+2. ./configure
+3. make
+4. make check # optional
+5. [sudo] make install
+
+This will compile the transducers and other binary files directly in the source
+code directory tree. If you prefer to build outside the source code, see the
+section VPATH building below.
+
+Options
+=======
+
+You can give `configure' initial values for configuration parameters
+by setting variables in the command line or in the environment. Here are some
+relevant options:
+
+--prefix=$HOME - installs the built binaries in suitable subdirs of your
+                  $HOME dir
+--enable-hfst  - turns on and checks for proper support for compiling hfst
+                 transducers
+
+`configure' also accepts some other, not widely useful, options.  Run
+`configure --help' for more details.
+
+VPATH building
+==============
+
+The new infra supports VPATH building, aka out-of-source building. This feature
+will do all building outside the source code directory tree, and leave the
+source code mainly uncluttered (except for a few intermediate files created by
+the autotools).
+
+To use VPATH building, do the following instead of the Basic Installation:
+
+0. cd $GTHOME/newinfra
+1. ./autogen.sh
+2. mkdir build   # or any other name, it is up to you
+3. cd build      # cd into the dir you just created
+2. ../configure  # from the new dir, call `configure' with the options you want
+3. make
+4. make check    # optional
+5. [sudo] make install
+
+This will result in the following directory structure:
+
+newinfra/gtlangs/...       - source files - edit here
+         build/gtlangs/... - makefiles, transducers - do make here
+
+Known bugs with VPATH building
+------------------------------
+
+NB! The Xerox tools have a hard-coded limit to the argument lengths, which
+causes failure when doing a VPATH builds (because all filenames get much longer
+and together all filenames given to lexc sum up to more than the limit, such
+that the last filenames will be trunkated or completely removed). The bug has
+been reported to L. Karttunen.
+
+That is, for now use VPATH with hfst ONLY, and regular in-source builds with
+Xerox. Unfortunately you can't have both at the same time, so you have to decide
+which one you want to build. Hopefully we will receive an update for the Xerox
+tools soon, by which point you should be free to use VPATH builds for both Xerox
+and hfst transducers. You can of course also build HFST transducers in-source,
+so if you want to play with both technologies, then in-source building will be
+fine (except for the fact that you get all binary files among the source files).

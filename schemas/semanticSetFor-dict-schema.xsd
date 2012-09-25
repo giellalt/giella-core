@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:hfp="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty">
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+<!-- This has been adapted from semantiske_sett.jspwiki for sets used in sma oahpa. -->
+   <xs:attribute name="semClass">
+      <xs:simpleType>
+         <xs:restriction base="xs:string">
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="ABSTRACT"/>
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="ABSTRACT_A"/>
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="ACTION"/>
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="ACTION_V"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="ACTIVITY_V"/>
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="AMOUNT"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_A"/>
+<!-- Super set: BIRD_FISH -->
+            <xs:enumeration value="ANIMAL_BIRDHUNT"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_DOM"/>
+<!-- Super set: BIRD_FISH -->
+            <xs:enumeration value="ANIMAL_FISH"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_HUNT"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_OTHER"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_PET"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_PREDITOR"/>
+<!-- Super set: BIRD_FISH -->
+            <xs:enumeration value="ANIMAL_SALTFISH"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_SOUND_V"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_V"/>
+<!-- Super set: ANIMAL -->
+            <xs:enumeration value="ANIMAL_WILD"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="ARRANGEMENT"/>
+<!-- Super set: HUMAN_DOING -->
+            <xs:enumeration value="AUX_V"/>
+<!-- Super set: OBJECT -->
+            <xs:enumeration value="BATHROOM"/>
+<!-- Super set: OBJECT -->
+            <xs:enumeration value="BELONGINGS"/>
+<!-- Super set: BIRD_FISH -->
+            <xs:enumeration value="BIRD"/>
+            <xs:enumeration value="BIRD_FISH_OTHER"/>
+<!-- Super set: BIRD_FISH -->
+            <xs:enumeration value="BIRD_FISH_V"/>
+<!-- Super set: BODY -->
+            <xs:enumeration value="BODYPART"/>
+<!-- Super set: BODY -->
+            <xs:enumeration value="BODYPART_PL"/>
+<!-- Super set: BODY -->
+            <xs:enumeration value="BODY_A"/>
+<!-- Super set: BODY -->
+            <xs:enumeration value="BODY_ADV"/>
+<!-- Super set: BODY -->
+            <xs:enumeration value="BODY_V"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="BUILDING"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="BUILDING_ROOM_A"/>
+            <xs:enumeration value="CARDS"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="CHRISTMAS"/>
+<!-- Super set: CLOTHES -->
+            <xs:enumeration value="CLOTHES_A"/>
+<!-- Super set: CLOTHES -->
+            <xs:enumeration value="CLOTHES_V"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="CLOTHES_WORK"/>
+<!-- Super set: CLOTHES -->
+            <xs:enumeration value="CLOTHING"/>
+<!-- Super set: CLOTHES -->
+            <xs:enumeration value="CLOTHING_OTHER"/>
+<!-- Super set: CLOTHES -->
+            <xs:enumeration value="CLOTHING_PL"/>
+<!-- Super set: CLOTHES -->
+            <xs:enumeration value="COLOUR"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mCOMMAND_V"/>
+<!-- Super set: OBJECT // CONCRETES -->
+            <xs:enumeration value="CONTAINER"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="CONSTRUCTION"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mCONVERSATION"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="DRINK"/>
+<!-- Super set: SCHOOL/EDUCATION -->
+            <xs:enumeration value="EDUCATION"/>
+<!-- Super set: HUMAN_DOING -->
+            <xs:enumeration value="EXPERIENCE_A"/>
+<!-- Super set: HUMAN_DOING -->
+            <xs:enumeration value="EXPERIENCE_V"/>
+<!-- Super set: CONCRETES -->
+            <xs:enumeration value="EXPOSURE_V"/>
+<!-- Super set: MULTIWORD -->
+            <xs:enumeration value="EXPRESSIONS"/>
+<!-- Super set: RELATIVES -->
+            <xs:enumeration value="FAMILY"/>
+<!-- Super set: RELATIVES -->
+            <xs:enumeration value="FAMILY_OTHER"/>
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="FEELING"/>
+<!-- Super set: WORK/ECONOMY/TOOLS -->
+            <xs:enumeration value="FINANCE"/>
+<!-- Super set: WORK/ECONOMY/TOOLS -->
+            <xs:enumeration value="FINANCE_V"/>
+<!-- Super set: BIRD_FISH -->
+            <xs:enumeration value="FISH"/>
+<!-- Super set: TRADITIONAL -->
+            <xs:enumeration value="FISHING"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="FOOD_BERRY"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="FOOD_DISH"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="FOOD_DRINK_V"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="FOOD_GROCERY"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="FOOD_OTHER"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="FURNITURE"/>
+<!-- Super set: TRADITIONAL -->
+            <xs:enumeration value="GAMME"/>
+            <xs:enumeration value="HANDICRAFTS"/>
+<!-- Super set: REINDEER/HERDING -->
+            <xs:enumeration value="HERDING"/>
+<!-- Super set: REINDEER/HERDING -->
+            <xs:enumeration value="HERDING_THING"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="HOME_ACTIVITY"/>
+<!-- Super set: HUMAN_DOING -->
+            <xs:enumeration value="HUMAN_A"/>
+<!-- Super set: HUMAN_DOING -->
+            <xs:enumeration value="HUMAN_V"/>
+<!-- Super set: BODY -->
+            <xs:enumeration value="ILLNESS"/>
+<!-- Super set: CONCRETES -->
+            <xs:enumeration value="INSTRUMENT"/>
+<!-- Super set: LITERATURE/TEXTS -->
+            <xs:enumeration value="ISSUE_A"/>
+<!-- Super set: WORK/ECONOMY/TOOLS -->
+            <xs:enumeration value="JOB"/>
+<!-- Super set: OBJECT -->
+            <xs:enumeration value="KITCHEN"/>
+<!-- Super set: LITERATURE/TEXTS -->
+            <xs:enumeration value="LANGUAGE"/>
+<!-- Super set: LITERATURE/TEXTS -->
+            <xs:enumeration value="LANGUAGEPART"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="LEISURETIME_HOME_V"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPERSNAME"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mVISSJH_V"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mLONG_SHORT"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mMONTH"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="MOVEMENT_A"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="MOVEMENT_V"/>
+<!-- Super set: HUMAN -->
+            <xs:enumeration value="MYTH_HUMAN"/>
+<!-- Super set: NATURE -->
+            <xs:enumeration value="NATURE"/>
+<!-- Super set: NATURE -->
+            <xs:enumeration value="NATURE_A"/>
+<!-- Super set: NATURE -->
+            <xs:enumeration value="NATURE_OTHER"/>
+<!-- Super set: NATURE -->
+            <xs:enumeration value="NATURE_PLACE"/>
+<!-- Super set: REINDEER/HERDING -->
+            <xs:enumeration value="NATURE_PLACE_REINDEER"/>
+<!-- Super set: NATURE -->
+            <xs:enumeration value="NATURE_V"/>
+<!-- Super set: NATURE -->
+            <xs:enumeration value="NATURE_WATER"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mNUMBER"/>
+<!-- Super set: CONCRETES -->
+            <xs:enumeration value="OBJECT_A"/>
+<!-- Super set: OBJECT -->
+            <xs:enumeration value="OBJECT_V"/>
+<!-- Super set: WORK/ECONOMY/TOOLS -->
+            <xs:enumeration value="ORGANIZATION"/>
+<!-- Super set: HUMAN -->
+            <xs:enumeration value="PEOPLE"/>
+<!-- Super set: HUMAN -->
+            <xs:enumeration value="PEOPLE_OTHER"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="PLACE_LOCAL"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPLACE_NAME"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPLACE_COUNTRY"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPLACE_DISTRICT"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPLACE_RIVER"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPLACE_MOUNTAIN"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPLACE_LAKE"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mPLACE_NATURE"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="PLACE_OTHER"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="PLACE_STAYING"/>
+<!-- Super set: PLANTS -->
+            <xs:enumeration value="PLANT"/>
+<!-- Super set: WORKERS -->
+            <xs:enumeration value="PROFESSION"/>
+            <xs:enumeration value="PRON"/>
+<!-- Super set: REINDEER/HERDING -->
+            <xs:enumeration value="REINDEER"/>
+<!-- Super set: REINDEER/HERDING -->
+            <xs:enumeration value="REINDEER_ANIMAL"/>
+<!-- Super set: REINDEER/HERDING -->
+            <xs:enumeration value="REINDEER_HERD"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="ROAD"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="ROOM"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="ROOM_OTHER"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="ROOM_PART"/>
+<!-- Super set: SCHOOL/EDUCATION -->
+            <xs:enumeration value="SCHOOL"/>
+<!-- Super set: SCHOOL/EDUCATION -->
+            <xs:enumeration value="SCHOOL_A"/>
+<!-- Super set: SCHOOL/EDUCATION -->
+            <xs:enumeration value="SCHOOL_ADV"/>
+<!-- Super set: SCHOOL/EDUCATION -->
+            <xs:enumeration value="SCHOOL_V"/>
+<!-- Super set: BUILDING/ROOMS -->
+            <xs:enumeration value="SHOP"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="SHOW"/>
+<!-- Super set: OBJECT -->
+            <xs:enumeration value="SLEEPINGROOM"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="SLIDE_TOOL"/>
+<!-- Super set: WEATHERTYPES -->
+            <xs:enumeration value="SNOW"/>
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="SOUND"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="SOUP_A"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="SPORT"/>
+<!-- Super set: LITERATURE/TEXTS -->
+            <xs:enumeration value="STORY"/>
+<!-- Super set: LITERATURE/TEXTS -->
+            <xs:enumeration value="TEXT"/>
+<!-- Super set: LITERATURE/TEXTS -->
+            <xs:enumeration value="TEXT_OTHER"/>
+<!-- Super set: OBJECT -->
+            <xs:enumeration value="THING"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mTHING_A"/>
+<!-- Super set: ABSTRACTS -->
+            <xs:enumeration value="THOUGHT"/>
+<!-- Super set: TIMEEXPRESSIONS -->
+            <xs:enumeration value="TIME"/>
+<!-- Super set: TIMEEXPRESSIONS -->
+            <xs:enumeration value="TIME_A"/>
+<!-- Super set: TIMEEXPRESSIONS -->
+            <xs:enumeration value="TIME_DAY"/>
+<!-- Super set: MORFA-C -->
+            <xs:enumeration value="mTIME_GEN"/>
+<!-- Super set: MULTIWORD -->
+            <xs:enumeration value="TIME_U"/>
+<!-- Super set: TIMEEXPRESSIONS -->
+            <xs:enumeration value="TIME_V"/>
+<!-- Super set: OBJECT // WORK/ECONOMY/TOOLS -->
+            <xs:enumeration value="TOOL"/>
+<!-- Super set: LEISURETIME/AT_HOME -->
+            <xs:enumeration value="TOY"/>
+<!-- Super set: TRADITIONAL -->
+            <xs:enumeration value="TRAD_CLOTHING"/>
+<!-- Super set: TRADITIONAL -->
+            <xs:enumeration value="TRAD_FOOD"/>
+<!-- Super set: TRADITIONAL -->
+            <xs:enumeration value="TRAD_OBJECT"/>
+<!-- Super set: TRADITIONAL -->
+            <xs:enumeration value="TRAD_OTHER"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="TRAVELLING"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="TRAVELLING_V"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="TRAVEL_V"/>
+<!-- Super set: TRAVEL -->
+            <xs:enumeration value="VEHICLE"/>
+<!-- Super set: HUMAN_DOING -->
+            <xs:enumeration value="VERBAL_V"/>
+<!-- Super set: TRADITIONAL -->
+            <xs:enumeration value="VUEKIE"/>
+<!-- Super set: DUEDTIE -->
+            <xs:enumeration value="VÆTNOE"/>
+<!-- Super set: DUEDTIE -->
+            <xs:enumeration value="VÆTNOE_GARRE"/>
+<!-- Super set: DUEDTIE -->
+            <xs:enumeration value="VÆTNOE_GÅARODH"/>
+<!-- Super set: WEATHERTYPES -->
+            <xs:enumeration value="WEATHER"/>
+<!-- Super set: WEATHERTYPES -->
+            <xs:enumeration value="WEATHER_A"/>
+<!-- Super set: WEATHERTYPES -->
+            <xs:enumeration value="WEATHER_V"/>
+<!-- Super set: WORK/ECONOMY/TOOLS -->
+            <xs:enumeration value="WORK_ECONOMY_V"/>
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+</xs:schema>

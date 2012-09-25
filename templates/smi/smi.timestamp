@@ -1,0 +1,17 @@
+$Revision$:
+Replaced initial SMA file with the actual shared propers from SME, where they
+used to be.
+
+r62901:
+Initial version of Sami languages macro to be spread over:
+sia – Akkala
+sjd – Kildin
+sjk – Kemi
+sjt – Ter
+smn – Inari
+sms – Skolt
+sju – Ume
+sje – Pite
+sme – Northern
+smj – Lule
+sma – Southern

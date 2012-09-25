@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Wrong usage - short instruction:
+if ! test $# -eq 1 ; then
+    echo "Usage: $0 LANGUAGE_DIR"
+    exit 1
+fi
+
+if test ! -r $1/und.timestamp ; then
+    echo "This script must have a top-level language directory as its only"
+    echo "argument, e.g."
+    echo "${GTHOME}/newinfra/gtlangs/fao/"
+    exit 1
+fi
+
+mkfiles="Makefile
+Makefile.in"
+
+autofiles="autom4te.cache
+build-aux
+config.log
+config.status
+configure
+aclocal.m4"
+
+fstfiles="*.hfst
+*.hfstol
+*.xfst
+*.bin
+*.bcg3"
+
+# Set svn:ignore props on all dirs:
+for f in $(find $1/ \
+			-not -iwholename '*.svn*' \
+			-type d) ; do
+	svn propset svn:ignore "$mkfiles
+$fstfiles" $f
+done
+
+# Set the svn:ignore prop on the top level lang dir:
+svn propset svn:ignore "$autofiles
+$mkfiles" $1
+
+# Set the svn:ignore prop on the source dir:
+svn propset svn:ignore "$mkfiles
+$fstfiles
+*.tmp" $1/src
+
+# Ignore extra lexc stem files:
+svn propset svn:ignore "*.lexc" $1/src/morphology/stems
+
+# Set the svn:ignore prop on the test/src/morphology/ dir:
+svn propset svn:ignore "$mkfiles
+$fstfiles
+*.txt
+*.sh" $1/test/src/morphology
+
+# Set the svn:ignore prop on the source dir:
+svn propset svn:ignore "$mkfiles
+$fstfiles
+*.zhfst" $1/tools/spellcheckers/hfst
+
+# Remove the svn:ignore prop on the morphology subdirs dir:
+svn propdel svn:ignore $1/src/morphology/affixes
+svn propdel svn:ignore $1/am-shared
+svn propdel svn:ignore $1/m4

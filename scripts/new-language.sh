@@ -6,7 +6,7 @@ fi
 
 # Wrong usage - short instruction:
 if ! test $# -eq 1 ; then
-    echo "Usage: $0 NEW_LANGUAGE_DIR"
+    echo "Usage: $0 NEW_LANGUAGE_ISOCODE"
     exit 1
 fi
 

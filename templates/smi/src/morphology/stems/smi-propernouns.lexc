@@ -74,7 +74,8 @@ Aanna ACCRA-fem ;
 Aanonsen:Aanonsen9 LONDON-sur ;
 Aanstad:Aan^stad9 BERN-sur ;
 Aarbakke:Aar^bakke ACCRA-sur ;
-Aarborte+Use/Sub:Aarborte ACCRA-plc ; !
+Aarporte+Use/Sub:Aarborte ACCRA-plc ; !
+Aarporte:Aarporte ACCRA-plc ; 
 Aardal:Aar^dal BERN-sur ;
 Aare ACCRA-mal ;
 Aarebrot:Aare^brot BERN-sur ;
@@ -1122,7 +1123,7 @@ Aran:Aran9 LONDON-plc ;
 Ararat BERN-plc ;
 Arba ACCRA-plc ;
 Arbeiderparti:Arbeider^parti NYSTØ-org ;
-Arbeiderpartiet+Use/Sub:Arbeider^partiet9 LONDON-org ; !
+Arbeiderpartiet+Use/LexSub:Arbeider^partiet9 LONDON-org ; !
 Arbeidslyst:Arbeids^lyst9 BERN-obj ;
 Arbeidsplassen:Arbeidsplassen9 LONDON-org ;
 Arbeidssenter:Arbeids^senter LONDON-org ;

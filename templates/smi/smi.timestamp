@@ -1,4 +1,8 @@
 $Revision$:
+Several edits in the SMI propernoun file by Inga. Mainly lemma cleanup and
+Use/Sub -> Use/LexSub.
+
+r63144:
 Replaced initial SMA file with the actual shared propers from SME, where they
 used to be.
 

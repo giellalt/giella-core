@@ -4,14 +4,21 @@
 # At the end of the makefile, there is support for automatic compilation of
 # other tagsets, given that the proper tagset relabeling files are defined,
 # and that the target files are defined as part of the 'all' target.
-
+#
 # Filenames are built as follows:
-# function[-subfunction].tagset.variant.transducertype
+# basictype-application-tagset-normativity[-dialect].fsttype
+#
+# 'application' is not specified for the regular/default morphological
+# analysis/generation.
 #
 # Examples:
-# analyser-ped.gt.norm.hfst
-# analyser-ped.gt.desc.hfst
-# generator-dicts.gt.desc.xfst
+# analyser-oahpa-gt-desc.hfst
+# generator-apert-apert-single.hfst
+# analyser-gt-desc.xfst
+#
+# Full details regarding transducer filenames can be found at:
+#
+# http://divvun.no/doc/infra/infraremake/TransducerNamesInTheNewInfra.html
 
 ####### Automake targets: ########
 

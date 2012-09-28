@@ -6469,10 +6469,10 @@ Fortus LONDON-plc ;
 Forum:Forum9 LONDON-org ;
 Forus LONDON-org ;
 Forut:Forut LONDON-org ;
-Forvaltningen+Use/LexSub:For^valtningen9 LONDON-obj ;
-Forvaltningsloven+Use/LexSub:For^valtnings^loven9 LONDON-obj ;
-Forvaltningsrett+Use/LexSub:For^valtnings^rett BERN-obj ;
-Forvaltningsseksjonen+Use/LexSub:For^valtnings^seksjonen9 LONDON-obj ;
+Forvaltningen+Use/LexSub+Use/-Spell:For^valtningen9 LONDON-obj ;
+Forvaltningsloven+Use/LexSub+Use/-Spell:For^valtnings^loven9 LONDON-obj ;
+Forvaltningsrett+Use/LexSub+Use/-Spell:For^valtnings^rett BERN-obj ;
+Forvaltningsseksjonen+Use/LexSub+Use/-Spell:For^valtnings^seksjonen9 LONDON-obj ;
 Forvik:For^vik BERN-sur ;
 Forøy+Use/Sub:For^øy NYSTØ-plc ; !
 Forøy:For^øy BERN-plc ;
@@ -6507,7 +6507,7 @@ Fossvika:Foss^vika ACCRA-plc ;
 Fostervoll:Foster^voll BERN-plc ;
 Fostvedt:Fos^tvedt BERN-sur ;
 Foswinckel LONDON-sur ;
-Fotefar% mot% nord+Use/LexSub:Fotefar% mot% nord9 BERN-obj ;
+Fotefar% mot% nord+Use/-Spell:Fotefar% mot% nord9 BERN-obj ;
 Fotlandsvåg:Fot^lands^våg9 BERN-plc ;
 Fougli ACCRA-sur ;
 Fougner LONDON-sur ;
@@ -6867,7 +6867,7 @@ Galenos LONDON-mal ;
 Galicia ACCRA-plc ;
 Galicja ACCRA-plc ;
 Galilea ACCRA-plc ;
-Galileasjøen+Use/LexSub:Galilea^sjø^en9 LONDON-plc ; !
+Galileasjøen+Use/LexSub+Use/-Spell:Galilea^sjø^en9 LONDON-plc ; !
 Galizien:Galizi^en9 LONDON-plc ;
 Galkina ACCRA-fem ;
 Gallager LONDON-sur ;
@@ -7028,7 +7028,7 @@ Gavppi ACCRA-sur ;
 Gavriloff BERN-sur ;
 Gavrilov BERN-sur ;
 Gaza ACCRA-plc ;
-Gazastripa+Use/LexSub:Gaza^stripa ACCRA-plc ; !
+Gazastripa+Use/LexSub+Use/-Spell:Gaza^stripa ACCRA-plc ; !
 Gaziantep:Gazi^antep9 LONDON-plc ;
 Gazprom:Gaz^prom9 BERN-org ;
 Gdan'sk:Gdan'7sk9 BERN-plc ;
@@ -7087,7 +7087,7 @@ Gentofte ACCRA-plc ;
 Genève+Use/Sub:Genève ACCRA-plc ; !
 Geo:Geo9 ACCRA-obj ;
 GeoForum:GeoForum9 LONDON-org ;
-Geografisk+Use/LexSub:Geo^grafisk9 LONDON-atr ;	!
+!Geografisk+Use/LexSub:Geo^grafisk9 LONDON-atr ;	!
 Geographic:Geo^graphic LONDON-org ;
 Georg:Georg9 BERN-mal ;
 George ACCRA-mal ;
@@ -7375,8 +7375,8 @@ Golden:Golden9 LONDON-sur ;
 Goldmann:Gold^mann9 BERN-sur ;
 Goldschmidt:Gold^schmidt BERN-sur ;
 Golf BERN-obj ;
-Golfkrigen+Use/LexSub:Golf^krigen9 LONDON-obj ;
-Golfstraumen+Use/LexSub:Golf^straumen9 LONDON-plc ; !
+Golfkrigen+Use/LexSub+Use/-Spell:Golf^krigen9 LONDON-obj ;
+Golfstraumen+Use/LexSub+Use/-Spell:Golf^straumen9 LONDON-plc ; !
 Golgata ACCRA-plc ;
 Goliat:Goli^at BERN-mal ;
 Golnes:Gol^nes BERN-sur ;
@@ -7871,7 +7871,7 @@ Gutiérrez:Gutiérrez9 BERN-plc ;
 Gutnel ANAR-fem ;
 Gutnil LONDON-sur ;
 Gutt BERN-sur ;
-Gutta% på% tur+Use/LexSub:Gutta% på% tur BERN-LOAN-obj ; !
+Gutta% på% tur+Use/-Spell:Gutta% på% tur BERN-LOAN-obj ; !
 Guttersrud:Guttersrud9 BERN-sur ;
 Guttorm:Guttorm9 BERN-sur ;
 Guttormsen:Guttormsen9 LONDON-sur ;
@@ -8347,7 +8347,7 @@ Hannestad:Hanne^stad9 BERN-sur ;
 Hannevig:Hannevig9 BERN-sur ;
 Hanni ACCRA-fem ;
 Hannibal BERN-mal ;
-Hannibalfeiden+Use/LexSub:Hannibal^feiden9 LONDON-obj ;
+Hannibalfeiden+Use/LexSub+Use/-Spell:Hannibal^feiden9 LONDON-obj ;
 Hannibalsson:Hannibalsson9 LONDON-sur ;
 Hannikainen:Hannikai C-FI-NEN-sur ;
 Hannila ACCRA-sur ;
@@ -9327,7 +9327,7 @@ Hispania ACCRA-plc ;
 Hissa ACCRA-plc ;
 Historia ACCRA-obj ;
 Historica ACCRA-plc ;
-Historisk+Use/LexSub:Historisk9 LONDON-atr ;	!
+!Historisk+Use/LexSub:Historisk9 LONDON-atr ;	!
 Historiska ACCRA-org ;
 Hisøy+Use/Sub:His^øy NYSTØ-plc ; !
 Hisøy:His^øy BERN-plc ;
@@ -10338,8 +10338,8 @@ Imsen:Imsen9 LONDON-sur ;
 Imsroa ACCRA-plc ;
 Imøy+Use/Sub:Im^øy NYSTØ-plc ; !
 Imøy:Im^øy BERN-plc ;
-In% The% Hand% of% The% Night+Use/LexSub:In% The% Hand% of% The% Night BERN-obj ;
-In% the% Shadow% of% the% Midnight% Sun+Use/LexSub:In% the% Shadow% of% the% Midnight% Sun BERN-LOAN-obj ; !
+In% The% Hand% of% The% Night+Use/-Spelll:In% The% Hand% of% The% Night BERN-obj ;
+In% the% Shadow% of% the% Midnight% Sun+Use/-Spell:In% the% Shadow% of% the% Midnight% Sun BERN-LOAN-obj ; !
 InDesign:In^Design BERN-obj ;
 Ina ACCRA-fem ;
 Ina-Ristin:Ina-Ristin9 LONDON-fem ;
@@ -10950,7 +10950,7 @@ Jernbaneverket:Jern^bane^verket LONDON-org ;
 Jernporten:Jern^porten9 LONDON-plc ;
 Jernsletten:Jern^sletten9 LONDON-sur ;
 Jernverk:Jern^verk BERN-org ;
-Jernverksmessan+Use/LexSub:Jern^verks^messan LONDON-obj ; !
+Jernverksmessan+Use/LexSub+Use/-Spell:Jern^verks^messan LONDON-obj ; !
 Jeroboam:Jerobo^am9 LONDON-plc ;
 Jerpseth:Jerpseth9 BERN-sur ;
 Jerpstad:Jerp^stad9 BERN-sur ;
@@ -11026,7 +11026,7 @@ Joakim:Jo^akim9 LONDON-mal ;
 Joakimsen:Jo^akimsen9 LONDON-sur ;
 Joan:Jo^an9 LONDON-mal ;
 Joanna:Jo^anna ACCRA-fem ;
-Joaquin-dalen+Use/LexSub:Jo^aquin-dalen9 LONDON-plc ; !
+Joaquin-dalen+Use/LexSub+Use/-Spell:Jo^aquin-dalen9 LONDON-plc ; !
 Joaquin:Jo^aquin9 BERN-mal ;
 Joar:Jo^ar LONDON-mal ;
 Joasj:Jo^asj BERN-sur ;
@@ -11360,7 +11360,7 @@ Juppi ACCRA-sur ;
 Jupukkajärvi:Jupukka^järvi ACCRA-plc ;
 Jura ACCRA-plc ;
 Jurbmu ACCRA-sur ;
-Juridisk+Use/LexSub:Juridisk9 LONDON-atr ;	!
+!Juridisk+Use/LexSub:Juridisk9 LONDON-atr ;	!
 Jurij:Jurij9 BERN-mal ;
 Jurmu ACCRA-sur ;
 Jurri ACCRA-mal ;
@@ -11481,7 +11481,7 @@ Jönköping:Jön^köping9 LONDON-plc ;
 Jönsson:Jöns^son LONDON-sur ;
 Jörgen:Jörgen9 LONDON-mal ;
 Jörn:Jörn9 BERN-mal ;
-Jødeland+Use/LexSub:Jøde^land9 BERN-plc ; !
+Jødeland+Use/LexSub+Use/-Spell:Jøde^land9 BERN-plc ; !
 Jøkelfjord:Jøkel^fjord9 BERN-plc ;
 Jølsen:Jølsen9 LONDON-sur ;
 Jølstad:Jøl^stad9 BERN-sur ;
@@ -11694,8 +11694,8 @@ Kallonen:Kallo C-FI-NEN-sur ;
 Kallunki ACCRA-sur ;
 Kalmar LONDON-plc ;
 Kalmari ACCRA-sur ;
-Kalmarkrigen+Use/LexSub:Kalmar^krigen9 LONDON-obj ;
-Kalmarunionen+Use/LexSub:Kalmar^unionen9 LONDON-obj ;
+Kalmarkrigen+Use/LexSub+Use/-Spell:Kalmar^krigen9 LONDON-obj ;
+Kalmarunionen+Use/LexSub+Use/-Spell:Kalmar^unionen9 LONDON-obj ;
 Kalmi ACCRA-sur ;
 Kalmykia ACCRA-plc ;
 Kalne ACCRA-plc ;
@@ -12293,9 +12293,9 @@ Kiekerö ACCRA-plc ;
 Kiel BERN-plc ;
 Kielatis LONDON-sur ;
 Kieldsen:Kieldsen9 LONDON-sur ;
-Kielfreden+Use/LexSub:Kiel^freden9 LONDON-obj ;
+Kielfreden+Use/LexSub+Use/-Spell:Kiel^freden9 LONDON-obj ;
 Kielinen:Kieli C-FI-NEN-sur ;
-Kielkanalen+Use/LexSub:Kiel^kanalen9 LONDON-plc ; !
+Kielkanalen+Use/LexSub+Use/-Spell:Kiel^kanalen9 LONDON-plc ; !
 Kielland:Kiel^land9 BERN-sur ;
 Kiema ACCRA-plc ;
 Kienholz:Kienholz9 BERN-plc ;

@@ -115,9 +115,12 @@
          <xs:enumeration value="PHRASE_SPAT"/>
          <xs:enumeration value="PHRASE_TEMP"/>
          <xs:enumeration value="PHRASE_V"/>
-	 <xs:enumeration value="BAHUVRIHI"/>
+	 <xs:enumeration value="BAHUVRIHI">
+<!-- This is an NP that functions as either a noun modifier in attribute position or as a complement without a direct semantic relation, e.g. "red head" indicates "a red-headed person" not merely a head that is red.  -->	 </xs:enumeration>
          <xs:enumeration value="A"/>
          <xs:enumeration value="AD-A"/>
+         <xs:enumeration value="ATTR">
+<!-- adjective that only occurs in attribute position, e.g. fin:"eri" -->	 </xs:enumeration>
          <xs:enumeration value="ADDITIVE">
 <!-- too, also -->	 </xs:enumeration>
          <xs:enumeration value="PRED_A"/>
@@ -318,6 +321,7 @@
          <xs:enumeration value="PRON-RECIP"/>
          <xs:enumeration value="PRON-REFL"/>
          <xs:enumeration value="ADN-REFL"/>
+         <xs:enumeration value="PRON-REL"/>
          <xs:enumeration value="PROP"/>
          <xs:enumeration value="PROP-ANIM"/>
          <xs:enumeration value="PROP-DEITY"/>

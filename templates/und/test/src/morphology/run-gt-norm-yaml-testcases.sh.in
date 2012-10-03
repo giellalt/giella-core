@@ -37,7 +37,7 @@ for f in .xfst .hfst; do
 		fi
 		
 		# Loop over the available yaml files, and run the tests:
-		for file in ${srcdir}/*.yaml; do
+		for file in ${srcdir}/*$transducer.yaml; do
 			(( i += 1 ))
 			echo
 			echo "Subtest $i - $section: Testing $file using $analyserfile$f"

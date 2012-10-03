@@ -5,8 +5,9 @@
 # and run them through the Apertium Quality morph-test.py tool.
 
 ###### Variables: #######
-analyserfile=${srcdir}/../../../src/analyser.gt
-generatorfile=${srcdir}/../../../src/generator.gt
+transducer=gt-norm
+analyserfile=${srcdir}/../../../src/analyser-$transducer
+generatorfile=${srcdir}/../../../src/generator-$transducer
 pythonbin=@PYTHON@
 runtests="$pythonbin $GTCORE/scripts/morph-test.py"
 
@@ -23,11 +24,14 @@ for f in .xfst .hfst; do
 		lookuptool="@HFST_LOOKUP@"
 		section="hfst"
 	fi
-	if [ -f "$generatorfile$f" ]; then
+	if [ -f "$generatorfile$f" -a -f "$analyserfile$f" ]; then
 		let "transducer_found += 1"
-		if [ ! -n "$(find ${srcdir} -name '*.yaml')" ]; then
+		if [ ! -n "$(find ${srcdir} -name '*$transducer.yaml')" ]; then
 			echo
 			echo "*** Warning: No YAML data files found. Skipping test."
+			echo "*** Filenames covered by this test needs to end in:"
+			echo "***"
+			echo "*** $transducer.yaml"
 			echo
 			exit 77
 		fi

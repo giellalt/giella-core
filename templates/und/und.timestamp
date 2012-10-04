@@ -1,4 +1,7 @@
 $Rev$
+I believe I finally have fixed the yaml testing shell scripts.
+
+r63573:
 One more fix for the yaml testing shell scripts.
 
 r63571:

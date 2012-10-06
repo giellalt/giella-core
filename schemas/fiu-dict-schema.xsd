@@ -152,7 +152,7 @@
          <xs:enumeration value="ADV-IDEOPH-INE">
             <!--баксорсо-->
          </xs:enumeration>
-         <xs:enumeration value="MANNER-INDEF"/>
+         <xs:enumeration value="ADV-MANNER-INDEF"/>
          <xs:enumeration value="ADV-PARENTHETIC"/>
          <xs:enumeration value="FINITE_PARENTHETIC"/>
          <xs:enumeration value="PCLE_ADV-PARENTHETIC"/>

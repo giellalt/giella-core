@@ -441,6 +441,8 @@ Aksland:Aks^land BERN-plc ;
 Aksnes:Aks^nes BERN-plc ;
 Aksum:Aksum9 LONDON-sur ;
 Aksvik:Aks^vik BERN-plc ;
+Aktan:Aktan9 LONDON-obj ;
+Aktesne ACCRA-obj ;
 Aktivneset:Aktiv^neset LONDON-plc ;
 Akujärvi:Aku^järvi ACCRA-sur ;
 Akureyri ACCRA-plc ;
@@ -22124,6 +22126,11 @@ Samelandssenter:Same^lands^senter LONDON-org ;
 Sameloven:Same^loven LONDON-LOAN-obj ;
 Samemuseum:Same^muse^um9 LONDON-org ;
 Samenes% Idrettsforbund:Samenes% Idrettsforbund9 BERN-org ;
+Samenes% Idrettsforbund+Use/Sub:Samenes% idrettsforbund9 BERN-org ;
+Samenes% Idrettsforbund-Norge:Samenes% Idrettsforbund9-Norge ACCRA-LOAN-org ;
+Samenes% folkeforbund:Samenes% folkeforbund9 BERN-org ;
+Samenes% Venn:Samenes% Venn9 BERN-obj ;
+Samenes% naturressursforbund:Samenes% naturressursforbund9 BERN-org ;
 Samenet+Use/Sub:Same^net BERN-obj ; !
 Samenett+Use/Sub:Same^nett9 BERN-org ; !
 Samerett:Same^rett BERN-obj ;
@@ -29187,6 +29194,7 @@ R-čuoivvat:R-čuoivvag ANAR-ani ;
 Åarjelhsaemien% Teatere:Åarjelh^saemien% Teatere ACCRA-org ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% teatere ACCRA-org ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% Teatre ACCRA-org ;
+Åarjelhsaemien+Use/LexSub:Åarjelhsaemien9 LONDON-atr ;	!
 Åarkanjohke+Use/Sub:Åarkan^johke ACCRA-plc ; !
 Åbenrå NYSTØ-plc ;
 Åberg:Å^berg9 BERN-sur ;

@@ -1,4 +1,7 @@
 $Rev$
+Reverted the simplification of hfst regex compilation.
+
+r64539:
 Added support for spellrelax. Also renamed the orthography include file to be
 more generic. Simplified regex build commands now that the bugs in
 hfst-regexp2fst have been corrected.

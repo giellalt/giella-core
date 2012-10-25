@@ -84,11 +84,14 @@ analyser-gt-desc.tmp.hfst: analyser-raw-gt-desc.hfst \
 					filters/remove-number-string-tags.hfst \
 					filters/remove-usage-tags.hfst \
 					filters/remove-morph-borders.hfst \
-					orthography/inituppercase.hfst
+					orthography/inituppercase.hfst \
+					orthography/spellrelax.hfst
 	$(HFST_COMPOSE) $(HFST_FLAGS) -F -1 $< \
 			-2 filters/remove-morph-borders.hfst \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-2 orthography/inituppercase.hfst \
+		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
+			-2 orthography/spellrelax.hfst \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-1 filters/remove-usage-tags.hfst \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
@@ -111,7 +114,8 @@ analyser-gt-desc.tmp.xfst: analyser-raw-gt-desc.xfst \
 					filters/remove-number-string-tags.xfst \
 					filters/remove-usage-tags.xfst \
 					filters/remove-morph-borders.xfst \
-					orthography/inituppercase.xfst
+					orthography/inituppercase.xfst \
+					orthography/spellrelax.xfst
 	$(PRINTF) "read regex \
 				@\"filters/remove-derivation-position-tags.xfst\" \
 			.o. @\"filters/remove-dialect-tags.xfst\" \
@@ -122,6 +126,7 @@ analyser-gt-desc.tmp.xfst: analyser-raw-gt-desc.xfst \
 			.o. @\"$<\" \
 			.o. @\"filters/remove-morph-borders.xfst\" \
 			.o. @\"orthography/inituppercase.xfst\" \
+			.o. @\"orthography/spellrelax.xfst\" \
 			;\n\
 		 save stack $@\n\
 		 quit\n" | $(XFST)

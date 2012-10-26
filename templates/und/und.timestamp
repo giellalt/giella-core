@@ -1,4 +1,7 @@
 $Rev$
+Silenced the build using an Automake macro.
+
+r64560:
 Make the silent build rules backwards compatible.
 
 r64552:

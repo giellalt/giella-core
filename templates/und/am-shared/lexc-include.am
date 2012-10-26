@@ -62,7 +62,7 @@ stems/%.lexc: stems/%.xml $(XSLDIR)/generate_lex-fileVM.xsl
 $(GTLANG).lexc.hfst: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
 	$(AM_V_GEN)$(HFST_LEXC) -f foma -o $@.foma $^
 	$(AM_V_GEN)$(HFST_FST2FST) -f openfst-tropical -i $@.foma -o $@
-	$(AM_V_GEN)-rm -f $@.foma
+	$(AM_V_GEN)rm -f $@.foma
 
 ####### Xerox build rules: #######
 

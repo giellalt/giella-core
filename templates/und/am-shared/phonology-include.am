@@ -54,7 +54,7 @@ HFSTTWOLFLAGS=--resolve
 	$(AM_V_GEN)cp $< $@.script
 	$(AM_V_GEN)$(PRINTF) "save stack $@" >> $@.script
 	$(AM_V_GEN)$(HFST_XFST) -f $@.script
-	$(AM_V_GEN)-rm -f $@.script
+	$(AM_V_GEN)rm -f $@.script
 
 ####### Xerox build rules: #######
 

@@ -40,7 +40,7 @@ noinst_DATA=$(GT_UPPERCASE_FSTS)
 	$(AM_V_GEN)cp $< $@.script
 	$(AM_V_GEN)$(PRINTF) "save stack $@" >> $@.script
 	$(AM_V_GEN)$(HFST_XFST) -f $@.script
-	$(AM_V_GEN)-rm -f $@.script
+	$(AM_V_GEN)rm -f $@.script
 
 .regex.hfst:
 	$(AM_V_GEN)$(HFST_REGEXP2FST) $(HFST_FLAGS) -S -i $< -o $@

@@ -29139,7 +29139,9 @@ Lákkonieiddat:Lákko^niej'da VARGGAT-org ;
 Áppá MARJA-mal ;
 Árni ACCRA-mal ;
 Áron LONDON-mal ;
-Árran% julevsámij% guovdásj LONDON-org ;
+Árran% julevsáme% guovdásj LONDON-org ;
+Árran% julevsáme% guovdásj+Use/Sub:Árran% julevsámij% guovdásj LONDON-org ;
+Árran% julevsáme% guovdásj+Use/Sub:Árran% Julevsáme% guovdásj LONDON-org ;
 Árviesjávrrie+Use/Sub:Árvies^jávrrie ACCRA-plc ; !
 Ásia ACCRA-plc ;
 Áslat:Áslah ANAR-mal ;
@@ -29194,6 +29196,9 @@ R-čuoivvat:R-čuoivvag ANAR-ani ;
 Åarjelhsaemien% Teatere:Åarjelh^saemien% Teatere ACCRA-org ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% teatere ACCRA-org ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% Teatre ACCRA-org ;
+Åarjelhsaemien% Teatere+Use/Sub:Åarjel^saemien% Teatere ACCRA-org ;
+Åarjelhsaemien% Teatere+Use/Sub:Åarjel^saemien% teatere ACCRA-org ;
+Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% teáhter ACCRA-org ;
 Åarjelhsaemien+Use/LexSub:Åarjelhsaemien9 LONDON-atr ;	!
 Åarkanjohke+Use/Sub:Åarkan^johke ACCRA-plc ; !
 Åbenrå NYSTØ-plc ;
@@ -29583,3 +29588,4 @@ Heargenjár-Lásse:Heargenjár-Lás'se MARJA-mal ;
 Kristiina ACCRA-fem ;
 Lathari ACCRA-plc ;
 Carisma ACCRA-obj ;
+Kvalhovudet BERN ;

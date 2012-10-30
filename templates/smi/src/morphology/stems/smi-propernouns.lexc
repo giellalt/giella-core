@@ -261,6 +261,7 @@ Agathe ACCRA-fem ;
 Agaña ACCRA-plc ;
 Agdenes:Agde^nes BERN-plc ;
 Agder LONDON-plc ;
+Agderforskning:Agder^forskning9 BERN-org ;
 Agenda ACCRA-obj ;
 Agent BERN-obj ; !Pocket Agent
 Agergaard:Ager^gaard BERN-sur ;
@@ -3294,6 +3295,7 @@ Brønnsletten:Brønn^sletten9 LONDON-sur ;
 Brønnøy+Use/Sub:Brønn^øy NYSTØ-plc ; !
 Brønnøy:Brønn^øy BERN-plc ;
 Brønnøysund:Brønn^øy^sund9 SUND-plc ;
+Brønnøysundregisterene:Brønn^øy^sund^registrene ACCRA-org ;
 Brønstad:Brøn^stad9 BERN-sur ;
 Brørs BERN-sur ;
 Brørup:Brørup9 BERN-plc ;
@@ -3487,6 +3489,9 @@ Bäckman:Bäck^man9 BERN-sur ;
 Bärnhielm:Bärn^hielm9 BERN-sur ;
 Bäärnhielm:Bäärn^hielm9 BERN-sur ;
 Bådåddjo+Use/Sub:Bådåddjo9 ACCRA-plc ; !
+Bådåddjo+Use/Sub:Budeadju MARJA-U-plc ; !
+Bådåddjo+Use/Sub:Budeaj'u MARJA-U-plc ; !
+Bådåddjo+Use/Sub:Bådoddjo9 MARJA-U-plc ; !
 Båhus BERN-sur ;
 Båhuslen:Båhus^len9 BERN-plc ;
 Bål BERN-sur ;
@@ -4803,6 +4808,7 @@ Dæhli ACCRA-sur ;
 Dæhlie ACCRA-fem ;
 Dæhlin:Dæhlin9 BERN-sur ;
 Dælenenggata:Dæleneng^ GATA-plc ;
+Dærga ACCRA-sur ;
 Død% snø+CmpN/None:Død% snø ACCRA-obj ;
 Dødehavet:Døde^havet LONDON-LOAN-plc ;
 Døgnvill BERN-org ;
@@ -9533,6 +9539,7 @@ Holmvik:Holm^vik BERN-sur ;
 Holmvåg:Holm^våg9 BERN-sur ;
 Holmøy+Use/Sub:Holm^øy NYSTØ-plc ; !
 Holmøy:Holm^øy BERN-plc ;
+Holmås:Holm^ås BERN-sur ;
 Holopainen:Holopai C-FI-NEN-sur ;
 Holsen:Holsen9 LONDON-sur ;
 Holsnøy+Use/Sub:Holsn^øy NYSTØ-plc ; !
@@ -10139,6 +10146,7 @@ Højsgaard:Høj9s^gaard9 BERN-sur ;
 Højvang:Høj9^vang9 BERN-sur ;
 Hølaas:Høl^aas BERN-sur ;
 Høland:Hø^land9 BERN-plc ;
+Hølmebakk:Hølme^bakk BERN-sur ;
 Hølen:Hølen9 LONDON-sur ;
 Høljarast:Høljarast9 BERN-plc ;
 Høllen:Høllen9 LONDON-plc ;

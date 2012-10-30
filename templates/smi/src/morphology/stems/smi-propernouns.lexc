@@ -117,7 +117,7 @@ Aaseth:Aaseth9 BERN-sur ;
 Aasgaard:Aas^gaard9 BERN-sur ;
 Aashamar:Aas^hamar LONDON-sur ;
 Aasheim:Aas^heim9 HEIM-sur ;
-Aashild:Aas^hild BERN-fem ;
+Aashild:Aas^hild9 BERN-fem ;
 Aasiaat:Aasi^aat BERN-plc ;
 Aasland:Aas^land BERN-sur ;
 Aasnes:Aas^nes BERN-sur ;
@@ -192,7 +192,7 @@ Adam:Adam9 LONDON-mal ;
 Adamsbrua:Adams^brua ACCRA-plc ;
 Adamselv:Adams^elv BERN-plc ;
 Adamsen:Adamsen9 LONDON-sur ;
-Adamsfjord:Adams^fjord BERN-LOAN-plc ;
+Adamsfjord:Adams^fjord9 BERN-LOAN-plc ;
 Adamspiggen:Adams^piggen9 LONDON-plc ;
 Adana ACCRA-plc ;
 Adaptec BERN-org ;
@@ -264,7 +264,7 @@ Agder LONDON-plc ;
 Agderforskning:Agder^forskning9 BERN-org ;
 Agenda ACCRA-obj ;
 Agent BERN-obj ; !Pocket Agent
-Agergaard:Ager^gaard BERN-sur ;
+Agergaard:Ager^gaard9 BERN-sur ;
 Aggersund:Agger^sund9 SUND-plc ;
 Agila ACCRA-obj ;
 Agino-Burjatsk:Agino-Burjatsk9 BERN-plc ;
@@ -417,7 +417,7 @@ Akkad:Akkad9 LONDON-plc ;
 Akkanas BERN-LOAN-plc ;
 Akkanen:Akka C-FI-NEN-sur ;
 Akkanjarstabba:Akka^njar^stabba ACCRA-plc ;
-Akkarfjord:Akkar^fjord BERN-plc ;
+Akkarfjord:Akkar^fjord9 BERN-plc ;
 Akkarvik:Akkar^vik BERN-plc ;
 Akkerhaugen:Akker^haugen9 LONDON-plc ;
 Akkila ACCRA-sur ;
@@ -553,7 +553,7 @@ Alf BERN-mal ;
 Alfa ACCRA-obj ;
 Alfeusa ACCRA-plc ;
 Alfheim:Alf^heim9 HEIM-plc ;
-Alfhild:Alf^hild BERN-fem ;
+Alfhild:Alf^hild9 BERN-fem ;
 Alfiva ACCRA-fem ;
 Alfon:Alfon9 LONDON-mal ;
 Alfons LONDON-mal ;
@@ -1472,7 +1472,7 @@ Auckland:Auck^land BERN-plc ;
 Aud-Jorun:Aud9-Jorun9 LONDON-fem ;
 Aud:Aud9 BERN-fem ;
 Audesen:Audesen9 LONDON-sur ;
-Audhild:Aud^hild BERN-fem ;
+Audhild:Aud^hild9 BERN-fem ;
 Audi ACCRA-obj ;
 Audmax BERN-plc ;
 Audnedal:Audne^dal BERN-plc ;
@@ -3488,9 +3488,11 @@ Bávvál LONDON-mal ;
 Bäckman:Bäck^man9 BERN-sur ;
 Bärnhielm:Bärn^hielm9 BERN-sur ;
 Bäärnhielm:Bäärn^hielm9 BERN-sur ;
-Bådåddjo+Use/Sub:Bådåddjo9 ACCRA-plc ; !
-Bådåddjo+Use/Sub:Budeadju MARJA-U-plc ; !
-Bådåddjo+Use/Sub:Budeaj'u MARJA-U-plc ; !
+Bådåddjo:Bådåddjo9 MARJA-plc ; !
+Bådåddjo+Use/Sub:Bådåddjo9¤ MARJA-U-plc ; !
+Bådåddjo+Use/Sub:Bådåddjå9¤ MARJA-U-plc ; !
+Bådåddjo+Use/Sub:Bådåddju9¤ MARJA-U-plc ; !
+Bådåddjo+Use/Sub:Budead'ju MARJA-U-plc ; !
 Bådåddjo+Use/Sub:Bådoddjo9 MARJA-U-plc ; !
 Båhus BERN-sur ;
 Båhuslen:Båhus^len9 BERN-plc ;
@@ -4814,7 +4816,7 @@ Dødehavet:Døde^havet LONDON-LOAN-plc ;
 Døgnvill BERN-org ;
 Dønfoss:Døn^foss9 BERN-plc ;
 Dønna ACCRA-plc ;
-Dønnesfjord:Dønnes^fjord BERN-plc ;
+Dønnesfjord:Dønnes^fjord9 BERN-plc ;
 Dørja ACCRA-plc ;
 Dørsjø:Dør^sjø NYSTØ-plc ;
 Dørstad:Dør^stad9 BERN-sur ;

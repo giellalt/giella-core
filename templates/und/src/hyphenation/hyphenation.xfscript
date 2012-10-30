@@ -59,17 +59,18 @@ define clean  Dummy -> 0 ;
 ! Lagre denne fila: i xfst: source < dennefila.txt og deretter: save hy.fst
 ! cat fil.txt | preprocess | ./lookup -utf8 hy.fst | cut -f2 | tr '\n' ' ' | less
 
-echo <<Combining...>>
-
 read regex [
-NG .o.
-beforeCV .o.
-sC .o.
-Css .o.
-CCV .o.
-CsCV .o.
-keep .o.
-VV .o.
-clean ] ;
+    NG
+.o. beforeCV
+.o. sC
+.o. Css
+.o. CCV
+.o. CsCV
+.o. keep
+.o. VV
+.o. clean
+] ;
 
-invert net ;
+echo <<Inverting...>>
+
+invert net

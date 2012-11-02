@@ -24,16 +24,17 @@
 <!ELEMENT lg (l, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
-      pos ( a | n | v | adv | po | pr | pron | rel | pers | det | i | pcle |
-            num | cc | cs | prop | propPl | g3 | actor |  
-            prsprc | fp-cmp | lp-cmp | x | xxx | 
+      pos ( a | n | v | adv | po | pr | pron | rel | pers | det | i | interj | pcle |
+            num | cc | cs | prop | propPl | g3 | actor | npl |
+            prsprc | fp-cmp | lp-cmp | cmp | mwe | x | xxx | 
             phrase_n | phrase_a | phrase_v | phrase_adv) #REQUIRED
       attr ( ok | no ) #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
       nr ( sg | pl ) #IMPLIED
       gen_only CDATA #IMPLIED
       context CDATA #IMPLIED
-      type ( rel | pers | indef | refl | pre | post | ord | TV | IV ) #IMPLIED
+      type ( rel | pers | indef | refl | dem | interr | 
+      pre | post | ord | TV | IV | actor | g3 ) #IMPLIED
       class ( I | II | III | IV | V | VI | xxx ) #IMPLIED 
       stem ( even | odd | 2syll | 3syll | xsyll | weak ) #IMPLIED
       p3p CDATA #IMPLIED
@@ -125,9 +126,9 @@
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
 <!ATTLIST t pos ( a | S  | n  | v | 
             adv | p | pr | po | det |
-            pron | prop | i  | cc | cs | im | npl | num |
-            pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | x  | xxx |
-	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg ) #IMPLIED > <!-- t have pos or type -->
+            pron | prop | i | interj | cc | cs | im | npl | num |
+            pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | cmp | x  | xxx |
+	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED > <!-- t have pos or type -->
 <!ATTLIST t type ( expl ) #IMPLIED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED> <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n ) #IMPLIED >
@@ -135,6 +136,7 @@
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >
 <!ATTLIST t xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
 <!ATTLIST t dialect CDATA #IMPLIED >
+<!ATTLIST t var ( sw | no | fi )  #IMPLIED >
 <!ATTLIST t nob-stat CDATA #IMPLIED >
 <!ATTLIST t sem-cl CDATA #IMPLIED >
 <!ATTLIST t src CDATA #IMPLIED >

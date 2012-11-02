@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--+
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main THIS_FILE inputDir=DICT_SOURCE_DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main THIS_FILE inputDir=DICT_SOURCE_DIR
     | Ex: in gtsvn/words/dicts
-    | java -Xmx2048m net.sf.saxon.Transform -it main scripts/check_static_files.xsl inDir=../smenob/src
+    | java -Xmx2048m net.sf.saxon.Transform -it:main scripts/check_static_files.xsl inDir=../smenob/src
     +-->
 
 <xsl:stylesheet version="2.0"

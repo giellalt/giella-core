@@ -2,10 +2,10 @@
 <!--+
     | 
     | compares (ped vs. smenob) and put ped-flags on smenob-entries 
-    | Usage: java net.sf.saxon.Transform -it main cfSmeSmj.xsl
+    | Usage: java net.sf.saxon.Transform -it:main cfSmeSmj.xsl
     +-->
 
-<!-- java net.sf.saxon.Transform -it main THIS_SHEET.xsl inFile=FILE.xml -->
+<!-- java net.sf.saxon.Transform -it:main THIS_SHEET.xsl inFile=FILE.xml -->
 
 <xsl:stylesheet version="2.0"
 		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"

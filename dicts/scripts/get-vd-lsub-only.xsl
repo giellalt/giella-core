@@ -2,7 +2,7 @@
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to compile
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main collect-dict-parts.xsl dir=DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main collect-dict-parts.xsl dir=DIR
     | 
     +-->
 

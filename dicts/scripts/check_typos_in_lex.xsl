@@ -2,7 +2,7 @@
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to check
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main THIS_FILE inputDir=DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main THIS_FILE inputDir=DIR
     | 
     +-->
 

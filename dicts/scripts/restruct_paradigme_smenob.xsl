@@ -4,7 +4,7 @@
     | Only simple POSs are handled!
     | NB: An XSLT-2.0-processor is needed!
     | The input: NOB data in the given format
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main nobDB_txt2xml.xsl file="INPUT-FILE"
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main nobDB_txt2xml.xsl file="INPUT-FILE"
     | 
     +-->
 

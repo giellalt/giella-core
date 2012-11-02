@@ -2,13 +2,13 @@
 <!--+
     | 
     | The parameter: language pair, and date
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main generate_infofile.xsl S_LANG=LANG T_LANG=LANG DATE=DATE
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main generate_infofile.xsl S_LANG=LANG T_LANG=LANG DATE=DATE
     | 
     +-->
 
 
 
-<!-- java -Xmx2048m net.sf.saxon.Transform -it main generate_makefile.xsl S_LANG=sme T_LANG=nob DICT_PATH=../bin/mac_smenob.xml > gogo.mf -->
+<!-- java -Xmx2048m net.sf.saxon.Transform -it:main generate_makefile.xsl S_LANG=sme T_LANG=nob DICT_PATH=../bin/mac_smenob.xml > gogo.mf -->
 
 
 <xsl:stylesheet version="2.0"

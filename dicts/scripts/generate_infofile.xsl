@@ -2,13 +2,13 @@
 <!--+
     | 
     | The parameter: language pair, and date
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main generate_infofile.xsl S_LANG=LANG T_LANG=LANG DATE=DATE
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main generate_infofile.xsl S_LANG=LANG T_LANG=LANG DATE=DATE
     | 
     +-->
 
 
 
-<!-- java -Xmx2048m net.sf.saxon.Transform -it main generate_infofile.xsl S_LANG=sme T_LANG=nob DATE=20090121 -->
+<!-- java -Xmx2048m net.sf.saxon.Transform -it:main generate_infofile.xsl S_LANG=sme T_LANG=nob DATE=20090121 -->
 
 
 

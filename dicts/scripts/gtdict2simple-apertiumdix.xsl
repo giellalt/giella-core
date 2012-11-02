@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!--+
     | 
-    | java net.sf.saxon.Transform -it main THIS_SHEET.xsl inFile=FILE.xml outDir=OUT_DIR
+    | java net.sf.saxon.Transform -it:main THIS_SHEET.xsl inFile=FILE.xml outDir=OUT_DIR
     | You can change the parameter values in  this file so that you don't need any inFile/outDir specification in the command line but just
-    | java net.sf.saxon.Transform -it main THIS_SHEET.xsl
+    | java net.sf.saxon.Transform -it:main THIS_SHEET.xsl
     +-->
 
 <xsl:stylesheet version="2.0"

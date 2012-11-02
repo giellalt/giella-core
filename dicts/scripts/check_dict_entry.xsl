@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--+
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main THIS_FILE inputDir=DICT_SOURCE_DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main THIS_FILE inputDir=DICT_SOURCE_DIR
     | Ex: in gtsvn/words/dicts
-    | java -Xmx2048m net.sf.saxon.Transform -it main scripts/check_dict_entry.xsl inDir=../smenob/src
+    | java -Xmx2048m net.sf.saxon.Transform -it:main scripts/check_dict_entry.xsl inDir=../smenob/src
     | 
     | The doublings (twins) are collected based on the <l> element: if two entries N and M have exactly the same <l> element 
     | (i.e., all attributes and lemma string) then N and M are twins.

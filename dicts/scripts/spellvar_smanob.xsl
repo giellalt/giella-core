@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--+
-    | Usage: java net.sf.saxon.Transform -it main THIS_FILE PARAM_NAME=PARAM_VALUE*
+    | Usage: java net.sf.saxon.Transform -it:main THIS_FILE PARAM_NAME=PARAM_VALUE*
     +-->
 
 <xsl:stylesheet version="2.0"

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--+
     | The parameter: the path to the collection of XML-files to compile
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it main (_sax) collect-dict-parts.xsl dir=DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main (_sax) collect-dict-parts.xsl dir=DIR
     +-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   

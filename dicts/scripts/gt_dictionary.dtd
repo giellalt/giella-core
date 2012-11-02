@@ -19,6 +19,7 @@
       src ( nj | sk | SvSt | other ) #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
+      illpl ( yes | no ) #IMPLIED
 >      
 <!ELEMENT lg (l, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
@@ -107,6 +108,8 @@
 <!ATTLIST mg 
       xml:lang ( sme | nob ) #IMPLIED
 >      
+<!ATTLIST mg re CDATA #IMPLIED >
+
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
       xml:lang ( sme | sma | nob | swe | eng | deu ) #IMPLIED
@@ -124,7 +127,8 @@
             adv | p | pr | po | det |
             pron | prop | i  | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | x  | xxx |
-	    phrase_n | phrase_a | phrase_v | phrase_adv ) #REQUIRED >
+	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg ) #IMPLIED > <!-- t have pos or type -->
+<!ATTLIST t type ( expl ) #IMPLIED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED> <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n ) #IMPLIED >
 <!ATTLIST t nr ( sg | pl ) #IMPLIED >

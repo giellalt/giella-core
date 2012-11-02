@@ -50,7 +50,8 @@
 	      <sdef n="conj."/>
 	      <sdef n="interj."/>
 	      <sdef n="n."/>
-	      <sdef n="n. pl."/>
+	      <sdef n="npl."/>
+<!--	      <sdef n="n. pl."/> -->
 	      <sdef n="num."/>
 	      <sdef n="pcle."/>
 	      <sdef n="postpos."/>

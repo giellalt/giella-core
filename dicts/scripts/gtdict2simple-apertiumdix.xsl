@@ -26,7 +26,7 @@
   <xsl:param name="inFile" select="'default.xml'"/>
 
   <!-- Output dir: customize as you need it -->
-  <xsl:variable name="outDir" select="'out_simple-apertium'"/>
+  <xsl:param name="outDir" select="'out_simple-apertium'"/>
   
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>

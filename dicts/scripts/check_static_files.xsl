@@ -31,7 +31,7 @@
 
   <xsl:param name="inFile" select="'gogo_file'"/>
   <xsl:param name="inDir" select="'../smenob/src'"/>
-  <xsl:variable name="outDir" select="'out_dir'"/>
+  <xsl:param name="outDir" select="'out_dir'"/>
   <xsl:variable name="outFile" select="'test-results'"/>
   <xsl:variable name="of" select="'xml'"/>
   <xsl:variable name="e" select="$of"/>

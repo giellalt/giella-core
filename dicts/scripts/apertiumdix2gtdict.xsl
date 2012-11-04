@@ -26,7 +26,7 @@
   <xsl:param name="tlang" select="'sma'"/>
 
   <!-- Output files -->
-  <xsl:variable name="outDir" select="'outDir'"/>
+  <xsl:param name="outDir" select="'outDir'"/>
   
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>

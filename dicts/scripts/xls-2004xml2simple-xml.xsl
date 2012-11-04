@@ -24,7 +24,7 @@
   <xsl:param name="inDir" select="'xxxdirxxx'"/>
   
   <!-- Output -->
-  <xsl:variable name="outputDir" select="'000_outDir'"/>
+  <xsl:param name="outputDir" select="'000_outDir'"/>
   
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>

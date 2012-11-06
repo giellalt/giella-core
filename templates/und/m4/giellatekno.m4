@@ -94,6 +94,10 @@ AS_IF([test x$with_saxon != xno], [
     AS_IF([test "x$SAXON" != xfalse], [gt_prog_saxon=yes],
           [gt_prog_saxon=no])
     AS_IF([test x$JV != xfalse], [gt_prog_java=yes], [gt_prog_java=no])
+    AC_CHECK_CLASSPATH
+    AC_PROG_JAVAC
+    AC_PROG_JAVA
+    AC_CHECK_CLASS(net.sf.saxon.Transform)
 ], [gt_prog_saxon=no])
 AC_MSG_RESULT([$gt_prog_saxon])
 AM_CONDITIONAL([CAN_SAXON], [test "x$gt_prog_saxon" != xno])

@@ -25101,6 +25101,7 @@ Székesfehérvár BERN-plc ;
 SÁLAS LONDON-obj ;
 SÁMÁS LONDON-obj ;
 SÁNAG:SÁNAG LONDON-org ;
+SÁNAG+Use/Sub:SANAG LONDON-org ;
 Sáben:Sáben9 LONDON-plc ;
 Sábin:Sábin9 LONDON-sur ;
 Sáhppángillar+Use/LexSub:Sáhppán^gillar ANAR-org ; ! !Sáhppángillár gánddat
@@ -27715,6 +27716,7 @@ Ventspils BERN-plc ;
 Venus LONDON-fem ;
 Venäläinen:Venäläi C-FI-NEN-sur ;
 Venås:Ven^ås BERN-sur ;
+Veolia ACCRA-org ;
 Vepsä ACCRA-plc ;
 Vepsäläinen:Vepsäläi C-FI-NEN-sur ;
 Vera ACCRA-fem ;

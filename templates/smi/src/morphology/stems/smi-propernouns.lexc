@@ -1838,6 +1838,7 @@ Barentshavet:Barents^havet LONDON-LOAN-plc ;
 Bárentsprográmma+Use/Sub:Barents^pro^grám'ma MARJA-A-obj ;
 Barentsregionen+Use/LexSub:Barents^regi^onen9 LONDON-plc ; !
 Barentssekretariatet:Barents^sekretariatet9 LONDON-org ;
+BarentsWatch:BarentsWatch9 BERN-obj ;
 Barfod:Barfod9 BERN-sur ;
 Barfoed:Barfoed9 BERN-sur ;
 Barhatov LONDON-sur ;

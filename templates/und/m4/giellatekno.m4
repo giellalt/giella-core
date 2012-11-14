@@ -135,6 +135,14 @@ AS_IF([test "x$enable_voikko" = "xyes"],
       [AC_PATH_PROG([ZIP], [zip], [false])
        AS_IF([test "x$ZIP" = "xfalse"],
              [AC_MSG_ERROR([zip is required for voikko speller packages])])])
+
+# Enable Oahpa transducers - default is 'no'
+AC_ARG_ENABLE([oahpa],
+              [AS_HELP_STRING([--enable-oahpa],
+                              [enable oahpa transducers @<:@default=no@:>@])],
+              [enable_oahpa=$enableval],
+              [enable_oahpa=no])
+AM_CONDITIONAL([WANT_OAHPA], [test "x$enable_oahpa" != xno])
 ]) # gt_ENABLE_TARGETS
 
 AC_DEFUN([gt_PRINT_FOOTER],

@@ -148,6 +148,7 @@ cat<<EOF
     * hfst speller automaton: $enable_spellerautomat
     * voikko support: $enable_voikko
     * yaml tests enabled: $enable_yamltests
+    * Oahpa transducers enabled: $enable_oahpa
 
 For more ./configure options, run ./configure --help
 

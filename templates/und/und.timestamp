@@ -1,4 +1,7 @@
 $Rev$
+Forgot Oahpa configuration feedback.
+
+r65376:
 Several updates:
 * slightly improved feedback from the configure script
 * improved hfst spell checker building

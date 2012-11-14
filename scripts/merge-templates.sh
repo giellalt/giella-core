@@ -14,13 +14,14 @@ function print_usage() {
     echo "  -h, --help           print this usage info"
     echo "  --unsafe             also try to merge unsafe mergables"
     echo "  -r, --revision=REV   start merging from REV instead of timestamp's"
+    echo "  -t, --template=TPL   Only select TPL templates (bash glob)"
     echo
 }
 
 # option variables
 unsafe=""
 forcerev=""
-
+tpl="*"
 # manual getopt loop... Mac OS X does not have good getopt
 while test $# -gt 1 ; do
     if test x$1 = x--unsafe ; then
@@ -40,6 +41,18 @@ while test $# -gt 1 ; do
         else
             forcerev="$2"
             shift
+        fi
+    elif test x$1 = x--template -o x$1 = x-t ; then
+        if test -z $2 ; then
+            if ! echo $1 | fgrep = ; then
+                echo "$1 requires template names"
+                print_usage
+                exit 1
+            else
+                tpl=$(echo $1 | sed -e 's/.*=//')
+            fi
+        else
+            tpl="$2"
         fi
     else
         echo "$0: unknown option $1"
@@ -67,7 +80,8 @@ fi
 CURLANG=`pwd | rev | cut -d'/' -f1 | rev`
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 
-for macrolang in $(ls ${GTCORE}/templates) ; do
+for macrolangdir in ${GTCORE}/templates/${tpl} ; do
+    macrolang=${macrolangdir#${GTCORE}/templates/}
     if test ! -r ${macrolang}.timestamp ; then
         # this is a macro language that has not been subscribed
         echo "Not merging ${macrolang} because ${CURLANG} is not in that set"

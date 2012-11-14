@@ -148,7 +148,10 @@ cat<<EOF
     * hfst speller automaton: $enable_spellerautomat
     * voikko support: $enable_voikko
     * yaml tests enabled: $enable_yamltests
-to build, test and install:
+
+For more ./configure options, run ./configure --help
+
+To build, test and install:
     make
     make check
     make install

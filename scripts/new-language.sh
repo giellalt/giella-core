@@ -33,9 +33,14 @@ touch $1/und.timestamp
 
 # Add the new language to svn:
 svn add --force $1
-# Revert the addition of the source files to make the transition from old to new
-# easier - we want to svn move the old files, so no new source files in svn:
+# Revert the addition of the source files to make the transition from old to
+# new easier - we want to svn move the old files, so no new source files in
+# svn:
 svn revert $1/src/morphology/*/*
+svn revert $1/src/morphology/root.lexc
+svn revert $1/src/syntax/disambiguation.cg3
+svn revert $1/src/phonology/*phon.*
+svn revert $1/src/transcriptions/*.lexc
 
 # Now that the files are knwon to svn, add svn:ignore properties:
 ${GTCORE}/scripts/set-svn-ignores.sh $1

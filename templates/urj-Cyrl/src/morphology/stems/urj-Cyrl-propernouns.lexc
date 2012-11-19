@@ -21,6 +21,7 @@
 ! The URJ-Cyrl (common Uralic Cyrillic) proper noun lexicon
 ! =========================================
 
+LEXICON urj-Cyrl-ProperNouns
 Аалунд:Аалунд CYRL-Cons-sur ;
 Абабков:Абабков Deriv-RUS-V-surmal ;
 Абаджев:Абаджев Deriv-RUS-V-surmal ;
@@ -28797,6 +28798,7 @@
 Цикенонпасер:Цикенонпасер CYRL-Cons-sur ;
 Циконицкий:Циконицк Deriv-RUS-KIJ-surmal ;
 Цикурис:Цикурис CYRL-Sibilant-sur ;
+Циликин:Циликин Deriv-RUS-IN-surmal ;
 Цилинский:Цилинск Deriv-RUS-KIJ-surmal ;
 Цимбиди:Цимбиди CYRL-Vow-sur ;
 Цимлянсков:Цимлянсков Deriv-RUS-V-surmal ;
@@ -29252,6 +29254,7 @@
 Чешков:Чешков Deriv-RUS-V-surmal ;
 Чибизов:Чибизов Deriv-RUS-V-surmal ;
 Чибисов:Чибисов Deriv-RUS-V-surmal ;
+Чивалдов:Чивалдов Deriv-RUS-V-surmal ;
 Чибышев:Чибышев Deriv-RUS-V-surmal ;
 Чивилев:Чивилев Deriv-RUS-V-surmal ;
 Чивилихин:Чивилихин Deriv-RUS-IN-surmal ;

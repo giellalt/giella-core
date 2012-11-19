@@ -22,7 +22,11 @@
             <xs:element minOccurs="0" ref="semRole"/>
             <xs:element minOccurs="0" ref="phonet"/>
             <xs:element minOccurs="0" ref="morphg"/>
-            <xs:element maxOccurs="unbounded" ref="e"/>
+	   <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="drv"/>
+            <xs:element ref="etymg"/>
+	   </xs:choice>
+            <xs:element maxOccurs="unbounded" ref="mg"/>
          </xs:sequence>
          <xs:attribute name="exclude">
             <xs:simpleType>
@@ -391,6 +395,7 @@
          <xs:enumeration value="V-IMP-PRT"/>
          <xs:enumeration value="V-REFL"/>
          <xs:enumeration value="V-INST"/>
+         <xs:enumeration value="PRON-INTERR"/>
          <xs:enumeration value="Q_A"/>
          <xs:enumeration value="Q_ADV"/>
          <xs:enumeration value="Q_DET"/>
@@ -450,143 +455,6 @@
          <xs:simpleContent>
             <xs:extension base="xs:string"/>
          </xs:simpleContent>
-      </xs:complexType>
-   </xs:element>
-<!--
-   <xs:attribute name="contlex">
-      <xs:simpleType>
-         <xs:restriction base="xs:string">
-            <xs:enumeration value="A1"/>
-            <xs:enumeration value="A1S"/>
-            <xs:enumeration value="A1S-IS_PTCP-Z"/>
-            <xs:enumeration value="A1S-PRED"/>
-            <xs:enumeration value="A2"/>
-            <xs:enumeration value="A3"/>
-            <xs:enumeration value="AbbrSF"/>
-            <xs:enumeration value="AbbrHF"/>
-            <xs:enumeration value="AbbrB"/>
-            <xs:enumeration value="Ad-A"/>
-            <xs:enumeration value="ADV"/>
-            <xs:enumeration value="ADV-IS_ELA"/>
-            <xs:enumeration value="ADV-IS_PTCP-Z"/>
-            <xs:enumeration value="ADV-MANNER"/>
-            <xs:enumeration value="ADV-POSITION"/>
-            <xs:enumeration value="ADV-STATE"/>
-            <xs:enumeration value="ADV-TEMP"/>
-            <xs:enumeration value="CLT"/>
-            <xs:enumeration value="CONJ"/>
-            <xs:enumeration value="DISTR"/>
-            <xs:enumeration value="GEN-ATTR"/>
-            <xs:enumeration value="INTERJ"/>
-            <xs:enumeration value="INTERJ-IMP"/>
-            <xs:enumeration value="MODIFIER"/>
-            <xs:enumeration value="N1"/>
-            <xs:enumeration value="N1-SUB"/>
-            <xs:enumeration value="N1-IS_VOC"/>
-            <xs:enumeration value="N1-Pl"/>
-            <xs:enumeration value="N1-Pl-SUB"/>
-            <xs:enumeration value="N1-Sg"/>
-            <xs:enumeration value="N1-Sg-SUB"/>
-            <xs:enumeration value="N1S"/>
-            <xs:enumeration value="N1S-SUB"/>
-            <xs:enumeration value="N1S-IS_PTCP-Z"/>
-            <xs:enumeration value="N1S-Pl"/>
-            <xs:enumeration value="N1S-Sg"/>
-            <xs:enumeration value="N2"/>
-            <xs:enumeration value="N2-SUB"/>
-            <xs:enumeration value="N2-Pl"/>
-            <xs:enumeration value="N2-Sg"/>
-            <xs:enumeration value="N3"/>
-            <xs:enumeration value="N3-SUB"/>
-            <xs:enumeration value="N3-IS_ASSOC"/>
-            <xs:enumeration value="N3-IS_PTCP-Z"/>
-            <xs:enumeration value="N3-IS_TEMP"/>
-            <xs:enumeration value="N3-Pl"/>
-            <xs:enumeration value="N3-Sg"/>
-            <xs:enumeration value="N_Y-E"/>
-            <xs:enumeration value="N_0-O"/>
-            <xs:enumeration value="NUM"/>
-            <xs:enumeration value="NUM-CARD"/>
-            <xs:enumeration value="NUM-CARD-APPR"/>
-            <xs:enumeration value="NUM-CARD-ITER"/>
-            <xs:enumeration value="NUM-ORD"/>
-            <xs:enumeration value="NUM-ORD-ITER"/>
-            <xs:enumeration value="PART"/>
-            <xs:enumeration value="PART-DEICT"/>
-            <xs:enumeration value="PART-IMP"/>
-            <xs:enumeration value="PART-IMP-IS_PL"/>
-            <xs:enumeration value="PART-IMP-IS_SG"/>
-            <xs:enumeration value="PART-NEG"/>
-            <xs:enumeration value="PART-ONOM"/>
-            <xs:enumeration value="PART1-ONOM"/>
-            <xs:enumeration value="PART1S-ONOM"/>
-            <xs:enumeration value="PART2-ONOM"/>
-            <xs:enumeration value="PART3-ONOM"/>
-            <xs:enumeration value="POSTP"/>
-            <xs:enumeration value="POSTP-TEMP"/>
-            <xs:enumeration value="PRON"/>
-            <xs:enumeration value="PRON-INDEF"/>
-            <xs:enumeration value="PRON-NONSPEC"/>
-            <xs:enumeration value="PRON-PERS"/>
-            <xs:enumeration value="PRON-RECIP"/>
-            <xs:enumeration value="QNT"/>
-            <xs:enumeration value="QNT1"/>
-            <xs:enumeration value="QNT3"/>
-            <xs:enumeration value="QNT-DISTR"/>
-            <xs:enumeration value="QNT-ITER"/>
-            <xs:enumeration value="QNT-UNIV"/>
-            <xs:enumeration value="REFL"/>
-            <xs:enumeration value="SPAT"/>
-            <xs:enumeration value="SPAT-DEICT"/>
-            <xs:enumeration value="SPAT-DEPEND"/>
-            <xs:enumeration value="SPAT-INDEP"/>
-            <xs:enumeration value="SPAT1"/>
-            <xs:enumeration value="SPAT1-DEPEND"/>
-            <xs:enumeration value="SPAT1-INDEP"/>
-            <xs:enumeration value="SPAT1S"/>
-            <xs:enumeration value="SPAT1S-DEPEND"/>
-            <xs:enumeration value="SPAT1S-INDEP"/>
-            <xs:enumeration value="SPAT2"/>
-            <xs:enumeration value="SPAT2-DEPEND"/>
-            <xs:enumeration value="SPAT2-INDEP"/>
-            <xs:enumeration value="SPAT3"/>
-            <xs:enumeration value="SPAT3-DEPEND"/>
-            <xs:enumeration value="SPAT3-INDEP"/>
-            <xs:enumeration value="SUMMON"/>
-            <xs:enumeration value="V-FINITE"/>
-            <xs:enumeration value="V-NEG"/>
-            <xs:enumeration value="V-avolj"/>
-            <xs:enumeration value="V-ez"/>
-            <xs:enumeration value="V-IMP-PRT"/>
-            <xs:enumeration value="V-panems"/>
-            <xs:enumeration value="V-panemsT"/>
-            <xs:enumeration value="V-panems_ObjAll"/>
-            <xs:enumeration value="V-panemsT_ObjAll"/>
-            <xs:enumeration value="V-panemsVU"/>
-            <xs:enumeration value="V-panemsVI"/>
-            <xs:enumeration value="V-kundams"/>
-            <xs:enumeration value="V-kundams_ObjAll"/>
-            <xs:enumeration value="V-kundams-EJE"/>
-            <xs:enumeration value="V-kundams-EJE_ObjAll"/>
-            <xs:enumeration value="V-satoms"/>
-            <xs:enumeration value="V-satoms_ObjAll"/>
-            <xs:enumeration value="V-jarsams"/>
-            <xs:enumeration value="indef_gen"/>
-         </xs:restriction>
-      </xs:simpleType>
-   </xs:attribute>
--->
-   <xs:element name="e">
-      <xs:complexType>
-         <xs:sequence>
-	   <xs:choice maxOccurs="unbounded" minOccurs="0">
-            <xs:element ref="drv"/>
-            <xs:element ref="etymg"/>
-	   </xs:choice>
-            <xs:element maxOccurs="unbounded" ref="mg"/>
-         </xs:sequence>
-         <xs:attribute ref="No"/>
-         <xs:attribute ref="RNo"/>
       </xs:complexType>
    </xs:element>
    <xs:attribute name="Contlex" type="xs:string"/>

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -x # this's neat debug stuff
+set -x # this's neat debug stuff
 
 if test -z "${GTCORE}" ; then
     echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"
@@ -23,7 +23,7 @@ unsafe=""
 forcerev=""
 tpl="*"
 # manual getopt loop... Mac OS X does not have good getopt
-while test $# -gt 1 ; do
+while test $# -ge 1 ; do
     if test x$1 = x--unsafe ; then
         unsafe=unsafe
     elif test x$1 = x--help -o x$1 = x-h ; then

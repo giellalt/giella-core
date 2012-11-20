@@ -10,11 +10,11 @@
    <xs:element name="r">
       <xs:complexType>
          <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="entry"/>
+            <xs:element maxOccurs="unbounded" ref="e"/>
          </xs:sequence>
       </xs:complexType>
    </xs:element>
-   <xs:element name="entry">
+   <xs:element name="e">
       <xs:complexType>
          <xs:sequence>
             <xs:element ref="lg"/>

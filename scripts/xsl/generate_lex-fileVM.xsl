@@ -29,7 +29,7 @@
   <xsl:param name="outDir" select="'out'"/>
   <xsl:variable name="of" select="'txt'"/>
   <xsl:variable name="debug" select="true()"/>
-  <xsl:variable name="FstEntries" select="count(document($inFile)/r/entry[not(@exclude='fst')])"/>
+  <xsl:variable name="FstEntries" select="count(document($inFile)/r/e[not(@exclude='fst')])"/>
 
   <xsl:template match="/" name="main">
     
@@ -56,7 +56,7 @@
 	<!-- this might have to be refined: too underspecified as for preceding::lemma-stem combinations -->
 	<!-- xsl:for-each select="./dict/entry[not(contains(./lemma/text(), $us))] the underscore should be replaced by "% "-->
 	<!--xsl:for-each select="document($inFile)/dict/entry[not(./lemma = preceding::entry/lemma and ./stem = preceding::entry/stem)][not(./@exclude='fst')]"-->
-	<xsl:for-each select="document($inFile)/r/entry[not(./@exclude='fst')]/lg/stg/st">
+	<xsl:for-each select="document($inFile)/r/e[not(./@exclude='fst')]/lg/stg/st">
 
 	  <xsl:variable name="out">
 	    <out>

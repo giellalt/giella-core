@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x # this's neat debug stuff
+#set -x # this's neat debug stuff
 
 if test -z "${GTCORE}" ; then
     echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"

@@ -1,5 +1,10 @@
 $Rev$
-Jack added male given names that can be used for deriving patronymics in Russian. The given names and patronymics are vital to usage in the _RU_ domain. 
+{{{
+$GTHOME/gtcore/templates/TEMPLATENAME/TEMPLATENAME.timestamp
+}}}
+
+r65944:
+Over 1000 male given names have been added to the template. The male given names are ones with derivable patronymics for the media in the _RU_ domain.
 
 r65777:
 Jack added lexicon name, two new names. NOTE: All edits should be done in the

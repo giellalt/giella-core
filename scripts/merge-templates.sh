@@ -22,6 +22,7 @@ function print_usage() {
 unsafe=""
 forcerev=""
 tpl="*"
+
 # manual getopt loop... Mac OS X does not have good getopt
 while test $# -ge 1 ; do
     if test x$1 = x--unsafe ; then

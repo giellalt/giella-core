@@ -31152,7 +31152,9 @@ LEXICON urj-Cyrl-ProperNouns
 Мирон:Мирон PropNameMaleDer-Ovich  "" ;
 Мирослав:Мирослав PropNameMaleDer-Ovich  "" ;
 Митрофан:Митрофан PropNameMaleDer-Ovich  "" ;
-!!Михаил:Михаил PropNameMaleDer-Ovich  "" ;
+Михаил:Михаил Prop-Mal-kal "" ;
+Михаил:Михайлович Prop-PatrMal-osh "" ;
+Михаил:Михайловна Prop-PatrFem-kudo "" ;
 Модест:Модест PropNameMaleDer-Ovich  "" ;
 Морис:Морис PropNameMaleDer-Ovich  "" ;
 Мстислав:Мстислав PropNameMaleDer-Ovich  "" ;

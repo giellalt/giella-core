@@ -74,8 +74,6 @@ Aanna ACCRA-fem ;
 Aanonsen:Aanonsen9 LONDON-sur ;
 Aanstad:Aan^stad9 BERN-sur ;
 Aarbakke:Aar^bakke ACCRA-sur ;
-Aarporte+Use/Sub:Aarborte ACCRA-plc ; !
-Aarporte:Aarporte ACCRA-plc ; 
 Aardal:Aar^dal BERN-sur ;
 Aare ACCRA-mal ;
 Aarebrot:Aare^brot BERN-sur ;
@@ -134,7 +132,7 @@ Abba ACCRA-fem ;
 Abbas LONDON-sur ;
 Abbedienga:Abbedi^enga ACCRA-plc ;
 Abbott LONDON-sur ;
-Abd+Use/Sub:Abd9 BERN-plc ; !
+Abd+Use/LexSub:Abd9 BERN-plc ; !
 Abdi ACCRA-plc ;
 Abdul LONDON-mal ;
 Abdullah:Abdullah9 LONDON-mal ;
@@ -230,17 +228,15 @@ Adriaterhavet:Adri^ater^havet LONDON-LOAN-plc ;
 Adsjaria ACCRA-plc ;
 Adventdalen:Advent^dalen9 LONDON-plc ;
 Adygia ACCRA-plc ;
-Aejlies% gaaltije+Use/Sub:Aej9lies% gaaltije SIJTE-obj ;
+Aejlies% gaaltije+Use/LexSub:Aej9lies% gaaltije SIJTE-obj ;
 Aeroflot:Aero^flot BERN-org ;
 Aetat BERN-org ;
 Aetáhta MARJA-A-org ;
 Afanasjeva ACCRA-sur ;
 Afanassieva:Afanassi^eva ACCRA-sur ;
 Affairs BERN-org ;
-Afganistan+Use/Sub:Afgani^stan9 BERN-plc ;
+Afghanistan+Use/Sub:Afgani^stan9 BERN-plc ;
 Afghanistan:Afghani^stan9 BERN-LOAN-plc ; !
-Afghanistána:Afghani^stána MARJA-A-plc ;
-Afrihkka+Use/Sub:Afrihkka ACCRA-plc ; !
 Afrika ACCRA-LOAN-plc ;
 Afrodite ACCRA-fem ;
 Afset LONDON-plc ;
@@ -327,11 +323,11 @@ Ahvenjärvi:Ahven^järvi ACCRA-plc ;
 Ahvenlampi:Ahven^lampi ACCRA-plc ;
 Ahvenniemi:Ahven^niemi ACCRA-plc ;
 Ahvonen:Ahvo C-FI-NEN-sur ;
-Ai+Use/Sub:Ai NYSTØ-plc ; !
+Ai+Use/LexSub:Ai NYSTØ-plc ; !
 Aias:A^ias LONDON-sur ;
 Aid:Aid9 BERN-sur ;
 Aida ACCRA-fem ;
-Aidejavri+Use/Sub:Aide^javri ACCRA-plc ; !
+Aidejavri+Use/LexSub:Aide^javri ACCRA-plc ; !
 Aigina ACCRA-plc ;
 Aigir LONDON-plc ;
 Aikio-Arianaick:Aikio-Ari^anaick BERN-sur ;
@@ -363,7 +359,7 @@ Airlines:Air^lines BERN-obj ;
 Airola ACCRA-sur ;
 Airport BERN-obj ;
 Airways:Air^ways BERN-obj ;
-Aisaroaivi+Use/Sub:Aisar^oaivi ACCRA-plc ; !
+Aisaroaivi+Use/LexSub:Aisar^oaivi ACCRA-plc ; !
 Aisha ACCRA-fem ;
 Aiskines:Aiski^nes BERN-plc ;
 Aiskylos LONDON-mal ;
@@ -521,7 +517,7 @@ Aldeigja ACCRA-plc ;
 Aldeigjuborg:Aldeigju^borg9 BERN-plc ;
 Alderney BERN-plc ;
 Aldershot:Alder^shot BERN-plc ;
-Aldesjávri+Use/Sub:Aldes^jávri ACCRA-plc ; !
+Aldesjávri+Use/LexSub:Aldes^jávri ACCRA-plc ; !
 Aldonis LONDON-sur ;
 Aldra ACCRA-plc ;
 Aldridge ACCRA-plc ;
@@ -569,7 +565,7 @@ Algarve ACCRA-plc ;
 Algeciras LONDON-plc ;
 Alger BERN-plc ;
 Algeria ACCRA-plc ;
-Algerie+Use/Sub:Algerie ACCRA-plc ; !
+Algeria+Use/Sub:Algerie ACCRA-plc ; !
 Algirdas LONDON-plc ;
 Algrøy+Use/Sub:Algr^øy NYSTØ-plc ; !
 Algrøy:Algr^øy BERN-plc ;
@@ -600,7 +596,7 @@ Allahabad:Allahabad9 BERN-plc ;
 Allan:Allan9 LONDON-mal ;
 Allaq LONDON-mal ;
 Allas LONDON-sur ;
-Allegaissa+Use/Sub:Alle^gaissa ACCRA-plc ; !
+Allegaissa+Use/LexSub:Alle^gaissa ACCRA-plc ; !
 Allegheny ACCRA-plc ;
 Alleknjárg:Allek^njárg9 BERN-LOAN-plc ;
 Allemannsrett:Alle^manns^rett BERN-obj ;
@@ -680,7 +676,7 @@ Altafjorden:Alta^fjorden9 LONDON-LOAN-plc ;
 Altai:Alta DUBAI-plc ;
 Altaj:Altaj9 BERN-plc ;
 Altan% Urag:Altan% Urag9 LONDON-org ;
-Altan% urag+Use/Sub:Altan% urag9 LONDON-org ;
+Altan% Urag+Use/Sub:Altan% urag9 LONDON-org ;
 Altaposten:Alta^posten9 LONDON-org ;
 Altaturnering:Altaturnering9 LONDON-org ;
 Altay BERN-plc ;
@@ -736,7 +732,7 @@ Amapá ACCRA-plc ;
 Amaranta ACCRA-fem ;
 Amazon:Amazon9 BERN-plc ;
 Amazonas LONDON-plc ;
-Amazonsletta+Use/Sub:Amazon^sletta ACCRA-plc ; !
+Amazonsletta+Use/LexSub:Amazon^sletta ACCRA-plc ; !
 Ambjørg:Am^bjørg9 BERN-fem ;
 Amble ACCRA-sur ;
 Ambrosen:Ambrosen9 LONDON-sur ;
@@ -745,7 +741,6 @@ Amdam:Amdam9 BERN-plc ;
 Amdrup:Amdrup9 BERN-plc ;
 Ameln:Ameln9 LONDON-plc ;
 American:American9 LONDON-org ;
-Amerihká+Use/Sub:Amerihká ACCRA-plc ; !
 Amerika ACCRA-LOAN-plc ;
 Amerikansk:Amerikansk9 LONDON-org ;
 Amfipolisa:Amfi^polisa ACCRA-plc ;
@@ -801,7 +796,6 @@ Anaksimenes BERN-plc ;
 Anania ACCRA-plc ;
 Ananias:Anani^as LONDON-mal ;
 Anaripiggen:Anari^piggen9 LONDON-plc ;
-Anarjohka+Use/Sub:Anar^joh'ka ACCRA-plc ; !
 Anastasia ACCRA-fem ;
 Anatolia ACCRA-plc ;
 Anatolij:Anatolij9 LONDON-mal ;
@@ -847,7 +841,7 @@ Andkilvatnet:Andkil^vatnet LONDON-plc ;
 Andong:Andong9 BERN-plc ;
 Andopsnes:Andops^nes BERN-plc ;
 Andor LONDON-mal ;
-Andora+Use/Sub:Andora ACCRA-plc ; !
+Andorra+Use/Sub:Andora ACCRA-plc ; !
 Andorf BERN-plc ;
 Andorfjellet:Andor^fjellet LONDON-plc ;
 Andorra ACCRA-plc ;
@@ -1142,10 +1136,8 @@ Arctander LONDON-sur ;
 Arctandria ACCRA-obj ;
 Arctic LONDON-org ;
 Arctic% Femme ACCRA-org ;
-Arctic% Gold% AB BERN-org ;
-Arctic% Gold% AB+Use/Sub: Artic% Gold% AB BERN-org ;
+Arctic% Gold% AB+Use/LexSub: Artic% Gold% AB BERN-org ;
 Arctic% Gold:Arctic% Gold9 BERN-org ;
-Arctic% Gold+Use/Sub:Artic% Gold9 BERN-org ;
 Arctic% Vilt BERN-org ;
 Arcticnet:Arctic^net BERN-obj ;
 Arcturus LONDON-malsur ;
@@ -1288,7 +1280,7 @@ Artemisa ACCRA-plc ;
 Artfjellet:Art^fjellet LONDON-plc ;
 Arthrizin:Arthrizin9 BERN-obj ;
 Arthur LONDON-mal ;
-Arts% and% Migration% Music% Festival+Use/Sub:Arts% and% Migration% Music% Festival BERN-org ;
+Arts% and% Migration% Music% Festival+Use/LexSub:Arts% and% Migration% Music% Festival BERN-org ;
 Artsfjell:Arts^fjell BERN-plc ;
 Artur LONDON-mal ;
 Aruba ACCRA-plc ;
@@ -1400,7 +1392,7 @@ Asponn:Asponn9 BERN-plc ;
 Aspås:Asp^ås BERN-plc ;
 Assab:Assab9 LONDON-plc ;
 Assam:Assam9 LONDON-plc ;
-Assebakti+Use/Sub:Asse^bakti ACCRA-plc ; !
+Assebakti+Use/LexSub:Asse^bakti ACCRA-plc ; !
 Assembly ACCRA-obj ;
 Assen:Assen9 LONDON-sur ;
 Assens LONDON-sur ;
@@ -1430,7 +1422,7 @@ Astrup:Astrup9 BERN-sur ;
 Asturia ACCRA-plc ;
 Asukas BERN-sur ;
 Asuncion:Asuncion9 BERN-plc ;
-Asunción+Use/Sub:Asunción9 BERN-plc ; !
+Asuncion+Use/Sub:Asunción9 BERN-plc ; !
 Asunmaa:Asun^maa ACCRA-sur ;
 Asunta ACCRA-plc ;
 Asur LONDON-mal ;
@@ -1451,7 +1443,7 @@ Athen:Athen9 BERN-plc ;
 Athene ACCRA-fem ;
 Atitlán:Atitlán9 BERN-plc ;
 Atlanta ACCRA-LOAN-plc ;
-Atlanten+Use/Sub:Atlanten9 LONDON-plc ; !
+Atlanten:Atlanten9 LONDON-LOAN-plc ; !
 Atlanteren:Atlanteren9 LONDON-LOAN-plc ;
 Atlanterhavet:Atlanter^havet LONDON-LOAN-plc ;
 Atlanterhavsryggen+Use/LexSub:Atlanter^havs^ryggen9 LONDON-plc ; !
@@ -1612,7 +1604,7 @@ Avikainen:Avikai C-FI-NEN-sur ;
 Avila ACCRA-plc ;
 Avinor:Avi^nor BERN-org ;
 Aviv LONDON-plc ;
-Avjuvarri+Use/Sub:Avju^varri ACCRA-plc ; !
+Avjuvarri+Use/LexSub:Avju^varri ACCRA-plc ; !
 Avløs BERN-plc ;
 Avløyp:Avløyp9 BERN-obj ;
 Avon:Avon9 LONDON-plc ;
@@ -1702,8 +1694,6 @@ Bajasid:Bajasid9 BERN-plc ;
 Bajkal:Baj9kal BERN-plc ;
 Bajkonur:Baj9konur LONDON-plc ;
 Bajme:Baj9me ACCRA-plc ;
-Bajábeal:Bajá^beal BERN-LOAN-obj ;
-Bajálbeal+Use/Sub:Bajál^beal BERN-obj ; !
 BakPommern:Bak^Pommern9 LONDON-plc ;
 Bakalorz:Bakalorz9 BERN-plc ;
 Baker LONDON-sur ;
@@ -1728,7 +1718,7 @@ Bakkerud:Bakkerud9 BERN-plc ;
 Bakkesvadet LONDON-plc ;
 Bakkevold:Bakkevold9 BERN-sur ;
 Bakkiljok:Bakkil^jok BERN-LOAN-plc ;
-Bakkilvarri+Use/Sub:Bakkil^varri ACCRA-plc ; !
+Bakkilvarri+Use/LexSub:Bakkil^varri ACCRA-plc ; !
 Bakklandet:Bakk^landet LONDON-plc ;
 Bakstad:Bak^stad9 BERN-sur ;
 Bakstvål:Baks^tvål BERN-plc ;
@@ -1837,7 +1827,6 @@ Bardujord:Bardu^jord9 BERN-plc ;
 Barekstad:Barek^stad9 BERN-sur ;
 Barents LONDON-LOAN-plc ;
 Barentshavet:Barents^havet LONDON-LOAN-plc ;
-Bárentsprográmma+Use/Sub:Barents^pro^grám'ma MARJA-A-obj ;
 Barentsregionen+Use/LexSub:Barents^regi^onen9 LONDON-plc ; !
 Barentssekretariatet:Barents^sekretariatet9 LONDON-org ;
 BarentsWatch:BarentsWatch9 BERN-obj ;
@@ -2001,7 +1990,7 @@ Begá ACCRA-plc ;
 Behkká MARJA-mal ;
 Behncke ACCRA-sur ;
 Behtter LONDON-sur ;
-Beian+Use/Sub:Be^ian9 LONDON-plc ; !
+Beian+Use/LexSub:Be^ian9 LONDON-plc ; !
 Beiarn:Be^iarn9 LONDON-LOAN-plc ;
 Beichman:Beich^man9 BERN-sur ;
 Beichmann:Beich^mann9 BERN-sur ;
@@ -2264,7 +2253,7 @@ Bertta ACCRA-fem ;
 Berven:Berven9 LONDON-sur ;
 Beryl BERN-obj ;
 Besançon:Besançon9 BERN-plc ;
-Beskinjarg+Use/Sub:Beski^njarg9 BERN-plc ; !
+Beskinjarg+Use/LexSub:Beski^njarg9 BERN-plc ; !
 Bessa ACCRA-plc ;
 Bessaker:Bess^aker LONDON-plc ;
 Bessarabia ACCRA-plc ;
@@ -2282,7 +2271,7 @@ Betfag:Betfag9 BERN-plc ;
 Beth:Beth9 BERN-fem ;
 Bethel LONDON-plc ;
 Bethesda ACCRA-fem ;
-Bethlehem+Use/Sub:Bethle^hem9 BERN-plc ; !
+Betlehem+Use/Sub:Bethle^hem9 BERN-plc ; !
 Betina ACCRA-fem ;
 Betlehem:Betle^hem9 BERN-plc ;
 Betna ACCRA-plc ;
@@ -2310,7 +2299,7 @@ Bidjovagge:Bidjo^vagge ACCRA-LOAN-plc ;
 Bidne ACCRA-sur ;
 Bie ACCRA-sur ;
 Bieda ACCRA-mal ;
-Bieddjuvaggi+Use/Sub:Bieddju^vaggi ACCRA-plc ; !
+Bieddjuvaggi+Use/LexSub:Bieddju^vaggi ACCRA-plc ; !
 Biede ACCRA-plc ;
 Biehttár ANAR-mal ;
 Biehtár LONDON-mal ;
@@ -2349,7 +2338,7 @@ Bill BERN-sur ;
 Billabong:Billabong9 BERN-sur ;
 Billefjord:Bille^fjord9 BERN-LOAN-plc ;
 Billesø:Billes^ø NYSTØ ;
-Billingan+Use/Sub:Billingan9 BERN-plc ; !
+Billingan+Use/LexSub:Billingan9 BERN-plc ; !
 Billingen:Billingen9 BERN-plc ;
 Billings LONDON-sur ;
 Billingstad:Billing^stad9 BERN-sur ;
@@ -2696,7 +2685,6 @@ Bockelie:Bocke^lie ACCRA-sur ;
 Boda ACCRA-plc ;
 Boday LONDON-plc ;
 Boddu.com:Boddu.com9 BERN-obj ;
-Bodeajju+Use/Sub:Bodeaj9ju ACCRA-plc ; !
 Bodelsen:Bodelsen9 LONDON-sur ;
 Boden:Boden9 LONDON-plc ;
 Bodhild:Bod^hild9 BERN-fem ;
@@ -2733,7 +2721,7 @@ Bognerud:Bognerud9 BERN-sur ;
 Bognes:Bog^nes BERN-sur ;
 Bogoljubskij:Bogoljubskij9 LONDON-plc ;
 Bogota ACCRA-plc ;
-Bogotá+Use/Sub:Bogotá ACCRA-plc ; !
+Bogota+Use/Sub:Bogotá ACCRA-plc ; !
 Bogsund:Bog^sund9 SUND-plc ;
 Bogåtangen:Bogå^tangen9 LONDON-plc ;
 Bogøy+Use/Sub:Bog^øy NYSTØ-plc ; !
@@ -3001,7 +2989,7 @@ Braskereidfoss:Brasker^eid^foss9 BERN-plc ;
 Brasov LONDON-sur ;
 Brassus LONDON-plc ;
 Brastad:Bra^stad9 BERN-sur ;
-Brasília+Use/Sub:Brasília ACCRA-plc ; !
+Brasilia+Use/Sub:Brasília ACCRA-plc ; !
 Brasøy+Use/Sub:Bras^øy NYSTØ-plc ; !
 Brasøy:Bras^øy BERN-plc ;
 Brataas:Brat^aas BERN-sur ;
@@ -3332,9 +3320,6 @@ Bud:Bud9 BERN-sur ;
 Buda ACCRA-fem ;
 Budapest:Budapest9 BERN-plc ;
 Buddha:Bud^dha ACCRA-mal ; !Or just obj?
-Budeajju+Use/Sub:Budeaj9ju ACCRA-plc ; !
-Budejju:Budej9ju ACCRA-plc ; ! j9 in order to avoid Budeiju. j9 goes to j
-Budeju+Use/Sub:Budeju ACCRA-plc ; !
 Budstikken:Bud^stikken9 LONDON-plc ;
 Budtz:Budtz9 BERN-sur ;
 Budweiser LONDON-obj ;
@@ -3469,13 +3454,13 @@ Byglandsfjord:Byg^lands^fjord9 BERN-plc ;
 Bygningabalken:Bygninga^balken9 LONDON-obj ;
 Bykle ACCRA-plc ;
 Byre ACCRA-sur ;
-Byrkiije+Use/Sub:Byrkiije ACCRA-plc ; !
+Byrkije+Use/Sub:Byrkiije ACCRA-plc ; !
 Byrkije ACCRA-plc ;
 Byrkjedal:Byrkje^dal BERN-plc ;
 Byrknes:Byrk^nes BERN-plc ;
 Bysants BERN-plc ;
 Byske ACCRA-plc ;
-Bájddár+Use/Sub:Báj9ddár LONDON-plc ; !
+Bájdár+Use/Sub:Báj9ddár LONDON-plc ; !
 Bákte-Lárás LONDON-mal ;
 Bánnos LONDON-mal ;
 Bárdeluovttjohka:Bárde^luovtt^joh'ka MARJA-A-plc ;
@@ -3515,7 +3500,7 @@ Båtnes BERN-sur ;
 Båtsfjord:Båts^fjord9 BERN-plc ;
 Båtstø:Båt^stø NYSTØ-plc ;
 Bæhr BERN-sur ;
-Bæivasgiedde+Use/Sub:Bæivas^giedde ACCRA-plc ; !
+Bæivasgiedde+Use/LexSub:Bæivas^giedde ACCRA-plc ; !
 Bæivi ACCRA-sur ;
 Bækgaard:Bæk^gaard9 BERN-sur ;
 Bækken:Bækken9 LONDON-sur ;
@@ -4182,7 +4167,7 @@ Dakar BERN-plc ;
 Dakhla ACCRA-plc ;
 Dakia ACCRA-plc ;
 Dakota ACCRA-plc ;
-Dakteroavvi+Use/Sub:Dakte^roavvi ACCRA-plc ; !
+Dakteroavvi+Use/LexSub:Dakte^roavvi ACCRA-plc ; !
 Dalai:Dala DUBAI-mal ;
 Dalai-Nor BERN-plc ;
 Dalan:Dalan9 LONDON-sur ;
@@ -4292,7 +4277,7 @@ Dartmouth:Dart^mouth9 LONDON-plc ;
 Darussalam:Darussalam9 BERN-plc ;
 Darwin:Darwin9 LONDON-sur ;
 Dashen:Dashen9 LONDON-plc ;
-Daskurieppi+Use/Sub:Dasku^rieppi ACCRA-plc ; !
+Daskurieppi+Use/LexSub:Dasku^rieppi ACCRA-plc ; !
 Datan:Datan9 LONDON-org ;
 Dataquest:Data^quest9 BERN-org ;
 Datatilsynet:Data^tilsynet LONDON-org ;
@@ -4314,7 +4299,7 @@ Davvin LONDON-obj ;
 Dawson:Dawson9 LONDON-sur ;
 Dayton:Dayton9 LONDON-sur ;
 Daytona ACCRA-plc ;
-De% Silva+Use/Sub:De% Silva ACCRA-plc ; !
+De% Silva+Use/LexSub:De% Silva ACCRA-plc ; !
 De% rettferdiges% strid+Use/LexSub:De% rettferdiges% strid9 BERN-obj ;
 DeCaspar:De^Caspar LONDON-sur ;
 Deahppán ANAR-mal ;
@@ -4411,7 +4396,7 @@ Detroit:Detro^it LONDON-plc ;
 Detsika:Detsika ACCRA-plc ;
 Dettifoss:Detti^foss9 BERN-plc ;
 Devddesjohka:Devddes^joh'ka MARJA-A-plc ;
-Devdesvarri+Use/Sub:Devdes^varri ACCRA-plc ; !
+Devdesvarri+Use/LexSub:Devdes^varri ACCRA-plc ; !
 Devdisfjell:Devdis^fjell BERN-LOAN-plc ;
 Devdisfjäll:Devdis^fjäll BERN-LOAN-plc ;
 Devi ACCRA-mal ;
@@ -4443,12 +4428,11 @@ Didrik LONDON-mal ;
 Didriksen:Didriksen9 LONDON-sur ;
 Die% Lappische% Volksmusik+CmpN/None:Die% Lappische% Volks^musik9 BERN-obj ;
 Difi ACCRA-obj ;
-Diedut+Use/Sub:Diedut BERN-obj ; !
 Diehpele:Di^ehpele ACCRA-plc ;
 Diem:Di^em9 LONDON-sur ;
 Dien:Di^en9 LONDON-plc ;
 Dieppe:Di^eppe ACCRA-plc ;
-Dierbmesvarri+Use/Sub:Dierbmes^varri ACCRA-plc ; !
+Dierbmesvarri+Use/LexSub:Dierbmes^varri ACCRA-plc ; !
 Diesen:Diesen9 LONDON-sur ;
 Dieter LONDON-mal ;
 Dietrichson:Dietrichson9 LONDON-sur ;
@@ -4464,7 +4448,7 @@ Diijá:Dij'já MARJA-mal ;
 Diinná ACCRA-plc ;
 Dijon:Dijon9 LONDON-plc ;
 Dikkanen:Dikkanen9 LONDON-sur ;
-Dikkkanen+Use/Sub:Dikkkanen9 LONDON-sur ; !
+Dikkanen+Use/Sub:Dikkkanen9 LONDON-sur ; !
 Dikla ACCRA-plc ;
 Dikson:Dikson9 LONDON-sur ;
 Dili ACCRA-sur ;
@@ -4510,7 +4494,6 @@ Ditten:Ditten9 LONDON-sur ;
 Dividalen:Divi^dalen LONDON-LOAN-plc ;
 Divide ACCRA-plc ;
 Divielva:Divi^elva ACCRA-LOAN-plc ;
-Divtasvuodna+Use/Sub:Divtas^vuodna ACCRA-plc ; !
 Divvun:Divvum ANAR-obj ;
 Diyarbakir:Di^yar^bakir LONDON-plc ;
 Diárra ACCRA-org ;
@@ -4738,7 +4721,7 @@ Dunkerque ACCRA-plc ;
 Duommá:Duom'má MARJA-mal ; ! Norwegian pattern
 Duomás LONDON-mal ;
 Duong:Duong9 BERN-sur ;
-Duorbun+Use/Sub:Duorbun9 LONDON-plc ; !
+Duorbun+Use/LexSub:Duorbun9 LONDON-plc ; !
 Dupmas LONDON-mal ;
 Dupont BERN-sur ;
 Duppal:Duppal LONDON-obj ;
@@ -4807,13 +4790,13 @@ Dános LONDON-plc ;
 Dávvet:Dávved9 ANAR-mal ;
 Dávvet:Dávveh ANAR-mal ;
 Dåfjord:Då^fjord9 BERN-plc ;
-Dåggejavri+Use/Sub:Dågge^javri ACCRA-plc ; !
-Dållajuolgi+Use/Sub:Dålla^juolgi ACCRA-plc ; !
-Dålpi+Use/Sub:Dålpi ACCRA-sur ; !
+Dåggejavri+Use/LexSub:Dågge^javri ACCRA-plc ; !
+Dållajuolgi+Use/LexSub:Dålla^juolgi ACCRA-plc ; !
+Dålpi+Use/LexSub:Dålpi ACCRA-sur ; !
 Dåsnes:Dås^nes BERN-sur ;
-Dåssaganvarri+Use/Sub:Dåssagan^varri ACCRA-plc ; !
+Dåssaganvarri+Use/LexSub:Dåssagan^varri ACCRA-plc ; !
 Dåvøy:Dåv^øy BERN-sur ;
-Dædnumuotki+Use/Sub:Dædnu^muotki ACCRA-plc ; !
+Dædnumuotki+Use/LexSub:Dædnu^muotki ACCRA-plc ; !
 Dæhli ACCRA-sur ;
 Dæhlie ACCRA-fem ;
 Dæhlin:Dæhlin9 BERN-sur ;
@@ -4928,7 +4911,7 @@ Eerik LONDON-mal ;
 Eerikkilä ACCRA-plc ;
 Eerikäinen:Eerikäi C-FI-NEN-sur ;
 Eerola ACCRA-sur ;
-Eesa+Use/Sub:Eesa ACCRA-mal ; !
+Eesa+Use/LexSub:Eesa ACCRA-mal ; !
 Eestilä ACCRA-sur ;
 Eetu ACCRA-mal ;
 Eeva ACCRA-fem ;
@@ -5214,7 +5197,7 @@ Elgsnes:Elgs^nes BERN-plc ;
 Elgstøen:Elg^støen9 LONDON-sur ;
 Elgvin:Elg^vin9 BERN-sur ;
 Elgå:Elg^å NYSTØ-plc ;
-Elgåa+Use/Sub:Elg^åa ACCRA-plc ; !
+Elgå+Use/Sub:Elg^åa ACCRA-plc ; !
 Eli ACCRA-fem ;
 Elia ACCRA-mal ;
 Elias:Eli^as LONDON-mal ;
@@ -5460,7 +5443,7 @@ Enontekiö ACCRA-LOAN-plc ;
 Enova ACCRA-org ;
 Enova ACCRA-plc ;
 Enquiry ACCRA-plc ;
-Enschede+Use/Sub:En^schede ACCRA-plc ; !
+Enshede+Use/Sub:En^schede ACCRA-plc ; !
 Ensemble% Noor BERN-org ;
 Enshede ACCRA-plc ;
 Ensjø:En^sjø NYSTØ ;
@@ -5553,7 +5536,7 @@ Erstad:Er^stad9 BERN-sur ;
 Ertenvåg:Erten^våg9 BERN-plc ;
 Ertetjernet:Erte^tjernet LONDON-plc ;
 Ertevatnet:Erte^vatnet LONDON-plc ;
-Ertevåg+Use/Sub:Erte^våg9 BERN-plc ; !
+Ertenvåg+Use/Sub:Erte^våg9 BERN-plc ; !
 Ertresvåg:Ertres^våg9 BERN-plc ;
 Erttjernet:Ert^tjernet LONDON-plc ;
 Ertvatnet:Ert^vatnet LONDON-plc ;
@@ -5617,7 +5600,6 @@ Espersen:Espersen9 LONDON-sur ;
 Espeseth:Espeseth9 BERN-sur ;
 Espevær:Espe^vær BERN-plc ;
 Espolin:Espolin9 BERN-sur ;
-Espánja+Use/Sub:Espánja ACCRA-plc ; !
 Espåsen:Esp^åsen9 LONDON-plc ;
 Esra ACCRA-plc ;
 Esrah:Esrah9 LONDON-mal ;
@@ -5670,7 +5652,7 @@ Euklid:Euk^lid9 BERN-plc ;
 Eunike ACCRA-fem ;
 Eunos LONDON-obj ;
 Euodia:Eu^odia ACCRA-plc ;
-Eurasia+Use/Sub:Eur^asia ACCRA-plc ; !
+Eurasia:Eur^asia ACCRA-LOAN-plc ; !
 Euratom:Euratom9 BERN-org ;
 Eure ACCRA-plc ;
 Eure-et-Loir:Eure-et-Lo^ir BERN-plc ;
@@ -5678,12 +5660,10 @@ Eureka ACCRA-plc ;
 Euripides LONDON-mal ;
 Euro-Arctic LONDON-org ;
 Eurokas BERN-ani ;
-Euroopá+Use/Sub:Euroopá ACCRA-plc ; !
 Europa ACCRA-LOAN-plc ;
 European:Europe^an9 LONDON-org ;
 Europeisk+Use/LexSub:Europe^isk9 LONDON-atr ;		!
 Europoort:Euro^poort BERN-org ;
-Eurásia:Eur^ásia ACCRA-plc ;
 Euterpe ACCRA-sur ;
 Eutin:Eutin9 LONDON-sur ;
 Eutykos LONDON-plc ;
@@ -5797,7 +5777,7 @@ Falch:Falch9 BERN-sur ;
 Falchenberg:Falchen^berg9 BERN-sur ;
 Falck BERN-sur ;
 Faleide:Fal^eide ACCRA-plc ;
-Falesnuorri+Use/Sub:Fales^nuorri ACCRA-plc ; !
+Fálesnuorri+Use/Sub:Fales^nuorri ACCRA-plc ; !
 Falevitch BERN-sur ;
 Falewitch BERN-sur ;
 Falk BERN-sur ;
@@ -5919,7 +5899,7 @@ Fennefoss:Fenne^foss9 BERN-plc ;
 Fenno-Skandia ACCRA-LOAN-plc ;
 Fennoskandia+Use/Sub:Fenno-skandia ACCRA-plc ; !
 Fennoskandia+Use/Sub:Fenno^skandia ACCRA-plc ; !
-Fennoskandia:Fenno^skandia ACCRA-plc ;
+Fennoskandia:Fenno^skandia ACCRA-LOAN-plc ;
 Fenre ACCRA-sur ;
 Fenris LONDON-ani ;
 Fenrisulven:Fenris^ulven9 LONDON-ani ;
@@ -6032,10 +6012,10 @@ Finland:Fin^land9 BERN-LOAN-plc ;
 Finlandsveien:Fin^lands^ve^ien9 LONDON-LOAN-plc ;
 Finlayson:Finlayson9 LONDON-org ;
 Finlux LONDON-org ;
-Finmarchiæ+Use/Sub:Fin^marchiæ NYSTØ-plc ; !
-Finmarcken+Use/Sub:Fin^marcken9 LONDON-plc ; !
-Finmark+Use/Sub:Fin^mark BERN-plc ; !
-Finmarken+Use/Sub:Fin^marken9 LONDON-plc ; !
+Finmarchiæ+Use/LexSub:Fin^marchiæ NYSTØ-plc ; !
+Finmarcken+Use/LexSub:Fin^marcken9 LONDON-plc ; !
+Finnmark+Use/Sub:Fin^mark BERN-plc ; !
+Finnmarken+Use/Sub:Fin^marken9 LONDON-plc ; !
 Finn-Erik LONDON-mal ;
 Finn:Finn9 BERN-sur ;
 Finnair:Finn^air BERN-org ;
@@ -6081,12 +6061,9 @@ Finnmarksnevnden:Finn^marks^nevnden9 LONDON-obj ;
 Finnmarksposten:Finn^marks^posten9 LONDON-obj ;
 Finnmarksvidda:Finn^marks^vidda ACCRA-LOAN-plc ;
 Finnmix BERN-org ;
-Finnmork+Use/Sub:Finn^mork BERN-plc ; !
-Finnmárk+Use/Sub:Finn^márk LONDON-plc ; !
-Finnmárken+Use/Sub:Finn^márken9 LONDON-plc ; !
-Finnmárkkolága+Use/Sub:Finn^márkko^lága MARJA-A-obj ; !
-Finnmárkkolávdegoddi+Use/Sub:Finn^márkko^lávde^goddi MARJA-I-org ; !
-Finnmárkkulága+Use/Sub:Finn^márkku^lága MARJA-A-obj ; !
+Finnmark+Use/Sub:Finn^mork BERN-plc ; !
+Finnmark+Use/Sub:Finn^márk LONDON-plc ; !
+Finnmarkken+Use/Sub:Finn^márken9 LONDON-plc ; !
 Finnskatt:Finn^skatt BERN-obj ;
 Finnskogen:Finn^skogen9 LONDON-plc ;
 Finnsnes:Finns^nes BERN-sur ;
@@ -6550,7 +6527,7 @@ Frafjord:Fra^fjord9 BERN-plc ;
 Frambu:Fram^bu ACCRA-org ;
 FrameMaker:Frame^Maker LONDON-obj ;
 Framer LONDON-sur ;
-Framindia+Use/Sub:Fram^india ACCRA-plc ; !
+Framindia+Use/LexSub:Fram^india ACCRA-plc ; !
 Framnes:Fram^nes BERN-plc ;
 Framrusta ACCRA-plc ;
 Framsenter:Fram^senter LONDON-obj ;
@@ -6566,11 +6543,11 @@ Frands BERN-mal ;
 Frandsen:Frandsen9 LONDON-sur ;
 Frank BERN-mal ;
 Franken:Franken9 LONDON-sur ;
-Frankfort+Use/Sub:Frank^fort BERN-plc ; !
+Frankfurt+Use/Sub:Frank^fort BERN-plc ; !
 Frankfurt:Frank^furt BERN-plc ;
 Frankland:Frank^land9 BERN-plc ;
 Franklin:Franklin9 LONDON-sur ;
-Frankrike+Use/Sub:Frank^rike ACCRA-plc ; !
+Frankrike:Frank^rike ACCRA-LOAN-plc ; !
 Franni ACCRA-fem ;
 Frans BERN-mal ;
 Fransen:Fransen9 LONDON-sur ;
@@ -6634,7 +6611,6 @@ Freilem:Freilem9 LONDON-sur ;
 Freim:Freim9 BERN-plc ;
 Freja ACCRA-plc ;
 Frekhaug:Frek^haug9 BERN-plc ;
-Frelsesarmeá+Use/Sub:Frelses^armeá ACCRA-org ; !
 Fremantle ACCRA-sur ;
 Fremover:Frem^over LONDON-org ;
 Fremstad:Frem^stad9 BERN-sur ;
@@ -7004,8 +6980,7 @@ Gasai:Gasa DUBAI-mal ;
 Gasai+Use/Sub:Gasai LONDON-mal ; !
 Gascogne ACCRA-plc ;
 Gashi ACCRA-plc ;
-Gaskaija+Use/Sub:Gaska^ija ACCRA-plc ; !
-Gaskasjåkka+Use/Sub:Gaskas^jåkka ACCRA-plc ; !
+Gaskasjåkka+Use/LexSub:Gaskas^jåkka ACCRA-plc ; !
 Gasken-Laante ACCRA-org ;
 Gaski ACCRA-sur ;
 Gaskobekken:Gasko^bekken9 LONDON-plc ;
@@ -7058,12 +7033,9 @@ Gaza ACCRA-plc ;
 Gazastripa+Use/LexSub+Use/-Spell:Gaza^stripa ACCRA-plc ; !
 Gaziantep:Gazi^antep9 LONDON-plc ;
 Gazprom:Gaz^prom9 BERN-org ;
-Gdan'sk:Gdan'7sk9 BERN-plc ;
-Gdansk+Use/Sub:Gdansk9 BERN-plc ; !
+Gdansk+Use/Sub:Gdan'7sk9 BERN-plc ;
+Gdansk:Gdansk9 BERN-plc ; !
 Gdynia ACCRA-plc ;
-Geairajohka:Geaira^joh'ka MARJA-A-plc ;
-Geakkán+Use/Sub:Geakkán9 LONDON-plc ; !!Not sure
-Geallirnjárga:Geallir^njár'ga MARJA-A-plc ;
 Gebal LONDON-plc ;
 Geboe ACCRA-sur ;
 Gebyrsentralen:Gebyr^sentralen9 LONDON-obj ;
@@ -7079,7 +7051,7 @@ Gefle ACCRA-plc ;
 Geggen:Geggen9 LONDON-sur ;
 Gehenna ACCRA-plc ;
 Gehrken:Gehrken9 LONDON-plc ;
-Geia+Use/Sub:Geia ACCRA-mal ; !
+Geija+Use/Sub:Geia ACCRA-mal ; !
 Geija ACCRA-mal ; !sub? !mal or sur?
 Geijer LONDON-sur ;
 Geir BERN-sur ;
@@ -7103,15 +7075,15 @@ Gelsenkirchen:Gelsen^kirchen9 LONDON-plc ;
 Gemini ACCRA-mal ;
 General LONDON-org ;
 Genesis BERN-obj ;
-Geneva+Use/Sub:Geneva ACCRA-plc ; !
+Geneve+Use/Sub:Geneva ACCRA-plc ; !
 Geneve ACCRA-plc ;
 Genigraphics:Geni^graphics LONDON-obj ;
 Gennesaret BERN-plc ;
-Genneve+Use/Sub:Genneve ACCRA-plc ; !
+Geneve+Use/Sub:Genneve ACCRA-plc ; !
 Genova ACCRA-sur ;
 Gent BERN-sur ;
 Gentofte ACCRA-plc ;
-Genève+Use/Sub:Genève ACCRA-plc ; !
+Geneve+Use/Sub:Genève ACCRA-plc ; !
 Geo:Geo9 ACCRA-obj ;
 GeoForum:GeoForum9 LONDON-org ;
 !Geografisk+Use/LexSub:Geo^grafisk9 LONDON-atr ;	!
@@ -7212,7 +7184,7 @@ Ginungagap:Ginungagap9 BERN-plc ;
 Giovanni:Gi^ovanni ACCRA-mal ;
 Giranjárga:Gira^njár'ga MARJA-A-plc ;
 Girardeau ACCRA-plc ;
-Girjas+Use/Sub:Girjas LONDON-plc ; !
+Girjas+Use/LexSub:Girjas LONDON-plc ; !
 Girjegiisá:Girje^gij'sá MARJA-org ;
 Girkoeatnanjohka:Girko^eatnan^joh'ka MARJA-A-plc ;
 Gironde ACCRA-plc ;
@@ -7239,7 +7211,7 @@ Giuseppe ACCRA-mal ;
 Givær BERN-plc ;
 Giza ACCRA-plc ;
 Giæver LONDON-sur ;
-Gjaerevoll+Use/Sub:Gjaerevoll BERN-sur ; !
+Gjaerevoll+Use/LexSub:Gjaerevoll BERN-sur ; !
 Gjallarbrua:Gjallar^brua ACCRA-plc ;
 Gjallarhornet:Gjallar^hornet LONDON-plc ;
 Gjeble ACCRA-sur ;
@@ -7428,7 +7400,7 @@ Gorgias:Gorgi^as LONDON-mal ;
 Gorgonzola ACCRA-plc ;
 Gori ACCRA-plc ;
 Gorkii HAWAII-plc ;
-Gorkii+Use/Sub:Gorkii LONDON-plc ; !
+Gorkij+Use/Sub:Gorkii LONDON-plc ; !
 Gorkij:Gorkij9 LONDON-plc ;
 Gorm:Gorm9 BERN-mal ;
 Gormsen:Gormsen9 LONDON-sur ;
@@ -7475,7 +7447,7 @@ Grand:Grand9 BERN-obj ;
 Grande ACCRA-sur ;
 Grandiosa ACCRA-obj ;
 Grane ACCRA-plc ;
-Granefjeld+Use/Sub:Grane^fjeld9 BERN-sur ; !
+Granefjeld:Grane^fjeld9 BERN-sur ; !
 Granefjell:Grane^fjell BERN-plc ;
 Granerud:Granerud9 BERN-plc ;
 Grange ACCRA-plc ;
@@ -7939,9 +7911,7 @@ Gáddjá MARJA-fem ;
 Gáhppá MARJA-mal ;
 Gáhte:Gáh'te MARJA-fem ;
 Gáhteriinná MARJA-fem ;
-Gáinnas+Use/Sub:Gáinnas LONDON-plc ; !
 Gállá:Gál'lá MARJA-mal ;
-Gálláfedra+Use/Sub:Gállá^fedra ACCRA-plc ; !
 Gálpe ACCRA-plc ;
 Gáppe MARJA-mal ;
 Gárasjohka:Gáras^joh'ka MARJA-A-plc ;
@@ -7991,7 +7961,7 @@ Gørill LONDON-fem ;
 Gørrisen:Gørrisen9 LONDON-sur ;
 Gøsta ACCRA-mal ;
 Gøstaff:Gøstaff LONDON-mal ;
-Gøteborg+Use/Sub:Gøte^borg9 BERN-plc ; !
+Göteborg+Use/Sub:Gøte^borg9 BERN-plc ; !
 Güberg:Gü^berg9 BERN-sur ;
 Günter LONDON-sur ;
 Günther LONDON-sur ;
@@ -8012,8 +7982,8 @@ Haaker LONDON-sur ;
 Haakon:Haakon9 LONDON-mal ;
 Haakonsen:Haakonsen9 LONDON-sur ;
 Haakonsvern:Haakons^vern9 BERN-plc ;
-Haalogaland+Use/Sub:Haaloga^land9 BERN-plc ; !
-Haalogandske+Use/Sub:Haalogandske ACCRA-plc ; !
+Hålogaland+Use/Sub:Haaloga^land9 BERN-plc ; !
+Haalogandske+Use/LexSub:Haalogandske ACCRA-plc ; !
 Haandværksdriften:Haand^værks^driften9 LONDON-org ;
 Haanes:Haa^nes BERN-sur ;
 Haanperä:Haan^perä ACCRA-plc ;
@@ -8189,7 +8159,7 @@ Halhjem:Hal^hjem9 BERN-sur ;
 Halifax BERN-plc ;
 Halikarnassos LONDON-plc ;
 Halinen:Hali C-FI-NEN-sur ;
-Halkkavarre+Use/Sub:Halkkavarre ACCRA-plc ; !
+Halkkavarre+Use/LexSub:Halkkavarre ACCRA-plc ; !
 Halkola ACCRA-sur ;
 Halkosaari:Halko^saari ACCRA-plc ;
 Hall BERN-sur ;
@@ -8663,7 +8633,7 @@ Hautanen:Hauta C-FI-NEN-sur ;
 Hautaniemi:Hauta^niemi ACCRA-plc ;
 Hautaviita:Hauta^viita ACCRA-sur ;
 Hauth:Hauth9 BERN-sur ;
-Havana+Use/Sub:Havana ACCRA-plc ; !
+Havanna+Use/Sub:Havana ACCRA-plc ; !
 Havanna ACCRA-plc ;
 Havbruksservice:Hav^bruks^service ACCRA-org ;
 Havel LONDON-sur ;
@@ -8696,7 +8666,7 @@ Haykås:Hayk^ås BERN-sur ;
 Hazel LONDON-sur ;
 Hazeland:Haze^land9 BERN-plc ;
 Hazzelrot BERN-sur ;
-He% Tooka+Use/Sub:He% Tooka ACCRA-mal ;
+He% Tooka+Use/LexSub:He% Tooka ACCRA-mal ;
 Head:Head9 BERN-sur ;
 Heaika:Heaj'ka MARJA-A-mal ;
 Heammu:Heammu MARJA-U-mal ;
@@ -8786,7 +8756,7 @@ Heidelberg:Heidel^berg9 BERN-sur ;
 Heidenheim:Heiden^heim9 HEIM-plc ;
 Heidenreich:Heiden^reich9 BERN-sur ;
 Heidi ACCRA-fem ;
-Heidmork+Use/Sub:Heid^mork BERN-plc ; !
+Heidmork+Use/LexSub:Heid^mork BERN-plc ; !
 Heidrun:Heidrun9 LONDON-fem ;
 Heien:He^ien9 LONDON-sur ;
 Heier:He^ier LONDON-sur ;
@@ -9422,7 +9392,7 @@ Hjørring:Hjørring9 LONDON-sur ;
 Hjørungavåg:Hjørunga^våg9 BERN-plc ;
 Hlbye ACCRA-sur ;
 Hlbye+Use/Sub:Hlbye NYSTØ-sur ; !
-Ho+Use/Sub:Ho9 ACCRA-mal ; !
+Ho+Use/LexSub:Ho9 ACCRA-mal ; !
 Hoang:Ho^ang9 BERN-sur ;
 Hoba ACCRA-plc ;
 Hobart LONDON-plc ;
@@ -9513,7 +9483,7 @@ Holkestad:Holke^stad9 BERN-sur ;
 Hollan:Hollan9 LONDON-sur ;
 Holland:Hol^land9 BERN-LOAN-plc ;
 Hollander:Hol^lander LONDON-sur ;
-Hollandia+Use/Sub:Hol^landia ACCRA-plc ; !
+Hollandia+Use/LexSub:Hol^landia ACCRA-plc ; !
 Hollanti:Hol^lanti ACCRA-LOAN-plc ;
 Holler LONDON-sur ;
 Holli ACCRA-sur ;
@@ -9608,7 +9578,7 @@ Honduras LONDON-plc ;
 Honerud:Honerud9 BERN-plc ;
 Honerød:Honerød9 BERN-plc ;
 Hong:Hong9 BERN-plc ;
-Hongkong+Use/Sub:Hong^kong9 BERN-plc ; !
+Hongkong+Use/LexSub:Hong^kong9 BERN-plc ; !
 Honiara:Honi^ara ACCRA-plc ;
 Honka ACCRA-sur ;
 Honkala ACCRA-sur ;
@@ -10005,8 +9975,6 @@ Hyökki ACCRA-sur ;
 Hyötylä ACCRA-sur ;
 Hyötyläinen:Hyötyläi C-FI-NEN-sur ;
 Hákon:Hákon9 LONDON-mal ;
-Hálkavárre+Use/Sub:Hálkavárre ACCRA-plc ; !
-Hámmerfest+Use/Sub:Hámmer^fest9 BERN-plc ; !
 Hánas ANAR-mal ;
 Hánno:Hán'no MARJA-mal ;
 Hánná:Hán'ná MARJA-fem ;
@@ -10208,7 +10176,7 @@ Høyvik:Høy^vik BERN-sur ;
 Høåstorvet:Hø^ås^torvet LONDON-plc ;
 Húnaflói:Húna^flói ACCRA-plc ;
 Húsavík:Húsa^vík BERN-plc ;
-Hûnaflôi+Use/Sub:Hûna^flôi ACCRA-plc ; !
+Hûnaflôi+Use/LexSub:Hûna^flôi ACCRA-plc ; !
 Hülegü NYSTØ ;
 ICOMOS BERN-org ;
 IJmuiden:IJmuiden9 LONDON-plc ;
@@ -10284,7 +10252,7 @@ Ihonen:Iho C-FI-NEN-sur ;
 Iidda ACCRA-fem ;
 Iiddá ACCRA-fem ;
 Iidá ACCRA-fem ;
-Iiggá+Use/Sub:Iiggá ACCRA-plc ; !
+Iiggá+Use/LexSub:Iiggá ACCRA-plc ; !
 Iinatti ACCRA-sur ;
 Iisak LONDON-mal ;
 Iisakka ACCRA-sur ;
@@ -10450,7 +10418,7 @@ Inger-Ann:Inger-Ann9 BERN-sur ;
 Inger-Anne ACCRA-fem ;
 Inger-Johanne ACCRA-fem ;
 Inger-Lise ACCRA-fem ;
-Inger-marie+Use/Sub:Inger-marie ACCRA-fem ; !
+Inger-marie+Use/LexSub:Inger-marie ACCRA-fem ; !
 Ingerborg:Inger^borg9 BERN-fem ;
 Ingerd:Ingerd9 LONDON-fem ;
 Ingerid:Ingerid9 BERN-fem ;
@@ -10584,7 +10552,7 @@ Irjala ACCRA-plc ;
 Irjá MARJA-fem ;
 Irján ANAR-mal ;
 Irkuck LONDON-plc ;
-Irkutsk+Use/Sub:Irkutsk LONDON-plc ; !
+Irkutsk+Use/LexSub:Irkutsk LONDON-plc ; !
 Irland:Ir^land9 BERN-LOAN-plc ;
 Irma ACCRA-fem ;
 Irmak LONDON-plc ;
@@ -10594,7 +10562,6 @@ Iroquois BERN-plc ;
 Irrawaddy ACCRA-plc ;
 Irtysj LONDON-plc ;
 Irvine RONDANE-fem ;
-Iráhka+Use/Sub:Iráhka ACCRA-plc ; !
 Irún:Irún9 BERN-plc ;
 Isabel LONDON-fem ;
 Isabell BERN-fem ;
@@ -10652,7 +10619,7 @@ Isojärvi:Iso^järvi ACCRA-plc ;
 Isokangas:Iso^kangas LONDON-plc ;
 Isokorpi:Iso^korpi ACCRA-sur ;
 Isokoski:Iso^koski ACCRA-plc ;
-Isokängäs+Use/Sub:Iso^kängäs LONDON-plc ; !
+Isoköngäs+Use/Sub:Iso^kängäs LONDON-plc ; !
 Isokääntä:Iso^kääntä ACCRA-plc ;
 Isoköngäs:Iso^köngäs LONDON-plc ;
 Isola ACCRA-plc ;
@@ -10712,8 +10679,6 @@ Iversen:Iversen9 LONDON-sur ;
 Ivgu ACCRA-plc ;
 Ivittuut BERN-plc ;
 Ivvár ANAR-mal ;
-Ivvárstádi+Use/Sub:Ivvár^stádi ACCRA-plc ; !
-Ivvárstáđi+Use/Sub:Ivvár^stáđi ACCRA-plc ; !
 Iwaki ACCRA-plc ;
 Iwate ACCRA-sur ;
 Iyang:I^yang9 BERN-sur ;
@@ -10868,7 +10833,7 @@ Jansson:Jansson9 LONDON-sur ;
 Jantunen:Jantu C-FI-NEN-sur ;
 Jantzen:Jantzen9 LONDON-sur ;
 Janus LONDON-mal ;
-Japan+Use/Sub:Japan9 BERN-plc ; !
+Japan:Japan9 BERN-LOAN-plc ; !
 Japurá ACCRA-plc ;
 Jaqueline ACCRA-fem ;
 Jaquet LONDON-sur ;
@@ -10888,7 +10853,7 @@ Jaroslav:Jaro^slav BERN-mal ;
 Jaroslavl:Jaro^slavl LONDON-mal ;
 Jaruma ACCRA-org ;
 Jarva ACCRA-sur ;
-Jarveläinen+Use/Sub:Jarveläi C-FI-NEN-sur ; !
+Jarveläinen+Use/LexSub:Jarveläi C-FI-NEN-sur ; !
 Jaskari ACCRA-sur ;
 Jason:Jason9 LONDON-mal ;
 Jassy ACCRA-plc ;
@@ -10948,7 +10913,7 @@ Jeltsin:Jeltsin9 LONDON-sur ;
 Jelved:Jelved9 BERN-sur ;
 Jemen:Jemen9 LONDON-plc ;
 Jemt:Jemt BERN-sur ;
-Jemtland+Use/Sub:Jemt^land9 BERN-plc ; !
+Jämtland+Use/Sub:Jemt^land9 BERN-plc ; !
 Jemuel LONDON-mal ;
 Jena ACCRA-plc ;
 Jenan:Jenan9 LONDON-plc ;
@@ -10978,7 +10943,7 @@ Jeremia ACCRA-mal ;
 Jeremy ACCRA-mal ;
 Jerevan:Jerevan9 BERN-plc ;
 Jerez:Jerez9 BERN-plc ;
-Jerggul+Use/Sub:Jerggul LONDON-plc ; !
+Jergol+Use/Sub:Jerggul LONDON-plc ; !
 Jergol LONDON-malplc ;
 Jergul LONDON-sur ;
 Jeris LONDON-plc ;
@@ -11030,7 +10995,6 @@ Jiangxi:Ji^angxi ACCRA-plc ;
 Jidda ACCRA-plc ;
 Jiddah:Jiddah9 LONDON-plc ;
 Jidlaf LONDON-mal ;
-Jiesjavre+Use/Sub:Jies^javre ACCRA-plc ; !
 Jiingevaerie:Jiinge^vaerie SIJTE-plc ;
 Jilin:Jilin9 LONDON-plc ;
 Jill BERN-fem ;
@@ -11479,7 +11443,7 @@ Járre:Jár're MARJA-mal ;
 Jäkälä ACCRA-sur ;
 Jämsä ACCRA-plc ;
 Jämtland:Jämt^land9 BERN-LOAN-plc ;
-Jämtlánd+Use/Sub:Jämt^lánd9 BERN-plc ; !
+Jämtland+Use/Sub:Jämt^lánd9 BERN-plc ; !
 Jänis LONDON-sur ;
 Jänkälä ACCRA-sur ;
 Jäntti ACCRA-sur ;
@@ -11502,7 +11466,6 @@ Jääskeläinen:Jääskeläi C-FI-NEN-sur ;
 Jääskä ACCRA-sur ;
 Jääskö:Jääsk^ö ACCRA-plc ;
 Jåberg:Jå^berg9 BERN-sur ;
-Jåhkågasska+Use/Sub:Jåhkå^gasska ACCRA-plc ; !
 Jåks:Jåks BERN-sur ;
 Jåma ACCRA-sur ;
 Jåttanuten:Jåttanuten9 LONDON-plc ;
@@ -11826,7 +11789,7 @@ Kankan:Kankan9 LONDON-plc ;
 Kankare ACCRA-sur ;
 Kankkonen:Kankko C-FI-NEN-sur ;
 Kankkunen:Kankku C-FI-NEN-sur ;
-Kannako+Use/Sub:Kannako9 ACCRA-fem ; !
+Kannako+Use/LexSub:Kannako9 ACCRA-fem ; !
 Kannas LONDON-sur ;
 Kanniainen:Kanni^ai C-FI-NEN-sur ;
 Kanninen:Kanni C-FI-NEN-sur ;
@@ -11851,7 +11814,7 @@ Kanton:Kanton9 LONDON-plc ;
 Kantonen:Kanto C-FI-NEN-sur ;
 Kantoniemi:Kanto^niemi ACCRA-sur ;
 Kantornes:Kantor^nes BERN-plc ;
-Kanáda+Use/Sub:Kanáda ACCRA-plc ; !
+Kanada+Use/Sub:Kanáda ACCRA-plc ; !
 Kaohsiung:Kaohsi^ung9 BERN-plc ;
 Kaos LONDON-sur ;
 Kap:Kap9 BERN-sur ;
@@ -11892,7 +11855,7 @@ Karasti ACCRA-sur ;
 Karatsjajevo-Tsjerkessia ACCRA-plc ;
 Kare ACCRA-sur ;
 Kareinen:Karei C-FI-NEN-sur ;
-Karelen+Use/Sub:Karelen9 LONDON-plc ; !
+Karelen+Use/LexSub:Karelen9 LONDON-plc ; !
 Karen:Karen9 LONDON-sur ;
 Karhapää:Karha^pää ACCRA-plc ;
 Karhinen:Karhi C-FI-NEN-sur ;
@@ -12048,7 +12011,7 @@ Kataja ACCRA-sur ;
 Katajala ACCRA-sur ;
 Katajamäki:Kataja^mäki ACCRA-plc ;
 Katalunia ACCRA-plc ;
-Kataluniija+Use/Sub:Kataluniija NIKOSIIJA-plc ; !
+Katalunia+Use/Sub:Kataluniija NIKOSIIJA-plc ; !
 Katamba ACCRA-plc ;
 Katanga ACCRA-plc ;
 Katarina ACCRA-fem ;
@@ -12147,7 +12110,7 @@ Kefar LONDON-plc ;
 Kefas LONDON-mal ;
 Kefevs LONDON-mal ;
 Keflavik:Kefla^vik BERN-plc ;
-Keflavík+Use/Sub:Kefla^vík BERN-plc ; !
+Keflavik+Use/Sub:Kefla^vík BERN-plc ; !
 Kefren:Kefren9 LONDON-plc ;
 Kehat LONDON-plc ;
 Kehusmaa:Kehus^maa ACCRA-sur ;
@@ -12770,7 +12733,7 @@ Kloester LONDON-sur ;
 Klokk BERN-sur ;
 Klokkarvik:Klokkar^vik BERN-plc ;
 Klokkergata:Klokker^ GATA-plc ;
-Klondike+Use/Sub:Klondike ACCRA-plc ; !
+Klondyke+Use/Sub:Klondike ACCRA-plc ; !
 Klondyke ACCRA-org ;
 Klopas LONDON-mal ;
 Klopasa ACCRA-plc ;
@@ -12963,7 +12926,7 @@ Kolsrud:Kolsrud9 BERN-sur ;
 Kolstad:Kol^stad9 BERN-sur ;
 Kolstø:Kol^stø NYSTØ-plc ;
 Kolsås:Kols^ås BERN-sur ;
-Kolttakängäs+Use/Sub:Koltta^kängäs LONDON-plc ; !
+Kolttaköngäs+Use/Sub:Koltta^kängäs LONDON-plc ; !
 Kolttaköngäs:Koltta^köngäs LONDON-plc ;
 Koltur LONDON-plc ;
 Kolu ACCRA-sur ;
@@ -13151,7 +13114,7 @@ Korpinen:Korpi C-FI-NEN-sur ;
 Korpisaari:Korpi^saari ACCRA-sur ;
 Korpivaara:Korpi^vaara ACCRA-sur ;
 Korppi ACCRA-sur ;
-Korppijärvi+Use/Sub:Korppi^järvi ACCRA-plc ; !
+Korpijärvi+Use/Sub:Korppi^järvi ACCRA-plc ; !
 Korpua ACCRA-plc ;
 Korri ACCRA-sur ;
 Korsbakken:Kors^bakken9 LONDON-plc ;
@@ -13481,7 +13444,7 @@ Kuban:Kuban9 LONDON-org ;
 Kublai:Kubla DUBAI-mal ;
 Kublai+Use/Sub:Kublai LONDON-mal ; !
 Kubru NYSTØ ;
-Kubá+Use/Sub:Kubá ACCRA-plc ; !
+Kuba+Use/Sub:Kubá ACCRA-plc ; !
 Kudjoi:Kudjo DUBAI-plc ;
 Kufa ACCRA-plc ;
 Kufjord:Ku^fjord9 BERN-plc ;
@@ -13604,7 +13567,6 @@ Kuosa ACCRA-sur ;
 Kuosku ACCRA-plc ;
 Kuosma ACCRA-sur ;
 Kuosmanen:Kuosma C-FI-NEN-sur ;
-Kuottemjaur+Use/Sub:Kuottem^jaur BERN-plc ; !
 Kupari ACCRA-sur ;
 Kuparinen:Kupari C-FI-NEN-sur ;
 Kupiainen:Kupi^ai C-FI-NEN-sur ;
@@ -13770,7 +13732,7 @@ Kvisten:Kvisten9 LONDON-plc ;
 Kvitbanken:Kvit^banken9 LONDON-plc ;
 Kvitblikk:Kvit^blikk BERN-plc ;
 Kviteggi ACCRA-plc ;
-Kviterussland+Use/Sub:Kvit^eruss^land9 BERN-plc ; !
+Kviterussland+Use/LexSub:Kvit^eruss^land9 BERN-plc ; !
 Kviteseid:Kvites^eid9 BERN-plc ;
 Kvitevik:Kvite^vik BERN-plc ;
 Kvitfjell:Kvit^fjell BERN-plc ;
@@ -13877,7 +13839,6 @@ Kákáos BERN-obj ;
 Kálle:Kál'le MARJA-mal ;
 Kállá:Kál'lá MARJA-mal ;
 Kálmán:Kálmán9 BERN-sur ;
-Kánada+Use/Sub:Kánada ACCRA-plc ; !
 Káre ACCRA-fem ;
 Károliinná:Károlijnná MARJA-fem ;
 Károly NYSTØ-mal ;
@@ -13941,7 +13902,6 @@ Kårhamn:Kår^hamn9 BERN-plc ;
 Kårhus:Kår^hus BERN-sur ;
 Kårstad:Kår^stad9 BERN-plc ;
 Kårstø:Kår^stø NYSTØ-plc ;
-Kårvejaure+Use/Sub:Kårve^jaure ACCRA-plc ; !
 Kårvik:Kår^vik BERN-sur ;
 Kårvåg:Kår^våg9 BERN-sur ;
 Kåsa ACCRA-plc ;
@@ -13975,7 +13935,7 @@ L'Anse:L'7Anse ACCRA-plc ;
 L'Aquila:L'7Aquila ACCRA-plc ;
 L'Orange:L'7Orange ACCRA-sur ;
 L'Orsa:L'7Orsa ACCRA-plc ;
-La% Cour+Use/Sub:La% Cour BERN-sur ; !
+La% Cour+Use/LexSub:La% Cour BERN-sur ; !
 Laache ACCRA-sur ;
 Laagendalsposten:Laagen^dals^posten9 LONDON-obj ;
 Laaja ACCRA-sur ;
@@ -14023,7 +13983,7 @@ Ladogasjøen+Use/LexSub:Ladoga^sjø^en LONDON-plc ; !
 Ladstein:Lad^stein9 BERN-plc ;
 Laelius:La^eli^us BERN-sur ;
 Laestadius:Laestadi^us BERN-sur ;
-Laevas+Use/Sub:Laevas LONDON-plc ; !
+Laeavas+Use/LexSub:Laevas LONDON-plc ; !
 Lafayette:Lafa^yette ACCRA-sur ;
 Lagabøter:Laga^bøter LONDON-sur ;
 Lagan:Lagan9 LONDON-org ;
@@ -14182,7 +14142,7 @@ Langang:Langang9 BERN-sur ;
 Langangen:Lang^angen9 LONDON-plc ;
 Langbakk:Lang^bakk BERN-plc ;
 Langballe:Lang^balle ACCRA-sur ;
-Langbein+Use/Sub:Lang^bein BERN-ani ; !
+Langbein+Use/LexSub:Lang^bein BERN-ani ; !
 Langbråten:Lang^bråten9 LONDON-sur ;
 Langdalen:Lang^dalen9 LONDON-plc ;
 Lange ACCRA-sur ;
@@ -14265,7 +14225,7 @@ Lapinmaa:Lapin^maa ACCRA-plc ;
 Lapinoja:Lapin^oja ACCRA-sur ;
 Lapiolahti:Lapio^lahti ACCRA-sur ;
 Lapmarken:Lap^marken9 LONDON-LOAN-plc ;
-Lapmarks+Use/Sub:Lap^marks BERN-plc ; !
+Lapmarks+Use/LexSub:Lap^marks BERN-plc ; !
 Laponia ACCRA-org ;
 Lappalainen:Lappalai C-FI-NEN-sur ;
 Lapparnas BERN-LOAN-obj ;
@@ -14334,7 +14294,7 @@ Last% Yoik% in% Sami% Forests+Use/LexSub:Last% Yoik% in% Sami% Forests LONDON-ob
 Lastikka ACCRA-sur ;
 Lathion:Lathi^on9 BERN-sur ;
 Latikka ACCRA-sur ;
-Latin-Amerika+Use/Sub:Latin-Amerika ACCRA-plc ; !
+Latin-Amerika+Use/LexSub:Latin-Amerika ACCRA-plc ; !
 Latomäki:Lato^mäki ACCRA-plc ;
 Lattakia ACCRA-plc ;
 Lattu ACCRA-sur ;
@@ -14445,7 +14405,7 @@ Leammá:Leam'má MARJA-mal ;
 Leander:Le^ander LONDON-sur ;
 Leangen:Le^angen9 LONDON-plc ;
 Leastadius:Leastadi^us BERN-sur ;
-Leastádius+Use/Sub:Leastádi^us BERN-sur ; !
+Leastádius+Use/LexSub:Leastádi^us BERN-sur ; !
 Leatherhead:Leather^head9 BERN-plc ;
 Lebesby:Lebes^by NYSTØ-LOAN-plc ;
 Lebowa ACCRA-plc ;
@@ -14511,7 +14471,6 @@ Leidulf:Leid^ulf LONDON-mal ;
 Leidulv:Leid^ulv BERN-sur ;
 Leier:Le^ier LONDON-sur ;
 Leif BERN-mal ;
-Leijaur+Use/Sub:Lei^jaur BERN-plc ; !
 Leijon LONDON-sur ;
 Leikanger:Leik^anger LONDON-plc ;
 Leikas LONDON-sur ;
@@ -14818,7 +14777,7 @@ Lill-Uman:Lill-Uman9 LONDON-plc ;
 Lilla ACCRA-plc ;
 Lillarmsjö:Lill^arm^sjö NYSTØ-plc ;
 Lille SIJTE-plc ;
-Lilleasia+Use/Sub:Lille^asia ACCRA-plc ; !
+Lilleasia+Use/LexSub:Lille^asia ACCRA-plc ; !
 Lilleberg:Lille^berg9 BERN-sur ;
 Lillebudal:Lille^bu^dal BERN-plc ;
 Lilleby:Lille^by NYSTØ-sur ;
@@ -14855,7 +14814,7 @@ Liltvedt:Lil^tvedt BERN-sur ;
 Lily ACCRA-fem ;
 Lima ACCRA-plc ;
 Limassol BERN-plc ;
-Limbourg+Use/Sub:Lim^bourg9 BERN-plc ; !
+Limburg+Use/Sub:Lim^bourg9 BERN-plc ; !
 Limburg:Lim^burg9 BERN-plc ;
 Limerick BERN-plc ;
 Limfjorden:Lim^fjorden9 LONDON-plc ;
@@ -15253,7 +15212,7 @@ Luhtanen:Luhta C-FI-NEN-sur ;
 Luik BERN-sur ;
 Luikku ACCRA-sur ;
 Luis LONDON-sur ;
-Lujaur+Use/Sub:Lu^jaur BERN-plc ; !
+Lujaur+Use/LexSub:Lu^jaur BERN-plc ; !
 Luka ACCRA-plc ; ! also? mal/fem
 Lukas LONDON-mal ;
 Lukianos:Luki^anos LONDON-mal ;
@@ -15267,7 +15226,7 @@ Lukkarila ACCRA-sur ;
 Lukkarinen:Lukkari C-FI-NEN-sur ;
 Lukkaroinen:Lukkaroi C-FI-NEN-sur ;
 Lule ACCRA-obj ;
-Luleajju+Use/Sub:Luleaj9j9u ACCRA-plc ; !
+Luleju+Use/Sub:Luleaj9j9u ACCRA-plc ; !
 Luleju ACCRA-plc ;
 Luleälv:Lule^älv BERN-LOAN-plc ;
 Luleälven:Lule^älven9 LONDON-plc ;
@@ -15333,7 +15292,6 @@ Luontopoika:Luonto^poika ACCRA-ani ;
 Luossavaara:Luossa^vaara ACCRA-LOAN-plc ;
 Luostari ACCRA-sur ;
 Luostarinen:Luostari C-FI-NEN-sur ;
-Luostejok+Use/Sub:Luoste^jok BERN-plc ; !
 Luosujärvi:Luosu^järvi ACCRA-sur ;
 Luoti ACCRA-sur ;
 Luotokorpi:Luoto^korpi ACCRA-sur ;
@@ -15350,7 +15308,7 @@ Lusa ACCRA-plc ;
 Lusaka ACCRA-plc ;
 Luse ACCRA-sur ;
 Luspie SIJTE-plc ;
-Lusppie+Use/Sub:Lusppie SIJTE-plc ; !
+Luspie+Use/Sub:Lusppie SIJTE-plc ; !
 Luster LONDON-sur ;
 Lustig:Lustig9 LONDON-sur ;
 Luther LONDON-sur ;
@@ -15460,7 +15418,6 @@ Lyyra ACCRA-fem ;
 Lyytikkä ACCRA-sur ;
 Lyytikäinen:Lyytikäi C-FI-NEN-sur ;
 Lyytinen:Lyyti C-FI-NEN-sur ;
-Lábbájot+Use/Sub:Lábbájot BERN ; !
 Lábán:Lábán9 LONDON-mal ; !A stallu
 Lágon:Lágon9 LONDON-plc ;
 Láhtar LONDON-plc ;
@@ -15796,7 +15753,7 @@ Makkula ACCRA-sur ;
 Makpela ACCRA-plc ;
 Maksimainen:Maksimai C-FI-NEN-sur ;
 Maksimova ACCRA-sur ;
-Maksimála+Use/Sub:Maksimála ACCRA-plc ; !
+Maksimála+Use/LexSub:Maksimála ACCRA-plc ; !
 Makurdi ACCRA-plc ;
 Makø NYSTØ ;
 Malabarkysten+Use/LexSub:Malabar^kysten9 LONDON-plc ; !
@@ -15850,7 +15807,7 @@ Malmi ACCRA-plc ;
 Malmin:Malmin9 LONDON-sur ;
 Malmivaara:Malmi^vaara ACCRA-sur ;
 Malmköping:Malm^köping9 LONDON-plc ;
-Malmo+Use/Sub:Malm^o9 ACCRA-plc ; !
+Malmö+Use/Sub:Malm^o9 ACCRA-plc ; !
 Malmédy ACCRA-plc ;
 Malmö:Malm^ö ACCRA-plc ;
 Malmöhus:Malm^ö^hus BERN-plc ;
@@ -16547,7 +16504,7 @@ Mesa ACCRA-plc ;
 Mesch BERN-sur ;
 Meschede:Me^schede ACCRA-plc ;
 Meselefors:Mesele^fors BERN-plc ;
-Meselfors+Use/Sub:Mesel^fors BERN-plc ; !
+Meselefors+Use/Sub:Mesel^fors BERN-plc ; !
 Meshwar LONDON-plc ;
 Mesiäinen:Mesiäi C-FI-NEN-sur ;
 Mesjduretsjensk BERN-plc ;
@@ -16557,8 +16514,7 @@ Meskus LONDON-sur ;
 Mesnali ACCRA-plc ;
 Mesopotamia ACCRA-LOAN-plc ;
 Mesopotamias:Mesopotami^as BERN-plc ;
-Mesopotamiija+Use/Sub:Mesopotamiija NIKOSIIJA-plc ; !
-Mesopotámia ACCRA-plc ;
+Mesopotamia+Use/Sub:Mesopotamiija NIKOSIIJA-plc ; !
 Messel LONDON-sur ;
 Messenger LONDON-plc ;
 Messias:Messi^as LONDON-mal ;
@@ -16622,7 +16578,7 @@ MicroMarc:Micro^Marc BERN-org ;
 Micrografx:Micro^grafx BERN-obj ;
 Microsoft:Micro^soft BERN-org ;
 Midas LONDON-mal ;
-Midausten+Use/Sub:Mid^austen9 LONDON-plc ; !
+Midausten+Use/LexSub:Mid^austen9 LONDON-plc ; !
 Middagsbukt:Middags^bukt BERN-sur ;
 Middagsfjellet:Mid^dags^fjellet LONDON-plc ;
 Middelburg:Middel^burg9 BERN-plc ;
@@ -16640,7 +16596,7 @@ Midnattsrock:Mid^natts^rock BERN-org ;
 Midnight% Sun% Marathon:Midnight% Sun% Marathon9 BERN-org ;
 Midsund:Mid^sund9 SUND-sur ;
 Midt:Midt9 BERN-sur ;
-Midtausten+Use/Sub:Midt^austen9 LONDON-plc ; !
+Midtausten+Use/LexSub:Midt^austen9 LONDON-plc ; !
 Midtbø:Midt^bø NYSTØ ;
 Midtfjords:Midt^fjords BERN-plc ;
 Midthun:Mid^thun9 BERN-sur ;
@@ -16654,9 +16610,7 @@ Mielikäinen:Mielikäi C-FI-NEN-sur ;
 Mielnik:Mielnik9 LONDON-sur ;
 Mielonen:Mielo C-FI-NEN-sur ;
 Mienna ACCRA-sur ;
-Mierojavri+Use/Sub:Miero^javri ACCRA-plc ; !
 Mieron:Mieron9 LONDON-mal ;
-Mieronjarve+Use/Sub:Miero^njarve ACCRA-plc ; !
 Mieskolainen:Mieskolai C-FI-NEN-sur ;
 Mieskonen:Miesko C-FI-NEN-sur ;
 Mietinen:Mieti C-FI-NEN-sur ;
@@ -16947,11 +16901,11 @@ Montgomery ACCRA-sur ;
 Montmartre ACCRA-plc ;
 Montonen:Monto C-FI-NEN-sur ;
 Montparnasse ACCRA-plc ;
-Montpelier+Use/Sub:Montpeli^er BERN-plc ; !
+Montpellier+Use/Sub:Montpeli^er BERN-plc ; !
 Montpellier:Montpelli^er BERN-plc ;
 Montreal:Montre^al BERN-plc ;
 Montreux BERN-plc ;
-Montréal+Use/Sub:Montré^al BERN-plc ; !
+Montreal+Use/Sub:Montré^al BERN-plc ; !
 Montserrat BERN-plc ;
 Montt BERN-plc ;
 Monza ACCRA-plc ;
@@ -17145,7 +17099,7 @@ Munne ACCRA-sur ;
 Munnukka ACCRA-sur ;
 Munster LONDON-sur ;
 Munukka ACCRA-sur ;
-Muoffie+Use/Sub:Muoffie ACCRA-plc ; !
+Muoffie+Use/LexSub:Muoffie ACCRA-plc ; !
 Muona ACCRA-plc ;
 Muonionjoki:Muoni^on^joki ACCRA-LOAN-plc ;
 Muonioälv:Muonio^älv BERN-LOAN-plc ;
@@ -17163,7 +17117,7 @@ Mures LONDON-plc ;
 Muri ACCRA-sur ;
 Murkes LONDON-sur ;
 Murmansk BERN-LOAN-plc ;
-Murmanskij% Vestnik+Use/Sub:Murmanskij9% Vestnik LONDON-org ; !
+Murmanskij% Vestnik+Use/LexSub:Murmanskij9% Vestnik LONDON-org ; !
 Murphy ACCRA-sur ;
 Murray LONDON-sur ;
 Mursu ACCRA-plc ;
@@ -17235,7 +17189,7 @@ Mwanza ACCRA-plc ;
 Mweru ACCRA-plc ;
 My+CmpN/None:My NYSTØ ; !
 Myanmar LONDON-plc ;
-Myckland+Use/Sub:Myck^land9 BERN-plc ; !
+Mykland+Use/Sub:Myck^land9 BERN-plc ; !
 Mydland:Myd^land9 BERN-sur ;
 Myers BERN-sur ;
 Myhr BERN-sur ;
@@ -17325,7 +17279,7 @@ Máhtto MARJA-mal ;
 Máhttolokten-Sámi+N+Prop+Obj+Sg+Nom:Máhttolokten-Sámi K ;
 Májjá:Máj9já MARJA-fem ;
 Mákke MARJA-fem ;
-Málaga+Use/Sub:Málaga ACCRA-plc ; !
+Malaga+Use/Sub:Málaga ACCRA-plc ; !
 Máljá:Mál'já MARJA-mal ; !Is this truly male?
 Márainen:Márainen LONDON-sur ;
 Máre ACCRA-fem ;
@@ -17422,7 +17376,6 @@ Måren:Måren9 LONDON-sur ;
 Mårnes:Mår^nes BERN-sur ;
 Mårøyfjord:Mår^øy^fjord9 BERN-LOAN-plc ;
 Mårøyfjorden:Mår^øy^fjorden9 LONDON-LOAN-plc ;
-Måskke% skåvllå ACCRA-org ;
 Måsske+Use/Sub:Måsske ACCRA-plc ; !
 Måsø:Mås^ø NYSTØ ;
 Måsøy+Use/Sub:Mås^øy NYSTØ-plc ; !
@@ -17565,7 +17518,7 @@ Nakari ACCRA-sur ;
 Nakasone ACCRA-plc ;
 Nakhitsjevan:Nakhitsjevan9 LONDON-plc ;
 Nakhodka ACCRA-plc ;
-Nakkelajervi+Use/Sub:Nakkela^jervi ACCRA-sur ; !
+Näkkäläjärvi+Use/Sub:Nakkela^jervi ACCRA-sur ; !
 Nakken:Nakken9 LONDON-sur ;
 Nakkerud:Nakkerud9 BERN-plc ;
 Nakksjø:Nakk^sjø NYSTØ ;
@@ -17613,7 +17566,7 @@ Nansy ACCRA-plc ;
 Nantes LONDON-plc ;
 Nantong:Nantong9 BERN-plc ;
 Nantucket LONDON-plc ;
-Nantung+Use/Sub:Nantung9 BERN-plc ; !
+Nantong+Use/Sub:Nantung9 BERN-plc ; !
 Napari ACCRA-sur ;
 Napoleon:Napoleon9 LONDON-mal ;
 Napoli ACCRA-plc ;
@@ -17913,7 +17866,7 @@ Nidarholm:Nidar^holm9 BERN-plc ;
 Nidaros:Nidar^os BERN-plc ;
 Nidarosdomen:Nidar^os^domen9 LONDON-obj ;
 Nidelven:Nid^elven9 LONDON-plc ;
-Niederösterreich+Use/Sub:Nieder^öster^reich9 BERN-plc ; !
+Niederösterreich+Use/LexSub:Nieder^öster^reich9 BERN-plc ; !
 Nielikäinen:Nielikäi C-FI-NEN-sur ;
 Niels BERN-mal ;
 Nielsen:Nielsen9 LONDON-sur ;
@@ -17947,9 +17900,9 @@ Niilas:Nijlas ANAR-mal ;
 Niiles LONDON-mal ;
 Niillas:Nijllas ANAR-mal ;
 Niillá:Nijllá MARJA-mal ;
-Niillán+Use/Sub:Nijllán9 ACCRA ; ! !WHAT IS THIS?
+Niillán+Use/LexSub:Nijllán9 ACCRA ; ! !WHAT IS THIS?
 Niilola ACCRA-sur ;
-Niilut+Use/Sub:Niiluh ANAR-sur ; !
+Nilut+Use/Sub:Niiluh ANAR-sur ; !
 Niilá:Nij'lá MARJA-mal ;
 Niinikoski:Niini^koski ACCRA-plc ;
 Niinimaa:Niini^maa ACCRA-sur ;
@@ -18001,7 +17954,7 @@ Nikomedes LONDON-mal ;
 Nikomediaby:Nikomedia^by NYSTØ ;
 Nikopolis LONDON-plc ;
 Nikosia ACCRA-plc ;
-Nikosiija+Use/Sub:Nikosiija NIKOSIIJA-plc ; !!XXX IIJA
+Nikosia+Use/Sub:Nikosiija NIKOSIIJA-plc ; !!XXX IIJA
 Niku ACCRA-plc ;
 Nikula ACCRA-sur ;
 Nikulainen:Nikulai C-FI-NEN-sur ;
@@ -18010,7 +17963,7 @@ Nikupeteri ACCRA-sur ;
 Nila ACCRA-mal ;
 Nilas LONDON-mal ;
 Nilda ACCRA-fem ;
-Nilen+Use/Sub:Nilen9 LONDON-plc ; !
+Nilen+Use/LexSub:Nilen9 LONDON-plc ; !
 Nilima ACCRA-sur ;
 Niljas LONDON-mal ;
 Nilke:Nil'ke MARJA-mal ;
@@ -18054,8 +18007,8 @@ Nirkkonen:Nirkko C-FI-NEN-sur ;
 Nironen:Niro C-FI-NEN-sur ;
 Nirvana ACCRA-org ;
 Nisga ACCRA-org ;
-Nisga’a% Longhouse+Use/Sub:Nisga’a% Longhouse ACCRA-obj ; !
-Nisga’a+Use/Sub:Nisga’a ACCRA-plc ;
+Nisga’a% Longhouse+Use/LexSub:Nisga’a% Longhouse ACCRA-obj ; !
+Nisga’a+Use/LexSub:Nisga’a ACCRA-plc ;
 Nisjnij:Nisjnij9 LONDON-plc ;
 Niska ACCRA-sur ;
 Niskakangas:Niska^kangas LONDON-plc ;
@@ -18097,8 +18050,6 @@ Njaa NYSTØ ;
 Njaarke ACCRA-plc ;
 Njarg:Njarg9 BERN-sur ;
 Njord:Njord9 BERN-mal ;
-Njuorajaure+Use/Sub:Njuora^jaure ACCRA-plc ; !
-Njuorjonjunni:Njuorjo^njunni MARJA-I-plc ;
 Njål BERN-mal ;
 Njård:Njård9 BERN-mal ;
 Njåstad:Njå^stad9 BERN-sur ;
@@ -18133,7 +18084,7 @@ Nonni ACCRA-sur ;
 Nonsrichai:Nonsricha DUBAI-sur ;
 Noora ACCRA-fem ;
 Noord-Brabant BERN-plc ;
-Noord-Holland+Use/Sub:Noord-Hol^land9 BERN-plc ; !
+Noord-Holland+Use/LexSub:Noord-Hol^land9 BERN-plc ; !
 Nopanen:Nopa C-FI-NEN-sur ;
 Noponen:Nopo C-FI-NEN-sur ;
 Nor% Watch BERN-obj ;
@@ -18225,7 +18176,7 @@ Nordishavet:Nord^is^havet LONDON-LOAN-plc ;
 Nordisk+Use/LexSub:Nordisk9 LONDON-atr ;	!
 Nordkalotten:Nord^kalotten9 LONDON-LOAN-plc ;
 Nordkalottfolket:Nord^kalott^folket LONDON-org ;
-Nordkap+Use/Sub:Nord^kap9 BERN-plc ; !
+Nordkapp+Use/Sub:Nord^kap9 BERN-plc ; !
 Nordkapp:Nord^kapp9 BERN-LOAN-plc ;
 Nordkil:Nord^kil BERN-sur ;
 Nordkild:Nord^kild9 BERN-sur ;
@@ -18255,7 +18206,7 @@ Nordmand:Nord^mand9 BERN-sur ;
 Nordmands:Nord^mands LONDON-org ;
 Nordmannset:Nord^mannset BERN-plc ;
 Nordmannvik:Nord^mann^vik BERN-plc ;
-Nordmanset+Use/Sub:Nord^manset BERN-plc ; !
+Nordmannset+Use/Sub:Nord^manset BERN-plc ; !
 Nordmark:Nord^mark BERN-plc ;
 Nordmarksgodset:Nord^marks^godset LONDON-plc ;
 Nordmela:Nord^mela ACCRA-plc ;
@@ -18268,7 +18219,7 @@ Nordnesøy+Use/Sub:Nord^nes^øy NYSTØ-plc ; !
 Nordnesøy:Nord^nes^øy BERN-plc ;
 Nordnorsk:Nord^norsk LONDON-org ;
 Nordnytt:Nord^nytt BERN-org ;
-Nordostpassasjen+Use/Sub:Nord^ost^passasjen9 LONDON-plc ; !
+Nordostpassasjen+Use/LexSub:Nord^ost^passasjen9 LONDON-plc ; !
 Nordplus:Nord^plus BERN-org ;
 Nordpolen+Use/LexSub:Nord^polen9 LONDON-plc ; !
 Nordraa:Nord^raa NYSTØ-sur ;
@@ -18317,7 +18268,7 @@ Norges% idrettsforbund+CmpN/None:Norges% idretts^for^bund9 BERN-org ;
 Norgesglasset:Norges^glasset LONDON-obj ;
 Norgreen:Nor^green9 BERN-sur ;
 Norgren:Nor^gren9 LONDON-sur ;
-Norgwegiæ+Use/Sub:Norg^wegiæ NYSTØ-plc ; !
+Norvvegiæ+Use/Sub:Norg^wegiæ NYSTØ-plc ; !
 Norheim:Nor^heim9 HEIM-sur ;
 Norheimsund:Nor^heim^sund9 SUND-plc ;
 Noricum:Noricum9 BERN-org ;
@@ -18328,7 +18279,7 @@ Norilsk BERN-plc ;
 Norja ACCRA-LOAN-plc ;
 Norkild:Norkild9 BERN-sur ;
 Norkynhalvøya:Nor^kyn^halv^øya ACCRA-plc ;
-Norland+Use/Sub:Nor^land9 BERN-plc ; !
+Norland+Use/LexSub:Nor^land9 BERN-plc ; !
 Norlandia:Nor^landia ACCRA-org ;
 Norlemann:Norle^mann9 BERN-sur ;
 Norli:Nor^li ACCRA-sur ;
@@ -18383,12 +18334,12 @@ Norvang:Nor^vang9 BERN-sur ;
 Norvegia:Nor^vegia ACCRA-LOAN-plc ;
 Norvegia:Nor^vegia ACCRA-obj ;
 Norvegicum:Nor^vegicum9 BERN-org ;
-Norvegiæ+Use/Sub:Nor^vegiæ NYSTØ ; !
+Norvvegiæ+Use/Sub:Nor^vegiæ NYSTØ ; !
 Norvvegiæ:Norv^vegiæ NYSTØ ;
 Norway+Use/Sub:Nor^way NYSTØ-plc ; !
 Norway:Nor^way LONDON-LOAN-plc ;
 Norwegian:Nor^wegi^an9 LONDON-org ;
-Norwegiæ+Use/Sub:Nor^wegiæ NYSTØ-plc ; !
+Norvvegiæ+Use/Sub:Nor^wegiæ NYSTØ-plc ; !
 Norwich:Norwich9 LONDON-plc ;
 Norøy+Use/Sub:Nor^øy NYSTØ-plc ; !
 Norøy:Nor^øy BERN-plc ;
@@ -18415,9 +18366,9 @@ Nova ACCRA-obj ;
 Novara ACCRA-plc ;
 Novgorod:Novgorod9 BERN-plc ;
 Novi ACCRA-plc ;
-Novokusneck BERN-plc ;
-Novokusnetsk+Use/Sub:Novokusnetsk BERN-plc ; !
-Novokuznetsk+Use/Sub:Novokuznetsk LONDON-plc ; !
+Novokusnetsk BERN-plc ;
+Novokusnetsk+Use/Sub:Novokusneck BERN-plc ; !
+Novokusnetsk+Use/Sub:Novokuznetsk LONDON-plc ; !
 Novosibirsk BERN-plc ;
 Novotny ACCRA-sur ;
 Novotsjerkassk BERN-plc ;
@@ -18429,7 +18380,6 @@ Noxnes:Nox^nes BERN-sur ;
 Nubia ACCRA-plc ;
 Nubiske ACCRA-sur ;
 Nuelva:Nu^elva ACCRA-plc ;
-Nuettjaur+Use/Sub:Nuett^jaur BERN-plc ; !
 Nuhtte MARJA-mal ;
 Nuija ACCRA-plc ;
 Nuikka ACCRA-sur ;
@@ -18561,8 +18511,6 @@ Nyyssölä ACCRA-plc ;
 Nyyssönen:Nyyssö C-FI-NEN-sur ;
 Náhkol LONDON-mal ;
 Náhor LONDON-plc ;
-Násavárre+Use/Sub:Nása^várre ACCRA-plc ; !
-Násavárrie+Use/Sub:Nása^várrie ACCRA-plc ; !
 Näkki ACCRA-sur ;
 Näkkäläjärvi:Näkkälä^järvi ACCRA-sur ;
 Näppi ACCRA-sur ;
@@ -18646,9 +18594,7 @@ Oakdale:Oak^dale ACCRA-plc ;
 Oakland:Oak^land9 BERN-plc ;
 Oakley ACCRA-plc ;
 Oanes:Oa^nes BERN-sur ;
-Oarjelet+Use/Sub:Oarjelet BERN ; !
-Oarjelij-Bájdár:Oarjelij9-Báj9dár LONDON-plc ;
-Oarluovttjohka:Oar^luovtt^joh'ka MARJA-A-plc ;
+Oarjelet+Use/LexSub:Oarjelet BERN ; !
 Oasis:O^asis LONDON-org ;
 Oaxaca ACCRA-plc ;
 Ob+CmpN/None:Ob9 BERN-plc ;
@@ -18661,7 +18607,7 @@ Oberammergau ACCRA-plc ;
 Oberhausen:Ober^hausen9 LONDON-sur ;
 Oberndorf:Obern^dorf BERN-plc ;
 Oberstdorf:Oberst^dorf BERN-plc ;
-Oberösterreich+Use/Sub:Ober^öster^reich9 BERN-plc ; !
+Oberösterreich+Use/LexSub:Ober^öster^reich9 BERN-plc ; !
 Obiter LONDON-plc ;
 Oblast:Oblast9 BERN-plc ;
 Obrestad:Obre^stad9 BERN-sur ;
@@ -18681,8 +18627,6 @@ Odbjørg:Od^bjørg9 BERN-fem ;
 Odd-Arne ACCRA-mal ;
 Odd:Odd9 BERN-mal ;
 Odda ACCRA-plc ;
-Odda-Kaledonia+Use/Sub:Odda-Kaledonia ACCRA-plc ; !
-Odda-Seelanti+Use/Sub:Odda-See^lanti ACCRA-plc ; !
 Oddbjørg:Odd^bjørg9 BERN-fem ;
 Oddbjørn:Odd^bjørn9 LONDON-mal ;
 Oddekalv BERN-sur ;
@@ -18734,7 +18678,6 @@ Offersen:Offersen9 LONDON-sur ;
 Offersøy+Use/Sub:Offers^øy NYSTØ-plc ; !
 Offersøy:Offers^øy BERN-plc ;
 Office RONDANE-obj ;
-Offiseara+Use/Sub:Offiseara ACCRA-obj ; ! !is this a name?
 Ofir LONDON-plc ;
 Ofoten:O^foten9 LONDON-LOAN-plc ;
 Ofstad:Of^stad9 BERN-sur ;
@@ -18798,7 +18741,7 @@ Oksfjellelva:Oks^fjell^elva ACCRA-plc ;
 Oksfjord:Oks^fjord9 BERN-LOAN-plc ;
 Oksfjorddalen:Oks^fjord^dalen9 LONDON-LOAN-plc ;
 Oksfjordhamn:Oks^fjord^hamn9 BERN-LOAN-plc ;
-Oksidenten+Use/Sub:Oksidenten9 LONDON-plc ; !
+Oksidenten+Use/LexSub:Oksidenten9 LONDON-plc ; !
 Oksnes:Oks^nes BERN-plc ;
 Okstindan:Oks^tindan9 LONDON-plc ;
 Okstindbreen:Oks^tind^bre^en9 LONDON-plc ;
@@ -18836,7 +18779,7 @@ Olderskog:Older^skog9 BERN-plc ;
 Oldervik:Older^vik BERN-plc ;
 Oldorf LONDON-mal ;
 Oldsmobile:Olds^mobile ACCRA-obj ;
-Olduvaidalen+Use/Sub:Olduvai^dalen9 LONDON-plc ; !
+Olduvaidalen+Use/LexSub:Olduvai^dalen9 LONDON-plc ; !
 Ole ACCRA-mal ;
 Ole-Christian:Ole-Christi^an9 LONDON-mal ;
 Ole-Johan:Ole-Johan9 LONDON-mal ;
@@ -19036,7 +18979,7 @@ Oreskov:O^reskov BERN-sur ;
 Orfeus:Orfe^us LONDON-mal ;
 Orfevs LONDON-mal ;
 Orheim:Or^heim9 HEIM-plc ;
-Orienten+Use/Sub:Orienten9 LONDON-plc ; !
+Orienten+Use/LexSub:Orienten9 LONDON-plc ; !
 Origami% Arctica ACCRA-org ;
 Orion:Ori^on9 LONDON-mal ;
 Orissa ACCRA-plc ;
@@ -19053,7 +18996,7 @@ Orlaug:Orlaug9 LONDON-fem ;
 Orleans BERN-plc ;
 Orlov LONDON-sur ;
 Orly ACCRA-plc ;
-Orléans+Use/Sub:Orléans BERN-plc ; !
+Orleans+Use/Sub:Orléans BERN-plc ; !
 Ormazd:Ormazd9 LONDON-plc ;
 Ormelet BERN-plc ;
 Ormemyr:Orme^myr BERN-plc ;
@@ -19117,7 +19060,7 @@ Osterfjord:Oster^fjord9 BERN-plc ;
 Osterhaus:Oster^haus BERN-plc ;
 Osterøy+Use/Sub:Oster^øy NYSTØ-plc ; !
 Osterøy:Oster^øy BERN-plc ;
-Ostindia+Use/Sub:Ost^india ACCRA-plc ; !
+Ostindia+Use/LexSub:Ost^india ACCRA-plc ; !
 Ostnes:Ost^nes BERN-plc ;
 Ostrava ACCRA-plc ;
 Ostrov:Ostrov LONDON-sur ;
@@ -19153,8 +19096,6 @@ Otterup:Otterup9 BERN-plc ;
 Ottesen:Ottesen9 LONDON-sur ;
 Ottestad:Otte^stad9 BERN-sur ;
 Otto-Ville ACCRA-mal ;
-Otto-automahta+Use/Sub:Otto-automahta ACCRA-org ; !
-Otto-automáhta ACCRA-obj ;
 Ottosen:Ottosen9 LONDON-sur ;
 Ouagadougou:Ou^agadougou ACCRA-plc ;
 Oujda:Ouj9da ACCRA-fem ;
@@ -19197,11 +19138,11 @@ Ovidia ACCRA-plc ;
 Ovidie ACCRA-sur ;
 Oviken:O^viken9 LONDON-plc ;
 Ovis LONDON-sur ;
-Ovla+Use/Sub:Ov'la MARJA-A-mal ; !
-Ovle-vuelie+Use/Sub:Ovle-vuelie ACCRA-plc ; !
+Ovllá+Use/Sub:Ov'la MARJA-A-mal ; !
+Ovlevuelie+Use/Sub:Ovle-vuelie ACCRA-plc ; !
 Ovlevuelie ACCRA-plc ;
 Ovlin LONDON-sur ;
-Ovlla+Use/Sub:Ovlla MARJA-A-mal ; !
+Ovllá+Use/Sub:Ovlla MARJA-A-mal ; !
 Ovllá MARJA-mal ;
 Ovllá+Use/NG:Ov'lá MARJA-mal ;
 Owe ACCRA-mal ;
@@ -19311,8 +19252,7 @@ Palau ACCRA-plc ;
 Palawan:Palawan9 BERN-plc ;
 Paldiski ACCRA-plc ;
 Palembang:Palembang9 BERN-plc ;
-Palestiinna+Use/Sub:Palestiinna ACCRA-plc ; !
-Palestina ACCRA-plc ;
+Palestina ACCRA-LOAN-plc ;
 Palimpsest:Palimpsest9 BERN-obj ;
 Palismaa:Palis^maa ACCRA-sur ;
 Paljakalle ACCRA-plc ;

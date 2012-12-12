@@ -10551,8 +10551,8 @@ Irja ACCRA-fem ;
 Irjala ACCRA-plc ;
 Irjá MARJA-fem ;
 Irján ANAR-mal ;
-Irkuck LONDON-plc ;
-Irkutsk+Use/LexSub:Irkutsk LONDON-plc ; !
+Irkutsk+Use/Sub:Irkuck LONDON-plc ;
+Irkutsk:Irkutsk LONDON-plc ; !
 Irland:Ir^land9 BERN-LOAN-plc ;
 Irma ACCRA-fem ;
 Irmak LONDON-plc ;
@@ -19252,7 +19252,7 @@ Palau ACCRA-plc ;
 Palawan:Palawan9 BERN-plc ;
 Paldiski ACCRA-plc ;
 Palembang:Palembang9 BERN-plc ;
-Palestina ACCRA-LOAN-plc ;
+Palestina ACCRA-LOAN-plc ; !ččč
 Palimpsest:Palimpsest9 BERN-obj ;
 Palismaa:Palis^maa ACCRA-sur ;
 Paljakalle ACCRA-plc ;
@@ -19299,7 +19299,7 @@ Pamyua:Pam^yua ACCRA-mal ;
 Pan:Pan9 BERN-sur ;
 Panaggi ACCRA-sur ;
 Panama ACCRA-plc ;
-Panamaeidet+Use/Sub:Panama^eidet LONDON-plc ; !
+Panamaeidet+Use/LexSub:Panama^eidet LONDON-plc ; !
 Panamakanalen+Use/LexSub:Panama^kanalen9 LONDON-plc ; !
 Panasonic LONDON-org ;
 Panchen LONDON-mal ;
@@ -19397,7 +19397,7 @@ Pasonen:Paso C-FI-NEN-sur ;
 Pasrjetsk:Pasrjetsk LONDON-plc ;
 Passat  LONDON-obj ;
 Passau ACCRA-plc ;
-Passbekk+Use/Sub:Pass^bekk BERN-plc ; !
+Passebekk+Use/Sub:Pass^bekk BERN-plc ; !
 Passebekk:Passe^bekk BERN-plc ;
 Passi ACCRA-sur ;
 Passila ACCRA-sur ;
@@ -19746,7 +19746,7 @@ Piera ACCRA-mal ;
 Pierra MARJA-A-mal ;
 Pierre:Pi^erre ACCRA-mal ;
 Piesanen:Piesa C-FI-NEN-sur ;
-Pieskehaure+Use/Sub:Pieske^haure ACCRA-plc ; !
+Pieskehaure+Use/LexSub:Pieske^haure ACCRA-plc ; !
 Pieski ACCRA-sur ;
 Pieskä ACCRA-sur ;
 Pietarila ACCRA-sur ;
@@ -19843,7 +19843,7 @@ Pirkkanen:Pirkka C-FI-NEN-sur ;
 Pirkola ACCRA-sur ;
 Pirnes:Pir^nes BERN-sur ;
 Pirskanen:Pirska C-FI-NEN-sur ;
-Pirtijärvi+Use/Sub:Pirti^järvi ACCRA-sur ; !
+Pirttijärvi+Use/Sub:Pirti^järvi ACCRA-sur ; !
 Pirttijärvi:Pirtti^järvi ACCRA-plc ;
 Pirttikoski:Pirtti^koski ACCRA-plc ;
 Pirttilahti:Pirtti^lahti ACCRA-plc ;
@@ -19863,7 +19863,7 @@ Piskonen:Pisko C-FI-NEN-sur ;
 Pispa ACCRA-sur ;
 Pistoia:Pisto^ia ACCRA-plc ;
 Pitcairn:Pitcairn9 LONDON-plc ;
-Piteelven+Use/Sub:Pite^elven9 LONDON-plc ; !
+Piteälven+Use/Sub:Pite^elven9 LONDON-plc ; !
 Piteälven:Pite^älven9 LONDON-plc ;
 Piteå:Pite^å ACCRA-LOAN-plc ;
 Pitkonen:Pitko C-FI-NEN-sur ;
@@ -19964,7 +19964,7 @@ Polarstjerna:Polar^stjerna ACCRA-obj ;
 Polarstjerne:Polar^stjerne ACCRA-org ;
 Polden:Polden9 LONDON-sur ;
 Polderland:Polderland9 BERN-org ;
-Polen+Use/Sub:Polen9 LONDON-plc ; !
+Polen:Polen9 LONDON-plc ; !
 Politiseringen:Politiseringen9 LONDON-obj ;
 Politisk+Use/LexSub:Politisk9 LONDON-atr ;	!
 Poljarnyj:Poljarnyj9 LONDON-plc ;
@@ -20429,7 +20429,7 @@ Quist:Quist9 BERN-sur ;
 Qum:Qum9 BERN-sur ;
 Qumran:Qumran9 LONDON-plc ;
 Qurtzalcoatl LONDON-sur ;
-Québec+Use/Sub:Québec BERN-plc ; !
+Quebec+Use/Sub:Québec BERN-plc ; !
 Qvale ACCRA-sur ;
 Qvigstad:Qvig^stad9 BERN-sur ;
 Qvist:Qvist9 BERN-sur ;
@@ -20644,7 +20644,7 @@ Rasta ACCRA-plc ;
 Rastas LONDON-sur ;
 Rasteby:Raste^by ACCRA-plc ;
 Rastenberger:Rasten^berger LONDON-sur ;
-Rastesvárre+Use/Sub:Rastes^várre ACCRA-plc ; !
+Rastesvárre+Use/LexSub:Rastes^várre ACCRA-plc ; !
 Rasvåg:Ras^våg9 BERN-sur ;
 Ratama ACCRA-sur ;
 Ratan:Ratan9 LONDON-plc ;
@@ -20956,7 +20956,7 @@ Revsneshamn:Revs^nes^hamn9 BERN-plc ;
 Rex BERN-ani ;
 Reykjanes:Reykja^nes BERN-plc ;
 Reykjavik:Reykja^vik BERN-plc ;
-Reykjavík+Use/Sub:Reykja^vík BERN-plc ; !
+Reykjavik+Use/Sub:Reykja^vík BERN-plc ; !
 Reymert:Reymert LONDON-mal ;
 Reynell BERN-sur ;
 Reynosa ACCRA-plc ;
@@ -20982,7 +20982,7 @@ Rhöse ACCRA-sur ;
 RiTø:Ri^Tø ACCRA-org ;
 Rian:Ri^an9 LONDON-sur ;
 Riast-Hylling:Ri^ast-Hylling9 LONDON-sur ;
-Riast/Hylling+Use/Sub:Ri^ast/Hylling9 LONDON-sur ; !?
+Riast-Hylling+Use/Sub:Ri^ast/Hylling9 LONDON-sur ; !?
 Riast:Ri^ast9 BERN-plc ;
 Riasten:Ri^asten9 LONDON-plc ;
 Ribe ACCRA-plc ;
@@ -21030,7 +21030,7 @@ Rigels LONDON-sur ;
 Rigmor LONDON-fem ;
 Rigney ACCRA-sur ;
 Rigney+Use/Sub:Rigney NYSTØ ; !
-Rigoberta+Use/Sub:Rigoberta ACCRA-fem ; !
+Rigobertha+Use/Sub:Rigoberta ACCRA-fem ; !
 Rigobertha ACCRA-fem ;
 Rigon:Rigon9 LONDON-mal ; !Not sure if mal
 Rigve ACCRA-mal ;
@@ -21216,7 +21216,7 @@ Rivdol LONDON-plc ;
 River LONDON-sur ;
 RiverFlowz:River^Flowz BERN-org ;
 Rivertz:Rivertz9 LONDON-sur ;
-Rivieraen+Use/Sub:Rivi^era^en9 LONDON-plc ; !
+Rivieraen+Use/LexSub:Rivi^era^en9 LONDON-plc ; !
 Rivinoja:Rivin^oja ACCRA-sur ;
 Rivojen:Rivojen9 LONDON-mal ;
 Riyadh:Ri^yadh9 BERN-sur ;
@@ -21344,7 +21344,7 @@ Rommetveit:Romme^tveit BERN-sur ;
 Romppainen:Romppai C-FI-NEN-sur ;
 Romppanen:Romppa C-FI-NEN-sur ;
 Romsdal:Roms^dal BERN-plc ;
-Romsdals+Use/Sub:Roms^dals BERN-plc ; !
+Romsdals+Use/LexSub:Roms^dals BERN-plc ; !
 Romsdalshorn:Roms^dals^horn9 BERN-plc ;
 Romset BERN-plc ;
 Romssaváhjohka:Romssa^váh^joh'ka MARJA-A-plc ;
@@ -21352,7 +21352,7 @@ Romu ACCRA-sur ;
 Romulus BERN-mal ;
 Romundstad:Ro^mund^stad9 BERN-sur ;
 Romunen:Romu C-FI-NEN-sur ;
-Romá+Use/Sub:Romá ACCRA-plc ; !
+Roma+Use/Sub:Romá ACCRA-plc ; !
 Románia ACCRA-plc ;
 Ron:Ron9 BERN-mal ;
 Ronald:Ronald9 LONDON-mal ;
@@ -21362,7 +21362,7 @@ Rondônia ACCRA-plc ;
 Rones:Ro^nes BERN-sur ;
 Rong:Rong9 BERN-sur ;
 Ronglan:Ronglan9 BERN-plc ;
-Rongland+Use/Sub:Rong^land9 BERN-plc ; !
+Ronglan+Use/Sub:Rong^land9 BERN-plc ; !
 Rongved:Rongved9 BERN-sur ;
 Ronimus BERN-sur ;
 Ronja ACCRA-fem ;
@@ -21433,7 +21433,7 @@ Rostavatn:Rosta^vatn9 BERN-LOAN-plc ;
 Rosti ACCRA-sur ;
 Rostock LONDON-plc ;
 Rostoeatnu:Rosto^eatnu MARJA-U-plc ;
-Rostojärvi+Use/Sub:Rosto^järvi ACCRA-plc ; !
+Rostojärvi+Use/LexSub:Rosto^järvi ACCRA-plc ; !
 Rostov LONDON-plc ;
 Rostov-na-Donu ACCRA-plc ;
 Rosvold:Ros^vold9 BERN-sur ;
@@ -21468,13 +21468,13 @@ Rousu ACCRA-sur ;
 Rouvali ACCRA-sur ;
 Rouvari ACCRA-sur ;
 Rouvinen:Rouvi C-FI-NEN-sur ;
-Rovagiedde+Use/Sub:Rova^giedde ACCRA-plc ; !
+Rovagiedde+Use/LexSub:Rova^giedde ACCRA-plc ; !
 Rovaniemi:Rova^niemi ACCRA-LOAN-plc ;
 Rovdjursutredningen:Rov^djurs^utredningen9 LONDON-obj ;
 Rover LONDON-sur ;
 Roverud:Roverud9 BERN-plc ;
 Rovik:Ro^vik BERN-sur ;
-Rovinj+Use/Sub:Rovinj LONDON-plc ; !
+Rovinj+Use/LexSub:Rovinj LONDON-plc ; !
 Rowley ACCRA-plc ;
 Roxborough:Rox^borough9 LONDON-plc ;
 Roxette ACCRA-fem ;
@@ -21531,7 +21531,7 @@ Rumohr LONDON-sur ;
 Rumpunen:Rumpu C-FI-NEN-sur ;
 Runa ACCRA-plc ;
 Runar LONDON-mal ;
-Runasvágge+Use/Sub:Runas^vágge SIJTE-plc ; !
+Runasvágge+Use/LexSub:Runas^vágge SIJTE-plc ; !
 Rundberg:Rund^berg9 BERN-sur ;
 Runde ACCRA-plc ;
 Rundevoll:Runde^voll BERN-plc ;
@@ -21588,7 +21588,7 @@ Russelvdalen:Russ^elv^dalen9 LONDON-plc ;
 Russenes:Russe^nes BERN-plc ;
 Russevåg:Russe^våg9 BERN-plc ;
 Russisk+Use/LexSub:Russisk9 LONDON-atr ;	!
-Russl.Russland+Use/Sub:Russl.Russ^land9 BERN-plc ; !
+Russl.Russland+Use/LexSub:Russl.Russ^land9 BERN-plc ; !
 Russland:Russ^land9 BERN-LOAN-plc ;
 Russvik:Russ^vik BERN-sur ;
 Russåga:Russ^åga ACCRA-plc ;
@@ -21747,7 +21747,7 @@ Rødby:Rød^by NYSTØ ;
 Rødde ACCRA-plc ;
 Rødding:Rødding9 LONDON-sur ;
 Rødehavet:Røde^havet LONDON-LOAN-plc ;
-Rødekleiv+Use/Sub:Røde^kleiv BERN-sur ; !
+Rødekleiv+Use/LexSub:Røde^kleiv BERN-sur ; !
 Rødgaard:Rød^gaard9 BERN-sur ;
 Rødsand:Rød^sand9 BERN-plc ;
 Rødseth:Rødseth9 BERN-sur ;
@@ -22005,7 +22005,7 @@ Salingen:Salingen9 LONDON-plc ;
 Salisbury:Salis^bury ACCRA-plc ;
 Salla ACCRA-femplc ;
 Sallamaa ACCRA-sur ;
-Sallevarre+Use/Sub:Sallevarre ACCRA-plc ; !
+Sallevarre+Use/LexSub:Sallevarre ACCRA-plc ; !
 Salli ACCRA-sur ;
 Sallila ACCRA-sur ;
 Sallinen:Salli C-FI-NEN-sur ;
@@ -22102,8 +22102,8 @@ Samenes% Idrettsforbund-Norge:Samenes% Idrettsforbund9-Norge ACCRA-LOAN-org ;
 Samenes% folkeforbund:Samenes% folkeforbund9 BERN-org ;
 Samenes% Venn:Samenes% Venn9 BERN-obj ;
 Samenes% naturressursforbund:Samenes% naturressursforbund9 BERN-org ;
-Samenet+Use/Sub:Same^net BERN-obj ; !
-Samenett+Use/Sub:Same^nett9 BERN-org ; !
+SameNet+Use/Sub:Same^net BERN-obj ; !
+SameNet+Use/Sub:Same^nett9 BERN-org ; !
 Samerett:Same^rett BERN-obj ;
 Samerettsutvalget:Same^retts^utvalget LONDON-org ;
 Samerna% för% framtiden+Use/LexSub:Samerna% för% framtiden LONDON-org ; !
@@ -22155,9 +22155,8 @@ Samuelsdatter:Samuels^datter LONDON-sur ;
 Samuelsen:Samuelsen9 LONDON-sur ;
 Samuli ACCRA-mal ;
 Samvirke:Sam^virke ACCRA-org ;
-Samvirkekafea+Use/Sub:Sam^virke^kafea ACCRA-obj ; !
+Samvirkekafea+Use/LexSub:Sam^virke^kafea ACCRA-obj ; !
 Samvirkelag:Sam^virke^lag9 BERN-org ;
-Samvirkelága:Sam^virke^lága MARJA-A-obj ;
 San:San9 BERN-sur ;
 Sana ACCRA-plc ;
 Sanaa ACCRA-plc ;
@@ -22169,7 +22168,7 @@ Sandanger:Sand^anger LONDON-plc ;
 Sandbakk:Sand^bakk BERN-plc ;
 Sandbakken:Sand^bakken9 LONDON-plc ;
 Sandbakkveien:Sand^bakk^ve^ien LONDON-plc ;
-Sandbakkvn+Use/Sub:Sand^bakkvn LONDON-plc ; !
+Sandbakkvn+Use/LexSub:Sand^bakkvn LONDON-plc ; !
 Sandberg:Sand^berg9 BERN-sur ;
 Sandbæk:Sand^bæk LONDON-sur ;
 Sande ACCRA-sur ;
@@ -22197,7 +22196,7 @@ Sandnes:Sand^nes BERN-sur ;
 Sandneshamn:Sand^nes^hamn9 BERN-plc ;
 Sandness:Sand^ness9 BERN-sur ;
 Sandoy+Use/Sub:Sand^oy BERN-plc ; !
-Sandoy+Use/Sub:Sand^oy NYSTØ-plc ; !
+Sandøy+Use/Sub:Sand^oy NYSTØ-plc ; !
 Sandoz:Sandoz9 NYSTØ-sur ;
 Sandra ACCRA-fem ;
 Sandset LONDON-plc ;
@@ -22295,7 +22294,6 @@ Sardinia ACCRA-plc ;
 Sarefat BERN-plc ;
 Sarek LONDON-plc ;
 Sarepta ACCRA-fem ;
-Sarevuopmi+Use/Sub:Sare^vuopmi ACCRA-plc ; !
 Sarey ACCRA-plc ;
 Sargassohavet:Sargasso^havet LONDON-LOAN-plc ;
 Sargejok:Sarge^jok BERN-LOAN-plc ;
@@ -22631,7 +22629,7 @@ Seleukia ACCRA-plc ;
 Selevkia ACCRA-plc ;
 Selevkos LONDON-plc ;
 Selfors:Sel^fors BERN-plc ;
-Selfoss+Use/Sub:Sel^foss9 BERN-plc ; !
+Selfors+Use/Sub:Sel^foss9 BERN-plc ; !
 Selgård:Sel^gård9 BERN-plc ;
 Selje ACCRA-plc ;
 Seljeseth:Seljeseth9 BERN-sur ;
@@ -22842,7 +22840,7 @@ Sian:Si^an9 LONDON-plc ;
 Siangkiang:Si^angki^ang9 BERN-plc ;
 Siangtan:Si^angtan9 BERN-plc ;
 Siberia ACCRA-plc ;
-Sibir+Use/Sub:Sibir BERN-plc ; !
+Sibir:Sibir BERN-LOAN-plc ; !
 Sibiu ACCRA-plc ;
 Sibon LONDON-sur ;
 Sibon:Sibon9 LONDON-sur ;
@@ -22863,7 +22861,7 @@ Sieiddeluovttjohka:Sieidde^luovtt^joh'ka MARJA-A-plc ;
 Siekkeli ACCRA-sur ;
 Siekkinen:Siekki C-FI-NEN-sur ;
 Siena ACCRA-plc ;
-Sienegála+Use/Sub:Sienegála ACCRA-plc ; !
+Sienegála+Use/LexSub:Sienegála ACCRA-plc ; !
 Sienna ACCRA-plc ;
 Sieppi ACCRA-sur ;
 Sierge ACCRA-mal ;
@@ -22955,7 +22953,7 @@ Sikku ACCRA-sur ;
 Sikká MARJA-fem ;
 Sila ACCRA-plc ;
 Silas LONDON-sur ;
-Silbajaure+Use/Sub:Silba^jaure ACCRA-plc ; !
+Silbajaure+Use/LexSub:Silba^jaure ACCRA-plc ; !
 Silbon:Silbon9 LONDON-ani ;
 Sild:Sild9 BERN-sur ;
 Sildbollen:Sild^bollen9 LONDON-plc ;
@@ -23070,11 +23068,9 @@ Sipi ACCRA-sur ;
 Sipilä ACCRA-sur ;
 Sipiläinen:Sipiläi C-FI-NEN-sur ;
 Sipinen:Sipi C-FI-NEN-sur ;
-Sipirjá+Use/Sub:Sipirjá ACCRA-plc ; !
-Sipirjá-Liisá:Sipirjá-Lij'sá MARJA-fem ;
 Siple ACCRA-plc ;
 Sipmehke ACCRA-plc ;
-Sipmekenjaure+Use/Sub:Sipmeken^jaure ACCRA-plc ; !
+Sipmekenjaure+Use/LexSub:Sipmeken^jaure ACCRA-plc ; !
 Sipmekinnsjøen:Sipmekinn^sjø^en9 LONDON-plc ;
 Sipmekjukke:Sipmek^jukke ACCRA-plc ;
 Sipmeksjøen:Sipmek^sjø^en LONDON-plc ;
@@ -23115,7 +23111,7 @@ Sisera ACCRA-plc ;
 Sisilia ACCRA-plc ;
 Sisimiut:Sisimi^ut BERN-plc ;
 Siskind:Siskin'd9 BERN ; !The Gen form is Siskindda. How to make it?
-Siskkit-Namdal+Use/Sub:Siskkit-Nam^dal BERN-plc ; !
+Siskkit-Namdal+Use/LexSub:Siskkit-Nam^dal BERN-plc ; !
 Sisovatnet:Siso^vatnet LONDON-LOAN-plc ;
 Siss:Siss9 BERN-fem ;
 Sissala ACCRA-sur ;
@@ -23161,7 +23157,6 @@ Sjonfjellet:Sjon^fjellet LONDON-plc ;
 Sjukov LONDON-sur ;
 Sjunkfjell:Sjunk^fjell BERN-plc ;
 Sjunkhatten:Sjunk^hatten9 LONDON-plc ;
-Sjuosjavri+Use/Sub:Sjuos^javri ACCRA-plc ; !
 Sjur BERN-mal ;
 Sjursen:Sjursen9 LONDON-sur ;
 Sjursnes:Sjurs^nes BERN-plc ;
@@ -23208,7 +23203,6 @@ Skage ACCRA-sur ;
 Skagen:Skagen9 LONDON-plc ;
 Skagerrak BERN-plc ;
 Skagestad:Skage^stad9 BERN-sur ;
-Skaidi+Use/Sub:Skaidi ACCRA-plc ; !
 Skaidiprosjektet+Use/LexSub:Skaidi^prosjektet LONDON-obj ;
 Skaidivassdraget+Use/LexSub:Skaidi^vass^draget LONDON-plc ; !
 Skaitelandet:Skaite^landet LONDON-LOAN-plc ;
@@ -23620,9 +23614,8 @@ Sloth:Sloth9 BERN-sur ;
 Slotten:Slotten9 LONDON-sur ;
 Slough:Slough9 BERN-sur ;
 Slovakia ACCRA-LOAN-plc ;
-Slovakiija+Use/Sub:Slovakiija NIKOSIIJA-plc ; !
+Slovakia+Use/Sub:Slovakiija NIKOSIIJA-plc ; !
 Slovenia ACCRA-plc ;
-Slovákia ACCRA-plc ;
 Sluck BERN-sur ;
 Slumstrup:Slumstrup9 BERN-sur ;
 Slyngstad:Slyng^stad9 BERN-sur ;
@@ -23696,17 +23689,12 @@ Snickers LONDON-obj ;
 Snillfjord:Snill^fjord9 BERN-plc ;
 Snilsberg:Snils^berg9 BERN-sur ;
 Snippen:Snippen9 LONDON-sur ;
-Snoasa ACCRA-plc ;
-Snoase+Use/Sub:Snoase ACCRA-plc ; !
-Snoasá+Use/Sub:Snoasá ACCRA-plc ; !
 Snodgras:Snod^gras LONDON-sur ;
 Snorre ACCRA-mal ;
 Snota ACCRA-plc ;
 Snowdon:Snowdon9 LONDON-sur ;
 Snowy ACCRA-plc ;
 Snubba ACCRA-plc ;
-Snåasa ACCRA-plc ;
-Snåase+Use/Sub:Snåase ACCRA-plc ; !
 Snåasen% tjielte ACCRA-org ;
 Snåasen% tjïelte ACCRA-org ;
 Snåsa ACCRA-LOAN-plc ;
@@ -23851,7 +23839,7 @@ Sombbi ACCRA-plc ;
 Somby ACCRA-sur ;
 Somby+Use/Sub:Som'by MARJA-sur ; !
 Somby-Solaas:Somby-Sol^aas BERN-sur ;
-Somerset+Use/Sub:Somerset BERN-plc ; !
+Sommerseth+Use/Sub:Somerset BERN-plc ; !
 Sommarset BERN-plc ;
 Sommarøy+Use/Sub:Sommar^øy NYSTØ-plc ; !
 Sommarøy:Sommar^øy BERN-plc ;
@@ -24118,7 +24106,7 @@ Statsarkivet:Stats^arkivet LONDON-obj ;
 Statsbygg:Stats^bygg BERN-org ;
 Statskalenderen:Stats^kalenderen9 LONDON-obj ;
 Statskog-Finnmark:Stat^skog9-Finn^mark LONDON-org ;
-Statskog-Finnmárk+Use/Sub:Stat^skog9-Finn^márk LONDON-org ; !
+Statskog-Finnmark+Use/Sub:Stat^skog9-Finn^márk LONDON-org ; !
 Statskog:Stat^skog9 BERN-org ;
 Statskonsulenten:Stats^konsulenten9 LONDON-obj ;
 Statskonsult:Stats^konsult BERN-obj ;
@@ -24276,7 +24264,6 @@ Stevns BERN-sur ;
 Stian:Sti^an9 LONDON-mal ;
 Stiansen:Sti^ansen9 LONDON-sur ;
 Stien:Sti^en9 LONDON-plc ;
-Stiertná+Use/Sub:Stiertná ACCRA-plc ; !
 Stifjell:Sti^fjell BERN-plc ;
 Stiftelsen:Stiftelsen9 LONDON-org ;
 Stig-Arne:Stig9-Arne ACCRA-mal ;
@@ -24288,17 +24275,16 @@ Stil BERN-org ;
 Stillehavet:Stille^havet LONDON-LOAN-plc ;
 Stina ACCRA-fem ;
 Stine ACCRA-fem ;
-Stinky+Use/Sub:Stinky ACCRA-ani ; !
+Stinky+Use/LexSub:Stinky ACCRA-ani ; !
 Stinnerbom:Stinnerbom9 BERN-sur ;
 Stirling:Stirling9 LONDON-sur ;
-Stižža+Use/Sub:Stižža ACCRA-plc ; !
+Stižža+Use/LexSub:Stižža ACCRA-plc ; !
 Stjern:Stjern9 BERN-sur ;
 Stjernsund:Stjern^sund9 SUND-plc ;
 Stjernøy+Use/Sub:Stjern^øy NYSTØ-plc ; !
 Stjernøy:Stjern^øy BERN-LOAN-plc ;
 Stjernøya:Stjern^øya ACCRA-LOAN-plc ;
 Stjørdal:Stjør^dal BERN-plc ;
-Stjørdála+Use/Sub:Stjør^dála ACCRA-plc ; !
 Stoa ACCRA-plc ;
 Stock BERN-plc ;
 Stockfleth:Stock^fleth9 BERN-sur ;
@@ -24345,7 +24331,7 @@ Stora% Tigern LONDON-obj ;
 Storbakk:Stor^bakk BERN-sur ;
 Storbekkmoen:Stor^bekk^mo^en9 LONDON-plc ;
 Storberget:Stor^berget LONDON-plc ;
-Storbritannia+Use/Sub:Stor^britannia ACCRA-plc ; !
+Storbritannia:Stor^britannia ACCRA-LOAN-plc ; !
 Storbukt:Stor^bukt BERN-sur ;
 Stord:Stord9 BERN-plc ;
 Stordahl:Stor^dahl BERN-sur ;
@@ -24525,20 +24511,11 @@ Stugudal:Stugu^dal BERN-plc ;
 Stuguflåten:Stugu^flåten9 LONDON-sur ;
 Stumlia:Stum^lia ACCRA-plc ;
 Stumpf BERN-sur ;
-Stuora% Británnia ACCRA-plc ;
 Stuora% Julev LONDON-plc ;
-Stuorabritannia+Use/Sub:Stuora^britannia ACCRA-plc ; !
 Stuoralule ACCRA-org ;
-Stuoravuovddijohka:Stuora^vuovddi^joh'ka MARJA-A-plc ;
-Stuoravárrie+Use/Sub:Stuora^várrie ACCRA-plc ; !
 Stuorjulev LONDON-plc ;
 Stuormuorkke+Use/Sub:Stuor^muorkke ACCRA-plc ; !
 Stuorra% Británnia ACCRA-plc ;
-Stuorra-Británnia+Use/Sub:Stuorra-Británnia ACCRA-plc ; !
-Stuorra-Peđar LONDON-mal ;
-Stuorra-Ánne:Stuorra-Án'ne MARJA-fem ;
-Stuorrabritannia+Use/Sub:Stuorra^britannia ACCRA-plc ; !
-Stuorrabritánnia+Use/Sub:Stuorra^británnia ACCRA-plc ; !
 Sture ACCRA-mal ;
 Stureplan BERN-plc ;
 Sturla ACCRA-plc ;
@@ -24598,13 +24575,13 @@ Sucre ACCRA-plc ;
 Sudan:Sudan9 BERN-plc ;
 Sudbury:Sud^bury ACCRA-plc ;
 Suderheim:Suder^heim9 HEIM-plc ;
-Sudetlandet+Use/Sub:Sudet^landet LONDON-plc ; !
+Sudetlandet+Use/LexSub:Sudet^landet LONDON-plc ; !
 Sudmann:Sud^mann9 BERN-sur ;
-Suenjel+Use/Sub:Suenjel LONDON-plc ; !
-Suennjel+Use/Sub:Suennjel LONDON-plc ; !
-Suennjela+Use/Sub:Suennjela ACCRA-plc ; !
+Suenjel+Use/LexSub:Suenjel LONDON-plc ; !
+Suennjel+Use/LexSub:Suennjel LONDON-plc ; !
+Suennjela+Use/LexSub:Suennjela ACCRA-plc ; !
 Suez:Suez9 LONDON-sur ;
-Suezkanalen+Use/Sub:Suez^kanalen9 LONDON-plc ; !
+Suezkanalen+Use/LexSub:Suez^kanalen9 LONDON-plc ; !
 Suga ACCRA-plc ;
 Suhayl BERN-fem ; !Not sure, fem or mal?
 Suhonen:Suho C-FI-NEN-sur ;
@@ -24719,7 +24696,6 @@ Suojoki:Suo^joki ACCRA-plc ;
 Suojärvi:Suo^järvi ACCRA-plc ;
 Suokas BERN-sur ;
 Suoknuuti ACCRA-sur ;
-Suolovuobme+Use/Sub:Suolo^vuobme ACCRA-plc ; !
 Suomala ACCRA-sur ;
 Suomalainen:Suomalai C-FI-NEN-sur ;
 Suomalais-ruotsalainen LONDON-obj ;
@@ -24748,7 +24724,6 @@ Suoranta:Suo^ranta ACCRA-sur ;
 Suorra ACCRA-sur ;
 Suorsa ACCRA-sur ;
 Suortti ACCRA-sur ;
-Suosjavrre+Use/Sub:Suos^javrre ACCRA-plc ; !
 Suovanen:Suova C-FI-NEN-sur ;
 Supatra ACCRA-fem ;
 Super LONDON-obj ;
@@ -24830,7 +24805,7 @@ Svanes:Sva^nes BERN-plc ;
 Svanhild:Svan^hild9 BERN-fem ;
 Svanhovd:Svan^hovd9 BERN-plc ;
 Svanjggá:Svanj9ggá ACCRA-plc ;
-Svanjgá+Use/Sub:Svanj9gá ACCRA-plc ; !
+Svanjggá+Use/Sub:Svanj9gá ACCRA-plc ; !
 Svankil LONDON-plc ;
 Svansjøen:Svan^sjø^en9 LONDON-plc ;
 Svanvik:Svan^vik BERN-plc ;
@@ -25038,44 +25013,6 @@ Szeged:Szeged9 LONDON-plc ;
 Szolnok LONDON-plc ;
 Szombathely ACCRA-plc ;
 Székesfehérvár BERN-plc ;
-SÁLAS LONDON-obj ;
-SÁMÁS LONDON-obj ;
-SÁNAG:SÁNAG LONDON-org ;
-SÁNAG+Use/Sub:SANAG LONDON-org ;
-Sáben:Sáben9 LONDON-plc ;
-Sábin:Sábin9 LONDON-sur ;
-Sáhppángillar+Use/LexSub:Sáhppán^gillar ANAR-org ; ! !Sáhppángillár gánddat
-Sálas LONDON-obj ;
-Sálá ACCRA-plc ;
-Sámenuorra:Sáme^nuorra MARJA-A-org ; !Used mostly in plural
-Sámi% Boy+CmpN/None:Sámi% Boy BERN-obj ; !
-Sámi% Grand% Prix BERN-obj ;
-Sámi% Jakki ACCRA-obj ;
-Sámi% joatkkaskuvla+CmpN/None:Sámi% joatkka^skuv'la MARJA-A-org ; !
-Sámi% joatkkaskuvla+CmpN/None+Use/Sub:Sámi% Joatkka^skuv'la MARJA-A-org ; !
-Sámi% joatkkaskuvla% ja% boazodoalloskuvla+CmpN/None:Sámi% joatkkaskuvla% ja% boazo^doallo^skuv'la MARJA-A-org ; !
-Sámi% joatkkaskuvla% ja% boazodoalloskuvla+CmpN/None+Use/Sub:Sámi% Joatkkaskuvla% ja% boazo^doallo^skuv'la MARJA-A-org ; !
-Sámi% joatkkaskuvla% ja% boazodoalloskuvla+CmpN/None+Use/Sub:Sámi% Joatkka-% ja% boazo^doallo^skuv'la MARJA-A-org ; !
-Sámi% joatkkaskuvla% ja% boazodoalloskuvla+CmpN/None+Use/Sub:Sámi% joatkka-% ja% boazo^doallo^skuv'la MARJA-A-org ; !
-Sámi% Siida% ro.+CmpN/None:Sámi% Siida% ro. ACCRA-org ; !
-Sámi% Særvi ACCRA-obj ;
-Sámi% boy+Use/Sub:Sámi% boy BERN-obj ; !
-Deanu% Leagi% cup:Deanu% Leagi% cup9 BERN-obj ;
-MM-cup:MM-cup9 BERN-obj ;
-NM-cup:NM-cup9 BERN-obj ;
-SHL-cup:SHL-cup9 BERN-obj ;
-SM-cup:SM-cup9 BERN-obj ;
-SVL-cup:SVL-cup9 BERN-obj ;
-UNN-cup:UNN-cup9 BERN-obj ;
-Sámi-Cup:Sámi-Cup9 BERN-obj ;
-Suoma% cup:Suoma% cup9 BERN-obj ;
-Nilut% cup:Nilut% cup9 BERN-obj ;
-Verddecup:Verdde^cup9 BERN-obj ;
-Eurohpácup:Eurohpá^cup9 BERN-obj ;
-Europacup:Europa^cup9 BERN-obj ;
-FMX-máilmmicup:FMX-máilmmi^cup9 BERN-obj ;
-Sámilávdegoddi+Use/Sub:Sámi^lávde^goddi MARJA-I-org ; !
-Sáminuorra:Sámi^nuorra MARJA-A-org ; !org in Sweden
 Sámmol LONDON-mal ;
 Sámmul ANAR-mal ;
 Sámoa ACCRA-plc ;
@@ -25088,9 +25025,6 @@ Sáron:Sáron9 LONDON-plc ;
 Sárá ACCRA-fem ;
 Sáráhkká:Sár^áhkká MARJA-fem ;
 Sávlos LONDON-mal ;
-Sáčča+Use/Sub:Sáčča ACCRA-plc ; !
-Sážža+Use/Sub:Sážža ACCRA-plc ; !
-Sáččá+Use/Sub:Sáččá ACCRA-plc ; !
 Säde ACCRA-fem ;
 Säffle ACCRA-plc ;
 Säily ACCRA-plc ;
@@ -25117,7 +25051,7 @@ Säärelä ACCRA-sur ;
 Sääski ACCRA-sur ;
 Sääskilahti:Sääski^lahti ACCRA-sur ;
 Säävälä ACCRA-plc ;
-Sää’mjânnan% rocks+Use/Sub:Sää’mjânnan% rocks BERN-obj ;
+Sää’mjânnan% rocks+Use/LexSub:Sää’mjânnan% rocks BERN-obj ;
 Såner LONDON-sur ;
 Sås BERN-sur ;
 Såta ACCRA-plc ;
@@ -25221,7 +25155,7 @@ Sør-Jemen+Use/LexSub:Sør-Jemen9 LONDON-plc ; !
 Sør-Kina-havet LONDON-LOAN-plc ;
 Sør-Korea ACCRA-LOAN-plc ;
 Sør-Leksa ACCRA-plc ;
-Sør-Libanon+Use/Sub:Sør-Libanon9 BERN-plc ; !
+Sør-Libanon+Use/LexSub:Sør-Libanon9 BERN-plc ; !
 Sør-Norge ACCRA-LOAN-plc ;
 Sør-Odal BERN-plc ;
 Sør-Ossetia+Use/LexSub:Sør-Ossetia ACCRA-plc ; !
@@ -25232,8 +25166,8 @@ Sør-Tyrol+Use/LexSub:Sør-Tyrol BERN-plc ; !
 Sør-Varanger:Sør-Var^anger LONDON-LOAN-plc ;
 Sør-Vera ACCRA-plc ;
 Sør:Sør BERN-sur ;
-Sørarnøy+Use/Sub:Sør^arn^øy BERN-plc ; !
-Sørarnøy+Use/Sub:Sør^arn^øy NYSTØ-plc ; !
+Sørarnøy+Use/LexSub:Sør^arn^øy BERN-plc ; !
+Sørarnøy+Use/LexSub:Sør^arn^øy NYSTØ-plc ; !
 Søraunet:Sør^aunet LONDON-sur ;
 Sørbotn:Sør^botn9 BERN-plc ;
 Sørburøy+Use/Sub:Sør^bur^øy NYSTØ-plc ; !
@@ -25337,8 +25271,8 @@ Taching:Taching9 BERN-plc ;
 Tacna ACCRA-plc ;
 Tacoma ACCRA-plc ;
 Taddeus:Tadde^us LONDON-mal ;
-Tadsjikistan+Use/Sub:Tadsjiki^stan9 BERN-plc ; !
-Tadzhikistan:Tadzhiki^stan9 BERN-plc ;
+Tadsjikistan+Use/Sub:Tadzhiki^stan9 BERN-plc ; !
+Tadsjikistan:Tadsjiki^stan9 BERN-plc ;
 Tadzikistan+Use/Sub:Tadziki^stan9 BERN-plc ; !
 Taedong:Taedong9 BERN-sur ;
 Taejon:Ta^ejon9 LONDON-plc ;
@@ -25406,14 +25340,14 @@ Talita ACCRA-fem ;
 Talja ACCRA-plc ;
 Talka ACCRA-plc ;
 Tallahassee ACCRA-plc ;
-Tallahasseee+Use/Sub:Tallahasseee NYSTØ-plc ; !
+Tallahassee+Use/Sub:Tallahasseee NYSTØ-plc ; !
 Tallaksen:Tallaksen9 LONDON-sur ;
 Tallbacka:Tall^backa ACCRA-plc ;
 Tallbackaskolan:Tall^backa^skolan LONDON-obj ;
 Tallberg:Tall^berg9 BERN-sur ;
 Tallin:Tallin9 LONDON-plc ;
 Tallinn:Tallinn9 BERN-sur ;
-Talma ACCRA-plc ;
+Talma ACCRA-LOAN-plc ;
 Talma+Use/Sub:Tal'ma MARJA-A-org ; !
 Talmud:Talmud9 BERN-obj ;
 Talola ACCRA-sur ;
@@ -25503,7 +25437,7 @@ Tanura ACCRA-plc ;
 Tanya:Tan^ya ACCRA-fem ;
 Tanzania ACCRA-LOAN-plc ;
 Tanzania ACCRA-plc ; 
-Tanzánia+Use/Sub:Tanzánia ACCRA-plc ; !
+Tanzania+Use/Sub:Tanzánia ACCRA-plc ; !
 Taormina ACCRA-plc ;
 Tapajós LONDON-malsur ;
 Tapanainen:Tapanai C-FI-NEN-sur ;
@@ -25629,7 +25563,7 @@ Tekoniemi:Teko^niemi ACCRA-sur ;
 Tekrø NYSTØ-sur ;
 Tektronix LONDON-mal ;
 Tel BERN-sur ;
-Telamork+Use/Sub:Tela^mork BERN-plc ; !
+Telemark+Use/Sub:Tela^mork BERN-plc ; !
 Tele ACCRA-org ;
 TeleConnect:Tele^Connect BERN-org ;
 Telefaks:Tele^faks BERN-obj ;
@@ -25940,7 +25874,7 @@ Tikkanen:Tikka C-FI-NEN-sur ;
 Tikkinen:Tikki C-FI-NEN-sur ;
 Tikrit LONDON-plc ;
 Tilburg:Til^burg9 BERN-plc ;
-Tiljavre+Use/Sub:Til^javre SIJTE-plc ; !
+Tiljavre+Use/LexSub:Til^javre SIJTE-plc ; !
 Tillanen:Tilla C-FI-NEN-sur ;
 Tiller LONDON-sur ;
 Tilli ACCRA-sur ;
@@ -26460,7 +26394,7 @@ Troms BERN-LOAN-plc ;
 Troms% i% fellesskap+Use/LexSub:Troms% i% felles^skap9 BERN-org ; !
 Tromsdalen:Troms^dalen LONDON-plc ;
 Tromsdalstind:Troms^dals^tind9 BERN-LOAN-plc ;
-Tromssa-OL+Use/Sub:Tromssa-OL BERN-org ; !
+Tromssa-OL+Use/LexSub:Tromssa-OL BERN-org ; !
 Tromsund:Trom^sund9 SUND-plc ;
 Tromsø% Boligsenter:Tromsø% Bolig^senter LONDON-org ;
 Tromsø:Troms^ø NYSTØ-LOAN-plc ;
@@ -26665,7 +26599,7 @@ Turistråd:Turist^råd9 BERN-org ;
 Turisttrafikk-Forbund:Turist^trafikk-Forbund9 BERN-org ;
 Turja ACCRA-plc ;
 Turk BERN-sur ;
-Turkia+Use/Sub:Turkia ACCRA-plc ; !
+Turkia:Turkia ACCRA-plc ; !
 Turkka ACCRA-sur ;
 Turkki ACCRA-sur ;
 Turkkila ACCRA-plc ;
@@ -26895,8 +26829,8 @@ Ualand:Ua^land9 BERN-sur ;
 Ubangi ACCRA-plc ;
 Ubayyid:Ubay^yid9 BERN-plc ;
 Ubergsmoen:U^bergs^mo^en9 LONDON-plc ;
-Ubmeje+Use/Sub:Ubmeje ACCRA-plc ; !
-Ucherman+Use/Sub:Ucher^man9 BERN-sur ; !
+Upmeje+Use/Sub:Ubmeje ACCRA-plc ; !
+Uchermann+Use/Sub:Ucher^man9 BERN-sur ; !
 Uchermann:Ucher^mann9 BERN-sur ;
 Uchimura ACCRA-obj ;
 Uddevalla:Udde^valla ACCRA-plc ;
@@ -26932,7 +26866,7 @@ Ukraina ACCRA-plc ;
 Uksáhkká:Uks^áhkká MARJA-fem ;
 Ul-Juhán:Ul-Juhán9 LONDON-mal ;
 Ula ACCRA-plc ;
-Ulaanbaatar+Use/Sub:Ulaan^baatar LONDON-plc ; !
+Ulan-Bator+Use/Sub:Ulaan^baatar LONDON-plc ; !
 Ulan-Bator LONDON-plc ;
 Ulan-Ude ACCRA-plc ;
 Ulan:Ulan9 LONDON-plc ;
@@ -27027,7 +26961,7 @@ Ung% i% Norden+Use/LexSub:Ung% i% Norden9 LONDON-org ;
 Ung:Ung9 BERN-org ;
 UngJobb:Ung^Jobb9 BERN-obj ;
 Unga ACCRA-sur ;
-Ungarn+Use/Sub:Ungarn9 LONDON-plc ; !
+Ungarn+Use/LexSub:Ungarn9 LONDON-plc ; !
 Ungava ACCRA-plc ;
 Unger LONDON-sur ;
 Ungjobb:Ung^jobb9 BERN-obj ;
@@ -27041,7 +26975,7 @@ Unicef BERN-org ;
 Unicode:Uni^code ACCRA-obj ;
 Uniforum:Uni^forum9 LONDON-org ;
 Unikom:Unikom9 ACCRA-org ;
-Unionen+Use/Sub:Unionen9 LONDON-org ;
+Unionen+Use/LexSub:Unionen9 LONDON-org ;
 Unireg:Uni^reg9 BERN-org ;
 Unisys BERN-org ;
 Unit LONDON-org ;
@@ -27078,10 +27012,10 @@ Upolu ACCRA-plc ;
 Uppbörd:Upp^börd9 BERN-org ;
 Uppland:Upp^land9 BERN-LOAN-plc ;
 Uppsala:Upp^sala ACCRA-plc ;
-Upsala+Use/Sub:Up^sala ACCRA-plc ; !
+Uppsala+Use/LexSub:Up^sala ACCRA-plc ; !
 Upsete ACCRA-plc ;
 Uragsha ACCRA-org ;
-Ural BERN-plc ;
+Ural BERN-LOAN-plc ;
 Uralisches LONDON-obj ;
 Uralsk BERN-obj ;
 Urangsvåg:Urangs^våg9 BERN-plc ;
@@ -27092,7 +27026,7 @@ Urban:Urban9 LONDON-mal ;
 Urbanus LONDON-malsur ;
 Urbye+Use/Sub:Ur^bye NYSTØ-sur ; !
 Urbye:Ur^bye ACCRA-sur ;
-Urbyæ+Use/Sub:Ur^byæ NYSTØ ; !
+Urbye+Use/LexSub:Ur^byæ NYSTØ ; !
 Urbán:Urbán9 LONDON-mal ;
 Urd:Urd9 BERN-fem ;
 Urdal:Ur^dal BERN-plc ;
@@ -27118,7 +27052,6 @@ Uruguay:Urugu^ay BERN-plc ;
 Uruk:Uruk9 BERN-plc ;
 Urukby:Uruk^by NYSTØ-plc ;
 Urumchi ACCRA-plc ;
-Urála+Use/Sub:Urála ACCRA-plc ; !
 Urørt BERN-obj ;
 Urørt BERN-obj ;
 Us+CmpN/None:Us BERN-plc ; !
@@ -27174,14 +27107,14 @@ Uttar LONDON-plc ;
 Utti ACCRA-plc ;
 Uttian:Utti^an9 LONDON-mal ;
 Uttrup:Uttrup9 BERN-plc ;
-Uttrøndelag+Use/Sub:Ut^trøndelag9 BERN-plc ; !
+Uttrøndelag+Use/LexSub:Ut^trøndelag9 BERN-plc ; !
 Utunen:Utu C-FI-NEN-sur ;
 Utvik:Ut^vik BERN-plc ;
 Utviklingsseksjonen:Ut^viklings^seksjonen9 LONDON-obj ;
 Utviklingsselskap:Ut^viklings^sel^skap9 BERN-org ;
 Utvorda ACCRA-plc ;
 Utvær:Ut^vær BERN-plc ;
-Utzjoki+Use/Sub:Utz^joki ACCRA-plc ; !
+Utsjoki+Use/Sub:Utz^joki ACCRA-plc ; !
 Utzon:Utzon9 LONDON-sur ;
 Utæker LONDON-sur ;
 Utøya:Ut^øya ACCRA-plc ;
@@ -27217,7 +27150,7 @@ Vaahtera ACCRA-sur ;
 Vaakanainen:Vaakanai C-FI-NEN-sur ;
 Vaal BERN-sur ;
 Vaapste ACCRA-plc ;
-Vaapsten+Use/Sub:Vaap^sten9 BERN-plc ; !
+Vaapste+Use/Sub:Vaap^sten9 BERN-plc ; !
 Vaara ACCRA-sur ;
 Vaarala ACCRA-plc ;
 Vaarama ACCRA-sur ;
@@ -27315,8 +27248,8 @@ Valkeapää:Valkea^pää ACCRA-sur ;
 Valkeejärvi:Valkee^järvi ACCRA-plc ;
 Valkeinen:Valkei C-FI-NEN-plc ;
 Valkendorf:Valken^dorf BERN-plc ;
-Valkiapää+Use/Sub:Valkia^pää ACCRA-sur ; !
-Valkiapää+Use/Sub:Valkia^pæ7æ7 ACCRA-sur ; !
+Valkeapää+Use/Sub:Valkia^pää ACCRA-sur ; !
+Valkeapää+Use/Sub:Valkia^pæ7æ7 ACCRA-sur ; !
 Valkila ACCRA-sur ;
 Valkjärvi:Valk^järvi ACCRA-plc ;
 Valkola ACCRA-plc ;
@@ -27343,7 +27276,7 @@ Valmen:Valmen9 LONDON-plc ;
 Valnes:Val^nes BERN-sur ;
 Valnesfjord:Val^nes^fjord9 BERN-plc ;
 Valonen:Valo C-FI-NEN-sur ;
-Valparaíso+Use/Sub:Valparaíso9 ACCRA-plc ; !
+Valparaiso+Use/Sub:Valparaíso9 ACCRA-plc ; !
 Valpas LONDON-sur ;
 Valppu ACCRA-sur ;
 Valset BERN-plc ;
@@ -27353,7 +27286,7 @@ Valsøy+Use/Sub:Vals^øy NYSTØ-plc ; !
 Valsøy:Vals^øy BERN-plc ;
 Valsøybotn:Vals^øy^botn9 BERN-plc ;
 Valtanen:Valta C-FI-NEN-sur ;
-Valtanjaure+Use/Sub:Valtan^jaure ACCRA-plc ; !
+Valtanjaure+Use/LexSub:Valtan^jaure ACCRA-plc ; !
 Valtari ACCRA-sur ;
 Valter LONDON-mal ;
 Valtola ACCRA-sur ;
@@ -27434,10 +27367,10 @@ Varberg:Var^berg9 BERN-sur ;
 Vardal:Var^dal BERN-plc ;
 Vardar LONDON-plc ;
 Varde ACCRA-plc ;
-Vardhusiæ+Use/Sub:Vard^husiæ NYSTØ-plc ; !
+Vardhusiæ+Use/LexSub:Vard^husiæ NYSTØ-plc ; !
 Vardø:Vard^ø NYSTØ-LOAN-plc ;
 Vardøhus:Vard^ø^hus BERN-plc ;
-Vardøyhus+Use/Sub:Vard^øy^hus BERN-plc ; !
+Vardøhus+Use/Sub:Vard^øy^hus BERN-plc ; !
 Varese ACCRA-plc ;
 Varfjell:Var^fjell BERN-plc ;
 Varg:Varg9 BERN-mal ;
@@ -27495,7 +27428,7 @@ Vasstuland:Vasstu^land9 BERN-plc ;
 Vassvik:Vass^vik BERN-sur ;
 Vasta ACCRA-obj ;
 Vastamäki:Vasta^mäki ACCRA-sur ;
-Vastenjaure+Use/Sub:Vasten^jaure ACCRA-plc ; !
+Vastenjaure+Use/LexSub:Vasten^jaure ACCRA-plc ; !
 Vataja ACCRA-sur ;
 Vatanen:Vata C-FI-NEN-sur ;
 Vatikanet+Use/LexSub:Vatikanet LONDON-obj ;
@@ -27666,7 +27599,7 @@ Verdalsøra:Ver^dals^øra ACCRA-plc ;
 Verdande ACCRA-sur ;
 Verde ACCRA-plc ;
 Verdich:Verdich9 LONDON-plc ;
-Verdála+Use/Sub:Verdála ACCRA-plc ; !
+Verdal+Use/Sub:Verdála ACCRA-plc ; !
 Vereeniging:Vereeniging9 LONDON-org ;
 Verem:Verem9 LONDON-plc ;
 Vergil LONDON-mal ;
@@ -27707,9 +27640,9 @@ Vesar LONDON-org ;
 Vesla ACCRA-fem ;
 Vesla ACCRA-org ;
 Vesle ACCRA-fem ;
-Vesleasia+Use/Sub:Vesle^asia ACCRA-plc ; !
+Vesleasia+Use/LexSub:Vesle^asia ACCRA-plc ; !
 Veslemøy:Veslem^øy BERN-fem ;
-Vespasia+Use/Sub:Vespasia ACCRA-plc ; !
+Vespasia+Use/LexSub:Vespasia ACCRA-plc ; !
 Vespasian:Vespasi^an9 LONDON-mal ;
 Vespucci ACCRA-org ;
 Vest-Afrika+Use/LexSub:Vest-Afrika ACCRA-plc ; !
@@ -27728,7 +27661,7 @@ Vest-Tyskland+Use/LexSub:Vest-Tysk^land9 BERN-plc ; !
 Vest:Vest9 BERN-sur ;
 Vesta ACCRA-plc ;
 Vestad:Ve^stad9 BERN-sur ;
-Vestasjiegge+Use/Sub:Vestas^jiegge ACCRA-plc ; !
+Vestasjiegge+Use/LexSub:Vestas^jiegge ACCRA-plc ; !
 Vestbirk:Vest^birk BERN-plc ;
 Vestbredden+Use/LexSub:Vest^bredden9 LONDON-plc ; !
 Vestby:Vest^by NYSTØ-sur ;
@@ -27808,7 +27741,7 @@ Vicky ACCRA-fem ;
 Victor LONDON-mal ;
 Victoria ACCRA-fem ;
 Victoria% Terrasse ACCRA-plc ;
-Victoriafalla+Use/Sub:Victoria^falla ACCRA-plc ; !
+Victoriafalla+Use/LexSub:Victoria^falla ACCRA-plc ; !
 Vidal:Vi^dal BERN-plc ;
 Vidar LONDON-mal ;
 Viddal:Vid^dal BERN-plc ;
@@ -27835,9 +27768,8 @@ Vierimaa:Vieri^maa ACCRA-sur ;
 Viersen:Vi^ersen9 LONDON-sur ;
 Viertola ACCRA-plc ;
 Vierula ACCRA-sur ;
-Viesttirála+Use/Sub:Viesttir^ála ACCRA-plc ; !
 Vietnam:Vietnam9 BERN-plc ;
-Vietnám+Use/Sub:Vietnám9 BERN-plc ; !
+Vietnam+Use/Sub:Vietnám9 BERN-plc ; !
 Vig:Vig9 BERN-sur ;
 Vigander LONDON-sur ;
 Vigdal:Vig^dal BERN-plc ;
@@ -28012,7 +27944,7 @@ Violet% Road:Violet% Road9 BERN-org ;
 Violin% Road:Violin% Road9 BERN-org ;
 Virgin:Virgin9 LONDON-org ;
 Virginia ACCRA-plc ;
-Virihaure+Use/Sub:Viri^haure ACCRA-plc ; !
+Virihaure+Use/LexSub:Viri^haure ACCRA-plc ; !
 Virittäjä ACCRA-org ;
 Virkajärvi:Virka^järvi ACCRA-sur ;
 Virkkala ACCRA-plc ;
@@ -28082,8 +28014,8 @@ Vlaardingen:Vlaardingen9 LONDON-plc ;
 Vlad:Vlad9 BERN-plc ;
 Vladikavkaz:Vladikavkaz9 LONDON-plc ;
 Vladimir LONDON-mal ;
-VladimirSuzdal+Use/Sub:Vladimir^Suz^dal BERN-plc ; !
-VladimirVolynskij+Use/Sub:Vladimir^Volynskij9 LONDON-plc ; !
+VladimirSuzdal+Use/LexSub:Vladimir^Suz^dal BERN-plc ; !
+VladimirVolynskij+Use/LexSub:Vladimir^Volynskij9 LONDON-plc ; !
 Vladislav:Vladi^slav BERN-mal ;
 Vladivostok LONDON-plc ;
 Vlissingen:Vlissingen9 LONDON-plc ;
@@ -28198,10 +28130,9 @@ Vuorimaa:Vuori^maa ACCRA-sur ;
 Vuorimies:Vuori^mies BERN-sur ;
 Vuorinen:Vuori C-FI-NEN-sur ;
 Vuorivirta:Vuori^virta ACCRA-sur ;
-Vuorká-Dávvir+Use/Sub:Vuorká-Dávvir ANAR-org ;
 Vuorma ACCRA-sur ;
-Vuoskäive+Use/Sub:Vuoskäive ACCRA-plc ; !
-Vuoskåive+Use/Sub:Vuosk^åive ACCRA-plc ; !
+Vuoskäive+Use/LexSub:Vuoskäive ACCRA-plc ; !
+Vuoskåive+Use/LexSub:Vuosk^åive ACCRA-plc ; !
 Vuoti ACCRA-sur ;
 Vuotila ACCRA-sur ;
 Vuttudal:Vuttu^dal BERN-plc ;
@@ -28218,7 +28149,7 @@ Válbor LONDON-fem ;
 Válováhnjárga:Válo^váh^njár'ga MARJA-A-plc ;
 Vápste ACCRA-plc ;
 Várdobáiki:Várdo^báj'ki MARJA-I-org ;
-Vásterbotten+Use/Sub:Váster^botten9 LONDON-plc ; !
+Västerbotten+Use/Sub:Váster^botten9 LONDON-plc ; !
 Vähä ACCRA-sur ;
 Vähäkainu:Vähä^kainu ACCRA-sur ;
 Vähäkangas:Vähä^kangas LONDON-plc ;
@@ -28275,7 +28206,7 @@ Västmanland:Väst^man^land9 BERN-LOAN-plc ;
 Vättern:Vättern9 LONDON-plc ;
 Vättö:Vätt^ö ACCRA-plc ;
 Växjö NYSTØ-plc ;
-Väylän% virrassa+Use/Sub:Väylän% virrassa ACCRA-obj ;
+Väylän% virrassa+Use/LexSub:Väylän% virrassa ACCRA-obj ;
 Väyrynen:Väyry C-FI-NEN-sur ;
 Väystäjä ACCRA-sur ;
 Väänänen:Väänä C-FI-NEN-sur ;
@@ -28399,7 +28330,7 @@ Warp:Warp9 BERN-sur ;
 Warren:Warren9 LONDON-sur ;
 Warrington:Warrington9 BERN-plc ;
 Warsawa ACCRA-plc ;
-Warszawa+Use/Sub:Warszawa ACCRA-plc ; !
+Warsawa+Use/Sub:Warszawa ACCRA-plc ; !
 Warta ACCRA-plc ;
 Wartburg:Wart^burg9 BERN-plc ;
 Wartenberg:Warten^berg9 BERN-sur ;
@@ -28627,7 +28558,7 @@ Willoch:Willoch9 BERN-sur ;
 Willumsen:Willumsen9 LONDON-sur ;
 Willy ACCRA-mal ;
 Wilmington:Wilmington9 BERN-plc ;
-Wilp% Wilxo’oskwhl+Use/Sub:Wilp9% Wilxo’oskwhl LONDON-org ;
+Wilp% Wilxo’oskwhl+Use/LexSub:Wilp9% Wilxo’oskwhl LONDON-org ;
 Wilsgaard:Wils^gaard9 BERN-sur ;
 Wilsgård:Wils^gård9 BERN-sur ;
 Wilska ACCRA-plc ;
@@ -28785,7 +28716,7 @@ Xinxiang:Xinxi^ang9 BERN-plc ;
 XtraPuls:Xtra^Puls BERN-org ;
 Xtrapuls:Xtra^puls BERN-org ;
 Xuzhou ACCRA-plc ;
-Yahama+Use/Sub:Yahama ACCRA-obj ; ! !What is this?
+Yamaha+Use/Sub:Yahama ACCRA-obj ; ! !What is this?
 Yakutia:Yakutia ACCRA-plc ;
 Yakutksii HAWAII-sur ;
 Yakutsk:Yakutsk9 BERN-plc ;
@@ -28962,7 +28893,7 @@ Zapffe ACCRA-sur ;
 Zapoljarnyj+Use/Sub:Zapoljarnyj9 LONDON-plc ; !
 Zapoljarnyj:Zapoljarnyj9 BERN-plc ;
 Zaporozje ACCRA-plc ;
-Zapp% me+Use/Sub:Zapp% me ACCRA-obj ; ! !Bug #616 Bispadime-me-ráden
+Zapp% me+Use/LexSub:Zapp% me ACCRA-obj ; ! !Bug #616 Bispadime-me-ráden
 Zappa ACCRA-sur ;
 Zaqaziq BERN-plc ;
 Zaragoza ACCRA-plc ;
@@ -29039,7 +28970,7 @@ Zwingli ACCRA-sur ;
 Zwolle ACCRA-plc ;
 Zápolya:Zápol^ya ACCRA-plc ;
 Zürich:Zürich9 LONDON-plc ;
-al-Qaeda+Use/Sub:al-Qaeda ACCRA-org ; !
+al-Qaida+Use/Sub:al-Qaeda ACCRA-org ; !
 al-Qaida ACCRA-org ;
 by%:Larm BERN-org ;
 eNorge:e^Norge ACCRA-org ;
@@ -29060,38 +28991,33 @@ north2north:north2north9 BERN-obj ;
 rOlfFa ACCRA-mal ;
 samtidskunst:samtidskunst9 BERN-org ;
 ski-doo:ski-doo9 ACCRA-obj ;
-strignin% gift+Use/Sub:strignin% gift BERN-obj ;
+strignin% gift+Use/LexSub:strignin% gift BERN-obj ;
 ÁJA ACCRA-org ;
 ÁLGU:ÁLGU ACCRA-obj ;
 Ádá ACCRA-plc ;
 Ágá ACCRA-sur ;
-Áhkkil LONDON-plc ;
 Áila MARJA-A-mal ;
 Áila:Áj'la MARJA-A-fem ;
 Áile MARJA-fem ;
 Áili MARJA-I-fem ;
-Áillonieida:Áillo^niej'da MARJA-A-fem ;
-Lákkonieiddat:Lákko^niej'da VARGGAT-org ;
 Áillun LONDON-mal ;
 Áilo MARJA-mal ;
 Áilu MARJA-U-mal ;
 Ája ACCRA-org ;
 Ájlin:Áj9lin9 BERN-fem ;
 Ájtte:Áj9tte ACCRA-org ; !Ájtte Sámimusea
-Álaska+Use/Sub:Álaska ACCRA-plc ; !
-Álbertnjárga:Álbert^njár'ga MARJA-A-plc ;
+Alaska+Use/Sub:Álaska ACCRA-plc ; !
 Álehttá MARJA-fem ;
 Álet:Áleh ANAR-fem ;
 Állan:Ál'lan LONDON-mal ;
 Állet:Álleh ANAR-fem ;
-Álosrohtonjárga:Álos^rohto^njár'ga MARJA-A-plc ;
-Álta+Use/Sub:Álta ACCRA-plc ; !
-Álttáturnering+Use/Sub:Álttá^turnering9 BERN-org ; !
+Áltá+Use/Sub:Álta ACCRA-plc ; !
+Álttáturnering+Use/LexSub:Álttá^turnering9 BERN-org ; !
 Ámmol LONDON-mal ;
 Ámmon LONDON-mal ;
 Ámmun:Ámmun9 LONDON-mal ;
 Ámmá:Ám'má ACCRA-mal ;
-Ámmárneas+Use/Sub:Ámmár^neas BERN-org ; !
+Ammarnäs+Use/Sub:Ámmár^neas BERN-org ; !
 Ándaras ANAR-mal ;
 Ándaras+Use/Sub:Ándaras BERN-mal ; !?
 Ánddijá ACCRA-plc ;
@@ -29101,8 +29027,6 @@ Lákkonieiddat:Lákko^niej'da VARGGAT-org ;
 Ánderijá ACCRA-mal ;
 Ándi:Án'di MARJA-I-mal ;
 Ándá:Án'dá MARJA-mal ;
-Ánjajohka:Ánja^joh'ka MARJA-A-plc ;
-Ánjavuopmi:Ánja^vuopmi MARJA-I-plc ;
 Ánna:Án'na MARJA-A-fem ;
 Ánne:Án'ne MARJA-fem ;
 Ánnjá:Án'njá MARJA-fem ;
@@ -29122,7 +29046,7 @@ Lákkonieiddat:Lákko^niej'da VARGGAT-org ;
 Árran% julevsáme% guovdásj LONDON-org ;
 Árran% julevsáme% guovdásj+Use/Sub:Árran% julevsámij% guovdásj LONDON-org ;
 Árran% julevsáme% guovdásj+Use/Sub:Árran% Julevsáme% guovdásj LONDON-org ;
-Árviesjávrrie+Use/Sub:Árvies^jávrrie ACCRA-plc ; !
+Árviesjávrrie+Use/LexSub:Árvies^jávrrie ACCRA-plc ; !
 Ásia ACCRA-plc ;
 Áslat:Áslah ANAR-mal ;
 Áslat:Áslak ANAR-mal ;
@@ -29180,7 +29104,7 @@ R-čuoivvat:R-čuoivvag ANAR-ani ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjel^saemien% teatere ACCRA-org ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% teáhter ACCRA-org ;
 Åarjelhsaemien+Use/LexSub:Åarjelhsaemien9 LONDON-atr ;	!
-Åarkanjohke+Use/Sub:Åarkan^johke ACCRA-plc ; !
+Åarkanjohke+Use/LexSub:Åarkan^johke ACCRA-plc ; !
 Åbenrå NYSTØ-plc ;
 Åberg:Å^berg9 BERN-sur ;
 Åbogen:Å^bogen9 LONDON-plc ;
@@ -29233,7 +29157,7 @@ R-čuoivvat:R-čuoivvag ANAR-ani ;
 Ålvundeid:Ålvund^eid9 BERN-plc ;
 Ålvundfjord:Ålvund^fjord9 BERN-plc ;
 Ålvundfoss:Ålvund^foss9 BERN-plc ;
-Åmdals+Use/Sub:Åm^dals BERN-plc ; !
+Åmdals+Use/LexSub:Åm^dals BERN-plc ; !
 Åmland:Åm^land9 BERN-plc ;
 Åmnes:Åm^nes BERN-sur ;
 Åmodt BERN-sur ;
@@ -29321,7 +29245,7 @@ R-čuoivvat:R-čuoivvag ANAR-ani ;
 Åtvidaberg:Åtvida^berg9 BERN-sur ;
 Åvall:Å^vall LONDON-sur ;
 Åvik:Å^vik BERN-sur ;
-Ædnamsærvi+Use/Sub:Ædnam^sær'vi MARJA-I-org ; !
+Ædnansærvi+Use/Sub:Ædnam^sær'vi MARJA-I-org ; !
 Ædnansærvi:Ædnan^sær'vi MARJA-I-org ;
 Æge ACCRA-mal ;
 Æmilius:Æmili^us BERN-sur ;
@@ -29466,8 +29390,8 @@ R-čuoivvat:R-čuoivvag ANAR-ani ;
 Østergaard:Øster^gaard9 BERN-sur ;
 Østergård:Øster^gård9 BERN-plc ;
 Østerhus:Øster^hus BERN-plc ;
-Østerrike+Use/Sub:Øster^rike ACCRA-plc ; !
-Østersund+Use/Sub:Østersund9 SUND-plc ; !
+Østerrike+Use/LexSub:Øster^rike ACCRA-plc ; !
+Östersund+Use/Sub:Østersund9 SUND-plc ; !
 Østerud:Østerud9 BERN-plc ;
 Østervik:Øster^vik BERN-plc ;
 Østerås:Øster^ås BERN-plc ;

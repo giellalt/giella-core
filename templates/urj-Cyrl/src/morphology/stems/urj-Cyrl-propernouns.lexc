@@ -10778,6 +10778,7 @@ LEXICON urj-Cyrl-ProperNouns
 Гурьев:Гурьев Deriv-RUS-V-surmal ;
 Гурьевских:Гурьевских CYRL-Cons-sur ;
 Гурьнев:Гурьнев Deriv-RUS-V-surmal ;
+Гурьян:Гурьян Deriv-RUS-AN-surmal ;
 Гурьянов:Гурьянов Deriv-RUS-V-surmal ;
 Гуря:Гуря CYRL-Vow-sur ;
 Гуряшин:Гуряшин Deriv-RUS-IN-surmal ;
@@ -13112,6 +13113,7 @@ LEXICON urj-Cyrl-ProperNouns
 Екимов:Екимов Deriv-RUS-V-surmal ;
 Екимовский:Екимовск Deriv-RUS-KIJ-surmal ;
 Еккерт:Еккерт CYRL-T-sur ;
+Екония:Екония Prop-kudo_mal ;
 Екотов:Екотов Deriv-RUS-V-surmal ;
 Екшибаров:Екшибаров Deriv-RUS-V-surmal ;
 Елагин:Елагин Deriv-RUS-IN-surmal ;
@@ -16303,6 +16305,7 @@ LEXICON urj-Cyrl-ProperNouns
 Кархов:Кархов Deriv-RUS-V-surmal ;
 Карцев:Карцев Deriv-RUS-V-surmal ;
 Карцов:Карцов Deriv-RUS-V-surmal ;
+Карцяйкин:Карцяйкин Deriv-RUS-IN-surmal ;
 Карчевский:Карчевск Deriv-RUS-KIJ-surmal ;
 Карый:Кар Deriv-RUS-YJ-surmal ;
 Карышев:Карышев Deriv-RUS-V-surmal ;
@@ -18986,6 +18989,7 @@ LEXICON urj-Cyrl-ProperNouns
 Ложников:Ложников Deriv-RUS-V-surmal ;
 Лозгунов:Лозгунов Deriv-RUS-V-surmal ;
 Лозенко:Лозенко CYRL-Vow-sur ;
+Лозневой:Лознев Deriv-RUS-OJ-surmal ;
 Лознянский:Лознянск Deriv-RUS-KIJ-surmal ;
 Лозовой:Лозов Deriv-RUS-OJ-surmal ;
 Лозутов:Лозутов Deriv-RUS-V-surmal ;
@@ -21957,6 +21961,7 @@ LEXICON urj-Cyrl-ProperNouns
 Пашук:Пашук CYRL-K-sur ;
 Пашунин:Пашунин Deriv-RUS-IN-surmal ;
 Пашутин:Пашутин Deriv-RUS-IN-surmal ;
+Пашуткин:Пашуткин Deriv-RUS-IN-surmal ;
 Пащенко:Пащенко CYRL-Vow-sur ;
 Пащин:Пащин Deriv-RUS-IN-surmal ;
 Пащук:Пащук CYRL-K-sur ;
@@ -26026,6 +26031,7 @@ LEXICON urj-Cyrl-ProperNouns
 Стеценко:Стеценко CYRL-Vow-sur ;
 Стецук:Стецук CYRL-K-sur ;
 Стешенко:Стешенко CYRL-Vow-sur ;
+Стёпкин:Стёпкин Deriv-RUS-IN-surmal ;
 Стионов:Стионов Deriv-RUS-V-surmal ;
 Стирменов:Стирменов Deriv-RUS-V-surmal ;
 Стифеев:Стифеев Deriv-RUS-V-surmal ;
@@ -26122,6 +26128,7 @@ LEXICON urj-Cyrl-ProperNouns
 Строков:Строков Deriv-RUS-V-surmal ;
 Стромилов:Стромилов Deriv-RUS-V-surmal ;
 Стронин:Стронин Deriv-RUS-IN-surmal ;
+Стропилкин:Стропилкин Deriv-RUS-IN-surmal ;
 Стругалев:Стругалев Deriv-RUS-V-surmal ;
 Стругов:Стругов Deriv-RUS-V-surmal ;
 Струговщиков:Струговщиков Deriv-RUS-V-surmal ;
@@ -26293,6 +26300,7 @@ LEXICON urj-Cyrl-ProperNouns
 Сусанин:Сусанин Deriv-RUS-IN-surmal ;
 Сусанов:Сусанов Deriv-RUS-V-surmal ;
 Сусарин:Сусарин Deriv-RUS-IN-surmal ;
+Сусаров:Сусаров Deriv-RUS-V-surmal ;
 Сусеев:Сусеев Deriv-RUS-V-surmal ;
 Сусенков:Сусенков Deriv-RUS-V-surmal ;
 Сусликов:Сусликов Deriv-RUS-V-surmal ;
@@ -27575,6 +27583,7 @@ LEXICON urj-Cyrl-ProperNouns
 Умняков:Умняков Deriv-RUS-V-surmal ;
 Умов:Умов Deriv-RUS-V-surmal ;
 Умолинов:Умолинов Deriv-RUS-V-surmal ;
+Умрихин:Умрихин Deriv-RUS-IN-surmal ;
 Умянцев:Умянцев Deriv-RUS-V-surmal ;
 Унгурян:Унгурян CYRL-Cons-sur ;
 Ундаков:Ундаков Deriv-RUS-V-surmal ;
@@ -30882,6 +30891,7 @@ LEXICON urj-Cyrl-ProperNouns
 Абрам:Абрам PropNameMaleDer-Ovich  "" ;
 Августин:Августин PropNameMaleDer-Ovich  "" ;
 Авенир:Авенир PropNameMaleDer-Ovich  "" ;
+Авия:Авия Prop-kudo_mal ;
 Авраам:Авраам PropNameMaleDer-Ovich  "" ;
 Аврор:Аврор PropNameMaleDer-Ovich  "" ;
 Агап:Агап PropNameMaleDer-Ovich  "" ;
@@ -30901,14 +30911,17 @@ LEXICON urj-Cyrl-ProperNouns
 Алим:Алим PropNameMaleDer-Ovich  "" ;
 Алихан:Алихан PropNameMaleDer-Ovich  "" ;
 Алишер:Алишер PropNameMaleDer-Ovich  "" ;
+Алфей:Алфей Prop-kal_mal ;
 Альберт:Альберт PropNameMaleDer-Ovich  "" ;
 Альбин:Альбин PropNameMaleDer-Ovich  "" ;
 Альвиан:Альвиан PropNameMaleDer-Ovich  "" ;
 Альвин:Альвин PropNameMaleDer-Ovich  "" ;
 Альфред:Альфред PropNameMaleDer-Ovich  "" ;
+Аминадав:Аминадав Prop-kal_mal ;
 Амиран:Амиран PropNameMaleDer-Ovich  "" ;
 Амир:Амир PropNameMaleDer-Ovich  "" ;
 Амирхан:Амирхан PropNameMaleDer-Ovich  "" ;
+Амон:Амон Prop-kal_mal ;
 Амос:Амос PropNameMaleDer-Ovich  "" ;
 Анар:Анар PropNameMaleDer-Ovich  "" ;
 Анвар:Анвар PropNameMaleDer-Ovich  "" ;
@@ -30940,10 +30953,12 @@ LEXICON urj-Cyrl-ProperNouns
 Артём:Артём PropNameMaleDer-Ovich  "" ;
 Артур:Артур PropNameMaleDer-Ovich  "" ;
 Архип:Архип PropNameMaleDer-Ovich  "" ;
+Аса:Аса Prop-kudo_mal ;
 Аскар:Аскар PropNameMaleDer-Ovich  "" ;
 Аскольд:Аскольд PropNameMaleDer-Ovich  "" ;
 Асхат:Асхат PropNameMaleDer-Ovich  "" ;
 Афиноген:Афиноген PropNameMaleDer-Ovich  "" ;
+Ахаз:Ахаз Prop-osh_mal ;
 Ахмад:Ахмад PropNameMaleDer-Ovich  "" ;
 Ахмат:Ахмат PropNameMaleDer-Ovich  "" ;
 Ашот:Ашот PropNameMaleDer-Ovich  "" ;
@@ -30951,6 +30966,7 @@ LEXICON urj-Cyrl-ProperNouns
 Бенедикт:Бенедикт PropNameMaleDer-Ovich  "" ;
 Бернард:Бернард PropNameMaleDer-Ovich  "" ;
 Бертольд:Бертольд PropNameMaleDer-Ovich  "" ;
+Боаз:Боаз Prop-osh_mal ;
 Богдан:Богдан PropNameMaleDer-Ovich  "" ;
 Боеслав:Боеслав PropNameMaleDer-Ovich  "" ;
 Болеслав:Болеслав PropNameMaleDer-Ovich  "" ;
@@ -31016,6 +31032,7 @@ LEXICON urj-Cyrl-ProperNouns
 Горимир:Горимир PropNameMaleDer-Ovich  "" ;
 Горислав:Горислав PropNameMaleDer-Ovich  "" ;
 Гурген:Гурген PropNameMaleDer-Ovich  "" ;
+Гурьян:Гурьян PropNameMaleDer-Ovich  "" ;
 Густав:Густав PropNameMaleDer-Ovich  "" ;
 Давид:Давид PropNameMaleDer-Ovich  "" ;
 Давыд:Давыд PropNameMaleDer-Ovich  "" ;
@@ -31047,6 +31064,7 @@ LEXICON urj-Cyrl-ProperNouns
 Епифан:Епифан PropNameMaleDer-Ovich  "" ;
 Ермак:Ермак PropNameMaleDer-Ovich  "" ;
 Ермил:Ермил PropNameMaleDer-Ovich  "" ;
+Есрон:Есрон Prop-kal_mal ;
 Ефим:Ефим PropNameMaleDer-Ovich  "" ;
 Ефрем:Ефрем PropNameMaleDer-Ovich  "" ;
 Жерар:Жерар PropNameMaleDer-Ovich  "" ;
@@ -31062,8 +31080,10 @@ LEXICON urj-Cyrl-ProperNouns
 Иван:Иван PropNameMaleDer-Ovich  "" ;
 Игнат:Игнат PropNameMaleDer-Ovich  "" ;
 Иероним:Иероним PropNameMaleDer-Ovich  "" ;
+Иессей:Иессей Prop-kal_mal ;
 Измаил:Измаил PropNameMaleDer-Ovich  "" ;
 Изяслав:Изяслав PropNameMaleDer-Ovich  "" ;
+Иисус:Иисус Prop-osh_mal ;
 Икар:Икар PropNameMaleDer-Ovich  "" ;
 Иларион:Иларион PropNameMaleDer-Ovich  "" ;
 Илиодор:Илиодор PropNameMaleDer-Ovich  "" ;
@@ -31074,12 +31094,20 @@ LEXICON urj-Cyrl-ProperNouns
 Ильяс:Ильяс PropNameMaleDer-Ovich  "" ;
 Имран:Имран PropNameMaleDer-Ovich  "" ;
 Инсаф:Инсаф PropNameMaleDer-Ovich  "" ;
+Иоаким:Иоаким Prop-kal_mal ;
 Иоанн:Иоанн PropNameMaleDer-Ovich  "" ;
+Иорам:Иорам Prop-kal_mal ;
+Иосафат:Иосафат Prop-kit_mal ;
 Иосиф:Иосиф PropNameMaleDer-Ovich  "" ;
+Иосия:Иосия Prop-kudo_mal ;
+Иотам:Иотам Prop-kal_mal ;
 Ипполит:Ипполит PropNameMaleDer-Ovich  "" ;
+Исайя:Исайя Prop-kudo_mal ;
 Исак:Исак PropNameMaleDer-Ovich  "" ;
 Исидор:Исидор PropNameMaleDer-Ovich  "" ;
+Искариот:Искариот Prop-kit_sur ;
 Исмаил:Исмаил PropNameMaleDer-Ovich  "" ;
+Иуда:Иуда Prop-kudo_mal ;
 Казбек:Казбек PropNameMaleDer-Ovich  "" ;
 Казимир:Казимир PropNameMaleDer-Ovich  "" ;
 Казим:Казим PropNameMaleDer-Ovich  "" ;
@@ -31113,6 +31141,7 @@ LEXICON urj-Cyrl-ProperNouns
 Кямран:Кямран PropNameMaleDer-Ovich  "" ;
 Лавр:Лавр PropNameMaleDer-Ovich  "" ;
 Ларион:Ларион PropNameMaleDer-Ovich  "" ;
+Леббей:Леббей Prop-kal_mal ;
 Леван:Леван PropNameMaleDer-Ovich  "" ;
 Левон:Левон PropNameMaleDer-Ovich  "" ;
 Ленар:Ленар PropNameMaleDer-Ovich  "" ;
@@ -31134,6 +31163,7 @@ LEXICON urj-Cyrl-ProperNouns
 Максим:Максим PropNameMaleDer-Ovich  "" ;
 Макс:Макс PropNameMaleDer-Ovich  "" ;
 Мамед:Мамед PropNameMaleDer-Ovich  "" ;
+Манассе:Манассе Prop-kudo_mal ;
 Мансур:Мансур PropNameMaleDer-Ovich  "" ;
 Манул:Манул PropNameMaleDer-Ovich  "" ; !?Register
 Мануил:Мануил PropNameMaleDer-Ovich  "" ;
@@ -31146,6 +31176,7 @@ LEXICON urj-Cyrl-ProperNouns
 Марс:Марс PropNameMaleDer-Ovich  "" ;
 Мартин:Мартин PropNameMaleDer-Ovich  "" ;
 Мартын:Мартын PropNameMaleDer-Ovich  "" ;
+Матван:Матван Prop-kal_mal ;
 Мечислав:Мечислав PropNameMaleDer-Ovich  "" ;
 Милан:Милан PropNameMaleDer-Ovich  "" ;
 Милослав:Милослав PropNameMaleDer-Ovich  "" ;
@@ -31168,6 +31199,7 @@ LEXICON urj-Cyrl-ProperNouns
 Назир:Назир PropNameMaleDer-Ovich  "" ;
 Натан:Натан PropNameMaleDer-Ovich  "" ;
 Наум:Наум PropNameMaleDer-Ovich  "" ;
+Нахшон:Нахшон Prop-kal_mal ;
 Нельсон:Нельсон PropNameMaleDer-Ovich  "" ;
 Нестор:Нестор PropNameMaleDer-Ovich  "" ;
 Никандр:Никандр PropNameMaleDer-Ovich  "" ;
@@ -31178,6 +31210,7 @@ LEXICON urj-Cyrl-ProperNouns
 Нил:Нил PropNameMaleDer-Ovich  "" ;
 Нодар:Нодар PropNameMaleDer-Ovich  "" ;
 Нурбек:Нурбек PropNameMaleDer-Ovich  "" ;
+Овид:Овид Prop-kal_mal ;
 Оганес:Оганес PropNameMaleDer-Ovich  "" ;
 Октавиан:Октавиан PropNameMaleDer-Ovich  "" ;
 Олег:Олег PropNameMaleDer-Ovich  "" ;
@@ -31190,15 +31223,20 @@ LEXICON urj-Cyrl-ProperNouns
 Осман:Осман PropNameMaleDer-Ovich  "" ;
 Остап:Остап PropNameMaleDer-Ovich  "" ;
 Отт:Отт PropNameMaleDer-Ovich  "" ;
-Павл:Павл PropNameMaleDer-Ovich  "" ;
+Павол:Павол Prop-kal_mal  "" ;
+Павол:Павлович Prop-osh_patrMal  "" ;
+Павол:Павловна Prop-kudo_patrFem  "" ;
 Памфил:Памфил PropNameMaleDer-Ovich  "" ;
 Пантелеймон:Пантелеймон PropNameMaleDer-Ovich  "" ;
 Панфил:Панфил PropNameMaleDer-Ovich  "" ;
 Парамон:Парамон PropNameMaleDer-Ovich  "" ;
 Патрик:Патрик PropNameMaleDer-Ovich  "" ;
 Пахом:Пахом PropNameMaleDer-Ovich  "" ;
+Перес:Перес Prop-osh_mal ;
 Пересвет:Пересвет PropNameMaleDer-Ovich  "" ;
-Петр:Петр PropNameMaleDer-Ovich  "" ;
+Пётр:Пётр Prop-kal_mal  "" ;
+Пётр:Петрович Prop-osh_patrMal  "" ;
+Пётр:Петровна Prop-kudo_patrFem  "" ;
 Пимен:Пимен PropNameMaleDer-Ovich  "" ;
 Платон:Платон PropNameMaleDer-Ovich  "" ;
 Поликарп:Поликарп PropNameMaleDer-Ovich  "" ;
@@ -31221,6 +31259,7 @@ LEXICON urj-Cyrl-ProperNouns
 Рашид:Рашид PropNameMaleDer-Ovich  "" ;
 Рем:Рем PropNameMaleDer-Ovich  "" ;
 Ренат:Ренат PropNameMaleDer-Ovich  "" ;
+Рехавеам:Рехавеам Prop-kal_mal ;
 Ричард:Ричард PropNameMaleDer-Ovich  "" ;
 Ришат:Ришат PropNameMaleDer-Ovich  "" ;
 Роальд:Роальд PropNameMaleDer-Ovich  "" ;
@@ -31242,8 +31281,11 @@ LEXICON urj-Cyrl-ProperNouns
 Рэм:Рэм PropNameMaleDer-Ovich  "" ;
 Рюрик:Рюрик PropNameMaleDer-Ovich  "" ;
 Сабир:Сабир PropNameMaleDer-Ovich  "" ;
+Садок:Садок Prop-lak_mal ;
 Салават:Салават PropNameMaleDer-Ovich  "" ;
+Салатил:Салатил Prop-kal_mal ;
 Салих:Салих PropNameMaleDer-Ovich  "" ;
+Салмон:Салмон Prop-kal_mal ;
 Самат:Самат PropNameMaleDer-Ovich  "" ;
 Самсон:Самсон PropNameMaleDer-Ovich  "" ;
 Самуил:Самуил PropNameMaleDer-Ovich  "" ;
@@ -31277,6 +31319,7 @@ LEXICON urj-Cyrl-ProperNouns
 Сулейман:Сулейман PropNameMaleDer-Ovich  "" ;
 Сурен:Сурен PropNameMaleDer-Ovich  "" ;
 Тагир:Тагир PropNameMaleDer-Ovich  "" ;
+Таддей:Таддей Prop-kal_mal ;
 Таир:Таир PropNameMaleDer-Ovich  "" ;
 Таймураз:Таймураз PropNameMaleDer-Ovich  "" ;
 Талгат:Талгат PropNameMaleDer-Ovich  "" ;
@@ -31294,6 +31337,8 @@ LEXICON urj-Cyrl-ProperNouns
 Тристан:Тристан PropNameMaleDer-Ovich  "" ;
 Трифон:Трифон PropNameMaleDer-Ovich  "" ;
 Трофим:Трофим PropNameMaleDer-Ovich  "" ;
+Узия:Узия Prop-kudo_mal ;
+Урия:Урия Prop-kudo_mal ;
 Устим:Устим PropNameMaleDer-Ovich  "" ;
 Устин:Устин PropNameMaleDer-Ovich  "" ;
 Фарид:Фарид PropNameMaleDer-Ovich  "" ;
@@ -31306,12 +31351,15 @@ LEXICON urj-Cyrl-ProperNouns
 Филарет:Филарет PropNameMaleDer-Ovich  "" ;
 Филат:Филат PropNameMaleDer-Ovich  "" ;
 Филимон:Филимон PropNameMaleDer-Ovich  "" ;
+Филип:Филип Prop-kal_mal ;
 Филипп:Филипп PropNameMaleDer-Ovich  "" ;
+Фирст:Фирст PropNameMaleDer-Ovich  "" ;
 Флегонт:Флегонт PropNameMaleDer-Ovich  "" ;
 Фридрих:Фридрих PropNameMaleDer-Ovich  "" ;
 Фрол:Фрол PropNameMaleDer-Ovich  "" ;
 Харитон:Харитон PropNameMaleDer-Ovich  "" ;
 Хасан:Хасан PropNameMaleDer-Ovich  "" ;
+Христос:Христос Prop-osh_sur ;
 Христоф:Христоф PropNameMaleDer-Ovich  "" ;
 Чеслав:Чеслав PropNameMaleDer-Ovich  "" ;
 Эвальд:Эвальд PropNameMaleDer-Ovich  "" ;
@@ -31321,6 +31369,10 @@ LEXICON urj-Cyrl-ProperNouns
 Эдгар:Эдгар PropNameMaleDer-Ovich  "" ;
 Эдмунд:Эдмунд PropNameMaleDer-Ovich  "" ;
 Эдуард:Эдуард PropNameMaleDer-Ovich  "" ;
+Эзекия:Эзекия Prop-kudo_mal ;
+Элеазар:Элеазар Prop-kal_mal ;
+Элиаким:Элиаким Prop-kal_mal ;
+Элиуд:Элиуд Prop-kal_mal ;
 Эльдар:Эльдар PropNameMaleDer-Ovich  "" ;
 Эльмар:Эльмар PropNameMaleDer-Ovich  "" ;
 Эльмир:Эльмир PropNameMaleDer-Ovich  "" ;
@@ -31347,9 +31399,11 @@ LEXICON urj-Cyrl-ProperNouns
 !!!й:0е
 Авдей:Авде PropNameMaleDer-J-0Evich  "" ;
 Аверкий:Аверки PropNameMaleDer-J-0Evich  "" ;
+Авиуд:Авиуд Prop-kal_mal ;
 Авксентий:Авксент PropNameMaleDer-IJ-I0Evich  "" ;
 Агей:Аге PropNameMaleDer-J-0Evich  "" ;
 Адий:Ад PropNameMaleDer-IJ-I0Evich  "" ;
+Азур:Азур Prop-kal_mal ;
 Алексей:Алексе PropNameMaleDer-J-0Evich  "" ;
 Ананий:Анан PropNameMaleDer-IJ-I0Evich  "" ;
 Анастасий:Анастас PropNameMaleDer-IJ-I0Evich  "" ;
@@ -31360,10 +31414,12 @@ LEXICON urj-Cyrl-ProperNouns
 Арефий:Арефи PropNameMaleDer-J-0Evich  "" ;
 Арий:Ар PropNameMaleDer-IJ-I0Evich  "" ;
 Аркадий:Аркад PropNameMaleDer-IJ-I0Evich  "" ;
+Аркелай:Аркелай Prop-kal_mal ;
 Арсений:Арсен PropNameMaleDer-IJ-I0Evich  "" ;
 Арсентий:Арсент PropNameMaleDer-IJ-I0Evich  "" ;
 Артемий:Артеми PropNameMaleDer-J-0Evich  "" ;
 Афанасий:Афанас PropNameMaleDer-IJ-I0Evich  "" ;
+Ахим:Ахим Prop-kal_mal ;
 Варфоломей:Варфоломе PropNameMaleDer-J-0Evich  "" ;
 Василий:Васил PropNameMaleDer-IJ-Y0Evich  "" ;
 Вергилий:Вергил PropNameMaleDer-IJ-I0Evich  "" ;
@@ -31387,19 +31443,25 @@ LEXICON urj-Cyrl-ProperNouns
 Евгений:Евген PropNameMaleDer-IJ-I0Evich  "" ;
 Евлампий:Евлампи PropNameMaleDer-J-0Evich  "" ;
 Евлогий:Евлоги PropNameMaleDer-J-0Evich  "" ;
+Евсевьевич:Евсевьевич Prop-osh_patrMal "" ;
 Евсей:Евсе PropNameMaleDer-J-0Evich  "" ;
 Евстафий:Евстафи PropNameMaleDer-J-0Evich  "" ;
+Екония:Екония Prop-kudo_mal ;
 Елисей:Елисе PropNameMaleDer-J-0Evich  "" ;
 Еремей:Ереме PropNameMaleDer-J-0Evich  "" ;
+Еремия:Еремия Prop-kudo_mal ;
 Ермолай:Ермола PropNameMaleDer-J-0Evich  "" ;
 Ерофей:Ерофе PropNameMaleDer-J-0Evich  "" ;
 Зиновий:Зинови PropNameMaleDer-J-0Evich  "" ;
+Зоровавель:Зоровавель Prop-kal_mal ;
 Игнатий:Игнат PropNameMaleDer-IJ-Y0Evich  "" ;
 Иларий:Илар PropNameMaleDer-IJ-I0Evich  "" ;
+Иммануэл:Иммануэл Prop-kal_mal ;
 Иннокентий:Иннокент PropNameMaleDer-IJ-I0Evich  "" ;
 Ипатий:Ипат PropNameMaleDer-IJ-I0Evich  "" ;
 Ираклий:Иракл PropNameMaleDer-IJ-I0Evich  "" ;
 Ириней:Ирине PropNameMaleDer-J-0Evich  "" ;
+Ирод:Ирод Prop-kal_mal ;
 Исаакий:Исааки PropNameMaleDer-J-0Evich  "" ;
 Исай:Иса PropNameMaleDer-J-0Evich  "" ;
 Июлий:Июл PropNameMaleDer-IJ-I0Evich  "" ;
@@ -31424,6 +31486,7 @@ LEXICON urj-Cyrl-ProperNouns
 Олимпий:Олимпи PropNameMaleDer-J-0Evich  "" ;
 Пафнутий:Пафнут PropNameMaleDer-IJ-I0Evich  "" ;
 Порфирий:Порфир PropNameMaleDer-IJ-I0Evich  "" ;
+Прокопий:Прокоп PropNameMaleDer-IJ-Y0Evich  "" ;
 Прокофий:Прокоф PropNameMaleDer-IJ-Y0Evich  "" ;
 Радий:Рад PropNameMaleDer-IJ-I0Evich  "" ;
 Савелий:Савел PropNameMaleDer-IJ-I0Evich  "" ;
@@ -31674,7 +31737,9 @@ LEXICON urj-Cyrl-ProperNouns
 Зара:Зара Prop-kudo_fem "" ;
 Зарема:Зарема Prop-kudo_fem "" ;
 Зарифа:Зарифа Prop-kudo_fem "" ;
+Зеведей:Зеведей Prop-kal_mal ;
 Земфира:Земфира Prop-kudo_fem "" ;
+Зерах:Зерах Prop-kal_mal ;
 Зиля:Зиля Prop-kudo_fem "" ;
 Зина:Зина Prop-kudo_fem "" ;
 Зинаида:Зинаида Prop-kudo_fem "" ;
@@ -31888,6 +31953,8 @@ LEXICON urj-Cyrl-ProperNouns
 Разиля:Разиля Prop-kudo_fem "" ;
 Раиса:Раиса Prop-kudo_fem "" ;
 Рамзия:Рамзия Prop-kudo_fem "" ;
+Рахав:Рахав Prop-kal_fem ;
+Рахиль:Рахиль Prop-kal_fem ;
 Рая:Рая Prop-kudo_fem "" ;
 Ребекка:Ребекка Prop-kudo_fem "" ;
 Регина:Регина Prop-kudo_fem "" ;
@@ -31903,6 +31970,7 @@ LEXICON urj-Cyrl-ProperNouns
 Роксана:Роксана Prop-kudo_fem "" ;
 Ростислава:Ростислава Prop-kudo_fem "" ;
 Руслана:Руслана Prop-kudo_fem "" ;
+Рут:Рут Prop-kit_fem ;
 Руфина:Руфина Prop-kudo_fem "" ;
 Сабина:Сабина Prop-kudo_fem "" ;
 Саида:Саида Prop-kudo_fem "" ;
@@ -31934,6 +32002,7 @@ LEXICON urj-Cyrl-ProperNouns
 Таира:Таира Prop-kudo_fem "" ;
 Таисия:Таисия Prop-kudo_fem "" ;
 Талия:Талия Prop-kudo_fem "" ;
+Тамар:Тамар Prop-kal_fem ;
 Тамара:Тамара Prop-kudo_fem "" ;
 Тамила:Тамила Prop-kudo_fem "" ;
 Танька:Танька Prop-kudo_fem "" ;
@@ -32007,3 +32076,14 @@ LEXICON urj-Cyrl-ProperNouns
 Яна:Яна Prop-kudo_fem "" ;
 Янис:Янис Prop-osh_fem "" ;
 Ярослава:Ярослава Prop-kudo_fem "" ;
+
+!! Place names (mainly foreign)
+Вавилон:Вавилон Prop-kudo_plc ;
+Вифлеем:Вифлеем Prop-kal_plc ;
+Галилея:Галилея Prop-kudo_plc ;
+Египет:Египет Prop-kit_plc ;
+Ерусалим:Ерусалим Prop-kal_plc ;
+Израиль:Израиль Prop-kal_plc ;
+Иудея:Иудея Prop-kudo_plc ;
+Самария:Самария Prop-kudo_plc ;
+

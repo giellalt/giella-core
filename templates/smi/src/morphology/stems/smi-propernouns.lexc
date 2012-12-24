@@ -1201,7 +1201,7 @@ Arkimedes LONDON-mal ;
 Arkippos LONDON-mal ;
 Arkiv:Arkiv BERN-obj ;
 Arkivverket:Arkiv^verket LONDON-org ;
-Arktis LONDON-plc ;
+Arktis+Use/Sub:Arktis LONDON-plc ;
 Arktis+Use/Sub:Arktis BERN-plc ;
 Arla ACCRA-fem ; !Also org
 Arlanda:Ar^landa ACCRA-plc ;

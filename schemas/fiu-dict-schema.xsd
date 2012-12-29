@@ -936,10 +936,12 @@
                   <xs:enumeration value="hyponym"/>
                   <xs:enumeration value="hypernym"/>
                   <xs:enumeration value="meronym"/>
-                  <xs:enumeration value="pro"/>
+                  <xs:enumeration value="prefer"/>
+                  <xs:enumeration value="pro"/><!-- Should this be removed 2012-12-27 -->
                   <xs:enumeration value="seeNative"/>
                   <xs:enumeration value="see"/>
                   <xs:enumeration value="seeAlso"/>
+                  <xs:enumeration value="sub"/>
                   <xs:enumeration value="synonym"/>
                </xs:restriction>
             </xs:simpleType>

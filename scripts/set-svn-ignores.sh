@@ -46,9 +46,6 @@ svn propset svn:ignore "$mkfiles
 $fstfiles
 *.tmp" $1/src
 
-# Ignore extra lexc stem files:
-svn propset svn:ignore "*.lexc" $1/src/morphology/stems
-
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 svn propset svn:ignore "$mkfiles
 $fstfiles

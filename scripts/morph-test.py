@@ -46,28 +46,28 @@ def string_to_list(data):
 	if isinstance(data, bytes): return [data.decode('utf-8')]
 	elif isinstance(data, str): return [data]
 	else: return data
-	
+
 def invert_dict(data):
 		tmp = OrderedDict()
 		for key, val in data.items():
 			for v in string_to_list(val):
 				tmp.setdefault(v, set()).add(key)
-		return tmp 
+		return tmp
 
 def colourise(string, opt=None):
 	#TODO per class, make into a class too
 	def red(s="", r="\033[m"):
-		return "\033[1;31m%s%s" % (s, r) 
+		return "\033[1;31m%s%s" % (s, r)
 	def green(s="", r="\033[m"):
-		return "\033[0;32m%s%s" % (s, r) 
+		return "\033[0;32m%s%s" % (s, r)
 	def orange(s="", r="\033[m"):
-		return "\033[0;33m%s%s" % (s, r) 
+		return "\033[0;33m%s%s" % (s, r)
 	def yellow(s="", r="\033[m"):
-		return "\033[1;33m%s%s" % (s, r) 
+		return "\033[1;33m%s%s" % (s, r)
 	def blue(s="", r="\033[m"):
-		return "\033[0;34m%s%s" % (s, r) 
+		return "\033[0;34m%s%s" % (s, r)
 	def light_blue(s="", r="\033[m"):
-		return "\033[0;36m%s%s" % (s, r) 
+		return "\033[0;36m%s%s" % (s, r)
 	def reset(s=""):
 		return "\033[m%s" % s
 
@@ -79,7 +79,7 @@ def colourise(string, opt=None):
 		x = x.replace("[PASS]", green("[PASS]"))
 		x = x.replace("[FAIL]", red("[FAIL]"))
 		return x
-	
+
 	elif opt == 1:
 		return light_blue(string)
 
@@ -146,21 +146,21 @@ class _OrderedDictYAMLLoader(yaml.Loader):
 
 class Test(object):
 	"""Abstract class for Test objects
-	
+
 	It is recommended that print not be used within a Test class.
 	Use a StringIO instance and .getvalue() in to_string().
 	"""
-	
+
 	"""Attributes"""
 	timer = None
-	
+
 	def __str__(self):
-		"""Will return to_string method's content if exists, 
+		"""Will return to_string method's content if exists,
 		otherwise default to parent class
 		"""
 		try: return self.to_string()
 		except: return object.__str__(self)
-	
+
 	def _checksum(self, data):
 		"""Returns checksum hash for given data (currently SHA1) for the purpose
 		of maintaining integrity of test data.
@@ -168,7 +168,7 @@ class Test(object):
 		if hasattr(data, 'encode'):
 			data = data.encode('utf-8')
 		return sha1(data).hexdigest()
-	
+
 	def _svn_revision(self, directory):
 		"""Returns the SVN revision of the given dictionary directory"""
 		whereis(['svnversion'])
@@ -178,28 +178,28 @@ class Test(object):
 			return str(res)
 		except:
 			raise UncleanWorkingDirectoryException("You must have a clean SVN directory. Commit or remove uncommitted files.")
-	
+
 	def run(self, *args, **kwargs):
 		"""Runs the actual test
-		
+
 		Parameters: none
 		Returns: integer >= 0 <= 255  (exit value)
 		"""
 		raise NotImplementedError("Required method `run` was not implemented.")
-	
+
 	def to_xml(self, *args, **kwargs):
 		"""Output XML suitable for saving in Statistics format.
 		It is recommended that you use etree for creating the tree.
-		
+
 		Parameters: none
 		Returns: (string, string)
 			first being parent node, second being xml
 		"""
 		raise NotImplementedError("Required method `to_xml` was not implemented.")
-	
+
 	def to_string(self, *args, **kwargs):
 		"""Prints the output of StringIO instance and other printable output.
-		
+
 		Parameters: none
 		Returns: string
 		"""
@@ -210,18 +210,18 @@ class MorphTest(Test):
 	class AllOutput(StringIO):
 		def __str__(self):
 			return self.to_string()
-		
+
 		def title(self, *args): pass
 		def success(self, *args): pass
-		def failure(self, *args): pass		
+		def failure(self, *args): pass
 		def result(self, *args): pass
-		
+
 		def final_result(self, hfst):
 			text = "Total passes: %d, Total fails: %d, Total: %d\n"
 			self.write(colourise(text % (hfst.passes, hfst.fails, hfst.fails+hfst.passes), 2))
-		
+
 		def to_string(self):
-			return self.getvalue().strip()	
+			return self.getvalue().strip()
 
 	class NormalOutput(AllOutput):
 		def title(self, text):
@@ -238,7 +238,7 @@ class MorphTest(Test):
 		def result(self, title, test, counts):
 			p = counts["Pass"]
 			f = counts["Fail"]
-			text = "Test %d - Passes: %d, Fails: %d, Total: %d\n\n"
+			text = "\nTest %d - Passes: %d, Fails: %d, Total: %d\n"
 			self.write(colourise(text % (test, p, f, p+f), 2))
 
 	class CompactOutput(AllOutput):
@@ -250,7 +250,7 @@ class MorphTest(Test):
 				self.write(colourise("[FAIL] %s\n" % out))
 			else:
 				self.write(colourise("[PASS] %s\n" % out))
-			
+
 	def __init__(self, f=None, **kwargs):
 		self.args = dict(kwargs)
 		self.f = self.args.get('test_file', f)
@@ -266,39 +266,39 @@ class MorphTest(Test):
 		self.run_tests(self.args['test'])
 		self.timer = time.time() - timing_begin
 		if self.fails > 0:
-		    return 1
+			return 1
 		else:
-		    return 0
+			return 0
 
 	def load_config(self):
 		global colourise
 		f = yaml.load(open(self.f), _OrderedDictYAMLLoader)
-		
+
 		section = self.args['section']
 		if not section in f["Config"]:
 			raise AttributeError("'%s' not found in Config of test file." % section)
-		
+
 		self.program = shlex.split(self.args.get('app') or f["Config"][section].get("App", "hfst-lookup"))
 		whereis([self.program[0]])
 
 		self.gen = self.args.get('gen') or f["Config"][section].get("Gen", None)
 		self.morph = self.args.get('morph') or f["Config"][section].get("Morph", None)
-	
+
 		if self.gen == self.morph == None:
 			raise AttributeError("One of Gen or Morph must be configured.")
 
 		for i in (self.gen, self.morph):
 			if i and not os.path.isfile(i):
 				raise IOError("File %s does not exist." % i)
-		
+
 		if self.args.get('compact'):
 			self.out = MorphTest.CompactOutput()
 		else:
 			self.out = MorphTest.NormalOutput()
-		
+
 		if self.args.get('verbose'):
 			self.out.write("`%s` will be used for parsing dictionaries.\n" % self.program)
-		
+
 		self.tests = f["Tests"]
 		for test in self.tests:
 			for key, val in self.tests[test].items():
@@ -306,17 +306,16 @@ class MorphTest(Test):
 
 		if not self.args.get('colour'):
 			colourise = lambda x, y=None: x
-		
+
 	def run_tests(self, data=None):
 		if self.args.get('surface') == self.args.get('lexical') == False:
 			self.args['surface'] = self.args['lexical'] = True
-		
 
-		if(data != None):
+		if data != None:
 			self.parse_fsts(self.tests[data[0]])
 			if self.args.get('lexical'): self.run_test(data[0], True)
 			if self.args.get('surface'): self.run_test(data[0], False)
-		
+
 		else:
 			tests = {}
 			for t in self.tests:
@@ -325,7 +324,7 @@ class MorphTest(Test):
 			for t in self.tests:
 				if self.args.get('lexical'): self.run_test(t, True)
 				if self.args.get('surface'): self.run_test(t, False)
-		
+
 		if self.args.get('verbose'):
 			self.out.final_result(self)
 
@@ -338,7 +337,7 @@ class MorphTest(Test):
 			keys = tests.keys()
 			app = Popen(self.program + [f], stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)
 			args = '\n'.join(keys) + '\n'
-			
+
 			res, err = app.communicate(args.encode('utf-8'))
 			res = res.decode('utf-8').split('\n\n')
 			err = err.decode('utf-8').strip()
@@ -349,13 +348,13 @@ class MorphTest(Test):
 				)
 			else:
 				self.results[d] = self.parse_fst_output(res)
-		
+
 		gen = Process(target=parser, args=(self, "gen", self.gen, tests))
 		gen.daemon = True
 		gen.start()
 		if self.args.get('verbose'):
 			self.out.write("Generating...\n")
-		
+
 		morph = Process(target=parser, args=(self, "morph", self.morph, invtests))
 		morph.daemon = True
 		morph.start()
@@ -367,7 +366,22 @@ class MorphTest(Test):
 
 		if self.args.get('verbose'):
 			self.out.write("Done!\n")
-		
+
+	def get_forms(self, test, forms):
+		if test.startswith('~'):
+			test = test.lstrip("~")
+			detested = set()
+			expected = set()
+			for i in forms:
+				if i.startswith('~'):
+					expected.add(i.lstrip('~'))
+				else:
+					detested.add('~' + i)
+		else:
+			detested = set([i.lstrip('~') for i in forms if i.startswith('~')])
+			expected = set([i.lstrip('~') for i in forms])
+		return test, detested, expected
+
 	def run_test(self, data, is_lexical):
 		if is_lexical:
 			desc = "Lexical/Generation"
@@ -378,10 +392,10 @@ class MorphTest(Test):
 			desc = "Surface/Analysis"
 			f = "morph"
 			tests = invert_dict(self.tests[data])
-		
+
 		if self.results.get('err'):
 			raise LookupError('`%s` had an error:\n%s' % (self.program, self.results['err']))
-		
+
 		c = len(self.count)
 		d = "%s (%s)" % (data, desc)
 		title = "Test %d: %s" % (c, d)
@@ -390,22 +404,27 @@ class MorphTest(Test):
 		self.count[d] = {"Pass": 0, "Fail": 0}
 
 		for test, forms in tests.items():
-			expected_results = set(forms)
 			actual_results = set(self.results[f][test])
+			test, detested_results, expected_results = self.get_forms(test, forms)
 
 			missing = set()
 			invalid = set()
 			success = set()
+			detested = set()
 			passed = False
-			
+
 			for form in expected_results:
 				if not form in actual_results:
 					missing.add(form)
 
+			for form in detested_results:
+				if form in actual_results:
+					detested.add(form)
+
 			for form in actual_results:
 				if not form in expected_results:
 					invalid.add(form)
-			
+
 			if len(expected_results) > 0:
 				for form in actual_results:
 					if not form in (missing | invalid):
@@ -420,22 +439,29 @@ class MorphTest(Test):
 					passed = True
 					self.count[d]["Pass"] += 1
 					if not self.args.get('hide_pass'):
-						self.out.success(test, '<no generation>')
-			
+						self.out.success(test, '<No generation>')
+
 			if not self.args.get('hide_fail'):
 				if len(missing) > 0:
-					self.out.failure(test, "missing results", missing)
+					self.out.failure(test, "Missing results", missing)
 					self.count[d]["Fail"] += len(missing)
 				if len(invalid) > 0 and \
 						(not self.args.get('ignore_analyses') or not passed):
-					self.out.failure(test, "unexpected results", invalid)
+					self.out.failure(test, "Unexpected results", invalid)
 					self.count[d]["Fail"] += len(invalid)
+				if len(detested) > 0:
+					if self.args.get('colour'):
+						msg = "\033[1;31mBROKEN!\033[m"
+					else:
+						msg = "BROKEN!"
+					self.out.failure(test, msg + " Negative results", detested)
+					self.count[d]["Fail"] += len(detested)
 
 		self.out.result(title, c, self.count[d])
-		
+
 		self.passes += self.count[d]["Pass"]
 		self.fails += self.count[d]["Fail"]
-	
+
 	def parse_fst_output(self, fst):
 		parsed = {}
 		for item in fst:
@@ -459,33 +485,33 @@ class MorphTest(Test):
 	def to_xml(self):
 		q = Element('config')
 		q.attrib["value"] = self.f
-		
+
 		r = SubElement(q, "revision", value=str(self._svn_revision(dirname(self.f))),
 					timestamp=datetime.utcnow().isoformat(),
 					checksum=self._checksum(open(self.f, 'rb').read()))
-		
+
 		s = SubElement(r, 'gen')
 		s.attrib["value"] = self.gen
 		s.attrib["checksum"] = self._checksum(open(self.gen, 'rb').read())
-		
+
 		s = SubElement(r, 'morph')
 		s.attrib["value"] = self.morph
 		s.attrib["checksum"] = self._checksum(open(self.morph, 'rb').read())
-		
+
 		SubElement(r, 'total').text = str(self.passes + self.fails)
 		SubElement(r, 'passes').text = str(self.passes)
 		SubElement(r, 'fails').text = str(self.fails)
-		
+
 		s = SubElement(r, 'tests')
 		for k, v in self.count.items():
 			t = SubElement(s, 'test')
 			t.text = str(k)
 			t.attrib['fails'] = str(v["Fail"])
 			t.attrib['passes'] = str(v["Pass"])
-		
+
 		s = SubElement(r, "system")
 		SubElement(s, "speed").text = "%.4f" % self.timer
-		
+
 		return ("morph", etree.tostring(r))
 
 	def to_string(self):
@@ -497,20 +523,20 @@ class Frontend(Test, ArgumentParser):
 		ArgumentParser.__init__(self)
 		Test.__init__(self)
 		if colour:
-			self.add_argument("-c", "--colour", dest="colour", action="store_true",
-							  help="Colours the output") 
+			self.add_argument("-c", "--colour", dest="colour",
+					action="store_true", help="Colours the output")
 
 	def start(self):
 		try:
-			try: 
+			try:
 				ret = self.run()
 			except IOError as e:
 				print(e)
 				sys.exit(1)
-			
+
 			print(self.to_string())
 			self.exit(ret)
-		
+
 		except KeyboardInterrupt:
 			sys.exit()
 
@@ -518,11 +544,11 @@ class Frontend(Test, ArgumentParser):
 class UI(Frontend, MorphTest):
 	def __init__(self):
 		Frontend.__init__(self, colour=True)
-		self.description="""Test morphological transducers for consistency. 
+		self.description="""Test morphological transducers for consistency.
 			`hfst-lookup` (or Xerox' `lookup` with argument -x) must be
 			available on the PATH."""
 		self.epilog="Will run all tests in the test_file by default."
-		
+
 		self.add_argument("-C", "--compact",
 			dest="compact", action="store_true",
 			help="Makes output more compact")
@@ -543,7 +569,7 @@ class UI(Frontend, MorphTest):
 			dest="hide_pass", action="store_true",
 			help="Suppresses failures to make finding passes easier")
 		self.add_argument("-S", "--section", default=["hfst"],
-			dest="section", nargs=1, required=False, 
+			dest="section", nargs=1, required=False,
 			help="The section to be used for testing (default is `hfst`)")
 		self.add_argument("-t", "--test",
 			dest="test", nargs=1, required=False,
@@ -552,29 +578,29 @@ class UI(Frontend, MorphTest):
 		self.add_argument("-v", "--verbose",
 			dest="verbose", action="store_true",
 			help="More verbose output.")
-		
-		self.add_argument("--app", dest="app", nargs=1, required=False, 
+
+		self.add_argument("--app", dest="app", nargs=1, required=False,
 			help="Override application used for test")
-		self.add_argument("--gen", dest="gen", nargs=1, required=False, 
+		self.add_argument("--gen", dest="gen", nargs=1, required=False,
 			help="Override generation transducer used for test")
-		self.add_argument("--morph", dest="morph", nargs=1, required=False, 
+		self.add_argument("--morph", dest="morph", nargs=1, required=False,
 			help="Override morph transducer used for test")
-		
+
 		self.add_argument("test_file", nargs=1,
 			help="YAML file with test rules")
-		
+
 		self.args = dict(self.parse_args()._get_kwargs())
 		for k, v in self.args.copy().items():
 			if isinstance(v, list) and len(v) == 1:
 				self.args[k] = v[0]
 
 		MorphTest.__init__(self, **self.args)
-	
+
 	def start(self):
 		ret = self.run()
 		print(self.to_string())
 		self.exit(ret)
-	
+
 def main():
 	try:
 		ui = UI()

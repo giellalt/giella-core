@@ -52,7 +52,7 @@ transcriptor-%2text-raw.hfst: %.lexc
 transcriptor-%2text-raw.xfst: %.lexc
 	$(AM_V_GEN)$(PRINTF) \
 		"compile-source $^\nsource-to-result\nsave-source $@\nquit\n" \
-		| > $@.script
+		> $@.script
 	$(AM_V_GEN)$(LEXC) < $@.script
 	$(AM_V_GEN)rm -f $@.script
 

@@ -86,7 +86,7 @@ analyser-raw-gt-desc.xfst: morphology/$(GTLANG).lexc.xfst \
 			 phonology/$(GTLANG)-phon.xfst
 	$(AM_V_GEN)$(PRINTF) \
 		"read-source morphology/$(GTLANG).lexc.xfst\nread-rules  phonology/$(GTLANG)-phon.xfst\ncompose-result\nsave-result $@\nquit\n" \
-		| > $@.script
+		> $@.script
 	$(AM_V_GEN)$(LEXC) < $@.script
 	$(AM_V_GEN)rm -f $@.script
 

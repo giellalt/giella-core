@@ -1,4 +1,7 @@
 $Rev$
+Fixed a stupid bash syntax error in the previous commit.
+
+r67720:
 Rewrote LexC and TwolC Xerox rules to make them work on Cygwin: the Windows
 Xerox tools need a script file as input, the scripts can't be piped in as on
 *nix systems. Removed the hack in the previous commit. The bug can be worked

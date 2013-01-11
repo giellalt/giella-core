@@ -1,4 +1,7 @@
 $Rev$
+Added support for XSL conversion of XML source files on Cygwin.
+
+r67732:
 Made Voikko support optional instead of required.
 
 r67724:

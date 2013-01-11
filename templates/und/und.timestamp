@@ -1,4 +1,7 @@
 $Rev$
+Made spell-relax a language-specific file by adding it to the und template.
+
+r67827:
 Added support for XSL conversion of XML source files on Cygwin.
 
 r67732:

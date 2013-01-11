@@ -48,7 +48,8 @@ $fstfiles
 
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 svn propset svn:ignore "$mkfiles
-$fstfiles
+*.log
+*.trs
 *.txt
 *.sh" $1/test/src/morphology
 

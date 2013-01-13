@@ -30,9 +30,9 @@
   <xsl:variable name="modus" select="'all'"/>
   <!--   <xsl:variable name="modus" select="'only_one'"/> -->
   <!-- source language -->
-  <xsl:param name="srcl" select="'sjd'"/>
+  <xsl:param name="srcl" select="'sme'"/>
   <!-- target language -->
-  <xsl:param name="trgl" select="'rus'"/>
+  <xsl:param name="trgl" select="'fin'"/>
   
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>

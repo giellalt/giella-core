@@ -9,7 +9,12 @@ fi
 if test ! -r $1/und.timestamp ; then
     echo "This script must have a top-level language directory as its only"
     echo "argument, e.g."
+    echo
     echo "${GTHOME}/langs/fao/"
+    echo
+    echo and not:
+    echo "$1"
+    echo
     exit 1
 fi
 
@@ -23,9 +28,8 @@ config.status
 configure
 aclocal.m4"
 
-fstfiles="*.hfst
+fstfiles="*fst
 *.hfstol
-*.xfst
 *.bin
 *.bcg3"
 
@@ -46,6 +50,9 @@ svn propset svn:ignore "$mkfiles
 $fstfiles
 *.tmp" $1/src
 
+# Only ignore generated propernoun files in stems dir:
+svn propset svn:ignore "*-*-propernouns.lexc" $1/src/morphology/stems
+
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 svn propset svn:ignore "$mkfiles
 *.log
@@ -53,7 +60,7 @@ svn propset svn:ignore "$mkfiles
 *.txt
 *.sh" $1/test/src/morphology
 
-# Set the svn:ignore prop on the source dir:
+# Set the svn:ignore prop on the hfst speller dir:
 svn propset svn:ignore "$mkfiles
 $fstfiles
 *.zhfst" $1/tools/spellcheckers/hfst

@@ -24,7 +24,7 @@ BEGIN {
 function expand_variables(s) {
     # expand all our doc comment variables
     return gensub("@CODE@", CODE, "g", 
-              gensub("@RULNAME@", RULENAME, "g",
+              gensub("@RULENAME@", RULENAME, "g",
                      gensub("@LEXNAME@", LEXNAME, "g", s)));
 }
 /^[[:space:]]*$/ {

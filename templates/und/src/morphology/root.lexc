@@ -12,21 +12,23 @@
 ! Other licensing options are available upon request, please contact
 ! giellatekno@hum.uit.no or divvun@samediggi.no
 
-!! Morphology
-!! ----------
-!! INTRODUCTION TO MORPHOLOGICAL ANALYSER OF UNDEFINED LANGUAGE.
+! ========================================================================== !
+! !!            !!!__UNDEFINED__ morphological analyser                      !
+! ========================================================================== !
+!! INTRODUCTION TO MORPHOLOGICAL ANALYSER OF __UNDEFINED__ LANGUAGE.
+ 
 
+Multichar_Symbols  !!≈ !!!@CODE@ definitions
 
-Multichar_Symbols
-!! Analysis symbols
+!! !!Analysis symbols
 !! ----------------
 !! The morphological analyses of wordforms of UNDEFINED language are presented
 !! in this system in terms of following symbols.
 !! (It is highly suggested to follow existing standards when adding new tags).
 
 !! The parts-of-speech are:
- +N +A +Adv +V
- +Pron +CS +CC +Adp +Po +Pr +Interj +Pcle +Num 
+ +N +A +Adv +V                                 !!≈
+ +Pron +CS +CC +Adp +Po +Pr +Interj +Pcle +Num !!≈
 
 !! The parts of speech are further split up into:
  +Prop +Pers +Dem +Interr +Refl +Recipr +Rel +Indef

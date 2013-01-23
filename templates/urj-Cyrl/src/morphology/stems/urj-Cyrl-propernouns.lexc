@@ -32078,12 +32078,27 @@ LEXICON urj-Cyrl-ProperNouns
 Ярослава:Ярослава Prop-kudo_fem "" ;
 
 !! Place names (mainly foreign)
+Англия:Англия Prop-kudo_plc ;
 Вавилон:Вавилон Prop-kudo_plc ;
 Вифлеем:Вифлеем Prop-kal_plc ;
 Галилея:Галилея Prop-kudo_plc ;
+Гермаия:Германия Prop-kudo_plc ;
+Дания:Дания Prop-kudo_plc ;
 Египет:Египет Prop-kit_plc ;
 Ерусалим:Ерусалим Prop-kal_plc ;
 Израиль:Израиль Prop-kal_plc ;
+Исляндия:Исляндия Prop-kudo_plc ;
+Испания:Испания Prop-kudo_plc ;
+Италия:Италия Prop-kudo_plc ;
 Иудея:Иудея Prop-kudo_plc ;
+Китай:Китай Prop-kal_plc ;
+Латвия:Латвия Prop-kudo_plc ;
+Литва:Литва Prop-kudo_plc ;
+Норвегия:Норвегия Prop-kudo_plc ;
 Самария:Самария Prop-kudo_plc ;
+Финляндия:Финляндия Prop-kudo_plc ;
+Франция:Франция Prop-kudo_plc ;
+Швеция:Швеция Prop-kudo_plc ;
+Эстония:Эстония Prop-kudo_plc ;
+Япония:Япония Prop-kudo_plc ;
 

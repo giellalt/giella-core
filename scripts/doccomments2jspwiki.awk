@@ -32,10 +32,13 @@ function expand_variables(s) {
     # of subsequent paragraphs
     printf("\n");
 }
-/^!![€$][^ ]/ {printf("(subsequent examples are for *%s*)\n", $3);}
+/^!![€$][^ ]/ {
+    printf("(subsequent examples are *%s*)\n", 
+           gensub("!![€$][^ ]* *", "", ""));
+}
 /^!!€ / {
     if (NF >= 4) {
-        printf("* __%s__: {{%s}} (engl.", $2, $3);
+        printf("* __%s__: {{%s}} (Eng.", $2, $3);
         for (i = 4; i <= NF; i++) {
             printf(" %s", $i);
         }
@@ -52,7 +55,30 @@ function expand_variables(s) {
     }
 }
 /^!!\$ / {
-    print("* __*%s__ (is not standard language)\n", $2);
+    if (NF >= 4) {
+        printf("* __*%s__: {{%s}} (is not standard language", $2, $3);
+        for (i = 4; i <= NF; i++) {
+            printf(" %s", $i);
+        }
+        printf(")\n");
+    }
+    else if (NF == 3) {
+        printf("* __*%s__: {{%s}} (is not standard language)\n", $2, $3);
+    }
+    else if (NF == 2) {
+        printf("* __*%s__ (is not standard language)\n", $2);
+    }
+    else {
+        print("* ???");
+    }
+}
+/^!!¥ / {
+    printf("; {{%s}}: ", gensub(":$", "", "", $2));
+    for (i = 3; i <= NF; i++)
+    {
+        printf("__%s__ ", gensub("[][]", "", "g", gensub("~", "*", "", $i)));
+    }
+    printf("\n");
 }
 /.*!!= / {
     CODE=gensub("!!=.*", "", "");

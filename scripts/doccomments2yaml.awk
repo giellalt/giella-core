@@ -27,20 +27,26 @@ BEGIN {
         gensub(":.*", "", ""))
     if (ACTIVETYPE == TYPE) {
         printf("  %s: # %s\n", $2, $3);
+        ALL_OK="YEAH";
     }
 }
 /^!!€ / {
     if (ACTIVETYPE == TYPE) {
         printf("    %s: %s # %s\n", $3, $2, $4);
+        ALL_OK="YEAH";
     }
 }
 /^!!\$ / {
     if (ACTIVETYPE == TYPE) {
-        printf("    %s: ~%s # %s\n", $2, $2, $3);
+        printf("    %s: ~%s # %s\n", $3, $2, $4);
+        ALL_OK="YEAH";
     }
 }
-/^!![$€]/ {
-    ALL_OK="YEAH";
+/^!!¥ / {
+    if (ACTIVETYPE == TYPE) {
+        printf("    %s\n", gensub("!!¥ *", "", ""));
+        ALL_OK="YEAH";
+    }
 }
 END {
     if (ALL_OK == "NOPE") {

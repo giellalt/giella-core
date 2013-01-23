@@ -55,6 +55,9 @@ svn propset svn:ignore "*-*-propernouns.lexc" $1/src/morphology/stems
 
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 svn propset svn:ignore "$mkfiles
+*-affixes-*.yaml
+*-stems-*.yaml
+*-morphology-*.yaml
 *.log
 *.trs
 *.txt

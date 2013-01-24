@@ -21,12 +21,11 @@ BEGIN {
     LEXNAME="@BEFORE LEXICON@";
     ALL_OK="NOPE";
 }
-/^LEXICON / {LEXNAME=$2;}
 /^!![€$][^ :]+:/ {
     ACTIVETYPE = gensub("!![€$]", "", "", 
         gensub(":.*", "", ""))
     if (ACTIVETYPE == TYPE) {
-        printf("  %s: # %s\n", $2, $3);
+        printf("  %s: #\n", gensub("!![^:]*:", "", ""));
         ALL_OK="YEAH";
     }
 }

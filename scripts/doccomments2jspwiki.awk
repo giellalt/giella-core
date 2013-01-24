@@ -107,9 +107,8 @@ function expand_variables(s) {
 }
 /.*!! / {print(expand_variables(gensub(".*!! ", "", ""))); }
 /!!/ {SOMETHING_WRONG="FALSE";}
-/^LEXICON / {
-    LEXNAME=$2;
-}
+/^Multichar_Symbols/ {LEXNAME=$1;}
+/^LEXICON / {LEXNAME=$2;}
 /^"[^"]*"/ {
     RULENAME=gensub("!.*", "", "", gensub("\"", "", "g"));
 }

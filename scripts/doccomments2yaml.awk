@@ -50,7 +50,7 @@ BEGIN {
 }
 END {
     if (ALL_OK == "NOPE") {
-        print("# Need more tests!");
+        printf("# THERE WERE NO TESTS marked with €%s:\n", TYPE);
         exit(1);
     }
 }

@@ -6,16 +6,18 @@ BEGIN {
     }
     # we need to getline to get filename :-\
     getline
-    printf("# yaml test generated from %s with doccomments2yaml.awk\n", 
-           FILENAME)
-    print("Config:");
-    print("  hfst:");
+    printf("# Yaml test file generated from %s\n", FILENAME)
+    print( "# with $GTCORE/scripts/doccomments2yaml.awk\n")
+    print( "Config:");
+    print( "  hfst:");
     printf("    Gen: ../../../src/generator-%s.hfst\n", TYPE);
     printf("    Morph: ../../../src/analyser-%s.hfst\n", TYPE);
-    print("  xerox:");
+    print( "    App: hfst-lookup");
+    print( "  xerox:");
     printf("    Gen: ../../../src/generator-%s.xfst\n", TYPE);
     printf("    Morph: ../../../src/analyser-%s.hfst\n", TYPE);
-    print("");
+    print( "    App: lookup");
+    print( "");
     print("Tests:");
     ACTIVETYPE="@NONE@";
     LEXNAME="@BEFORE LEXICON@";

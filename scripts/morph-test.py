@@ -334,7 +334,7 @@ class MorphTest(Test):
 		self.results = manager.dict({"gen": {}, "morph": {}})
 
 		def parser(self, d, f, tests):
-			keys = tests.keys()
+			keys = [key.lstrip("~") for key in tests.keys()]
 			app = Popen(self.program + [f], stdin=PIPE, stdout=PIPE, stderr=PIPE, close_fds=True)
 			args = '\n'.join(keys) + '\n'
 
@@ -376,10 +376,10 @@ class MorphTest(Test):
 				if i.startswith('~'):
 					expected.add(i.lstrip('~'))
 				else:
-					detested.add('~' + i)
+					detested.add(i)
 		else:
 			detested = set([i.lstrip('~') for i in forms if i.startswith('~')])
-			expected = set([i.lstrip('~') for i in forms])
+			expected = set([i.lstrip('~') for i in forms if not i.startswith('~')])
 		return test, detested, expected
 
 	def run_test(self, data, is_lexical):
@@ -404,13 +404,14 @@ class MorphTest(Test):
 		self.count[d] = {"Pass": 0, "Fail": 0}
 
 		for test, forms in tests.items():
-			actual_results = set(self.results[f][test])
+			actual_results = set(self.results[f][test.lstrip("~")])
 			test, detested_results, expected_results = self.get_forms(test, forms)
 
 			missing = set()
 			invalid = set()
 			success = set()
 			detested = set()
+			missing_detested = set()
 			passed = False
 
 			for form in expected_results:
@@ -420,6 +421,9 @@ class MorphTest(Test):
 			for form in detested_results:
 				if form in actual_results:
 					detested.add(form)
+					actual_results.remove(form)
+				else:
+					missing_detested.add(form)
 
 			for form in actual_results:
 				if not form in expected_results:
@@ -427,19 +431,25 @@ class MorphTest(Test):
 
 			if len(expected_results) > 0:
 				for form in actual_results:
-					if not form in (missing | invalid):
+					if not form in (missing | invalid | detested):
 						passed = True
 						success.add(form)
 						self.count[d]["Pass"] += 1
 						if not self.args.get('hide_pass'):
 							self.out.success(test, form)
+				for form in missing_detested:
+					passed = True
+					success.add(form)
+					self.count[d]["Pass"] += 1
+					if not self.args.get('hide_pass'):
+						self.out.success(test, "<No '%s' %s>" % (form, desc.lower()))
 			else:
 				if len(invalid) == 1 and list(invalid)[0].endswith("+?"):
 					invalid = set()
 					passed = True
 					self.count[d]["Pass"] += 1
 					if not self.args.get('hide_pass'):
-						self.out.success(test, '<No generation>')
+						self.out.success(test, "<No %s>" % desc.lower())
 
 			if not self.args.get('hide_fail'):
 				if len(missing) > 0:

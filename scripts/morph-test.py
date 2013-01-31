@@ -272,17 +272,18 @@ class MorphTest(Test):
 
 	def load_config(self):
 		global colourise
-		f = yaml.load(open(self.f), _OrderedDictYAMLLoader)
+		if self.f.endswith('lexc'):
+			f = parse_lexc_trans(open(self.f), self.args.get('gen'),
+					self.args.get('morph'), self.args.get('app'))
+		else:
+			f = yaml.load(open(self.f), _OrderedDictYAMLLoader)
 
-		section = self.args['section']
-		if not section in f["Config"]:
-			raise AttributeError("'%s' not found in Config of test file." % section)
-
-		self.program = shlex.split(self.args.get('app') or f["Config"][section].get("App", "hfst-lookup"))
+		section = f.get("Config", {}).get(self.args['section'], {})
+		self.program = shlex.split(self.args.get('app') or section.get("App", "hfst-lookup"))
 		whereis([self.program[0]])
 
-		self.gen = self.args.get('gen') or f["Config"][section].get("Gen", None)
-		self.morph = self.args.get('morph') or f["Config"][section].get("Morph", None)
+		self.gen = self.args.get('gen') or section.get("Gen", None)
+		self.morph = self.args.get('morph') or section.get("Morph", None)
 
 		if self.gen == self.morph == None:
 			raise AttributeError("One of Gen or Morph must be configured.")
@@ -528,6 +529,75 @@ class MorphTest(Test):
 		return self.out.getvalue().strip()
 
 
+def parse_lexc(f):
+	HEADER_RE = re.compile(r'^\!\!€([^\s:]+):\s*([^#]+)\s*#?')
+	TEST_RE = re.compile(r'^\!\!([€\$])\s+(\S+)\s+(\S+)\s*#?')
+	POS = "€"
+	NEG = "$"
+
+	output = {}
+	test = None
+	if isinstance(f, str):
+		f = StringIO(f)
+
+	lines = f.readlines()
+	for line in lines:
+		if line.startswith("!!"):
+			match = HEADER_RE.match(line)
+			if match:
+				trans = match.group(1)
+				test = match.group(2).strip()
+				if output.get(trans) is None:
+					output[trans] = OrderedDict()
+				if output[trans].get(test) is None:
+					output[trans][test] = OrderedDict()
+				continue
+
+			match = TEST_RE.match(line)
+			if test is None or trans is None:
+				continue
+
+			if TEST_RE.match(line):
+				test_type = match.group(1)
+				left = match.group(3)
+				right = match.group(2)
+
+				if test_type == NEG:
+					right = "~" + right
+
+				if output[trans][test].get(left) is None:
+					output[trans][test][left] = []
+				output[trans][test][left].append(right)
+	return dict(output)
+
+def parse_lexc_trans(f, gen=None, morph=None, lookup="hfst"):
+	trans = None
+	if gen is not None:
+		trans = "-".join(gen.split('.')[0].split('-')[-2:])
+	elif morph is not None:
+		trans = "-".join(gen.split('.')[0].split('-')[-2:])
+	if trans is None:
+		raise AttributeError("Could not guess which transducer to use.")
+
+	lexc = parse_lexc(f)[trans]
+	app = "hfst-lookup" if lookup == "hfst" else "lookup"
+	config = {lookup: {"Gen": gen, "Morph": morph, "App": app}}
+	return {"Config": config, "Tests": lexc}
+
+def lexc_to_yaml_string(data):
+	out = StringIO()
+	out.write("Tests:\n")
+	for trans, tests in data.items():
+		for test, lines in tests.items():
+			out.write("  %s:\n" % test)
+			for left, rights in lines.items():
+				if len(rights) == 1:
+					out.write("	%s: %s\n" % (left, rights[0]))
+				elif len(rights) > 1:
+					out.write("	%s: [%s]\n" % (left, ", ".join(rights)))
+	return out.getvalue()
+
+
 class Frontend(Test, ArgumentParser):
 	def __init__(self, stats=True, colour=False):
 		ArgumentParser.__init__(self)
@@ -617,6 +687,9 @@ def main():
 		ui.start()
 	except KeyboardInterrupt:
 		pass
+	except Exception as e:
+		print("Error: %s" % e)
+		sys.exit()
 
 if __name__ == "__main__":
 	main()

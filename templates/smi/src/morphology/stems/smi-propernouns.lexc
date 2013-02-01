@@ -24599,7 +24599,7 @@ Suldal:Sul^dal BERN-plc ;
 Suldalsosen:Sul^dals^osen9 LONDON-sur ;
 Suleiman:Suleiman9 BERN-sur ;
 Sulesund:Sule^sund9 SUND-plc ;
-Sulitjelma ACCRA-LOAN-plc ;
+Sulitjelma ACCRA-plc ;
 Sulkakoski:Sulka^koski ACCRA-sur ;
 Sulkanen:Sulka C-FI-NEN-sur ;
 Sulkava ACCRA-plc ;
@@ -27339,7 +27339,7 @@ Vapola ACCRA-sur ;
 Vappula ACCRA-plc ;
 Vapsten:Vap^sten BERN-plc ;
 Var BERN-sur ;
-Vara ACCRA-plc ;
+Vara+Use/-Spell:Vara ACCRA-plc ;
 Varaldsøy+Use/Sub:Varalds^øy NYSTØ-plc ; !
 Varaldsøy:Varalds^øy BERN-plc ;
 Varanasi ACCRA-plc ;

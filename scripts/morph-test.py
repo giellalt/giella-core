@@ -274,7 +274,8 @@ class MorphTest(Test):
 		global colourise
 		if self.f.endswith('lexc'):
 			f = parse_lexc_trans(open(self.f), self.args.get('gen'),
-					self.args.get('morph'), self.args.get('app'))
+					self.args.get('morph'), self.args.get('app'),
+					self.args.get('section'))
 		else:
 			f = yaml.load(open(self.f), _OrderedDictYAMLLoader)
 
@@ -570,17 +571,18 @@ def parse_lexc(f):
 				output[trans][test][left].append(right)
 	return dict(output)
 
-def parse_lexc_trans(f, gen=None, morph=None, lookup="hfst"):
+def parse_lexc_trans(f, gen=None, morph=None, app=None, lookup="hfst"):
 	trans = None
 	if gen is not None:
 		trans = "-".join(gen.split('.')[0].split('-')[-2:])
 	elif morph is not None:
 		trans = "-".join(gen.split('.')[0].split('-')[-2:])
-	if trans is None:
+	if trans is None or trans == "":
 		raise AttributeError("Could not guess which transducer to use.")
 
 	lexc = parse_lexc(f)[trans]
-	app = "hfst-lookup" if lookup == "hfst" else "lookup"
+	if app is None:
+		app = "hfst-lookup" if lookup == "hfst" else "lookup"
 	config = {lookup: {"Gen": gen, "Morph": morph, "App": app}}
 	return {"Config": config, "Tests": lexc}
 

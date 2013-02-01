@@ -574,9 +574,9 @@ def parse_lexc(f):
 def parse_lexc_trans(f, gen=None, morph=None, app=None, lookup="hfst"):
 	trans = None
 	if gen is not None:
-		trans = "-".join(gen.split('.')[0].split('-')[-2:])
+		trans = "-".join(gen.rsplit('.', 1)[0].split('-')[-2:])
 	elif morph is not None:
-		trans = "-".join(gen.split('.')[0].split('-')[-2:])
+		trans = "-".join(gen.rsplit('.', 1)[0].split('-')[-2:])
 	if trans is None or trans == "":
 		raise AttributeError("Could not guess which transducer to use.")
 

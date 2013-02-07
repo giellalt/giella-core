@@ -82,7 +82,8 @@ def main(filename, outfile=False):
 					header = order
 					print >> outfile, ','.join(header).encode('utf-8')
 
-				r = ','.join(vals).encode('utf-8')
+				# r = ','.join(vals).encode('utf-8')
+				r = ','.join(['"' + v.replace('"','\"').encode('utf-8') + '"' for v in vals])
 
 				# If there are suddenly separate line-lengths, there may have
 				# been a parsing error.

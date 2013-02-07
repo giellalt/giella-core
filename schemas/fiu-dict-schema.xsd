@@ -306,6 +306,7 @@
          <xs:enumeration value="PCLE-DESCR"/>
          <xs:enumeration value="PCLE-IMP"/>
          <xs:enumeration value="PCLE"/>
+         <xs:enumeration value="PCLE-MOD"/>
          <xs:enumeration value="PCLE_NEG"/>
          <xs:enumeration value="PCLE_OPT"/>
          <xs:enumeration value="PCLE-ONOM"/>

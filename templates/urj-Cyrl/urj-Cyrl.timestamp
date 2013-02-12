@@ -1,4 +1,7 @@
 $Rev$
+The contlexes have been uppercased and Cyrillic patterns are given in Cyrillics.
+
+r68672
 A few more place names have been added for testing templates. If it works fine, a bugzilla bug will be closed.
 
 r66948

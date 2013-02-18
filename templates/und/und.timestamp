@@ -1,4 +1,7 @@
 $Rev$
+Corrected cut&paste error.
+
+r71325:
 Added check for forrest as part of configuring the documentation extraction.
 Forrest will be used to validate the jspwiki documents during the build, to
 avoid that invalid documents enter the svn repository and corrupts the web page

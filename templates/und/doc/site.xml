@@ -41,6 +41,9 @@ See http://forrest.apache.org/docs/linking.html for more info
   xmlns:xi="http://www.w3.org/2001/XInclude"
   >
   <about label="About">
-    <index label="Index" href="Links.html" description="Welcome to the __UNDEFINED__ documentation"/>
+    <index label="Index" href="index.html" description="Welcome to the __UNDEFINED__ documentation"/>
+    <links label="Links" href="Links.html"
+           description="Links to all documentation"
+           tab="Links" />
   </about>
 </site>

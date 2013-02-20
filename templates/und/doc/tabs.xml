@@ -30,5 +30,7 @@
    Tabs can be embedded to a depth of two. The second level of tabs will only 
     be displayed when their parent tab is selected.    
   -->
-  <tab id="" label="Home" dir="" indexfile="Links.html"/>
+  <tab id="" label="Home" dir="" indexfile="index.html">
+    <tab id="Links" label="Links" dir="" />
+  </tab>
 </tabs>

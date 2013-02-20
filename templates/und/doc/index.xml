@@ -18,7 +18,7 @@
 <!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
 <document>
   <header>
-    <title>Welcome to MyProj</title>
+    <title>Welcome to the __UNDEFINED__ project</title>
   </header>
   <body>
     <section id="status">
@@ -26,27 +26,15 @@
       <p>
         You have successfully generated and rendered an
         <a
-          href="ext:forrest">Apache Forrest&trade;</a> site. This page is
-        from the site template. It is found in
-        <code>src/documentation/content/xdocs/index.xml</code> Please edit it
-        and replace this text with content of your own.
+          href="http://forrest.apache.org">Apache Forrest&trade;</a> site for
+          the __UNDEFINED__ language project.
       </p>
     </section>
-    <section id="examples">
-      <title>Using examples as templates</title>
+    <section id="links">
+      <title>Browsing the documentation</title>
       <p>
-        This demo site has many examples. See the menu at the left. The sources
-        for these examples are in the directory
-        <code>src/documentation/content/xdocs/</code>
-      </p>
-      <p>
-        The sources for the Apache Forrest website are also included in your
-        distribution at <code>$FORREST_HOME/site-author/</code>
-      </p>
-      <p>
-        You can also extend the functionality of Forrest via
-        <a href="site:plugins">plugins</a>, these will often come with more
-        samples for you to try out.
+        The documentation provided in the source code can be viewed by following
+        the links provided on <a href="Links.html">this page</a>.
       </p>
     </section>
   </body>

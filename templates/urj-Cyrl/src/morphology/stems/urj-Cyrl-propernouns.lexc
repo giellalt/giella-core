@@ -31281,7 +31281,7 @@ LEXICON urj-Cyrl-ProperNouns
 Рэм:Рэм PropNameMaleDer-Ovich  "" ;
 Рюрик:Рюрик PropNameMaleDer-Ovich  "" ;
 Сабир:Сабир PropNameMaleDer-Ovich  "" ;
-Садок:Садок Prop-lak_MAL ;
+Садок:Садок PROP_ЛАК_MAL ;
 Салават:Салават PropNameMaleDer-Ovich  "" ;
 Салатил:Салатил PROP_КАЛ_MAL ;
 Салих:Салих PropNameMaleDer-Ovich  "" ;

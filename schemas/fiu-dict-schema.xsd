@@ -570,7 +570,7 @@
             </xs:simpleType>
          </xs:attribute>
          <xs:attribute ref="etymType"/>
-         <xs:attribute ref="lang"/>
+         <xs:attribute ref="xml:lang"/>
          <xs:attribute ref="lemmaID"/>
 	 <xs:attribute ref="stemID"/>
          <xs:attribute ref="nx"/>
@@ -605,7 +605,7 @@
             <xs:element ref="t"/>
             <xs:element ref="tCtn"/>
          </xs:choice>
-         <xs:attribute ref="lang"/>
+         <xs:attribute ref="xml:lang"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="tCtn">
@@ -621,7 +621,7 @@
 	      <xs:element ref="sense"/>
 	    </xs:choice>
          </xs:sequence>
-         <xs:attribute ref="lang"/>
+         <xs:attribute ref="xml:lang"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="t">
@@ -646,6 +646,7 @@
          </xs:attribute>
          <xs:attribute ref="nx"/>
          <xs:attribute ref="pos"/>
+         <xs:attribute ref="register"/>
          <xs:attribute ref="tType"/>
       </xs:complexType>
    </xs:element>
@@ -952,7 +953,7 @@
    <xs:element name="xt">
       <xs:complexType mixed="true">
          <xs:sequence/>
-         <xs:attribute ref="lang"/>
+         <xs:attribute ref="xml:lang"/>
          <xs:attribute ref="pos"/>
          <xs:attribute ref="tType"/>
       </xs:complexType>
@@ -1090,8 +1091,6 @@
          </xs:restriction>
       </xs:simpleType>
    </xs:attribute>
-   <xs:element name="register">
-      <xs:complexType>
          <xs:attribute name="register">
             <xs:simpleType>
                <xs:restriction base="xs:string">
@@ -1111,6 +1110,9 @@
                </xs:restriction>
             </xs:simpleType>
          </xs:attribute>
+   <xs:element name="register">
+      <xs:complexType>
+         <xs:attribute ref="register"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="typical">

@@ -603,6 +603,7 @@
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
             <xs:element ref="t"/>
+            <xs:element ref="tf"/>
             <xs:element ref="tCtn"/>
          </xs:choice>
          <xs:attribute ref="xml:lang"/>
@@ -625,6 +626,32 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="t">
+      <xs:complexType mixed="true">
+         <xs:sequence/>
+         <xs:attribute name="gen">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="f"/>
+                  <xs:enumeration value="m"/>
+                  <xs:enumeration value="n"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="gloss">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="+"/>
+                  <xs:enumeration value="0"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute ref="nx"/>
+         <xs:attribute ref="pos"/>
+         <xs:attribute ref="register"/>
+         <xs:attribute ref="tType"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="tf">
       <xs:complexType mixed="true">
          <xs:sequence/>
          <xs:attribute name="gen">

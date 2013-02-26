@@ -10568,6 +10568,7 @@ Ischia ACCRA-plc ;
 Isdahl:Is^dahl BERN-sur ;
 Isdal:Is^dal BERN-plc ;
 Isdalstø:Is^dal^stø NYSTØ-plc ;
+Isafjorður:Isa^fjorður LONDON-plc ;
 Ise ACCRA-sur ;
 Isebakke:Ise^bakke ACCRA-sur ;
 Isebel BERN-fem ;
@@ -17751,6 +17752,7 @@ Nesheim:Nes^heim9 HEIM-sur ;
 Nesholmen:Nes^holmen9 LONDON-plc ;
 Nesje ACCRA-sur ;
 Nesjøen:Ne^sjø^en9 LONDON-plc ;
+Neskaupstaður:Neskaup^staður London-Plc ;
 Neskil LONDON-plc ;
 Nesland:Nes^land9 BERN-plc ;
 Neslandsvatn:Nes^lands^vatn9 BERN-plc ;
@@ -18211,6 +18213,7 @@ Nordnytt:Nord^nytt BERN-org ;
 Nordostpassasjen+Use/LexSub:Nord^ost^passasjen9 LONDON-plc ; !
 Nordplus:Nord^plus BERN-org ;
 Nordpolen+Use/LexSub:Nord^polen9 LONDON-plc ; !
+Norðuroyar:Norður^oyar London-Plc ;
 Nordraa:Nord^raa NYSTØ-sur ;
 Nordre ACCRA-plc ;
 Nordreisa:Nord^reisa ACCRA-LOAN-plc ;

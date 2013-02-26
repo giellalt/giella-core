@@ -45,6 +45,10 @@ done
 svn propset svn:ignore "$autofiles
 $mkfiles" $1
 
+# Set the svn:ignore prop on the doc dir:
+svn propset svn:ignore "$mkfiles
+build" $1/doc
+
 # Set the svn:ignore prop on the source dir:
 svn propset svn:ignore "$mkfiles
 $fstfiles
@@ -68,7 +72,9 @@ svn propset svn:ignore "$mkfiles
 $fstfiles
 *.zhfst" $1/tools/spellcheckers/hfst
 
-# Remove the svn:ignore prop on the morphology subdirs dir:
+# Remove the svn:ignore prop on some subdirs:
 svn propdel svn:ignore $1/src/morphology/affixes
 svn propdel svn:ignore $1/am-shared
 svn propdel svn:ignore $1/m4
+svn propdel svn:ignore $1/doc/resources
+svn propdel svn:ignore $1/doc/resources/images

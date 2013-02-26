@@ -403,7 +403,8 @@
          <xs:enumeration value="VT-IMP"/>
          <xs:enumeration value="VI-IMP"/>
          <xs:enumeration value="V-IMP-PRT"/>
-         <xs:enumeration value="V-REFL"/>
+         <xs:enumeration value="V-REFL"/><!-- change V-REFL to VR -->
+         <xs:enumeration value="VR"/>
          <xs:enumeration value="V-INST"/>
          <xs:enumeration value="PRON-INTERR"/>
          <xs:enumeration value="Q_A"/>

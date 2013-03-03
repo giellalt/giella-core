@@ -502,7 +502,11 @@
       <xs:complexType mixed="true">
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="constituent" type="xs:string"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="t"/>
+	    <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="t"/>
+            <xs:element ref="td"/>
+            <xs:element ref="tf"/>
+	    </xs:choice>
          </xs:sequence>
          <xs:attribute name="type">
             <xs:simpleType>
@@ -542,7 +546,11 @@
       <xs:complexType>
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="2" ref="etym"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="t"/>
+	    <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="t"/>
+            <xs:element ref="td"/>
+            <xs:element ref="tf"/>
+	    </xs:choice>
          </xs:sequence>
          <xs:attribute name="type">
             <xs:simpleType>
@@ -557,7 +565,11 @@
       <xs:complexType mixed="true">
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="constituent" type="xs:string"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="t"/>
+	    <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="t"/>
+            <xs:element ref="td"/>
+            <xs:element ref="tf"/>
+	    </xs:choice>
          </xs:sequence>
          <xs:attribute ref="cx"/>
          <xs:attribute ref="dx"/>
@@ -604,6 +616,7 @@
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
             <xs:element ref="t"/>
+            <xs:element ref="td"/>
             <xs:element ref="tf"/>
             <xs:element ref="tCtn"/>
          </xs:choice>
@@ -613,7 +626,11 @@
    <xs:element name="tCtn">
       <xs:complexType>
          <xs:sequence>
+	    <xs:choice maxOccurs="unbounded">
             <xs:element ref="t"/>
+            <xs:element ref="td"/>
+            <xs:element ref="tf"/>
+	    </xs:choice>
 	    <xs:choice maxOccurs="unbounded">
 	      <xs:element ref="att"/>
 	      <xs:element ref="field"/>
@@ -627,6 +644,32 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="t">
+      <xs:complexType mixed="true">
+         <xs:sequence/>
+         <xs:attribute name="gen">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="f"/>
+                  <xs:enumeration value="m"/>
+                  <xs:enumeration value="n"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="gloss">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="+"/>
+                  <xs:enumeration value="0"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute ref="nx"/>
+         <xs:attribute ref="pos"/>
+         <xs:attribute ref="register"/>
+         <xs:attribute ref="tType"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="td">
       <xs:complexType mixed="true">
          <xs:sequence/>
          <xs:attribute name="gen">

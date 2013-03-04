@@ -395,13 +395,13 @@
          <xs:enumeration value="QNT-UNIV-PRON"/>
          <xs:enumeration value="V"/>
          <xs:enumeration value="V-V"/>
-         <xs:enumeration value="VT"/>
-         <xs:enumeration value="VI"/>
+         <xs:enumeration value="TV"/>
+         <xs:enumeration value="IV"/>
          <xs:enumeration value="V-AUX"/>
          <xs:enumeration value="V-FINITE"/>
          <xs:enumeration value="V-NEG"/>
-         <xs:enumeration value="VT-IMP"/>
-         <xs:enumeration value="VI-IMP"/>
+         <xs:enumeration value="TV-IMP"/>
+         <xs:enumeration value="IV-IMP"/>
          <xs:enumeration value="V-IMP-PRT"/>
          <xs:enumeration value="V-REFL"/><!-- change V-REFL to VR -->
          <xs:enumeration value="VR"/>

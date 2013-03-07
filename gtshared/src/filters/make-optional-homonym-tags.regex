@@ -1,0 +1,8 @@
+# This file makes homonym tags used in inverted dictionary fst's optional.
+# This is to ensure that it is ok to input such tags in some generators, but
+# not required.
+
+0 (<-) %+hom1,
+0 (<-) %+hom2,
+0 (<-) %+hom3,
+0 (<-) %+hom4;

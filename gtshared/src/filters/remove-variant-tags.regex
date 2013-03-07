@@ -1,0 +1,7 @@
+! This file removes variant tags used only for generating dictionary fst's.
+
+0 <- %+v1, 
+0 <- %+v2, 
+0 <- %+v3, 
+0 <- %+v4, 
+0 <- %+v5;

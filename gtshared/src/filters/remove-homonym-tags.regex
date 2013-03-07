@@ -1,0 +1,6 @@
+! This file removes homonym tags used for generating dictionary fst's.
+
+0 <- %+hom1,
+0 <- %+hom2,
+0 <- %+hom3,
+0 <- %+hom4;

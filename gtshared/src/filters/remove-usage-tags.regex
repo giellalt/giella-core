@@ -10,6 +10,7 @@
 0 <- %+Use%/LexSub,
 0 <- %+Use%/Ped,
 0 <- %+Use%/NG,
+0 <- %+Use%/NGminip,
 0 <- %+Use%/NA,
 0 <- %+Use%/%-Spell,
 0 <- %+Use%/SpellNoSugg

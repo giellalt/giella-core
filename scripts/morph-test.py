@@ -691,7 +691,7 @@ def main():
 		pass
 	except Exception as e:
 		print("Error: %s" % e)
-		sys.exit()
+		sys.exit(1)
 
 if __name__ == "__main__":
 	main()

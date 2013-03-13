@@ -119,6 +119,7 @@
       <xs:restriction base="xs:string">
          <xs:enumeration value="SUF"/>
          <xs:enumeration value="PREF"/>
+         <xs:enumeration value="Phrase"/>
          <xs:enumeration value="PHRASE_A"/>
          <xs:enumeration value="PHRASE_ADV"/>
          <xs:enumeration value="PHRASE_N"/>
@@ -149,7 +150,7 @@
          <xs:enumeration value="A-SUPERL"/>
          <xs:enumeration value="V-GEN_A"/>
          <xs:enumeration value="COMP_A"/>
-         <xs:enumeration value="ADV"/>
+         <xs:enumeration value="Adv"/>
          <xs:enumeration value="ADV-MANNER"/>
          <xs:enumeration value="ADV-SPAT"/>
          <xs:enumeration value="ADV-TEMP"/>
@@ -187,7 +188,7 @@
          <xs:enumeration value="A-PRED">
             <!--A-PRED >> ??COMPL "complement Russian grammars tend to use the term 'наречия' with Full statements _Холодно!_. "-->
          </xs:enumeration>
-         <xs:enumeration value="CONJ">
+         <xs:enumeration value="Conj">
             <!--Conjunction that still needs to classified as either coordinator or subordinator-->
          </xs:enumeration>
          <xs:enumeration value="CC">
@@ -433,7 +434,7 @@
          <xs:enumeration value="VB2"/>
          <xs:enumeration value="DESCR"/>
          <xs:enumeration value="MWE"/>
-         <xs:enumeration value="PCLE"/>
+         <xs:enumeration value="Pcle"/>
       </xs:restriction>
    </xs:simpleType>
    <xs:element name="src">

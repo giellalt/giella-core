@@ -1,4 +1,7 @@
 $Rev$
+More tweaks to make the test output compact and readable.
+
+r72854:
 Made use of the more compact modes of morph-tester.py. For all PASSed test runs,
 only one line is printed.
 

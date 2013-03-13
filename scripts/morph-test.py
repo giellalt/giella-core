@@ -75,9 +75,8 @@ def colourise(string, opt=None):
 		x = string
 		x = x.replace("=>", blue("=>"))
 		x = x.replace("<=", blue("<="))
-		x = x.replace(":", blue(":"))
-		x = x.replace("[PASS]", green("[PASS]"))
-		x = x.replace("[FAIL]", red("[FAIL]"))
+		x = x.replace("PASS", green("PASS"))
+		x = x.replace("FAIL", red("FAIL"))
 		return x
 
 	elif opt == 1:
@@ -221,7 +220,7 @@ class MorphTest(Test):
 			self.write(colourise(text % (hfst.passes, hfst.fails, hfst.fails+hfst.passes), 2))
 
 		def to_string(self):
-			return self.getvalue().strip()
+			return self.getvalue()
 
 	class NormalOutput(AllOutput):
 		def title(self, text):
@@ -242,14 +241,29 @@ class MorphTest(Test):
 			self.write(colourise(text % (test, p, f, p+f), 2))
 
 	class CompactOutput(AllOutput):
+		def __init__(self, args):
+			super().__init__()
+			self.args = args
+
 		def result(self, title, test, counts):
 			p = counts["Pass"]
 			f = counts["Fail"]
 			out = "%s %d/%d/%d" % (title, p, f, p+f)
 			if counts["Fail"] > 0:
-				self.write(colourise("[FAIL] %s\n" % out))
-			else:
+				if not self.args.get('hide_fail'):
+					self.write(colourise("[FAIL] %s\n" % out))
+			elif not self.args.get('hide_pass'):
 				self.write(colourise("[PASS] %s\n" % out))
+
+	class TerseOutput(AllOutput):
+		def final_result(self, counts):
+			if counts.fails > 0:
+				self.write(colourise("FAIL\n"))
+			else:
+				self.write(colourise("PASS\n"))
+
+	class NoOutput(AllOutput):
+		pass
 
 	def __init__(self, f=None, **kwargs):
 		self.args = dict(kwargs)
@@ -273,8 +287,11 @@ class MorphTest(Test):
 	def load_config(self):
 		global colourise
 		if self.f.endswith('lexc'):
-			f = parse_lexc_trans(open(self.f), self.args.get('gen'),
-					self.args.get('morph'), self.args.get('app'),
+			f = parse_lexc_trans(open(self.f),
+					self.args.get('gen'),
+					self.args.get('morph'),
+					self.args.get('app'),
+					self.args.get('transducer'),
 					self.args.get('section'))
 		else:
 			f = yaml.load(open(self.f), _OrderedDictYAMLLoader)
@@ -293,8 +310,12 @@ class MorphTest(Test):
 			if i and not os.path.isfile(i):
 				raise IOError("File %s does not exist." % i)
 
-		if self.args.get('compact'):
-			self.out = MorphTest.CompactOutput()
+		if self.args.get('silent'):
+			self.out = MorphTest.NoOutput()
+		elif self.args.get('terse'):
+			self.out = MorphTest.TerseOutput()
+		elif self.args.get('compact'):
+			self.out = MorphTest.CompactOutput(self.args)
 		else:
 			self.out = MorphTest.NormalOutput()
 
@@ -327,7 +348,7 @@ class MorphTest(Test):
 				if self.args.get('lexical'): self.run_test(t, True)
 				if self.args.get('surface'): self.run_test(t, False)
 
-		if self.args.get('verbose'):
+		if self.args.get('verbose') or self.args.get('terse'):
 			self.out.final_result(self)
 
 	def parse_fsts(self, tests):
@@ -453,21 +474,23 @@ class MorphTest(Test):
 					if not self.args.get('hide_pass'):
 						self.out.success(test, "<No %s>" % desc.lower())
 
-			if not self.args.get('hide_fail'):
-				if len(missing) > 0:
+			if len(missing) > 0:
+				if not self.args.get('hide_fail'):
 					self.out.failure(test, "Missing results", missing)
-					self.count[d]["Fail"] += len(missing)
-				if len(invalid) > 0 and \
-						(not self.args.get('ignore_analyses') or not passed):
+				self.count[d]["Fail"] += len(missing)
+			if len(invalid) > 0 and \
+					(not self.args.get('ignore_analyses') or not passed):
+				if not self.args.get('hide_fail'):
 					self.out.failure(test, "Unexpected results", invalid)
-					self.count[d]["Fail"] += len(invalid)
-				if len(detested) > 0:
-					if self.args.get('colour'):
-						msg = "\033[1;31mBROKEN!\033[m"
-					else:
-						msg = "BROKEN!"
+				self.count[d]["Fail"] += len(invalid)
+			if len(detested) > 0:
+				if self.args.get('colour'):
+					msg = "\033[1;31mBROKEN!\033[m"
+				else:
+					msg = "BROKEN!"
+				if not self.args.get('hide_fail'):
 					self.out.failure(test, msg + " Negative results", detested)
-					self.count[d]["Fail"] += len(detested)
+				self.count[d]["Fail"] += len(detested)
 
 		self.out.result(title, c, self.count[d])
 
@@ -527,23 +550,29 @@ class MorphTest(Test):
 		return ("morph", etree.tostring(r))
 
 	def to_string(self):
-		return self.out.getvalue().strip()
+		return self.out.getvalue()
 
 
-def parse_lexc(f):
+def parse_lexc(f, fallback=None):
 	HEADER_RE = re.compile(r'^\!\!€([^\s:]+):\s*([^#]+)\s*#?')
 	TEST_RE = re.compile(r'^\!\!([€\$])\s+(\S+)\s+(\S+)\s*#?')
 	POS = "€"
 	NEG = "$"
 
 	output = {}
+	trans = None
 	test = None
 	if isinstance(f, str):
 		f = StringIO(f)
 
 	lines = f.readlines()
 	for line in lines:
-		if line.startswith("!!"):
+		if line.startswith("LEXICON"):
+			test = line.split(" ", 1)[-1]
+			if fallback is not None:
+				trans = fallback
+
+		elif line.startswith("!!"):
 			match = HEADER_RE.match(line)
 			if match:
 				trans = match.group(1)
@@ -571,16 +600,18 @@ def parse_lexc(f):
 				output[trans][test][left].append(right)
 	return dict(output)
 
-def parse_lexc_trans(f, gen=None, morph=None, app=None, lookup="hfst"):
+def parse_lexc_trans(f, gen=None, morph=None, app=None, fallback=None, lookup="hfst"):
 	trans = None
 	if gen is not None:
-		trans = "-".join(gen.rsplit('.', 1)[0].split('-')[-2:])
+		trans = gen.rsplit('.', 1)[0].split('-', 1)[1]
 	elif morph is not None:
-		trans = "-".join(gen.rsplit('.', 1)[0].split('-')[-2:])
+		trans = morph.rsplit('.', 1)[0].split('-', 1)[1]
+	elif fallback is not None:
+		trans = fallback
 	if trans is None or trans == "":
 		raise AttributeError("Could not guess which transducer to use.")
 
-	lexc = parse_lexc(f)[trans]
+	lexc = parse_lexc(f, fallback)[trans]
 	if app is None:
 		app = "hfst-lookup" if lookup == "hfst" else "lookup"
 	config = {lookup: {"Gen": gen, "Morph": morph, "App": app}}
@@ -634,6 +665,12 @@ class UI(Frontend, MorphTest):
 		self.add_argument("-C", "--compact",
 			dest="compact", action="store_true",
 			help="Makes output more compact")
+		self.add_argument("--terse",
+			dest="terse", action="store_true",
+			help="Show only PASS or FAIL for whole test.")
+		self.add_argument("--silent",
+			dest="silent", action="store_true",
+			help="Hide all output; exit code only")
 		self.add_argument("-i", "--ignore-extra-analyses",
 			dest="ignore_analyses", action="store_true",
 			help="""Ignore extra analyses when there are more than expected,
@@ -657,6 +694,9 @@ class UI(Frontend, MorphTest):
 			dest="test", nargs=1, required=False,
 			help="""Which test to run (Default: all). TEST = test ID, e.g.
 			'Noun - g\u00E5etie' (remember quotes if the ID contains spaces)""")
+		self.add_argument("-F", "--fallback",
+			dest="transducer", nargs=1, required=False,
+			help="""Which fallback transducer to use.""")
 		self.add_argument("-v", "--verbose",
 			dest="verbose", action="store_true",
 			help="More verbose output.")
@@ -679,8 +719,9 @@ class UI(Frontend, MorphTest):
 		MorphTest.__init__(self, **self.args)
 
 	def start(self):
+		import sys
 		ret = self.run()
-		print(self.to_string())
+		sys.stdout.write(self.to_string())
 		self.exit(ret)
 
 def main():

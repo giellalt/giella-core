@@ -49,7 +49,7 @@ fi
 function run_tests() {
 	$runtests \
 		--colour \
-		--compact \
+		--terse \
 		--ignore-extra-analyses \
 		--section $section \
 	    --app $lookuptool \
@@ -59,8 +59,7 @@ function run_tests() {
 	# If the test failed, print instructions to rerun and get more details:
 	if [[ $? -gt 0 ]]; then
 	    let "Fail += 1"
-	    echo
-	    echo "FAIL: To rerun with more details, please do:"
+	    echo "To rerun with more details, please do:"
 	    echo
 	    echo "pushd $(pwd); $runtests -c -i -S $section --app $lookuptool --gen $generatorfile.$f --morph $analyserfile.$f $testfile; popd"
 	    echo
@@ -88,7 +87,7 @@ for f in $fsttype; do
 		let "transducer_found += 1"
 		testfileshort=$(echo "$(basename \
 			$(dirname $testfile))/$(basename $testfile)")
-		echo "testing $testfileshort using $(basename $analyserfile.$f)"
+		printf "testing $testfileshort using $(basename $analyserfile.$f) - "
 		run_tests
 	else
 	    let "Fail += 1"

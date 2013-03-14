@@ -19,7 +19,7 @@
          <xs:sequence>
             <xs:element ref="lg"/>
             <xs:element ref="pos"/>
-            <xs:element ref="posDescr"/>
+            <xs:element minOccurs="0" ref="posDescr"/>
             <xs:element minOccurs="0" ref="semRole"/>
             <xs:element minOccurs="0" ref="phonet"/>
             <xs:element minOccurs="0" ref="morphg"/>

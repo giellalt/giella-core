@@ -19,6 +19,7 @@
          <xs:sequence>
             <xs:element ref="lg"/>
             <xs:element ref="pos"/>
+            <xs:element ref="posDescr"/>
             <xs:element minOccurs="0" ref="semRole"/>
             <xs:element minOccurs="0" ref="phonet"/>
             <xs:element minOccurs="0" ref="morphg"/>
@@ -116,6 +117,90 @@
    <xs:element name="pos" type="posType"/>
    <xs:attribute name="pos" type="posType"/>
    <xs:simpleType name="posType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="A"/>
+         <xs:enumeration value="Ad-A"/>
+         <xs:enumeration value="Pred_A"/>
+         <xs:enumeration value="Pred_Ideoph">
+<!-- IDEOPH used as a predication в роли сказ. -->
+	 </xs:enumeration>
+         <xs:enumeration value="Pred_N">
+<!-- в роли сказ. -->	 </xs:enumeration>
+         <xs:enumeration value="Adn_A"/>
+         <xs:enumeration value="Adv"/>
+         <xs:enumeration value="Art"/>
+         <xs:enumeration value="Clt"/>
+         <xs:enumeration value="Conj">
+            <!--Conjunction that still needs to classified as either coordinator or subordinator-->
+         </xs:enumeration>
+         <xs:enumeration value="CC">
+            <!--COORD "coordinator"-->
+         </xs:enumeration>
+         <xs:enumeration value="CS">
+            <!--SUBORD "subordinator"-->
+         </xs:enumeration>
+         <xs:enumeration value="Card"/>
+         <xs:enumeration value="Dem"/>
+         <xs:enumeration value="Descr"/>
+         <xs:enumeration value="Det"/>
+         <xs:enumeration value="Gen_A"/>
+         <xs:enumeration value="Ger"/>
+         <xs:enumeration value="Interj"/>
+         <xs:enumeration value="Iter"/>
+         <xs:enumeration value="Ideoph"/>
+         <xs:enumeration value="Modifier"/>
+         <xs:enumeration value="DV_N"/>
+         <xs:enumeration value="N"/>
+         <xs:enumeration value="Num"/>
+         <xs:enumeration value="Ord"/>
+         <xs:enumeration value="Pcle"/>
+         <xs:enumeration value="Suf"/>
+         <xs:enumeration value="Pref"/>
+         <xs:enumeration value="Phrase"/>
+         <xs:enumeration value="Phrase_A"/>
+         <xs:enumeration value="Phrase_ADV"/>
+         <xs:enumeration value="Phrase_N"/>
+         <xs:enumeration value="Phrase_NUM"/>
+         <xs:enumeration value="Phrase_PRON"/>
+         <xs:enumeration value="Phrase_QNT"/>
+         <xs:enumeration value="Phrase_SPAT"/>
+         <xs:enumeration value="Phrase_TEMP"/>
+         <xs:enumeration value="Phrase_V"/>
+         <xs:enumeration value="Po"/>
+         <xs:enumeration value="Pr"/>
+         <xs:enumeration value="Prc"/>
+         <xs:enumeration value="Pred2">
+            <!--secondary predication: чавонь кедть, ласте, озадо-->
+         </xs:enumeration>
+         <xs:enumeration value="Pron"/>
+         <xs:enumeration value="Prop"/>
+
+         <xs:enumeration value="Qnt"/>
+         <xs:enumeration value="Q_A"/>
+         <xs:enumeration value="Q_Adv"/>
+         <xs:enumeration value="Q_Det"/>
+         <xs:enumeration value="Q_Iter"/>
+         <xs:enumeration value="Q_Manner"/>
+         <xs:enumeration value="Q_N"/>
+         <xs:enumeration value="Q_Ord"/>
+         <xs:enumeration value="Q_Ord-Iter"/>
+         <xs:enumeration value="Q_Pcle"/>
+         <xs:enumeration value="Q_Pron"/>
+         <xs:enumeration value="Q_Pers"/>
+         <xs:enumeration value="Q_Qnt"/>
+         <xs:enumeration value="Q_Reason"/>
+         <xs:enumeration value="Q_Spat"/>
+         <xs:enumeration value="Q_Temp"/>
+         <xs:enumeration value="V"/>
+         <xs:enumeration value="TV"/>
+         <xs:enumeration value="IV"/>
+         <xs:enumeration value="V-Aux"/>
+         <xs:enumeration value="V-Refl"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:element name="posDescr" type="posDescrType"/>
+   <xs:attribute name="posDescr" type="posDescrType"/>
+   <xs:simpleType name="posDescrType">
       <xs:restriction base="xs:string">
          <xs:enumeration value="SUF"/>
          <xs:enumeration value="PREF"/>
@@ -276,7 +361,7 @@
 <!-- depricating to VOCATIVE -->
 	 </xs:enumeration>
          <xs:enumeration value="VOCATIVE"/>
-         <xs:enumeration value="NUM"/>
+         <xs:enumeration value="Num"/>
          <xs:enumeration value="NUM-ADN"/>
          <xs:enumeration value="NUM-UNIV"/>
          <xs:enumeration value="NUM-DISTR">

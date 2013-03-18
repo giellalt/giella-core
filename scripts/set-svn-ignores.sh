@@ -78,7 +78,8 @@ svn propset svn:ignore "$mkfiles
 # Set the svn:ignore prop on the hfst speller dir:
 svn propset svn:ignore "$mkfiles
 $fstfiles
-*.zhfst" $1/tools/spellcheckers/fstbased/hfst
+*.zhfst
+3" $1/tools/spellcheckers/fstbased/hfst
 
 # Remove the svn:ignore prop on some subdirs:
 svn propdel svn:ignore $1/src/morphology/affixes

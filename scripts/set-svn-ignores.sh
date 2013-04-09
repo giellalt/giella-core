@@ -50,6 +50,9 @@ build" $1
 svn propset svn:ignore "$mkfiles
 build" $1/doc
 
+# Set the svn:ignore prop on the misc dir:
+svn propset svn:ignore "*" $1/misc
+
 # Set the svn:ignore prop on the source dir:
 svn propset svn:ignore "$mkfiles
 $fstfiles

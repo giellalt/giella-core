@@ -18,6 +18,8 @@ function print_usage() {
     echo
 }
 
+LingResourceTemplates="smi url-Cyrl"
+
 # option variables
 unsafe=""
 forcerev=""
@@ -78,7 +80,7 @@ if test ! -r und.timestamp ; then
     exit 1
 fi
 
-CURLANG=$(pwd | rev | cut -d'/' -f1 | rev)
+CURLANG=$(basename $(pwd))
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 
 for macrolangdir in ${GTCORE}/templates/${tpl} ; do

@@ -1,0 +1,8 @@
+Aldesjávri+Use/LexSub:Aldes^jávri ACCRA-plc ; !
+Aarporte ACCRA-plc ;
+Bealjehkh LONDON-plc ;
+Bealjehkh LONDON-plc ;
+Birja ACCRA-fem ;
+Boaresárku:Boares^árku ACCRA-plc ;
+Bávllos LONDON-mal ;
+Bávlos LONDON-mal ;

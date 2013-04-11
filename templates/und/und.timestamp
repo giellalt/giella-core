@@ -1,4 +1,7 @@
 $Rev$
+Forgot to include changes to the filters Makefile.am in the previous commit.
+
+r74424:
 Moved some of the fst-speller building one level up, and added support for
 building foma-based spellers.
 

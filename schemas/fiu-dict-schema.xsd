@@ -258,19 +258,19 @@
          <xs:enumeration value="PCLE_EPIST">
             <!--particle Epistemological modality-->
          </xs:enumeration>
-         <xs:enumeration value="V_ADV-PARENTHETIC"/>
-         <xs:enumeration value="ADV-POSITION"/>
-         <xs:enumeration value="ADV-STATE"/>
-         <xs:enumeration value="PRED2">
+         <xs:enumeration value="V_Adv-Parenthetic"/>
+         <xs:enumeration value="Adv-Position"/>
+         <xs:enumeration value="Adv-State"/>
+         <xs:enumeration value="Pred2">
             <!--secondary predication: чавонь кедть, ласте, озадо-->
          </xs:enumeration>
          <xs:enumeration value="TEMP-0ARG-INDEF"/>
          <xs:enumeration value="TEMP-INDEF"/>
-         <xs:enumeration value="TEMP-DEICT"/>
+         <xs:enumeration value="Temp-Deict"/>
          <xs:enumeration value="ART"/>
-         <xs:enumeration value="ASSOC-COLL"/>
+         <xs:enumeration value="Assoc-Coll"/>
          <xs:enumeration value="CLT"/>
-         <xs:enumeration value="A-PRED">
+         <xs:enumeration value="A-Pred">
             <!--A-PRED >> ??COMPL "complement Russian grammars tend to use the term 'наречия' with Full statements _Холодно!_. "-->
          </xs:enumeration>
          <xs:enumeration value="Conj">
@@ -345,22 +345,22 @@
          <xs:enumeration value="DEP-MORPH"/>
          <xs:enumeration value="DV_N"/>
          <xs:enumeration value="N"/>
-         <xs:enumeration value="N.ABE"/>
-         <xs:enumeration value="N.COMP"/>
-         <xs:enumeration value="N.GEN"/>
+         <xs:enumeration value="N.Abe"/>
+         <xs:enumeration value="N.Comp"/>
+         <xs:enumeration value="N.Gen"/>
          <xs:enumeration value="INE_N"/>
          <xs:enumeration value="NN"/>
-         <xs:enumeration value="N-ASSOC"/>
-         <xs:enumeration value="N-COLL"/>
-         <xs:enumeration value="N-PL"/>
-         <xs:enumeration value="N-SG"/>
-         <xs:enumeration value="N-TEMP">
+         <xs:enumeration value="N-Assoc"/>
+         <xs:enumeration value="N-Coll"/>
+         <xs:enumeration value="N-Pl"/>
+         <xs:enumeration value="N-Sg"/>
+         <xs:enumeration value="N-Temp">
             <!--Temporal noun: The nominative singular is the same as the Temporal adverb form-->
          </xs:enumeration>
-         <xs:enumeration value="N-VOCATIVE">
+         <xs:enumeration value="N-Vocative">
 <!-- depricating to VOCATIVE -->
 	 </xs:enumeration>
-         <xs:enumeration value="VOCATIVE"/>
+         <xs:enumeration value="Vocative"/>
          <xs:enumeration value="Num"/>
          <xs:enumeration value="NUM-ADN"/>
          <xs:enumeration value="NUM-UNIV"/>

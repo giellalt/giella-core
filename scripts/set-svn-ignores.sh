@@ -30,6 +30,7 @@ aclocal.m4"
 
 fstfiles="*fst
 *.hfstol
+*.foma
 *.bin
 *.bcg3"
 

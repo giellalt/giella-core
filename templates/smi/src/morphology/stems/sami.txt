@@ -372,6 +372,16 @@ Ammarnäs+Use/Sub:Ámmár^neas BERN-org ;
 Árran% julevsáme% guovdásj+Use/Sub:Árran% Julevsáme% guovdásj LONDON-org ;
 Árviesjávrrie+Use/LexSub:Árvies^jávrrie ACCRA-plc ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% teáhter ACCRA-org ;
+San?uari:San?u^ari ACCRA-org ;
+Ommot:Ommod9 Anar-Mal ;
+Saantensiijte:Saanten^siijte Accra-Plc ;
+Deatnu Marja-Loan-Plc ;
+Jitnemenjohke:Jitnemen^johke Accra-Plc ;
+Joret:Jored9 Anar-Mal ;
+Leaváš London-Plc ;
+Lemet:Lemed9  Anar-Mal ;
+Måehvie:Måehv Javrrie-Plc ;
+Árviesjávrrie:Árvies^jávrr Javrrie-Plc ;
 
 Aakenusjärvi:Aakenus^järvi ACCRA-plc ;
 Ahomäki:Aho^mäki ACCRA-sur ;

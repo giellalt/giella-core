@@ -1,3 +1,5 @@
+Áigi ACCRA-LOAN-org ;
+Vájsá% Sámisearvi ACCRA-LOAN-org ;
 Aldesjávri+Use/LexSub:Aldes^jávri ACCRA-plc ; !
 Aarporte ACCRA-plc ;
 Bealjehkh LONDON-plc ;
@@ -41,7 +43,7 @@ Saantenjaevrie:Saanten^jaevrie SIJTE-plc ;
 Saemien% Eatname ACCRA-org ;
 Saemien% Sijte:Saemien% Sij9te SIJTE-org ;
 Sijte:Sij9te SIJTE-org ;
-Sijti:Sij9ti ACCRA-org ;XXX Possible???
+Sijti:Sij9ti ACCRA-org ; !XXX Possible???
 Sijti% Jarnge:Sij9ti% Jarnge SIJTE-org ;
 Såålejaevrie:Sååle^jaevrie SIJTE-plc ;
 Tiljavre+Use/LexSub:Til^javre SIJTE-plc ;
@@ -374,9 +376,9 @@ Ammarnäs+Use/Sub:Ámmár^neas BERN-org ;
 Åarjelhsaemien% Teatere+Use/Sub:Åarjelh^saemien% teáhter ACCRA-org ;
 San?uari:San?u^ari ACCRA-org ;
 Ommot:Ommod9 Anar-Mal ;
-Saantensiijte:Saanten^siijte Accra-Plc ;
+Saantensiijte:Saanten^siijte ACCRA-plc ;
 Deatnu Marja-Loan-Plc ;
-Jitnemenjohke:Jitnemen^johke Accra-Plc ;
+Jitnemenjohke:Jitnemen^johke ACCRA-plc ;
 Joret:Jored9 Anar-Mal ;
 Leaváš London-Plc ;
 Lemet:Lemed9  Anar-Mal ;

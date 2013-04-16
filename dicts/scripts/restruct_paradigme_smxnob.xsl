@@ -57,6 +57,8 @@
       <result>
 	<xsl:variable name="lemma" select="doc($file)/paradigm/lemma"/>
 	<xsl:variable name="pos" select="doc($file)/paradigm/pos"/>
+	<xsl:variable name="pos_manteau" select="doc($file)/paradigm/n_pos"/>
+ 
 
 	<xsl:variable name="big_paradigm">
 	  <big_paradigm>
@@ -157,10 +159,34 @@
 	  <e>
 	    <lg>
 	      <l>
+
 		<xsl:attribute name="pos">
 		  <xsl:value-of select="$pos"/>
 		</xsl:attribute>
+
+		<xsl:if test="contains('__NomAg__G3__Prop__', $pos_manteau)">
+		  <xsl:attribute name="type">
+		    <xsl:value-of select="$pos_manteau"/>
+		  </xsl:attribute>
+		</xsl:if>
+		
+		<xsl:if test="$pos = 'Pron')">
+		  <xsl:attribute name="type">
+		    <xsl:value-of select="'Indef'"/>
+		  </xsl:attribute>
+		</xsl:if>
+
+		<xsl:if test="$pos_manteau = 'Npl')">
+		  <xsl:attribute name="type">
+		    <xsl:value-of select="'Prop'"/>
+		  </xsl:attribute>
+		  <xsl:attribute name="nr">
+		    <xsl:value-of select="'Pl'"/>
+		  </xsl:attribute>
+		</xsl:if>
+
 		<xsl:value-of select="current-grouping-key()"/>
+
 	      </l>
 	      <lemma_ref>
 		<xsl:value-of select="$lemma"/>

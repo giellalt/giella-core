@@ -42,7 +42,7 @@
   <!--   Input file in text format: as parameter -->
   <xsl:param name="file" select="'default.xml'"/>
   <xsl:param name="path" select="'.'"/>
-  <xsl:param name="outputDir" select="'XML_out'"/>
+  <xsl:param name="outputDir" select="'_out_'"/>
   <xsl:param name="lang" select="'sme'"/>
 
   <!-- Patterns for the feature values -->
@@ -164,19 +164,19 @@
 		  <xsl:value-of select="$pos"/>
 		</xsl:attribute>
 
-		<xsl:if test="contains('__NomAg__G3__Prop__', $pos_manteau)">
+		<xsl:if test="contains('__NomAg__G3__Prop__', concat('__', $pos_manteau, '__'))">
 		  <xsl:attribute name="type">
 		    <xsl:value-of select="$pos_manteau"/>
 		  </xsl:attribute>
 		</xsl:if>
 		
-		<xsl:if test="$pos = 'Pron')">
+		<xsl:if test="$pos = 'Pron'">
 		  <xsl:attribute name="type">
 		    <xsl:value-of select="'Indef'"/>
 		  </xsl:attribute>
 		</xsl:if>
 
-		<xsl:if test="$pos_manteau = 'Npl')">
+		<xsl:if test="$pos_manteau = 'Npl'">
 		  <xsl:attribute name="type">
 		    <xsl:value-of select="'Prop'"/>
 		  </xsl:attribute>

@@ -361,7 +361,8 @@ Västerbotten+Use/Sub:Váster^botten9 LONDON-plc ;
 Yucatán:Yucatán9 BERN-plc ;
 Ádá ACCRA-plc ;
 Ágá ACCRA-sur ;
-Ájtte:Áj9tte ACCRA-org ;Ájtte Sámimusea
+Ájtte:Áj9tte ACCRA-org ;
+Ájtte Sámimusea
 Áltá+Use/Sub:Álta ACCRA-plc ;
 Álttáturnering+Use/LexSub:Álttá^turnering9 BERN-org ;
 Ámmá:Ám'má ACCRA-mal ;

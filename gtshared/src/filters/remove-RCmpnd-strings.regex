@@ -1,0 +1,4 @@
+! Remove strings containing +RCmpnd, that is, all compounding stems ending in a
+! hyphen. Used when building certain tts transducers.
+
+~$[ %+RCmpnd ] ;

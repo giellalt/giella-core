@@ -1,0 +1,4 @@
+! Remove strings containing +CLB, that is, all clause boundary punctuation.
+! Used when building certain tts transducers.
+
+~$[ %+CLB ] ;

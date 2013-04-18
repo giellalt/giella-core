@@ -1,3 +1,4 @@
+Ságat:Ságad9 LONDON-org ;
 Áigi ACCRA-LOAN-org ;
 Vájsá% Sámisearvi ACCRA-LOAN-org ;
 Aldesjávri+Use/LexSub:Aldes^jávri ACCRA-plc ; !

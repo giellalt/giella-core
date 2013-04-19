@@ -127,7 +127,10 @@ for macrolangdir in ${GTCORE}/templates/${tpl} ; do
                     svn merge -r${macrolangrev}:HEAD ${f} ${localf} $SVNMERGE_OPTIONS
                     ;;
                 *.lexc | *.twolc | *.regex | *.xfstscript )
-                    if test x$unsafe = xunsafe ; then
+                    echo ${f}
+                    if [[ "$LingResourceTemplates" == *"$macrolang"* ]] ; then
+                        cp -f ${f} ${localf}
+                    elif test x$unsafe = xunsafe ; then
                         svn merge -r${macrolangrev}:HEAD ${f} ${localf} $SVNMERGE_OPTIONS
                     else
                         echo UNSAFE_FILE ${localf} >> ${unmerged};

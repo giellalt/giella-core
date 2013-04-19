@@ -1,4 +1,8 @@
 $Revision$:
+A number of changes in the propernoun file has been committed without updates to
+the timestamp file. Now done.
+
+r63274:
 Several edits in the SMI propernoun file by Inga. Mainly lemma cleanup and
 Use/Sub -> Use/LexSub.
 

@@ -1,4 +1,7 @@
 $Revision$:
+Added a short comment to force merging/updating from the template.
+
+r75006:
 A number of changes in the propernoun file has been committed without updates to
 the timestamp file. Now done.
 

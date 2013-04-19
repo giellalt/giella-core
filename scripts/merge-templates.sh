@@ -18,6 +18,14 @@ function print_usage() {
     echo
 }
 
+SED=sed
+
+# Prefer gnu sed if found:
+GSED=$(which gsed)
+if test -n $GSED; then
+	SED=$GSED
+fi
+
 LingResourceTemplates="smi url-Cyrl"
 
 # option variables
@@ -39,7 +47,7 @@ while test $# -ge 1 ; do
                 print_usage
                 exit 1
             else
-                forcerev=$(echo $1 | sed -e 's/.*=//')
+                forcerev=$(echo $1 | $SED -e 's/.*=//')
             fi
         else
             forcerev="$2"
@@ -52,7 +60,7 @@ while test $# -ge 1 ; do
                 print_usage
                 exit 1
             else
-                tpl=$(echo $1 | sed -e 's/.*=//')
+                tpl=$(echo $1 | $SED -e 's/.*=//')
             fi
         else
             tpl="$2"
@@ -92,7 +100,7 @@ for macrolangdir in ${GTCORE}/templates/${tpl} ; do
     fi
     if test -z ${forcerev} ; then
         # assume we are merging from the revision of timestamp to today
-        macrolangrev=$(LC_ALL=C svn info ${macrolang}.timestamp | fgrep 'Last Changed Rev' | sed -e 's/Last Changed Rev: //')
+        macrolangrev=$(LC_ALL=C svn info ${macrolang}.timestamp | fgrep 'Last Changed Rev' | $SED -e 's/Last Changed Rev: //')
         if test -z $macrolangrev ; then
             echo could not find revision of ${macrolang}.timestamp
             continue

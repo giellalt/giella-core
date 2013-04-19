@@ -13,6 +13,14 @@ if test $# -ne 2 ; then
     exit 1
 fi
 
+SED=sed
+
+# Prefer gnu sed if found:
+GSED=$(which gsed)
+if test -n $GSED; then
+	SED=$GSED
+fi
+
 # Get the 2-char language code from the 3-char code:
 iso2code=`${GTCORE}/scripts/iso3-to-2.sh $2`
 if [[ $? -gt 0 ]] ; then
@@ -36,10 +44,11 @@ for f in $(find $1/ \
 			-not -name '*.xfst' \
 			-not -name '*.hfst' \
 			-not -name '*.hfstol' \
+			-not -name '*.png' \
 			-type f) ; do
     # In file content:
     cp $f $f~
-    sed -e "s/__UND__/$2/g" \
+    $SED -e "s/__UND__/$2/g" \
     	-e "s/__UND2C__/$iso2code/g" \
     	-e "s/__UNDEFINED__/$isoName/g" \
     	< $f~ > $f
@@ -47,7 +56,7 @@ for f in $(find $1/ \
     # And do the same with filenames:
     dir=`dirname $f`
     undfilename=`basename $f`
-    newfilename=`echo $undfilename | sed -e "s/und/$2/"`
+    newfilename=`echo $undfilename | $SED -e "s/und/$2/"`
     newfile=`echo $dir/$newfilename`
     if test ! $f = $newfile ; then
         # Only process files starting with 'und' followed by punctuation:

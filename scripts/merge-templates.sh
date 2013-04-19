@@ -13,8 +13,8 @@ function print_usage() {
     echo
     echo "  -h, --help           print this usage info"
     echo "  --unsafe             also try to merge unsafe mergables"
-    echo "  -r, --revision=REV   start merging from REV instead of timestamp's"
-    echo "  -t, --template=TPL   Only select TPL templates (bash glob)"
+    echo "  -r, --revision REV   start merging from REV instead of timestamp's"
+    echo "  -t, --template TPL   Only select TPL templates (bash glob)"
     echo
 }
 

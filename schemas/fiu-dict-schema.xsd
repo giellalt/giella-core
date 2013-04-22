@@ -446,22 +446,22 @@
          <xs:enumeration value="RECIP">
             <!--Reciprocal-->
          </xs:enumeration>
-         <xs:enumeration value="SPAT"/>
-         <xs:enumeration value="SPAT-INDEF"/>
-         <xs:enumeration value="SPAT-DEM"/>
-         <xs:enumeration value="SPAT-DISTR"/>
-         <xs:enumeration value="ADV-SPAT-GEN"/>
-         <xs:enumeration value="SPAT-DEICT"/>
-         <xs:enumeration value="SPAT-INDEP"/>
-         <xs:enumeration value="SPAT-DEPEND"/>
-         <xs:enumeration value="SPAT-GOAL"/>
-         <xs:enumeration value="SPAT-SOURCE"/>
-         <xs:enumeration value="SPAT-LOC"/>
-         <xs:enumeration value="SPAT-MULTIPOINT"/>
+         <xs:enumeration value="Spat"/>
+         <xs:enumeration value="Spat-INDEF"/>
+         <xs:enumeration value="Spat-DEM"/>
+         <xs:enumeration value="Spat-DISTR"/>
+         <xs:enumeration value="ADV-Spat-GEN"/>
+         <xs:enumeration value="Spat-DEICT"/>
+         <xs:enumeration value="Spat-INDEP"/>
+         <xs:enumeration value="Spat-DEPEND"/>
+         <xs:enumeration value="Spat-GOAL"/>
+         <xs:enumeration value="Spat-SOURCE"/>
+         <xs:enumeration value="Spat-LOC"/>
+         <xs:enumeration value="Spat-MULTIPOINT"/>
          <xs:enumeration value="STATE"/>
          <xs:enumeration value="SUMMON"/>
          <xs:enumeration value="TEMP"/>
-         <xs:enumeration value="TEMP-SPAT"/>
+         <xs:enumeration value="TEMP-Spat"/>
          <xs:enumeration value="TEMP-DISTR"/>
          <xs:enumeration value="TERMINATIVE">
             <!--Adverb indicating temporal terminative limit. Erzya: -->
@@ -506,11 +506,11 @@
          <xs:enumeration value="Q_PERS"/>
          <xs:enumeration value="Q_QNT"/>
          <xs:enumeration value="Q_REASON"/>
-         <xs:enumeration value="Q_SPAT"/>
+         <xs:enumeration value="Q_Spat"/>
          <xs:enumeration value="Q_TEMP"/>
          <xs:enumeration value="R_ORD"/>
          <xs:enumeration value="R_QNT"/>
-         <xs:enumeration value="R_SPAT"/>
+         <xs:enumeration value="R_Spat"/>
          <xs:enumeration value="R_TEMP"/>
          <xs:enumeration value="PRT_INTERR"/>
          <xs:enumeration value="R_PRON"/>

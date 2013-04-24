@@ -1,3 +1,14 @@
+!  +--------------+------------+-------------+
+!  | Siste stav.  | trykksterk | trykksvak   |
+!  +--------------+------------+-------------+
+!  | final X+i/j  | DUBAI (V+j)| PIPPI (C+i) |
+!  +--------------+------------+-------------+
+!  | andre fin. V | NYSTØ*     | ACCRA       |
+!  +--------------+------------+-------------+
+!  
+!  * Også i som ikke har lang vokal foran seg slik som i DUBAI.
+
+
 ! The beginning of the SMI file.
 Aahlin BERN-sur ;
 Alfaios:Alfa^i^os LONDON-mal ;
@@ -22,7 +33,6 @@ Foibe BETFAGE-fem ;
 Gadar DUORTNUS-plc ;
 Guinea ACCRA-plc ;
 Haran LONDON-plc ;
-Heijari:Heijari ACCRA-sur ;
 Ikonia ACCRA-plc ;
 Iturea ACCRA-plc ;
 Japan LONDON-plc ;
@@ -51,7 +61,6 @@ Manasse BETFAGE-mal ;
 Mattatias:Mattati^as BERN-mal ;
 Mesopotamia ACCRA-plc ;
 Metusjelah BERN-mal ;
-Meänkieli:Meän#Kieli ACCRA-obj ; ! Xxx - Er Dette Proper? Snm
 Miletos LONDON-plc ;
 Mitylene BETFAGE-plc ;
 Norcem LONDON-org ;
@@ -59,7 +68,7 @@ Norges-Gruppen:Norges-Gruppen LONDON-org ;
 Perge BETFAGE-plc ;
 Press:Press9 BERN-sur ;
 Prokorosa ACCRA-fem ;
-Ram:Ram9 BERN-mal ;
+Ram:Ram BERN-mal ;
 Reijonen LONDON-sur ;
 Romfas LONDON-mal ;
 Samotrake BETFAGE-plc ;
@@ -8607,7 +8616,7 @@ Haraldshaugen:Haralds^haugen9 LONDON-plc ;
 Haraldsson:Haraldsson9 LONDON-sur ;
 Haraldstad:Harald^stad9 BERN-sur ;
 Haraldvangen:Harald^vangen9 LONDON-plc ;
-Haram:Haram9 LONDON-malplc ;
+Haram:Haram9 LONDON-plc ;
 Harangsfjord:Harangs^fjord9 BERN-plc ;
 Harar LONDON-plc ;
 Harare ACCRA-plc ;
@@ -21658,7 +21667,7 @@ Skåre ACCRA-sur ;
 Skårer LONDON-sur ;
 Skårerhøgda:Skårer^høgda ACCRA-plc ;
 Skårvik:Skår^vik BERN-sur ;
-Skåvsjöholm:Skåv^sjö^holm9 BERN-plc ;
+Skåvsjöholm:Skåv^sjö^holm BERN-plc ;
 Skækerfjell:Skæker^fjell BERN-plc ;
 Skælskør:Skæl^skør BERN-plc ;
 Skærbæk:Skær^bæk LONDON-sur ;

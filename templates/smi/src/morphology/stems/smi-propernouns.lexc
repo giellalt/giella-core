@@ -2845,6 +2845,7 @@ Bergsøya:Bergs^øya ACCRA-plc ;
 Bergum:Bergum9 LONDON-sur ;
 Bergverklovkomiteen:Berg^verk^lov^komiteen9 LONDON-org ;
 Bergverksdrift:Berg^verks^drift BERN-org ;
+Nord-Norsk% Hotelldrift:Nord-Norsk% Hotell^drift BERN-org ;
 Bergverksloven LONDON-obj ;
 Bergverkslovkomiteen:Berg^verks^lov^komiteen9 LONDON-org ;
 Bergvesenet:Berg^vesenet LONDON-org ;
@@ -27359,7 +27360,7 @@ Luosujärvi:Luosu^järvi PIPPI-sur ;
 Markkinajärvi:Markkina^järvi PIPPI-plc ;
 Mentyjärvi:Menty^järvi PIPPI-sur ;
 Mourujärvi:Mouru^järvi PIPPI-sur ;
-Muotkajärvi:Muotka^järvi PIPPI-plc ;FIN
+Muotkajärvi:Muotka^järvi PIPPI-plc ;!FIN
 Mustajärvi:Musta^järvi PIPPI-plc ;
 Nuulankijärvi:Nuulanki^järvi PIPPI-plc ;
 Näkkäläjärvi:Näkkälä^järvi PIPPI-sur ;

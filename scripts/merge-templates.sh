@@ -22,8 +22,13 @@ SED=sed
 
 # Prefer gnu sed if found:
 GSED=$(which gsed)
-if test -n $GSED; then
+if test ! -z $GSED; then
 	SED=$GSED
+fi
+
+if test x$SED == "x"; then
+    echo "Required tools sed or gsed not found, aborting."
+    exit 1
 fi
 
 LingResourceTemplates="smi url-Cyrl"

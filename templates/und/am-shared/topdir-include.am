@@ -88,10 +88,10 @@ analyser-gt-desc.tmp.hfst: analyser-raw-gt-desc.hfst \
 			-2 filters/remove-hyphenation-marks.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-infl_deriv-borders.hfst \
+			-2 filters/remove-infl_deriv-borders.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-word-boundary.hfst \
+			-2 filters/remove-word-boundary.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-2 orthography/inituppercase.hfst \
@@ -171,10 +171,10 @@ generator-gt-desc.tmp.hfst: analyser-raw-gt-desc.hfst \
 			-2 filters/remove-hyphenation-marks.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-infl_deriv-borders.hfst \
+			-2 filters/remove-infl_deriv-borders.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-word-boundary.hfst \
+			-2 filters/remove-word-boundary.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-1 filters/remove-usage-tags.hfst \
@@ -256,10 +256,10 @@ analyser-gt-norm.tmp.hfst: analyser-raw-gt-desc.hfst \
 			-2 filters/remove-hyphenation-marks.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-infl_deriv-borders.hfst \
+			-2 filters/remove-infl_deriv-borders.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-word-boundary.hfst \
+			-2 filters/remove-word-boundary.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-2 orthography/inituppercase.hfst \
@@ -340,10 +340,10 @@ generator-gt-norm.tmp.hfst: analyser-raw-gt-desc.hfst \
 			-2 filters/remove-hyphenation-marks.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-infl_deriv-borders.hfst \
+			-2 filters/remove-infl_deriv-borders.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			-2 orthography/remove-word-boundary.hfst \
+			-2 filters/remove-word-boundary.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-1 filters/remove-sub-forms.hfst \
@@ -482,10 +482,10 @@ morpher-gt-desc.hfst: analyser-raw-gt-desc.hfst \
 				-2 filters/remove-hyphenation-marks.hfst \
 			| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 			| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-				-2 orthography/remove-infl_deriv-borders.hfst \
+				-2 filters/remove-infl_deriv-borders.hfst \
 			| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 			| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-				-2 orthography/remove-word-boundary.hfst \
+				-2 filters/remove-word-boundary.hfst \
 			| $(HFST_INVERT) $(HFST_FLAGS) \
 			| $(HFST_MINIMIZE) $(HFST_FLAGS) \
 			| $(HFST_FST2FST) $(HFST_FLAGS) -f olw -o $@

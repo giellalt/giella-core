@@ -1,4 +1,7 @@
 $Rev$
+Corrected copy-paste error.
+
+r75423:
 Rewrote a number of targets to reflect a splitted morph boundary removal filter.
 There are now three filters instead of one, to allow for more flexible fst
 building for speech processing.

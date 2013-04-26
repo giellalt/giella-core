@@ -1,4 +1,9 @@
 $Rev$
+Rewrote a number of targets to reflect a splitted morph boundary removal filter.
+There are now three filters instead of one, to allow for more flexible fst
+building for speech processing.
+
+r75275:
 Added gzip compression of foma speller transducer, and proper checks for
 prerequisites. Foma spellers can now be disabled, they are enabled by default.
 

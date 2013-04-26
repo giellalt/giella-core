@@ -1,0 +1,3 @@
+!Remove hyphenation points from the lower side of the transducer:
+
+%^ -> 0;

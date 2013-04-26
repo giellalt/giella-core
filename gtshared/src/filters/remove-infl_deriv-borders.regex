@@ -1,7 +1,5 @@
 !Remove morhpological boundaries from the lower side of the transducer:
 
-%# -> 0,
-%^ -> 0,
 %> -> 0,
 %» -> 0,
 %< -> 0,

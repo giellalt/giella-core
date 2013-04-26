@@ -1,0 +1,3 @@
+!Remove word boundary mark from the lower side of the transducer:
+
+%# -> 0;

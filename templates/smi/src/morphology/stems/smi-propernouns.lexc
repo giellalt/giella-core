@@ -561,6 +561,7 @@ Piiroinen:Piiroi C-FI-NEN-plc ;
 Piitulainen:Piitulai C-FI-NEN-sur ;
 Pikkarainen:Pikkarai C-FI-NEN-sur ;
 Pikkumusta:Pikku^musta ACCRA-ani ;
+IATA:IATA ACCRA-org ;
 Pipinen:Pipi C-FI-NEN-sur ;
 Pirinen:Piri C-FI-NEN-sur ;
 Pirkkalainen:Pirkkalai C-FI-NEN-sur ;
@@ -1746,6 +1747,7 @@ Anne-Lene ACCRA-fem ;
 Anne-Lise ACCRA-fem ;
 Anne-Margrethe:Anne-Mar^grethe ACCRA-fem ;
 Anne-Marie ACCRA-fem ;
+Ida-Marie ACCRA-fem ;
 Annecy ACCRA-plc ;
 Annelie ACCRA-fem ;
 Annelise:Anne^lise ACCRA-fem ;
@@ -9981,6 +9983,7 @@ Hygea ACCRA-plc ;
 Hygen:Hygen9 LONDON-sur ;
 Hyggen:Hyggen9 LONDON-sur ;
 Hygiea:Hygi^ea ACCRA-plc ;
+IKEA:IKE^A ACCRA-org ;
 Hyhnen-Hahn:Hyhnen-Hahn9 BERN-sur ;
 Hyldstrup:Hyldstrup9 BERN-sur ;
 Hyle ACCRA-sur ;
@@ -28569,8 +28572,6 @@ Yippi PIPPI-ani ;
 Yllästunturi PIPPI-plc ;
 Zunyi PIPPI-plc ;
 Ääri PIPPI-sur ;
-
-
 !Prop.nouns som er kommet inn fra sma-prop.fila i langs/sma/src/morphology/stems: 
 !AIDS:AIDS BERN-obj ;
 !ASVO:ASVO ACCRA-org ;

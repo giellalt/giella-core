@@ -18,6 +18,7 @@ Aramataia:Aramata^ia ACCRA-plc ;
 Asjdod LONDON-plc ;
 Asjer LONDON-sur ;
 Avias:Avi^as BERN-plc ;
+Loisas BERN-plc ;
 Barjona ACCRA-sur ;
 Berekja ACCRA-mal ;
 Betfage BETFAGE-plc ;
@@ -47,6 +48,7 @@ Keijonen LONDON-sur ;
 Kjårdavatn BERN-plc ;
 Kjårdavatnet:Kjårda^vatnet LONDON-plc ;
 Klassekampen:Klasse^kampen LONDON-org ;
+Litl-Svenningvatnet:Litl-Svenning^vatnet LONDON-plc;
 Knutson LONDON-sur ;
 Kusas LONDON-mal ;
 Kwajalein BERN-plc ;
@@ -923,6 +925,7 @@ Aarflon:Aar^flon9 BERN-sur ;
 Aarflot:Aar^flot LONDON-sur ;
 Aargau ACCRA-plc ;
 Aarhus:Aar^hus BERN-plc ;
+Petrus:Petrus BERN-mal ; !
 Aarikka ACCRA-sur ;
 Aarikkala ACCRA-plc ;
 Aarnes:Aar^nes BERN-sur ;
@@ -958,6 +961,8 @@ Aasrud:Aasrud9 BERN-sur ;
 Aass:Aass9 BERN-sur ;
 Aasta ACCRA-fem ;
 Aasvangen:Aas^vangen9 LONDON-sur ;
+Malabarkysten:Malabar^kysten LONDON-plc ;
+Lyngen LONDON-sur ;
 Abadan:Abadan9 BERN-plc ;
 Abaddon:Abaddon9 LONDON-plc ;
 Abakan:Abakan9 LONDON-sur ;
@@ -2508,6 +2513,7 @@ Barcelona ACCRA-plc ;
 Bardal:Bar^dal BERN-plc ;
 Bardlindhaug:Bardlind^haug9 BERN-sur ;
 Barduelva:Bardu^elva ACCRA-LOAN-plc ;
+Litlelva ACCRA-LOAN-plc ;
 Bardufoss:Bardu^foss9 BERN-plc ;
 Bardujord:Bardu^jord9 BERN-plc ;
 Barekstad:Barek^stad9 BERN-sur ;
@@ -4185,6 +4191,7 @@ Canyon:Canyon9 LONDON-plc ;
 Caoxian:Ca^oxi^an9 BERN-plc ;
 Cape ACCRA-plc ;
 Capell:Capell LONDON-sur ;
+Københavnfreden:Køben^havn^freden LONDON-sur ;
 Capella ACCRA-plc ;
 Capjon:Capjon9 LONDON-sur ;
 Capone ACCRA-sur ;
@@ -4335,6 +4342,7 @@ Chengdu ACCRA-plc ;
 Chenkiang:Chenki^ang9 BERN-plc ;
 Cher BERN-sur ;
 Cherbourg:Cher^bourg9 LONDON-plc ;
+Limbourg:Lim^bourg LONDON-plc ;
 Cherry ACCRA-fem ;
 Chery   ACCRA-obj ;
 Chesapeake ACCRA-plc ;
@@ -30708,7 +30716,33 @@ Zunyi PIPPI-plc ;
 !Árni:Árni ACCRA-mal ;
 !Ääri:Ääri ACCRA-sur ;
 !Öræfi:Öræfi ACCRA-plc ;
-!
-!
+!Land's+Use/Sub:Land's CNAME_EVEN-org ;
+!Lapplands+N+Prop+Attr:Lapp^lands ENDLEX ; !XXX
+Laramie:Laramie ACCRA-fem ;; 
+Midland:Mid^lands BERN-LOAN-plc ; !XXX
+Midtfjord:Midt^fjord BERN-LOAN-plc ; !XXX
+Mikronesiaføderasjonen:Mikronesia^føderasjonen LONDON-obj ;
+Nordsjøkonvensjonen:Nord^sjø^konvensjonen LONDON-org ;
 
+!Montpelier:Montpeli^er CNAME_EVEN-plc ;
+!Montréal:Montré^al CNAME_EVEN-plc ; 
+Møller-rasmussen+Use/Sub:Møller-rasmussen LONDON-obj ; 
+Mørekysten+Use/Sub:Møre^kysten LONDON-obj ;
+Norskekysten+Use/Sub:Norske^kysten LONDON-plc ;
+N'Djamena:N'Djamen ACCRA-plc ;
+NOPEF:NOPEF BERN-org ;
+Narkissosa:Narkissosa ACCRA-mal ;
+Noomie:Noomie ACCRA-fem  ; ! 
+Nord-Hol:Nord-Hol BERN-plc ;
+Nordollnes:Nordoll^nes BERN-plc ;
+Novaja:Novaja ACCRA-plc ;
+O'Hare:O'Hare ACCRA-sur ; 
+O'Shelley:O'Shelley ACCRA-sur ;
+OPEC:OPEC BERN-org ;
+POT:POT BERN-org ;
+SINTEF:SINTEF BERN-org ;
+Passbekk:Pass^bekk BERN-plc ;
+Reykjavík:Reykja^vík BERN-plc ; 
+Saint-Malo:Saint-Malo NYSTØ-plc ;
+Selfoss:Sel^foss BERN-plc ;
 

@@ -37,7 +37,6 @@ Luspie SIJTE-plc ;
 Luspie+Use/Sub:Lusppie SIJTE-plc ;
 Luvlieluspie:Luvlie^luspie SIJTE-plc ;
 Luvlie% Praantse ACCRA-plc ;
-Runasvágge+Use/LexSub:Runas^vágge SIJTE-plc ;
 Saajve:Saaj9ve SIJTE-plc ;Maybe also org
 Saame% Siita ACCRA-obj ;
 Saantenjaevrie:Saanten^jaevrie SIJTE-plc ;
@@ -84,7 +83,7 @@ Bijjie% Rantsere+MWE:Bij9jie% Rantsere ACCRA-plc ;
 Birrat% Birra+MWE:Birrat% Birra ACCRA-obj ;
 Bures% ain+MWE+CmpN/None:Bures% ain9 BERN-LOAN-obj ;
 Bæivasgiedde+Use/LexSub:Bæivas^giedde ACCRA-plc ;
-Doajmmasiebbre% Julev-Sabme:Doaj9mmasiebbre% Julev-Sabme ACCRA-org ;
+Doajmmasiebrre% Julev-Sabme:Doaj9mmasiebrre% Julev-Sabme ACCRA-org ;
 Dakteroavvi+Use/LexSub:Dakte^roavvi ACCRA-plc ;
 Boaittobeal:Boaitto^beal BERN-LOAN-obj ;
 Dåggejavri+Use/LexSub:Dågge^javri ACCRA-plc ;
@@ -296,7 +295,6 @@ Oskár LONDON-mal ;
 Panoráma ACCRA-obj ;
 Paranaguá ACCRA-plc ;
 Paraná ACCRA-plc ;
-Park:Park9 BERN-plc ;Sápmi Park
 Pará ACCRA-plc ;
 Polárgierdu:Polár^gierdu ACCRA-plc ;
 Páfos LONDON-plc ;

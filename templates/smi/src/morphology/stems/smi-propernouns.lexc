@@ -1,3 +1,18 @@
+! http://giellatekno.uit.no & http://divvun.no
+!
+! This program is free software ;you can redistribute and/or modify
+! this file under the terms of the GNU General Public License as published by
+! the Free Software Foundation, either version 3 of the License, or
+! (at your option) any later version. The GNU General Public License
+! is found at http://www.gnu.org/licenses/gpl.html. It is
+! also available in the file $GTHOME/LICENSE.txt.
+!
+! Other licensing options are available upon request, please contact
+! giellatekno@hum.uit.no or divvun@samediggi.no
+
+! The SMI (common Sámi) proper noun lexicon
+! =========================================
+
 !  +--------------+------------+-------------+
 !  | Siste stav.  | trykksterk | trykksvak   |
 !  +--------------+------------+-------------+
@@ -8,6 +23,8 @@
 !  
 !  * Også i som ikke har lang vokal foran seg slik som i DUBAI.
 
+! BETFAGE er spesifikk for lulesamisk, og er identisk med ACCRA for dei andre
+samiske språka. BETFAGE skal brukast ved e-finale ACCRA-ord.
 
 ! The beginning of the SMI file.
 Aahlin BERN-sur ;
@@ -816,20 +833,6 @@ Ylinen:Yli C-FI-NEN-sur ;
 Yläoutinen:Ylä^outi C-FI-NEN-sur ;
 Yrjänäinen:Yrjänäi C-FI-NEN-sur ;
 Äyräväinen:Äyräväi C-FI-NEN-sur ;
-! http://giellatekno.uit.no & http://divvun.no
-!
-! This program is free software ;you can redistribute and/or modify
-! this file under the terms of the GNU General Public License as published by
-! the Free Software Foundation, either version 3 of the License, or
-! (at your option) any later version. The GNU General Public License
-! is found at http://www.gnu.org/licenses/gpl.html. It is
-! also available in the file $GTHOME/LICENSE.txt.
-!
-! Other licensing options are available upon request, please contact
-! giellatekno@hum.uit.no or divvun@samediggi.no
-
-! The SMI (common Sámi) proper noun lexicon
-! =========================================
 Almannagjá ACCRA-plc ;
 Amapá ACCRA-plc ;
 András LONDON-mal ;
@@ -861,9 +864,6 @@ Pápa ACCRA-plc ;
 Tucumán:Tucumán9 BERN-plc ;
 Zápolya:Zápol^ya ACCRA-plc ;
 Zapp% me+Use/LexSub:Zapp% me ACCRA-obj ;! Bug #616 Bispadime-me-ráden
-
-
-
 A-ha ACCRA-org ;
 ABC-Company ACCRA-obj ;
 ABC-company ACCRA-org ;
@@ -18084,6 +18084,7 @@ Parker LONDON-sur ;
 Parkkila ACCRA-plc ;
 Parkkonen:Parkko C-FI-NEN-sur ;
 Parkveien:Park^ve^ien LONDON-plc ;
+Park:Park9 BERN-plc ; !Sápmi Park
 Parma ACCRA-sur ;
 Parmenasa ACCRA-plc ;
 Parnassos LONDON-plc ;

@@ -23,8 +23,7 @@
 !  
 !  * Også i som ikke har lang vokal foran seg slik som i DUBAI.
 
-! BETFAGE er spesifikk for lulesamisk, og er identisk med ACCRA for dei andre
-samiske språka. BETFAGE skal brukast ved e-finale ACCRA-ord.
+! BETFAGE er spesifikk for lulesamisk, og er identisk med ACCRA for dei andre samiske språka. BETFAGE skal brukast ved e-finale ACCRA-ord.
 
 ! MÄKI er for finske i-finale navn hvor sørsamisk og lulesamisk følger ulike mønster. PIPPi i smj, ACCRA i sme og sma.
 
@@ -28696,7 +28695,7 @@ Arni:Arni ACCRA-mal ;
 Giellatekno:Giellatekno ACCRA-org ;
 Arnoldi:Arnoldi ACCRA-sur ;
 Aromäki:Aro^mäki ACCRA-sur ;
-Arravaatra:Arravaatr SNAME_MAANA-plc "21 TERRTX" ;
+!Arravaatra:Arravaatr SNAME_MAANA-plc "21 TERRTX" ;
 Aruvba:Aruvba ACCRA-plc ;
 Arvio:Arvio ACCRA-sur ;
 Ashanti:Ashanti PIPPI-plc ;

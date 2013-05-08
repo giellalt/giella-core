@@ -31559,7 +31559,6 @@ Rømo:Rømo9 NYSTØ ;
 Ski-Doo:Ski-Doo9 NYSTØ-ani ;
 Suivakko:Suivakko9 ACCRA-ani ;
 Taro:Taro9 ACCRA-ani ;
-Ruokso:Ruokso9 ACCRA-ani ;
 Bravo:Bravo9 ACCRA-ani ;
 MoDo:MoDo9 ACCRA-org ;
 FeFo:FeFo9 ACCRA-org ;
@@ -32062,3 +32061,7 @@ Vo+CmpN/None:Vo9 ACCRA-mal ; !
 Bo+CmpN/None:Bo9 NYSTØ-plc ; !
 Mo+CmpN/None:Mo9 NYSTØ-plc ; !
 Poulsbo+Use/Sub:Pouls^bo9 NYSTØ-plc ; !
+Ábo:Ábo9 ACCRA-mal ;
+Ádo:Ádo9 ACCRA-sur ;
+Áno:Áno9 ACCRA-plc ;
+Áro:Áro9 ACCRA-plc ;

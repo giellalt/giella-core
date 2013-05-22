@@ -72,7 +72,29 @@
 		</xsl:attribute>
 		<xsl:attribute name="t">
 <!-- This has been replaced with "fin" so progress can be observed  <xsl:value-of select="normalize-space(../../../mg[1]/tg[@xml:lang='eng']/t[1])"/>  -->
-		  <xsl:value-of select="normalize-space(../../../mg[1]/tg[@xml:lang='fin']/t[1])"/>
+<!-- This chooser was introduced 2013-05-22 to make sure there was text content in between the quote pair.  -->
+<xsl:choose>
+  <xsl:when test="../../../mg[1]/tg[@xml:lang='fin']/t[1]">
+    <xsl:value-of select="normalize-space(../../../mg[1]/tg[@xml:lang='fin']/t[1])"/>
+  </xsl:when>
+  <xsl:otherwise>
+    <xsl:choose>
+      <xsl:when test="../../../mg[1]/tg[@xml:lang='fin']/tCtn[1]/t[1]">
+	<xsl:value-of select="normalize-space(../../../mg[1]/tg[@xml:lang='fin']/tCtn[1]/t[1])"/>
+      </xsl:when>
+      <xsl:otherwise>
+	<xsl:choose>
+	  <xsl:when test="../../../mg[1]/tg[@xml:lang='fin']/tf[1]">
+	    <xsl:value-of select="normalize-space(../../../mg[1]/tg[@xml:lang='fin']/tf[1])"/>
+	  </xsl:when>
+	  <xsl:otherwise>
+	    <xsl:value-of select="normalize-space(../../../mg[1]/tg[@xml:lang='fin']/td[1])"/>
+	  </xsl:otherwise>
+	</xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:otherwise>
+</xsl:choose>
 		</xsl:attribute>
 		<!-- xsl:value-of select="normalize-space(../../l)"/ replace underscore by "% "-->
 		<xsl:value-of select="replace(normalize-space(../../l), ' ', '% ')"/>		

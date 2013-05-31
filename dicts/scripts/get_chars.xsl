@@ -57,7 +57,7 @@
   <xsl:param name="tlang" select="'nob'"/>
   <!-- the output dir is named 'sorting' and is created in the dir of each lang pair -->
   <xsl:param name="outDir" select="concat($slang, $tlang, '/sorting')"/>
-  <xsl:param name="debug" select="'true_gogo'"/>
+  <xsl:param name="debug" select="true()"/>
 
   <xsl:variable name="of" select="'xml'"/>
   <xsl:variable name="e" select="$of"/>
@@ -72,7 +72,7 @@
 	<xsl:variable name="current_dir" select="substring-before(document-uri(.), $current_file)"/>
 	<xsl:variable name="current_location" select="concat($inDir, substring-after($current_dir, $inDir))"/>
 	
-	<xsl:if test="$debug = 'true_gogo'">
+	<xsl:if test="$debug">
 	  <xsl:message terminate="no">
 	    <xsl:value-of select="concat('-----------------------------------------', $nl)"/>
 	    <xsl:value-of select="concat('processing file ', $current_file, $nl)"/>

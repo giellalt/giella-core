@@ -3,11 +3,11 @@ templates required for all work on language files using the new infrastructure.
 
 Some of the files are:
 
-iso-639-3_20110525.txt
-----------------------
+iso-639-3_20130520.tab.txt
+--------------------------
 
 Downloaded from: http://www.sil.org/iso639-3/download.asp
-Original filename: http://www.sil.org/iso639-3/iso-639-3_20110525.tab
+Original filename: http://www.sil.org/iso639-3/iso-639-3_20130520.tab
 Content: tab-separated values with the following fields:
 
    Id       -- The three-letter 639-3 identifier
@@ -21,6 +21,8 @@ Content: tab-separated values with the following fields:
             -- E(xtinct), H(istorical), L(iving), S(pecial)
    Ref_Name -- Reference language name 
    Comment  -- Comment relating to one or more of the columns
+
+Update 3.6.2013: replaced the ISO 639-3 file from 2011 with the newest version.
 
 iso3-to-2.sh
 ------------

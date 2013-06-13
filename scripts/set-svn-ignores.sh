@@ -59,12 +59,18 @@ svn propset svn:ignore "$mkfiles
 $fstfiles
 *.tmp" $1/src
 
-# Ignore all temporary and generated files in morph dir:
+# Ignore all temporary and generated files in the morph dir:
 svn propset svn:ignore "$mkfiles
 $fstfiles
 *.foma
 *.script
 *.tmp.*" $1/src/morphology
+
+# Ignore all temporary and generated files in the tagsets dir:
+svn propset svn:ignore "$mkfiles
+$fstfiles
+*.relabel
+*.txt" $1/src/tagsets
 
 # Only ignore generated propernoun files in stems dir:
 svn propset svn:ignore "*-*-propernouns.lexc" $1/src/morphology/stems

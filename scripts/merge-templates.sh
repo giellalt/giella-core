@@ -94,6 +94,8 @@ if test ! -r und.timestamp ; then
 fi
 
 CURLANG=$(basename $(pwd))
+CURTOPDIR=$(basename $(dirname $(pwd)))
+TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 
 for macrolangdir in ${GTCORE}/templates/${tpl} ; do

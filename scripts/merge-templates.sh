@@ -98,8 +98,8 @@ CURTOPDIR=$(basename $(dirname $(pwd)))
 TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 
-for macrolangdir in ${GTCORE}/templates/${tpl} ; do
-    macrolang=${macrolangdir#${GTCORE}/templates/}
+for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
+    macrolang=${macrolangdir#${GTCORE}/${TEMPLATEDIR}/}
     if test ! -r ${macrolang}.timestamp ; then
         # this is a macro language that has not been subscribed
         echo "Not merging ${macrolang} because ${CURLANG} is not in that set"
@@ -107,7 +107,8 @@ for macrolangdir in ${GTCORE}/templates/${tpl} ; do
     fi
     if test -z ${forcerev} ; then
         # assume we are merging from the revision of timestamp to today
-        macrolangrev=$(LC_ALL=C svn info ${macrolang}.timestamp | fgrep 'Last Changed Rev' | $SED -e 's/Last Changed Rev: //')
+        macrolangrev=$(LC_ALL=C svn info ${macrolang}.timestamp \
+            | fgrep 'Last Changed Rev' | $SED -e 's/Last Changed Rev: //')
         if test -z $macrolangrev ; then
             echo could not find revision of ${macrolang}.timestamp
             continue
@@ -118,27 +119,30 @@ for macrolangdir in ${GTCORE}/templates/${tpl} ; do
         echo "Merging from explicit version: $macrolangrev to HEAD"
     fi
 
-    for f in $(svn diff -r${macrolangrev}:HEAD --summarize ${GTCORE}/templates/${macrolang}/ | awk '{print $2}' ) ; do
-        localf=./${f#$GTCORE*templates/${macrolang}/}
+    for f in $(svn diff -r${macrolangrev}:HEAD --summarize ${GTCORE}/${TEMPLATEDIR}/${macrolang}/ | awk '{print $2}' ) ; do
+        localf=./${f#$GTCORE*${TEMPLATEDIR}/${macrolang}/}
         if test ! -r ${localf} ; then
             svn cp ${f} ${localf}
         elif test -d ${localf} ; then
             if test x$unsafe = xunsafe ; then
-                svn merge -r${macrolangrev}:HEAD ${f} ${localf} $SVNMERGE_OPTIONS
+                svn merge -r${macrolangrev}:HEAD \
+                            ${f} ${localf} $SVNMERGE_OPTIONS
             else
                 echo DIR ${localf} >> ${unmerged}
             fi
         else
             case ${f} in
                 *.am | *.m4 | *configure.ac | *autogen.sh | *README )
-                    svn merge -r${macrolangrev}:HEAD ${f} ${localf} $SVNMERGE_OPTIONS
+                    svn merge -r${macrolangrev}:HEAD \
+                                ${f} ${localf} $SVNMERGE_OPTIONS
                     ;;
                 *.lexc | *.twolc | *.regex | *.xfstscript )
                     echo ${f}
                     if [[ "$LingResourceTemplates" == *"$macrolang"* ]] ; then
                         cp -f ${f} ${localf}
                     elif test x$unsafe = xunsafe ; then
-                        svn merge -r${macrolangrev}:HEAD ${f} ${localf} $SVNMERGE_OPTIONS
+                        svn merge -r${macrolangrev}:HEAD \
+                                    ${f} ${localf} $SVNMERGE_OPTIONS
                     else
                         echo UNSAFE_FILE ${localf} >> ${unmerged};
                     fi;
@@ -149,7 +153,8 @@ for macrolangdir in ${GTCORE}/templates/${tpl} ; do
                     ;;
                 *)
                     if test x${unsafe} = xunsafe ; then
-                        svn merge -r${macrolangrev}:HEAD ${f} ${localf} $SVNMERGE_OPTIONS
+                        svn merge -r${macrolangrev}:HEAD \
+                                    ${f} ${localf} $SVNMERGE_OPTIONS
                     else
                         echo UNKNOWN_FILE ${localf} >> ${unmerged};
                     fi;
@@ -158,12 +163,14 @@ for macrolangdir in ${GTCORE}/templates/${tpl} ; do
         fi
     done
 
-    # Replace placeholder language code with real language code in newly added files:
+    # Replace placeholder language code with real language code in newly
+    # added files:
     ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG
 
     # Make sure we know we have updated the templated files:
     # use plain cp until we have svn DIR merge in place:
-    cp -v -f ${GTCORE}/templates/${macrolang}/${macrolang}.timestamp ${macrolang}.timestamp
+    cp -v -f ${GTCORE}/${TEMPLATEDIR}/${macrolang}/${macrolang}.timestamp \
+    		 ${macrolang}.timestamp
     if test -s ${unmerged} ; then
         echo There were files that are not safe to merge:
         cat ${unmerged}
@@ -180,8 +187,9 @@ for macrolangdir in ${GTCORE}/templates/${tpl} ; do
     else
         cat<<EOF
 
-        The updates to templates have been merged and the timestamp updated.
-        Do not forget to commit merged files along with new ${macrolang}.timestamp
+        The updates to the template(s) have been merged and the timestamp(s)
+        updated. Do not forget to commit merged files along with the new
+        ${macrolang}.timestamp
 
 EOF
     fi

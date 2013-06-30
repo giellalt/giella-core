@@ -17,7 +17,9 @@ SPELLERTOOL=$(notdir $(TRIE_SPELL_FOMA))
 # wrapped in another call, and followed by yet another shell script, to capture
 # processing time and memory consumption.
 $(SPELLEROUTPUT): $(SPELLERINPUT)
-	{ time $(TRIE_SPELL_FOMA) acceptor-kal.foma kal.trie \
+	{ time $(TRIE_SPELL_FOMA) \
+		$(GTLANG2)-latest/acceptor-$(GTLANG2).foma \
+		$(GTLANG2)-latest/$(GTLANG2).trie \
 		< $< > $@ ; } 2> spellertimeusage.txt &
 	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
 

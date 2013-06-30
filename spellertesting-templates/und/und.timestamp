@@ -1,4 +1,9 @@
 $Rev$
+Changed references to symbolic links to follow a pattern locale-version, so that
+selecting an arbitrary version can operate on the same dirname pattern in all
+cases. Corrected errors in the foma-trie processing.
+
+r78073:
 Added config feedback about the voikko speller.
 
 r78071:

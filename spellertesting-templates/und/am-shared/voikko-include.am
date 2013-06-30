@@ -17,7 +17,7 @@ SPELLERTOOL=$(notdir $(VOIKKOSPELL))
 # wrapped in another call, and followed by yet another shell script, to capture
 # processing time and memory consumption.
 $(SPELLEROUTPUT): $(SPELLERINPUT)
-	{ time $(VOIKKOSPELL) -s -d $(GTLANG2)-x-standard -p $(GTLANG)/ \
+	{ time $(VOIKKOSPELL) -s -d $(GTLANG2)-x-standard -p $(GTLANG)-latest/ \
 		ignore_dot=1 < $< > $@ ; } 2> tmp/spellertimeusage.txt &
 	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
 

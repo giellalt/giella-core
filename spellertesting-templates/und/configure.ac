@@ -69,7 +69,7 @@ gt_PROG_SCRIPTS_PATHS
 # Check for Hunspell
 AC_PATH_PROG([HUNSPELL], [hunspell], [], [$PATH$PATH_SEPARATOR$with_hunspell])
 AC_MSG_CHECKING([whether we can enable hunspell testing])
-AS_IF([test "x$HUNSPELL" != "x" -a -d hunspell/$GTLANG2/ ],
+AS_IF([test "x$HUNSPELL" != "x" -a -d hunspell/$GTLANG2-latest/ ],
       [hunspell_test=yes],
       [hunspell_test=no])
 AC_MSG_RESULT([$hunspell_test])
@@ -81,7 +81,7 @@ AC_PATH_PROG([TRIE_SPELL_FOMA], [trie-spell-foma], [],
 AC_PATH_PROG([FLOOKUP], [flookup], [],
              [$PATH$PATH_SEPARATOR$with_flookup])
 AC_MSG_CHECKING([whether we can enable foma testing])
-AS_IF([test "x$TRIE_SPELL_FOMA" != "x" -a "x$FLOOKUP" != "x" -a -d foma-trie/$GTLANG2/ ],
+AS_IF([test "x$TRIE_SPELL_FOMA" != "x" -a "x$FLOOKUP" != "x" -a -d foma-trie/$GTLANG2-latest/ ],
       [trie_spell_foma_test=yes],
       [trie_spell_foma_test=no])
 AC_MSG_RESULT([$trie_spell_foma_test])
@@ -91,7 +91,7 @@ AM_CONDITIONAL([CAN_FOMASPELL], [test "x$trie_spell_foma_test" != "xno"])
 AC_PATH_PROG([VOIKKOSPELL], [voikkospell], [],
              [$PATH$PATH_SEPARATOR$with_voikkospell])
 AC_MSG_CHECKING([whether we can enable voikkospell testing])
-AS_IF([test "x$VOIKKOSPELL" != "x" -a -d voikko/$GTLANG2/ ],
+AS_IF([test "x$VOIKKOSPELL" != "x" -a -d voikko/$GTLANG2-latest/ ],
       [voikkospell_test=yes],
       [voikkospell_test=no])
 AC_MSG_RESULT([$voikkospell_test])

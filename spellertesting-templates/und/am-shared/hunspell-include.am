@@ -17,7 +17,7 @@ SPELLERTOOL=$(notdir $(HUNSPELL))
 # wrapped in another call, and followed by yet another shell script, to capture
 # processing time and memory consumption.
 $(SPELLEROUTPUT): $(SPELLERINPUT)
-	{ time $(HUNSPELL) -a -i UTF-8 -d $(GTLANG2)/$(GTLANG2) \
+	{ time $(HUNSPELL) -a -i UTF-8 -d $(GTLANG2)-latest/$(GTLANG2) \
 		< $< > $@ ; } 2> spellertimeusage.txt &
 	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
 

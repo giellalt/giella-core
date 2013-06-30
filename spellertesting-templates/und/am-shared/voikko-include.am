@@ -1,0 +1,28 @@
+## Process this file with automake to produce Makefile.in
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+# Included by the main makefile. Process the including file with automake.
+
+# This include file contains targets specific to the hunspell speller.
+
+# Variables:
+TESTTOOL=vk
+
+# Extract the name of the tool from the AM variable, used by the memory probing
+# shell script:
+SPELLERTOOL=$(notdir $(VOIKKOSPELL))
+
+# Run the actual speller command to generate the speller output; the command is
+# wrapped in another call, and followed by yet another shell script, to capture
+# processing time and memory consumption.
+$(SPELLEROUTPUT): $(SPELLERINPUT)
+	{ time $(VOIKKOSPELL) -s -d $(GTLANG2)-x-standard -p $(GTLANG)/ \
+		ignore_dot=1 < $< > $@ ; } 2> tmp/spellertimeusage.txt &
+	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
+
+# Add speller tool version:
+$(SPELLERVERSION):
+	$(VOIKKOSPELL) --version > $@
+
+include $(top_srcdir)/am-shared/convert_spelleroutput-include.am

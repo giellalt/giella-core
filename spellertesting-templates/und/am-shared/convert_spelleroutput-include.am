@@ -1,0 +1,38 @@
+## Process this file with automake to produce Makefile.in
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+# Included by several *.am files. Process the including files with automake.
+
+# This include file contains build targets shared among all speller tools
+
+# Variables:
+DATE = $(shell date +%Y%m%d)
+TESTTIME = $(shell date +%H%M)
+SCRIPTDIR=$(GTHOME)/gt/script
+LEXICONVERSION=$(shell readlink $(GTLANG2) | tr -d '/')
+
+# Generate speller input:
+$(SPELLERINPUT): $(GSDATA)
+	cut -f1 $< > $@
+
+# Convert the speller output to an xml format:
+$(SPELLERTESTRESULT): \
+		$(GSDATA) \
+		$(SPELLEROUTPUT) \
+		$(SCRIPTDIR)/speller-testres.pl
+	$(SCRIPTDIR)/speller-testres.pl \
+		--$(TESTTOOL) \
+		--input=$< \
+		--output=$(SPELLEROUTPUT) \
+		--document=$(<F) \
+		--date=$(DATE)-$(TESTTIME) \
+		--version="$(LEXICONVERSION)" \
+		--toolversion="`cat $(SPELLERVERSION)`" \
+		--memoryuse="`cat spellermemusage.txt`" \
+		--timeuse="`cat spellertimeusage.txt`" \
+		--xml=$@
+
+# Clean generated files:
+clean-local:
+	-rm -f *.txt *.xml

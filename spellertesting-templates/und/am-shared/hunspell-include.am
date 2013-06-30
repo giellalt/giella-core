@@ -1,0 +1,28 @@
+## Process this file with automake to produce Makefile.in
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+# Included by the main makefile. Process the including file with automake.
+
+# This include file contains targets specific to the hunspell speller.
+
+# Variables:
+TESTTOOL=hu
+
+# Extract the name of the tool from the AM variable, used by the memory probing
+# shell script:
+SPELLERTOOL=$(notdir $(HUNSPELL))
+
+# Run the actual speller command to generate the speller output; the command is
+# wrapped in another call, and followed by yet another shell script, to capture
+# processing time and memory consumption.
+$(SPELLEROUTPUT): $(SPELLERINPUT)
+	{ time $(HUNSPELL) -a -i UTF-8 -d $(GTLANG2)/$(GTLANG2) \
+		< $< > $@ ; } 2> spellertimeusage.txt &
+	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
+
+# Add speller tool version:
+$(SPELLERVERSION):
+	$(HUNSPELL) --version | head -n 1 > $@
+
+include $(top_srcdir)/am-shared/convert_spelleroutput-include.am

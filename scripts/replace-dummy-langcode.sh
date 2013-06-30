@@ -47,12 +47,12 @@ file=$3
 # In either a single file:
 if ! test "x$file" == "x"; then
 	if test -e $file ; then
-	    cp $f $f~
+	    cp $file $file~
 	    $SED -e "s/__UND__/$2/g" \
 	    	-e "s/__UND2C__/$iso2code/g" \
 	    	-e "s/__UNDEFINED__/$isoName/g" \
-	    	< $f~ > $f
-	    rm -f $f~
+	    	< $file~ > $file
+	    rm -f $file~
 	else
 		echo "File not found"
 		exit 1

@@ -4,6 +4,12 @@
 # to all languages. It loops over all language dirs as defined in the *.am file
 # and runs the merge script in each of them.
 
+# Wrong usage - short instruction:
+if ! test $# -eq 0 ; then
+    echo "Usage: $0"
+    exit 1
+fi
+
 # The whole GT infra requires GTCORE to be accessible at setup time
 if test -z $GTCORE ; then
     echo variable GTCORE not set, run gtsetup.sh and retry
@@ -16,9 +22,26 @@ if test -z $GTHOME ; then
     exit 1
 fi
 
+DIR=$(pwd)
+TEMPLATENAME=$(basename $DIR)
+
+# This script requires GTBIG to be accessible at setup time
+# if the prooftesting files should be updated:
+if ! test -e $DIR/Makefile.am ; then
+    echo "Makefile.am not found - please call from within the directory above"
+    echo "all language dirs."
+    exit 1
+fi
+
 # Extract the list of all languages from the $GTHOME/langs/*.am file:
-ALL_LANGS=$(egrep '^ALL_LANGS=' < $GTHOME/langs/Makefile.am \
+ALL_LANGS=$(egrep '^ALL_LANGS=' < $DIR/Makefile.am \
 			| sed -e 's/ALL_LANGS=//')
+
+if test "x$ALL_LANGS" == "x" ; then
+	echo "Script was called from the wrong directory. It must be called from"
+	echo "the directory enclosing all language directories."
+	exit 1
+fi
 
 for ll in $ALL_LANGS ; do
     if test -d $ll ; then
@@ -26,7 +49,8 @@ for ll in $ALL_LANGS ; do
         echo
         echo "*** Setting svn:ignore's for language $ll - $Language ***"
         echo
-        cd $ll && ${GTCORE}/scripts/set-svn-ignores.sh $(pwd) && cd ..
+        cd $ll && ${GTCORE}/scripts/set-svn-ignores-$TEMPLATENAME.sh \
+        	$(pwd) && cd ..
     fi
 done
 

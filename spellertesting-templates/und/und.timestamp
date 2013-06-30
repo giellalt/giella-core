@@ -1,3 +1,6 @@
 $Rev$
+Added config feedback about the voikko speller.
+
+r78071:
 Initial setup of the spellertesting und template. Foma, Hunspell and Voikko
 testing is supported.

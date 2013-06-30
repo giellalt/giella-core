@@ -161,11 +161,12 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
                     ;;
             esac
         fi
-    done
 
-    # Replace placeholder language code with real language code in newly
-    # added files:
-    ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG
+        # Replace placeholder language code with real language code in newly
+        # added files:
+        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG ${localf}
+
+    done
 
     # Make sure we know we have updated the templated files:
     # use plain cp until we have svn DIR merge in place:

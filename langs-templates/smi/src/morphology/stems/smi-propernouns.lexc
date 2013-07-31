@@ -20430,7 +20430,7 @@ San:San9 BERN-sur ;
 Sánchez:Sánchez9 LONDON-sur ;
 Sana ACCRA-plc ;
 Sanaa ACCRA-plc ;
-Sand9 BERN-sur ;
+Sand:Sand9 BERN-sur ;
 Sandaker:Sand^aker LONDON-plc ;
 Sandal:San^dal BERN-plc ;
 Sandane RONDANE-plc ;
@@ -28563,7 +28563,7 @@ Varsi PIPPI-sur ;
 Veini PIPPI-fem ;
 Vekki PIPPI-sur ;
 Vieri PIPPI-sur ;
-Viikki PIPPI-plc ; ! Can be both plc and9 sur
+Viikki PIPPI-plc ; ! Can be both plc and sur
 Viiri PIPPI-sur ;
 Viiru PIPPI-ani ;
 Vikki PIPPI-sur ;

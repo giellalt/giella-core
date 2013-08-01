@@ -1,0 +1,19 @@
+# Remove semantic tags from the upper side.
+# Semantic tags:
+0 <- %+Obj,
+0 <- %+Group,
+0 <- %+Time, 
+0 <- %+Txt,
+0 <- %+Route,
+0 <- %+Measr, 
+0 <- %+Wthr,
+0 <- %+Build, 
+0 <- %+Hum,
+0 <- %+Edu,
+0 <- %+Veh,
+0 <- %+Clth,
+0 <- %+Plant,
+0 <- %+Event,
+0 <- %+Wpn,
+0 <- %+Body,
+0 <- %+Food;

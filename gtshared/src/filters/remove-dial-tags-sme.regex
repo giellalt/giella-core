@@ -1,7 +1,0 @@
-# This regex removes tags we do not want in the ordinary $(GTLANG).fst
-# That is, we do not give them as output from analysis
-
-# delete the tags governing normative/speller derivation restrictions
-0 <- %+Dial/-KJ,
-0 <- %+Dial/-GG,
-0 <- %+Dial/-GS;

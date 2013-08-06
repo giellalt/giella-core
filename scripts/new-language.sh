@@ -49,7 +49,7 @@ svn revert $1/src/syntax/disambiguation.cg3
 svn revert $1/src/phonology/*phon.*
 svn revert $1/src/transcriptions/*.lexc
 
-# Now that the files are knwon to svn, add svn:ignore properties:
+# Now that the files are known to svn, add svn:ignore properties:
 ${GTCORE}/scripts/set-svn-ignores-$2.sh $1
 
 cat<<EOF

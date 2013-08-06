@@ -29,13 +29,7 @@
 	   </xs:choice>
             <xs:element maxOccurs="unbounded" ref="mg"/>
          </xs:sequence>
-         <xs:attribute name="exclude">
-            <xs:simpleType>
-               <xs:restriction base="xs:string">
-                  <xs:enumeration value="fst"/>
-               </xs:restriction>
-            </xs:simpleType>
-         </xs:attribute>
+         <xs:attribute ref="exclude"/>
          <xs:attribute name="order">
             <xs:simpleType>
                <xs:restriction base="xs:string">
@@ -87,6 +81,7 @@
    <xs:element name="st">
       <xs:complexType mixed="true">
          <xs:sequence/>
+         <xs:attribute ref="exclude"/>
          <xs:attribute ref="Contlex"/>
          <xs:attribute ref="orthType"/>
       </xs:complexType>
@@ -1493,6 +1488,14 @@
          </xs:restriction>
       </xs:simpleType>
    </xs:attribute>
+   <xs:attribute name="exclude">
+     <xs:simpleType>
+       <xs:restriction base="xs:string">
+         <xs:enumeration value="fst"/>
+       </xs:restriction>
+     </xs:simpleType>
+   </xs:attribute>
+
    <xs:attributeGroup name="inherentMarking">
       <xs:attribute ref="cx"/>
       <xs:attribute ref="mx"/>

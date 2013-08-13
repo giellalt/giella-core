@@ -1,0 +1,45 @@
+## Process this file with automake to produce Makefile.in
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+# Included by the main makefile. Process the including file with automake.
+
+# This include file contains targets specific to the foma-trie speller.
+
+# Language-dependent Polderland tools and files:
+if CAN_PLXSPELLSME
+LEXFILE = mssp3samiNorthern.lex
+SPELLER = $(PLXSPELLSME)
+endif # CAN_PLXSPELLSME
+if CAN_PLXSPELLSMJ
+LEXFILE = mssp3samiLule.lex
+SPELLER = $(PLXSPELLSMJ)
+endif # CAN_PLXSPELLSMJ
+if CAN_PLXSPELLSMA
+LEXFILE = mssp3samiSout.lex
+SPELLER = $(PLXSPELLSMA)
+endif # CAN_PLXSPELLSMA
+
+# Variables:
+TESTTOOL=pl
+
+# Extract the name of the tool from the AM variable, used by the memory probing
+# shell script:
+SPELLERTOOL=$(notdir $(SPELLER))
+
+# Run the actual speller command to generate the speller output; the command is
+# wrapped in another call, and followed by yet another shell script, to capture
+# processing time and memory consumption.
+$(SPELLEROUTPUT): $(SPELLERINPUT)
+	touch userdict
+	{ time $(SPELLER) -u8 -0 -d \
+		-m $(GTLANG2)-latest/$(LEXFILE) \
+		< $< > $@ ; } 2> spellertimeusage.txt &
+	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
+	rm -f userdict
+
+# Generate speller tool version:
+$(SPELLERVERSION): $(SPELLEROUTPUT)
+	$(SPELLER) --version 2>&1 | rev | cut -d'/' -f1 | rev > $@
+
+include $(top_srcdir)/am-shared/convert_spelleroutput-include.am

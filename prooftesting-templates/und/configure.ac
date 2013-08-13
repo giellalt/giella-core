@@ -87,6 +87,29 @@ AS_IF([test "x$TRIE_SPELL_FOMA" != "x" -a "x$FLOOKUP" != "x" -a -d foma-trie/$GT
 AC_MSG_RESULT([$trie_spell_foma_test])
 AM_CONDITIONAL([CAN_FOMASPELL], [test "x$trie_spell_foma_test" != "xno"])
 
+# Check for and configure PLX-spell-smX - only available for SME, SMJ and SMA
+AC_ARG_VAR([GTPRIV], [gtpriv path must be defined for the plx tests to work])
+AC_PATH_PROG([PLXSPELLSME], [$GTPRIV/polderland/bin/spellSamiNort], [],
+             [$PATH$PATH_SEPARATOR$with_plxspellsme])
+AC_PATH_PROG([PLXSPELLSMJ], [$GTPRIV/polderland/bin/spellSamiLule], [],
+             [$PATH$PATH_SEPARATOR$with_plxspellsmj])
+AC_PATH_PROG([PLXSPELLSMA], [$GTPRIV/polderland/bin/spellSamiSout], [],
+             [$PATH$PATH_SEPARATOR$with_plxspellsma])
+AC_MSG_CHECKING([whether we can enable PLX speller testing])
+AS_IF([test "x$PLXSPELLSME" != "x" -a \
+            "x$PLXSPELLSMJ" != "x" -a \
+            "x$PLXSPELLSMA" != "x" -a \
+            -d plx/$GTLANG2-latest/ ],
+      [plxspell_test=yes],
+      [plxspell_test=no])
+AC_MSG_RESULT([$plxspell_test])
+AM_CONDITIONAL([CAN_PLXSPELLSME],
+               [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsme"])
+AM_CONDITIONAL([CAN_PLXSPELLSMJ],
+               [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsmj"])
+AM_CONDITIONAL([CAN_PLXSPELLSMA],
+               [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsma"])
+
 # Check for Voikkospell
 AC_PATH_PROG([VOIKKOSPELL], [voikkospell], [],
              [$PATH$PATH_SEPARATOR$with_voikkospell])
@@ -98,9 +121,10 @@ AC_MSG_RESULT([$voikkospell_test])
 AM_CONDITIONAL([CAN_VOIKKOSPELL], [test "x$voikkospell_test" != "xno"])
 
 # List all non-script files processed by Autoconf.
-AC_CONFIG_FILES([Makefile \
-                 hunspell/Makefile \
+AC_CONFIG_FILES([Makefile           \
+                 hunspell/Makefile  \
                  foma-trie/Makefile \
+                 plx/Makefile       \
                  voikko/Makefile])
 
 # This must be near the end of all configure.ac files:

@@ -97,6 +97,7 @@ CURLANG=$(basename $(pwd))
 CURTOPDIR=$(basename $(dirname $(pwd)))
 TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
+SVNREPOROOT="https://victorio.uit.no/langtech"
 
 for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
     macrolang=${macrolangdir#${GTCORE}/${TEMPLATEDIR}/}
@@ -119,8 +120,10 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
         echo "Merging from explicit version: $macrolangrev to HEAD"
     fi
 
-    for f in $(svn diff -r${macrolangrev}:HEAD --summarize ${GTCORE}/${TEMPLATEDIR}/${macrolang}/ | awk '{print $2}' ) ; do
-        localf=./${f#$GTCORE*${TEMPLATEDIR}/${macrolang}/}
+    for f in $(svn diff -r${macrolangrev}:HEAD --summarize \
+            ${SVNREPOROOT}/trunk/gtcore/${TEMPLATEDIR}/${macrolang}/ \
+            | awk '{print $2}' ) ; do
+        localf=./${f#$SVNREPOROOT*${TEMPLATEDIR}/${macrolang}/}
         if test ! -r ${localf} ; then
             svn cp ${f} ${localf}
         elif test -d ${localf} ; then

@@ -55,6 +55,7 @@ cat<<EOF
 -- Building $PACKAGE_STRING:
     * test Hunspell: $hunspell_test
     * test Foma+trie: $trie_spell_foma_test
+    * test PLX: $plxspell_test
     * test Voikko: $voikkospell_test
 
 For more ./configure options, run ./configure --help

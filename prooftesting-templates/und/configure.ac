@@ -89,12 +89,12 @@ AM_CONDITIONAL([CAN_FOMASPELL], [test "x$trie_spell_foma_test" != "xno"])
 
 # Check for and configure PLX-spell-smX - only available for SME, SMJ and SMA
 AC_ARG_VAR([GTPRIV], [gtpriv path must be defined for the plx tests to work])
-AC_PATH_PROG([PLXSPELLSME], [$GTPRIV/polderland/bin/spellSamiNort], [],
-             [$PATH$PATH_SEPARATOR$with_plxspellsme])
-AC_PATH_PROG([PLXSPELLSMJ], [$GTPRIV/polderland/bin/spellSamiLule], [],
-             [$PATH$PATH_SEPARATOR$with_plxspellsmj])
-AC_PATH_PROG([PLXSPELLSMA], [$GTPRIV/polderland/bin/spellSamiSout], [],
-             [$PATH$PATH_SEPARATOR$with_plxspellsma])
+AC_PATH_PROG([PLXSPELLSME], [spellSamiNort], [],
+   [$GTPRIV/polderland/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_plxspellsme])
+AC_PATH_PROG([PLXSPELLSMJ], [spellSamiLule], [],
+   [$GTPRIV/polderland/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_plxspellsmj])
+AC_PATH_PROG([PLXSPELLSMA], [spellSamiSout], [],
+   [$GTPRIV/polderland/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_plxspellsma])
 AC_MSG_CHECKING([whether we can enable PLX speller testing])
 AS_IF([test "x$PLXSPELLSME" != "x" -a \
             "x$PLXSPELLSMJ" != "x" -a \

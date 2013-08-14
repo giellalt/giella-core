@@ -1,4 +1,8 @@
 $Rev$
+Corrected AC_PATH_PROG for the PLX speller tools, included the plx dir in the
+processing. Now plx testing seems to be working.
+
+r79142:
 Added a missing CAN_PLXSPELL conditional - used but not defined.
 
 r79130:

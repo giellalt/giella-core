@@ -40,5 +40,8 @@ done
 # Set the svn:ignore prop on the top level lang dir:
 svn propset svn:ignore "$autofiles
 $mkfiles
-build
-userdict" $1
+build" $1
+
+# Set the svn:ignore prop on the plx dir - it needs an extra ignore:
+svn propset svn:ignore "$mkfiles
+userdict" $1/plx

@@ -1,4 +1,7 @@
 $Rev$
+Added a missing CAN_PLXSPELL conditional - used but not defined.
+
+r79130:
 Forgot to add configuration summary output.
 
 r79118:

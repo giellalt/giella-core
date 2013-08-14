@@ -103,6 +103,7 @@ AS_IF([test "x$PLXSPELLSME" != "x" -a \
       [plxspell_test=yes],
       [plxspell_test=no])
 AC_MSG_RESULT([$plxspell_test])
+AM_CONDITIONAL([CAN_PLXSPELL], [test "x$plxspell_test" != "xno"])
 AM_CONDITIONAL([CAN_PLXSPELLSME],
                [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsme"])
 AM_CONDITIONAL([CAN_PLXSPELLSMJ],

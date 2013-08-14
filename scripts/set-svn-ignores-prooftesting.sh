@@ -40,4 +40,5 @@ done
 # Set the svn:ignore prop on the top level lang dir:
 svn propset svn:ignore "$autofiles
 $mkfiles
-build" $1
+build
+userdict" $1

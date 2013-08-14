@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# This is a maintenance script to ease propagating changes in the core template
-# to all languages. It loops over all language dirs as defined in the *.am file
-# and runs the merge script in each of them.
+# This is a maintenance script to ease updating the svn:ignore property
+# for all languages. It loops over all language dirs as defined in the *.am file
+# and runs the set-svn-ignores-X.sh script in each of them.
 
 # Wrong usage - short instruction:
 if ! test $# -eq 0 ; then
@@ -29,11 +29,13 @@ TEMPLATENAME=$(basename $DIR)
 # if the prooftesting files should be updated:
 if ! test -e $DIR/Makefile.am ; then
     echo "Makefile.am not found - please call from within the directory above"
-    echo "all language dirs."
+    echo "all language dirs, typically $GTHOME/langs/"
+    echo "or $GTBIG/prooftesting/"
     exit 1
 fi
 
-# Extract the list of all languages from the $GTHOME/langs/*.am file:
+# Extract the list of all languages from the $GTHOME/langs/Makefile.am file
+# or from the $GTBIG/prooftesting/Makefile.am file:
 ALL_LANGS=$(egrep '^ALL_LANGS=' < $DIR/Makefile.am \
 			| sed -e 's/ALL_LANGS=//')
 

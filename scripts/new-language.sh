@@ -5,21 +5,25 @@ if test -z "${GTCORE}" ; then
 fi
 
 # Wrong usage - short instruction:
-if ! test $# -eq 2 ; then
-    echo "Usage: $0 NEW_LANGUAGE_ISOCODE TEMPLATE_COLLECTION"
+if ! test $# -eq 1 ; then
+    echo "Usage: $0 NEW_LANGUAGE_ISOCODE"
     echo
-    echo "e.g. $0 sme langs"
+    echo "e.g. $0 sme"
     echo
     exit 1
 fi
 
-TEMPLATEDIR=$2-templates
+# Where are we? inside 'langs' or 'prooftesting':
+curDir=$(pwd)
+# Extract template collection name from current dir:
+TEMPLATECOLL=$(basename $curDir)
+
+TEMPLATEDIR=$TEMPLATECOLL-templates
 
 # Copy template files to new language dir:
 rsync -avzC ${GTCORE}/${TEMPLATEDIR}/und/ $1/
 
 # Replace placeholder language code with real language code:
-curDir=`pwd`
 ${GTCORE}/scripts/replace-dummy-langcode.sh "$curDir/$1" $1
 
 # Update Makefile.am with the new language:
@@ -50,7 +54,7 @@ svn revert $1/src/phonology/*phon.*
 svn revert $1/src/transcriptions/*.lexc
 
 # Now that the files are known to svn, add svn:ignore properties:
-${GTCORE}/scripts/set-svn-ignores-$2.sh $1
+${GTCORE}/scripts/set-svn-ignores-$TEMPLATECOLL.sh $1
 
 cat<<EOF
     The new language $1 has been added to the top-level Makefile.

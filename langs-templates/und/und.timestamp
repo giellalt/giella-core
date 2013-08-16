@@ -1,4 +1,8 @@
 $Rev$
+One small change forgotten in the previous commit: comments and one less target
+in the default setup (more to be added on a per-language base).
+
+r79308:
 Moved MT/Apertium code to the und template from sma. Not tested, most likely
 buggy.
 

@@ -15,10 +15,13 @@ GT_TRANSFORMERS_HFST=transcriptor-clock2text-desc.hfst \
 					 transcriptor-numbers2text-desc.hfst
 
 if WANT_APERTIUM
-APERTIUM_ANALYSERS_HFST=analyser-apertium-desc.hfst \
-						analyser-apertium-norm.hfst
-APERTIUM_GENERATORS_HFST=generator-apertium-desc.hfst \
-						generator-apertium-norm.hfst
+# These are just generic targets. You need to add pair-specific fst's to the
+# language-specific part further down.
+APERTIUM_ANALYSERS_HFST=analyser-mt-gt-desc.hfst \
+						analyser-mt-apertium-desc.hfst
+APERTIUM_GENERATORS_HFST=generator-mt-gt-norm.hfst \
+						generator-mt-apertium-norm.hfst \
+						generator-mt-apertium-norm.att
 endif # WANT_APERTIUM
 endif # CAN_HFST
 

@@ -1,4 +1,8 @@
 $Rev$
+Moved MT/Apertium code to the und template from sma. Not tested, most likely
+buggy.
+
+r79152:
 Added remove-variant-string.regex, for removing strings containing +v2,
 +v3, +v4, +v5, but not removing +v1.
 

@@ -23,22 +23,38 @@ availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
                         n2=${n%-templates}; echo "$n2"; done)
 
 # Check if the current directory name matches one of the template collection
-# names by counting the matches (it should be 1 if it matches, 0 if not):
-TemplateMatch=$(echo "$availableTemplateColls" | grep -c $TEMPLATECOLL )
-
+# names by counting the matches (it should be 1 if it matches, 0 if not);
 # if the test fails (i.e. we are in the wrong directory), write a message and
 # exit:
-if test $TemplateMatch -eq 0 ; then
-    echo "*** ERROR ***"
+if test $(echo "$availableTemplateColls" | grep -c $TEMPLATECOLL ) -eq 0 ; then
     echo "You are not in a directory holding template-based language dirs."
     echo "Your current directory is named $TEMPLATECOLL, but should be one of"
     echo
     echo "$availableTemplateColls"
     echo
-    echo "Your current dir also needs to contain a Makefile.am with the list"
-    echo "of available languages defined in the variable: ALL_LANGS"
-    echo
     echo "Move to a suitable directory and try again."
+    exit 1
+fi
+
+if ! [ -f Makefile.am ]
+then
+    echo "No Makefile.am file in this directory. It seems this is not a proper"
+    echo "Giellatekno/Divvun infrastructure directory holding template-based"
+    echo "language directories."
+    exit 1
+fi
+
+if ! [ -f configure.ac ]
+then
+    echo "No configure.ac file in this directory. It seems this is not a proper"
+    echo "Giellatekno/Divvun infrastructure directory holding template-based"
+    echo "language directories."
+    exit 1
+fi
+
+if test $(grep -c "^ALL_LANGS=" Makefile.am ) -eq 0 ; then
+    echo "Something is wrong with your infrstructure setup:"
+    echo "Your Makefile.am file does not set the variable ALL_LANGS."
     exit 1
 fi
 

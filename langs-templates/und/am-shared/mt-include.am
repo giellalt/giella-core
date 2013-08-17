@@ -63,7 +63,6 @@ generator-mt-gt-norm.tmp.hfst: generator-raw-gt-desc.hfst \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-1 filters/remove-test-tags.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
-		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
 		-o $@
 
 analyser-mt-gt-desc.tmp.hfst: generator-raw-gt-desc.hfst \
@@ -111,27 +110,23 @@ analyser-mt-gt-desc.tmp.hfst: generator-raw-gt-desc.hfst \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			-1 filters/remove-test-tags.hfst \
 		| $(HFST_MINIMIZE) $(HFST_FLAGS) \
-		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
 		-o $@
 
-generator-mt-%-norm.hfst: \
+generator-mt-apertium-norm.hfst: \
 			generator-mt-gt-norm.hfst \
-			$(srcdir)/tagsets/$*.relabel
-	$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
-		-F $(srcdir)/tagsets/$*.relabel 
+			$(srcdir)/tagsets/apertium.relabel
+	$(AM_V_GEN)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
+		-F $(srcdir)/tagsets/apertium.relabel \
 		-o $@
 
-analyser-mt-%-desc.hfst: \
-			analyser-mt-gt-desc.hfst \
-			$(srcdir)/tagsets/$*.relabel
-	$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
-		-F $(srcdir)/tagsets/$*.relabel 
+analyser-mt-apertium-desc.%.hfst: \
+			analyser-mt-gt-desc.%.hfst \
+			$(srcdir)/tagsets/apertium.relabel
+	$(AM_V_GEN)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
+		-F $(srcdir)/tagsets/apertium.relabel \
+		| $(HFST_FST2FST) $(HFSTFLAGS) -f olw \
 		-o $@
 
-%-mt-apertium-norm.att: %-mt-apertium-norm.hfst
-	$(HFST_FST2FST) $(HFSTFLAGS) -w -i $< \
-		| hfst-fst2txt -o $@
-
-analyser-mt-gt-desc.und.hfst: analyser-mt-gt-desc.tmp.hfst
-	$(AM_V_GEN)$(HFST_INVERT) $< \
-		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw -o $@
+%.att: %.hfst
+	$(AM_V_GEN)$(HFST_FST2FST) $(HFSTFLAGS) -w -i $< \
+		| $(HFST_FST2TXT) -o $@

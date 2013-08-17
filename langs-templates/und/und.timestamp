@@ -1,4 +1,8 @@
 $Rev$
+Added missing check and variable definition for hfst-fst2txt. Several minor
+changes to the apertium build instructions.
+
+r79316:
 Added missing reference to the remove-semantic-tags-except-prop filter.
 
 r79315:

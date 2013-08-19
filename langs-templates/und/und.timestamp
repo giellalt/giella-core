@@ -1,4 +1,7 @@
 $Rev$
+Another bugfix: switched from -f owl to -t in another case, to avoid hfst crash.
+
+r79373:
 Bugfix: hfst-substitute can't take lookup-optimised fst's as input.
 
 r79338:

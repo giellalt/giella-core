@@ -1,4 +1,7 @@
 $Rev$
+Renamed result file to follow the existing filename convention.
+
+r79455:
 Reorganised the configuration code, moving most of it to m4/giellatekno.m4.
 
 r79450:

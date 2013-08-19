@@ -7,7 +7,7 @@ GSDATA=../all-gs.txt
 SPELLERINPUT=goldstandard.spin.txt
 SPELLEROUTPUT=goldstandard.spout.txt
 SPELLERVERSION=sp-version.txt
-SPELLERTESTRESULT=goldstandard.xml
+SPELLERTESTRESULT=GoldstandardTexts.txt.xml
 
 # The target(s) to build:
 noinst_DATA=

@@ -66,6 +66,16 @@ AM_CONDITIONAL([FREEPRESTABLE],
 # Tests and sets up giellatekno directories and scripts
 gt_PROG_SCRIPTS_PATHS
 
+# Check for forrest, whether we should install xml files in the forrest dir.
+# Requires forrest and that $GTBIG is defined (= available).
+AC_PATH_PROG([FORREST], [forrest], [], [$PATH$PATH_SEPARATOR$with_forrest])
+AC_MSG_CHECKING([whether we can enable html report generation])
+AS_IF([test "x$GTBIG" != x], [
+    AS_IF([test "x$FORREST" != x], [html_report=yes], [html_report=no])
+],[html_report=no])
+AC_MSG_RESULT([$html_report])
+AM_CONDITIONAL([CAN_FORREST], [test "x$html_report" != xno])
+
 # Check for Hunspell
 AC_PATH_PROG([HUNSPELL], [hunspell], [], [$PATH$PATH_SEPARATOR$with_hunspell])
 AC_MSG_CHECKING([whether we can enable hunspell testing])
@@ -81,7 +91,9 @@ AC_PATH_PROG([TRIE_SPELL_FOMA], [trie-spell-foma], [],
 AC_PATH_PROG([FLOOKUP], [flookup], [],
              [$PATH$PATH_SEPARATOR$with_flookup])
 AC_MSG_CHECKING([whether we can enable foma testing])
-AS_IF([test "x$TRIE_SPELL_FOMA" != "x" -a "x$FLOOKUP" != "x" -a -d foma-trie/$GTLANG2-latest/ ],
+AS_IF([test "x$TRIE_SPELL_FOMA" != "x" \
+		 -a "x$FLOOKUP" != "x" \
+		 -a -d foma-trie/$GTLANG2-latest/ ],
       [trie_spell_foma_test=yes],
       [trie_spell_foma_test=no])
 AC_MSG_RESULT([$trie_spell_foma_test])
@@ -120,6 +132,10 @@ AS_IF([test "x$VOIKKOSPELL" != "x" -a -d voikko/$GTLANG2-latest/ ],
       [voikkospell_test=no])
 AC_MSG_RESULT([$voikkospell_test])
 AM_CONDITIONAL([CAN_VOIKKOSPELL], [test "x$voikkospell_test" != "xno"])
+
+# Check for other programs:
+AC_PROG_MKDIR_P
+AC_PROG_LN_S
 
 # List all non-script files processed by Autoconf.
 AC_CONFIG_FILES([Makefile           \

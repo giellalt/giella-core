@@ -57,6 +57,7 @@ cat<<EOF
     * test Foma+trie: $trie_spell_foma_test
     * test PLX: $plxspell_test
     * test Voikko: $voikkospell_test
+    * Html reports using forrest: $html_report
 
 For more ./configure options, run ./configure --help
 

@@ -9,8 +9,18 @@
 # Variables:
 DATE = $(shell date +%Y%m%d)
 TESTTIME = $(shell date +%H%M)
-SCRIPTDIR=$(GTHOME)/gt/script
+SCRIPTDIR=$(GTCORE)/scripts
 LEXICONVERSION=$(shell readlink $(GTLANG2) | tr -d '/')
+
+# Forrest publishing:
+SPLTESTREPDIR   = $(GTBIG)/techdoc/proof/spelling/testing
+
+# if Forrest, then
+if CAN_FORREST
+FORRESTTESTRESULT=$(SPLTESTREPDIR)/$(GTLANG)/$(TESTTOOL)/goldstandard/$(DATE)-$(TESTTIME)-$(SPELLERTESTRESULT)
+
+noinst_DATA+=$(FORRESTTESTRESULT)
+endif # CAN_FORREST
 
 # Generate speller input:
 $(SPELLERINPUT): $(GSDATA)
@@ -32,6 +42,14 @@ $(SPELLERTESTRESULT): \
 		--memoryuse="`cat spellermemusage.txt`" \
 		--timeuse="`cat spellertimeusage.txt`" \
 		--xml=$@
+
+$(FORRESTTESTRESULT): $(SPELLERTESTRESULT)
+	$(MKDIR_P) $(@D)
+	cp $< $@
+	if [ -f $(@D)/latest-$< ] ; then \
+		cd $(@D) && mv latest-$< previous-$< ; \
+	fi
+	cd $(@D) && $(LN_S) $(@F) latest-$<
 
 # Clean generated files:
 clean-local:

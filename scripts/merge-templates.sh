@@ -142,8 +142,6 @@ if test $(echo "$availableTemplateColls" \
     exit 1
 fi
 
-exit 0
-
 TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 SVNREPOROOT="https://victorio.uit.no/langtech"

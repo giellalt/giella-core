@@ -1,4 +1,7 @@
 $Rev$
+Moved the definition of SCRIPTDIR to configure.ac.
+
+r79472:
 Forgot the second half of the fix for the logical bug thus creating another bug.
 
 r79471:

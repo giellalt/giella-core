@@ -32,8 +32,6 @@ und.timestamp: ${GTCORE}/prooftesting-templates/und/und.timestamp
 	-cp -v -f $< $@
 endif
 
-SCRIPTDIR=$(GTHOME)/gt/script
-
 # Use all available data in the language's dir in GTFREE and GTBOUND:
 GSDATA=
 if FREESTABLE

@@ -50,6 +50,8 @@ AC_SUBST([GTLANG], [__UND__])
 # as above
 AC_SUBST([GTLANG2], [__UND2C__])
 
+AC_SUBST([SCRIPTDIR],[$GTCORE/scripts])
+
 # Tests and sets up giellatekno directories and scripts
 gt_PROG_SCRIPTS_PATHS
 

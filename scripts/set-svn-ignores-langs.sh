@@ -58,6 +58,7 @@ svn propset svn:ignore "*" $1/misc
 svn propset svn:ignore "$mkfiles
 $fstfiles
 *.att
+*.gz
 *.tmp" $1/src
 
 # Ignore all temporary and generated files in the morph dir:

@@ -1,4 +1,8 @@
 $Rev$
+Corrected a logical bug that forced running all tests even if the configuration
+had turned off a certain test.
+
+r79468:
 Renamed result file to follow the existing filename convention.
 
 r79455:

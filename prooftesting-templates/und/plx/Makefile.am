@@ -13,6 +13,14 @@ SPELLERTESTRESULT=GoldstandardTexts.txt.xml
 noinst_DATA=
 if CAN_PLXSPELL
 noinst_DATA+=$(SPELLERVERSION) $(SPELLERTESTRESULT)
+
+# if Forrest, then
+if CAN_FORREST
+FORRESTTESTRESULT=$(SPLTESTREPDIR)/$(GTLANG)/$(TESTTOOL)/goldstandard/$(DATE)-$(TESTTIME)-$(SPELLERTESTRESULT)
+
+noinst_DATA+=$(FORRESTTESTRESULT)
+endif # CAN_FORREST
+
 endif # CAN_PLXSPELL
 
 include $(top_srcdir)/am-shared/plx-include.am

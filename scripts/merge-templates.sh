@@ -11,10 +11,11 @@ function print_usage() {
     echo "Usage: $0 [OPTIONS...]"
     echo "Merges templates from gtcore to current working dir"
     echo
-    echo "  -h, --help           print this usage info"
-    echo "  --unsafe             also try to merge unsafe mergables"
-    echo "  -r, --revision REV   start merging from REV instead of timestamp's"
-    echo "  -t, --template TPL   Only select TPL templates (bash glob)"
+    echo "  -h, --help                 print this usage info"
+    echo "  --unsafe                   also try to merge unsafe mergables"
+    echo "  -r, --revision REV         start merging from REV instead of timestamp's"
+    echo "  -t, --template TPL         Only select TPL templates (bash glob)"
+    echo "  -c, --templatecoll TPLCOLL Only select templates from TPLCOLL (bash glob)"
     echo
 }
 
@@ -69,6 +70,20 @@ while test $# -ge 1 ; do
             fi
         else
             tpl="$2"
+            shift
+        fi
+    elif test x$1 = x--templatecoll -o x$1 = x-c ; then
+        if test -z $2 ; then
+            if ! echo $1 | fgrep = ; then
+                echo "$1 requires template names"
+                print_usage
+                exit 1
+            else
+                tplcoll=$(echo $1 | $SED -e 's/.*=//')
+            fi
+        else
+            tplcoll="$2"
+            shift
         fi
     else
         echo "$0: unknown option $1"
@@ -93,8 +108,42 @@ if test ! -r und.timestamp ; then
     exit 1
 fi
 
-CURLANG=$(basename $(pwd))
-CURTOPDIR=$(basename $(dirname $(pwd)))
+# Identify language:
+CURLANG=$(fgrep 'AC_SUBST([GTLANG]' configure.ac \
+		  | cut -d',' -f2 | cut -d'[' -f2 | cut -d']' -f1)
+
+# Identify template collection name from parent directory or from option:
+if test "x$tplcoll" = "x" ; then
+    CURTOPDIR=$(basename $(dirname $(pwd)))
+else
+    CURTOPDIR=$tplcoll
+fi
+
+# Get the list of available template collections:
+availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
+                        n2=${n%-templates}; echo "$n2"; done)
+
+availableTemplateCollsAsList=$(echo $availableTemplateColls | tr ' ' '|')
+
+# Check if the current directory name matches one of the template collection
+# names by counting the matches (it should be 1 if it matches, 0 if not);
+# if the test fails (i.e. we are in the wrong directory), write a message and
+# exit:
+if test $(echo "$availableTemplateColls" \
+          | grep -c "^$CURTOPDIR\$" ) -eq 0 ; then
+    echo "The parent directory or --templatecoll $tplcoll is not in the set of:"
+    echo
+    echo "$availableTemplateColls"
+    echo
+    echo "You need to specify the applicable template collection as an"
+    echo "option to the merge script:"
+    echo
+    echo "$0 --templatecoll [$availableTemplateCollsAsList]"
+    exit 1
+fi
+
+exit 0
+
 TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 SVNREPOROOT="https://victorio.uit.no/langtech"

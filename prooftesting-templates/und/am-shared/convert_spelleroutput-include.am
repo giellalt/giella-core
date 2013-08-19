@@ -15,13 +15,6 @@ LEXICONVERSION=$(shell readlink $(GTLANG2)-latest | tr -d '/')
 # Forrest publishing:
 SPLTESTREPDIR   = $(GTBIG)/techdoc/proof/spelling/testing
 
-# if Forrest, then
-if CAN_FORREST
-FORRESTTESTRESULT=$(SPLTESTREPDIR)/$(GTLANG)/$(TESTTOOL)/goldstandard/$(DATE)-$(TESTTIME)-$(SPELLERTESTRESULT)
-
-noinst_DATA+=$(FORRESTTESTRESULT)
-endif # CAN_FORREST
-
 # Generate speller input:
 $(SPELLERINPUT): $(GSDATA)
 	cut -f1 $< > $@

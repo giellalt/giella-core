@@ -1,4 +1,7 @@
 $Rev$
+Forgot the second half of the fix for the logical bug thus creating another bug.
+
+r79471:
 Corrected a logical bug that forced running all tests even if the configuration
 had turned off a certain test.
 

@@ -28,8 +28,21 @@
 
 AC_DEFUN([gt_PROG_SCRIPTS_PATHS],
          [
-AC_ARG_VAR([GTHOME], [root directory of giellatekno scripts])
-AC_ARG_VAR([GTCORE], [directory for giellatekno core data])
+# GTCORE and GTFREE env. variables are required by the testbench
+AC_ARG_VAR([GTCORE], [directory for giellatekno core data and scripts])
+AC_ARG_VAR([GTFREE], [gtfree path must be defined for the test bench to work])
+
+# Check if any of the corpus data repositories are available:
+AM_CONDITIONAL([BOUNDSTABLE],
+               [test -d ${GTBOUND}/stable/goldstandard/converted/__UND__/])
+AM_CONDITIONAL([BOUNDPRESTABLE],
+               [test -d ${GTBOUND}/prestable/goldstandard/converted/__UND__/])
+AM_CONDITIONAL([FREESTABLE],
+               [test -d ${GTFREE}/stable/goldstandard/converted/__UND__/])
+AM_CONDITIONAL([FREEPRESTABLE],
+               [test -d ${GTFREE}/prestable/goldstandard/converted/__UND__/])
+
+# Define whether you want to be a maintainer:
 AC_ARG_VAR([GTMAINTAINER], [define if you are maintaining the infra to get additional complaining about infra integrity])
 AM_CONDITIONAL([WANT_MAINTAIN], [test x"$GTMAINTAINER" != x])
 AC_PATH_PROG([GTVERSION], [gt-version.sh], [false],
@@ -47,6 +60,74 @@ Please do one of the following:
        d. add "export GTCORE=path/to/gtcore" to your ~/.profile or similar
 EOT
        AC_MSG_ERROR([gtversion.sh could not be executed])])
+
+# Check for forrest, whether we should install xml files in the forrest dir.
+# Requires forrest and that $GTBIG is defined (= available).
+AC_PATH_PROG([FORREST], [forrest], [], [$PATH$PATH_SEPARATOR$with_forrest])
+AC_MSG_CHECKING([whether we can enable html report generation])
+AS_IF([test "x$GTBIG" != x], [
+    AS_IF([test "x$FORREST" != x], [html_report=yes], [html_report=no])
+],[html_report=no])
+AC_MSG_RESULT([$html_report])
+AM_CONDITIONAL([CAN_FORREST], [test "x$html_report" != xno])
+
+# Check for Hunspell
+AC_PATH_PROG([HUNSPELL], [hunspell], [], [$PATH$PATH_SEPARATOR$with_hunspell])
+AC_MSG_CHECKING([whether we can enable hunspell testing])
+AS_IF([test "x$HUNSPELL" != "x" -a -d hunspell/$GTLANG2-latest/ ],
+      [hunspell_test=yes],
+      [hunspell_test=no])
+AC_MSG_RESULT([$hunspell_test])
+AM_CONDITIONAL([CAN_HUNSPELL], [test "x$hunspell_test" != "xno"])
+
+# Check for Foma, and the trie-spell-foma tool
+AC_PATH_PROG([TRIE_SPELL_FOMA], [trie-spell-foma], [],
+             [$PATH$PATH_SEPARATOR$with_trie_spell_foma])
+AC_PATH_PROG([FLOOKUP], [flookup], [],
+             [$PATH$PATH_SEPARATOR$with_flookup])
+AC_MSG_CHECKING([whether we can enable foma testing])
+AS_IF([test "x$TRIE_SPELL_FOMA" != "x" \
+		 -a "x$FLOOKUP" != "x" \
+		 -a -d foma-trie/$GTLANG2-latest/ ],
+      [trie_spell_foma_test=yes],
+      [trie_spell_foma_test=no])
+AC_MSG_RESULT([$trie_spell_foma_test])
+AM_CONDITIONAL([CAN_FOMASPELL], [test "x$trie_spell_foma_test" != "xno"])
+
+# Check for and configure PLX-spell-smX - only available for SME, SMJ and SMA
+AC_ARG_VAR([GTPRIV], [gtpriv path must be defined for the plx tests to work])
+AC_PATH_PROG([PLXSPELLSME], [spellSamiNort], [],
+   [$GTPRIV/polderland/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_plxspellsme])
+AC_PATH_PROG([PLXSPELLSMJ], [spellSamiLule], [],
+   [$GTPRIV/polderland/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_plxspellsmj])
+AC_PATH_PROG([PLXSPELLSMA], [spellSamiSout], [],
+   [$GTPRIV/polderland/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_plxspellsma])
+AC_MSG_CHECKING([whether we can enable PLX speller testing])
+AS_IF([test "x$PLXSPELLSME" != "x" -a \
+            "x$PLXSPELLSMJ" != "x" -a \
+            "x$PLXSPELLSMA" != "x" -a \
+            -d plx/$GTLANG2-latest/ ],
+      [plxspell_test=yes],
+      [plxspell_test=no])
+AC_MSG_RESULT([$plxspell_test])
+AM_CONDITIONAL([CAN_PLXSPELL], [test "x$plxspell_test" != "xno"])
+AM_CONDITIONAL([CAN_PLXSPELLSME],
+               [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsme"])
+AM_CONDITIONAL([CAN_PLXSPELLSMJ],
+               [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsmj"])
+AM_CONDITIONAL([CAN_PLXSPELLSMA],
+               [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsma"])
+
+# Check for Voikkospell
+AC_PATH_PROG([VOIKKOSPELL], [voikkospell], [],
+             [$PATH$PATH_SEPARATOR$with_voikkospell])
+AC_MSG_CHECKING([whether we can enable voikkospell testing])
+AS_IF([test "x$VOIKKOSPELL" != "x" -a -d voikko/$GTLANG2-latest/ ],
+      [voikkospell_test=yes],
+      [voikkospell_test=no])
+AC_MSG_RESULT([$voikkospell_test])
+AM_CONDITIONAL([CAN_VOIKKOSPELL], [test "x$voikkospell_test" != "xno"])
+
 ]) # gt_PROG_SCRIPTS_PATHS
 
 AC_DEFUN([gt_PRINT_FOOTER],

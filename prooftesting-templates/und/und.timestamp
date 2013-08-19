@@ -1,4 +1,7 @@
 $Rev$
+Reorganised the configuration code, moving most of it to m4/giellatekno.m4.
+
+r79450:
 Changing filenames, fixed a bug in detecting speller lexicon version.
 
 r79443:

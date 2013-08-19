@@ -10,7 +10,7 @@
 DATE = $(shell date +%Y%m%d)
 TESTTIME = $(shell date +%H%M)
 SCRIPTDIR=$(GTCORE)/scripts
-LEXICONVERSION=$(shell readlink $(GTLANG2) | tr -d '/')
+LEXICONVERSION=$(shell readlink $(GTLANG2)-latest | tr -d '/')
 
 # Forrest publishing:
 SPLTESTREPDIR   = $(GTBIG)/techdoc/proof/spelling/testing

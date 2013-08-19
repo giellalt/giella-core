@@ -1,4 +1,7 @@
 $Rev$
+Changing filenames, fixed a bug in detecting speller lexicon version.
+
+r79443:
 Added support for copying test results to the forrest documentation location.
 Enabled automatically if forrest is installed, and $GTBIG is defined (assuming
 all of it is then checked out).

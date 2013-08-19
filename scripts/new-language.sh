@@ -26,7 +26,8 @@ availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
 # names by counting the matches (it should be 1 if it matches, 0 if not);
 # if the test fails (i.e. we are in the wrong directory), write a message and
 # exit:
-if test $(echo "$availableTemplateColls" | grep -c $TEMPLATECOLL ) -eq 0 ; then
+if test $(echo "$availableTemplateColls" \
+          | grep -c "^$TEMPLATECOLL\$" ) -eq 0 ; then
     echo "You are not in a directory holding template-based language dirs."
     echo "Your current directory is named $TEMPLATECOLL, but should be one of"
     echo

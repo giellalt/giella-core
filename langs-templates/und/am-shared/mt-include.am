@@ -122,3 +122,6 @@ analyser-mt-apertium-desc.%.hfst: \
 %.att: %.hfst
 	$(AM_V_GEN)$(HFST_FST2FST) $(HFSTFLAGS) -w -i $< \
 		| $(HFST_FST2TXT) -o $@
+
+%.att.gz: %.att
+	$(AM_V_GEN)$(GZIP) -9 -c $< > $@

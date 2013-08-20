@@ -111,6 +111,7 @@ fi
 # Identify language:
 CURLANG=$(fgrep 'AC_SUBST([GTLANG]' configure.ac \
 		  | cut -d',' -f2 | cut -d'[' -f2 | cut -d']' -f1)
+CUR2LANG=$( ${GTCORE}/scripts/iso3-to-2.sh $CURLANG )
 
 # Identify template collection name from parent directory or from option:
 if test "x$tplcoll" = "x" ; then
@@ -170,7 +171,10 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
     for f in $(svn diff -r${macrolangrev}:HEAD --summarize \
             ${SVNREPOROOT}/trunk/gtcore/${TEMPLATEDIR}/${macrolang}/ \
             | awk '{print $2}' ) ; do
-        localf=./${f#$SVNREPOROOT*${TEMPLATEDIR}/${macrolang}/}
+        localf-tmp=./${f#$SVNREPOROOT*${TEMPLATEDIR}/${macrolang}/}
+        # Replace __UND__ in local filenames, so that merging can be done:
+        localf=$( echo $localf-tmp | $SED -e "s/__UND__/$CURLANG/g" \
+                                          -e "s/__UND2C__/$CUR2LANG/g" )
         if test ! -r ${localf} ; then
             svn cp ${f} ${localf}
         elif test -d ${localf} ; then

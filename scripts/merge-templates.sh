@@ -186,7 +186,7 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
             fi
         else
             case ${f} in
-                *.am | *.m4 | *configure.ac | *autogen.sh | *README )
+                *.am | *.m4 | *.sh | *.sh.in | *configure.ac | *README)
                     svn merge -r${macrolangrev}:HEAD \
                                 ${f} ${localf} $SVNMERGE_OPTIONS
                     ;;

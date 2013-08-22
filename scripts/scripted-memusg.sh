@@ -33,8 +33,7 @@ pgid=`ps -c | grep $1 | sed -e 's/^/ /' | tr -s " " | cut -d" " -f2`
 
 # detect operating system and prepare measurement
 case `uname` in
-    Darwin|*BSD) sizes() { /bin/ps -o rss= $1; } ;;
-    Linux) sizes() { /bin/ps -o rss= -$1; } ;;
+    Darwin|*BSD|Linux) sizes() { /bin/ps -o rss= $1; } ;;
     *) echo "`uname`: unsupported operating system" >&2; exit 2 ;;
 esac
 

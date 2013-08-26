@@ -3,7 +3,7 @@
 ## Licence: GPL v3+
 
 # Files and filenames:
-GSDATA=../all-gs.txt
+GSDATA=../all-gs-$(GTLANG).txt
 SPELLERINPUT=goldstandard.spin.txt
 SPELLEROUTPUT=goldstandard.spout.txt
 SPELLERVERSION=sp-version.txt

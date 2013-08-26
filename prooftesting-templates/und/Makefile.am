@@ -51,27 +51,27 @@ endif # BOUNDPRESTABLE
 GSDOC=
 
 # All input texts are concatenated into this file:
-ALLDATA=all-gs.txt
+ALLDATA=all-gs-$(GTLANG).txt
 
 noinst_DATA=$(ALLDATA) $(GSDATA)
 
 $(ALLDATA): $(GSDOC) $(GSDATA)
 	if test "x$(GSDOC)" != "x" ; then \
-	ccat -l $(GTLANG) -a -S -ort -C -f $< \
+	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f $< \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \
 		> $@; else \
 		cat $^ > $@; fi
 
 all-gs-%-bound.txt:
-	ccat -l $(GTLANG) -a -S -ort -C -f \
+	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f \
 		-r $$GTBOUND/$*/goldstandard/converted/$(GTLANG)/ \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \
 		> $@
 
 all-gs-%-free.txt:
-	ccat -l $(GTLANG) -a -S -ort -C -f \
+	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f \
 		-r $$GTFREE/$*/goldstandard/converted/$(GTLANG)/ \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \

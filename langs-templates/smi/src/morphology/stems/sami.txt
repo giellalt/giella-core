@@ -272,7 +272,7 @@ Muorahká ACCRA-plc ;
 Mádes LONDON-plc ;
 Mágredá:Má^gredá ACCRA-fem ;
 !Máhttei:Máhtte DUBAI-mal ;Finnes dette navnet? Lager en trasig homonymi
-Máhttolokten-Sámi+N+Prop+Obj+Sg+Nom:Máhttolokten-Sámi K ;
+Máhttolokten-Sámi+N+Prop+Sem/Obj+Sg+Nom:Máhttolokten-Sámi K ;
 Malaga+Use/Sub:Málaga ACCRA-plc ;
 Márainen:Márainen LONDON-sur ;
 Máre ACCRA-fem ;
@@ -287,7 +287,7 @@ Niillán+Use/LexSub:Nijllán9 ACCRA ;!WHAT IS THIS?
 Nilá ACCRA-mal ;
 Nilán:Nilán9 BERN-plc ;
 Nová ACCRA-mal ;
-Nuorttanaste+N+Prop+Obj+Sg+Ill:Nuortta^nastái ACCRA-obj ;
+Nuorttanaste+N+Prop+Sem/Obj+Sg+Ill:Nuortta^nastái ACCRA-obj ;
 Náhkol LONDON-mal ;
 Náhor LONDON-plc ;
 Olá ACCRA-mal ;

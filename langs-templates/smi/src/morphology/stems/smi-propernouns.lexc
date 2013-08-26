@@ -720,7 +720,7 @@ Taivainen:Taivai C-FI-NEN-sur ;
 Takkinen:Takki C-FI-NEN-sur ;
 Talvinen:Talvi C-FI-NEN-sur ;
 Tamminen:Tammi C-FI-NEN-sur ;
-Tampere+N+Prop+Org+Sg+Ill:@U.Cap.Obl@Tamperei K ; !alt. ill-form
+Tampere+N+Prop+Sem/Org+Sg+Ill:@U.Cap.Obl@Tamperei K ; !alt. ill-form
 Tanninen:Tanni C-FI-NEN-sur ;
 Tapanainen:Tapanai C-FI-NEN-sur ;
 Tapaninen:Tapani C-FI-NEN-sur ;
@@ -826,7 +826,7 @@ Värtinen:Värti C-FI-NEN-sur ;
 Väätäinen:Väätäi C-FI-NEN-sur ;
 Väätämöinen:Väätämöi C-FI-NEN-sur ;
 Vågsli+Use/Sub:Vågs^li NYSTØ-plc ;
-Yle+N+Prop+Org+Sg+Ill:@U.Cap.Obl@Ylei K ; !alt. ill-form
+Yle+N+Prop+Sem/Org+Sg+Ill:@U.Cap.Obl@Ylei K ; !alt. ill-form
 Yletyinen:Yletyi C-FI-NEN-sur ;
 Ylhäinen:Ylhäi C-FI-NEN-plc ;
 Ylinen:Yli C-FI-NEN-sur ;
@@ -10715,7 +10715,7 @@ Jakola ACCRA-sur ;
 Jakonen:Jako C-FI-NEN-sur ;
 Jakov LONDON-plc ;
 Jakovlev BERN-sur ;
-Jakt-% och% fiskesamerna+N+Prop+Org+Sg+Nom+CmpN/None:@U.Cap.Obl@Jakt-% och% fiske^samerna K ;
+Jakt-% och% fiskesamerna+N+Prop+Sem/Org+Sg+Nom+CmpN/None:@U.Cap.Obl@Jakt-% och% fiske^samerna K ;
 Jaktlovkommisjonen:Jakt^lov^kommisjonen9 LONDON-obj ;
 Jakuck BERN-plc ;
 Jakutia ACCRA-plc ;
@@ -20380,7 +20380,7 @@ SameNet+Use/Sub:Same^nett9 BERN-org ;
 Samerett:Same^rett BERN-obj ;
 Samerettsutvalget:Same^retts^utvalget LONDON-org ;
 Samerna% för% framtiden+Use/LexSub:Samerna% för% framtiden LONDON-org ;
-Samerna+N+Prop+Org+Sg+Nom:@U.Cap.Obl@Samerna K ;
+Samerna+N+Prop+Sem/Org+Sg+Nom:@U.Cap.Obl@Samerna K ;
 Samernas BERN-LOAN-obj ;
 Sameråd:Same^råd9 BERN-LOAN-org ;
 Sametinget:Same^tinget9 LONDON-LOAN-org ;
@@ -21573,7 +21573,7 @@ Skogselskap:Skog^sel^skap9 BERN-org ;
 Skogseth:Skogseth9 BERN-sur ;
 Skogsholm:Skogs^holm9 BERN-sur ;
 Skogsrud:Skogsrud9 BERN-sur ;
-Skogssamerna+N+Prop+Org+Sg+Nom:@U.Cap.Obl@Skogs^samerna K ;
+Skogssamerna+N+Prop+Sem/Org+Sg+Nom:@U.Cap.Obl@Skogs^samerna K ;
 Skogsselskap:Skogs^sel^skap9 BERN-org ;
 Skogsstyrelsen:Skogs^styrelsen9 LONDON-sur ;
 Skogstad:Skog^stad9 BERN-sur ;

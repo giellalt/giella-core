@@ -1,5 +1,6 @@
 # Remove semantic tags from the upper side.
 # Semantic tags:
+%+N <- %+Sem%/Plc %+N ,
 0 <- %+Sem%/Obj,
 0 <- %+Sem%/Org,
 0 <- %+Sem%/Act,

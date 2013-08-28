@@ -253,3 +253,8 @@ EOF
         rm -f ${unmerged}
     fi
 done
+
+# Remove .tmp file if empty:
+if test ! -s ${unmerged} ; then
+    rm -f ${unmerged}
+fi

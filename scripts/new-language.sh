@@ -5,18 +5,24 @@ if test -z "${GTCORE}" ; then
 fi
 
 # Wrong usage - short instruction:
-if ! test $# -eq 1 ; then
-    echo "Usage: $0 NEW_LANGUAGE_ISOCODE"
+if ! test $# -eq 1 -o $# -eq 2 ; then
+    echo "Usage: $0 NEW_LANGUAGE_ISOCODE [TEMPLATECOLLECTION]"
     echo
-    echo "e.g. $0 sme"
+    echo "e.g.:"
+    echo "$0 sme"
+    echo "$0 kal langs"
     echo
     exit 1
 fi
 
-# Where are we? Must be inside 'langs' or 'prooftesting', check further down:
-curDir=$(pwd)
-# Extract template collection name from current dir:
-TEMPLATECOLL=$(basename $curDir)
+if test "x$2" == "x"; then
+    # Where are we? Must be inside 'langs' or 'prooftesting' if not specified:
+    curDir=$(pwd)
+    # Extract template collection name from current dir:
+    TEMPLATECOLL=$(basename $curDir)
+else
+    TEMPLATECOLL=$2
+fi
 
 # Get the list of available template collections:
 availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
@@ -28,12 +34,15 @@ availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
 # exit:
 if test $(echo "$availableTemplateColls" \
           | grep -c "^$TEMPLATECOLL\$" ) -eq 0 ; then
-    echo "You are not in a directory holding template-based language dirs."
-    echo "Your current directory is named $TEMPLATECOLL, but should be one of"
+    echo "You are not in a directory holding template-based language dirs,"
+    echo "or the specified collection name is invalid."
+    echo "The given or identified collection name is '$TEMPLATECOLL', but"
+    echo "should be one of:"
     echo
     echo "$availableTemplateColls"
     echo
-    echo "Move to a suitable directory and try again."
+    echo "Move to a suitable directory, or specify the template collection"
+    echo "name as the second option, and try again."
     exit 1
 fi
 

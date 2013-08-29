@@ -15,9 +15,9 @@ if ! test $# -eq 1 -o $# -eq 2 ; then
     exit 1
 fi
 
+curDir=$(pwd)
 if test "x$2" == "x"; then
     # Where are we? Must be inside 'langs' or 'prooftesting' if not specified:
-    curDir=$(pwd)
     # Extract template collection name from current dir:
     TEMPLATECOLL=$(basename $curDir)
 else

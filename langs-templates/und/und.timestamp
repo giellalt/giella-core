@@ -1,4 +1,7 @@
 $Rev$
+Forgot one small make step.
+
+r81051:
 Added the inverse transcriptors, to go from text to numerical expressions.
 
 r81022:

@@ -57,7 +57,7 @@ transcriptor-text2%-raw.hfst: %.lexc
 	$(AM_V_GEN)$(HFST_LEXC) -f foma -o $@.foma $^
 	$(AM_V_GEN)$(HFST_FST2FST) -f openfst-tropical -i $@.foma -o $@.tmp
 	$(AM_V_GEN)$(HFST_INVERT) -i $@.tmp -o $@
-	$(AM_V_GEN)rm -f $@.foma
+	$(AM_V_GEN)rm -f $@.foma $@.tmp
 
 ####### Xerox build rules: #######
 

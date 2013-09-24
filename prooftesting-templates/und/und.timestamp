@@ -1,4 +1,7 @@
 $Rev$
+Forgot to add footer output of Púki test.
+
+r81313:
 Added support for the Icelandic speller Púki (Linux and GTPRIV only).
 
 r79478:

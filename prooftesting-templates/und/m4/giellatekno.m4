@@ -152,6 +152,7 @@ cat<<EOF
     * test Hunspell: $hunspell_test
     * test Foma+trie: $trie_spell_foma_test
     * test PLX: $plxspell_test
+    * test Púki: $pukispell_test
     * test Voikko: $voikkospell_test
     * Html reports using forrest: $html_report
 

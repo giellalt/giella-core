@@ -31,6 +31,7 @@ my $output;
 my $print_xml;
 my $forced=0;
 my $polderland;
+my $puki;
 my $applescript;
 my $hunspell;
 my $voikko;
@@ -55,6 +56,7 @@ GetOptions (
 			"output|o=s"         => \$output,
 			"document|d=s"       => \$document,
 			"pl|p"               => \$polderland,
+			"pk"                 => \$puki,
 			"mw|m"               => \$applescript,
 			"hu|fo|u"            => \$hunspell,
 			"vkmalaga|vkhfst|vk" => \$voikko,
@@ -91,12 +93,13 @@ $toolversion =~ s/^, //;
 # Convert the system time input data to usable strings in seconds:
 @alltime = convert_systime( $timeuse );
 
-if ($applescript) { $input_type="mw"; read_applescript(); }
-elsif ($hunspell) { $input_type="hu"; read_hunspell(); }
-elsif ($polderland) { $input_type="pl"; read_polderland(); }
-elsif ($voikko) { $input_type="vk"; read_voikko(); }
-elsif ($hfst) { $input_type="hf"; read_hfst(); }
-else { print STDERR "$0: Give the speller output type: --pl, --mw, --hu, --hf or --vk\n"; exit; }
+if    ($applescript) { $input_type="mw"; read_applescript(); }
+elsif ($hunspell)    { $input_type="hu"; read_hunspell();    }
+elsif ($polderland)  { $input_type="pl"; read_polderland();  }
+elsif ($puki)        { $input_type="pk"; read_puki();        }
+elsif ($voikko)      { $input_type="vk"; read_voikko();      }
+elsif ($hfst)        { $input_type="hf"; read_hfst();        }
+else { print STDERR "$0: Give the speller output type: --pl, --pk, --mw, --hu, --hf or --vk\n"; exit; }
 
 if ($print_xml) { print_xml_output(); }
 else { print_output(); }
@@ -241,6 +244,79 @@ sub read_hunspell {
 			  @suggestions = split(/\, /, $sugglist);
 		  }
 	  }
+		# Debug prints
+		#print "Flag: $flag\n";
+		#print "ERROR: $error\n";
+		#if ($orig) { print "Orig: $orig\n"; }
+		#if (@suggestions) { print "Suggs: @suggestions\n"; }
+
+		# remove extra space from original
+		if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
+		if ($offset) { $offset =~ s/\://; }
+
+		if ($error eq "SplCor") {
+			$originals[$i]{'error'} = $error; 
+			next;
+		}
+		# Some simple adjustments to the input and output lists.
+		# First search the output word in the input list.
+		if (! $orig) { next; }
+		if ($originals[$i] && $originals[$i]{'orig'} ne $orig) {
+			push (@tokens, $orig);
+			next;
+		}
+		if ($originals[$i] && (! $orig || $originals[$i]{'orig'} eq $orig)) {
+			if ($error) { $originals[$i]{'error'} = $error; }
+			else { $originals[$i]{'error'} = "not_known"; }
+			$originals[$i]{'sugg'} = [ @suggestions ];
+			if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; }
+			#$originals[$i]{'num'} = [ @numbers ];
+		}
+	}
+	close(FH);
+}
+
+sub read_puki {
+	
+	print STDERR "Reading Púki output from $output\n";
+	open(FH, $output);
+
+	my $i=0;
+	my @suggestions;
+	my $error;
+	#my @numbers;
+	my $hunspellversion = <FH>;
+	my @tokens;
+	while(<FH>) {
+		# Typical input:
+		# $ echo eg | ./puki | iconv -f Latin1 -t UTF-8
+		# *eg*dg#eð#ef#ei#ek#el#en#er#et#ey#ég#kg#mg#og#æg*
+		# $ echo ég | iconv -f UTF-8 -t Latin1 | ./puki | iconv -f Latin1 -t UTF-8
+		# ég
+		# $ echo islndt | iconv -f UTF-8 -t Latin1 | ./puki | iconv -f Latin1 -t UTF-8
+		# *islndt**
+		# ^[^\*] = correct spelling
+		# ^* = misspelling, possibly with suggestions
+		# ^*eg* = original input
+		# The rest is a #-separated list of suggestions
+		# ^*islndt** = misspelling with no suggestions
+		my $root;
+		my $suggnr;
+		my $compound;
+		my $orig;
+		my $offset;
+		my ($flag, $rest) = split(/ /, $_, 2);
+
+		# Error symbol conversion:
+    	if ($_ =~ '^\*') {
+    	    $error = 'SplErr' ;
+    	    my $sugglist;
+    	    ($orig, $sugglist, $rest) = split(/\*/, $_, 3);
+    	    @suggestions = split(/\#/, $sugglist);
+    	} else {
+    	    $error = 'SplCor' ;
+    	}
+
 		# Debug prints
 		#print "Flag: $flag\n";
 		#print "ERROR: $error\n";
@@ -857,6 +933,8 @@ Usage: speller-testres.pl [OPTIONS]
 
 --pl              The speller output is in Polderland format.
 -p
+
+--pk              The speller output is in the Icelandic Púki format.
 
 --mw              The speller output is in AppleScript+MSWord format.
 -m

@@ -94,8 +94,10 @@ AS_IF([test "x$TRIE_SPELL_FOMA" != "x" \
 AC_MSG_RESULT([$trie_spell_foma_test])
 AM_CONDITIONAL([CAN_FOMASPELL], [test "x$trie_spell_foma_test" != "xno"])
 
-# Check for and configure PLX-spell-smX - only available for SME, SMJ and SMA
+# Define GTPRIV - needed for plx and Púki speller tools:
 AC_ARG_VAR([GTPRIV], [gtpriv path must be defined for the plx tests to work])
+
+# Check for and configure PLX-spell-smX - only available for SME, SMJ and SMA
 AC_PATH_PROG([PLXSPELLSME], [spellSamiNort], [],
    [$GTPRIV/polderland/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_plxspellsme])
 AC_PATH_PROG([PLXSPELLSMJ], [spellSamiLule], [],
@@ -117,6 +119,19 @@ AM_CONDITIONAL([CAN_PLXSPELLSMJ],
                [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsmj"])
 AM_CONDITIONAL([CAN_PLXSPELLSMA],
                [test "x$plxspell_test" != "xno" -a "x$GTLANG" = "xsma"])
+
+# Check for and configure Púki - only for Icelandic, only in $GTPRIV, and only
+# for Linux.
+AC_PATH_PROG([PUKI], [puki], [],
+   [$GTPRIV/puki/bin$PATH_SEPARATOR$PATH$PATH_SEPARATOR$with_puki])
+AC_MSG_CHECKING([whether we can enable Púki speller testing - Linux only])
+AS_IF([test "x$PUKI" != "x" -a \
+			-d puki/$GTLANG2-latest/ -a \
+			"$(expr substr $(uname -s) 1 5)" == "Linux"],
+      [pukispell_test=yes],
+      [pukispell_test=no])
+AC_MSG_RESULT([$pukispell_test])
+AM_CONDITIONAL([CAN_PUKISPELL], [test "x$pukispell_test" != "xno"])
 
 # Check for Voikkospell
 AC_PATH_PROG([VOIKKOSPELL], [voikkospell], [],

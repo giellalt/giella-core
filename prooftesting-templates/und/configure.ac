@@ -64,6 +64,7 @@ AC_CONFIG_FILES([Makefile           \
                  hunspell/Makefile  \
                  foma-trie/Makefile \
                  plx/Makefile       \
+                 puki/Makefile      \
                  voikko/Makefile])
 
 # This must be near the end of all configure.ac files:

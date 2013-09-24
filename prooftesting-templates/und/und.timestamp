@@ -1,4 +1,7 @@
 $Rev$
+Added support for the Icelandic speller Púki (Linux and GTPRIV only).
+
+r79478:
 Moved the definition of SCRIPTDIR to configure.ac.
 
 r79472:

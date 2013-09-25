@@ -14,6 +14,7 @@
 #
 # $Id$
 
+use utf8; # The perl script itself is UTF-8, and this pragma will make perl obey
 use strict;
 use XML::Twig;
 
@@ -111,9 +112,9 @@ sub convert_systime {
 		my @real = grep /^real/, @alltimes;
 		my @user = grep /^user/, @alltimes;
 		my @sys  = grep /^sys/,  @alltimes;
-		my $real = convert_systime_to_seconds( $real[1] );
-		my $user = convert_systime_to_seconds( $user[1] );
-		my $sys  = convert_systime_to_seconds( $sys[1]  );
+		my $real = convert_systime_to_seconds( @real );
+		my $user = convert_systime_to_seconds( @user );
+		my $sys  = convert_systime_to_seconds( @sys  );
 		return ($real, $user, $sys);
 	} else {
 		return ("", "", "");

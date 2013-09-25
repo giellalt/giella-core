@@ -107,10 +107,13 @@ else { print_output(); }
 sub convert_systime {
 	my $times = shift(@_);
 	if ( $times ) {
-		my ($empty, $real, $user, $sys) = split /\n/, $times;
-		$real = convert_systime_to_seconds( $real );
-		$user = convert_systime_to_seconds( $user );
-		$sys  = convert_systime_to_seconds( $sys  );
+		my @alltimes = split /\n/, $times;
+		my @real = grep /^real/, @alltimes;
+		my @user = grep /^user/, @alltimes;
+		my @sys  = grep /^sys/,  @alltimes;
+		$real = convert_systime_to_seconds( $real[1] );
+		$user = convert_systime_to_seconds( $user[1] );
+		$sys  = convert_systime_to_seconds( $sys[1]  );
 		return ($real, $user, $sys);
 	} else {
 		return ("", "", "");

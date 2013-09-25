@@ -1,4 +1,7 @@
 $Rev$
+Forgot to add the puki dir to the SUBDIRS list.
+
+r81314:
 Forgot to add footer output of Púki test.
 
 r81313:

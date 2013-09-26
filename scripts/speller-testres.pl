@@ -187,7 +187,6 @@ sub read_hunspell {
 	my @suggestions;
 	my $error;
 	#my @numbers;
-	my $hunspellversion = <FH>;
 	my @tokens;
 	while(<FH>) {
 		chomp;
@@ -289,7 +288,6 @@ sub read_puki {
 	my @suggestions;
 	my $error;
 	#my @numbers;
-	my $hunspellversion = <FH>;
 	my @tokens;
 	while(<FH>) {
 		# Typical input:
@@ -309,27 +307,26 @@ sub read_puki {
 		my $compound;
 		my $orig;
 		my $offset;
-		my ($flag, $rest) = split(/ /, $_, 2);
 
 		# Error symbol conversion:
-    	if ($_ =~ '^\*') {
+    	if ( m/^\*/ ) {
     	    $error = 'SplErr' ;
-    	    my $sugglist;
-    	    ($orig, $sugglist, $rest) = split(/\*/, $_, 3);
+		    my $sugglist, $empty;
+		    ($empty, $orig, $sugglist, $rest) = split(/\*/, $_, 4);
     	    @suggestions = split(/\#/, $sugglist);
     	} else {
     	    $error = 'SplCor' ;
+		    $orig = $_ ;
     	}
 
 		# Debug prints
 		#print "Flag: $flag\n";
 		#print "ERROR: $error\n";
-		#if ($orig) { print "Orig: $orig\n"; }
-		#if (@suggestions) { print "Suggs: @suggestions\n"; }
+	    #if ($orig) { print "Orig: $orig\n"; }
+	    #if (@suggestions) {print "Suggs: @suggestions\n\n";} else {print "\n";}
 
 		# remove extra space from original
 		if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
-		if ($offset) { $offset =~ s/\://; }
 
 		if ($error eq "SplCor") {
 			$originals[$i]{'error'} = $error; 

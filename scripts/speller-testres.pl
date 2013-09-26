@@ -313,6 +313,7 @@ sub read_puki {
     	    $error = 'SplErr' ;
 		    my $sugglist;
 		    my $empty;
+		    my $rest;
 		    ($empty, $orig, $sugglist, $rest) = split(/\*/, $_, 4);
     	    @suggestions = split(/\#/, $sugglist);
     	} else {

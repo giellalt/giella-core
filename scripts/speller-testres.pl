@@ -311,7 +311,8 @@ sub read_puki {
 		# Error symbol conversion:
     	if ( m/^\*/ ) {
     	    $error = 'SplErr' ;
-		    my $sugglist, $empty;
+		    my $sugglist;
+		    my $empty;
 		    ($empty, $orig, $sugglist, $rest) = split(/\*/, $_, 4);
     	    @suggestions = split(/\#/, $sugglist);
     	} else {

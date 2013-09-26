@@ -18,13 +18,12 @@ SPELLERTOOL=$(notdir $(SPELLER))
 # wrapped in another call, and followed by yet another shell script, to capture
 # processing time and memory consumption.
 $(SPELLEROUTPUT): $(SPELLERINPUT)
-	touch userdict
-	{ time iconv -f UTF-8 -t Latin1 $< \
-		| $(SPELLER) \
-		| iconv -f Latin1 -t UTF-8 \
-		> $@ ; } 2> spellertimeusage.txt &
+	iconv -f UTF-8 -t Latin1 < $< > $<.latin1
+	{ time $(SPELLER) < $<.latin1 \
+		> $@.latin1 ; } 2> spellertimeusage.txt &
+	iconv -f Latin1 -t UTF-8 < $@.latin1 > $@
 	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
-	rm -f userdict
+	-rm -f *.latin1
 
 # Generate speller tool version:
 $(SPELLERVERSION): $(SPELLEROUTPUT)

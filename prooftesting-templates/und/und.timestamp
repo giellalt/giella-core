@@ -1,4 +1,7 @@
 $Rev$
+Moved the iconv steps outside of the time- and mem-checked process.
+
+r81339:
 Forgot to add the puki dir to the SUBDIRS list.
 
 r81314:

@@ -173,7 +173,7 @@ sub read_applescript {
 			$originals[$i]{'num'} = [ @numbers ];
 		}
 		$i++;
-		}
+	}
 	close(FH);
 }
 
@@ -297,11 +297,17 @@ sub read_puki {
 		my $orig;
 		my $offset;
 
+		# Warn if the output list is longer than the input list:
+		if (! $originals[$i]) {
+			cluck "Warning: the number of output words did not match the input\n";
+			cluck "Skipping part of the output..\n";
+			last;
+		}
+
 		# If the line starts with a star, the speller didn't recognise the word:
 		if ( $line =~ /^\*/ ) {
 			$error = 'SplErr' ;
 			my $sugglist = "";
-#			print STDERR ".";
     		my $empty;
     		my $rest;
     		($empty, $orig, $sugglist, $rest) = split(/\*/, $line, 4);
@@ -309,18 +315,16 @@ sub read_puki {
 			if ( $sugglist ) {
 				@suggestions = split(/\#/, $sugglist);
 				@numbers = @suggestions;
-				my $size = @suggestions;
+				my $suggnr = @suggestions;
 				my $j;
-				for ($j=0; $j<$size; $j++) {
+				for ($j=0; $j<$suggnr; $j++) {
 					$numbers[$j] = ''; # No weights available from Púki
 				}
-#				print STDERR "+";
 			}
 		# Otherwise it is a correct word, according to the speller
 		} else {
 			$error = 'SplCor' ;
 			$orig = $line ;
-#			print STDERR "|";
 		}
 
 # Debug prints:
@@ -334,7 +338,6 @@ sub read_puki {
 
 		if ($error eq "SplCor") {
 			$originals[$i]{'error'} = $error; 
-#			next;
 		}
 		# Some simple adjustments to the input and output lists.
 		# First search the output word in the input list.
@@ -348,7 +351,7 @@ sub read_puki {
 
 		# If the output word was not found in the input list, ignore it.
 		if (! $originals[$j]) {
-#			print STDERR "$0: Output word $orig was not found in the input list.\n";
+			print STDERR "$0: Output word $orig was not found in the input list.\n";
 			next;
 		}
 		# If it was found, mark the words in between.
@@ -368,14 +371,13 @@ sub read_puki {
 				$originals[$i]{'error'} = "not_known";
 			}
 			$originals[$i]{'sugg'} = [ @suggestions ]; # Store each suggestion
-			if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; }
+			if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; } # # of suggs
 			$originals[$i]{'num'} = [ @numbers ]; # Store the weight of the sugg
 		}
-#		print STDERR "$i" ;
-		$i++;
 		@suggestions = ();
 		@numbers = ();
 		$error = '';
+		$i++;
 	}
 	close(FH);
 	print STDERR "\n";

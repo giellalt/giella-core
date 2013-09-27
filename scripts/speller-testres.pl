@@ -287,10 +287,10 @@ sub read_puki {
 	my $i=0;
 	my $error;
 	my @numbers = ();
-    my @suggestions = ();
+	my @suggestions = ();
 	while(<FH>) {
-	    my $line = $_ ;
-	    chomp $line ;
+		my $line = $_ ;
+		chomp $line ;
 		my $root;
 		my $suggnr;
 		my $compound;
@@ -300,13 +300,12 @@ sub read_puki {
 		# If the line starts with a star, the speller didn't recognise the word:
 		if ( $line =~ /^\*/ ) {
 			$error = 'SplErr' ;
-			# if the line contains something between the second and third star,
-			# there are suggestions:
-			if ( $line =~ /^\*[^*]+\*[^*]+\*/ ) {
-				my $sugglist = "";
-				my $empty;
-				my $rest;
-				($empty, $orig, $sugglist, $rest) = split(/\*/, $line, 4);
+			my $sugglist = "";
+    		my $empty;
+    		my $rest;
+    		($empty, $orig, $sugglist, $rest) = split(/\*/, $line, 4);
+			# if there are suggestions, split them and add empty weights:
+			if ( $sugglist ) {
 				@suggestions = split(/\#/, $sugglist);
 				@numbers = @suggestions;
 				my $size = @suggestions;

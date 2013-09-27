@@ -21,8 +21,8 @@ $(SPELLEROUTPUT): $(SPELLERINPUT)
 	iconv -f UTF-8 -t Latin1 < $< > $<.latin1
 	{ time $(SPELLER) < $<.latin1 \
 		> $@.latin1 ; } 2> spellertimeusage.txt &
-	iconv -f Latin1 -t UTF-8 < $@.latin1 > $@
 	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
+	iconv -f Latin1 -t UTF-8 < $@.latin1 > $@
 	-rm -f *.latin1
 
 # Generate speller tool version:

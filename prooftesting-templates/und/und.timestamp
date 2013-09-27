@@ -1,4 +1,7 @@
 $Rev$
+Do not run iconv until the speller process is finished.
+
+r81393:
 Moved the iconv steps outside of the time- and mem-checked process.
 
 r81339:

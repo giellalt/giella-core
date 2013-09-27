@@ -286,35 +286,46 @@ sub read_puki {
 
 	my $i=0;
 	my $error;
-	#my @numbers;
-	my @tokens;
+	my @numbers = ();
+    my @suggestions = ();
 	while(<FH>) {
 	    my $line = $_ ;
 	    chomp $line ;
-	    my @suggestions = ();
 		my $root;
 		my $suggnr;
 		my $compound;
 		my $orig;
 		my $offset;
 
-		# Error symbol conversion:
+		# If the line starts with a star, the speller didn't recognise the word:
 		if ( $line =~ /^\*/ ) {
-		    $error = 'SplErr' ;
-		    my $sugglist = "";
-		    my $empty;
-		    my $rest;
-		    ($empty, $orig, $sugglist, $rest) = split(/\*/, $line, 4);
-		    @suggestions = split(/\#/, $sugglist);
+			$error = 'SplErr' ;
+			# if the line contains something between the second and third star,
+			# there are suggestions:
+			if ( $line =~ /^\*[^*]+\*[^*]+\*/ ) {
+				my $sugglist = "";
+				my $empty;
+				my $rest;
+				($empty, $orig, $sugglist, $rest) = split(/\*/, $line, 4);
+				@suggestions = split(/\#/, $sugglist);
+				@numbers = @suggestions;
+				my $size = @suggestions;
+				my $j;
+				for ($j=0; $j<$size; $j++) {
+					$numbers[$j] = ''; # No weights available from Púki
+				}
+			}
+		# Otherwise it is a correct word, according to the speller
 		} else {
-		    $error = 'SplCor' ;
-		    $orig = $line ;
+			$error = 'SplCor' ;
+			$orig = $line ;
 		}
 
-		# Debug prints
-		#print "Speller: $error\n";
-		#print "Orig: $orig\n";
-		#if (@suggestions) {print "Suggs: @suggestions\n\n";} else {print "\n";}
+# Debug prints:
+#		print "Speller: $error\n";
+#		if ($orig) { print "Orig: $orig\n"; }
+#		if (@suggestions) { print "Suggs: @suggestions\n"; }
+#		if (@numbers) { print "Nums: @numbers\n"; }
 
 		# remove extra space from original
 		if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
@@ -325,19 +336,42 @@ sub read_puki {
 		}
 		# Some simple adjustments to the input and output lists.
 		# First search the output word in the input list.
-		if (! $orig) { next; }
-		if ($originals[$i] && $originals[$i]{'orig'} ne $orig) {
-			push (@tokens, $orig);
+		my $j = $i;
+
+# Debug prints:
+#		print "$originals[$j]{'orig'}\n";
+#		print "-----------\n";
+
+		while($originals[$j] && $originals[$j]{'orig'} ne $orig) { $j++; }
+
+		# If the output word was not found in the input list, ignore it.
+		if (! $originals[$j]) {
+			print STDERR "$0: Output word $orig was not found in the input list.\n";
 			next;
 		}
-		if ($originals[$i] && (! $orig || $originals[$i]{'orig'} eq $orig)) {
-			if ($error) { $originals[$i]{'error'} = $error; }
-			else { $originals[$i]{'error'} = "not_known"; }
-			$originals[$i]{'sugg'} = [ @suggestions ];
-			if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; }
-			#$originals[$i]{'num'} = [ @numbers ];
+		# If it was found, mark the words in between.
+		elsif ($originals[$j] && $originals[$j]{'orig'} eq $orig) {
+			for (my $p=$i; $p<$j; $p++){ $originals[$p]{'error'} = "Error"; }
+			$i=$j;
+		}
+
+		# Assign error codes, suggestions and weights to the global entry list:
+		if ($originals[$i] && $originals[$i]{'orig'} eq $orig) {
+			if ($error) {
+				# Assign the proper error code:
+				$originals[$i]{'error'} = $error;
+			}
+			else {
+				# Assign a fallback code if there was no error code:
+				$originals[$i]{'error'} = "not_known";
+			}
+			$originals[$i]{'sugg'} = [ @suggestions ]; # Store each suggestion
+			$originals[$i]{'num'} = [ @numbers ]; # Store the weight of the sugg
+			$i++;
 		}
 		@suggestions = ();
+		@numbers = ();
+		$error = '';
 	}
 	close(FH);
 }
@@ -595,17 +629,19 @@ sub read_hfst {
 		my $rest      = "";
 		my ($firstline, $suggs) = split(/\n/, $_, 2);
 
+		# Speller didn't recognise, no suggestions provided:
 		if ($firstline  =~ m/Unable to correct/ ) {
 			($flag, $orig, $rest) = split(/"/, $firstline, 3); #"# Reset sntx clr
 			$error = 'SplErr' ;
+		# Speller did recognise the input:
 		} elsif ($firstline  =~ m/is in the lexicon/ ) {
-			($rest, $orig, $flag) = split(/"/, $firstline, 3);
+			($rest, $orig, $flag) = split(/"/, $firstline, 3); #"# Reset sntx clr
 			$error = 'SplCor' ;
+		# Speller didn't recognise, suggestions provided on the following lines:
 		} elsif ($firstline  =~ m/Corrections for/ ) {
-			($flag, $orig, $rest) = split(/"/, $firstline, 3);
+			($flag, $orig, $rest) = split(/"/, $firstline, 3); #"# Reset sntx clr
 			@suggestions = split(/\n/, $suggs);
 			$error = 'SplErr' ;
-			my $numb;
 			@numbers = @suggestions;
 			my $size = @suggestions;
 			my $j;

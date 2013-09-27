@@ -285,23 +285,13 @@ sub read_puki {
 	open(FH, $output);
 
 	my $i=0;
-	my @suggestions;
 	my $error;
 	#my @numbers;
 	my @tokens;
 	while(<FH>) {
-		# Typical input:
-		# $ echo eg | ./puki | iconv -f Latin1 -t UTF-8
-		# *eg*dg#eð#ef#ei#ek#el#en#er#et#ey#ég#kg#mg#og#æg*
-		# $ echo ég | iconv -f UTF-8 -t Latin1 | ./puki | iconv -f Latin1 -t UTF-8
-		# ég
-		# $ echo islndt | iconv -f UTF-8 -t Latin1 | ./puki | iconv -f Latin1 -t UTF-8
-		# *islndt**
-		# ^[^\*] = correct spelling
-		# ^* = misspelling, possibly with suggestions
-		# ^*eg* = original input
-		# The rest is a #-separated list of suggestions
-		# ^*islndt** = misspelling with no suggestions
+	    my $line = $_ ;
+	    chomp $line ;
+	    my @suggestions = ();
 		my $root;
 		my $suggnr;
 		my $compound;
@@ -309,23 +299,22 @@ sub read_puki {
 		my $offset;
 
 		# Error symbol conversion:
-    	if ( m/^\*/ ) {
-    	    $error = 'SplErr' ;
-		    my $sugglist;
+		if ( $line =~ /^\*/ ) {
+		    $error = 'SplErr' ;
+		    my $sugglist = "";
 		    my $empty;
 		    my $rest;
-		    ($empty, $orig, $sugglist, $rest) = split(/\*/, $_, 4);
-    	    @suggestions = split(/\#/, $sugglist);
-    	} else {
-    	    $error = 'SplCor' ;
-		    $orig = $_ ;
-    	}
+		    ($empty, $orig, $sugglist, $rest) = split(/\*/, $line, 4);
+		    @suggestions = split(/\#/, $sugglist);
+		} else {
+		    $error = 'SplCor' ;
+		    $orig = $line ;
+		}
 
 		# Debug prints
-		#print "Flag: $flag\n";
-		#print "ERROR: $error\n";
-	    #if ($orig) { print "Orig: $orig\n"; }
-	    #if (@suggestions) {print "Suggs: @suggestions\n\n";} else {print "\n";}
+		#print "Speller: $error\n";
+		#print "Orig: $orig\n";
+		#if (@suggestions) {print "Suggs: @suggestions\n\n";} else {print "\n";}
 
 		# remove extra space from original
 		if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
@@ -348,6 +337,7 @@ sub read_puki {
 			if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; }
 			#$originals[$i]{'num'} = [ @numbers ];
 		}
+		@suggestions = ();
 	}
 	close(FH);
 }

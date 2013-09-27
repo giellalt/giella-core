@@ -301,6 +301,7 @@ sub read_puki {
 		if ( $line =~ /^\*/ ) {
 			$error = 'SplErr' ;
 			my $sugglist = "";
+#			print STDERR ".";
     		my $empty;
     		my $rest;
     		($empty, $orig, $sugglist, $rest) = split(/\*/, $line, 4);
@@ -313,11 +314,13 @@ sub read_puki {
 				for ($j=0; $j<$size; $j++) {
 					$numbers[$j] = ''; # No weights available from Púki
 				}
+#				print STDERR "+";
 			}
 		# Otherwise it is a correct word, according to the speller
 		} else {
 			$error = 'SplCor' ;
 			$orig = $line ;
+#			print STDERR "|";
 		}
 
 # Debug prints:
@@ -331,7 +334,7 @@ sub read_puki {
 
 		if ($error eq "SplCor") {
 			$originals[$i]{'error'} = $error; 
-			next;
+#			next;
 		}
 		# Some simple adjustments to the input and output lists.
 		# First search the output word in the input list.
@@ -345,7 +348,7 @@ sub read_puki {
 
 		# If the output word was not found in the input list, ignore it.
 		if (! $originals[$j]) {
-			print STDERR "$0: Output word $orig was not found in the input list.\n";
+#			print STDERR "$0: Output word $orig was not found in the input list.\n";
 			next;
 		}
 		# If it was found, mark the words in between.
@@ -365,14 +368,17 @@ sub read_puki {
 				$originals[$i]{'error'} = "not_known";
 			}
 			$originals[$i]{'sugg'} = [ @suggestions ]; # Store each suggestion
+			if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; }
 			$originals[$i]{'num'} = [ @numbers ]; # Store the weight of the sugg
-			$i++;
 		}
+#		print STDERR "$i" ;
+		$i++;
 		@suggestions = ();
 		@numbers = ();
 		$error = '';
 	}
 	close(FH);
+	print STDERR "\n";
 }
 
 

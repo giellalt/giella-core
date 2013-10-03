@@ -1,4 +1,7 @@
-$Revision$:
+$Revision$
+Sorted and uniqued the smi file.
+
+r81540:
 Replaced ^ with # where there are real or semi word boundaries, ie a
 morpho(phono)logical structure that triggers secondary stress on the following
 syllabe.

@@ -1,4 +1,9 @@
 $Revision$:
+Replaced ^ with # where there are real or semi word boundaries, ie a
+morpho(phono)logical structure that triggers secondary stress on the following
+syllabe.
+
+r79040:
 d9 corrections by Trond.
 
 r75017:

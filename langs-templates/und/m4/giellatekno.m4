@@ -151,7 +151,7 @@ AC_ARG_ENABLE([voikko],
                               [build voikko support @<:@default=yes@:>@])],
               [enable_voikko=$enableval],
               [enable_voikko=yes])
-AM_CONDITIONAL([WANT_VOIKKO], [test "x$enable_spellerautomat" = xyes
+AM_CONDITIONAL([WANT_VOIKKO], [test "x$enable_spellerautomat" = xyes \
                                 -a  "x$enable_voikko"         = xyes ])
 
 # Enable Foma-based spellers, requires gzip - default is no
@@ -219,6 +219,7 @@ AC_DEFUN([gt_PRINT_FOOTER],
 [
 cat<<EOF
 -- Building $PACKAGE_STRING:
+
     -- basic package (on by default except hfst): --
     * build with Xerox: $gt_prog_xfst
     * build with HFST: $gt_prog_hfst
@@ -226,11 +227,13 @@ cat<<EOF
     * generators enabled: $enable_generation
     * yaml tests enabled: $enable_yamltests
     * generated documentation enabled: $gt_prog_docc
+
     -- proofing tools (off by default): --
     * spellers enabled: $enable_spellers
       * hfst speller fst's enabled: $enable_spellerautomat
       * voikko speller enabled: $enable_voikko
       * foma speller enabled: $enable_fomaspeller
+
     -- specialised fst's (off by default): --
     * phonetic/IPA conversion enabled: $enable_phonetic
     * dictionary fst's enabled: $enable_dicts

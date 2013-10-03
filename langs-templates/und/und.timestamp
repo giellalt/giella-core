@@ -1,4 +1,7 @@
 $Rev$
+Corrected syntax error in a test. Improved config feedback further.
+
+r81551:
 Now all speller fst's are turned off by default (I missed a few in the previous
 commit). The configure feedback is slightly improved.
 

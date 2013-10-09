@@ -37,6 +37,9 @@ fstfiles="*fst
 # Set svn:ignore props on all dirs:
 for f in $(find $1/ \
 			-not -iwholename '*.svn*' \
+			-not -iwholename '*build*' \
+			-not -iwholename '*.cache*' \
+			-not -iwholename '*hfst/3*' \
 			-type d) ; do
 	svn propset svn:ignore "$mkfiles
 $fstfiles" $f

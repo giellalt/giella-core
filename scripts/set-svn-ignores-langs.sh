@@ -40,6 +40,7 @@ for f in $(find $1/ \
 			-not -iwholename '*build*' \
 			-not -iwholename '*.cache*' \
 			-not -iwholename '*hfst/3*' \
+			-not -iwholename '*grammarcheckers/4*' \
 			-type d) ; do
 	svn propset svn:ignore "$mkfiles
 $fstfiles" $f
@@ -95,6 +96,11 @@ svn propset svn:ignore "$mkfiles
 $fstfiles
 *.zhfst
 3" $1/tools/spellcheckers/fstbased/hfst
+
+# Set the svn:ignore prop on the grammarchecker dir:
+svn propset svn:ignore "$mkfiles
+$fstfiles
+4" $1/tools/grammarcheckers
 
 # Remove the svn:ignore prop on some subdirs:
 svn propdel svn:ignore $1/src/morphology/affixes

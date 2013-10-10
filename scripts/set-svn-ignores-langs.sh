@@ -100,6 +100,7 @@ $fstfiles
 # Set the svn:ignore prop on the grammarchecker dir:
 svn propset svn:ignore "$mkfiles
 $fstfiles
+*-x-standard
 4" $1/tools/grammarcheckers
 
 # Remove the svn:ignore prop on some subdirs:

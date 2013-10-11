@@ -1,4 +1,10 @@
 $Revision$
+Several changes:
+* added a number of OLang tags - now down to ≈18 200 entries left to tag
+* all entries are now of the form upper:lower
+* tagged all MWE's as MWE's
+
+r18291:
 Added a few examples of OLang = ENG, SWE and NNO to make sure everything works
 as it should.
 

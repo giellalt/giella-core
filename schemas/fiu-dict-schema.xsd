@@ -693,6 +693,18 @@
    </xs:attribute>
    <xs:attribute name="lemmaID" type="xs:string"/>
    <xs:attribute name="stemID" type="xs:string"/>
+   <xs:element name="semantics">
+      <xs:complexType>
+         <xs:choice maxOccurs="unbounded">
+            <xs:element ref="sem"/>
+         </xs:choice>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="sem">
+     <xs:complexType>
+           <xs:attribute ref="semClass"/>
+      </xs:complexType>
+   </xs:element>
    <xs:element name="tg">
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
@@ -805,6 +817,7 @@
    <xs:element name="mg">
       <xs:complexType>
          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="semantics"/>
             <xs:element maxOccurs="unbounded" ref="m"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tg"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="xg"/>

@@ -25,7 +25,10 @@ AS_IF([test "x$GTCORE"  = x], [GTCORE=$(pwd); AC_MSG_RESULT([yes - from pwd])],
       [AC_MSG_RESULT([no])])
 AC_ARG_VAR([GTCORE], [directory for giellatekno core data and scripts])
 
-AC_SUBST([GT_SCRIPTVERSION], [0.1-$Revision$])
+SVNREVISION="$Revision$"
+SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
+
+AC_SUBST([GT_SCRIPTVERSION], [0.1-${SVNREVNUM}])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([gt-version.sh], [chmod +x gt-version.sh])

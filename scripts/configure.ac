@@ -19,9 +19,17 @@ AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
+AC_MSG_CHECKING([whether we can define GTCORE])
+AS_IF([test "x$GTCORE"  = x], [GTCORE=$(pwd); AC_MSG_RESULT([yes - from pwd])],
+	  [test "x$GTCORE" != x], [AC_MSG_RESULT([yes - from env])],
+      [AC_MSG_RESULT([no])])
+AC_ARG_VAR([GTCORE], [directory for giellatekno core data and scripts])
+
 AC_SUBST([GT_SCRIPTVERSION], [0.1-$Revision$])
 
-AC_CONFIG_FILES([Makefile gt-version.sh], [chmod +x gt-version.sh])
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([gt-version.sh], [chmod +x gt-version.sh])
+AC_CONFIG_FILES([gt-core.sh],    [chmod +x gt-core.sh])
 
 AC_OUTPUT
 

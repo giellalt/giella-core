@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+# Returns the location of the gtcore directory
+echo "@GTCORE@"

@@ -1,4 +1,8 @@
 $Rev$
+Had to remove the Makefile as well, adding only the dir in the first go - no
+text replacement was done inside the Makefile.
+
+r82258:
 Removed the shell script, to take the merge in two steps: first create the dir,
 then add the shell script file. This makes it possible to rename the file at the
 same time, whereas if we merge the dir and the file in one go, no renaming will

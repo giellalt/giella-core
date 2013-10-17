@@ -1,4 +1,10 @@
 $Rev$
+Removed the shell script, to take the merge in two steps: first create the dir,
+then add the shell script file. This makes it possible to rename the file at the
+same time, whereas if we merge the dir and the file in one go, no renaming will
+take place. That leaves us with a tedious manual rename process afterwards.
+
+r82255:
 The first lookup shell script added, with supporting infrastructure.
 
 r82231:

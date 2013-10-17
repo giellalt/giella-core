@@ -2,8 +2,8 @@
 
 #set -x # this's neat debug stuff
 
-if test -z "${GTCORE}" ; then
-    echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"
+if test -z "${GTCOREDIR}" ; then
+    echo "Unable to determine GTCOREDIR, re-run gtsetup.sh and re-try"
     exit 1
 fi
 
@@ -111,7 +111,7 @@ fi
 # Identify language:
 CURLANG=$(fgrep 'AC_SUBST([GTLANG]' configure.ac \
 		  | cut -d',' -f2 | cut -d'[' -f2 | cut -d']' -f1)
-CUR2LANG=$( ${GTCORE}/scripts/iso3-to-2.sh $CURLANG )
+CUR2LANG=$( ${GTCOREDIR}/scripts/iso3-to-2.sh $CURLANG )
 
 # Identify template collection name from parent directory or from option:
 if test "x$tplcoll" = "x" ; then
@@ -121,7 +121,7 @@ else
 fi
 
 # Get the list of available template collections:
-availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
+availableTemplateColls=$(for t in $GTCOREDIR/*-templates; do n=$(basename $t); \
                         n2=${n%-templates}; echo "$n2"; done)
 
 availableTemplateCollsAsList=$(echo $availableTemplateColls | tr ' ' '|')
@@ -147,8 +147,8 @@ TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 SVNREPOROOT="https://victorio.uit.no/langtech"
 
-for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
-    macrolang=${macrolangdir#${GTCORE}/${TEMPLATEDIR}/}
+for macrolangdir in ${GTCOREDIR}/${TEMPLATEDIR}/${tpl} ; do
+    macrolang=${macrolangdir#${GTCOREDIR}/${TEMPLATEDIR}/}
     if test ! -r ${macrolang}.timestamp ; then
         # this is a macro language that has not been subscribed
         echo "Not merging ${macrolang} because ${CURLANG} is not in that set"
@@ -219,13 +219,13 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
 
         # Replace placeholder language code with real language code in newly
         # added files:
-        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG ${localf}
+        ${GTCOREDIR}/scripts/replace-dummy-langcode.sh . $CURLANG ${localf}
 
     done
 
     # Make sure we know we have updated the templated files:
     # use plain cp until we have svn DIR merge in place:
-    cp -v -f ${GTCORE}/${TEMPLATEDIR}/${macrolang}/${macrolang}.timestamp \
+    cp -v -f ${GTCOREDIR}/${TEMPLATEDIR}/${macrolang}/${macrolang}.timestamp \
     		 ${macrolang}.timestamp
     if test -s ${unmerged} ; then
         echo There were files that are not safe to merge:

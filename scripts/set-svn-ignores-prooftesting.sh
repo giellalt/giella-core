@@ -18,6 +18,10 @@ if test ! -r $1/und.timestamp ; then
     exit 1
 fi
 
+# The ignore command:
+svnignore="svn -q propset svn:ignore"
+
+# Define common ignore patterns:
 mkfiles="Makefile
 Makefile.in
 *.txt
@@ -34,14 +38,14 @@ aclocal.m4"
 for f in $(find $1/ \
 			-not -iwholename '*.svn*' \
 			-type d) ; do
-	svn propset svn:ignore "$mkfiles" $f
+	$svnignore "$mkfiles" $f
 done
 
 # Set the svn:ignore prop on the top level lang dir:
-svn propset svn:ignore "$autofiles
+$svnignore "$autofiles
 $mkfiles
 build" $1
 
 # Set the svn:ignore prop on the plx dir - it needs an extra ignore:
-svn propset svn:ignore "$mkfiles
+$svnignore "$mkfiles
 userdict" $1/plx

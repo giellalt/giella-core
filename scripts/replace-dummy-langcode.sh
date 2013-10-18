@@ -45,8 +45,8 @@ file=$3
 
 # Replace placeholder language code with real language code
 # In either a single file:
-if ! test "x$file" == "x"; then
-	if test -e $file ; then
+if test "x$file" != "x"; then
+	if test -e $file -a ! -d $file ; then
 	    cp $file $file~
 	    $SED -e "s/__UND__/$2/g" \
 	    	-e "s/__UND2C__/$iso2code/g" \

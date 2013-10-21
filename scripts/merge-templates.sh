@@ -19,13 +19,13 @@ function print_usage() {
     echo
 }
 
-SED=$(which sed)
+SED=$(which sed 2>&1)
 if grep -q 'no sed in' <<<$SED; then
 	SED=
 fi
 
 # Prefer gnu sed if found:
-GSED=$(which gsed)
+GSED=$(which gsed 2>&1)
 if ! grep -q 'no gsed in' <<<$GSED; then
 	SED=$GSED
 fi

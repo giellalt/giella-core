@@ -1,4 +1,9 @@
 $Rev$
+Fixed references to GTCORE in test scripts. Earlier we relied solely on it
+beingset in the environment, now we take it from configure (which can take it
+from the environment or from a script).
+
+r82403:
 One more gzip option fix.
 
 r82399:

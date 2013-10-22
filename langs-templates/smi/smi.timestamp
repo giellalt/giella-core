@@ -1,4 +1,8 @@
 $Revision$
+Tagged the remaining 17777 words as +OLang/UND, meaning that they won't be
+processed for IPA conversion right now. They can be properly tagged later.
+
+r82420:
 450 more language tags.
 
 r82095:

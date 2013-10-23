@@ -10655,7 +10655,7 @@ Høgronden+OLang/NOB:Høg9#ronden9 LONDON-plc ;
 Høgsbro+OLang/NOB:Høgs#bro9 ACCRA-plc ;
 Høgset+OLang/NOB:Høgset BERN-sur ;
 Høgseth+OLang/NOB:Høgseth9 BERN-sur ;
-høgskole+CmpN/None+OLang/NOB:høg#skole ACCRA-org ;
+høgskole+CmpN/None+OLang/NOB:høg9#skole ACCRA-org ;
 Høgsterett+OLang/NOB:Høgste#rett BERN-obj ;
 Høgås+OLang/NOB:Høg9#ås BERN-sur ;
 Høiberg+OLang/NOB:Høi#berg9 BERN-sur ;
@@ -23933,7 +23933,7 @@ Sami% Culture% in% a% New% Era+Use/LexSub+MWE+OLang/UND:Sami% Culture% in% a% Ne
 Sami% nieida% joik+Use/LexSub+MWE+OLang/UND:Sami% nieida% joik9 BERN-obj ;
 Samii% Litto+MWE+OLang/UND:Samii% Litto9 ACCRA-org ;
 SAMINOR+OLang/UND:SAMINOR BERN-obj ;
-Samisk% høgskole+CmpN/None+MWE+OLang/NOB:Samisk9% høg#skole ACCRA-LOAN-org ;
+Samisk% høgskole+CmpN/None+MWE+OLang/NOB:Samisk9% høg9#skole ACCRA-LOAN-org ;
 Samisk% Solidaritet+MWE+OLang/UND:Samisk9% Solidaritet BERN-org ;
 Samisk% videregående% skole+CmpN/None+MWE+OLang/UND:Samisk9% videregå^ende% skole ACCRA-LOAN-org ;
 Samisk+Use/LexSub+OLang/UND:Samisk9 LONDON-atr ;

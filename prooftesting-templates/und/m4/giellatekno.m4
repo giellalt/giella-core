@@ -33,28 +33,28 @@ AC_ARG_VAR([GTCORE], [directory for giellatekno core data and scripts])
 AC_ARG_VAR([GTFREE], [gtfree path must be defined for the test bench to work])
 
 # Check if any of the corpus data repositories are available:
-AC_MSG_CHECKING([whether GTBOUND STABLE is available])
+AC_MSG_CHECKING([whether GTBOUND STABLE exists for __UND__])
 AS_IF([test -d ${GTBOUND}/stable/goldstandard/converted/__UND__/],
       [gtboundstable=yes],
       [gtboundstable=no])
 AC_MSG_RESULT([$gtboundstable])
 AM_CONDITIONAL([BOUNDSTABLE], [test "x$gtboundstable" != "xno"])
 
-AC_MSG_CHECKING([whether GTBOUND PRESTABLE is available])
+AC_MSG_CHECKING([whether GTBOUND PRESTABLE exists for __UND__])
 AS_IF([test -d ${GTBOUND}/prestable/goldstandard/converted/__UND__/],
       [gtboundprestable=yes],
       [gtboundprestable=no])
 AC_MSG_RESULT([$gtboundprestable])
 AM_CONDITIONAL([BOUNDPRESTABLE], [test "x$gtboundprestable" != "xno"])
 
-AC_MSG_CHECKING([whether GTFREE STABLE is available])
+AC_MSG_CHECKING([whether GTFREE STABLE exists for __UND__])
 AS_IF([test -d ${GTFREE}/stable/goldstandard/converted/__UND__/],
       [gtfreestable=yes],
       [gtfreestable=no])
 AC_MSG_RESULT([$gtfreestable])
 AM_CONDITIONAL([FREESTABLE], [test "x$gtfreestable" != "xno"])
 
-AC_MSG_CHECKING([whether GTFREE PRESTABLE is available])
+AC_MSG_CHECKING([whether GTFREE PRESTABLE exists for __UND__])
 AS_IF([test -d ${GTFREE}/prestable/goldstandard/converted/__UND__/],
       [gtfreeprestable=yes],
       [gtfreeprestable=no])

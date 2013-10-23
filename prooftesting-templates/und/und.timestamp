@@ -1,4 +1,7 @@
 $Rev$
+Better config feedback.
+
+r82588:
 Proper reporting of which test corpora were found.
 
 r81424:

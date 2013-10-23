@@ -1,4 +1,7 @@
 $Rev$
+Proper reporting of which test corpora were found.
+
+r81424:
 Do not run iconv until the speller process is finished.
 
 r81393:

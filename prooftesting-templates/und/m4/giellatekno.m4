@@ -33,14 +33,33 @@ AC_ARG_VAR([GTCORE], [directory for giellatekno core data and scripts])
 AC_ARG_VAR([GTFREE], [gtfree path must be defined for the test bench to work])
 
 # Check if any of the corpus data repositories are available:
-AM_CONDITIONAL([BOUNDSTABLE],
-               [test -d ${GTBOUND}/stable/goldstandard/converted/__UND__/])
-AM_CONDITIONAL([BOUNDPRESTABLE],
-               [test -d ${GTBOUND}/prestable/goldstandard/converted/__UND__/])
-AM_CONDITIONAL([FREESTABLE],
-               [test -d ${GTFREE}/stable/goldstandard/converted/__UND__/])
-AM_CONDITIONAL([FREEPRESTABLE],
-               [test -d ${GTFREE}/prestable/goldstandard/converted/__UND__/])
+AC_MSG_CHECKING([whether GTBOUND STABLE is available])
+AS_IF([test -d ${GTBOUND}/stable/goldstandard/converted/__UND__/],
+      [gtboundstable=yes],
+      [gtboundstable=no])
+AC_MSG_RESULT([$gtboundstable])
+AM_CONDITIONAL([BOUNDSTABLE], [test "x$gtboundstable" != "xno"])
+
+AC_MSG_CHECKING([whether GTBOUND PRESTABLE is available])
+AS_IF([test -d ${GTBOUND}/prestable/goldstandard/converted/__UND__/],
+      [gtboundprestable=yes],
+      [gtboundprestable=no])
+AC_MSG_RESULT([$gtboundprestable])
+AM_CONDITIONAL([BOUNDPRESTABLE], [test "x$gtboundprestable" != "xno"])
+
+AC_MSG_CHECKING([whether GTFREE STABLE is available])
+AS_IF([test -d ${GTFREE}/stable/goldstandard/converted/__UND__/],
+      [gtfreestable=yes],
+      [gtfreestable=no])
+AC_MSG_RESULT([$gtfreestable])
+AM_CONDITIONAL([FREESTABLE], [test "x$gtfreestable" != "xno"])
+
+AC_MSG_CHECKING([whether GTFREE PRESTABLE is available])
+AS_IF([test -d ${GTFREE}/prestable/goldstandard/converted/__UND__/],
+      [gtfreeprestable=yes],
+      [gtfreeprestable=no])
+AC_MSG_RESULT([$gtfreeprestable])
+AM_CONDITIONAL([FREEPRESTABLE], [test "x$gtfreeprestable" != "xno"])
 
 # Define whether you want to be a maintainer:
 AC_ARG_VAR([GTMAINTAINER], [define if you are maintaining the infra to get additional complaining about infra integrity])
@@ -155,6 +174,12 @@ cat<<EOF
     * test Púki: $pukispell_test
     * test Voikko: $voikkospell_test
     * Html reports using forrest: $html_report
+
+ -- Available test corpora:
+    * Stable bound: $gtboundstable
+    * Prestable bound: $gtboundprestable
+    * Stable free: $gtfreestable
+    * Prestable free: $gtfreeprestable
 
 For more ./configure options, run ./configure --help
 

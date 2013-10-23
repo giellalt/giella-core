@@ -1,4 +1,7 @@
 $Revision$
+A number of smaller fixes.
+
+r82521:
 Tagged the remaining 17777 words as +OLang/UND, meaning that they won't be
 processed for IPA conversion right now. They can be properly tagged later.
 

@@ -44,6 +44,6 @@ do
     set -- $sizes
     sample=$((${@/#/+}))
     let peak="sample > peak ? sample : peak"
-    sleep 10
+    sleep 3
 done
 echo "$peak" >&2

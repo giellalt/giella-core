@@ -99,6 +99,8 @@
             <xs:enumeration value="DRINK"/>
 <!-- Super set: SCHOOL/EDUCATION -->
             <xs:enumeration value="EDUCATION"/>
+<!-- Super set: VERBAL ASPECT -->
+            <xs:enumeration value="EVENT_V"/>
 <!-- Super set: HUMAN_DOING -->
             <xs:enumeration value="EXPERIENCE_A"/>
 <!-- Super set: HUMAN_DOING -->
@@ -148,6 +150,8 @@
             <xs:enumeration value="HUMAN_V"/>
 <!-- Super set: BODY -->
             <xs:enumeration value="ILLNESS"/>
+<!-- Super set: VERBAL ASPECT -->
+            <xs:enumeration value="INCHOATIVE_V"/>
 <!-- Super set: CONCRETES -->
             <xs:enumeration value="INSTRUMENT"/>
 <!-- Super set: LITERATURE/TEXTS -->
@@ -265,6 +269,8 @@
             <xs:enumeration value="SOUP_A"/>
 <!-- Super set: LEISURETIME/AT_HOME -->
             <xs:enumeration value="SPORT"/>
+<!-- Super set: VERBAL ASPECT -->
+            <xs:enumeration value="STATE_V"/>
 <!-- Super set: LITERATURE/TEXTS -->
             <xs:enumeration value="STORY"/>
 <!-- Super set: LITERATURE/TEXTS -->

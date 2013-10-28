@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 #
 # spell-preprocess.pl
 # Preprocesses input data before spell checking, to ensure

@@ -503,7 +503,7 @@ class MorphTest(Test):
 			res = item.replace('\r\n','\n').replace('\r','\n').split('\n')
 			for i in res:
 				if i.strip() != '':
-					results = i.split('\t')
+					results = re.split(r'\t+', i)
 					key = results[0].strip()
 					if not key in parsed:
 						parsed[key] = set()

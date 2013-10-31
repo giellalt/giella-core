@@ -34,6 +34,7 @@ my $forced=0;
 my $polderland;
 my $puki;
 my $applescript;
+my $foma;
 my $hunspell;
 my $voikko;
 my $hfst;
@@ -59,7 +60,8 @@ GetOptions (
 			"pl|p"               => \$polderland,
 			"pk"                 => \$puki,
 			"mw|m"               => \$applescript,
-			"hu|fo|u"            => \$hunspell,
+			"hu|u"               => \$hunspell,
+			"fo"                 => \$foma,
 			"vkmalaga|vkhfst|vk" => \$voikko,
 			"hfst|hf"            => \$hfst,
 			"typos|t"            => \$typos,
@@ -96,11 +98,12 @@ $toolversion =~ s/^, //;
 
 if    ($applescript) { $input_type="mw"; read_applescript(); }
 elsif ($hunspell)    { $input_type="hu"; read_hunspell();    }
+elsif ($foma)        { $input_type="fo"; read_hunspell();    }
 elsif ($polderland)  { $input_type="pl"; read_polderland();  }
 elsif ($puki)        { $input_type="pk"; read_puki();        }
 elsif ($voikko)      { $input_type="vk"; read_voikko();      }
 elsif ($hfst)        { $input_type="hf"; read_hfst();        }
-else { print STDERR "$0: Give the speller output type: --pl, --pk, --mw, --hu, --hf or --vk\n"; exit; }
+else { print STDERR "$0: Give the speller output type: --pl, --pk, --mw, --hu, --fo, --hf or --vk\n"; exit; }
 
 if ($print_xml) { print_xml_output(); }
 else { print_output(); }

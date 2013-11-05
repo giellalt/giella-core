@@ -16,7 +16,7 @@
 
 use utf8; # The perl script itself is UTF-8, and this pragma will make perl obey
 use strict;
-use XML::Twig;
+use XML::LibXML;
 
 use Carp qw(cluck confess);
 use File::stat;
@@ -771,17 +771,17 @@ sub print_xml_output {
 	if (! $print_xml) {
 		die "Specify the output file with option --xml=<file>\n";
 	}
-	my $FH1;
-	open($FH1,  ">$print_xml");
-	print $FH1 qq|<?xml version='1.0'  encoding="UTF-8"?>|;
-	print $FH1 qq|<spelltestresult>|;
 
-	# Print some header information
-	my $header = XML::Twig::Elt->new('header');
-	$header->set_pretty_print('record');
+	my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
 
-    # Get version info if it's available
-    my $rec = $originals[0];
+	my $spelltestresult = $doc->createElement('spelltestresult');
+
+	my $header = $doc->createElement('header');
+
+	$spelltestresult->appendChild($header);
+
+	# Get version info if it's available
+	my $rec = $originals[0];
 	if ($rec->{'orig'} eq "nuvviD" || $rec->{'orig'} eq "nuvviDspeller") {
 #		cluck "INFO: nuvviDspeller found.\n";
 		shift @originals;
@@ -802,67 +802,66 @@ sub print_xml_output {
 	}
 
 	# Print some header information
-	my $tool = XML::Twig::Elt->new('tool');
-	$tool->set_att('lexversion', $version);
-	$tool->set_att('toolversion', $toolversion);
-	$tool->set_att('type', $input_type);
-	$tool->set_att('memoryusage', $memoryuse);
-	$tool->set_att('realtime', $alltime[0]);
-	$tool->set_att('usertime', $alltime[1]);
-	$tool->set_att('systime',  $alltime[2]);
-	$tool->paste('last_child', $header);
+	my $tool = $doc->createElement('tool');
+	$tool->setAttribute('lexversion' => $version);
+	$tool->setAttribute('toolversion' => $toolversion);
+	$tool->setAttribute('type' => $input_type);
+	$tool->setAttribute('memoryusage' => $memoryuse);
+	$tool->setAttribute('realtime' => $alltime[0]);
+	$tool->setAttribute('usertime' => $alltime[1]);
+	$tool->setAttribute('systime' =>  $alltime[2]);
+	$header->appendChild($tool);
 
 	# what was the checked document
-	my $docu = XML::Twig::Elt->new('document');
-	if (!$document) { $document=basename($input); }
-	$docu->set_text($document);
-	$docu->paste('last_child', $header);
+	my $docu = $doc->createElement('document');
+	if (!$document) {
+		$document=basename($input);
+	}
+	$docu->appendTextNode($document);
+	$header->appendChild($docu);
 
     # The date is the timestamp of speller output file if not given.
-	my $date_elt = XML::Twig::Elt->new('date');
+	my $date_elt = $doc->createElement('date');
 	if (!$date ) {
 		$date = ctime(stat($output)->mtime);
 		#print "file $input updated at $date\n";
 	}
-	$date_elt->set_text($date);
-	$date_elt->paste('last_child', $header);
-
-	$header->print($FH1);
+	$date_elt->appendTextNode($date);
+	$header->appendChild($date_elt);
 
 	# Start the results-section
-	my $results = XML::Twig::Elt->new('results');
-	$results->set_pretty_print('record');
+	my $results = $doc->createElement('results');
 
 	for my $rec (@originals) {
 
-		my $word = XML::Twig::Elt->new('word');
+		my $word = $doc->createElement('word');
 		if ($rec->{'orig'}) {
-			my $original = XML::Twig::Elt->new('original');
-			$original->set_text($rec->{'orig'});
-			$original->paste('last_child', $word);
+			my $original = $doc->createElement('original');
+			$original->appendTextNode($rec->{'orig'});
+			$word->appendChild($original);
 		}
 		if ($rec->{'expected'}){
-			my $expected = XML::Twig::Elt->new('expected');
-			$expected->set_text($rec->{'expected'});
-			$expected->paste('last_child', $word);
+			my $expected = $doc->createElement('expected');
+			$expected->appendTextNode($rec->{'expected'});
+			$word->appendChild($expected);
 			my $distance=distance($rec->{'orig'},$rec->{'expected'},{-output=>'distance'});
-			my $edit_dist = XML::Twig::Elt->new('edit_dist');
-			$edit_dist->set_text($distance);
-			$edit_dist->paste('last_child', $word);
+			my $edit_dist = $doc->createElement('edit_dist');
+			$edit_dist->appendTextNode($distance);
+			$word->appendChild($edit_dist);
 		}
 		if ($rec->{'error'}){
-			my $error = XML::Twig::Elt->new('status');
-			$error->set_text($rec->{'error'});
-			$error->paste('last_child', $word);
+			my $error = $doc->createElement('status');
+			$error->appendTextNode($rec->{'error'});
+			$word->appendChild($error);
 		}
-		if ($rec->{'forced'}){ $word->set_att('forced', "yes"); }
+		if ($rec->{'forced'}){ $word->setAttribute('forced' => "yes"); }
 
 		if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
-			my $suggestions_elt = XML::Twig::Elt->new('suggestions');
+			my $suggestions_elt = $doc->createElement('suggestions');
 			my $sugg_count=0;
 			if ($rec->{'sugg'}) { $sugg_count = scalar @{ $rec->{'sugg'}} };
-			$suggestions_elt->set_att('count', $sugg_count);
-			my $position = XML::Twig::Elt->new('position');
+			$suggestions_elt->setAttribute('count' => $sugg_count);
+			my $position = $doc->createElement('position');
 			my $pos=0;
 			my $near_miss_count = 0;
 			if ($rec->{'suggnr'}) { $near_miss_count = $rec->{'suggnr'}; }
@@ -873,22 +872,22 @@ sub print_xml_output {
 				if ($rec->{'num'}) { @numbers =  @{$rec->{'num'}}; }
 				for my $sugg (@suggestions) {
 					next if (! $sugg);
-					my $suggestion = XML::Twig::Elt->new('suggestion');
-					$suggestion->set_text($sugg);
+					my $suggestion = $doc->createElement('suggestion');
+					$suggestion->appendTextNode($sugg);
 					if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
-						$suggestion->set_att('expected', "yes");
+						$suggestion->setAttribute('expected' => "yes");
 					}
 					my $num;
 					if (@numbers) {
 						$num = shift @numbers;
-						$suggestion->set_att('penscore', $num);
+						$suggestion->setAttribute('penscore' => $num);
 					}
 					if ($near_miss_count > 0) {
-						$suggestion->set_att('miss', "yes");
+						$suggestion->setAttribute('miss' => "yes");
 						$near_miss_count--;
 					}
 
-					$suggestion->paste('last_child', $suggestions_elt);
+					$suggestions_elt->appendChild($suggestion);
 				}
 				my $i=0;
 				if ($rec->{'expected'}) {
@@ -896,38 +895,39 @@ sub print_xml_output {
 					if ($suggestions[$i]) { $pos = $i+1; }
 				}
 			}
-			$position->set_text($pos);
-			$position->paste('last_child', $word);
-			$suggestions_elt->paste('last_child', $word);
+			$position->appendTextNode($pos);
+			$word->appendChild($position);
+			$word->appendChild($suggestions_elt);
 		}
 		if ($rec->{'tokens'}) {
 			my @tokens = @{$rec->{'tokens'}};
 			my $tokens_num = scalar @tokens;
-			my $tokens_elt = XML::Twig::Elt->new(tokens=>{ count=>$tokens_num });
+			my $tokens_elt = $doc->createElement(tokens=>{ count=>$tokens_num });
 			for my $t (@tokens) {
-				my $token_elt = XML::Twig::Elt->new('token', $t);
-				$token_elt->paste('last_child', $tokens_elt);
+				my $token_elt = $doc->createElement('token', $t);
+				$tokens_elt->appendChild($token_elt);
 			}
-			$tokens_elt->paste('last_child', $word);
+			$word->appendChild($tokens_elt);
 		}
 		if ($rec->{'bugID'}){
-			my $bugID = XML::Twig::Elt->new('bug');
-			$bugID->set_text($rec->{'bugID'});
-			$bugID->paste('last_child', $word);
+			my $bugID = $doc->createElement('bug');
+			$bugID->appendTextNode($rec->{'bugID'});
+			$word->appendChild($bugID);
 #			print STDERR ".";
 		}
 		if ($rec->{'comment'}){
-			my $comment = XML::Twig::Elt->new('comment');
-			$comment->set_text($rec->{'comment'});
-			$comment->paste('last_child', $word);
+			my $comment = $doc->createElement('comment');
+			$comment->appendTextNode($rec->{'comment'});
+			$word->appendChild($comment);
 		}
 
-		$word->paste('last_child', $results);
+		$results->appendChild($word);
 	}
 
-	$results->print($FH1);
-	print $FH1 qq|</spelltestresult>|;
-	close($FH1);
+	$spelltestresult->appendChild($results);
+
+	$doc->setDocumentElement($spelltestresult);
+	$doc->toFile($print_xml, 1);
 }
 
 sub print_output {
@@ -950,8 +950,6 @@ sub print_output {
 		print "\n";
 	}
 }
-
-
 sub print_help {
 	print << "END";
 Combines speller input and output into an xml file.

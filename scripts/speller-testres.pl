@@ -728,42 +728,43 @@ sub read_typos {
 #		print STDERR "Original: $orig\n";
 #		print STDERR "Expected: $expected\n" if $expected;
 #		print STDERR "Comment:  $comment\n" if $comment;
-		next if (! $orig );
-		my $rec = {};
-		$orig =~ s/\s*$//;
-		$rec->{'orig'} = $orig;
-		if ($expected) {
-			$expected =~ s/\s*$//;
-			$rec->{'expected'} = $expected;
-		}
-		if ($comment) {
-			$comment =~ s/\s*$//;
-			$comment =~ s/^\s*//;
-			# IF BUG ID: either numbers only, or numbers followed by whitespace,
-			# or, IF PARADIGM, string followed by inflection tags, no whitespace
-			if ($comment =~ m/^[\#\!]*\d+$/  ||
-			    $comment =~ m/^[\#\!]*\d+\s/ ||
-			    $comment =~ m/^[\#\!]*\w+\+/) {
-			    my $bugID = "";
-			    my $restcomment = "";
-			    if ($comment =~ m/\s+/ ) {
-					($bugID, $restcomment) = split(/\s+/,$comment,2);
-			    } else {
-					($bugID, $restcomment) = split(/\+/,$comment,2);
-			    }
-				$bugID =~ s/^[\#\!]//;
-				$rec->{'bugID'} = $bugID;
-				#print STDERR $bugID.".";
-				$comment = $restcomment;
+		if ( $orig ) {
+			my $rec = {};
+			$orig =~ s/\s*$//;
+			$rec->{'orig'} = $orig;
+			if ($expected) {
+				$expected =~ s/\s*$//;
+				$rec->{'expected'} = $expected;
 			}
-			# If the comment was a bug ID only, there's no comment any more
 			if ($comment) {
-				$comment =~ s/^[-\!\# ]*//;
-#				print STDERR $comment.".";
-				$rec->{'comment'} = $comment;
+				$comment =~ s/\s*$//;
+				$comment =~ s/^\s*//;
+				# IF BUG ID: either numbers only, or numbers followed by whitespace,
+				# or, IF PARADIGM, string followed by inflection tags, no whitespace
+				if ($comment =~ m/^[\#\!]*\d+$/  ||
+				    $comment =~ m/^[\#\!]*\d+\s/ ||
+				    $comment =~ m/^[\#\!]*\w+\+/) {
+				    my $bugID = "";
+				    my $restcomment = "";
+				    if ($comment =~ m/\s+/ ) {
+						($bugID, $restcomment) = split(/\s+/,$comment,2);
+				    } else {
+						($bugID, $restcomment) = split(/\+/,$comment,2);
+				    }
+					$bugID =~ s/^[\#\!]//;
+					$rec->{'bugID'} = $bugID;
+					#print STDERR $bugID.".";
+					$comment = $restcomment;
+				}
+				# If the comment was a bug ID only, there's no comment any more
+				if ($comment) {
+					$comment =~ s/^[-\!\# ]*//;
+	#				print STDERR $comment.".";
+					$rec->{'comment'} = $comment;
+				}
 			}
+			push @originals, $rec;
 		}
-		push @originals, $rec;
 	}
 	close(FH);
 #	print STDERR " - end of bugs.\n";

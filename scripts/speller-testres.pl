@@ -343,24 +343,10 @@ sub read_puki {
 		}
 		# Some simple adjustments to the input and output lists.
 		# First search the output word in the input list.
-		my $j = $i;
 
 # Debug prints:
 #		print "$originals[$j]{'orig'}\n";
 #		print "-----------\n";
-
-		while($originals[$j] && $originals[$j]{'orig'} ne $orig) { $j++; }
-
-		# If the output word was not found in the input list, ignore it.
-		if (! $originals[$j]) {
-			print STDERR "$0: Output word $orig was not found in the input list.\n";
-			next;
-		}
-		# If it was found, mark the words in between.
-		elsif ($originals[$j] && $originals[$j]{'orig'} eq $orig) {
-			for (my $p=$i; $p<$j; $p++){ $originals[$p]{'error'} = "Error"; }
-			$i=$j;
-		}
 
 		# Assign error codes, suggestions and weights to the global entry list:
 		if ($originals[$i] && $originals[$i]{'orig'} eq $orig) {

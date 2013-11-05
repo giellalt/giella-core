@@ -378,50 +378,121 @@ sub read_polderland {
 	open(FH, $output) or die "Could not open file $output. $!";
 
 	# Read until "Prompt"
-	while(<FH>) { last if (/Prompt/); }
+	while(<FH>) {
+		last if (/Prompt/);
+	}
 
 	my $i=0;
 	my $line = $_;
 
-	return if (! $line);
-	my $orig;
-	# variable to check whether the suggestions are already started.
-	# this is because the line "check returns" may be missing.
-	my $reading=0;
+	if ($line) {
+		my $orig;
+		# variable to check whether the suggestions are already started.
+		# this is because the line "check returns" may be missing.
+		my $reading=0;
 
-    if ($line =~ /Check returns/) {
-		($orig = $line) =~ s/.*?Check returns .*? for \'(.*?)\'\s*$/$1/;
-		$reading=1;
-	}
-	elsif ($line =~ /Getting suggestions/) {
-		$reading=1;
-		($orig = $line) =~ s/.*?Getting suggestions for (.*?)\.\.\.\s*$/$1/;
-	}
-	else { confess "could not read $output: $line"; }
-
-	if (!$orig || $orig eq $line) {
-		confess "Probably wrong format, start again with --mw\n";
-	}
-
-	while($originals[$i] && $originals[$i]{'orig'} ne $orig) {
-		#print STDERR "$0: Input and output mismatch, removing $originals[$i]{'orig'}.\n";
-		splice(@originals,$i,1);
-	}
-
-	my @suggestions;
-	my @numbers;
-
-	while(<FH>) {
-
-		$line = $_;
-		next if ($reading && /Getting suggestions/);
-		next if ($line =~ /End of suggestions/);
-		last if ($line =~ /Terminate/);
-
-		if ($line =~ /Suggestions:/) { $originals[$i]{'error'} = "SplErr" };
-
-		if ($line =~ /Check returns/ || $line =~ /Getting suggestions/) {
+	    if ($line =~ /Check returns/) {
+			($orig = $line) =~ s/.*?Check returns .*? for \'(.*?)\'\s*$/$1/;
 			$reading=1;
+		}
+		elsif ($line =~ /Getting suggestions/) {
+			$reading=1;
+			($orig = $line) =~ s/.*?Getting suggestions for (.*?)\.\.\.\s*$/$1/;
+		}
+		else {
+			confess "could not read $output: $line";
+		}
+
+		if (!$orig || $orig eq $line) {
+			confess "Probably wrong format, start again with --mw\n";
+		}
+
+		while($originals[$i] && $originals[$i]{'orig'} ne $orig) {
+			#print STDERR "$0: Input and output mismatch, removing $originals[$i]{'orig'}.\n";
+			splice(@originals,$i,1);
+		}
+
+		my @suggestions;
+		my @numbers;
+
+		while(<FH>) {
+
+			$line = $_;
+			next if ($reading && /Getting suggestions/);
+			next if ($line =~ /End of suggestions/);
+			last if ($line =~ /Terminate/);
+
+			if ($line =~ /Suggestions:/) {
+				$originals[$i]{'error'} = "SplErr";
+			}
+
+			if ($line =~ /Check returns/ || $line =~ /Getting suggestions/) {
+				$reading=1;
+				#Store the suggestions from the last round.
+				if (@suggestions) {
+					$originals[$i]{'sugg'} = [ @suggestions ];
+					$originals[$i]{'num'} = [ @numbers ];
+					$originals[$i]{'error'} = "SplErr";
+					@suggestions = ();
+					pop @suggestions;
+					@numbers = ();
+					pop @numbers;
+					$reading = 0;
+				}
+				elsif (! $originals[$i]{'error'}) {
+					$originals[$i]{'error'} = "SplCor";
+				}
+
+				$i++;
+				if ($line =~ /Check returns/) {
+					$reading = 1;
+					($orig = $line) =~ s/^.*?Check returns .* for \'(.*?)\'\s*$/$1/;
+				}
+				elsif (! $reading && $line =~ /Getting suggestions/) {
+					$reading = 1;
+					($orig = $line) =~ s/^.*?Getting suggestions for (.*?)\.\.\.\s*$/$1/;
+				}
+
+				# Some simple adjustments to the input and output lists.
+				# First search the output word in the input list.
+				my $j = $i;
+				while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+					$j++;
+				}
+
+				# If the output word was not found in the input list, ignore it.
+				if (! $originals[$j]) {
+					cluck "WARNING: Output word $orig was not found in the input list.\n";
+					$orig=undef;
+					$i--;
+					next;
+				}
+
+				# If it was found later, mark the intermediate input as correct.
+				elsif($j != $i) {
+					my $k=$j-$i;
+					for (my $p=$i; $p<$j; $p++){
+						$originals[$p]{'error'}="SplCor";
+						$originals[$p]{'sugg'}=();
+						pop @{ $originals[$p]{'sugg'} };
+						#print STDERR "$0: Removing input word $originals[$p]{'orig'}.\n";
+					}
+					$i=$j;
+				}
+				next;
+			}
+
+			next if (! $orig);
+			chomp $line;
+			my ($num, $suggestion) = split(/\s+/, $line, 2);
+			#print STDERR "$_ SUGG $suggestion\n";
+			if ($suggestion) {
+				push (@suggestions, $suggestion);
+				push (@numbers, $num);
+			}
+		}
+		close(FH);
+		if ($orig) {
 			#Store the suggestions from the last round.
 			if (@suggestions) {
 				$originals[$i]{'sugg'} = [ @suggestions ];
@@ -431,70 +502,16 @@ sub read_polderland {
 				pop @suggestions;
 				@numbers = ();
 				pop @numbers;
-				$reading = 0;
 			}
-			elsif (! $originals[$i]{'error'}) { $originals[$i]{'error'} = "SplCor"; }
-			$i++;
-			if ($line =~ /Check returns/) {
-				$reading = 1;
-				($orig = $line) =~ s/^.*?Check returns .* for \'(.*?)\'\s*$/$1/;
+			elsif (! $originals[$i]{'error'}) {
+				$originals[$i]{'error'} = "SplCor";
 			}
-			elsif (! $reading && $line =~ /Getting suggestions/) {
-				$reading = 1;
-				($orig = $line) =~ s/^.*?Getting suggestions for (.*?)\.\.\.\s*$/$1/;
-			}
-			# Some simple adjustments to the input and output lists.
-			# First search the output word in the input list.
-			my $j = $i;
-			while($originals[$j] && $originals[$j]{'orig'} ne $orig) { $j++; }
-
-			# If the output word was not found in the input list, ignore it.
-			if (! $originals[$j]) {
-				cluck "WARNING: Output word $orig was not found in the input list.\n";
-				$orig=undef;
-				$i--;
-				next;
-			}
-
-			# If it was found later, mark the intermediate input as correct.
-			elsif($j != $i) {
-				my $k=$j-$i;
-				for (my $p=$i; $p<$j; $p++){
-					$originals[$p]{'error'}="SplCor";
-					$originals[$p]{'sugg'}=();
-					pop @{ $originals[$p]{'sugg'} };
-					#print STDERR "$0: Removing input word $originals[$p]{'orig'}.\n";
-				}
-				$i=$j;
-			}
-			next;
 		}
-
-		next if (! $orig);
-		chomp $line;
-		my ($num, $suggestion) = split(/\s+/, $line, 2);
-		#print STDERR "$_ SUGG $suggestion\n";
-		if ($suggestion) {
-			push (@suggestions, $suggestion);
-			push (@numbers, $num);
+		$i++;
+		while($originals[$i]) {
+			$originals[$i]{'error'} = "SplCor"; $i++;
 		}
 	}
-	close(FH);
-	if ($orig) {
-		#Store the suggestions from the last round.
-		if (@suggestions) {
-			$originals[$i]{'sugg'} = [ @suggestions ];
-			$originals[$i]{'num'} = [ @numbers ];
-			$originals[$i]{'error'} = "SplErr";
-			@suggestions = ();
-			pop @suggestions;
-			@numbers = ();
-			pop @numbers;
-		}
-		elsif (! $originals[$i]{'error'}) { $originals[$i]{'error'} = "SplCor"; }
-	}
-	$i++;
-	while($originals[$i]) { $originals[$i]{'error'} = "SplCor"; $i++; }
 }
 
 sub read_voikko {

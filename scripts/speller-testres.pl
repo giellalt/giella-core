@@ -443,7 +443,6 @@ sub read_polderland {
 					$originals[$i]{'error'} = "SplCor";
 				}
 
-				$i++;
 				if ($line =~ /Check returns/) {
 					$reading = 1;
 					($orig = $line) =~ s/^.*?Check returns .* for \'(.*?)\'\s*$/$1/;
@@ -459,6 +458,7 @@ sub read_polderland {
 				while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
 					$j++;
 				}
+				$i++;
 
 				# If the output word was not found in the input list, ignore it.
 				if (! $originals[$j]) {

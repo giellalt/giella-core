@@ -190,7 +190,8 @@
          <xs:enumeration value="TV"/>
          <xs:enumeration value="IV"/>
          <xs:enumeration value="V-Aux"/>
-         <xs:enumeration value="V-Refl"/>
+         <xs:enumeration value="V-Refl"/><!-- Change to VR -->
+         <xs:enumeration value="VR"/>
       </xs:restriction>
    </xs:simpleType>
    <xs:element name="posDescr" type="posDescrType"/>

@@ -819,7 +819,8 @@
       <xs:complexType>
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="semantics"/>
-            <xs:element maxOccurs="unbounded" ref="m"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="m"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="defNative"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tg"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="xg"/>
          </xs:sequence>
@@ -1645,6 +1646,8 @@
             <xs:enumeration value="ACTIVITY_V"/>
 <!-- Super set: ABSTRACTS -->
             <xs:enumeration value="AMOUNT"/>
+<!-- Super set: ANIMATE -->
+            <xs:enumeration value="ANIMATE"/>
 <!-- Super set: ANIMAL -->
             <xs:enumeration value="ANIMAL_A"/>
 <!-- Super set: BIRD_FISH -->
@@ -1700,6 +1703,7 @@
 <!-- Super set: LEISURETIME/AT_HOME -->
             <xs:enumeration value="CHRISTMAS"/>
 <!-- Super set: CLOTHES -->
+            <xs:enumeration value="CLOTHES"/>
             <xs:enumeration value="CLOTHES_A"/>
 <!-- Super set: CLOTHES -->
             <xs:enumeration value="CLOTHES_V"/>
@@ -1721,6 +1725,8 @@
             <xs:enumeration value="CONSTRUCTION"/>
 <!-- Super set: MORFA-C -->
             <xs:enumeration value="mCONVERSATION"/>
+<!-- Super set: HUMAN-LIKE -->
+            <xs:enumeration value="DEITY"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="DRINK"/>
 <!-- Super set: SCHOOL/EDUCATION -->
@@ -1739,8 +1745,11 @@
             <xs:enumeration value="FAMILY"/>
 <!-- Super set: RELATIVES -->
             <xs:enumeration value="FAMILY_OTHER"/>
+            <xs:enumeration value="FAMILY_PATERNAL"/>
 <!-- Super set: ABSTRACTS -->
             <xs:enumeration value="FEELING"/>
+<!-- Super set: GENDER -->
+            <xs:enumeration value="FEMALE"/>
 <!-- Super set: WORK/ECONOMY/TOOLS -->
             <xs:enumeration value="FINANCE"/>
 <!-- Super set: WORK/ECONOMY/TOOLS -->
@@ -1768,6 +1777,9 @@
             <xs:enumeration value="HERDING"/>
 <!-- Super set: REINDEER/HERDING -->
             <xs:enumeration value="HERDING_THING"/>
+<!-- Super set: LEISURETIME/AT_HOME days of an observance-->
+<!-- days of an observance -->
+            <xs:enumeration value="HOLIDAY"/>
 <!-- Super set: LEISURETIME/AT_HOME -->
             <xs:enumeration value="HOME_ACTIVITY"/>
 <!-- Super set: HUMAN_DOING -->
@@ -1792,6 +1804,8 @@
             <xs:enumeration value="LANGUAGEPART"/>
 <!-- Super set: LEISURETIME/AT_HOME -->
             <xs:enumeration value="LEISURETIME_HOME_V"/>
+<!-- Super set: GENDER -->
+            <xs:enumeration value="MALE"/>
 <!-- Super set: MORFA-C -->
             <xs:enumeration value="mPERSNAME"/>
 <!-- Super set: MORFA-C -->

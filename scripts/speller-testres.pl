@@ -12,7 +12,7 @@
 #
 # Usage: speller-testres.pl -h
 #
-# $Id$
+# $Id: speller-testres.pl 83558 2013-11-14 09:01:35Z boerre $
 
 use utf8; # The perl script itself is UTF-8, and this pragma will make perl obey
 use strict;
@@ -901,9 +901,11 @@ sub print_xml_output {
 		if ($rec->{'tokens'}) {
 			my @tokens = @{$rec->{'tokens'}};
 			my $tokens_num = scalar @tokens;
-			my $tokens_elt = $doc->createElement(tokens=>{ count=>$tokens_num });
+			my $tokens_elt = $doc->createElement('tokens');
+			$tokens_elt->setAttribute('count' => $tokens_num);
 			for my $t (@tokens) {
-				my $token_elt = $doc->createElement('token', $t);
+				my $token_elt = $doc->createElement('token');
+				$token_elt->appendTextNode($t);
 				$tokens_elt->appendChild($token_elt);
 			}
 			$word->appendChild($tokens_elt);

@@ -261,16 +261,11 @@ sub read_hunspell {
 
 		if ($error && $error eq "SplCor") {
 			$originals[$i]{'error'} = $error;
-			next;
-		}
-		# Some simple adjustments to the input and output lists.
-		# First search the output word in the input list.
-		if (! $orig) { next; }
-		if ($originals[$i] && $originals[$i]{'orig'} ne $orig) {
+		} elsif ($orig && $originals[$i] && $originals[$i]{'orig'} ne $orig) {
+			# Some simple adjustments to the input and output lists.
+			# First search the output word in the input list.
 			push (@tokens, $orig);
-			next;
-		}
-		if ($originals[$i] && (! $orig || $originals[$i]{'orig'} eq $orig)) {
+		} elsif ($originals[$i] && (! $orig || $originals[$i]{'orig'} eq $orig)) {
 			if ($error) { $originals[$i]{'error'} = $error; }
 			else { $originals[$i]{'error'} = "not_known"; }
 			$originals[$i]{'sugg'} = [ @suggestions ];

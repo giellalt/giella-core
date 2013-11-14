@@ -259,7 +259,7 @@ sub read_hunspell {
 		if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
 		if ($offset) { $offset =~ s/\://; }
 
-		if ($error eq "SplCor") {
+		if ($error && $error eq "SplCor") {
 			$originals[$i]{'error'} = $error;
 			next;
 		}

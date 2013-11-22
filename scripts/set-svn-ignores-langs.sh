@@ -75,6 +75,7 @@ $svnignore "$mkfiles
 $fstfiles
 *.foma
 *.script
+*-all.lexc
 *.tmp.*" $1/src/morphology
 
 # Ignore all temporary and generated files in the tagsets dir:

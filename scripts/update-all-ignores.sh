@@ -48,14 +48,11 @@ fi
 for ll in $ALL_LANGS ; do
     if test -d $ll ; then
     	Language=$(${GTCORE}/scripts/iso639-to-name.sh $ll)
-        echo
-        echo "*** Setting svn:ignore's for language $ll - $Language ***"
-        echo
+        echo "*** Setting svn:ignore's for $ll - $Language ***"
         cd $ll && ${GTCORE}/scripts/set-svn-ignores-$TEMPLATENAME.sh \
         	$(pwd) && cd ..
     fi
 done
 
-echo
 echo "*** Done: svn:ignore's for all languages updated. ***"
 echo

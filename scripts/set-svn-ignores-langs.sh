@@ -115,8 +115,8 @@ $svnignore "$mkfiles
 *.txt" $1/tools/shellscripts
 
 # Remove the svn:ignore prop on some subdirs:
-svn propdel svn:ignore $1/src/morphology/affixes
-svn propdel svn:ignore $1/am-shared
-svn propdel svn:ignore $1/m4
-svn propdel svn:ignore $1/doc/resources
-svn propdel svn:ignore $1/doc/resources/images
+svn -q propdel svn:ignore $1/src/morphology/affixes
+svn -q propdel svn:ignore $1/am-shared
+svn -q propdel svn:ignore $1/m4
+svn -q propdel svn:ignore $1/doc/resources
+svn -q propdel svn:ignore $1/doc/resources/images

@@ -1,4 +1,8 @@
 $Rev$
+Further cleanup of semantic tag filtering: no processing of semantic filters in
+the shared makefiles.
+
+r84117:
 Remove semantic tag filtering from the common targets, it is only used by sme
 and sma.
 

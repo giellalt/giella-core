@@ -87,7 +87,8 @@ $fstfiles
 # Ignore all temporary and generated files in the src/filters/ dir:
 $svnignore "$mkfiles
 $fstfiles
-*.txt" $1/src/filters
+*.txt
+*.regex" $1/src/filters
 
 # Only ignore generated propernoun files in the src/morphology/stems dir:
 $svnignore "*-*-propernouns.lexc" $1/src/morphology/stems

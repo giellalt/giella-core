@@ -22850,7 +22850,7 @@ Ringkjøb+OLang/NOB:Ring^kjøb9 BERN-plc ;
 Ringkollen+OLang/UND:Ring9#kollen9 LONDON-plc ;
 Ringkøbing+OLang/NOB:Ring9#købing9 LONDON-plc ;
 Ringkøping+OLang/NOB:Ring^køping9 LONDON-plc ;
-Ringnes+OLang/NOB:Ring9#nes BERN-sur ;
+ !Ringnes+OLang/NOB:Ring#nes BERN-sur ;
 Ringo+OLang/UND:Ringo9 ACCRA-mal ;
 !Ringo+OLang/UND:Ringo9 ACCRA-mal ;
 Ringsager+OLang/UND:Rings#ager LONDON-sur ;

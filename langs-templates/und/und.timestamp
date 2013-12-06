@@ -1,4 +1,8 @@
 $Rev$
+And with some more coffee in my system, remove-semantic-tags-except-prop.xfst
+is now included in the mobile dict analyser.
+
+r84650:
 Checked in the two dict analysers with different spellrelax, but forgot 
 semantic tags and orig_lang tags.
 

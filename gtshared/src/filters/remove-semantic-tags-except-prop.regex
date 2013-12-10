@@ -6,6 +6,8 @@
 %+N <- %+Sem%/Mal %+N ,
 %+N <- %+Sem%/Fem %+N ,
 %+N <- %+Sem%/Org %+N ,
+%+N <- %+Sem%/Obj %+N ,
+%+N <- %+Sem%/Ani %+N ,
 # these ones away:
 0 <- %+Sem%/Act,
 0 <- %+Sem%/Ani,

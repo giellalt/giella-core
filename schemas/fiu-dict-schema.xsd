@@ -63,6 +63,12 @@
          <xs:simpleContent>
             <xs:extension base="xs:string">
                <xs:attribute ref="pos" use="required"/>
+               <xs:attribute name="type">
+		 <xs:simpleType>
+		   <xs:restriction base="xs:string">
+		   </xs:restriction>
+		 </xs:simpleType>
+               </xs:attribute>
             </xs:extension>
          </xs:simpleContent>
       </xs:complexType>
@@ -760,7 +766,13 @@
          <xs:attribute ref="nx"/>
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
-         <xs:attribute ref="tType"/>
+         <xs:attribute name="tType"/>
+         <xs:attribute name="type">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
       </xs:complexType>
    </xs:element>
    <xs:element name="td">
@@ -787,6 +799,12 @@
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
          <xs:attribute ref="tType"/>
+         <xs:attribute name="type">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
       </xs:complexType>
    </xs:element>
    <xs:element name="tf">
@@ -813,6 +831,12 @@
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
          <xs:attribute ref="tType"/>
+         <xs:attribute name="type">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
       </xs:complexType>
    </xs:element>
    <xs:element name="mg">
@@ -1140,7 +1164,7 @@
          </xs:sequence>
       </xs:complexType>
    </xs:element>
-   <xs:attribute name="tType">
+   <xs:attribute name="tType"><!-- translation type-->
      <xs:simpleType>
        <xs:restriction base="xs:string">
 	 <xs:enumeration value="equivalent"/>

@@ -488,19 +488,19 @@ SET V-NOT-PL3 = VFIN-NOT-IMP - V-PL3 ;
 SET V-1-2 = V-SG1 OR V-SG2 OR V-DU1 OR V-DU2 OR V-PL1 OR V-PL2 ;
 SET V-3  = V-SG3 OR V-DU3 OR V-PL3 ;
 
-# Sets consisting of forms of LEAT (these ones need to be rewritten)
+# Sets consisting of LEAT
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-LIST LEAT = "leat" "liehket" ;
+LIST LEAT = "leat" "liehket" "lea" ;
 
-LIST LEAT-FIN-NOT-IMP = ("leat" V Ind) ("leat" V Cond) ("leat" V Pot) ("liehket" V Ind) ("liehket" V Cond) ("liehket" V Pot);
+SET LEAT-FIN-NOT-IMP = LEAT - Imprt;
  
 LIST VPRFPRC = (V PrfPrc) ;
-LIST LEATPRFPRC = ("leat" PrfPrc) ("liehket" PrfPrc) ;
+LIST LEATPRFPRC = ("leat" PrfPrc) ("liehket" PrfPrc) ("lea" PrfPrc) ;
 SET PRC-NOT-LEAT = VPRFPRC - LEATPRFPRC ;
     # In order to distinguish between real leat-constructions and participles of other verbs
-LIST HABEO-SG3 = ("leat" Sg3) (V Neg Sg3) ("šaddat" Sg3) ("sjaddat" Sg3) ("liehket" Sg3) ;
+LIST HABEO-SG3 = ("leat" Sg3) (V Neg Sg3) ("šaddat" Sg3) ("sjaddat" Sg3) ("liehket" Sg3) ("lea" Sg3) ;
 
-LIST HABEO-PL3 = ("leat" Pl3) (V Neg Pl3) ("šaddat" Pl3)  ("sjaddat" Pl3) ("liehket" Pl3) ;
+LIST HABEO-PL3 = ("leat" Pl3) (V Neg Pl3) ("šaddat" Pl3)  ("sjaddat" Pl3) ("liehket" Pl3) ("lea" Pl3)  ;
 
 SET HABEO-3 = HABEO-SG3 OR HABEO-PL3 ;
 
@@ -666,45 +666,20 @@ SET REAL-V = V - NOT-REAL-V  ;
             
  
  # The set REAL is smaller than COPULAS, made for verbs with PrfPrc complements: Seammás REAL-COPULAS son dovdan iežas...
-LIST REAL-COPULAS = "dáidit" "leat" "soaitit" "veadjit" "liehket" ;
+LIST REAL-COPULAS = "dáidit" "leat" "soaitit" "veadjit" "liehket" "lea";
 
 #!! * The set COPULAS is for predicative constructions
-LIST COPULAS = "dáidit" "gártat" "leat" "soaitit" "šaddat" "orrut" "veadjit" "liehket" "sjaddat" ;
+LIST COPULAS = "dáidit" "gártat" "leat" "soaitit" "šaddat" "orrut" "veadjit" "liehket" "sjaddat" "lea" "sjïdtedh" ;
  #  "bissut" ? 
  # 'Dáidit' can appear without 'leat'.
 
 SET NOT-COP-V = V - COPULAS ;
 
-LIST MOD-ASP = "áigut" "bállet" "berret" "dáidit" "fertet" "galgat" "gillet" "lávet" "sáhttit" "seahtit" "soaitit" "viggat" ;
-
- # Verbs that never have arguments of their own - so we leave out "áigut", for ex.
-
-LIST AUX-OR-MAIN = "áigut" "álgit" "beassat" "galgat" "háliidit" "máhttit" "nagadit" "nagodit" "ollit" "orrut" "sihtat" "veadjit";
-
- # These verbs can take arguments, so they do not belong in the AUX group, 
- # but they are nevertheless mapped to (@+FAUXV). 
- # Added "álgit" to the group (Lene) - Made rules for "boahtit" which  sometimes can be AUX
- # Magga (1982: 120): áigut, dáidit, deaivat, fertet, galgat, lávet, máhttit, oažžut, sáhttit, soaitit, veadjit - in some of the meanings 
- # Halvhjelpeverb: álgit, berret, dohkket, gártat, heivet, liigut, šaddat - in some of the meanings 
- 
-SET AUX = COPULAS OR Neg OR MOD-ASP OR AUX-OR-MAIN ;
- 
-
-SET NOT-AUX-V = V - AUX ; # This is former V-NOT-AUX
- # The set of verbs that cannot be auxiliaries. 
-			  # Does not include AUX-OR-MAIN.
-SET VFIN-NOT-AUX = VFIN - AUX ;
-
-SET MAIN-V = V - COPULAS - Neg - MOD-ASP OR ("orrut") ;
+SET MAIN-V = V - FAUXV ;
  
 # All active verbs with a TV tag, including AUX-OR-MAIN.
 
 LIST V-TRANS = (V TV) (IV Der/ahtti) (IV Der/h) ;
-
- 
-SET TRANS-ACT-NOT-AUX-V =  V-TRANS - Der/Pass - AUX ;
-
-#!! TRANS-V is the set for verbs really taking objects
 
 
 SET TRANS-V = V-TRANS - Der/Pass + REAL-V ;
@@ -712,7 +687,6 @@ SET TRANS-V = V-TRANS - Der/Pass + REAL-V ;
 #!! * NP sets defined according to their morphosyntactic features
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-SET NORM-LOC = Loc - (South Loc) ;
 
 LIST N-SG-NOM = (N Sg Nom);
 
@@ -867,7 +841,7 @@ SET APP-BOUNDARY = REAL-CLB OR VFIN OR Inf OR (Actio Ess) OR ConNeg OR VGen OR S
 # A special barrier used with mapping of appositions. 
 
 # This set contains FMAINV with @, which means that it functions for all kind of mainverbs after the verb-mapping rules 
-SET SV-BOUNDARY = S-BOUNDARY OR Inf - AUX OR Sup OR FMAINV ;
+SET SV-BOUNDARY = S-BOUNDARY OR Inf - FAUXV OR Sup OR FMAINV ;
  # VFIN-NOT-AUX ;
  # should be MAIN-V linked to VFIN-aux to the left. (cg-3)
 # This set is ment to use in rules for disambiguating due to verbs or verbsets. It contents @.
@@ -899,7 +873,7 @@ SET NON-APP = ALLSYNTAG - (@APP);
 	# Habitives - HAB
 	
 #!! * __hab1__ 
-MAP:hab1 (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 AUX + HAB-V-TAGS LINK *1 LEAT BARRIER NP-HEAD OR MAIN-V);
+MAP:hab1 (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 FAUXV + HAB-V-TAGS LINK *1 LEAT BARRIER NP-HEAD OR MAIN-V);
 	#$ Mus eai leat girjjit mielde.
 	#% Dorskis sáhttet leat vuoivvas ja meađđemat.
 
@@ -907,7 +881,7 @@ MAP:hab_numo (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-
 	#%Dus lea, nu mo buot eará bargiin, vuoigatvuohta oahppasoahpamuša lassin maiddái čálalaš bargosoahpamuššii oahppafitnodagain.
 
 #!! * __hab2__ 
-MAP:hab2 (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 AUX + HAB-V-TAGS LINK 1 Adv LINK *1 LEAT BARRIER NOT-ADV-PCLE);
+MAP:hab2 (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 FAUXV + HAB-V-TAGS LINK 1 Adv LINK *1 LEAT BARRIER NOT-ADV-PCLE);
 
 #!! * __hab3__ 
 MAP:hab3 (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 Sem/Group OR Pl - Rel LINK *-1 Indef - BUOT + Nom OR HUMAN + Nom BARRIER NOT-NPMOD-ACC)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))(NEGATE 0 N OR Pers OR Indef LINK *-1 HAB-ACTOR + HAB-CASE BARRIER NOT-NPMOD-ACC OR CC)(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER S-BOUNDARY);
@@ -917,14 +891,14 @@ MAP:hab3 (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 Sem/Group OR Pl - 
 	
 
 
-MAP:habInf (@HAB>) TARGET HAB-ACTOR + HAB-CASE OR ("dat" Dem Loc) - Attr (1 LEAT + Sg3 LINK 1 Inf) ;
+MAP:habInf (@HAB>) TARGET HAB-ACTOR + HAB-CASE OR ("dat" Dem) +  HAB-CASE - Attr (1 LEAT + Sg3 LINK 1 Inf) ;
 	#$ Mis lea cahkkehit dola.
 
 #!! * __habNomLeft__ 
 MAP:habNomLeft (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr ((-1 Nom LINK NEGATE *-1 (Pers Gen) BARRIER NOT-NPMOD) OR (-1 (Sg Gen) LINK -1 (Sg Num Nom) LINK NEGATE *-1 (Pers Gen) BARRIER NOT-NPMOD))(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE);
 	#$ Mii dus lea?
 
-MAP:habAdvl (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr  (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))((*1 Loc BARRIER NOT-NPMOD-ACC LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE) OR (*1 Loc BARRIER NOT-NPMODADV LINK *1 AUX LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE));
+MAP:habAdvl (@HAB>) TARGET HAB-ACTOR + HAB-CASE - Attr  (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))((*1 HAB-CASE BARRIER NOT-NPMOD-ACC LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE) OR (*1 HAB-CASE BARRIER NOT-NPMODADV LINK *1 FAUXV LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE));
 	#$ Ii han ovttasge du sogas leat dat namma.
 
 #!! * __hab4__ 	
@@ -948,10 +922,10 @@ MAP:hab7 (@<HAB) TARGET HAB-ACTOR + HAB-CASE - Attr (*-1 go BARRIER NOT-NPMOD LI
 #MAP:hab5 (@HAB>) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 HAB-V BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER VFIN);
 	#$ Mánás gollot gieđat. 
 
-MAP:hab9 (@HAB>) TARGET Loc IF (-1 FIRSTNAME)(0 Ord)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE);
+MAP:hab9 (@HAB>) TARGET HAB-CASE IF (-1 FIRSTNAME)(0 Ord)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE);
 	#$ Heinrich njealjádis lea rikkis eamit.
 	
-MAP:hab10 (@<HAB) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN + Nom BARRIER S-BOUNDARY) (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 Num BARRIER S-BOUNDARY LINK 1 HUMAN + Gen)(*-1 LEAT + HAB-V-TAGS BARRIER Nom OR S-BOUNDARY OR MAIN-V LINK -1 ADVLCASE OR Adv OR Po)((*1 Nom BARRIER NOT-NPMOD-ACC) OR (1 CC LINK *1 Loc BARRIER NOT-NPMOD-ACC LINK *1 Nom BARRIER NOT-NPMOD-ACC));
+MAP:hab10 (@<HAB) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN + Nom BARRIER S-BOUNDARY) (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 Num BARRIER S-BOUNDARY LINK 1 HUMAN + Gen)(*-1 LEAT + HAB-V-TAGS BARRIER Nom OR S-BOUNDARY OR MAIN-V LINK -1 ADVLCASE OR Adv OR Po)((*1 Nom BARRIER NOT-NPMOD-ACC) OR (1 CC LINK *1 HAB-CASE BARRIER NOT-NPMOD-ACC LINK *1 Nom BARRIER NOT-NPMOD-ACC));
 	#$ Dál leat sus 137 gáicca.
 	#$ De lea sihke divššohasas ja su lagamus oapmahaččas vuoigatvuohta oažžut dieđuid.
 	#$ Doppe leamaš sámiin stuora deaddu.
@@ -1110,7 +1084,7 @@ MAP:r293 (@APP-Pron<) TARGET (N Acc) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC OR
 	#$ Mon oainnán fierpmi, su mearkka, ja dieđán ahte Spider-Man lea leamaš das.	
 
 		
-MAP:r244 (@APP-ADVL<) TARGET (N Loc) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC OR ADVLCASE LINK -1 DOPPE)(1 EOS) ;	
+MAP:r244 (@APP-ADVL<) TARGET N + LOC IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC OR ADVLCASE LINK -1 DOPPE)(1 EOS) ;	
 MAP:r245 (@APP-ADVL<) TARGET (N Ill) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC LINK -1 DOHKO  LINK *-1 BOS BARRIER APP-BOUNDARY)(1 COMMA) ;
 MAP:r246 (@APP-Pron<) TARGET (N Ill) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC LINK -1 DOHKO)(1 EOS) ;
 MAP:r247 (@APP-Pron<) TARGET (N Ill) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC LINK -1 DOHKO)(1 COMMA LINK 1 S-BOUNDARY OR CC) ;
@@ -1298,7 +1272,7 @@ MAP:Gallespred> (@SPRED>) TARGET ("galle" Num Nom) (*-1 BOS BARRIER NOT-ADV) ;
 
 MAP:spredSg> (@SPRED>) TARGET MII + (Sg Nom) (*1 (Sg Nom) BARRIER NOT-NPMOD LINK 1 COPULAS) ;
 
-MAP:r492 (@SPRED>) TARGET (Interr Gen) IF (NEGATE 0 MII)(NEGATE *1 A OR N BARRIER NOT-NPMOD) (NEGATE *1 NOT-AUX-V BARRIER S-BOUNDARY);
+MAP:r492 (@SPRED>) TARGET (Interr Gen) IF (NEGATE 0 MII)(NEGATE *1 A OR N BARRIER NOT-NPMOD) (NEGATE *1 V - FAUXV BARRIER S-BOUNDARY);
 	#$ Gean dat lea?
 
 
@@ -1396,7 +1370,7 @@ MAP:>cc (@>CC) TARGET ("sihke")(*1 ("ja") OR ("ahte")) ;
 MAP:advl>cs (@ADVL>CS) TARGET ("beare" Adv) (1 CS LINK *1 FMAINV) ;
 	#$ Muhto dus ii leat riekti dearpat su beare danin go sáhtát.
 
-LIST ADVL = Adv Ill Com Loc Po Pr ;
+LIST ADVL = Adv Ill Com Loc Po Pr Ine Ela ;
 
 MAP:r39 (@ADVL<) TARGET (N Sg Loc) IF (-1 ("oktii") OR ("guktii") OR ("golbmii") OR ("njelljii") OR ("vihttii") OR ("geardde"))(0 TIME-N);
 	#$ Mun ferten málestit guktii vahkus.

@@ -32,7 +32,7 @@
 ! samiske språka. BETFAGE skal brukast ved e-finale ACCRA-ord.
 
 !
-! MÄKI er for finske i-finale navn hvor sørsamisk og lulesamisk følger ulike
+! MAKI er for finske i-finale navn hvor sørsamisk og lulesamisk følger ulike
 ! mønster. PIPPi i smj, ACCRA i sme og sma.
 
 !
@@ -13944,7 +13944,7 @@ Korpiaho+OLang/FIN:Korpi#aho9 ACCRA-sur ;
 !Korpiaho+OLang/FIN:Korpi#aho9 ACCRA-sur ;
 Korpijaakko+OLang/UND:Korpi^jaakko9 ACCRA-sur ;
 Korpijärvi+OLang/FIN:Korpi#järv MAKI-plc ;
-Korpijärvi+Use/Sub+OLang/UND:Korppi#järv PN_I_FINSK-plcorg ;
+Korpijärvi+Use/Sub+OLang/UND:Korppi#järv MAKI-plc ;
 !Korpikoski+OLang/FIN:Korpi#koski ACCRA-plc ;
 Korpikoski+OLang/FIN:Korpi#koski PIPPI-plc ;
 !Korpilahti+OLang/FIN:Korpi#lahti ACCRA-plc ;

@@ -6,7 +6,7 @@
 # ==================================================================== #
 # ==================================================================== 
 
-#  Sámi language technology project 2003-2006, University of Tromsø #
+#  Sámi language technology project 2003-2006, University of Tromsø # 
 
 # ========== #
 # Delimiters #
@@ -1242,7 +1242,16 @@ MAP:leftCop<spred (@<SPRED) TARGET Nom ((*-1 COPULAS + FMAINV BARRIER NOT-NPMODA
 	#$ Čállit lea buoret go lohkat.
 	#$ Soai leat goappašagat nu jallat.
 
-MAP:<spred (@<SPRED) TARGET (A Nom) (-1 TIME-N LINK -1 Num LINK *-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE)(NEGATE 1 Nom - Rel) ;
+
+#MAP:<spredLocEXPERIMENT (@<SPRED) TARGET (Sem/Mat N Loc) (*-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE LINK *-1 Nom BARRIER VFIN-NOT-NEG LINK NEGATE 0 HAB-ACTOR) ;
+	#$ Niibi lea stális.
+	#% Niibi lea olbmos.
+	#% Olmmoš lea muoras.
+	# Comment: if we can use the Sem-tags like this, then it would be great! :-) 
+ 
+ 
+#!! * __NumTime__ (@<SPRED) for A Nom
+MAP:NumTime<spred (@<SPRED) TARGET (A Nom) (-1 TIME-N LINK -1 Num LINK *-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE)(NEGATE 1 Nom - Rel) ;
 	#$ Son lea 10 jagi boaris.
 	#$ Sápmelaččaid historjá álbmogin lea duháhiid jagiid boaris.
 	
@@ -1261,12 +1270,15 @@ MAP:<spred (@<SPRED) TARGET Nom (*-1 COPULAS + FMAINV BARRIER NOT-NPMODADV LINK 
 
 MAP:<spredEss (@<SPRED) TARGET (N Ess) IF (*-1 COPULAS BARRIER S-BOUNDARY OR Ess - ("buorre" Ess) OR Nom LINK 0 FMAINV LINK *-1 NP-HEAD-NOM BARRIER SV-BOUNDARY OR @HAB>);
 
-MAP:<spredEss (@SPRED>) TARGET (N Ess) IF (*1 COPULAS BARRIER SV-BOUNDARY)(-1 NP-HEAD-NOM);
+#!! * __spredEss>__ (@SPRED>) for essive; if copulas to the right of you, and if an NP with nom-case first one to your left
+MAP:spredEss> (@SPRED>) TARGET (N Ess) IF (*1 COPULAS BARRIER SV-BOUNDARY)(-1 NP-HEAD-NOM);
 	#$ Sápmelaččaid historjá álbmogin lea duháhiid jagiid boaris, muhto dálá ássanguovlluin sápmelaččat eai leat ássan nu guhká.
 
 #!! * __HABSpredSg>__ (@SPRED>) for Nom; if habitive first one to the left, followed by copulas
 MAP:HABspredSg> (@SPRED>) TARGET Nom (1 @HAB> LINK 1 COPULAS) ;
 	#$ Mii dus lea?
+
+#!! * __GalleSpred>__ (@SPRED>) for Num Nom; if sentence initial
 MAP:Gallespred> (@SPRED>) TARGET ("galle" Num Nom) (*-1 BOS BARRIER NOT-ADV) ;
 
 
@@ -1297,8 +1309,7 @@ MAP:<spredCoor (@<SPRED) TARGET Nom - Rel (*-1 CC OR COMMA BARRIER NOT-NPMOD LIN
 #!! * __Spred>SubjInf__ (@SPRED>) for Nom; if copulas to the right, and the subject of copulas is an Inf to the right
 MAP:spred>SubjInf (@SPRED>) TARGET Nom - OKTA (*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA)(*2 @<SUBJ + Inf BARRIER NOT-ADV-PCLE) ;
 	#$ Gurssa ulbmil lea oahppat goarrut Ivgu gávtti.
-	#$ Bargu lei kánske árvvoštallat dan.
-	
+	#$ Bargu lei kánske árvvoštallat dan.	
 	 
  
 	# Subjects - SUBJ
@@ -1544,17 +1555,18 @@ SUBSTITUTE (<sme>) (*) TARGET (<sme>) ;
 SUBSTITUTE (<smj>) (*) TARGET (<smj>) ;
 SUBSTITUTE (<sma>) (*) TARGET (<sma>) ;
 
+LIST HEAD = @SUBJ> @<SUBJ @SUBJ @OBJ @OBJ> @<OBJ @ADVL @ADVL> @<ADVL @SPRED> @<SPRED @SPRED @OPRED> @<OPRED @OPRED @HAB @HAB> @<HAB @-FSUBJ> @-FOBJ> @-FADVL> @-FSPRED> @-F<SUBJ @-F<OBJ @-F<ADVL @-F<SPRED ;
 
 #for view - kommenteres inn for view
-#SUBSTITUTE (@>N) (@>N <mod_obj>) TARGET (@>N) (*1 OBJ BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@>N) (@>N <mod_subj>) TARGET (@>N) (*1 SUBJ BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@>N) (@>N <mod_advl>) TARGET (@>N) (*1 @ADVL BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@>A) (@>A <mod_obj>) TARGET (@>A) (*1 OBJ BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@>A) (@>A <mod_subj>) TARGET (@>A) (*1 SUBJ BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@>A) (@>A <mod_advl>) TARGET (@>A) (*1 @ADVL BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@N<) (@N< <compl_obj>) TARGET (@N<) (*-1 OBJ BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@N<) (@N< <compl_subj>) TARGET (@N<) (*-1 SUBJ BARRIER NOT-NPMOD) ;
-#SUBSTITUTE (@N<) (@N< <compl_advl>) TARGET (@N<) (*-1 @ADVL BARRIER NOT-NPMOD) ;
+#SUBSTITUTE (@>N) (@>N <mod_obj>) TARGET (@>N) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@>N) (@>N <mod_subj>) TARGET (@>N) (*1 SUBJ BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@>N) (@>N <mod_advl>) TARGET (@>N) (*1 @ADVL BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@>A) (@>A <mod_obj>) TARGET (@>A) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@>A) (@>A <mod_subj>) TARGET (@>A) (*1 SUBJ BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@>A) (@>A <mod_advl>) TARGET (@>A) (*1 @ADVL BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@N<) (@N< <compl_obj>) TARGET (@N<) (*-1 OBJ BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@N<) (@N< <compl_subj>) TARGET (@N<) (*-1 SUBJ BARRIER NOT-NPMOD OR HEAD) ;
+#SUBSTITUTE (@N<) (@N< <compl_advl>) TARGET (@N<) (*-1 @ADVL BARRIER NOT-NPMOD OR HEAD) ;
 #SUBSTITUTE (@Num<) (@Num< <compl_obj>) TARGET (@Num<) (*-1 OBJ BARRIER Num) ;
 #SUBSTITUTE (@Num<) (@Num< <compl_subj>) TARGET (@Num<) (*-1 SUBJ BARRIER Num) ;
 #SUBSTITUTE (@Num<) (@Num< <compl_advl>) TARGET (@Num<) (*-1 @ADVL BARRIER Num) ;

@@ -1216,6 +1216,7 @@ MAP:<spred (@<SPRED) TARGET Nom - OKTA - Pers (*-1 ("boahtit") + FMAINV - Du3 OR
 MAP:<spred (@<SPRED) TARGET Nom - OKTA (*-1 (N Nom) BARRIER NOT-NPMODADV OR COMMA LINK -1 COPULAS + FMAINV LINK -1 TIME-N OR TIME-ADVL OR Sem/Time) ;
 	#$ Ovdal lei gákti árgabivttas ja bargobivttas, muhto dál dat lea čikŋabivttas.
 
+#!! * __<spredQst__ (@<SPRED) for Nom in a typically question sentence; if A) Hab, some kind of place word, Po or Nom to the left, and Qst followed by copulas to the left. B) same as a, only the Qst-pcle is attached to copulas. C) Qst to the left, with copulas to its left, but not if two Nom:s are found somewhere to the right. D) copulas to the left, and BOS to the left. E) Loc or Ill to the left, and Loc or Hab to the left of this, Qst and copulas to the left. F) Num @>N to the left, Hab, some kind of place word, Po or Nom to the left, and Qst followed by copulas to the left. NOTE) for all these rules; human, Loc or Sem/Plc not allowed to the right.
 MAP:<spredQst (@<SPRED) TARGET Nom - Pers (
 (*-1 @<HAB OR DOPPE OR (Sem/Plc Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Nom BARRIER NOT-NPMODADV LINK *-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS) OR 
 (*-1 @<HAB OR DOPPE OR (Sem/Plc Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Nom BARRIER NOT-NPMODADV LINK *-1 Qst + COPULAS) OR 
@@ -1228,6 +1229,7 @@ MAP:<spredQst (@<SPRED) TARGET Nom - Pers (
 	#$ Leat go dudnos alddáde bohccot?
 	#$ Lea go dus dušše okta mánná?
 	#$ Leat go min dihtorat ođđaáigásaččat?
+#Comment: It might be easier to read this, if it hadn't been clinched all together as one spredQst-rule.. Concider dividing it into at least two rules: one for Hab/DOPPE and the other one for the rest. A,B and F make one pair. 
 
 #!! * __<spred__ (@<SPRED) for A Nom or N Nom if; the subject Nom is on the same side of copulas as you: on the right side of copulas
 MAP:<spred (@<SPRED) TARGET (A Nom) OR (N Nom)(*-1 (N Nom) BARRIER NOT-A LINK -1 COPULAS + FMAINV)(NEGATE -1 @<SPRED) ;
@@ -1243,7 +1245,7 @@ MAP:leftCop<spred (@<SPRED) TARGET Nom ((*-1 COPULAS + FMAINV BARRIER NOT-NPMODA
 	#$ Soai leat goappašagat nu jallat.
 
 
-#MAP:<spredLocEXPERIMENT (@<SPRED) TARGET (Sem/Mat N Loc) (*-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE LINK *-1 Nom BARRIER VFIN-NOT-NEG LINK NEGATE 0 HAB-ACTOR) ;
+MAP:<spredLocEXPERIMENT (@<SPRED) TARGET (Sem/Mat N Loc) (*-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE LINK *-1 Nom BARRIER VFIN-NOT-NEG LINK NEGATE 0 HAB-ACTOR) ;
 	#$ Niibi lea stális.
 	#% Niibi lea olbmos.
 	#% Olmmoš lea muoras.

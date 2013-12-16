@@ -930,6 +930,14 @@ MAP:hab10 (@<HAB) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN OR S
 	#$ De lea sihke divššohasas ja su lagamus oapmahaččas vuoigatvuohta oažžut dieđuid.
 	#$ Doppe leamaš sámiin stuora deaddu.
 
+#!! * __habDain__ (@HAB>) for (Pron Dem Pl Loc) if leat followed by Nom to the right
+MAP:habDain (@HAB>) TARGET (Pron Dem Pl Loc)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK 1 Nom) ; 
+	#$ Makkár vuoigatvuođat dain leat Norgga riikavuložin?
+	#% Dat bulle ja goldne go dain ii leat ruohtas. 
+	
+#MAP:habOrgPlc (@HAB>) TARGET (Sem/Hum
+	#$ Ohppiidráđis lea stuora fápmu skuvllas dan dihte go leat nu máŋggas geat hupmet ovttas áššiid birra.
+	
 # before relative clause
 MAP:habRel (@HAB>) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 Rel BARRIER WORD LINK *1 FMAINV BARRIER S-BOUNDARY LINK *1 LEAT + HAB-V-TAGS BARRIER S-BOUNDARY OR MAIN-V);
 	#$ Divššohasas, gii dárbbaša guhkit áiggi ja oktiiheivehuvvon dearvvašvuođabálvalusaid, lea vuoigatvuohta oažžut ráhkaduvvot oktagaslaš plána.

@@ -28,7 +28,7 @@ AC_ARG_VAR([GTCORE], [directory for giellatekno core data and scripts])
 SVNREVISION="$Revision$"
 SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
 
-AC_SUBST([GT_SCRIPTVERSION], [0.1-${SVNREVNUM}])
+AC_SUBST([GT_SCRIPTVERSION], [0.1.0.${SVNREVNUM}])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([gt-version.sh], [chmod +x gt-version.sh])

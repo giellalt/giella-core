@@ -19,7 +19,7 @@ curDir=$(pwd)
 if test "x$2" == "x"; then
     # Where are we? Must be inside 'langs' or 'prooftesting' if not specified:
     # Extract template collection name from current dir:
-    TEMPLATECOLL=$(basename $curDir)
+    TEMPLATECOLL=$(basename $curDir | cut -d'-' -f2)
 else
     TEMPLATECOLL=$2
 fi

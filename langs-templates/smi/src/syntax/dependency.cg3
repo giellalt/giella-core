@@ -13,79 +13,83 @@
 # giellatekno@hum.uit.no or divvun@samediggi.no
 
 # ==================================================================== #
-#    N O R T H E R N  S Á M I  D E P E N D E N C Y   G R A M M A R     #               
+#!! !!!N O R T H E R N  S Á M I  D E P E N D E N C Y   G R A M M A R                    
 # ==================================================================== #
 # ==================================================================== #
 
 
 
 # ========== #
-# Delimiters #
+#!! !!!DELIMITERS 
 # ========== #
 
 DELIMITERS = "<.>" "<!>" "<?>" "<...>" "<¶>" ;
+#!! Sentence delimiters are the following: <.> <!> <?> <...> <¶>
+
+
+#!! !!!TAGS AND SETS
 
 SETS
 
-LIST N = N ;
-LIST V = V ;
-LIST A = A ;
-LIST Adv = Adv ;
-LIST CC = CC ;
-LIST CS = CS ;
-LIST Inf = Inf ;
-LIST Sup = Sup ;
-LIST Neg = Neg ;
-LIST Num = Num ;
-LIST Po = Po ;
-LIST Pr = Pr ;
+LIST N = N ;	  #!! N
+LIST V = V ;	  #!! V
+LIST A = A ;	  #!! A
+LIST Adv = Adv ;  #!! Adv
+LIST CC = CC ;	  #!! CC
+LIST CS = CS ;	  #!! CS
+LIST Inf = Inf ;  #!! Inf
+LIST Sup = Sup ;  #!! Sup
+LIST Neg = Neg ;  #!! Neg
+LIST Num = Num ;  #!! Num
+LIST Po = Po ;	  #!! Po
+LIST Pr = Pr ;	  #!! Pr
 
-LIST Pcle = Pcle ;
-LIST Prop = Prop ;
+LIST Pcle = Pcle ; #!! Pcle
+LIST Prop = Prop ; #!! Prop
 
-LIST Pron = Pron ;
-LIST IV = IV ;
-LIST TV = TV ;
-LIST COMMA = "," ;
-LIST DASH = "–" ;
-LIST CITATION = """ ;  # to keep colouring we add a "
-LIST HYPHEN = "-" ;
-LIST QMARK = "\?" ;
-LIST PUNCT = PUNCT ;
-LIST LEFT = LEFT ;
-LIST RIGHT = RIGHT ;
-LIST CLB = CLB ;
-LIST Ind = Ind ;
-LIST Pot = Pot ;
-LIST Imprt = Imprt ;
-LIST ImprtII = ImprtII ;
-LIST Cond = Cond ;
-LIST ConNeg = ConNeg ;
-LIST Caus = Caus ; # causative eus
-LIST VGen = VGen ;
-LIST Interj = Interj ;
-LIST ABBR = ABBR ;
-LIST ACR = ACR ;
-LIST Prs = Prs ;
-LIST Prt = Prt ;
-LIST Cmpnd = Cmpnd ;
-LIST RCmpnd = RCmpnd ;
-LIST PrfPrc = PrfPrc ;
-LIST PrsPrc = PrsPrc ;
-LIST Actor = Actor ;
-LIST Actio = Actio ;
-LIST Ger = Ger ;
-LIST Indef = Indef ;
-LIST Nom = Nom ;
-LIST Acc = Acc ;
-LIST Ill = Ill ;
-LIST Com = Com ;
-LIST Gen = Gen ;
-LIST Ess = Ess ;
+LIST Pron = Pron ;		 #!! Pron
+LIST IV = IV ;			 #!! IV
+LIST TV = TV ;			 #!! TV
+LIST COMMA = "," ;		 #!! COMMA
+LIST DASH = "–" ;		 #!! DASH
+LIST CITATION = """ ;    #!! CITATION to keep colouring we add a "
+LIST HYPHEN = "-" ;		 #!! HYPHEN
+LIST QMARK = "\?" ;		 #!! QMARK
+LIST PUNCT = PUNCT ;	 #!! PUNCT
+LIST LEFT = LEFT ;		 #!! LEFT
+LIST RIGHT = RIGHT ;	 #!! RIGHT
+LIST CLB = CLB ;		 #!! CLB
+LIST Ind = Ind ;		 #!! Ind
+LIST Pot = Pot ;		 #!! Pot
+LIST Imprt = Imprt ;	 #!! Impr
+LIST ImprtII = ImprtII ; #!! ImprtII
+LIST Cond = Cond ;		 #!! Cond
+LIST ConNeg = ConNeg ;	 #!! ConNeg
+LIST Caus = Caus ;       #!! Caus causative eus
+LIST VGen = VGen ;		 #!! VGen
+LIST Interj = Interj ;	 #!! Interj
+LIST ABBR = ABBR ;		 #!! ABBR
+LIST ACR = ACR ;		 #!! ACR
+LIST Prs = Prs ;		 #!! Prs
+LIST Prt = Prt ;		 #!! Prt
+LIST Cmpnd = Cmpnd ;	 #!! Cmpnd
+LIST RCmpnd = RCmpnd ;	 #!! RCmpnd
+LIST PrfPrc = PrfPrc ;	 #!! PrfPrc
+LIST PrsPrc = PrsPrc ;	 #!! PrsPrc
+LIST Actor = Actor ;	 #!! Actor
+LIST Actio = Actio ;	 #!! Actio
+LIST Ger = Ger ;		 #!! Ger
+LIST Indef = Indef ;	 #!! Indef
+LIST Nom = Nom ;		 #!! Nom
+LIST Acc = Acc ;		 #!! Acc
+LIST Ill = Ill ;		 #!! Ill
+LIST Com = Com ;		 #!! Com
+LIST Gen = Gen ;		 #!! Gen
+LIST Ess = Ess ;		 #!! Ess
+						 
+LIST IM = IM ; #!! IM For fao
 
-LIST IM = IM ; # For fao!!
-
-# POS sub-categories
+#!! !!POS sub-categories
 # ------------------
 
 LIST Pers = Pers ;
@@ -268,10 +272,10 @@ SET DASHHYPHEN = ("-") OR ("–") ;
 SET NOT-ADJ = WORD - A ;
 SET NOT-COMMA = CLB - COMMA ;
 
-# Syntactic tags and sets
+#!! !!Syntactic tags and sets
 # =======================
 
-# Syntactic tag definitions 
+#!! Syntactic tag definitions 
 
 LIST @+FAUXV = @+FAUXV ; 	         # finite auxiliary
 LIST @+FMAINV = @+FMAINV ; 	         # finite main verb
@@ -469,11 +473,12 @@ SET S-BOUNDARY = (Pron Interr) OR Rel OR MCL-CONJ OR ADVL-COMP OR ADVL-COMPfao O
 #   §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§                  
 #   §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§                  
 
+#!! !!!Dep grammar
 
 SECTION
 
 
-# Correction rules
+#!! Correction rules
 # ================
 
 # sme-rules
@@ -481,17 +486,21 @@ SECTION
 LIST MUITALIT = "árvalit" "bivdit" "boagustit" "cealkit" "cuoigut" "čilget" "čurvet" "čuorvut" "dadjat" "eahpidit" "geardduhit" "gielistit" "gilljut" "hállat" "hoallat" "huikit" "huikkádit" "imaštallat" "jearrat" "jievžat"  "juoigat" "jurdilit" "jurddašit" "kommenteret" "lávlut" "lasihit" "loahpahit" "lohkat" "lohpidit" "máidnut" "máinnašit" "muitalit" "muittuhit" "nágget" "njávggádit" "oaivvildit" "rávvet" "savkalit" "sárdnidit" "šuohkihit" "váidalit" "váruhit" "vástidit" ;
     ## Njáv, váidalii Busi ja gávastalai.
     ## Njáv, njávggádii Busi fas ja fanahalai.
-    
+
+#!! * __muitalit__    
 SUBSTITUTE:muitalit (V) (<vdic> V) TARGET MUITALIT (0 @FMAINV) ;
 
 # eus-rules
 
+#!! * __XX__
 SUBSTITUTE (@SUBJ> @<SUBJ) (@SUBJ>) TARGET (@SUBJ> @<SUBJ) (*1 @FMV OR @FAUX);
 #SUBSTITUTE (@SUBJ> @<SUBJ) (@<SUBJ) TARGET
-#
+
+#!! * __XX__
 SUBSTITUTE (@OBJ> @<OBJ) (@OBJ>) TARGET (@OBJ>) (*1 @FMV)(NEGATE *1 @<SUBJ);
 #SUBSTITUTE (@OBJ> @<OBJ) (@<OBJ) TARGET
-#
+
+#!! * __XX__
 SUBSTITUTE (@SPRED> @<SPRED) (@SPRED>) TARGET (@SPRED>) (*-1 @SUBJ>)(NEGATE *1 @<SUBJ)
 #SUBSTITUTE (@SPRED> @<SPRED) (@<SPRED) TARGET
 #
@@ -507,7 +516,8 @@ SUBSTITUTE (@SPRED> @<SPRED) (@SPRED>) TARGET (@SPRED>) (*-1 @SUBJ>)(NEGATE *1 @
 
 # fao-rules
 
-SUBSTITUTE:fao_sum_id=Rel (CS) (<cs> Rel) TARGET ("sum" CS) OR ("ið" CS) ;
+#!! * __faoSumId=Rel__
+SUBSTITUTE:faoSumId=Rel (CS) (<cs> Rel) TARGET ("sum" CS) OR ("ið" CS) ;
 
 
 # kal-rules
@@ -560,7 +570,7 @@ SUBSTITUTE:SubV=aux (V) (<aux> V) TARGET @AUX ;
 #SUBSTITUTE:SubV=mvICL (V) (<mv> V) TARGET NONVFIN (0 @<OBJ LINK NEGATE *1 @IMV BARRIER S-BOUNDARY OR V) ;
 #SUBSTITUTE:SubV=auxICL (V) (<aux> V) TARGET NONVFIN (0 AUX LINK 0 @<OBJ LINK *1 @IMV BARRIER S-BOUNDARY OR V) ;
 
-# the finite verb
+#!! !!the finite verb
 # ===============
 
 # fao: the finite verb of pr-complement-subclauses gets @FS-P<:
@@ -722,7 +732,7 @@ SUBSTITUTE:V=ehead (V) (<ehead> V) TARGET VFIN (*-1 Rel BARRIER VFIN OR COMMA LI
 SUBSTITUTE:faoSubV=iclp< (@P<) (@ICL-P<) TARGET Inf ; #faospecsynrules 
 
 
-# Mapping rules
+#!! !!!Mapping rules
 # =============
 
 

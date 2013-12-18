@@ -27,10 +27,12 @@ fi
 # Prefer gnu sed if found:
 GSED=$(which gsed 2>&1)
 if ! grep -q 'no gsed in' <<<$GSED; then
-	SED=$GSED
+	if ! test "x$GSED" == "x"; then
+		SED=$GSED
+	fi
 fi
 
-if test x$SED == "x"; then
+if test "x$SED" == "x"; then
     echo "Required tools sed or gsed not found, aborting."
     exit 1
 fi

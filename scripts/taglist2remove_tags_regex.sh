@@ -4,6 +4,7 @@
 # to remove those tags.
 
 SED=sed
+AWK=awk
 
 # Script explanation:
 # 1. the first line contains tag symbols that need to be escaped - add as needed
@@ -14,4 +15,5 @@ SED=sed
 $SED   's/\([+/-]\)/%\1/g' $1 \
 | $SED 's/^/0 <- /' \
 | $SED 's/$/,/' \
-| $SED '$ s/,/;/'
+| $SED '$ s/,/;/' \
+| $AWK 'NR==1{$0="### This is a generated file - do not edit!!!\n"$0}1'

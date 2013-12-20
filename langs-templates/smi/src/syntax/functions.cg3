@@ -932,9 +932,12 @@ MAP:hab10 (@<HAB) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN OR S
 	#$ Doppe leamaš sámiin stuora deaddu.
 
 #!! * __habDain__ (@HAB>) for (Pron Dem Pl Loc) if leat followed by Nom to the right
-MAP:habDain (@HAB>) TARGET (Pron Dem Pl Loc)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK 1 Nom) ; 
+MAP:habDain (@HAB>) TARGET (Pron Dem Pl Loc)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK 1 Nom) ;
+MAP:habDain2 (@HAB>) TARGET (Pron Dem Pl Loc)(-1 Nom LINK -1 (Pron Interr))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK *1 Ess) ;
+	#$ Hui dávjá lea nu ahte dain leat olbmot, geat eai doarvái bures dovdda sámi kultuvrra eaige sin jurddašanvuogi.
 	#$ Makkár vuoigatvuođat dain leat Norgga riikavuložin?
 	#% Dat bulle ja goldne go dain ii leat ruohtas. 
+	#Comment: hard to determin whether 'dain' is HAB or ADVL.
 	
 #MAP:habOrgPlc (@HAB>) TARGET (Sem/Hum
 	#$ Ohppiidráđis lea stuora fápmu skuvllas dan dihte go leat nu máŋggas geat hupmet ovttas áššiid birra.
@@ -1200,6 +1203,13 @@ MAP:Relsubj> (@SUBJ>) TARGET (Rel Nom) IF (*1 FMAINV) ;
  
  
 	# Subject predicatives - SPRED 
+ 
+#!! * __spred<obj__ (@SPRED<OBJ) for Acc; the object of an SPRPED. Not to be mistaken with OPRED. If SPRED is to the left, and copulas is to the left of it. Nom or Hab are found sentence initially.
+MAP:spred<obj (@SPRED<OBJ) TARGET Acc (*-1 Nom BARRIER NOT-NPMODADV LINK *-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE LINK *-1 Nom OR @HAB> BARRIER WORD - Neg)(NEGATE *1 TRANS-V + FMAINV BARRIER SV-BOUNDARY OR COMMA) ;
+	#$ Mánát leat oažžulat guliid.
+	#$ Dain lea fáktemuš juohke balvva.
+	#% Divššohasas lea vuoigatvuohta iežas journála geahččat
+ 
  
 #!! * __Hab<spred__ (@<SPRED) for Nom; if copulas, goallut or jápmit is FMAINV and habitive or human Loc is found to the left. OR: if Ill or @Pron< followed by HAB are found to the left.
 MAP:Hab<spred (@<SPRED) TARGET Nom - OKTA ((*-1 COPULAS + FMAINV OR ("jápmit") OR ("goallut") + Der/Pass BARRIER NOT-NPMODADV LINK *-1 @HAB> OR HUMAN + HAB-CASE BARRIER SV-BOUNDARY) OR (*-1 Ill OR @Pron< OR Po BARRIER NOT-NPMOD OR COMMA LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV LINK *-1 @HAB> BARRIER SV-BOUNDARY)) ;

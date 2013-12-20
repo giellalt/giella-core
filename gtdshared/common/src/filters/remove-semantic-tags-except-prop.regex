@@ -10,7 +10,6 @@
 %+N <- %+Sem%/Ani %+N ,
 # these ones away:
 0 <- %+Sem%/Act,
-0 <- %+Sem%/Ani,
 0 <- %+Sem%/AniProd,
 0 <- %+Sem%/Body,
 0 <- %+Sem%/Build,
@@ -34,10 +33,8 @@
 0 <- %+Sem%/Money,
 0 <- %+Sem%/Obj-el,
 0 <- %+Sem%/Obj-clo,
-0 <- %+Sem%/Org,
 0 <- %+Sem%/Perc-Emo,
 0 <- %+Sem%/Plant,
-0 <- %+Sem%/Plc,
 0 <- %+Sem%/Route,
 0 <- %+Sem%/Semcon,
 0 <- %+Sem%/Time,

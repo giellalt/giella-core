@@ -1670,6 +1670,12 @@ SUBSTITUTE (Sem/Txt) (*) TARGET (Sem/Txt) ;
 SUBSTITUTE (Sem/Veh) (*) TARGET (Sem/Veh) ;
 SUBSTITUTE (Sem/Wpn) (*) TARGET (Sem/Wpn) ;
 SUBSTITUTE (Sem/Wthr) (*) TARGET (Sem/Wthr) ;
+SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ;
+SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ;
+SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ;
+SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ;
+SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ;
+SUBSTITUTE (Sem/State) (*) TARGET (Sem/State) ;
 SUBSTITUTE (<vdic>) (*) TARGET (<vdic>) ;
 SUBSTITUTE (MWE) (*) TARGET (MWE) ;
 

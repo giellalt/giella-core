@@ -1672,6 +1672,8 @@ SUBSTITUTE (Sem/Wpn) (*) TARGET (Sem/Wpn) ;
 SUBSTITUTE (Sem/Wthr) (*) TARGET (Sem/Wthr) ;
 SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ;
 SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ;
+SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ;
+SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ;
 SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ;
 SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ;
 SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ;

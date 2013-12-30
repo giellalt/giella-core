@@ -24,13 +24,13 @@
 <!ELEMENT lg (l, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
-      pos ( a | n | v | adv | po | pr | pron | rel | pers | det | i | interj | pcle |
-            num | cc | cs | prop | propPl | g3 | actor | npl |
-            prsprc | fp-cmp | lp-cmp | cmp | mwe | x | xxx | 
-            phrase_n | phrase_a | phrase_v | phrase_adv) #REQUIRED
+      pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |
+            Num | CC | CS | Prop | Proppl | G3 | Actor | Npl |
+            Prsprc | Fp-Cmp | Lp-Cmp | Cmp | Mwe | X | Xxx | Qu | Abbr | Clt |
+            Phrase_N | Phrase_A | Phrase_V | Phrase_Adv) #REQUIRED
       attr ( ok | no ) #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
-      nr ( sg | pl ) #IMPLIED
+      nr ( Sg | Pl ) #IMPLIED
       gen_only CDATA #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | dem | interr | 
@@ -51,6 +51,7 @@
       diph ( yes ) #IMPLIED
       umlaut ( full ) #IMPLIED
       num ( pl ) #IMPLIED
+      val ( IV | TV ) #IMPLIED
 
 >      
 
@@ -124,11 +125,19 @@
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t oa ( first | yes | no ) #IMPLIED  >
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
+<!ATTLIST t pos ( A | S  | N  | V | 
+            Adv | P | Pr | Po | Det |
+            Pron | Prop | I | Interj | CC | CS | Im | Npl | Num |
+            Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
+	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED > 
+	    
+<!--
 <!ATTLIST t pos ( a | S  | n  | v | 
             adv | p | pr | po | det |
             pron | prop | i | interj | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | cmp | x  | xxx |
-	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED > <!-- t have pos or type -->
+	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED > 
+-->
 <!ATTLIST t type ( expl ) #IMPLIED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED> <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n ) #IMPLIED >

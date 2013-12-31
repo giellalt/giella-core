@@ -870,6 +870,10 @@ SET NON-APP = ALLSYNTAG - (@APP);
 
          SECTION         #
 
+MAP (@HNOUN) TARGET N (NEGATE *0 REAL-V) ;
+#$ Fiskes, rukses, alit, ruoná ja muđui buotlágaš ivnnit.
+
+
 #!! !!HABITIVE MAPPING
 
 	# Habitives - HAB
@@ -999,6 +1003,10 @@ MAP:p<coor (@P<) Gen (-1 CRD OR COMMA LINK -1 @P<) ;
 LIST JAHKI = "jahke" "jahki" ;
 
 MAP:num< (@Num<) TARGET (N Sg Gen)(*-1 NUM + (Sg Nom) OR NUM + (Sg Acc) BARRIER NOT-A LINK NOT -1 JAHKI) ;
+
+MAP:n<titel (@N<) TARGET ("jr") OR ("sr") (-1 Prop) ;
+	#$ Loahpas jearai Johttisámelisttu Anders Somby jr. sudnos njuolga háliida go čearru gulahallat, juo dahje ii.
+
 MAP:n< (@N<) TARGET (Sg Com)(-1 Coll) ;
 	#$ Mun oidnen Ándde-guovtto Ristiinnáin.
 
@@ -1436,7 +1444,7 @@ MAP:f<advl (@-F<ADVL) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Rout
 MAP:fadvl> (@-FADVL>) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen)(NEGATE *-1 FMAINV BARRIER S-BOUNDARY OR CS)(*1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS OR FMAINV) ;
 	#$ Anán buorebun odne vuolgit go ihttážii vuordit.
 
-MAP:advl> (@ADVL>) TARGET ADVL (NOT *-1 FMAINV)(*1 FMAINV) ; 
+MAP:advl> (@ADVL>) TARGET ADVL (NOT *-1 FMAINV)(*1 FMAINV OR @HNOUN) ; 
 	#$ Dál de viimmat asttan lohkat reivve.
 
 	# Accusatives
@@ -1589,8 +1597,6 @@ MAP:opred>Ess (@OPRED>) TARGET (N Ess) OR (A Ess) IF (*1 FMAINV + TRANS-V BARRIE
 MAP:>advl (@>ADVL) TARGET Adv IF (0 DUSSE  OR EASKKA)(*1 @ADVL BARRIER NOT-NPMOD);
 	#$ Jus in leat váiban, de manan nohkkat easkka gaskaija.
 
-MAP (@HNOUN) TARGET N (NEGATE *0 REAL-V) ;
-#$ Fiskes, rukses, alit, ruoná ja muđui buotlágaš ivnnit.
 
 
 	#$ Báhpaeamit, Margrethe Wiig, gii lei gasku giellamoivvi, ráhkadii iežas sárgumiiguin sámegiela Áppesa, mii lei stuorra ávkin sámegiela oahpahusas.

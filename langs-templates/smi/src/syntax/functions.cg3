@@ -870,10 +870,6 @@ SET NON-APP = ALLSYNTAG - (@APP);
 
          SECTION         #
 
-MAP (@HNOUN) TARGET N (NEGATE *0 REAL-V) ;
-#$ Fiskes, rukses, alit, ruoná ja muđui buotlágaš ivnnit.
-
-
 #!! !!HABITIVE MAPPING
 
 	# Habitives - HAB
@@ -1367,7 +1363,7 @@ MAP:spred>SubjInf (@SPRED>) TARGET Nom - OKTA (*1 COPULAS + FMAINV BARRIER SV-BO
  
 LIST PERS-TAGS = Sg1 Sg2 Sg3 Du1 Du2 Du3 Pl1 Pl2 P3 ;
 
-MAP:subj>Pers (@SUBJ>) TARGET $$PERS-TAGS + Nom IF ((*1 $$PERS-TAGS + VFIN BARRIER NOT-ADV-PCLE) OR (1 (Sg Com) LINK *1 $$PERS-TAGS + VFIN BARRIER NOT-ADV-PCLE) OR (*1 Refl BARRIER NOT-ADV-PCLE LINK *1 $$PERS-TAGS + VFIN BARRIER NOT-ADV-PCLE)) ;
+MAP:subj>Pers (@SUBJ>) TARGET $$PERS-TAGS + Nom IF ((*1 $$PERS-TAGS + VFIN BARRIER SV-BOUNDARY OR N - ADVLCASE) OR (1 (Sg Com) LINK *1 $$PERS-TAGS + VFIN BARRIER SV-BOUNDARY OR N - ADVLCASE) OR (*1 Refl BARRIER NOT-ADV-PCLE LINK *1 $$PERS-TAGS + VFIN BARRIER NOT-ADV-PCLE)) ;
 	#$ Moai Birehiin barggašeimme mánáidgárddis.
 MAP:subj>Pers (@SUBJ>) TARGET (Sg1 Nom) (-1 CC LINK *2 (V Pl1) BARRIER NOT-ADV-PCLE) ;
 MAP:subj>Pers (@SUBJ>) TARGET (Sg1 Nom) (1 CC LINK *1 (N Pl) BARRIER NOT-NPMOD LINK *1 (V Pl1) BARRIER NOT-ADV-PCLE) ;
@@ -1444,7 +1440,7 @@ MAP:f<advl (@-F<ADVL) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Rout
 MAP:fadvl> (@-FADVL>) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen)(NEGATE *-1 FMAINV BARRIER S-BOUNDARY OR CS)(*1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS OR FMAINV) ;
 	#$ Anán buorebun odne vuolgit go ihttážii vuordit.
 
-MAP:advl> (@ADVL>) TARGET ADVL (NOT *-1 FMAINV)(*1 FMAINV OR @HNOUN) ; 
+MAP:advl> (@ADVL>) TARGET ADVL (NOT *-1 FMAINV)(*1 FMAINV) ; 
 	#$ Dál de viimmat asttan lohkat reivve.
 
 	# Accusatives
@@ -1597,6 +1593,12 @@ MAP:opred>Ess (@OPRED>) TARGET (N Ess) OR (A Ess) IF (*1 FMAINV + TRANS-V BARRIE
 MAP:>advl (@>ADVL) TARGET Adv IF (0 DUSSE  OR EASKKA)(*1 @ADVL BARRIER NOT-NPMOD);
 	#$ Jus in leat váiban, de manan nohkkat easkka gaskaija.
 
+#!! !!HNOUN MAPPING
+
+MAP (@HNOUN) TARGET N (NEGATE *0 REAL-V) ;
+#$ Fiskes, rukses, alit, ruoná ja muđui buotlágaš ivnnit.
+
+MAP:advl> (@ADVL>) TARGET ADVL (*1 @HNOUN) ; 
 
 
 	#$ Báhpaeamit, Margrethe Wiig, gii lei gasku giellamoivvi, ráhkadii iežas sárgumiiguin sámegiela Áppesa, mii lei stuorra ávkin sámegiela oahpahusas.

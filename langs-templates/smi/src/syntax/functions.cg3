@@ -1440,11 +1440,18 @@ MAP:r39 (@ADVL<) TARGET (N Sg Loc) IF (-1 ("oktii") OR ("guktii") OR ("golbmii")
 
 SET MOD-ADV = DUSSE OR ("njuolga") OR ("njuolgga") OR EASKKA OR ("gitta") ;
 
+#!! * __f<advl__ (@-F<ADVL) for infinite adverbials
 MAP:f<advl (@-F<ADVL) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen) (*-1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS)(NEGATE 0 DUSSE OR EASKKA) ;
 	#$ Min mielas goit lea veara jurddašit nissongova birra mii boahtá ovdan jearahallamiin.
 
+#!! * __f<advl__ (@-F<ADVL) for infinite adverbials
 MAP:fadvl> (@-FADVL>) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen)(NEGATE *-1 FMAINV BARRIER S-BOUNDARY OR CS)(*1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS OR FMAINV) ;
 	#$ Anán buorebun odne vuolgit go ihttážii vuordit.
+
+MAP:advl> (@ADVL>) TARGET ADVL + S-BOUNDARY (*1 FMAINV BARRIER S-BOUNDARY) ;
+MAP:diibmuadvl> (@ADVL>) TARGET ("diibmu" Nom) (1 Num) ;
+	#$ Diibmu golbma manan ruoktot.
+
 
 MAP:n< (@N<) TARGET (N Loc) (-1 (N @SUBJ>))(1 FMAINV) ; 
 MAP:Pron< (@Pron<) TARGET (N Loc) (-1 (Pron @SUBJ>) LINK NOT 0 Rel)(1 FMAINV) ; 
@@ -1452,7 +1459,7 @@ MAP:Pron< (@Pron<) TARGET (N Loc) (-1 (Pron @SUBJ>) LINK NOT 0 Rel)(1 FMAINV) ;
 
 
 
-	# Accusatives
+	# Infinite obbject - FOBJ
 
 #!! * __-fobj>__ (@-FOBJ>) for Acc 
 MAP:-fobj> (@-FOBJ>) TARGET Acc (1 (TV VAbess) OR (TV Ger) OR (TV Actio Loc) OR (TV PrfPrc) OR (TV Inf) LINK 0 SYN-V LINK NOT 1 Acc) ; 
@@ -1464,11 +1471,6 @@ MAP:-fobj> (@-FOBJ>) TARGET Acc (-1 ADVL + Sem/Hum)(1 (TV Inf @<OBJ) LINK NOT 1 
 	#$ Eadni oahpaha nieidasis beaskka goarrut.
 	
 
-
-
-MAP:advl> (@ADVL>) TARGET ADVL + S-BOUNDARY (*1 FMAINV BARRIER S-BOUNDARY) ;
-MAP:diibmuadvl> (@ADVL>) TARGET ("diibmu" Nom) (1 Num) ;
-	#$ Diibmu golbma manan ruoktot.
 
 
 MAP:num< (@Num<) TARGET (Pl Loc) (*-1 OKTA BARRIER NOT-NPMOD) ;
@@ -1487,13 +1489,22 @@ MAP:n< (@N<) TARGET Loc (*-1 COUNTABLE BARRIER NOT-A) ;
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Gen (1 (Actio Nom) LINK 1 N) ; 
 	#$ Máreha čállin teavsttat ledje buoremusat.
 
-MAP:advl> (@ADVL>) TARGET ADVL (NOT *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAINV) ; 
-	#$ Dál de viimmat asttan lohkat reivve.
 
+#!! * __<advl__ (@<ADVL) if; finite mainverb found to the left, and a finite main verb is found to the right.
+MAP:advl> (@ADVL>) TARGET ADVL (NOT *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAINV BARRIER SV-BOUNDARY) ; 
+	#$ Dál de viimmat asttan lohkat reivve.
+	#$ Jos ja go suodjalus ii šat dárbbaš guovllu, dat galgá máhcahuvvot sámi geavahussii, Skum cealká.
+
+#!! * __<advl__ (@<ADVL) if; finite mainverb found to the left. Not if a comma is found immediately to the left and a finite mainverb is located somewhere to the right of this comma.
 MAP:<advl (@<ADVL) TARGET ADVL - MO - Rel - MOD-ADV - Attr OR TIME-N + Gen OR (Sem/Route Gen) OR Sem/Date (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
 	#$ Giellatekno álggahuvvui 1.8.2001 prošeaktan ráhkadit sámegiela grammatihkalaš analysa.
+	#$ Dán filmma leat Kárášjoga nuorat oaidnán, eaige šat vuolgge sirkusii.
 MAP:advl> (@ADVL>) TARGET ADVL OR TIME-N + Gen OR (Sem/Route Gen) ((*1 FMAINV OR FAUXV BARRIER SV-BOUNDARY) OR (*1 ("de") BARRIER FMAINV LINK 1 FMAINV OR FAUXV)) ;
 	#$ Maŋŋá jápmimis de aliduvvui Gonagas Olav bassin.
+	
+#MAP:<advl (@<ADVL) TARGET ADVL (*-1 S-BOUNDARY LINK *-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE *1 FMAINV BARRIER S-BOUNDARY);
+	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
+	
 MAP:advl>cs (@ADVL>CS) TARGET Adv (*-1 BOS BARRIER NOT-ADV)(1 CS LINK *1 FMAINV) ;
 	#$ Danne go ..
 
@@ -1517,10 +1528,14 @@ MAP:advlEss> (@<ADVL) TARGET (Wthr Ess) OR TIME-N + Ess (*-1 FMAINV BARRIER SV-B
 MAP:Acc<advl (@<ADVL) TARGET TIME-N + Acc OR ("gaska" Acc) (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE 1 (A Nom)) ;
 MAP:Accadvl> (@ADVL>) TARGET TIME-N + Acc OR ("gaska" Acc) (*1 FMAINV BARRIER SV-BOUNDARY) ;
 
+
 MAP:gitta>adv (@>ADVL) TARGET ("gitta" Adv)(NOT *-1 ("váldit") OR ("doallat") OR ("čatnat") OR ("bidjat") OR LEAT OR ("mannat") BARRIER SV-BOUNDARY)(*1 DOHKO OR DOPPE OR Loc OR Ill OR Sem/Time OR Po BARRIER NOT-NPMOD) ;
-MAP (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
+MAP:>advl (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
 
 MAP:<advl (@<ADVL) TARGET Adv (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+
+#MAP:<advl (@<ADVL) TARGET ("šat" Adv) (*-1 FMAINV BARRIER SV-BOUNDARY);
+
 
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY) ; 
@@ -1529,6 +1544,8 @@ MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY
 
 MAP:-fsubj> (@-FSUBJ>) TARGET Acc (*1 (IV @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 	#$ Sii lohket fatnasa gopmánan.
+ 
+ 
  
 	# Predicatives - PPRED
  

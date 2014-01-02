@@ -1673,6 +1673,7 @@ SUBSTITUTE (Sem/Clth) (*) TARGET (Sem/Clth) ;
 SUBSTITUTE (Sem/Clth-jewl) (*) TARGET (Sem/Clth-jewl) ;
 SUBSTITUTE (Sem/Ctain) (*) TARGET (Sem/Ctain) ;
 SUBSTITUTE (Sem/Ctain-clth) (*) TARGET (Sem/Ctain-clth) ;
+SUBSTITUTE (Sem/Ctain-abstr) (*) TARGET (Sem/Ctain-abstr) ;
 SUBSTITUTE (Sem/Curr) (*) TARGET (Sem/Curr) ;
 SUBSTITUTE (Sem/Date) (*) TARGET (Sem/Date) ;
 SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ;

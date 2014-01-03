@@ -691,10 +691,6 @@ SET TRANS-V = V-TRANS - Der/Pass + REAL-V ;
 
 LIST N-SG-NOM = (N Sg Nom);
 
-LIST PROP = (N Prop);
-
-SET COMMON-N = N - Prop;
-
 SET HEAD-N = N - RCmpnd ;
 
 SET HEAD-N-NOM = (N Nom) - RCmpnd ;
@@ -1006,7 +1002,7 @@ MAP:n<titel (@N<) TARGET INITIAL ((-1 N) OR (-1 CC LINK -1 INITIAL LINK -1 N))(N
 MAP:n< (@N<) TARGET (Sg Com)(-1 Coll) ;
 	#$ Mun oidnen Ándde-guovtto Ristiinnáin.
 
-MAP:n< (@N<) TARGET (Num Nom) (-1 JAHKI OR ("diibmu")) ;
+MAP:n< (@N<) TARGET (Num Nom) ((-1 JAHKI OR ("diibmu")) OR (-1 Sem/Sur LINK 2 (":"))) ;
 MAP:>nRCmpnd (@>N) TARGET RCmpnd ;
 
 MAP:>num (@>Num) TARGET DUSSE (1 Num) ;
@@ -1157,6 +1153,9 @@ MAP:r297 (@APP-Pron<) TARGET (N Loc) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC OR
 	#$ Ánde orru Oslos, Norgga oaivegávpogis.	
 
 MAP:r298 (@APP-N<) TARGET (N Ill) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC LINK -1 (N Ill))(1 EOS) ;
+MAP:App-N<Punct (@APP-N<) TARGET (N Ill) IF (*-1 ("–") BARRIER APP-BOUNDARY LINK -1 (N Ill)) ;
+	#$ Min jurdagat mannet lagamuččaide – bearrašii, sohkii ja ustibiidda.
+
 MAP:r299 (@APP-N<) TARGET (N Ill) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC LINK -1 (N Ill))(1 COMMA LINK 1 S-BOUNDARY) ;	
 	
 MAP:r300 (@APP-Pron<) TARGET (N Ill) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC LINK -1 (Pers Ill))(1 EOC OR COMMA) ;		
@@ -1285,7 +1284,7 @@ MAP:<spredVeara (@<SPRED) TARGET ("veara" Nom) (-1 Gen LINK *-1 IV + FMAINV BARR
 #!! * __leftCop<spred__ (@<SPRED) for Nom; if copulas is the main verb to the left, and there is no Ess found to the left of cop (note that Loc is allowed between target and cop). OR: if you are Coll or Sem/Group with copulas to your left. 
 MAP:leftCop<spred (@<SPRED) TARGET Nom ((*-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) OR 
 (-1 Loc LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) OR 
-(0 Coll OR Sem/Group LINK *-1 COPULAS BARRIER NOT-NPMODADV))
+(0 Coll OR Sem/Group LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV))
 (NEGATE 1 Nom - Rel)(NEGATE *1 Nom - Rel BARRIER NOT-A OR COMMA)(NEGATE 0 Gen OR Attr OR ("buorre") LINK 1 N)(NEGATE 1 Ess LINK NOT *-2 SUBJ BARRIER S-BOUNDARY) ;
 	#$ Čállit lea buoret go lohkat.
 	#$ Soai leat goappašagat nu jallat.
@@ -1454,7 +1453,8 @@ MAP:diibmuadvl> (@ADVL>) TARGET ("diibmu" Nom) (1 Num) ;
 
 
 MAP:n< (@N<) TARGET (N Loc) (-1 (N @SUBJ>))(1 FMAINV) ; 
-MAP:Pron< (@Pron<) TARGET (N Loc) (-1 (Pron @SUBJ>) LINK NOT 0 Rel)(1 FMAINV) ; 
+MAP:Pron< (@Pron<) TARGET (N Loc) - TIME-N (*-1 (Pron @SUBJ>) BARRIER NOT-ADV - COMMA LINK NOT 0 Rel)(*1 VFIN BARRIER NOT-ADV-PCLE - COMMA) ; 
+	#$ Nu guhká go mii, opposišuvnnas, eat čohkká beaivválaččat daiguin dokumeanttaiguin, de lea bahá vajáldahttit.
 #MAP:n< (@N<) TARGET (N Loc)(-1 (N Nom) LINK *-1 FMAINV BARRIER SV-BOUNDARY) ; 
 
 
@@ -1625,6 +1625,11 @@ MAP:>advl (@>ADVL) TARGET Adv IF (0 DUSSE  OR EASKKA)(*1 @ADVL BARRIER NOT-NPMOD
 MAP:<subj (@<SUBJ) TARGET NP-HEAD-NOM - A OR DUPRON + Nom OR (Num Nom) (*-1 FMAINV BARRIER (":") OR S-BOUNDARY) ;
 MAP:subj> (@SUBJ>) TARGET NP-HEAD-NOM - A OR DUPRON + Nom OR (Num Nom) (*1 FMAINV BARRIER (":")) ;
 
+#!! !!OBJ MAPPING - leftovers
+MAP:<obj (@<OBJ) TARGET NP-HEAD-ACC OR DUPRON + Acc (*-1 FMAINV BARRIER (":") OR S-BOUNDARY) ;
+MAP:obj> (@OBJ>) TARGET NP-HEAD-ACC OR DUPRON + Acc (*1 FMAINV BARRIER (":"))(NOT *-1 Interj BARRIER NOT-NPMOD) ;
+
+
 #!! !!HNOUN MAPPING
 
 MAP:hnounNom (@HNOUN) TARGET NP-HEAD-NOM - A OR (Num Nom) (NEGATE *0 REAL-V BARRIER (":"))(NEGATE *-1 PUNCT BARRIER (":") LINK -1 WORD) ;
@@ -1632,6 +1637,7 @@ MAP:hnounNom (@HNOUN) TARGET NP-HEAD-NOM - A OR (Num Nom) (NEGATE *0 REAL-V BARR
 	#$ Bargolávdegotti bargu: Álgobargu lei čielggadit min mandáhta.
 
 MAP:hnounAdvl (@HNOUN) TARGET ADVLCASE OR Acc (NEGATE *0 REAL-V OR @HNOUN) ;
+MAP:hnounInterj (@HNOUN) TARGET Acc (*-1 Interj BARRIER NOT-NPMOD) ;
 
 
 
@@ -1702,6 +1708,7 @@ SUBSTITUTE (Sem/Food) (*) TARGET (Sem/Food) ;
 SUBSTITUTE (Sem/Furn) (*) TARGET (Sem/Furn) ;
 SUBSTITUTE (Sem/Group) (*) TARGET (Sem/Group) ;
 SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) ;
+SUBSTITUTE (Sem/Year) (*) TARGET (Sem/Year) ;
 SUBSTITUTE (Sem/Lang) (*) TARGET (Sem/Lang) ;
 SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) ;
 SUBSTITUTE (Sem/Mat) (*) TARGET (Sem/Mat) ;

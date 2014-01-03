@@ -1719,7 +1719,7 @@ SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) ;
 SUBSTITUTE (Sem/Obj-clo) (*) TARGET (Sem/Obj-clo) ;
 SUBSTITUTE (Sem/Obj-el) (*) TARGET (Sem/Obj-el) ;
 SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) ;
-SUBSTITUTE (Sem/Perc-Emo) (*) TARGET (Sem/Perc-Emo) ;
+SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ;
 SUBSTITUTE (Sem/Plant) (*) TARGET (Sem/Plant) ;
 SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) ;
 SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ;

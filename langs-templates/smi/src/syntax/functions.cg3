@@ -1363,6 +1363,11 @@ MAP:spred>SubjInf (@SPRED>) TARGET Nom - OKTA (*1 COPULAS + FMAINV BARRIER SV-BO
 	#$ Gurssa ulbmil lea oahppat goarrut Ivgu gávtti.
 	#$ Bargu lei kánske árvvoštallat dan.	
 	 
+#!! * __spredCoord__ (@<SPRED) coordination for Nom; only if there already is a SPRED to the left of CNP. Not if there is some kind of comparison involved.
+MAP:spredCoord (@<SPRED) TARGET Nom - OKTA (*-1 @CNP BARRIER NOT-NPMODADV )(*-2 @<SPRED BARRIER WORD - Adv)(NEGATE *-1 ("go" CS) BARRIER NOT-NPMOD LINK -1 ("nu" Adv))(NEGATE *-1 XGO BARRIER NOT-NPMOD);#(*1 EOS)(NEGATE *1 FMAINV) ;
+	#$ De eai leat šat dušše tálat, muhto bustávat maid.
+	#% Dat ledje beakkán ja dovddus olbmot nu go Diaz.
+ 
  
 	# Subjects - SUBJ
 	
@@ -1533,9 +1538,17 @@ MAP:>advl (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
 
 MAP:<advl (@<ADVL) TARGET Adv (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
 
-#MAP:<advl (@<ADVL) TARGET ("šat" Adv) (*-1 FMAINV BARRIER SV-BOUNDARY);
+#!! * __<advlEOS__ (@<ADVL) if; comma found to the left and the finite mainverb to the left of comma. To the right is a sentence boundary. No mainverbs are allowed to the left.
+MAP:<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV) ;#(*-1 FMAINV BARRIER SV-BOUNDARY);
+	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 
-
+#!! * __cleanupILL<advl__ (@<ADVL) for N Ill if; there are no boundarysymbols to your left, if you arent already @N< OR @APP-N<, and no mainverb is to yor left.
+MAP:cleanupILL<advl (@<ADVL) TARGET (N Ill) (NEGATE *-1 BOUNDARYSYMBOLS BARRIER FMAINV)(NEGATE 0 @N< OR @APP-N< OR ("doarvi"))(NEGATE *1 FMAINV);
+	#$ Riekti oassálastit luondduriggodagaid hálddašeamis sáhttá čađahuvvot dakko bokte ahte Sámediggi nammada áirasiid oktasaš stivrenorgánaide, nu movt Finnmárkoopmodahkii ja guovllu boraspirelávdegottiide.
+	#% Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.
+	#% Guovdageainnus muittán ahte roagga gándajienat eahketbeaivve huike: Muorravissui, muorravissui!
+	
+	
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY) ; 
 	#$ Máret muitalii Máhte oaidnán guovžža.

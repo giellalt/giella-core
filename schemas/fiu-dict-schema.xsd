@@ -702,14 +702,15 @@
    <xs:attribute name="stemID" type="xs:string"/>
    <xs:element name="semantics">
       <xs:complexType>
-         <xs:choice maxOccurs="unbounded">
-            <xs:element ref="sem"/>
-         </xs:choice>
+         <xs:sequence>
+            <xs:element ref="sem" maxOccurs="unbounded"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="semRel"/>
+         </xs:sequence>
       </xs:complexType>
    </xs:element>
    <xs:element name="sem">
      <xs:complexType>
-           <xs:attribute ref="semClass"/>
+           <xs:attribute ref="class"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="tg">
@@ -1018,7 +1019,7 @@
                <xs:attribute name="count" type="BooleanType"/>
                <xs:attribute name="anim" type="BooleanType"/>
                <xs:attribute ref="isaType"/>
-               <xs:attribute ref="semClass"/>
+               <xs:attribute ref="class"/>
                <xs:attribute ref="lemmaID"/>
                <xs:attribute ref="stemID"/>
             </xs:extension>
@@ -1655,7 +1656,7 @@
       </xs:restriction>
    </xs:simpleType>
 <!-- This has been adapted from semantiske_sett.jspwiki for sets used in sma oahpa. -->
-   <xs:attribute name="semClass">
+   <xs:attribute name="class">
       <xs:simpleType>
          <xs:restriction base="xs:string">
 <!-- Super set: ABSTRACTS -->
@@ -1666,7 +1667,9 @@
             <xs:enumeration value="ACTION"/>
 <!-- Super set: ABSTRACTS -->
             <xs:enumeration value="ACTION_V"/>
-<!-- Super set: MORFA-C -->
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="ACTOR"/>
+<!-- Super set: MORFAS -->
             <xs:enumeration value="ACTIVITY_V"/>
 <!-- Super set: ABSTRACTS -->
             <xs:enumeration value="AMOUNT"/>
@@ -1698,6 +1701,7 @@
             <xs:enumeration value="ANIMAL_WILD"/>
 <!-- Super set: LEISURETIME/AT_HOME -->
             <xs:enumeration value="ARRANGEMENT"/>
+            <xs:enumeration value="ARRANGEMENT_PL"/>
 <!-- Super set: HUMAN_DOING -->
             <xs:enumeration value="AUX_V"/>
 <!-- Super set: OBJECT -->
@@ -1718,6 +1722,8 @@
 <!-- Super set: BODY -->
             <xs:enumeration value="BODY_ADV"/>
 <!-- Super set: BODY -->
+            <xs:enumeration value="BODY_OTHER"/>
+<!-- Super set: BODY -->
             <xs:enumeration value="BODY_V"/>
 <!-- Super set: BUILDING/ROOMS -->
             <xs:enumeration value="BUILDING"/>
@@ -1726,31 +1732,32 @@
             <xs:enumeration value="CARDS"/>
 <!-- Super set: LEISURETIME/AT_HOME -->
             <xs:enumeration value="CHRISTMAS"/>
+            <xs:enumeration value="CITY"/>
 <!-- Super set: CLOTHES -->
             <xs:enumeration value="CLOTHES"/>
             <xs:enumeration value="CLOTHES_A"/>
 <!-- Super set: CLOTHES -->
             <xs:enumeration value="CLOTHES_V"/>
-<!-- Super set: MORFA-C -->
+<!-- Super set: MORFAS -->
             <xs:enumeration value="CLOTHES_WORK"/>
 <!-- Super set: CLOTHES -->
             <xs:enumeration value="CLOTHING"/>
+            <xs:enumeration value="CLOTHING_A"/>
 <!-- Super set: CLOTHES -->
             <xs:enumeration value="CLOTHING_OTHER"/>
 <!-- Super set: CLOTHES -->
             <xs:enumeration value="CLOTHING_PL"/>
+            <xs:enumeration value="CLOTHING_V"/>
 <!-- Super set: CLOTHES -->
             <xs:enumeration value="COLOUR"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mCOMMAND_V"/>
+<!-- Super set: MORFAS -->
 <!-- Super set: OBJECT // CONCRETES -->
             <xs:enumeration value="CONTAINER"/>
 <!-- Super set: BUILDING/ROOMS -->
             <xs:enumeration value="CONSTRUCTION"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mCONVERSATION"/>
 <!-- Super set: HUMAN-LIKE -->
             <xs:enumeration value="DEITY"/>
+            <xs:enumeration value="DIV_ADV"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="DRINK"/>
 <!-- Super set: SCHOOL/EDUCATION -->
@@ -1790,6 +1797,7 @@
             <xs:enumeration value="FOOD_DRINK_V"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="FOOD_GROCERY"/>
+            <xs:enumeration value="FOOD_GROCERY_PL"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="FOOD_OTHER"/>
 <!-- Super set: BUILDING/ROOMS -->
@@ -1797,6 +1805,7 @@
 <!-- Super set: TRADITIONAL -->
             <xs:enumeration value="GAMME"/>
             <xs:enumeration value="HANDICRAFTS"/>
+            <xs:enumeration value="HANDICRAFTS_PL"/>
 <!-- Super set: REINDEER/HERDING -->
             <xs:enumeration value="HERDING"/>
 <!-- Super set: REINDEER/HERDING -->
@@ -1807,9 +1816,9 @@
 <!-- Super set: LEISURETIME/AT_HOME -->
             <xs:enumeration value="HOME_ACTIVITY"/>
 <!-- Super set: HUMAN_DOING -->
-            <xs:enumeration value="HUMAN_A"/>
+            <xs:enumeration value="HUM_A"/>
 <!-- Super set: HUMAN_DOING -->
-            <xs:enumeration value="HUMAN_V"/>
+            <xs:enumeration value="HUM_V"/>
 <!-- Super set: BODY -->
             <xs:enumeration value="ILLNESS"/>
 <!-- Super set: VERBAL ASPECT -->
@@ -1830,20 +1839,18 @@
             <xs:enumeration value="LEISURETIME_HOME_V"/>
 <!-- Super set: GENDER -->
             <xs:enumeration value="MALE"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPERSNAME"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mVISSJH_V"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mLONG_SHORT"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mMONTH"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="MORFAS"/>
+<!-- Super set: MORFAS -->
+<!-- Super set: MORFAS -->
+<!-- Super set: MORFAS -->
 <!-- Super set: TRAVEL -->
             <xs:enumeration value="MOVEMENT_A"/>
 <!-- Super set: TRAVEL -->
             <xs:enumeration value="MOVEMENT_V"/>
 <!-- Super set: HUMAN -->
-            <xs:enumeration value="MYTH_HUMAN"/>
+            <xs:enumeration value="MYTH_HUM"/>
+            <xs:enumeration value="MYTH_OTHER"/>
 <!-- Super set: NATURE -->
             <xs:enumeration value="NATURE"/>
 <!-- Super set: NATURE -->
@@ -1858,8 +1865,7 @@
             <xs:enumeration value="NATURE_V"/>
 <!-- Super set: NATURE -->
             <xs:enumeration value="NATURE_WATER"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mNUMBER"/>
+<!-- Super set: MORFAS -->
 <!-- Super set: CONCRETES -->
             <xs:enumeration value="OBJECT_A"/>
 <!-- Super set: OBJECT -->
@@ -1867,25 +1873,16 @@
 <!-- Super set: WORK/ECONOMY/TOOLS -->
             <xs:enumeration value="ORGANIZATION"/>
 <!-- Super set: HUMAN -->
+            <xs:enumeration value="OTHERS"/>
             <xs:enumeration value="PEOPLE"/>
 <!-- Super set: HUMAN -->
             <xs:enumeration value="PEOPLE_OTHER"/>
+            <xs:enumeration value="PL"/>
 <!-- Super set: TRAVEL -->
+            <xs:enumeration value="PLACE_ADV"/>
+            <xs:enumeration value="PLACE_LEKSA"/>
             <xs:enumeration value="PLACE_LOCAL"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPLACE_NAME"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPLACE_COUNTRY"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPLACE_DISTRICT"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPLACE_RIVER"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPLACE_MOUNTAIN"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPLACE_LAKE"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mPLACE_NATURE"/>
+<!-- Super set: MORFAS -->
 <!-- Super set: TRAVEL -->
             <xs:enumeration value="PLACE_OTHER"/>
 <!-- Super set: TRAVEL -->
@@ -1895,6 +1892,7 @@
 <!-- Super set: WORKERS -->
             <xs:enumeration value="PROFESSION"/>
             <xs:enumeration value="PRON"/>
+            <xs:enumeration value="PXPROPERTY"/>
 <!-- Super set: REINDEER/HERDING -->
             <xs:enumeration value="REINDEER"/>
 <!-- Super set: REINDEER/HERDING -->
@@ -1908,7 +1906,7 @@
 <!-- Super set: BUILDING/ROOMS -->
             <xs:enumeration value="ROOM_OTHER"/>
 <!-- Super set: BUILDING/ROOMS -->
-            <xs:enumeration value="ROOM_PART"/>
+            <xs:enumeration value="ROOMPART"/>
 <!-- Super set: SCHOOL/EDUCATION -->
             <xs:enumeration value="SCHOOL"/>
 <!-- Super set: SCHOOL/EDUCATION -->
@@ -1944,19 +1942,22 @@
 <!-- Super set: OBJECT -->
             <xs:enumeration value="THING"/>
             <xs:enumeration value="THING_A"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mTHING_A"/>
 <!-- Super set: ABSTRACTS -->
             <xs:enumeration value="THOUGHT"/>
 <!-- Super set: TIMEEXPRESSIONS -->
             <xs:enumeration value="TIME"/>
 <!-- Super set: TIMEEXPRESSIONS -->
             <xs:enumeration value="TIME_A"/>
+            <xs:enumeration value="TIME_ADV"/>
 <!-- Super set: TIMEEXPRESSIONS -->
             <xs:enumeration value="TIME_DAY"/>
-<!-- Super set: MORFA-C -->
-            <xs:enumeration value="mTIME_GEN"/>
-<!-- Super set: MULTIWORD -->
+            <xs:enumeration value="TIME_DUR"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="TIME_OTHER"/>
+            <xs:enumeration value="TIME_POINT_GEN"/>
+            <xs:enumeration value="TIME_POINT_GEN_PL"/>
+            <xs:enumeration value="TIME_POINT_LOC"/>
+            <xs:enumeration value="TIME_SEASON"/>
             <xs:enumeration value="TIME_U"/>
 <!-- Super set: TIMEEXPRESSIONS -->
             <xs:enumeration value="TIME_V"/>
@@ -1977,6 +1978,7 @@
 <!-- Super set: TRAVEL -->
             <xs:enumeration value="TRAVELLING_V"/>
 <!-- Super set: TRAVEL -->
+            <xs:enumeration value="TRAVEL"/>
             <xs:enumeration value="TRAVEL_V"/>
 <!-- Super set: TRAVEL -->
             <xs:enumeration value="VEHICLE"/>
@@ -1994,10 +1996,80 @@
             <xs:enumeration value="WEATHER"/>
 <!-- Super set: WEATHERTYPES -->
             <xs:enumeration value="WEATHER_A"/>
+            <xs:enumeration value="WEATHER_PL"/>
 <!-- Super set: WEATHERTYPES -->
             <xs:enumeration value="WEATHER_V"/>
+            <xs:enumeration value="WEEKDAY"/>
 <!-- Super set: WORK/ECONOMY/TOOLS -->
+            <xs:enumeration value="WORK_ECONOMY_ADV"/>
             <xs:enumeration value="WORK_ECONOMY_V"/>
+            <xs:enumeration value="mACTIVITY"/>
+            <xs:enumeration value="mBAHTI"/>
+            <xs:enumeration value="mBUILD"/>
+            <xs:enumeration value="mCARD_SMALL"/>
+            <xs:enumeration value="mCARD_VERYSMALL"/>
+            <xs:enumeration value="mCLOTHESVERB"/>
+            <xs:enumeration value="mCOLL"/>
+            <xs:enumeration value="mCOLL_DU"/>
+            <xs:enumeration value="mCOLL_NOT_DU"/>
+            <xs:enumeration value="mCOMMAND_V"/>
+            <xs:enumeration value="mCOMV"/>
+            <xs:enumeration value="mCONVERSATION"/>
+            <xs:enumeration value="mCOOK"/>
+            <xs:enumeration value="mDILLI_ESS"/>
+            <xs:enumeration value="mFAMILY"/>
+            <xs:enumeration value="mFAMILYsg"/>
+            <xs:enumeration value="mFOR_PICKING"/>
+            <xs:enumeration value="mGOHPPU"/>
+            <xs:enumeration value="mGROUP"/>
+            <xs:enumeration value="mHUM_A"/>
+            <xs:enumeration value="mILLV"/>
+            <xs:enumeration value="mLAUGH"/>
+            <xs:enumeration value="mLIKE_ILL"/>
+            <xs:enumeration value="mLOCV"/>
+            <xs:enumeration value="mLONG_SHORT"/>
+            <xs:enumeration value="mMARRY"/>
+            <xs:enumeration value="mMONTH"/>
+            <xs:enumeration value="mMOVE_V"/>
+            <xs:enumeration value="mNUM_N"/>
+            <xs:enumeration value="mNUMBER"/>
+            <xs:enumeration value="mOKTA"/>
+            <xs:enumeration value="mORD"/>
+            <xs:enumeration value="mORD_SMALL"/>
+            <xs:enumeration value="mPAIR"/>
+            <xs:enumeration value="mPARTY_CLOTHING"/>
+            <xs:enumeration value="mPEOPLE"/>
+            <xs:enumeration value="mPERSNAME"/>
+            <xs:enumeration value="mPLACE"/>
+            <xs:enumeration value="mPLACENAME"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="mPLACE_COUNTRY"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="mPLACE_DISTRICT"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="mPLACE_RIVER"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="mPLACE_MOUNTAIN"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="mPLACE_LAKE"/>
+<!-- Super set: MORFAS -->
+            <xs:enumeration value="mPLACE_NATURE"/>
+            <xs:enumeration value="mPLAY_V"/>
+            <xs:enumeration value="mPRINTEDMATTER"/>
+            <xs:enumeration value="mPRINTEDMATTER_V"/>
+            <xs:enumeration value="mPRIVVEHICLE"/>
+            <xs:enumeration value="mPRIV_BUILDING"/>
+            <xs:enumeration value="mPROFESSION"/>
+            <xs:enumeration value="mRAIN"/>
+            <xs:enumeration value="mROAD"/>
+            <xs:enumeration value="mROAD_A"/>
+            <xs:enumeration value="mSEE"/>
+            <xs:enumeration value="mSTIMULANT"/>
+            <xs:enumeration value="mSTORY"/>
+            <xs:enumeration value="mTIME_POINT_ESS"/>
+            <xs:enumeration value="mUSETIME"/>
+            <xs:enumeration value="mVERBAL_COM"/>
+            <xs:enumeration value="mVISSJH_V"/>
          </xs:restriction>
       </xs:simpleType>
    </xs:attribute>

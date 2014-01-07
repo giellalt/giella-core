@@ -1485,7 +1485,7 @@ MAP:diibmuadvl> (@ADVL>) TARGET ("diibmu" Nom) (1 Num) ;
 	#$ Diibmu golbma manan ruoktot.
 
 
-	# Infinite obbject - FOBJ
+	# Infinite object - FOBJ
 
 #!! * __-fobj>__ (@-FOBJ>) for Acc 
 MAP:-fobj> (@-FOBJ>) TARGET Acc (1 (TV VAbess) OR (TV Ger) OR (TV Actio Loc) OR (TV PrfPrc) OR (TV Inf) LINK 0 SYN-V LINK NOT 1 Acc) ; 
@@ -1502,7 +1502,7 @@ MAP:advl>mainV (@ADVL>) TARGET ADVL (NOT *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAIN
 	#$ Dál de viimmat asttan lohkat reivve.
 	#$ Jos ja go suodjalus ii šat dárbbaš guovllu, dat galgá máhcahuvvot sámi geavahussii, Skum cealká.
 	
-#MAP:advl>TEST (@ADVL>) TARGET ADVL (*-1 S-BOUNDARY BARRIER FMAINV LINK *-1 FMAINV BARRIER SV-BOUNDARY) ; 
+#MAP:advl>TEST (@ADVL>) TARGET (N Ill) (*-1 S-BOUNDARY BARRIER FMAINV OR FAUXV LINK *-1 FMAINV BARRIER SV-BOUNDARY) ; 
 	#$ Muđui ledje johtti oahpaheaddjit, muhto eai doarvái.
 
 
@@ -1546,8 +1546,10 @@ MAP:>advl (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
 
 MAP:<advl (@<ADVL) TARGET Adv (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
 
-#!! * __<advlEOS__ (@<ADVL) if; comma found to the left and the finite mainverb to the left of comma. To the right is a sentence boundary. No mainverbs are allowed to the left.
-MAP:<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV) ;#(*-1 FMAINV BARRIER SV-BOUNDARY);
+#!! * __<advlEOS__ (@<ADVL) if; comma found to the left and the finite mainverb to the left of comma. To the right is the end of the sentence.
+MAP:<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV) ;
+#MAP:nr2<advlEOS (@<ADVL) TARGET (N Loc) (*-1 S-BOUNDARY BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV);
+	#$ 'De eai leat šat dušše tálat, muhto bustávat maid.
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 
 #!! * __advlBOS>__ (@ADVL>) if; you are N Ill and found sentnece initially. First one to your right is a clause.

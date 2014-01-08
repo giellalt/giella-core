@@ -1548,7 +1548,7 @@ MAP:gitta>adv (@>ADVL) TARGET ("gitta" Adv)(NOT *-1 ("váldit") OR ("doallat") O
 MAP:>advl (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
 
 MAP:<advl (@<ADVL) TARGET Adv (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
-#!! * ____ (@<ADVL)
+#!! * __advl>inbetween__ (@ADVL>) for Adv; if inbetween two sentenceboundaries where no mainverb is present.
 MAP:advl>inbetween (@ADVL>) TARGET Adv (*-1 BOC BARRIER FMAINV)(*1 S-BOUNDARY BARRIER FMAINV)  ;
 	#$ Son muitala maid ahte nu guhká go orohagat eai vuosttal mearkkaid, de sii lávejit juolludit mearkkaid ohcciide.	
 	#$ Dál de viimmat asttan čállit reivve. 

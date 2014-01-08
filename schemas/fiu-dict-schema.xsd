@@ -69,6 +69,7 @@
 		   </xs:restriction>
 		 </xs:simpleType>
                </xs:attribute>
+               <xs:attribute ref="val"/>
             </xs:extension>
          </xs:simpleContent>
       </xs:complexType>
@@ -774,6 +775,7 @@
                </xs:restriction>
             </xs:simpleType>
          </xs:attribute>
+         <xs:attribute ref="val"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="td">
@@ -2070,6 +2072,17 @@
             <xs:enumeration value="mUSETIME"/>
             <xs:enumeration value="mVERBAL_COM"/>
             <xs:enumeration value="mVISSJH_V"/>
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+
+   <xs:attribute name="val">
+      <xs:simpleType>
+         <xs:restriction base="xs:string">
+            <xs:enumeration value="IV"/>
+            <xs:enumeration value="IV:S=0"/>
+            <xs:enumeration value="TV"/>
+            <xs:enumeration value="TV:S=0"/>
          </xs:restriction>
       </xs:simpleType>
    </xs:attribute>

@@ -1506,9 +1506,7 @@ MAP:-fobj> (@-FOBJ>) TARGET Acc (-1 ADVL + Sem/Hum)(1 (TV Inf @<OBJ) LINK NOT 1 
 MAP:advl>mainV (@ADVL>) TARGET ADVL (NOT *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAINV BARRIER SV-BOUNDARY) ; 
 	#$ Dál de viimmat asttan lohkat reivve.
 	#$ Jos ja go suodjalus ii šat dárbbaš guovllu, dat galgá máhcahuvvot sámi geavahussii, Skum cealká.
-	
-#MAP:advl>TEST (@ADVL>) TARGET (N Ill) (*-1 S-BOUNDARY BARRIER FMAINV OR FAUXV LINK *-1 FMAINV BARRIER SV-BOUNDARY) ; 
-	#$ Muđui ledje johtti oahpaheaddjit, muhto eai doarvái.
+
 
 #!! * __<advl__ (@<ADVL) if; finite mainverb found to the left. Not if a comma is found immediately to the left and a finite mainverb is located somewhere to the right of this comma.
 MAP:<advl (@<ADVL) TARGET ADVL - MO - Rel - MOD-ADV - Attr OR TIME-N + Gen OR (Sem/Route Gen) OR Sem/Date OR Sem/Year (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
@@ -1549,6 +1547,7 @@ MAP:gitta>adv (@>ADVL) TARGET ("gitta" Adv)(NOT *-1 ("váldit") OR ("doallat") O
 MAP:>advl (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
 
 MAP:<advl (@<ADVL) TARGET Adv (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+MAP:<advl (@<ADVL) TARGET Adv (*1 Po OR EOS BARRIER SV-BOUNDARY) ;
 #!! * __advl>inbetween__ (@ADVL>) for Adv; if inbetween two sentenceboundaries where no mainverb is present.
 MAP:advl>inbetween (@ADVL>) TARGET Adv (*-1 BOC BARRIER FMAINV)(*1 S-BOUNDARY BARRIER FMAINV)  ;
 	#$ Son muitala maid ahte nu guhká go orohagat eai vuosttal mearkkaid, de sii lávejit juolludit mearkkaid ohcciide.	

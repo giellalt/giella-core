@@ -91,7 +91,7 @@ $fstfiles
 *.regex" $1/src/filters
 
 # Only ignore generated propernoun files in the src/morphology/stems dir:
-$svnignore "*-*-propernouns.lexc" $1/src/morphology/stems
+$svnignore "*-propernouns.lexc" $1/src/morphology/stems
 
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 $svnignore "$mkfiles

@@ -1548,12 +1548,7 @@ MAP:>advl (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
 
 MAP:<advl (@<ADVL) TARGET Adv (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
 
-#!! * __hnoun<advlEOS__ (@<ADVL) for Adv; in sentences with HNOUN. Nom is to the left, but no mainverb allowed to the left. EOS to the right. This rule is based on that there is a SUBJ to the right which the adverbial points to.
-MAP:hnoun<advlEOS (@<ADVL) TARGET Adv (*-1 Nom BARRIER FMAINV LINK NEGATE *-1 Nom BARRIER BOS)(*1 EOS BARRIER SV-BOUNDARY) ;
-	#$ Boazodoalu siskkáldas dilálašvuođat, dás maiddái ovttaskas boazoeaiggádiid riektedilálašvuođat.
-	#$ Stuorra giitu maiddái professor Birger Stuevold Lassenii.
-	#Commet: Unfortunately it can't deal with this sentence: Birasgáhttenlihkadus ja álgoálbmogat - ovttasbargit vai vuostálágaid?
-	
+
 #!! * __advl>inbetween__ (@ADVL>) for Adv; if inbetween two sentenceboundaries where no mainverb is present.
 MAP:advl>inbetween (@ADVL>) TARGET Adv (*-1 BOC BARRIER FMAINV)(*1 S-BOUNDARY BARRIER FMAINV)  ;
 	#$ Son muitala maid ahte nu guhká go orohagat eai vuosttal mearkkaid, de sii lávejit juolludit mearkkaid ohcciide.	
@@ -1563,6 +1558,10 @@ MAP:advl>inbetween (@ADVL>) TARGET Adv (*-1 BOC BARRIER FMAINV)(*1 S-BOUNDARY BA
 MAP:comma<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV) ;
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 	#$ De eai leat šat dušše tálat, muhto bustávat maid.
+	
+MAP:<advl (@<ADVL) TARGET Adv (*1 Po OR EOS BARRIER SV-BOUNDARY) ;
+	#% Odne vai ihttin? 
+	#% Juoba ge dán áigodagas.
 
 #MAP:nr2<advlEOS (@<ADVL) TARGET (N Loc) (*-1 S-BOUNDARY BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV);
 	#$ 'De eai leat šat dušše tálat, muhto bustávat maid.

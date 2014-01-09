@@ -1547,14 +1547,23 @@ MAP:gitta>adv (@>ADVL) TARGET ("gitta" Adv)(NOT *-1 ("váldit") OR ("doallat") O
 MAP:>advl (@>ADVL) TARGET Adv IF (0 MOD-ADV)(*1 @ADVL BARRIER NOT-NPMOD);
 
 MAP:<advl (@<ADVL) TARGET Adv (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
-MAP:<advl (@<ADVL) TARGET Adv (*1 Po OR EOS BARRIER SV-BOUNDARY) ;
+
+#!! * __hnoun<advlEOS__ (@<ADVL) for Adv; in sentences with HNOUN. Nom is to the left, but no mainverb allowed to the left. EOS to the right. This rule is based on that there is a SUBJ to the right which the adverbial points to.
+MAP:hnoun<advlEOS (@<ADVL) TARGET Adv (*-1 Nom BARRIER FMAINV LINK NEGATE *-1 Nom BARRIER BOS)(*1 EOS BARRIER SV-BOUNDARY) ;
+	#$ Boazodoalu siskkáldas dilálašvuođat, dás maiddái ovttaskas boazoeaiggádiid riektedilálašvuođat.
+	#$ Stuorra giitu maiddái professor Birger Stuevold Lassenii.
+	#Commet: Unfortunately it can't deal with this sentence: Birasgáhttenlihkadus ja álgoálbmogat - ovttasbargit vai vuostálágaid?
+	
 #!! * __advl>inbetween__ (@ADVL>) for Adv; if inbetween two sentenceboundaries where no mainverb is present.
 MAP:advl>inbetween (@ADVL>) TARGET Adv (*-1 BOC BARRIER FMAINV)(*1 S-BOUNDARY BARRIER FMAINV)  ;
 	#$ Son muitala maid ahte nu guhká go orohagat eai vuosttal mearkkaid, de sii lávejit juolludit mearkkaid ohcciide.	
 	#$ Dál de viimmat asttan čállit reivve. 
 
-#!! * __<advlEOS__ (@<ADVL) if; comma found to the left and the finite mainverb to the left of comma. To the right is the end of the sentence.
-MAP:<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV) ;
+#!! * __comma<advlEOS__ (@<ADVL) if; comma found to the left and the finite mainverb to the left of comma. To the right is the end of the sentence.
+MAP:comma<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV) ;
+	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
+	#$ De eai leat šat dušše tálat, muhto bustávat maid.
+
 #MAP:nr2<advlEOS (@<ADVL) TARGET (N Loc) (*-1 S-BOUNDARY BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV);
 	#$ 'De eai leat šat dušše tálat, muhto bustávat maid.
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
@@ -1689,7 +1698,8 @@ MAP:hnounInterj (@HNOUN) TARGET Acc (*-1 Interj BARRIER NOT-NPMOD) ;
 MAP:HNOUN<advl (@N<) TARGET ADVL (*-1 @HNOUN - Num BARRIER CRD) ; 
 MAP:HNOUN<advl (@N<) TARGET ADVL (-1 CRD LINK -1 @N<)(1 EOS) ; 
 MAP:advl>HNOUN (@ADVL>) TARGET ADVL (*1 @HNOUN BARRIER CRD) ; 
-MAP:HNOUN<obj (@<OBJ) TARGET Acc (*-1 @HNOUN) ; 
+MAP:HNOUN<obj (@<OBJ) TARGET Acc (*-1 @HNOUN) ;
+	#% Birasgáhttenlihkadus ja álgoálbmogat - ovttasbargit vai vuostálágaid? 
 MAP:obj>HNOUN (@OBJ>) TARGET Acc (*1 @HNOUN) ; 
 MAP:HNOUN<spred (@<SPRED) TARGET (A Nom) (*-1 @HNOUN) ; 
 	#$ Dii guoktilaččat!

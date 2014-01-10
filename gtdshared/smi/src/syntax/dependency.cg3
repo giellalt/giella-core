@@ -13,11 +13,11 @@
 # giellatekno@hum.uit.no or divvun@samediggi.no
 
 # ==================================================================== #
-#!! !!!N O R T H E R N  S Á M I  D E P E N D E N C Y   G R A M M A R                    
+#!! !!!C O M M O N  S Á M I  D E P E N D E N C Y   G R A M M A R                    
 # ==================================================================== #
 # ==================================================================== #
 
-
+!! This dep file is for sma, sme, smj.
 
 # ========== #
 #!! !!!DELIMITERS 

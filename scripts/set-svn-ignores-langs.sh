@@ -70,6 +70,12 @@ $fstfiles
 *.gz
 *.tmp" $1/src
 
+# Ignore all temporary and generated files in the src/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.txt
+*.regex" $1/src/filters
+
 # Ignore all temporary and generated files in the src/morphology/ dir:
 $svnignore "$mkfiles
 $fstfiles
@@ -78,20 +84,20 @@ $fstfiles
 *-all.lexc
 *.tmp.*" $1/src/morphology
 
+# Only ignore generated propernoun files in the src/morphology/stems dir:
+$svnignore "*-propernouns.lexc" $1/src/morphology/stems
+
 # Ignore all temporary and generated files in the src/tagsets/ dir:
 $svnignore "$mkfiles
 $fstfiles
 *.relabel
 *.txt" $1/src/tagsets
 
-# Ignore all temporary and generated files in the src/filters/ dir:
+# Ignore all temporary and generated files in the src/syntax/ dir:
 $svnignore "$mkfiles
 $fstfiles
-*.txt
-*.regex" $1/src/filters
-
-# Only ignore generated propernoun files in the src/morphology/stems dir:
-$svnignore "*-propernouns.lexc" $1/src/morphology/stems
+dependency.cg3
+functions.cg3" $1/src/syntax
 
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 $svnignore "$mkfiles

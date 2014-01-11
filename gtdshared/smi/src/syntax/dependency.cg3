@@ -668,7 +668,7 @@ SUBSTITUTE (@FMAIN) (@S<) TARGET V (0 (Neg Ind) LINK *-1 (":") LINK NOT *-1 (@FM
 SUBSTITUTE:SubV=FS-VFIN<mv (@FMV)(@FS-VFIN<) TARGET V (*-1 CS BARRIER VFIN OR Rel OR MCL-CONJ OR @COMP-CS<)(*-1 @FMV OR @FAUX BARRIER (":")) ;
     # The last condition makes sure there is finite verb candidate for the main clause to the left
 SUBSTITUTE:SubV=FS-VFIN<mv (@FMV)(@FS-VFIN<) TARGET V (*-1 CS BARRIER VFIN OR Rel OR MCL-CONJ OR @COMP-CS<)(*-1 @FMVdic)(NOT *1 @FV)  ;
-SUBSTITUTE:SubV=FS-VFIN<mv (@FMV)(@FS-VFIN<) TARGET V ((*-1 (CC @CVP) OR COMMA BARRIER @SUBJ> OR @V OR MCL-CONJ OR S-BOUNDARY LINK NOT 0 MCL-CONJ LINK *-1 (@FS-VFIN<) OR (@FS-IMV) BARRIER @V))(NEGATE *1 (@<SUBJ))(*-1 @FMV OR @FAUX OR @FMVdic) ;
+SUBSTITUTE:SubV=FS-VFIN<mv (@FMV)(@FS-VFIN<) TARGET V (*-1 (CC @CVP) OR COMMA BARRIER @SUBJ> OR @V OR MCL-CONJ OR S-BOUNDARY LINK NOT 0 MCL-CONJ LINK *-1 (@FS-VFIN<) OR (@FS-IMV) BARRIER @V)(NEGATE *1 (@<SUBJ))(*-1 @FMV OR @FAUX OR @FMVdic) ;
     # The last condition makes sure there is finite verb candidate for the main clause to the left
     # coordination
 

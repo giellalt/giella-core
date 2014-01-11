@@ -19,14 +19,13 @@ if ! test $# -eq 3 ; then
 fi
 
 Language=$(${GTCORE}/scripts/iso639-to-name.sh $1)
-VersionFile=$3
 
 Date=$(date +%Y.%m.%d)
-Version=$(cat $VersionFile)
+Version=$(cat $3)
 Revision=$(svn info $2 | grep Revision | grep -Eo '[0-9]+')
 HfstVersion=$(hfst-info | grep 'HFST version' | grep -Eo '[0-9.]+')
 HfstRevision=$(hfst-info | grep 'revision' | grep -Eo '[0-9.]+')
 
-echo "Divvun for $Language ($1)"
-echo "Version $Version, $Date, r$Revision"
+echo "Divvun for $Language"
+echo "$1 version $Version, $Date, rev$Revision"
 echo "Built using HFST $HfstVersion, rev$HfstRevision"

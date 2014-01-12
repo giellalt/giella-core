@@ -112,6 +112,7 @@ $svnignore "$mkfiles
 # Set the svn:ignore prop on the hfst speller dir:
 $svnignore "$mkfiles
 $fstfiles
+easteregg.*
 *.zhfst
 3" $1/tools/spellcheckers/fstbased/hfst
 

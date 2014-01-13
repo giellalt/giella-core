@@ -12,6 +12,7 @@
          <xs:sequence>
             <xs:element maxOccurs="unbounded" ref="e"/>
          </xs:sequence>
+         <xs:attribute ref="xml:lang"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="e">

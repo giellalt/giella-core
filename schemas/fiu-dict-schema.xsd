@@ -836,6 +836,7 @@
          <xs:attribute ref="register"/>
          <xs:attribute ref="tType"/>
          <xs:attribute name="type">
+         <xs:attribute ref="val"/>
             <xs:simpleType>
                <xs:restriction base="xs:string">
                </xs:restriction>

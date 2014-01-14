@@ -114,7 +114,14 @@ my %paradigms;
 my $gen_lookup;
 if (! $noparadigm) {
     generate_taglist($paradigmfile,$tagfile,\%paradigms);
-    $gen_lookup="lookup -flags mbTT -utf8 \"$fst\" 2>/dev/null";
+    if ( $fst =~ /\.xfst$/ ) {
+        $gen_lookup="lookup -flags mbTT -utf8 \"$fst\" 2>/dev/null";
+    } elsif ( $fst =~ /\.hfst$/ ) {
+        $gen_lookup="hfst-lookup -q \"$fst\" 2>/dev/null";
+    }
+    else {
+        die "Can't find fst file: $fst!\n";
+    }
 }
 
 

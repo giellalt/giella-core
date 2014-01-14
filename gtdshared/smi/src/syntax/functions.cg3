@@ -1522,10 +1522,25 @@ MAP:advl> (@ADVL>) TARGET ADVL OR TIME-N + Gen OR (Sem/Route Gen) ((*1 FMAINV OR
 MAP:advl>cs (@ADVL>CS) TARGET Adv (*-1 BOS BARRIER NOT-ADV)(1 CS LINK *1 FMAINV) ;
 	#$ Danne go ..
 
+
+
 #!! * __<advlPoPr__ (@<ADVL) if mainverb to the left.
 MAP:<advlPoPr (@<ADVL) TARGET Po OR Pr (*-1 FMAINV BARRIER SV-BOUNDARY) ;
 #!! * __advlPoPr>__ (@<ADVL) if mainverb to the right.
 MAP:advlPoPr> (@ADVL>) TARGET Po OR Pr (*1 FMAINV BARRIER SV-BOUNDARY) ;
+
+#!! * __BOSPo>__ (@ADVL>) for Po; if trapped between BOS to the right and S-BOUNDARY OR COMMA to the left, because the main verb will then automatically be on your right side.
+MAP:BOSPo> (@ADVL>) TARGET Po (*-1 BOS BARRIER FMAINV)(*1 S-BOUNDARY OR COMMA BARRIER FMAINV)(NEGATE 0 @N<) ;
+	#$ Divššohasaid birra geat leat uminddegin dahkkon.
+	#$ Dán girjji vuođul ja ságastallamiiguin lullisámiin lea munnje báhcán millii ahte internáhttadoaibma ii lean gal alla dásis, muhto internáhttaskuvlii dattetge bohte viššalit lullisámi bearrašat.
+	#% Romssa ja davágeaži Norrbottena boazoorohagat ja čearut riikaráji guoras ja konvenšuvdnaguovlluin.
+
+#!! * __<advlPoEOS__ (@<ADVL) for Po; if you are found at the very end of a sentence. A mainverb is needed to the right though.
+MAP:<advlPoEOS (@<ADVL) TARGET Po (*-1 FMAINV)(1 EOS);
+	#$ Sámediggi lea miehtan sutnje máksit 800 ruvnno juohke árgabeaivvi ovddas, muhto ii fal lávvordagaid, sotnabeivviid ja bassebeivviid ovddas.
+
+
+
 
 #MAP:<advl (@<ADVL) TARGET ADVL (*-1 FMAINV BARRIER SV-BOUNDARY) ;
 #MAP:advl> (@ADVL>) TARGET ADVL (*1 FMAINV BARRIER SV-BOUNDARY) ;
@@ -1573,11 +1588,7 @@ MAP:advlDAS> (@ADVL>) TARGET (N Loc) OR (N Ill) (*-1 BOS BARRIER FMAINV OR COMMA
 	#$ Eará guovlluin gos leat vel unnit sámit go Finnmárkkus, leamaš dákkár ákkain vel stuorát deaddu almmolaš ságastallamis. 
 	#$ Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.
 	#% Sánddatlovttat Nordlánddas ja Romssas gos mánát orro skuvllastobu bajábealde, ledje dábálaččat gitta 1900-lohkui.
-	
-#!! * __<advlPoEOS__ (@<ADVL) for Po; if you are found at the very end of a sentence. A mainverb is needed to the right though.
-MAP:<advlPoEOS (@<ADVL) TARGET Po (*-1 FMAINV)(1 EOS);
-	#$ Sámediggi lea miehtan sutnje máksit 800 ruvnno juohke árgabeaivvi ovddas, muhto ii fal lávvordagaid, sotnabeivviid ja bassebeivviid ovddas.
-	
+		
 
 	# POSTPOSIŠUVNNAT, mat galget oažžut dušše @ADVL: 
 	#$ Muhto man sivas?
@@ -1593,6 +1604,10 @@ MAP:cleanupILL<advl (@<ADVL) TARGET (N Ill) (NEGATE *-1 BOUNDARYSYMBOLS BARRIER 
 
 
 
+#!! * __cleanupPo__ (@ADVL) for Po: This rule tags all Po:s as @ADVL if they haven't gotten a tag somewhere along the way. 
+#MAP:cleanupPo (@ADVL) TARGET Po (0 Po); 
+	#$ Muhto man sivas?
+	#$ Čakčageasi birra.
 	
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY) ; 

@@ -932,7 +932,7 @@ MAP:habDain2 (<hab> @ADVL>) TARGET (Pron Dem Pl Loc)(-1 Nom LINK -1 (Pron Interr
 	#$ Makkár vuoigatvuođat dain leat Norgga riikavuložin?
 	#% Dat bulle ja goldne go dain ii leat ruohtas. 
 	#Comment: hard to determin whether 'dain' is HAB or ADVL.
-	
+
 	
 # before relative clause
 MAP:habRel (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 Rel BARRIER WORD LINK *1 FMAINV BARRIER S-BOUNDARY LINK *1 LEAT + HAB-V-TAGS BARRIER S-BOUNDARY OR MAIN-V);
@@ -1210,7 +1210,6 @@ MAP:r321 (@APP-Pron<) TARGET (N Acc) IF (*-1 ("nugo") OR ("sihke") BARRIER APP-B
 MAP:Relsubj> (@SUBJ>) TARGET (Rel Nom) IF (*1 FMAINV) ;
 	#$ Go dat geažit mat geaigut leaba bajás, gohčoduvvoba spahká-oaivin.
  
- 
 	# Subject predicatives - SPRED 
  
 #!! * __spred<obj__ (@SPRED<OBJ) for Acc; the object of an SPRPED. Not to be mistaken with OPRED. If SPRED is to the left, and copulas is to the left of it. Nom or Hab are found sentence initially.
@@ -1242,7 +1241,8 @@ MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - OKTA ((*-1 COPULAS + FMAINV BARRIER NOT
 #!! * __<extSubj__ (<ext> @<SUBJ) for Nom, but not for Pers. To the left boahtit or heaŋgát as MAINV, and futher to the left is some kind of place related word, or time related word
 MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - OKTA - Pers (*-1 ("boahtit") + FMAINV - Du3 OR ("heaŋgát") BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Rel Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL BARRIER SV-BOUNDARY)(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD) ;
 	#$ Doppe boahtá áhčči.
-
+	
+#!! * __<spred__ (@<SPRED) for Nom; if Nom to the left, copulas to the left of Nom, and a time related word to the left of it.
 MAP:<spred (@<SPRED) TARGET Nom - OKTA (*-1 (N Nom) BARRIER NOT-NPMODADV OR COMMA LINK -1 COPULAS + FMAINV LINK -1 TIME-N OR TIME-ADVL OR Sem/Time) ;
 	#$ Ovdal lei gákti árgabivttas ja bargobivttas, muhto dál dat lea čikŋabivttas.
 
@@ -1567,10 +1567,12 @@ MAP:<advl (@<ADVL) TARGET Adv (*1 Po OR EOS BARRIER SV-BOUNDARY) ;
 	#$ 'De eai leat šat dušše tálat, muhto bustávat maid.
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 
-#!! * __advlBOS>__ (@ADVL>) if; you are N Ill and found sentnece initially. First one to your right is a clause.
-MAP:advlBOS> (@ADVL>) TARGET (N Ill) (*-1 BOS BARRIER NOT-NPMOD)(1 S-BOUNDARY);
+#!! * __BOSadvl>__ (@ADVL>) if; you are N Loc or N Ill and found sentnece initially. First one to your right is probably a sentenceboundary, but there should be a finite mainverb too. ''Mearrádusaide nugo namohuvvo''
+MAP:advlDAS> (@ADVL>) TARGET (N Loc) OR (N Ill) (*-1 BOS BARRIER FMAINV OR COMMA)(*1 FMAINV BARRIER S-BOUNDARY - MO)(NEGATE 0 @N<)(NEGATE *-1 Nom BARRIER BOS) ;
+	#$ Das makkár hálddašanmálle šaddá lea maid hui ollu dadjamuš.
+	#$ Eará guovlluin gos leat vel unnit sámit go Finnmárkkus, leamaš dákkár ákkain vel stuorát deaddu almmolaš ságastallamis. 
 	#$ Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.
-
+	#% Sánddatlovttat Nordlánddas ja Romssas gos mánát orro skuvllastobu bajábealde, ledje dábálaččat gitta 1900-lohkui.
 	
 #!! * __<advlPoEOS__ (@<ADVL) for Po; if you are found at the very end of a sentence. A mainverb is needed to the right though.
 MAP:<advlPoEOS (@<ADVL) TARGET Po (*-1 FMAINV)(1 EOS);
@@ -1588,7 +1590,9 @@ MAP:cleanupILL<advl (@<ADVL) TARGET (N Ill) (NEGATE *-1 BOUNDARYSYMBOLS BARRIER 
 	#$ Riekti oassálastit luondduriggodagaid hálddašeamis sáhttá čađahuvvot dakko bokte ahte Sámediggi nammada áirasiid oktasaš stivrenorgánaide, nu movt Finnmárkoopmodahkii ja guovllu boraspirelávdegottiide.
 	#% Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.
 	#% Guovdageainnus muittán ahte roagga gándajienat eahketbeaivve huike: Muorravissui, muorravissui!
-	
+
+
+
 	
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY) ; 

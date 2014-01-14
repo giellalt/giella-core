@@ -1602,10 +1602,12 @@ MAP:cleanupILL<advl (@<ADVL) TARGET (N Ill) (NEGATE *-1 BOUNDARYSYMBOLS BARRIER 
 	#% Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.
 	#% Guovdageainnus muittán ahte roagga gándajienat eahketbeaivve huike: Muorravissui, muorravissui!
 
+#MAP:<advlXXXX (@<ADVL) TARGET (N Ill) (*-1 S-BOUNDARY OR COMMA BARRIER FMAINV)(*1 S-BOUNDARY OR COMMA BARRIER FMAINV) ; #LINK *-1 FMAINV BARRIER SV-BOUNDARY
+	#$
 
 
 #!! * __cleanupPo__ (@ADVL) for Po: This rule tags all Po:s as @ADVL if they haven't gotten a tag somewhere along the way. 
-#MAP:cleanupPo (@ADVL) TARGET Po (0 Po); 
+MAP:cleanupPo (@ADVL) TARGET Po (0 Po); 
 	#$ Muhto man sivas?
 	#$ Čakčageasi birra.
 	

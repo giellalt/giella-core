@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document PUBLIC "-//UIT//DTD Corpus V1.0//EN" "http://giellatekno.uit.no/dtd/corpus.dtd">
+<document id="no_id" xml:lang="nob">
+    <header>
+        <title>23 12 2006 10:22:34</title>
+        <genre/>
+        <author>
+            <person born="" firstname="" lastname="" nationality="en_US" sex="unknown"/>
+        </author>
+        <year>2007</year>
+        <availability>
+            <license type="free"/>
+        </availability>
+        <multilingual>
+            <language xml:lang="dan"/>
+            <language xml:lang="nob"/>
+        </multilingual>
+        <metadata>
+            <uncomplete/>
+        </metadata>
+        <version>XSLtemplate  1.19 ; file-specific xsl  $Revision: 1.5 $; common.xsl  $Revision$; </version>
+    </header>
+    <body>
+        <p>
+            I 1864 ga han ut boka <span type="quote" xml:lang="dan">"Fornuftigt Madstel"</span>.
+        </p>
+    </body>
+</document>

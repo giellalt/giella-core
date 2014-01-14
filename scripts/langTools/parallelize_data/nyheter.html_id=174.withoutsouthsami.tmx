@@ -1,0 +1,766 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tmx>
+  <header segtype="sentence" o-tmf="OmegaT TMX" adminlang="en-US" srclang="nob" datatype="plaintext"><prop type="x-filename">nyheter.html_id=174.tmx</prop></header>
+  <body>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Nyheter</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ođđasat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Siste nyheter fra Arbeidsdepartementet.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dás gávnnat Bargodepartemeanta preassadieđáhusaid ja ođasáššiid.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Abonner på e-postvarsling</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Gonagaslaš Majestehta sárdni 6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Abonner på RSS-feed (høyreklikk og kopier snarvei)</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sámedikki rahpama oktavuođas golggotmánu 13. b. 2009</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[05.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[13.10.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Regjeringens målsetting for budsjettet er å legge fram et samlet opplegg for å holde sysselsettingen oppe og arbeidsledigheten lav.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>– Sámedikki bargu lea leamaš deaŧalaš dasa ahte ollosat ožžot buoret áddejumi ja beroštumi sápmelaččaide ja sámi kultuvrii ja gillii.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Regjeringen styrker innsatsen mot fattigdom</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus nanne sámi giela ja kultuvrra</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[05.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[13.10.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Regjeringen har styrket innsatsen mot fattigdom med 3,9 milliarder kroner i perioden 2006-2010.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Juolludeapmi sámi ulbmiliidda jahkái 2010 lea buohkanassii 798 milj. ruvnnu, mii čájeha 38 milj. ruvdnosaš lassáneami.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Regjeringen foreslår i statsbudsjettet for 2011 en styrking på nær 300 millioner kroner på de områdene som er viktige i en samlet innsats mot fattigdom.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sámediggi oažžu jahkásaččat ruđaid máŋgga departemeanttas ja beassá jagi 2010 hálddašit 351 milj. ruvnnu, mii mii lea 17 milj. ruvnnu eambbo go diibmá.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Utgifter til dagpenger og sykepenger går ned</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bjarne Håkon Hanssen muitala buktá ovdan stáhtabušeahta Kárášjogas</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[05.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[12.10.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er en økning på 16 milliarder kroner fra saldert budsjett 2010. 153 millioner til sykefraværstiltak</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Seamma beaivvi go Sámedikki rahpan lea, maŋŋebárgga golggotmánu 13. b., biddjojuvvo jagi 2010 stáhtabušeahtta ovdan.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[05.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[09.10.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Regjeringen foreslår å styrke tiltak overfor sykmeldere og for tidligere og bedre oppfølging av sykmeldte.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Odne lea 20 áigi dassážii go vuosttaš Sámediggi rahppojuvvui.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det settes av 12,5 millioner kroner til informasjonstiltak for å støtte opp under IA-arbeidet.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>– Mun háliidan sávvat Sámediggái lihkku beivviin, lohká bargo- ja searvádahttinministtar Bjarne Håkon Hanssen.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Situasjonen i NAV</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>- Lihkku Loabát suohkanii</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[05.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[30.09.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I 2011 vil arbeidet med å heve kvaliteten i saksbehandlingen og nytt IKT-system stå sentralt i Arbeids- og velferdsetaten.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Hálddašanguovllu viiddideapmi lea mávssolaš sámegiela boahttevaš seailluheami várás, dadjá bargo- ja searvadahttinministtar Dag Terje Andersen.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>10 millioner til opprydding i renholdsbransjen</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Doarjja rádjerasttildeaddji gielladoaimmaide Deanus</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[05.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[21.08.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I samarbeid med partene i arbeidslivet vil regjeringen iverksette en særlig innsats i bransjer som er utsatt for useriøsitet og sosial dumping, gjennom treparts bransjeprogrammer.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus doarju sámi giella-, skuvla- ja mánáidgárddi ovdánahttinprošeavtta Deanus 100 000 ruvnnuin. Dát lea ovttasbarganprošeakta gaskal Deanu gieldda ja Ohcejoga gieldda Suomas.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Renhold er første bransje ut.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>130 000 ruvnnu kvena prošeavttaide</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[05.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[17.08.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Regjeringen vil bevilge 25 millioner kroner i 2011 som et ledd i en treårig offensiv for å begrense ufrivillig deltid og bedre muligheten for heltid.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus addá ruđaid golmmagielat lávllagirjái Porsáŋggus ja dasa ahte aviisii Ruijan Kaikui sihkkarastojuvvo kvena eaiggáduššan.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Svak utvikling på arbeidsmarknaden i september</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Njeallje jagi rukses-ruoná sámepolitihkain</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[01.10.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[11.08.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den registrerte arbeidsløysa auka med 2 800 personar i september, korrigert for normale sesongvariasjonar. – Det bryt med den gode utviklinga vi har sett gjennom sommarmånadane, seier statssekretær Gina Lund.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>– Mii leat nannen sámi giela ja kultuvrra, addán Sámediggái eanet válddi ja dadjamuša ja bidjan sámiid árgabeaivvi diliid guovddážii, dadjá bargo- ja searvadahttinministtar Dag Terje Andersen.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Historisk trepartskonferanse i Shanghai</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>500 000 ruvnnu sámi iešmearrideami prošektii</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[30.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[11.08.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>– Samarbeid mellom partene i arbeidslivet og myndighetene er grunnleggende for et godt arbeidsliv og for velferdssamfunnet, sa arbeidsminister Hanne Bjurstrøm på den norsk-kinesiske trepartskonferansen i Shanghai i dag, hvor hun innledet sammen med LO-leder Roar Flåthen og NHO-sjef John G. Bernander.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus doarju prošeavtta 500 000 ruvnnuin.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Norge og Kina skal samarbeide om utfordringer knyttet til arbeidsmigrasjon</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Eanetlohkoráđđehusa sámepolitihkalaš doaibmabijut áigodagas 2005-2009</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[30.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[07.08.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>På en høynivå trepartskonferanse i Shanghai i dag ble arbeidsminister Hanne Bjurstrøm og viseminister Yang Zhiming i det kinesiske arbeidsdepartementet enige om å etablere et samarbeid om utfordringer knyttet til arbeidsmigranter.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bargo- ja searvadahttinministtar, Dag Terje Andersen, galleda Kárášjoga ja Porsáŋggu disdaga borgemánu 11. beaivvi dan oktavuođas go lágiduvvo jahkebeallásaš čoahkkin sámediggeráđiin.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[28.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ođđa sámi ofelaččat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Statsråd Hanne Bjurstrøm undertegnet tirsdag en samarbeidsavtale mellom Norge og Kina om arbeidstilsyn og håndheving av reglene for helse, miljø og sikkerhet.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[04.07.2009] Golbma ođđa sámi ofelččat davvisámi, oarjelsámi ja bihtánsámi guovllus oahpásmahttojuvvojedje Skiippagurrafestiválas Deanus Finnmárkkus.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Styrker innsatsen mot trygdemisbruk</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Doarjja sámi gielladoaibmabijuide</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[28.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[23.06.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>- Trygdemisbruk er uakseptabelt, og det er viktig at de som misbruker stønader blir oppdaget og anmeldt.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus addá 3,1 milj. ruvnnu doarjjan arvat báikkálaš doaibmabijuide mat leat unnibuš sámegielaid várás.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Jeg har derfor bedt Arbeids- og velferdsdirektoratet om å styrke innsatsen på området, sier arbeidsminister Hanne Bjurstrøm.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sámegielaid doaibmaplána mielde vuoruhuvvojit lulli ­sámegielalaš ja julevsámegielalaš doaibmabijut.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Midlar til prosjekt om arbeid og velferd</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Mo lea eallit sápmelažžan gávpogis ?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[27.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[19.06.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Prosjekt som utviklar ny kunnskap innan deltaking, velferd, nærvær og fråvær i arbeidslivet kan søkje midlar for 2011 gjennom FARVE-programmet.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus juolluda 400 000 ruvnnu vai lea vejolaš čađahit iskkadeami das mo Norgga stuorra gávpogiid sámiid dearvvasvuohta ja eallindilli leat.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Søknadsfristen er 1. november 2010.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ođđa válgaortnet sámediggeválgii 2009</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Åpning av servicetorg i Indre Østfold fengsel</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Stuorradiggedieđáhus Sámedikki doaimma birra jagi 2008</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[24.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[12.06.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Arbeidsminister Hanne Bjurstrøm og justisminister Knut Storberget åpnet i dag servicetorget i Indre Østfold fengsel.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus lea dál bidjan ovdan Stuorradiggedieđáhusa nr. 43 (2008-2009) Sámedikki doaimma birra jagi 2008.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>NAV Østfold og Kriminalomsorgen skal koordinere hjelpetiltak for innsatte, som et ledd i regjeringens satsing på å gi domfelte et bedre liv etter endt soning.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Mánáidgárddit, skuvllat, almmolaš bálválusat ja mediafálaldat leat guovddážis dan doaibmaplánas sámegielaid várás, mii odne biddjojuvvo ovdan. Ásaha sierra jorgalanbálvalusa regjeringen.no oktavuođas</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[21.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[15.05.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Sjukefråværet er redusert med 10,7 prosent frå andre kvartal 2009 til andre kvartal i år. Dette er andre kvartal på rad med kraftig nedgang i sjukefråværet.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus evttoha 2009 reviderejuvvon nationálabušeahtas juolludit 600 000 ruvnnu ásahit bistevaš jorgalanbálvalusa sámegielaid várás regjeringen.no neahttabáikkis.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>- Det er ein stor inspirasjon i arbeidet med å få ned sjukefråværet, seier arbeidsminister Hanne Bjurstrøm.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bálvalus čadnojuvvo departemeanttaid bálvalusguovddážii (Servicesenteret for departementene (DSS)).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>OECD diskuterer sysselsetting for ungdom</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Viiddida sámegielaid hálddašanguovllu</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[20.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[15.05.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>- Gjennom den økonomiske krisen har arbeidsledigheten blant unge økt kraftig i OECD-området, samtidig som mange unge har trukket seg helt ut av arbeidsmarkedet.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus árvala Ođastuvvon nationálabušeahtas 2009 lasihit juolludeami Sámediggái vai Loabága suohkan sáhttá searvat sámegielaid hálddašanguvlui.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Utviklingen er bekymringsfull, sier arbeidsminister Hanne Bjurstrøm.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Seammás árvaluvvo ahte Njávdáma dákteriggeosiid ođđasis hávdádeapmái lasihuvvo 1,5 miljovnna ruvnnu.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Joakim Lystad blir ny Arbeids- og velferdsdirektør</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Álgoálbmotdoaibmabijut davviguovlluáŋgiruššamis</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[17.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[12.03.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>– Dette har vært en omfattende prosess, og vi har vært på jakt etter den beste kandidaten i landet. Lystad svarer til de forventingene vi har, sier arbeidsminister Hanne Bjurstrøm.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Rádjerasttideaddji máhttoprográmma ásaheapmi ja sierra álgoálbmotprográmma ásaheapmi kulturvuđot ealáhusovddideami várás gullet ráđđehusa davviguovlluáŋgiruššama doaibmabijuide.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Forslag til nye regler for AA-registeret</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lassi miljovdna åarjel- ja julevsámegiela dutkamii</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[13.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[17.02.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vil innføre likebehandlingsprinsipp for utleide arbeidstakere</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dutkanráđi sámedutkanprográmma lea lasihuvvon 1,179 miljon ruvnnuin.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[10.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ruđat galget geavahuvvot åarjel- ja julevsámegiela dutkamii.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Arbeidstakere som blir leid ut fra et vikarbyrå skal ha de samme lønns- og arbeidsvilkår som vedkommende ville fått ved direkte ansettelse i den virksomheten som leier dem.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>– Dárbu lea diehtit eambbo dáid gielaid birra vai daid lea vejolaš seailluhit nana ja ceavzilis giellan boahtteáigái, dadjá stáhtaráđđi Dag Terje Andersen.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Deltakelse er nøkkelen</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lihku sámi álbmotbeaivái !</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[09.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[06.02.2009]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Statsrådene Hanne Bjurstrøm og Audun Lysbakken møtte mange engasjerte innbyggere i Hamar 8. september.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>– Sámi álbmotbeaivi – guovvamánu 6. beaivi – lea dakkár beaivi mii beroštahttá olbmuid eanet ja eanet báikkiin riikkas.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Basert på moderat vekst i økonomien og uendra etterspurnad etter arbeidskraft, er dette positivt, seier arbeidsminister Hanne Bjurstrøm i ein kommentar til det nye månadstalet frå NAV om arbeidsmarknaden.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea illudahtti go sámegiella boahtá eambbo oidnosii almmolaččat, ja go sámegiella ja sámi kultuvra viidánit eanet ođđa surggiide go ovdal, dadjá stáhtaministtar Jens Stoltenberg ja sámeministtar Dag Terje Andersen.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Samarbeid om fattigdom i Europa</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lihkkosávaldagat The BlackSheeps:ii</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[02.09.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[29.11.2008]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>– Det europeiske fattigdomsåret gir muligheter til å utveksle erfaringer og kunnskaper om tiltak for å bekjempe fattigdom og fremme inkludering over hele Europa, sa arbeidsminister Hanne Bjurstrøm på Velferdsalliansens internasjonale fattigdomskonferanse.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>- Stuorra buorášemiin, iluin, ja erenoamážit ceavláivuođain go lean Unjárgga sápmelaš, sávan lihku The BlackSheeps:ii vuoittuin Århusas, dadjá Bargo- ja searvadahttindepartemeantta stáhtačálli Raimo Valle.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Har du tips til IA-arbeidet ?</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Doarjja lulli- ja julevsámegielaide</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[30.08.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[17.11.2008]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Arbeidsdepartementet introduserer i dag en IA-postkasse.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ráđđehus árvala oktiibuot 782 miljovnna ruvnno sierranas sámi ulbmiliidda.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Alle, ikke minst de som jobber med IA-arbeid lokalt, kan nå sende tips og tilbakemeldinger direkte til departementet.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát lea stuorimus juolludeapmi sámi ulbmiliidda obanassiige. Ráđđehus lea 2005 rájes lasihan juolludeami sámi ulbmiliidda sullii 172,5 miljovnna ruvnnuin.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Stortingsmelding om arbeidsforhold</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ođđa sámi ofelaččat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[30.08.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[25.07.2008]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Regjeringen har startet arbeidet med en tilstandsrapport om arbeidsforholdene i Norge.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Nanne sámi doaimmaid 1,6 milj. ruvnnuin / Saemienvoete nænnoste 1,6 millijovni gujmie</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er faktisk første gang det lages en stortingsmelding som systematisk gjennomgår hvordan det står til i norsk arbeidsliv, skriver arbeidsminister Hanne Inger Bjurstrøm i en kronikk i LO-aktuelt.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bargo- ja searvadahttindepartemeanta (BSD) nanne sámiid árbedieđu čohkkema, systematiserema ja gaskkusteami Norggas oktiibuot 1,6 milj. ruvnnuin.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Behov for meir kontroll med offentleg sektor</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Láhkarievdadus sáhttá váikkuhit dasa ahte eanebut servet sámediggeválgii</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[27.08.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[27.06.2008]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ho vil sjå på nye tiltak for å skjerpe kontrollen med offentleg sektor.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Odne leat sámelága rievdadusat sámedikki válgaortnega hárrái dohkkehuvvon stáhtaráđis.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Rekrutteringa av ny NAV-direktør</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Áigu sihkkarastit sámiid vuoigatvuođaid</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[25.08.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[30.05.2008]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>– I samarbeid med Delphi Consulting jobbar Arbeidsdepartementet aktivt med rekrutteringsprosessen, og vi håper å få tilsett ein ny NAV-direktør så fort som mogeleg, seier departementsråd Ellen Seip.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Jos sámi álbmogii galget leat buorit ja norgalaččaiguin muđui ovttadássásaš bálvalusfálaldagat, de gáibiduvvo ahte almmolaš doaimmat dovdet sámi dilálašvuođaid mat gullet sin doaibmansurggiide.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ny leder i SSP</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Láhčá diliid ealáhusovddideapmái ja árvoháhkamii sámi guovlluin</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[23.08.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>[30.05.2008]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Etter 23 år i Senter for Seniorpolitikk ble Åsmund Lunde fredag takket av som direktør av statsråd Hanne Bjurstrøm.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>– Sámi guovlluin ja sámi kultruvrras leat luonddu, luondduresurssaid ja eanadaga geavaheapmi guovddáš ášši.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Samtidig kunne statsråden ønske den nye direktøren Kari Østerud velkommen.</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Oktavuođadieđut:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Lågare arbeidsløyse i juli</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Preassa- ja gulahallansekšuvdna</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>[30.07.2010]</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Telefovdna:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>22 24 84 28</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>22 24 84 28</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Faks:</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Fáksa:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>22 24 27 12</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>22 24 27 12</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Adresse:</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Čujuhus:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Presse- og kommunikasjonsseksjonen Arbeidsdepartementet Postboks 8019 Dep 0030 Oslo Besøksadresse Einar Gerhardsens Plass 3 (S blokk)</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Galledančujuhus: Einar Gerhardsens Plass 3 (S-blohkka)</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

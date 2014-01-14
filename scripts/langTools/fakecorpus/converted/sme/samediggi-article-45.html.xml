@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document PUBLIC "-//UIT//DTD Corpus V1.0//EN" "http://giellatekno.uit.no/dtd/corpus.dtd">
+<document id="no_id" xml:lang="sme">
+  <header>
+    <title>Sámi álbmotlávlla - Sámediggi Sametinget</title>
+    <genre/>
+    <author>
+      <unknown/>
+    </author>
+    <translator>
+      <unknown/>
+    </translator>
+    <translated_from xml:lang="nob"/>
+    <publChannel>
+      <publication>
+        <publisher>Sámediggi/Sametinget</publisher>
+      </publication>
+    </publChannel>
+    <wordcount>209</wordcount>
+    <availability>
+      <free/>
+    </availability>
+    <submitter email="divvun@samediggi.no" name=""/>
+    <origFileName>http://samediggi.no/Artikkel.aspx?aid=45&amp;sprak=Samisk&amp;Print=1</origFileName>
+    <parallel_text location="samediggi-article-45.html" xml:lang="nob"/>
+    <metadata>
+      <uncomplete/>
+    </metadata>
+    <version>XSLtemplate $Revision$; file-specific xsl  Revision; common.xsl  $Revision$; </version>
+  </header>
+  <body>
+    <section>
+      <p type="title">Sámi álbmotlávlla</p>
+    </section>
+    <p>Sámi álbmotlávlaga sániid lea čállán Isak Saba (1875-1921), oahpaheaddji ja girkolávlu Unjárggas eret. </p>
+    <p>Isak Saba Guovddáš  </p>
+    <p>Saba válljejuvvui vuosttaš sápmelažžan Stuorradiggái 1906:s ja son leai Bargiidbellodaga Finnmárkku áirras ja guolásteddjiid ovddasteaddji. Vállejuvvii maiddái nuppi áigodahkii 1909-1912. Sámi soga lávlla mearriduvvui sámiid oktasaš álbmotlávllan Davviriikkalaš 13. sámekonfereansa Åres 1986:s. Sámekonfereansa Helssegis 1992:s dohkkehii Arne Sørlie melodiija lávlaga virggálaš melodiijan (pdf-dokumeanta). </p>
+    <p><em type="italic">Sámi soga lávlla </em>Guhkkin davvin Dávggáid vuolde sabmá suolggaid Sámieatnan. Duottar leabbá duoddar duohkin, jávri seabbá jávrri lahka. Čohkat čilggiin, čorut čearuin allanaddet almmi vuostái. Šávvet jogat, šuvvet vuovddit, cáhket ceakko stállenjárggat máraideaddji mearaide. Dálvit dáppe buolašbiekkat, muohtaborggat meariheamit. Sámi sohka sieluin mielain eahccá datte eatnamiiddis: Mátkálažžii mánoheabit, giđđodeaddji guovssahasat, - ruoškkas, ruovggas rođuin gullo, juhca jávrriin, jalgadasain, geresskálla máđiid miel. Ja go geassebeaivváš gollut mehciid, mearaid, mearragáttiid, golli siste guollebivdit suilot mearain, suilot jávrriin gollin čuvget čáhcelottit, silban šovvot sámedeanut, šelgot čuoimmit, šleđgot áirrut, luitet albmát lávllodemiin geavgŋáid, guoikkaid, goatniliid. </p>
+    <p>Sámeeatnan sohkagoddi, dat lea gierdan doddjokeahttá goddi čuđiid, garrogávppiid, viehkis vearrevearrováldiid. Dearvva dutnje, sitkes sohka! Dearvva dutnje, ráfi ruohtas! Eai leat doarut dorrojuvvon, eai leat vieljain varat vardán Sámi siivosoga sis. </p>
+    <p>Máttarádját mis leat dovle vuoitán vearredahkkiid badjel. Vuostálastot, vieljat, miige sitkatvuođain soardiideamet! Beaivvi bártniid nana nálli! Eai du vuoitte vašálaččat, jos fal gáhttet gollegielat, muittát máttarmáttuid sáni: Sámieatnan sámiide! </p>
+    <p></p>
+    <p>
+        Almmuhan John-Marcus Kuhmunen. </p>
+    <p>
+        Maŋumustá rievdaduvvon 23.02.2009
+      </p>
+    <p>
+      <em type="bold">Artihkkalat </em>
+    </p>
+    <p>Sámemátto lávlla </p>
+    <p>Saemie eatnemen vuelie </p>
+    <p>
+      <em type="bold">Fiillat </em>
+    </p>
+    <p>Gula lávlla (MediaPlayer) </p>
+    <p>Gula lávllá (RealPlayer) </p>
+  </body>
+</document>

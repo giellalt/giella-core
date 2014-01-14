@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document PUBLIC "-//UIT//DTD Corpus V1.0//EN" "http://giellatekno.uit.no/dtd/corpus.dtd">
+<document id="no_id" xml:lang="nob">
+  <header>
+    <title>Forsøk med reindriftsfag i skolen</title>
+    <genre code="facta"/>
+    <author>
+      <person born="" firstname="Bjørn" lastname="Aarseth" nationality="NO" sex="m"/>
+    </author>
+    <year>2007</year>
+    <wordcount>4009</wordcount>
+    <availability>
+      <free/>
+    </availability>
+    <submitter email="borre.gaup@samediggi.no" name="Børre Gaup"/>
+    <origFileName>aarseth2-n.htm</origFileName>
+    <parallel_text location="aarseth2-s.htm" xml:lang="sme"/>
+    <metadata>
+      <uncomplete/>
+    </metadata>
+    <version>XSLtemplate $Revision: 31551 $; file-specific xsl  Revision; common.xsl  $Revision: 48460 $; </version>
+  </header>
+  <body>
+  </body>
+</document>

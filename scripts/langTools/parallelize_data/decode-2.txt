@@ -1,0 +1,6 @@
+Davvisámegiel sátne- ja teakstaanalysaprográmma
+ºále dahje kopiere sániid lásii, ja deatte "Analysere". ºilgehusaid morfologalaƒ ja syntávssalaƒ oanádusaide gávnnat vuolábealde. Jos válljet "Atte buot analysaid", de prográmma addá buot vejolaƒ analysaid, muhto jos válljet "Disambiguere", de prográmma geahªªala addit duƒƒe analysa mii heive dan cealkagii. Prográmma sáhttá maid botket sániid, dahje addit stávvalsázu - deatte "Botke".
+
+Jos dus lea sámegiel boallobeavdi (Linuxii, Mac OSX:i dahje Windows XP:i), de sáhtát ªállit "á, ª, ∂, √, ƒ, ŧ, π", dego dábálaªªat, ja válljet UTF-8.
+
+ºále sátnehámi:

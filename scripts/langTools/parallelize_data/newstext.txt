@@ -1,0 +1,35 @@
+@bilde:NSR PRESIDEANTAEVTTOHAS? Berit Ranveig Nilssen
+
+@bilde:NSR PRESIDEANTAEVTTOHAS? Ragnhild Nystad
+
+@bilde:NSR PRESIDEANTAEVTTOHAS? Aili Keskitalo
+
+@bilde:BB PRESIDEANTAEVTTOHAS? Marianne Balto Henriksen
+@bilde:BB PRESIDEANTAEVTTOHAS? Magnhild Mathisen
+
+@tittel:Gii boahtá Nystø maŋis?
+
+@ingress:Ragnhild Nystad, Aili Keskitalo.
+
+@byline:Elle Merete Utsi
+
+@tekst:NSR ii áiggo geažihit ge gii sin ođđa sámediggepresideanta-evttohassan veadjá šaddat.
+
+@m.titt:Čeahpes jođiheaddji
+@tekst:Muhto Ragnhild Nystad ii leat áidna nissonolmmoš NSR:s gii lea dahkan buori barggu.
+
+ÊÊSon lea ge maiddái dáláš sámediggepresideantta sivjjot ja dáidá nu oalle presideantaskuvlla juo vázzán.
+
+@m.titt:Báhkkaseamos kándidáhtta?
+@tekst:NSR:s lea maiddái goalmmát nissonolmmoš. ÊÊUnjárgalaš Berit Ranveig. ÊÊĐ<\!q>Ferten ruovttus.
+
+@m.titt:Bargiidbellodagas vejolašvuohta
+@tekst:Dattetge eai noga. ÊÊBargiidbellodaga nubbi.
+
+@m.titt:Bb-nissonat
+@tekst:Bargiidbellodaga sámepolitihkalaš. ÊÊĐ<\!q>Mun doarjjun nissonolbmo presideantaevttohassan.  ÊÊBargiidbellodaga nubbi vejolaš.
+
+@m.titt:Du válljejupmi
+@tekst:Guhtemušat dáin šaddet.
+@stikk:Đ<\!q>Vašálaččat geavahit fuones koansttaid
+@foto:Kirkenytt govva

@@ -1,0 +1,2198 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tmx>
+  <header segtype="sentence" o-tmf="OmegaT TMX" adminlang="en-US" srclang="nob" datatype="plaintext"/>
+  <body>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Sámegillii</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>På norsk</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Artikkel i boka Samisk skolehistorie 2 .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Artihkal girjjis Sámi skuvlahistorjá 2 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Davvi Girji 2007 .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Davvi Girji 2007 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Bjørn Aarseth :</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bjørn Aarseth :</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Forsøk med reindriftsfag i skolen</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Geahččaleapmi boazodoallofágain skuvllas</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg></seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sámás : Sara Ellen J. Eira</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Bjørn Aarseth med elever på skitur - på 1950-tallet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bjørn Aarseth čuoiganmátkkis ohppiiguin 1950-logus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>( Foto : Trygve Madsen )</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>( Govva : Trygve Madsen )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Bjørn Aarseth var da denne artikkelen blei skrevet rektor ved Karasjok ungdomsskole .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bjørn Aarseth lei Kárášjoga nuoraidskuvlla rektor go dát artihkal čállojuvvui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Han var ei drivkraft bak opprettinga av reindriftslinja ved den linjedelte ungdomsskolen og underviste sjøl på denne , blant annet på praktiske fjellkurs .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Son lei okta sis , geat jođihedje barggu álggahit boazodoallosuorggi suorgejuhkkojuvvon nuoraidskuvlii , ja ieš maid oahpahii doppe , earret eará praktihkalaš meahcástankurssas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>For øvrig er han grundigere presentert i Samisk skolehistorie 1 .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Su birra lea muđui dárkileappot muitaluvvon girjjis Sámi skuvlahistorjjá 1 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I de åra Karasjok ungdomsskole hadde reindriftslinje var dette den eneste utdanninga i reindrift i landet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Daid jagiid go Kárášjoga nuoraidskuvllas lei boazodoallosuorgi , de lei dát áidna oahppu boazodoalus riikkas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De erfaringene som blei gjort her , et tiår før reindriftsskolen blei starta , er derfor en viktig del av reindriftsutdanningas historie .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dat vásáhusat maid dahke doppe , logenár jagi ovdal boazodoalloskuvlla álggaheami , leat dehálaš oasit boazodoallooahpu historjjás .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den artikkelen som trykkes her , er tidligere trykt i Sámi Ællin / Sameliv , 1961–63 .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát artihkal mii dás deaddiluvvo , lea ovdal deaddiluvvon Sámi Ællin / Sameliv girjjážis jagiin 1961–1963 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vi viser også til Niillas A. Sombys artikkel i Samisk skolehistorie 1 , der han forteller om sine erfaringer som elev på reindriftslinja .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muđui čujuhit Niillas A. Somby artihkkalii Sámi skuvlahistorjjá vuosttaš girjjis , mas son muitala iežas vásáhusaid go lei oahppin boazodoallosuorggis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Undervisning i reindriftsfag er noe nytt her i landet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Oahpahus boazodoallofágas lea ođas Norggas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Noen korte kurs har vært holdt i Kautokeino .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Soames oanehit kurssat leat dollon Guovdageainnus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Samekomitéen av 1956 pekte på at yrkesopplæringen innen reindriften må komme i fastere former .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sámelávdegoddi ásahuvvon 1956:s oaivvildii ahte oahpahus boazodoalus ferte šaddat čavgadit hámis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Landbruksdepartementet er i prinsippet enig med komiteen og antar at spørsmålet best kan løses i forbindelse med innføringen av 9-årig skole . ( St.meld. nr. 21 , 1962/63 . )</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Eanandoallodepartemeanta lea prinsihpalaččat ovttaoaivilis lávdegottiin ja jáhkká ahte lea buoremus dan čoavdit 9-jagi vuođđoskuvlla álggaheami oktavuođas ( Stuoradiggedieđáhus nr. 21,1962/63 ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det kan kanskje i denne anledning være av interesse å se litt på hvordan de første spede forsøk med yrkesforberedende undervisning i reindriftsfag har løpet av ved den 9-årige skolen i Karasjok .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Soaitá dán oktavuođas leat somá geahčadit movt vuosttaš smávva geahččaleamit ledje boazodoallofága fidnoráhkkanahttin oahpahusas 9-jagi skuvllas Kárášjogas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Innledningsvis bør det pekes på at reindriftens utøvere på ingen måte har fått del i den utbytte- og velstandsøkning som har funnet sted innen andre landbruksnæringer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vuosttažettiin ferte fuomášuhttit dan ahte boazodoallu ii leat ožžon oasi dain buriin maid eará eanandoalloealáhusat leat ožžon , dienas- ja buorredili lassáneami oktavuođas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriften er riktignok en høyst særpreget næring med arbeidssituasjoner som knapt har sin like i andre yrker , men det ligger likevel nær å karakterisere den som en landbruksnæring og da med fedriften som nærmeste sammenlignbare bransje .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallu lea gal hui earenoamáš ealáhus mas leat dakkár bargodilit maid ii sáhte buohtastahttit eará fidnuiguin , muhto sáhttá goitge gohčodit dan eanandoalloealáhussan , mas šibitdoallu lea dat suorgi mainna sáhttá buoremusat buohtastahttit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Husdyrholdet har de siste mannsaldre gjennomgått en rivende utvikling .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Šibitdoallu lea maŋemus buolvvaid hirbmosit rievdan .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er nok å peke på at fra 1900 til 1958 er kjøttproduksjonen økt med 80 prosent og produksjonen av kumelk med 110 prosent .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dušše dat juo muitala olu go diehtit ahte biergobuvttadeapmi lea lassánan 80 % 1900 ' ja 1958 ' gaskkas , ja mielkebuvttadeapmi fas 110 % seamma áigodagas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Antall dyr er i samme tidsrom økt med bare 35 prosent .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muhto dien áigodagas eai leat go dušše 35 % lassánan oamit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Etter siste krig har tendensen innen storfeholdet faktisk gått i retning av færre dyr og samtidig større produksjon .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Maŋŋel soađi leage šibitdoalus leamaš dakkár vierru ahte eai galgga nu ollu oamit , muhto eanet buvttadeapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Dette er en fantastisk utvikling , og hva den betyr for næringens utøvere i spart arbeid og økt sikkerhet , kan neppe måles i penger .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dat lea earenoamáš buorre ovdáneapmi , ja ii sáhte mihtidit ruđain man ollu sestet barggu ja man sihkkareabbo dat lea dan ealáhusa olbmuide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En lignende utvikling burde finne sted også innen reindriften , og den bør komme i gang før det er for sent .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Diekkár sullasaš ovdáneapmi galggašii maid leat boazodoalus , muhto dat fertešii álggahuvvot ovdalgo lea ilá maŋŋit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det bedrøvelige forhold er dessverre at utbytteøkningen pr. rein ikke en gang har holdt tritt med den alminnelige prisstigning .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dat heittot bealli lea dađibahábut ahte dienas juohke bohcco nammii ii čuovo dábálaš haddelassáneamige .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Antall rein er riktignok økt i 1950-årene , men den produktive avkastning pr. rein er sannsynligvis blitt mindre etter overgangen til ekstensive driftsforhold .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>1950-logus lea boazolohku lassánan , muhto dienas biergobuvttadeamis juohke bohccos lea jáhkkimis njiedjan maŋŋel go rievddai ekstensiiva boazodoallun .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det kan ikke herske tvil om at det er landbruksforskningen og landbrukets undervisnings- og veiledningstjeneste som har en vesentlig del av æren for produksjonsøkningen innen husdyrnæringen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea eahpitkeahttá eanandoallodutkama ja eanandoalu oahpahan- ja bagadallanbálvalusa gudni ahte šibitdoalus lea lassánan buvttadeapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Når det gjelder reindriften har det vært en populær overtro at den er en så eiendommelig og usivilisert næring at den ikke kan underlegges vitenskapelig forskning , undervisning eller økonomisk planlegging .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoalus ges lea leamaš dakkár jáhkku ahte dat lea nu earenoamáš ja eahpesiviliserejuvvon ahte dan ii sáhte dieđalaččat dutkat , oahpahit iige plánet ekonomalaččat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>– Alt skulle være som før , og dermed er reindriften blitt akterutseilt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>– Buot galggai leat nu go ovdal ja danne lea boazodoallu bázahallan .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Likevel forsvarer næringen med glans sin plass i vår samfunnshusholdning , idet reinen som det helårs utebeitende « husdyr » den er , nyttiggjør ellers uproduktive fjellvidder som landet vårt har slik en overflod av .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Liikká bealušta ealáhus roahkka iežas saji min servodatekonomiijas , go gearddi boazu lea « šibit » , mii birra jagi guohtu olgun ja ávkkástallá dakkár duoddariid mat min riikkas leat valjis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den aktuelle problemstilling for reindriften er i dag : Hvordan tjene mer pr. rein med mindre slit og med større økonomisk sikkerhet for næringsutøveren ?</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Čuolbma mii dál lea áigeguovdil boazodoalus lea : Movt dine eambbo juohke bohcco nammii unnit rahčamiin ja buoret ekonomalaš sihkarvuođain boazobargiide ?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Forskning er i og for seg ikke nok .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dutkan iešalddis ii leat doarvái .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reineierne må gjøres aktivt interessert i forskningen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodolliid ferte oažžut eambbo beroštit dutkamis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De sitter inne med kolossale detaljkunnskaper oppsamlet gjennom generasjoner .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sii dihtet ollu bienasta bitnii ja sis lea mearihis ollu máhttu maid leat seailluhan buolvvas bulvii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Disse må forskerne få del i , så de kan overføres til systematisk kunnskap og veves inn i de erfaringer reinforskningen er kommet til .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dáid dieđuid galggaše dutkit oažžut , vai sáhtáše fievrredit daid systemáhtalaš máhttun ja čadnot daidda vásáhusaide maid boazodutkamušas leat dahkan .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Resultatene må gjøres kjent for yrkesutøverne i en form som kan forstås , og de nye kunnskaper må omsettes i praktisk reindrift .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohtosiid galggašii addit boazobargiide dakkár hámis mii lea ipmirdahtti , ja ođđa diehtu fertešii váldot atnui praktihkalaš boazodoalus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Dette kan bare skje gjennom en organisert veiledningstjeneste hvor reinsamene selv er aktivt med .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát sáhttá dušše dáhpáhuvvat organiserejuvvon bagadallanbálvalusa bokte mas boazosámit leat aktiivvalaččat mielde .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er i denne forbindelse viktig at skolene for reinsameungdom gir en slik undervisning i reindriftsspørsmål at denne utvikling fremmes .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dan oktavuođas lea dehálaš ahte skuvllat addet boazosáminuoraide dakkár oahpahusa boazodoallogažaldagain ahte dát ovdáneapmi ovddiduvvo .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den yrkesforberedende undervisning for vordende reindriftsutøvere må ta sikte på en bevisstgjøring og verdsetting av de gode samiske tradisjoner innen reindriften og samtidig innarbeide en yrkesinnstilling som er vitenskapelig fundert .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Fidnoráhkkanahtti oahpahus boahttevaš boazobargiide ferte bargat dan nala ahte hukse dihtomielalašvuođa ja árvvusatnima dain sámi arbevierun mat leat buorit boazodoalu siskkobealde ja seammás bargat vai šaddá dakkár jurddašanvuohki barggu ektui mii lea dieđalaččat jurddašuvvon .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den grunnleggende undervisning må bestå i en systematisk gjennomgåing av reinens biologi , reindriftens arbeidsformer og det landskap den skal praktiseres i .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vuđolaš oahpahusas ferte leat systemáhtalaš oahpaheapmi bohcco biologiijas , boazodoalu bargovugiin ja dan eanadagas gos galgá bargat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Omsetningsspørsmål , driftsøkonomi , orientering om nye arbeidsformer og forskningsresultater kommer som en naturlig fortsettelse .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lunddolaš joatkkan oahpaheamis šaddet gálvojođugažaldagat , doaibmaekonomiija , ođđa bargovugiid smiehttan ja dutkanbohtosat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er å håpe at undervisningen kan bibringe de unge en aktiv interesse for forskningen og for å finne frem til mer lønnsomme driftsmetoder , samtidig som de har et våkent øye for de gode samiske tradisjoner .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ferte sávvat ahte oahpahus maiddái buktá aktiivvalaš beroštumi dutkamii ja dasa ahte gávnnahit bargovugiid mat leat eambbo gánnáhahttit .  Seammás galget sii beroštit buriin sámi árbevieruin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ut fra disse intensjoner er det i de senere år drevet undervisning i reindriftsfag ved Karasjok linjedelte ungdomsskole som omfatter de tre øverste klasser i den 9-årige skole .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dáid áigumušaid vuođul leage daid maŋemus jagiid oahpahuvvon boazodoallofágain Kárášjoga suorgejuhkkojuvvon nuoraidskuvllas , mat leat golbma maŋemus jagi 9-jagi skuvllas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den første begynnelse ble gjort i 1956 da faget « flyttsamekunnskap » ble innført i framhaldsskolen i Karasjok med et 108 timers kurs fordelt på 18 uker á 6 timer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Das lei álgu 1956:s go « johttisámemáhttu » ( flyttsamekunnskap ) álggahuvvui joatkkaskuvllas ( framhaldsskuvllas ) Kárášjogas .  Dan kurssas lei 108 diimmu oahpahus , mii juhkkojuvvui 18 vahkkui , ja lei 6 diimmu vahkkui oahpahus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Framhaldsskolen for flyttsamer var 2-årig , og det var forutsetningen at disse timene det ene året skulle brukes til samfunnskunnskap og helselære .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Joatkkaskuvla lei 2 jagi johttisámiide , ja lei eaktun ahte nuppi jagi galget dát diimmut adnot servodatohppui ja dearvvašvuođaohppui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En bredt opplagt prøveplan ble utarbeidet av skoleinspektør Lind Meløy , og lærer Per Lyngstad startet høsten 1956 opp med den første undervisning i faget .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Skuvlahoavda Lind Meløy ráhkadii viiddis geahččalanplána , ja oahpaheaddji Per Lyngstad álggahii vuosttaš oahpahusa dán fágas 1956:s .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Han ble året etter avløst av undertegnede som siden har vært betrodd det videre arbeid med opplegget for undervisningen i flyttsamekunnskap .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Jagi maŋŋel álggii vuolláičálli , gii lea dan rájes beassan bargat johttisámemáhtu oahpahusain .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I 1958 gikk Karasjok kommune i gang med linjedelt ungdomsskole .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>1958:s álggahii Kárášjoga gielda suorgejuhkkojuvvon nuoraidskuvlla .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ved velvillig imøtekommenhet fra Forsøksrådet for skoleverket og Kirke- og Undervisningsdepartementet ble det gitt adgang til å opprette en egen reindriftslinje for 7. – 9. skoleår , – foreløpig er dette den eneste reindriftslinje i landet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Buorredáhtolaš vuollegašvuođain addui Skuvladoaimmahaga geahččaladdanráđi ja Girko- ja oahpahusdepartemeantta bokte lohpi álggahit sierra boazodoallosuorggi 7. – 9. skuvlajagiide , - mii dál vuos lea áidna boazodoallosuorgi riikkas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriftslinjas fjellkurs 1959 , ved Ytre Billefjord i Porsanger .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallosuorggi meahccekurssa 1959 , Gorbovuonas , Porsáŋggus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Bjørn Aarseth og veterinær Sven Skjenneberg veier en slaktet kalv .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bjørn Aarseth ja šibitdoavttir Sven Skjenneberg vihkkeba njuvvon miesi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Elevene på bildet er Per Eira og Johannes Sara .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Oahppit govas leaba Per Eira ja Johannes Sara .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>( Foto : Virginia Davidson / Norsk folkemuseum )</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>( Govva : Virginia Davidson / Norsk folkemuseum )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Allmenn praktisk reindriftslinje , populært kalt R-linjen , har samme fagkrets og leseplaner i allmennfagene som allmenn praktisk linje ( Y-linjen ) , bortsett fra engelsk .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dábálaš praktihkalaš boazodoallosuorggis , nu gohčoduvvon R-suorggis , leat dábálaš fágain seamma fágat ja lohkanplánat go dábálaš praktihkalaš suorggis ( Y-suorggis ) , earet eŋgelasgiella .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Dette fag , som er frivillig på Y-linjen , har på R-linjen avgitt sine timer til norsk , samfunnskunnskap og det nye faget flyttsamekunnskap , som er en direkte oversettelse av svenskenes « nomadkunnskap » .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dat fága lea eaktodáhtolaš Y-suorggis , muhto R-suorggis leat dát diimmut biddjon dárogielfágii , servodatohppui ja ođđa fágii , johttisámemáhttui , mii lea njuolga jorgaluvvon ruoŧŧelaččaid « nomadkunnskap » .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Skoletiden på reindriftslinjen avviker en del fra det vanlige mønster .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Skuvlaáigi boazodoallosuorggis lea veahá eará go dábálaš minstaris .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Elevene har 27 uker på skolebenken ( november – juni ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ohppiin lea 27 vahkku oahpaheapmi skuvllas skábmamánus geassemánnui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I tillegg kommer 4 uker fjellkurs ( feltstudiekurs ) i juli – august .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lassin dasa lea 4 vahkku meahcceskuvla ( gieddeoahpahuskursa ) suoidnemánus borgemánnui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Dessuten har elevene plikt til å delta minst 7 uker i praktisk reindrift hver høst ( august – november ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muđui lea ohppiin geatnegasvuohta oassálastit unnimusat 7 vahkku praktihkalaš boazodoalus juohke čavčča ( borgemánus gitta skábmamánnui ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Denne utplasering kan skje i foreldrenes reindrift , og det er i praksis gjerne blitt slik at foreldrene eller nære slektninger er deres læremestere i de travle høstmåneder når der foregår så mye innen reindriften .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát bargu sáhttá leat váhnemiiddis boazodoalus , ja duohtadilis leage nu ahte váhnemat dehe lagas fuolkkit leat sin oahpaheaddjit čakčat go boazodoalus lea hui ollu hommá .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Flertallet av elevene har arbeidet 10–12 uker i reindriften hvert år .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Eanas oassi ohppiin leat bargan 10–12 vahkku boazodoalus juohke jagi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Foran arbeidsperioden får de utlevert en lang liste over oppgaver som skal stimulere dem til å gjøre iakttagelser som de igjen skal avgi rapport om på skolen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Juohke bargoáigodaga ovddabealde ožžot oahppit guhkes čállosa mas leat bargobihtát mat galget movttiidahttit ohppiid dahkat fuomášumiid .  Daid birra galget oahppit skuvllas čállit raportta .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er av særlig betydning at de samler materiale og får et noenlunde felles erfaringsgrunnlag til videre bearbeidelse i skoletimene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea erenoamáš dehálaš ahte sii čohkkejit materiála ja ožžot sullasaš vásáhusaid maiguin barget viidáset skuvladiimmuin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er også en forutsetning at elevene ved utplassering om høsten skal lære og få øving i arbeidsformer som ikke kan integreres i skolens virksomhet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea maid eaktun ahte go oahppit leat čakčat gieddebarggus dahje bargohárjehallamis , de sii besset oahppat ja hárjehallat dakkár bargovugiid maid ii sáhte skuvladoaimmain čađahit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Rapportskjema vil stadig minne dem om at dette er en viktig læretid og en del av deres utdannelse .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Raportaskovvi muittuha ohppiid ahte dát lea dehálaš oahppanáigi ja oassin sin oahpus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Foreldrene er gjerne interessert i å ha elever på dette alderstrinn ( 13 –16 år ) hjemme i høstflyttetiden , fordi det er størst behov for arbeidskraft nettopp da .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Váhnemat háliidit ahte mánát mat leat gaskal 13 ja 16 jagi leat ruovttus čakčajohttináiggi go juste dalle dárbbahuvvojit bargonávccat boazodoalus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I faget flyttsamekunnskap har vi i noen grad kunnet nyttiggjøre erfaringer fra Sveriges nomadskolor hvor dette har vært orienteringsfag i barneskolen i en årrekke .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Johttisámemáhttofágas leat sáhttán atnit ávkin daid vásáhusaid maid Ruoŧa bealde nomadskuvllain leat dahkan .  Doppe lea dát fága leamaš birasfágan mánáidskuvllas máŋggaid jagiid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den linjedelte ungdomsskolen arbeider imidlertid på høyere klassetrinn .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Suorgejuhkkojuvvon nuoraidskuvla bargá fas alit luohkkácehkiin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Våre elever har sannsynligvis større kjennskap til reindriften hjemmefra , og siden de har valgt en yrkesbetont linje , er det naturlig at vår undervisning tar sterkere preg av yrkesopplæring , spesielt i 9. klasse .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Min oahppit leat ruovttus oahpahuvvon boazodollui ja dáidet dasto dovdet eanet boazodoalu , ja go leat válljen suorggi mii bargguid deattuha , de lea lunddolaš ahte oahpahusas vuhtto nana fidnooahpahus , earenoamážit 9. luohkás .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>For å illustrere hva undervisningen har gått ut på , skal her summeres opp de hovedemner som ble behandlet i faget flyttsamekunnskap skoleåret 1961/62 :</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vai čájehivččii mii oahpahusas lea leamaš , de sáhttit dás čoahkkáigeassit makkár váldofáttát leat johttisámemáhttofágas leamaš skuvlajagi 1961/62 :</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>7. klasse ( 3 timer pr. uke i 27 uker ) : Reinens utbredelse , særtrekk , krav til naturen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>7. luohkás ( 3 diimmu vahkkui , 27 vahkku ) : Ealu lávdan , mihtilmasvuohta , gáibádus ealáhahkii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Alminnelig zoologi , reinens plass i det zoologiske system , slektninger .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dábálaš zoologiija , bohcco sadji zoologalaš vuogádagas , sogalaččat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinen – landskapet – mennesket .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazu – eanadat– olmmoš .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Tilpassing , naturlig utvalg , naturens og menneskets innvirkning på reinstammen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Heiveheapmi , lunddolaš válljenmunni , luonddu ja olbmo váikkuhus boazonállái .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinens anatomi og fysiologi ( bred behandling ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco anatomiija ja fysiologiija ( viiddis meannudeapmi ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinens mat ( elementært om reinbeite ) .  Reinens sykdommer , særlig om parasittsykdommer og forebygging av sykdommer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco biebmu ( álggolaččat ealáhaga birra ) Boazodávddat , earenoamážit luhtehasdávddaid ja dávddaid eastadeami birra .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reingjeteryrket , betydning , krav til kunnskaper , innsikt , ferdigheter .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Guođoheaddjifidnu , dehálašvuohta , gáibádusat máhttuide , ipmárdussii , gálggaide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Gjeting og driving av rein i ulike landskapstyper og forskjellige årstider .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Guođoheapmi ja johttin ealuin iešguđetlágan eatnamiin ja jahkeáigodagain .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Intensiv og ekstensiv reindrift – elementær oversikt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Intensiiva ja ekstensiiva boazodoallu – vuđolaš oppalašgeahčastat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Litt driftsøkonomi .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Veahá doaibmaekonomiija .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinmerking og merkesnitt – første gangs gjennomgåing .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco merken ja mearkasánit – vuosttaš geardde oahpahus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Andre reindriftsfolk og villreinjegere – etnografi .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Eará boazodoalloálbmogat ja goddebivdit – etnografiija .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>8. klasse ( 3 timer pr. uke i 27 uker ) : Om behov for orden og administrasjon innen næringen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>8. luohkás ( 3 diimmu vahkkui , 27 vahkku ) : Dárbu ortnegii ja hálddahussii ealáhusas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Skjematisk oversikt over reindriftsadministrasjonen , Reindriftens ordning i Finnmark , distriktsinndeling , beitetid og flyttebestemmelser , statistikk over reinantall , avkastning , aktuelle problemer for reindriftsadministrasjon .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriften i resten av Norge , distriktsinndeling , utbredelse og antall , flyttinger og andre særtrekk ved driften .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Skemáhtalaš čilgehus boazodoallohálddahusas .  Boazodoalu vuogádat Finnmárkkus , orohatjuohku , guohtunáigi ja johttinmearrádusat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Problemer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Norsk tamreindrift ved aksjeselskaper i Sør-Norge .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallu oasusovttastumis Lulli-Norggas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriften i Karasjok reinsogn , detaljert om hvert distrikt , flytteveier , grenser ete .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallu Kárášjoga boazosuohkanis , vuđolaččat juohke orohaga birra , johttingeainnut ja ráját jna. .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Inntegning på kart 1:100000 .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Tevdnet kártii 1:100000 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Elevenes rapporter om høstflyttinga .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ohppiid raporttat čakčajohtimis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Gjennomgåing og kommentar .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Guorahallat ja kommeanttaid oažžut .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriften i Norden , historisk oversyn over framveksten .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallu Davviriikkain , historjjálaš ovdáneami geahčastat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Flyttsamer – skogsamer – elvesamer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Johttisámit , vuovdesámit ja johkasámit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Organisasjoner for samene i de nordiske land .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Searvvit dehe organisašuvnnat sámiid várás Davviriikkain .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriften i Sverige .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallu Ruoŧas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriften i Sovjet-Samveldet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallu Sovjetlihtus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriften i Alaska .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallu Alaskas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinens anatomi og fysiologi , repetisjon og nytt detaljstoff .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco anatomiija ja fysiologiija , geardduheapmi ja ođđa dieđut .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Slakteutvalg og slaktelære , hovedvekt på økonomi og hygiene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Njuovvanbohcco válljen ja njuovvanoahppu , ekonomiija ja ráinnasvuohta deattuhuvvo .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Gjeterhunden .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Guođohanbeana .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Stell og dressur .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Beatnaga dikšu ja oahpaheapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Forbedring av reinhundrasen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazobeananáli buorideapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Rovdyrene og reindriften , ulv , jerv , gaupe , rev , ørn og ravn .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boraspiret ja boazodoallu , gumpe , geatki , rieban , goaskin ja gáranas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>9. klasse ( 5 timer pr. uke i 27 uker ) : Mer om reindriftens administrasjon i praksis .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>9. luohkás ( 5 diimmu vahkkui , 27 vahkku : Eambbo boazodoalu hálddahusa birra duohtadilis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Flyttsamers og formenns adm.  plikter , utferdigelse av skjema etc. , registrering av merke .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Johttisámiid ja ovdaolbmuid hálddahuslaš geatnegasvuođat , skoviid deavdin jna. , mearkka dieđiheapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinmerkelære , repetisjon og nytt stoff .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Oahppu bohcco bealljemearkkain , geardduheapmi ja ođđa dieđut .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Lappefogdens årsmelding om reindriften i Finnmark .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallohoavdda jahkedieđáhus Finnmárkku boazodoalu birra .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Kommentarer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Kommeanttat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reindriftens muligheter i Finnmark , vurdering av muligheter for økning av reinantallet eller øking av avkastningen tross reduksjon av reinantallet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoalu vejolašvuođat Finnmárkkus , boazologu lasiheami vejolašvuođaid árvvoštallan , dehe dietnasa lassáneapmi vaikko unnida boazologu .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Betydning av beitegransking og veterinærforskning .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Guohtuniskama ja šibitdoavtterdutkama árvu .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Om vitenskapelig forskning og forsøk innen reindriften .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dieđalaš dutkan ja geahččaleamit boazodoalus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Referat av noen forsøk .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Referáhtat soames geahččalemiin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinens energibehov , ernæringslære .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco energiijadárbu , biebmooahppu .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Tamreinens beiteproblemer og beitebehov .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco guohtunváttisvuođat ja guohtundárbbut .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Avlsutvalg , – opprydding i reinflokken .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Nálleválljen – ealu čorgen .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinrase etter markedets behov .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazonálli márkana dárbbu mielde .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinflokkens sammensetning ( alder / kjønn ) og omløpstid .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Makkár bohccot ealus leat ( ahki / sohkabealli ) , eallingierdu .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Næringsstoffer i reinkjøtt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Biebmoávdnasat bohccobierggus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Foredling og markedsføring av reinkjøtt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohccobierggu reiden ja márkanfievrredeapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Repetisjon av sentrale avsnitt i 7.  – 9. års pensum .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>7.–9. jagiid lohkanmeari guovddáš osiid geardduheapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Terminologi innen reindriften i Finnmark ( samisk ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Finnmárkku boazodoalu terminologiija ( sámegiella ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Kulturhistorie – reinnomadismen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Kulturhistorjá – boazonomadisma .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Lesing i Vorren &amp;amp; Manker : Samekulturen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lohkamuš Vorren ja Manker : Samekulturen .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>På 9. klassetrinn er behandlingene av emnene mer detaljert , og det legges mer vekt på arbeidsoppgaver for elevene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>9. luohkás oahpahuvvojit dárkileappot oasit , ja bargobihtát ohppiide deattuhuvvojit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Denne årsprøva i reindriftskunnskap fra 1968 viser at reindriftslinja kom ganske langt faglig .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát jahkegeahččaleapmi 1968:s čájeha ahte boazodoallosuorgi doalai viehká alla dási .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Språket er ellers norsk - men i beskrivelsen av reinmerkesnitt måtte man bruke samisk !</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muđui lea dárogiella fágagiellan , muhto fertejedje sámegillii čilget náhpaid !</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Årsprøva er laga av Bjørn Aarseth og hadde havna i arkivet til Skoledirektøren i Finnmark , der vi fant den ved Statsarkivet i Tromsø .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bjørn Aarseth dat lei ráhkadan geahččaleami , mii lei vurken Finnmárkku skuvladirektora arkiivvas .  Doppe gávnnaimet dan Romssa stáhtaarkiivvas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Siden vi kom i gang har vi hatt en viss progresjon i undervisningen fra klasse til klasse .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dan rájes go álggiimet lea mis leamaš vissis progrešuvdna oahpahusas luohkás luohkkái .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det har imidlertid skjedd en god del nytt innen reindriften de aller siste årene , spesielt omkring veterinærforskningen , beitegransking og driftsøkonomisk kartlegging .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodollui leat daid maŋemus jagiid ollu ođđa áššit boahtán , earenoamážit šibitdoavtterdutkama ja guohtuniskama oktavuođas ja doaibmaekonomiija kártemis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vi har derfor ikke villet binde undervisningen for sterkt til et bestemt pensum for hver klasse , men har gjort bruk av nytt stoff etter hvert som det ble tilgjengelig .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dan dihte eat leat áigon čatnat oahpahusa dihto lohkanmearrái iešguđetge luohkás , muhto geavahan ođđa lohkamuša dađistaga go dan sáhttá oažžut .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det kan ha skjedd samtidig på alle klassetrinn .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dat sáhttá dáhpáhuvvan oktanis buot luohkáin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Lærestoffet har derfor skiftet litt fra år til år , særlig i 9. klasse hvor vi i 1963 fører ut det 3. årskull .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Danne lea oahpu sisdoallu veahá rievdan jagis jahkái , earenoamážit 9. luohkás , mii 1963:s geargá 3. jagiin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Men målsetting og hovedtema har vært det samme , for alle kull .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Mihttomearit ja váldofáttát goitge leat leamaš seamma , juohke buolvvas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det har vært til stor nytte at en i undervisningen stadig har kunne vise til og arbeide videre med de praktiske erfaringer fra sommerens feltstudiekurser .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea leamaš stuora ávkin go sáhttá geasi gieddeoahppokurssaide čujuhit ja bargat viidáseappot praktihkalaš vásáhusaiguin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vi har nå 4 kurssomrer med i alt 6 fjellkurs bak oss og skulle dermed ha grunnlag for å trekke opp linjene for permanente kursopplegg .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Mii leat dál čađahan 4 geasi kurssaid , oktiibuot 6 meahccekurssa , ja de galggašii leat doarvái vuođđu álgit lágidit bistevaš kurssaid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Kursene holdes fra ca. 25. juli og i fire uker framover .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Kurssat álget birrasii suoidnemánu 25. b. ja bistet 4 vahkku .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De er obligatoriske for de elever som samme år skal begynne i 8. og 9. klasse på R-linjen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát leat geatnegahtton kurssat sidjiide geat seamma jagi álget 8. ja 9. luohkáide R-suorggis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Første året ( 1959 ) hadde vi bare en klasse på kurs og brukte da Karasjok , Billefjord-området ( distr. 16 ) og Ifjordfjellet ( distr. 13 ) som kurssteder .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vuosttaš jagi ( 1959 ) lei dušše okta luohkká kurssas ja dalle lei Kárášjoga – Billávuona guovlu ( orohat 16 ) ja Lágesduottar ( orohat 13 ) kursabáikin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Året etter hadde vi 8. og 9. klasse på felles kurs i Karasjok og i Vestgaissene ( distr. 16-17 ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Jagi maŋŋel lei 8. ja 9. luohkáin oktasaš kursa Kárášjogas ja Oarjegáissáin ( orohagain 16-17 ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Erfaringene med to klassetrinn på samme kurs var ikke bare gunstige , og i 1961 hadde vi atskilte kurs for klassene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vásáhusat dáinna guvttiin luohkáin eai lean dušše buorit , ja 1961:s jugiimet dáid luohkáid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>8. klassen var på vestsiden av Porsanger og i Vestgaissene ( distr. 16 ) , mens 9. klasse var på østsiden av Porsanger og i østgaissene ( distr. 14 og 13 ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>8. luohkká lei oarjjabealde Porsáŋggu ja Oarjegáissáin ( orohagas 16 ) , ja 9. luohkká ges lei nuorttabealde Porsáŋggu ja Nuortagáissáin ( orohagain 14 ja 13 ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De første dagene var begge klasser i Karasjok .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vuosttaš beivviid ledje goappašat luohkát Kárášjogas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Sommeren 1962 hadde vi de samme kursopplegg med noen forbedringer , og vi mener nå å ha funnet fram til kursmåter som kan brukes i noen år framover .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>1962 geasi doalaimet seamma kurssaid , muhto de leimmet veahá buoridan , ja oaivvildit dál ahte leat gávnnahan kursavugiid maid sáhttit doallat moadde jagi ovddosguvlui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>For at elevene skal få et bredere oversyn over reindriften og de ulike arbeidsformer er det nødvendig at de får følge med arbeidet i flere reinflokker og beiteområder .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vai oahppit viidábut oidnet boazodoalu ja iešguđetlágan bargovugiid , de lea dárbbašlaš ahte besset čuovvut bargguid máŋgga ealus ja guohtoneatnamis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Forutsetningen er at hvert kurs omfatter minst to reinflokker .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea eaktun ahte juohke kurssa olis fitnet unnimusat guovtti ealu luhtte .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De som har vært med på fjellkursene de to siste årene , har således fått praktisere i fem reinflokker på ulike beiteområder , og de har dessuten hatt ekskursjon til høst- og vinterbeiter .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sii geat leat leamaš meahccekurssain dan guokte maŋemus jagi leat beassan hárjehallat bargat viđa ealu luhtte iešguđetge guohtoneatnamis .  Sis leat maid leamaš oahppomátkkit čakča- ja dálveorohagaide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Hva vi ellers gjør på disse kursene har vært en kilde til forundring for mange .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Máŋggas leat imaštallan maid mii muđui dahkat dáin kurssain .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De som selv har deltatt i kursene , stiller seg meget velvillige i sine vurderinger .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sii geat ieža leat oassálastán dáin kurssain leat iežaset árvvoštallamiin leamaš hui duhtavaččat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Samarbeidet med flyttsamene har på et eneste unntak nær vært meget godt , og skolen får hvert år henvendelser fra andre flyttsamegrupper som gjerne vil ha kurset til sitt sommerbeite .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ovttasbargu johttisápmelaččaiguin , earet ovttain , lea leamaš buorre , ja juohke jagi oažžu skuvla fálaldagaid eará siiddain geat háliidit kurssa sin geasseorohahkii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Elev på reindriftslinjas fjellkurs lærer å binde rein .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ved Ytre Billefjord i Porsanger .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>( Foto : Virginia Davidson / Norsk folkemuseum )</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Endel emner for undervisning og arbeidsøving nevnes her : Orientering – med og uten kart og kompass .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Soames fáttát oahpahusas ja bargohárjehallamis namuhuvvojit dás : Meahccedádjadeapmi – sihke kárttain ja kompássain ja daid haga .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Førstehjelp ved ulykker i fjellet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Heahteveahkki lihkohisvuođain meahcis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Leirordning og leirhygiene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Leairaortnet ja leairabuhtisvuohta .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Beitedistriktenes geografi og utnytting i reindriftens tjeneste .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Orohagaid guovlu ja dan guovllu ávkkástallan boazodollui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Grenser , flytteveier , naturlige knutepunkter .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Rájit , johtingeainnut , lunddolaš deaivvadanbáikkit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinens trekkvaner i forskjellige områder og metoder ved samling og driving .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco johttindábit iešguđetge guovllus , ja čohkken- ja vuojehandábit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Reinsamling , gjeting og driving av rein til samleplass .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Čohkken , guođoheapmi ja vuojeheapmi dohko gosa čohkkejit ealu .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Gjenkjenning av rein , lassokasting og øremerking .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Bohcco dovdan dehe áican , njoarosteapmi ja merken .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Feltslakting , oppretting av feltslakteplass , avliving , slakting av kalver og hygienisk behandling av kjøttet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Fealtanjuovvan , fealtanjuovvanbáikki ceggen , goddin , misiid njuovvan ja biergguid ráidnasit gieđahallan .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Partering av kalveskrotter , hygienisk og økonomisk .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Miessegorudiid rihtten ráidnasit ja ekonomalaččat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Bruk av kastreringstang .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Gáldendoaŋggaid geavaheapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Matstell i fjellet , brødbaking i sametelt , stell av kjøtt og fisk for salting og røyking .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Biebmoráhkadeapmi meahcis , láibun lávus , bierggu ja guoli sálten ja suovastuhttin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg></seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Meahci šattuid ávkkástallat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Utnytting av fjellets nyttevekster .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ee. lávu ja luovi ceggen ja sirdin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Oppsetting og flytting av sametelt , forrådsstilaser etc. .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Litt fiskeribiologi , bruk av forskjellige fiskeredskaper .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Veahá guolástanbiologiija , iešguđetlágán guolástanrusttegiid geavaheapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Geologi – plantelære – plantesamfunn , synfaring av beiter og utregning av beiteverdi , synfaring av overbeitede steder .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Geologiija – šaddodieđa – šaddoservodat , guohtumiid geahčadeapmi ja guohtunárvvu rehkenastin , geahčadanmátki báikkiide maid leat badjelmeari guhton .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Samling og pressing av planter .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Šattuid čohkken ja vuožuheapmi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Fjellvandringer i studieøyemed ( flere døgn , uten telt og sovepose ) , ordning av natteleie ute , løvhytter , vindskjermer o. l. .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Meahccevánddardeapmi oahppama várás ( máŋga jándora , lávu ja gávnniid haga ) , láhččit olggos idjadansaji , ráhkadit lastagoađi , cegget bieggasuoji jna. .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ekskursjon til viktige knutepunkter for reinflyttinga , steder av kulturhistorisk betydning ( gamle melkegjerder , fangstgraver etc. ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Oahppomátki dehálaš čohkkenbáikkiide johttingeainnus , báikkiide main lea kulturhistorjjálaš mearkkašupmi ( dološ bohččingárddiide , bivdorokkiide jna. )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Under fjellkurset for 9. klasse søker en å bygge videre på forrige års kurs .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>9. luohká meahccekurssa geahččalit hukset ovddit jagi kurssa nala .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Om en av praktiske grunner ikke kan rekke over et undervisningsemne på 8. klasses kurs , passer en på å få det med neste år .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Jus 8. luohká kurssas ii leat praktihkalaš sivaid geažil ollen ovtta fáttá oahpahit , de váruha ahte dat fáddá šaddá nuppi jagi mielde .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Et utkast til arbeidsplan for fjellkursene ble våren 1959 sendt forskjellige instanser innen reindriftsadministrasjonen og flyttsamenes organisasjon til uttalelse .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Meahccekurssa bargoplánaevttohus sáddejuvvui 1958 giđa gulaskuddamii iešguđetlágán ásahusaide boazodoallohálddahusas ja johttisápmelaččaid organisašuvnnas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Selvfølgelig ble utkastet også drøftet med flyttsamer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Diehttelas ahte dán evttohusa ságastalle maid johttisápmelaččaiguin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Samtlige stilte seg positivt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Buohkat ledje mielas dása .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Forsøksrådet for skoleverket godkjente det praktiske opplegget for kurset i brev av 18/8 1959 og uttalte da bl. a. : « Selve innholdet i kurset virker gjennomtenkt og underbygd og ser ut til å konsentrere seg om vesentlige emner som vil få stor betydning for elevene i deres yrkesarbeid .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Skuvladoaimmahaga geahččalanráđđi ( Forsøksrådet for skoleverket ) dohkkehii reivvestis beaiváduvvon 18/8 1959 praktihkalaš oasi dán evttohusas , ja čállá ee. ná : « Dán kurssa sisdoallu orru dárkilit jurddašuvvon ja ákkastuvvon ja orro čiekŋudeame dehálaš osiide mat mearkkašit ollu ohppiid barggus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg></seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Go lea johttisámemáhttu duogážin , de gal sáhttá ollu vuordit dákkár kurssas . »</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Med flyttsame-kunnskapen som bakgrunn er det grunn til å vente seg mye av dette kursopplegget . »</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallosuorggi meahccekurssa oahppi oahppá gárrat bohccuid . Gorbovuona lahka , Porsáŋggus , 1959 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg></seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg> ( Govva : Virginia Davidson / Norsk folkemuseum )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Med denne tillitserklæring i ryggen har vi så fra år til år søkt å forbedre kursoppleggene til vi foran 1963-kursene står med planer som vi anser tilfredsstillende , men ikke endelige .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dáinna luohttámušduođaštusain leat mii de jagis jahkái geahččalan buoridit kurssaid nu ahte ovdalgo1963-kurssaid álggahit , de lea mis dohkálaš plána , vaikko dat ii leat loahpalaš .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I konklusjonen til rapporten fra det første fjellkurset i 1959 skrev undertegnede bl. a. : « I faget flyttsamekunnskap og i særlig grad i fjellkurset beveger vi oss på områder hvor vi skolemessig sett har få eller ingen erfaringer å bygge på .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Loahppacealkagis raporttas maid vuosttaš meahccekurssa maŋŋel čálii 1959:s lea vuolláičálli čállán ee. « Johttisámimáhttofágas ja earenoamážit meahccekurssain leat mis skuvlla dáfus hui unnán vásáhusat maid nala sáhttá hukset viidáseappot . </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vi må derfor regne med at det vil gå noen år før vi har funnet fram til det mest hensiktsmessige opplegg .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Danne fertet rehkenastit moadde jagi dasa ahte gávdnat vuohkkaseamos oahpahusvugiid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I mellomtiden bør ikke kurset være bundet til bestemte kurssteder eller bestemte arbeidsformer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dan botta ii berre kurssa čatnat dihto báikkiide dehe dihto bargovugiide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En må prøve seg fram – med omtanke – og i samarbeid med flyttsamer og andre sakkyndige . »</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ferte geahččaladdat – fuolalašvuođain – ovttasráđiid johttisápmelaččaiguin ja eará áššedovdiiguin . »</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Et av de største problemene ved innføring av reindriftsfag var å skaffe lærerkrefter som kunne ta undervisningen på skolen og dessuten lede fjellkursene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Okta dain stuorámus hástalusain go álggaheimmet boazodoallofága lei gávdnat oahpahannávccaid mat sáhtte oahpahit skuvllas ja maiddái lágidit meahccekurssaid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I mangel av noen bedre måtte undertegnede påta seg dette .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Go ii lean buoret , de fertii vuolláičálli váldit badjelasas dan barggu .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Oppgavene har vært interessante og lærerike , men på grunn av de uløste oppgaver hele den linjedelte ungdomsskolen sto overfor , har det alltid blitt for liten tid til overs for arbeidet med denne spesielle linje .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Barggut leat leamaš miellagiddevaččat ja ollu lea oahppan das , muhto go olles dan suorgejuhkkojuvvon nuoraidskuvllas ledje barggut mat eai lean čovdojuvvon , de lea álo leamaš beare unnán liigeáigi bargat dainna earenoamáš surggiin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I 1960 fikk skolens lærerstab en verdifull tilvekst ved lærerinne Kirsten Ravna Porsanger som er av flyttsameslekt og er oppvokset i reindriftsmiljøet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>1960:s oaččui skuvlla oahpaheaddjijoavku divrras veahki oahpaheaddjis Kirsten Ravna Porsangeris , gii lea johttisámisogas ja bajásšaddan boazodoallobirrasis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vi har delt undervisningen i flyttsamekunnskap mellom oss og har ledet hvert vårt fjellkurs , hun med 9. klasse på Østfjellet og undertegnede med 8. klasse på Vestfjellet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Moai letne juogadan oahpahusa johttisámemáhtus ja letne goabbat meahccekurssaid lágidan , son 9. luohká nuorttabealde ja mun 8. luohká oarjjabealde . Muđui letne váldán vehkkeoahpaheddjiid oahpahussii maid sii máhtte bures .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ellers har vi trukket inn i undervisningen hjelpelærere som var flinke til å undervise på sine områder .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Nevnes bør særskilt : Dyrlege Sven Skjenneberg , beitekonsulent Erling Lyftingmo , kaptein Knut Spilling , idrettskonsulent Odd Hagen , flyttsamene Elen Marie Anti og Anders Bær jr. .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dás ferte earenoamážit namuhit šibitdoaktára Sven Skjenneberg , guohtunoaivadeaddji Erling Lyftingmo , kapteainna Knut Spilling , valáštallanbagadalli Odd Haugen , johttisápmelaččaid Ellen Marie Anti ja Anders Bær jr. .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ellers har vi benyttet en rekke andre flyttsamer som rådgivere og hjelpelærere .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muđui leat geavahan eará johttisápmelaččaid ráđđeaddin ja veahkkeoahpaheaddjin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Under fjellkursene benytter vi flyttsamer fra de respektive beiteområder .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Meahccekurssaid áiggi ávkkástallat johttisápmelaččaid mat gullet daidda orohagaide gos ain leat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Et meget følbart problem i reindriftsundervisningen har vært mangelen på lærebøker .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Váttisvuohta maid leat dovdan bures , lea go váilot oahppogirjjit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En har plukket stoff av fagskrifter , pressen , håndbøker og private notater .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Leat čoakkašan fáttáid fágačállosiin , áviissain , giehtagirjjiin ja priváhta čállosiin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Men sjelden har en funnet noe som var skreddersydd til vårt bruk .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Hui hárve leat gávdnan maidege mii leat juste heivehuvvon min atnui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Landslaget for tamrein ved Ingvald Brudeli har gjort en meget prisverdig innsats på opplysningssektoren ved å utgi boka Norsk Tamreindrift og tidsskriftet Fjell-Nytt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Landslaget for tamrein ( Boazoriikkasearvi ) lea Ingvald Brudeli bokte dahkan buori barggu bajásčuvgehussuorggis go leat almmuhan girjji Norsk tamreindrift ja áigečállaga Fjell-Nytt .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ved siden av Reindriftsbladet som utgis av Norges Reindriftsamers Landsforening , kan disse gi oss verdifullt stoff til undervisningen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Earret Reindriftsbladet ( Boazodoallobláđđi ) nammasaš áigečállaga man Norgga Boazosápmelaččaid Riikkasearvi almmuha , de addet namuhuvvon čállagat mávssolaš oahpponeavvuid oahpahussii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Svenska Renforskningens skrifter har også vært gode håndbøker for lærerne .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Svenska Renforskningena ( Ruoŧa boazodutkan ) čállosat leat leamaš buorit veahkkeneavvut oahpaheddjiide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Beitekonsulent Lyftingsmo har skrevet en kort og grei beitelære for reindriftslinjen , og dyrlege Skjenneberg er på det nærmeste ferdig med manuskriptet til sin lærebok om Rein og reindrift ( ca. 200 sider pluss billeder ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Guohtunoaivadeaddji Lyftingsmo lea čállán oanehis ja álkis guohtunoahppogirjjáža boazodoallosuorgái , ja šibitdoavttir Skjenneberg lea measta geargan giehtačállosiin Rein og reindrift nammasaš oahppogirjjiin ( sullii 200 siiddu ja govat ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Disse tiltak betyr verdifulle skritt fram mot løsningen av lærebok-problemet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát barggut mearkkašit ollu go galget čoavdit oahppogirjevátnivuođa váttisvuođaid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Etter konferanse med landbrukssjef Bartholdsen og undertegnede har Sven Skjenneberg også utarbeidet en plan for et 3 måneders spesialkurs for lærere på reindriftslinja .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Maŋŋel konferánssa eanandoallohoavddain Bartholdseniin ja vuolláičálliin lea Sven Skjenneberga ráhkadan plána golmma mánnosaš erenoamáškursii boazodoallosuorggi oahpaheddjiide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er grunn til å vente seg meget av dette .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Das gal sáhttá ollu vuordit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Hvis de skoler som tenker å sette i gang reindriftsundervisning , sender lærere til kurset , vil det kunne få betydning for reindriftsnæringen i hele landet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Jus dat skuvllat mat áigot álggahit boazodoallooahpahusa sáddejit oahpaheddjiid dákkár kursii , de dat váikkuhivččii boazodoaloealáhussii oba riikkas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er visstnok tanken å legge dette kurs til en landbruksskole .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea várra jurdda dán kurssa bidjat soames eanandoalloskuvlii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I denne sammenheng melder spørsmålet seg om et skolested for videre opplæring i reindriftsfag , altså en overbygging for reindriftslinjene ved linjedelte ungdomsskoler , slik at ungdom som ønsker det , kan få et 10. frivillig skoleår der .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dasto čuožžila gažaldat skuvlabáikkis boazodoallosuorggi joatkkaoahpus , nappo dakkár mii hukse boazodoallosuorggi nala mii lea suorgejuhkkojuvvon nuoraidskuvllas .  Dasto besset sii geat háliidit , eaktodáhtolaččat vázzit 10. luohká doppe .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Heimeyrkeskolen for samer i Kautokeino utpeker seg her som det naturlige sted , forutsatt at lærerkrefter for denne undervisning kan skaffes .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Selv om reindriftsfaget nå er etablert i den linjedelte ungdomsskolen , er dermed ikke problemene løst .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ruovttufidnoskuvla sámiide Guovdageainnus lea lunddolaš báiki dasa , jus fal oahpahannávccaid sáhttá oažžut .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det må stadig foregå en vekst fram mot mer hensiktsmessige og dagsaktuelle former for undervisning .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vaikko boazodoallosuorgi leage sajáiduvvan suorgejuhkkojuvvon nuoraidskuvlii , de ii leat čoavdán buot váttisvuođaid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg></seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ferte čađat leat ovdáneapmi ávkkálaš ja áigeguovdilis oahpahanmálliin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det oppstår også organisatoriske problemer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Gártet maid organiseremis váttisvuođat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Faget flyttsamekunnskap har hittil tatt engelskens plass på fagfordelingsplanen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Boazodoallofága lea dán rádjái váldán eŋgelasgiela saji fágajuohkinplánas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I fjor ble imidlertid engelsk innført i 6. klasse i flyttsameskolen , og da bør elevene få fortsette med dette på reindriftslinja .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Diibmá álggahuvvui eŋgelasgiella 6. luohkkái johttisámeskuvllas , ja de berrejit oahppit beassat joatkit dainna maiddái boazodoallosuorggis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Dette skoleår har flyttsamekunnskap i 7. klasse måttet avgi 2 av sine 3 uketimer til engelsk .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dán oahppojagi leat johttisámeoahpus váldán guokte diimmu golmma diimmus vahkkui eŋgelasgillii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vi har løst problemet på den måten at flyttsamekunnskap ( 1 t. ) er lagt under samme lærer som har biologi ( 2 t. ) og geografi ( 2 t. ) i klassen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Mii leat dán rádjái čoavdan dan dainna lágiin ahte leat bidjan johttisámemáhtu ( 1 diimmu ) seamma oahpaheaddjái go das geas lea biologiija ( 2 diimmu ) ja geografiija ( 2 diimmu ) luohkás .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ved samkjøring av lærestoff fra botanikk og zoologi samt geografi med etnografi , håper vi likevel å få gjennomført det meste av 7. klasses pensum i flyttsamekunnskap .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Go ovttas oahpaha botanihka ja zoologiija ja maiddái geografiija ovttas etnografiijain , de sávvat ahte dainna lágiin čađahuvvo eanas oassi 7. luohká johttisámemáhtu lohkanmearis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vi må nå finne frem til en løsning for de elever som vil lese engelsk i 8. klasse på reindriftslinja neste år og eventuelt senere i 9. klasse .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dál fertet gávdnat lohkamuša daidda ohppiide 8. luohkás geat háliidit boahtte jagi lohkat eŋgelasgiela boazodoallosuorggis , ja maŋŋel 9. luohkás .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Fagtrengselens spøkelse brer seg nå også over reindriftslinja !</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Fágagáržžádusa ballu lea čuohcan maiddái boazodoallosuorgái !</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>For det enkelte årskull kan det være så få flyttsamebarn i Karasjok at det ikke blir nok elever til egen reindriftslinje .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muhtin jagiid sáhttet leat nu unnán johttisámemánát Kárášjogas ahte eai deavdde olles luohká boazodoallosuorggis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De som vil ha yrkesforberedende opplæring i 9. klasse , må kunne få en egen gren for reindrift .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sii geat háliidit fidnoráhkkanan oahpahusa 9. luohkás , galget sáhttit oažžut sierra suorggi boazodoalus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Men hva med reindriftsfaget for disse i 7. og 8. klasse ?</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muhto movt lea boazodoallofágain dáin ohppiin 7. ja 8. luohkáin ?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Og hva med den praktiske trening hos foreldrene eller på fjellkurs når elevene skal være på skolebenken fra august til juni ?</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ja movt šaddá dainna praktihkalaš hárjehallamiin váhnemiid luhtte dehe meahccekurssas go oahppit galget leat skuvllas borgemánus geassemánnui ?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Om de interesserte parter viser den samme forståelse og velvilje som hittil , skulle det tross alt være mulig å finne frem til brukbare løsninger .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Jus berošteaddji bealit čájehit seamma beroštumi ja buorredáhtu go dán rádjai leat dahkan , de livččii ain vejolaš gávdnat heivvolaš čovdosiid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En bør ikke vike tilbake for særordninger som har livets rett , selv om de betyr en belastning for skolens administrasjon .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ii berre hilgut sierra ortnegiid mat leat seailluhanveara , vaikko dát čuhcet skuvlla hálddašeapmái .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er naturlig å følge forbindelseslinjene for faget flyttsamekunnskap også nedover i skolen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea maid lunddolaš čuovvut oktavuođalinnjáid vulosguvlui skuvllas johttisámeoahpu fágas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En tenker da på heimstadlæren og orienteringsfagene i barneskolen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dás jurddaša ruovttudoallooahpu ja o-fága ( luonddufágaid ja servodatfágaid ) birra mánáidskuvllas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Her har Sveriges nomadskolor solide tradisjoner som vi kan øse av .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ruoŧa sámeskuvllain leat das nana árbevierut maid mii sáhttit ávkkástallat .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Flyttsameskolen bør ha sin egen læreplan i heimstadlære ( l. – 3. klasse ) .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Johttisámeskuvllas berre leat sierra oahppoplána ruovttudoallooahpus ( 1.–3. luohkás ) .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I likhet med heimstadlæren i andre skoler skal den med heimen som sentrum gjøre barna bedre kjent med livet omkring dem , lære dem visse arbeidsformer og legge grunnlaget for den senere opplæring i orienteringsfagene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Nu go eará ruovttudoallooahpuin eará skuvllain galgá dát fága , mas ruoktu lea guovddážin , oahpasnuhttit mánáid iežaset lagasbirrasii , oahpahit sidjiide dihto bargovugiid ja dahkat vuođu maŋitáiggiid servodat- ja birasoahpu oahpahussii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>For flyttsameskolen må følgelig heimstadlæren hente mye av sitt stoff fra samenes liv , deres arbeid , redskaper og omgivelser , fra dyreliv og vekstliv i fjellet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Johttisámeskuvla ferte ruovttudoalloohppui viežžat dieđuid sámiid eallimis , sin bargguin , biergasiin dehe reaidduin ja birrasis , elliin ja šattuin meahcis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Et forslag til læreplan i heimstadlære for flyttsameskolen ble utarbeidet av undertegnede for noen år siden og prøvet i småskolen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vuolláičálli lea moadde jagi áigi čállán evttohusa johttisámeskuvlla ruovttudoallooahpa oahppoplánii , mii lea geahččaluvvon smávvaskuvllas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Saken ble dessverre skjøvet til side for mer påtrengende oppgaver på ungdomsskoletrinnet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát ášši šattai dađibahábut duvdiluvvot eret losit bargguid geažil nuoraidskuvlladásis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>For orienteringsfagene i 4.–6. klasse ( geografi , historie , samfunnskunnskap og naturfag ) bør det også være adgang til mindre avvik i lærestoffet , slik at det kan bli utvidet heimstadlære eller « nomadkunnskap » som det kalles i Sverige .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Servodat- ja birasoahpu 4.-6. luohkáide ( geografiija , historjá , servodatoahppu ja luonddufága ) berre sáhttit rievdadit veahá , nu ahte sáhttá šaddat viidát ruovttudoallooahppu , dehe « nomádaoahppu » , manin Ruoŧas dat gohčoduvvo .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det kan enten skje ved at en legger særlig vekt på det som er aktuelt for elevenes eget miljø eller ved at det avgis l time pr. uke til « samekunnskap » som orienteringsfag med bl. a. kulturhistorisk stoff .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dan sáhttá dahkat jogo nu ahte earenoamážit deattuha dan mii lea oahppi lagasbirrasis dehege várrejuvvo juohke vahkku okta diibmu « sámiohppui » mii lea servodat- ja birasoahppu , mas ee. lea kulturhistorjjálaš fáddá .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Svenskenes plan i nomadkunnskap gir gode holdepunkter .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ruoŧŧelaččaid plánas « nomadkunnskapas » ( johttisámemáhtus ) leat buorit dovdomearkkat dasa .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er grunn til å understreke at reindriftsfaget ikke står isolert i skolen og stjeler tid fra den ordinære fagkrets .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ferte deattuhit ahte boazodoallofága ii leat áibbas sierra skuvllas ja suoláda áiggi dábálaš fágain .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Vesentlige biprodukter av det yrkesmerkte fag kommer de andre fag til gode .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dehálaš liigeoasit dán fidnomerkejuvvon fágas bohtet buorrin eará fágaide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det brukes mye arbeidsbok i faget , og elevene får stadig arbeidsoppgaver som de skal løse .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Adnojit ollu bargogirjjit dán fágas , ja oahppit ožžot dávjá bargobihtáid maid galget čoavdit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>De må bruke faglitteratur .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sii fertejit atnit fágagirjjálašvuođa .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Dette kommer faget norsk til gode .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dát boahtá ávkin dárogielfágii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Tilskuddet blir ikke mindre av at det stadig leses om og skrives om ting som elevene er interessert i og har kontakt med i heimelivet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lassioahppu ii šatta unnit go duos dás ain lohkat ja čállit daid áššiid birra main oahppit beroštit ja main lea oktavuohta sin ruovttuide .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Den grundige behandling av reinsdyret , reinsykdommer og parasitter gir vesentlige tilskudd til kunnskapene i biologi og fysiologi .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Vuđolaš oahpahus bohcco , boazodávddaid ja luhtehiid birra , lasiha máhtuid biologiijas ja fysiologiijas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ernæringslæren og slaktelæren kommer faget heimkunnskap til gode .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Biebmooahppu ja njuovvanoahppu boahtá buorrin ruovttudoalloohppui .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Geografifaget får tilskudd fra flyttsamekunnskap på alle klassetrinn og fra fjellkursene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Geografiija fága oažžu lasáhusaid johttisámeoahpus buot luohkkádásiin ja meahccekurssain .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Kursene dekker også visse emner i kroppsøving .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Kurssat maid gokčet osiid lášmmohallanfágas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Fagene regning , historie , samfunnskunnskap og tegning får også sin del gjennom de mange emner og aktiviteter reindriftsfaget spenner over .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Fágat rehkenastin , historjá , servodatoahppu ja sárgun ožžot maid gokčojuvvot osiid daid ollu fáttáid ja doaimmaid bokte mat leat boazodoallofágas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Dette yrkesmerkte fag kan derfor i høy grad også sies å være allmenndannende med elevens egen heimekultur som utgangspunkt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Sáhttá roahkka lohkat ahte dát fidnomerkejuvvvon fága dahká ohppiid buotbeallásažžan mas vuolggasadji lea sin ruoktokultuvra .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Ellen Marie Anti var reindriftssame og deltok som lærer i reindriftslinjas fjellkurs .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ellen Marie Anti lei badjeolmmoš ja searvvai boazodoallosuorggi meahccekursii oahpaheaddjin .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Her fyrer hun opp bålet i lavvoen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dá son dahká dola árranii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I bakgrunnen Kirsten Anne Turi .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Duogážis Kirsten Anne Turi .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Bildet er tatt nær Indre Billefjord i Porsanger , 1959 .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Gorbovuona lahka , Porsáŋggus , 1959 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>( Foto : Virginia Davidson / Norsk folkemuseum )</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>( Govva : Virginia Davidson / Norsk folkemuseum )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I hvilken utstrekning reindriftsfaget indirekte styrker de andre fag er det umulig å si med sikkerhet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea veadjemeahttun dadjat juste man muddui boazodoallofága doarju daid iežá fágaid eahpenjuolgadit .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det bør kanskje nevnes at reindriftslinja ved årsprøver og avgangseksamen får de samme oppgaver som allmenn praktisk linje .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dás soaitá fertet namuhit ahte jahkegeahččalemiin ja loahpalaš eksámenis ožžot seamma bargobihtáid go dábálaš praktihkalaš suorggis .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Gjennomsnittsresultatene har hittil ligget på omtrent samme nivå for begge linjer , selv om R-linjen har 11 uker kortere skoletid pr. år .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Gaskamearálaš bohtosat leat sullii seamma dásis goappašat luohkáin , vaikko R-suorggis leat 11 vahkku oanehit skuvlaáigi jahkái .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Flere forhold kan her spille inn , bl. a. at R-linjen har færre elever i klassene , men ett og annet tyder på at de gjennom reindriftsfaget har fått et visst praktisk grep når det gjelder å bruke skolekunnskapene .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Dása sáhttet leat ollu sivat , omd. ahte R-suorggis eai leat nu ollu oahppit , muhto juoga goitge čájeha dan ahte sii leat boazodoallofága čađa ožžon vissis praktihkalaš máhtu atnit skuvladáidduideaset .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En kan med noen rett bruke utrykket : « Spesialutdanning er den beste allmenndanning . »</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea goit veahá riekta dadjat « erenoamáš oahppu dahká buoremusat ohppiid buotbeallásažžan . »</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Som en konklusjon på denne utgreiing kan vel sies at en del er gjort for reindriftsundervisnmgen .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Loahppacealkámuššan dán čállosis sáhttá lohkat ahte oassi lea juo dahkkon boazodoallooahpahussii .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Mye står igjen , men en del av det ugjorte er innen synsvidde .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ain váilu ollu , muhto das gal lea oassi olámuttos .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>I en travel oppbyggingstid for skolen kunne det være fristende å skyve denne oppgaven fra seg og vente på at bedre kvalifiserte folk skulle gjøre grunnarbeidet .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Huksenáigodagas , go lea álo hoahppu , de livččii álki duvdilit dán barggu eret ja vuordit dassážii go bohtet eanet oahppan olbmot geat barggaše vuođđobargguid .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Noen måtte imidlertid gjøre begynnelsen – og dumme seg som amatører ofte gjør .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Muhtin fertii goitge álggu dahkat – ja čurbošit nu go aiddoálgit dávjá dahket .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Så får korrektivene komme etter hvert .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>De fertejit njulgehusat boahtit dađistaga .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Landbruksundervisningen trengte også en modningstid og gjennomgår visst ennå forbedringer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Eanandoallooahpahus dárbbašii maid láddanáiggi ja dan leat várra ain buorideame .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det vil være for mye å vente at den grunnundervisning som er gitt i den linjedelte ungdomsskolen , skal gi praktiske resultater i reindriften med en gang .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Livččii beare ollu vuordit ahte dat vuođđooahpahus mii lea addon suorgejuhkkojuvvon nuoraidskuvllas , addá dakkaviđe bohtosiid duohtadilis boazodoalus .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Kimene til mer rasjonelle tenkemåter er imidlertid lagt og vil forhåpentlig slå ut i praktisk handling når disse elever er modne menn og kvinner med innflytelse i sine reinbyer .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Gálggat / čuolmmat jurddašit ulbmillaččat leat goitge biddjojuvvon , ja sávvamis dát bohtet oidnosii duohtadili daguin go dát nuorat leat rávisolbmot ja váikkuhišgohtet iežaset siiddain .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>En utvikling som ikke lar seg stanse er begynt .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Ovdáneapmi man ii šat sáhte bissehit lea álggahuvvon .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Det er all grunn til å tro at den kommende generasjon av flyttsamer vil finne nye og mer lønnsomme former i sine fedres tradisjonsrike næring .</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Lea ágga jáhkkit ahte boahtte buolva johttisápmelaččat gávdnet ođđa ja eanet gánnáhahtti vugiid sin áhčiid rikkis árbevirolaš ealáhusas .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="nob">
+        <seg>Andre artikler i Samisk skolehistorie 2</seg>
+      </tuv>
+      <tuv xml:lang="sme">
+        <seg>Eará artihkkalat girjjis Sámi skuvlahistorjá 2</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

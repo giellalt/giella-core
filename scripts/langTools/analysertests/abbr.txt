@@ -1,0 +1,1359 @@
+LEXICON ITRAB
+
+1p
+2p
+3p
+A.L
+A.S
+Dep
+Eftf
+EUREG
+Gastrolab
+Gess
+Guovdag
+Guovdg
+Hedm
+ID
+Jak
+JsL
+Kp
+Lohk
+Máks
+Muf
+Nagirlab
+NewZ
+P.E.N
+P.S
+Vahátlab
+Vuor
+Vuorkááššenr
+a.-g
+a.D
+abess
+abl
+abstr
+adess
+adj
+adv
+advl
+affekt
+akk
+akt
+all
+am
+anat
+anestesiijaosd
+at
+att
+attr
+bargiidosd
+bearj
+bearjad
+biehttalanh
+biol
+borasdávdaosd
+bot
+bto
+c
+cal
+can
+cc
+cea
+čoahkkinortn
+dea
+dearvvašvuođaosd
+dearvvašvuođaoss
+ded
+dem
+dept
+dhj
+dii.oahp
+doaimm
+doallonr
+doavttirgrádastip
+dual
+dub
+duorast
+dállonr
+eanadoallolávd
+eaŋg
+ess
+estteg
+etc
+euf
+f
+fac
+ff
+fin
+fol
+fr
+fuolahusosd
+fuom
+gaskav
+gaskkav
+geogr
+geom
+ger
+ggl
+ggl.cea
+gl
+gl.res
+gl.rs
+goall
+govvalab
+gt
+guovl
+hárv
+id
+ill
+imp
+impers
+impf
+imprt
+ind
+indekl
+inf
+ing
+instr
+interr
+intr
+ipmilbálv
+j.d
+j.d.s
+j.e
+j.s
+j.v
+jd
+jdd
+je
+jed
+jna
+jnv
+journ
+jr
+js
+jv
+kan
+kat
+kl
+kom
+komp
+kond
+konj
+konkr
+kons
+korr
+kto
+l
+lab
+lat
+leasmedávdaosd
+liikeosd
+liigejuollud
+liigejuolludeap
+lingv
+lk
+log
+lok
+lp
+luo
+lád
+lávv
+lávvord
+m
+m.fl
+db
+bb
+gpl
+mKr
+matem
+mearrid
+med
+milj
+miljo
+mill
+miner
+ml
+dl
+cl
+mg
+kg
+cm
+mod
+mrd
+máŋggaidl
+nd
+neg
+njukč
+nom
+nto
+o.Kr
+o.s
+oKr
+obj
+obsol
+od.prp
+ođđajagimá
+ođđajagimán
+ol
+op
+op.cit
+ord
+osd
+oss
+oss.jođ
+ov.sk.oahp
+ovttaidl
+ovttaj
+ovttajie
+ovttajien
+p.b
+pa
+par
+parl
+part
+part.prf
+partit
+pass
+pc
+ped.jođ
+perf
+pers
+perš
+pf
+phil
+philos
+pl
+pm
+pos
+post
+postp
+pot
+pp
+prep
+pres
+pret
+prf
+prol
+pron
+prot
+prs
+prt
+prv
+pt
+pts
+refl
+reg
+rek
+rel
+relat
+relig
+res
+rskr
+ru
+ruoŧag
+ry
+ráŋggáštusč
+ráŋggáštč
+røntgenosd
+s.v
+sek
+sg
+sic
+sign
+sisdávdaosd
+siviling
+skábm
+sl
+spd
+st
+st.dieđ
+st.prp
+stip
+subj
+subst
+suoidn
+sup
+sátnečilg
+tabl
+tan
+temp
+tlg
+trans
+transl
+uŋgárg
+vol
+vsu
+vulg
+váldolávdeg
+Áššemeannud
+áššejođih
+č.ortn
+čilg
+čottaosd
+čs
+LEXICON NOAB
+du
+gen
+jur
+LEXICON TRNUMAB
+Apd
+Buš
+Dnr
+Gieldanr
+Kildegt
+Kommunenr
+Kor
+O.nr
+Pb
+Pk
+Poastanr
+Postnr
+RevBuš
+Rt
+S.nr
+Suohkannr
+Sál
+Tess
+alm
+anr
+arkiivaáššenr
+b
+b.c
+bc
+bet
+bie
+bnr
+djd
+ds
+enr
+fnr
+fáksanr
+gnr
+gozihankom
+jnr
+kap
+kr
+lnr
+mk
+mob
+mátketlf
+njuolggotlf
+nr
+org.nr
+pgf
+pst
+r
+ref
+rieg
+rievd
+rskr
+s
+spr
+tab
+tii
+tlf
+vnr
+áššenr
+čk
+LEXICON TRAB
+1.aman
+Bj
+Boazod
+Chr
+Dep
+Edv
+H.K.H
+H.M
+Innst
+Joh
+Johs
+Kr
+Lámispenš
+Luk
+Mield
+Nilsdtr
+Od.dieđ.nr
+Od.prop
+Od.prp.nr
+Ot
+Ot.prp.nr
+Proavássb
+Rom
+Sadj.b
+Sadjb
+Sd
+Sd.dieđ.nr
+Sd.prp
+Sd.prp.nr
+Seb
+St
+St.d.nr
+St.died
+St.dieđ.nr
+St.meld.nr
+St.nr
+St.prp
+St.prp.nr
+St.tid
+Th
+Turnusbálv
+Vik.pr
+adr
+anár
+art
+ass
+avd
+avd.dir
+bbl
+bd
+biht
+bnr
+borgem
+buo
+ca
+cand.mag
+cand.med
+cand.oecon
+cand.philol
+cand.real
+cand.scient
+cand.theol
+cand
+cuoŋom
+d.g
+d.l
+darj
+davvisuopm
+dbm
+dearv
+dearvv
+dearvvašv
+dhj
+dieđ
+dieđ.nr
+dipl.ing
+dipl.ins
+dir
+dr
+dr.art
+dr.med
+dr.philos
+dr.polit
+dr.theol
+dáb
+e.e
+ea
+ea.ea
+ee
+eksp
+eksp.hoavd
+eksp.sj
+eren
+erenoamášped
+evtt
+ex
+ex.fac
+eŋg
+febr
+fenr
+fig
+fil.tri
+geahč
+geassem
+gen.lt
+genr
+genr.lt
+germ
+gield
+golggotm
+guovvam
+guovtteg
+gárj
+gč
+h.r.adv
+hr
+inkl
+institušuvn
+isl
+juovlam
+kapt
+kard
+koord
+korp
+korpr
+lekt
+lic
+lnr
+ltn
+lul
+lullisuopm
+lágid
+mag
+mag.art
+merc
+miessem
+milj
+mr
+mrs
+ms
+mársm
+ng
+njukčam
+nuort
+nuortasuopm
+o.m.d
+oahp
+oarjesuopm
+obl
+oblt
+odont
+od.dieđ
+oecon
+off
+omd
+osd
+ordf
+ossod.dir
+ot.meld
+ot.prp
+ot.prop
+ovd
+ovdasu
+overs
+ođđaj
+ođđajagem
+ped
+pharm
+philol
+phl
+pol
+polit
+priv
+pr
+pro
+prof
+prop
+prp
+psychol
+psyk
+r
+red
+res.kap
+resipr
+saksnr
+sb
+sd
+skábmam
+sos
+spes.ped
+st.meld
+stud
+stud.philol
+sugr
+suoidnem
+suopm
+suorgg
+sá
+sásu
+tel
+tlf
+tri
+ubm
+urál
+vit.ass
+vrd
+vs
+vsá
+čakčam
+čuj
+čuo
+ž
+á
+ŋ
+đ
+ŧ
+a
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+æ
+ø
+å
+ä
+ö
+č
+š
+ž
+á
+ŋ
+đ
+ŧ
+a
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+æ
+ø
+å
+ä
+ö
+č
+š
+LEXICON NUMNOAB
+su
+dii
+LEXICON IDIOM
+mainna lágiin
+feara manin
+feara mii
+feara man
+feara máid
+feara man
+feara masa
+feara mas
+feara mainna
+feara mat
+feara maid
+feara máid
+feara maid
+feara maidda
+feara main
+feara maiguin
+feara manin
+feara mii
+feara man
+feara máid
+feara man
+feara masa
+feara mas
+feara mainna
+feara mat
+feara maid
+feara máid
+feara maid
+feara maidda
+feara main
+feara maiguin
+feara manin
+feara mii
+feara man
+feara máid
+feara man
+feara masa
+feara mas
+feara mainna
+feara mat
+feara maid
+feara máid
+feara maid
+feara maidda
+feara main
+feara maiguin
+feara geanin
+feara gii
+feara gean
+feara geasa
+feara geas
+feara geainna
+feara geat
+feara geaid
+feara geaidda
+feara geain
+feara geaiguin
+feara manin
+feara mii
+feara man
+feara máid
+feara man
+feara masa
+feara mas
+feara mainna
+feara mat
+feara maid
+feara máid
+feara maid
+feara maidda
+feara main
+feara maiguin
+feara geanin
+feara gii
+feara gean
+feara geasa
+feara geas
+feara geainna
+feara geat
+feara geaid
+feara geaidda
+feara geain
+feara geaiguin
+feara makkár
+feara makkárin
+feara makkár
+feara makkára
+feara makkárii
+feara makkáris
+feara makkárin
+feara makkáriin
+feara makkáriinna
+feara makkárat
+feara makkáriid
+feara makkáriidda
+feara makkáriin
+feara makkáriiguin
+vaikko máid
+mii nu
+man nu
+maid nu
+masa nu
+mas nu
+mainna nu
+manin nu
+mii nu
+man nu
+maid nu
+masa nu
+mas nu
+mainna nu
+manin nu
+mii nu
+man nu
+maid nu
+masa nu
+mas nu
+mainna nu
+manin nu
+mii nu
+man nu
+maid nu
+masa nu
+mas nu
+mainna nu
+manin nu
+mii nu
+man nu
+maid nu
+masa nu
+mas nu
+mainna nu
+manin nu
+mii nu
+man nu
+maid nu
+masa nu
+mas nu
+mainna nu
+manin nu
+mii nu
+man nu
+maid nu
+masa nu
+mas nu
+mainna nu
+manin nu
+gii nu
+gean nu
+geasa nu
+geas nu
+geainna nu
+geanin nu
+gii nu
+gean nu
+geasa nu
+geas nu
+geainna nu
+geanin nu
+gii nu
+gean nu
+geasa nu
+geas nu
+geainna nu
+geanin nu
+gii nu
+gean nu
+geasa nu
+geas nu
+geainna nu
+geanin nu
+gii nu
+gean nu
+geasa nu
+geas nu
+geainna nu
+geanin nu
+gii nu
+gean nu
+geasa nu
+geas nu
+geainna nu
+geanin nu
+gii nu
+gean nu
+geasa nu
+geas nu
+geainna nu
+geanin nu
+makkár nu
+makkáraš nu
+dalle go
+dan botta go
+danin go
+danne go
+das go
+dassážii go
+dassá go
+dušše go
+nu guhkásgo
+juos go
+maŋŋel go
+maŋŋá go
+ovdal go
+seammás go
+Harry Potter-filbma
+Hei Lola-vuoiti
+Harry Potter-girji
+Riddu Riđđu-beaivi
+Riddu Riđđu-dearvvuohta
+Riddu Riđđu-dearvuohta
+Riddu Riđđu-geahčči
+Riddu Riđđu-gieddi
+Riddu Riđđu-gohppa
+Riddu Riđđu-gohppu
+Riddu Riđđu-gálvu
+Riddu Riđđu-ilbmi
+Riddu Riđđu-kohppa
+Riddu Riđđu-lávdi
+Riddu Riđđu-mánná
+Sea King-veahka
+fair play
+fair playa
+fair playii
+fair playas
+fair playain
+fair playat
+fair playaid
+fair playaide
+fair playain
+fair playaiguin
+fair playan
+flower power
+flower powera
+flower power
+flower powera
+flower power
+flower powerii
+flower poweris
+flower poweriin
+flower poweriinna
+flower powerak
+flower powerat
+flower poweriid
+flower poweriidda
+flower poweriis
+flower poweriin
+flower poweriinna
+flower poweriiguin
+flower powerin
+grand prix
+grand prixa
+grand prixii
+grand prixas
+grand prixain
+grand prixat
+grand prixaid
+grand prixaide
+grand prixain
+grand prixaiguin
+grand prixan
+hip hop
+hip hopa
+hip hopii
+hip hopas
+hip hopain
+hip hopat
+hip hopaid
+hip hopaide
+hip hopain
+hip hopaiguin
+hip hopan
+public service
+public servicii
+public services
+public servicen
+public serviciin
+public servicek
+public servicet
+public serviciid
+public serviciide
+public serviciis
+public serviciin
+public serviciiguin
+public servicen
+romani chib
+romani chiba
+romani chibii
+romani chibas
+romani chibain
+romani chibat
+romani chibaid
+romani chibaide
+romani chibain
+romani chibaiguin
+romani chiban
+iešguđetge ládje
+dan dihte
+dan láhkái
+man láhkai
+man láhkái
+man láhkai
+man láhkái
+dihto láhkai
+easkka láhkai
+muhtun muddui
+dakko bokte
+eará ládje
+eará láhkai
+eará láhkái
+eará láhkai
+eará láhkái
+seammá ládje
+seamma ládje
+eambbot eambbo
+seammá láhkai
+seammá láhkái
+seamma láhkai
+seamma láhkái
+seammá láhkai
+seammá láhkái
+seamma láhkai
+seamma láhkái
+seammá ládje
+seamma ládje
+dávjjet dávjá
+seammá ládjii
+dákko bokte
+seammá láhkai
+seammá láhkái
+seamma láhkai
+seamma láhkái
+seammá láhkai
+seammá láhkái
+seamma láhkai
+seamma láhkái
+duoppet dáppe
+duoppil dáppil
+duolluid dálluid
+sierra ládje
+sierra ládjii
+duokkot dákko
+duollet dálle
+sierra láhkai
+soggái čalmmiid
+goabbat láhkai
+goabbat láhkái
+goabbat láhkai
+goabbat láhkái
+goabbat ládje
+7. juni-plassen
+Aejlies gaaltije
+Atex Sápmi
+Beaivv-Ándaras johka
+Beaivv-Ándaras jávri
+Bihtoš-Per jeaggi
+Bijjie Rantsere
+Birrat Birra
+Bures ain
+Cohkolat dálveorohat
+Daerpies Dierie
+Davvi Dearvvašvuohta
+Ell Ásllat Goahtečopma
+Ell-áhko jeaggi
+Gaska Neaskim
+Gist-Ásllat jávri
+Gist-Ásllat várri
+Gáppe-Jon báiki
+Hans Garmaroaivi
+Heaik-Ándde jávri
+Iešjot lunttat
+Iiskk-Ovllá johka
+Iiskk-Ovllá jávri
+Iiskku Ládjojeaggi
+Ipmil Áhčči
+Iskk Elle luokta
+Jeagge Jussá
+Josát Per várri
+Jovn-Niillas Gárdejávrrit
+Jágon-Ántte várri
+Jáhko-Vulle luokta
+Kautokeino kommune
+Káre-Jon Gárdeája
+Káren-Rávnn oaivi
+Kåfjord kommune
+Lappi leatna
+Lappi universitehta
+Liemmajoen Anni
+Meahcce Vulle
+Miggot-Issát johka
+Min Áigi
+Nihko-Pier jávri
+Nihko-Pier leahki
+Norske Kveners Forbund
+Olle-Pier jávri
+Per-čezá jávri
+Riddu Riđđu-festivála
+Rorschacha bleahkkareidehat
+Rákko Čuoivvat
+Rávd-Erkke johka
+Rávgoš Teáhter
+Scandinavia Golf Business
+SeastinBáŋku 1 Davvi-Norga
+Sirpmá Sanitetsearvi
+Ska Patrol
+Skikk-Elle njárga
+Skárrevađa Muorraváráš
+Stuor Garravárri
+Stuor Reaiddávággi
+Stáhta kártadoaimmahat
+Sálto Sámesiebrre
+Sámegiel Berošteaddjik
+Sámi Amatör Teáhter
+Sámi boy
+Sámi Jakki
+Sámi Jienat
+Sámi Særvi
+Táhppán Siun
+Ule-Kristtáš jávri
+Uzen Ládjojávri
+van der
+Voijaa minun poroni
+von der
+Áhko-Per moski
+Ánin Dánin
+Ánot-Biret suolu
+Čálkk-Ovllá jeaggi
+Alacaston Exploration
+Allmenningens komedie
+Altan Urag
+Arctic Femme
+Arctic Gold AB
+Arctic Gold
+Arctic Vilt
+ARS Reasearch
+Arts and Migration Music Festival
+Asplan Viak
+Austre Tiplingen
+Bals Bakeri
+Beaten To Death
+Bedre Helse
+Beer Lahai Roi
+Bel Canto
+Bella Coola
+Bitan Music Festival
+Bladet Tromsø
+Blå Kors
+Bolvanskij Nos
+Bulgarian voices
+Busby babes
+By Larm
+Chevron Texaco
+Chief Seattle
+Club Native
+Commission on Human Rights
+Concrete Crew
+Dagens Nyheter
+De rettferdiges strid
+De Silva
+Den kulturelle skolesekken
+Djin Djin
+DumDum Boys
+Econ Analyse
+Ehier magak
+Ella fiskerjente
+Ensemble Noor
+Framtid i Nord
+Frøken Julie
+Fucking Northpole
+Gange Rolv
+Gargia Fjellstue
+Grunnskolens Informasjonssystem
+Halti Exit Camp
+Harstad Tidende
+High School
+Highland Fling
+Hyde Park
+Indigenous Studies
+Indigenous Youth Camp
+Indigenous Youth Gathering
+Inkluderende Arbeidsliv
+Inuit Circumpolar Council
+Jazz House
+Jethro Tull
+Juhls Silvergallery
+Julia Spacehead
+Kalaallit Nunaat
+Kaloi Limenes
+Karpe Diem
+Kautokeino Boligselskap
+Keyhinge Toys
+Kill Buljo
+Knudsens Fotosenter
+Kohanga Reo
+Kotiteollisuusjärjestöjen keskusliitto
+Krem Nasjonal
+Kvinneuniversitetet Nord
+Kōhanga Reo
+Landsförbundet Svenska Samer
+Lierne Viltforedling
+Linkin Park
+Lions Club
+Live Earth
+Lucky People Center International
+Madam Bongo
+Madame Tussaud
+Magna Carta
+Masi Turistsenter
+Midnight Sun Marathon
+Migration Music Festival
+Miss Blondie
+Molotov Cocktail
+Molotov Coctail
+Moscow Art Trio
+Mother Mongolia
+MT Slakt
+Narko Nord
+Narko Sør
+Nass River
+Native American Music Awards
+Niko Valkeapää Band
+Nor Watch
+Nord-Norges Salgslag
+Nord-Norsk Hotelldrift
+Nordlandia Kautokeino
+Noregs forskingsråd
+Norges idrettsforbund
+Norrbottens Kuriren
+Norsk Miljøkraft
+Norsk Målungdom
+Norske Meierier
+Norske Talenter
+Off Season
+Old Trafford
+One More River
+One Nation Under
+Open Race
+Origami Arctica
+Ov-messie darjomes
+Oves Varesenter
+Pakistansk Studentersamfunn
+Permanent Forum
+Premier League
+Prolapse Project
+Real Ones
+Redd Barna
+Reindriftssamers Landsforbund
+Rezolution Pictures
+Rio de Janeiro
+Rolling Stones
+Sacred Stone
+Sagai Muittalægje
+Same Ätnam
+Samenes folkeforbund
+Samenes Idrettsforbund
+Samenes Idrettsforbund-Norge
+Samenes naturressursforbund
+Samenes Venn
+Samii Litto
+Samisk Solidaritet
+Sea King
+Sheng Xiang
+Sjøsamisk kompetansesenter
+Skeppagurra Babylon
+Smoke Signals
+SMS från Soppero
+Soria Moria
+Space Jam
+Spice Girls
+St. Olavs Orden
+St. Petersburg
+Stadio Franco Ossola
+Stadio Mario Rigamonti
+Stadio Silvio Piola
+Statistisk Sentralbyrå
+Steeleye Span
+Stora Tigern
+Store Norske Gull AS
+Store Norske Gull
+Store Norske
+Syd-Dansk Universitet
+Sámi Radio
+Sørøy Glimt
+Tank design
+The Amazon Alliance
+THINK Mental Fashion
+Topp Lynx Racing
+Trees Music
+Triumf Turistsenter
+Triumfs Turistsenter
+Tromsø Boligsenter
+Trondsen Auto
+Ungt Entreprenørskap
+United Seafood
+Valkyrien Allstars
+Varanger Vilt
+Vatne Transport
+Victoria Terrasse
+Viddas Veidemann
+Vilhelmina norra
+Violet Road
+Violin Road
+Visma Services
+Voronja Minerals
+Vårt Land
+White Power
+White Spirit
+World Indigenous Television Broadcasters Network
+World Music Awards
+World Music
+Young Guns
+Östra Kikkejaur
+
+LEXICON NUM
+žiin
+
+'žiin
+’an
+'žin
+'iidda
+ža
+´n
+'t
+idda
+’ain
+ái
+'ide
+´i
+´ái
+iidda
+ain
+´iidda
+´idda
+´in
+´žis
+'iide
+’t
+’iidda
+iide
+´as
+’ža
+is
+'in
+'ain
+´is
+'i
+'as
+’is
+'is
+’ái
+’ii
+’i
+'s
+’žii
+’žin
+'a
+´ide
+’as
+'žii
+’ide
+an
+'iguin
+’a
+´ain
+a
+´a
+’id
+´iguin
+’žiin
+iguin
+žis
+in
+’s
+’iide
+'idda
+id
+’iguin
+iid
+t
+'an
+´id
+´ii
+´t
+´žin
+´s
+’idda
+s
+ide
+'n
+žii
+'iid
+´iid
+'žis
+ii
+'ái
+’iid
+´iide
+žin
+´žii
+i
+´an
+n
+´ža
+’žis
+'ža
+'ii
+as
+’n
+´žiin
+'id
+’in

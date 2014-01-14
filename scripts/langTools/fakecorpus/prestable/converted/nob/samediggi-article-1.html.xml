@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document PUBLIC "-//UIT//DTD Corpus V1.0//EN" "http://giellatekno.uit.no/dtd/corpus.dtd">
+<document id="no_id" xml:lang="nob">
+  <header>
+    <title>Siste nytt - Sámediggi Sametinget</title>
+    <genre/>
+    <author>
+      <unknown/>
+    </author>
+    <publChannel>
+      <publication>
+        <publisher>Sámediggi/Sametinget</publisher>
+      </publication>
+    </publChannel>
+    <wordcount>78</wordcount>
+    <availability>
+      <free/>
+    </availability>
+    <submitter email="divvun@samediggi.no" name=""/>
+    <origFileName>http://samediggi.no/Artikkel.aspx?aid=1&amp;sprak=Norsk&amp;Print=1</origFileName>
+    <parallel_text location="samediggi-article-1.html" xml:lang="sme"/>
+    <metadata>
+      <uncomplete/>
+    </metadata>
+    <version>XSLtemplate $Revision$; file-specific xsl  Revision; common.xsl  $Revision$; </version>
+  </header>
+  <body>
+    <p>
+      Siste nytt
+    </p>
+    <p>Samiske tall forteller 3 lanseres fredag 01.oktober </p>
+    <p>
+            Publisert 29.09.2010
+          </p>
+    <p>
+      <em type="italic">Sametinget inviterer til pressekonferanse i forbindelse med lanseringen av boken "Samiske tall forteller 3" fredag 01.10.2010 kl.13.00 på Sametinget i Karasjok. </em>
+    </p>
+    <p>Les mer </p>
+    <p> | </p>
+    <p>Arkiv </p>
+    <p>Nytt rådsmedlem i visepresidentens fravær. </p>
+    <p>
+            Publisert 28.09.2010
+          </p>
+    <p>President Egil Olli informerte i dag plenum om hvem som trer inn i rådet mens visepresident Láilá Susanne Vars går ut i svangerskapspermisjon fra 1. november. </p>
+    <p>Les mer </p>
+    <p> | </p>
+    <p>Arkiv </p>
+  </body>
+</document>

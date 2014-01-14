@@ -1,0 +1,6 @@
+Davvismegiel stne- ja teakstaanalysaprogrmma
+¢le dahje kopiere sniid lsii, ja deatte "Analysere". ¢ilgehusaid morfologala» ja syntvssala» oandusaide gvnnat vuolbealde. Jos vlljet "Atte buot analysaid", de progrmma add buot vejola» analysaid, muhto jos vlljet "Disambiguere", de progrmma geah¸¸ala addit du»»e analysa mii heive dan cealkagii. Progrmma shtt maid botket sniid, dahje addit stvvalszu - deatte "Botke".
+
+Jos dus lea smegiel boallobeavdi (Linuxii, Mac OSX:i dahje Windows XP:i), de shtt ¸llit ", ¸, ¹, º, », ¼, ½", dego dbla¸¸at, ja vlljet UTF-8.
+
+¢le stnehmi:

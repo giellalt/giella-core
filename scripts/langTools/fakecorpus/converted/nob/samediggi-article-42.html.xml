@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document PUBLIC "-//UIT//DTD Corpus V1.0//EN" "http://giellatekno.uit.no/dtd/corpus.dtd">
+<document id="no_id" xml:lang="nob">
+  <header>
+    <title>Kontaktinformasjon - Sámediggi Sametinget</title>
+    <genre/>
+    <author>
+      <unknown/>
+    </author>
+    <publChannel>
+      <publication>
+        <publisher>Sámediggi/Sametinget</publisher>
+      </publication>
+    </publChannel>
+    <wordcount>132</wordcount>
+    <availability>
+      <free/>
+    </availability>
+    <submitter email="divvun@samediggi.no" name=""/>
+    <origFileName>http://samediggi.no/Artikkel.aspx?aid=42&amp;sprak=Norsk&amp;Print=1</origFileName>
+    <parallel_text location="samediggi-article-42.html" xml:lang="sme"/>
+    <metadata>
+      <uncomplete/>
+    </metadata>
+    <version>XSLtemplate $Revision$; file-specific xsl  Revision; common.xsl  $Revision$; </version>
+  </header>
+  <body>
+    <section>
+      <p type="title">Kontaktinformasjon</p>
+    </section>
+    <p>Åpningstider: mandag - fredag, 08.00-15.30 Telefon: +47 78 47 40 00 Telefaks: +47 78 47 40 90 samediggi@samediggi.no </p>
+    <p><em type="italic">Postadresse: </em>Sámediggi - Sametinget Ávjovárgeaidnu 50 9730 Karasjok/Kárášjohka <em type="italic">Fakturaadresse: </em>Sámediggi - Sametinget Fakturamottak SSØ Postboks 4104 2307 Hamar Org. nr.: 974 760 347 Bankkonto: 7694 05 62178 IBAN nr. NO78 7694 05 62178 SWIFT adresse: DNBANOKK <em type="italic">Ansatte: </em>Kontaktinformasjon til <em type="italic">ansatte i Sametinget </em><em type="italic">- </em>inndelt avdelingsvis. </p>
+    <p>Kommunikasjon (GUL) </p>
+    <p>Navn </p>
+    <p>Stilling </p>
+    <p>Telefon </p>
+    <p>Mobil </p>
+    <p>Sentralbord </p>
+    <p>Jan Roger Østby </p>
+    <p>
+                          Kommunikasjonsdirektør</p>
+    <p>78 47 41 42</p>
+    <p>48 14 46 96</p>
+    <p>78 47 40 00</p>
+    <p>Hanne Holmgren </p>
+    <p>
+                          Kommunikasjonsrådgiver</p>
+    <p>74 13 80 65</p>
+    <p>90 67 38 83</p>
+    <p>78 47 40 00</p>
+    <p>Sara Marja Magga </p>
+    <p>
+                          Kommunikasjonsrådgiver</p>
+    <p>78 47 41 65</p>
+    <p>78 47 40 00</p>
+    <p>Sametingets kontorsteder </p>
+    <p>Poststed </p>
+    <p>Adresse/kontorsted </p>
+    <p>Telefaks </p>
+    <p>9730 Karasjok</p>
+    <p>Ávjovárgeaidnu
+                          50</p>
+    <p>78 47 40 90</p>
+    <p>9520 Kautokeino</p>
+    <p>Hánnoluohkká 45</p>
+    <p>9840
+                          Varangerbotn</p>
+    <p>Varanger Samiske
+                          Museum</p>
+    <p>78 95 99 09</p>
+    <p>7760 Snåsa</p>
+    <p>Saemien Sijtie</p>
+    <p>74 13 80 70</p>
+    <p>8270 Drag</p>
+    <p>Árran lulesamiske
+                          senter</p>
+    <p>75 77 56 88</p>
+    <p>9144 Samuelsberg</p>
+    <p>Ája samisk
+                          senter</p>
+    <p>77 71 63 10</p>
+    <p>8536 Evenes</p>
+    <p>Várdobáiki</p>
+    <p>
+      <em type="bold">artikler </em>
+    </p>
+    <p>Artikkel - Pressekontakter i Sametinget </p>
+  </body>
+</document>

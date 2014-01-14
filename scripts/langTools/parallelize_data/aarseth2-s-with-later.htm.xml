@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document PUBLIC "-//UIT//DTD Corpus V1.0//EN" "http://giellatekno.uit.no/dtd/corpus.dtd">
+<document id="no_id" xml:lang="sme">
+  <header>
+    <title>Geahččaleapmi boazodoallofágain skuvllas</title>
+    <genre code="facta"/>
+    <author>
+      <person born="" firstname="Bjørn" lastname="Aarseth" nationality="NO" sex="m"/>
+    </author>
+    <translator>
+      <person born="" firstname="Sara Ellen J." lastname="Eira" nationality="NO" sex="f"/>
+    </translator>
+    <translated_from xml:lang="nob"/>
+    <year>2007</year>
+    <wordcount>3226</wordcount>
+    <availability>
+      <free/>
+    </availability>
+    <submitter email="borre.gaup@samediggi.no" name="Børre Gaup"/>
+    <origFileName>aarseth2-s.htm</origFileName>
+    <parallel_text location="aarseth2-n.htm" xml:lang="nob"/>
+    <metadata>
+      <uncomplete/>
+    </metadata>
+    <version>XSLtemplate $Revision: 31551 $; file-specific xsl  Revision; common.xsl  $Revision$; </version>
+  </header>
+  <body>
+    <p>På norsk </p>
+    <p>Artihkal girjjis Sámi skuvlahistorjá 2 . Davvi Girji 2007. </p>
+    <section>
+      <p type="title">Bjørn Aarseth:</p>
+    </section>
+    <later>
+    <section>
+      <p type="title">Geahččaleapmi boazodoallofágain skuvllas</p>
+    </section>
+    </later>
+    <section>
+      <p type="title">Sámás: Sara Ellen J. Eira</p>
+    </section>
+    <p/>
+    <p>Bjørn Aarseth čuoiganmátkkis oahppiiguin 1950-logus. (Govva: Trygve Madsen) </p>
+    <later>
+    <p>
+      Bjørn Aarseth lei Kárášjoga nuoraidskuvlla rektor go dát artihkal čállojuvvui. Son lei okta sis, geat jođihedje barggu álggahit boazodoallosuorggi suorgejuhkkojuvvon nuoraidskuvlii, ja ieš maid oahpahii doppe, earret eará praktihkalaš meahcástankurssas. Su birra lea muđui dárkileappot muitaluvvon girjjis Sámi skuvlahistorjjá 1 . 
+    </p>
+    </later>
+    <p>Daid jagiid go Kárášjoga nuoraidskuvllas lei boazodoallosuorgi, de lei dát áidna oahppu boazodoalus riikkas. Dat vásahusat maid dahke doppe, logenár jagi ovdal boazodoalloskuvlla álggaheami, leat dehálaš oasit boazodoallooahpu historjjás. </p>
+    <p>Dát artihkal mii dás deaddiluvvo, lea ovdal deaddiluvvon Sámi Ællin / Sameliv girjjážis jagiin 1961–1963. Muđui čujuhit Niillas A. Somby artihkkalii Sámi skuvlahistorjjá vuosttaš girjjis, mas son muitala iežas vásáhusaid go lei oahppin boazodoallosuorggis. </p>
+    <p>Oahpahus boazodoallofágas lea ođas Norggas. Soames oanehit kurssat leat dollon Guovdageainnus. Sámelávdegoddi ásahuvvon 1956:s oaivvildii ahte oahpahus boazodoalus ferte šaddat čavgadit hámis. </p>
+  </body>
+</document>

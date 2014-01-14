@@ -1,0 +1,18 @@
+<!DOCTYPE document PUBLIC "-//UIT//DTD Corpus V1.0//EN" "http://giellatekno.uit.no/dtd/corpus.dtd">
+<document xml:lang="smj" id="no_id">
+    <header>
+        <title/>
+        <genre code="ficti"/>
+        <year>2011</year>
+        <availability>
+          <license type="standard"/>
+        </availability>
+    </header>
+    <body>
+        <p>Vijmak bierjjedak!
+            <errorlang correct="nor">Pjuh</errorlang>
+            vijmak de bierjjedak
+            <errorort correct="sjattaj" errorinfo="vowlat,á-a">sjattáj</errorort>.
+        </p>
+    </body>
+</document>

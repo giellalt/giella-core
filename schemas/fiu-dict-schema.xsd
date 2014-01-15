@@ -595,6 +595,7 @@
 	    <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element ref="t"/>
             <xs:element ref="td"/>
+            <xs:element ref="te"/>
             <xs:element ref="tf"/>
 	    </xs:choice>
          </xs:sequence>
@@ -639,6 +640,7 @@
 	    <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element ref="t"/>
             <xs:element ref="td"/>
+            <xs:element ref="te"/>
             <xs:element ref="tf"/>
 	    </xs:choice>
          </xs:sequence>
@@ -658,6 +660,7 @@
 	    <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element ref="t"/>
             <xs:element ref="td"/>
+            <xs:element ref="te"/>
             <xs:element ref="tf"/>
 	    </xs:choice>
          </xs:sequence>
@@ -720,6 +723,7 @@
          <xs:choice maxOccurs="unbounded">
             <xs:element ref="t"/>
             <xs:element ref="td"/>
+            <xs:element ref="te"/>
             <xs:element ref="tf"/>
             <xs:element ref="tCtn"/>
          </xs:choice>
@@ -732,6 +736,7 @@
 	    <xs:choice maxOccurs="unbounded">
             <xs:element ref="t"/>
             <xs:element ref="td"/>
+            <xs:element ref="te"/>
             <xs:element ref="tf"/>
 	    </xs:choice>
 	    <xs:choice maxOccurs="unbounded">
@@ -780,6 +785,38 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="td">
+      <xs:complexType mixed="true">
+         <xs:sequence/>
+         <xs:attribute name="gen">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="f"/>
+                  <xs:enumeration value="m"/>
+                  <xs:enumeration value="n"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute name="gloss">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="+"/>
+                  <xs:enumeration value="0"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute ref="nx"/>
+         <xs:attribute ref="pos"/>
+         <xs:attribute ref="register"/>
+         <xs:attribute ref="tType"/>
+         <xs:attribute name="type">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="te">
       <xs:complexType mixed="true">
          <xs:sequence/>
          <xs:attribute name="gen">

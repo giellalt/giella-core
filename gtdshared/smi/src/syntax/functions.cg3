@@ -1460,6 +1460,7 @@ MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Gen (1 (Actio Nom) LINK 1 N) ;
  
  
 MAP:>cc (@>CC) TARGET ("sihke")(*1 ("ja") OR ("ahte")) ;
+MAP:>cc (@>CC) TARGET ("juogo" Adv) OR ("jogo" Adv) (*1 ("dahje") BARRIER S-BOUNDARY) ;
 MAP:advl>cs (@ADVL>CS) TARGET ("beare" Adv) (1 CS LINK *1 FMAINV) ;
 	#$ Muhto dus ii leat riekti dearpat su beare danin go sáhtát.
 
@@ -1730,6 +1731,7 @@ MAP:HNOUN<spred (@<SPRED) TARGET (A Nom) OR (N Nom) (*-1 PUNCT BARRIER REAL-V LI
 
 	#$ Báhpaeamit, Margrethe Wiig, gii lei gasku giellamoivvi, ráhkadii iežas sárgumiiguin sámegiela Áppesa, mii lei stuorra ávkin sámegiela oahpahusas.
 
+MAP:missingX (@X) TARGET (?) ;
 
 AFTER-SECTIONS
 

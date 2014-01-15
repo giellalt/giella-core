@@ -1320,11 +1320,11 @@ MAP:<spredPl (@<SPRED) TARGET (Pl Nom) ((*-1 COPULAS BARRIER NOT-NPMODADV LINK *
 MAP:<spred (@<SPRED) TARGET Nom (*-1 COPULAS + FMAINV BARRIER NOT-NPMODADV LINK -1 Nom OR S-BOUNDARY)(1 EOS) ;
 	#$ Arkiivaávdnasat galget sáddejuvvot go leat sullii 25-30 jagi boarrásat.
 
-#!! * __<spred__ (@<SPRED) for N Ess
+#!! * __COP<spredEss__ (@<SPRED) for N Ess
 MAP:<spredEss (@<SPRED) TARGET (N Ess) IF (*-1 COPULAS BARRIER S-BOUNDARY OR Ess - ("buorre" Ess) OR Nom LINK 0 FMAINV LINK *-1 NP-HEAD-NOM BARRIER SV-BOUNDARY OR <hab>);
 
 #!! * __spredEss>__ (@SPRED>) for N Ess; if copulas to the right of you, and if an NP with nom-case first one to your left.
-MAP:spredEss> (@SPRED>) TARGET (N Ess) IF (*1 COPULAS BARRIER SV-BOUNDARY)(-1 NP-HEAD-NOM);
+MAP:spredEss>COP (@SPRED>) TARGET (N Ess) IF (*1 COPULAS BARRIER SV-BOUNDARY)(-1 NP-HEAD-NOM);
 	#$ Sápmelaččaid historjá álbmogin lea duháhiid jagiid boaris, muhto dálá ássanguovlluin sápmelaččat eai leat ássan nu guhká.
 
 #!! * __HABSpredSg>__ (@SPRED>) for Nom; if habitive first one to the left, followed by copulas.
@@ -1475,7 +1475,6 @@ SET MOD-ADV = DUSSE OR ("njuolga") OR ("njuolgga") OR EASKKA OR ("gitta") ;
 #!! * __f<advl__ (@-F<ADVL) for infinite adverbials
 MAP:f<advl (@-F<ADVL) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen) (*-1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS)(NEGATE 0 DUSSE OR EASKKA) ;
 	#$ Min mielas goit lea veara jurddašit nissongova birra mii boahtá ovdan jearahallamiin.
-
 #!! * __f<advl__ (@-F<ADVL) for infinite adverbials
 MAP:fadvl> (@-FADVL>) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen)(NEGATE *-1 FMAINV BARRIER S-BOUNDARY OR CS)(*1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS OR FMAINV) ;
 	#$ Anán buorebun odne vuolgit go ihttážii vuordit.
@@ -1537,7 +1536,7 @@ MAP:BOSPo> (@ADVL>) TARGET Po (*-1 BOS BARRIER FMAINV)(*1 S-BOUNDARY OR COMMA BA
 	#$ Dán girjji vuođul ja ságastallamiiguin lullisámiin lea munnje báhcán millii ahte internáhttadoaibma ii lean gal alla dásis, muhto internáhttaskuvlii dattetge bohte viššalit lullisámi bearrašat.
 	#% Romssa ja davágeaži Norrbottena boazoorohagat ja čearut riikaráji guoras ja konvenšuvdnaguovlluin.
 
-#!! * __<advlEOS__ (@<ADVL) for Po; if you are found at the very end of a sentence. A mainverb is needed to the right though.
+#!! * __<advlEOS__ (@<ADVL) for Po or Loc; if you are found at the very end of a sentence. A mainverb is needed to the left though.
 MAP:<advlEOS (@<ADVL) TARGET Po OR Loc (*-1 FMAINV)(*1 EOS BARRIER FMAINV);
 	#$ Sámediggi lea miehtan sutnje máksit 800 ruvnno juohke árgabeaivvi ovddas, muhto ii fal lávvordagaid, sotnabeivviid ja bassebeivviid ovddas.
 	#$ Sosiálkuráhtorat eai gávdnon gilis ovdalgo 1960-logus.
@@ -1603,8 +1602,8 @@ MAP:cleanupILL<advl (@<ADVL) TARGET (N Ill) (NEGATE *-1 BOUNDARYSYMBOLS BARRIER 
 	#% Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.
 	#% Guovdageainnus muittán ahte roagga gándajienat eahketbeaivve huike: Muorravissui, muorravissui!
 
-#MAP:<advlXXXX (@<ADVL) TARGET (N Ill) (*-1 S-BOUNDARY OR COMMA BARRIER FMAINV)(*1 S-BOUNDARY OR COMMA BARRIER FMAINV) ; #LINK *-1 FMAINV BARRIER SV-BOUNDARY
-	#$
+MAP:<advlXXXX (@<ADVL) TARGET (N Ill) (*-1 S-BOUNDARY OR COMMA BARRIER FMAINV)(*1 S-BOUNDARY OR COMMA BARRIER FMAINV) ; #LINK *-1 FMAINV BARRIER SV-BOUNDARY
+	#$ Ii fal runiidan jalges gittiide, muhto meahccái, gosa návddit dávjá ja lunddolaččat fievrridit ráppiid.
 
 
 #!! * __cleanupPo__ (@ADVL) for Po: This rule tags all Po:s as @ADVL if they haven't gotten a tag somewhere along the way. 
@@ -1676,10 +1675,11 @@ LIST ESS-PROB-ADVL-N = ("bassi" N) "boaris" ("nuorra" N) ;
 #!! * __<advlEss__ (@<ADVL) for ESS-ADVL if; FMAINV to the left
 MAP:<advlEss (@<ADVL) TARGET ESS-ADVL + Ess IF (*-1 FMAINV BARRIER SV-BOUNDARY) ;
 	#$ Beaskkain gal bivvá buolašin.
-#!! * __<spredEss__ (@<SPRED) for N Ess if; FMAINV to the left is intransitive or bargat
-MAP:<spredEss (@<SPRED) TARGET (N Ess) - ESS-ADVL OR (A Ess) IF (*-1 FMAINV + IV OR ("bargat") + FMAINV BARRIER SV-BOUNDARY) ;
+#!! * __IV<spredEss__ (@<SPRED) for N Ess if; FMAINV to the left is intransitive or bargat
+MAP:IV<spredEss (@<SPRED) TARGET (N Ess) - ESS-ADVL OR (A Ess) IF (*-1 FMAINV + IV OR ("bargat") + FMAINV BARRIER SV-BOUNDARY) ;
 MAP:<opredEss (@<OPRED) TARGET (N Ess) OR (A Ess) IF (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY)((*-1 Acc BARRIER NOT-NPMOD) OR (*1 Acc BARRIER NOT-NPMOD) OR (*1 Inf BARRIER NOT-ADV-PCLE) OR (*1 N BARRIER NOT-NPMOD LINK 1 Inf));
 	#$ Gaup dojii stivrrana hárjehallamiin, muhto oaččui luoikkasin eará stivrrana.
+	#Comment: Olbmot ledje dilssit buktit bierggu máksun mánáideaset dikšumis.
 MAP:<opredEssRel (@<OPRED) TARGET (N Ess) OR (A Ess) IF (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY LINK -1 (Rel Acc)) ;
 	#$ Organisašuvnna bláđđi man gohčodit Fokusin muitala ahte gonagas Olav su áiggistis lei bivdán beassat leat servodaga suodjaleaddji.
 

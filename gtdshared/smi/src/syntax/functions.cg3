@@ -1735,6 +1735,8 @@ MAP:missingX (@X) TARGET (?) ;
 
 AFTER-SECTIONS
 
+REMOVE:WORD WORD - ALLSYNTAG ;
+
 SUBSTITUTE (<sme>) (*) TARGET (<sme>) ;
 SUBSTITUTE (<smj>) (*) TARGET (<smj>) ;
 SUBSTITUTE (<sma>) (*) TARGET (<sma>) ;

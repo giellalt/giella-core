@@ -1582,8 +1582,8 @@ MAP:<advl (@<ADVL) TARGET Adv (*1 Po OR EOS BARRIER SV-BOUNDARY) ;
 	#$ 'De eai leat šat dušše tálat, muhto bustávat maid.
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 
-#!! * __BOSadvl>__ (@ADVL>) if; you are N Loc or N Ill and found sentnece initially. First one to your right is probably a sentenceboundary, but there should be a finite mainverb too. ''Mearrádusaide nugo namohuvvo''
-MAP:advlDAS> (@ADVL>) TARGET (N Loc) OR (N Ill) (*-1 BOS BARRIER FMAINV OR COMMA)(*1 FMAINV BARRIER S-BOUNDARY - MO)(NEGATE 0 @N<)(NEGATE *-1 Nom BARRIER BOS) ;
+#!! * __BOSadvl>__ (@ADVL>) if; you are N Loc or N Ill and found sentnece initially and there is a main verb somewhere to the right. No barrier for the mainverb; based on the thought that first one to your right is probably a sentenceboundary.
+MAP:BOSadvl (@ADVL>) TARGET Loc OR (N Ill) (*-1 BOS BARRIER FMAINV OR COMMA)(*1 FMAINV)(NEGATE 0 @N<) ;
 	#$ Das makkár hálddašanmálle šaddá lea maid hui ollu dadjamuš.
 	#$ Eará guovlluin gos leat vel unnit sámit go Finnmárkkus, leamaš dákkár ákkain vel stuorát deaddu almmolaš ságastallamis. 
 	#$ Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.

@@ -1187,6 +1187,8 @@ SETPARENT:noarrow VFIN (NONE p (*)) TO (*-1 CS LINK *-1 @NOARROW BARRIER @V);
 SETPARENT @V (NONE p (*)) TO (@0 (*)); # to root
 
 ## div
+
+
 SETPARENT:vocToRight @VOC TO (*1 VFIN);
 	## Karijuse, die lean heehkeme jih heehkeme.
 SETPARENT:vocToLeft @VOC TO (*-1 VFIN BARRIER (":"));
@@ -1266,8 +1268,8 @@ SETPARENT:CITATION CITATION TO (1 VFIN) ;
 SETPARENT:RIGHT RIGHT TO (-1 VFIN) ;
 SETPARENT:LEFT LEFT TO (1 VFIN) ;
 
-
-SETPARENT:X (@X) TO (-1 (*)) ; #Hva skal vi gjøre med X?
+SETPARENT:missingToRoot @X (NONE p (*)) TO (@0 (*));
+#SETPARENT:X (@X) TO (-1 (*)) ; #Hva skal vi gjøre med X?
 
 AFTER-SECTIONS
 

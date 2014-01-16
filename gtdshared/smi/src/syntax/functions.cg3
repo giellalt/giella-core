@@ -1736,6 +1736,8 @@ MAP:spred>HNOUN (@SPRED>) TARGET (A Nom) (*1 @HNOUN) ;
 MAP:HNOUN<spred (@<SPRED) TARGET (A Nom) OR (N Nom) (*-1 PUNCT BARRIER REAL-V LINK *-1 @HNOUN) ; 
 	#$ Birasgáhttenlihkadus ja álgoálbmogat – ovttasbargit vai vuostálagaid?
 
+MAP:HNOUNcoor (@HNOUN) TARGET N (-1 CC LINK -1 @HNOUN) ;
+	#$ Oslos ja Londonis.
 
 	#$ Báhpaeamit, Margrethe Wiig, gii lei gasku giellamoivvi, ráhkadii iežas sárgumiiguin sámegiela Áppesa, mii lei stuorra ávkin sámegiela oahpahusas.
 

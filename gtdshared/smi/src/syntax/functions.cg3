@@ -1537,8 +1537,9 @@ MAP:BOSPo> (@ADVL>) TARGET Po (*-1 BOS BARRIER FMAINV)(*1 S-BOUNDARY OR COMMA BA
 	#% Romssa ja davágeaži Norrbottena boazoorohagat ja čearut riikaráji guoras ja konvenšuvdnaguovlluin.
 
 #!! * __<advlEOS__ (@<ADVL) for Po or Loc; if you are found at the very end of a sentence. A mainverb is needed to the left though.
-MAP:<advlEOS (@<ADVL) TARGET Po OR Loc (*-1 FMAINV)(*1 EOS BARRIER FMAINV);
+MAP:<advlEOS (@<ADVL) TARGET Po OR Pr OR Loc (*-1 FMAINV)(*1 EOS BARRIER FMAINV);
 	#$ Sámediggi lea miehtan sutnje máksit 800 ruvnno juohke árgabeaivvi ovddas, muhto ii fal lávvordagaid, sotnabeivviid ja bassebeivviid ovddas.
+	#$ Dat sáhttet leat ovttasbargošiehtadusat oanahis áigái, dahje oktasašdoallu muhtin áiggiid jagis, dahje vaikko miehtá jagi.
 	#$ Sosiálkuráhtorat eai gávdnon gilis ovdalgo 1960-logus.
 	#Comment: Sámi dutkan ii leat dan dihte soaittáhagas válljejuvvon dutkansuorgi. <== galggašii doaibmat dalle go 'leat' oažžu rivttes analysa. 
 
@@ -1610,6 +1611,13 @@ MAP:<advlXXXX (@<ADVL) TARGET (N Ill) (*-1 S-BOUNDARY OR COMMA BARRIER FMAINV)(*
 MAP:cleanupPo (@ADVL) TARGET Po (0 Po); 
 	#$ Muhto man sivas?
 	#$ Čakčageasi birra.
+
+#!! * __cleanupPr__ (@ADVL) for Po: This rule tags all Pr:s as @ADVL if they haven't gotten a tag somewhere along the way.
+MAP:cleanupPr (@ADVL) TARGET Pr (0 Pr); 
+	#$
+	#% Sámeskuvla šattai oktasaš deaivvadanbáikin hárvelohkosaš ja hádjánan lullisámi minoritehtii geaid ruovttut ledje Femundmárkkus gitta Davvi-Rátnui, - badjel 1000 km guhkkosaš guovlu.
+	
+	
 	
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY) ; 

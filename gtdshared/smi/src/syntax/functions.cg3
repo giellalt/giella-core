@@ -1745,11 +1745,17 @@ MAP:@<ADVLcoor (@<ADVL) TARGET ADVL (-1 @CNP LINK -1 @ADVL) ;
 	
 	#$ Báhpaeamit, Margrethe Wiig, gii lei gasku giellamoivvi, ráhkadii iežas sárgumiiguin sámegiela Áppesa, mii lei stuorra ávkin sámegiela oahpahusas.
 
+#!! ! __missingX__ adds @X to all missings
 MAP:missingX (@X) TARGET (?) ;
 
 AFTER-SECTIONS
 
 REMOVE:WORD WORD - ALLSYNTAG ;
+
+#!! ! __therestX__ adds @X to all what is left, often errouneus disambiguated forms
+
+MAP:missingX (@X) TARGET WORD ;
+
 
 SUBSTITUTE (<sme>) (*) TARGET (<sme>) ;
 SUBSTITUTE (<smj>) (*) TARGET (<smj>) ;

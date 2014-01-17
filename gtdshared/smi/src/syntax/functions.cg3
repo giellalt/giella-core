@@ -856,6 +856,8 @@ LIST CASE = Nom Acc Gen Ill Loc Com Ess Ine Ela ;
 
 LIST ALLSYNTAG = (@+FAUXV) (@+FMAINV) (@-FAUXV) (@-FMAINV) (@-FSUBJ>)(@-FOBJ)(@-F<ADVL)(@-FADVL>)(@>A) (@>ADVL) (@ADVL<) (@<ADVL) (@ADVL>) (@ADVL) (@>N) (@APP) (@APP-N<) (@APP-Pron<) (@APP>Pron) (@APP-Num<) (@APP-ADVL<) (@VOC)(@CNP) (@CVP) (@P<) (@>P) (@HNOUN) (@INTERJ) (@Pron<) (@OBJ) (@OBJ>) (@<OBJ) (@OPRED) (@<OPRED) (@OPRED>) (@SPRED<OBJ) (@PCLE) (@COMP-CS<) (@N<) (@SPRED) (@<SPRED) (@SPRED>) (@PPRED) (@Num<) (@SUBJ) (@<SUBJ) (@SUBJ>) (@X);
  
+LIST HEAD = @SUBJ> @<SUBJ @SUBJ @OBJ @OBJ> @<OBJ @ADVL @ADVL> @<ADVL @SPRED> @<SPRED @SPRED @OPRED> @<OPRED @OPRED @-FSUBJ> @-FOBJ> @-FADVL> @-FSPRED> @-F<SUBJ @-F<OBJ @-F<ADVL @-F<SPRED ;
+ 
 
 SET NON-APP = ALLSYNTAG - (@APP);
 
@@ -1439,7 +1441,6 @@ MAP:Pron< (@Pron<) TARGET (N Loc) - TIME-N (*-1 (Pron @SUBJ>) BARRIER NOT-ADV - 
 	#$ Nu guhká go mii, opposišuvnnas, eat čohkká beaivválaččat daiguin dokumeanttaiguin, de lea bahá vajáldahttit.
 #MAP:n< (@N<) TARGET (N Loc)(-1 (N Nom) LINK *-1 FMAINV BARRIER SV-BOUNDARY) ; 
 
-
 MAP:num< (@Num<) TARGET (Pl Loc) (*-1 OKTA BARRIER NOT-NPMOD) ;
 	#$ Dat lea okta min buoremus girjjiin.
 
@@ -1578,7 +1579,7 @@ MAP:comma<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRI
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 	#$ De eai leat šat dušše tálat, muhto bustávat maid.
 	
-MAP:<advlØ (@<ADVL) TARGET Adv (*1 Po OR EOS BARRIER SV-BOUNDARY) ;
+MAP:<advlØ (@<ADVL) TARGET Adv (*-1 Nom)(*1 Po OR EOS BARRIER SV-BOUNDARY) ;
 	#$ Maid mii dál vihtaniiguin?
 	#$ Lákca vel alde!
 	#$ Sámi dutkan ii leat dan dihte soaittáhagas válljejuvvon dutkansuorgi.
@@ -1616,8 +1617,7 @@ MAP:cleanupPo (@ADVL) TARGET Po (0 Po);
 MAP:cleanupPr (@ADVL) TARGET Pr (0 Pr); 
 	#$
 	#% Sámeskuvla šattai oktasaš deaivvadanbáikin hárvelohkosaš ja hádjánan lullisámi minoritehtii geaid ruovttut ledje Femundmárkkus gitta Davvi-Rátnui, - badjel 1000 km guhkkosaš guovlu.
-	
-	
+		
 	
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY) ; 
@@ -1736,9 +1736,13 @@ MAP:spred>HNOUN (@SPRED>) TARGET (A Nom) (*1 @HNOUN) ;
 MAP:HNOUN<spred (@<SPRED) TARGET (A Nom) OR (N Nom) (*-1 PUNCT BARRIER REAL-V LINK *-1 @HNOUN) ; 
 	#$ Birasgáhttenlihkadus ja álgoálbmogat – ovttasbargit vai vuostálagaid?
 
-MAP:HNOUNcoor (@HNOUN) TARGET N (-1 CC LINK -1 @HNOUN) ;
+MAP:HNOUNcoor (@HNOUN) TARGET N (-1 @CNP LINK -1 @HNOUN) ;
 	#$ Oslos ja Londonis.
 
+MAP (@ADVL) Adv (-1 BOS) ;
+MAP:@<ADVLcoor (@<ADVL) TARGET ADVL (-1 @CNP LINK -1 @ADVL) ;
+	#$ Odne vai ihttin?
+	
 	#$ Báhpaeamit, Margrethe Wiig, gii lei gasku giellamoivvi, ráhkadii iežas sárgumiiguin sámegiela Áppesa, mii lei stuorra ávkin sámegiela oahpahusas.
 
 MAP:missingX (@X) TARGET (?) ;
@@ -1751,7 +1755,6 @@ SUBSTITUTE (<sme>) (*) TARGET (<sme>) ;
 SUBSTITUTE (<smj>) (*) TARGET (<smj>) ;
 SUBSTITUTE (<sma>) (*) TARGET (<sma>) ;
 
-LIST HEAD = @SUBJ> @<SUBJ @SUBJ @OBJ @OBJ> @<OBJ @ADVL @ADVL> @<ADVL @SPRED> @<SPRED @SPRED @OPRED> @<OPRED @OPRED @-FSUBJ> @-FOBJ> @-FADVL> @-FSPRED> @-F<SUBJ @-F<OBJ @-F<ADVL @-F<SPRED ;
 
 #for view - kommenteres inn for view
 #SUBSTITUTE (@>N) (@>N <mod_obj>) TARGET (@>N) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ;

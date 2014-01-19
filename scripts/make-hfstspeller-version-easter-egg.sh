@@ -26,6 +26,6 @@ Revision=$(svn info $2 | grep Revision | grep -Eo '[0-9]+')
 HfstVersion=$(hfst-info | grep 'HFST version' | grep -Eo '[0-9.]+')
 HfstRevision=$(hfst-info | grep 'revision' | grep -Eo '[0-9.]+')
 
-echo "Divvun for $Language"
+echo "Divvun speller for $Language"
 echo "$1 version $Version, $Date, rev$Revision"
 echo "Built using HFST $HfstVersion, rev$HfstRevision"

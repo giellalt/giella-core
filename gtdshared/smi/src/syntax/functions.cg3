@@ -1472,6 +1472,8 @@ LIST COUNTABLE = "oassi" "kapihtal" "paragráfa" ;
 
 MAP:n< (@N<) TARGET Loc - Rel (*-1 COUNTABLE BARRIER NOT-A) ;
 	#$ Dat lea oassin giellaprográmmas.
+
+#!! * __-fsubj>__ (@-FSUBJ>) for HUMAN Gen; in a NP-clause. To your right is Actio Nom followed by a noun
 MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Gen (1 (Actio Nom) LINK 1 N) ; 
 	#$ Máreha čállin teavsttat ledje buoremusat.
 
@@ -1637,14 +1639,23 @@ MAP:cleanupPr (@ADVL) TARGET Pr (0 Pr);
 	#$
 	#% Sámeskuvla šattai oktasaš deaivvadanbáikin hárvelohkosaš ja hádjánan lullisámi minoritehtii geaid ruovttut ledje Femundmárkkus gitta Davvi-Rátnui, - badjel 1000 km guhkkosaš guovlu.
 		
-	
-MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ; 
+#!! * __-fsubj>asAcc__ (@-FSUBJ>) for HUMAN Acc; if there is a verb @<OBJ to your left	
+MAP:-fsubj> (@-FSUBJ>) TARGET HUMAN + Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE) ;
+	#$ Divtte bálvaleddjiidat ássat Gosenis! 
+
+#!! * __-f<obj__ (@-F<OBJ) for Acc if there is a transitive verb + SYN-V to your left
 MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY) ; 
 	#$ Máret muitalii Máhte oaidnán guovžža.
 	#$ Gurssa ulbmil lea oahppat goarrut Ivgu gávtti.
 
+#!! * __-fsubj>IV__ (@-FSUBJ>) for Acc; if there is an IV-verb acting as a @<OBJ to your right
 MAP:-fsubj> (@-FSUBJ>) TARGET Acc (*1 (IV @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 	#$ Sii lohket fatnasa gopmánan.
+
+#!! * __-fsubj>asGen__ (@-FSUBJ>) for Gen;
+MAP:-fsubj>asGen (@-FSUBJ>) TARGET Gen (*1 (Actio Loc @<ADVL) OR (TV VAbess) BARRIER NOT-ADV-PCLE) ;
+	#$ Mun gal ceavzzán du goargŋumis.
+	#$ Diet dáhpáhuvai mu dieđikeahttá.
  
  
  

@@ -22,7 +22,8 @@ Language=$(${GTCORE}/scripts/iso639-to-name.sh $1)
 
 Date=$(date +%Y.%m.%d)
 Version=$(cat $3)
-Revision=$(svn info $2 | grep Revision | grep -Eo '[0-9]+')
+Revision=$(svn info --xml $2 | grep -A 4 '<entry' \
+		 | grep revision | grep -Eo '[0-9]+')
 HfstVersion=$(hfst-info | grep 'HFST version' | grep -Eo '[0-9.]+')
 HfstRevision=$(hfst-info | grep 'revision' | grep -Eo '[0-9.]+')
 

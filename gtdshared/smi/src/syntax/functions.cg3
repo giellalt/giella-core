@@ -1682,7 +1682,11 @@ MAP:<opredAAcc (@<OPRED) TARGET (A Acc) IF ((*-1 Acc BARRIER NOT-ADV-PCLE LINK *
 	#$ Son ráhkada gáhkuid hui buriid.
 	#$ Gáhkuid son ráhkada hui buriid.
 
-MAP:<obj (@<OBJ) TARGET Acc - Rel (*-1 FMAINV + TV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *2 TRANS-V + FMAINV BARRIER SV-BOUNDARY)(NEGATE 0 Num LINK 1 MEASR-N) ;
+#!! * __TV<obj__ (@<OBJ) for Acc; if there is a transitive mainverb to the left in the clause. Not for Rel. Not if you are a numeral followed by a measure-noun
+MAP:TV<obj (@<OBJ) TARGET Acc - Rel (*-1 FMAINV + TV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *2 TRANS-V + FMAINV BARRIER SV-BOUNDARY)(NEGATE 0 Num LINK 1 MEASR-N) ;
+	#$ Stueng háliidii ge oažžut johtui buoret oktavuođa sámi ja Bolivia eamiálbmot nuoraid gaskkas, go nuorat leat eamiálbmogiid boahtteáigi, mahkáš nuoraid lonuhanprográmma.
+	
+	
 
 #!! !sma object
 MAP:<obj (@<OBJ) TARGET (Nom Pl <sma>) - Rel  (*-1 FMAINV + TV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *2 TRANS-V + FMAINV BARRIER SV-BOUNDARY)(NEGATE 0 Num LINK 1 MEASR-N) ;
@@ -1696,10 +1700,20 @@ MAP:advl> (@ADVL>) TARGET (Num Acc) (1 MEASR-N + (Sg Gen) LINK *1 FMAINV BARRIER
 	#$ Mánná lea golbma jagi boaris.
 MAP:advl> (@ADVL>) TARGET MEASR-N + Acc (-1 (Num Pl))(*1 FMAINV BARRIER SV-BOUNDARY) ;
 
-MAP:obj> (@OBJ>) TARGET Acc (*1 FMAINV BARRIER SV-BOUNDARY) ;
+#!! * __Obj>__ (@OBJ>) for Acc; if there is a finite mainverb to the right in the clause. A really simple rule with no other restrictions.. 
+MAP:Obj> (@OBJ>) TARGET Acc (*1 FMAINV BARRIER SV-BOUNDARY) ;
+	#$ Dan duođaštit čállosat maid politihkkárat leat čálašan gieskat e-poasttain ja maid leat mediai suođđan.
+	#$ Dán filmma leat Kárášjoga nuorat oaidnán, eaige šat vuolgge sirkusii.
 
+#!! * __s-boun<obj__ (@<OBJ) for Acc; if sentenceboundary to your left and a transitive mainverb to the left futher to the left
+MAP:s-boun<obj (@<OBJ) TARGET Acc - Num (*-1 S-BOUNDARY BARRIER FMAINV + TV LINK *-1 FMAINV + TV BARRIER SV-BOUNDARY) ;
+	#$ Sii bukte skeaŋkkaid mánnái: golliid, suovvasiid ja myrra.
+	#$ Iige láhka lihkahala vuoigatvuođaid mat vuođđuduvvet eará vuđđosii, ovdamearkan dakkáriid mat vuođđuduvvet dahkkojuvvon šiehtadussii.
 
+#!! * __<objIV__ (@<OBJ) for Acc; if there is an intransitive mainverb in the clause. Not for Rel or Num. Not if you are a numeral followed by a measure-noun
 MAP:<objIV (@<OBJ) TARGET Acc - Rel - Num (*-1 FMAINV + IV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *2 TRANS-V + FMAINV BARRIER SV-BOUNDARY)(NEGATE 0 Num LINK 1 MEASR-N) ;
+	#$ 1980:s manai Anny Hámmárfestii vázzit buohccedivššárskuvlla.
+	#$ Ja de sii bidje čázi duoldat ja juopmomielkki dasa, ja de dan juhke. 
 
 MAP:obj>rel (@OBJ>) TARGET Acc (1 Rel LINK *1 FMAINV BARRIER SV-BOUNDARY LINK *1 FMAINV + TV BARRIER SV-BOUNDARY) ;
 	#$ Danne sáhttá váttisvuođaid mat čuožžilit gaskasaš konvenšuvnna beaivválaš dilis, buoremusat čoavdit riikkaidgaskasaš orgánain, mas leat loahpalaš mearridanváldi.

@@ -1249,13 +1249,14 @@ MAP:spred<obj (@SPRED<OBJ) TARGET Acc (*-1 Nom BARRIER NOT-NPMODADV LINK *-1 COP
 	#% Divššohasas lea vuoigatvuohta iežas journála geahččat
 
 SET NOT-EXT = TIME-N OR A OR Pers OR Dem OR Rel OR ("dálki") OR OKTA ; 
+LIST A-EXT = "riekta" "vejolaš" ;
  
 #!! * __Hab<subj__ (<ext> @<SUBJ) for Nom; if copulas, goallut or jápmit is FMAINV and habitive or human Loc is found to the left. OR: if Ill or @Pron< followed by HAB are found to the left.
-MAP:Hab<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR ("riekta" Nom) OR ("vejolaš" Nom) ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> OR HUMAN + HAB-CASE BARRIER SV-BOUNDARY) OR (*-1 Ill OR @Pron< OR Po BARRIER NOT-NPMOD OR COMMA LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> BARRIER SV-BOUNDARY)) ;
+MAP:Hab<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> OR HUMAN + HAB-CASE BARRIER SV-BOUNDARY) OR (*-1 Ill OR @Pron< OR Po BARRIER NOT-NPMOD OR COMMA LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> BARRIER SV-BOUNDARY)) ;
 	#$ Sus lea alddis buorit attáldagat.
 
 #!! * __Hab>Advlcase<subj__ (<ext> @<SUBJ) for Nom; it allows adverbials with Ill/Loc/Com/Ess to be found inbetween HAB and <ext>.
-MAP:Hab>Advlcase<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR ("riekta" Nom) OR ("vejolaš" Nom) (*-1 ADVLCASE BARRIER NOT-ADV-PCLE LINK -1 ("leat") + FMAINV + HAB-V-TAGS LINK *-1 <hab> BARRIER WORD - Neg) ;
+MAP:Hab>Advlcase<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (*-1 ADVLCASE BARRIER NOT-ADV-PCLE LINK -1 ("leat") + FMAINV + HAB-V-TAGS LINK *-1 <hab> BARRIER WORD - Neg) ;
 	#$ Sus lea álgovuorus dušše guohtunvuoigatvuohta dáidda.
 	#$ Boazosápmelaččain ii leat bassin vejolaš fievrridit gálvvu gerresiiguin.
  
@@ -1278,7 +1279,7 @@ MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + FMAINV + HAB-V-
 	#$ Doppe boahtá áhčči.
 
 
-MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR ("riekta" Nom) OR ("vejolaš" Nom) (-1 Loc LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) ; 
+MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (-1 Loc LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) ; 
 	#$ Rievtti mielde lea duodjeluohkás gulahallanoahpaheaddji, muhto son ii leat doppe nu dávjá go oahppit sávvet.
 	
 #!! * __<spred__ (@<SPRED) for Nom; if Nom to the left, copulas to the left of Nom, and a time related word to the left of it.

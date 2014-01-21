@@ -1042,6 +1042,11 @@ MAP:>n/ (@>N) TARGET Gen - TIME-N - Sem/Date (1 ("/") LINK 1 A LINK *1 N BARRIER
 	#$ Dan dihte ohcat guokte lassi stipendiáhttavirggi sámi/eamiálbmotguoskevaš dutkamiidda.
 	#Commet: This needs adjusting: are there some similar sentences???? Or perhaps some other way to solve this?
 	
+#!! * __>nGen__ (@>N) for Num Gen; if there is CNP to your right, and an adjective or a numeral tagged as @>N to the right of it. This is a rule of coordination
+MAP:>nGen (@>N) TARGET Num + Gen (1 CC LINK *1 (A @>N) OR (Num @>N) BARRIER NOT-ADV) ;
+	#$ Dalle sáhttá beaktilit háhkat guovtte ja maiddái golmmagielat (maiddái suomagielat) gelbbolašvuođa.
+	#$ Juos mearriduvvo meahcceeatnamiid nuppástuvvan geavaheapmi golmma ja dušše golmma stivrralahtu doarjagiin ja olles uhcitlohku vuođđudallá oainnus sámi kultuvrra, boazodoalu, meahcásteami, ealáhusdoaimmaheami ja servodateallima destii mii lea árvvoštallojuvvon Sámedikki válddahusaid vuođul, de sáhttá uhcitlohku ovtta oli stivrračoahkkima áigge gáibidit ášši Sámedikki gieđahallamii.
+	
 #!! * __>nTime__ (@>N) for Gen TIME-N; if timenoun to your right. Restrictions: Not if you are a OKTA Nom with Pl Loc to your right. Not if CC followed by Gen, followed by Po to your right. Not if COMMA to your right
 MAP:>nTime (@>N) TARGET TIME-N + Gen (*1 TIME-N BARRIER NOT-NPMOD OR A)(NEGATE 0 OKTA + Nom LINK *1 (N Pl Loc) BARRIER NOT-NPMOD)(NEGATE 0 Gen LINK 1 CC LINK *1 Gen BARRIER NOT-NPMOD LINK 1 Po OR NP-BOUNDARY)(NEGATE 0 Gen LINK 1 COMMA LINK NEGATE *1 CC LINK 1 Gen) ;
 	#$ Mannan čuohtejagi gaskamuttus lei stuorra gilvu.

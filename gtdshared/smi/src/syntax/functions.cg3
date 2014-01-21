@@ -980,6 +980,9 @@ MAP:habGen (<hab> @<ADVL) TARGET HAB-ACTOR + Gen (*-1 LEAT + HAB-V-TAGS BARRIER 
 	#% Soabadanráđis galget leat golbma miellahtu ja seamma ollu várrelahtut.
 	#% Sámedikkis lea leamaš čoahkkin 14.03.01.
 
+LIST MEASR-N-SET = (N Sem/Measr) (N Sem/Money) (N Sem/Time) ;
+
+SET MEASR-N = MEASR-N-SET - NOT-TIME ;
 
 
 MAP:pcle (@PCLE) TARGET Pcle ;
@@ -1051,6 +1054,14 @@ MAP:>n (@>N) TARGET $$CASE (0 Dem OR OKTA OR ("buorre" A) LINK *1 $$CASE + N BAR
 #!! * __>ntittel__ (@>N) for (Sg Nom TIME-N) or (Nom Der/NomAg); if to your right is Sem/Mal, Sem/Fem, Sem/Sur
 MAP:>ntittel (@>N) TARGET TIME-N + (Sg Nom) - Coll OR (Sem/Hum Sg Nom) - Coll OR Der/NomAg (1 Sem/Mal OR Sem/Fem OR Sem/Sur);
 	#$ Ávvir ii ožžon rektor Mats Steinfjella jearahallamii.
+
+#!! * __>nALU__ (@>N) Sg Acc numerals; when a measure-noun to the right
+#MAP:>nALU (@>N) TARGET NUM + (Sg Acc) (*1 MEASR-N BARRIER NOT-NPMODADV) ;
+	#$ Min viessu lea vihtta mehtara alu. 
+	#% De son barggai guokte jagi buohccedivššárin Kolvereidas Trøndelagas, dan maŋŋá son lea bargan Kárášjogas.
+	#% Máŋggas čuovvoledje, fertejedje vázzit guokte jagi vuosttaš luohkás.
+	#% Finnmárkkus ledje ovdal sihke doaktárat ja buohccedivššárat dábálaččat Lulli-Norggas eret, ja máŋggas ledje dušše leamaš moadde jagi dahje vel oanibut davvin.
+	#Comment: This works when all measure words get their Sem/Measure-tags.
 	
 MAP:>veara (@>A) TARGET Gen  (1 ("veara" Nom))  ;
 MAP:>nAttrCoor (@>N) TARGET Attr (1 CC LINK 1 @>N)  ;
@@ -1684,9 +1695,6 @@ MAP:<ppred (@<PPRED) TARGET (Pl Nom) OR Ess (*-1 @<SPRED + Pl BARRIER NOT-ADV-PC
 MAP:<ppred (@<PPRED) TARGET (Sg Nom) OR Ess (*-1 @<SPRED + Sg BARRIER NOT-ADV-PCLE OR ("ain")) ;
 	# Márehis lea oaivi bávččas. 
 
-LIST MEASR-N-SET = (N Sem/Measr) (N Sem/Money) (N Sem/Time) ;
-
-SET MEASR-N = MEASR-N-SET - NOT-TIME ;
 
 MAP:>n (@>N) TARGET (Num Acc) ((1 MEASR-N + (Sg Gen) LINK 1 Po) OR (1 (Num Acc) LINK 1 MEASR-N + (Sg Gen) LINK 1 Po)) ;
 	#$ Noađđespagáin leat dat geažit guokte golbma tumá guhku.

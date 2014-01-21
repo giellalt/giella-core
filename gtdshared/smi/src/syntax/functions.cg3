@@ -1056,11 +1056,9 @@ MAP:>ntittel (@>N) TARGET TIME-N + (Sg Nom) - Coll OR (Sem/Hum Sg Nom) - Coll OR
 	#$ Ávvir ii ožžon rektor Mats Steinfjella jearahallamii.
 
 #!! * __>nALU__ (@>N) Sg Acc numerals; when a measure-noun to the right
-#MAP:>nALU (@>N) TARGET NUM + (Sg Acc) (*1 MEASR-N BARRIER NOT-NPMODADV) ;
+MAP:>nALU (@>N) TARGET NUM + (Sg Acc) (*1 MEASR-N - (Sem/Time) BARRIER NOT-NPMODADV) ;
 	#$ Min viessu lea vihtta mehtara alu. 
-	#% De son barggai guokte jagi buohccedivššárin Kolvereidas Trøndelagas, dan maŋŋá son lea bargan Kárášjogas.
 	#% Máŋggas čuovvoledje, fertejedje vázzit guokte jagi vuosttaš luohkás.
-	#% Finnmárkkus ledje ovdal sihke doaktárat ja buohccedivššárat dábálaččat Lulli-Norggas eret, ja máŋggas ledje dušše leamaš moadde jagi dahje vel oanibut davvin.
 	#Comment: This works when all measure words get their Sem/Measure-tags.
 	
 MAP:>veara (@>A) TARGET Gen  (1 ("veara" Nom))  ;

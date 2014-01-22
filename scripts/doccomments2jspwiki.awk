@@ -73,7 +73,7 @@ function expand_variables(s) {
     }
 }
 /^!!¥ / {
-    printf("This construct is not supported anymore:\n {{{%s}}} ", $0;);
+    printf("This construct is not supported anymore:\n {{{%s}}} ", $0);
 }
 /.*!!= / {
     CODE=gensub("!!=.*", "", "");

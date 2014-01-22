@@ -1720,16 +1720,23 @@ MAP:<obj (@<OBJ) TARGET (Nom Pl <sma>) - Rel  (*-1 FMAINV + TV BARRIER SV-BOUNDA
 MAP:obj> (@OBJ>) TARGET (Nom Pl <sma>) (*1 FMAINV BARRIER SV-BOUNDARY) ;
 
 
-#!! * __<advlMeasr__ (@<ADVL) for Num Acc; if finite mainverb to the left, measure-noun to the right
+#!! * __<advlMeasr__ (@<ADVL) for Num Acc; if finite IV-mainverb to the left, measure-noun to the right
 MAP:<advlMeasr (@<ADVL) TARGET (Num Acc) ((*-1 FMAINV + IV BARRIER SV-BOUNDARY) OR (*-1 (N Loc) BARRIER NOT-Attr LINK *-1 ("bargat") + TV BARRIER SV-BOUNDARY))(*1 MEASR-N + (Sg Gen) BARRIER NOT-NPMODADV LINK NOT 1 Po) ;
 	#$ Mánná lea golbma jagi boaris.
 	#$ 1982:s son roasmmohuvai bávkilahttima oktavuođas Álttádulvadeami vuostá, váldojuvvui gitta, muhto báhtarii Kanadai, ja orui doppe álgoálbmogiid luhtte moadde jagi.
-	#$ Gáre-goaski barggai suohkanis guhtta mánu. => Galgá deaivat dán maid vaikko lea TV ("bargat" + Loc = áigi @ADVL)
-
+	#$ Gáre-goaski barggai suohkanis guhtta mánu. 
+	#% Álggos coggalii Svein Kristian Anti vuosttaš spáppa Sørøy Glimt mollii 22 minuvtta maŋŋel go čiekčamat ledje álgán Niitoguolban stadionas. Acc @>CS (Illatiiva gaskkas?) 
+	
+#!! * __<objMeasr__ (@<OBJ) for Num Acc; if finite TV-mainverb to the left, measure-noun to the right
+MAP:<objMeasr (@<OBJ) TARGET (Num Acc) (*-1 FMAINV + TV BARRIER SV-BOUNDARY)(*1 MEASR-N + (Sg Gen) BARRIER NOT-NPMODADV LINK NOT 1 Po) ;
+	#$ Juohke mánná oaččui guokte ja eanemusat golbma mánu oahpahusa jagis.
+	#$ De son barggai guokte jagi buohccedivššárin Kolvereidas Trøndelagas, dan maŋŋá son lea bargan Kárášjogas.
+	#% Son bijai vuosttaš spáppá mollii 22 minuvtta maŋŋel go čiekčamat ledje álgan.
 	
 MAP:<advl (@<ADVL) TARGET MEASR-N + Acc (-1 (Num Pl) LINK *-1 FMAINV BARRIER SV-BOUNDARY) ;
 
-MAP:advl> (@ADVL>) TARGET (Num Acc) (1 MEASR-N + (Sg Gen) LINK *1 FMAINV BARRIER SV-BOUNDARY) ;
+#!! * __advlMeasr>__ (@ADVL>) for Num Acc;
+MAP:advlMeasr> (@ADVL>) TARGET (Num Acc) (1 MEASR-N + (Sg Gen) LINK *1 FMAINV BARRIER SV-BOUNDARY) ;
 	#$ Mánná lea golbma jagi boaris.
 	#% De son barggai guokte jagi buohccedivššárin Kolvereidas Trøndelagas, dan maŋŋá son lea bargan Kárášjogas.
 	

@@ -33,7 +33,7 @@ function expand_variables(s) {
     printf("\n");
 }
 /^!![€$][^ ]/ {
-    printf("(subsequent examples are *%s*)\n", 
+    printf("\n__%s examples:__\n", 
            gensub("!![€$][^ ]* *", "", ""));
 }
 /^!!€ / {
@@ -73,12 +73,7 @@ function expand_variables(s) {
     }
 }
 /^!!¥ / {
-    printf("; {{%s}}: ", gensub(":$", "", "", $2));
-    for (i = 3; i <= NF; i++)
-    {
-        printf("__%s__ ", gensub("[][]", "", "g", gensub("~", "*", "", $i)));
-    }
-    printf("\n");
+    printf("This construct is not supported anymore:\n {{{%s}}} ", $0;);
 }
 /.*!!= / {
     CODE=gensub("!!=.*", "", "");

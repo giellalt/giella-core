@@ -1792,7 +1792,24 @@ MAP:>advl (@>ADVL) TARGET Adv IF (0 DUSSE  OR EASKKA)(*1 @ADVL BARRIER NOT-NPMOD
 
 #!! !!SUBJ MAPPING - leftovers
 MAP:<subj (@<SUBJ) TARGET NP-HEAD-NOM - A OR DUPRON + Nom OR (Num Nom) (*-1 FMAINV BARRIER (":") OR S-BOUNDARY) ;
-MAP:subj> (@SUBJ>) TARGET NP-HEAD-NOM - A OR DUPRON + Nom OR (Num Nom) (*1 FMAINV BARRIER (":")) ;
+
+#!! * __subj>ifV__ (@SUBJ>) for NP-HEAD-NOM, DUPRON or (Num Nom) if; a finite mainverb is found to the left. This is a cleanup rule for subjects
+MAP:subj>ifV (@SUBJ>) TARGET NP-HEAD-NOM - A OR DUPRON + Nom OR (Num Nom) (*1 FMAINV BARRIER (":"))(NEGATE *1 @SUBJ> + (Pron Rel) BARRIER FMAINV OR FAUXV LINK NOT *2 FMAINV BARRIER EOS) ;
+	#$ Lean ieá oaidnán dange.
+	#$ Mii Sámedikki nuoraidpolitihkalaš lávdegottis (SNPL) áigut čalmmustahttit árbevirolaš ja ođđaáigásaš sámi ealáhusaid.
+	#% #$ Ávdugasat sii geat moraštit.
+	
+#!! * __hnoun>ifV__ (@SUBJ>) for NP-HEAD-NOM, DUPRON if. The counterpart of subj>ifV. You are HNOUN if there is a finite verb to your right, but NOT if there is a finite verb after a relative clause
+MAP:hnoun>ifV (@HNOUN) TARGET NP-HEAD-NOM - A OR DUPRON + Nom (*1 FMAINV BARRIER (":"))(NEGATE *1 @SUBJ> BARRIER FMAINV LINK 2* FMAINV BARRIER EOS ) ;
+	#$ Ávdugas dat guhte vurke dán girjji profehtalaš sániid.
+	#$ Ja ávdugas son guhte oskkui.
+	#$ Ávdugasat sii geat moraštit.
+	#$ Gonagas Agrippa ja dii buohkat geat lehpet dás minguin!
+	#$ Olbmot geat ellet náitoslágan dahje guimmešvuođalágan gaskavuođain.
+	#$ Áhččámet, don guhte leat almmis. 
+	#$ Dat geat ieža eai máhttán oppanassiige lohkat girjjiid.
+	#% Sihke son ja su viellja Paul Danielsen, gii lei ovdaolmmoš vieljas maŋis, vácciiga osiid skuvlla Haviikkas.
+
 
 #!! !!OBJ MAPPING - leftovers
 MAP:<obj (@<OBJ) TARGET NP-HEAD-ACC OR DUPRON + Acc (*-1 FMAINV BARRIER (":") OR S-BOUNDARY) ;

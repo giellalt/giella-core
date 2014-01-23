@@ -45,8 +45,9 @@
       <xs:complexType>
          <xs:sequence>
             <xs:element ref="l"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_drv"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_ref"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_drv"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_cogn"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="lsub"/>
             <xs:element ref="stg"/>
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
@@ -77,6 +78,21 @@
          </xs:simpleContent>
       </xs:complexType>
    </xs:element>
+   <xs:element name="l_ref">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+	      <xs:attribute ref="pos" use="required"/>
+               <xs:attribute name="type">
+		 <xs:simpleType>
+		   <xs:restriction base="xs:string">
+		   </xs:restriction>
+		 </xs:simpleType>
+               </xs:attribute>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
    <xs:element name="l_drv"><!-- This is used with derivations. The content ends in _POS , but there is also a pos attribute-->
       <xs:complexType>
          <xs:simpleContent>
@@ -92,7 +108,7 @@
          </xs:simpleContent>
       </xs:complexType>
    </xs:element>
-   <xs:element name="l_ref">
+   <xs:element name="l_cogn">
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -103,6 +119,7 @@
 		   </xs:restriction>
 		 </xs:simpleType>
                </xs:attribute>
+               <xs:attribute ref="xml:lang" use="required"/>
             </xs:extension>
          </xs:simpleContent>
       </xs:complexType>

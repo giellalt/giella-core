@@ -27,7 +27,7 @@ fi
 grep ";" $1 | grep -v "^\!" | \
              egrep -v '(LEXICON| K | Rreal | R |ShCmp|RCmpnd|CmpN/Only|ENDLEX)' | \
              egrep -v "$EXTRAREMOVALS" | \
-              sed 's/^\w*//' | \
+              sed 's/^[ 	]*//' | \
               grep -v "^\-" | \
               sed 's/% /€/g' | \
               sed 's/%:/¢/g' | \
@@ -39,4 +39,5 @@ grep ";" $1 | grep -v "^\!" | \
               tr "€" " " | \
               tr "¢" ":" | \
               tr "¥" "#" | \
+             egrep -v "(^$|^;|_|^[0-9]$)" | \
               sort -u

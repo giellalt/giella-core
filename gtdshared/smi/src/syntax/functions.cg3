@@ -1608,7 +1608,7 @@ MAP:advl> (@ADVL>) TARGET Ess (*1 FMAINV BARRIER SV-BOUNDARY LINK NOT *1 Nom BAR
 
 #!! * __advlEss>__ (@<ADVL) for weather and time Ess, if FMAINV to the left.
 MAP:advlEss> (@<ADVL) TARGET (Wthr Ess) OR TIME-N + Ess (*-1 FMAINV BARRIER SV-BOUNDARY) ;
-	#$ Boazosápmelaččain ii leat bassin vejolaš fievrridit gálvvu gerresiiguin
+	#$ Boazosápmelaččain ii leat bassin vejolaš fievrridit gálvvu gerresiiguin.
 	
 MAP:Acc<advl (@<ADVL) TARGET TIME-N + Acc OR ("gaska" Acc) (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE 1 (A Nom)) ;
 MAP:Accadvl> (@ADVL>) TARGET TIME-N + Acc OR ("gaska" Acc) (*1 FMAINV BARRIER SV-BOUNDARY) ;
@@ -1760,6 +1760,9 @@ MAP:<objIV (@<OBJ) TARGET Acc - Rel - Num (*-1 FMAINV + IV BARRIER SV-BOUNDARY)(
 MAP:obj>rel (@OBJ>) TARGET Acc (1 Rel LINK *1 FMAINV BARRIER SV-BOUNDARY LINK *1 FMAINV + TV BARRIER SV-BOUNDARY) ;
 	#$ Danne sáhttá váttisvuođaid mat čuožžilit gaskasaš konvenšuvnna beaivválaš dilis, buoremusat čoavdit riikkaidgaskasaš orgánain, mas leat loahpalaš mearridanváldi.
 
+
+
+
 # These nouns in essiv get @ADVL:
 LIST ESS-ADVL = Sem/Time Sem/Wthr "baika" "čakčaseavdnjat" "čuoika" "čuovga"  "varra" ;
 
@@ -1769,22 +1772,28 @@ LIST ESS-PROB-ADVL-N = ("bassi" N) "boaris" ("nuorra" N) ;
 #!! * __<advlEss__ (@<ADVL) for ESS-ADVL if; FMAINV to the left
 MAP:<advlEss (@<ADVL) TARGET ESS-ADVL + Ess IF (*-1 FMAINV BARRIER SV-BOUNDARY) ;
 	#$ Beaskkain gal bivvá buolašin.
+	#$ Dilli joatkašuvvá dákkárin guhkás boahtteáigái.
+	
 #!! * __IV<spredEss__ (@<SPRED) for N Ess if; FMAINV to the left is intransitive or bargat
 MAP:IV<spredEss (@<SPRED) TARGET (N Ess) - ESS-ADVL OR (A Ess) IF (*-1 FMAINV + IV OR ("bargat") + FMAINV BARRIER SV-BOUNDARY) ;
+	#$ Son muittaša movt ovdal lávii ja jietna šaddá litnáseabbon.
+
+#!! * __<opredEss__ (@<OPRED) for N Ess or A Ess 
 MAP:<opredEss (@<OPRED) TARGET (N Ess) OR (A Ess) IF (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY)((*-1 Acc BARRIER NOT-NPMODADV - ADVLCASE) OR (*1 Acc BARRIER NOT-NPMOD) OR (*1 Inf OR ("ahte" CS) BARRIER NOT-ADV-PCLE) OR (*1 N BARRIER NOT-NPMOD LINK 1 Inf));
 	#$ Gaup dojii stivrrana hárjehallamiin, muhto oaččui luoikkasin eará stivrrana.
-	#Comment: Olbmot ledje dilssit buktit bierggu máksun mánáideaset dikšumis.
-MAP:<opredEssRel (@<OPRED) TARGET (N Ess) OR (A Ess) IF (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY LINK -1 (Rel Acc)) ;
+	#$ Olbmot ledje dilssit buktit bierggu máksun mánáideaset dikšumis.
+
+#!! * __Acc<opredEss__ (@<OPRED) for N Ess or A Ess if; transitive mainverb to the left in the clause, and an accusative cased Rel left to the verb
+MAP:Acc<opredEss (@<OPRED) TARGET (N Ess) OR (A Ess) OR (Pron Ess) IF (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY - FAUXV LINK *-1 Acc BARRIER S-BOUNDARY) ;
 	#$ Organisašuvnna bláđđi man gohčodit Fokusin muitala ahte gonagas Olav su áiggistis lei bivdán beassat leat servodaga suodjaleaddji.
 
-MAP:<opredEss (@<OPRED) TARGET (N Ess) OR (A Ess) IF (-1 FMAINV + TRANS-V LINK *-1 Acc BARRIER S-BOUNDARY);
-	#$ Šiehtadus sisttisdoallá dárkilis evttohusa movt guohtuneatnamiid sáhttá atnit ávkin goabbat bealde ráji.
-	#$ Duolji geavahit máŋgga ládje, dan sáhttá goikadit ja geavahit suodjin.
 
 MAP:spred>Ess (@SPRED>) TARGET (N Ess) OR (A Ess) IF (*1 FMAINV + IV OR ("bargat") + FMAINV BARRIER SV-BOUNDARY);
 MAP:opred>Ess (@OPRED>) TARGET (N Ess) OR (A Ess) IF (*1 FMAINV + TRANS-V BARRIER SV-BOUNDARY);
 #MAP:<spredEss (@<SPRED) TARGET (A Ess) IF (*-1 FMAINV BARRIER SV-BOUNDARY);
 #MAP:spred>Ess (@SPRED>) TARGET (A Ess) IF (*1 FMAINV BARRIER SV-BOUNDARY);
+
+
 
 
 MAP:>advl (@>ADVL) TARGET Adv IF (0 DUSSE  OR EASKKA)(*1 @ADVL BARRIER NOT-NPMOD);
@@ -1823,6 +1832,7 @@ MAP:hnounNom (@HNOUN) TARGET NP-HEAD-NOM - A OR (Num Nom) (NEGATE *0 REAL-V BARR
 	#$ Bargolávdegotti bargu: Álgobargu lei čielggadit min mandáhta.
 
 MAP:hnounAdvl (@HNOUN) TARGET ADVLCASE OR Acc (NEGATE *0 REAL-V OR @HNOUN) ;
+	#$ Juoba ge dán áigodagas.
 MAP:hnounInterj (@HNOUN) TARGET Acc (*-1 Interj BARRIER NOT-NPMOD) ;
 
 
@@ -1833,12 +1843,13 @@ MAP:advl>HNOUN (@ADVL>) TARGET ADVL (*1 @HNOUN BARRIER CRD) ;
 MAP:HNOUN<obj (@<OBJ) TARGET Acc (*-1 @HNOUN) ;
 	#% Birasgáhttenlihkadus ja álgoálbmogat - ovttasbargit vai vuostálágaid? 
 MAP:obj>HNOUN (@OBJ>) TARGET Acc (*1 @HNOUN) ; 
-MAP:HNOUN<spred (@<SPRED) TARGET (A Nom) (*-1 @HNOUN) ; 
+MAP:HNOUN<spred1 (@<SPRED) TARGET (A Nom) (*-1 @HNOUN) ; 
 	#$ Dii guoktilaččat!
 MAP:spred>HNOUN (@SPRED>) TARGET (A Nom) (*1 @HNOUN) ; 
-MAP:HNOUN<spred (@<SPRED) TARGET (A Nom) OR (N Nom) (*-1 PUNCT BARRIER REAL-V LINK *-1 @HNOUN) ; 
+MAP:HNOUN<spred2 (@<SPRED) TARGET (A Nom) OR (N Nom) (*-1 PUNCT BARRIER REAL-V LINK *-1 @HNOUN) ; 
 	#$ Birasgáhttenlihkadus ja álgoálbmogat – ovttasbargit vai vuostálagaid?
-
+MAP:HNOUN<spred3 (@<SPRED) TARGET (N Ess) (*-1 Nom BARRIER V) ;
+	#$ Mu dárkileamos muittut internáhttaskuvllas leat dán áigodagas; 10 vuosttaš jagi álbmot- ja joatkkaskuvlla (framhaldskuvlla) oahpaheaddjin, ja muhtin áigodagaid internáhttahoavdan, 12 maŋimus jagi nuoraidskuvlla jođiheaddjin ja eanaš oahppit orro internáhtas.
 MAP:HNOUNcoor (@HNOUN) TARGET N (-1 @CNP LINK -1 @HNOUN) ;
 	#$ Oslos ja Londonis.
 

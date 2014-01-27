@@ -1588,11 +1588,17 @@ MAP:BOSPo> (@ADVL>) TARGET Po (*-1 BOS BARRIER FMAINV)(*1 S-BOUNDARY OR COMMA BA
 	#$ Dán girjji vuođul ja ságastallamiiguin lullisámiin lea munnje báhcán millii ahte internáhttadoaibma ii lean gal alla dásis, muhto internáhttaskuvlii dattetge bohte viššalit lullisámi bearrašat.
 	#% Romssa ja davágeaži Norrbottena boazoorohagat ja čearut riikaráji guoras ja konvenšuvdnaguovlluin.
 
-#!! * __<advlEOS__ (@<ADVL) for Po or Loc; if you are found at the very end of a sentence. A mainverb is needed to the left though.
+#!! * __<advlComIll__ (@<ADVL) only if; you are Com OR Ill. To your left is a mainverb, and to your right a sentenceboundary, because we don't want there to be another mainverb you potentially could belong to
+MAP:<advlComIll (@<ADVL) TARGET Com OR Ill (*-1 FMAINV BARRIER FMAINV OR ("<:>"))(*1 EOC BARRIER FMAINV)(NEGATE 0 (Pl Loc))(NEGATE 0 Gen LINK 1 Pr OR Po) ;
+	#$ Sis lei unnán dahje ii makkárge oktavuohta earáiguin earretgo internáhtas orodettiin.
+	#$ Ii fal runiidan jalges gittiide, muhto meahccái, gosa návddit dávjá ja lunddolaččat fievrridit ráppiid.	
+
+#!! * __<advlEOS__ (@<ADVL) for Po or Pr or Loc; if you are found at the very end of a sentence. A mainverb is needed to the left though.
 MAP:<advlEOS (@<ADVL) TARGET Po OR Pr OR Loc (*-1 FMAINV)(*1 EOS BARRIER FMAINV);
 	#$ Sámediggi lea miehtan sutnje máksit 800 ruvnno juohke árgabeaivvi ovddas, muhto ii fal lávvordagaid, sotnabeivviid ja bassebeivviid ovddas.
 	#$ Dat sáhttet leat ovttasbargošiehtadusat oanahis áigái, dahje oktasašdoallu muhtin áiggiid jagis, dahje vaikko miehtá jagi.
 	#$ Sosiálkuráhtorat eai gávdnon gilis ovdalgo 1960-logus.
+	#% Daid sáhttá heaŋggastit dan heargái mii daid eará goahtemuoraid lea guoddimin, guokte bealji goappáge beallái hearggi.
 	#Comment: Sámi dutkan ii leat dan dihte soaittáhagas válljejuvvon dutkansuorgi. <== galggašii doaibmat dalle go 'leat' oažžu rivttes analysa. 
 
 

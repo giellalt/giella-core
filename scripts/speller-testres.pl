@@ -446,6 +446,7 @@ sub read_polderland {
 					$reading = 1;
 					($orig = $line) =~ s/^.*?Getting suggestions for (.*?)\.\.\.\s*$/$1/;
 				}
+				$i++;
 
 				# Some simple adjustments to the input and output lists.
 				# First search the output word in the input list.
@@ -453,7 +454,6 @@ sub read_polderland {
 				while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
 					$j++;
 				}
-				$i++;
 
 				# If the output word was not found in the input list, ignore it.
 				if (! $originals[$j]) {

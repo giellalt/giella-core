@@ -1306,6 +1306,7 @@ MAP:<extsubjQst1 (<ext> @<SUBJ) TARGET Nom - NOT-EXT (
 	#$ Lea go dus dušše okta mánná?
 	#$ Leat go min dihtorat ođđaáigásaččat? SUBJ + SPRED 
 	#% Ledje go hilbadat mánát? SUBJ + SPRED
+	#% Ledjego guolit divrasat?
 #Comment: It might be easier to read this, if it hadn't been clinched all together as one spredQst-rule.. Concider dividing it into at least two rules: one for Hab/DOPPE and the other one for the rest. A,B and F make one pair. 2
 
 MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Neg OR COMMA BARRIER NOT-NPMOD LINK *-1 <ext> BARRIER WORD)(NEGATE 1 REAL-V) ;
@@ -1325,12 +1326,20 @@ MAP:<spredQst2 (@<SPRED) TARGET Nom - Pers (*-1 Qst BARRIER NOT-NPMOD LINK -1 CO
 	#$ Leago Čáhppes Bearral oahpis dutnje?
 	#% Muhto ii dalle leat velá guhkki idja.
 	
-
-MAP:<spredBeforeSubj (@<SPRED) TARGET (A Nom) (*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS)(1 (N Nom));# OR (*-1 COPULAS BARRIER NOT-NPMOD LINK -1 BOS))(1 (N Nom)) ;
+#!! * __<spredBeforeSubj__ (@<SPRED) for A Nom if; copulas with a Qst-particle is found sentence initially. First one to the riht is (N Nom)
+MAP:<spredBeforeSubj (@<SPRED) TARGET (A Nom) IF (*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS)(*1 (N Nom) BARRIER NOT-NPMOD);# OR (*-1 COPULAS BARRIER NOT-NPMOD LINK -1 BOS))(1 (N Nom)) ;
 	#$ Ledje go hilbadat mánát?
+
+#!! * __<spredBeforeSubj2__ (@<SPRED) for A Nom if; Nom to the right and copulas to the right of Nom, but no Nom allošed to the right of copulas. To avoid messing with coordination: ja is not allowd to your right. 
+MAP:<spredBeforeSubj2 (@<SPRED) TARGET (A Nom) IF (*-1 Nom BARRIER NOT-NPMODADV LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Nom)(NEGATE *-1 ("ja") OR ("dahje") BARRIER NOT-NPMODADV)(NEGATE -1 COMMA)(NEGATE 1 ("go") OR V) ;
+	#$ Earát fas orro olbmuid luhtte, ja sin mielas lei dát hui givssálaš.
+	#$ Dábálaččat lea čuollu guhkit, golbma, njeallje fierbmebaji guhku.
+	#$ Suomas maid lea dilli váttis.
+	#$ Dán oktavuođas leat dološ geavahusa njuolggadusat miellagiddevaččat.
+	#$ Márehis lea oaivi bávččas.
   
 #!! * __<spred__ (@<SPRED) for A Nom or N Nom if; the subject Nom is on the same side of copulas as you: on the right side of copulas
-MAP:<spred (@<SPRED) TARGET (A Nom) OR (N Nom)(*-1 (N Nom) BARRIER NOT-A LINK -1 COPULAS + FMAINV)(NEGATE -1 @<SPRED) ;
+MAP:<spred (@<SPRED) TARGET (A Nom) OR (N Nom) IF (*-1 (N Nom) BARRIER NOT-A LINK -1 COPULAS + FMAINV)(NEGATE -1 @<SPRED) ;
 	#$ Girjji namma čujuha dasa ahte dološ myhtain leat sámit mánát.
 
 #!! * __<spredVeara__ (@<SPRED) for veara + Nom; if genitive immediately to the right, and intransitive mainverb to the right of genitive
@@ -1447,7 +1456,7 @@ MAP:subj>Du (@SUBJ>) TARGET (Coll Nom) IF (*1 VFIN + Du3 BARRIER REAL-V OR S-BOU
 #!! * __subj>Pl__ (@SUBJ>) for plural nominatives, including Coll and Sem/Group. VFIN + Pl3 to the right.
 
 #!! * __subj>Pl__ (@SUBJ>) for plural nominatives
-MAP:subj>Pl (@SUBJ>) TARGET (Nom Pl) OR (Pl3 Nom) OR (Sem/Group Nom) OR (Coll Nom) OR (Pron Indef) IF (*1 VFIN + Pl3 BARRIER REAL-V OR S-BOUNDARY) ;
+MAP:subj>Pl (@SUBJ>) TARGET (Nom Pl) OR (Pl3 Nom) OR (Sem/Group Nom) OR (Coll Nom) IF (*1 VFIN + Pl3 BARRIER REAL-V OR S-BOUNDARY) ;
 	#$
  
 
@@ -1581,6 +1590,7 @@ MAP:advl>mainV (@ADVL>) TARGET ADVL (NOT *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAIN
 MAP:V<advl (@<ADVL) TARGET ADVL - MO - Rel - MOD-ADV - Attr OR TIME-N + Gen OR (Sem/Route Gen) OR Sem/Date OR Sem/Year (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
 	#$ Giellatekno álggahuvvui 1.8.2001 prošeaktan ráhkadit sámegiela grammatihkalaš analysa.
 	#$ Dán filmma leat Kárášjoga nuorat oaidnán, eaige šat vuolgge sirkusii.
+	#% Vare livččet jogo galmmas dahje liekkas.
 
 #!! * __advl>v__ (@ADVL>) if; you are ADVL, time-noun or Sem/Route and there is a finite verb to the right in the clause, or if to your right is: de followed by a finite verb. OR: if you are a time-nound and to your right is: go or sentenceboundary followed by a finite verb	
 MAP:advl>v (@ADVL>) TARGET ADVL OR TIME-N + Gen OR (Sem/Route Gen) ((*1 FMAINV OR FAUXV BARRIER SV-BOUNDARY) OR (*1 ("de") BARRIER FMAINV LINK 1 FMAINV OR FAUXV) OR (*-1 BOS BARRIER NOT-NPMOD LINK *1 TIME-N + Gen BARRIER NOT-NPMOD LINK *1 ("go") OR S-BOUNDARY BARRIER FMAINV LINK *1 FMAINV OR FAUXV BARRIER SV-BOUNDARY)) ;

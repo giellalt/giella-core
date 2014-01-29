@@ -1837,14 +1837,20 @@ MAP:IV<spredEss (@<SPRED) TARGET (N Ess) - ESS-ADVL OR (A Ess) OR (A Ord Ess) IF
 	#$ Son muittaša movt ovdal lávii ja jietna šaddá litnáseabbon.
 	#$ Sii olihedje diibmá nu movt dán jagi nubbin.
 
-#!! * __<opredEss__ (@<OPRED) for N Ess or A Ess 
+#!! * __<opredEss__ (@<OPRED) for (N Ess), (A Ess) if; transitive mainverb to the left in the clause. If accusative to the left or to the right, or if Inf or ahte to the right, or if there is a noun to the right followed by an Inf
 MAP:<opredEss (@<OPRED) TARGET (N Ess) OR (A Ess) IF (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY)((*-1 Acc BARRIER NOT-NPMODADV - ADVLCASE) OR (*1 Acc BARRIER NOT-NPMOD) OR (*1 Inf OR ("ahte" CS) BARRIER NOT-ADV-PCLE) OR (*1 N BARRIER NOT-NPMOD LINK 1 Inf));
 	#$ Gaup dojii stivrrana hárjehallamiin, muhto oaččui luoikkasin eará stivrrana.
 	#$ Olbmot ledje dilssit buktit bierggu máksun mánáideaset dikšumis.
 
-#!! * __Acc<opredEss__ (@<OPRED) for N Ess or A Ess if; transitive mainverb to the left in the clause, and an accusative cased Rel left to the verb
+#!! * __Acc<opredEss__ (@<OPRED) for (N Ess), (A Ess) if; transitive mainverb to the left in the clause, and an accusative cased Rel left to the verb
 MAP:Acc<opredEss (@<OPRED) TARGET (N Ess) OR (A Ess) OR (Pron Ess) IF (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY - FAUXV LINK *-1 Acc BARRIER S-BOUNDARY) ;
 	#$ Organisašuvnna bláđđi man gohčodit Fokusin muitala ahte gonagas Olav su áiggistis lei bivdán beassat leat servodaga suodjaleaddji.
+
+#!! * __onlyV<opred__ (@<OPRED) for (N Ess) if; there is a transitive mainverb to the left. Usually there needs to be an Acc to the left, but here it is not needed
+#MAP:onlyV<opred (@<OPRED) TARGET (N Ess) (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY) ;
+	#$ Eaba dahkan gullinge.
+	#$ Borghild Johansen nevttii Ovllážin, gii gávnnadii guovžžain vuovddis.
+	#$ Mu mielas lei váttis joatkit mearrabivdin.
 
 
 MAP:spred>Ess (@SPRED>) TARGET (N Ess) OR (A Ess) IF (*1 FMAINV + IV OR ("bargat") + FMAINV BARRIER SV-BOUNDARY);

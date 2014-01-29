@@ -1055,7 +1055,7 @@ MAP:>n (@>N) TARGET $$CASE (0 Dem OR OKTA OR ("buorre" A) LINK *1 $$CASE + N BAR
 MAP:>ntittel (@>N) TARGET TIME-N + (Sg Nom) - Coll OR (Sem/Hum Sg Nom) - Coll OR Der/NomAg (1 Sem/Mal OR Sem/Fem OR Sem/Sur);
 	#$ Ávvir ii ožžon rektor Mats Steinfjella jearahallamii.
 
-#!! * __>nALU__ (@>N) Sg Acc numerals; when a measure-noun to the right
+#!! * __>nALU__ (@>N) for Sg Acc numerals; when a measure-noun to the right
 MAP:>nALU (@>N) TARGET NUM + (Sg Acc) (*1 MEASR-N - (Sem/Time) BARRIER NOT-NPMODADV) ;
 	#$ Min viessu lea vihtta mehtara alu. 
 	#% Máŋggas čuovvoledje, fertejedje vázzit guokte jagi vuosttaš luohkás.
@@ -1085,10 +1085,27 @@ MAP:pron< (@Pron<) TARGET (Indef Nom) OR (Refl Nom) (-1 COPULAS + FMAINV LINK -1
 MAP:n< (@N<) TARGET (Refl Nom) ((*-1 (N Nom) BARRIER NOT-ADV-PCLE) OR (-1 FMAINV LINK *-1 (N Nom) BARRIER SV-BOUNDARY OR Nom))(NEGATE 1 Refl) ;
 	#$ Eadni dal ieš čohkká ommangáttis ja boraha uhca nieiddažis gean son doallá askkistis.
 
-MAP:>pron (@>Pron) GRADE-ADV OR DUSSE OR BUOT (1 Pron) ;
-MAP:>pron (@>Pron) (Refl Nom) (1 Refl) ;
+
+#!! * __>pron1__ (@>Pron) for GRADE-ADV, DUSSE, BUOT if; first one to the right is Pron
+MAP:>pron1 (@>Pron) GRADE-ADV OR DUSSE OR BUOT (1 Pron) ;
+	#$ Ja nugo olmmoš gohčodii guđege ealli, nu dat šattai navdojuvvot.
+	
+#!! * __>pron2__ (@>Pron) for (Refl Nom) if; first one to the right is Refl
+MAP:>pron2 (@>Pron) (Refl Nom) (1 (Refl) OR (Pers)) ;
+	#$ Sis lea nana árbevierru veahkehit ieš iežas persovnnalaš fierpmádagaid vehkiin.
+
+#!! * __>pron3__ (@>Pron) for (Pron Recipr) if; first one to the right is (Pron Recipr)
+MAP:>pron3 (@>Pron) (Pron Recipr) (1 (Pron Recipr)) ;
+	#$ Mánát iešguđege sogas internáhtas deaivvadedje ja ovttasbargodilálašvuođaid bokte várra lahkanedje guhtet guimmiideaset.
+	
+#!! * __vaikko__ (@>Pron) for vaikko if; first one to the right is Indef
 MAP:vaikko (@>Pron) ("vaikko") (1 Indef) ;
-MAP:vaikko (@>ADVL) ("vaikko") (1 ("man" Adv)) ;
+	#$ Dákkár stuora gávpogis olmmoš sáhttá bargat vaikko maid.
+
+#!! * __vaikkoman__ (@>ADVL) for vaikko if; first one to the right is man
+MAP:vaikkoman (@>ADVL) ("vaikko") (1 ("man" Adv)) ;
+	#$ Romssas, Davvi-Norgga stuorimus gávpogis, leat vaikko man ollu studeanttat.
+
 
 MAP:>a (@>A) TARGET GRADE-ADV (*1 A BARRIER NOT-NPMOD) ;
 MAP:>aSup (@>A) TARGET ("buot") (*1 Superl BARRIER NOT-NPMOD) ;

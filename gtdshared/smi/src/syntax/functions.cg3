@@ -582,7 +582,7 @@ SET NOT-ADV-PCLE-NEG   = WORD - Adv - Pcle - Neg ;
 SET NOT-ADVL-PCLE-NEG  = WORD - @ADVL - @P< - Pcle - Neg ;
 
 
-LIST MO-MANge = "goas" "gokko" "gos" "gosa" "govt" "makkár" "man" "manne" "mo" "mot" "mov" "movt" ("nugo" @CVP) (V Qst);
+LIST MO-MANge = "goas" "gokko" "gos" "gosa" "govt" "makkár" "man" "manne" ("manin" Adv) "mo" "mot" "mov" "movt" ("nugo" @CVP) (V Qst);
  
 SET MO = MO-MANge - ("man" Foc/ge) ; 
  
@@ -1847,11 +1847,14 @@ MAP:Acc<opredEss (@<OPRED) TARGET (N Ess) OR (A Ess) OR (Pron Ess) IF (*-1 FMAIN
 	#$ Organisašuvnna bláđđi man gohčodit Fokusin muitala ahte gonagas Olav su áiggistis lei bivdán beassat leat servodaga suodjaleaddji.
 
 #!! * __onlyV<opred__ (@<OPRED) for (N Ess) if; there is a transitive mainverb to the left. Usually there needs to be an Acc to the left, but here it is not needed
-#MAP:onlyV<opred (@<OPRED) TARGET (N Ess) (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY) ;
+MAP:onlyV<opred (@<OPRED) TARGET (N Ess) (*-1 @-FMAINV + TRANS-V OR @+FMAINV + TRANS-V BARRIER SV-BOUNDARY) ;
 	#$ Eaba dahkan gullinge.
 	#$ Borghild Johansen nevttii Ovllážin, gii gávnnadii guovžžain vuovddis.
 	#$ Mu mielas lei váttis joatkit mearrabivdin.
 
+#!! * __onlyV<opred2__ (@<OPRED) for (N Ess) if; 
+MAP:onlyV<opred2 (@-F<OPRED) TARGET (N Ess) (*-1 FMAINV + TRANS-V BARRIER SV-BOUNDARY) ;
+	#$ Oahpaheaddjin mun dovden heahtin go in máhttán sámegiela.
 
 MAP:spred>Ess (@SPRED>) TARGET (N Ess) OR (A Ess) IF (*1 FMAINV + IV OR ("bargat") + FMAINV BARRIER SV-BOUNDARY);
 MAP:opred>Ess (@OPRED>) TARGET (N Ess) OR (A Ess) IF (*1 FMAINV + TRANS-V BARRIER SV-BOUNDARY);

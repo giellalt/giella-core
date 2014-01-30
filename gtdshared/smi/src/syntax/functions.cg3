@@ -1333,22 +1333,22 @@ MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Ne
 	# Subject predicatives - SPRED 
 	
 	
-#!! * __<spredQst2__ (@<SPRED) for Nom; in a typically question sentence; differs from <spredQst1 by not beeing as restricted to the right. Though you are not allowed to be Pers or human.
-MAP:<spredQst2 (@<SPRED) TARGET Nom - Pers (*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS)(NEGATE 0 HUMAN)(NEGATE *1 Nom BARRIER NOT-NPMOD) ;
+#!! * __<spredQst__ (@<SPRED) for Nom; in a typically question sentence; You are not allowed to be Pers or human. Nom is not allowed to your right
+MAP:<spredQst (@<SPRED) TARGET Nom - Pers IF (*-1 Qst BARRIER NOT-NPMODADV LINK -1 COPULAS + FMAINV LINK -1 BOS)(NEGATE 0 HUMAN)(NEGATE *1 Nom BARRIER NOT-NPMOD) ;
 	#$ Lea go duohtavuohta sukcasiin Jack Sparrow birra?
 	#$ Leat go árgi bajándálkkis? 
 
-#!! * __Nom<spredQst__ (@<SPRED) for Nom; in a typically question sentence. Differs from <spredQst2 by letting Nom be found between SPRED and copulas
-#MAP:Nom<spredQst (@<SPRED) TARGET Nom - Pers ((*-1 Nom BARRIER NOT-ADV-PCLE LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV) OR (*-1 Nom BARRIER NOT-ADV-PCLE LINK *-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV BARRIER NOT-NPMODADV))(NEGATE *-1 COPULAS + FMAINV BARRIER SV-BOUNDARY LINK *-1 Nom OR <hab> BARRIER BOC OR NOT-NPMODADV - Neg)  ;
-	#$ Leago Čáhppes Bearral oahpis dutnje?
-	#% Muhto ii dalle leat velá guhkki idja.
+#!! * __<spredQst2__ (@<SPRED) for Nom;
+MAP:<spredQst2 (@<SPRED) TARGET (A Nom) IF (*-1 (N Nom) BARRIER NOT-NPMODADV LINK *-1 Qst BARRIER NOT-NPMODADV LINK -1 COPULAS + FMAINV LINK -1 BOS) ;
+	#$ Leat go min dihtorat ođđaáigásaččat?
+	#$ Lea go Čáhppes Bearral oahpis dutnje? 
 	
-#!! * __<spredBeforeSubj__ (@<SPRED) for A Nom if; copulas with a Qst-particle is found sentence initially. First one to the riht is (N Nom)
-MAP:<spredBeforeSubj (@<SPRED) TARGET (A Nom) IF (*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS)(*1 (N Nom) BARRIER NOT-NPMOD);# OR (*-1 COPULAS BARRIER NOT-NPMOD LINK -1 BOS))(1 (N Nom)) ;
+#!! * __<spredQst3__ (@<SPRED) for (A Nom); you are SPRED when you are (A Nom) and to your right is (N Nom). This is a Qst-sentence, so copulas is found to your left
+MAP:<spredQst3 (@<SPRED) TARGET (A Nom) IF (*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS)(*1 (N Nom) BARRIER NOT-NPMOD);
 	#$ Ledje go hilbadat mánát?
 
-#!! * __<spredBeforeSubj2__ (@<SPRED) for A Nom if; Nom to the right and copulas to the right of Nom, but no Nom allowed to the right of copulas. To avoid messing with coordination: ja or dahje is not allowd to your right. Comma is not allowed to your right; then you are also likely to be coordinated
-MAP:<spredBeforeSubj2 (@<SPRED) TARGET (A Nom) IF (*-1 Nom BARRIER NOT-NPMODADV LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Nom)(NEGATE *-1 ("ja") OR ("dahje") BARRIER NOT-NPMODADV)(NEGATE -1 COMMA)(NEGATE 1 ("go") OR V) ;
+#!! * __<NomBeforeSpred__ (@<SPRED) for (A Nom) if; Nom to the left, and copulas is to the left of Nom. There is no Nom allowed to the right of copulas! To avoid messing with coordination: ja, dahje and comma are not allowed to your left. Comma is not allowed to your right; if so then you are likely to be coordinated
+MAP:<NomBeforeSpred (@<SPRED) TARGET (A Nom) IF (*-1 Nom BARRIER NOT-NPMODADV LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Nom)(NEGATE *-1 ("ja") OR ("dahje") BARRIER NOT-NPMODADV)(NEGATE -1 COMMA)(NEGATE 1 ("go") OR V) ;
 	#$ Earát fas orro olbmuid luhtte, ja sin mielas lei dát hui givssálaš.
 	#$ Dábálaččat lea čuollu guhkit, golbma, njeallje fierbmebaji guhku.
 	#$ Suomas maid lea dilli váttis.
@@ -1360,11 +1360,11 @@ MAP:<spred (@<SPRED) TARGET (A Nom) OR (N Nom) IF (*-1 (N Nom) BARRIER NOT-A LIN
 	#$ Girjji namma čujuha dasa ahte dološ myhtain leat sámit mánát.
 
 #!! * __<spredVeara__ (@<SPRED) for veara + Nom; if genitive immediately to the right, and intransitive mainverb to the right of genitive
-MAP:<spredVeara (@<SPRED) TARGET ("veara" Nom) (-1 Gen LINK *-1 IV + FMAINV BARRIER SV-BOUNDARY) ; 
+MAP:<spredVeara (@<SPRED) TARGET ("veara" Nom) IF (-1 Gen LINK *-1 IV + FMAINV BARRIER SV-BOUNDARY) ; 
 	#$ Son oinnii buot dan mii lea ráhkistan ja gudnejahttin veara.
 
 #!! * __leftCop<spred__ (@<SPRED) for Nom; if copulas is the main verb to the left, and there is no Ess found to the left of cop (note that Loc is allowed between target and cop). OR: if you are Coll or Sem/Group with copulas to your left. 
-MAP:leftCop<spred (@<SPRED) TARGET Nom - Pers ((*-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) OR 
+MAP:leftCop<spred (@<SPRED) TARGET Nom - Pers IF ((*-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) OR 
 (0 Coll OR Sem/Group LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV))
 (NEGATE 1 Nom - Rel)(NEGATE *1 Nom - Rel BARRIER NOT-A OR COMMA)(NEGATE 0 Gen OR Attr OR ("buorre") LINK 1 N)(NEGATE 1 Ess LINK NOT *-2 SUBJ BARRIER S-BOUNDARY) (NEGATE 0 HUMAN LINK *-1 ("orrut") BARRIER NOT-NPMODADV OR S-BOUNDARY) (NEGATE 0 Num LINK 1 HUMAN LINK *-1 ("orrut") BARRIER NOT-NPMODADV OR S-BOUNDARY)(NEGATE 0 Nom LINK *1 (A Nom) BARRIER NOT-ADV) ;
 	#$ Čállit lea buoret go lohkat.
@@ -1372,7 +1372,7 @@ MAP:leftCop<spred (@<SPRED) TARGET Nom - Pers ((*-1 COPULAS + FMAINV BARRIER NOT
 	#% Mánnáguoddi-spagáin leat spahká-oaivvit sakka guhkibut.
 
 #!! * __<spredLocEXPERIMENT__ (@<SPRED) for material Loc; if you are to the right of copulas, and the Nom to the left of copulas is not a hab-actor
-MAP:<spredLocEXPERIMENT (@<SPRED) TARGET (Sem/Mat N Loc) (*-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE LINK *-1 Nom BARRIER VFIN-NOT-NEG LINK NEGATE 0 HAB-ACTOR) ;
+MAP:<spredLocEXPERIMENT (@<SPRED) TARGET (Sem/Mat N Loc) IF (*-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE LINK *-1 Nom BARRIER VFIN-NOT-NEG LINK NEGATE 0 HAB-ACTOR) ;
 	#$ Niibi lea stális.
 	#% Niibi lea olbmos.
 	#% Olmmoš lea muoras.
@@ -1380,23 +1380,23 @@ MAP:<spredLocEXPERIMENT (@<SPRED) TARGET (Sem/Mat N Loc) (*-1 COPULAS + FMAINV B
  
  
 #!! * __NumTime__ (@<SPRED) for A Nom
-MAP:NumTime<spred (@<SPRED) TARGET (A Nom) (-1 TIME-N LINK -1 Num LINK *-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE)(NEGATE 1 Nom - Rel) ;
+MAP:NumTime<spred (@<SPRED) TARGET (A Nom) IF (-1 TIME-N LINK -1 Num LINK *-1 COPULAS + FMAINV BARRIER NOT-ADV-PCLE)(NEGATE 1 Nom - Rel) ;
 	#$ Son lea 10 jagi boaris.
 	#$ Sápmelaččaid historjá álbmogin lea duháhiid jagiid boaris.
 
 #!! * __<spredSg__ (@<SPRED) for Sg Nom	
-MAP:<spredSg (@<SPRED) TARGET (Sg Nom) (*-1 @CNP OR (Neg Foc/ge) BARRIER REAL-V - COPULAS OR S-BOUNDARY LINK *-1 @<SPRED BARRIER WORD) ;
+MAP:<spredSg (@<SPRED) TARGET (Sg Nom) IF (*-1 @CNP OR (Neg Foc/ge) BARRIER REAL-V - COPULAS OR S-BOUNDARY LINK *-1 @<SPRED BARRIER WORD) ;
 	#$ Son lea mu oabbá, ja 10 jagi boaris.
 	#$ Son oinnii buot dan mii lea ráhkistan ja gudnejahttin veara.
 	#$ Munnje lei dehálaš ahte áiggošin leat bahánihkkán.
 	#$ Mus ii leat biila iige mopeda.
 
 #!! * __<spredPg__ (@<SPRED) for Pl Nom	
-MAP:<spredPl (@<SPRED) TARGET (Pl Nom) ((*-1 COPULAS BARRIER NOT-NPMODADV LINK *-1 (Pl Nom) OR PLPRON + Nom OR DUPRON + Nom BARRIER NOT-ADV-PCLE) OR (*-1 COPULAS BARRIER NOT-NPMODADV LINK -1 Nom LINK *-1 CC BARRIER NOT-NPMOD LINK -1 Nom) OR (*-1 COPULAS BARRIER NOT-NPMODADV LINK *-1 FAUXV BARRIER NOT-ADV-PCLE LINK *-1 (Pl Nom) OR PLPRON + Nom OR DUPRON + Nom BARRIER NOT-ADV-PCLE)) ;
+MAP:<spredPl (@<SPRED) TARGET (Pl Nom) IF ((*-1 COPULAS BARRIER NOT-NPMODADV LINK *-1 (Pl Nom) OR PLPRON + Nom OR DUPRON + Nom BARRIER NOT-ADV-PCLE) OR (*-1 COPULAS BARRIER NOT-NPMODADV LINK -1 Nom LINK *-1 CC BARRIER NOT-NPMOD LINK -1 Nom) OR (*-1 COPULAS BARRIER NOT-NPMODADV LINK *-1 FAUXV BARRIER NOT-ADV-PCLE LINK *-1 (Pl Nom) OR PLPRON + Nom OR DUPRON + Nom BARRIER NOT-ADV-PCLE)) ;
 	#$ Arkiivaávdnasat leat 25-30 jagi boarrásat.
 
 #!! * __<spred__ (@<SPRED) for Nom; if copulas to the left, and Nom or sentence boundary to the left of copulas. First one to the right is EOS.
-MAP:<spred (@<SPRED) TARGET Nom (*-1 COPULAS + FMAINV BARRIER NOT-NPMODADV LINK -1 Nom OR S-BOUNDARY)(1 EOS) ;
+MAP:<spred (@<SPRED) TARGET Nom IF (*-1 COPULAS + FMAINV BARRIER NOT-NPMODADV LINK -1 Nom OR S-BOUNDARY)(1 EOS) ;
 	#$ Arkiivaávdnasat galget sáddejuvvot go leat sullii 25-30 jagi boarrásat.
 
 #!! * __COP<spredEss__ (@<SPRED) for N Ess
@@ -1407,45 +1407,45 @@ MAP:spredEss>COP (@SPRED>) TARGET (N Ess) IF (*1 COPULAS BARRIER SV-BOUNDARY)(-1
 	#$ Sápmelaččaid historjá álbmogin lea duháhiid jagiid boaris, muhto dálá ássanguovlluin sápmelaččat eai leat ássan nu guhká.
 
 #!! * __HABSpredSg>__ (@SPRED>) for Nom; if habitive first one to the left, followed by copulas.
-MAP:HABspredSg> (@SPRED>) TARGET Nom (1 <hab> LINK 1 COPULAS) ;
+MAP:HABspredSg> (@SPRED>) TARGET Nom IF (1 <hab> LINK 1 COPULAS) ;
 	#$ Mii dus lea?
 
 #!! * __GalleSpred>__ (@SPRED>) for Num Nom; if sentence initial
-MAP:Gallespred> (@SPRED>) TARGET ("galle" Num Nom) (*-1 BOS BARRIER NOT-ADV) ;
+MAP:Gallespred> (@SPRED>) TARGET ("galle" Num Nom) IF (*-1 BOS BARRIER NOT-ADV) ;
 
 #!! * __spredSgMII>__ (@SPRED>)
-MAP:spredSgMII> (@SPRED>) TARGET MII + (Sg Nom) (*1 (Sg Nom) BARRIER NOT-NPMOD LINK 1 COPULAS) ;
+MAP:spredSgMII> (@SPRED>) TARGET MII + (Sg Nom) IF (*1 (Sg Nom) BARRIER NOT-NPMOD LINK 1 COPULAS) ;
 
 #!! * __r492>__ (@SPRED>) for Interr Gen; consisting only of negations. You are not allowed to be MII. You are not allowed to have an adjective or noun to yor right. You are not allowed to have a verb to your right; the exception beeing an aux.
 MAP:r492 (@SPRED>) TARGET (Interr Gen) IF (NEGATE 0 MII)(NEGATE *1 A OR N BARRIER NOT-NPMOD) (NEGATE *1 V - FAUXV BARRIER S-BOUNDARY);
 	#$ Gean dat lea?
 
 
-MAP:spredSg> (@SPRED>) TARGET (Sg Nom) (1 (Sg Nom) OR SGPRON + Nom OR (Indef Nom) LINK 1 COPULAS) ;
+MAP:spredSg> (@SPRED>) TARGET (Sg Nom) IF (1 (Sg Nom) OR SGPRON + Nom OR (Indef Nom) LINK 1 COPULAS) ;
 	#$ Mii mun lean?
 
 #!! * __AdjSpredSg>__ (@SPRED>) for A Sg Nom; if copulas to the right, but not if A or @<SPRED are found to the right of copulas
-MAP:AdjSpredSg> (@SPRED>) TARGET (A Sg Nom) (*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA OR CC LINK NOT *1 A OR @<SPRED BARRIER NOT-NPMOD); ;
+MAP:AdjSpredSg> (@SPRED>) TARGET (A Sg Nom) IF (*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA OR CC LINK NOT *1 A OR @<SPRED BARRIER NOT-NPMOD); ;
 	#$ Buorre lea oažžut su boahtit deike.
 	#$ Divrras ii leat gal barggu ektui.
 	#% Dási ferte árvvoštallat daláš gáibádusaid ektui, ja internáhtat ledje buorebut go priváhta olbmuid luhtte orrut.
 
 #!! * __SpredSg>Hab__ (@SPRED>) for Nom; if you are sentence initial, copulas is located to the right, and there is a habitive to the right of copulas
-MAP:SpredSg>Hab (@SPRED>) TARGET (N Sg Nom) (*-1 BOC BARRIER NOT-NPMOD)(*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA OR CC LINK *1 <hab> BARRIER NOT-NPMODADV);
+MAP:SpredSg>Hab (@SPRED>) TARGET (N Sg Nom) IF (*-1 BOC BARRIER NOT-NPMOD)(*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA OR CC LINK *1 <hab> BARRIER NOT-NPMODADV);
 	#$ Girji lea Máreha.
 	#$ Diet girji lea dušše mu.
 	
-MAP:spredPl> (@SPRED>) TARGET (Pl Nom) (1 (Pl Nom) OR PLPRON + Nom OR DUPRON + Nom LINK 1 COPULAS)  ;
+MAP:spredPl> (@SPRED>) TARGET (Pl Nom) IF (1 (Pl Nom) OR PLPRON + Nom OR DUPRON + Nom LINK 1 COPULAS)  ;
 
-MAP:<spredCoor (@<SPRED) TARGET Nom - Rel (*-1 CC OR COMMA BARRIER NOT-NPMOD LINK -1 @<SPRED)(NEGATE 1 VFIN) ;
+MAP:<spredCoor (@<SPRED) TARGET Nom - Rel IF (*-1 CC OR COMMA BARRIER NOT-NPMOD LINK -1 @<SPRED)(NEGATE 1 VFIN) ;
 
 #!! * __Spred>SubjInf__ (@SPRED>) for Nom; if copulas to the right, and the subject of copulas is an Inf to the right
-MAP:spred>SubjInf (@SPRED>) TARGET Nom - OKTA (*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA)(*2 @<SUBJ + Inf BARRIER NOT-ADV-PCLE) ;
+MAP:spred>SubjInf (@SPRED>) TARGET Nom - OKTA IF (*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA)(*2 @<SUBJ + Inf BARRIER NOT-ADV-PCLE) ;
 	#$ Gurssa ulbmil lea oahppat goarrut Ivgu gávtti.
 	#$ Bargu lei kánske árvvoštallat dan.	
 	 
 #!! * __spredCoord__ (@<SPRED) coordination for Nom; only if there already is a SPRED to the left of CNP. Not if there is some kind of comparison involved.
-MAP:spredCoord (@<SPRED) TARGET Nom - OKTA (*-1 @CNP BARRIER NOT-NPMODADV )(*-2 @<SPRED BARRIER WORD - Adv)(NEGATE *-1 ("go" CS) BARRIER NOT-NPMOD LINK -1 ("nu" Adv))(NEGATE *-1 XGO BARRIER NOT-NPMOD);#(*1 EOS)(NEGATE *1 FMAINV) ;
+MAP:spredCoord (@<SPRED) TARGET Nom - OKTA IF (*-1 @CNP BARRIER NOT-NPMODADV )(*-2 @<SPRED BARRIER WORD - Adv)(NEGATE *-1 ("go" CS) BARRIER NOT-NPMOD LINK -1 ("nu" Adv))(NEGATE *-1 XGO BARRIER NOT-NPMOD);#(*1 EOS)(NEGATE *1 FMAINV) ;
 	#$ De eai leat šat dušše tálat, muhto bustávat maid.
 	#% Dat ledje beakkán ja dovddus olbmot nu go Diaz.
  

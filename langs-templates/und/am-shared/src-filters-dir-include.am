@@ -26,8 +26,8 @@ XFST_verbose_0 = @echo "  XFST     $@";
 
 VERBOSITY=$(if $(strip $(filter-out false,$(AM_V_P))), ,-q)
 
-HFST_FLAGS=$(VERBOSITY) $(HFST_FLAGS)
-XFSTFLAGS=$(VERBOSITY) $(XFSTFLAGS)
+HFST_FLAGS=$(VERBOSITY)
+XFSTFLAGS=$(VERBOSITY)
 
 ####### Source file defs: ########
 

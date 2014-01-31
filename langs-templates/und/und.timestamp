@@ -1,4 +1,9 @@
 $Rev$
+Enabled compression of zhfst files again, it should now work across all
+platforms. Made filter regex compilation quiter for xfst, and made the silent
+mode more informative for filter compilation.
+
+r87298:
 Make the the xfscript compilers quiet in silent mode, verbose in verbose mode.
 
 r87220:

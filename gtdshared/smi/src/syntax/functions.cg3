@@ -1177,6 +1177,10 @@ MAP:r252 (@APP-ADVL<) TARGET (Po) IF (-1 Gen LINK *-1 COMMA BARRIER NOT-ADV LINK
 
 SET NOT-NP = VFIN-NOT-NEG OR ConNeg OR Inf OR Pcle OR Interj OR CS ;
 
+
+	# Vocative - VOC 
+
+
 MAP:voc (@VOC) TARGET Nom IF (*-1 COMMA BARRIER NOT-NP OR CC LINK *-1 (V Sg2) OR (V Du2) OR (V Pl2) OR (Pron Sg2) OR (Pron Du2) OR (Pron Pl2) LINK NOT 0 LEAT)(1 EOS)(0 HUMAN)(NEGATE 0 Sg LINK *-1 V-SG3 BARRIER REAL-V);
 	## Vuoi du, Betsaida!
 	
@@ -1200,6 +1204,8 @@ MAP:voc (@VOC) TARGET (N Nom) IF (-4 BOS)(-3 (V Sg2))(-2 go)(-1 COMMA)(1 COMMA);
 
 MAP:voc (@VOC) TARGET (N Nom) IF (*-1 BOS BARRIER NOT-ADV-PCLE)(0 HUMAN LINK 1 EOS);
 	#$ Ustibažžan!
+
+
 
 
 MAP:r294 (@APP-N<) TARGET (N Loc) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC OR ADVLCASE LINK -1 (N Loc))(1 EOS) ;	
@@ -1264,6 +1270,15 @@ MAP:r321 (@APP-Pron<) TARGET (N Acc) IF (*-1 ("nugo") OR ("sihke") BARRIER APP-B
 
 MAP:Relsubj> (@SUBJ>) TARGET (Rel Nom) IF (*1 FMAINV) ;
 	#$ Go dat geažit mat geaigut leaba bajás, gohčoduvvoba spahká-oaivin.
+
+#!! * __Particle<subj __ (@PCLE)  
+#MAP:Particle<subj (@PCLE) TARGET ("son") IF (-1 MO-MANge )(1 ANIMATE + Nom LINK 1 @+FMAINV OR @-FMAINV); 
+	#$ Mo son Duommá lea dahkan? 
+	#$ Dan viesu son mun dovddan? 
+	#$ Lea go son Máret boahtán? 
+	#$ Leago son Máret boahtán? 
+	#[MO-MANge] son Máret boahtá? 
+	#Comment: There is no such set as ANIMATE (yet).. 
  
 	# Exsistential subjects - SUBJ
  
@@ -1326,9 +1341,10 @@ MAP:<extsubjQst1 (<ext> @<SUBJ) TARGET Nom - NOT-EXT (
 	#$ Lea go dis ruhta?
 	#$ Leat go dudnos alddáde bohccot?
 	#$ Lea go dus dušše okta mánná?
-	#$ Leat go min dihtorat ođđaáigásaččat? SUBJ + SPRED 
 	#% Ledje go hilbadat mánát? SUBJ + SPRED
-	#% Ledjego guolit divrasat?
+	#% Ledjego guolit divrasat? SUBJ + SPRED
+	#% Lea go son Máret boahtán? 
+	#% Lea buoret borramuš go dat maid nuorat dán áigge njillet.
 #Comment: It might be easier to read this, if it hadn't been clinched all together as one spredQst-rule.. Concider dividing it into at least two rules: one for Hab/DOPPE and the other one for the rest. A,B and F make one pair. 2
 
 MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Neg OR COMMA BARRIER NOT-NPMOD LINK *-1 <ext> BARRIER WORD)(NEGATE 1 REAL-V) ;
@@ -1462,6 +1478,8 @@ MAP:subj>Pers (@SUBJ>) TARGET (Sg1 Nom) (1 CC LINK *1 (N Pl) BARRIER NOT-NPMOD L
 #MAP:subj>Pers (@SUBJ>) TARGET (Sg1 Nom) (-1 CC LINK *2 (V Pl1) BARRIER NOT-ADV-PCLE) ;
 	#$ Mii du namma lea?
 	#$ Gii ..
+	#% Lea go son Máret boahtán? 
+	
 MAP:<subjPers (@<SUBJ) TARGET $$PERS-TAGS + Nom IF (*-1 $$PERS-TAGS + VFIN BARRIER NOT-ADV-PCLE) ;
 	
 #!! * __subj>Sgnr1__ (@SUBJ>) for Nom Sg, including Indef Nom if; VFIN + Sg3 or Pl3 to the right (VFIN not allowed to the left) 

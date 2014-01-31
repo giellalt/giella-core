@@ -947,6 +947,11 @@ MAP:habEllipse (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE (1 Adv LINK 1 (N Nom))
 #!! * __habGen__ (<hab> @<ADVL) hab for Gen; if Gen is located in the end of the sentence and Nom is sentence initial
 MAP:habGen (<hab> @<ADVL) TARGET HAB-ACTOR + Gen (*-1 LEAT + HAB-V-TAGS BARRIER NOT-NPMODADV LINK -1 (N Nom) OR (Dem Nom))(1 EOC) ;
 	#$ Dát lea áhči.
+	
+#!! * __habGenQst__ (<hab> @<ADVL) hab for Gen; in a question sentence. Gen is located sentence initially and SUBJ is found to the right. To the right of SUBJ is copulas
+MAP:<habGenQst (<hab> @<ADVL) TARGET (Pron Interr) + Gen (-1 BOS)(*1 Nom BARRIER NOT-NPMODADV LINK 1 LEAT + HAB-V-TAGS LINK NEGATE *1 FMAINV BARRIER SV-BOUNDARY) ;
+	#$ Gean dat livččii? 
+	#% Gean vuorru lea dál bálkestit birccu?
 
 	#$ Riššat dat gal leat musge, jus eai leačča njuoskan.
 	#$ Dán čieža oassálasti searvvis ii lean oktage boazodoalli, muhto kurssa oahpaheaddjis, Kjell Smestadas, lea doaivva ahte boazodolliide maid galgá gávdnot sierra heivehuvvon fálaldat.
@@ -1429,11 +1434,6 @@ MAP:AdjSpredSg> (@SPRED>) TARGET (A Sg Nom) IF (*1 COPULAS + FMAINV BARRIER SV-B
 	#$ Buorre lea oažžut su boahtit deike.
 	#$ Divrras ii leat gal barggu ektui.
 	#% Dási ferte árvvoštallat daláš gáibádusaid ektui, ja internáhtat ledje buorebut go priváhta olbmuid luhtte orrut.
-
-#!! * __SpredSg>Hab__ (@SPRED>) for Nom; if you are sentence initial, copulas is located to the right, and there is a habitive to the right of copulas
-MAP:SpredSg>Hab (@SPRED>) TARGET (N Sg Nom) IF (*-1 BOC BARRIER NOT-NPMOD)(*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA OR CC LINK *1 <hab> BARRIER NOT-NPMODADV);
-	#$ Girji lea Máreha.
-	#$ Diet girji lea dušše mu.
 	
 MAP:spredPl> (@SPRED>) TARGET (Pl Nom) IF (1 (Pl Nom) OR PLPRON + Nom OR DUPRON + Nom LINK 1 COPULAS)  ;
 
@@ -1467,6 +1467,7 @@ MAP:<subjPers (@<SUBJ) TARGET $$PERS-TAGS + Nom IF (*-1 $$PERS-TAGS + VFIN BARRI
 #!! * __subj>Sgnr1__ (@SUBJ>) for Nom Sg, including Indef Nom if; VFIN + Sg3 or Pl3 to the right (VFIN not allowed to the left) 
 MAP:subj>Sgnr1 (@SUBJ>) TARGET (Nom Sg) OR (Sg3 Nom) OR (Indef Nom) IF (*1 VFIN + Sg3 OR VFIN + Pl3 BARRIER REAL-V OR S-BOUNDARY)(NEGATE *-1 VFIN + Sg3 BARRIER NOT-ADV-PCLE);
 	#$ Niibi lea stális.
+	#$ Girji lea Máreha.
 
 #!! * __subj>Du__ (@SUBJ>) for dual nominatives, including Coll Nom. VFIN + Du3 to the right. 
 MAP:subj>Du (@SUBJ>) TARGET (Coll Nom) IF (*1 VFIN + Du3 BARRIER REAL-V OR S-BOUNDARY) ;

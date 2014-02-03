@@ -19,6 +19,7 @@
 ! spell-relax [ё (->) е] will be used where necessary
 
 ! The URJ-Cyrl (common Uralic Cyrillic) proper noun lexicon
+! 100% equivalent to Russian
 ! =========================================
 
 LEXICON urj-Cyrl-ProperNouns
@@ -32079,27 +32080,28 @@ LEXICON urj-Cyrl-ProperNouns
 Ярослава:Ярослава PROP_КУДО_FEM "Z" ;
 
 !! Place names (mainly foreign)
-Англия:Англия PROP_КУДО_PLC "Z" ;
-Вавилон:Вавилон PROP_КУДО_PLC "Z" ;
-Вифлеем:Вифлеем PROP_КАЛ_PLC "Z" ;
-Галилея:Галилея PROP_КУДО_PLC "Z" ;
-Гермаия:Германия PROP_КУДО_PLC "Z" ;
-Дания:Дания PROP_КУДО_PLC "Z" ;
-Египет:Египет PROP_КИТ_PLC "Z" ;
-Ерусалим:Ерусалим PROP_КАЛ_PLC "Z" ;
-Израиль:Израиль PROP_КАЛ_PLC "Z" ;
-Исляндия:Исляндия PROP_КУДО_PLC "Z" ;
-Испания:Испания PROP_КУДО_PLC "Z" ;
-Италия:Италия PROP_КУДО_PLC "Z" ;
-Иудея:Иудея PROP_КУДО_PLC "Z" ;
-Китай:Китай PROP_КАЛ_PLC "Z" ;
-Латвия:Латвия PROP_КУДО_PLC "Z" ;
-Литва:Литва PROP_КУДО_PLC "Z" ;
-Норвегия:Норвегия PROP_КУДО_PLC "Z" ;
-Самария:Самария PROP_КУДО_PLC "Z" ;
-Финляндия:Финляндия PROP_КУДО_PLC "Z" ;
-Франция:Франция PROP_КУДО_PLC "Z" ;
-Швеция:Швеция PROP_КУДО_PLC "Z" ;
-Эстония:Эстония PROP_КУДО_PLC "Z" ;
-Япония:Япония PROP_КУДО_PLC "Z" ;
+Англия:Англия PROP-PLC_КУДО "Z" ;
+Вавилон:Вавилон PROP-PLC_КУДО "Z" ;
+Вифлеем:Вифлеем PROP-PLC_КАЛ "Z" ;
+Галилея:Галилея PROP-PLC_КУДО "Z" ;
+Гермаия:Германия PROP-PLC_КУДО "Z" ;
+Дания:Дания PROP-PLC_КУДО "Z" ;
+Египет:Египет PROP-PLC_КИТ "Z" ;
+Ерусалим:Ерусалим PROP-PLC_КАЛ "Z" ;
+Израиль:Израиль PROP-PLC_КАЛ "Z" ;
+Индия:Индия PROP-PLC_КУДО "Z" ;
+Исляндия:Исляндия PROP-PLC_КУДО "Z" ;
+Испания:Испания PROP-PLC_КУДО "Z" ;
+Италия:Италия PROP-PLC_КУДО "Z" ;
+Иудея:Иудея PROP-PLC_КУДО "Z" ;
+Китай:Китай PROP-PLC_КАЛ "Z" ;
+Латвия:Латвия PROP-PLC_КУДО "Z" ;
+Литва:Литва PROP-PLC_КУДО "Z" ;
+Норвегия:Норвегия PROP-PLC_КУДО "Z" ;
+Самария:Самария PROP-PLC_КУДО "Z" ;
+Финляндия:Финляндия PROP-PLC_КУДО "Z" ;
+Франция:Франция PROP-PLC_КУДО "Z" ;
+Швеция:Швеция PROP-PLC_КУДО "Z" ;
+Эстония:Эстония PROP-PLC_КУДО "Z" ;
+Япония:Япония PROP-PLC_КУДО "Z" ;
 

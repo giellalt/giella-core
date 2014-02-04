@@ -882,8 +882,9 @@ MAP:hab_numo (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACT
 MAP:hab2 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 FAUXV + HAB-V-TAGS LINK 1 Adv LINK *1 LEAT BARRIER NOT-ADV-PCLE);
 
 #!! * __hab3__ (<hab> @ADVL>) for hab-actor and hab-case; if leat to the right, and Nom to the right of leat. Lots of restrictions.
-MAP:hab3 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 Sem/Group OR Pl - Rel LINK *-1 Indef - BUOT + Nom OR HUMAN + Nom BARRIER NOT-NPMOD-ACC)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))(NEGATE 0 N OR Pers OR Indef LINK *-1 HAB-ACTOR + HAB-CASE BARRIER NOT-NPMOD-ACC OR CC)(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER S-BOUNDARY);
+#MAP:hab3 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 Sem/Group OR Pl - Rel LINK *-1 Indef - BUOT + Nom OR HUMAN + Nom BARRIER NOT-NPMOD-ACC)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))(NEGATE 0 N OR Pers OR Indef LINK *-1 HAB-ACTOR + HAB-CASE BARRIER NOT-NPMOD-ACC OR CC)(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER S-BOUNDARY);
 	#$ Máhtes lea beana.
+	#% Sis lei unnán dahje ii makkárge oktavuohta earáiguin earretgo internáhtas orodettiin, vaikko máŋggas sis ledje fulkkežagat.
 	#% Juos gorreválggain Sámedikkis lea dárbbašlaš deavdit gáibádusa, ahte okta stivrralahtuin ja su sadjásašlahttu galgaba leat boazodoalu ovddasteaddjit, de galgá boazodoalu ovddasteddjiid loktet badjeliidda dan listtas, mii lea ožžon uhcimus jienaid daid listtaid gaskkas, mat galget ovddastuvvot ja main leat dakkár evttohasat. 
 	#% Ealus leat eanaš álddut.
 
@@ -1341,6 +1342,12 @@ MAP:<extQst1 (<ext> @<SUBJ) TARGET Nom - NOT-EXT ((*-1 <hab> OR DOPPE OR (Sem/Pl
 MAP:<extQst2 (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + HAB-V-TAGS BARRIER WORD - (Attr "muhtun") - (Attr "muhtin") LINK -1 BOS)(NEGATE *1 HUMAN OR Loc OR Sem/Plc BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE 1 (A Nom)) ;
 	#$ Ledje muhtin čiegusvuođat, nu ahte in dieđe juste mo sii dahke, muhto geavahedje goit gunaid spárttuid vuostá ja bihka eksema vuostá.
 	
+#!! * __extQst3>__ (<ext> @SUBJ>) for Nom; if habitive first one to the left, followed by copulas.
+MAP:extQst3> (<ext> @SUBJ>) TARGET Nom IF (1 <hab> LINK 1 COPULAS)(NEGATE 1 (Pron Rel))(NEGATE 1 <hab> LINK 1 COPULAS LINK 1 FMAINV) ;
+	#$ Mii dus lea?
+	#$ Man uhccán osku dus lea!
+	#$ Sii muitalit oahpaheaddjái makkár barggut sis leat siiddas.
+	#% Sis lei unnán dahje ii makkárge oktavuohta earáiguin earretgo internáhtas orodettiin, vaikko máŋggas sis ledje fulkkežagat.
 
 MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Neg OR COMMA BARRIER NOT-NPMOD LINK *-1 <ext> BARRIER WORD)(NEGATE 1 REAL-V) ;
 	#$ Eai lean boraspiret, eai ealggat, eaige nu ollu bohccot dain duovdagiin go dál.
@@ -1423,10 +1430,6 @@ MAP:<spredEss (@<SPRED) TARGET (N Ess) IF (*-1 COPULAS BARRIER S-BOUNDARY OR Ess
 MAP:spredEss>COP (@SPRED>) TARGET (N Ess) IF (*1 COPULAS BARRIER SV-BOUNDARY)(-1 NP-HEAD-NOM);
 	#$ Sápmelaččaid historjá álbmogin lea duháhiid jagiid boaris, muhto dálá ássanguovlluin sápmelaččat eai leat ássan nu guhká.
 
-#!! * __HABSpredSg>__ (@SPRED>) for Nom; if habitive first one to the left, followed by copulas.
-MAP:HABspredSg> (@SPRED>) TARGET Nom IF (1 <hab> LINK 1 COPULAS) ;
-	#$ Mii dus lea?
-
 #!! * __GalleSpred>__ (@SPRED>) for Num Nom; if sentence initial
 MAP:Gallespred> (@SPRED>) TARGET ("galle" Num Nom) IF (*-1 BOS BARRIER NOT-ADV) ;
 
@@ -1435,7 +1438,7 @@ MAP:spredSgMII> (@SPRED>) TARGET MII + (Sg Nom) IF (*1 (Sg Nom) BARRIER NOT-NPMO
 
 #!! * __r492>__ (@SPRED>) for Interr Gen; consisting only of negations. You are not allowed to be MII. You are not allowed to have an adjective or noun to yor right. You are not allowed to have a verb to your right; the exception beeing an aux.
 MAP:r492 (@SPRED>) TARGET (Interr Gen) IF (NEGATE 0 MII)(NEGATE *1 A OR N BARRIER NOT-NPMOD) (NEGATE *1 V - FAUXV BARRIER S-BOUNDARY);
-	#$ Gean dat lea?
+	#Commet: Not in use?
 
 
 MAP:spredSg> (@SPRED>) TARGET (Sg Nom) IF (1 (Sg Nom) OR SGPRON + Nom OR (Indef Nom) LINK 1 COPULAS) ;

@@ -1362,28 +1362,27 @@ MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Ne
 	# Subject predicatives - SPRED 
 	
 	
-#!! * __<spredQst__ (@<SPRED) for Nom; in a typically question sentence; You are not allowed to be Pers or human. Nom is not allowed to your right
+#!! * __<spredQst__ (@<SPRED) for Nom; in a typically question sentence; You are not allowed to be Pers or human. The special part is that Nom is not allowed to your right
 MAP:<spredQst (@<SPRED) TARGET Nom - Pers IF (*-1 Qst BARRIER NOT-NPMODADV LINK -1 COPULAS + FMAINV LINK -1 BOS)(NEGATE 0 HUMAN)(NEGATE *1 Nom BARRIER NOT-NPMOD) ;
 	#$ Lea go duohtavuohta sukcasiin Jack Sparrow birra?
 	#$ Leat go árgi bajándálkkis? 
 
-#!! * __<spredQst2__ (@<SPRED) for Nom;
-MAP:<spredQst2 (@<SPRED) TARGET (A Nom) IF (*-1 (N Nom) BARRIER NOT-NPMODADV LINK *-1 Qst BARRIER NOT-NPMODADV LINK -1 COPULAS + FMAINV LINK -1 BOS) ;
+#!! * __<spredQst2__ (@<SPRED) for (A Nom); in a typically question sentence; You are SPRED if (N Nom) is to your left and leat + qst is to the left 
+MAP:<spredQst2 (@<SPRED) TARGET Nom IF (*-1 (N Nom) BARRIER NOT-NPMODADV LINK *-1 Qst BARRIER NOT-NPMODADV LINK -1 COPULAS + FMAINV LINK -1 BOS) ;
 	#$ Leat go min dihtorat ođđaáigásaččat?
-	#$ Lea go Čáhppes Bearral oahpis dutnje? 
+	#$ Lea go Čáhppes Bearral oahpis dutnje?
+	#$ Leatgo álbmotmeahcit veahkaváldi báikkálaš olbmuid vuostá?
+	#$ Lea go dihtor dušše ođđaáigásaš čállinmášiidna?  dát ii leat HUMAN, dárbbaša sierra njuolggadusa 
 	
 #!! * __<spredQst3__ (@<SPRED) for (A Nom); you are SPRED when you are (A Nom) and to your right is (N Nom). This is a Qst-sentence, so copulas is found to your left
 MAP:<spredQst3 (@<SPRED) TARGET (A Nom) IF (*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS)(*1 (N Nom) BARRIER NOT-NPMOD);
 	#$ Ledje go hilbadat mánát?
 	#$ Ledjego hilbadat mánát? #Comment: should work
 	
-#!! * __<spredQst4__ (@<SPRED) for HUMAN Nom; but only in a qst-sentence where there is no chance of you beeing the subj
-MAP:<spredQst4 (@<SPRED) TARGET Nom IF ((*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS) OR (*-1 COPULAS + Qst BARRIER NOT-NPMOD LINK -1 BOS))(NEGATE *1 Nom BARRIER NOT-NPMODADV OR @CNP)(NEGATE *1 (Sem/Plc Loc) OR (Sem/Org Loc) OR (Sem/Build Loc) OR TIME-N + Gen OR TIME-ADVL) ; 
+#!! * __<spredQst4__ (@<SPRED) for Nom; but only in a qst-sentence where there is no chance of you beeing the subj
+MAP:<spredQst4 (@<SPRED) TARGET Nom IF ((*-1 Qst BARRIER NOT-NPMOD LINK -1 COPULAS + FMAINV LINK -1 BOS) OR (*-1 COPULAS + Qst BARRIER NOT-NPMOD LINK -1 BOS))(NEGATE *1 Nom BARRIER NOT-NPMODADV OR @CNP)(NEGATE *1 (Sem/Plc Loc) OR (Sem/Org Loc) OR (Sem/Build Loc) OR TIME-N + Gen OR TIME-ADVL)(NEGATE *1 FMAINV BARRIER EOS) ; 
 	#$ Lea go nieida vai bárdni? 
-	#$ Lea go nieida? 
-
-	#$ Lea go dihtor dušše ođđaáigásaš čállinmášiidna?  dát ii leat HUMAN, dárbbaša sierra njuolggadusa
-
+	#% Leatgo sii njuovadan juo? 
 
 #!! * __<NomBeforeSpred__ (@<SPRED) for (A Nom) if; Nom to the left, and copulas is to the left of Nom. There is no Nom allowed to the right of copulas! To avoid messing with coordination: ja, dahje and comma are not allowed to your left. Comma is not allowed to your right; if so then you are likely to be coordinated
 MAP:<NomBeforeSpred (@<SPRED) TARGET (A Nom) IF (*-1 Nom BARRIER NOT-NPMODADV LINK *-1 COPULAS + FMAINV BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Nom)(NEGATE *-1 ("ja") OR ("dahje") BARRIER NOT-NPMODADV)(NEGATE -1 COMMA)(NEGATE 1 ("go") OR V) ;

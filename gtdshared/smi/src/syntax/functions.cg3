@@ -1006,14 +1006,16 @@ LIST JAHKI = "jahke" "jahki" ;
 
 MAP:num< (@Num<) TARGET (N Sg Gen)(*-1 NUM + (Sg Nom) OR NUM + (Sg Acc) BARRIER NOT-A LINK NOT -1 JAHKI) ;
 
-MAP:n<titel (@N<) TARGET ("jr") OR ("sr") (-1 Prop) ;
+#!! * __n<titel1__ (@N<) for ("jr") or ("sr"); if first one to the left is Prop
+MAP:n<titel1 (@N<) TARGET ("jr") OR ("sr") (-1 Prop) ;
 	#$ Loahpas jearai Johttisámelisttu Anders Somby jr. sudnos njuolga háliida go čearru gulahallat, juo dahje ii.
 
-MAP:n<titel (@N<) TARGET INITIAL ((-1 N) OR (-1 CC LINK -1 INITIAL LINK -1 N))(NEGATE 1 Prop OR Num OR INITIAL) ;
+#!! * __n<titel2__ (@N<) for INITIAL; if first one to the left is a noun, or if to the left of you is a single letter which is part of a noun conjunction ''bustávas e ja f gáibiduvvo'' 
+MAP:n<titel2 (@N<) TARGET INITIAL ((-1 N) OR (-1 CC LINK -1 INITIAL LINK -1 N))(NEGATE 1 Prop OR Num OR INITIAL) ;
 	#$ Mearrádusaide nugo namahuvvo nuppi lađđasis bustávas e ja f gáibiduvvo ovttamielalašvuohta.
 
-
-MAP:n< (@N<) TARGET (Sg Com)(-1 Coll) ;
+#!! * __n<:com__ (@N<) for (Sg Com); if first one to the left is Coll
+MAP:n<:com (@N<) TARGET (Sg Com)(-1 Coll) ;
 	#$ Mun oidnen Ándde-guovtto Ristiinnáin.
 
 MAP:n< (@N<) TARGET (Num Nom) ((-1 JAHKI OR ("diibmu")) OR (-1 Sem/Sur LINK 2 (":"))) ;
@@ -1088,8 +1090,11 @@ MAP:pron< (@Pron<) (Sg Com) (0 Prop LINK 0 Sem/Mal OR Sem/Sur OR Sem/Fem LINK *-
 MAP:pron< (@Pron<) TARGET (Pl Loc) (*-1 Indef - Attr BARRIER NOT-NPMOD) ;
 MAP:pron< (@Pron<) TARGET (Indef Nom) OR (Refl Nom) (-1 COPULAS + FMAINV LINK -1 (Pron Nom))(*1 Nom BARRIER NOT-A-ADV) ;
 	#$ Soai leaba goappašagat nu jallat.
-MAP:n< (@N<) TARGET (Refl Nom) ((*-1 (N Nom) BARRIER NOT-ADV-PCLE) OR (-1 FMAINV LINK *-1 (N Nom) BARRIER SV-BOUNDARY OR Nom))(NEGATE 1 Refl) ;
+	
+#!! * __n<:Refl__ (@N<) for (Refl Nom); if to the left is (N Nom), or if first one to the left is a finite mainverb with a (N Nom) to the left
+MAP:n<:Refl (@N<) TARGET (Refl Nom) IF ((*-1 (N Nom) BARRIER NOT-ADV-PCLE) OR (-1 FMAINV LINK *-1 (N Nom) BARRIER SV-BOUNDARY OR Nom) OR (-1 FAUXV LINK *-1 (N Nom) BARRIER SV-BOUNDARY OR Nom))(NEGATE 1 Refl) ;
 	#$ Eadni dal ieš čohkká ommangáttis ja boraha uhca nieiddažis gean son doallá askkistis.
+	#$ Juohke bearaš fertii ieš omardit biepmuid, ja koahkkanieidda bargun lei vuoššat mállása. 
 
 
 #!! * __>pron1__ (@>Pron) for GRADE-ADV, DUSSE, BUOT if; first one to the right is Pron
@@ -1523,9 +1528,10 @@ MAP:Du<subj (@<SUBJ) TARGET (Nom Coll) IF (*-1 VFIN + Du3 BARRIER REAL-V OR S-BO
 	#$
 	
 #!! * __PlDu<subj__ (@<SUBJ) for (N Nom Pl), (Sem/Group Nom), (Coll Nom), (Pron Nom Pl) if; a verb is Pl3 or Du3 to your left. The verb is not allowed to be copulas with a place, Loc or time noun to its left
-MAP:PlDu<subj (@<SUBJ) TARGET (N Nom Pl) OR (Sem/Group Nom) OR (Coll Nom) OR (Pron Nom Pl) IF (*-1 VFIN + Pl3 OR VFIN + Du3 BARRIER REAL-V OR S-BOUNDARY OR Loc LINK NEGATE 0 COPULAS + FMAINV LINK -1 Sem/Plc OR Loc OR TIME-N OR TIME-ADVL) ;
+MAP:PlDu<subj (@<SUBJ) TARGET (N Nom Pl) OR (Sem/Group Nom) OR (Coll Nom) OR (Pron Nom Pl) OR (Pron Indef) IF (*-1 VFIN + Pl3 OR VFIN + Du3 BARRIER REAL-V OR S-BOUNDARY OR Loc LINK NEGATE 0 COPULAS + FMAINV LINK -1 Sem/Plc OR Loc OR TIME-N OR TIME-ADVL)(*-1 VFIN + Pl3 OR VFIN + Du3 BARRIER REAL-V OR S-BOUNDARY OR Loc LINK NEGATE -1 Nom)(NEGATE 0 (Pron Indef Ill) OR (Pron Indef Attr) OR ("buot")) ;
 	#$ Dárkkisteami maŋŋil gárte dan guovtti riikka boazodoallolágat measta áibbas ovttaláganat viidodaga ja sisdoalu dáfus.
-	#%
+	#$ Dat gal lea maid okta fáktor muhtin guvlui, muhto gávdnojit maid eará.
+	#$ Ja go álget johttágoahtit, de eai oaččo ealuid čoahkkái, ja go ožžot, de lea nu arvi ja muohtti, ahte leat visot nu njuoskasat.
 
 #!! * __copPl3<subj__ (@<SUBJ) for Nom Pl; you don't to be a noun, only Nom Pl. To the left is copulas and first one to the right is @<SPRED
 MAP:copPl3<subj (@<SUBJ) TARGET (Nom Pl) IF (*-1 COPULAS + Pl3 BARRIER NOT-NPMOD)(*1 @<SPRED BARRIER NOT-ADV) ;

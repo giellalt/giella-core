@@ -1312,12 +1312,14 @@ MAP:Nom>Advlcase<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ADVLCASE - Ess BA
 	#% Son lea oahpaheaddjin hui čeahppi.
  
 #!! * __<extSubj__ (<ext> @<SUBJ) for Nom; if copulas to the left, and some kind of adverb, N Loc, time related word or Po to the left of it. OR: if Ill or @Pron< to the left, followed by copulas and the before mentioned to the left of copulas. 
-MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv BARRIER SV-BOUNDARY LINK NOT -1 Nom) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD  LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po BARRIER SV-BOUNDARY))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA) ;
+MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv BARRIER SV-BOUNDARY OR Nom LINK NEGATE -1 Nom) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD  LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po BARRIER SV-BOUNDARY))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA) ;
 	#$ Dá lea dutnje biebmu.
 	#$ Juohke guovllu gávttis lea sierralágan holbi.
 	#% Buot buoremus lea ieš vuolgit. 
 
-MAP:<extSubj (<ext> @<SUBJ) TARGET A ((*-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV OR Pron LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv OR <hab> BARRIER SV-BOUNDARY OR Nom LINK NOT *-1 Nom BARRIER NOT-NPMODADV) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD LINK *-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po OR <hab> BARRIER SV-BOUNDARY OR Nom))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE *1 ("ahte") OR go OR Inf BARRIER SV-BOUNDARY) ;
+#!! * __<extSubjA__ (<ext> @<SUBJ) for A
+MAP:<extSubjA (<ext> @<SUBJ) TARGET A ((*-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV OR Pron LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv OR <hab> BARRIER SV-BOUNDARY OR Nom LINK NOT *-1 Nom BARRIER NOT-NPMODADV) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD LINK *-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po OR <hab> BARRIER SV-BOUNDARY OR Nom))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE *1 ("ahte") OR go OR Inf BARRIER SV-BOUNDARY) ;
+	#$
 	
 #!! * __<extSubj?__ (<ext> @<SUBJ) for Nom; if leat to the left and sentenceboundary 	
 MAP:<extSubj? (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR Ord OR (Ref Gen) LINK *-1 BOC - Nom BARRIER WORD - Neg)(NEGATE *1 Nom - Rel OR Ess - Rel BARRIER NOT-NPMOD OR CC)(NEGATE *1 ("ahte") OR go + CS LINK *1 REAL-V) ;#(NEGATE *1 FMAINV BARRIER SV-BOUNDARY) ; 
@@ -1334,8 +1336,8 @@ MAP:<extSubj? (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + FMAINV + HAB-V
 #MAP:<extSubj (<ext> @<SUBJ) TARGET NOT-EXT (*-1 ("boahtit") + FMAINV - Du3 OR ("heaŋgát") BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Rel Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL BARRIER SV-BOUNDARY)(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD) ;
 	#$ Doppe boahtá áhčči.
 
-
-MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (-1 Loc LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) ; 
+#!! * __loc<extSubj__ (<ext> @<SUBJ) for Nom
+MAP:loc<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (-1 Loc LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) ; 
 	#$ Rievtti mielde lea duodjeluohkás gulahallanoahpaheaddji, muhto son ii leat doppe nu dávjá go oahppit sávvet.
 	
 #!! * __<spred__ (@<SPRED) for Nom; if Nom to the left, copulas to the left of Nom, and a time related word to the left of it.
@@ -1361,6 +1363,7 @@ MAP:extQst3> (<ext> @SUBJ>) TARGET Nom IF (1 <hab> LINK 1 COPULAS)(NEGATE 1 (Pro
 	#$ Sii muitalit oahpaheaddjái makkár barggut sis leat siiddas.
 	#% Sis lei unnán dahje ii makkárge oktavuohta earáiguin earretgo internáhtas orodettiin, vaikko máŋggas sis ledje fulkkežagat.
 
+#!! * __<extsubjcoor__ (<ext> @<SUBJ) for Nom. Coordination
 MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Neg OR COMMA BARRIER NOT-NPMOD LINK *-1 <ext> BARRIER WORD)(NEGATE 1 REAL-V) ;
 	#$ Eai lean boraspiret, eai ealggat, eaige nu ollu bohccot dain duovdagiin go dál.
 

@@ -1032,12 +1032,18 @@ MAP:>nAttr (@>A) TARGET Attr - Dem - Pron (*1 A - Gen OR Ord - Gen BARRIER NOT-N
 MAP:>nAttr (@>A) TARGET (Indef Attr) (*1 A - Gen OR Ord - Gen BARRIER NOT-NPMOD OR CC OR (N Gen) OR COMMA OR PUNCT)  ;
 	#$ Dattetge ii leat muitaluvvon makkárge namahan veara geavahanriiddu birra dálolaččaid ja boazodoalu gaskkas.
 
-#!! * __>nAttr__ (@>N) for attributes; if there is a noun to your right
+#!! * __>nAttr__ (@>N) for Attr; if there is a noun to your right
 MAP:>nAttr (@>N) TARGET Attr (*1 N BARRIER Num OR A - Attr OR Pr OR Ord)  ;
 	#$
 	#% Ledjego hilbadat mánát?
 
-#!! * __>nNum__ (@>N) for numerals if; there is a noun to your right. You are not allowed to be Sg Nom, Sg Acc or Sem/Date
+#!! * __n>Indef__ (Pron Indef Attr); if eará is to the right
+MAP:n>Indef (@>Pron) TARGET (Pron Indef Attr) (*1 ("eará") BARRIER NP-BOUNDARY OR Num OR A - Attr OR Pr OR Ord) ;
+	#$ Galgat go mii vuordit muhtun eará? 
+	#% Dat berre leat oktasaš buot ovttaahkásaš mánáide Loabágis.
+	#Comment: should be expanded
+
+#!! * __>nNum__ (@>N) for numerals if; there is a noun to your right. You are not allowed to be (Sg Nom), (Sg Acc) or (Sem/Date)
 MAP:>nNum (@>N) TARGET Num - (Sg Nom) - (Sg Acc) - Sem/Date (*1 N BARRIER NOT-A OR Num)  ;
 	#$ Juos mearriduvvo meahcceeatnamiid nuppástuvvan geavaheapmi golmma ja dušše golmma stivrralahtu doarjagiin ja olles uhcitlohku vuođđudallá oainnus sámi kultuvrra, boazodoalu, meahcásteami, ealáhusdoaimmaheami ja servodateallima destii mii lea árvvoštallojuvvon Sámedikki válddahusaid vuođul, de sáhttá uhcitlohku ovtta oli stivrračoahkkima áigge gáibidit ášši Sámedikki gieđahallamii.
 

@@ -224,6 +224,7 @@ Abrek+OLang/UND:Abrek LONDON-mal ;
 Abruzzi+OLang/NOB:Abruzzi ACCRA-plc ;
 Abruzzi+OLang/NOB:Abruzzi PIPPI-plc ;
 Absalom+OLang/UND:Absalom9 LONDON-mal ;
+Absalom+OLang/UND+Use/Sub:Absalom9 BERN-mal ; !sub?
 Absalon+OLang/UND:Absalon9 LONDON-mal ;
 Abu+OLang/NOB:Abu ACCRA-mal ;
 Abuja+OLang/UND:Abuja ACCRA-plc ;
@@ -795,6 +796,7 @@ Altan% Urag+MWE+OLang/UND:Altan% Urag9 LONDON-org ;
 Altan% Urag+MWE+Use/Sub+OLang/UND:Altan% urag9 LONDON-org ;
 Altaposten+OLang/NOB:Alta^posten9 LONDON-org ;
 Altaturnering+OLang/NOB:Altaturnering9 LONDON-org ;
+Altaturnering+OLang/NOB:Altaturnering9 BERN-org ;
 AltaVista+OLang/NOB:Alta^Vista ACCRA-org ;
 Altay+OLang/UND:Altay BERN-plc ;
 Alte+OLang/UND:Alte ACCRA-plc ;
@@ -3737,6 +3739,7 @@ Bækken+OLang/NOB:Bækken9 LONDON-sur ;
 Bælum+OLang/NOB:Bælum9 LONDON-sur ;
 Bær+OLang/NOB:Bær BERN-sur ;
 Bærum+OLang/NOB:Bærum9 LONDON-plc ;
+Bærum+OLang/NOB+Use/Sub:Bærum9 BERN-plc ;
 Bærøyvågen+OLang/NOB:Bær^øy#vågen9 LONDON-plc ;
 Bæverfjord+OLang/NOB:Bæver9#fjord9 BERN-plc ;
 Bævre+OLang/NOB:Bævre ACCRA-plc ;
@@ -11564,6 +11567,7 @@ Jerry+OLang/UND:Jerry ACCRA-mal ;
 Jersey+OLang/UND:Jersey ACCRA-plc ;
 Jerte+OLang/UND:Jerte ACCRA-plc ;
 Jerusalem+OLang/UND:Jerusalem9 BERN-plc ;
+Jerusalem+OLang/UND+Use/Sub:Jerusalem9 LONDON-plc ; !er dette sub?
 Jervell+OLang/UND:Jervell LONDON-sur ;
 Jerving+OLang/NOB:Jerving9 LONDON-sur ;
 Jesabela+OLang/FIN:Jesabela ACCRA-plc ;
@@ -12224,6 +12228,7 @@ Kaiku+OLang/UND:Kaiku ACCRA-obj ; ! Ruijan Kaiku
 Kaila+OLang/FIN:Kaila ACCRA-sur ;
 Kaima+OLang/UND:Kaima ACCRA-obj ;
 Kain+OLang/UND:Kain9 LONDON-mal ;
+Kain+OLang/UND+Use/Sub:Kain9 BERN-mal ; ! er dette sub?
 !Kainlauri+OLang/UND:Kainlauri ACCRA-sur ;
 Kainu+OLang/UND:Kainu ACCRA-plc ;
 Kainulainen+OLang/FIN:Kainulai C-FI-NEN-sur ;
@@ -31747,3 +31752,4 @@ Zürich+OLang/UND:Zürich9 LONDON-plc ;
 Čebo+OLang/UND:Čebo9 ACCRA-plc ;
 Šefo+OLang/UND:Šefo9 ACCRA-org ;
 Šilo+OLang/UND:Šilo9 ACCRA-sur ;
+Adeccoliga+OLang/NOB:Adeccoliga ACCRA-org ;

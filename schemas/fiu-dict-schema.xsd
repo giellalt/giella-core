@@ -66,6 +66,7 @@
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
+               <xs:attribute ref="hid"/>
                <xs:attribute ref="pos" use="required"/>
                <xs:attribute name="type">
 		 <xs:simpleType>
@@ -2161,6 +2162,17 @@
             <xs:enumeration value="mUSETIME"/>
             <xs:enumeration value="mVERBAL_COM"/>
             <xs:enumeration value="mVISSJH_V"/>
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+
+   <xs:attribute name="hid">
+      <xs:simpleType>
+         <xs:restriction base="xs:string">
+            <xs:enumeration value="Hom1"/>
+            <xs:enumeration value="Hom2"/>
+            <xs:enumeration value="Hom3"/>
+            <xs:enumeration value="Hom4"/>
          </xs:restriction>
       </xs:simpleType>
    </xs:attribute>

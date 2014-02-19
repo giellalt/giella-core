@@ -2032,6 +2032,7 @@
 <!-- Super set: OBJECT -->
             <xs:enumeration value="THING"/>
             <xs:enumeration value="THING_A"/>
+            <xs:enumeration value="THING_V"/>
 <!-- Super set: ABSTRACTS -->
             <xs:enumeration value="THOUGHT"/>
 <!-- Super set: TIMEEXPRESSIONS -->

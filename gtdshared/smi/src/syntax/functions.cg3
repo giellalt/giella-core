@@ -1154,8 +1154,9 @@ MAP:r289 (@APP-Pron<) TARGET (N Nom) IF (*-1 COMMA BARRIER APP-BOUNDARY OR CC LI
 MAP:app-pron< (@APP-Pron<) TARGET $$CASE - Gen (0 N LINK -1 $$CASE + Pers)(1 VFIN) ;
 	#$ Ja moai boazodoalloáirasat áigguime vaikko guovttá joatkit barggu.
 		
-MAP:r290 (@APP-N<) TARGET (N Acc) - TIME-N IF (*-1 (N Acc) BARRIER APP-BOUNDARY OR CC OR (N Nom) LINK NOT *-1 COMMA BARRIER APP-BOUNDARY OR CC)(1 EOS) ;
+MAP:r290 (@APP-N<) TARGET (N Acc) - TIME-N IF (*-1 (N Acc) OR (A Acc) BARRIER APP-BOUNDARY OR CC OR (N Nom) LINK NOT *-1 COMMA BARRIER APP-BOUNDARY OR CC)(1 EOS) ;
 	## Dovddatgo Bienne Káre-Ánne, skuvlla bassi? 	
+	#$ Sámi áššiid stáhtačállin leat nammadan guovdageaidnulačča Anders J. Bals.
 MAP:r291 (@APP-N<) TARGET (N Acc) - TIME-N IF (*-1 (N Acc) BARRIER APP-BOUNDARY OR CC OR (N Nom) LINK NOT *-1 COMMA BARRIER APP-BOUNDARY OR CC)(1 COMMA LINK 1 S-BOUNDARY) ;	
  
 MAP:nugoAppn< (@APP-N<) TARGET (N Acc) IF (*-1 ("nugo") OR ("sihke") BARRIER APP-BOUNDARY LINK -1 COMMA LINK -1 (N Acc) LINK *-1 BOS BARRIER NOT-NPMOD)(*1 COMMA BARRIER APP-BOUNDARY) ;
@@ -1704,7 +1705,7 @@ MAP:<advlGen (@<ADVL) TARGET (N Gen) (*-1 FMAINV BARRIER SV-BOUNDARY)(NOT *1 N B
 	#$ Ja dat rievvun lea dáhpáhuvván ollu gerddiid.
 	#$ Nubbi ja goalmmát lađas gustojit seamma láhkai virgehasaid ja earrásiid fápmudeapmái dahkat mearrádusa meahcceeatnamiid nuppástuvvan geavaheamis.
 MAP:advl> (@ADVL>) TARGET (N Gen) (*1 FMAINV BARRIER SV-BOUNDARY OR Po)(NOT *1 N BARRIER NOT-A) ;
-MAP:advl> (@ADVL>) TARGET Ess (*1 FMAINV BARRIER SV-BOUNDARY LINK NOT *1 Nom BARRIER NOT-NPMOD)(NEGATE *-1 REAL-V BARRIER S-BOUNDARY) ;
+#MAP:advl> (@ADVL>) TARGET Ess (*1 FMAINV BARRIER SV-BOUNDARY LINK NOT *1 Nom BARRIER NOT-NPMOD)(NEGATE *-1 REAL-V BARRIER S-BOUNDARY) ;
 	#$ Čuoikan ...
 
 #!! * __advlEss>__ (@<ADVL) for weather and time Ess, if FMAINV to the left.
@@ -1999,6 +2000,10 @@ MAP:leftoversX (@X) TARGET WORD ;
 SUBSTITUTE (<sme>) (*) TARGET (<sme>) ;
 SUBSTITUTE (<smj>) (*) TARGET (<smj>) ;
 SUBSTITUTE (<sma>) (*) TARGET (<sma>) ;
+
+#MT RULES
+#SUBSTITUTE ("váldit" V) ("váldit2" V) ("váldit" V) (*1 ("vuostá" Adv) BARRIER SV-BOUNDARY OR REAL-V) ;
+#REMCOHORT TARGET ("vuostá" Adv) (*-1 ("váldit2") BARRIER SV-BOUNDARY OR REAL-V) ;
 
 
 #for view - kommenteres inn for view

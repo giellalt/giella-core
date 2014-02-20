@@ -1705,7 +1705,7 @@ MAP:<advlGen (@<ADVL) TARGET (N Gen) (*-1 FMAINV BARRIER SV-BOUNDARY)(NOT *1 N B
 	#$ Ja dat rievvun lea dáhpáhuvván ollu gerddiid.
 	#$ Nubbi ja goalmmát lađas gustojit seamma láhkai virgehasaid ja earrásiid fápmudeapmái dahkat mearrádusa meahcceeatnamiid nuppástuvvan geavaheamis.
 MAP:advl> (@ADVL>) TARGET (N Gen) (*1 FMAINV BARRIER SV-BOUNDARY OR Po)(NOT *1 N BARRIER NOT-A) ;
-#MAP:advl> (@ADVL>) TARGET Ess (*1 FMAINV BARRIER SV-BOUNDARY LINK NOT *1 Nom BARRIER NOT-NPMOD)(NEGATE *-1 REAL-V BARRIER S-BOUNDARY) ;
+MAP:advl> (@ADVL>) TARGET Ess (*1 FMAINV BARRIER SV-BOUNDARY LINK NOT *1 Nom BARRIER NOT-NPMOD)(NEGATE *-1 REAL-V BARRIER S-BOUNDARY) ;
 	#$ Čuoikan ...
 
 #!! * __advlEss>__ (@<ADVL) for weather and time Ess, if FMAINV to the left.

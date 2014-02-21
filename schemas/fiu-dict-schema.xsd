@@ -804,6 +804,7 @@
    <xs:element name="t">
       <xs:complexType mixed="true">
          <xs:sequence/>
+         <xs:attribute ref="compl"/>
          <xs:attribute name="gen">
             <xs:simpleType>
                <xs:restriction base="xs:string">
@@ -901,6 +902,7 @@
    <xs:element name="tf">
       <xs:complexType mixed="true">
          <xs:sequence/>
+         <xs:attribute ref="compl"/>
          <xs:attribute name="gen">
             <xs:simpleType>
                <xs:restriction base="xs:string">
@@ -1274,6 +1276,7 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="re" type="xs:string"/>
+   <xs:attribute name="compl" type="xs:string"/>
    <xs:attribute name="No" type="xs:integer"/>
    <xs:attribute name="RNo" type="xs:string"/>
    <xs:attribute name="dialect">

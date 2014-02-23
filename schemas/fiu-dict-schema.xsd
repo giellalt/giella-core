@@ -1849,6 +1849,7 @@
             <xs:enumeration value="CONTAINER"/>
 <!-- Super set: BUILDING/ROOMS -->
             <xs:enumeration value="CONSTRUCTION"/>
+            <xs:enumeration value="COUNT"/>
 <!-- Super set: HUMAN-LIKE -->
             <xs:enumeration value="DEITY"/>
             <xs:enumeration value="DIV_ADV"/>

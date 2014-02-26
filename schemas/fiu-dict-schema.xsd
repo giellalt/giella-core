@@ -766,6 +766,8 @@
    <xs:element name="sem">
      <xs:complexType>
            <xs:attribute ref="class"/>
+<!-- leksa, morfac, morfas separated by commas -->
+           <xs:attribute name="usage" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="tg">
@@ -937,6 +939,7 @@
       <xs:complexType>
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="semantics"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_ref"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="m"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="defNative"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tg"/>
@@ -1769,6 +1772,7 @@
             <xs:enumeration value="AMOUNT"/>
 <!-- Super set: ANIMATE -->
             <xs:enumeration value="ANIMATE"/>
+            <xs:enumeration value="INANIMATE"/>
 <!-- Super set: ANIMAL -->
             <xs:enumeration value="ANIMAL_A"/>
 <!-- Super set: BIRD_FISH -->
@@ -1802,6 +1806,8 @@
             <xs:enumeration value="BATHROOM"/>
 <!-- Super set: OBJECT -->
             <xs:enumeration value="BELONGINGS"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="BEVERAGE"/>
 <!-- Super set: BIRD_FISH -->
             <xs:enumeration value="BIRD"/>
             <xs:enumeration value="BIRD_FISH_OTHER"/>
@@ -1850,6 +1856,7 @@
 <!-- Super set: BUILDING/ROOMS -->
             <xs:enumeration value="CONSTRUCTION"/>
             <xs:enumeration value="COUNT"/>
+            <xs:enumeration value="NONCOUNT"/>
 <!-- Super set: HUMAN-LIKE -->
             <xs:enumeration value="DEITY"/>
             <xs:enumeration value="DIV_ADV"/>
@@ -1895,6 +1902,8 @@
             <xs:enumeration value="FOOD_GROCERY_PL"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="FOOD_OTHER"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="FRUIT"/>
 <!-- Super set: BUILDING/ROOMS -->
             <xs:enumeration value="FURNITURE"/>
 <!-- Super set: TRADITIONAL -->
@@ -1984,6 +1993,7 @@
             <xs:enumeration value="PLACE_STAYING"/>
 <!-- Super set: PLANTS -->
             <xs:enumeration value="PLANT"/>
+            <xs:enumeration value="TREE"/>
 <!-- Super set: WORKERS -->
             <xs:enumeration value="PROFESSION"/>
             <xs:enumeration value="PRON"/>

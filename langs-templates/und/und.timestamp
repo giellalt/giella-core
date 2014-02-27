@@ -1,4 +1,7 @@
 $Rev$
+Fixed pattern rule error.
+
+r89569:
 Simplified the building of the hfst lexical transducer, and made it easy to use
 the -F option to hyperminimise the lexical fst. Using pattern rules instead of
 fixed filenames.

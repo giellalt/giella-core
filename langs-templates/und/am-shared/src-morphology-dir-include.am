@@ -96,11 +96,11 @@ $(GTLANG).all.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
 ####### lexical transducer building rules: #######
 
 ####### HFST build rules: ########
-%.hfst: %.lexc
+%.lexc.hfst: %.all.lexc
 	$(HLEXC_verbose)$(HFST_LEXC) $(HFST_LEXC_FLAGS) -f openfst-tropical -o $@ $^
 
 ####### Xerox build rules: #######
-%.xfst: %.lexc
+%.lexc.xfst: %.all.lexc
 	$(XFST_verbose)$(XFST) -q \
 			-e "read lexc $^" \
 			-e "compose net" \

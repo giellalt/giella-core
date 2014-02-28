@@ -81,7 +81,7 @@ $svnignore "$mkfiles
 $fstfiles
 *.foma
 *.script
-*-all.lexc
+*.all.lexc
 *.tmp.*" $1/src/morphology
 
 # Only ignore generated propernoun files in the src/morphology/stems dir:
@@ -114,6 +114,8 @@ $svnignore "$mkfiles
 $fstfiles
 easteregg.*
 *.zhfst
+*.oxt
+build
 3" $1/tools/spellcheckers/fstbased/hfst
 
 # Set the svn:ignore prop on the grammarchecker dir:

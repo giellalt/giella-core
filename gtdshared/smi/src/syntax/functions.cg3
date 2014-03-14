@@ -1734,13 +1734,14 @@ MAP:comma<advlEOS (@<ADVL) TARGET Adv (*-1 COMMA BARRIER V LINK *-1 FMAINV BARRI
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 	#$ De eai leat šat dušše tálat, muhto bustávat maid.
 	
-MAP:<advlØ (@<ADVL) TARGET Adv (*-1 Nom)(*1 Po OR EOS BARRIER SV-BOUNDARY) ;
+MAP:<advlØ (@<ADVL) TARGET Adv OR TIME-N (*-1 Nom)(*1 Po OR EOS BARRIER SV-BOUNDARY) ;
 	#$ Maid mii dál vihtaniiguin?
 	#$ Lákca vel alde!
 	#$ Sámi dutkan ii leat dan dihte soaittáhagas válljejuvvon dutkansuorgi.
 	#% Odne vai ihttin? 
 	#% Juoba ge dán áigodagas.
 	#Comment: Dát doaibmá bures ellipsaide main lea HNOUN, muhto ferten gávdnat eará čovdosa.
+	#$ Ođđa viessu boahtte jagi.
 
 #MAP:nr2<advlEOS (@<ADVL) TARGET (N Loc) (*-1 S-BOUNDARY BARRIER V LINK *-1 FMAINV BARRIER S-BOUNDARY)(*1 EOS BARRIER FMAINV);
 	#$ 'De eai leat šat dušše tálat, muhto bustávat maid.

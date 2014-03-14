@@ -138,6 +138,8 @@ AC_CONFIG_FILES([test/src/morphology/run-morph-tester.sh], \
       [chmod a+x test/src/morphology/run-morph-tester.sh])
 AC_CONFIG_FILES([test/src/morphology/generate-noun-lemmas.sh], \
       [chmod a+x test/src/morphology/generate-noun-lemmas.sh])
+AC_CONFIG_FILES([test/tools/spellcheckers/test-zhfst-file.sh], \
+      [chmod a+x test/tools/spellcheckers/test-zhfst-file.sh])
 AC_CONFIG_FILES([tools/shellscripts/u__UND__-gt.sh], \
       [chmod a+x tools/shellscripts/u__UND__-gt.sh])
 

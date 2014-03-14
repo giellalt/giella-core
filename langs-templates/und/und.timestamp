@@ -1,4 +1,8 @@
 $Rev$
+Moved the new test script processing in configure.ac up a few lines to avoid
+conflicts during template merge.
+
+r90414:
 Added a test to check zhfst file validity. Not functional yet, because of a bug
 in hfst-ospell.
 

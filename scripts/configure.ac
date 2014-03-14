@@ -23,12 +23,12 @@ AC_MSG_CHECKING([whether we can define GTCORE])
 AS_IF([test "x$GTCORE"  = x], [GTCORE=$(dirname $(pwd) ); AC_MSG_RESULT([yes - from pwd])],
 	  [test "x$GTCORE" != x], [AC_MSG_RESULT([yes - from env])],
       [AC_MSG_RESULT([no])])
-AC_ARG_VAR([GTCORE], [directory for giellatekno core data and scripts])
+AC_ARG_VAR([GTCORE], [directory for Giellatekno/Divvun core data and scripts])
 
 SVNREVISION="$Revision$"
 SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
 
-AC_SUBST([GT_SCRIPTVERSION], [0.2.4-${SVNREVNUM}])
+AC_SUBST([GT_SCRIPTVERSION], [0.2.5-${SVNREVNUM}])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([gt-version.sh], [chmod +x gt-version.sh])

@@ -103,7 +103,7 @@
 	  <xsl:text>postp.</xsl:text>
 	</xsl:if>
 	
-	<xsl:if test="lower-case((normalize-space($pos))='pcle'">
+	<xsl:if test="lower-case(normalize-space($pos))='pcle'">
 	  <!--       <xsl:text>partikkel</xsl:text> -->
 	  <xsl:text>part.</xsl:text>
 	</xsl:if>

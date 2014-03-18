@@ -10,9 +10,47 @@
    <xs:element name="r">
       <xs:complexType>
          <xs:sequence>
+            <xs:element minOccurs="0" ref="lics"/>
             <xs:element maxOccurs="unbounded" ref="e"/>
          </xs:sequence>
          <xs:attribute ref="xml:lang"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="lics">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="lic"/>
+            <xs:element minOccurs="0" ref="ref"/>
+            <xs:element minOccurs="0" ref="sourcenote"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="lic">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:element ref="a"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ref">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:element ref="a"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="sourcenote">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:element ref="a"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="a">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string"/>
+         </xs:simpleContent>
       </xs:complexType>
    </xs:element>
    <xs:element name="e">
@@ -807,6 +845,7 @@
       <xs:complexType mixed="true">
          <xs:sequence/>
          <xs:attribute ref="compl"/>
+         <xs:attribute ref="Contlex"/>
          <xs:attribute name="gen">
             <xs:simpleType>
                <xs:restriction base="xs:string">
@@ -1897,6 +1936,7 @@
             <xs:enumeration value="FOOD_DISH"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="FOOD_DRINK_V"/>
+            <xs:enumeration value="FOODDRINK_V"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="FOOD_GROCERY"/>
             <xs:enumeration value="FOOD_GROCERY_PL"/>
@@ -1921,8 +1961,10 @@
             <xs:enumeration value="HOME_ACTIVITY"/>
 <!-- Super set: HUMAN_DOING -->
             <xs:enumeration value="HUM_A"/>
+            <xs:enumeration value="HUMAN_A"/>
 <!-- Super set: HUMAN_DOING -->
             <xs:enumeration value="HUM_V"/>
+            <xs:enumeration value="HUMAN_V"/>
 <!-- Super set: BODY -->
             <xs:enumeration value="ILLNESS"/>
 <!-- Super set: VERBAL ASPECT -->

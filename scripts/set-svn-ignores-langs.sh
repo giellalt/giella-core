@@ -114,6 +114,13 @@ $svnignore "$mkfiles
 *.log
 *.trs
 *.txt
+*.sh" $1/test/src/phonology
+
+# Set the svn:ignore prop on the test/tools/spellcheckers/ dir:
+$svnignore "$mkfiles
+*.log
+*.trs
+*.txt
 *.sh" $1/test/tools/spellcheckers
 
 # Set the svn:ignore prop on the hfst speller dir:

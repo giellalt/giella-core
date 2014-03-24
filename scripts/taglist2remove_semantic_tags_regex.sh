@@ -15,5 +15,5 @@ AWK=awk
 $SED   's/\([+/-]\)/%\1/g' $1 \
 | $SED 's/^/0 <- /' \
 | $SED 's/$/,/' \
-| $SED '$ s/,/ || \\[ %+N%+Prop ] _ ;/' \
+| $SED '$ s/,/ || \\%+Prop _ ;/' \
 | $AWK 'NR==1{$0="### This is a generated file - do not edit!!!\n"$0}1'

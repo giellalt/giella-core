@@ -2000,6 +2000,7 @@
             <xs:enumeration value="MOVEMENT_V"/>
 <!-- Super set: HUMAN -->
             <xs:enumeration value="MYTH_HUM"/>
+            <xs:enumeration value="MYTH_BEING"/>
             <xs:enumeration value="MYTH_OTHER"/>
 <!-- Super set: NATURE -->
             <xs:enumeration value="NATURE"/>

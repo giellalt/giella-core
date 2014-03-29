@@ -2,12 +2,14 @@
 # or any later version.
 
 # ==================================================================== #
-#    N O R T H E R N  S Á M I  D I S A M B I G U A T O R               
+#!!    S Y N T A C T I C   F U N C T I O N S   F O R   S Á M I
 # ==================================================================== #
 # ==================================================================== 
 
-#  Sámi language technology project 2003-2006, University of Tromsø # 
+#!!  Sámi language technology project 2003-2014, University of Tromsø # 
 
+#!! This file adds syntactic functions. It is common for all the Saami
+##! languages, so far for sma, sme, smj.
 
 # ========== #
 # Delimiters #
@@ -2003,10 +2005,11 @@ REMOVE:WORD WORD - ALLSYNTAG ;
 
 MAP:leftoversX (@X) TARGET WORD ;
 
+#!! ! __smeRemove__ removes the language tags <sma>, <sme>,  etc, before proceeding to the dep file.
 
-SUBSTITUTE (<sme>) (*) TARGET (<sme>) ;
-SUBSTITUTE (<smj>) (*) TARGET (<smj>) ;
-SUBSTITUTE (<sma>) (*) TARGET (<sma>) ;
+SUBSTITUTE:smeRemove (<sme>) (*) TARGET (<sme>) ;
+SUBSTITUTE:smjRemove (<smj>) (*) TARGET (<smj>) ;
+SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 
 #MT RULES
 #SUBSTITUTE ("váldit" V) ("váldit2" V) ("váldit" V) (*1 ("vuostá" Adv) BARRIER SV-BOUNDARY OR REAL-V) ;
@@ -2033,10 +2036,13 @@ SUBSTITUTE (<sma>) (*) TARGET (<sma>) ;
 #SUBSTITUTE (@Pron<) (@Pron< <compl_subj>) TARGET (@Pron<) (-1 SUBJ) ;
 #SUBSTITUTE (@Pron<) (@Pron< <compl_advl>) TARGET (@Pron<) (-1 @ADVL) ;
 
-#For MT:
+#!! !!For MT:
+
+#!! Here we remove semantic tags for all other words than
+#!! proper nouns. In the Apertium bidix, only names have semtags.
 
 SUBSTITUTE (Sem/Act) (*) TARGET (Sem/Act) ;
-SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) ;
+SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/AniProd) (*) TARGET (Sem/AniProd) ;
 SUBSTITUTE (Sem/Body) (*) TARGET (Sem/Body) ;
 SUBSTITUTE (Sem/Build) (*) TARGET (Sem/Build) ;
@@ -2050,31 +2056,31 @@ SUBSTITUTE (Sem/Curr) (*) TARGET (Sem/Curr) ;
 SUBSTITUTE (Sem/Date) (*) TARGET (Sem/Date) ;
 SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ;
 SUBSTITUTE (Sem/Emo) (*) TARGET (Sem/Emo) ;
-SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) ;
+SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Feat-psych) (*) TARGET (Sem/Feat-psych) ;
-SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) ;
+SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Food) (*) TARGET (Sem/Food) ;
 SUBSTITUTE (Sem/Furn) (*) TARGET (Sem/Furn) ;
 SUBSTITUTE (Sem/Group) (*) TARGET (Sem/Group) ;
-SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) ;
+SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Year) (*) TARGET (Sem/Year) ;
 SUBSTITUTE (Sem/Lang) (*) TARGET (Sem/Lang) ;
-SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) ;
+SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Mat) (*) TARGET (Sem/Mat) ;
 SUBSTITUTE (Sem/Measr) (*) TARGET (Sem/Measr) ;
 SUBSTITUTE (Sem/Money) (*) TARGET (Sem/Money) ;
-SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) ;
+SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Obj-clo) (*) TARGET (Sem/Obj-clo) ;
 SUBSTITUTE (Sem/Obj-el) (*) TARGET (Sem/Obj-el) ;
-SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) ;
+SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ;
 SUBSTITUTE (Sem/Plant) (*) TARGET (Sem/Plant) ;
-SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) ;
+SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ;
 SUBSTITUTE (Sem/Plc-water) (*) TARGET (Sem/Plc-water) ;
 SUBSTITUTE (Sem/Plc-elevate) (*) TARGET (Sem/Plc-elevate) ;
 SUBSTITUTE (Sem/Substnc) (*) TARGET (Sem/Substnc) ;
-SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) ;
+SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) (NOT 0 Prop) ;
 SUBSTITUTE (Sem/Route) (*) TARGET (Sem/Route) ;
 SUBSTITUTE (Sem/Semcon) (*) TARGET (Sem/Semcon) ;
 SUBSTITUTE (Sem/Time) (*) TARGET (Sem/Time) ;

@@ -68,6 +68,7 @@
             <xs:element ref="drv"/>
             <xs:element ref="etymg"/>
 	   </xs:choice>
+            <xs:element minOccurs="0" ref="sources"/>
             <xs:element maxOccurs="unbounded" ref="mg"/>
          </xs:sequence>
          <xs:attribute ref="exclude"/>
@@ -976,6 +977,15 @@
          <xs:attribute ref="val"/>
       </xs:complexType>
    </xs:element>
+   <xs:element name="sources">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="media"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="book"/>
+         </xs:sequence>
+         <xs:attribute ref="No"/>
+      </xs:complexType>
+   </xs:element>
    <xs:element name="mg">
       <xs:complexType>
          <xs:sequence>
@@ -1105,6 +1115,37 @@
             </xs:simpleType>
          </xs:attribute>
       </xs:complexType>
+   </xs:element>
+<!-- This is used with ped/LANG/src/...xml -->
+   <xs:element name="book">
+     <xs:complexType>
+       <xs:simpleContent>
+	 <xs:extension base="xs:string">
+	   <xs:attribute name="name" type="xs:string"/>
+	 </xs:extension>
+       </xs:simpleContent>
+     </xs:complexType>
+   </xs:element>
+<!-- This is used with main/langs/LANG/src/morphology/stems/...xml -->
+   <xs:element name="media">
+     <xs:complexType>
+       <xs:simpleContent>
+	 <xs:extension base="xs:string">
+	   <xs:attribute name="mediaID">
+	     <xs:simpleType>
+	       <xs:restriction base="xs:string">
+		 <xs:enumeration value="book"/>
+		 <xs:enumeration value="periodical"/>
+		 <xs:enumeration value="radio"/>
+		 <xs:enumeration value="television"/>
+		 <xs:enumeration value="wikipedia"/>
+	       </xs:restriction>
+	     </xs:simpleType>
+	   </xs:attribute>
+	   <xs:attribute name="name" type="xs:string"/>
+	 </xs:extension>
+       </xs:simpleContent>
+     </xs:complexType>
    </xs:element>
    <xs:element name="range">
      <xs:complexType>

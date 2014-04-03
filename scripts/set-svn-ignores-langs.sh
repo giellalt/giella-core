@@ -99,6 +99,10 @@ $fstfiles
 dependency.cg3
 functions.cg3" $1/src/syntax
 
+# Set the svn:ignore prop on the test/ dir:
+$svnignore "$mkfiles
+run-morph-tester.sh" $1/test
+
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 $svnignore "$mkfiles
 *-affixes_*.yaml
@@ -122,6 +126,18 @@ $svnignore "$mkfiles
 *.trs
 *.txt
 *.sh" $1/test/tools/spellcheckers
+
+# Set the svn:ignore prop on the test/tools/mt/apertium/ dir:
+$svnignore "$mkfiles
+*.log
+*.trs
+*.txt
+*.sh" $1/test/tools/mt/apertium
+
+# Set the svn:ignore prop on the hfst speller dir:
+$svnignore "$mkfiles
+$fstfiles
+*.att.gz" $1/tools/mt/apertium
 
 # Set the svn:ignore prop on the hfst speller dir:
 $svnignore "$mkfiles

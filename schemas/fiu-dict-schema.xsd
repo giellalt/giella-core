@@ -996,6 +996,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tg"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="xg"/>
          </xs:sequence>
+         <xs:attribute name="id" type="xs:string"/>
          <xs:attribute ref="No"/>
       </xs:complexType>
    </xs:element>
@@ -1121,6 +1122,7 @@
      <xs:complexType>
        <xs:simpleContent>
 	 <xs:extension base="xs:string">
+	   <xs:attribute name="mgs" type="xs:string"/>
 	   <xs:attribute name="name" type="xs:string"/>
 	 </xs:extension>
        </xs:simpleContent>
@@ -1142,11 +1144,13 @@
 	       </xs:restriction>
 	     </xs:simpleType>
 	   </xs:attribute>
+	   <xs:attribute name="mgs" type="xs:string"/>
 	   <xs:attribute name="name" type="xs:string"/>
 	 </xs:extension>
        </xs:simpleContent>
      </xs:complexType>
    </xs:element>
+   <xs:attribute name="mgs" type="xs:string"/>
    <xs:element name="range">
      <xs:complexType>
        <xs:simpleContent>
@@ -1973,6 +1977,8 @@
             <xs:enumeration value="FISH"/>
 <!-- Super set: TRADITIONAL -->
             <xs:enumeration value="FISHING"/>
+<!-- Super set: FOOD/DRINK -->
+            <xs:enumeration value="FOOD"/>
 <!-- Super set: FOOD/DRINK -->
             <xs:enumeration value="FOOD_A"/>
 <!-- Super set: FOOD/DRINK -->

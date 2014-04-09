@@ -62,7 +62,11 @@
 	    <out>
 	      <e>
 		<xsl:attribute name="stem">
-		  <xsl:value-of select="replace(normalize-space(.), ' ', '% ')"/>
+		  <xsl:value-of select="replace(
+		                          replace(
+		                            replace(normalize-space(.), ' ', '% '),
+		                          ':','%:'),
+		                        '!','%!')  "/>
 		</xsl:attribute>
 		<xsl:attribute name="pos">
 		  <xsl:value-of select="normalize-space(../../../pos)"/>
@@ -97,7 +101,11 @@
 </xsl:choose>
 		</xsl:attribute>
 		<!-- xsl:value-of select="normalize-space(../../l)"/ replace underscore by "% "-->
-		<xsl:value-of select="replace(normalize-space(../../l), ' ', '% ')"/>		
+		<xsl:value-of select="replace(
+		                          replace(
+		                            replace(normalize-space(../../l), ' ', '% '),
+		                          ':','%:'),
+		                        '!','%!')  "/>		
 	      </e>
 	    </out>
 	  </xsl:variable>

@@ -16,6 +16,7 @@ function print_usage() {
     echo "  -r, --revision REV         start merging from REV instead of timestamp's"
     echo "  -t, --template TPL         Only select TPL templates (bash glob)"
     echo "  -c, --templatecoll TPLCOLL Only select templates from TPLCOLL (bash glob)"
+    echo "  -u, --username USER        Use username USER for the svn interaction"
     echo
 }
 
@@ -77,6 +78,19 @@ while test $# -ge 1 ; do
             tpl="$2"
             shift
         fi
+    elif test x$1 = x--username -o x$1 = x-u ; then
+        if test -z $2 ; then
+            if ! echo $1 | fgrep = ; then
+                echo "$1 requires user names"
+                print_usage
+                exit 1
+            else
+                user=$(echo $1 | $SED -e 's/.*=//')
+            fi
+        else
+            user="$2"
+            shift
+        fi
     elif test x$1 = x--templatecoll -o x$1 = x-c ; then
         if test -z $2 ; then
             if ! echo $1 | fgrep = ; then
@@ -97,6 +111,11 @@ while test $# -ge 1 ; do
     fi
     shift
 done
+
+username=""
+if test "x$user" != "x"; then
+  username="$user@"
+fi
 
 unmerged=.tmp.unsafe.unmerged
 if test x$unsafe != xunsafe ; then
@@ -150,7 +169,7 @@ fi
 
 TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
-SVNREPOROOT="https://victorio.uit.no/langtech"
+SVNREPOROOT="https://${username}victorio.uit.no/langtech"
 
 for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
     macrolang=${macrolangdir#${GTCORE}/${TEMPLATEDIR}/}

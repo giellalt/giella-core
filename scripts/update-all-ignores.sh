@@ -40,15 +40,15 @@ ALL_LANGS=$(egrep '^ALL_LANGS=' < $DIR/Makefile.am \
 			| sed -e 's/ALL_LANGS=//')
 
 if test "x$ALL_LANGS" == "x" ; then
-	echo "Script was called from the wrong directory. It must be called from"
-	echo "the directory enclosing all language directories."
+	echo "The script was called from the wrong directory. It must be called"
+	echo "from the directory enclosing all language directories."
 	exit 1
 fi
 
 for ll in $ALL_LANGS ; do
     if test -d $ll ; then
     	Language=$(${GTCORE}/scripts/iso639-to-name.sh $ll)
-        echo "*** Setting svn:ignore's for $ll - $Language ***"
+        echo "- setting svn:ignore's for $ll - $Language"
         cd $ll && ${GTCORE}/scripts/set-svn-ignores-$TEMPLATENAME.sh \
         	$(pwd) && cd ..
     fi

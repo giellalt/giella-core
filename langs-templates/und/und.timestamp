@@ -7,7 +7,7 @@ A major update to the Apertium fst building:
   specific filters
 * added facility to modify locally remove...strings.regex files by using an
   exception file
-* 
+* build the remove-derivation-strings.regex dynamically also for regular fst's
 
 r92170:
 Now building the remove dialect tag removal filter dynamically, in the same way

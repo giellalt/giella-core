@@ -134,10 +134,16 @@ $svnignore "$mkfiles
 *.txt
 *.sh" $1/test/tools/mt/apertium
 
-# Set the svn:ignore prop on the hfst speller dir:
+# Set the svn:ignore prop on the tools/mt/apertium/ dir:
 $svnignore "$mkfiles
 $fstfiles
 *.att.gz" $1/tools/mt/apertium
+
+# Set the svn:ignore prop on the tools/mt/apertium/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*txt
+*.regex" $1/tools/mt/apertium/filters
 
 # Set the svn:ignore prop on the hfst speller dir:
 $svnignore "$mkfiles

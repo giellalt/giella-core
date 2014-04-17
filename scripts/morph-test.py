@@ -37,8 +37,6 @@ except:
 	import xml.etree.ElementTree as etree
 	from xml.etree.ElementTree import Element, SubElement
 
-sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
-
 
 # SUPPORT FUNCTIONS
 
@@ -302,6 +300,11 @@ class MorphTest(Test):
 
 		self.gen = self.args.get('gen') or section.get("Gen", None)
 		self.morph = self.args.get('morph') or section.get("Morph", None)
+
+		if self.args.get('surface', None):
+			self.gen = None
+		if self.args.get('lexical', None):
+			self.morph = None
 
 		if self.gen == self.morph == None:
 			raise AttributeError("One of Gen or Morph must be configured.")

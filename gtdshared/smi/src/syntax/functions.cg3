@@ -2041,105 +2041,64 @@ SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 #!! Here we remove semantic tags for all other words than
 #!! proper nouns.  
 
-SUBSTITUTE (Sem/Act) (*) TARGET (Sem/Act) ;
-SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/AniProd) (*) TARGET (Sem/AniProd) ;
-SUBSTITUTE (Sem/Body) (*) TARGET (Sem/Body) ;
-SUBSTITUTE (Sem/Build) (*) TARGET (Sem/Build) ;
-SUBSTITUTE (Sem/Build-part) (*) TARGET (Sem/Build-part) ;
-SUBSTITUTE (Sem/Clth) (*) TARGET (Sem/Clth) ;
-SUBSTITUTE (Sem/Clth-jewl) (*) TARGET (Sem/Clth-jewl) ;
-SUBSTITUTE (Sem/Ctain) (*) TARGET (Sem/Ctain) ;
-SUBSTITUTE (Sem/Ctain-clth) (*) TARGET (Sem/Ctain-clth) ;
-SUBSTITUTE (Sem/Ctain-abstr) (*) TARGET (Sem/Ctain-abstr) ;
-SUBSTITUTE (Sem/Curr) (*) TARGET (Sem/Curr) ;
-SUBSTITUTE (Sem/Date) (*) TARGET (Sem/Date) ;
-SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ;
-SUBSTITUTE (Sem/Emo) (*) TARGET (Sem/Emo) ;
-SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Feat-psych) (*) TARGET (Sem/Feat-psych) ;
-SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Food) (*) TARGET (Sem/Food) ;
-SUBSTITUTE (Sem/Furn) (*) TARGET (Sem/Furn) ;
-SUBSTITUTE (Sem/Group) (*) TARGET (Sem/Group) ;
-SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Year) (*) TARGET (Sem/Year) ;
-SUBSTITUTE (Sem/Lang) (*) TARGET (Sem/Lang) ;
-SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Mat) (*) TARGET (Sem/Mat) ;
-SUBSTITUTE (Sem/Measr) (*) TARGET (Sem/Measr) ;
-SUBSTITUTE (Sem/Money) (*) TARGET (Sem/Money) ;
-SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Obj-clo) (*) TARGET (Sem/Obj-clo) ;
-SUBSTITUTE (Sem/Obj-el) (*) TARGET (Sem/Obj-el) ;
-SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ;
-SUBSTITUTE (Sem/Plant) (*) TARGET (Sem/Plant) ;
-SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ;
-SUBSTITUTE (Sem/Plc-water) (*) TARGET (Sem/Plc-water) ;
-SUBSTITUTE (Sem/Plc-elevate) (*) TARGET (Sem/Plc-elevate) ;
-SUBSTITUTE (Sem/Substnc) (*) TARGET (Sem/Substnc) ;
-SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) (NOT 0 Prop) ;
-SUBSTITUTE (Sem/Route) (*) TARGET (Sem/Route) ;
-SUBSTITUTE (Sem/Semcon) (*) TARGET (Sem/Semcon) ;
-SUBSTITUTE (Sem/Time) (*) TARGET (Sem/Time) ;
-SUBSTITUTE (Sem/Txt) (*) TARGET (Sem/Txt) ;
-SUBSTITUTE (Sem/Veh) (*) TARGET (Sem/Veh) ;
-SUBSTITUTE (Sem/Wpn) (*) TARGET (Sem/Wpn) ;
-SUBSTITUTE (Sem/Wthr) (*) TARGET (Sem/Wthr) ;
-SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ;
-SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ;
-SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ;
-SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ;
-SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ;
-SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ;
-SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ;
-SUBSTITUTE (Sem/State) (*) TARGET (Sem/State) ;
+SUBSTITUTE (Sem/Act) (*) TARGET (Sem/Act) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/AniProd) (*) TARGET (Sem/AniProd) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Body) (*) TARGET (Sem/Body) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Build) (*) TARGET (Sem/Build) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Build-part) (*) TARGET (Sem/Build-part) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Clth) (*) TARGET (Sem/Clth) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Clth-jewl) (*) TARGET (Sem/Clth-jewl) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Ctain) (*) TARGET (Sem/Ctain) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Ctain-clth) (*) TARGET (Sem/Ctain-clth) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Ctain-abstr) (*) TARGET (Sem/Ctain-abstr) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Curr) (*) TARGET (Sem/Curr) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Date) (*) TARGET (Sem/Date) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Emo) (*) TARGET (Sem/Emo) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Feat-psych) (*) TARGET (Sem/Feat-psych) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Food) (*) TARGET (Sem/Food) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Furn) (*) TARGET (Sem/Furn) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Group) (*) TARGET (Sem/Group) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Year) (*) TARGET (Sem/Year) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Lang) (*) TARGET (Sem/Lang) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Mat) (*) TARGET (Sem/Mat) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Measr) (*) TARGET (Sem/Measr) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Money) (*) TARGET (Sem/Money) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Obj-clo) (*) TARGET (Sem/Obj-clo) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Obj-el) (*) TARGET (Sem/Obj-el) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plant) (*) TARGET (Sem/Plant) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plc-water) (*) TARGET (Sem/Plc-water) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plc-elevate) (*) TARGET (Sem/Plc-elevate) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Substnc) (*) TARGET (Sem/Substnc) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Route) (*) TARGET (Sem/Route) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Semcon) (*) TARGET (Sem/Semcon) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Time) (*) TARGET (Sem/Time) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Txt) (*) TARGET (Sem/Txt) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Veh) (*) TARGET (Sem/Veh) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Wpn) (*) TARGET (Sem/Wpn) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Wthr) (*) TARGET (Sem/Wthr) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ; #RemoveFromApertium
+SUBSTITUTE (Sem/State) (*) TARGET (Sem/State) ; #RemoveFromApertium
 SUBSTITUTE (<vdic>) (*) TARGET (<vdic>) ;
 SUBSTITUTE (MWE) (*) TARGET (MWE) ;
 
-#SUBSTITUTE SUB:-1 (sem_act) (*) TARGET (sem_act) ;
-#SUBSTITUTE SUB:-1 (sem_ani) (*) TARGET (sem_ani) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_aniprod) (*) TARGET (sem_aniprod) ;
-#SUBSTITUTE SUB:-1 (sem_body) (*) TARGET (sem_body) ;
-#SUBSTITUTE SUB:-1 (sem_build) (*) TARGET (sem_build) ;
-#SUBSTITUTE SUB:-1 (sem_build-part) (*) TARGET (sem_build-part) ;
-#SUBSTITUTE SUB:-1 (sem_clth) (*) TARGET (sem_clth) ;
-#SUBSTITUTE SUB:-1 (sem_clth-jewl) (*) TARGET (sem_clth-jewl) ;
-#SUBSTITUTE SUB:-1 (sem_ctain) (*) TARGET (sem_ctain) ;
-#SUBSTITUTE SUB:-1 (sem_curr) (*) TARGET (sem_curr) ;
-#SUBSTITUTE SUB:-1 (sem_date) (*) TARGET (sem_date) ;
-#SUBSTITUTE SUB:-1 (sem_edu) (*) TARGET (sem_edu) ;
-#SUBSTITUTE SUB:-1 (sem_emo) (*) TARGET (sem_emo) ;
-#SUBSTITUTE SUB:-1 (sem_event) (*) TARGET (sem_event) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_fem) (*) TARGET (sem_fem) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_food) (*) TARGET (sem_food) ;
-#SUBSTITUTE SUB:-1 (sem_furn) (*) TARGET (sem_furn) ;
-#SUBSTITUTE SUB:-1 (sem_group) (*) TARGET (sem_group) ;
-#SUBSTITUTE SUB:-1 (sem_hum) (*) TARGET (sem_hum) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_lang) (*) TARGET (sem_lang) ;
-#SUBSTITUTE SUB:-1 (sem_mal) (*) TARGET (sem_mal) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_mat) (*) TARGET (sem_mat) ;
-#SUBSTITUTE SUB:-1 (sem_measr) (*) TARGET (sem_measr) ;
-#SUBSTITUTE SUB:-1 (sem_money) (*) TARGET (sem_money) ;
-#SUBSTITUTE SUB:-1 (sem_obj) (*) TARGET (sem_obj) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_obj-clo) (*) TARGET (sem_obj-clo) ;
-#SUBSTITUTE SUB:-1 (sem_obj-el) (*) TARGET (sem_obj-el) ;
-#SUBSTITUTE SUB:-1 (sem_org) (*) TARGET (sem_org) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_plant) (*) TARGET (sem_plant) ;
-#SUBSTITUTE SUB:-1 (sem_perc-emo) (*) TARGET (sem_perc-emo) ;
-#SUBSTITUTE SUB:-1 (sem_plc) (*) TARGET (sem_plc) (NOT 0 Prop) ; 
-#SUBSTITUTE SUB:-1 (sem_sur) (*) TARGET (sem_sur) (NOT 0 Prop) ;
-#SUBSTITUTE SUB:-1 (sem_route) (*) TARGET (sem_route) ;
-#SUBSTITUTE SUB:-1 (sem_semcon) (*) TARGET (sem_semcon) ;
-#SUBSTITUTE SUB:-1 (sem_txt) (*) TARGET (sem_txt) ;
-#SUBSTITUTE SUB:-1 (sem_time) (*) TARGET (sem_time) ;
-#SUBSTITUTE SUB:-1 (sem_txt) (*) TARGET (sem_txt) ;
-#SUBSTITUTE SUB:-1 (sem_veh) (*) TARGET (sem_veh) ;
-#SUBSTITUTE SUB:-1 (sem_wpn) (*) TARGET (sem_wpn) ;
-#SUBSTITUTE SUB:-1 (sem_wthr) (*) TARGET (sem_wthr) ;
-SUBSTITUTE SUB:-1 (←vdic→) (*) TARGET (←vdic→) ;
 
 	#=====#
       END #

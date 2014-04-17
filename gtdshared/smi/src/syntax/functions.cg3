@@ -1940,7 +1940,7 @@ MAP:<subj (@<SUBJ) TARGET NP-HEAD-NOM - A OR DUPRON + Nom OR (Num Nom) (*-1 FMAI
 MAP:subj>ifV (@SUBJ>) TARGET NP-HEAD-NOM - A OR DUPRON + Nom OR (Num Nom) (*1 FMAINV BARRIER (":"))(NEGATE *1 @SUBJ> + (Pron Rel) BARRIER FMAINV OR FAUXV LINK NOT *2 FMAINV BARRIER EOS) ;
 	#$ Lean ieš oaidnán dange.
 	#$ Mii Sámedikki nuoraidpolitihkalaš lávdegottis (SNPL) áigut čalmmustahttit árbevirolaš ja ođđaáigásaš sámi ealáhusaid.
-	#% #$ Ávdugasat sii geat moraštit.
+	#% Ávdugasat sii geat moraštit.
 	
 #!! * __hnoun>ifV__ (@SUBJ>) for NP-HEAD-NOM, DUPRON if. The counterpart of subj>ifV. You are HNOUN if there is a finite verb to your right, but NOT if there is a finite verb after a relative clause
 MAP:hnoun>ifV (@HNOUN) TARGET NP-HEAD-NOM - A OR DUPRON + Nom (*1 FMAINV BARRIER (":"))(NEGATE *1 @SUBJ> BARRIER FMAINV LINK 2* FMAINV BARRIER EOS ) ;
@@ -2036,10 +2036,10 @@ SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 #SUBSTITUTE (@Pron<) (@Pron< <compl_subj>) TARGET (@Pron<) (-1 SUBJ) ;
 #SUBSTITUTE (@Pron<) (@Pron< <compl_advl>) TARGET (@Pron<) (-1 @ADVL) ;
 
-#!! !!For MT:
+#!! !!For Korp:
 
 #!! Here we remove semantic tags for all other words than
-#!! proper nouns. In the Apertium bidix, only names have semtags.
+#!! proper nouns.  
 
 SUBSTITUTE (Sem/Act) (*) TARGET (Sem/Act) ;
 SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) (NOT 0 Prop) ;
@@ -2099,46 +2099,46 @@ SUBSTITUTE (Sem/State) (*) TARGET (Sem/State) ;
 SUBSTITUTE (<vdic>) (*) TARGET (<vdic>) ;
 SUBSTITUTE (MWE) (*) TARGET (MWE) ;
 
-SUBSTITUTE SUB:-1 (sem_act) (*) TARGET (sem_act) ;
-SUBSTITUTE SUB:-1 (sem_ani) (*) TARGET (sem_ani) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_aniprod) (*) TARGET (sem_aniprod) ;
-SUBSTITUTE SUB:-1 (sem_body) (*) TARGET (sem_body) ;
-SUBSTITUTE SUB:-1 (sem_build) (*) TARGET (sem_build) ;
-SUBSTITUTE SUB:-1 (sem_build-part) (*) TARGET (sem_build-part) ;
-SUBSTITUTE SUB:-1 (sem_clth) (*) TARGET (sem_clth) ;
-SUBSTITUTE SUB:-1 (sem_clth-jewl) (*) TARGET (sem_clth-jewl) ;
-SUBSTITUTE SUB:-1 (sem_ctain) (*) TARGET (sem_ctain) ;
-SUBSTITUTE SUB:-1 (sem_curr) (*) TARGET (sem_curr) ;
-SUBSTITUTE SUB:-1 (sem_date) (*) TARGET (sem_date) ;
-SUBSTITUTE SUB:-1 (sem_edu) (*) TARGET (sem_edu) ;
-SUBSTITUTE SUB:-1 (sem_emo) (*) TARGET (sem_emo) ;
-SUBSTITUTE SUB:-1 (sem_event) (*) TARGET (sem_event) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_fem) (*) TARGET (sem_fem) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_food) (*) TARGET (sem_food) ;
-SUBSTITUTE SUB:-1 (sem_furn) (*) TARGET (sem_furn) ;
-SUBSTITUTE SUB:-1 (sem_group) (*) TARGET (sem_group) ;
-SUBSTITUTE SUB:-1 (sem_hum) (*) TARGET (sem_hum) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_lang) (*) TARGET (sem_lang) ;
-SUBSTITUTE SUB:-1 (sem_mal) (*) TARGET (sem_mal) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_mat) (*) TARGET (sem_mat) ;
-SUBSTITUTE SUB:-1 (sem_measr) (*) TARGET (sem_measr) ;
-SUBSTITUTE SUB:-1 (sem_money) (*) TARGET (sem_money) ;
-SUBSTITUTE SUB:-1 (sem_obj) (*) TARGET (sem_obj) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_obj-clo) (*) TARGET (sem_obj-clo) ;
-SUBSTITUTE SUB:-1 (sem_obj-el) (*) TARGET (sem_obj-el) ;
-SUBSTITUTE SUB:-1 (sem_org) (*) TARGET (sem_org) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_plant) (*) TARGET (sem_plant) ;
-SUBSTITUTE SUB:-1 (sem_perc-emo) (*) TARGET (sem_perc-emo) ;
-SUBSTITUTE SUB:-1 (sem_plc) (*) TARGET (sem_plc) (NOT 0 Prop) ; 
-SUBSTITUTE SUB:-1 (sem_sur) (*) TARGET (sem_sur) (NOT 0 Prop) ;
-SUBSTITUTE SUB:-1 (sem_route) (*) TARGET (sem_route) ;
-SUBSTITUTE SUB:-1 (sem_semcon) (*) TARGET (sem_semcon) ;
-SUBSTITUTE SUB:-1 (sem_txt) (*) TARGET (sem_txt) ;
-SUBSTITUTE SUB:-1 (sem_time) (*) TARGET (sem_time) ;
-SUBSTITUTE SUB:-1 (sem_txt) (*) TARGET (sem_txt) ;
-SUBSTITUTE SUB:-1 (sem_veh) (*) TARGET (sem_veh) ;
-SUBSTITUTE SUB:-1 (sem_wpn) (*) TARGET (sem_wpn) ;
-SUBSTITUTE SUB:-1 (sem_wthr) (*) TARGET (sem_wthr) ;
+#SUBSTITUTE SUB:-1 (sem_act) (*) TARGET (sem_act) ;
+#SUBSTITUTE SUB:-1 (sem_ani) (*) TARGET (sem_ani) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_aniprod) (*) TARGET (sem_aniprod) ;
+#SUBSTITUTE SUB:-1 (sem_body) (*) TARGET (sem_body) ;
+#SUBSTITUTE SUB:-1 (sem_build) (*) TARGET (sem_build) ;
+#SUBSTITUTE SUB:-1 (sem_build-part) (*) TARGET (sem_build-part) ;
+#SUBSTITUTE SUB:-1 (sem_clth) (*) TARGET (sem_clth) ;
+#SUBSTITUTE SUB:-1 (sem_clth-jewl) (*) TARGET (sem_clth-jewl) ;
+#SUBSTITUTE SUB:-1 (sem_ctain) (*) TARGET (sem_ctain) ;
+#SUBSTITUTE SUB:-1 (sem_curr) (*) TARGET (sem_curr) ;
+#SUBSTITUTE SUB:-1 (sem_date) (*) TARGET (sem_date) ;
+#SUBSTITUTE SUB:-1 (sem_edu) (*) TARGET (sem_edu) ;
+#SUBSTITUTE SUB:-1 (sem_emo) (*) TARGET (sem_emo) ;
+#SUBSTITUTE SUB:-1 (sem_event) (*) TARGET (sem_event) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_fem) (*) TARGET (sem_fem) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_food) (*) TARGET (sem_food) ;
+#SUBSTITUTE SUB:-1 (sem_furn) (*) TARGET (sem_furn) ;
+#SUBSTITUTE SUB:-1 (sem_group) (*) TARGET (sem_group) ;
+#SUBSTITUTE SUB:-1 (sem_hum) (*) TARGET (sem_hum) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_lang) (*) TARGET (sem_lang) ;
+#SUBSTITUTE SUB:-1 (sem_mal) (*) TARGET (sem_mal) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_mat) (*) TARGET (sem_mat) ;
+#SUBSTITUTE SUB:-1 (sem_measr) (*) TARGET (sem_measr) ;
+#SUBSTITUTE SUB:-1 (sem_money) (*) TARGET (sem_money) ;
+#SUBSTITUTE SUB:-1 (sem_obj) (*) TARGET (sem_obj) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_obj-clo) (*) TARGET (sem_obj-clo) ;
+#SUBSTITUTE SUB:-1 (sem_obj-el) (*) TARGET (sem_obj-el) ;
+#SUBSTITUTE SUB:-1 (sem_org) (*) TARGET (sem_org) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_plant) (*) TARGET (sem_plant) ;
+#SUBSTITUTE SUB:-1 (sem_perc-emo) (*) TARGET (sem_perc-emo) ;
+#SUBSTITUTE SUB:-1 (sem_plc) (*) TARGET (sem_plc) (NOT 0 Prop) ; 
+#SUBSTITUTE SUB:-1 (sem_sur) (*) TARGET (sem_sur) (NOT 0 Prop) ;
+#SUBSTITUTE SUB:-1 (sem_route) (*) TARGET (sem_route) ;
+#SUBSTITUTE SUB:-1 (sem_semcon) (*) TARGET (sem_semcon) ;
+#SUBSTITUTE SUB:-1 (sem_txt) (*) TARGET (sem_txt) ;
+#SUBSTITUTE SUB:-1 (sem_time) (*) TARGET (sem_time) ;
+#SUBSTITUTE SUB:-1 (sem_txt) (*) TARGET (sem_txt) ;
+#SUBSTITUTE SUB:-1 (sem_veh) (*) TARGET (sem_veh) ;
+#SUBSTITUTE SUB:-1 (sem_wpn) (*) TARGET (sem_wpn) ;
+#SUBSTITUTE SUB:-1 (sem_wthr) (*) TARGET (sem_wthr) ;
 SUBSTITUTE SUB:-1 (←vdic→) (*) TARGET (←vdic→) ;
 
 	#=====#

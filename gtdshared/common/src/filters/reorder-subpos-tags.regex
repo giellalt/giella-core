@@ -6,4 +6,7 @@
 %+N %+Prop %+MWE <- %+MWE %+N %+Prop ,
 %+Pron     %+MWE <- %+MWE %+Pron ,
 %+Adv      %+MWE <- %+MWE %+Adv ,
-%+CS       %+MWE <- %+MWE %+CS ;
+%+CS       %+MWE <- %+MWE %+CS ,
+
+# Prop:
+%+N %+Prop <- %+Prop %+N ;

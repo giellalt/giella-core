@@ -185,7 +185,7 @@ LIST Prt = Prt;
 LIST Prs = Prs ;
  
 
-LIST Ind = Ind ;
+LIST Ind = Ind indic ;
 LIST Pot = Pot ;
 LIST Cond = Cond ;
 
@@ -441,32 +441,24 @@ SET NOT-PRFPRC = WORD - PrfPrc ;
 # Person
 # - - - - 
 
-LIST V-SG1 = (V Ind Prs Sg1)  (V Ind Prt Sg1) (V Cond Prs Sg1) 
-             (V Cond Prt Sg1) (V Pot Prs Sg1) (V Neg Ind Sg1);
+LIST V-SG1 = (V Sg1)  ;
  
-LIST V-SG2 = (V Ind Prs Sg2)  (V Ind Prt Sg2) (V Cond Prs Sg2) 
-             (V Cond Prt Sg2) (V Pot Prs Sg2) (V Neg Ind Sg2);
+LIST V-SG2 = (V Sg2) ;
  
-LIST V-SG3 = (V Ind Prs Sg3)  (V Ind Prt Sg3) (V Cond Prs Sg3) 
-             (V Cond Prt Sg3) (V Pot Prs Sg3) (V Neg Ind Sg3);
+LIST V-SG3 = (V Sg3) ;
  
-LIST V-DU1 = (V Ind Prs Du1)  (V Ind Prt Du1) (V Cond Prs Du1) 
-     	     (V Cond Prt Du1) (V Pot Prs Du1) (V Neg Ind Du1);
+LIST V-DU1 = (V Du1) ;
  
-LIST V-DU2 = (V Ind Prs Du2)  (V Ind Prt Du2) (V Cond Prs Du2) 
-	         (V Cond Prt Du2) (V Pot Prs Du2) (V Neg Ind Du2);
+LIST V-DU2 = (V Du2) ;
  
-LIST V-DU3 = (V Ind Prs Du3)  (V Ind Prt Du3) (V Cond Prs Du3) 
-	         (V Cond Prt Du3) (V Pot Prs Du3) (V Neg Ind Du3);
+LIST V-DU3 = (V Du3) ;
  
-LIST V-PL1 = (V Ind Prs Pl1)  (V Ind Prt Pl1) (V Cond Prs Pl1) 
-             (V Cond Prt Pl1) (V Pot Prs Pl1) (V Neg Ind Pl1);
+LIST V-PL1 = (V Pl1) ;
  
-LIST V-PL2 = (V Ind Prs Pl2)  (V Ind Prt Pl2) (V Cond Prs Pl2) 
-             (V Cond Prt Pl2) (V Pot Prs Pl2) (V Neg Ind Pl2);
+LIST V-PL2 = (V Pl2) ;
  
-LIST V-PL3 = (V Ind Prs Pl3)  (V Ind Prt Pl3) (V Cond Prs Pl3) 
-             (V Cond Prt Pl3) (V Pot Prs Pl3) (V Neg Ind Pl3);
+LIST V-PL3 = (V Pl3) ;
+
  
 
  # Note that imperative verbs are not included in these sets!
@@ -726,7 +718,7 @@ SET PRE-NP-HEAD = (Prop Attr) OR (Prop @>N) OR (A Attr) OR (ABBR Attr) OR ("buor
 
 #LIST PRE-NP-HEAD = @>N @>A @>Pron @Num< @CNP ;
          
-SET PRE-NP-V = PrfPrc OR PrsPrc OR Der/NomAg OR Actio OR Der/NomAct OR (V A) OR (Ind Prs Sg3) OR (Ind Prs Sg1) OR (Imprt Du2) ;
+SET PRE-NP-V = PrfPrc OR PrsPrc OR Der/NomAg OR Actio OR Der/NomAct OR (V A) OR (Prs Sg3) + Ind OR (Prs Sg1) + Ind OR (Imprt Du2) ;
     # to be used together with PRE-NP-HEAD before @>N is disambiguated
          
 SET NP-MEMBER   = PRE-NP-HEAD OR N ;

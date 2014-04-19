@@ -2001,6 +2001,8 @@ AFTER-SECTIONS
 
 REMOVE:WORD WORD - ALLSYNTAG ;
 
+
+
 #!! ! __therestX__ adds @X to all what is left, often errouneus disambiguated forms
 
 MAP:leftoversX (@X) TARGET WORD ;
@@ -2011,7 +2013,7 @@ SUBSTITUTE:smeRemove (<sme>) (*) TARGET (<sme>) ;
 SUBSTITUTE:smjRemove (<smj>) (*) TARGET (<smj>) ;
 SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 
-#MT RULES
+#MT RULES for sme-sma
 #SUBSTITUTE ("váldit" V) ("váldit2" V) ("váldit" V) (*1 ("vuostá" Adv) BARRIER SV-BOUNDARY OR REAL-V) ;
 #REMCOHORT TARGET ("vuostá" Adv) (*-1 ("váldit2") BARRIER SV-BOUNDARY OR REAL-V) ;
 
@@ -2035,6 +2037,14 @@ SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 #SUBSTITUTE (@Pron<) (@Pron< <compl_obj>) TARGET (@Pron<) (-1 OBJ) ;
 #SUBSTITUTE (@Pron<) (@Pron< <compl_subj>) TARGET (@Pron<) (-1 SUBJ) ;
 #SUBSTITUTE (@Pron<) (@Pron< <compl_advl>) TARGET (@Pron<) (-1 @ADVL) ;
+
+
+#!! !!For Apertium: 
+#!! The analysis give double analysis because of optional semtags. We go for the one with semtag. 
+
+LIST SEMTAGS = sem_act sem_ani sem_body sem_build sem_build-part sem_clth sem_curr sem_edu sem_hum sem_lang sem_measr sem_org sem_plc sem_time sem_tool sem_txt sem_group sem_semcon sem_veh ;
+
+SELECT SEMTAGS ;
 
 #!! !!For Korp:
 

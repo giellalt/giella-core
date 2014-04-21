@@ -19,7 +19,7 @@
 <!ELEMENT e (lg, stem*, sources?, mg+) >
 <!ATTLIST e 
       usage ( mt | vd | dict | other ) #IMPLIED
-      src ( nj | sk | SvSt | other ) #IMPLIED
+      src ( nj | sk | SvSt | gt_fad | gt | fad | other ) #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED
@@ -37,9 +37,10 @@
       gen_only CDATA #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | dem | interr | 
-      pre | post | ord | TV | IV | actor | g3 ) #IMPLIED
+      pre | post | ord | TV | IV | actor | g3 | NomAg ) #IMPLIED
       class ( I | II | III | IV | V | VI | xxx ) #IMPLIED 
       stem ( even | odd | 2syll | 3syll | xsyll | weak ) #IMPLIED
+      pg ( yes | no ) #IMPLIED
       p3p CDATA #IMPLIED
       minip ( notSg1 | onlyPl ) #IMPLIED
       illpl ( ok | no ) #IMPLIED
@@ -135,7 +136,7 @@
             Adv | P | Pr | Po | Det |
             Pron | Prop | I | Interj | CC | CS | Im | Npl | Num |
             Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
-	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe ) #IMPLIED > 
+	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp ) #IMPLIED > 
 	    
 <!--
 <!ATTLIST t pos ( a | S  | n  | v | 
@@ -154,6 +155,7 @@
 <!ATTLIST t nob-stat CDATA #IMPLIED >
 <!ATTLIST t sem-cl CDATA #IMPLIED >
 <!ATTLIST t src CDATA #IMPLIED >
+<!ATTLIST t alt_str CDATA #IMPLIED >
 <!ATTLIST t tcomm ( yes | no ) #IMPLIED  >
 <!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >
 
@@ -183,7 +185,7 @@
 <!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
 
 
-<!ELEMENT xg ((x,xt)+)>
+<!ELEMENT xg ((x, xt+)+)>
 <!ELEMENT x (#PCDATA)>
 <!ATTLIST x src CDATA #IMPLIED >
 <!ELEMENT xt (#PCDATA)>

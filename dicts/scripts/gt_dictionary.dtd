@@ -2,6 +2,9 @@
 <!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml"      
 	  xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED
 >
+<!ATTLIST r 
+      id ( smenob ) #IMPLIED >
+
       
 <!-- the header -->
 <!ELEMENT lics (lic, ref*, sourcenote*) >
@@ -21,13 +24,13 @@
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED
 >      
-<!ELEMENT lg (l, lsub*, lc*, stem*) >
+<!ELEMENT lg (l, l_ref*, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l 
       pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |
             Num | CC | CS | Prop | Proppl | G3 | Actor | Npl |
             Prsprc | Fp-Cmp | Lp-Cmp | Cmp | Mwe | X | Xxx | Qu | Abbr | Clt |
-            Phrase_N | Phrase_A | Phrase_V | Phrase_Adv) #REQUIRED
+            Phrase_N | Phrase_A | Phrase_V | Phrase_Adv ) #REQUIRED
       attr ( ok | no ) #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
       nr ( Sg | Pl ) #IMPLIED
@@ -42,6 +45,7 @@
       illpl ( ok | no ) #IMPLIED
       status ( sjekk | ok ) #IMPLIED
       grad ( pos | comp | sup ) #IMPLIED
+      vmax ( 2 | 3 | 4) #IMPLIED
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED
       soggi CDATA #IMPLIED
@@ -106,7 +110,7 @@
       class CDATA #IMPLIED
 >      
 
-<!ELEMENT mg (semantics?,  tg+) >
+<!ELEMENT mg (semantics?,  tg+, xg* ) >
 <!ATTLIST mg 
       xml:lang ( sme | nob ) #IMPLIED
 >      
@@ -125,11 +129,13 @@
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t oa ( first | yes | no ) #IMPLIED  >
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
+<!ATTLIST t t_type ( Pers | expl ) #IMPLIED  >
+<!ATTLIST t nr ( Sg | Pl ) #IMPLIED  >
 <!ATTLIST t pos ( A | S  | N  | V | 
             Adv | P | Pr | Po | Det |
             Pron | Prop | I | Interj | CC | CS | Im | Npl | Num |
             Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
-	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED > 
+	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe ) #IMPLIED > 
 	    
 <!--
 <!ATTLIST t pos ( a | S  | n  | v | 
@@ -139,9 +145,8 @@
 	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED > 
 -->
 <!ATTLIST t type ( expl ) #IMPLIED >
-<!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i ) #IMPLIED> <!-- irr irregular -->
-<!ATTLIST t gen ( m | f | n ) #IMPLIED >
-<!ATTLIST t nr ( sg | pl ) #IMPLIED >
+<!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i | yyy ) #IMPLIED> <!-- irr irregular -->
+<!ATTLIST t gen ( m | f | n | xxx ) #IMPLIED >
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >
 <!ATTLIST t xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
 <!ATTLIST t dialect CDATA #IMPLIED >

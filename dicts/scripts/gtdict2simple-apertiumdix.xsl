@@ -23,10 +23,10 @@
 
   
   <!-- Input file: customize as you need it -->
-  <xsl:param name="inFile" select="'default.xml'"/>
+  <xsl:param name="inFile" select="'nobtull/ns.xml'"/>
 
   <!-- Output dir: customize as you need it -->
-  <xsl:param name="outDir" select="'out_simple-apertium'"/>
+  <xsl:param name="outDir" select="'nobtull2'"/>
   
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>

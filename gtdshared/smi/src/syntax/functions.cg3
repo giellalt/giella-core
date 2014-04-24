@@ -1790,6 +1790,11 @@ MAP:-f<obj (@-F<OBJ) TARGET Acc (*-1 (V TV) + SYN-V BARRIER REAL-V OR S-BOUNDARY
 #!! * __-fsubj>IV__ (@-FSUBJ>) for Acc; if there is an IV-verb acting as a @<OBJ to your right
 MAP:-fsubj> (@-FSUBJ>) TARGET Acc (*1 (IV @<OBJ) BARRIER NOT-ADV-PCLE) ; 
 	#$ Sii lohket fatnasa gopmánan.
+	#$ Mii vurddiimet dálkki buorránit.
+
+#!! * __-fsubj>IV__ (@-FSUBJ>) for Acc; if there is an TV-verb acting as a @<OBJ to your right followed by an Acc
+MAP:-fsubj> (@-FSUBJ>) TARGET Acc (*1 (V @<OBJ) BARRIER NOT-ADV-PCLE LINK *1 Acc BARRIER NOT-NPMOD) ; 
+	#$ Máhtte rábmui iežas vuoitit dan gilvvu.
 
 #!! * __-fsubj>asGen__ (@-FSUBJ>) for Gen;
 MAP:-fsubj>asGen (@-FSUBJ>) TARGET Gen (*1 (Actio Loc @<ADVL) OR (TV VAbess) BARRIER NOT-ADV-PCLE) ;

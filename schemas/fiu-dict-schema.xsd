@@ -2135,6 +2135,7 @@
             <xs:enumeration value="SPORT"/>
 <!-- Super set: VERBAL ASPECT -->
             <xs:enumeration value="STATE_V"/>
+            <xs:enumeration value="STATECHANGE_V"/>
 <!-- Super set: LITERATURE/TEXTS -->
             <xs:enumeration value="STORY"/>
 <!-- Super set: LITERATURE/TEXTS -->

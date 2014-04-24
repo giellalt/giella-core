@@ -185,7 +185,7 @@ LIST Prt = Prt;
 LIST Prs = Prs ;
  
 
-LIST Ind = Ind indic ;
+LIST Ind = Ind ;
 LIST Pot = Pot ;
 LIST Cond = Cond ;
 

@@ -2081,6 +2081,7 @@ SUBSTITUTE (Sem/Obj-clo) (*) TARGET (Sem/Obj-clo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Obj-el) (*) TARGET (Sem/Obj-el) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Perc-phys) (*) TARGET (Sem/Perc-phys) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plant) (*) TARGET (Sem/Plant) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ; #RemoveFromApertium

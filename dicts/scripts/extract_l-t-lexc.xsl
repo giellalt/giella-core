@@ -86,6 +86,15 @@
 	    <xsl:value-of select="'-----------------------------------------'"/>
 	  </xsl:message>
 	</xsl:if>
+
+	<xsl:variable name="tcounter" select="count(.//tg[./@xml:lang=$TLANG]/t)"/>
+
+	<xsl:if test="$tcounter=0">
+	  <xsl:message terminate="yes">
+	    <xsl:value-of select="concat('No t-element found. Please check the xml:lang attribute on tg-elements!', $nl)"/>
+	  </xsl:message>
+	</xsl:if>
+
 	
 	<xsl:for-each select=".//e">
 	  <xsl:variable name="cl" select="normalize-space(./lg/l)"/>

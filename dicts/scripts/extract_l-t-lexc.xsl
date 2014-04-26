@@ -1,9 +1,22 @@
 <?xml version="1.0"?>
 <!--+
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main THIS_FILE inDir=DIR
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main THIS_FILE PARAMETER_LIST
     |
-    | - specify inDir and inFile in this script
-    | - output is in dir out_put
+    | - parameter to adjust:
+    |   - input dir: inDir; default is ../SLANGTLANG/src (e.g., ../smenob/src)
+    |   - output dir: outDir; default is SLANGTLANG/bin (e.g., ../smenob/bin)
+    |
+    |  CAVEAT: inDir and outDir should be given as relative to where
+    |                 this script is called from; the defaults are relative to 
+    |                   (a) the script being main/words/dicts/scripts
+    |                        and
+    |                   (b) the calling place being main/words/dicts
+    |
+    |   - inFile: which files to select; default is *.xml (all xml files from src)
+    |   - source lang: SLANG
+    |   - target lang: TLANG
+    |   - number of traslation to pair: first (take only the first t)
+    |      all (take all t-element values)
     +-->
 
 <xsl:stylesheet version="2.0"
@@ -33,8 +46,8 @@
 
   <xsl:param name="inDir" select="concat('../',$SLANG,$TLANG,'/src')"/>
 
-  <xsl:param name="inFile" select="'verb*_smenob.xml'"/>
-  <xsl:param name="outDir" select="concat('../',$SLANG,$TLANG,'/bin')"/>
+  <xsl:param name="inFile" select="'*.xml'"/>
+  <xsl:param name="outDir" select="concat($SLANG,$TLANG,'/bin')"/>
   <xsl:param name="outFile" select="'out_file'"/>
   <xsl:param name="SLANG" select="'sme'"/>
   <xsl:param name="TLANG" select="'nob'"/>
@@ -78,11 +91,11 @@
 	  <xsl:variable name="cl" select="normalize-space(./lg/l)"/>
 	  <xsl:if test="$TNUM='first'">
 	    <xsl:value-of
-		select="concat($cl,$tb,translate(normalize-space(./mg[1]/tg[1]/t[1]),
+		select="concat($cl,$tb,translate(normalize-space(./mg[1]/tg[1][./@xml:lang=$TLANG]/t[1]),
 			' ','_') , ' # ;',$nl)"/>
 	  </xsl:if>
 	  <xsl:if test="$TNUM='all'">
-	    <xsl:for-each select=".//t">
+	    <xsl:for-each select=".//tg[./@xml:lang=$TLANG]/t">
 	      <xsl:value-of
 		  select="concat($cl,':',translate(normalize-space(.),
 			  ' ', '_') , ' # ;',$nl)"/>
@@ -93,6 +106,12 @@
       </xsl:for-each>
     </xsl:result-document>
     
+    <xsl:if test="true()">
+      <xsl:message terminate="no">
+	<xsl:value-of select="'Done!'"/>
+      </xsl:message>
+    </xsl:if>
+
   </xsl:template>
   
 </xsl:stylesheet>

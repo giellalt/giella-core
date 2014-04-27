@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <!--+
     | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main THIS_FILE PARAMETER_LIST
+    | e.g.
+    | java -Xmx2048m net.sf.saxon.Transform -it:main _six scripts/extract_l-t-lexc.xsl SLANG=sme TLANG=smj TNUM=first
     |
     | - parameter to adjust:
     |   - input dir: inDir; default is ../SLANGTLANG/src (e.g., ../smenob/src)
@@ -48,10 +50,10 @@
 
   <xsl:param name="inFile" select="concat('*_',$SLANG,$TLANG,'.xml')"/>
   <xsl:param name="outDir" select="concat($SLANG,$TLANG,'/bin')"/>
-  <xsl:param name="outFile" select="'out_file'"/>
-  <xsl:param name="SLANG" select="'sme'"/>
-  <xsl:param name="TLANG" select="'nob'"/>
-  <xsl:param name="TNUM" select="'all'"/>
+  <xsl:param name="outFile" select="concat($SLANG,$TLANG,'-',$TNUM)"/>
+  <xsl:param name="SLANG" select="'ggg'"/>
+  <xsl:param name="TLANG" select="'ooo'"/>
+  <xsl:param name="TNUM" select="'xxx'"/>
   <xsl:variable name="debug" select="false()"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
   <xsl:variable name="tb" select="'&#9;'"/>

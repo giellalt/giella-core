@@ -100,6 +100,10 @@
 	
 	<xsl:for-each select=".//e">
 	  <xsl:variable name="cl" select="normalize-space(./lg/l)"/>
+	  <!-- if needed due to mwe in the l-value whitespaces can be
+	       replaced by underscore such in t-value -->
+	  <!--xsl:variable name="cl" select="translate(normalize-space(./lg/l), ' ','_')"/-->
+
 	  <xsl:if test="$TNUM='first'">
 	    <xsl:value-of
 		select="concat($cl,$tb,translate(normalize-space(./mg[1]/tg[1][./@xml:lang=$TLANG]/t[1]),

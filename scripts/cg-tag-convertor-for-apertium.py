@@ -39,6 +39,9 @@ for line in sys.stdin.readlines(): #{
 	elif 'IFF' in row[0]: #{
 		oper = 'IFF';
 		first = True;
+	elif 'SETPARENT' in row[0]: #{
+		oper = 'SETPARENT';
+		first = True;
 	elif 'SUBSTITUTE' in row[0]: #{
 		oper = 'SUBSTITUTE';
 		first = True;
@@ -99,7 +102,7 @@ for line in sys.stdin.readlines(): #{
 			outline = outline + ' ';
 			ntoken = ntoken + 1;
 		#}
-	elif oper == 'SELECT' or oper == 'REMOVE' or oper == 'IFF':
+	elif oper == 'SELECT' or oper == 'REMOVE' or oper == 'IFF' or oper == 'SETPARENT':
 		#- SELECT True ||| SELECT ("albmi") (0 ("almmái")) ;
 		# ['SELECT', '(', '"albmi"', ')', '(', '0', '(', '"almmái"', ')', ')', ';\n']
 		# + SELECT True ||| SELECT:KillCom ( Pl Loc ) IF ( 0 ( sg com ) ) ;

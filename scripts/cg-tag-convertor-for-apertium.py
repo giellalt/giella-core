@@ -1,4 +1,7 @@
+#!/usr/bin/python3
 # -*- indent-tabs-mode: t -*-
+
+VERBOSITY=0
 
 # List of hardcoded tag replacements (the rest are just lowercased):
 tag_replacements = { "Ind": "indic" }
@@ -45,13 +48,13 @@ for line in sys.stdin.readlines(): #{
 	#}
 
 
-	print('-', oper,first,'|||', line, file=sys.stderr);
+	if VERBOSITY: print('-', oper,first,'|||', line, file=sys.stderr);
 
 	tokens = line.replace('(', ' ( ').replace(')',' ) ');
 	tokens = re.sub('  *', ' ', tokens);
 	tokens = tokens.split(' ');
 
-	print(tokens, file=sys.stderr);
+	if VERBOSITY: print(tokens, file=sys.stderr);
 
 	outline = '';
 	if oper == 'LIST': #{
@@ -210,7 +213,7 @@ for line in sys.stdin.readlines(): #{
 				first_block = False;
 			#} 
 
-			print('***', par, inside, token, file=sys.stderr);
+			if VERBOSITY: print('***', par, inside, token, file=sys.stderr);
 
 			if ntoken == 1: #{
 				outline = outline + token;
@@ -235,7 +238,7 @@ for line in sys.stdin.readlines(): #{
 
 	outline = outline.strip(' ');
 	outline = outline.replace('>', '→').replace('<', '←').replace('/', '_').replace('( ', '(').replace(' )',')');
-	print('+', oper,first,'|||', outline, file=sys.stderr);
+	if VERBOSITY: print('+', oper,first,'|||', outline, file=sys.stderr);
 	if outline != '': #{
 		sys.stdout.write(outline);
 	else: #{

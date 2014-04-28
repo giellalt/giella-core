@@ -1,3 +1,10 @@
+# -*- indent-tabs-mode: t -*-
+
+# List of hardcoded tag replacements (the rest are just lowercased):
+tag_replacements = { "Ind": "indic" }
+
+def replace_tag(tag):
+	return tag_replacements.get(tag, tag.lower())
 
 
 import sys, re ; 
@@ -55,7 +62,7 @@ for line in sys.stdin.readlines(): #{
 			if token == ')': par = par - 1;
 
 			if par == 1: #{
-				outline = outline + token.lower();			
+				outline = outline + replace_tag(token);			
 			elif token == 'LIST' or ntoken == 1: #{
 				outline = outline + token;
 			elif '"' in token: #{
@@ -63,8 +70,7 @@ for line in sys.stdin.readlines(): #{
 			elif '@' in token: #{
 				outline = outline + token;
 			else: #{
-				token = token.replace('Ind','Indic');
-				outline = outline + token.lower();
+				outline = outline + replace_tag(token);
 			#}
 			outline = outline + ' ';
 			ntoken = ntoken + 1;
@@ -77,7 +83,7 @@ for line in sys.stdin.readlines(): #{
 			if token == ')': par = par - 1;
 
 			if par == 1: #{
-				outline = outline + token.lower();			
+				outline = outline + replace_tag(token);			
 			elif token == 'LIST' or ntoken == 1: #{
 				outline = outline + token;
 			elif '"' in token: #{
@@ -120,9 +126,9 @@ for line in sys.stdin.readlines(): #{
 			if ntoken == 1: #{
 				outline = outline + token;
 			elif par == 1 and first_block and token[0] != '"' and token[0] != '@': #{
-				outline = outline + token.lower();
+				outline = outline + replace_tag(token);
 			elif inside == True and par == 1 and token[0] != '"' and token[0] != '@': #{
-				outline = outline + token.lower();
+				outline = outline + replace_tag(token);
 			else: #{
 				outline = outline + token;
 			#}
@@ -154,9 +160,9 @@ for line in sys.stdin.readlines(): #{
 			if ntoken == 1: #{
 				outline = outline + token;
 			elif par == 1 and first_block and token[0] != '"' and token[0] != '@': #{
-				outline = outline + token.lower();
+				outline = outline + replace_tag(token);
 			elif inside == True and par == 1 and token[0] != '"' and token[0] != '@': #{
-				outline = outline + token.lower();
+				outline = outline + replace_tag(token);
 			else: #{
 				outline = outline + token;
 			#}
@@ -209,10 +215,10 @@ for line in sys.stdin.readlines(): #{
 			if ntoken == 1: #{
 				outline = outline + token;
 			elif par == 1 and first_block and seen_position == False and token[0] != '"' and token[0] != '@': #{
-				outline = outline + token.lower();
+				outline = outline + replace_tag(token);
 #			elif par > 1 and par == max_par and not first_block and token[0] != '"' and token[0] != '@': #{
 			elif inside == True and par == 1 and token[0] != '"' and token[0] != '@': #{
-				outline = outline + token.lower();
+				outline = outline + replace_tag(token);
 			else: #{
 				outline = outline + token;
 			#}

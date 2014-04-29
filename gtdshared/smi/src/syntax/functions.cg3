@@ -2061,6 +2061,8 @@ SUBSTITUTE (Sem/Ctain-clth) (*) TARGET (Sem/Ctain-clth) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Ctain-abstr) (*) TARGET (Sem/Ctain-abstr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Curr) (*) TARGET (Sem/Curr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Date) (*) TARGET (Sem/Date) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Domain) (*) TARGET (Sem/Domain) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Drink) (*) TARGET (Sem/Drink) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Emo) (*) TARGET (Sem/Emo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) (NOT 0 Prop) ; #RemoveFromApertium
@@ -2087,8 +2089,14 @@ SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-water) (*) TARGET (Sem/Plc-water) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-elevate) (*) TARGET (Sem/Plc-elevate) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Prod) (*) TARGET (Sem/Prod) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Prod-audio) (*) TARGET (Sem/Prod-audio) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Prod-cogn) (*) TARGET (Sem/Prod-cogn) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Prod-ling) (*) TARGET (Sem/Prod-ling) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Prod-vis) (*) TARGET (Sem/Prod-vis) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Substnc) (*) TARGET (Sem/Substnc) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Symbol) (*) TARGET (Sem/Symbol) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Route) (*) TARGET (Sem/Route) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Semcon) (*) TARGET (Sem/Semcon) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Time) (*) TARGET (Sem/Time) ; #RemoveFromApertium
@@ -2100,6 +2108,7 @@ SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Tool-music) (*) TARGET (Sem/Tool-music) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ; #RemoveFromApertium

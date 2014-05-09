@@ -1,10 +1,12 @@
 prefix=@prefix@
 exec_prefix=${prefix}
 libdir=@libdir@
-dir=@libdir@/giella/__UND__
-srcdir=@datarootdir@/giella/__UND__
+datadir=@datarootdir@
+gtlang=__UND__
+dir=${datadir}/giella/${gtlang}
+srcdir=${datadir}/giella/${gtlang}
 
 Name: giella-__UND__
-Description: Finite-state transducers and other language processing tools for __UNDEFINED__, developed by the Giellatekno and Divvun groups at UiT The Arctic University of Norway, in cooperation with the language communities.
-URL: 
+Description: Finite-state language processing tools for __UNDEFINED__
+URL: http://giellatekno.uit.no/doc/index.html
 Version: @VERSION@

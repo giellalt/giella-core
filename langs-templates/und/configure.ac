@@ -24,7 +24,7 @@
 # third is email address for bug reports
 # fourth is name of packages made by make dist, excluding .tar.gz
 # fifth is the project web address
-AC_INIT([gtlangs-__UND__], [20110617], [feedback@divvun.no], [gtlangs-__UND__],
+AC_INIT([giella-__UND__], [20110617], [feedback@divvun.no], [giella-__UND__],
         [http://divvun.no])
 # AC_REVISION is used to get SVN revision into bug reports
 AC_REVISION([$Revision$])
@@ -115,6 +115,7 @@ gt_ENABLE_TARGETS
 
 # List all non-script files processed by Autoconf.
 AC_CONFIG_FILES([Makefile \
+                 giella-__UND__.pc \
                  src/Makefile \
                  src/filters/Makefile \
                  src/hyphenation/Makefile \

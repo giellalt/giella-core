@@ -918,7 +918,11 @@ MAP:hab7 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE - Attr (*-1 go BARRIER NOT-N
 MAP:hab9 (<hab> @ADVL>) TARGET HAB-CASE IF (-1 FIRSTNAME)(0 Ord)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE);
 	#$ Heinrich njealjádis lea rikkis eamit.
 	
-MAP:hab10 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN OR Sem/Group LINK *1 HUMAN + Nom BARRIER S-BOUNDARY) (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 Num BARRIER S-BOUNDARY LINK 1 HUMAN + Gen)(*-1 LEAT + HAB-V-TAGS BARRIER Nom OR S-BOUNDARY OR MAIN-V LINK -1 ADVLCASE OR Adv OR Po)((*1 Nom BARRIER NOT-NPMOD-ACC) OR (1 CC LINK *1 HAB-CASE BARRIER NOT-NPMOD-ACC LINK *1 Nom BARRIER NOT-NPMOD-ACC));
+MAP:hab10 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE 
+(NEGATE 0 HAB-ACTOR-NOT-HUMAN OR Sem/Group LINK *1 HUMAN + Nom BARRIER S-BOUNDARY) 
+(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 Num BARRIER S-BOUNDARY LINK 1 HUMAN + Gen)
+(*-1 LEAT + HAB-V-TAGS BARRIER Nom OR S-BOUNDARY OR MAIN-V LINK -1 ADVLCASE OR Adv OR Po)
+((*1 Nom BARRIER NOT-NPMOD-ACC) OR (1 CC LINK *1 HAB-CASE BARRIER NOT-NPMOD-ACC LINK *1 Nom BARRIER NOT-NPMOD-ACC)) ;
 	#$ Dál leat sus 137 gáicca.
 	#$ De lea sihke divššohasas ja su lagamus oapmahaččas vuoigatvuohta oažžut dieđuid.
 	#$ Doppe leamaš sámiin stuora deaddu.
@@ -2063,6 +2067,7 @@ SUBSTITUTE (Sem/Curr) (*) TARGET (Sem/Curr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Date) (*) TARGET (Sem/Date) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Domain) (*) TARGET (Sem/Domain) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Drink) (*) TARGET (Sem/Drink) ; #RemoveFromApertium
+SUBSTITUTE (Sem/DummyTag) (*) TARGET (Sem/DummyTag) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Emo) (*) TARGET (Sem/Emo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) (NOT 0 Prop) ; #RemoveFromApertium

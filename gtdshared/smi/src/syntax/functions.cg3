@@ -1108,7 +1108,7 @@ MAP:n<:Refl (@N<) TARGET (Refl Nom) IF ((*-1 (N Nom) BARRIER NOT-ADV-PCLE) OR (-
 
 
 #!! * __>pron1__ (@>Pron) for GRADE-ADV, DUSSE, BUOT if; first one to the right is Pron
-MAP:>pron1 (@>Pron) GRADE-ADV OR DUSSE OR BUOT (1 Pron) ;
+#MAP:>pron1 (@>Pron) GRADE-ADV OR DUSSE OR BUOT (1 Pron) ; #Lene: ??
 	#$ Ja nugo olmmoš gohčodii guđege ealli, nu dat šattai navdojuvvot.
 	
 #!! * __>pron2__ (@>Pron) for (Refl Nom) if; first one to the right is Refl
@@ -1202,7 +1202,11 @@ MAP:voc (@VOC) TARGET Nom IF (*-1 COMMA BARRIER NOT-NP OR CC LINK *-1 (V Sg2) OR
 	#$ Vuoi du, Betsaida!
 	
 MAP:voc (@VOC) TARGET Nom IF (-1 Attr LINK *-1 COMMA BARRIER NOT-NP OR CC LINK *-1 (V Sg2) OR (V Du2) OR (V Pl2) OR (Pron Sg2) OR (Pron Du2) OR (Pron Pl2) LINK NOT 0 LEAT)(1 EOS)(0 HUMAN)(NEGATE 0 Sg LINK *-1 V-SG3 BARRIER REAL-V);
-	
+
+MAP:voc (@VOC) TARGET HUMAN IF (*-1 BOS BARRIER WORD - Interj)(1 COMMA LINK *1 VFIN) ;	
+	#$ - Áhčči, mii lea duot čáppa alit násti doppe guhkkelis?
+	#$ Áhččámet, don guhte leat almmis. 
+
 	
 MAP:voc (@VOC) TARGET (N Nom) IF (*-1 COMMA BARRIER NP-BOUNDARY LINK *-1 ("boahtin" Nom) BARRIER REAL-V OR S-BOUNDARY LINK -1 ("bures"))(1 EOC);
 	## Bures boahtin Čáhppes Bearralii, Miss Turner!	
@@ -1615,8 +1619,11 @@ MAP:advl>cs (@ADVL>CS) TARGET ("beare" Adv) (1 CS LINK *1 FMAINV) ;
 
 LIST ADVL = Adv Ill Com Loc Po Pr Ine Ela ;
 
-MAP:r39 (@ADVL<) TARGET (N Sg Loc) IF (-1 ("oktii") OR ("guktii") OR ("golbmii") OR ("njelljii") OR ("vihttii") OR ("geardde"))(0 TIME-N);
+MAP:advl< (@ADVL<) TARGET (N Sg Loc) IF (-1 ("oktii") OR ("guktii") OR ("golbmii") OR ("njelljii") OR ("vihttii") OR ("geardde"))(0 TIME-N);
 	#$ Mun ferten málestit guktii vahkus.
+MAP:advl< (@ADVL<) (Pl Acc) (-1 MO)(*1 ("?")) ;
+	#$ Gos nevrriid Fávdna lei fidnen dan fiinna dávgebissu?
+	
 
 SET MOD-ADV = DUSSE OR ("njuolga") OR ("njuolgga") OR EASKKA OR ("gitta") ;
 
@@ -1950,7 +1957,6 @@ MAP:hnoun>ifV (@HNOUN) TARGET NP-HEAD-NOM - A OR DUPRON + Nom (*1 FMAINV BARRIER
 	#$ Ávdugasat sii geat moraštit.
 	#$ Gonagas Agrippa ja dii buohkat geat lehpet dás minguin!
 	#$ Olbmot geat ellet náitoslágan dahje guimmešvuođalágan gaskavuođain.
-	#$ Áhččámet, don guhte leat almmis. 
 	#$ Dat geat ieža eai máhttán oppanassiige lohkat girjjiid.
 	#% Sihke son ja su viellja Paul Danielsen, gii lei ovdaolmmoš vieljas maŋis, vácciiga osiid skuvlla Haviikkas.
 

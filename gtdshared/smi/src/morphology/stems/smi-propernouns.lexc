@@ -129,7 +129,11 @@ Aagård+OLang/NOB:Aa#gård9 BERN-sur ;
 Aahlin+OLang/SWE:Aahlin BERN-sur ;
 Aaiún+OLang/ENG:Aa^iún9 BERN-plc ;
 Aakenus+OLang/FIN:Aakenus ACCRA-plc ;
+
 Aakenusjärvi+OLang/FIN:Aakenus#järv MAKI-plc ;
+
+
+
 Aakenuspirtti+OLang/FIN:Aakenuspirtti PIPPI-plc ;
 Aakenustunturi+OLang/FIN:Aakenustunturi PIPPI-plc ;
 Aakervik+OLang/NOB:Aaker9#vik BERN-sur ;
@@ -417,10 +421,12 @@ Ahokas+OLang/UND:Aho^kas BERN-sur ;
 Ahola+OLang/UND:Aho^la ACCRA-sur ;
 Aholainen+OLang/FIN:Aho^lai C-FI-NEN-sur ;
 Ahomäki+OLang/FIN:Aho#mäk MAKI-sur ;
-!Ahomäki+OLang/FIN:Aho#mäk MAKI-sur ;
+
 Ahonen+OLang/FIN:Aho C-FI-NEN-sur ;
-!Ahoniemi+OLang/FIN:Aho#niemi ACCRA-plc ;
-Ahoniemi+OLang/FIN:Aho#niemi PIPPI-plc ;
+
+Ahoniemi+OLang/FIN:Aho#niemi PIPPI-plc ;  ! 
+
+
 Ahopelto+OLang/UND:Aho#pelto9 ACCRA-sur ;
 Ahponen+OLang/FIN:Ahpo C-FI-NEN-sur ;
 Ahrenberg+OLang/NOB:Ahren#berg9 BERN-sur ;

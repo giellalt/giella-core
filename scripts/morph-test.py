@@ -234,7 +234,7 @@ class MorphTest:
 		def final_result(self, counts):
 			p = counts.passes
 			f = counts.fails
-			self.write("Total %d/%d/%d\n" % (p, f, p+f))
+			self.write("%d/%d/%d " % (p, f, p+f))
 
 	class NoOutput(AllOutput):
 		def final_result(self, *args):

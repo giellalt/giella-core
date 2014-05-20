@@ -2060,6 +2060,7 @@ SELECT SEMTAGS ;
 #!! proper nouns.  
 
 SUBSTITUTE (Sem/Act) (*) TARGET (Sem/Act) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Amount) (*) TARGET (Sem/Act) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/AniProd) (*) TARGET (Sem/AniProd) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body) (*) TARGET (Sem/Body) ; #RemoveFromApertium
@@ -2072,6 +2073,7 @@ SUBSTITUTE (Sem/Ctain-clth) (*) TARGET (Sem/Ctain-clth) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Ctain-abstr) (*) TARGET (Sem/Ctain-abstr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Curr) (*) TARGET (Sem/Curr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Date) (*) TARGET (Sem/Date) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Dir) (*) TARGET (Sem/Dir) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Domain) (*) TARGET (Sem/Domain) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Drink) (*) TARGET (Sem/Drink) ; #RemoveFromApertium
 SUBSTITUTE (Sem/DummyTag) (*) TARGET (Sem/DummyTag) ; #RemoveFromApertium
@@ -2121,7 +2123,7 @@ SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Tool-measr) (*) TARGET (Sem/Tool-music) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Tool-measr) (*) TARGET (Sem/Tool-measr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-music) (*) TARGET (Sem/Tool-music) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ; #RemoveFromApertium

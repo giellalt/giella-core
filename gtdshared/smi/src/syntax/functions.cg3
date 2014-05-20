@@ -2060,7 +2060,7 @@ SELECT SEMTAGS ;
 #!! proper nouns.  
 
 SUBSTITUTE (Sem/Act) (*) TARGET (Sem/Act) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Amount) (*) TARGET (Sem/Act) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Amount) (*) TARGET (Sem/Amount) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/AniProd) (*) TARGET (Sem/AniProd) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body) (*) TARGET (Sem/Body) ; #RemoveFromApertium
@@ -2130,7 +2130,6 @@ SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/State) (*) TARGET (Sem/State) ; #RemoveFromApertium
 SUBSTITUTE (<vdic>) (*) TARGET (<vdic>) ;
-SUBSTITUTE (MWE) (*) TARGET (MWE) ;
 
 
 	#=====#

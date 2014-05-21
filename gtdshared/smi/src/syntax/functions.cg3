@@ -2083,6 +2083,7 @@ SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Feat-psych) (*) TARGET (Sem/Feat-psych) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Food) (*) TARGET (Sem/Food) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Food-med) (*) TARGET (Sem/Food-med) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Furn) (*) TARGET (Sem/Furn) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Group) (*) TARGET (Sem/Group) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) (NOT 0 Prop) ; #RemoveFromApertium
@@ -2129,6 +2130,7 @@ SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/State) (*) TARGET (Sem/State) ; #RemoveFromApertium
+SUBSTITUTE (Sem/State-sick) (*) TARGET (Sem/State-sick) ; #RemoveFromApertium
 SUBSTITUTE (<vdic>) (*) TARGET (<vdic>) ;
 
 

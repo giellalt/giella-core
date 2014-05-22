@@ -2085,8 +2085,10 @@ SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Food) (*) TARGET (Sem/Food) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Food-med) (*) TARGET (Sem/Food-med) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Furn) (*) TARGET (Sem/Furn) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Game) (*) TARGET (Sem/Game) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Group) (*) TARGET (Sem/Group) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Ideol) (*) TARGET (Sem/Ideol) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Year) (*) TARGET (Sem/Year) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Lang) (*) TARGET (Sem/Lang) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) (NOT 0 Prop) ; #RemoveFromApertium

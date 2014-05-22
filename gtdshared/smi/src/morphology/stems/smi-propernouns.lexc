@@ -271,6 +271,7 @@ Abitibi+OLang/UND:Abitibi PIPPI-plc ;
 Abjatar+OLang/UND:Abjatar LONDON-mal ;
 Abkhasia+OLang/NOB:Abkhasia ACCRA-plc ;
 Abloy+OLang/UND:Abloy BERN-org ;
+Web+OLang/UND:Web BERN-org ;
 ABM-utvikling+OLang/NOB:ABM-utvikling9 LONDON-obj ;
 Abomey+OLang/UND:Abomey BERN-plc ;
 Abraham+OLang/UND:Abraham9 BERN-mal ;
@@ -31839,4 +31840,29 @@ Zürich+OLang/UND:Zürich9 LONDON-plc ;
 Adeccoliga+OLang/NOB:Adeccoliga ACCRA-org ;
 Disneyland+OLang/NOB:Disney#land9 BERN-sur ;
 Pintamo+OLang/UND:Pintamo9 ACCRA-sur ;
+
+! Legges inn fra missingsma-list
+!Zed
+!Zapper
+!Zachrisson
+!Yran
+!Year
+!YOUTUBE
+!Work
+!Wisdom
+!Winona
+!WindZip
+!Wild
+!Wilborg
+!Wiktionary:en
+!Wiksell
+!Whenua
+!What
+!Well-Being
+!Webbportalen
+!Was
+!Wackernagel
+!WAAUW
+
+
 

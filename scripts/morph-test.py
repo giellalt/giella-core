@@ -435,7 +435,6 @@ class MorphTest:
             success = set()
             detested = set()
             missing_detested = set()
-            passed = False
 
             for form in expected_results:
                 if not form in actual_results:
@@ -461,7 +460,6 @@ class MorphTest:
                         if not self.args.hide_pass:
                             self.out.success(n, caseslen, test, form)
                 for form in missing_detested:
-                    passed = True
                     success.add(form)
                     self.count[d]["Pass"] += 1
                     if not self.args.hide_pass:
@@ -469,7 +467,6 @@ class MorphTest:
             else:
                 if len(invalid) == 1 and list(invalid)[0].endswith("+?"):
                     invalid = set()
-                    passed = True
                     self.count[d]["Pass"] += 1
                     if not self.args.hide_pass:
                         self.out.success(n, caseslen, test, "<No %s>" % desc.lower())
@@ -479,11 +476,11 @@ class MorphTest:
                     self.out.failure(n, caseslen, test, "Missing results", missing)
                 #self.count[d]["Fail"] += len(missing)
             
-            if len(invalid) > 0 and (not self.args.ignore_analyses or not passed):
-                if not self.args.hide_fail:
+            if len(invalid) > 0:
+                if not is_lexical and self.args.ignore_analyses:
+                    invalid = set() # hide this for the final check
+                elif not self.args.hide_fail:
                     self.out.failure(n, caseslen, test, "Unexpected results", invalid)
-            else:
-                invalid = set() # hide this for the final check
                 #self.count[d]["Fail"] += len(invalid)
             
             if len(detested) > 0:

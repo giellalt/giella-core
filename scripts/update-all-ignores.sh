@@ -23,7 +23,7 @@ if test -z $GTHOME ; then
 fi
 
 DIR=$(pwd)
-TEMPLATENAME=$(basename $DIR)
+TEMPLATENAME=$(basename $DIR | cut -d'-' -f2)
 
 # This script requires GTBIG to be accessible at setup time
 # if the prooftesting files should be updated:

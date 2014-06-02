@@ -138,6 +138,7 @@ $svnignore "$mkfiles
 # Set the svn:ignore prop on the tools/mt/apertium/ dir:
 $svnignore "$mkfiles
 $fstfiles
+*.cg3
 *.att.gz" $1/tools/mt/apertium
 
 # Set the svn:ignore prop on the tools/mt/apertium/filters/ dir:

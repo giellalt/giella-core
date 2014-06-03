@@ -2103,6 +2103,7 @@ SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Perc-phys) (*) TARGET (Sem/Perc-phys) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plant) (*) TARGET (Sem/Plant) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plant-part) (*) TARGET (Sem/Plant-part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-abstr) (*) TARGET (Sem/Plc-abstr) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ; #RemoveFromApertium
@@ -2115,6 +2116,7 @@ SUBSTITUTE (Sem/Prod-ling) (*) TARGET (Sem/Prod-ling) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Prod-vis) (*) TARGET (Sem/Prod-vis) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Route) (*) TARGET (Sem/Route) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Rule) (*) TARGET (Sem/Rule) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Sport) (*) TARGET (Sem/Sport) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Substnc) (*) TARGET (Sem/Substnc) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) (NOT 0 Prop) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Symbol) (*) TARGET (Sem/Symbol) (NOT 0 Prop) ; #RemoveFromApertium
@@ -2130,6 +2132,7 @@ SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-measr) (*) TARGET (Sem/Tool-measr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-music) (*) TARGET (Sem/Tool-music) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Tool-write) (*) TARGET (Sem/Tool-write) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Feat-phys) (*) TARGET (Sem/Feat-phys) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Clth-part) (*) TARGET (Sem/Clth-part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body-abstr) (*) TARGET (Sem/Body-abstr) ; #RemoveFromApertium

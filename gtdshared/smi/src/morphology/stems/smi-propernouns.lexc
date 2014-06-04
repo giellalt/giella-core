@@ -541,7 +541,7 @@ Akeloos+OLang/UND:Akeloos BERN-plc ;
 Aker+OLang/UND:Aker LONDON-plc ;
 Akerhus+OLang/NOB:Aker9#hus BERN-sur ;
 Akersbakken+OLang/UND:Akers#bakken LONDON-plc ;
-Akersgata+OLang/NOB:Akers# GATA-plc ;
+Akersgata+OLang/NOB:Akersgata ACCRA-plc ;
 Akershus+OLang/NOB:Akers#hus BERN-plc ;
 Akersvatnet+OLang/NOB:Akers#vatnet LONDON-plc ;
 Akerveien+OLang/NOB:Aker9#vei^en LONDON-plc ;
@@ -814,7 +814,12 @@ Almtoft+OLang/NOB:Almtoft BERN-sur ;
 Almås+OLang/NOB:Alm9#ås BERN-plc ;
 Alna+OLang/UND:Alna ACCRA-plc ;
 Alnabru+OLang/NOB:Alna#bru NYSTØ ;
-Alnafetgata+OLang/NOB:Alnafet9# GATA-plc ;
+Alnafetgata+OLang/NOB:Alnafetgata  ACCRA-plc ; 
+    
+    !Gata+OLang/UND:Gata ACCRA-plc ;
+    
+    
+    
 Alnes+OLang/NOB:Al#nes BERN-sur ;
 Alnæs+OLang/NOB:Al#næs BERN-sur ;
 Alonen+OLang/FIN:Alo C-FI-NEN-sur ;
@@ -1292,7 +1297,7 @@ Apollonia+OLang/NOB:Apollonia ACCRA-plc ;
 Apollos+OLang/UND:Apollos LONDON-mal ;
 Apollosa+OLang/UND:Apollosa ACCRA-plc ;
 Apollyon+OLang/UND:Apolly^on9 LONDON-org ;
-Apotekergata+OLang/NOB:Apoteker9# GATA-plc ;
+  Apotekergata+OLang/NOB:Apotekergata ACCRA-plc ;   
 Appenzell+OLang/UND:Appenzell JOKULL-plc ;
 Appfjell+OLang/NOB:App9#fjell BERN-plc ;
 Appfjell-Eira+OLang/UND:Appfjell-Eira ACCRA-femsur ;
@@ -1316,7 +1321,7 @@ Aracruz+OLang/UND:Aracruz9 BERN-plc ;
 Arafat+OLang/UND:Arafat BERN-sur ;
 Aragonia+OLang/NOB:Aragonia ACCRA-plc ;
 Aragón+OLang/UND:Aragón9 BERN-sur ;
-Arajärvi+OLang/FIN:Ara#järv MAKI-sur ;
+!Arajärvi+OLang/FIN:Ara#järv MAKI-sur ;
 Arakne+OLang/UND:Arakne ACCRA-sur ;
 Aralden+OLang/UND:Aralden9 LONDON-sur ;
 Aram+OLang/UND:Aram9 LONDON-mal ;
@@ -1358,7 +1363,9 @@ Arell+OLang/UND:Arell LONDON-sur ;
 Aremark+OLang/NOB:Are#mark BERN-plc ;
 Arenas+OLang/UND:Are^nas LONDON-plc ;
 Arendal+OLang/NOB:Aren#dal BERN-plc ;
-Arendalsgata+OLang/NOB:Arendals# GATA-plc ;
+
+Arendalsgata+OLang/NOB:Arendalsgata ACCRA-plc ;
+
 Arent+OLang/UND:Arent LONDON-sur ;
 Arentz-Hansen+OLang/NOB:Arentz9-Hansen9 LONDON-sur ;
 Areopagos+OLang/UND:Areopagos LONDON-plc ;
@@ -3819,7 +3826,9 @@ Bø+CmpN/None+OLang/NOB:Bø NYSTØ-plc ;
 Bødtker+OLang/NOB:Bødtker LONDON-sur ;
 Bøe+OLang/NOB:Bøe ACCRA-sur ;
 Bøen+OLang/NOB:Bøen9 LONDON-sur ;
+
 Bøgata+OLang/NOB:Bø# GATA-plc ;
+
 Bøggild+OLang/NOB:Bøggild9 BERN-sur ;
 Bøhle+OLang/NOB:Bøhle ACCRA-sur ;
 Bøhler+OLang/NOB:Bøhler LONDON-sur ;
@@ -7464,7 +7473,10 @@ Gaskobekken+OLang/UND:Gasko^bekken9 LONDON-plc ;
 Gasmann+OLang/NOB:Gasmann9 BERN-sur ;
 Gaspar+OLang/UND:Gaspar LONDON-mal ;
 Gat+OLang/UND:Gat LONDON-sur ;
+
 Gata+OLang/UND:Gata ACCRA-plc ;
+
+
 Gatam+OLang/UND:Gatam9 LONDON-plc ;
 Gate+OLang/UND:Gate ACCRA-sur ;
 Gateshead+OLang/ENG:Gateshead9 BERN-plc ;

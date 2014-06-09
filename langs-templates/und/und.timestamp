@@ -1,4 +1,7 @@
 $Rev$
+Forgot two files in the previous commit.
+
+r95954:
 Added support for testing the fst for initial upper casing of strings. This also
 includes yaml test support for non-analysing/-genereting fst's.
 

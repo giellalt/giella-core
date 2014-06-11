@@ -2110,6 +2110,7 @@ SUBSTITUTE (Sem/Plc-abstr) (*) TARGET (Sem/Plc-abstr) (NOT 0 Prop) ; #RemoveFrom
 SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-water) (*) TARGET (Sem/Plc-water) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-elevate) (*) TARGET (Sem/Plc-elevate) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Process) (*) TARGET (Sem/Process) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Prod) (*) TARGET (Sem/Prod) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Prod-audio) (*) TARGET (Sem/Prod-audio) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Prod-cogn) (*) TARGET (Sem/Prod-cogn) ; #RemoveFromApertium

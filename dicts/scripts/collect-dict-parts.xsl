@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "dummy.dtd">
+
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to compile

@@ -14,7 +14,7 @@ APERTIUM_GENERATOR_ATTGZ=
 APERTIUM_CG_BIN=
 
 # The list of target languages are taken from configure.ac:
-# TARGET_LANGS="sma smj nob"
+# TARGET_LANGS="sma smj nob smn"
 TARGET_LANGS=$(MT_AP_TARGET_LANGS)
 
 if WANT_APERTIUM

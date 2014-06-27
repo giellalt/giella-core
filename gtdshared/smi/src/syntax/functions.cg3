@@ -2061,7 +2061,7 @@ SELECT SEMTAGS ;
 
 SUBSTITUTE (Sem/Act) (*) TARGET (Sem/Act) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Amount) (*) TARGET (Sem/Amount) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Ani) (*) TARGET (Sem/Ani) ; #RemoveFromApertium
 SUBSTITUTE (Sem/AniProd) (*) TARGET (Sem/AniProd) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body) (*) TARGET (Sem/Body) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Build) (*) TARGET (Sem/Build) ; #RemoveFromApertium
@@ -2080,36 +2080,39 @@ SUBSTITUTE (Sem/Drink) (*) TARGET (Sem/Drink) ; #RemoveFromApertium
 SUBSTITUTE (Sem/DummyTag) (*) TARGET (Sem/DummyTag) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Emo) (*) TARGET (Sem/Emo) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Event) (*) TARGET (Sem/Event) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Feat-measr) (*) TARGET (Sem/Feat-measr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Feat-psych) (*) TARGET (Sem/Feat-psych) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Fem) (*) TARGET (Sem/Fem) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Food) (*) TARGET (Sem/Food) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Food-med) (*) TARGET (Sem/Food-med) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Furn) (*) TARGET (Sem/Furn) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Game) (*) TARGET (Sem/Game) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Geom) (*) TARGET (Sem/Geom) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Group) (*) TARGET (Sem/Group) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Hum) (*) TARGET (Sem/Hum) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Ideol) (*) TARGET (Sem/Ideol) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Year) (*) TARGET (Sem/Year) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Lang) (*) TARGET (Sem/Lang) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Mal) (*) TARGET (Sem/Mal) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Mat) (*) TARGET (Sem/Mat) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Measr) (*) TARGET (Sem/Measr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Money) (*) TARGET (Sem/Money) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Obj-clo) (*) TARGET (Sem/Obj-clo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Obj-el) (*) TARGET (Sem/Obj-el) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Perc-phys) (*) TARGET (Sem/Perc-phys) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Perc-psych) (*) TARGET (Sem/Perc-psych) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plant) (*) TARGET (Sem/Plant) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plant-part) (*) TARGET (Sem/Plant-part) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) (NOT 0 Prop) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Plc-abstr) (*) TARGET (Sem/Plc-abstr) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plc) (*) TARGET (Sem/Plc) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Plc-abstr) (*) TARGET (Sem/Plc-abstr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-line) (*) TARGET (Sem/Plc-line) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-water) (*) TARGET (Sem/Plc-water) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Plc-elevate) (*) TARGET (Sem/Plc-elevate) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Pos) (*) TARGET (Sem/Pos) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Process) (*) TARGET (Sem/Process) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Prod) (*) TARGET (Sem/Prod) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Prod-audio) (*) TARGET (Sem/Prod-audio) ; #RemoveFromApertium
@@ -2120,8 +2123,8 @@ SUBSTITUTE (Sem/Route) (*) TARGET (Sem/Route) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Rule) (*) TARGET (Sem/Rule) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Sport) (*) TARGET (Sem/Sport) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Substnc) (*) TARGET (Sem/Substnc) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) (NOT 0 Prop) ; #RemoveFromApertium
-SUBSTITUTE (Sem/Sign) (*) TARGET (Sem/Sign) (NOT 0 Prop) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Sur) (*) TARGET (Sem/Sur) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Sign) (*) TARGET (Sem/Sign) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Semcon) (*) TARGET (Sem/Semcon) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Time) (*) TARGET (Sem/Time) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Txt) (*) TARGET (Sem/Txt) ; #RemoveFromApertium

@@ -57,27 +57,9 @@
 !! (and thereafter 31000 similar lines follow):
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
+  
     !Gata+OLang/UND:Gata ACCRA-plc ;
-  Apotekergata+OLang/NOB:Apotekergata ACCRA-plc ;   
-
+Apotekergata+OLang/NOB:Apotekergata GATA-plc ;   
 A-ha+OLang/NOB:A-ha ACCRA-org ;			    !!= @CODE@ \\
 ABC-Company+OLang/UND:ABC-Company ACCRA-obj ;
 ABC-company+Err/Sub+OLang/UND:ABC-company NYSTØ-org ;
@@ -125,7 +107,7 @@ Aall+OLang/NOB:Aall BERN-sur ;
 Aalsmeer+OLang/FIN:Aals#meer LONDON-sur ;
 Aalst+OLang/NOB:Aalst9 BERN-sur ;
 Aaltio+OLang/FIN:Aaltio9 ACCRA-sur ;
-Aaltola+OLang/FIN:Aaltola ACCRA-sur ;
+Aaltola+OLang/FIN:Aaltola9 ACCRA-sur ;
 Aaltonen+OLang/FIN:Aalto C-FI-NEN-sur ;
 Aalvik+OLang/NOB:Aal#vik BERN-sur ;
 Aamodt+OLang/NOB:Aamodt BERN-sur ;
@@ -494,7 +476,7 @@ Akeloos+OLang/UND:Akeloos BERN-plc ;
 Aker+OLang/UND:Aker LONDON-plc ;
 Akerhus+OLang/NOB:Aker9#hus BERN-sur ;
 Akersbakken+OLang/UND:Akers#bakken LONDON-plc ;
-Akersgata+OLang/NOB:Akersgata ACCRA-plc ;
+Akersgata+OLang/NOB:Akersgata GATA-plc ;
 Akershus+OLang/NOB:Akers#hus BERN-plc ;
 Akersvatnet+OLang/NOB:Akers#vatnet LONDON-plc ;
 Akerveien+OLang/NOB:Aker9#vei^en LONDON-plc ;

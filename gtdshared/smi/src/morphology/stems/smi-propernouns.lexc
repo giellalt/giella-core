@@ -98,7 +98,10 @@ Aakre+OLang/NOB:Aakre ACCRA-sur ;
 Aakula+OLang/FIN:Aakula ACCRA-sur ;
 Aakvik+OLang/NOB:Aak9#vik BERN-sur ;
 Aalberg+OLang/NOB:Aal#berg9 BERN-sur ;
+
 Aalborg+OLang/NOB:Aal#borg9 BERN-plc ;
+Wilborg+OLang/NOB:Wil#borg9 BERN-plc ;
+
 Aalbu+OLang/NOB:Aal#bu NYSTØ-sur ;
 Aalen+OLang/NOB:Aalen9 LONDON-sur ;
 Aaler+OLang/NOB:Aaler LONDON-sur ;
@@ -148,6 +151,7 @@ Aarum+OLang/NOB:Aarum9 LONDON-sur ;
 Aarvik+OLang/NOB:Aar9#vik BERN-sur ;
 Aarø+OLang/NOB:Aarø NYSTØ-sur ;
 Aas+OLang/NOB:Aas BERN-sur ;
+Was+OLang/NOB:Was BERN-sur ;
 Aasberg+OLang/NOB:Aas#berg9 BERN-sur ;
 Aasbø+OLang/NOB:Aas#bø NYSTØ-sur ;
 Aase+OLang/NOB:Aase ACCRA-femsur ;
@@ -283,9 +287,14 @@ Adrianopel+OLang/UND:Adri^anopel LONDON-plc ;
 Adriaterhavet+OLang/UND:Adri^ater9#havet LONDON-LOAN-plc ;
 Adsjaria+OLang/NOB:Adsjaria ACCRA-plc ;
 Adventdalen+OLang/NOB:Advent9#dalen9 LONDON-plc ;
+Webportalen+OLang/NOB:Webpor9#talen9 LONDON-plc ;
+Webportalen+Err/Sub+OLang/NOB:Webbpor9#dalen9 LONDON-plc ;
 Adygia+OLang/NOB:Adygia ACCRA-plc ;
 Aeroflot+OLang/UND:Aero#flot BERN-org ;
 Aetat+OLang/UND:Aetat BERN-org ;
+What+OLang/UND:What BERN-org ;
+Work+OLang/UND:Work BERN-org ;
+Wild+OLang/UND:Wild BERN-org ;
 Afanasjeva+OLang/UND:Afanasjeva ACCRA-sur ;
 Afanassieva+OLang/UND:Afanassi^eva ACCRA-sur ;
 Affairs+OLang/UND:Affairs BERN-org ;
@@ -358,6 +367,7 @@ Ahmad+OLang/NOB:Ahmad9 LONDON-mal ;
 Ahmadabad+OLang/NOB:Ahmadabad9 BERN-plc ;
 Ahmasalo+OLang/FIN:Ahmasalo9 ACCRA-sur ;
 Ahmed+OLang/UND:Ahmed9 LONDON-mal ;
+Zed+OLang/UND:Zed9 LONDON-mal ;
 Ahmedabad+OLang/NOB:Ahmedabad9 BERN-plc ;
 Ahmet+OLang/UND:Ahmet LONDON-mal ;
 Aho+OLang/UND:Aho9 ACCRA-sur ;
@@ -724,7 +734,7 @@ Almtoft+OLang/NOB:Almtoft BERN-sur ;
 Almås+OLang/NOB:Alm9#ås BERN-plc ;
 Alna+OLang/UND:Alna ACCRA-plc ;
 Alnabru+OLang/NOB:Alna#bru NYSTØ ;
-Alnafetgata+OLang/NOB:Alnafetgata  ACCRA-plc ; 
+Alnafetgata+OLang/NOB:Alnafetgata GATA-plc ; 
 Alnes+OLang/NOB:Al#nes BERN-sur ;
 Alnæs+OLang/NOB:Al#næs BERN-sur ;
 Alonen+OLang/FIN:Alo C-FI-NEN-sur ;
@@ -896,6 +906,7 @@ Anbjørg+OLang/NOB:An#bjørg9 BERN-fem ;
 Anchises+OLang/UND:Anchises LONDON-plc ;
 Anchorage+OLang/UND:Anchorage ACCRA-plc ;
 Ancona+OLang/NOB:Ancona ACCRA-plc ;
+Winona+OLang/NOB:Winona ACCRA-plc ;
 Anda+OLang/NOB:Anda ACCRA-plc ;
 Andabeløy+Err/Sub+OLang/NOB:Andabel#øy NYSTØ-plc ;
 Andabeløy+OLang/NOB:Andabel#øy NYSTØ-plc ;
@@ -917,6 +928,9 @@ Andersdatter+OLang/UND:Anders#datter LONDON-sur ;
 Andersen+OLang/NOB:Andersen9 LONDON-sur ;
 Andersnatten+OLang/UND:Anders^natten9 LONDON-plc ;
 Anderson+OLang/UND:Anderson9 LONDON-sur ;
+
+Zachrisson+OLang/UND:Zachrisson9 LONDON-sur ;
+
 Anderssen+OLang/NOB:Anderssen9 LONDON-sur ;
 Andersson+OLang/UND:Andersson9 LONDON-sur ;
 Anderstorp+OLang/UND:Anders#torp9 BERN-plc ;
@@ -1222,6 +1236,7 @@ Aram+OLang/UND:Aram9 LONDON-mal ;
 Aram+OLang/UND:Aram9 LONDON-plc ;
 Aramataia+OLang/NOB:Aramata^ia ACCRA-plc ;
 Aran+OLang/UND:Aran9 LONDON-plc ;
+Yran+OLang/UND:Yran9 LONDON-plc ;
 Ararat+OLang/UND:Ararat BERN-plc ;
 Arba+OLang/UND:Arba ACCRA-plc ;
 Arbeiderparti+OLang/NOB:Arbeider^parti NYSTØ-org ;
@@ -1257,7 +1272,7 @@ Arell+OLang/UND:Arell LONDON-sur ;
 Aremark+OLang/NOB:Are#mark BERN-plc ;
 Arenas+OLang/UND:Are^nas LONDON-plc ;
 Arendal+OLang/NOB:Aren#dal BERN-plc ;
-Arendalsgata+OLang/NOB:Arendalsgata ACCRA-plc ;
+Arendalsgata+OLang/NOB:Arendalsgata GATA-plc ;
 Arent+OLang/UND:Arent LONDON-sur ;
 Arentz-Hansen+OLang/NOB:Arentz9-Hansen9 LONDON-sur ;
 Areopagos+OLang/UND:Areopagos LONDON-plc ;
@@ -2066,6 +2081,7 @@ Baía+OLang/UND:Ba^ía ACCRA-plc ;
 Beach+OLang/UND:Beach9 BERN-sur ;
 Beaconsfield+OLang/UND:Beacons^field9 BERN-sur ;
 Bear+OLang/UND:Bear BERN-sur ;
+Year+OLang/UND:Year BERN-sur ;
 Beate+OLang/UND:Be^ate ACCRA-fem ;
 Beaten% To% Death+MWE+Use/LexSub+OLang/UND:Beaten% To% Death9 BERN-org ;
 Beathe+OLang/UND:Be^athe ACCRA-fem ;
@@ -2353,7 +2369,10 @@ Beroia+OLang/NOB:Bero^ia ACCRA-plc ;
 Beronka+OLang/UND:Beronka ACCRA-sur ;
 Berre+OLang/UND:Berre ACCRA-sur ;
 Berry+OLang/UND:Berry ACCRA-mal ;
+
 Bersagel+OLang/UND:Bersagel LONDON-sur ;
+Wackernagel+OLang/UND:Wackernagel LONDON-sur ;
+
 Berserk+OLang/UND:Berserk9 BERN-obj ;
 Berstad+OLang/NOB:Ber9#stad9 BERN-sur ;
 Bersvendsen+OLang/NOB:Bersvendsen9 LONDON-sur ;
@@ -2682,6 +2701,7 @@ Bjørvik+OLang/NOB:Bjør9#vik BERN-plc ;
 Bjørånes+OLang/NOB:Bjørå#nes BERN-plc ;
 Bjørøyhamn+OLang/NOB:Bjør^øy#hamn9 BERN-plc ;
 Blaauw+OLang/UND:Blaauw BERN-sur ;
+Waauw+OLang/UND:Waauw BERN-sur ;
 Black+OLang/UND:Black BERN-sur ;
 BlackSheeps+OLang/UND:Black^Sheeps BERN-org ;
 Blackburn+OLang/ENG:Black9#burn9 BERN-plc ;
@@ -2812,6 +2832,7 @@ Bodhild+OLang/NOB:Bod9#hild9 BERN-fem ;
 Bodil+OLang/UND:Bodil LONDON-fem ;
 Bodin+OLang/UND:Bodin9 LONDON-sur ;
 Bodom+OLang/UND:Bodom9 LONDON-plc ;
+Wisdom+OLang/UND:Bodom9 LONDON-org ;
 Bodrum+OLang/UND:Bodrum9 LONDON-plc ;
 Bodung+OLang/UND:Bodung9 BERN-sur ;
 Body+Err/Sub+OLang/UND:Body NYSTØ-mal ;
@@ -2822,6 +2843,7 @@ Boe+OLang/UND:Boe ACCRA-mal ;
 Boeck+OLang/UND:Boeck BERN-sur ;
 Boehg+OLang/UND:Boehg9 BERN-sur ;
 Boeing+OLang/NOB:Boe^ing9 LONDON-plc ;
+Well-Being+OLang/NOB:Well-Be^ing9 LONDON-plc ;
 Boel+OLang/UND:Boel BERN-sur ;
 Boelke+OLang/UND:Boelke ACCRA-sur ;
 Boesen+OLang/NOB:Boesen9 LONDON-sur ;
@@ -3436,6 +3458,7 @@ Brøttum+OLang/NOB:Brøttum9 LONDON-sur ;
 Brüel+OLang/UND:Brüel BERN-sur ;
 Brügge+OLang/UND:Brügge ACCRA-plc ;
 Brüssel+OLang/UND:Brüssel LONDON-sur ;
+Brüssel+Err/Sub+OLang/UND:Bryssel LONDON-sur ;
 Bu+CmpN/None+OLang/UND:Bu ACCRA-plc ;
 Buan+OLang/UND:Bu^an9 LONDON-sur ;
 Buarbreen+OLang/UND:Bu^ar9#bre^en9 LONDON-plc ;
@@ -7565,7 +7588,7 @@ Goldschmidt+OLang/UND:Gold^schmidt BERN-sur ;
 Golf+OLang/UND:Golf BERN-obj ;
 Golfkrigen+Use/LexSub+Use/-Spell+OLang/UND:Golf^krigen9 LONDON-obj ;
 Golfstraumen+Use/LexSub+Use/-Spell+OLang/UND:Golf#straumen9 LONDON-plc ;
-Golgata+OLang/UND:Golgata ACCRA-plc ;
+Golgata+OLang/UND:Golgata GATA-plc ;
 Goliat+OLang/UND:Goli^at BERN-mal ;
 Golnes+OLang/NOB:Gol#nes BERN-sur ;
 Golten+OLang/UND:Golten9 LONDON-sur ;
@@ -13085,6 +13108,7 @@ Knagenhjem+OLang/UND:Knagen#hjem9 BERN-sur ;
 Knap+OLang/UND:Knap9 BERN-plc ;
 Knaphus+OLang/NOB:Knaphus BERN-plc ;
 Knapper+OLang/UND:Knapper LONDON-sur ;
+Zapper+OLang/UND:Zapper LONDON-sur ;
 Knapstad+OLang/NOB:Knap9#stad9 BERN-sur ;
 Knarrlagsund+OLang/NOB:Knarr^lag9#sund9 SUND-plc ;
 Knarvik+OLang/NOB:Knar9#vik BERN-plc ;
@@ -14956,6 +14980,7 @@ Lemvig+OLang/NOB:Lem9#vig9 BERN-sur ;
 Lena+OLang/UND:Lena ACCRA-fem ;
 Lenangsøra+OLang/NOB:Lenangs#øra ACCRA-plc ;
 Lende+OLang/UND:Lende ACCRA-sur ;
+En% folkefiende:En% folkefi^ende ACCRA-sur ;
 Lene+OLang/UND:Lene ACCRA-fem ;
 Lenes+OLang/NOB:Le#nes BERN-sur ;
 Lenin+OLang/UND:Lenin9 LONDON-sur ;
@@ -18332,7 +18357,7 @@ Nihkkel+OLang/UND:Nihkkel LONDON-plc ;
 Nihkolávo+OLang/UND:Nihko^lávo9 ACCRA-plc ;
 Nihkul+OLang/UND:Nihkul LONDON-sur ;
 Nihtilä+OLang/FIN:Nihtilä ACCRA-sur ;
-Niigata+OLang/UND:Niigata ACCRA-plc ;
+Niigata+OLang/UND:Niigata GATA-plc ;
 Niihkke+OLang/UND:Niihkke ACCRA-plc ;
 Niihkko+OLang/UND:Niihkko9 ACCRA-plc ;
 Niikke+OLang/UND:Niikke ACCRA-sur ;
@@ -20639,6 +20664,7 @@ Primorsk+OLang/UND:Primorsk BERN-plc ;
 Prince+OLang/UND:Prince ACCRA-obj ;
 Princeton+OLang/UND:Princeton9 LONDON-plc ;
 Princip+OLang/UND:Princip9 BERN-plc ;
+WindZip+OLang/UND:WindZip9 BERN-plc ;
 Prinkkilä+OLang/FIN:Prinkkilä ACCRA-sur ;
 Prins+OLang/UND:Prins BERN-plc ;
 Pripjat+OLang/UND:Pripjat LONDON-plc ;
@@ -27849,7 +27875,7 @@ Urbanus+OLang/UND:Urbanus LONDON-malsur ;
 Urbino+OLang/UND:Urbino9 ACCRA-plc ;
 Urbye+Err/Sub+OLang/UND:Ur9#bye NYSTØ-sur ;
 Urbye+OLang/NOB:Ur9#bye ACCRA-sur ;
-Urbye+Use/LexSub+OLang/UND:Ur9#byæ NYSTØ-sur ;
+Urbye+Use/LexSub+OLang/UND:Ur9#bye NYSTØ-sur ;
 Urd+OLang/UND:Urd9 BERN-fem ;
 Urdal+OLang/NOB:Ur9#dal BERN-plc ;
 Ure+OLang/UND:Ure ACCRA-sur ;
@@ -28180,6 +28206,7 @@ Vansjø+OLang/NOB:Van#sjø NYSTØ ;
 Vantaa+OLang/FIN:Vantaa ACCRA-plc ;
 Vanttausjärvi+OLang/FIN:Vanttaus#järv MAKI-plc ;
 Vanua+OLang/UND:Vanua ACCRA-plc ;
+Whenua+OLang/UND:Whenua ACCRA-plc ;
 Vanuatu+OLang/UND:Vanu^atu ACCRA-plc ;
 Vanvik+OLang/NOB:Van#vik BERN-sur ;
 Vanylven+OLang/UND:Vanylven9 LONDON-plc ;
@@ -29361,6 +29388,7 @@ Westen+OLang/NOB:Westen9 LONDON-sur ;
 Westerberg+OLang/NOB:Wester9#berg9 BERN-sur ;
 Westerdahl+OLang/UND:Westerdahl BERN-sur ;
 Westerfjell+OLang/NOB:Wester9#fjell BERN-plc ;
+Wiksell+OLang/NOB:Wik9#sell BERN-plc ;
 Westerheim+OLang/NOB:Wester9#heim9 HEIM-plc ;
 Westerland+OLang/NOB:Wester9#land9 BERN-plc ;
 Westerlund+OLang/NOB:Wester9#lund9 BERN-sur ;
@@ -29655,7 +29683,7 @@ Yakutksii+OLang/UND:Yakutksii HAWAII-sur ;
 Yakutsk+OLang/UND:Yakutsk9 BERN-plc ;
 Yala+OLang/FIN:Yala ACCRA-plc ;
 Yalu+OLang/UND:Yalu ACCRA-plc ;
-Yamagata+OLang/UND:Yamagata ACCRA-plc ;
+Yamagata+OLang/UND:Yamagata GATA-plc ;
 Yamaha+Err/Sub+OLang/UND:Yahama ACCRA-obj ;!What is this?
 Yamaha+OLang/UND:Yamaha ACCRA-org ;
 Yamakita+OLang/UND:Yamakita ACCRA-sur ;
@@ -30372,28 +30400,6 @@ strignin% gift+Use/LexSub+MWE+OLang/UND:strignin% gift BERN-obj ;
 Šefo+OLang/UND:Šefo9 ACCRA-org ;
 Šilo+OLang/UND:Šilo9 ACCRA-sur ;
 
-! Legges inn fra missingsma-list
-!Zed
-!Zapper
-!Zachrisson
-!Yran
-!Year
-!YOUTUBE
-!Work
-!Wisdom
-!Winona
-!WindZip
-!Wild
-!Wilborg
-!Wiktionary:en
-!Wiksell
-!Whenua
-!What
-!Well-Being
-!Webbportalen
-!Was
-!Wackernagel
-!WAAUW
 
 
 

@@ -2135,6 +2135,8 @@ SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Tool-clean) (*) TARGET (Sem/Tool-clean) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Tool-it) (*) TARGET (Sem/Tool-it) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-measr) (*) TARGET (Sem/Tool-measr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-music) (*) TARGET (Sem/Tool-music) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-write) (*) TARGET (Sem/Tool-write) ; #RemoveFromApertium

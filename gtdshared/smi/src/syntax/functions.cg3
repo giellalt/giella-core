@@ -2133,6 +2133,7 @@ SUBSTITUTE (Sem/Wpn) (*) TARGET (Sem/Wpn) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Wthr) (*) TARGET (Sem/Wthr) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Feat) (*) TARGET (Sem/Feat) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Part) (*) TARGET (Sem/Part) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Rel) (*) TARGET (Sem/Rel) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool) (*) TARGET (Sem/Tool) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-catch) (*) TARGET (Sem/Tool-catch) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Tool-clean) (*) TARGET (Sem/Tool-clean) ; #RemoveFromApertium

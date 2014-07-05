@@ -18,9 +18,13 @@
 !! and ''shall not'' be edited in the __langs__ directory.
 
 
+!! !!!General notes
 
+!! The entries are tagged for language, to satisfy the needs of the 
+!! synthetic speech project.
 
-!! !!!This file (smi-propernouns.lexc) applied to sme
+!! !!!Language-specific notes
+!! !!This file (smi-propernouns.lexc) when applied to sme
 
 
 !! This file was originally written for sme, and is copied directly to
@@ -37,19 +41,24 @@
 
 
 
-!! !!!This file (smi-propernouns.lexc) applied to sma and smj
+!! !!This file (smi-propernouns.lexc) when applied to sma, smj and smn.
 
-!! For sma and smj, there is a script, {{src/scripts/smi-sma-conversion.pl}}
-!! changing the lexicon names from sme-style to sma/smj-style. The resulting
+!! For sma, smj and smn, there is a script, {{src/scripts/smi-sma-conversion.pl}}
+!! changing the lexicon names from sme-style to sma/smj/smn-style. The resulting
 !! file is {{src/morphology/stems/smi-sma-propernouns.lexc}}, with the content
 !! of this file following the text ''Dump from SMI''. This is governed in 
 !! ''src/morphology/Makefile.am''
 
+
+!! !!Modifications for sma
+!! __MAKI__ er for finske i-finale navn hvor sørsamisk og lulesamisk følger ulike
+!! mønster. PIPPi i smj, ACCRA i sme og sma.
+
+!! !!Modifications for sma
 !! __BETFAGE__ er spesifikk for lulesamisk, og er identisk med ACCRA for dei andre
 !! samiske språka. BETFAGE skal brukast ved e-finale ACCRA-ord.
 
-!! __MAKI__ er for finske i-finale navn hvor sørsamisk og lulesamisk følger ulike
-!! mønster. PIPPi i smj, ACCRA i sme og sma.
+!! !!Modifications for smn
 
 !! ----
 
@@ -57,9 +66,6 @@
 !! (and thereafter 31000 similar lines follow):
 
 
-  
-    !Gata+OLang/UND:Gata ACCRA-plc ;
-Apotekergata+OLang/NOB:Apoteker# GATA-plc ;   
 A-ha+OLang/NOB:A-ha ACCRA-org ;			    !!= @CODE@ \\
 ABC-Company+OLang/UND:ABC-Company ACCRA-obj ;
 ABC-company+Err/Sub+OLang/UND:ABC-company NYSTØ-org ;
@@ -1207,6 +1213,7 @@ Apollonia+OLang/NOB:Apollonia ACCRA-plc ;
 Apollos+OLang/UND:Apollos LONDON-mal ;
 Apollosa+OLang/UND:Apollosa ACCRA-plc ;
 Apollyon+OLang/UND:Apolly^on9 LONDON-org ;
+Apotekergata+OLang/NOB:Apoteker# GATA-plc ;   
 Appenzell+OLang/UND:Appenzell JOKULL-plc ;
 Appfjell+OLang/NOB:App9#fjell BERN-plc ;
 Appfjell-Eira+OLang/UND:Appfjell-Eira ACCRA-femsur ;

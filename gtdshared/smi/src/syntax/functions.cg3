@@ -2066,6 +2066,7 @@ SUBSTITUTE (Sem/AniProd) (*) TARGET (Sem/AniProd) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Body) (*) TARGET (Sem/Body) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Build) (*) TARGET (Sem/Build) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Build-part) (*) TARGET (Sem/Build-part) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Cat) (*) TARGET (Sem/Cat) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Clth) (*) TARGET (Sem/Clth) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Clth-jewl) (*) TARGET (Sem/Clth-jewl) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Ctain) (*) TARGET (Sem/Ctain) ; #RemoveFromApertium

@@ -2102,6 +2102,8 @@ SUBSTITUTE (Sem/Money) (*) TARGET (Sem/Money) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Obj) (*) TARGET (Sem/Obj) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Obj-clo) (*) TARGET (Sem/Obj-clo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Obj-el) (*) TARGET (Sem/Obj-el) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Obj-ling) (*) TARGET (Sem/Obj-ling) ; #RemoveFromApertium
+SUBSTITUTE (Sem/Obj-surfc) (*) TARGET (Sem/Obj-surfc) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Org) (*) TARGET (Sem/Org) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Perc-emo) (*) TARGET (Sem/Perc-emo) ; #RemoveFromApertium
 SUBSTITUTE (Sem/Perc-phys) (*) TARGET (Sem/Perc-phys) ; #RemoveFromApertium

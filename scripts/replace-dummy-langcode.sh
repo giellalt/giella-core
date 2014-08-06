@@ -28,9 +28,9 @@ if test x$SED == "x"; then
 fi
 
 langcode=$2
-hyphenedcode=$(echo "${langcode}" | grep -v '[_-]' - )
+hyphenedcode=$(echo "${langcode}" | grep '[_-]' - )
 
-if ${hyphenedcode}; then
+if test "x${hyphenedcode}" != "x" ; then
     langcode=$( echo "${langcode}" | tr '_' '-' | cut -d'-' -f1 )
 fi
 

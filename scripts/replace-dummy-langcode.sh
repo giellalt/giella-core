@@ -27,15 +27,22 @@ if test x$SED == "x"; then
     exit 1
 fi
 
+langcode=$2
+hyphenedcode=$(echo "${langcode}" | grep -v '[_-]' - )
+
+if ${hyphenedcode}; then
+    langcode=$( echo "${langcode}" | tr '_' '-' | cut -d'-' -f1 )
+fi
+
 # Get the 2-char language code from the 3-char code:
-iso2code=`${GTCORE}/scripts/iso3-to-2.sh $2`
+iso2code=`${GTCORE}/scripts/iso3-to-2.sh $langcode`
 if [[ $? -gt 0 ]] ; then
 	echo "ISO 639 3-to-2 char conversion had an error!" 1>&2
 	exit 2
 fi
 
 # Get the language name from the 3-char code:
-isoName=`${GTCORE}/scripts/iso639-to-name.sh $2`
+isoName=`${GTCORE}/scripts/iso639-to-name.sh $langcode`
 if [[ $? -gt 0 ]] ; then
 	echo "ISO 639 language name identification had an error!" 1>&2
 	exit 3

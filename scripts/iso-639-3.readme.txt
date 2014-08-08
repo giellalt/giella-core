@@ -1,0 +1,10 @@
+The file iso-639-3.txt is a symbolic link to the latest version of the ISO 639-3
+data. The data is taken from:
+
+http://www-01.sil.org/iso639%2D3/download.asp
+
+and the date in the filename of the target of the symbolic link corresponds to
+the date given on that page for the downloaded data.
+
+Copyright SIL. All feedback should be directed to SIL. See the above page for
+contact info.

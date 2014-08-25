@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if test -z "${GTCORE}" ; then
-    echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"
+    echo "Unable to determine GTCORE, either run 'sudo make install' in" >&2
+    echo "your gtcore directory, or set GTCORE in .profile or similar."  >&2
     exit 1
 fi
 

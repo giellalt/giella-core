@@ -1,6 +1,12 @@
 #!/bin/bash
 
-if test -z "${GTCORE}" ; then
+MYGTCORE=
+
+if   test   "${GTCORE}";     then
+    MYGTCORE=${GTCORE}
+elif test   "$(gt-core.sh)"; then
+    MYGTCORE=$(gt-core.sh)
+else
     echo "Unable to determine GTCORE, either run 'sudo make install' in" >&2
     echo "your gtcore directory, or set GTCORE in .profile or similar."  >&2
     exit 1
@@ -19,7 +25,7 @@ if ! test $# -eq 3 ; then
     exit 1
 fi
 
-Language=$(${GTCORE}/scripts/iso639-to-name.sh $1)
+Language=$(${MYGTCORE}/scripts/iso639-to-name.sh $1)
 
 Date=$(date +%Y.%m.%d)
 Version=$(cat $3)

@@ -2026,7 +2026,7 @@ SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 #REMCOHORT TARGET ("vuostá" Adv) (*-1 ("váldit2") BARRIER SV-BOUNDARY OR REAL-V) ;
 
 
-#for view - kommenteres inn for view
+#for Konteaksta - kommenteres inn for Konteaksta
 #SUBSTITUTE (@>N) (@>N <mod_obj>) TARGET (@>N) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ;
 #SUBSTITUTE (@>N) (@>N <mod_subj>) TARGET (@>N) (*1 SUBJ BARRIER NOT-NPMOD OR HEAD) ;
 #SUBSTITUTE (@>N) (@>N <mod_advl>) TARGET (@>N) (*1 @ADVL BARRIER NOT-NPMOD OR HEAD) ;

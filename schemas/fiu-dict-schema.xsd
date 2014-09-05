@@ -109,6 +109,7 @@
             <xs:extension base="xs:string">
                <xs:attribute ref="hid"/>
                <xs:attribute ref="pos" use="required"/>
+               <xs:attribute ref="src"/>
                <xs:attribute name="type">
 		 <xs:simpleType>
 		   <xs:restriction base="xs:string">
@@ -1262,7 +1263,7 @@
    <xs:element name="x">
       <xs:complexType mixed="true">
          <xs:sequence/>
-         <xs:attribute name="src" type="xs:string"/>
+         <xs:attribute ref="src"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="answer">
@@ -1368,6 +1369,7 @@
    <xs:attribute name="compl" type="xs:string"/>
    <xs:attribute name="No" type="xs:integer"/>
    <xs:attribute name="RNo" type="xs:string"/>
+   <xs:attribute name="src" type="xs:string"/>
    <xs:attribute name="dialect">
       <xs:simpleType>
          <xs:restriction base="xs:string">

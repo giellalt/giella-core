@@ -27,7 +27,7 @@ fi
 
 Language=$(${MYGTCORE}/scripts/iso639-to-name.sh $1)
 
-Date=$(date +%Y.%m.%d)
+Date=$(date +%d.%m.%Y)
 Version=$(cat $3)
 Revision=$(svn info --xml $2 | grep -A 4 '<entry' \
 		 | grep revision | grep -Eo '[0-9]+')

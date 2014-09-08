@@ -85,8 +85,8 @@ $fstfiles
 *.all.lexc
 *.tmp.*" $1/src/morphology
 
-# Only ignore generated propernoun files in the src/morphology/stems dir:
-$svnignore "*-propernouns.lexc" $1/src/morphology/stems
+# Ignore all files in the src/morphology/generated_files dir:
+$svnignore "*" $1/src/morphology/generated_files
 
 # Ignore all temporary and generated files in the src/tagsets/ dir:
 $svnignore "$mkfiles

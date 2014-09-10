@@ -1061,6 +1061,8 @@ SUBSTITUTE:ctjHead (V) (<ctjHead> V) TARGET $$VERBCOORD (NOT 0 VFIN)(NEGATE *-1 
 SETPARENT:SetCNPToInf @CNP TO (*-1 <ctjHead> LINK 0 Inf) ;
 	## Tálat ja bustávat sáhtte jorrat girjjis ja šaddat čáhppes sáhcun.
 
+SETPARENT:FSSTAtoX @FS-VFIN< TO (*-1 @X) ;
+
 # subclause to mainclause
 SETPARENT:SetFSSTAtoMV @FS-VFIN< TO (*-1 @FAUX OR @FMV BARRIER CC OR @FS-VFIN<) ;
 	## Gávpoga poarttat eai goassege dahppojuvvo beaivet, ii ge idja šat leat .
@@ -1272,6 +1274,9 @@ SETPARENT:missingToRoot @X (NONE p (*)) TO (@0 (*));
 #SETPARENT:X (@X) TO (-1 (*)) ; #Hva skal vi gjøre med X?
 
 AFTER-SECTIONS
+SETPARENT:tomissingVerb (@ADVL) TO (*1 @X) ;
+SETPARENT:tomissingVerb (@ADVL) TO (*-1 @X) ;
+
 
 #Removing tags for output
 SUBSTITUTE (<mv>) (*) TARGET (<mv>) ;

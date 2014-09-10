@@ -1,0 +1,42 @@
+#Distributed under the terms of the GNU General Public License version 2 
+# or any later version.
+
+# ==================================================================== #
+#!!    S Y N T A C T I C   F U N C T I O N S   F O R   S Á M I
+# ==================================================================== #
+# ==================================================================== 
+
+#!!  Sámi language technology project 2003-2014, University of Tromsø # 
+
+
+
+INCLUDE functions.cg3 ;
+
+#for Konteaksta - kommenteres inn for Konteaksta
+SUBSTITUTE (@>N) (@>N <mod_obj>) TARGET (@>N) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@>N) (@>N <mod_subj>) TARGET (@>N) (*1 SUBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@>N) (@>N <mod_advl>) TARGET (@>N) (*1 @ADVL BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@>A) (@>A <mod_obj>) TARGET (@>A) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@>A) (@>A <mod_subj>) TARGET (@>A) (*1 SUBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@>A) (@>A <mod_advl>) TARGET (@>A) (*1 @ADVL BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@N<) (@N< <compl_obj>) TARGET (@N<) (*-1 OBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@N<) (@N< <compl_subj>) TARGET (@N<) (*-1 SUBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@N<) (@N< <compl_advl>) TARGET (@N<) (*-1 @ADVL BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
+SUBSTITUTE (@Num<) (@Num< <compl_obj>) TARGET (@Num<) (*-1 OBJ BARRIER Num) ;
+SUBSTITUTE (@Num<) (@Num< <compl_subj>) TARGET (@Num<) (*-1 SUBJ BARRIER Num) ; #IncludeforKonteaksta
+SUBSTITUTE (@Num<) (@Num< <compl_advl>) TARGET (@Num<) (*-1 @ADVL BARRIER Num) ; #IncludeforKonteaksta
+SUBSTITUTE (@>Num) (@>Num <compl_advl>) TARGET (A @>Num) OR (Pron @>Num) (*1 @ADVL BARRIER Num) ; #IncludeforKonteaksta
+SUBSTITUTE (@>Num) (@>Num <compl_obj>) TARGET (A @>Num) OR (Pron @>Num) (*1 OBJ BARRIER Num) ; #IncludeforKonteaksta
+SUBSTITUTE (@>Num) (@>Num <compl_subj>) TARGET (A @>Num) OR (Pron @>Num) (*1 SUBJ BARRIER Num) ; #IncludeforKonteaksta
+SUBSTITUTE (@Pron<) (@Pron< <compl_obj>) TARGET (@Pron<) (-1 OBJ) ; #IncludeforKonteaksta
+SUBSTITUTE (@Pron<) (@Pron< <compl_subj>) TARGET (@Pron<) (-1 SUBJ) ; #IncludeforKonteaksta
+SUBSTITUTE (@Pron<) (@Pron< <compl_advl>) TARGET (@Pron<) (-1 @ADVL) ; #IncludeforKonteaksta
+
+
+
+
+
+
+	#=====#
+      END #
+	#=====#

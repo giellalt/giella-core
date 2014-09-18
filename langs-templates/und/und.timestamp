@@ -1,4 +1,7 @@
 $Rev$
+Fixed a problem with MT filter compilation that only revealed itself in sme.
+
+r99579:
 Cleaned the filter build files even more. Now only local / language specific
 regex source files need to be listed in the local Makefile.am.
 

@@ -60,6 +60,8 @@ GENERATED_REGEXES=remove-semantic-tags.regex        \
 
 REGEX_SRCS=$(GT_FILTER_CORE_SRCS) $(GT_FILTER_LOCAL_SRCS) $(GENERATED_REGEXES)
 
+# Define variable before using it:
+GT_FILTER_TARGETS=
 # Generate the filter targets from the source filenames:
 if CAN_HFST
 GT_FILTER_TARGETS+=$(patsubst %.regex,%.hfst,$(REGEX_SRCS))

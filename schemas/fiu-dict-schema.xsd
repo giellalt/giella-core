@@ -991,6 +991,7 @@
       <xs:complexType>
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="semantics"/>
+	      <xs:element maxOccurs="unbounded" minOccurs="0" ref="field"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_ref"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="m"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="defNative"/>

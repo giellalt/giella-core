@@ -24,7 +24,7 @@ else
     EXTRAREMOVALS="(THISISADUMMYSTRING)"
 fi
 
-grep ";" $1 | grep -v "^\!" | \
+grep ";" $1 | egrep -v "^[[:space:]]*\!" | \
              egrep -v '(LEXICON| K | Rreal | R |ShCmp|RCmpnd|CmpN/Only|ENDLEX)' | \
              egrep -v "$EXTRAREMOVALS" | \
               sed 's/^[ 	]*//' | \

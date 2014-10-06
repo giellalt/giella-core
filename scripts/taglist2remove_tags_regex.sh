@@ -12,7 +12,7 @@ AWK=awk
 # 3. the third line adds a comma at the end of each line
 # 4. the fourth line replaces the last comma with a semicolon, to end the regex
 
-$SED   's/\([+/-]\)/%\1/g' $1 \
+$SED   's/\([+/_-]\)/%\1/g' $1 \
 | $SED 's/^/0 <- /' \
 | $SED 's/$/,/' \
 | $SED '$ s/,/;/' \

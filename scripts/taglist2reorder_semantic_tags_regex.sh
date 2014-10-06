@@ -37,7 +37,7 @@ for POS in $POSes; do
 
     # escape characters special to Xerox regex, then create the regex, and
     # finally replace the last comma with a semicolon to end the regex.
-    $SED   's/\([+/-]\)/%\1/g' $TAGFILE \
+    $SED   's/\([+/_-]\)/%\1/g' $TAGFILE \
     | $SED "s/^\(.*\)/$REALPOS \1 <- \1 $REALPOS ,/" \
     | $SED '$ s/,/;/' \
     >> $REGEXFILE

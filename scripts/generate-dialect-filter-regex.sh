@@ -37,6 +37,6 @@ echo "~\$[ %+Dial%/%-$TARGETDIAL |" >> $REGEXFILE # Exclude from target
 
 echo "$NONTARGETDIALECTS"  \
 | $SED 's/^/	\+Dial\//' \
-| $SED 's/\([+/-]\)/%\1/g' \
+| $SED 's/\([+/_-]\)/%\1/g' \
 | $SED 's/$/  |/'          \
 | $SED '$ s/|/ ] ;/' >> $REGEXFILE

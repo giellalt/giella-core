@@ -14,6 +14,7 @@ if ! test $# -eq 2 ; then
 fi
 
 REGEXFILE=$1
+TMPFILE=$1.tmp
 TAGFILE=$2
 
 SED=sed
@@ -24,21 +25,26 @@ SED=sed
 POSes="%+N %+A %+N_%+Prop"
 
 # Print header text:
-echo "# This is a generated file - do not edit!"    > $REGEXFILE
-echo "# The generated regex reorders all semantic" >> $REGEXFILE
-echo "# tags with respect to some POS tags."       >> $REGEXFILE
+echo "# This is a generated file - do not edit!"    > $TMPFILE
+echo "# The generated regex reorders all semantic" >> $TMPFILE
+echo "# tags with respect to some POS tags."       >> $TMPFILE
 
 # Loop over the list of POS's requiring semantic tag reordering:
 for POS in $POSes; do
     # replace _ with space in POS
     REALPOS=$(echo $POS | tr '_' ' ')
-    echo "" >> $REGEXFILE
-    echo "# $REALPOS" >> $REGEXFILE
+    echo "" >> $TMPFILE
+    echo "# $REALPOS" >> $TMPFILE
 
     # escape characters special to Xerox regex, then create the regex, and
     # finally replace the last comma with a semicolon to end the regex.
     $SED   's/\([+/_-]\)/%\1/g' $TAGFILE \
     | $SED "s/^\(.*\)/$REALPOS \1 <- \1 $REALPOS ,/" \
-    | $SED '$ s/,/;/' \
-    >> $REGEXFILE
+    >> $TMPFILE
 done
+
+cat $TMPFILE \
+    | $SED '$ s/,/;/' \
+    > $REGEXFILE
+
+rm -f $TMPFILE

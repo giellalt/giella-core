@@ -244,6 +244,8 @@ for line in sys.stdin.readlines(): #{
 	if VERBOSITY: print('+', oper,first,'|||', outline, file=sys.stderr);
 	if outline != '': #{
 		sys.stdout.write(outline);
+	elif line[0] == '"' and line[1] == '<': #{
+		sys.stdout.write(line.replace('/', '_').replace('( ', '(').replace(' )',')'));
 	else: #{
 		sys.stdout.write(line);
 	#}	

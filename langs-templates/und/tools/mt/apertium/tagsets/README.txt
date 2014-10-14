@@ -25,3 +25,10 @@ Reorder tags in the form created by the default GTD-to-Apertium tag converter.
 
 NB! Remember to escape Xerox regex special characters with %, e.g. the < and >
 characters conventionally used to delimit tags in Apertium.
+
+The file apertium.postproc.relabel is a manually edited relabelling file that
+is applied after the automatic relabelling. Use this file to add or modify any
+relabelling that is not covered by the automatic relabelling. Remember that
+the relabeling tool only can replace single symbols (multichar or otherwise) -
+if you need to do more advanced changes (reordering, multiple symbols at once)
+please use the target language specific regexes in addition (see above).

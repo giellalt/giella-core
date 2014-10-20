@@ -96,7 +96,7 @@ SUBSTITUTE (Sem/Domain) (*) TARGET (Sem/Domain) ;
 SUBSTITUTE (Sem/Domain_Food-med) (*) TARGET (Sem/Domain_Food-med) ;
 SUBSTITUTE (Sem/Domain_Prod-audio) (*) TARGET (Sem/Domain_Prod-audio) ;
 SUBSTITUTE (Sem/Drink) (*) TARGET (Sem/Drink) ; 
-SUBSTITUTE (Sem/DummyTag) (*) TARGET (Sem/DummyTag) ; 
+SUBSTITUTE (Sem/Dummytag) (*) TARGET (Sem/Dummytag) ; 
 SUBSTITUTE (Sem/Edu) (*) TARGET (Sem/Edu) ; 
 SUBSTITUTE (Sem/Edu_Event) (*) TARGET (Sem/Edu_Event) ;
 SUBSTITUTE (Sem/Edu_Group_Hum) (*) TARGET (Sem/Edu_Group_Hum) ;

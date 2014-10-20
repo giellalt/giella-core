@@ -102,10 +102,11 @@ LIST Sem/Build = Sem/Amount_Build Sem/Ani_Build Sem/Ani_Build_Hum_Txt Sem/Build 
 LIST Sem/Build-part = Sem/Ani_Build-part Sem/Build-part Sem/Build-part_Plc Sem/Build_Build-part ; #Building part, e.g. room #Sem:+con,+count,-mova #Syn: mannat X sisa
 LIST Sem/Cat = Sem/Cat ;
 LIST Sem/Clth = Sem/Body_Clth Sem/Clth Sem/Clth_Hum ; #Clothes #Sem #bidjat X ala/badjelii.
-LIST Sem/Clth-jewl = Sem/Clth-jewl Sem/Clth-jewl_Curr Sem/Clth-jewl_Money Sem/Clth-jewl_Plant Sem/Org_Clth-jewl ; #Clothes jewelry #Synt: bidjat X ala. *bidjat X badjelii.
+LIST Sem/Clth-jewl = Sem/Clth-jewl Sem/Clth-jewl_Curr Sem/Clth-jewl_Money Sem/Clth-jewl_Plant Sem/Org_Clth-jewl  Sem/Clth-jewl_Org ; #Clothes jewelry #Synt: bidjat X ala. *bidjat X badjelii.
 LIST Sem/Clth-part  = Sem/Build_Clth-part Sem/Clth-part  ;
 LIST Sem/Ctain = Sem/Ctain Sem/Ctain_Feat-phys Sem/Ctain_Furn Sem/Ctain_Tool Sem/Ctain_Tool-measr ; #Container #Sem:+mova #Syn: bidjat juoidá X sisa
 LIST Sem/Ctain-abstr = Sem/Ctain-abstr Sem/Ctain-abstr_Org ;
+LIST Sem/Ctain-clth = Sem/Ctain-clth Sem/Ctain-clth_Plant Sem/Ctain-clth_Veh ;
 LIST Sem/Curr = Sem/Clth-jewl_Curr Sem/Curr Sem/Curr_Org; #Syn: Mun mávssan dasa 100 X. Dat máksá 100 X.
 LIST Sem/Date = Sem/Date ;
 LIST Sem/Dance = Sem/Dance Sem/Dance_Org Sem/Dance_Prod-audio ; #Ollugat dánso swinga lávddi ovddabeale.
@@ -136,18 +137,21 @@ LIST Sem/Mal = Sem/Mal ;
 LIST Sem/Mat = Sem/Body_Mat Sem/Edu_Mat Sem/Mat Sem/Mat_Plant Sem/Mat_Txt ; # Material #Sem: cannot pass through it without destroying it, ráhkadit juoidá X:s. Niibi lea X-Loc-Sg. #Dán báhkis šaddá čáppa gohppu.
 LIST Sem/Measr = Sem/Body_Measr Sem/Measr Sem/Measr_Time ; # Lea lassánan 100 X-Loc.
 LIST Sem/Money = Sem/Clth-jewl_Money Sem/Money Sem/Money_Obj Sem/Money_Txt ; #Mun mávssán X. Mii ávžžuhit vuovdit alimus X-Ill (haddái). ruhtadit doaibmabušeahtain. vuovdit/bidjat ruđast - selge for penger
-LIST Sem/Obj = Sem/Body_Obj_Tool-catch Sem/Geom_Obj Sem/Hum_Obj Sem/Money_Obj Sem/Obj Sem/Obj_Semcon Sem/State_Obj ; # concrete object, movable #Syn: Mun guoskkán X-Acc. Dá livčče dutnje X-Nom (sabehat). čievččastit geađggi johkii
+LIST Sem/Obj = Sem/Body_Obj_Tool-catch Sem/Geom_Obj Sem/Hum_Obj Sem/Money_Obj Sem/Obj Sem/Obj_Semcon Sem/Obj_State ; # concrete object, movable #Syn: Mun guoskkán X-Acc. Dá livčče dutnje X-Nom (sabehat). čievččastit geađggi johkii
 #LIST Sem/Obj-com = Sem/Obj-com ; #communication object #hálan telefuvnnas/e-poasttas #sádden X bokte
 LIST Sem/Obj-clo = Sem/Aniprod_Obj-clo Sem/Obj-clo ; #bidjat juoidá Obj-clo sisa
+LIST Sem/Obj-cogn = Sem/Obj-cogn ;
 LIST Sem/Obj-el = Sem/Obj-el ; # moveable, countable, touchable, electrical objects that can be turned on and of,  mus lea X alde, mun bijan X ala
 LIST Sem/Obj-ling = Sem/Obj-ling ;
 LIST Sem/Obj-play = Sem/Game_Obj-play Sem/Obj-play_Sport ;
 LIST Sem/Obj-rope = Sem/Obj-rope ;
 LIST Sem/Obj-surfc = Sem/Obj-surfc ;
-LIST Sem/Org = Sem/Build_Edu_Org Sem/Build_Event_Org Sem/Build_Org Sem/Ctain-abstr_Org Sem/Curr_Org Sem/Dance_Org Sem/Edu_Org Sem/Group_Hum_Org Sem/Group_Org Sem/Hum_Org Sem/Org Sem/Org_Clth-jewl Sem/Org_Rule Sem/Org_Txt Sem/Org_Veh ;
+LIST Sem/Org = Sem/Build_Edu_Org Sem/Build_Event_Org Sem/Build_Org Sem/Ctain-abstr_Org Sem/Curr_Org Sem/Dance_Org Sem/Edu_Org Sem/Group_Hum_Org Sem/Group_Org Sem/Hum_Org Sem/Org Sem/Org_Clth-jewl Sem/Org_Rule Sem/Org_Txt Sem/Org_Veh Sem/Clth-jewl_Org ;
 LIST Sem/Part = Sem/Part Sem/Part_Prod-cogn ; # bealli, oassi
+LIST Sem/Perc-cogn = Sem/Perc-cogn ;
 LIST Sem/Perc-emo = Perc-emo ; #Sem not touchable, not countable ("ballu" "suhttu" "vaši") -  Mun dovddan garra X. Mun lean X+Loc # moraš
 LIST Sem/Perc-phys = Sem/Aniprod_Perc-phys Sem/Food_Perc-phys Sem/Perc-phys Sem/Perc-emo_Wthr ; # anistupmi, oaidnu
+LIST Sem/Perc-psych = Sem/Perc-psych ;
 LIST Sem/Plant = Sem/Clth-jewl_Plant Sem/Ctain-clth_Plant Sem/Feat_Plant Sem/Food_Plant Sem/Hum_Plant Sem/Mat_Plant Sem/Plant Sem/Plant_Tool Sem/Plant_Tool-measr ; #čáhccet X-Acc #X-Nom šaddet
 LIST Sem/Plant-part = Sem/Plant_Plant-part Sem/Plant-part ; #čáhccet X-Acc #X-Nom šaddet
 LIST Sem/Plc = Sem/Act_Plc Sem/Ani_Hum_Plc Sem/Ani_Plc Sem/Ani_Plc_Txt Sem/Aniprod_Plc Sem/Body_Plc Sem/Build-part_Plc Sem/Event_Plc Sem/Group_Hum_Plc Sem/Hum_Lang_Plc Sem/Hum_Plc Sem/Plc Sem/Plc_Pos Sem/Plc_Route Sem/Plc_Substnc Sem/Plc_Substnc_Wthr Sem/Plc_Time Sem/Plc_Tool-catch Sem/Plc_Wthr;
@@ -156,6 +160,7 @@ LIST Sem/Plc-elevate = Sem/Plc-elevate ;
 LIST Sem/Plc-line = Sem/Plc-line ;
 LIST Sem/Plc-water = Sem/Plc-water ;
 LIST Sem/Pos = Sem/Plc_Pos Sem/Pos ; #Social position (job etc.)
+LIST Sem/Process = Sem/Process ;
 LIST Sem/Prod = Sem/Prod ; #jáhkku
 LIST Sem/Prod-audio = Sem/Body-abstr_Prod-audio_Semcon Sem/Dance_Prod-audio Sem/Domain_Prod-audio Sem/Prod-audio Sem/Prod-audio_Txt ; #attáldat
 LIST Sem/Prod-cogn = Sem/Part_Prod-cogn Sem/Prod-cogn Sem/Prod-cogn_Txt ; # muittuhus, ipmárdus, jáhkku, osku, vuordámuš, viisodat? diehtu?
@@ -167,10 +172,11 @@ LIST Sem/Rule = Sem/Org_Rule Sem/Rule ;
 LIST Sem/Semcon = Sem/Amount_Semcon Sem/Body-abstr_Prod-audio_Semcon Sem/Obj_Semcon Sem/Semcon Sem/Semcon_Txt ; # semantic concept
 LIST Sem/Sign = Sem/Group_Sign Sem/Sign ;
 LIST Sem/Sport = Sem/Obj-play_Sport Sem/Sport ;
-LIST Sem/State = Sem/Plc-abstr_Rel_State Sem/State Sem/State_Obj ; # lihkku, ipmilbalolašvuohta, mokta, váivi, váttisvuohta
+LIST Sem/State = Sem/Plc-abstr_Rel_State Sem/State Sem/Obj_State ; # lihkku, ipmilbalolašvuohta, mokta, váivi, váttisvuohta
 LIST Sem/State-sick = Sem/State-sick ;
 LIST Sem/Substnc = Sem/Plc_Substnc Sem/Plc_Substnc_Wthr Sem/Substnc Sem/Substnc_Wthr ; #Sem: can pass through it without destroying it
 LIST Sem/Sur = Sem/Sur ;
+LIST Sem/Symbol = Sem/Symbol ;
 LIST Sem/Time = Sem/Ani_Hum_Time Sem/Ani_Time Sem/Body_Time Sem/Event_Time Sem/Hum_Lang_Time Sem/Measr_Time Sem/Plc_Time Sem/Time Sem/Time_Wthr ;
 LIST Sem/Tool = Sem/Ctain_Tool Sem/Hum_Tool Sem/Lang_Tool Sem/Plant_Tool Sem/Tool ;
 LIST Sem/Tool-catch = Sem/Body_Obj_Tool-catch Sem/Plc_Tool-catch Sem/Tool-catch ;
@@ -1285,9 +1291,10 @@ MAP:voc (@VOC) TARGET Nom IF (*-1 COMMA BARRIER NOT-NP OR CC LINK *-1 (V Sg2) OR
 	
 MAP:voc (@VOC) TARGET Nom IF (-1 Attr LINK *-1 COMMA BARRIER NOT-NP OR CC LINK *-1 (V Sg2) OR (V Du2) OR (V Pl2) OR (Pron Sg2) OR (Pron Du2) OR (Pron Pl2) LINK NOT 0 LEAT)(1 EOS)(0 HUMAN)(NEGATE 0 Sg LINK *-1 V-SG3 BARRIER REAL-V);
 
-MAP:voc (@VOC) TARGET HUMAN IF (*-1 BOS BARRIER WORD - Interj)(1 COMMA LINK *1 VFIN) ;	
+MAP:voc (@VOC) TARGET HUMAN IF (*-1 BOS BARRIER WORD - Interj)(1 COMMA LINK *1 VFIN)(NEGATE 1 COMMA LINK 1 Rel LINK NOT *1 ("?")) ;	
 	#$ - Áhčči, mii lea duot čáppa alit násti doppe guhkkelis?
 	#$ Áhččámet, don guhte leat almmis. 
+	#% Ealgabivdojoavku, geain lea válla Suonjus, Guovdageainnu suohkanis, leat boazopolitiijat leamaš golbmii dárkkisteame.
 
 	
 MAP:voc (@VOC) TARGET (N Nom) IF (*-1 COMMA BARRIER NP-BOUNDARY LINK *-1 ("boahtin" Nom) BARRIER REAL-V OR S-BOUNDARY LINK -1 ("bures"))(1 EOC);
@@ -2107,26 +2114,6 @@ SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 #SUBSTITUTE ("váldit" V) ("váldit2" V) ("váldit" V) (*1 ("vuostá" Adv) BARRIER SV-BOUNDARY OR REAL-V) ;
 #REMCOHORT TARGET ("vuostá" Adv) (*-1 ("váldit2") BARRIER SV-BOUNDARY OR REAL-V) ;
 
-
-#for Konteaksta - kommenteres inn for Konteaksta
-#SUBSTITUTE (@>N) (@>N <mod_obj>) TARGET (@>N) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>N) (@>N <mod_subj>) TARGET (@>N) (*1 SUBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>N) (@>N <mod_advl>) TARGET (@>N) (*1 @ADVL BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>A) (@>A <mod_obj>) TARGET (@>A) (*1 OBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>A) (@>A <mod_subj>) TARGET (@>A) (*1 SUBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>A) (@>A <mod_advl>) TARGET (@>A) (*1 @ADVL BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@N<) (@N< <compl_obj>) TARGET (@N<) (*-1 OBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@N<) (@N< <compl_subj>) TARGET (@N<) (*-1 SUBJ BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@N<) (@N< <compl_advl>) TARGET (@N<) (*-1 @ADVL BARRIER NOT-NPMOD OR HEAD) ; #IncludeforKonteaksta
-#SUBSTITUTE (@Num<) (@Num< <compl_obj>) TARGET (@Num<) (*-1 OBJ BARRIER Num) ;
-#SUBSTITUTE (@Num<) (@Num< <compl_subj>) TARGET (@Num<) (*-1 SUBJ BARRIER Num) ; #IncludeforKonteaksta
-#SUBSTITUTE (@Num<) (@Num< <compl_advl>) TARGET (@Num<) (*-1 @ADVL BARRIER Num) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>Num) (@>Num <compl_advl>) TARGET (A @>Num) OR (Pron @>Num) (*1 @ADVL BARRIER Num) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>Num) (@>Num <compl_obj>) TARGET (A @>Num) OR (Pron @>Num) (*1 OBJ BARRIER Num) ; #IncludeforKonteaksta
-#SUBSTITUTE (@>Num) (@>Num <compl_subj>) TARGET (A @>Num) OR (Pron @>Num) (*1 SUBJ BARRIER Num) ; #IncludeforKonteaksta
-#SUBSTITUTE (@Pron<) (@Pron< <compl_obj>) TARGET (@Pron<) (-1 OBJ) ; #IncludeforKonteaksta
-#SUBSTITUTE (@Pron<) (@Pron< <compl_subj>) TARGET (@Pron<) (-1 SUBJ) ; #IncludeforKonteaksta
-#SUBSTITUTE (@Pron<) (@Pron< <compl_advl>) TARGET (@Pron<) (-1 @ADVL) ; #IncludeforKonteaksta
 
 
 #!! !!For Apertium: 

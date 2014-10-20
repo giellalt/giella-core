@@ -5882,6 +5882,7 @@ Evjenth+OLang/UND:Evjenth9 BERN-sur ;
 Evju+OLang/UND:Evju ACCRA-plc ;
 Evklid+OLang/NOB:Evk9#lid9 BERN-plc ;
 Evo+OLang/UND:Evo9 ACCRA-org ;
+Evo+OLang/UND:Evo9 ACCRA-mal ; #Morales
 Evripides+OLang/UND:Evripides LONDON-mal ;
 Evrydike+OLang/UND:Evrydike ACCRA-fem ;
 Evterpe+OLang/UND:Evterpe ACCRA-sur ;
@@ -30334,6 +30335,7 @@ strignin% gift+Use/LexSub+MWE+OLang/UND:strignin% gift BERN-obj ;
 Čebo+OLang/UND:Čebo9 ACCRA-plc ;
 Šefo+OLang/UND:Šefo9 ACCRA-org ;
 Šilo+OLang/UND:Šilo9 ACCRA-sur ;
+Apertium+OLang/UND:Aperti^um9 BERN-obj ;
 
 
 

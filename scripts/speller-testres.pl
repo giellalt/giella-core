@@ -911,6 +911,7 @@ sub print_xml_output {
             $word->appendChild($tokens_elt);
         }
         if ($rec->{'bugID'}){
+            #handle_comment would be used here
             my $bugID = $doc->createElement('bug');
             $bugID->appendTextNode($rec->{'bugID'});
             $word->appendChild($bugID);

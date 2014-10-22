@@ -766,7 +766,6 @@ sub read_typos {
 }
 
 sub print_xml_output {
-
     if (! $print_xml) {
         die "Specify the output file with option --xml=<file>\n";
     }
@@ -775,15 +774,182 @@ sub print_xml_output {
 
     my $spelltestresult = $doc->createElement('spelltestresult');
 
+    make_header(\@originals, $spelltestresult, $doc);
+    make_results(\@originals, $spelltestresult, $doc);
+
+    $doc->setDocumentElement($spelltestresult);
+    $doc->toFile($print_xml, 1);
+}
+
+sub make_original {
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'orig'}) {
+        my $original = $doc->createElement('original');
+        $original->appendTextNode($rec->{'orig'});
+        $word->appendChild($original);
+    }
+}
+
+sub make_expected {
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'expected'}){
+        my $expected = $doc->createElement('expected');
+        $expected->appendTextNode($rec->{'expected'});
+        $word->appendChild($expected);
+        my $distance=distance($rec->{'orig'},$rec->{'expected'},{-output=>'distance'});
+        my $edit_dist = $doc->createElement('edit_dist');
+        $edit_dist->appendTextNode($distance);
+        $word->appendChild($edit_dist);
+    }
+}
+
+sub make_error {
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'error'}){
+        my $error = $doc->createElement('status');
+        $error->appendTextNode($rec->{'error'});
+        $word->appendChild($error);
+    }
+}
+
+sub make_suggestion_position {
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
+        my $suggestions_elt = $doc->createElement('suggestions');
+        my $sugg_count=0;
+        if ($rec->{'sugg'}) { $sugg_count = scalar @{ $rec->{'sugg'}} };
+        $suggestions_elt->setAttribute('count' => $sugg_count);
+        my $position = $doc->createElement('position');
+        my $pos=0;
+        my $near_miss_count = 0;
+        if ($rec->{'suggnr'}) { $near_miss_count = $rec->{'suggnr'}; }
+        if ($rec->{'sugg'}) {
+
+            my @suggestions = @{$rec->{'sugg'}};
+            my @numbers;
+            if ($rec->{'num'}) { @numbers =  @{$rec->{'num'}}; }
+            for my $sugg (@suggestions) {
+                next if (! $sugg);
+                my $suggestion = $doc->createElement('suggestion');
+                $suggestion->appendTextNode($sugg);
+                if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
+                    $suggestion->setAttribute('expected' => "yes");
+                }
+                my $num;
+                if (@numbers) {
+                    $num = shift @numbers;
+                    $suggestion->setAttribute('penscore' => $num);
+                }
+                if ($near_miss_count > 0) {
+                    $suggestion->setAttribute('miss' => "yes");
+                    $near_miss_count--;
+                }
+
+                $suggestions_elt->appendChild($suggestion);
+            }
+            my $i=0;
+            if ($rec->{'expected'}) {
+                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) { $i++; }
+                if ($suggestions[$i]) { $pos = $i+1; }
+            }
+        }
+        $position->appendTextNode($pos);
+        $word->appendChild($position);
+        $word->appendChild($suggestions_elt);
+    }
+}
+
+sub make_tokens {
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'tokens'}) {
+        my @tokens = @{$rec->{'tokens'}};
+        my $tokens_num = scalar @tokens;
+        my $tokens_elt = $doc->createElement('tokens');
+        $tokens_elt->setAttribute('count' => $tokens_num);
+        for my $t (@tokens) {
+            my $token_elt = $doc->createElement('token');
+            $token_elt->appendTextNode($t);
+            $tokens_elt->appendChild($token_elt);
+        }
+        $word->appendChild($tokens_elt);
+    }
+}
+
+sub make_bugid {
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'bugID'}){
+        #handle_comment would be used here
+        my $bugID = $doc->createElement('bug');
+        $bugID->appendTextNode($rec->{'bugID'});
+        $word->appendChild($bugID);
+    }
+}
+
+sub make_comment {
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'comment'}){
+        my $comment = $doc->createElement('comment');
+        $comment->appendTextNode($rec->{'comment'});
+        $word->appendChild($comment);
+    }
+}
+
+sub make_word {
+    my ($rec, $results, $doc) = @_;
+
+    my $word = $doc->createElement('word');
+    if ($rec->{'forced'}){ $word->setAttribute('forced' => "yes"); }
+
+    make_original($rec, $word, $doc);
+    make_expected($rec, $word, $doc);
+    make_error($rec, $word, $doc);
+    make_suggestion_position($rec, $word, $doc);
+    make_tokens($rec, $word, $doc);
+    make_bugid($rec, $word, $doc);
+    make_comment($rec, $word, $doc);
+
+    $results->appendChild($word);
+}
+
+sub make_results {
+    my ($originals_ref, $spelltestresult, $doc) = @_;
+
+    my $results = $doc->createElement('results');
+
+    for my $rec (@{$originals_ref}) {
+        make_word($rec, $results, $doc);
+    }
+
+    $spelltestresult->appendChild($results);
+}
+
+sub make_header {
+    my ($originals_ref, $spelltestresult, $doc) = @_;
+
     my $header = $doc->createElement('header');
 
+    make_tool($originals_ref, $header, $doc);
+    make_document($header, $doc);
+    make_date($header, $doc);
+
     $spelltestresult->appendChild($header);
+}
+
+sub make_tool {
+    my ($originals_ref, $header, $doc) = @_;
 
     # Get version info if it's available
-    my $rec = $originals[0];
+    my $rec = ${$originals_ref}[0];
     if ($rec->{'orig'} eq "nuvviD" || $rec->{'orig'} eq "nuvviDspeller") {
 #        cluck "INFO: nuvviDspeller found.\n";
-        shift @originals;
+        shift @{$originals_ref};
         if ($rec->{'sugg'}) {
 #            cluck "INFO: nuvviDspeller contains suggestions.\n";
             my @suggestions = @{$rec->{'sugg'}};
@@ -795,8 +961,6 @@ sub print_xml_output {
                     last;
                 }
             }
-        } else {
-#            cluck "INFO: nuvviDspeller contains NO suggestions.\n";
         }
     }
 
@@ -811,125 +975,32 @@ sub print_xml_output {
     $tool->setAttribute('systime' =>  $alltime[2]);
     $header->appendChild($tool);
 
+}
+
+sub make_document {
+    my ($header, $doc) = @_;
+
     # what was the checked document
     my $docu = $doc->createElement('document');
     if (!$document) {
         $document=basename($input);
     }
+
     $docu->appendTextNode($document);
     $header->appendChild($docu);
+}
+
+sub make_date {
+    my ($header, $doc) = @_;
 
     # The date is the timestamp of speller output file if not given.
     my $date_elt = $doc->createElement('date');
-    if (!$date ) {
+    if (!$date) {
         $date = ctime(stat($output)->mtime);
         #print "file $input updated at $date\n";
     }
     $date_elt->appendTextNode($date);
     $header->appendChild($date_elt);
-
-    # Start the results-section
-    my $results = $doc->createElement('results');
-
-    for my $rec (@originals) {
-
-        my $word = $doc->createElement('word');
-        if ($rec->{'orig'}) {
-            my $original = $doc->createElement('original');
-            $original->appendTextNode($rec->{'orig'});
-            $word->appendChild($original);
-        }
-        if ($rec->{'expected'}){
-            my $expected = $doc->createElement('expected');
-            $expected->appendTextNode($rec->{'expected'});
-            $word->appendChild($expected);
-            my $distance=distance($rec->{'orig'},$rec->{'expected'},{-output=>'distance'});
-            my $edit_dist = $doc->createElement('edit_dist');
-            $edit_dist->appendTextNode($distance);
-            $word->appendChild($edit_dist);
-        }
-        if ($rec->{'error'}){
-            my $error = $doc->createElement('status');
-            $error->appendTextNode($rec->{'error'});
-            $word->appendChild($error);
-        }
-        if ($rec->{'forced'}){ $word->setAttribute('forced' => "yes"); }
-
-        if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
-            my $suggestions_elt = $doc->createElement('suggestions');
-            my $sugg_count=0;
-            if ($rec->{'sugg'}) { $sugg_count = scalar @{ $rec->{'sugg'}} };
-            $suggestions_elt->setAttribute('count' => $sugg_count);
-            my $position = $doc->createElement('position');
-            my $pos=0;
-            my $near_miss_count = 0;
-            if ($rec->{'suggnr'}) { $near_miss_count = $rec->{'suggnr'}; }
-            if ($rec->{'sugg'}) {
-
-                my @suggestions = @{$rec->{'sugg'}};
-                my @numbers;
-                if ($rec->{'num'}) { @numbers =  @{$rec->{'num'}}; }
-                for my $sugg (@suggestions) {
-                    next if (! $sugg);
-                    my $suggestion = $doc->createElement('suggestion');
-                    $suggestion->appendTextNode($sugg);
-                    if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
-                        $suggestion->setAttribute('expected' => "yes");
-                    }
-                    my $num;
-                    if (@numbers) {
-                        $num = shift @numbers;
-                        $suggestion->setAttribute('penscore' => $num);
-                    }
-                    if ($near_miss_count > 0) {
-                        $suggestion->setAttribute('miss' => "yes");
-                        $near_miss_count--;
-                    }
-
-                    $suggestions_elt->appendChild($suggestion);
-                }
-                my $i=0;
-                if ($rec->{'expected'}) {
-                    while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) { $i++; }
-                    if ($suggestions[$i]) { $pos = $i+1; }
-                }
-            }
-            $position->appendTextNode($pos);
-            $word->appendChild($position);
-            $word->appendChild($suggestions_elt);
-        }
-        if ($rec->{'tokens'}) {
-            my @tokens = @{$rec->{'tokens'}};
-            my $tokens_num = scalar @tokens;
-            my $tokens_elt = $doc->createElement('tokens');
-            $tokens_elt->setAttribute('count' => $tokens_num);
-            for my $t (@tokens) {
-                my $token_elt = $doc->createElement('token');
-                $token_elt->appendTextNode($t);
-                $tokens_elt->appendChild($token_elt);
-            }
-            $word->appendChild($tokens_elt);
-        }
-        if ($rec->{'bugID'}){
-            #handle_comment would be used here
-            my $bugID = $doc->createElement('bug');
-            $bugID->appendTextNode($rec->{'bugID'});
-            $word->appendChild($bugID);
-#            print STDERR ".";
-        }
-        if ($rec->{'comment'}){
-            my $comment = $doc->createElement('comment');
-            $comment->appendTextNode($rec->{'comment'});
-            $word->appendChild($comment);
-        }
-
-        $results->appendChild($word);
-    }
-
-    $spelltestresult->appendChild($results);
-
-    $doc->setDocumentElement($spelltestresult);
-    $doc->toFile($print_xml, 1);
 }
 
 sub print_output {
@@ -952,6 +1023,7 @@ sub print_output {
         print "\n";
     }
 }
+
 sub print_help {
     print << "END";
 Combines speller input and output into an xml file.

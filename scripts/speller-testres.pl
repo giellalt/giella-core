@@ -14,16 +14,16 @@
 #
 # $Id: speller-testres.pl 83558 2013-11-14 09:01:35Z boerre $
 
+use warnings;
 use utf8; # The perl script itself is UTF-8, and this pragma will make perl obey
 use strict;
-use XML::LibXML;
 
 use Carp qw(cluck confess);
 use File::stat;
 use Time::localtime;
 use File::Basename;
 use Text::Brew qw(distance);
-use warnings;
+use XML::LibXML;
 
 my $help;
 my $input;

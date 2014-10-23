@@ -80,10 +80,7 @@ $fstfiles
 # Ignore all temporary and generated files in the src/morphology/ dir:
 $svnignore "$mkfiles
 $fstfiles
-*.foma
-*.script
-*.all.lexc
-*.tmp.*" $1/src/morphology
+lexicon.lexc" $1/src/morphology
 
 # Ignore all files in the src/morphology/generated_files dir:
 $svnignore "*" $1/src/morphology/generated_files

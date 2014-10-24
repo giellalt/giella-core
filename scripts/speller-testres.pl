@@ -787,6 +787,13 @@ sub make_original {
     if ($rec->{'orig'}) {
         my $original = $doc->createElement('original');
         $original->appendTextNode($rec->{'orig'});
+
+        if ($rec->{'expected'}) {
+            $original->setAttribute('status' => "error");
+        } else {
+            $original->setAttribute('status' => "correct");
+        }
+
         $word->appendChild($original);
     }
 }
@@ -805,13 +812,19 @@ sub make_expected {
     }
 }
 
-sub make_error {
+sub make_speller {
     my ($rec, $word, $doc) = @_;
 
-    if ($rec->{'error'}){
-        my $error = $doc->createElement('status');
-        $error->appendTextNode($rec->{'error'});
-        $word->appendChild($error);
+    my $speller = $doc->createElement('speller');
+    if ($rec->{'error'}) {
+        if ($rec->{'error'} eq "SplErr") {
+            $speller->setAttribute('status' => "error");
+        }
+        if ($rec->{'error'} eq "SplCor") {
+            $speller->setAttribute('status' => "correct");
+        }
+
+        $word->appendChild($speller);
     }
 }
 
@@ -955,8 +968,8 @@ sub make_word {
     if ($rec->{'forced'}){ $word->setAttribute('forced' => "yes"); }
 
     make_original($rec, $word, $doc);
+    make_speller($rec, $word, $doc);
     make_expected($rec, $word, $doc);
-    make_error($rec, $word, $doc);
     make_suggestion_position($rec, $word, $doc);
     make_tokens($rec, $word, $doc);
     make_bugid($rec, $word, $doc);

@@ -52,7 +52,7 @@
 	    <!-- 2012-08-31 replacing _$lex_name_ with _$file_name_, it seems to work. Jack
 		 <xsl:value-of select="concat('LEXICON', $spc, $lex_name, $nl, $nl)"/> -->
 	    <xsl:value-of select="concat($nl, 'LEXICON', $spc, $file_name, $nl, $nl)"/>
-	    
+
 	    <!-- this might have to be refined: too underspecified as for preceding::lemma-stem combinations -->
 	    <!-- xsl:for-each select="./dict/entry[not(contains(./lemma/text(), $us))] the underscore should be replaced by "% "-->
 	    <!--xsl:for-each select="document($inFile)/dict/entry[not(./lemma = preceding::entry/lemma and ./stem = preceding::entry/stem)][not(./@exclude='fst')]"-->
@@ -61,6 +61,7 @@
 	      <xsl:variable name="out">
 		<out>
 		  <e>
+		    <xsl:copy-of select="../../l/@hid"/>
 		    <xsl:attribute name="stem">
 		      <xsl:value-of select="replace(
 		                            replace(
@@ -69,7 +70,7 @@
 		                            '!','%!')  "/>
 		    </xsl:attribute>
 		    <xsl:attribute name="pos">
-		      <xsl:value-of select="normalize-space(../../../pos)"/>
+		      <xsl:value-of select="normalize-space(../../l/@pos)"/>
 		    </xsl:attribute>
 		<xsl:attribute name="cl">
 		  <xsl:value-of select="normalize-space(@Contlex)"/>
@@ -112,8 +113,14 @@
 	      
 	      <xsl:if test="$out/out/e">
 		<xsl:for-each select="$out/out/e">
+		  <xsl:variable name="current_hid" select="if (./@hid
+							   and
+							   not(normalize-space(./@hid)=''))
+							   then
+							   concat('+',./@hid)
+							   else concat('','')"/>
 		  <xsl:value-of select="if (./@stem = '') then concat(., $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)
-					else concat(., $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+					else concat(.,$current_hid, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
 		</xsl:for-each>
 	      </xsl:if>
 	    </xsl:for-each>

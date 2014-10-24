@@ -895,9 +895,56 @@ sub make_comment {
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'comment'}){
-        my $comment = $doc->createElement('comment');
-        $comment->appendTextNode($rec->{'comment'});
-        $word->appendChild($comment);
+        print STDERR __LINE__ . "\n";
+        my ($errorinfo, $origfile) = ($rec->{'comment'} =~ m/errorinfo=(.+) file: (.*)/);
+        make_errors($errorinfo, $word, $doc);
+        make_origfile($origfile, $word, $doc);
+    }
+}
+
+sub make_errors {
+    my ($errorinfo, $word, $doc) = @_;
+
+    print STDERR __LINE__ . "\n";
+    if ($errorinfo) {
+        my $errors = $doc->createElement('errors');
+        my @e = split(';', $errorinfo);
+        foreach my $part (@e) {
+            make_error_part($part, $errors, $doc);
+        }
+
+        $word->appendChild($errors);
+    }
+}
+
+sub make_error_part {
+    my ($part, $errors, $doc) = @_;
+
+    print STDERR __LINE__ . "\n";
+    my $error = $doc->createElement('error');
+
+    if ($part =~ /,$/) {
+        $part = substr($part, 0, -1);
+    }
+    my $type = substr($part, 0, index($part, ','));
+    my $text = substr($part, index($part, ',') + 1);
+    $error->setAttribute('type' => $type);
+    if ($text) {
+        $error->appendTextNode($text);
+    }
+
+    $errors->appendChild($error);
+}
+
+sub make_origfile {
+    my ($origfile, $word, $doc) = @_;
+
+    print STDERR __LINE__ . "\n";
+    if ($origfile) {
+        my $f = $doc->createElement('origfile');
+        $f->appendTextNode($origfile);
+
+        $word->appendChild($f);
     }
 }
 

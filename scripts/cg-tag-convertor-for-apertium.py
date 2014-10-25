@@ -13,6 +13,7 @@ def replace_tag(tag):
 import sys, re ; 
 
 first = False;
+oper = '';
 for line in sys.stdin.readlines(): #{
 #	line = line.replace('<sme>','');
 #	line = line.replace('←sme→','');
@@ -240,7 +241,7 @@ for line in sys.stdin.readlines(): #{
 
 
 	outline = outline.strip(' ');
-	outline = outline.replace('>', '→').replace('<', '←').replace('/', '_').replace('( ', '(').replace(' )',')');
+	outline = outline.replace('>', '→').replace('<', '←').replace('/', '_').replace('( ', '(').replace(' )',')').replace('→→→', '>>>').replace('<<<', '←←←').replace('()', '(*)').replace('(←', '(<');
 	if VERBOSITY: print('+', oper,first,'|||', outline, file=sys.stderr);
 	if outline != '': #{
 		sys.stdout.write(outline);

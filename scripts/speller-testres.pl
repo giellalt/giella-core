@@ -12,7 +12,7 @@
 #
 # Usage: speller-testres.pl -h
 #
-# $Id: speller-testres.pl 83558 2013-11-14 09:01:35Z boerre $
+# $Id$
 
 use warnings;
 use utf8; # The perl script itself is UTF-8, and this pragma will make perl obey
@@ -908,7 +908,7 @@ sub make_comment {
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'comment'}){
-        print STDERR __LINE__ . "\n";
+        #print STDERR __LINE__ . "\n";
         my ($errorinfo, $origfile) = ($rec->{'comment'} =~ m/errorinfo=(.+) file: (.*)/);
         make_errors($errorinfo, $word, $doc);
         make_origfile($origfile, $word, $doc);
@@ -918,7 +918,7 @@ sub make_comment {
 sub make_errors {
     my ($errorinfo, $word, $doc) = @_;
 
-    print STDERR __LINE__ . "\n";
+    #print STDERR __LINE__ . "\n";
     if ($errorinfo) {
         my $errors = $doc->createElement('errors');
         my @e = split(';', $errorinfo);
@@ -933,7 +933,7 @@ sub make_errors {
 sub make_error_part {
     my ($part, $errors, $doc) = @_;
 
-    print STDERR __LINE__ . "\n";
+    #print STDERR __LINE__ . "\n";
     my $error = $doc->createElement('error');
 
     if ($part =~ /,$/) {
@@ -952,7 +952,7 @@ sub make_error_part {
 sub make_origfile {
     my ($origfile, $word, $doc) = @_;
 
-    print STDERR __LINE__ . "\n";
+    #print STDERR __LINE__ . "\n";
     if ($origfile) {
         my $f = $doc->createElement('origfile');
         $f->appendTextNode($origfile);
@@ -998,9 +998,11 @@ sub make_header {
     make_tool($originals_ref, $header, $doc);
     make_document($header, $doc);
     make_date($header, $doc);
-
+    
     $spelltestresult->appendChild($header);
 }
+
+
 
 sub make_tool {
     my ($originals_ref, $header, $doc) = @_;
@@ -1046,8 +1048,18 @@ sub make_document {
         $document=basename($input);
     }
 
+    my @doccu2 = split(/\./, $document);
+    my @doccu1 = split(/-/, $doccu2[0]);
+
+    my $lang = $doc->createElement('lang');
+    my $engine = $doc->createElement('engine');
+
     $docu->appendTextNode($document);
+    $lang->appendTextNode($doccu1[2]);
+    $engine->appendTextNode($doccu1[1]);
     $header->appendChild($docu);
+    $header->appendChild($lang);
+    $header->appendChild($engine);
 }
 
 sub make_date {

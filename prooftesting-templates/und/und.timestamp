@@ -1,4 +1,9 @@
 $Rev$
+Updated ccat calling to adhere to the new python version (no -r option). Added
+building a file containing the last change revision of each corpus dir used, to
+make it possible to track changes in the test data sources.
+
+r82593:
 Better config feedback.
 
 r82588:

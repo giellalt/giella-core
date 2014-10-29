@@ -65,17 +65,23 @@ $(ALLDATA): $(GSDOC) $(GSDATA)
 
 all-gs-%-bound.txt:
 	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f \
-		-r $$GTBOUND/$*/goldstandard/converted/$(GTLANG)/ \
+		$$GTBOUND/$*/goldstandard/converted/$(GTLANG)/ \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \
 		> $@
+	echo "Revision of $@: \
+		$$(svn info $$GTBOUND/$*/goldstandard/converted/$(GTLANG)/ | \
+		grep 'Last Changed Rev' | cut -d':' -f2);" >> corpusrevisions.txt
 
 all-gs-%-free.txt:
 	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f \
-		-r $$GTFREE/$*/goldstandard/converted/$(GTLANG)/ \
+		$$GTFREE/$*/goldstandard/converted/$(GTLANG)/ \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \
 		> $@
+	echo "Revision of $@: \
+		$$(svn info $$GTFREE/$*/goldstandard/converted/$(GTLANG)/ | \
+		grep 'Last Changed Rev' | cut -d':' -f2);" >> corpusrevisions.txt
 
 clean-local:
 	-rm -f *.txt

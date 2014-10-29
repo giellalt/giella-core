@@ -29,15 +29,10 @@ my $help;
 my $input;
 my $input_type;
 my $output;
+my $lang;
 my $print_xml;
 my $forced=0;
-my $polderland;
-my $puki;
-my $applescript;
-my $foma;
-my $hunspell;
-my $voikko;
-my $hfst;
+my $engine = "";
 my $ccat;
 my $out_file;
 my $typos=1; # Defaults to true - but is it needed? Cf ll 75-76
@@ -57,17 +52,12 @@ GetOptions (
             "input|i=s"          => \$input,
             "output|o=s"         => \$output,
             "document|d=s"       => \$document,
-            "pl|p"               => \$polderland,
-            "pk"                 => \$puki,
-            "mw|m"               => \$applescript,
-            "hu|u"               => \$hunspell,
-            "fo"                 => \$foma,
-            "vkmalaga|vkhfst|vk" => \$voikko,
-            "hfst|hf"            => \$hfst,
+            "engine|eng=s"       => \$engine,
             "typos|t"            => \$typos,
             "ccat|c"             => \$ccat,
             "forced|f"           => \$forced,
             "date|e=s"           => \$date,
+            "lang|l=s"           => \$lang,
             "xml|x=s"            => \$print_xml,
             "version|v=s"        => \$version,
             "toolversion|w=s"    => \$toolversion,
@@ -96,14 +86,14 @@ $toolversion =~ s/^, //;
 # Convert the system time input data to usable strings in seconds:
 @alltime = convert_systime( $timeuse );
 
-if    ($applescript) { $input_type="mw"; read_applescript(); }
-elsif ($hunspell)    { $input_type="hu"; read_hunspell();    }
-elsif ($foma)        { $input_type="fo"; read_hunspell();    }
-elsif ($polderland)  { $input_type="pl"; read_polderland();  }
-elsif ($puki)        { $input_type="pk"; read_puki();        }
-elsif ($voikko)      { $input_type="vk"; read_voikko();      }
-elsif ($hfst)        { $input_type="hf"; read_hfst();        }
-else { print STDERR "$0: Give the speller output type: --pl, --pk, --mw, --hu, --fo, --hf or --vk\n"; exit; }
+if    ( $engine eq "mw") { $input_type="mw"; read_applescript(); }
+elsif ( $engine eq "hu") { $input_type="hu"; read_hunspell();    }
+elsif ( $engine eq "fo") { $input_type="fo"; read_hunspell();    }
+elsif ( $engine eq "pl") { $input_type="pl"; read_polderland();  }
+elsif ( $engine eq "pk") { $input_type="pk"; read_puki();        }
+elsif ( $engine eq "vk") { $input_type="vk"; read_voikko();      }
+elsif ( $engine eq "hf") { $input_type="hf"; read_hfst();        }
+else { print STDERR "$0: Specify the speller engine: --engine=[pl|pk|mw|hu|fo|hf|vk]\n"; exit; }
 
 if ($print_xml) { print_xml_output(); }
 else { print_output(); }
@@ -1113,21 +1103,15 @@ Usage: speller-testres.pl [OPTIONS]
 --document=<name> The name of the original speller input, if not the input file name.
 -d <name>
 
---pl              The speller output is in Polderland format.
--p
-
---pk              The speller output is in the Icelandic Púki format.
-
---mw              The speller output is in AppleScript+MSWord format.
--m
-
---hu              The speller output is in Hunspell format.
---fo              (This includes also the foma-trie speller)
--u
-
---vkmalaga        The speller output is in Voikko format.
---vkhfst
---vk
+--engine=[pl|pk|mw|hu|fo|hf|vk]
+                  The speller engine used is one of:
+                  * pl - Polderland
+                  * pk - Icelandic Púki
+                  * mw - AppleScript+MSWord
+                  * hu - Hunspell
+                  * fo - foma-trie (output format = Hunspell)
+                  * hf - Hfst-ospell
+                  * vk - Voikko
 
 --ccat            The input is from ccat, the default is typos.txt. Not yet in use.
 -c

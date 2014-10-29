@@ -41,6 +41,7 @@ my $version;
 my $date;
 my @originals;
 my $toolversion;
+my $corpusversion;
 my $memoryuse = "";
 my $timeuse   = "";
 my @alltime ;
@@ -61,6 +62,7 @@ GetOptions (
             "xml|x=s"            => \$print_xml,
             "version|v=s"        => \$version,
             "toolversion|w=s"    => \$toolversion,
+            "corpusversion|co=s" => \$corpusversion,
             "memoryuse|mem=s"    => \$memoryuse,
             "timeuse|ti=s"       => \$timeuse,
             );

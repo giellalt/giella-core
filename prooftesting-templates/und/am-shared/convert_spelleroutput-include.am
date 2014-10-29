@@ -24,13 +24,15 @@ $(SPELLERTESTRESULT): \
 		$(SPELLEROUTPUT) \
 		$(SCRIPTDIR)/speller-testres.pl
 	$(SCRIPTDIR)/speller-testres.pl \
-		--$(TESTTOOL) \
+		--engine=$(TESTTOOL) \
+		--lang=$(GTLANG) \
 		--input=$< \
 		--output=$(SPELLEROUTPUT) \
 		--document=$(<F) \
 		--date=$(DATE)-$(TESTTIME) \
 		--version="$(LEXICONVERSION)" \
 		--toolversion="`cat $(SPELLERVERSION)`" \
+		--corpusversion="`cat ../corpusrevisions.txt`" \
 		--memoryuse="`cat spellermemusage.txt`" \
 		--timeuse="`cat spellertimeusage.txt`" \
 		--xml=$@

@@ -1,4 +1,8 @@
 $Rev$
+Changed the calling conventions for the speller output conversion script to
+follow the changes earlier today.
+
+r101835:
 Updated ccat calling to adhere to the new python version (no -r option). Added
 building a file containing the last change revision of each corpus dir used, to
 make it possible to track changes in the test data sources.

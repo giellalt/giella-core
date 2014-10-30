@@ -11,7 +11,7 @@ use utf8;
 
 # These definitions ensure that the script works
 # also in environments, where PERL_UNICODE is not set.
-binmode( STDIN, ':utf8' );
+binmode( STDIN,  ':utf8' );
 binmode( STDOUT, ':utf8' );
 binmode( STDERR, ':utf8' );
 use open 'utf8';
@@ -20,20 +20,18 @@ while(<>) {
 	# if the line contains a tab, there is an error correction pair - all is ok:
 	if (/.+\t.+/) { print; next; }
 
-	# discard lines which don't contain any letters.
-	next if (! /^\p{L}/);
+	# discard lines which don't contain any letters or numbers.
+	next if (! /[\p{L}\p{N}]+/);  # No letters or numbers
+	next if (/^\p{P}+$/);         # Remove lines with only punctuation
+	next if (/^[\p{P}\p{S}]+[\p{L}\p{N}]$/); # Remove smilies
 
 	chomp;
 
-	# replace anything that is not a letter or dash
-	# from the beginning and end of the expression.
-	# Preserves full stop at the end.
-	s/^[^\p{L}\p{Pd}]+//;
-	s/[^\p{L}\p{Pd}\.]+$//;
-
-	# remove the full stop if preceded by punctuation 
-	# for example: word).
-	s/[^\p{L}]+\.$//;
+	# Remove a few punctuation chars from the beginning and end of
+	# the expression, preserving full stops at the end.
+	s/^[".\(\/]+//;  # Remove from the start of the word
+	s/["),!?]+\.?$//; # Remove from the end, including a final full stop
+	s/[.]+$/./; # Collapse multiple full stops to one
 
 	# add a tab and a newline to the end of the word, then print:
 	my $word = $_ . "\t\n";

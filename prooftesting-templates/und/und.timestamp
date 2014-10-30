@@ -1,4 +1,7 @@
 $Rev$
+Removed -noforeign temporary, to work around ccat bug and still continue.
+
+r101897:
 Changed the calling conventions for the speller output conversion script to
 follow the changes earlier today.
 

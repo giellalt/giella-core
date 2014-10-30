@@ -57,14 +57,14 @@ noinst_DATA=$(ALLDATA) $(GSDATA)
 
 $(ALLDATA): $(GSDOC) $(GSDATA)
 	if test "x$(GSDOC)" != "x" ; then \
-	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f $< \
+	ccat -l $(GTLANG) -a -S -ort -C -f $< \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \
 		> $@; else \
 		cat $^ > $@; fi
 
 all-gs-%-bound.txt:
-	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f \
+	ccat -l $(GTLANG) -a -S -ort -C -f \
 		$$GTBOUND/$*/goldstandard/converted/$(GTLANG)/ \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \
@@ -74,7 +74,7 @@ all-gs-%-bound.txt:
 		grep 'Last Changed Rev' | cut -d':' -f2);" >> corpusrevisions.txt
 
 all-gs-%-free.txt:
-	ccat -l $(GTLANG) -a -S -ort -C -noforeign -f \
+	ccat -l $(GTLANG) -a -S -ort -C -f \
 		$$GTFREE/$*/goldstandard/converted/$(GTLANG)/ \
 		| LOCALE=C sort \
 		| $(SCRIPTDIR)/spell-preprocess.pl \

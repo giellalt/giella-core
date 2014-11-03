@@ -1,4 +1,7 @@
 $Rev$
+Restored the use of -noforeign, ccat is fixed.
+
+r101984:
 Removed -noforeign temporary, to work around ccat bug and still continue.
 
 r101897:

@@ -45,6 +45,12 @@ my $corpusversion;
 my $memoryuse = "";
 my $timeuse   = "";
 my @alltime ;
+my $true_positive = 0;
+my $true_negative = 0;
+my $false_positive = 0;
+my $false_negative = 0;
+my $flagged_words = 0;
+my $accepted_words = 0;
 
 use Getopt::Long;
 Getopt::Long::Configure ("bundling");
@@ -900,7 +906,6 @@ sub make_comment {
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'comment'}){
-        #print STDERR __LINE__ . "\n";
         my ($errorinfo, $origfile) = ($rec->{'comment'} =~ m/errorinfo=(.+) file: (.*)/);
         make_errors($errorinfo, $word, $doc);
         make_origfile($origfile, $word, $doc);
@@ -910,7 +915,6 @@ sub make_comment {
 sub make_errors {
     my ($errorinfo, $word, $doc) = @_;
 
-    #print STDERR __LINE__ . "\n";
     if ($errorinfo) {
         my $errors = $doc->createElement('errors');
         my @e = split(';', $errorinfo);
@@ -925,7 +929,6 @@ sub make_errors {
 sub make_error_part {
     my ($part, $errors, $doc) = @_;
 
-    #print STDERR __LINE__ . "\n";
     my $error = $doc->createElement('error');
 
     if ($part =~ /,$/) {
@@ -944,7 +947,6 @@ sub make_error_part {
 sub make_origfile {
     my ($origfile, $word, $doc) = @_;
 
-    #print STDERR __LINE__ . "\n";
     if ($origfile) {
         my $f = $doc->createElement('origfile');
         $f->appendTextNode($origfile);
@@ -982,19 +984,70 @@ sub make_results {
     $spelltestresult->appendChild($results);
 }
 
+sub update_true_positive {
+    my ($rec) = @_;
+
+    if ($rec->{'orig'} && $rec->{'expected'} &&
+        $rec->{'error'} && $rec->{'error'} eq "SplErr") {
+        $true_positive++;
+    }
+}
+
+sub update_true_negative {
+    my ($rec) = @_;
+
+    if ($rec->{'orig'} && !$rec->{'expected'} &&
+        $rec->{'error'} && $rec->{'error'} eq "SplCor") {
+        $true_negative++;
+    }
+}
+
+sub update_false_positive {
+    my ($rec) = @_;
+
+    if ($rec->{'orig'} && !$rec->{'expected'} &&
+        $rec->{'error'} && $rec->{'error'} eq "SplErr") {
+        $false_positive++;
+    }
+}
+
+sub update_false_negative {
+    my ($rec) = @_;
+
+    if ($rec->{'orig'} && $rec->{'expected'} &&
+        $rec->{'error'} && $rec->{'error'} eq "SplCor") {
+        $false_negative++;
+    }
+}
+
+sub update_flagged_words {
+    my ($rec) = @_;
+
+    if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
+        $flagged_words++;
+    }
+}
+
+sub update_accepted_words {
+    my ($rec) = @_;
+
+    if ($rec->{'error'} && $rec->{'error'} eq "SplCor") {
+        $accepted_words++;
+    }
+}
+
 sub make_header {
     my ($originals_ref, $spelltestresult, $doc) = @_;
 
     my $header = $doc->createElement('header');
 
     make_tool($originals_ref, $header, $doc);
+    make_summary($originals_ref, $header, $doc);
     make_document($header, $doc);
     make_date($header, $doc);
-    
+
     $spelltestresult->appendChild($header);
 }
-
-
 
 sub make_tool {
     my ($originals_ref, $header, $doc) = @_;
@@ -1029,6 +1082,43 @@ sub make_tool {
     $tool->setAttribute('systime' =>  $alltime[2]);
     $header->appendChild($tool);
 
+}
+
+sub calculate_summary {
+    my ($originals_ref) = @_;
+
+    for my $rec (@{$originals_ref}) {
+        update_true_positive($rec);
+        update_true_negative($rec);
+        update_false_positive($rec);
+        update_false_negative($rec);
+        update_flagged_words($rec);
+        update_accepted_words($rec);
+    }
+}
+
+sub make_summary {
+    my ($originals_ref, $header, $doc) = @_;
+
+    calculate_summary($originals_ref);
+
+    my $summary = $doc->createElement('summary');
+
+    my $precision = $doc->createElement('precision');
+    $precision->appendTextNode(sprintf("%.2f", $true_positive/($true_positive + $false_positive)));
+
+    my $recall = $doc->createElement('recall');
+    $recall->appendTextNode(sprintf("%.2f", $true_positive/($true_positive + $false_negative)));
+
+
+    my $accuracy = $doc->createElement('accuracy');
+    $accuracy->appendTextNode(sprintf("%.2f", ($true_positive + $true_negative)/($flagged_words + $accepted_words)));
+
+    $summary->appendChild($precision);
+    $summary->appendChild($recall);
+    $summary->appendChild($accuracy);
+
+    $header->appendChild($summary);
 }
 
 sub make_document {

@@ -1,7 +1,7 @@
 locales:
   en:
-    name: "Divvun __LANGUAGE__ Keyboard"
-    description: "A mobile OS keyboard for __LANGUAGE__."
+    name: "Divvun __UNDEFINED__ Keyboard"
+    description: "A mobile OS keyboard for __UNDEFINED__."
 
 author: The Divvun Group, UiT
 email: feedback@divvun.no

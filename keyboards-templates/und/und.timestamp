@@ -1,4 +1,7 @@
 $Revision$
+Corrected replace string from __LANGUAGE__ to __UNDEFINED__.
+
+r102305:
 Added first version of a build infra for the mobile keyboards, with some basic
 templates for keyboard files.
 

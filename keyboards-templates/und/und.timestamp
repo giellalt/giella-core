@@ -1,0 +1,6 @@
+$Revision$
+Added first version of a build infra for the mobile keyboards, with some basic
+templates for keyboard files.
+
+r95939:
+Setting up the basic dir structure, adding a few default files.

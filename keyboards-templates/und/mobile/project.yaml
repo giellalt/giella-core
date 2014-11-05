@@ -1,0 +1,14 @@
+locales:
+  en:
+    name: "Divvun __LANGUAGE__ Keyboard"
+    description: "A mobile OS keyboard for __LANGUAGE__."
+
+author: The Divvun Group, UiT
+email: feedback@divvun.no
+
+layouts: [__UND__]
+
+targets:
+  android:
+    packageId: so.brendan.keyboards.sami
+

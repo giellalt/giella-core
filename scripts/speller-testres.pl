@@ -55,6 +55,7 @@ my $false_positive = 0;
 my $false_negative = 0;
 my $flagged_words = 0;
 my $accepted_words = 0;
+my @sugg;
 
 use Getopt::Long;
 Getopt::Long::Configure ("bundling");
@@ -1074,6 +1075,7 @@ sub make_header {
     make_document($header, $doc);
     make_timestamp($header, $doc);
     make_truefalsesummary($originals_ref, $header, $doc);
+    make_suggestionsummary($originals_ref, $header, $doc);
 
     $spelltestresult->appendChild($header);
 }
@@ -1122,7 +1124,7 @@ sub make_tool {
     $header->appendChild($lexicon);
 }
 
-sub calculate_summary {
+sub calculate_truefalsesummary {
     my ($originals_ref) = @_;
 
     for my $rec (@{$originals_ref}) {
@@ -1140,7 +1142,7 @@ sub calculate_summary {
 sub make_truefalsesummary {
     my ($originals_ref, $header, $doc) = @_;
 
-    calculate_summary($originals_ref);
+    calculate_truefalsesummary($originals_ref);
 
     my $truefalsesummary = $doc->createElement('truefalsesummary');
     $truefalsesummary->setAttribute('wordcount' => $flagged_words + $accepted_words);
@@ -1181,6 +1183,95 @@ sub make_truefalsesummary {
     $header->appendChild($truefalsesummary);
 }
 
+sub calculate_suggestionsummary {
+    my ($originals_ref) = @_;
+
+    for my $rec (@{$originals_ref}) {
+        update_suggestion($rec);
+    }
+}
+
+sub set_sugg {
+    my ($edit_dist, $sugg_pos) = @_;
+
+    if ($edit_dist == 1) {
+        $sugg[$sugg_pos][0]++;
+    } elsif ($edit_dist == 2) {
+        $sugg[$sugg_pos][1]++;
+    } elsif ($edit_dist > 2) {
+        $sugg[$sugg_pos][2]++;
+    }
+}
+sub update_suggestion {
+    my ($rec) = @_;
+
+    if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
+
+        my $sugg_count=0;
+        if ($rec->{'sugg'}) { $sugg_count = scalar @{ $rec->{'sugg'}} };
+        if ($sugg_count == 0) {
+            set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 7);
+        }
+        my $pos=0;
+        if ($rec->{'sugg'}) {
+
+            my $i=0;
+            my @suggestions = @{$rec->{'sugg'}};
+            if ($rec->{'expected'}) {
+                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) { $i++; }
+                if ($suggestions[$i]) {
+                    $pos = $i+1;
+                    if ($pos < 6) {
+                        set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), $i);
+                    } elsif ($pos > 5) {
+                        set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 5);
+                    }
+                } else {
+                    set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 6);
+                }
+            }
+        }
+    }
+}
+
+sub make_suggestionsummary {
+    my ($originals_ref, $header, $doc) = @_;
+
+    calculate_suggestionsummary($originals_ref);
+
+    my $suggestionsummary = $doc->createElement('suggestionsummary');
+
+    my $i = 0;
+    while ($i < 8) {
+        my $sugg;
+
+        if ($i == 7) {
+            $sugg = $doc->createElement('nosugg');
+        } elsif ($i == 6) {
+            $sugg = $doc->createElement('badsuggs');
+        } elsif ($i == 5) {
+            $sugg = $doc->createElement('suggbelow5');
+        } else {
+            $sugg = $doc->createElement('sugg' . ($i + 1));
+        }
+        my $j = 0;
+        while ($j < 3) {
+            my $name;
+            if ($j == 2) {
+                $name = "editdist3plus";
+            } else {
+                $name = 'editdist' . ($j + 1);
+            }
+            $sugg->setAttribute($name => $sugg[$i][$j] ? $sugg[$i][$j] : 0);
+            $j++;
+        }
+        $suggestionsummary->appendChild($sugg);
+        $i++;
+    }
+
+    $header->appendChild($suggestionsummary);
+}
+
 sub make_document {
     my ($header, $doc) = @_;
 
@@ -1189,18 +1280,18 @@ sub make_document {
     if (!$document) {
         $document=basename($input);
     }
+    $docu->appendTextNode($document);
+    $header->appendChild($docu);
 
     my @doccu2 = split(/\./, $document);
     my @doccu1 = split(/-/, $doccu2[0]);
 
     my $lang = $doc->createElement('lang');
-    my $testtype = $doc->createElement('testtype');
-
-    $docu->appendTextNode($document);
     $lang->appendTextNode($doccu1[2]);
-    $testtype->appendTextNode($doccu1[1]);
-    $header->appendChild($docu);
     $header->appendChild($lang);
+
+    my $testtype = $doc->createElement('testtype');
+    $testtype->appendTextNode($doccu1[1]);
     $header->appendChild($testtype);
 }
 

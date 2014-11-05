@@ -1042,9 +1042,9 @@ sub make_header {
     my $header = $doc->createElement('header');
 
     make_tool($originals_ref, $header, $doc);
-    make_summary($originals_ref, $header, $doc);
+    make_truefalsesummary($originals_ref, $header, $doc);
     make_document($header, $doc);
-    make_date($header, $doc);
+    make_timestamp($header, $doc);
 
     $spelltestresult->appendChild($header);
 }
@@ -1072,16 +1072,25 @@ sub make_tool {
     }
 
     # Print some header information
-    my $tool = $doc->createElement('tool');
-    $tool->setAttribute('lexversion' => $version);
-    $tool->setAttribute('toolversion' => $toolversion);
-    $tool->setAttribute('type' => $input_type);
-    $tool->setAttribute('memoryusage' => $memoryuse);
-    $tool->setAttribute('realtime' => $alltime[0]);
-    $tool->setAttribute('usertime' => $alltime[1]);
-    $tool->setAttribute('systime' =>  $alltime[2]);
-    $header->appendChild($tool);
+    my $engine = $doc->createElement('engine');
+    $engine->setAttribute('abbreviation' => $input_type);
 
+    my $tool = $doc->createElement('toolversion');
+    $tool->appendTextNode($toolversion);
+    $engine->appendChild($tool);
+
+    my $processing = $doc->createElement('processing');
+    $processing->setAttribute('memoryusage' => $memoryuse);
+    $processing->setAttribute('realtime' => $alltime[0]);
+    $processing->setAttribute('usertime' => $alltime[1]);
+    $processing->setAttribute('systime' =>  $alltime[2]);
+    $engine->appendChild($processing);
+
+    $header->appendChild($engine);
+
+    my $lexicon = $doc->createElement('lexicon');
+    $lexicon->setAttribute('version' => $version);
+    $header->appendChild($lexicon);
 }
 
 sub calculate_summary {
@@ -1097,12 +1106,12 @@ sub calculate_summary {
     }
 }
 
-sub make_summary {
+sub make_truefalsesummary {
     my ($originals_ref, $header, $doc) = @_;
 
     calculate_summary($originals_ref);
 
-    my $summary = $doc->createElement('summary');
+    my $summary = $doc->createElement('truefalsesummary');
 
     my $precision = $doc->createElement('precision');
     $precision->appendTextNode(sprintf("%.2f", $true_positive/($true_positive + $false_positive)));
@@ -1134,27 +1143,27 @@ sub make_document {
     my @doccu1 = split(/-/, $doccu2[0]);
 
     my $lang = $doc->createElement('lang');
-    my $engine = $doc->createElement('engine');
+    my $testtype = $doc->createElement('testtype');
 
     $docu->appendTextNode($document);
     $lang->appendTextNode($doccu1[2]);
-    $engine->appendTextNode($doccu1[1]);
+    $testtype->appendTextNode($doccu1[1]);
     $header->appendChild($docu);
     $header->appendChild($lang);
-    $header->appendChild($engine);
+    $header->appendChild($testtype);
 }
 
-sub make_date {
+sub make_timestamp {
     my ($header, $doc) = @_;
 
     # The date is the timestamp of speller output file if not given.
-    my $date_elt = $doc->createElement('date');
+    my $timestamp = $doc->createElement('timestamp');
     if (!$date) {
         $date = ctime(stat($output)->mtime);
         #print "file $input updated at $date\n";
     }
-    $date_elt->appendTextNode($date);
-    $header->appendChild($date_elt);
+    $timestamp->appendTextNode($date);
+    $header->appendChild($timestamp);
 }
 
 sub print_output {

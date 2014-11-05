@@ -45,6 +45,10 @@ my $corpusversion;
 my $memoryuse = "";
 my $timeuse   = "";
 my @alltime ;
+my $original_correct = 0;
+my $original_error = 0;
+my $speller_correct = 0;
+my $speller_error = 0;
 my $true_positive = 0;
 my $true_negative = 0;
 my $false_positive = 0;
@@ -984,6 +988,31 @@ sub make_results {
     $spelltestresult->appendChild($results);
 }
 
+sub update_original {
+    my ($rec) = @_;
+
+    if ($rec->{'orig'}) {
+        if ($rec->{'expected'}) {
+            $original_error++;
+        } else {
+            $original_correct++;
+        }
+    }
+}
+
+sub update_speller {
+    my ($rec) = @_;
+
+    if ($rec->{'error'}) {
+        if ($rec->{'error'} eq "SplErr") {
+            $speller_error++;
+        }
+        if ($rec->{'error'} eq "SplCor") {
+            $speller_correct++;
+        }
+    }
+}
+
 sub update_true_positive {
     my ($rec) = @_;
 
@@ -1042,9 +1071,9 @@ sub make_header {
     my $header = $doc->createElement('header');
 
     make_tool($originals_ref, $header, $doc);
-    make_truefalsesummary($originals_ref, $header, $doc);
     make_document($header, $doc);
     make_timestamp($header, $doc);
+    make_truefalsesummary($originals_ref, $header, $doc);
 
     $spelltestresult->appendChild($header);
 }
@@ -1097,6 +1126,8 @@ sub calculate_summary {
     my ($originals_ref) = @_;
 
     for my $rec (@{$originals_ref}) {
+        update_original($rec);
+        update_speller($rec);
         update_true_positive($rec);
         update_true_negative($rec);
         update_false_positive($rec);
@@ -1111,23 +1142,43 @@ sub make_truefalsesummary {
 
     calculate_summary($originals_ref);
 
-    my $summary = $doc->createElement('truefalsesummary');
+    my $truefalsesummary = $doc->createElement('truefalsesummary');
+    $truefalsesummary->setAttribute('wordcount' => $flagged_words + $accepted_words);
+
+    my $original = $doc->createElement('original');
+    $original->setAttribute('correct' => $original_correct);
+    $original->setAttribute('error' => $original_error);
+    $truefalsesummary->appendChild($original);
+
+    my $speller = $doc->createElement('speller');
+    $speller->setAttribute('correct' => $speller_correct);
+    $speller->setAttribute('error' => $speller_error);
+    $truefalsesummary->appendChild($speller);
+
+    my $positive = $doc->createElement('positive');
+    $positive->setAttribute('true' => $true_positive);
+    $positive->setAttribute('false' => $false_positive);
+    $truefalsesummary->appendChild($positive);
+
+    my $negative = $doc->createElement('negative');
+    $negative->setAttribute('true' => $true_negative);
+    $negative->setAttribute('false' => $false_negative);
+    $truefalsesummary->appendChild($negative);
 
     my $precision = $doc->createElement('precision');
     $precision->appendTextNode(sprintf("%.2f", $true_positive/($true_positive + $false_positive)));
+    $truefalsesummary->appendChild($precision);
 
     my $recall = $doc->createElement('recall');
     $recall->appendTextNode(sprintf("%.2f", $true_positive/($true_positive + $false_negative)));
+    $truefalsesummary->appendChild($recall);
 
 
     my $accuracy = $doc->createElement('accuracy');
     $accuracy->appendTextNode(sprintf("%.2f", ($true_positive + $true_negative)/($flagged_words + $accepted_words)));
+    $truefalsesummary->appendChild($accuracy);
 
-    $summary->appendChild($precision);
-    $summary->appendChild($recall);
-    $summary->appendChild($accuracy);
-
-    $header->appendChild($summary);
+    $header->appendChild($truefalsesummary);
 }
 
 sub make_document {

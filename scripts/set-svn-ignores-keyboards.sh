@@ -37,6 +37,8 @@ for f in $(find $1/ \
 			-not -iwholename '*.svn*' \
 			-not -iwholename '*autom4te.cache*' \
 			-not -iwholename '*build-aux*' \
+			-not -iwholename '*build*' \
+			-not -iwholename '*deps*' \
 			-type d) ; do
 	$svnignore "$mkfiles" $f
 done
@@ -45,3 +47,8 @@ done
 $svnignore "$autofiles
 $mkfiles
 build" $1
+
+# Set the svn:ignore prop on the top level lang dir:
+$svnignore "$mkfiles
+build
+deps" $1/mobile

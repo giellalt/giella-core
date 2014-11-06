@@ -1,4 +1,9 @@
 $Rev$
+Moved gold standard test results for the new version of the test bench to a
+new directory, to not mix new and old test results. Made the filename of the
+test results more transparent and less idiosyncratic.
+
+r102130:
 Restored the use of -noforeign, ccat is fixed.
 
 r101984:

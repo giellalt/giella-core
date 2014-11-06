@@ -2,13 +2,6 @@
 ## Copyright: Sámediggi/Divvun/UiT
 ## Licence: GPL v3+
 
-# Files and filenames:
-GSDATA=../all-gs-$(GTLANG).txt
-SPELLERINPUT=goldstandard.spin.txt
-SPELLEROUTPUT=goldstandard.spout.txt
-SPELLERVERSION=sp-version.txt
-SPELLERTESTRESULT=GoldstandardTexts.txt.xml
-
 # The target(s) to build:
 noinst_DATA=
 if CAN_VOIKKOSPELL

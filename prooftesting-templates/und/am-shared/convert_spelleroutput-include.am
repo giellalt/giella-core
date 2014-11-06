@@ -4,7 +4,19 @@
 
 # Included by several *.am files. Process the including files with automake.
 
-# This include file contains build targets shared among all speller tools
+# This include file contains build targets and variables shared among
+# all speller tools
+
+# Files and filenames:
+GSDATA=../all-gs-$(GTLANG).txt
+SPELLERINPUT=goldstandard.spin.txt
+SPELLEROUTPUT=goldstandard.spout.txt
+SPELLERVERSION=sp-version.txt
+SPELLERTESTRESULT=$(shell if test "x$(GSDOC)" != "x" ; then \
+        echo "$(GSDOC)-gs-results.xml"; \
+    else \
+        echo "corpus-gs-results.xml"; \
+    fi)
 
 # Variables:
 DATE = $(shell date +%Y%m%d)
@@ -12,7 +24,7 @@ TESTTIME = $(shell date +%H%M)
 LEXICONVERSION=$(shell readlink $(GTLANG2)-latest | tr -d '/')
 
 # Forrest publishing:
-SPLTESTREPDIR   = $(GTBIG)/techdoc/proof/spelling/testing
+SPLTESTREPDIR   = $(GTBIG)/techdoc/proof/spelling/testing2
 
 # Generate speller input:
 $(SPELLERINPUT): $(GSDATA)

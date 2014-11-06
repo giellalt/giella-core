@@ -1209,7 +1209,7 @@ sub update_suggestion {
 
         my $sugg_count=0;
         if ($rec->{'sugg'}) { $sugg_count = scalar @{ $rec->{'sugg'}} };
-        if ($sugg_count == 0) {
+        if ($sugg_count == 0 && $rec->{'expected'}) {
             set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 7);
         }
         my $pos=0;

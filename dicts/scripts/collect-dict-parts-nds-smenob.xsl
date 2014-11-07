@@ -46,7 +46,7 @@
 <!-- collection('PATH?select=*.xml') -->
 
     <r>
-      <xsl:copy-of  copy-namespaces="no" select="collection(concat($inDir, '?select=*.xml'))/r/e[(contains(@usage, 'nds')) and not(./mg/tg/t='XXXX')]"/>
+      <xsl:copy-of  copy-namespaces="no" select="collection(concat($inDir, '?select=*.xml'))/r/e[(contains(@usage, 'nds')) or (contains(@usage, 'vd')) and not(./mg/tg/t='XXXX')]"/>
       <!-- xsl:copy-of  copy-namespaces="no" select="collection(concat($inDir, '?select=*.xml'))/r/e[(@usage='vd') and not(./mg/tg/t='XXXX') and not(contains(normalize-space(lg/l), ' '))]"/ -->
       <!--       <xsl:copy-of select="collection(concat($inDir, '?select=*.xml'))/r/e[(@usage='ped' or @src='nj') and not(starts-with(./mg/tg/t,'XX'))]"/> -->
     </r>

@@ -162,6 +162,7 @@
 		   </xs:restriction>
 		 </xs:simpleType>
                </xs:attribute>
+               <xs:attribute ref="src"/>
                <xs:attribute ref="xml:lang" use="required"/>
             </xs:extension>
          </xs:simpleContent>

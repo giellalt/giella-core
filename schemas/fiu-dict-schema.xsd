@@ -185,6 +185,7 @@
          <xs:attribute ref="exclude"/>
          <xs:attribute ref="Contlex"/>
          <xs:attribute ref="orthType"/>
+         <xs:attribute ref="status"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="stCtn">
@@ -642,6 +643,11 @@
             <xs:enumeration value="ry"/>
             <xs:enumeration value="uncertain"/>
          </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="status">
+      <xs:simpleType><!-- Err/Sub -->
+         <xs:restriction base="xs:string"/>
       </xs:simpleType>
    </xs:attribute>
    <xs:element name="phonet">

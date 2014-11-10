@@ -62,6 +62,7 @@
 		<out>
 		  <e>
 		    <xsl:copy-of select="../../l/@hid"/>
+		    <xsl:copy-of select="./@status"/>
 		    <xsl:attribute name="stem">
 		      <xsl:value-of select="replace(
 		                            replace(
@@ -111,6 +112,7 @@
 		</out>
 	      </xsl:variable>
 	      
+	      
 	      <xsl:if test="$out/out/e">
 		<xsl:for-each select="$out/out/e">
 		  <xsl:variable name="current_hid" select="if (./@hid
@@ -119,8 +121,14 @@
 							   then
 							   concat('+',./@hid)
 							   else concat('','')"/>
+		  <xsl:variable name="current_status" select="if (./@status
+							   and
+							   not(normalize-space(./@status)=''))
+							   then
+							   concat('+',./@status)
+							   else concat('','')"/>
 		  <xsl:value-of select="if (./@stem = '') then concat(., $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)
-					else concat(.,$current_hid, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+					else concat(.,$current_hid,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
 		</xsl:for-each>
 	      </xsl:if>
 	    </xsl:for-each>

@@ -186,6 +186,10 @@ sub read_applescript {
 sub read_hunspell {
 
     print STDERR "Reading Hunspell output from $output\n";
+    if ((-s $output) == 0) {
+        die "WARNING: No content in $output\nThere seems to be something wrong with the test setup\n";
+    }
+
     open(FH, $output);
 
     my $i=0;

@@ -91,6 +91,10 @@ if (! $output) {
     print STDERR "$0: No speller output file specified.\n"; exit;
 }
 
+if ((-s $output) == 0) {
+    die "Warning: No output from speller\nCheck that the testing setup works as it should\n";
+}
+
 if ($ccat) {
     read_ccat();
 } else {

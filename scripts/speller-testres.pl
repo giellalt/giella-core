@@ -83,13 +83,23 @@ if ($help) {
     exit 1;
 }
 
-if (! $input || ! -f $input) { print STDERR "$0: No input file specified.\n"; exit; }
-if (! $output) { print STDERR "$0: No speller output file specified.\n"; exit; }
+if (! $input || ! -f $input) {
+    print STDERR "$0: No input file specified.\n"; exit;
+}
 
-if ($ccat) { read_ccat(); }
-else { read_typos(); }
+if (! $output) {
+    print STDERR "$0: No speller output file specified.\n"; exit;
+}
 
-if(! @originals) { exit; }
+if ($ccat) {
+    read_ccat();
+} else {
+    read_typos();
+}
+
+if(! @originals) {
+    exit;
+}
 
 # Clean $toolversion (ie replace all \n with ', '), to make it printable in all
 # cases:
@@ -99,17 +109,37 @@ $toolversion =~ s/^, //;
 # Convert the system time input data to usable strings in seconds:
 @alltime = convert_systime( $timeuse );
 
-if    ( $engine eq "mw") { $input_type="mw"; read_applescript(); }
-elsif ( $engine eq "hu") { $input_type="hu"; read_hunspell();    }
-elsif ( $engine eq "fo") { $input_type="fo"; read_hunspell();    }
-elsif ( $engine eq "pl") { $input_type="pl"; read_polderland();  }
-elsif ( $engine eq "pk") { $input_type="pk"; read_puki();        }
-elsif ( $engine eq "vk") { $input_type="vk"; read_voikko();      }
-elsif ( $engine eq "hf") { $input_type="hf"; read_hfst();        }
-else { print STDERR "$0: Specify the speller engine: --engine=[pl|pk|mw|hu|fo|hf|vk]\n"; exit; }
+if ( $engine eq "mw") {
+    $input_type="mw";
+    read_applescript();
+} elsif ( $engine eq "hu") {
+    $input_type="hu";
+    read_hunspell();
+} elsif ( $engine eq "fo") {
+    $input_type="fo";
+    read_hunspell();
+} elsif ( $engine eq "pl") {
+    $input_type="pl";
+    read_polderland();
+} elsif ( $engine eq "pk") {
+    $input_type="pk";
+    read_puki();
+} elsif ( $engine eq "vk") {
+    $input_type="vk";
+    read_voikko();
+} elsif ( $engine eq "hf") {
+    $input_type="hf";
+    read_hfst();
+} else {
+    print STDERR "$0: Specify the speller engine: --engine=[pl|pk|mw|hu|fo|hf|vk]\n";
+    exit;
+}
 
-if ($print_xml) { print_xml_output(); }
-else { print_output(); }
+if ($print_xml) {
+    print_xml_output();
+} else {
+    print_output();
+}
 
 sub convert_systime {
     my $times = shift(@_);
@@ -152,14 +182,18 @@ sub read_applescript {
             confess "Probably reading Polderland format, start again with option --pl\n\n";
         }
         my ($orig, $error, $sugg) = split(/\t/, $_, 3);
-        if ($sugg) { @suggestions = split /\t/, $sugg; }
+        if ($sugg) {
+            @suggestions = split /\t/, $sugg;
+        }
         $orig =~ s/^\s*(.*?)\s*$/$1/;
 
         # Some simple adjustments to the input and output lists.
         # First search the output word from the input list.
         my $j = $i;
 #        print "$originals[$j]{'orig'}\n";
-        while($originals[$j] && $originals[$j]{'orig'} ne $orig) { $j++; }
+        while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+            $j++;
+        }
 
         # If the output word was not found in the input list, ignore it.
         if (! $originals[$j]) {
@@ -168,13 +202,18 @@ sub read_applescript {
         }
         # If it was found, mark the words in between.
         elsif ($originals[$j] && $originals[$j]{'orig'} eq $orig) {
-            for (my $p=$i; $p<$j; $p++){ $originals[$p]{'error'} = "Error"; }
+            for (my $p=$i; $p<$j; $p++){
+                $originals[$p]{'error'} = "Error";
+            }
             $i=$j;
         }
 
         if ($originals[$i] && $originals[$i]{'orig'} eq $orig) {
-            if ($error) { $originals[$i]{'error'} = $error; }
-            else { $originals[$i]{'error'} = "not_known"; }
+            if ($error) {
+                $originals[$i]{'error'} = $error;
+            } else {
+                $originals[$i]{'error'} = "not_known";
+            }
             $originals[$i]{'sugg'} = [ @suggestions ];
             $originals[$i]{'num'} = [ @numbers ];
         }
@@ -186,10 +225,6 @@ sub read_applescript {
 sub read_hunspell {
 
     print STDERR "Reading Hunspell output from $output\n";
-    if ((-s $output) == 0) {
-        die "WARNING: No content in $output\nThere seems to be something wrong with the test setup\n";
-    }
-
     open(FH, $output);
 
     my $i=0;
@@ -228,34 +263,34 @@ sub read_hunspell {
         my $orig;
         my $offset;
         my ($flag, $rest) = split(/ /, $_, 2);
-      READ_OUTPUT: {
-          # Error symbol conversion:
-          if ($flag eq '*') {
-              $error = 'SplCor' ;
-              last READ_OUTPUT;
-          }
-          if ($flag eq '+') {
-              $error = 'SplCor' ;
-              $root = $rest;
-              last READ_OUTPUT;
-          }
-          if ($flag eq '-') {
-              $error = 'SplCor' ;
-              $compound =1;
-              last READ_OUTPUT;
-          }
-          if ($flag eq '#') {
-              $error = 'SplErr' ;
-              ($orig, $offset) = split(/ /, $rest, 2);
-              last READ_OUTPUT;
-          }
-          if ($flag eq '&') {
-              $error = 'SplErr' ;
-              my $sugglist;
-              ($orig, $suggnr, $offset, $sugglist) = split(/ /, $rest, 4);
-              @suggestions = split(/\, /, $sugglist);
-          }
-      }
+        READ_OUTPUT: {
+            # Error symbol conversion:
+            if ($flag eq '*') {
+                $error = 'SplCor' ;
+                last READ_OUTPUT;
+            }
+            if ($flag eq '+') {
+                $error = 'SplCor' ;
+                $root = $rest;
+                last READ_OUTPUT;
+            }
+            if ($flag eq '-') {
+                $error = 'SplCor' ;
+                $compound =1;
+                last READ_OUTPUT;
+            }
+            if ($flag eq '#') {
+                $error = 'SplErr' ;
+                ($orig, $offset) = split(/ /, $rest, 2);
+                last READ_OUTPUT;
+            }
+            if ($flag eq '&') {
+                $error = 'SplErr' ;
+                my $sugglist;
+                ($orig, $suggnr, $offset, $sugglist) = split(/ /, $rest, 4);
+                @suggestions = split(/\, /, $sugglist);
+            }
+        }
         # Debug prints
         #print "Flag: $flag\n";
         #print "ERROR: $error\n";
@@ -263,8 +298,12 @@ sub read_hunspell {
         #if (@suggestions) { print "Suggs: @suggestions\n"; }
 
         # remove extra space from original
-        if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
-        if ($offset) { $offset =~ s/\://; }
+        if ($orig) {
+            $orig =~ s/^\s*(.*?)\s*$/$1/;
+        }
+        if ($offset) {
+            $offset =~ s/\://;
+        }
 
         if ($error && $error eq "SplCor") {
             $originals[$i]{'error'} = $error;
@@ -273,10 +312,15 @@ sub read_hunspell {
             # First search the output word in the input list.
             push (@tokens, $orig);
         } elsif ($originals[$i] && (! $orig || $originals[$i]{'orig'} eq $orig)) {
-            if ($error) { $originals[$i]{'error'} = $error; }
-            else { $originals[$i]{'error'} = "not_known"; }
+            if ($error) {
+                $originals[$i]{'error'} = $error;
+            } else {
+                $originals[$i]{'error'} = "not_known";
+            }
             $originals[$i]{'sugg'} = [ @suggestions ];
-            if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; }
+            if ($suggnr) {
+                $originals[$i]{'suggnr'} = $suggnr;
+            }
             #$originals[$i]{'num'} = [ @numbers ];
         }
     }
@@ -338,7 +382,9 @@ sub read_puki {
 #        if (@numbers) { print "Nums: @numbers\n"; }
 
         # remove extra space from original
-        if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
+        if ($orig) {
+            $orig =~ s/^\s*(.*?)\s*$/$1/;
+        }
 
         if ($error eq "SplCor") {
             $originals[$i]{'error'} = $error;
@@ -346,22 +392,23 @@ sub read_puki {
         # Some simple adjustments to the input and output lists.
         # First search the output word in the input list.
 
-# Debug prints:
-#        print "$originals[$j]{'orig'}\n";
-#        print "-----------\n";
+        # Debug prints:
+        #        print "$originals[$j]{'orig'}\n";
+        #        print "-----------\n";
 
         # Assign error codes, suggestions and weights to the global entry list:
         if ($originals[$i] && $originals[$i]{'orig'} eq $orig) {
             if ($error) {
                 # Assign the proper error code:
                 $originals[$i]{'error'} = $error;
-            }
-            else {
+            } else {
                 # Assign a fallback code if there was no error code:
                 $originals[$i]{'error'} = "not_known";
             }
             $originals[$i]{'sugg'} = [ @suggestions ]; # Store each suggestion
-            if ($suggnr) { $originals[$i]{'suggnr'} = $suggnr; } # # of suggs
+            if ($suggnr) {
+                $originals[$i]{'suggnr'} = $suggnr;
+            } # # of suggs
             $originals[$i]{'num'} = [ @numbers ]; # Store the weight of the sugg
         }
         @suggestions = ();
@@ -396,12 +443,10 @@ sub read_polderland {
         if ($line =~ /Check returns/) {
             ($orig = $line) =~ s/.*?Check returns .*? for \'(.*?)\'\s*$/$1/;
             $reading=1;
-        }
-        elsif ($line =~ /Getting suggestions/) {
+        } elsif ($line =~ /Getting suggestions/) {
             $reading=1;
             ($orig = $line) =~ s/.*?Getting suggestions for (.*?)\.\.\.\s*$/$1/;
-        }
-        else {
+        } else {
             confess "could not read $output: $line";
         }
 
@@ -440,16 +485,14 @@ sub read_polderland {
                     @numbers = ();
                     pop @numbers;
                     $reading = 0;
-                }
-                elsif (! $originals[$i]{'error'}) {
+                } elsif (! $originals[$i]{'error'}) {
                     $originals[$i]{'error'} = "SplCor";
                 }
 
                 if ($line =~ /Check returns/) {
                     $reading = 1;
                     ($orig = $line) =~ s/^.*?Check returns .* for \'(.*?)\'\s*$/$1/;
-                }
-                elsif (! $reading && $line =~ /Getting suggestions/) {
+                } elsif (! $reading && $line =~ /Getting suggestions/) {
                     $reading = 1;
                     ($orig = $line) =~ s/^.*?Getting suggestions for (.*?)\.\.\.\s*$/$1/;
                 }
@@ -504,8 +547,7 @@ sub read_polderland {
                 pop @suggestions;
                 @numbers = ();
                 pop @numbers;
-            }
-            elsif (! $originals[$i]{'error'}) {
+            } elsif (! $originals[$i]{'error'}) {
                 $originals[$i]{'error'} = "SplCor";
             }
         }
@@ -552,15 +594,16 @@ sub read_voikko {
             if ($line =~ s/^W: //) {
                 $originals[$i]{'error'}="SplErr";
                 $orig = $line;
-            }
-            elsif ($line =~ s/^C: //) {
+            } elsif ($line =~ s/^C: //) {
                 $originals[$i]{'error'}="SplCor";
                 $orig = $line;
             }
             # Some simple adjustments to the input and output lists.
             # First search the output word in the input list.
             my $j = $i;
-            while($originals[$j] && $originals[$j]{'orig'} ne $orig) { $j++; }
+            while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+                $j++;
+            }
 
             # If the output word was not found in the input list, ignore it.
             if (! $originals[$j]) {
@@ -597,8 +640,9 @@ sub read_voikko {
             pop @suggestions;
             @numbers = ();
             pop @numbers;
+        } elsif (! $originals[$i]{'error'}) {
+            $originals[$i]{'error'} = "SplCor";
         }
-        elsif (! $originals[$i]{'error'}) { $originals[$i]{'error'} = "SplCor"; }
     }
     $i++;
     while($originals[$i]) { $originals[$i]{'error'} = "SplCor"; $i++; }
@@ -675,7 +719,9 @@ sub read_hfst {
 #        if (@numbers) { print "Nums: @numbers\n"; }
 
         # remove extra space from original
-        if ($orig) { $orig =~ s/^\s*(.*?)\s*$/$1/; }
+        if ($orig) {
+            $orig =~ s/^\s*(.*?)\s*$/$1/;
+        }
 
         # Some simple adjustments to the input and output lists.
         # First search the output word from the input list.
@@ -685,7 +731,9 @@ sub read_hfst {
 #        print "$originals[$j]{'orig'}\n";
 #        print "-----------\n";
 
-        while($originals[$j] && $originals[$j]{'orig'} ne $orig) { $j++; }
+        while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+            $j++;
+        }
 
         # If the output word was not found in the input list, ignore it.
         if (! $originals[$j]) {
@@ -699,15 +747,18 @@ sub read_hfst {
         }
 
         if ($originals[$i] && $originals[$i]{'orig'} eq $orig) {
-            if ($error) { $originals[$i]{'error'} = $error; }
-            else { $originals[$i]{'error'} = "not_known"; }
+            if ($error) {
+                $originals[$i]{'error'} = $error;
+            } else {
+                $originals[$i]{'error'} = "not_known";
+            }
             $originals[$i]{'sugg'} = [ @suggestions ];
             $originals[$i]{'num'} = [ @numbers ];
             $i++;
         }
-    @suggestions = ();
-    @numbers = ();
-    $error = '';
+        @suggestions = ();
+        @numbers = ();
+        $error = '';
     }
     close(FH);
     $/ = $eol; # restore default value of record separator
@@ -1316,17 +1367,27 @@ sub print_output {
 
     for my $rec (@originals) {
         my @suggestions;
-        if ($rec->{'orig'}) { print "Orig: $rec->{'orig'} | "; }
-        if ($rec->{'expected'}) { print "Expected: $rec->{'expected'} | "; }
-        if ($rec->{'error'}) { print "Error: $rec->{'error'} | "; }
+        if ($rec->{'orig'}) {
+            print "Orig: $rec->{'orig'} | ";
+        }
+        if ($rec->{'expected'}) {
+            print "Expected: $rec->{'expected'} | ";
+        }
+        if ($rec->{'error'}) {
+            print "Error: $rec->{'error'} | ";
+        }
         print "Forced: $forced | ";
         if ($rec->{'sugg'}) {
             print "Suggs: @{$rec->{'sugg'}} | ";
             my @suggestions = @{$rec->{'sugg'}};
             my $i=0;
             if ($rec->{'expected'}) {
-                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) { $i++; }
-                if ($suggestions[$i]) { print $i+1; }
+                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) {
+                    $i++;
+                }
+                if ($suggestions[$i]) {
+                    print $i+1;
+                }
             }
         }
         print "\n";

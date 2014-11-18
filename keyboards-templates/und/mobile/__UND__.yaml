@@ -38,3 +38,7 @@ styles:
     actions:
       shift: [3, left, fill]
       backspace: [3, right, fill]
+
+strings:
+  space: gaske
+  return: linnjámolsun

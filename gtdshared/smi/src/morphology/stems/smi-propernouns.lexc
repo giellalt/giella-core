@@ -3700,7 +3700,6 @@ Bøylefossbru+OLang/NOB:Bøyle#foss9#bru NYSTØ ;
 Bøylestad+OLang/NOB:Bøyle#stad9 BERN-plc ;
 Bøyum+OLang/NOB:Bø^yum9 BERN-sur ;
 Bülow+OLang/UND:Bülow BERN-sur ;
-CCITT+Err/Sub+OLang/UND:CCITT LONDON-org ;!acro
 COCOM+OLang/UND:COCOM BERN-org ;
 COMECON+OLang/UND:COMECON LONDON-org ;
 COOP+OLang/UND:COOP BERN-org ;
@@ -22399,7 +22398,6 @@ SMS% från% Soppero+MWE+CmpN/None+OLang/UND:SMS% från% Soppero9 ACCRA-obj ;
 SRUSamerettsutvalget+OLang/UND:SRU#Same#retts#ut9#valget LONDON-org ;
 STEP+OLang/UND:STEP BERN-org ;
 SUFUR+OLang/UND:SUFUR LONDON-org ;
-SUKPb+Err/Sub+OLang/UND:SUKPb9 BERN-org ;!acro - hva er norm?
 Saab+OLang/UND:Saab9 BERN-obj ;
 Saadi+OLang/UND:Saadi PIPPI-sur ;
 Saalasti+OLang/UND:Saalasti PIPPI-sur ;
@@ -27634,9 +27632,6 @@ Uggen+OLang/UND:Uggen9 LONDON-sur ;
 Uggerud+OLang/NOB:Ugge#rud9 BERN-plc ;
 Ugland+OLang/NOB:Ug9#land9 BERN-sur ;
 Ugur+OLang/UND:Ugur LONDON-mal ;
-UiB+Err/Sub+OLang/UND:UiB BERN-mal ;
-UiO+Err/Sub+OLang/UND:Ui^O ACCRA-org ;
-UiT+Err/Sub+OLang/UND:Ui^T BERN-org ;
 UiTø+OLang/NOB:Ui^Tø ACCRA-org ;
 Uikujärvi+OLang/FIN:Uiku#järv MAKI-plc ;
 Uimonen+OLang/FIN:Uimo C-FI-NEN-sur ;

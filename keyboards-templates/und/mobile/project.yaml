@@ -1,14 +1,27 @@
+internalName: sami_keyboard
+
 locales:
   en:
-    name: "Divvun __UNDEFINED__ Keyboard"
+    name: &bundleName "Divvun __UNDEFINED__ Keyboard"
     description: "A mobile OS keyboard for __UNDEFINED__."
+  nb:
+    name: "__UNDEFINED__ tastatur fra Divvun"
+    description: "Et mobiltastatur for __UNDEFINED__."
 
-author: The Divvun Group, UiT
+author: The Divvun Group, UiT Norgga árktalaš universitehta
 email: feedback@divvun.no
 
 layouts: [__UND__]
 
+version: 1.0
+build: 1
+
 targets:
   android:
-    packageId: so.brendan.keyboards.sami
+    packageId: no.divvun.keyboards.__UND__
+    keyStore: /Users/brendan/git/softkbdgen/test.keystore
+    keyAlias: sami_keyboard
 
+  ios:
+    packageId: no.divvun.keyboards.__UND__
+    bundleName: *bundleName

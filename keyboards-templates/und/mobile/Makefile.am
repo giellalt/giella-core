@@ -5,7 +5,7 @@
 EXTRA_DIST =
 
 IOS_IME=tasty-imitation-keyboard
-ANDROID_IME=sami-ime
+ANDROID_IME=giella-ime
 
 all: ios android
 

@@ -2,11 +2,11 @@ internalName: sami_keyboard
 
 locales:
   en:
-    name: &bundleName "Divvun __UNDEFINED__ Keyboard"
-    description: "A mobile OS keyboard for __UNDEFINED__."
+    name: &bundleName "__UNDEFINED__ Keyboard"
+    description: "A mobile OS keyboard for __UNDEFINED__ from the Divvun group at UiT."
   nb:
-    name: "__UNDEFINED__ tastatur fra Divvun"
-    description: "Et mobiltastatur for __UNDEFINED__."
+    name: "__UNDEFINED__ tastatur"
+    description: "Et mobiltastatur for __UNDEFINED__ fra Divvun-gruppa."
 
 author: The Divvun Group, UiT Norgga árktalaš universitehta
 email: feedback@divvun.no

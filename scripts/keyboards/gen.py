@@ -9,7 +9,10 @@ import subprocess
 import copy
 import re
 import io
-
+import json
+import uuid
+import plistlib
+import collections
 
 import pycountry
 
@@ -39,6 +42,131 @@ def git_update(dst, branch, cwd='.'):
 
     process = subprocess.Popen(cmd, cwd=cwd, shell=True)
     process.wait()
+
+
+def plutil_get_json(path):
+    cmd = "plutil -convert json -o -".split(" ")
+    cmd.append(path)
+
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    json_str = process.communicate()[0].decode()
+    return json.loads(json_str, object_pairs_hook=collections.OrderedDict)
+
+
+def plutil_to_xml_str(json_obj):
+    cmd = "plutil -convert xml1 -o - -".split(" ")
+
+    process = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE)
+    return process.communicate(json.dumps(json_obj).encode())[0].decode()
+
+
+class Pbxproj:
+    @staticmethod
+    def gen_key():
+        return uuid.uuid4().hex[8:].upper()
+
+    def __init__(self, path):
+        self._proj = plutil_get_json(path)
+
+    def __str__(self):
+        return plutil_to_xml_str(self._proj)
+
+    @property
+    def objects(self):
+        return self._proj['objects']
+
+    @property
+    def root(self):
+        return self.objects[self._proj['rootObject']]
+
+    @property
+    def main_group(self):
+        return self.objects[self.root['mainGroup']]
+
+    def find_resource_build_phase(self, target_name):
+        targets = [self.objects[t] for t in self.root['targets']]
+        target = None
+
+        for t in targets:
+            if t['name'] == target_name:
+                target = t
+                break
+
+        if target is None:
+            return None
+
+        for build_phase in target['buildPhases']:
+            phase = self.objects[build_phase]
+            if phase['isa'] == "PBXResourcesBuildPhase":
+                return phase
+
+        return None
+
+    def create_plist_string_file(self, locale):
+        o = {
+            "isa": "PBXFileReference",
+            "lastKnownFileType": "text.plist.strings",
+            "name": locale,
+            "path": "%s.lproj/InfoPlist.strings" % locale,
+            "sourceTree": "<group>"
+        }
+
+        k = Pbxproj.gen_key()
+        self.objects[k] = o
+        return k
+
+    def create_plist_string_variant(self, variants):
+        o = {
+            "isa": "PBXVariantGroup",
+            "children": variants,
+            "name": "InfoPlist.strings",
+            "sourceTree": "<group>"
+        }
+
+        return o
+
+    def add_plist_strings(self, locales):
+        plist_strs = [self.create_plist_string_file(l) for l in locales]
+        variant = self.create_plist_string_variant(plist_strs)
+
+        var_key = Pbxproj.gen_key()
+        self.objects[var_key] = variant
+
+        key = Pbxproj.gen_key()
+        self.objects[key] = {
+            "isa": "PBXBuildFile",
+            "fileRef": var_key
+        }
+
+        return (var_key, key)
+
+    def add_plist_strings_to_build_phase(self, locales, target_name):
+        phase = self.find_resource_build_phase(target_name)
+        (var_ref, ref) = self.add_plist_strings(locales)
+        phase['files'].append(ref)
+        return var_ref
+
+    def add_ref_to_group(self, ref, group_list):
+        o = self.main_group
+        n = False
+
+        for g in group_list:
+            for c in o['children']:
+                co = self.objects[c]
+                if n:
+                    break
+                if co.get('path', co.get('name', None)) == g:
+                    o = co
+                    n = True
+            if n:
+                n = False
+                continue
+            else:
+                return False
+
+        o['children'].append(ref)
+        return True
 
 
 class Generator:
@@ -77,12 +205,113 @@ class AppleiOSGenerator(Generator):
             else:
                 git_clone(self.repo, gen_dir, self.branch, base)
 
-            with open(os.path.join(gen_dir, 'Keyboard',\
+            # Generated swift file
+            with open(os.path.join(gen_dir, 'Keyboard',
                         'GeneratedKeyboard.swift'), 'w') as f:
                 f.write(self.generate_file(layout))
 
+            # Hosting app plist
+            with open(os.path.join(gen_dir, 'HostingApp',
+                        'Info.plist'), 'rb') as f:
+                plist = plistlib.load(f, dict_type=collections.OrderedDict)
+
+            with open(os.path.join(gen_dir, 'HostingApp',
+                        'Info.plist'), 'wb') as f:
+                self.update_plist(plist, f)
+
+            # Keyboard plist
+            with open(os.path.join(gen_dir, 'Keyboard',
+                        'Info.plist'), 'rb') as f:
+                plist = plistlib.load(f, dict_type=collections.OrderedDict)
+
+            with open(os.path.join(gen_dir, 'Keyboard',
+                        'Info.plist'), 'wb') as f:
+                self.update_kbd_plist(plist, layout, f)
+
+            # Update pbxproj with locales
+            path = os.path.join(gen_dir,
+                'TastyImitationKeyboard.xcodeproj', 'project.pbxproj')
+            pbxproj = Pbxproj(path)
+            with open(path, 'w') as f:
+                self.update_pbxproj(pbxproj, layout, f)
+
+            # Create locale strings
+            self.create_locales(gen_dir, layout)
+
             print("You may now open TastyImitationKeyboard.xcodeproj in '%s'." %\
                     gen_dir)
+
+    def write_l18n_str(self, f, key, value):
+        f.write('"%s" = "%s";\n' % (key, value))
+
+    def create_locales(self, gen_dir, layout):
+        for locale, attrs in self._project.locales.items():
+            lproj_dir = locale if locale != "en" else "Base"
+            lproj = os.path.join(gen_dir, 'HostingApp', '%s.lproj' % lproj_dir)
+            os.makedirs(lproj, exist_ok=True)
+
+            with open(os.path.join(lproj, 'InfoPlist.strings'), 'a') as f:
+                self.write_l18n_str(f, 'CFBundleName', attrs['name'])
+                self.write_l18n_str(f, 'CFBundleDisplayName', attrs['name'])
+
+        for locale, name in layout.display_names.items():
+            lproj_dir = locale if locale != "en" else "Base"
+            lproj = os.path.join(gen_dir, 'Keyboard', '%s.lproj' % lproj_dir)
+            os.makedirs(lproj, exist_ok=True)
+
+            with open(os.path.join(lproj, 'InfoPlist.strings'), 'a') as f:
+                self.write_l18n_str(f, 'CFBundleName', name)
+                self.write_l18n_str(f, 'CFBundleDisplayName', name)
+
+    def get_layout_locales(self, layout):
+        locales = set(layout.display_names.keys())
+        locales.remove('en')
+        locales.add("Base")
+        locales.add(layout.locale)
+        return locales
+
+    def get_project_locales(self):
+        locales = set(self._project.locales.keys())
+        locales.remove('en')
+        locales.add("Base")
+        return locales
+
+    def get_locales(self, layout):
+        return list(self.get_layout_locales(layout) |
+                    self.get_project_locales())
+
+    def update_pbxproj(self, pbxproj, layout, f):
+        pbxproj.root['knownRegions'] = self.get_locales(layout)
+
+        ref = pbxproj.add_plist_strings_to_build_phase(
+                self.get_project_locales(), "HostingApp")
+        pbxproj.add_ref_to_group(ref, ["HostingApp", "Supporting Files"])
+
+        ref = pbxproj.add_plist_strings_to_build_phase(
+                self.get_layout_locales(layout), "Keyboard")
+        pbxproj.add_ref_to_group(ref, ["Keyboard", "Supporting Files"])
+
+        f.write(str(pbxproj))
+
+    def update_kbd_plist(self, plist, layout, f):
+        bundle_id = "%s.%s" % (
+                self._project.target('ios')['packageId'],
+                layout.locale)
+
+        plist['CFBundleName'] = layout.display_names['en']
+        plist['CFBundleDisplayName'] = layout.display_names['en']
+        plist['NSExtension']['NSExtensionAttributes']['PrimaryLanguage'] =\
+                layout.locale
+        plist['CFBundleIdentifier'] = bundle_id
+
+        plistlib.dump(plist, f)
+
+    def update_plist(self, plist, f):
+        plist['CFBundleName'] = self._project.target('ios')['bundleName']
+        plist['CFBundleDisplayName'] = self._project.target('ios')['bundleName']
+        plist['CFBundleIdentifier'] = self._project.target('ios')['packageId']
+
+        plistlib.dump(plist, f)
 
     def generate_file(self, layout):
         buf = io.StringIO()
@@ -133,7 +362,8 @@ class AppleiOSGenerator(Generator):
 
 
 class AndroidGenerator(Generator):
-    ANDROID_NS="http://schemas.android.com/apk/res/android"
+    REPO = "giella-ime"
+    ANDROID_NS = "http://schemas.android.com/apk/res/android"
     NS = "http://schemas.android.com/apk/res-auto"
 
     def _element(self, *args, **kwargs):
@@ -206,11 +436,13 @@ class AndroidGenerator(Generator):
             self.update_method_xml(kbd, base)
             self.update_strings_xml(kbd, base)
 
+        files.append(self.create_ant_properties())
+
         self.save_files(files, base)
 
         self.update_localisation(base)
 
-        self.build(base)
+        self.build(base, self.is_release)
 
     def native_locale_workaround(self):
         for name, kbd in self._project.layouts.items():
@@ -235,13 +467,17 @@ class AndroidGenerator(Generator):
                     pycountry.languages.get(alpha2=dn_locale)
                 except KeyError:
                     sane = False
-                    print("Error: (%s) '%s' is not a supported locale. You should provide the code in ISO 639-1 format, if possible." % (
+                    print(("Error: (%s) '%s' is not a supported locale. " +\
+                          "You should provide the code in ISO 639-1 " +\
+                          "format, if possible.") % (
                         name, dn_locale))
 
             for mode, rows in kbd.modes.items():
                 for n, row in enumerate(rows):
                     if len(row) > 11:
-                        print("Warning: (%s) row %s has %s keys. It is recommended to have less than 12 keys per row." % (name, n+1, len(row)))
+                        print(("Warning: (%s) row %s has %s keys. It is " +\
+                               "recommended to have less than 12 keys per " +\
+                               "row.") % (name, n+1, len(row)))
         return sane
 
     def _upd_locale(self, d, values):
@@ -268,7 +504,7 @@ class AndroidGenerator(Generator):
             f.write(self._tostring(tree))
 
     def update_localisation(self, base):
-        res_dir = os.path.join(base, 'deps', 'sami-ime', 'res')
+        res_dir = os.path.join(base, 'deps', self.REPO, 'res')
 
         self._upd_locale(os.path.join(res_dir, "values"),
             self._project.locales['en'])
@@ -278,15 +514,19 @@ class AndroidGenerator(Generator):
             if os.path.isdir(d):
                 self._upd_locale(d, values)
 
-    def build(self, base, debug=True):
+    def build(self, base, release_mode=True):
         # TODO normal build
         print("Building...")
-        process = subprocess.Popen(['ant', 'debug'], 
-                    cwd=os.path.join(base, 'deps', 'sami-ime'))
+        process = subprocess.Popen(['ant', 'release' if release_mode else 'debug'],
+                    cwd=os.path.join(base, 'deps', self.REPO))
         process.wait()
 
-        fn = "SamiIME-debug.apk"
-        path = os.path.join(base, 'deps', 'sami-ime', 'bin')
+        if not release_mode:
+            fn = self._project.internal_name + "-debug.apk"
+        else:
+            fn = self._project.internal_name + "-release.apk"
+            # TODO other release shi
+        path = os.path.join(base, 'deps', self.REPO, 'bin')
 
         print("Copying '%s' to build/ directory..." % fn)
         os.makedirs(os.path.join(base, 'build'), exist_ok=True)
@@ -316,7 +556,7 @@ class AndroidGenerator(Generator):
     def update_strings_xml(self, kbd, base):
         # TODO sanity check for non-existence directories
         # TODO run this only once preferably
-        res_dir = os.path.join(base, 'deps', 'sami-ime', 'res')
+        res_dir = os.path.join(base, 'deps', self.REPO, 'res')
 
         for locale, name in kbd.display_names.items():
             if locale == "en":
@@ -324,12 +564,11 @@ class AndroidGenerator(Generator):
             else:
                 val_dir = os.path.join(res_dir, 'values-%s' % locale)
             self._str_xml(val_dir, name, kbd.internal_name)
-        
 
     def update_method_xml(self, kbd, base):
         # TODO run this only once preferably
         print("Updating res/xml/method.xml...")
-        fn = os.path.join(base, 'deps', 'sami-ime', 'res', 'xml', 'method.xml')
+        fn = os.path.join(base, 'deps', self.REPO, 'res', 'xml', 'method.xml')
 
         with open(fn) as f:
             tree = etree.parse(f)
@@ -345,7 +584,7 @@ class AndroidGenerator(Generator):
         #return ('res/xml/method.xml', self._tostring(tree))
 
     def save_files(self, files, base):
-        fn = os.path.join(base, 'deps', 'sami-ime')
+        fn = os.path.join(base, 'deps', self.REPO)
         for k, v in files:
             with open(os.path.join(fn, k), 'w') as f:
                 print("Saving file '%s'..." % k)
@@ -357,57 +596,36 @@ class AndroidGenerator(Generator):
         deps_dir = os.path.join(base, 'deps')
         os.makedirs(deps_dir, exist_ok=True)
 
-        processes = []
+        print("Preparing dependencies...")
 
-        repos = [
-            ('sami-ime', 'https://github.com/bbqsrc/sami-ime.git')
-            ]
+        repo_dir = os.path.join(deps_dir, self.REPO)
 
-        for d, url in repos:
-            cmd = ['git', 'clone', url]
-            cwd = deps_dir
-
-            if os.path.isdir(os.path.join(deps_dir, d)):
-                continue
-
-            print("Cloning repository '%s'..." % d)
-            processes.append(subprocess.Popen(cmd, cwd=cwd))
-
-        for process in processes:
-            output = process.wait()
-            if process.returncode != 0:
-                raise Exception(output[1])
-
-        processes = []
-
-        for d, url in repos:
-            print("Updating repository '%s'..." % d)
-
-            cmd = """git checkout stable;
-                     git reset --hard;
-                     git clean -fdx;
-                     git pull;"""
-            cwd = os.path.join(deps_dir, d)
-
-            processes.append(subprocess.Popen(cmd, cwd=cwd, shell=True))
-
-        for process in processes:
-            output = process.wait()
-            if process.returncode != 0:
-                raise Exception(output[1])
+        if os.path.isdir(repo_dir):
+            git_update(repo_dir, self.branch, base)
+        else:
+            git_clone(self.repo, repo_dir, self.branch, base)
 
         print("Create Android project...")
 
-        cmd = "%s update project -n SamiIME -t android-19 -p ." % \
-            os.path.join(os.path.abspath(sdk_base), 'tools/android')
-        process = subprocess.Popen(cmd, cwd=os.path.join(deps_dir, 'sami-ime'),
+        cmd = "%s update project -n %s -t android-19 -p ." % (
+            os.path.join(os.path.abspath(sdk_base), 'tools/android'),
+            self._project.internal_name)
+        process = subprocess.Popen(cmd, cwd=os.path.join(deps_dir, self.REPO),
                 shell=True)
         output = process.wait()
         if process.returncode != 0:
             raise Exception(output[1])
 
     def create_ant_properties(self):
-        data = "package.name=%s\n" % self._project.target('android')['packageId']
+        data = dedent("""\
+        package.name=%s
+        key.store=%s
+        key.alias=%s
+        """ % (
+            self._project.target('android')['packageId'],
+            self._project.target('android')['keyStore'],
+            self._project.target('android')['keyAlias']
+        ))
 
         return ('ant.properties', data)
 

@@ -12,6 +12,11 @@ def replace_tag(tag):
 
 import sys, re ; 
 
+for line in sys.stdin.readlines(): #{
+	print(line.strip());
+#}
+sys.exit(0);
+
 first = False;
 oper = '';
 for line in sys.stdin.readlines(): #{

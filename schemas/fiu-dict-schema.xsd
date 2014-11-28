@@ -1007,6 +1007,7 @@
          </xs:sequence>
          <xs:attribute name="id" type="xs:string"/>
          <xs:attribute ref="No"/>
+         <xs:attribute ref="src"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="m">

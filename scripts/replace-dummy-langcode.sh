@@ -3,12 +3,15 @@
 # Replace placeholder language code with real language code
 
 # Wrong usage - short instruction:
-if ! test $# -eq 2 -o $# -eq 3 ; then
+if ! test $# -eq 2 -o $# -eq 3 -o $# -eq 4 ; then
     echo
-    echo "Usage: $0 DIR iso3code [FILNAME]"
+    echo "Usage: $0 DIR iso3code [COLLSTRING [FILNAME] ]"
     echo
     echo "Replaces all occurrences of dummy language codes in files and"
     echo "filenames within DIR with real language codes and name."
+    echo "Optionally specify a collection name (only used"
+    echo "when working with keyboards). Specify as anything if you want"
+    echo "to specify a file when not working with keyboard layouts."
     echo "Optionally specify a filename to do the replacements in."
     echo
     exit 1
@@ -48,7 +51,9 @@ if [[ $? -gt 0 ]] ; then
 	exit 3
 fi
 
-file=$3
+collection=$3
+
+file=$4
 
 # Replace placeholder language code with real language code
 # In either a single file:
@@ -58,6 +63,7 @@ if test "x$file" != "x"; then
 	    $SED -e "s/__UND__/$2/g" \
 	    	-e "s/__UND2C__/$iso2code/g" \
 	    	-e "s/__UNDEFINED__/$isoName/g" \
+	    	-e "s/__COLLECTION__/$collection/g" \
 	    	< $file~ > $file
 	    rm -f $file~
 	else
@@ -81,6 +87,7 @@ else
 	    $SED -e "s/__UND__/$2/g" \
 	    	-e "s/__UND2C__/$iso2code/g" \
 	    	-e "s/__UNDEFINED__/$isoName/g" \
+	    	-e "s/__COLLECTION__/$collection/g" \
 	    	< $f~ > $f
 	    rm -f $f~
 	    # And do the same with filenames:

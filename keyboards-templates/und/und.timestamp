@@ -1,4 +1,7 @@
 $Revision$
+Added a new dir mobile/doc/ to store development and other documentation in.
+
+r103616:
 Now with support for keyboard collection names.
 
 r103271:

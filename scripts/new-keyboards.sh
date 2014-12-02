@@ -66,7 +66,7 @@ rsync -avzC ${GTCORE}/${TEMPLATEDIR}/und/ $COLLECTION_NAME/
 
 # Replace placeholder language code with real language code:
 ${GTCORE}/scripts/replace-dummy-langcode.sh \
-                  "$curDir/$COLLECTION_NAME" $first_lang
+                  "$curDir/$COLLECTION_NAME" $first_lang $COLLECTION_NAME
 
 # Rename files with placeholder language code:
 for f in $(find ./$COLLECTION_NAME -name "*__UND__*") ; do

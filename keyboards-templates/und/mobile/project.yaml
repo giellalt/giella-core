@@ -1,12 +1,12 @@
-internalName: __UND___keyboard
+internalName: __COLLECTION___keyboard
 
 locales:
   en:
-    name: &bundleName "__UNDEFINED__ Keyboard"
-    description: "A mobile OS keyboard for __UNDEFINED__ from the Divvun group at UiT."
+    name: &bundleName "__COLLECTION__ Keyboards"
+    description: "Mobile OS keyboards for __COLLECTION__ languages from the Divvun group at UiT."
   nb:
-    name: "__UNDEFINED__ tastatur"
-    description: "Et mobiltastatur for __UNDEFINED__ fra Divvun-gruppa."
+    name: "__COLLECTION__ tastatur"
+    description: "Mobiltastatur for __COLLECTION__ fra Divvun-gruppa."
 
 author: The Divvun Group, UiT Norgga árktalaš universitehta
 email: feedback@divvun.no
@@ -18,10 +18,10 @@ build: 1
 
 targets:
   android:
-    packageId: no.divvun.keyboards.__UND__
+    packageId: no.divvun.keyboards.__COLLECTION__
     keyStore: /Users/brendan/git/softkbdgen/test.keystore
     keyAlias: sami_keyboard
 
   ios:
-    packageId: no.divvun.keyboards.__UND__
+    packageId: no.divvun.keyboards.__COLLECTION__
     bundleName: *bundleName

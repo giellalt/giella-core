@@ -18,10 +18,10 @@ build: 1
 
 targets:
   android:
-    packageId: no.divvun.keyboards.__COLLECTION__
+    packageId: no.uit.giella.keyboards.__COLLECTION__
     keyStore: /Users/brendan/git/softkbdgen/test.keystore
     keyAlias: sami_keyboard
 
   ios:
-    packageId: no.divvun.keyboards.__COLLECTION__
+    packageId: no.uit.giella.keyboards.__COLLECTION__
     bundleName: *bundleName

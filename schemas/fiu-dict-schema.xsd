@@ -248,6 +248,7 @@
          <xs:enumeration value="Modifier"/>
          <xs:enumeration value="DV_N"/>
          <xs:enumeration value="N"/>
+         <xs:enumeration value="NN"/>
          <xs:enumeration value="Num"/>
          <xs:enumeration value="Ord"/>
          <xs:enumeration value="Pcle"/>

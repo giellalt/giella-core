@@ -495,18 +495,21 @@ class AppleiOSGenerator(Generator):
         with open(xml_fn) as f:
             tree = etree.parse(f)
 
-        o = {}
+        o = []
         for key, node, attr_node in [(n.attrib['value'], n.getparent().getparent(), n)
                 for n in tree.xpath("//*[@keyPath='translate']")]:
             if node.attrib.get('placeholder', None) is not None:
-                o[key] = "%s.placeholder" % node.attrib['id']
+                o.append(("%s.placeholder" % node.attrib['id'], key))
             if 'text' in node.attrib or\
                     node.find("string[@key='text']") is not None:
-                o[key] = "%s.text" % node.attrib['id']
+                o.append(("%s.text" % node.attrib['id'], key))
             state_node = node.find('state')
             if state_node is not None:
-                o[key] = "%s.%sTitle" % (node.attrib['id'], state_node.attrib['key'])
+                o.append(("%s.%sTitle" % (node.attrib['id'], state_node.attrib['key']), key))
             attr_node.getparent().remove(attr_node)
+        o.sort()
+
+        print(o)
 
         with open(xml_fn, 'w') as f:
             f.write(self._tostring(tree))
@@ -524,19 +527,21 @@ class AppleiOSGenerator(Generator):
             path = os.path.join(base_dir, lproj_dir)
             os.makedirs(path, exist_ok=True)
 
-            with open(os.path.join(path, 'Main.strings'), 'a') as f:
-                for key, oid_path in trans_pairs.items():
+            with open(os.path.join(path, 'Main.strings'), 'ab') as f:
+                for oid_path, key in trans_pairs:
                     if key in o:
                         self.write_l10n_str(f, oid_path, o[key])
                     else:
-                        f.write("/* Missing translation: %s */\n" % key)
+                        f.write(("/* Missing translation: %s */\n" %
+                            key).encode('utf-8'))
 
         ref = pbxproj.add_plist_strings_to_variant_group(
                 self._project.app_strings.keys(), "Main.storyboard", "Main.strings")
 
 
     def write_l10n_str(self, f, key, value):
-        f.write('"%s" = %s;\n' % (key, json.dumps(value)))
+        f.write(('"%s" = %s;\n' % (
+            key, json.dumps(value, ensure_ascii=False))).encode('utf-8'))
 
     def create_locales(self, gen_dir):
         for locale, attrs in self._project.locales.items():
@@ -544,7 +549,7 @@ class AppleiOSGenerator(Generator):
             lproj = os.path.join(gen_dir, 'HostingApp', '%s.lproj' % lproj_dir)
             os.makedirs(lproj, exist_ok=True)
 
-            with open(os.path.join(lproj, 'InfoPlist.strings'), 'a') as f:
+            with open(os.path.join(lproj, 'InfoPlist.strings'), 'ab') as f:
                 self.write_l10n_str(f, 'CFBundleName', attrs['name'])
                 self.write_l10n_str(f, 'CFBundleDisplayName', attrs['name'])
 
@@ -554,7 +559,7 @@ class AppleiOSGenerator(Generator):
                 lproj = os.path.join(gen_dir, 'Generated', name, '%s.lproj' % lproj_dir)
                 os.makedirs(lproj, exist_ok=True)
 
-                with open(os.path.join(lproj, 'InfoPlist.strings'), 'a') as f:
+                with open(os.path.join(lproj, 'InfoPlist.strings'), 'ab') as f:
                     self.write_l10n_str(f, 'CFBundleName', lname)
                     self.write_l10n_str(f, 'CFBundleDisplayName', lname)
 

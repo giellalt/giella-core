@@ -14,7 +14,7 @@ appStrings:
 
     "no":
         testText: "Skriv tekst her for å teste"
-        dismissKeyboard: "Fjern tastatur"
+        dismissKeyboard: "Skjul tastatur"
         openSettings: "Åpne Innstillinger"
         instructionsTitle: "Hvordan du slår på tastaturene:"
         instructions: |
@@ -27,7 +27,7 @@ appStrings:
 
     nb:
         testText: "Skriv tekst her for å teste"
-        dismissKeyboard: "Fjern tastatur"
+        dismissKeyboard: "Skjul tastatur"
         openSettings: "Åpne Innstillinger"
         instructionsTitle: "Hvordan du slår på tastaturene:"
         instructions: |

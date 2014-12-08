@@ -48,5 +48,18 @@ appStrings:
             2. «Tredjepartstastaturer» vuolde válljet dán boallobeavdeprográmmaža.
             3. Vállje daid boallobevddiid maid dárbbašat listtus mii ihtá ja deaddil «Ferdig».
 
-            Dál sáhtát molsut boallobevddiid gaskkas deaddilettiin globusboalu gaskaboalu gurutbealde.
-        imageSource: 'Duogásgovva: «Mountains outside Narvik» maid Alexander Cahlenstein lea govven (CC BY)'
+            Dál sáhtát molsut boallobevddiid gaskkas deaddilettiin globusboalu maid gávnnat gaskaboalu gurutbealde.
+        imageSource: 'Duogášgovva: «Mountains outside Narvik» maid Alexander Cahlenstein lea govven (CC BY)'
+
+    sv:
+        testText: "Skriv text här för att testa"
+        dismissKeyboard: "Göm tangentbord"
+        openSettings: "Öppna Inställningar"
+        instructionsTitle: "Hur du slår på tangentborden:"
+        instructions: |
+            1. I Inställningar, välj Allmänt > Tangentbord > Tangentbord > Lägg till nytt tangentbord...
+            2. Under «Tangentbord från tredje part», välj denna tangentbordsappen.
+            3. Slå på de tangentborden du vill använda i listan som dyker upp, och tryck «Klar».
+
+            Du kan nu byta mellan tangentborden genom att trycka på glob-tangenten vänster om mellanslagstangenten.
+        imageSource: 'Bakgrundsbild: «Mountains outside Narvik» av Alexander Cahlenstein (CC BY)'

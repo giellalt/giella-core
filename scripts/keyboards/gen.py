@@ -632,26 +632,32 @@ class AppleiOSGenerator(Generator):
         if len(longpress_str) == 0:
             longpress_str = '"":[""]'
 
+        l10n_name = layout.display_names.get(layout.locale, None)
+        if l10n_name is None:
+            raise Exception("Keyboard requires localisation " +
+                            "into its own locale. (%s missing.)" % l10n_name)
+
         buf.write(dedent("""\
         // GENERATED FILE: DO NOT EDIT.
 
         import UIKit
 
         class %s: GiellaKeyboard {
-            var keyNames = ["return": "%s", "space": "%s"]
-
             required init(coder: NSCoder) {
                 fatalError("init(coder:) has not been implemented")
             }
 
             init() {
+                var keyNames = ["keyboard": "%s", "return": "%s", "space": "%s"]
+
                 var kbd = Keyboard()
 
                 let isPad = UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad
 
                 let longPresses = %s.getLongPresses()
 
-        """ % (layout.internal_name, ret_str, space_str, layout.internal_name)))
+        """ % (layout.internal_name, l10n_name, ret_str,
+                    space_str, layout.internal_name)))
 
         row_count = 0
 
@@ -692,15 +698,13 @@ class AppleiOSGenerator(Generator):
                 returnKey.uppercaseOutput = "\\n"
                 returnKey.lowercaseOutput = "\\n"
 
-                var commaKey = Key(.Character)
-                commaKey.uppercaseKeyCap = ",!"
-                commaKey.lowercaseKeyCap = ",!"
+                var commaKey = Key(.SpecialCharacter)
+                commaKey.uppercaseKeyCap = "!\\n,"
                 commaKey.uppercaseOutput = "!"
                 commaKey.lowercaseOutput = ","
 
-                var fullStopKey = Key(.Character)
-                fullStopKey.uppercaseKeyCap = ".?"
-                fullStopKey.lowercaseKeyCap = ".?"
+                var fullStopKey = Key(.SpecialCharacter)
+                fullStopKey.uppercaseKeyCap = "?\\n."
                 fullStopKey.uppercaseOutput = "?"
                 fullStopKey.lowercaseOutput = "."
 

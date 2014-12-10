@@ -1,4 +1,7 @@
 $Rev$
+Added strip function to get rid of extra spaces, resolves bug in abbr.txt build.
+
+r103029:
 Included lexc files in src/morphology/ in the abbr file making.
 
 r103027:

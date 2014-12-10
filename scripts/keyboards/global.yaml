@@ -63,3 +63,16 @@ appStrings:
 
             Du kan nu byta mellan tangentborden genom att trycka på glob-tangenten vänster om mellanslagstangenten.
         imageSource: 'Bakgrundsbild: «Mountains outside Narvik» av Alexander Cahlenstein (CC BY)'
+
+    fi:
+        testText: "Kirjoita tähän testataksesi"
+        dismissKeyboard: "Kätke näppäimistö"
+        openSettings: "Avaa asetukset"
+        instructionsTitle: "Kuinka otat näppäimistön käyttöön:"
+        instructions: |
+            1. Asetuksissa: Yleiset > Näppäimistö > Näppäimistöt > Lisää näppäimistö...
+            2. «Muiden valmistajien näppäimistöt» -tekstin alla valitse tämä näppäimistö.
+            3. Valitse listalta tarvitsemasi näppäimistöt ja paina «Valmis».
+
+            Voit valita näppäimistön painamalla globusnappia välinäppäimen vasemmalla puolella.
+        imageSource: 'Taustakuva: «Mountains outside Narvik» Alexander Cahlenstein:sta (CC BY)'

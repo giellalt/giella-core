@@ -53,6 +53,30 @@ class Project:
     def target(self, target):
         return self._tree['targets'].get(target, {}) or {}
 
+    def icon(self, target, size=None):
+        val = self.target(target).get('icon', None)
+        if val is None:
+            return None
+        if isinstance(val, str):
+            return val
+        if size is None:
+            # Find largest
+            m = -1
+            for k in val:
+                if k > m:
+                    m = k
+            return val[m]
+        else:
+            lrg = -1
+            m = sys.maxsize
+            for k in val:
+                if k > lrg:
+                    lrg = k
+                if k >= size and k < m:
+                    m = k
+            if m == sys.maxsize:
+                return val[lrg]
+            return val[m]
 
 class Keyboard:
     def __init__(self, tree):
@@ -85,6 +109,9 @@ class Keyboard:
     @property
     def styles(self):
         return self._tree['styles']
+
+    def target(self, target):
+        return self._tree.get('targets', {}).get(target, {}) or {}
 
     def get_actions(self, style):
         return self.styles[style]['actions']

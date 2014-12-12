@@ -4,6 +4,7 @@ from textwrap import dedent, indent
 
 import os
 import os.path
+import sys
 import shutil
 import subprocess
 import copy
@@ -15,6 +16,15 @@ import plistlib
 import collections
 
 import pycountry
+import boolmap
+
+ANDROID_GLYPHS = {}
+
+for api in range(16, 21+1):
+    if api in (17, 18, 20):
+        continue
+    with open(os.path.join(os.path.dirname(__file__), "android-glyphs-api%s.bin" % api), 'rb') as f:
+        ANDROID_GLYPHS[api] = boolmap.BoolMap(f.read())
 
 class CulturalImperialismException(Exception): pass
 
@@ -417,6 +427,12 @@ class Generator:
 
 class AppleiOSGenerator(Generator):
     def generate(self, base='.'):
+        # TODO sanity checks
+
+        if self.dry_run:
+            print("Dry run completed.")
+            return
+
         build_dir = os.path.join(base, 'build',
                 'ios', self._project.target('ios')['packageId'])
 
@@ -480,12 +496,52 @@ class AppleiOSGenerator(Generator):
         with open(path, 'w') as f:
             self.update_pbxproj(pbxproj, f)
 
+        # Generate icons for hosting app
+        self.gen_hosting_app_icons(build_dir)
+
         print("You may now open TastyImitationKeyboard.xcodeproj in '%s'." %\
                     build_dir)
 
     def _tostring(self, tree):
         return etree.tostring(tree, pretty_print=True,
             xml_declaration=True, encoding='utf-8').decode()
+
+    def gen_hosting_app_icons(self, build_dir):
+        if self._project.icon('ios') is None:
+            print("Warning: no icon supplied!")
+            return
+
+        path = os.path.join(build_dir, 'HostingApp',
+                'Images.xcassets', 'AppIcon.appiconset')
+
+        with open(os.path.join(path, "Contents.json")) as f:
+            contents = json.load(f, object_pairs_hook=collections.OrderedDict)
+
+        cmd_tmpl = "convert -background white -alpha remove -resize %dx%d %s %s"
+
+        for obj in contents['images']:
+            scale = int(obj['scale'][:-1])
+            h, w = obj['size'].split('x')
+            h = int(h) * scale
+            w = int(w) * scale
+
+            icon = self._project.icon('ios', w)
+            fn = "%s-%s@%s.png" % (obj['idiom'], obj['size'], obj['scale'])
+            obj['filename'] = fn
+            cmd = cmd_tmpl % (w, h, icon, os.path.join(path, fn))
+
+            print("Creating '%s' from '%s'..." % (fn, icon))
+            process = subprocess.Popen(cmd, shell=True,
+                    stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+            out, err = process.communicate()
+            if process.returncode != 0:
+                print(err.decode())
+                print("Application ended with error code %s." % process.returncode)
+                sys.exit(process.returncode)
+
+        with open(os.path.join(path, "Contents.json"), 'w') as f:
+            json.dump(contents, f)
+
 
     def get_translatables_from_storyboard(self, xml_fn):
         with open(xml_fn) as f:
@@ -784,6 +840,8 @@ class AndroidGenerator(Generator):
 
         files = []
 
+        layouts = collections.defaultdict(list)
+
         for name, kbd in self._project.layouts.items():
 
             files += [
@@ -801,10 +859,12 @@ class AndroidGenerator(Generator):
                     row = ("res/%s/%s" % (prefix, row[0]), row[1])
                     files.append(row)
 
-            self.update_method_xml(kbd, base)
+            layouts[kbd.target("android").get("minimumSdk", None)].append(kbd)
             self.update_strings_xml(kbd, base)
 
-        files.append(self.create_ant_properties())
+        self.update_method_xmls(layouts, base)
+
+        files.append(self.create_ant_properties(self.is_release))
 
         self.save_files(files, base)
 
@@ -837,7 +897,7 @@ class AndroidGenerator(Generator):
                     pycountry.languages.get(alpha2=dn_locale)
                 except KeyError:
                     sane = False
-                    print(("Error: (%s) '%s' is not a supported locale. " +\
+                    print(("[%s] Error: '%s' is not a supported locale. " +\
                           "You should provide the code in ISO 639-1 " +\
                           "format, if possible.") % (
                         name, dn_locale))
@@ -845,9 +905,13 @@ class AndroidGenerator(Generator):
             for mode, rows in kbd.modes.items():
                 for n, row in enumerate(rows):
                     if len(row) > 11:
-                        print(("Warning: (%s) row %s has %s keys. It is " +\
+                        print(("[%s] Warning: row %s has %s keys. It is " +\
                                "recommended to have less than 12 keys per " +\
                                "row.") % (name, n+1, len(row)))
+
+            self.detect_unavailable_glyphs_long_press(kbd, 16)
+            self.detect_unavailable_glyphs_long_press(kbd, 19)
+            self.detect_unavailable_glyphs_long_press(kbd, 21)
         return sane
 
     def _upd_locale(self, d, values):
@@ -885,7 +949,7 @@ class AndroidGenerator(Generator):
                 self._upd_locale(d, values)
 
     def generate_icons(self, base):
-        icon = self._project.target('android').get('icon', None)
+        icon = self._project.icon('android')
         if icon is None:
             print("Warning: no icon supplied!")
             return
@@ -908,8 +972,9 @@ class AndroidGenerator(Generator):
                     stderr=subprocess.PIPE, stdout=subprocess.PIPE)
             out, err = process.communicate()
             if process.returncode != 0:
-                print(err)
-                raise Exception("Application ended with error code %s." % process.returncode)
+                print(err.decode())
+                print("Application ended with error code %s." % process.returncode)
+                sys.exit(process.returncode)
 
 
     def build(self, base, release_mode=True):
@@ -935,7 +1000,7 @@ class AndroidGenerator(Generator):
     def _str_xml(self, val_dir, name, subtype):
         os.makedirs(val_dir, exist_ok=True)
         fn = os.path.join(val_dir, 'strings.xml')
-        print("Updating %s..." % fn)
+        print("Updating '%s'..." % fn)
 
         if not os.path.exists(fn):
             root = etree.XML("<resources/>")
@@ -963,29 +1028,53 @@ class AndroidGenerator(Generator):
                 val_dir = os.path.join(res_dir, 'values-%s' % locale)
             self._str_xml(val_dir, name, kbd.internal_name)
 
-    def update_method_xml(self, kbd, base):
+    def gen_method_xml(self, kbds, tree):
+        root = tree.getroot()
+
+        for kbd in kbds:
+            self._android_subelement(root, 'subtype',
+                icon="@drawable/ic_ime_switcher_dark",
+                label="@string/subtype_%s" % kbd.internal_name,
+                imeSubtypeLocale=kbd.locale,
+                imeSubtypeMode="keyboard",
+                imeSubtypeExtraValue="KeyboardLayoutSet=%s,AsciiCapable,EmojiCapable" % kbd.internal_name)
+
+        return self._tostring(tree)
+
+
+    def update_method_xmls(self, layouts, base):
         # TODO run this only once preferably
-        print("Updating res/xml/method.xml...")
-        fn = os.path.join(base, 'deps', self.REPO, 'res', 'xml', 'method.xml')
 
-        with open(fn) as f:
+        base_layouts = layouts[None]
+        del layouts[None]
+
+        print("Updating 'res/xml/method.xml'...")
+        path = os.path.join(base, 'deps', self.REPO, 'res', '%s')
+        fn = os.path.join(path, 'method.xml')
+
+        with open(fn % 'xml') as f:
             tree = etree.parse(f)
+        with open(fn % 'xml', 'w') as f:
+            f.write(self.gen_method_xml(base_layouts, tree))
 
-        self._android_subelement(tree.getroot(), 'subtype',
-            icon="@drawable/ic_ime_switcher_dark",
-            label="@string/subtype_%s" % kbd.internal_name,
-            imeSubtypeLocale=kbd.locale,
-            imeSubtypeMode="keyboard",
-            imeSubtypeExtraValue="KeyboardLayoutSet=%s,AsciiCapable,EmojiCapable" % kbd.internal_name)
-        with open(fn, 'w') as f:
-            f.write(self._tostring(tree))
-        #return ('res/xml/method.xml', self._tostring(tree))
+        for kl, vl in reversed(sorted(layouts.items())):
+            for kr, vr in layouts.items():
+                if kl >= kr:
+                    continue
+                layouts[kr] = vl + vr
+
+        for api_ver, kbds in layouts.items():
+            xmlv = "xml-v%s" % api_ver
+            print("Updating 'res/%s/method.xml'..." % xmlv)
+            os.makedirs(path % xmlv, exist_ok=True)
+            with open(fn % xmlv, 'w') as f:
+                f.write(self.gen_method_xml(kbds, copy.deepcopy(tree)))
 
     def save_files(self, files, base):
         fn = os.path.join(base, 'deps', self.REPO)
         for k, v in files:
             with open(os.path.join(fn, k), 'w') as f:
-                print("Saving file '%s'..." % k)
+                print("Creating '%s'..." % k)
                 f.write(v)
 
     def get_source_tree(self, base, sdk_base):
@@ -1025,20 +1114,31 @@ class AndroidGenerator(Generator):
         with open(rules_fn, 'w') as f:
             f.write(x.replace('GiellaIME', self._project.internal_name))
 
-    def create_ant_properties(self):
-        data = dedent("""\
-        package.name=%s
-        key.store=%s
-        key.alias=%s
-        version.code=%s
-        version.name=%s
-        """ % (
-            self._project.target('android')['packageId'],
-            os.path.abspath(self._project.target('android')['keyStore']),
-            self._project.target('android')['keyAlias'],
-            self._project.build,
-            self._project.version
-        ))
+    def create_ant_properties(self, release_mode=False):
+        if release_mode:
+            data = dedent("""\
+            package.name=%s
+            key.store=%s
+            key.alias=%s
+            version.code=%s
+            version.name=%s
+            """ % (
+                self._project.target('android')['packageId'],
+                os.path.abspath(self._project.target('android')['keyStore']),
+                self._project.target('android')['keyAlias'],
+                self._project.build,
+                self._project.version
+            ))
+        else:
+            data = dedent("""\
+            package.name=%s
+            version.code=%s
+            version.name=%s
+            """ % (
+                self._project.target('android')['packageId'],
+                self._project.build,
+                self._project.version
+            ))
 
         return ('ant.properties', data)
 
@@ -1197,3 +1297,25 @@ class AndroidGenerator(Generator):
 
         self.add_special_buttons(kbd, n, style, values, out, False)
 
+    def detect_unavailable_glyphs_long_press(self, layout, api_ver):
+        glyphs = ANDROID_GLYPHS.get(api_ver, None)
+        if glyphs is None:
+            print("Warning: no glyphs file found for API %s! Can't detect " +
+                  "missing characters from Android font!" % api_ver)
+            return
+
+        for vals in layout.longpress.values():
+            for v in vals:
+                for c in v:
+                    if glyphs[ord(c)] is False:
+                        print("[%s] Warning: '%s' (codepoint: U+%04X) is not supported by API %s!" % (
+                            layout.internal_name,
+                            c, ord(c), api_ver))
+
+    # TODO finish this method
+    def detect_unavailable_glyphs_keys(self, key, api_ver):
+        glyphs = ANDROID_GLYPHS.get(api_ver, None)
+        if glyphs is None:
+            print("Warning: no glyphs file found for API %s! Can't detect " +
+                  "missing characters from Android font!" % api_ver)
+            return

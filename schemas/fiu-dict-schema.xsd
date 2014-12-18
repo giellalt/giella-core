@@ -90,6 +90,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_drv"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_cogn"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="lsub"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
             <xs:element ref="stg"/>
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
          </xs:sequence>
@@ -175,6 +176,15 @@
             <xs:extension base="xs:string">
                <xs:attribute ref="myvSrc"/>
                <xs:attribute ref="orthType"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="l_sci">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute ref="src"/>
             </xs:extension>
          </xs:simpleContent>
       </xs:complexType>

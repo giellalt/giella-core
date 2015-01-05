@@ -237,7 +237,7 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
 
         # Replace placeholder language code with real language code in newly
         # added files:
-        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG ${localf}
+        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG langs ${localf}
 
     done
 

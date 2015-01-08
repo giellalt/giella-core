@@ -190,8 +190,9 @@ for my $file (@lex_file_names) {
 
 if( ! $noparadigm) {
     print ABB "\nLEXICON NUM\n";
-
-    my $all;
+    # assign empty string to the $all variable
+    # in order to prevent 'Use of uninitialized value' messages
+    my $all='';
     my %num_suffix;
     for my $n (@numbers) {
         for my $a ( @{$paradigms{"Num"}} ) {

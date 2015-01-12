@@ -151,7 +151,10 @@ easteregg.*
 *.service
 *.zhfst
 *.oxt
+spellercorpus.*
+test.*
 build
+unitweight
 3" $1/tools/spellcheckers/fstbased/hfst
 
 # Set the svn:ignore prop on the grammarchecker dir:

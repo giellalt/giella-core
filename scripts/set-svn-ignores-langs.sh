@@ -148,6 +148,7 @@ $fstfiles
 $svnignore "$mkfiles
 $fstfiles
 easteregg.*
+*.service
 *.zhfst
 *.oxt
 build

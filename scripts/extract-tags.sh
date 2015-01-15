@@ -17,7 +17,7 @@ fi
 
 REGEX=$3
 
-if ! grep -F "${REGEX}" $1; then
+if ! grep -q -F "${REGEX}" $1; then
     echo "${REGEX}DummyTag" > $2
 else
     grep -F "${REGEX}" $1 > $2

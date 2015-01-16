@@ -410,6 +410,8 @@ class MorphTest:
             f = "morph"
             tests = self.config.lexical_tests[data]
 
+        res = self.results[f]
+
         if self.results.get('err'):
             raise LookupError('`%s` had an error:\n%s' % (self.program, self.results['err']))
 
@@ -427,7 +429,7 @@ class MorphTest:
             test = testcase.input
             forms = testcase.outputs
 
-            actual_results = set(self.results[f][test.lstrip("~")])
+            actual_results = set(res[test.lstrip("~")])
             test, detested_results, expected_results = self.get_forms(test, forms)
 
             missing = set()

@@ -671,6 +671,21 @@
    <xs:attribute name="Contlex" type="xs:string"/>
 
 
+   <xs:element name="defg">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="def"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="def">
+      <xs:complexType mixed="true">
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="l_ref"/>
+         </xs:choice>
+         <xs:attribute ref="xml:lang"/>
+      </xs:complexType>
+   </xs:element>
    <xs:element name="drv">
       <xs:complexType>
          <xs:simpleContent>
@@ -738,6 +753,8 @@
    <xs:element name="etymg">
       <xs:complexType>
          <xs:choice maxOccurs="unbounded" minOccurs="1">
+            <xs:element ref="etymon"/>
+            <xs:element ref="cognate"/>
             <xs:element ref="etym"/>
             <xs:element ref="etymCtn"/>
          </xs:choice>
@@ -761,6 +778,79 @@
                </xs:restriction>
             </xs:simpleType>
          </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="cognate">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="constituent" type="xs:string"/>
+	    <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="t"/>
+            <xs:element ref="td"/>
+            <xs:element ref="te"/>
+            <xs:element ref="tf"/>
+	    </xs:choice>
+         </xs:sequence>
+         <xs:attribute ref="cx"/>
+         <xs:attribute ref="dx"/>
+         <xs:attribute name="langForm">
+            <!--This should be either dial or *-->
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="dial"/>
+                  <xs:enumeration value="*"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute ref="etymType"/>
+         <xs:attribute ref="xml:lang"/>
+         <xs:attribute ref="lemmaID"/>
+	 <xs:attribute ref="stemID"/>
+         <xs:attribute ref="nx"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="etymon">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="constituent" type="xs:string"/>
+	    <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="t"/>
+            <xs:element ref="td"/>
+            <xs:element ref="te"/>
+            <xs:element ref="tf"/>
+	    </xs:choice>
+         </xs:sequence>
+         <xs:attribute ref="source">
+            <xs:simpleType>
+              <xs:restriction base="xs:string"/>
+	    </xs:simpleType>
+	 </xs:attribute>
+         <xs:attribute ref="type">
+            <xs:simpleType>
+              <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+         </xs:attribute>
+	 <xs:attribute ref="variant">
+            <xs:simpleType>
+              <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+         </xs:attribute>
+	 <xs:attribute ref="cx"/>
+         <xs:attribute ref="dx"/>
+         <xs:attribute name="langForm">
+            <!--This should be either dial or *-->
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:enumeration value="dial"/>
+                  <xs:enumeration value="*"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:attribute>
+         <xs:attribute ref="etymType"/>
+         <xs:attribute ref="xml:lang"/>
+         <xs:attribute ref="lemmaID"/>
+	 <xs:attribute ref="stemID"/>
+         <xs:attribute ref="nx"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="etym">
@@ -1013,6 +1103,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_ref"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="m"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="defNative"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="defg"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tg"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="xg"/>
          </xs:sequence>

@@ -18796,6 +18796,7 @@ Numedalslågen+OLang/UND:Nume^dals#lågen9 LONDON-plc ;
 Numidia+OLang/NOB:Numidia ACCRA-plc ;
 Numitor+OLang/UND:Numitor LONDON-mal ;
 Nummedal+OLang/NOB:Numme#dal BERN-sur ;
+Numedal+OLang/NOB:Nume#dal BERN-Plc ;
 Nummela+OLang/FIN:Nummela ACCRA-plc ;
 Nummenpää+OLang/FIN:Nummen#pää ACCRA-plc ;
 Nummi+OLang/UND:Nummi PIPPI-sur ;
@@ -30342,3 +30343,9 @@ Irmeli+OLang/UND:Irmeli NYSTØ-fem ;
 Haukipudas+OLang/FIN:Haukipudas LONDON-plc ;
 Siikasaari+OLang/FIN:Siika#saari PIPPI-sur ;
 Löf+OLang/UND:Löf BERN-sur ;
+Stáinnak+OLang/SME:Stáinnak LONDON-obj ;
+Røssnes+OLang/NOB:Røss9#nes BERN-plc ;
+Vibe+OLang/UND:Vibe ACCRA-sur ;
+Haviken+OLang/NOB:Ha#viken9 LONDON-plc ;
+Boy% George+OLang/UND+MWE:Boy% George ACCRA-mal ;
+

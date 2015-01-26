@@ -11006,7 +11006,7 @@ Jakola+OLang/FIN:Jakola ACCRA-sur ;
 Jakonen+OLang/FIN:Jako C-FI-NEN-sur ;
 Jakov+OLang/UND:Jakov LONDON-plc ;
 Jakovlev+OLang/UND:Jakovlev BERN-sur ;
-Jakt-% och% fiskesamerna+N+Prop+Sem/Org+Sg+Nom+CmpN/None+MWE+OLang/SWE:Jakt-% och% fiske^samerna K ;
+Jakt-% och% fiskesamerna+N+Prop+Sem/Org+Sg+Nom+CmpN/None+MWE+OLang/SWE:Jakt-% och% fiske^samerna flagK ;
 Jaktlovkommisjonen+OLang/UND:Jakt^lov#kommisjonen9 LONDON-obj ;
 Jakuck+OLang/UND:Jakuck BERN-plc ;
 Jakutia+OLang/NOB:Jakutia ACCRA-plc ;
@@ -22657,7 +22657,7 @@ Samenes% naturressursforbund+MWE+OLang/UND:Samenes% natur9#ressurs#forbund9 BERN
 Samerett+OLang/NOB:Same#rett BERN-obj ;
 Samerettsutvalget+OLang/UND:Same#retts#utvalget LONDON-org ;
 Samerna% för% framtiden+Use/LexSub+MWE+OLang/UND:Samerna% för% fram9#tiden LONDON-org ;
-Samerna+N+Prop+Sem/Org+Sg+Nom+OLang/SWE:Samerna K ;
+Samerna+N+Prop+Sem/Org+Sg+Nom+OLang/SWE:Samerna flagK ;
 Samernas+OLang/UND:Samernas BERN-LOAN-obj ;
 Sameråd+OLang/UND:Same#råd9 BERN-LOAN-org ;
 Sametinget+OLang/NOB:Same#tinget9 LONDON-LOAN-org ;
@@ -24024,7 +24024,7 @@ Skogselskap+OLang/UND:Skog^sel#skap9 BERN-org ;
 Skogseth+OLang/NOB:Skogseth9 BERN-sur ;
 Skogsholm+OLang/NOB:Skogs#holm9 BERN-sur ;
 Skogsrud+OLang/NOB:Skogs#rud9 BERN-sur ;
-Skogssamerna+N+Prop+Sem/Org+Sg+Nom+OLang/SWE:Skogs^samerna K ;
+Skogssamerna+N+Prop+Sem/Org+Sg+Nom+OLang/SWE:Skogs^samerna flagK ;
 Skogsselskap+OLang/UND:Skogs^sel#skap9 BERN-org ;
 Skogsstyrelsen+OLang/NOB:Skogs^styrelsen9 LONDON-sur ;
 Skogstad+OLang/NOB:Skog9#stad9 BERN-plc ;
@@ -26007,7 +26007,7 @@ Tammitupa+OLang/UND:Tammitupa ACCRA-plc ;
 Tammivuori+OLang/FIN:Tammi#vuori ACCRA-sur ;
 Tammivuori+OLang/UND:Tammi#vuori PIPPI-sur ;
 Tampa+OLang/UND:Tampa ACCRA-plc ;
-Tampere+N+Prop+Sem/Org+Sg+Ill+OLang/FIN:Tamperei K ; !alt. ill-form
+Tampere+N+Prop+Sem/Org+Sg+Ill+OLang/FIN:Tamperei flagK ; !alt. ill-form
 Tampere+OLang/FIN:Tamper RONDANE-SG-plc ;
 Tampico+OLang/UND:Tampico9 ACCRA-mal ;
 Tampio+OLang/UND:Tampio9 ACCRA-sur ;
@@ -29571,7 +29571,7 @@ Yinchuan+OLang/UND:Yinchu^an9 BERN-plc ;
 Yippi+OLang/UND:Yippi PIPPI-ani ;
 Yiyang+OLang/UND:Yi^yang9 BERN-sur ;
 Ykkös-Offset+OLang/UND:Ykkös-Offset LONDON-org ;
-Yle+N+Prop+Sem/Org+Sg+Ill+OLang/UND:Ylei K ; !alt. ill-form
+Yle+N+Prop+Sem/Org+Sg+Ill+OLang/UND:Ylei flagK ; !alt. ill-form
 Yle+OLang/UND:Yle SIJTE-org ;
 Yleisradio+OLang/UND:Yleis#radio9 ACCRA-org ;
 Yletyinen+OLang/FIN:Yletyi C-FI-NEN-sur ;

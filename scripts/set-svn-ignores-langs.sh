@@ -85,6 +85,11 @@ lexicon.lexc" $1/src/morphology
 # Ignore all files in the src/morphology/generated_files dir:
 $svnignore "*" $1/src/morphology/generated_files
 
+# Ignore all temporary and generated files in the src/syntax/ dir:
+$svnignore "$mkfiles
+$fstfiles
+downcase-derived_proper-strings.xfscript" $1/src/orthography
+
 # Ignore all temporary and generated files in the src/tagsets/ dir:
 $svnignore "$mkfiles
 $fstfiles

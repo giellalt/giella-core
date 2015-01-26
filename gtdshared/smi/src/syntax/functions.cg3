@@ -92,6 +92,7 @@ LIST Prop = Prop ;
 # -------------
 
 LIST Sem/Act = Sem/Act Sem/Act_Group Sem/Act_Plc Sem/Act_Route; #Activity #Ollet guhká dainna X-Com (Veaigin bisánasttii Ristenge geahččat, man guhkás Lemet-gázzi juo ledje ollen dainna divvunbargguin.) # bargu
+LIST Sem/Adr = Sem/Adr ;
 LIST Sem/Amount = Sem/Amount Sem/Amount_Build Sem/Amount_Semcon;
 LIST Sem/Ani = Sem/Ani Sem/Ani_Body-abstr_Hum Sem/Body Sem/Body-abstr Sem/Body-abstr_Prod-audio_Semcon Sem/Body_Body-abstr Sem/Body_Clth Sem/Body_Food Sem/Body_Group_Hum Sem/Body_Hum Sem/Body_Mat Sem/Body_Measr Sem/Body_Obj_Tool-catch Sem/Body_Plc Sem/Body_Time ; #Animal #bivdit X-Loc veahki.
 LIST Sem/Aniprod = Sem/Aniprod Sem/Aniprod_Hum
@@ -1755,9 +1756,10 @@ MAP:advl>mainV (@ADVL>) TARGET ADVL (NOT *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAIN
 
 
 #!! * __V<advl__ (@<ADVL) if; finite mainverb found to the left. Not if a comma is found immediately to the left and a finite mainverb is located somewhere to the right of this comma.
-MAP:V<advl (@<ADVL) TARGET ADVL - MO - Rel - MOD-ADV - Attr OR TIME-N + Gen OR (Sem/Route Gen) OR Sem/Date OR Sem/Year (*-1 FMAINV BARRIER SV-BOUNDARY)(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+MAP:V<advl (@<ADVL) TARGET ADVL - MO - Rel - MOD-ADV - Attr OR TIME-N + Gen OR (Sem/Route Gen) OR Sem/Date OR Sem/Year (*-1 FMAINV BARRIER SV-BOUNDARY - (":"))(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
 	#$ Giellatekno álggahuvvui 1.8.2001 prošeaktan ráhkadit sámegiela grammatihkalaš analysa.
 	#$ Dán filmma leat Kárášjoga nuorat oaidnán, eaige šat vuolgge sirkusii.
+	#$ Eanet dieđuid gávnnat dáppe: www.denkulturelleskolesekken.no
 	#% Vare livččet jogo galmmas dahje liekkas.
 
 #!! * __advl>v__ (@ADVL>) if; you are ADVL, time-noun or Sem/Route and there is a finite verb to the right in the clause, or if to your right is: de followed by a finite verb. OR: if you are a time-nound and to your right is: go or sentenceboundary followed by a finite verb	
@@ -2058,6 +2060,7 @@ MAP:obj> (@OBJ>) TARGET NP-HEAD-ACC OR DUPRON + Acc (*1 FMAINV BARRIER (":"))(NO
 #!! !!HNOUN MAPPING
 
 MAP:hnounNom (@HNOUN) TARGET NP-HEAD-NOM - A OR (Num Nom) (NEGATE *0 REAL-V BARRIER (":"))(NEGATE *-1 PUNCT BARRIER (":") LINK -1 WORD) ;
+MAP:HNOUN<advl (@<SPRED) TARGET Sem/Adr (-1 (":") LINK -1 Nom) ; 
 	#$ Fiskes, rukses, alit, ruoná ja muđui buotlágaš ivnnit.
 	#$ Bargolávdegotti bargu: Álgobargu lei čielggadit min mandáhta.
 

@@ -820,17 +820,17 @@
             <xs:element ref="tf"/>
 	    </xs:choice>
          </xs:sequence>
-         <xs:attribute ref="source">
+         <xs:attribute name="source">
             <xs:simpleType>
               <xs:restriction base="xs:string"/>
 	    </xs:simpleType>
 	 </xs:attribute>
-         <xs:attribute ref="type">
+         <xs:attribute name="type">
             <xs:simpleType>
               <xs:restriction base="xs:string"/>
             </xs:simpleType>
          </xs:attribute>
-	 <xs:attribute ref="variant">
+	 <xs:attribute name="variant">
             <xs:simpleType>
               <xs:restriction base="xs:string"/>
             </xs:simpleType>

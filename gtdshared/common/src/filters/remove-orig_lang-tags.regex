@@ -2,7 +2,9 @@
 # words and names. They are most likely noise in other contexts, and thus we
 # remove them.
 
+0 <- %+OLang%/SMA, !!≈ * @CODE@ - South Sámi
 0 <- %+OLang%/SME, !!≈ * @CODE@ - North Sámi
+0 <- %+OLang%/SMJ, !!≈ * @CODE@ - Julev Sámi
 0 <- %+OLang%/FIN, !!≈ * @CODE@ - Finnish
 0 <- %+OLang%/SWE, !!≈ * @CODE@ - Swedish
 0 <- %+OLang%/NOB, !!≈ * @CODE@ - Norw. bokmål

@@ -1901,7 +1901,7 @@ Ballsfjorden+OLang/NOB:Balls#fjorden9 LONDON-plc ;
 Ballstad+OLang/NOB:Ball#stad9 BERN-plc ;
 Ballvatnet+OLang/NOB:Ball#vatnet LONDON-plc ;
 Balmer+OLang/UND:Balmer LONDON-sur ;
-Bals% Bakeri+MWE+OLang/UND:Bals% Bakeri ACCRA-org ;
+Bals% Bakeri+MWE+OLang/UND:Bals% Bakeri NYSTØ-org ;
 Bals+OLang/UND:Bals BERN-sur ;
 Balsby+OLang/NOB:Bals#by NYSTØ-plc ;
 Balsfjord+OLang/NOB:Bals#fjord9 BERN-LOAN-plc ;
@@ -30328,7 +30328,7 @@ Tukes+OLang/UND:Tukes LONDON-org ;
 Tuija+OLang/FIN:Tuija ACCRA-fem ;
 Miira+OLang/FIN:Miira PIPPI-fem ;
 Henriksson+OLang/UND:Henriks#son BERN-sur ;
-Aleksanteri+OLang/FIN:Aleksanteri NYSTØ-mal ;
+Aleksanteri+OLang/FIN:Aleksanteri ACCRA-mal ;
 Alatorvinen+OLang/FIN:Ala^torvi C-FI-NEN-sur ;
 Suurpää+OLang/FIN:Suur#pää ACCRA-plc ;
 Pinja+OLang/FIN:Pinja PIPPI-fem ;
@@ -30350,4 +30350,6 @@ Haviken+OLang/NOB:Ha#viken9 LONDON-plc ;
 Boy% George+OLang/UND+MWE:Boy% George ACCRA-mal ;
 Søyland+OLang/NOB:Søy#land9 BERN-sur ;
 Guldal+OLang/NOB:Gul#dal BERN-sur ;
+Finnmarks% Fylkesrederi+OLang/UND+MWE:Finnmarks% Fylkesrederi NYSTØ-org ;
+
 

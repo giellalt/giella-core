@@ -58,13 +58,9 @@ if(! $fst || ! -f $fst || !$paradigmfile || ! -f $paradigmfile) {
 }
 
 if ($lex_files) {
-    print "57 $lex_files\n";
     @lex_file_names = split (/,/, $lex_files);
 }
 
-print "61 @lex_file_names\n";
-
-print "63 paradigmfile $paradigmfile\n";
 # Read from lex-file and write to abbr file.
 open ABB, "> $abbr_file" or die "Cant open the output file: $!\n";
 
@@ -76,7 +72,6 @@ open LEX, "< $abbr_lex_file" or die "Cant open the abbreviation file: $!\n";
 while (<LEX>) {
     if (/^LEXICON ITRAB/) {
         print ABB "$_\n";
-        print "72 $_\n";
         last;
     }
 }
@@ -86,7 +81,6 @@ while (<LEX>) {
 
     if (/^LEXICON/) {
         print ABB "$_\n";
-        print "82 $_\n";
         next;
     }
 
@@ -102,7 +96,6 @@ while (<LEX>) {
     if ((my $abbr = $_)    =~ s/^([\w\.]+(% [\w\.]+\+MWE|-[\w\.]+)*)[\s+:].*/$1/) {
         $abbr =~ s/%//g;
         print ABB "$abbr\n";
-        print "98 $abbr\n";
     }
 }
 close LEX;
@@ -146,10 +139,11 @@ for my $file (@lex_file_names) {
 #         print "138 $key $file\n";
         if ($file =~ /$key\.lexc/) {
             $pos = $lex_pos{$key};
-            print "140 $pos\n";
+            print "140 $pos $file\n";
         }
     }
 
+    my $x=0;
     open LEX, "< $file" or die "Cant open the file: $!\n";
     while (<LEX>) {
         chomp;
@@ -167,7 +161,7 @@ for my $file (@lex_file_names) {
                     print STDERR "165 Ingen paradigme!\n"; # DEBUG
                 }
                 else {
-                    print "168 $pos\n";
+                    print "$abbr $pos $file\n";
                     my @all_a;
                     my $all;
                     my $i=0;
@@ -176,18 +170,20 @@ for my $file (@lex_file_names) {
                     # The strings are splitted since there are so many possible
                     # forms for pronouns.
                     for my $a ( @{$paradigms{$pos}} ) {
-                        print "177 $a\n";
+#                         print "177 $a\n";
                         if ($i++ > 1000) { push (@all_a, $all); $all=""; $i=0; }
                         my $string = "$abbr+$a";
+                        $string =~ s/\+MWE//;
                         $all .= $string . "\n";
 #                        print STDERR "+"; # DEBUG
                     }
                     if ($all) {
-                       print STDERR "184\n"; # DEBUG
+#                        print STDERR "184\n"; # DEBUG
                         push (@all_a, $all);
                     }
                     for my $a (@all_a) {
-                       print STDERR "188 generating\n"; # DEBUG
+                        $x++;
+                       print STDERR "\tgenerating forms for $abbr $file\n"; # DEBUG
                         call_gen(\@idioms,$a);
                     }
                     if (! @idioms) {
@@ -247,20 +243,40 @@ if( ! $noparadigm) {
 sub call_gen {
     my ($tmp_aref, $all) = @_;
 
-    print STDERR "248 $gen_lookup\n";
-    print STDERR "249 $all\n";
+#     print STDERR "248 $gen_lookup\n";
+#     print STDERR "249 $all\n";
     my $generated = `echo \"$all\" | $gen_lookup`;
-    print STDERR "251 $generated\n";
-    die "AHHHHHHHHHHH!!!!!";
+#     print STDERR "251 $generated\n";
+#     die "AHHHHHHHHHHH!!!!!";
     my @analyses = split(/\n+/, $generated);
+
+    my $useless = 0;
+    my $not_wanted_sign = 0;
+    my $contains_tab = 0;
+    my $usefull = 0;
     for my $idiom (@analyses) {
-        next if ($idiom =~ /\+\?/);
-        next if ($idiom =~ /[\:\-]/);
+        if ($idiom =~ /\+\?/) {
+            $useless++;
+            next;
+        }
+        if ($idiom =~ /[\:\-]/) {
+            $not_wanted_sign++;
+            next;
+        }
         my ($word, $analysis) = split(/\t/, $idiom);
-        next if (! $analysis);
+        if (! $analysis) {
+            $contains_tab++;
+            next;
+        }
 
         push (@$tmp_aref, $analysis);
+        $usefull++;
     }
+    print STDERR "\ttotal analyses: $#analyses\n";
+    print STDERR "\t\tusefull: $usefull\n";
+    print STDERR "\t\tuseless: $useless\n";
+    print STDERR "\t\tnot_wanted_sign: $not_wanted_sign\n";
+    print STDERR "\t\tcontains_tab: $contains_tab\n";
 }
 
 close ABB;

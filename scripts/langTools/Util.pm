@@ -9,6 +9,7 @@ use Encode;
 use warnings;
 use strict;
 use Carp qw(cluck);
+use Data::Dumper; # for DEBUGging %paradigms
 
 use Exporter;
 our ( $VERSION, @ISA, @EXPORT, @EXPORT_OK );
@@ -64,7 +65,8 @@ sub call_lookup {
 # Call the recursive function that generates the tag list.
 sub generate_taglist {
     my ( $gramfile, $tagfile, $taglist_aref ) = @_;
-
+# gramfile = paradigm.sme.txt
+# tagfile  = korpustags.sme.txt
     my @grammar;
     my %tags;
 
@@ -72,7 +74,7 @@ sub generate_taglist {
         print "util 72\n";
         # Read from tag file and store to an array.
         open GRAM, "< $gramfile" or die "Cant open the file $gramfile: $!\n";
-        my @tags;
+        #my @tags;
         my $tag_class;
       GRAM_FILE:
         while (<GRAM>) {
@@ -83,12 +85,14 @@ sub generate_taglist {
             next if /^#/;
 
             s/\s*$//;
+            print STDERR "util 87 $_\n";
             push( @grammar, $_ );
             print "util 87 $_\n";
         }
     }
     read_tags( $tagfile, \%tags );
 
+    print Dumper(\%tags);
     my @taglists;
 
     # Read each grammar rule and generate the taglist.
@@ -98,6 +102,7 @@ sub generate_taglist {
         my $tag     = $pos;
         my @taglist;
 
+        print STDERR "util 102 $pos @classes\n";
         generate_tag( $tag, \%tags, \@classes, \@taglist );
         push( @{ $$taglist_aref{$pos} }, @taglist );
     }
@@ -107,15 +112,15 @@ sub generate_taglist {
     #	}
 }
 
-# Ttravel recursively the taglists and generate
+# Traverse recursively the taglists and generate
 # the tagsets for pardigm generation.
 # The taglist is stored to the array reference $taglist_aref.
 sub generate_tag {
     my ( $tag, $tags_href, $classes_aref, $taglist_aref ) = @_;
 
-    print "util 116 $tag\n";
+    print STDERR "util 121 $tag\n";
     if ( !@$classes_aref ) { push( @$taglist_aref, $tag ); return; }
-    print "util 118 $tag\n";
+    print STDERR "util 123 $tag\n";
     my $class = shift @$classes_aref;
     if ( $class =~ s/\?// ) {
         my $new_tag   = $tag;
@@ -125,6 +130,7 @@ sub generate_tag {
 
     if ( !$$tags_href{$class} ) {
         my $new_tag   = $tag . "+" . $class;
+        print STDERR "util 128 $new_tag\n";
         my @new_class = @$classes_aref;
         generate_tag( $new_tag, $tags_href, \@new_class, $taglist_aref );
         return;

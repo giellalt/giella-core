@@ -161,7 +161,7 @@ for my $file (@lex_file_names) {
                     print STDERR "165 Ingen paradigme!\n"; # DEBUG
                 }
                 else {
-                    print "$abbr $pos $file\n";
+                    print STDERR "$abbr $pos $file\n"; # DEBUG
                     my @all_a;
                     my $all;
                     my $i=0;

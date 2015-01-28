@@ -181,11 +181,11 @@ for my $file (@lex_file_names) {
 #                        print STDERR "+"; # DEBUG
                     }
                     if ($all) {
-                       print STDERR "184 $all"; # DEBUG
+                       print STDERR "184\n"; # DEBUG
                         push (@all_a, $all);
                     }
                     for my $a (@all_a) {
-#                        print STDERR "."; # DEBUG
+                       print STDERR "188 generating\n"; # DEBUG
                         call_gen(\@idioms,$a);
                     }
                     if (! @idioms) {
@@ -245,8 +245,11 @@ if( ! $noparadigm) {
 sub call_gen {
     my ($tmp_aref, $all) = @_;
 
+    print STDERR "248 $gen_lookup\n";
+    print STDERR "249 $all\n";
     my $generated = `echo \"$all\" | $gen_lookup`;
-    print STDERR "249 $generated\n";
+    print STDERR "251 $generated\n";
+    die "AHHHHHHHHHHH!!!!!";
     my @analyses = split(/\n+/, $generated);
     for my $idiom (@analyses) {
         next if ($idiom =~ /\+\?/);

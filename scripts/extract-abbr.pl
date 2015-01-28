@@ -51,7 +51,10 @@ GetOptions ("output=s" => \$abbr_file,
 
 
 my $noparadigm;
-if(! $fst || !$paradigmfile || ! -f $paradigmfile) { $noparadigm=1; }
+if(! $fst || ! -f $fst || !$paradigmfile || ! -f $paradigmfile) {
+    $noparadigm=1;
+    print STDERR "$0: No paradigm - no fst or paradigm file.\n";
+}
 
 if ($lex_files) {
     @lex_file_names = split (/,/, $lex_files);
@@ -100,13 +103,13 @@ close LEX;
 # they go to IDIOM-category.
 print ABB "LEXICON IDIOM\n";
 
-my %lex_pos = ( 'noun' => 'N',
-                'adv' => 'Adv',
-                'adj' => 'Adj',
-                'propernoun' => 'N+Prop',
-                'verb' => 'V',
-                'pronoun' => 'Pron',
-                'numeral' => 'Num',
+my %lex_pos = ( 'nouns' => 'N',
+                'adverbs' => 'Adv',
+                'adjectives' => 'Adj',
+                'propernouns' => 'N+Prop',
+                'verbs' => 'V',
+                'pronouns' => 'Pron',
+                'numerals' => 'Num',
                 );
 
 # Initialize paradigm and generator
@@ -127,11 +130,11 @@ if (! $noparadigm) {
 
 for my $file (@lex_file_names) {
 
-    print STDERR "abbr-extract: reading file $file\n";
+    print STDERR "$0: reading file $file\n";
 
     my $pos;
     for my $key (keys %lex_pos) {
-        if ($file =~ /\/$key\-/) {
+        if ($file =~ /$key\.lexc/) {
             $pos = $lex_pos{$key};
         }
     }
@@ -150,6 +153,7 @@ for my $file (@lex_file_names) {
                 my @idioms;
                 if (! $pos || $noparadigm) {
                     print ABB "$abbr\n";
+#                    print STDERR "Ingen paradigme!\n"; # DEBUG
                 }
                 else {
                     my @all_a;
@@ -163,21 +167,25 @@ for my $file (@lex_file_names) {
                         if ($i++ > 1000) { push (@all_a, $all); $all=""; $i=0; }
                         my $string = "$abbr+$a";
                         $all .= $string . "\n";
+#                        print STDERR "+"; # DEBUG
                     }
                     if ($all) {
+#                        print STDERR "-"; # DEBUG
                         push (@all_a, $all);
                     }
                     for my $a (@all_a) {
+#                        print STDERR "."; # DEBUG
                         call_gen(\@idioms,$a);
                     }
-
                     if (! @idioms) {
+#                        print STDERR ":"; # DEBUG
                         print ABB "$abbr\n";
                     }
                     else {
                         for my $idiom (@idioms) {
                             if ( $idiom =~ / /) { # print idiom only if it contains space
                                 print ABB "$idiom\n";
+#                                print STDERR "|"; # DEBUG
                             }
                         }
                     }
@@ -186,6 +194,7 @@ for my $file (@lex_file_names) {
         }
     }
     close LEX;
+#    print STDERR "\n"; # DEBUG - print a newline after each file and row of .:-+|
 }
 
 if( ! $noparadigm) {

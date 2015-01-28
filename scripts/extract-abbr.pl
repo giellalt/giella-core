@@ -21,6 +21,7 @@ use open 'utf8';
 
 # permit named arguments
 use Getopt::Long;
+#use Data::Dumper; # for DEBUGging %paradigms
 
 # Module to communicate with program's user interfaces
 use langTools::Util;
@@ -124,6 +125,7 @@ my %paradigms;
 my $gen_lookup;
 if (! $noparadigm) {
     generate_taglist($paradigmfile,$tagfile,\%paradigms);
+#    print Dumper(\%paradigms); # DEBUG
     if ( $fst =~ /\.xfst$/ ) {
         $gen_lookup="lookup -flags mbTT -utf8 \"$fst\" 2>/dev/null";
     } elsif ( $fst =~ /\.hfst$/ ) {
@@ -214,7 +216,7 @@ if( ! $noparadigm) {
     # in order to prevent 'Use of uninitialized value' messages
     my %num_suffix;
     for my $n (@numbers) {
-        my $all;
+        my $all='';
         for my $a ( @{$paradigms{"Num"}} ) {
             my $string = "$n+$a";
             $all .= $string . "\n";

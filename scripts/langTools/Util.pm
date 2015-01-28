@@ -69,7 +69,7 @@ sub generate_taglist {
     my %tags;
 
     if ($gramfile) {
-
+        print "util 72\n";
         # Read from tag file and store to an array.
         open GRAM, "< $gramfile" or die "Cant open the file $gramfile: $!\n";
         my @tags;
@@ -84,6 +84,7 @@ sub generate_taglist {
 
             s/\s*$//;
             push( @grammar, $_ );
+            print "util 87 $_\n";
         }
     }
     read_tags( $tagfile, \%tags );
@@ -112,7 +113,9 @@ sub generate_taglist {
 sub generate_tag {
     my ( $tag, $tags_href, $classes_aref, $taglist_aref ) = @_;
 
+    print "util 116 $tag\n";
     if ( !@$classes_aref ) { push( @$taglist_aref, $tag ); return; }
+    print "util 118 $tag\n";
     my $class = shift @$classes_aref;
     if ( $class =~ s/\?// ) {
         my $new_tag   = $tag;
@@ -153,12 +156,14 @@ sub read_tags {
         if (s/^#//) {
 
             $tag_class = $_;
+            print "159 $tag_class\n";
             push( @{ $$tags_href{$tag_class} }, @tags );
             undef @tags;
             pop @tags;
             next TAG_FILE;
         }
         my @tag_a = split( /\s+/, $_ );
+        print "util 163 $tag_a[0]\n";
         push @tags, $tag_a[0];
     }
 

@@ -57,9 +57,13 @@ if(! $fst || ! -f $fst || !$paradigmfile || ! -f $paradigmfile) {
 }
 
 if ($lex_files) {
+    print "57 $lex_files\n";
     @lex_file_names = split (/,/, $lex_files);
 }
 
+print "61 @lex_file_names\n";
+
+print "63 paradigmfile $paradigmfile\n";
 # Read from lex-file and write to abbr file.
 open ABB, "> $abbr_file" or die "Cant open the output file: $!\n";
 
@@ -71,6 +75,7 @@ open LEX, "< $abbr_lex_file" or die "Cant open the abbreviation file: $!\n";
 while (<LEX>) {
     if (/^LEXICON ITRAB/) {
         print ABB "$_\n";
+        print "72 $_\n";
         last;
     }
 }
@@ -80,6 +85,7 @@ while (<LEX>) {
 
     if (/^LEXICON/) {
         print ABB "$_\n";
+        print "82 $_\n";
         next;
     }
 
@@ -95,6 +101,7 @@ while (<LEX>) {
     if ((my $abbr = $_)    =~ s/^([\w\.]+(% [\w\.]+\+MWE|-[\w\.]+)*)[\s+:].*/$1/) {
         $abbr =~ s/%//g;
         print ABB "$abbr\n";
+        print "98 $abbr\n";
     }
 }
 close LEX;
@@ -134,8 +141,10 @@ for my $file (@lex_file_names) {
 
     my $pos;
     for my $key (keys %lex_pos) {
+#         print "138 $key $file\n";
         if ($file =~ /$key\.lexc/) {
             $pos = $lex_pos{$key};
+            print "140 $pos\n";
         }
     }
 
@@ -153,9 +162,10 @@ for my $file (@lex_file_names) {
                 my @idioms;
                 if (! $pos || $noparadigm) {
                     print ABB "$abbr\n";
-#                    print STDERR "Ingen paradigme!\n"; # DEBUG
+                    print STDERR "165 Ingen paradigme!\n"; # DEBUG
                 }
                 else {
+                    print "168 $pos\n";
                     my @all_a;
                     my $all;
                     my $i=0;
@@ -164,6 +174,7 @@ for my $file (@lex_file_names) {
                     # The strings are splitted since there are so many possible
                     # forms for pronouns.
                     for my $a ( @{$paradigms{$pos}} ) {
+                        print "177 $a\n";
                         if ($i++ > 1000) { push (@all_a, $all); $all=""; $i=0; }
                         my $string = "$abbr+$a";
                         $all .= $string . "\n";
@@ -201,9 +212,9 @@ if( ! $noparadigm) {
     print ABB "\nLEXICON NUM\n";
     # assign empty string to the $all variable
     # in order to prevent 'Use of uninitialized value' messages
-    my $all='';
     my %num_suffix;
     for my $n (@numbers) {
+        my $all;
         for my $a ( @{$paradigms{"Num"}} ) {
             my $string = "$n+$a";
             $all .= $string . "\n";

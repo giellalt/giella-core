@@ -37,6 +37,13 @@ my $paradigmfile;
 my $tagfile;
 my $fst;
 
+# Count analyses
+my $total_analyses = 0;
+my $total_usefull = 0;
+my $total_useless = 0;
+my $total_not_wanted_chars = 0;
+my $total_contains_tab = 0;
+
 # The numbers which are used as examples of number inflection in the preprocessor.
 my @numbers = qw(1 17);
 
@@ -238,6 +245,11 @@ if( ! $noparadigm) {
     }
 }
 
+sub conclusion {
+    print STDERR "This program sent $total_analyses strings to $gen_lookup\n";
+    print STDERR "lookup recognised $total_usefull of these\n";
+    print STDERR "lookup did not recognise $total_useless of these\n";
+}
 
 # Call generator for all word forms.
 sub call_gen {
@@ -251,7 +263,7 @@ sub call_gen {
     my @analyses = split(/\n+/, $generated);
 
     my $useless = 0;
-    my $not_wanted_sign = 0;
+    my $not_wanted_chars = 0;
     my $contains_tab = 0;
     my $usefull = 0;
     for my $idiom (@analyses) {
@@ -260,7 +272,7 @@ sub call_gen {
             next;
         }
         if ($idiom =~ /[\:\-]/) {
-            $not_wanted_sign++;
+            $not_wanted_chars++;
             next;
         }
         my ($word, $analysis) = split(/\t/, $idiom);
@@ -272,10 +284,20 @@ sub call_gen {
         push (@$tmp_aref, $analysis);
         $usefull++;
     }
+    if ($useless > $#analyses) {
+        $useless = $#analyses;
+    }
+
+    $total_analyses += $#analyses;
+    $total_usefull += $usefull;
+    $total_useless += $useless;
+    $total_not_wanted_chars += $not_wanted_chars;
+    $total_contains_tab += $contains_tab;
+
     print STDERR "\ttotal analyses: $#analyses\n";
     print STDERR "\t\tusefull: $usefull\n";
     print STDERR "\t\tuseless: $useless\n";
-    print STDERR "\t\tnot_wanted_sign: $not_wanted_sign\n";
+    print STDERR "\t\tnot_wanted_chars: $not_wanted_chars\n";
     print STDERR "\t\tcontains_tab: $contains_tab\n";
 }
 

@@ -262,9 +262,9 @@ sub call_gen {
         if ($idiom =~ /\+\?/) {
             next;
         }
-        if ($idiom =~ /[\:\-]/) {
-            next;
-        }
+#         if ($idiom =~ /[\:\-]/) {
+#             next;
+#         }
         my ($word, $analysis) = split(/\t/, $idiom);
         if (! $analysis) {
             next;

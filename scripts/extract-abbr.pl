@@ -38,11 +38,8 @@ my $tagfile;
 my $fst;
 
 # Count analyses
-my $total_analyses = 0;
-my $total_usefull = 0;
-my $total_useless = 0;
-my $total_not_wanted_chars = 0;
-my $total_contains_tab = 0;
+my $total_to_generate = 0;
+my $total_generated = 0;
 
 # The numbers which are used as examples of number inflection in the preprocessor.
 my @numbers = qw(1 17);
@@ -143,14 +140,11 @@ for my $file (@lex_file_names) {
 
     my $pos;
     for my $key (keys %lex_pos) {
-#         print "138 $key $file\n";
         if ($file =~ /$key\.lexc/) {
             $pos = $lex_pos{$key};
-            print "140 $pos $file\n";
         }
     }
 
-    my $x=0;
     open LEX, "< $file" or die "Cant open the file: $!\n";
     while (<LEX>) {
         chomp;
@@ -165,10 +159,11 @@ for my $file (@lex_file_names) {
                 my @idioms;
                 if (! $pos || $noparadigm) {
                     print ABB "$abbr\n";
-                    print STDERR "165 Ingen paradigme!\n"; # DEBUG
+                    print STDERR __LINE__ . " Ingen paradigme!\n"; # DEBUG
                 }
                 else {
-                    print STDERR "$abbr $pos $file\n"; # DEBUG
+                    my $this_abbr = $abbr;
+                    $this_abbr =~ s/\+MWE//;
                     my @all_a;
                     my $all;
                     my $i=0;
@@ -177,34 +172,37 @@ for my $file (@lex_file_names) {
                     # The strings are splitted since there are so many possible
                     # forms for pronouns.
                     for my $a ( @{$paradigms{$pos}} ) {
-#                         print "177 $a\n";
                         if ($i++ > 1000) { push (@all_a, $all); $all=""; $i=0; }
-                        my $string = "$abbr+$a";
-                        $string =~ s/\+MWE//;
+                        my $string = "$this_abbr+$a";
                         $all .= $string . "\n";
-#                        print STDERR "+"; # DEBUG
                     }
                     if ($all) {
-#                        print STDERR "184\n"; # DEBUG
                         push (@all_a, $all);
                     }
+
+                    my $to_generate = 0;
+
                     for my $a (@all_a) {
-                        $x++;
-                       print STDERR "\tgenerating forms for $abbr $file\n"; # DEBUG
+                        my @number_a = split(/\n+/, $a);
+                        $to_generate += $#number_a;
                         call_gen(\@idioms,$a);
                     }
+
+                    $total_to_generate += $to_generate;
+                    my $generated = 0;
                     if (! @idioms) {
-#                        print STDERR ":"; # DEBUG
                         print ABB "$abbr\n";
                     }
                     else {
                         for my $idiom (@idioms) {
                             if ( $idiom =~ / /) { # print idiom only if it contains space
+                                $generated += 1;
                                 print ABB "$idiom\n";
-#                                print STDERR "|"; # DEBUG
                             }
                         }
+                        $total_generated += $generated;
                     }
+                    print STDERR __LINE__ . "\t\t$generated of $to_generate potential forms for $this_abbr were generated\n"; # DEBUG
                 }
             }
         }
@@ -245,61 +243,35 @@ if( ! $noparadigm) {
     }
 }
 
+conclusion();
+close ABB;
+
 sub conclusion {
-    print STDERR "This program sent $total_analyses strings to $gen_lookup\n";
-    print STDERR "lookup recognised $total_usefull of these\n";
-    print STDERR "lookup did not recognise $total_useless of these\n";
+    print STDERR "This program sent $total_to_generate strings to $gen_lookup\n";
+    print STDERR sprintf("lookup recognised %d (%.2f percent) of these\n", $total_generated, $total_generated/$total_to_generate*100);
 }
 
 # Call generator for all word forms.
 sub call_gen {
     my ($tmp_aref, $all) = @_;
 
-#     print STDERR "248 $gen_lookup\n";
-#     print STDERR "249 $all\n";
     my $generated = `echo \"$all\" | $gen_lookup`;
-#     print STDERR "251 $generated\n";
-#     die "AHHHHHHHHHHH!!!!!";
     my @analyses = split(/\n+/, $generated);
 
-    my $useless = 0;
-    my $not_wanted_chars = 0;
-    my $contains_tab = 0;
-    my $usefull = 0;
     for my $idiom (@analyses) {
         if ($idiom =~ /\+\?/) {
-            $useless++;
             next;
         }
         if ($idiom =~ /[\:\-]/) {
-            $not_wanted_chars++;
             next;
         }
         my ($word, $analysis) = split(/\t/, $idiom);
         if (! $analysis) {
-            $contains_tab++;
             next;
         }
 
         push (@$tmp_aref, $analysis);
-        $usefull++;
     }
-    if ($useless > $#analyses) {
-        $useless = $#analyses;
-    }
-
-    $total_analyses += $#analyses;
-    $total_usefull += $usefull;
-    $total_useless += $useless;
-    $total_not_wanted_chars += $not_wanted_chars;
-    $total_contains_tab += $contains_tab;
-
-    print STDERR "\ttotal analyses: $#analyses\n";
-    print STDERR "\t\tusefull: $usefull\n";
-    print STDERR "\t\tuseless: $useless\n";
-    print STDERR "\t\tnot_wanted_chars: $not_wanted_chars\n";
-    print STDERR "\t\tcontains_tab: $contains_tab\n";
 }
 
-close ABB;
 

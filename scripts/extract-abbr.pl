@@ -247,7 +247,7 @@ conclusion();
 close ABB;
 
 sub conclusion {
-    print STDERR "This program sent $total_to_generate strings to $gen_lookup\n";
+    print STDERR "\nThis program sent $total_to_generate strings to $gen_lookup\n";
     print STDERR sprintf("lookup recognised %d (%.2f percent) of these\n", $total_generated, $total_generated/$total_to_generate*100);
 }
 

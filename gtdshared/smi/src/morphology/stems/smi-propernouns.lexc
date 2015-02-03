@@ -30262,6 +30262,7 @@ Eija+OLang/UND:Ei^ja ACCRA-fem ;
 Aija+OLang/UND:Ai^ja ACCRA-fem ;
 Lilija+OLang/UND:Lilija ACCRA-fem ;
 Mitkija+OLang/UND:Mitkija ACCRA-fem ;
+Mitkijá+OLang/UND:Mitkijá ACCRA-fem ;
 Nija+OLang/UND:Nija ACCRA-sur ;
 Bjørnstjerne+OLang/UND:Bjørnstjerne ACCRA-mal ;
 Leiros+OLang/UND:Leiros BERN-plc ;
@@ -30457,5 +30458,19 @@ Storelven+OLang/UND:Stor#elven9 LONDON-plc ;
 Hammerneselven+OLang/UND:Hammernes#elven9 LONDON-plc ;
 Lonkoselven+OLang/UND:Lonkos#elven9 LONDON-plc ;
 Bergebyelven+OLang/UND:Bergeby#elven9 LONDON-plc ;
-
+Timothy+OLang/UND:Timothy ACCRA-mal ;
+Stephany+OLang/UND:Stephany ACCRA-fem ;
+Hultkrantz+OLang/UND:Hultkrantz LONDON-sur ;
+Deorowicz+OLang/UND:Deorowicz BERN-sur ;
+Junkerelv+OLang/NOB:Junker#elv BERN-plc ;
+Ahlqvist+OLang/UND:Ahl#qvist9 BERN-sur ;
+Enkvist+OLang/UND:En#kvist9 BERN-sur ;
+Ketrez+OLang/UND:Ketrez9 LONDON-sur ;
+Budenz+OLang/UND:Budenz LONDON-sur ;
+Hurwitz+OLang/UND:Hurwitz LONDON-sur ;
+Spolsky+OLang/UND:Spolsky ACCRA-sur ;
+Kawagley+OLang/UND:Kawagley ACCRA-sur ;
+Foley+OLang/UND:Foley ACCRA-sur ;
+Sibley+OLang/UND:Sibley ACCRA-sur ;
+MacWhinney+OLang/UND:MacWhinney ACCRA-sur ;
 

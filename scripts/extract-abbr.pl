@@ -138,76 +138,78 @@ for my $file (@lex_file_names) {
 
     print STDERR "$0: reading file $file\n";
 
-    my $pos;
+    my @poses;
     for my $key (keys %lex_pos) {
         if ($file =~ /$key\.lexc/) {
-            $pos = $lex_pos{$key};
+            push(@poses, $lex_pos{$key});
         }
     }
 
-    open LEX, "< $file" or die "Cant open the file: $!\n";
-    while (<LEX>) {
-        chomp;
-        if (! /^\!/) { #discard comments
+    for my $pos (@poses) {
+        open LEX, "< $file" or die "Cant open the file: $!\n";
+        while (<LEX>) {
+            chomp;
+            if (! /^\!/) { #discard comments
 
-            if ((my $abbr = $_) =~ s/^([\w\.\-^]+((% [\w\.\-^]+)+\+MWE)+).*?[\s|:].*/$1/) {
-                $abbr =~ s/%//g;
-                $abbr =~ s/\^//g;
-                $abbr =~ s/0//g;
-                $abbr =~ s/[987]$//g;
+                if ((my $abbr = $_) =~ s/^([\w\.\-^]+((% [\w\.\-^]+)+\+MWE)+).*?[\s|:].*/$1/) {
+                    $abbr =~ s/%//g;
+                    $abbr =~ s/\^//g;
+                    $abbr =~ s/0//g;
+                    $abbr =~ s/[987]$//g;
 
-                my @idioms;
-                if (! $pos || $noparadigm) {
-                    print ABB "$abbr\n";
-                    print STDERR __LINE__ . " Ingen paradigme!\n"; # DEBUG
-                }
-                else {
-                    my $this_abbr = $abbr;
-                    $this_abbr =~ s/\+MWE//;
-                    my @all_a;
-                    my $all;
-                    my $i=0;
-
-                    # Collect all possible strings for generator.
-                    # The strings are splitted since there are so many possible
-                    # forms for pronouns.
-                    for my $a ( @{$paradigms{$pos}} ) {
-                        if ($i++ > 1000) { push (@all_a, $all); $all=""; $i=0; }
-                        my $string = "$this_abbr+$a";
-                        $all .= $string . "\n";
-                    }
-                    if ($all) {
-                        push (@all_a, $all);
-                    }
-
-                    my $to_generate = 0;
-
-                    for my $a (@all_a) {
-                        my @number_a = split(/\n+/, $a);
-                        $to_generate += $#number_a;
-                        call_gen(\@idioms,$a);
-                    }
-
-                    $total_to_generate += $to_generate;
-                    my $generated = 0;
-                    if (! @idioms) {
+                    my @idioms;
+                    if (! $pos || $noparadigm) {
                         print ABB "$abbr\n";
+                        print STDERR __LINE__ . " Ingen paradigme!\n"; # DEBUG
                     }
                     else {
-                        for my $idiom (@idioms) {
-                            if ( $idiom =~ / /) { # print idiom only if it contains space
-                                $generated += 1;
-                                print ABB "$idiom\n";
-                            }
+                        my $this_abbr = $abbr;
+                        $this_abbr =~ s/\+MWE//;
+                        my @all_a;
+                        my $all;
+                        my $i=0;
+
+                        # Collect all possible strings for generator.
+                        # The strings are splitted since there are so many possible
+                        # forms for pronouns.
+                        for my $a ( @{$paradigms{$pos}} ) {
+                            if ($i++ > 1000) { push (@all_a, $all); $all=""; $i=0; }
+                            my $string = "$this_abbr+$a";
+                            $all .= $string . "\n";
                         }
-                        $total_generated += $generated;
+                        if ($all) {
+                            push (@all_a, $all);
+                        }
+
+                        my $to_generate = 0;
+
+                        for my $a (@all_a) {
+                            my @number_a = split(/\n+/, $a);
+                            $to_generate += $#number_a;
+                            call_gen(\@idioms,$a);
+                        }
+
+                        $total_to_generate += $to_generate;
+                        my $generated = 0;
+                        if (! @idioms) {
+                            print ABB "$abbr\n";
+                        }
+                        else {
+                            for my $idiom (@idioms) {
+                                if ( $idiom =~ / /) { # print idiom only if it contains space
+                                    $generated += 1;
+                                    print ABB "$idiom\n";
+                                }
+                            }
+                            $total_generated += $generated;
+                        }
+                        print STDERR __LINE__ . "\t\t$pos $generated of $to_generate potential forms for $this_abbr were generated\n"; # DEBUG
                     }
-                    print STDERR __LINE__ . "\t\t$generated of $to_generate potential forms for $this_abbr were generated\n"; # DEBUG
                 }
             }
         }
+        close LEX;
     }
-    close LEX;
 #    print STDERR "\n"; # DEBUG - print a newline after each file and row of .:-+|
 }
 

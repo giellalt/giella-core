@@ -111,10 +111,8 @@ Aakre+OLang/NOB:Aakre ACCRA-sur ;
 Aakula+OLang/FIN:Aakula ACCRA-sur ;
 Aakvik+OLang/NOB:Aak9#vik BERN-sur ;
 Aalberg+OLang/NOB:Aal#berg9 BERN-sur ;
-
 Aalborg+OLang/NOB:Aal#borg9 BERN-plc ;
 Wilborg+OLang/NOB:Wil#borg9 BERN-plc ;
-
 Aalbu+OLang/NOB:Aal#bu NYSTØ-sur ;
 Aalen+OLang/NOB:Aalen9 LONDON-sur ;
 Aaler+OLang/NOB:Aaler LONDON-sur ;
@@ -941,9 +939,7 @@ Anderson+OLang/UND:Anderson9 LONDON-sur ;
 Batman+OLang/NOB:Batman9 LONDON-mal ;
 Superman+OLang/NOB:Superman9 BERN-sur ;
 Snehvit+OLang/NOB:Sne#hvit BERN-obj ;
-
 Zachrisson+OLang/UND:Zachrisson9 LONDON-sur ;
-
 Anderssen+OLang/NOB:Anderssen9 LONDON-sur ;
 Andersson+OLang/UND:Andersson9 LONDON-sur ;
 Anderstorp+OLang/UND:Anders#torp9 BERN-plc ;
@@ -30433,4 +30429,19 @@ Voeikova+OLang/UND:Voeikova ACCRA-sur ;
 Nicoladis+OLang/UND:Nicoladis LONDON-sur ;
 Schoch+OLang/UND:Schoch9 BERN-sur ;
 Kilani+OLang/UND:Kilani ACCRA-sur ;
+Kaijalainen+OLang/FIN:Kaijalai C-FI-NEN-sur ;
+Kaijanen+OLang/FIN:Kaija C-FI-NEN-sur ;
+Keijonen+OLang/FIN:Keijo C-FI-NEN-sur ;
+Laulajainen+OLang/FIN:Laulajai C-FI-NEN-sur ;
+Maijanen+OLang/FIN:Maija C-FI-NEN-sur ;
+Majoinen+OLang/FIN:Majoi C-FI-NEN-sur ;
+Ojalainen+OLang/FIN:Ojalai C-FI-NEN-sur ;
+Reijonen+OLang/FIN:Reijo C-FI-NEN-sur ;
+Salkunen+OLang/FIN:Salku C-FI-NEN-sur ;
+Sottinen+OLang/FIN:Sotti C-FI-NEN-sur ;
+Toijonen+OLang/FIN:Toijo C-FI-NEN-sur ;
+Veijalainen+OLang/FIN:Veijalai C-FI-NEN-sur ;
+Veijanen+OLang/FIN:Veija C-FI-NEN-sur ;
+Veijonen+OLang/FIN:Veijo C-FI-NEN-sur ;
+Vuojolainen+OLang/FIN:Vuojolai C-FI-NEN-sur ;
 

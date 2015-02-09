@@ -23945,6 +23945,7 @@ Skumnes+OLang/NOB:Skum9#nes BERN-plc ;
 Skundenes+OLang/NOB:Skunde#nes BERN-plc ;
 Skup+OLang/UND:Skup9 BERN-org ;
 Skutnabb-Kangas+OLang/UND:Skut^nabb9-Kangas LONDON-sur ;
+Skutnabb-Kangas+Err/Sub+OLang/UND:Skut^nabb9-Kankas LONDON-sur ;
 Skutvik+OLang/NOB:Skut9#vik BERN-plc ;
 Skuvlalinux+OLang/UND:Skuvla#linux LONDON-org ;
 Sky+OLang/UND:Sky NYSTØ-org ;
@@ -30210,4 +30211,5 @@ Veijanen+OLang/FIN:Veija C-FI-NEN-sur ;
 Veijonen+OLang/FIN:Veijo C-FI-NEN-sur ;
 Vuojolainen+OLang/FIN:Vuojolai C-FI-NEN-sur ;
 Kesänkitunturi+OLang/FIN:Kesänkitunturi PIPPI-plc ;
-
+Söderholm+OLang/SWE:Söder#holm9 BERN-plc ;
+Wittgenstein+OLang/UND:Wittgen#stein9 BERN-plc ;

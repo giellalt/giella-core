@@ -1,0 +1,6 @@
+# This file makes the v1 variant tag used in inverted dictionary fst's optional.
+# This is to ensure that it is ok to generate without a variant tag (in which
+# case you get v1), but that you need to specify all other variant tags to get
+# exactly that variant.
+
+0 (<-) %+v1;

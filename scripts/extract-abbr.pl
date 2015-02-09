@@ -111,7 +111,7 @@ print ABB "LEXICON IDIOM\n";
 my %lex_pos = ( 'nouns' => 'N',
                 'adverbs' => 'Adv',
                 'adjectives' => 'Adj',
-                'propernouns' => 'N+Prop',
+                'propernouns' => 'N',
                 'verbs' => 'V',
                 'pronouns' => 'Pron',
                 'numerals' => 'Num',

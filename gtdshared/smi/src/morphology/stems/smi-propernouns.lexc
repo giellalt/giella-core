@@ -10299,7 +10299,7 @@ Høver+OLang/NOB:Høver LONDON-sur ;
 Høvik+OLang/NOB:Hø#vik BERN-sur ;
 Høvringen+OLang/NOB:Høvringen9 LONDON-plc ;
 Høvåg+OLang/NOB:Hø#våg9 BERN-sur ;
-Høy+OLang/NOB:Høy OY-sur ;
+Høy+OLang/NOB:Høy OY-plc ; !Egentlig sur
 Høyanger+OLang/NOB:Høy#anger LONDON-plc ;
 Høybakken+OLang/NOB:Høy#bakken9 LONDON-sur ;
 Høybråten+OLang/NOB:H^øy#bråten9 LONDON-sur ;
@@ -28125,7 +28125,7 @@ Vesla+OLang/UND:Vesla ACCRA-fem ;
 Vesla+OLang/UND:Vesla ACCRA-org ;
 Vesle+OLang/UND:Vesle ACCRA-fem ;
 Vesleasia+Use/LexSub+OLang/UND:Vesle^asia ACCRA-plc ;
-Veslemøy+OLang/NOB:Veslemøy OY-fem ;
+Veslemøy+OLang/NOB:Veslemøy OY-plc ; !egentlig OY-fem
 Vespasia+Use/LexSub+OLang/UND:Vespasia ACCRA-plc ;
 Vespasian+OLang/UND:Vespasi^an9 LONDON-mal ;
 Vespucci+OLang/UND:Vespucci ACCRA-org ;

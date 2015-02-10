@@ -204,7 +204,7 @@ for my $file (@lex_file_names) {
                         }
                         $total_generated += $generated;
                     }
-                    print STDERR __LINE__ . "\t\t$pos $generated of $to_generate potential forms for $this_abbr were generated\n"; # DEBUG
+                    print STDERR __LINE__ . "\t$pos $generated of $to_generate potential forms for $this_abbr were generated\n"; # DEBUG
                 }
             }
         }
@@ -262,7 +262,7 @@ sub call_gen {
 
     for my $idiom (@analyses) {
         if ($idiom =~ /\+\?/) {
-            print __LINE__ . "\tnot accepted $idiom\n";
+            print __LINE__ . "\t\tnot accepted $idiom\n";
             next;
         }
 #         if ($idiom =~ /[\:\-]/) {

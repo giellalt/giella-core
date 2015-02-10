@@ -159,7 +159,7 @@ for my $file (@lex_file_names) {
                 my @idioms;
                 if (! $pos || $noparadigm) {
                     print ABB "$abbr\n";
-                    print STDERR __LINE__ . " Ingen paradigme!\n"; # DEBUG
+                    print STDERR __LINE__ . " Ingen paradigme\n"; # DEBUG
                 }
                 else {
                     my $this_abbr = $abbr;

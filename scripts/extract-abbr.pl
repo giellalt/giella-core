@@ -112,7 +112,6 @@ my %lex_pos = ( 'nouns' => 'N',
                 'adverbs' => 'Adv',
                 'adjectives' => 'Adj',
                 'propernouns' => 'N',
-                'verbs' => 'V',
                 'pronouns' => 'Pron',
                 'numerals' => 'Num',
                 );

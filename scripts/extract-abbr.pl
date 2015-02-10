@@ -110,7 +110,7 @@ print ABB "LEXICON IDIOM\n";
 
 my %lex_pos = ( 'nouns' => 'N',
                 'adverbs' => 'Adv',
-                'propernouns' => 'N',
+                'propernouns' => 'N', # should just accept N+Prop when generating
                 'pronouns' => 'Pron',
                 );
 

@@ -187,7 +187,7 @@ for my $file (@lex_file_names) {
                     for my $a (@all_a) {
                         my @number_a = split(/\n+/, $a);
                         $to_generate += $#number_a;
-                        call_gen(\@idioms,$a);
+                        @idioms = call_gen($a);
                     }
 
                     $total_to_generate += $to_generate;
@@ -255,7 +255,9 @@ sub conclusion {
 
 # Call generator for all word forms.
 sub call_gen {
-    my ($tmp_aref, $all) = @_;
+    my ($all) = @_;
+
+    my @idioms;
 
     my $generated = `echo \"$all\" | $gen_lookup`;
     my @analyses = split(/\n+/, $generated);
@@ -273,8 +275,10 @@ sub call_gen {
             next;
         }
 
-        push (@$tmp_aref, $analysis);
+        push (@idioms, $analysis);
     }
+
+    return @idioms;
 }
 
 

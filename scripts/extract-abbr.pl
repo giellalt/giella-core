@@ -1,10 +1,17 @@
 #!/usr/bin/perl -w
 use strict;
 use utf8;
+use open 'utf8';
+# permit named arguments
+use Getopt::Long;
+#use Data::Dumper; # for DEBUGging %paradigms
+
+# Module to communicate with program's user interfaces
+use langTools::Util;
+
 
 binmode( STDIN, ':utf8' );
 binmode( STDOUT, ':utf8' );
-use open 'utf8';
 
 # abbr-extract
 # Perl-script for extracting abbreviations from lexicon files.
@@ -18,13 +25,6 @@ use open 'utf8';
 #  --lex=<file_name1>,<file_name2> Comma-separated list of other lexicon files.
 #
 # $Id$
-
-# permit named arguments
-use Getopt::Long;
-#use Data::Dumper; # for DEBUGging %paradigms
-
-# Module to communicate with program's user interfaces
-use langTools::Util;
 
 my @lex_file_names;
 my $lex_files;

@@ -171,8 +171,10 @@ for my $file (@lex_file_names) {
                         # forms for pronouns.
                         for my $a ( @{$paradigms{$pos}} ) {
                             if ($i++ > 1000) { push (@all_a, $all); $all=""; $i=0; }
-                            my $string = "$this_abbr+$a";
-                            $all .= $string . "\n";
+                            if (!($file =~ /propernouns/ && $a !~ /\+Prop/)) {
+                                my $string = "$this_abbr+$a";
+                                $all .= $string . "\n";
+                            }
                         }
                         if ($all) {
                             push (@all_a, $all);

@@ -110,10 +110,8 @@ print ABB "LEXICON IDIOM\n";
 
 my %lex_pos = ( 'nouns' => 'N',
                 'adverbs' => 'Adv',
-                'adjectives' => 'Adj',
                 'propernouns' => 'N',
                 'pronouns' => 'Pron',
-                'numerals' => 'Num',
                 );
 
 # Initialize paradigm and generator

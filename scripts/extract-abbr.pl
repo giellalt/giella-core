@@ -159,7 +159,7 @@ for my $file (@lex_file_names) {
                 my @idioms;
                 if (! $pos || $noparadigm) {
                     print ABB "$abbr\n";
-                    print STDERR __LINE__ . " Ingen paradigme\n"; # DEBUG
+#                     print STDERR __LINE__ . " Ingen paradigme\n"; # DEBUG
                 }
                 else {
                     my $this_abbr = $abbr;
@@ -262,7 +262,7 @@ sub call_gen {
 
     for my $idiom (@analyses) {
         if ($idiom =~ /\+\?/) {
-            print __LINE__ . "\t\tnot accepted $idiom\n";
+#             print __LINE__ . "\t\tnot accepted $idiom\n";
             next;
         }
 #         if ($idiom =~ /[\:\-]/) {

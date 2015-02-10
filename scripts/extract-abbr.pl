@@ -262,6 +262,7 @@ sub call_gen {
 
     for my $idiom (@analyses) {
         if ($idiom =~ /\+\?/) {
+            print __LINE__ . "\tnot accepted $idiom\n";
             next;
         }
 #         if ($idiom =~ /[\:\-]/) {

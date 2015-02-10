@@ -130,6 +130,7 @@ if (! $noparadigm) {
     }
 }
 
+my %all_idioms;
 
 for my $file (@lex_file_names) {
 
@@ -193,13 +194,13 @@ for my $file (@lex_file_names) {
                     $total_to_generate += $to_generate;
                     my $generated = 0;
                     if (! @idioms) {
-                        print ABB "$abbr\n";
+                        $all_idioms{$abbr} = 1;
                     }
                     else {
                         for my $idiom (@idioms) {
                             if ( $idiom =~ / /) { # print idiom only if it contains space
                                 $generated += 1;
-                                print ABB "$idiom\n";
+                                $all_idioms{$idiom} = 1;
                             }
                         }
                         $total_generated += $generated;
@@ -211,6 +212,10 @@ for my $file (@lex_file_names) {
     }
     close LEX;
 #    print STDERR "\n"; # DEBUG - print a newline after each file and row of .:-+|
+}
+
+for my $idiom (keys %all_idioms) {
+    print ABB "$idiom\n";
 }
 
 if( ! $noparadigm) {

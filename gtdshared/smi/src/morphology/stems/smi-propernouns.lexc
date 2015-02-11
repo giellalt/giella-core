@@ -29962,9 +29962,7 @@ Bratland+OLang/NOB:Brat#land9 BERN-plc ;
 Mardoeke+OLang/UND:Mardoek RONDANE-fem ;
 Boekraad+OLang/NOB:Boekraad9 BERN-sur ;
 Eliva+OLang/UND:Eliva ACCRA-fem ;
-Snåase+OLang/SMA:Snåase ACCRA-plc ;
 Snåasa+OLang/SMA:Snåasa ACCRA-plc ;
-Maajehjaevrie+OLang/SMA:Maajehjaevrie ACCRA-plc ;
 Lidvard+OLang/UND:Lidvard9 LONDON-mal ;
 Brygfjeld+OLang/UND:Bryg9#fjeld9 BERN-sur ;
 Maursund+OLang/NOB:Maur9#sund9 SUND-plc ;
@@ -30560,9 +30558,8 @@ eSápmi+OLang/UND:e#Sápmi PIPPI-org ;
 Meahcce-Vulle+OLang/UND:Meahcce-Vul'le ACCRA-mal ;
 Nilut% Cup+MWE+OLang/UND:Nilut% Cup9 BERN-obj ;
 Anne-Mari+OLang/UND:Anne-Mari ACCRA-fem ;
-Tiljavre+Err/LexSub+OLang/SMA:Til#javre SIJTE-plc ;
 Runasvágge+Err/LexSub+OLang/SMA:Runas#vágge SIJTE-plc ;
-Stordalen+OLang/UND:Stordalen LONDON-plc ;
+Stordalen+OLang/UND:Stor9#dalen9 LONDON-plc ;
 Stordalselva+OLang/UND:Stordals#elva ACCRA-plc ;
 
 

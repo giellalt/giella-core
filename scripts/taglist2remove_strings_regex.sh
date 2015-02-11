@@ -3,7 +3,7 @@
 # Create a filter regex to remove all strings not belonging to the requested
 # category, as extracted from the list of multichar symbols in the lexical fst.
 
-if ! test $# -eq 2 -o $# -eq 3 ; then
+if ! test $# -eq 3 -o $# -eq 4 ; then
     echo
     echo "Usage: $0 OUTFILE CATEGORY TAGFILE [ADAPTIONREGEXFILE]"
     echo

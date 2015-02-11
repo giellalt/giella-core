@@ -75,7 +75,9 @@ open LEX, "< $abbr_lex_file" or die "Cant open the abbreviation file: $!\n";
 # idioms come first.
 while (<LEX>) {
     if (/^LEXICON ITRAB/) {
-        print ABB "$_\n";
+        my $lex = $_;
+        $lex =~ s/\!.+//;
+        print ABB "$lex\n";
         last;
     }
 }
@@ -84,7 +86,9 @@ while (<LEX>) {
     chomp;
 
     if (/^LEXICON/) {
-        print ABB "$_\n";
+        my $lex = $_;
+        $lex =~ s/\!.+//;
+        print ABB "$lex\n";
         next;
     }
 

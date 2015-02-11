@@ -218,7 +218,7 @@ for my $file (@lex_file_names) {
 #    print STDERR "\n"; # DEBUG - print a newline after each file and row of .:-+|
 }
 
-for my $idiom (keys %all_idioms) {
+for my $idiom (sort(keys %all_idioms)) {
     print ABB "$idiom\n";
 }
 

@@ -3,4 +3,4 @@
 # not required.
 
 0 (<-) %+Comp, 
-0 (<-) %+Superl || %+Adv _ ;
+0 (<-) %+Superl || %+Adv ( ? ) _ ;

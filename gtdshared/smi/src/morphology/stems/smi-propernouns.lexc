@@ -3518,6 +3518,7 @@ Botngård+OLang/NOB:Botn#gård9 BERN-plc ;
 Botnhamn+OLang/NNO:Botn#hamn9 BERN-plc ;
 Botswana+OLang/UND:Botswana ACCRA-LOAN-plc ;
 Botten+OLang/UND:Botten9 LONDON-sur ;
+Øster-Botten+OLang/UND:Øster-Botten9 LONDON-sur ;
 Bottenviken+Err/Sub+OLang/UND:Botten#vika ACCRA-plc ;
 Bottenviken+OLang/NOB:Botten#viken9 LONDON-LOAN-plc ;
 Botthiem+OLang/UND:Bott^hiem9 BERN-plc ;
@@ -14343,7 +14344,7 @@ Kyngäs+OLang/UND:Kyngäs LONDON-sur ;
 Kynnberget+OLang/NOB:Kynn#berget LONDON-plc ;
 Kynsijärvi+OLang/FIN:Kynsi#järv MAKI-plc ;
 Kynsilehto+OLang/FIN:Kynsi#lehto9 ACCRA-sur ;
-Kyntäjä+OLang/UND:Kyntäjä ACCRA-sur ;
+Kyntäjä+OLang/FIN:Kyntäjä ACCRA-sur ;
 Kyoto+OLang/UND:Ky^oto9 ACCRA-plc ;
 Kyperelva+OLang/NOB:Kyper9#elva ACCRA-plc ;
 Kypris+OLang/UND:Kypris LONDON-fem ;
@@ -30573,12 +30574,32 @@ Stordalen+OLang/UND:Stor9#dalen9 LONDON-plc ;
 Stordalselva+OLang/UND:Stordals#elva ACCRA-plc ;
 Heyden+OLang/UND:Heyden9 LONDON-plc ;
 Gorholt+OLang/UND:Gorholt BERN-sur ;
-
-
-
-
-
-
+Boyesen+OLang/NOB:Boyesen9 LONDON-sur ;
+Bruner+OLang/UND:Bruner LONDON-sur ;
+Burgess+OLang/UND:Burgess9 BERN-plc ;
+Digerneset+OLang/UND:Diger#neset LONDON-plc ;
+Dixon+OLang/UND:Dixon9 LONDON-sur ;
+Fiellström+OLang/SWE:Fiell#ström9 BERN-sur ;
+Hagège+OLang/UND:Hagège ACCRA-sur ;
+Hawkins+OLang/UND:Hawkins LONDON-sur ;
+Höbugt+OLang/SWE:Hö#bugt BERN-sur ;
+Jerome+OLang/UND:Jerome ACCRA-sur ;
+Lönnrot+OLang/SWE:Lönnrot9 LONDON-sur ;
+Pehrson+OLang/SWE:Pehrson9 LONDON-sur ;
+Platzack+OLang/UND:Platzack LONDON-sur ;
+Kustannus+OLang/UND:Kustannus BERN-sur ;
+Pohjoinen+OLang/FIN:Pohjoi C-FI-NEN-sur ;
+Richards+OLang/UND:Richards LONDON-sur ;
+Räppääjä+OLang/FIN:Räppääjä ACCRA-sur ;
+Røyneland+OLang/NOB:Røyne#land9 BERN-sur ;
+Seilberget+OLang/NOB:Seil#berget LONDON-plc ;
+Snyder+OLang/UND:Snyder LONDON-sur ;
+McLean+OLang/UND:McLean9 ACCRA-sur ;
+Stensgård+OLang/NOB:Stens#gård9 BERN-sur ;
+Turnbull+OLang/UND:Turnbull LONDON-sur ;
+Västi+OLang/FIN:Västi ACCRA-sur ;
+Storbækken+OLang/UND:Stor^bækken9 LONDON-plc ;
+Saeed+OLang/SWE:Saeed9 BERN-sur ;
 
 
 

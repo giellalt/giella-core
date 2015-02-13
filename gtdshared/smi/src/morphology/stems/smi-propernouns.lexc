@@ -152,7 +152,7 @@ ABM-utvikling+CmpN/None+OLang/NOB:ABM-utvikling9 LONDON-obj ;
 ACTA+CmpN/None+OLang/UND:ACTA ACCRA-org ;
 AIDS+CmpN/None+OLang/UND:AIDS BERN-obj ;
 ASVO+CmpN/None+OLang/UND:ASVO ACCRA-org ;
-
+High+CmpN/None+OLang/UND:High9 BERN-obj ;
 
 LEXICON ProperNoun-smi  !!= * __@CODE@__ Propernouns
 
@@ -30566,6 +30566,8 @@ Anne-Mari+OLang/UND:Anne-Mari ACCRA-fem ;
 Runasvágge+Err/LexSub+OLang/SMA:Runas#vágge SIJTE-plc ;
 Stordalen+OLang/UND:Stor9#dalen9 LONDON-plc ;
 Stordalselva+OLang/UND:Stordals#elva ACCRA-plc ;
+Heyden+OLang/UND:Heyden9 LONDON-plc ;
+Gorholt+OLang/UND:Gorholt BERN-sur ;
 
 
 

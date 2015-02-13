@@ -597,6 +597,7 @@ Izu+CmpN/None+OLang/UND:Izu ACCRA-obj ;
 ÁJA+CmpN/None+OLang/UND:ÁJA ACCRA-org ;
 Ája+CmpN/None+OLang/UND:Ája ACCRA-org ;
 Finn+OLang/UND:Finn9 BERN-sur ;
+Sibir+OLang/UND:Sibir BERN-LOAN-plc ;
 
 
 
@@ -23408,7 +23409,6 @@ Siangkiang+OLang/UND:Si^angki#ang9 BERN-plc ;
 Siangtan+OLang/UND:Si^angtan9 BERN-plc ;
 Siao+OLang/UND:Si^ao9 ACCRA-mal ;
 Siberia+OLang/NOB:Siberia ACCRA-plc ;
-Sibir+OLang/UND:Sibir BERN-LOAN-plc ;
 Sibiu+OLang/UND:Sibiu ACCRA-plc ;
 Sibon+OLang/UND:Sibon9 LONDON-sur ;
 Sibylla+OLang/NOB:Sibylla ACCRA-fem ;

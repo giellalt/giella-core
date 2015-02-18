@@ -25,7 +25,12 @@ Source examples (<x>) recognised as ${trg_lang}:
 EOF
 paste <(src_ex | pytextcat proc -s --langs "${src_lang},${trg_lang}" ) <(src_ex) | grep "^${trg_lang}" || true
 cat <<EOF
+(if these are really ${src_lang}, you can ignore them)
 
 Target examples (<xt>) recognised as ${src_lang}:
 EOF
 paste <(trg_ex | pytextcat proc -s --langs "${src_lang},${trg_lang}" ) <(trg_ex) | grep "^${src_lang}" || true
+cat <<EOF
+(if these are really ${trg_lang}, you can ignore them)
+EOF
+

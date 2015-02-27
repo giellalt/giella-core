@@ -88,6 +88,8 @@ $svnignore "*" $1/src/morphology/generated_files
 # Ignore all temporary and generated files in the src/syntax/ dir:
 $svnignore "$mkfiles
 $fstfiles
+*.xeroxscript
+*.hfstscript
 downcase-derived_proper-strings.xfscript" $1/src/orthography
 
 # Ignore all temporary and generated files in the src/tagsets/ dir:
@@ -101,6 +103,53 @@ $svnignore "$mkfiles
 $fstfiles
 dependency.cg3
 functions.cg3" $1/src/syntax
+
+# Set the svn:ignore prop on the test/tools/mt/apertium/ dir:
+$svnignore "$mkfiles
+*.log
+*.trs
+*.txt
+*.sh" $1/test/tools/mt/apertium
+
+# Set the svn:ignore prop on the tools/mt/apertium/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.cg3
+*.att.gz" $1/tools/mt/apertium
+
+# Set the svn:ignore prop on the tools/mt/apertium/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*txt
+*.regex" $1/tools/mt/apertium/filters
+
+# Set the svn:ignore prop on the test/tools/preprocess/ dir:
+$svnignore "$mkfiles
+abbr.txt" $1/tools/preprocess
+
+# Set the svn:ignore prop on the hfst speller dir:
+$svnignore "$mkfiles
+$fstfiles
+easteregg.*
+*.service
+*.zhfst
+*.oxt
+spellercorpus.*
+test.*
+build
+unitweight
+3" $1/tools/spellcheckers/fstbased/hfst
+
+# Set the svn:ignore prop on the grammarchecker dir:
+$svnignore "$mkfiles
+$fstfiles
+*-x-standard
+4" $1/tools/grammarcheckers
+
+# Set the svn:ignore prop on the shellscripts dir:
+$svnignore "$mkfiles
+*.sh
+*.txt" $1/tools/shellscripts
 
 # Set the svn:ignore prop on the test/ dir:
 $svnignore "$mkfiles
@@ -129,49 +178,6 @@ $svnignore "$mkfiles
 *.trs
 *.txt
 *.sh" $1/test/tools/spellcheckers
-
-# Set the svn:ignore prop on the test/tools/mt/apertium/ dir:
-$svnignore "$mkfiles
-*.log
-*.trs
-*.txt
-*.sh" $1/test/tools/mt/apertium
-
-# Set the svn:ignore prop on the tools/mt/apertium/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.cg3
-*.att.gz" $1/tools/mt/apertium
-
-# Set the svn:ignore prop on the tools/mt/apertium/filters/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*txt
-*.regex" $1/tools/mt/apertium/filters
-
-# Set the svn:ignore prop on the hfst speller dir:
-$svnignore "$mkfiles
-$fstfiles
-easteregg.*
-*.service
-*.zhfst
-*.oxt
-spellercorpus.*
-test.*
-build
-unitweight
-3" $1/tools/spellcheckers/fstbased/hfst
-
-# Set the svn:ignore prop on the grammarchecker dir:
-$svnignore "$mkfiles
-$fstfiles
-*-x-standard
-4" $1/tools/grammarcheckers
-
-# Set the svn:ignore prop on the shellscripts dir:
-$svnignore "$mkfiles
-*.sh
-*.txt" $1/tools/shellscripts
 
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/src/morphology/affixes

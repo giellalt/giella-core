@@ -17,27 +17,43 @@ if ! test $# -ge 1 ; then
     exit 1
 fi
 
+inputfile=$1
+shift
+
 # Specify a never-matching dummy string if no second argument is given:
-if test $2 ; then
-    EXTRAREMOVALS=$2
+if test "x$@" != "x"; then
+    EXTRAREMOVALS=$@
 else
     EXTRAREMOVALS="(THISISADUMMYSTRING)"
 fi
 
-grep ";" $1 | egrep -v "^[[:space:]]*\!" | \
-             egrep -v '(LEXICON| K | Rreal | R |ShCmp|RCmpnd|CmpN/Only|ENDLEX)' | \
-             egrep -v "$EXTRAREMOVALS" | \
-              sed 's/^[ 	]*//' | \
-              grep -v "^\-" | \
-              sed 's/% /€/g' | \
-              sed 's/%:/¢/g' | \
-              sed 's/%#/¥/g' | \
-              sed 's/%\(.\)/\1/g' | \
-              tr ":+\t" " "  | \
-              cut -d " " -f1 | \
-              tr -d "#"  | \
-              tr "€" " " | \
-              tr "¢" ":" | \
-              tr "¥" "#" | \
-             egrep -v "(^$|^;|_|^[0-9]$|^\!)" | \
-              sort -u
+# Debug:
+# printf "$0 $inputfile $@\n" 1>&2
+# printf "Extra removals: $EXTRAREMOVALS\n" 1>&2
+
+# The first lines do:
+# 1. grep only lines containing ;
+# 2. do NOT grep lines beginning with (space +) !, @ or <
+# 3. do NOT grep lines containing ONLY a continuation lexicon ref
+# 4. do NOT grep lines containing a number of generally known wrong stuff
+# 5. do NOT grep things specified in each test script
+# The rest is general mangling
+grep ";" $inputfile \
+   | egrep -v "^[[:space:]]*(\!|\@|<)" \
+   | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
+   | egrep -v '(LEXICON| K | Rreal | R |ShCmp|RCmpnd|CmpN/Only|ENDLEX|\+Err\/)' \
+   | egrep -v "$EXTRAREMOVALS" \
+   | sed 's/^[ 	]*//' \
+   | grep -v "^\-" \
+   | sed 's/% /€/g' \
+   | sed 's/%:/¢/g' \
+   | sed 's/%#/¥/g' \
+   | sed 's/%\(.\)/\1/g' \
+   | tr ":+\t" " "  \
+   | cut -d " " -f1 \
+   | tr -d "#"  \
+   | tr "€" " " \
+   | tr "¢" ":" \
+   | tr "¥" "#" \
+   | egrep -v "(^$|^;|_|^[0-9]$|^\!)" \
+   | sort -u

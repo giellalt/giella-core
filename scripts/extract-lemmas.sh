@@ -41,7 +41,7 @@ fi
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<)" \
    | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
-   | egrep -v '(LEXICON| K | Rreal | R |ShCmp|RCmpnd|CmpN/Only|ENDLEX|\+Err\/)' \
+   | egrep -v '(LEXICON| K | Rreal | R |ShCmp|RCmpnd|CmpN/Only|ENDLEX|\/LexSub)'\
    | egrep -v "$EXTRAREMOVALS" \
    | sed 's/^[ 	]*//' \
    | grep -v "^\-" \

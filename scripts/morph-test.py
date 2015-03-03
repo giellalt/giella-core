@@ -17,7 +17,7 @@ import os
 import os.path
 import re
 import shlex
-#import time
+import shutil
 import sys
 import yaml
 
@@ -54,15 +54,10 @@ def colourise(string, *args, **kwargs):
     kwargs.update(colors)
     return string.format(*args, **kwargs)
 
-def check_path_exists(programs):
-    out = {}
-    for p in programs:
-        for path in os.environ.get('PATH', '').split(':'):
-            if os.path.exists(os.path.join(path, p)) and \
-               not os.path.isdir(os.path.join(path, p)):
-                    out[p] = os.path.join(path, p)
-        if not out.get(p):
-            raise EnvironmentError("Cannot find `%s`. Check $PATH." % p)
+def check_path_exists(program):
+    out = shutil.which(program)
+    if out is None:
+        raise EnvironmentError("Cannot find `%s`. Check $PATH." % program)
     return out
 
 # SUPPORT CLASSES
@@ -147,7 +142,12 @@ class TestFile:
     def app(self):
         a = self.data.get("Config", {}).get(self._system, {}).get("App", None)
         if a is None:
-            a = "hfst-lookup" if self._system == "hfst" else "lookup"
+            if self._system == "hfst":
+                return ['hfst-lookup']
+            elif self._system == "xerox":
+                return ["lookup", "-flags", "mbTT"]
+            else:
+                raise Exception("Unknown system: '%s'" % self._system)
         return a
 
 class MorphTest:
@@ -269,14 +269,17 @@ class MorphTest:
                     args.morph,
                     args.app,
                     args.transducer,
-                    args.section))
+                    args.section), args.section)
         else:
-            self.config = TestFile(yaml_load_ordered(open(fn)))
+            self.config = TestFile(yaml_load_ordered(open(fn)), args.section)
 
         config = self.config
 
-        self.program = shlex.split(args.app or config.app)
-        check_path_exists([self.program[0]])
+        app = args.app or config.app
+        if isinstance(app, str):
+            app = app.split(" ")
+        self.program = string_to_list(app)
+        check_path_exists(self.program[0])
 
         self.gen = args.gen or config.gen
         self.morph = args.morph or config.morph
@@ -477,14 +480,14 @@ class MorphTest:
                 if not self.args.hide_fail:
                     self.out.failure(n, caseslen, test, "Missing results", missing)
                 #self.count[d]["Fail"] += len(missing)
-            
+
             if len(invalid) > 0:
                 if not is_lexical and self.args.ignore_analyses:
                     invalid = set() # hide this for the final check
                 elif not self.args.hide_fail:
                     self.out.failure(n, caseslen, test, "Unexpected results", invalid)
                 #self.count[d]["Fail"] += len(invalid)
-            
+
             if len(detested) > 0:
                 if self.args.colour:
                     msg = colourise("{red}BROKEN!{reset}")
@@ -586,8 +589,8 @@ def parse_lexc_trans(f, gen=None, morph=None, app=None, fallback=None, lookup="h
 
     lexc = parse_lexc(f, fallback)[trans]
     if app is None:
-        app = "hfst-lookup" if lookup == "hfst" else "lookup"
-    config = {lookup: {"Gen": gen, "Morph": morph, "App": app}}
+        app = ["hfst-lookup"] if lookup == "hfst" else ["lookup", "-flags", "mbTT"]
+    config = {lookup: {"Gen": gen, "Morph": morph, "App": string_to_list(app)}}
     return {"Config": config, "Tests": lexc}
 
 def lexc_to_yaml_string(data):
@@ -608,9 +611,7 @@ class UI(ArgumentParser):
     def __init__(self):
         ArgumentParser.__init__(self)
 
-        self.description="""Test morphological transducers for consistency.
-            `hfst-lookup` (or Xerox' `lookup` with argument -x) must be
-            available on the PATH."""
+        self.description="""Test morphological transducers for consistency."""
         self.epilog="Will run all tests in the test_file by default."
 
         self.add_argument("-c", "--colour", dest="colour",
@@ -637,7 +638,7 @@ class UI(ArgumentParser):
         self.add_argument("-p", "--hide-passes",
             dest="hide_pass", action="store_true",
             help="Suppresses failures to make finding passes easier")
-        self.add_argument("-S", "--section", default=["hfst"],
+        self.add_argument("-S", "--section", default="hfst",
             dest="section", nargs='?', required=False,
             help="The section to be used for testing (default is `hfst`)")
         self.add_argument("-t", "--test",
@@ -658,7 +659,7 @@ class UI(ArgumentParser):
         self.add_argument("--morph", dest="morph", nargs='?', required=False,
             help="Override morph transducer used for test")
 
-        self.add_argument("test_file", nargs='?',
+        self.add_argument("test_file",
             help="YAML file with test rules")
 
         self.test = MorphTest(self.parse_args())

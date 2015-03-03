@@ -1,35 +1,71 @@
 #!/bin/bash
-#
-# extract-lemmas.sh FILE ["(string1|string2|stringN)"]
-#
-# Extracts all real lemmas from lexc file FILE, optionally excluding lines
-# containing the strings in the second argument (as pased to egrep -v). The
-# lemmas are printed to STDOUT.
+
+# For debugging, uncomment this command:
+# set -x
 
 if test -z "${GTCORE}" ; then
     echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"
     exit 1
 fi
 
+function print_usage() {
+    echo "Usage: $0 [OPTIONS...] INPUTFILE"
+    echo "Extract lemmas from INPUTFILE (lexc)"
+    echo
+    echo "  -h, --help             Print this usage info"
+    echo "  --exclude '(pattern)'  Exclude (egrep) patterns from the lemma list"
+    echo "  --include '(pattern)'  Include (egrep) patterns from the lemma list"
+    echo
+}
+
 # Wrong usage - short instruction:
 if ! test $# -ge 1 ; then
-    echo "Usage: $0 INPUT_FILE [\"(EXCLUDE|MATCHING|LINES)\"]"
+    print_usage
     exit 1
 fi
 
-inputfile=$1
-shift
+# manual getopt loop... Mac OS X does not have good getopt
+while test $# -ge 1 ; do
+    if test x$1 = x--help -o x$1 = x-h ; then
+        print_usage
+        exit 0
+    elif test x$1 = x--exclude ; then
+        if test -z "$2" ; then
+            print_usage
+            exit 1
+        else
+            excludepattern="$2"
+            shift
+        fi
+    elif test x$1 = x--include ; then
+        if test -z "$2" ; then
+            print_usage
+            exit 1
+        else
+            includepattern="$2"
+            shift
+        fi
+    elif test -f "$1"; then
+        inputfile="$1"
+        shift
+    else
+        echo "$0: unknown option $1"
+        print_usage
+        exit 1
+    fi
+    shift
+done
 
-# Specify a never-matching dummy string if no second argument is given:
-if test "x$@" != "x"; then
-    EXTRAREMOVALS=$@
-else
-    EXTRAREMOVALS="(THISISADUMMYSTRING)"
-fi
-
-# Debug:
-# printf "$0 $inputfile $@\n" 1>&2
-# printf "Extra removals: $EXTRAREMOVALS\n" 1>&2
+# Only grep if there is a pattern to grep on, or everything will vanish:
+exclgrep () {
+    # Check that the grep pattern isn't empty:
+    if test "x$@" != "x"; then
+        egrep -v "$@"
+    # If it is, just let everything pass through using cat:
+    else
+        cat
+    fi
+}
 
 # The first lines do:
 # 1. grep only lines containing ;
@@ -42,7 +78,8 @@ grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<)" \
    | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
    | egrep -v '(LEXICON| K | Rreal | R |ShCmp|RCmpnd|CmpN/Only|ENDLEX|\/LexSub)'\
-   | egrep -v "$EXTRAREMOVALS" \
+   | exclgrep "$excludepattern" \
+   | egrep "$includepattern" \
    | sed 's/^[ 	]*//' \
    | grep -v "^\-" \
    | sed 's/% /€/g' \

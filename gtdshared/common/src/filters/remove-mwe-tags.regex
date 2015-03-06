@@ -1,0 +1,5 @@
+# This regex removes the tag +MWE, which we do not want in any fst.
+# It is used only by the preprocess tool.
+
+# delete +MWE tags from sme:
+0 <- %+MWE ;

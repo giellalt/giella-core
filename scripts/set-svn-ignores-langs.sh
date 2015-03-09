@@ -123,6 +123,12 @@ $fstfiles
 *txt
 *.regex" $1/tools/mt/apertium/filters
 
+# Set the svn:ignore prop on the tools/mt/apertium/tagsets/ dir:
+$svnignore "$mkfiles
+$fstfiles
+apertiumtags.txt
+apertium.relabel" $1/tools/mt/apertium/tagsets
+
 # Set the svn:ignore prop on the test/tools/preprocess/ dir:
 $svnignore "$mkfiles
 abbr.txt" $1/tools/preprocess
@@ -155,11 +161,18 @@ $svnignore "$mkfiles
 $svnignore "$mkfiles
 run-morph-tester.sh" $1/test
 
-# Set the svn:ignore prop on the test/src/morphology/ dir:
+# Set the svn:ignore prop on the test/src/ dir:
 $svnignore "$mkfiles
 *-affixes_*.yaml
 *-stems_*.yaml
 *-morphology_*.yaml
+*.log
+*.trs
+*.txt
+*.sh" $1/test/src
+
+# Set the svn:ignore prop on the test/src/morphology/ dir:
+$svnignore "$mkfiles
 *.log
 *.trs
 *.txt
@@ -178,6 +191,13 @@ $svnignore "$mkfiles
 *.trs
 *.txt
 *.sh" $1/test/tools/spellcheckers
+
+# Set the svn:ignore prop on the test/tools/spellcheckers/fstbased/hfst dir:
+$svnignore "$mkfiles
+*.log
+*.trs
+*.txt
+*.sh" $1/test/tools/spellcheckers/fstbased/hfst
 
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/src/morphology/affixes

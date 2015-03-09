@@ -261,7 +261,9 @@ close ABB;
 
 sub conclusion {
     print STDERR "\nThis program sent $total_to_generate strings to $gen_lookup\n";
-    print STDERR sprintf("lookup recognised %d (%.2f percent) of these\n", $total_generated, $total_generated/$total_to_generate*100);
+    if ( $total_to_generate > 0 ) {
+        print STDERR sprintf("lookup recognised %d (%.2f percent) of these\n", $total_generated, $total_generated/$total_to_generate*100);
+    }
 }
 
 # Call generator for all word forms.

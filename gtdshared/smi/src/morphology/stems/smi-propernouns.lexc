@@ -861,6 +861,7 @@ Agenda+OLang/NOB:Agenda ACCRA-obj ;
 Agent+OLang/UND:Agent BERN-obj ; ! Pocket Agent
 Agergaard+OLang/NOB:Ager9#gaard9 BERN-sur ;
 Aggersund+OLang/NOB:Agger9#sund9 SUND-plc ;
+Stralsund+OLang/NOB:Stral#sund9 SUND-plc ;
 Agila+OLang/FIN:Agila ACCRA-obj ;
 Agino-Burjatsk+OLang/UND:Agino-Burjatsk9 BERN-plc ;
 Aginskoje+OLang/UND:Aginskoje ACCRA-plc ;
@@ -28326,6 +28327,10 @@ Viborg+OLang/NOB:Vi#borg9 BERN-plc ;
 Vibstad+OLang/NOB:Vib9#stad9 BERN-plc ;
 Viby+OLang/NOB:Vi#by NYSTØ-plc ;
 Vicente+OLang/UND:Vicente ACCRA-sur ;
+St.% Vicente+OLang/MWE:St.% Vicente ACCRA-plc ;
+St.% Vincente+OLang/MWE:St.% Vincente ACCRA-plc ;
+St.% Michels+OLang/MWE:St.% Michels BERN-plc ;
+St.% Lucia+OLang/NOB:St.% Lucia ACCRA-plc ;
 Vicenza+OLang/UND:Vicenza ACCRA-plc ;
 Vichy+OLang/UND:Vichy ACCRA-plc ;
 Vicky+OLang/UND:Vicky ACCRA-fem ;

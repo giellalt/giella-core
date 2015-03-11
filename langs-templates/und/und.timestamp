@@ -1,4 +1,7 @@
 $Rev$
+Preparations for supporting corpus-based frequency weights, as per TommiP.
+
+r109063:
 Enabled weighting of speller fst's. Adjust weights and tags as needed.
 
 r108914:

@@ -92,6 +92,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="lsub"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
             <xs:element ref="stg"/>
+            <xs:element minOccurs="0" ref="etymology"/>
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
          </xs:sequence>
       </xs:complexType>
@@ -211,6 +212,14 @@
                </xs:restriction>
             </xs:simpleType>
          </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="etymolgy">
+      <xs:complexType>
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="etymon"/>
+            <xs:element ref="cognate"/>
+         </xs:choice>
       </xs:complexType>
    </xs:element>
    <xs:element name="stress">
@@ -748,6 +757,16 @@
                </xs:restriction>
             </xs:simpleType>
          </xs:attribute>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="etymology">
+      <xs:complexType>
+         <xs:choice maxOccurs="unbounded">
+            <xs:element ref="etymon"/>
+            <xs:element ref="cognate"/>
+            <xs:element ref="etym"/>
+            <xs:element ref="etymCtn"/>
+         </xs:choice>
       </xs:complexType>
    </xs:element>
    <xs:element name="etymg">

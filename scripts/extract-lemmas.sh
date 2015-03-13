@@ -75,7 +75,7 @@ exclgrep () {
 # the continuation lexicon, if asked to.
 cut_fields () {
     if test "$keep_contlex" = "true" ; then
-        tr ":\t"  " " | cut -d " " -f1,3 | perl -pe "s/\+[^\t ]+//"
+        tr ":\t"  " " | cut -d " " -f1,2 | perl -pe "s/\+[^\t ]+//"
     else
         tr ":+\t" " " | cut -d " " -f1
     fi
@@ -87,8 +87,8 @@ cut_fields () {
 # 3. do NOT grep lines containing ONLY a continuation lexicon ref
 # 4. do NOT grep lines containing a number of generally known wrong stuff
 # 5. do NOT grep things specified in each test script
-# The rest is general mangling
-#  Rreal | R |ShCmp|RCmpnd|CmpN/Only|
+# The rest is general mangling, the XXXXX part is needed to take care of
+# "lemma:stem CONTLEX" vs "word CONTLEX" when retaining the CONTLEX.
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<)" \
    | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
@@ -101,7 +101,10 @@ grep ";" $inputfile \
    | sed 's/%:/¢/g' \
    | sed 's/%#/¥/g' \
    | sed 's/%\(.\)/\1/g' \
+   | tr -s ' ' \
+   | sed 's/:/XXXXX/' \
    | cut_fields \
+   | sed 's/XXXXX.* / /' \
    | tr -d "#"  \
    | tr " " "\t" \
    | tr "€" " " \

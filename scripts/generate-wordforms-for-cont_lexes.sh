@@ -147,6 +147,13 @@ generate_word_forms () {
     printf "$@\n" | $lookuptool -q $fst_file
 }
 
+######## Open in default browser if on Mac:
+macopen() {
+    if hash open 2>/dev/null; then
+        open "$@"
+    fi
+}
+
 ################ The main processing ################
 lexicon_list=$(lexicon_extraction "$source_file")
 
@@ -172,8 +179,8 @@ cat $html_header \
     $html_footer \
     > ${generated_table}
 
-# Open html file in default browser
-open ${generated_table}
+# Open html file in default browser (only on MacOSX(?))
+macopen ${generated_table}
 
 # Remove temporary files:
 rm -f "${generated_table}.tmp" \

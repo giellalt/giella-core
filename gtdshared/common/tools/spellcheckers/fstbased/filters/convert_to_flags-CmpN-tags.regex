@@ -20,7 +20,8 @@
   "@U.CmpFrst.TRUE@" <- "+CmpN/First",
   "@U.CmpPref.TRUE@" <- "+CmpN/Pref" ,
   "@P.CmpLast.TRUE@" <- "+CmpN/Last" ,
-  "@R.CmpSuff.TRUE@" <- "+CmpN/Suff" ,
+  [ "@P.CmpOnly.FALSE@" "@P.CmpLast.TRUE@" 
+  | "@R.CmpOnly.TRUE@"  "@P.CmpLast.TRUE@"   ] <- "+CmpN/Suff" ,
   [ "@P.CmpOnly.FALSE@" | "@R.CmpOnly.TRUE@" ] <- "+CmpN/Only" ,
   "@U.CmpNone.TRUE@" <- "+CmpN/None"
 ];

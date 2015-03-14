@@ -51,10 +51,12 @@ for f in $(find $1/ \
 $fstfiles" $f
 done
 
-# Set the svn:ignore prop on the top level lang dir, ignoring build and *.pc:
+# Set the svn:ignore prop on the top level lang dir, ignoring build, *.html
+# and *.pc:
 $svnignore "$autofiles
 $mkfiles
 build
+*.html
 *.pc" $1
 
 # Set the svn:ignore prop on the doc dir:

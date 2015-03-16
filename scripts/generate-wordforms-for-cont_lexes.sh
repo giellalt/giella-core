@@ -135,7 +135,8 @@ done
 
 ######## Add the morphosyntactic codes to each lemma:
 add_morf_codes () {
-for lemma in $@; do
+lemmalist=$(printf "$@" | sed 's/ /__XXYYZZ__/g')
+for lemma in $lemmalist; do
     for code in $morf_codes; do
         echo "$lemma$code"
     done
@@ -162,8 +163,8 @@ lemma_lex_list=$(echo "$lemma_lex_list_tmp" | sort --key=2)
 
 printf "$lemma_lex_list\n" > $lemma_lexicon_list
 
-lemma_list=$(printf "$lemma_lex_list\n" | cut -f1)
-lemma_code_list=$(add_morf_codes "$lemma_list")
+lemma_list=$(printf "$lemma_lex_list\n" | cut -f1 )
+lemma_code_list=$(add_morf_codes "$lemma_list" | sed 's/__XXYYZZ__/ /g')
 find_generator
 generate_word_forms "$lemma_code_list" > $generated_word_forms
 

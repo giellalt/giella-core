@@ -105,6 +105,7 @@ grep ";" $inputfile \
    | sed 's/:/XXXXX/' \
    | cut_fields \
    | sed 's/XXXXX.* / /' \
+   | sed 's/XXXXX.*//' \
    | tr -d "#"  \
    | tr " " "\t" \
    | tr "€" " " \

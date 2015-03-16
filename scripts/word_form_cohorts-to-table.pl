@@ -32,10 +32,10 @@ my $code_list;
 my $number_of_codes;
 my @code_array;
 
-GetOptions ("input=s" => \$word_form_file,
-            "lemlex=s" => \$lemma_lexicon_list,
+GetOptions ("input=s"    => \$word_form_file,
+            "lemlex=s"   => \$lemma_lexicon_list,
             "codelist=s" => \$code_list,
-            "output=s" => \$word_form_table_file );
+            "output=s"   => \$word_form_table_file );
 
 $code_list =~ s/ +/ /g;
 $number_of_codes = @code_array = split(' ',$code_list);

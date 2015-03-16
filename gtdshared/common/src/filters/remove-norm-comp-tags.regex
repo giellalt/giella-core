@@ -4,7 +4,9 @@
 # delete normative tags governing compound behaviour
 # -N- in the tag name stands for Normative
 0 <- %+CmpN%/First,
+0 <- %+CmpN%/Pref,
 0 <- %+CmpN%/Last,
+0 <- %+CmpN%/Suff,
 0 <- %+CmpN%/None,
 0 <- %+CmpN%/Only,
 0 <- %+CmpN%/SgNomLeft,

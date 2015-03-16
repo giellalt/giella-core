@@ -157,14 +157,19 @@ macopen() {
 
 ################ The main processing ################
 lexicon_list=$(lexicon_extraction "$source_file")
+#echo "$lexicon_list" > lexicon_list.txt
 
 lemma_lex_list_tmp=$(lemma_extraction "$lexicon_list")
 lemma_lex_list=$(echo "$lemma_lex_list_tmp" | sort --key=2)
 
-printf "$lemma_lex_list\n" > $lemma_lexicon_list
+echo "$lemma_lex_list" > $lemma_lexicon_list
 
 lemma_list=$(printf "$lemma_lex_list\n" | cut -f1 )
+#echo "$lemma_list" > lemma_list.txt
+
 lemma_code_list=$(add_morf_codes "$lemma_list" | sed 's/__XXYYZZ__/ /g')
+#echo "$lemma_code_list" > lemma_code_list.txt
+
 find_generator
 generate_word_forms "$lemma_code_list" > $generated_word_forms
 

@@ -3,17 +3,17 @@
 
 # delete normative tags governing compound behaviour
 # -N- in the tag name stands for Normative
-0 <- %+CmpN%/First,
-0 <- %+CmpN%/Pref,
-0 <- %+CmpN%/Last,
-0 <- %+CmpN%/Suff,
-0 <- %+CmpN%/None,
-0 <- %+CmpN%/Only,
+0 <- %+CmpNP%/All,
+0 <- %+CmpNP%/First,
+0 <- %+CmpNP%/Pref,
+0 <- %+CmpNP%/Last,
+0 <- %+CmpNP%/Suff,
+0 <- %+CmpNP%/None,
+0 <- %+CmpNP%/Only,
 0 <- %+CmpN%/SgNomLeft,
 0 <- %+CmpN%/SgGenLeft,
 0 <- %+CmpN%/PlGenLeft,
 0 <- %+CmpN%/SgLeft,
-0 <- %+CmpN%/All,
 0 <- %+CmpN%/DefSgGen,
 0 <- %+CmpN%/DefPlGen,
 0 <- %+CmpN%/Def,
@@ -21,6 +21,5 @@
 0 <- %+CmpN%/SgG,
 0 <- %+CmpN%/PlG,
 0 <- %+CmpN%/Sg,
-0 <- %+CmpN%/Pref,
 0 <- %+CmpN%/SgN
 ;

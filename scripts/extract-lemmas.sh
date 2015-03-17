@@ -94,7 +94,7 @@ grep ";" $inputfile \
    | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
    | egrep -v '(LEXICON| K |ENDLEX|\/LexSub)'\
    | exclgrep "$excludepattern" \
-   | egrep "$includepattern" \
+   | egrep    "$includepattern" \
    | sed 's/^[ 	]*//' \
    | grep -v "^\-" \
    | sed 's/% /€/g' \

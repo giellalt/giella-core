@@ -16,10 +16,10 @@
 # This is the first step of two in converting CmpN tags into flag diacritics
 # that will regulate compounding behaviour in fst-based spellers.
 
-~$[  "+CmpN/First" "+CmpN/Last" ]
+~$[  "+CmpNP/First" "+CmpNP/Last" ]
 
 .o.
 
-[ "+CmpN/Last"  (<-) "+CmpN/First" "+CmpN/Last",
-  "+CmpN/First" (<-) "+CmpN/First" "+CmpN/Last" ]
+[ "+CmpNP/Last"  (<-) "+CmpNP/First" "+CmpNP/Last",
+  "+CmpNP/First" (<-) "+CmpNP/First" "+CmpNP/Last" ]
 ;

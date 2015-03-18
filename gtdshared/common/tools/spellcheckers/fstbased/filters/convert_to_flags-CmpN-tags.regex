@@ -17,11 +17,11 @@
 # that will regulate compounding behaviour in fst-based spellers.
 
 [
-  "@U.CmpFrst.TRUE@" <- "+CmpN/First",
-  "@U.CmpPref.TRUE@" <- "+CmpN/Pref" ,
-  "@P.CmpLast.TRUE@" <- "+CmpN/Last" ,
+  "@U.CmpFrst.TRUE@" <- "+CmpNP/First",
+  "@U.CmpPref.TRUE@" <- "+CmpNP/Pref" ,
+  "@P.CmpLast.TRUE@" <- "+CmpNP/Last" ,
   [ "@P.CmpOnly.FALSE@" "@P.CmpLast.TRUE@" 
-  | "@R.CmpOnly.TRUE@"  "@P.CmpLast.TRUE@"   ] <- "+CmpN/Suff" ,
-  [ "@P.CmpOnly.FALSE@" | "@R.CmpOnly.TRUE@" ] <- "+CmpN/Only" ,
-  "@U.CmpNone.TRUE@" <- "+CmpN/None"
+  | "@R.CmpOnly.TRUE@"  "@P.CmpLast.TRUE@"   ] <- "+CmpNP/Suff" ,
+  [ "@P.CmpOnly.FALSE@" | "@R.CmpOnly.TRUE@" ] <- "+CmpNP/Only" ,
+  "@U.CmpNone.TRUE@" <- "+CmpNP/None"
 ];

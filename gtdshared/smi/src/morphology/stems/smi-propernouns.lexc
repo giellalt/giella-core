@@ -18090,7 +18090,7 @@ NORAD+OLang/UND:NORAD LONDON-org ;
 NORKLIMA+OLang/UND:NOR^KLIMA ACCRA-org ;
 NORSAR+OLang/UND:NORSAR BERN-org ;
 NORUT+OLang/UND:NORUT LONDON-org ;
-NRK-Sápmi+OLang/UND:NRK-Sápmi NYSTØ-org ;
+NRK-Sápmi+OLang/UND:NRK-Sápmi NYSTØ-org ;! Check E-Sápmi!
 Naakka+OLang/FIN:Naakka ACCRA-sur ;
 Naama+OLang/UND:Naama ACCRA-plc ;
 Naaman+OLang/NOB:Naaman9 BERN-sur ;
@@ -30647,7 +30647,7 @@ Yucatán+OLang/UND:Yucatán9 BERN-plc ;
 Zoubari+OLang/UND:Zoubari ACCRA-sur ;
 eNorga+OLang/UND:e#Nor'ga ACCRA-org ;
 eSkuvla+OLang/UND:e#Skuv'la ACCRA-org ;
-eSápmi+OLang/UND:e#Sápmi PIPPI-org ;
+eSápmi+OLang/UND:e#Sápmi PIPPI-org ;  !!! Is this possible? Check NRK_Sápmi!
 ÁLGU+OLang/UND:ÁLGU ACCRA-obj ;
 Ähtäri+OLang/UND:Ähtäri ACCRA-plc ;
 Öræfajökull+OLang/UND:Öræfa#jökull JOKULL-plc ;

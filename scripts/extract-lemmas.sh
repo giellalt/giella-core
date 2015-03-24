@@ -100,10 +100,12 @@ grep ";" $inputfile \
    | sed 's/% /€/g' \
    | sed 's/%:/¢/g' \
    | sed 's/%#/¥/g' \
+   | sed 's/%@/£/g' \
    | sed 's/%\(.\)/\1/g' \
    | tr -s ' ' \
    | sed 's/:/XXXXX/' \
    | cut_fields \
+   | sed 's/@.* / /' \
    | sed 's/XXXXX.* / /' \
    | sed 's/XXXXX.*//' \
    | tr -d "#"  \
@@ -111,5 +113,6 @@ grep ";" $inputfile \
    | tr "€" " " \
    | tr "¢" ":" \
    | tr "¥" "#" \
+   | tr "£" "@" \
    | egrep -v "(^$|^;|^[0-9]$|^\!)" \
    | sort -u

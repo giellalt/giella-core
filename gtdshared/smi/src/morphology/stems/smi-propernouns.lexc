@@ -215,7 +215,7 @@ Bru+CmpNP/None+OLang/UND:Bru ACCRA-plc ;
 Bud+CmpNP/None+OLang/UND:Bud9 BERN-sur ;
 Bue+CmpNP/None+OLang/UND:Bue ACCRA-mal ;
 Bug+CmpNP/None+OLang/UND:Bug9 BERN-sur ;
-Bui+Err/Sub+CmpNP/None+OLang/UND:Bui NYSTØ-plc ;
+Bui+CmpNP/None+OLang/UND:Bui NYSTØ-plc ;
 Bye+CmpNP/None+OLang/UND:Bye NYSTØ-sur ;
 Byg+CmpNP/None+OLang/UND:Byg9 BERN-sur ;
 Bål+CmpNP/None+OLang/UND:Bål BERN-sur ;
@@ -1294,7 +1294,7 @@ Kildin+OLang/UND:Kildin9 LONDON-plc ;
 Alsøy+OLang/NOB:Als#øy OY-plc ;
 Alta+OLang/UND:Alta ACCRA-plc ;
 AltaVista+OLang/NOB:Alta^Vista ACCRA-org ;
-Keitele+OLang/FIN:Keitele ACCRA-plc ;
+Keitele+OLang/FIN:Keitele ACCRA-plc ;  ! ACCRA? Keitelisnie, it seems to be ODD
 Khatanga+OLang/UND:Khatanga ACCRA-plc ;
 Altadalen+OLang/NOB:Alta#dalen9 LONDON-LOAN-plc ;
 Altaelva+OLang/NOB:Alta#elva ACCRA-LOAN-plc ;
@@ -1768,7 +1768,7 @@ Arbien+OLang/UND:Arbi^en9 LONDON-plc ;
 Arboga+OLang/NOB:Arboga ACCRA-plc ;
 Arbor+OLang/UND:Arbor LONDON-plc ;
 Archer+OLang/UND:Archer LONDON-sur ;
-Archie+OLang/UND:Archie ACCRA-mal ;
+Archie+OLang/UND:Archie ACCRA-mal ;  !  CHECK!!!
 Archimedes+OLang/UND:Archimedes LONDON-obj ;
 Arctander+OLang/UND:Arctander LONDON-sur ;
 Arctandria+OLang/NOB:Arctandria ACCRA-obj ;
@@ -7464,7 +7464,7 @@ Gallagher+OLang/UND:Gallagher LONDON-sur ;
 Galle+OLang/UND:Galle ACCRA-sur ;
 Galleberg+OLang/NOB:Galle#berg9 BERN-sur ;
 Gallegos+OLang/UND:Gallegos BERN-plc ;
-Galleri+Err/Sub+OLang/UND:Galleri NYSTØ-plc ;
+Galleri+Err/Sub+OLang/UND:Galleri PIPPI-plc ;
 GalleriCafé+OLang/UND:Galleri#Café ACCRA-org ;
 Gallery+Err/Sub+OLang/UND:Gallery NYSTØ-plc ;
 Gallery+OLang/UND:Gallery ACCRA-plc ;
@@ -18090,7 +18090,7 @@ NORAD+OLang/UND:NORAD LONDON-org ;
 NORKLIMA+OLang/UND:NOR^KLIMA ACCRA-org ;
 NORSAR+OLang/UND:NORSAR BERN-org ;
 NORUT+OLang/UND:NORUT LONDON-org ;
-NRK-Sápmi+OLang/UND:NRK-Sápmi NYSTØ-org ;! Check E-Sápmi!
+NRK-Sápmi+OLang/UND:NRK-Sápmi PIPPI-org ;! Check E-Sápmi!
 Naakka+OLang/FIN:Naakka ACCRA-sur ;
 Naama+OLang/UND:Naama ACCRA-plc ;
 Naaman+OLang/NOB:Naaman9 BERN-sur ;
@@ -30396,7 +30396,7 @@ Hakuli+OLang/UND:Hakuli ACCRA-sur ;
 Holmvassdalen+OLang/UND:Holmvassdalen9 LONDON-plc ;
 Huotari+OLang/UND:Huotari ACCRA-sur ;
 Husbanken+OLang/UND:Husbanken LONDON-org ;
-Huui+OLang/UND:Huui BERN-LOAN-org ;
+Huui+OLang/UND:Huui PIPPI-org ;  ! 
 Hyväri+OLang/UND:Hyväri ACCRA-sur ;
 Iivari+OLang/UND:Iivari ACCRA-sur ;
 Ilmari+OLang/UND:Ilmari ACCRA-mal ;

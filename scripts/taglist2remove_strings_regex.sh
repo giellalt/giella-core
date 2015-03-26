@@ -43,8 +43,8 @@ echo ""                                                     >> $REGEXFILE
 # Print the actual regular expression:
 printf "~[ \$[ " >> $REGEXFILE # Exclude from target
 
-$SED   's/\([+/_-]\)/%\1/g' $TAGFILE \
-| $SED 's/$/  |/'          \
+$SED 's/$/"  |/' $TAGFILE \
+| $SED 's/^/"/' \
 | $SED "$ s/|/ ] /" >> $REGEXFILE
 
 echo "$ADAPTIONREGEX ] ;" >> $REGEXFILE

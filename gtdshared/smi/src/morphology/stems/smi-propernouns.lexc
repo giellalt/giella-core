@@ -7468,7 +7468,7 @@ Gallagher+OLang/UND:Gallagher LONDON-sur ;
 Galle+OLang/UND:Galle ACCRA-sur ;
 Galleberg+OLang/NOB:Galle#berg9 BERN-sur ;
 Gallegos+OLang/UND:Gallegos BERN-plc ;
-Galleri+Err/Sub+OLang/UND:Galleri PIPPI-plc ;
+Galleri+OLang/UND:Galleri PIPPI-plc ;
 GalleriCafé+OLang/UND:Galleri#Café ACCRA-org ;
 Gallery+Err/Sub+OLang/UND:Gallery NYSTØ-plc ;
 Gallery+OLang/UND:Gallery ACCRA-plc ;
@@ -8903,6 +8903,7 @@ Hannevig+OLang/NOB:Hannevig9 BERN-sur ;
 Hanni+OLang/UND:Hanni PIPPI-fem ;
 Hannibal+OLang/UND:Hannibal BERN-mal ;
 Hannibalfeiden+Err/LexSub+Use/-Spell+OLang/UND:Hannibal^feiden9 LONDON-obj ;
+!Kafar-Naahume
 Hannibalsson+OLang/UND:Hannibalsson9 LONDON-sur ;
 Hannikainen+OLang/FIN:Hannikai C-FI-NEN-sur ;
 Hannila+OLang/FIN:Hannila ACCRA-sur ;
@@ -22066,6 +22067,9 @@ Rosenvinge+OLang/NOB:Rosen^vinge ACCRA-sur ;
 Roshauw+OLang/UND:Roshauw BERN-sur ;
 Rosie+OLang/UND:Rosie ACCRA-fem ;
 Rosing+OLang/NOB:Rosing9 LONDON-plc ;
+
+! Scholastic's+Err/Sub:Scholastic's CNAME_ODD-org ;
+
 Rosita+OLang/UND:Rosita ACCRA-fem ;
 Roska+OLang/UND:Roska ACCRA-sur ;
 Roskilde+OLang/UND:Roskilde ACCRA-plc ;
@@ -24569,6 +24573,9 @@ Southampton+OLang/UND:Southampton9 LONDON-plc ;
 Southend-on-Sea+OLang/UND:South^end-on-Sea ACCRA-plc ;
 Southport+OLang/UND:South9#port BERN-plc ;
 Sova+OLang/NOB:Sova ACCRA-plc ;
+
+!  Tiffany's+Err/Sub:Tiffany's CNAME_EVEN-org ;  ! Lånemønsteret på dette??
+
 Sovjet+OLang/UND:Sovjet BERN-plc ;
 Sovjetunionen+Err/LexSub+OLang/UND:Sovjet^unionen9 LONDON-plc ;
 Sovkina+OLang/NOB:Sovkina ACCRA-sur ;

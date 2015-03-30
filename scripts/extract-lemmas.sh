@@ -92,7 +92,7 @@ cut_fields () {
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
    | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
-   | egrep -v "(LEXICON| K |ENDLEX|\/LexSub)" \
+   | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex)" \
    | exclgrep "$excludepattern" \
    | egrep    "$includepattern" \
    | sed 's/^[ 	]*//' \

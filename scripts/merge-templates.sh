@@ -154,11 +154,13 @@ availableTemplateCollsAsList=$(echo $availableTemplateColls | tr ' ' '|')
 # exit:
 if test $(echo "$availableTemplateColls" \
           | grep -c "^$CURTOPDIR\$" ) -eq 0 ; then
-    echo "The parent directory or --templatecoll $tplcoll is not in the set of:"
+    echo "The parent directory is not named as one of the following:"
     echo
     echo "$availableTemplateColls"
     echo
-    echo "You need to specify the applicable template collection as an"
+    echo "or --templatecoll $tplcoll was not specified."
+    echo
+    echo "You need to specify the appropriate template collection as an"
     echo "option to the merge script:"
     echo
     echo "$0 --templatecoll [$availableTemplateCollsAsList]"

@@ -30712,6 +30712,28 @@ Haaland+OLang/NOB:Haa#land9 BERN-sur ;
 Twitter+OLang/ENG:Twitter LONDON-org ;
 Instagram+OLang/UND:Instagram9 BERN-org ;
 
+! fra sma-propernoun
+!Kjerråtjønnin:Kjerrå^tjønn TJØNNIN ;
+!Habbervstad:Habbervstad CNAME_EVEN-sur ;
+!Heiberg-øyane/Axel:Hei^berg-øyane/Axel ENDLEX ;
+!Hobro:Hobro CNAME_ODD-plc ;
+!In+CmpNP/None:In CNAME_EVEN-plc ;
+!Jean-Marie:Jean-Mari SNAME_NIEJTE-fem ;
+! King's+Err/Lex:King's CNAME_EVEN-org ; ! til smi-prop-fila?
+!TWOL:TWOL CNAME_EVEN-obj ;
+!British+N+Prop+Attr:British ENDLEX ;
+!Britisk+N+Prop+Attr:Britisk ENDLEX ; !XXX
+
+!Century VNAME-obj ;
+!Ceylovne:Ceylovn SNAME_NIEJTE-plc ;
+!Christensens+N+Prop+Attr:Christensens ENDLEX ; !XXX
+!Cumæ+N+Prop:Cumæ VNAME ;
+!Da+N+Prop+CmpNP/None:D SNAME_MAANA ;
+!Dybbøls+N+Prop+Attr:Dyb^bøls ENDLEX ; !XXX
+!Dystevrud:Dystevrud BERN-sur ;
+
+
+
 
 
 

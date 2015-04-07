@@ -158,10 +158,8 @@ if test $(echo "$availableTemplateColls" \
     echo
     echo "$availableTemplateColls"
     echo
-    echo "or --templatecoll $tplcoll was not specified."
-    echo
     echo "You need to specify the appropriate template collection using the"
-    echo "following option with one of the specified values:"
+    echo "following option with one of the listed values:"
     echo
     echo "$0 --templatecoll [$availableTemplateCollsAsList]"
     exit 1

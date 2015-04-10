@@ -4352,7 +4352,7 @@ Cesare+OLang/UND:Cesare ACCRA-sur ;
 Cesilie+OLang/UND:Cesilie ACCRA-fem ;
 Ceuta+OLang/UND:Ceuta ACCRA-plc ;
 Ceyhan+OLang/UND:Ceyhan9 LONDON-plc ;
-Ceylon+OLang/UND:Ceylon9 LONDON-plc ;
+
 Chablis+OLang/UND:Chablis BERN-plc ;
 Chaco+OLang/UND:Chaco9 ACCRA-plc ;
 Chad+OLang/NOB:Chad9 BERN-plc ;
@@ -30713,32 +30713,28 @@ Twitter+OLang/ENG:Twitter LONDON-org ;
 Instagram+OLang/UND:Instagram9 BERN-org ;
 
 ! fra sma-propernoun
-!Kjerråtjønnin:Kjerrå^tjønn TJØNNIN ;
-!Habbervstad:Habbervstad CNAME_EVEN-sur ;
-!Heiberg-øyane/Axel:Hei^berg-øyane/Axel ENDLEX ;
-!Hobro:Hobro CNAME_ODD-plc ;
-!In+CmpNP/None:In CNAME_EVEN-plc ;
-!Jean-Marie:Jean-Mari SNAME_NIEJTE-fem ;
-! King's+Err/Lex:King's CNAME_EVEN-org ; ! til smi-prop-fila?
-!TWOL:TWOL CNAME_EVEN-obj ;
-!British+N+Prop+Attr:British ENDLEX ;
-!Britisk+N+Prop+Attr:Britisk ENDLEX ; !XXX
+Kjerråtjønnin+OLang/UND:Kjerråtjønnin9 LONDON-mal ;
+Habberstad+OLang/NOB:Habber#stad9 BERN-sur ;
+Heiberg-øyane/Axel:Hei^berg-øyane/Axel BERN-plc ;
+Hobro+CmpNP/None+OLang/UND:Hobro9 ACCRA-fem ;
+In+CmpNP/None:In NYSTØ-plc ;
+Jean-Marie+OLang/UND:Jean-Marie  ACCRA-fem ;
+TWOL+OLang/UND:TWOL BERN-org ;
+British+OLang/UND:British LONDON-obj ;
+Britisk+Err/Lex+OLang/UND:Britisk9 LONDON-atr ;
+Century+OLang/UND:Centu#ry NYSTØ-sur ;
+Ceylon+OLang/UND:Ceylon9 LONDON-plc ;
+Ceylon+Err/Orth:Ceylovn SNAME_NIEJTE-plc ;
+Da+CmpNP/None+OLang/UND:Da ACCRA-org ;
+Dysterud+OLang/NOB:Dyste#rud9 BERN-fem ;
+Bottenvika+OLang/NOB:Botten9#vika ACCRA-plc ;
+Brattbekken+OLang/UND:Bratt^brekken9 LONDON-sur ;
 
-!Century VNAME-obj ;
-!Ceylovne:Ceylovn SNAME_NIEJTE-plc ;
-!Christensens+N+Prop+Attr:Christensens ENDLEX ; !XXX
-!Cumæ+N+Prop:Cumæ VNAME ;
-!Da+N+Prop+CmpNP/None:D SNAME_MAANA ;
+! els- vet ikke hvordan
 !Dybbøls+N+Prop+Attr:Dyb^bøls ENDLEX ; !XXX
-!Dystevrud:Dystevrud BERN-sur ;
-
-
-
-
-
-
-
-
+!Bloomingdale's+Err/Lex:Bloomingdale's CNAME_EVEN-org ;
+!Christensens+OLang/UND:Christensens LONDON-org ;
+!King's+Err/Lex:King's CNAME_EVEN-org ; ! til smi-prop-fila?
 
 
 

@@ -226,6 +226,7 @@ Cae+CmpNP/None+OLang/UND:Cae ACCRA-sur ;
 Che+CmpNP/None+OLang/UND:Che NYSTØ-mal ;
 Chi+CmpNP/None+OLang/UND:Chi NYSTØ-plc ;
 Chu+CmpNP/None+OLang/UND:Chu ACCRA-plc ;
+Da+CmpNP/None+OLang/UND:Da ACCRA-org ;
 Daa+CmpNP/None+OLang/NOB:Daa NYSTØ-org ;
 Dae+CmpNP/None+OLang/UND:Dae ACCRA-sur ;
 Dag+CmpNP/None+OLang/UND:Dag9 BERN-mal ;
@@ -328,6 +329,7 @@ Ill+CmpNP/None+OLang/UND:Ill BERN-org ;
 Ilo+CmpNP/None+OLang/UND:Ilo9 ACCRA-obj ;
 Ima+CmpNP/None+OLang/UND:Ima ACCRA-fem ;
 Ims+CmpNP/None+OLang/UND:Ims BERN-plc ;
+In+CmpNP/None+OLang/UND:In NYSTØ-plc ;
 Ina+CmpNP/None+OLang/UND:Ina ACCRA-fem ;
 Ine+CmpNP/None+OLang/UND:Ine ACCRA-fem ;
 Inn+CmpNP/None+OLang/UND:Inn9 BERN-sur ;
@@ -30714,19 +30716,13 @@ Instagram+OLang/UND:Instagram9 BERN-org ;
 
 ! fra sma-propernoun
 Kjerråtjønnin+OLang/UND:Kjerråtjønnin9 LONDON-mal ;
-Habberstad+OLang/NOB:Habber#stad9 BERN-sur ;
 Heiberg-øyane/Axel:Hei^berg-øyane/Axel BERN-plc ;
-Hobro+CmpNP/None+OLang/UND:Hobro9 ACCRA-fem ;
-In+CmpNP/None:In NYSTØ-plc ;
 Jean-Marie+OLang/UND:Jean-Marie  ACCRA-fem ;
 TWOL+OLang/UND:TWOL BERN-org ;
 British+OLang/UND:British LONDON-obj ;
-Britisk+Err/Lex+OLang/UND:Britisk9 LONDON-atr ;
 Century+OLang/UND:Centu#ry NYSTØ-sur ;
 Ceylon+OLang/UND:Ceylon9 LONDON-plc ;
-Ceylon+Err/Orth:Ceylovn SNAME_NIEJTE-plc ;
-Da+CmpNP/None+OLang/UND:Da ACCRA-org ;
-Dysterud+OLang/NOB:Dyste#rud9 BERN-fem ;
+Ceylon+Err/Orth:Ceylovn LONDON-plc ;
 Bottenvika+OLang/NOB:Botten9#vika ACCRA-plc ;
 Brattbekken+OLang/UND:Bratt^brekken9 LONDON-sur ;
 

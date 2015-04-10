@@ -91,7 +91,7 @@ cut_fields () {
 # "lemma:stem CONTLEX" vs "word CONTLEX" when retaining the CONTLEX.
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
-   | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
+   | egrep -v "^[[:space:]]*[[:alpha:]_-]+[[:space:]]*;" \
    | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex)" \
    | exclgrep "$excludepattern" \
    | egrep    "$includepattern" \

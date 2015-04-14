@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- indent-tabs-mode: t -*-
 
 VERBOSITY=0
@@ -10,7 +10,7 @@ def replace_tag(tag):
 	return tag_replacements.get(tag, tag.lower())
 
 
-import sys, re ; 
+import sys, re ;
 
 for line in sys.stdin.readlines(): #{
 	print(line.strip());
@@ -74,7 +74,7 @@ for line in sys.stdin.readlines(): #{
 			if token == ')': par = par - 1;
 
 			if par == 1: #{
-				outline = outline + replace_tag(token);			
+				outline = outline + replace_tag(token);
 			elif token == 'LIST' or ntoken == 1: #{
 				outline = outline + token;
 			elif '"' in token: #{
@@ -95,7 +95,7 @@ for line in sys.stdin.readlines(): #{
 			if token == ')': par = par - 1;
 
 			if par == 1: #{
-				outline = outline + replace_tag(token);			
+				outline = outline + replace_tag(token);
 			elif token == 'LIST' or ntoken == 1: #{
 				outline = outline + token;
 			elif '"' in token: #{
@@ -124,14 +124,14 @@ for line in sys.stdin.readlines(): #{
 			if token == '(': total_par = total_par + 1;
 		#}
 		for token in tokens: #{
-			if token == '(': 
+			if token == '(':
 				par = par + 1;
 				seen_par = True;
 			if token == ')': par = par - 1;
 			if token == ')' or (not seen_par and ntoken == 2): first_block = False;
 
 			if token.strip('C*- ').isnumeric() or token == 'NOT' or token == 'NEGATE' or token == 'OR': #{
-				inside = True;	
+				inside = True;
 				par = 0;
 			#}
 
@@ -153,19 +153,19 @@ for line in sys.stdin.readlines(): #{
 		inside = False;
 		ntoken = 0;
 		first_block = True;
-		
+
 		for token in tokens: #{
 			if token == '(':  par = par + 1;
-			if token == ')':  
+			if token == ')':
 				par = par - 1 ;
 				inside = False;
-	
+
 			if token == 'IF': #{
 				first_block = False;
 			#}
 
 			if token.strip('C*- ').isnumeric() or token == 'NOT' or token == 'NEGATE' or token == 'OR': #{
-				inside = True;	
+				inside = True;
 				par = 0;
 			#}
 
@@ -199,14 +199,14 @@ for line in sys.stdin.readlines(): #{
 		for token in tokens: #{
 			if token == '(': par = par + 1;
 			if token == ')': par = par - 1;
-			if par > max_par: max_par = par;	
+			if par > max_par: max_par = par;
 		#}
 		par = 0;
 		for token in tokens: #{
-			if token == '(': 
+			if token == '(':
 				par = par + 1;
 
-			if token == ')': 
+			if token == ')':
 				if seen_target: first_block = False;
 				inside = False;
 				par = par - 1;
@@ -220,7 +220,7 @@ for line in sys.stdin.readlines(): #{
 				inside = True;
 				par = 0;
 				first_block = False;
-			#} 
+			#}
 
 			if VERBOSITY: print('***', par, inside, token, file=sys.stderr);
 
@@ -240,7 +240,7 @@ for line in sys.stdin.readlines(): #{
 #
 #	elif oper == 'IFF': #{
 #		# IFF:miiIndef ("mii" Indef) IF ((-1 ("vaikko")) OR (1 ("beare")))(NOT *0 (V Pl1) BARRIER SV-BOUNDARY) ;
-#		
+#
 #		outline = '#';
 #	#}
 
@@ -254,7 +254,7 @@ for line in sys.stdin.readlines(): #{
 		sys.stdout.write(line.replace('/', '_').replace('( ', '(').replace(' )',')'));
 	else: #{
 		sys.stdout.write(line);
-	#}	
+	#}
 	if first == True and oper != '': #{
 		first = False;
 	#}

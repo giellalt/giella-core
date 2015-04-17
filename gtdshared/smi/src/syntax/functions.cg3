@@ -1404,31 +1404,31 @@ LIST A-EXT = "riekta" "vejolaš" ;
 
  
 #!! * __Hab<subj__ (<ext> @<SUBJ) for Nom; if copulas, goallut or jápmit is FMAINV and habitive or human Loc is found to the left. OR: if Ill or @Pron< followed by HAB are found to the left.
-MAP:Hab<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> OR HUMAN + HAB-CASE BARRIER SV-BOUNDARY) OR (*-1 Ill OR @Pron< OR Po BARRIER NOT-NPMOD OR COMMA LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> BARRIER SV-BOUNDARY)) ;
+MAP:Hab<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> OR HUMAN + HAB-CASE BARRIER SV-BOUNDARY) OR (*-1 Ill OR @Pron< OR Po BARRIER NOT-NPMOD OR COMMA LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 <hab> BARRIER SV-BOUNDARY)) ; #RemoveFromApertium
 	#$ Sus lea alddis buorit attáldagat.
 
 #!! * __Hab>Advlcase<subj__ (<ext> @<SUBJ) for Nom; it allows adverbials with Ill/Loc/Com/Ess to be found inbetween HAB and <ext>.
-MAP:Hab>Advlcase<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (*-1 ADVLCASE BARRIER NOT-ADV-PCLE LINK -1 ("leat") + FMAINV + HAB-V-TAGS LINK *-1 <hab> BARRIER WORD - Neg) ;
+MAP:Hab>Advlcase<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (*-1 ADVLCASE BARRIER NOT-ADV-PCLE LINK -1 ("leat") + FMAINV + HAB-V-TAGS LINK *-1 <hab> BARRIER WORD - Neg) ; #RemoveFromApertium
 	#$ Sus lea álgovuorus dušše guohtunvuoigatvuohta dáidda.
 	#$ Boazosápmelaččain ii leat bassin vejolaš fievrridit gálvvu gerresiiguin.
  
 #!! * __Nom>Advlcase<subj__ (<ext> @<SUBJ) for Nom; it allows adverbials with Ill/Loc/Com/Ess to be found inbetween Nom and <ext> @<SUBJ.
-MAP:Nom>Advlcase<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ADVLCASE - Ess BARRIER NOT-ADV-PCLE LINK -1 ("leat") + FMAINV + HAB-V-TAGS LINK *-1 Nom BARRIER WORD - Neg) ;
+MAP:Nom>Advlcase<subj (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ADVLCASE - Ess BARRIER NOT-ADV-PCLE LINK -1 ("leat") + FMAINV + HAB-V-TAGS LINK *-1 Nom BARRIER WORD - Neg) ; #RemoveFromApertium
 	#$ Oppalaš hábmema strategiija mii galgá váikkuhit dasa ahte servodat šaddá buohkaide olahahttin, ja dasa ahte vealaheapmi eastaduvvo, lea maid deattuhuvvon.
 	#% Son lea oahpaheaddjin hui čeahppi.
  
 #!! * __<extSubj__ (<ext> @<SUBJ) for Nom; if copulas to the left, and some kind of adverb, N Loc, time related word or Po to the left of it. OR: if Ill or @Pron< to the left, followed by copulas and the before mentioned to the left of copulas. 
-MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv BARRIER SV-BOUNDARY OR Nom LINK NEGATE -1 Nom) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD  LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po BARRIER SV-BOUNDARY))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA) ;
+MAP:<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT ((*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv BARRIER SV-BOUNDARY OR Nom LINK NEGATE -1 Nom) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD  LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po BARRIER SV-BOUNDARY))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA) ; #RemoveFromApertium
 	#$ Dá lea dutnje biebmu.
 	#$ Juohke guovllu gávttis lea sierralágan holbi.
 	#% Buot buoremus lea ieš vuolgit. 
 
 #!! * __<extSubjA__ (<ext> @<SUBJ) for A
-MAP:<extSubjA (<ext> @<SUBJ) TARGET A ((*-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV OR Pron LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv OR <hab> BARRIER SV-BOUNDARY OR Nom LINK NOT *-1 Nom BARRIER NOT-NPMODADV) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD LINK *-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po OR <hab> BARRIER SV-BOUNDARY OR Nom))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE *1 ("ahte") OR go OR Inf BARRIER SV-BOUNDARY) ;
+MAP:<extSubjA (<ext> @<SUBJ) TARGET A ((*-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV OR Pron LINK *-1 DOPPE OR (N Loc) OR (Dem Loc) OR Ill OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po OR Adv OR <hab> BARRIER SV-BOUNDARY OR Nom LINK NOT *-1 Nom BARRIER NOT-NPMODADV) OR (*-1 Ill OR @Pron< BARRIER NOT-NPMOD LINK *-1 ("leat") + FMAINV + Sg3 BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (Sem/Plc Loc) OR Ill OR Sem/Time OR TIME-ADVL OR Po OR <hab> BARRIER SV-BOUNDARY OR Nom))(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE *1 ("ahte") OR go OR Inf BARRIER SV-BOUNDARY) ; #RemoveFromApertium
 	#$
 	
 #!! * __<extSubj?__ (<ext> @<SUBJ) for Nom; if leat to the left and sentenceboundary 	
-MAP:<extSubj? (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR Ord OR (Ref Gen) LINK *-1 BOC - Nom BARRIER WORD - Neg)(NEGATE *1 Nom - Rel OR Ess - Rel BARRIER NOT-NPMOD OR CC)(NEGATE *1 ("ahte") OR go + CS LINK *1 REAL-V) ;#(NEGATE *1 FMAINV BARRIER SV-BOUNDARY) ; 
+MAP:<extSubj? (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR Ord OR (Ref Gen) LINK *-1 BOC - Nom BARRIER WORD - Neg)(NEGATE *1 Nom - Rel OR Ess - Rel BARRIER NOT-NPMOD OR CC)(NEGATE *1 ("ahte") OR go + CS LINK *1 REAL-V) ;#(NEGATE *1 FMAINV BARRIER SV-BOUNDARY) ;  #RemoveFromApertium
 	#% Ii leat gal dienas lottiid vuovdit.	
 	#$ Ohppiidráđis lea stuora fápmu skuvllas dan dihte go leat nu máŋggas geat hupmet ovttas áššiid birra.
 	#$ Rievtti mielde lea duodjeluohkás gulahallanoahpaheaddji, muhto son ii leat doppe nu dávjá go oahppit sávvet.
@@ -1439,11 +1439,11 @@ MAP:<extSubj? (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + FMAINV + HAB-V
 	#$ Leago nieida? 
 
 #!! * __<extSubj__ (<ext> @<SUBJ) for Nom, but not for Pers. To the left boahtit or heaŋgát as MAINV, and futher to the left is some kind of place related word, or time related word
-#MAP:<extSubj (<ext> @<SUBJ) TARGET NOT-EXT (*-1 ("boahtit") + FMAINV - Du3 OR ("heaŋgát") BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Rel Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL BARRIER SV-BOUNDARY)(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD) ;
+#MAP:<extSubj (<ext> @<SUBJ) TARGET NOT-EXT (*-1 ("boahtit") + FMAINV - Du3 OR ("heaŋgát") BARRIER NOT-NPMODADV LINK *-1 DOPPE OR (N Loc) OR (Rel Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL BARRIER SV-BOUNDARY)(NEGATE *1 Nom OR Ess BARRIER NOT-NPMOD) ; #RemoveFromApertium
 	#$ Doppe boahtá áhčči.
 
 #!! * __loc<extSubj__ (<ext> @<SUBJ) for Nom
-MAP:loc<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (-1 Loc LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) ; 
+MAP:loc<extSubj (<ext> @<SUBJ) TARGET Nom - NOT-EXT OR A-EXT + Nom (-1 Loc LINK *-1 ("leat") + FMAINV + HAB-V-TAGS BARRIER NOT-NPMODADV OR S-BOUNDARY LINK NEGATE -1 Ess LINK NOT -1 Nom) ;  #RemoveFromApertium
 	#$ Rievtti mielde lea duodjeluohkás gulahallanoahpaheaddji, muhto son ii leat doppe nu dávjá go oahppit sávvet.
 	
 #!! * __<spred__ (@<SPRED) for Nom; if Nom to the left, copulas to the left of Nom, and a time related word to the left of it.
@@ -1452,25 +1452,25 @@ MAP:Time<spred (@<SPRED) TARGET Nom - OKTA (*-1 (N Nom) BARRIER NOT-NPMODADV OR 
 
 
 #!! * __<extQst1__ (<ext> @<SUBJ) for Nom; in an existential sentence. To your left is hab, some kind of place or time-word or Po. This is a Qst-sentence so the qst-pcle is attached to leat or following leat
-MAP:<extQst1 (<ext> @<SUBJ) TARGET Nom - NOT-EXT ((*-1 <hab> OR DOPPE OR (Sem/Plc Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po BARRIER NOT-NPMODADV LINK *-1 Qst BARRIER NOT-NPMOD LINK -1 ("leat") + HAB-V-TAGS) OR (*-1 <hab> OR DOPPE OR (Sem/Plc Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po BARRIER NOT-NPMODADV LINK *-1 Qst + ("leat") + HAB-V-TAGS))(NEGATE *1 HUMAN OR Loc OR Sem/Plc BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE *1 @+FMAINV OR @-FMAINV BARRIER SV-BOUNDARY) ;
+MAP:<extQst1 (<ext> @<SUBJ) TARGET Nom - NOT-EXT ((*-1 <hab> OR DOPPE OR (Sem/Plc Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po BARRIER NOT-NPMODADV LINK *-1 Qst BARRIER NOT-NPMOD LINK -1 ("leat") + HAB-V-TAGS) OR (*-1 <hab> OR DOPPE OR (Sem/Plc Loc) OR (Sem/Time Adv) OR TIME-N + Gen OR TIME-ADVL OR Po BARRIER NOT-NPMODADV LINK *-1 Qst + ("leat") + HAB-V-TAGS))(NEGATE *1 HUMAN OR Loc OR Sem/Plc BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE *1 @+FMAINV OR @-FMAINV BARRIER SV-BOUNDARY) ; #RemoveFromApertium
 	#$ Lea go dus ruhta?
 	#$ Leažžá go Máhtes ođđa beana gal? 
 	#$ Dalle mun ferten iskat lea go dus feber, ja mihtidit dus varradeattu.
 	#% Lea go Sámedikki mielas Microsoft duođaid ánssášan vel oktii nuvttá máidnosa, mii ii leat duohta ge?
 
 #!! * __<extQst2__ (<ext> @<SUBJ) for Nom; in an existential sentence. To your left is leat and it is sentence initial. No attributes or other words are allowed inbetween (because then you are SPRED), except the attribute muhtun, muhtin
-MAP:<extQst2 (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + HAB-V-TAGS BARRIER WORD - (Attr "muhtun") - (Attr "muhtin") LINK -1 BOS)(NEGATE *1 HUMAN OR Loc OR Sem/Plc BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE 1 (A Nom)) ;
+MAP:<extQst2 (<ext> @<SUBJ) TARGET Nom - NOT-EXT (*-1 ("leat") + HAB-V-TAGS BARRIER WORD - (Attr "muhtun") - (Attr "muhtin") LINK -1 BOS)(NEGATE *1 HUMAN OR Loc OR Sem/Plc BARRIER NOT-NPMOD OR CC OR COMMA)(NEGATE 1 (A Nom)) ; #RemoveFromApertium
 	#$ Ledje muhtin čiegusvuođat, nu ahte in dieđe juste mo sii dahke, muhto geavahedje goit gunaid spárttuid vuostá ja bihka eksema vuostá.
 	
 #!! * __extQst3>__ (<ext> @SUBJ>) for Nom; if habitive first one to the left, followed by copulas.
-MAP:extQst3> (<ext> @SUBJ>) TARGET Nom IF (1 <hab> LINK 1 COPULAS)(NEGATE 1 (Pron Rel))(NEGATE 1 <hab> LINK 1 COPULAS LINK 1 FMAINV) ;
+MAP:extQst3> (<ext> @SUBJ>) TARGET Nom IF (1 <hab> LINK 1 COPULAS)(NEGATE 1 (Pron Rel))(NEGATE 1 <hab> LINK 1 COPULAS LINK 1 FMAINV) ; #RemoveFromApertium
 	#$ Mii dus lea?
 	#$ Man uhccán osku dus lea!
 	#$ Sii muitalit oahpaheaddjái makkár barggut sis leat siiddas.
 	#% Sis lei unnán dahje ii makkárge oktavuohta earáiguin earretgo internáhtas orodettiin, vaikko máŋggas sis ledje fulkkežagat.
 
 #!! * __<extsubjcoor__ (<ext> @<SUBJ) for Nom. Coordination
-MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Neg OR COMMA BARRIER NOT-NPMOD LINK *-1 <ext> BARRIER WORD)(NEGATE 1 REAL-V) ;
+MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Neg OR COMMA BARRIER NOT-NPMOD LINK *-1 <ext> BARRIER WORD)(NEGATE 1 REAL-V) ; #RemoveFromApertium
 	#$ Eai lean boraspiret, eai ealggat, eaige nu ollu bohccot dain duovdagiin go dál.
 
 #!! * Sem/Year

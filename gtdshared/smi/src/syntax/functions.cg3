@@ -954,60 +954,60 @@ SET NON-APP = ALLSYNTAG - (@APP);
 	# Habitives - HAB
 	
 #!! * __hab1__ 
-MAP:hab1 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 FAUXV + HAB-V-TAGS LINK *1 LEAT BARRIER NP-HEAD OR MAIN-V);
+MAP:hab1 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 FAUXV + HAB-V-TAGS LINK *1 LEAT BARRIER NP-HEAD OR MAIN-V); #RemoveFromApertium
 	#$ Mus eai leat girjjit mielde.
 	#% Dorskis sáhttet leat vuoivvas ja meađđemat.
 
-MAP:hab_numo (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 COPULAS + HAB-V-TAGS LINK 1 COMMA LINK *1 COMMA LINK 1 (N Nom)) ;
+MAP:hab_numo (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 COPULAS + HAB-V-TAGS LINK 1 COMMA LINK *1 COMMA LINK 1 (N Nom)) ; #RemoveFromApertium
 	#%Dus lea, nu mo buot eará bargiin, vuoigatvuohta oahppasoahpamuša lassin maiddái čálalaš bargosoahpamuššii oahppafitnodagain.
 
 #!! * __hab2__ 
-MAP:hab2 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 FAUXV + HAB-V-TAGS LINK 1 Adv LINK *1 LEAT BARRIER NOT-ADV-PCLE);
+MAP:hab2 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 FAUXV + HAB-V-TAGS LINK 1 Adv LINK *1 LEAT BARRIER NOT-ADV-PCLE); #RemoveFromApertium
 
 #!! * __hab3__ (<hab> @ADVL>) for hab-actor and hab-case; if leat to the right, and Nom to the right of leat. Lots of restrictions.
-MAP:hab3 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 Sem/Group OR Pl - Rel LINK *-1 Indef - BUOT + Nom OR HUMAN + Nom BARRIER NOT-NPMOD-ACC)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))(NEGATE 0 N OR Pers OR Indef LINK *-1 HAB-ACTOR + HAB-CASE BARRIER NOT-NPMOD-ACC OR CC)(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER S-BOUNDARY);
+MAP:hab3 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 Sem/Group OR Pl - Rel LINK *-1 Indef - BUOT + Nom OR HUMAN + Nom BARRIER NOT-NPMOD-ACC)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))(NEGATE 0 N OR Pers OR Indef LINK *-1 HAB-ACTOR + HAB-CASE BARRIER NOT-NPMOD-ACC OR CC)(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER S-BOUNDARY); #RemoveFromApertium
 	#$ Máhtes lea beana.
 	#% Sis lei unnán dahje ii makkárge oktavuohta earáiguin earretgo internáhtas orodettiin, vaikko máŋggas sis ledje fulkkežagat.
 	#% Juos gorreválggain Sámedikkis lea dárbbašlaš deavdit gáibádusa, ahte okta stivrralahtuin ja su sadjásašlahttu galgaba leat boazodoalu ovddasteaddjit, de galgá boazodoalu ovddasteddjiid loktet badjeliidda dan listtas, mii lea ožžon uhcimus jienaid daid listtaid gaskkas, mat galget ovddastuvvot ja main leat dakkár evttohasat. 
 	#% Ealus leat eanaš álddut.
 
 
-MAP:habInf (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE OR ("dat" Dem) +  HAB-CASE - Attr (1 LEAT + Sg3 LINK 1 Inf) ;
+MAP:habInf (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE OR ("dat" Dem) +  HAB-CASE - Attr (1 LEAT + Sg3 LINK 1 Inf) ; #RemoveFromApertium
 	#$ Mis lea cahkkehit dola.
 
 #!! * __habNomLeft__ 
-MAP:habNomLeft (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr ((-1 Nom LINK NEGATE *-1 (Pers Gen) BARRIER NOT-NPMOD) OR (-1 (Sg Gen) LINK -1 (Sg Num Nom) LINK NEGATE *-1 (Pers Gen) BARRIER NOT-NPMOD))(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE);
+MAP:habNomLeft (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr ((-1 Nom LINK NEGATE *-1 (Pers Gen) BARRIER NOT-NPMOD) OR (-1 (Sg Gen) LINK -1 (Sg Num Nom) LINK NEGATE *-1 (Pers Gen) BARRIER NOT-NPMOD))(NEGATE -1 Num LINK -1 Num)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE); #RemoveFromApertium
 	#$ Mii dus lea?
 
-MAP:habAdvl (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr  (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))((*1 HAB-CASE BARRIER NOT-NPMOD-ACC LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE) OR (*1 HAB-CASE BARRIER NOT-NPMODADV LINK *1 FAUXV LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE));
+MAP:habAdvl (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr  (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(NEGATE 0 (Sem/Ani Sem/Group) LINK *1 Sem/Ani BARRIER (N Nom))(NEGATE 0 (Sem/Hum Sem/Group) LINK *1 Sem/Hum BARRIER (N Nom))((*1 HAB-CASE BARRIER NOT-NPMOD-ACC LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE) OR (*1 HAB-CASE BARRIER NOT-NPMODADV LINK *1 FAUXV LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE)); #RemoveFromApertium
 	#$ Ii han ovttasge du sogas leat dat namma.
 	#Comment: "bealli" is probably not listed as HAB-ACTOR, even if it could mean "spouce".
 
 #!! * __hab4__ 	
-MAP:hab4 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 CC LINK *1 HAB-ACTOR BARRIER NOT-NPMOD LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE);
+MAP:hab4 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE - Attr (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(1 CC LINK *1 HAB-ACTOR BARRIER NOT-NPMOD LINK *1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE); #RemoveFromApertium
 
 
 
 #!! * __hab6__ 
-MAP:hab6 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE - Attr ((*-1 go BARRIER NOT-NPMOD LINK -1 LEAT + HAB-V-TAGS LINK -1 BOC) OR (*-1 LEAT + Qst BARRIER NOT-NPMOD LINK -1 BOC));
+MAP:hab6 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE - Attr ((*-1 go BARRIER NOT-NPMOD LINK -1 LEAT + HAB-V-TAGS LINK -1 BOC) OR (*-1 LEAT + Qst BARRIER NOT-NPMOD LINK -1 BOC)); #RemoveFromApertium
 	#$ Lea go dis ruhta?
 	#$ Leago sámeálbmogis vuoigatvuođat vai eai?
 
 #!! * __hab7__ 
-MAP:hab7 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE - Attr (*-1 go BARRIER NOT-NPMOD LINK -1 LEAT + HAB-V-TAGS LINK -1 MAIN-V);
+MAP:hab7 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE - Attr (*-1 go BARRIER NOT-NPMOD LINK -1 LEAT + HAB-V-TAGS LINK -1 MAIN-V); #RemoveFromApertium
 	#$ Dalle mun ferten iskat lea go dus feber.
 
 #!! * __hab8__ This is not HAB
-#MAP:hab8 (<hab> @ADVL>) TARGET HAB-ACTOR + Ill IF (*-1 BOS BARRIER NOT-NPMODADV)(*1 COPULAS BARRIER NOT-ADV-PCLE LINK *1 A OR N BARRIER NOT-ADV-PCLE);
+#MAP:hab8 (<hab> @ADVL>) TARGET HAB-ACTOR + Ill IF (*-1 BOS BARRIER NOT-NPMODADV)(*1 COPULAS BARRIER NOT-ADV-PCLE LINK *1 A OR N BARRIER NOT-ADV-PCLE); #RemoveFromApertium
 	#$ Ellii šattai hoahppu.
 #!! * __hab5__  This is not HAB
-#MAP:hab5 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 HAB-V BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER VFIN);
+#MAP:hab5 (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 HAB-V BARRIER NOT-ADV-PCLE LINK *1 Nom BARRIER VFIN); #RemoveFromApertium
 	#$ Mánás gollot gieđat. 
 
-MAP:hab9 (<hab> @ADVL>) TARGET HAB-CASE IF (-1 FIRSTNAME)(0 Ord)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE);
+MAP:hab9 (<hab> @ADVL>) TARGET HAB-CASE IF (-1 FIRSTNAME)(0 Ord)(NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE); #RemoveFromApertium
 	#$ Heinrich njealjádis lea rikkis eamit.
 	
-MAP:hab10 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE 
+MAP:hab10 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE  #RemoveFromApertium
 (NEGATE 0 HAB-ACTOR-NOT-HUMAN OR Sem/Group LINK *1 HUMAN + Nom BARRIER S-BOUNDARY) 
 (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 Num BARRIER S-BOUNDARY LINK 1 HUMAN + Gen)
 (*-1 LEAT + HAB-V-TAGS BARRIER Nom OR S-BOUNDARY OR MAIN-V LINK -1 ADVLCASE OR Adv OR Po)
@@ -1017,8 +1017,8 @@ MAP:hab10 (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE
 	#$ Doppe leamaš sámiin stuora deaddu.
 
 #!! * __habDain__ (<hab> @ADVL>) for (Pron Dem Pl Loc) if leat followed by Nom to the right
-MAP:habDain (<hab> @ADVL>) TARGET (Pron Dem Pl Loc)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK 1 Nom) ;
-MAP:habDain2 (<hab> @ADVL>) TARGET (Pron Dem Pl Loc)(-1 Nom LINK -1 (Pron Interr))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK *1 Ess) ;
+MAP:habDain (<hab> @ADVL>) TARGET (Pron Dem Pl Loc)(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK 1 Nom) ; #RemoveFromApertium
+MAP:habDain2 (<hab> @ADVL>) TARGET (Pron Dem Pl Loc)(-1 Nom LINK -1 (Pron Interr))(*1 LEAT + HAB-V-TAGS BARRIER NOT-ADV-PCLE - FAUXV LINK *1 Ess) ; #RemoveFromApertium
 	#$ Hui dávjá lea nu ahte dain leat olbmot, geat eai doarvái bures dovdda sámi kultuvrra eaige sin jurddašanvuogi.
 	#$ Makkár vuoigatvuođat dain leat Norgga riikavuložin?
 	#% Dat bulle ja goldne go dain ii leat ruohtas. 
@@ -1026,18 +1026,18 @@ MAP:habDain2 (<hab> @ADVL>) TARGET (Pron Dem Pl Loc)(-1 Nom LINK -1 (Pron Interr
 
 	
 # before relative clause
-MAP:habRel (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 Rel BARRIER WORD LINK *1 FMAINV BARRIER S-BOUNDARY LINK *1 LEAT + HAB-V-TAGS BARRIER S-BOUNDARY OR MAIN-V);
+MAP:habRel (<hab> @ADVL>) TARGET HAB-ACTOR + HAB-CASE (NEGATE 0 HAB-ACTOR-NOT-HUMAN LINK *1 HUMAN BARRIER (N Nom))(*1 Rel BARRIER WORD LINK *1 FMAINV BARRIER S-BOUNDARY LINK *1 LEAT + HAB-V-TAGS BARRIER S-BOUNDARY OR MAIN-V); #RemoveFromApertium
 	#$ Divššohasas, gii dárbbaša guhkit áiggi ja oktiiheivehuvvon dearvvašvuođabálvalusaid, lea vuoigatvuohta oažžut ráhkaduvvot oktagaslaš plána.
 
-MAP:habEllipse (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE (1 Adv LINK 1 (N Nom))(-1 COMMA LINK -1 (N Nom) LINK *-1 LEAT + HAB-V-TAGS BARRIER NOT-NPMOD LINK -1 HAB-ACTOR + HAB-CASE);
+MAP:habEllipse (<hab> @<ADVL) TARGET HAB-ACTOR + HAB-CASE (1 Adv LINK 1 (N Nom))(-1 COMMA LINK -1 (N Nom) LINK *-1 LEAT + HAB-V-TAGS BARRIER NOT-NPMOD LINK -1 HAB-ACTOR + HAB-CASE); #RemoveFromApertium
 	#$ Buot gánddain lea dreassa, nieiddain fas gákti.
 
 #!! * __habGen__ (<hab> @<ADVL) hab for Gen; if Gen is located in the end of the sentence and Nom is sentence initial
-MAP:habGen (<hab> @<ADVL) TARGET HAB-ACTOR + Gen (*-1 LEAT + HAB-V-TAGS BARRIER NOT-NPMODADV LINK -1 (N Nom) OR (Dem Nom))(1 EOC) ;
+MAP:habGen (<hab> @<ADVL) TARGET HAB-ACTOR + Gen (*-1 LEAT + HAB-V-TAGS BARRIER NOT-NPMODADV LINK -1 (N Nom) OR (Dem Nom))(1 EOC) ; #RemoveFromApertium
 	#$ Dát lea áhči.
 	
 #!! * __habGenQst__ (<hab> @<ADVL) hab for Gen; in a question sentence. Gen is located sentence initially and SUBJ is found to the right. To the right of SUBJ is copulas
-MAP:<habGenQst (<hab> @<ADVL) TARGET (Pron Interr) + Gen (-1 BOS)(*1 Nom BARRIER NOT-NPMODADV LINK 1 LEAT + HAB-V-TAGS LINK NEGATE *1 FMAINV BARRIER SV-BOUNDARY) ;
+MAP:<habGenQst (<hab> @<ADVL) TARGET (Pron Interr) + Gen (-1 BOS)(*1 Nom BARRIER NOT-NPMODADV LINK 1 LEAT + HAB-V-TAGS LINK NEGATE *1 FMAINV BARRIER SV-BOUNDARY) ; #RemoveFromApertium
 	#$ Gean dat livččii? 
 	#% Gean vuorru lea dál bálkestit birccu?
 

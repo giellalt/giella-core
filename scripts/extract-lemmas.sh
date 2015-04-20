@@ -92,6 +92,8 @@ cut_fields () {
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
    | egrep -v "^[[:space:]]*[[:alpha:]_-]+[[:space:]]*;" \
+   | sed 's/%!/_xxEXCLxx_/' \
+   | sed 's/!.*//' \
    | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex)" \
    | exclgrep "$excludepattern" \
    | egrep    "$includepattern" \
@@ -101,6 +103,7 @@ grep ";" $inputfile \
    | sed 's/%:/¢/g' \
    | sed 's/%#/¥/g' \
    | sed 's/%@/£/g' \
+   | sed 's/_xxEXCLxx_/%!/' \
    | sed 's/%\(.\)/\1/g' \
    | tr -s ' ' \
    | sed 's/:/XXXXX/' \

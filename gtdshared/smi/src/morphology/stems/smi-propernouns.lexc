@@ -3309,7 +3309,7 @@ Blåhammarkläppen+OLang/SWE:Blå^hammar^kläppen9 LONDON-plc ;
 Blåhammarskaftet+OLang/UND:Blå^hammar^skaftet LONDON-plc ;
 Blåheia+OLang/NOB:Blå#he^ia ACCRA-plc ;
 Blåmannsisen+OLang/NOB:Blå#manns#isen9 LONDON-sur ;
-Blåsjön+OLang/UND:Blå#sjön9 LONDON-plc ;
+Blåsjön+OLang/UND:Blå9#sjön9 BERN-plc ; ! Should go as other sjön-lemma
 Blåsjöälven+OLang/UND:Blå^sjö#älven9 LONDON-plc ;
 Blåsjøkilen+OLang/NOB:Blå^sjø#kilen9 LONDON-plc ;
 Blåtind+OLang/NOB:Blå#tind9 BERN-plc ;
@@ -30741,6 +30741,7 @@ Brattbekken+OLang/UND:Bratt^bekken9 LONDON-sur ;
 ! els- vet ikke hvordan
 !Dybbøls+N+Prop+Attr:Dyb^bøls ENDLEX ; !XXX
 !Bloomingdale's+Err/Lex:Bloomingdale's CNAME_EVEN-org ;
+Gerog´s
 !Christensens+OLang/UND:Christensens LONDON-org ;
 !King's+Err/Lex:King's CNAME_EVEN-org ; ! til smi-prop-fila?
 

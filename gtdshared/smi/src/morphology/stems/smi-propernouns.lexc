@@ -3309,7 +3309,7 @@ Blåhammarkläppen+OLang/SWE:Blå^hammar^kläppen9 LONDON-plc ;
 Blåhammarskaftet+OLang/UND:Blå^hammar^skaftet LONDON-plc ;
 Blåheia+OLang/NOB:Blå#he^ia ACCRA-plc ;
 Blåmannsisen+OLang/NOB:Blå#manns#isen9 LONDON-sur ;
-Blåsjön+OLang/UND:Blå9#sjön9 BERN-plc ; ! Should go as other sjön-lemma
+Blåsjön+OLang/UND:Blå#sjön9 BERN-plc ; ! Should go as other sjön-lemma
 Blåsjöälven+OLang/UND:Blå^sjö#älven9 LONDON-plc ;
 Blåsjøkilen+OLang/NOB:Blå^sjø#kilen9 LONDON-plc ;
 Blåtind+OLang/NOB:Blå#tind9 BERN-plc ;
@@ -30728,7 +30728,7 @@ Haaland+OLang/NOB:Haa#land9 BERN-sur ;
 Twitter+OLang/ENG:Twitter LONDON-org ;
 Instagram+OLang/UND:Instagram9 BERN-org ;
 Kjerråtjønnin+OLang/UND:Kjerråtjønnin9 LONDON-mal ;
-Heiberg-øyane/Axel:Hei^berg-øyane/Axel BERN-plc ;
+Heiberg-øyane/Axel:Hei^berg9-øyane/Axel BERN-plc ;
 Jean-Marie+OLang/UND:Jean-Marie  ACCRA-fem ;
 TWOL+OLang/UND:TWOL BERN-org ;
 British+OLang/UND:British LONDON-obj ;

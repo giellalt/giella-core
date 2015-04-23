@@ -161,6 +161,7 @@ Ai+CmpNP/None+Err/Lex+OLang/UND:Ai NYSTØ-plc ;
 Ho+CmpNP/None+Err/Lex+OLang/UND:Ho9 ACCRA-mal ;
 Ol+CmpNP/None+OLang/UND:Ol BERN-mal ;
 Ål+CmpNP/None+OLang/NOB:Ål BERN-plc ;
+El+CmpNP/None+OLang/NOB:El BERN-plc ;
 Tid+CmpNP/None+OLang/UND:Tid9 BERN-sur ;
 Aas+CmpNP/None+OLang/NOB:Aas BERN-sur ;
 Was+CmpNP/None+OLang/NOB:Was BERN-sur ;
@@ -646,6 +647,7 @@ Aakenusjärvi+OLang/FIN:Aakenus#järv MAKI-plc ;
 Aakenuspirtti+OLang/FIN:Aakenuspirtti PIPPI-plc ;
 Aakenustunturi+OLang/FIN:Aakenustunturi PIPPI-plc ;
 Aakervik+OLang/NOB:Aaker9#vik BERN-sur ;
+Keflavík+OLang/NOB:Kefla9#vik BERN-sur ;
 Aakrann+OLang/NOB:Aakrann9 BERN-sur ;
 Aakre+OLang/NOB:Aakre ACCRA-sur ;
 Aakula+OLang/FIN:Aakula ACCRA-sur ;
@@ -1292,6 +1294,7 @@ Alsten+OLang/NOB:Al#sten9 LONDON-sur ;
 Alster+OLang/UND:Alster LONDON-sur ;
 Alsvik+OLang/NOB:Als#vik BERN-plc ;
 Alsvåg+OLang/NOB:Als#våg9 BERN-plc ;
+Ertevåg+OLang/NOB:Erte#våg9 BERN-plc ;
 Alsåker+OLang/UND:Als#åker LONDON-plc ;
 Kildin+OLang/UND:Kildin9 LONDON-plc ;
 Alsøy+OLang/NOB:Als#øy OY-plc ;
@@ -3310,6 +3313,11 @@ Blåhammarskaftet+OLang/UND:Blå^hammar^skaftet LONDON-plc ;
 Blåheia+OLang/NOB:Blå#he^ia ACCRA-plc ;
 Blåmannsisen+OLang/NOB:Blå#manns#isen9 LONDON-sur ;
 Blåsjön+OLang/UND:Blå#sjön9 BERN-plc ; ! Should go as other sjön-lemma
+Almsjön+OLang/UND:Alm#sjön9 BERN-plc ;
+Harrsjön:Harr#sjön9 BERN-plc ;! from sma
+Malgomajsjön:Malgomaj#sjön9 BERN-plc ;! from sma
+Avasjön:Ava#sjön9 BERN-plc ;! from sma
+Aspsjön:Asp#sjön9 BERN-plc ;! from sma
 Blåsjöälven+OLang/UND:Blå^sjö#älven9 LONDON-plc ;
 Blåsjøkilen+OLang/NOB:Blå^sjø#kilen9 LONDON-plc ;
 Blåtind+OLang/NOB:Blå#tind9 BERN-plc ;
@@ -21919,6 +21927,7 @@ Rocha+OLang/UND:Rocha ACCRA-sur ;
 Rochdale+Err/Orth+OLang/UND:Roch^dale9 ACCRA-plc ;
 Rochdale+OLang/UND:Roch^dale ACCRA-plc ;
 Rochefort+OLang/UND:Rochefort BERN-sur ;
+Frankfort+OLang/UND:Frankfort BERN-sur ;
 Rochelle+OLang/UND:Rochelle ACCRA-fem ;
 Rochester+OLang/UND:Ro^chester LONDON-plc ;
 Rocheteau+OLang/UND:Rocheteau ACCRA-sur ;

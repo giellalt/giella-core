@@ -2001,6 +2001,7 @@ Arveschoug+OLang/UND:Arve^schoug9 BERN-sur ;
 Arvesen+OLang/NOB:Arvesen9 LONDON-sur ;
 Arvid+OLang/UND:Arvid9 LONDON-mal ;
 Arvidsjaur+OLang/UND:Arvids#jaur BERN-LOAN-plc ;
+Borkajaur+OLang/UND:Borka^jaur BERN-LOAN-plc ;
 Arvidson+OLang/UND:Arvidson9 LONDON-sur ;
 Arvika+OLang/NOB:Ar9#vika ACCRA-plc ;
 Arvila+OLang/FIN:Arvila ACCRA-sur ;
@@ -2976,6 +2977,7 @@ Berven+OLang/UND:Berven9 LONDON-sur ;
 Beryl+OLang/UND:Beryl BERN-obj ;
 Besançon+OLang/UND:Besançon9 BERN-plc ;
 Beskinjarg+Err/Lex+OLang/UND:Beski^njarg9 BERN-plc ;
+Alleknjárg+OLang/UND:Allek^njárg9 BERN-plc ;
 Bessa+OLang/UND:Bessa ACCRA-plc ;
 Bessaker+OLang/NOB:Bess9#aker LONDON-plc ;
 Bessarabia+OLang/NOB:Bessarabia ACCRA-plc ;
@@ -30838,13 +30840,14 @@ Bottenvika+OLang/NOB:Botten9#vika ACCRA-plc ;
 Brattbekken+OLang/UND:Bratt^bekken9 LONDON-sur ;
 
 ! el´s- vet ikke hvordan
+VIIs+Err/Lex:VIIs CNAME_EVEN-org ;
 !Dybbøls+N+Prop+Attr:Dyb^bøls ENDLEX ; !XXX
 !Bloomingdale's+Err/Lex:Bloomingdale's CNAME_EVEN-org ;
 !Gerog´s
 !Christensens+OLang/UND:Christensens LONDON-org ;
 !King's+Err/Lex:King's CNAME_EVEN-org ; ! til smi-prop-fila?
 !George's+Err/Lex:George's CNAME_EVEN-org ;
-Östergötlands+N+Prop+Attr:Öster^göt^lands ENDLEX ; !XXX
+!Östergötlands+N+Prop+Attr:Öster^göt^lands ENDLEX ; !XXX
 
 
 Öræfajökull+OLang/NOB:Öræfa^jökull LONDON-plc ;
@@ -30890,6 +30893,7 @@ Almsele+OLang/NOB:Alm^sele ACCRA-LOAN-plc ;
 StudentkáféEN+OLang/NOB:Student^káfé^EN LONDON-plc ;
 Mulingan+OLang/NOB:Mulingan LONDON-plc ;
 Avtsejen+OLang/NOB:Avtsejen LONDON-plc ;
+Nordsjösætrane+OLang/NOB:Nordsjösætrane LONDON-plc ;
 
 
 

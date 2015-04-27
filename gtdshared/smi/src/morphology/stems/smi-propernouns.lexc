@@ -30837,13 +30837,60 @@ Ceylon+Err/Orth:Ceylovn LONDON-plc ;
 Bottenvika+OLang/NOB:Botten9#vika ACCRA-plc ;
 Brattbekken+OLang/UND:Bratt^bekken9 LONDON-sur ;
 
-! els- vet ikke hvordan
+! el´s- vet ikke hvordan
 !Dybbøls+N+Prop+Attr:Dyb^bøls ENDLEX ; !XXX
 !Bloomingdale's+Err/Lex:Bloomingdale's CNAME_EVEN-org ;
 !Gerog´s
 !Christensens+OLang/UND:Christensens LONDON-org ;
 !King's+Err/Lex:King's CNAME_EVEN-org ; ! til smi-prop-fila?
 !George's+Err/Lex:George's CNAME_EVEN-org ;
+Östergötlands+N+Prop+Attr:Öster^göt^lands ENDLEX ; !XXX
+
+
+Öræfajökull+OLang/NOB:Öræfa^jökull LONDON-plc ;
+Västerbottenkysten+OLang/NOB:Västerbotten^kysten LONDON-plc ;
+Vojmådalen+OLang/NOB:Vojmådalen LONDON-plc ;
+Tettingfossen+OLang/NOB:Tetting^fossen LONDON-plc ;
+Sømnalandet+OLang/NOB:Sømna^landet LONDON-plc ;
+Storvassbekken+OLang/NOB:Storvass^bekken LONDON-plc ;
+Stenvogen+OLang/NOB:Sten^vogen LONDON-plc ;
+Stenkulla+OLang/NOB:Sten#kulla ACCRA-plc ;
+Själevadbrua+OLang/NOB:Själevad#brua ACCRA-plc ;
+Sandnessjøen+OLang/NOB:Sandnes^sjø^en LONDON-plc ;
+Rickelåen+OLang/NOB:Rickelåen CNAME_ODD-plc ;
+Prästsundet+OLang/NOB:Prästsundet LONDON-plc ;
+Tutta+OLang/NOB:Tutta ACCRA-plc ;
+Mulingmannen+OLang/NOB:Muling^mannen9 LONDON-plc ;
+Mattisforsen+OLang/NOB:Mattis^forsen LONDON-plc ;
+Mulingen+OLang/NOB:Mulingen LONDON-plc ;
+Låvsejen+OLang/NOB:Låvsejen LONDON-plc ;
+Lappskaret+OLang/NOB:Lapp^skaret LONDON-plc ;
+Kultsjödalen+OLang/NOB:Kult^sjö^dalen LONDON-plc ;
+Krötselberget+OLang/NOB:Krötsel^berget LONDON-plc ;
+Kraftverket+OLang/NOB:Kraft^verket LONDON-plc ;
+Klockvaken+OLang/NOB:Klock^vaken LONDON-plc ;
+Kjerringlorten+OLang/NOB:Kjerring^lorten LONDON-plc ;
+Innlandet+OLang/NOB:Inn^landet LONDON-plc ;
+Hörösundet+OLang/NOB:Hörö^sundet LONDON-plc ;
+Hjartøya+OLang/NOB:Hjart9#øya ACCRA-plc ;
+Hjarteelva+OLang/NOB:Hjarte#elva ACCRA-plc ;
+Hjartedalen+OLang/NOB:Hjarte^dalen LONDON-plc ;
+Hieronymussen+OLang/NOB:Hieronymussen LONDON-sur ;
+Hellebarden+OLang/NOB:Helle^barden LONDON-plc ;
+Helgelandskysten+OLang/NOB:Helgelands^kysten LONDON-plc ;
+Gransansjöen+OLang/NOB:Gransan^sjö^en LONDON-plc ;
+Gottern+OLang/UND:Gottern9 LONDON-plc ;
+Gamsjöbovika+OLang/NOB:Gamsjöbo#vika ACCRA-plc ;
+Gammelgårdsberget+OLang/NOB:Gammelgårds^berget LONDON-plc ;
+Fättjaure+OLang/NOB:Fätt#jaure ACCRA-plc ;
+Frustegvika+OLang/NOB:Frusteg#vika ACCRA-plc ;
+Eiaskaret+OLang/NOB:Eia^skaret LONDON-plc ;
+Andalsgubben+OLang/NOB:Andals^gubben LONDON-plc ;
+Almsele+OLang/NOB:Alm^sele ACCRA-LOAN-plc ;
+StudentkáféEN+OLang/NOB:Student^káfé^EN LONDON-plc ;
+Mulingan+OLang/NOB:Mulingan LONDON-plc ;
+Avtsejen+OLang/NOB:Avtsejen LONDON-plc ;
+
 
 
 

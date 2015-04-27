@@ -30840,7 +30840,7 @@ Bottenvika+OLang/NOB:Botten9#vika ACCRA-plc ;
 Brattbekken+OLang/UND:Bratt^bekken9 LONDON-sur ;
 
 ! el´s- vet ikke hvordan
-VIIs+Err/Lex:VIIs CNAME_EVEN-org ;
+!VIIs+Err/Lex:VIIs CNAME_EVEN-org ;
 !Dybbøls+N+Prop+Attr:Dyb^bøls ENDLEX ; !XXX
 !Bloomingdale's+Err/Lex:Bloomingdale's CNAME_EVEN-org ;
 !Gerog´s
@@ -30860,7 +30860,7 @@ Stenvogen+OLang/NOB:Sten^vogen LONDON-plc ;
 Stenkulla+OLang/NOB:Sten#kulla ACCRA-plc ;
 Själevadbrua+OLang/NOB:Själevad#brua ACCRA-plc ;
 Sandnessjøen+OLang/NOB:Sandnes^sjø^en LONDON-plc ;
-Rickelåen+OLang/NOB:Rickelåen CNAME_ODD-plc ;
+Rickelåen+OLang/NOB:Rickelåen LONDON-plc ;
 Prästsundet+OLang/NOB:Prästsundet LONDON-plc ;
 Tutta+OLang/NOB:Tutta ACCRA-plc ;
 Mulingmannen+OLang/NOB:Muling^mannen9 LONDON-plc ;

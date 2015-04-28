@@ -570,7 +570,6 @@ Wig+CmpNP/None+OLang/UND:Wig9 BERN-sur ;
 Wik+CmpNP/None+OLang/UND:Wik BERN-sur ;
 Xia+CmpNP/None+OLang/NOB:Xia ACCRA-plc ;
 Xin+CmpNP/None+OLang/UND:Xin9 BERN-sur ;
-Yle+N+Prop+Sem/Org+Sg+Ill+CmpNP/None+OLang/UND:Ylei flagK ; !alt. ill-form
 Yle+CmpNP/None+OLang/UND:Yle SIJTE-org ;
 Yme+CmpNP/None+OLang/UND:Yme ACCRA-mal ;
 Zhu+CmpNP/None+OLang/UND:Zhu ACCRA-plc ;
@@ -26125,7 +26124,6 @@ Tammisto+OLang/FIN:Tammisto9 ACCRA-plc ;
 Tammitupa+OLang/UND:Tammitupa ACCRA-plc ;
 Tammivuori+OLang/FIN:Tammi#vuori PIPPI-sur ;
 Tampa+OLang/UND:Tampa ACCRA-plc ;
-Tampere+N+Prop+Sem/Org+Sg+Ill+OLang/FIN:Tamperei flagK ; !alt. ill-form
 Tampere+OLang/FIN:Tamper RONDANE-SG-plc ;
 Tampico+OLang/UND:Tampico9 ACCRA-mal ;
 Tampio+OLang/UND:Tampio9 ACCRA-sur ;
@@ -30847,7 +30845,6 @@ Brattbekken+OLang/UND:Bratt^bekken9 LONDON-sur ;
 !Östergötlands+N+Prop+Attr:Öster^göt^lands ENDLEX ; !XXX
 
 
-Öræfajökull+OLang/NOB:Öræfa^jökull LONDON-plc ;
 Västerbottenkysten+OLang/NOB:Västerbotten^kysten LONDON-plc ;
 Vojmådalen+OLang/NOB:Voj9mådalen LONDON-plc ;
 Tettingfossen+OLang/NOB:Tetting^fossen LONDON-plc ;

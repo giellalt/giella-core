@@ -9715,7 +9715,6 @@ Hergel+OLang/UND:Hergel LONDON-sur ;
 Herheim+OLang/NOB:Her9#heim9 HEIM-sur ;
 Herigstad+OLang/NOB:Herig9#stad9 BERN-plc ;
 Herjangen+OLang/UND:Herj9#angen9 LONDON-plc ;
-Herjangen+OLang/UND:Herjangen9 LONDON-LOAN-plc ;
 Herjangsfjellet+OLang/UND:Herjangs#fjellet LONDON-LOAN-plc ;
 Herjangsfjorden+OLang/NOB:Herjangs#fjorden9 LONDON-LOAN-plc ;
 Herjedalen+Err/Lex+OLang/UND:Herje#dalen9 LONDON-plc ;
@@ -21373,8 +21372,8 @@ Ranveig+OLang/UND:Ranveig9 BERN-sur ;
 Ranvik+OLang/NOB:Ran#vik BERN-sur ;
 Rapakko+OLang/UND:Rapakko9 ACCRA-sur ;
 Rapatti+OLang/UND:Rapatti PIPPI-sur ;
-Rapeli+OLang/NOB:Rapeli ACCRA-sur ;
-Rapeli+OLang/UND:Rapeli NYSTØ-sur ;
+Rapeli+OLang/NOB:Rapeli ACCRA-sur ;! SMA:ERVASTI, SMJ: 
+Rapeli+OLang/UND:Rapeli NYSTØ-sur ;! SMA:ERVASTI, SMJ: 
 Raphamn+OLang/NNO:Rap9#hamn9 BERN-plc ;
 Rapids+OLang/UND:Rapids LONDON-plc ;
 Rapo+OLang/UND:Rapo9 ACCRA-sur ;
@@ -30625,23 +30624,23 @@ Mesnali+OLang/UND:Mesnali ACCRA-plc ;
 Midlands+OLang/UND:Mid9#lands BERN-plc ;
 Mikel+OLang/UND:Mikel LONDON-mal ;
 Miren+OLang/UND:Miren LONDON-fem ;
-Morceli+OLang/UND:Morceli ACCRA-sur ;
-Moroni+OLang/UND:Moroni ACCRA-sur ;
-Muittari+OLang/UND:Muittari ACCRA-sur ;
-Mylläri+OLang/UND:Mylläri ACCRA-sur ;
-Mänttäri+OLang/UND:Mänttäri ACCRA-sur ;
-Mölläri+OLang/UND:Mölläri ACCRA-sur ;
-Naftali+OLang/UND:Naftali ACCRA-mal ;
-Naftali+OLang/UND:Naftali ACCRA-plc ;
-Nahkuri+OLang/UND:Nahkuri ACCRA-sur ;
-Nakari+OLang/UND:Nakari ACCRA-sur ;
-Napari+OLang/UND:Napari ACCRA-sur ;
-Napoli+OLang/UND:Napoli ACCRA-plc ;
-Naskali+OLang/UND:Naskali ACCRA-sur ;
+Morceli+OLang/UND:Morceli LONDON-sur ;  ! sma-LONDON: Morcelisnie 
+Moroni+OLang/UND:Moroni LONDON-sur ;! Moronisnie
+Muittari+OLang/UND:Muittari LONDON-sur ;! 
+Mylläri+OLang/UND:Mylläri LONDON-sur ;! sma-ERVASTI:
+Mänttäri+OLang/UND:Mänttäri LONDON-sur ;! sma-ERVASTI:
+Mölläri+OLang/UND:Mölläri LONDON-sur ;! sma-ERVASTI:
+Naftali+OLang/UND:Naftali LONDON-mal ;! sma-ERVASTI:
+Naftali+OLang/UND:Naftali LONDON-plc ;! sma-ERVASTI:
+Nahkuri+OLang/UND:Nahkuri LONDON-sur ;! sma-ERVASTI:
+Nakari+OLang/UND:Nakari LONDON-sur ;! sma-ERVASTI:
+Napari+OLang/UND:Napari LONDON-sur ;! sma-ERVASTI:
+Napoli+OLang/UND:Napoli LONDON-plc ;! sma-ERVASTI:
+Naskali+OLang/UND:Naskali LONDON-sur ;! sma-ERVASTI:
 Nasti+OLang/UND:Nasti ACCRA-org ;! A name of a pub
-Negeri+OLang/UND:Negeri ACCRA-plc ;
-Nestori+OLang/UND:Nestori ACCRA-mal ;
-Nikkari+OLang/UND:Nikkari ACCRA-sur ;
+Negeri+OLang/UND:Negeri LONDON-plc ;! sma-ERVASTI:
+Nestori+OLang/UND:Nestori LONDON-mal ;! sma-ERVASTI:
+Nikkari+OLang/UND:Nikkari ACCRA-sur ;! sma-ERVASTI:
 Nikken+OLang/UND:Nikken LONDON-mal ;
 Njaarke+OLang/UND:Njaarke ACCRA-plc ;
 Njerrem+OLang/UND:Njerrem9 LONDON-plc ;
@@ -30663,7 +30662,7 @@ Paakkari+OLang/UND:Paakkari ACCRA-sur ;
 Paasikivi+OLang/UND:Paasikivi ACCRA-sur ;
 Pahlavi+OLang/UND:Pahlavi ACCRA-plc ;
 Paldiski+OLang/UND:Paldiski ACCRA-plc ;
-Pallari+OLang/UND:Pallari ACCRA-sur ;
+Pallari+OLang/UND:Pallari LONDON-sur ;
 Panaggi+OLang/UND:Panaggi ACCRA-sur ;
 Panu+OLang/UND:Panu ACCRA-mal ;
 Pareli+OLang/UND:Pareli ACCRA-sur ;

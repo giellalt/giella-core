@@ -1055,8 +1055,6 @@ Kenkreas+OLang/NOB:Kenkre^as LONDON-plc ;
 Kerberos+OLang/NOB:Kerberos LONDON-plc ;
 Klockar+OLang/NOB:Klockar LONDON-plc ;
 Kongsserver+OLang/NOB:Kongs^server LONDON-plc ;
-
-
 Akerveien+OLang/NOB:Aker9#vei^en9 LONDON-plc ;
 Akhtar+OLang/UND:Akhtar LONDON-mal ;
 Akihito+OLang/UND:Akihito9 ACCRA-sur ;
@@ -1306,7 +1304,7 @@ Alna+OLang/UND:Alna ACCRA-plc ;
 Alnabru+OLang/NOB:Alna#bru NYSTØ-plc ;
 Alnafetgata+OLang/NOB:Alnafet# GATA-plc ; 
 Alnes+OLang/NOB:Al#nes BERN-sur ;
-Ringnes+OLang/NOB:Ring#nes BERN-obj ;
+Ringnes+OLang/NOB:Ring#nes BERN-obj ;! sma:BERN,smj:BERN, sme:BERN
 Alnæs+OLang/NOB:Al#næs BERN-sur ;
 Alonen+OLang/FIN:Alo C-FI-NEN-sur ;
 Alosberg+OLang/NOB:Alos#berg9 BERN-plc ;
@@ -1345,7 +1343,6 @@ Altafjorden+OLang/NOB:Alta#fjorden9 LONDON-LOAN-plc ;
 Bindalsfjorden+OLang/NOB:Bindals#fjorden9 LONDON-LOAN-plc ;
 Velfjorden+OLang/NOB:Vel#fjorden9 LONDON-LOAN-plc ;
 Bergensvågen+OLang/NOB:Bergens^vågen LONDON-LOAN-plc ;
-
 Altai+OLang/UND:Alta DUBAI-plc ;
 Kawthoolei+OLang/UND:Kawthoole DUBAI-plc ;
 Altaj+OLang/UND:Altaj9 BERN-plc ;
@@ -1439,7 +1436,6 @@ Marsfjellet+OLang/UND:Mars9#fjellet LONDON-LOAN-plc ;
 Jamtfjellet+OLang/UND:Jamt9#fjellet LONDON-LOAN-plc ;
 Bjøllefjellet+OLang/UND:Bjølle9#fjellet LONDON-LOAN-plc ;
 Bjørnådalen+OLang/UND:Bjørnå^dalen LONDON-LOAN-plc ;
-
 Ammarnäs+OLang/UND:Ammar9#näs BERN-plc ;
 Ammassalik+OLang/UND:Ammassalik BERN-plc ;
 Ammer+OLang/UND:Ammer LONDON-plc ;
@@ -5621,7 +5617,7 @@ Eestilä+OLang/FIN:Eestilä ACCRA-sur ;
 Eetu+OLang/UND:Eetu ACCRA-mal ;
 Eeva+OLang/UND:Eeva ACCRA-fem ;
 Efer+OLang/UND:Efer LONDON-sur ;
-Efesos+OLang/UND:Efesos BERN-plc ;! Also another - LONDON-plc
+Efesos+OLang/UND:Efesos LONDON-plc ;! 
 Efesos+OLang/UND:Efesos LONDON-plc ;! Not used, only BERN - Used in smj - lene
 Effata+OLang/UND:Effata ACCRA-plc ;
 Efini+OLang/UND:Efini NYSTØ-obj ;
@@ -6319,7 +6315,7 @@ Estoril+OLang/UND:Estoril BERN-plc ;
 Estremadura+OLang/UND:Estremadura ACCRA-plc ;
 Estremoz+OLang/UND:Estremoz9 BERN-plc ;
 Etan+OLang/UND:Etan9 LONDON-org ;
-Yucatán+OLang/UND:Yucatán9 LONDON-plc ;
+Yucatán+OLang/UND:Yucatán9 LONDON-plc ;! sma:antagelig ERVASTI; smj:BERN, sme: LONDON
 Eteläaho+OLang/FIN:Etelä#aho9 ACCRA-sur ;
 Eteläinen+OLang/FIN:Eteläi C-FI-NEN-sur ;
 Etelämäki+OLang/FIN:Etelä#mäk MAKI-plc ;
@@ -6714,7 +6710,7 @@ Finmarchiæ+Err/Lex+OLang/NOB:Fin^marchiæ NYSTØ-plc ;
 Finmarcken+Err/Lex+OLang/UND:Fin^marcken9 LONDON-plc ;
 Finn-Erik+OLang/UND:Finn-Erik LONDON-mal ;
 Finnair+OLang/UND:Finn^air BERN-org ;
-Finncomm% Airlines+MWE+OLang/NOB:Finn^comm% Airlines LONDON-org ;
+Finncomm% Airlines+MWE+OLang/NOB:Finn^comm% Airlines LONDON-org ;! sma:?
 Finndalselva+OLang/NOB:Finn^dals#elva ACCRA-plc ;
 Finne+OLang/UND:Finne ACCRA-sur ;
 Finnefondet+OLang/UND:Finne#fondet LONDON-org ;
@@ -9204,8 +9200,7 @@ Hatt+OLang/UND:Hatt BERN-sur;
 Hatten+OLang/UND:Hatten9 LONDON-plc ;
 Hatteng+OLang/NOB:Hatt9#eng9 BERN-LOAN-plc ;
 Hatter+OLang/UND:Hatter LONDON-sur ;
-Hattfjelldal+OLang/NOB:Hatt9#fjell#dal BERN-plc ;
-Hattfjelldal+OLang/NOB:Hatt^fjell#dal BERN-LOAN-plc ;
+Hattfjelldal+OLang/NOB:Hatt9#fjell#dal BERN-plc ;! sma:BERN,smj:BERN,sme:BERN
 Hattsjöån+OLang/UND:Hatt9#sjö#ån9 BERN-plc ;
 Hattukangas+OLang/FIN:Hattu#kangas LONDON-plc ;
 Hattunen+OLang/FIN:Hattu C-FI-NEN-sur ;
@@ -9714,7 +9709,7 @@ Herfølge+OLang/NOB:Herfølge ACCRA-plc ;
 Hergel+OLang/UND:Hergel LONDON-sur ;
 Herheim+OLang/NOB:Her9#heim9 HEIM-sur ;
 Herigstad+OLang/NOB:Herig9#stad9 BERN-plc ;
-Herjangen+OLang/UND:Herj9#angen9 LONDON-plc ;
+Herjangen+OLang/UND:Herj9#angen9 LONDON-plc ;! smj:riktig
 Herjangsfjellet+OLang/UND:Herjangs#fjellet LONDON-LOAN-plc ;
 Herjangsfjorden+OLang/NOB:Herjangs#fjorden9 LONDON-LOAN-plc ;
 Herjedalen+Err/Lex+OLang/UND:Herje#dalen9 LONDON-plc ;
@@ -10910,8 +10905,8 @@ Iivanainen+OLang/FIN:Iivanai C-FI-NEN-sur ;
 Iivar+OLang/UND:Iivar LONDON-mal ;
 Iivarinen+OLang/FIN:Iivari C-FI-NEN-sur ;
 Iivonen+OLang/FIN:Iivo C-FI-NEN-sur ;
-Ijäs+OLang/UND:Ijäs BERN-sur;
-Ijäs+OLang/UND:Ijäs LONDON-sur ;
+Ijäs+OLang/UND:Ijäs BERN-sur; ! smj: LONDON
+Ijäs+OLang/UND:Ijäs LONDON-sur ;! smj:LONDON
 Ikaros+OLang/UND:Ikaros BERN-mal ;
 Ikast+OLang/UND:Ikast9 LONDON-org ;
 Ikjefjord+OLang/NOB:Ikje#fjord9 BERN-plc ;
@@ -11270,8 +11265,8 @@ Isotalo+OLang/FIN:Iso#talo9 ACCRA-sur ;
 Isotalus+OLang/UND:Iso^talus LONDON-sur ;
 Isotupa+OLang/UND:Iso#tupa ACCRA-sur ;
 Isoviita+OLang/UND:Iso#viita ACCRA-sur ;
-Israel+OLang/UND:Isra^el BERN-plc ;
-Israel+Use/NG+OLang/UND:Isra^el LONDON-plc ;
+!Israel+OLang/UND:Isra^el LONDON-BERN-plc ;! sma:BERN,smj:BERN,sme:? It sees to be LONDON-BERN
+ !Israel+Use/NG+OLang/UND:Isra^el LONDON-plc ; ! Outcommented this one, because it seems to be BERN i all sami languages
 Israelsson+OLang/UND:Isra^els^son9 LONDON-sur ;
 Issakainen+OLang/FIN:Issakai C-FI-NEN-sur ;
 Issakar+OLang/UND:Issakar BERN-plc ;
@@ -16166,9 +16161,9 @@ Lämpsä+OLang/UND:Lämpsä ACCRA-plc ;
 Lämsä+OLang/UND:Lämsä ACCRA-plc ;
 Länkinen+OLang/FIN:Länki C-FI-NEN-sur ;
 Länsimäki+OLang/FIN:Länsi#mäk MAKI-plc ;
-Länsman+OLang/SWE:Läns#man9 BERN-sur ;
+Länsman+OLang/SWE:Läns#man9 BERN-sur ;! sma:BERN,sme:BERN, smj:?
 Länsman+OLang/SWE:Läns#man9 LONDON-sur ;
-Länsmann+OLang/SWE:Läns#mann9 BERN-sur ;
+Länsmann+OLang/SWE:Läns#mann9 BERN-sur ; ! sma:BERN,sme:BERN, smj:?
 Länsmann+OLang/SWE:Läns#mann9 LONDON-sur ;
 Länta+OLang/UND:Länta ACCRA-sur ;
 Läntinen+OLang/FIN:Länti C-FI-NEN-sur ;
@@ -22468,7 +22463,7 @@ Ræder+OLang/NOB:Ræder LONDON-sur ;
 Rædergård+OLang/NOB:Ræder9#gård9 BERN-plc ;
 Rælingen+OLang/NOB:Rælingen9 LONDON-plc ;
 Ræstad+OLang/NOB:Ræ#stad9 BERN-plc ;
-Réunion+OLang/UND:Ré^union9 BERN-plc ;
+Réunion+OLang/UND:Ré^union9 BERN-plc ; ! smj-LONDON
 Röksä+OLang/UND:Röksä ACCRA-plc ;
 Römpötti+OLang/UND:Römpötti PIPPI-sur ;
 Rönkkö+OLang/FIN:Rönkkö ACCRA-plc ;
@@ -26123,7 +26118,7 @@ Tammisto+OLang/FIN:Tammisto9 ACCRA-plc ;
 Tammitupa+OLang/UND:Tammitupa ACCRA-plc ;
 Tammivuori+OLang/FIN:Tammi#vuori PIPPI-sur ;
 Tampa+OLang/UND:Tampa ACCRA-plc ;
-Tampere+OLang/FIN:Tamper RONDANE-SG-plc ;
+Tampere+OLang/FIN:Tamper RONDANE-SG-plc ;! 
 Tampico+OLang/UND:Tampico9 ACCRA-mal ;
 Tampio+OLang/UND:Tampio9 ACCRA-sur ;
 Tamreinlag+OLang/UND:Tam^rein#lag9 BERN-org ;
@@ -29968,8 +29963,8 @@ strignin% gift+Err/Lex+MWE+OLang/UND:strignin% gift BERN-obj ;
 Émile+OLang/UND:Émile ACCRA-fem ;
 Évora+OLang/UND:Évora ACCRA-plc ;
 Ísafjörður+OLang/NOB:Ísa#fjörður LONDON-plc ;
-Ódáðahraun+OLang/UND:Ódáðahraun9 LONDON-plc ;
-Ódáðahraun+OLang/UND:Ódáðahraun9 BERN-plc ;
+Ódáðahraun+OLang/UND:Ódáðahraun9 LONDON-plc ; 
+Ódáðahraun+OLang/UND:Ódáðahraun9 BERN-plc ; ! sma:BERN?,smj:BERN, sme:BERN?
 Öckerön+OLang/UND:Öcker9#ön9 BERN-plc ;
 Ödeshög+OLang/UND:Ödes#hög9 BERN-sur ;
 Öland+OLang/NOB:Ö#land9 BERN-LOAN-plc ;
@@ -30576,71 +30571,71 @@ Krasniqi+OLang/UND:Krasniqi ACCRA-plc ;
 Krooka-Verneri+OLang/UND:Krooka-Verneri ACCRA-mal ;
 Kukkohovi+OLang/UND:Kukkohovi ACCRA-sur ;
 Kumajri+OLang/UND:Kumaj9ri ACCRA-plc ;
-Kumari+OLang/UND:Kumari ACCRA-sur ;
-Kumasi+OLang/UND:Kumasi ACCRA-plc ;
-Kunnari+OLang/UND:Kunnari ACCRA-sur ;
+Kumari+OLang/UND:Kumari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Kumasi+OLang/UND:Kumasi ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Kunnari+OLang/UND:Kunnari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Kuottemjaur+Err/Lex+OLang/UND:Kuottem9#jaur BERN-plc ; !
-Kupari+OLang/UND:Kupari ACCRA-sur ;
+Kupari+OLang/UND:Kupari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Kusadasi+OLang/UND:Kusadasi ACCRA-plc ;
 Kvepsendalstjønna+OLang/UND:Kvepsendals#tjønna ACCRA-plc ;
 Kviteggi+OLang/UND:Kviteggi ACCRA-plc ;
 Kykyri+OLang/UND:Kykyri ACCRA-plc ;
 Kyötikki+OLang/UND:Kyötikki ACCRA-sur ;
-Kähäri+OLang/UND:Kähäri ACCRA-sur ;
-Kämäri+OLang/UND:Kämäri ACCRA-sur ;
+Kähäri+OLang/UND:Kähäri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Kämäri+OLang/UND:Kämäri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Kåfjord% kommune+MWE+OLang/UND:Kåfjord% kommune ACCRA-LOAN-org ;
 Lahnstein+OLang/UND:Lahn#stein BERN-sur ;
 Lappecodisiila+OLang/UND:Lappe#codisiila ACCRA-obj ;
 Lappekodicilla+OLang/UND:Lappe#kodicil'la ACCRA-obj ;
 Lappekodisilla+OLang/UND:Lappe#kodisil'la ACCRA-obj ;
-Lathari+OLang/UND:Lathari ACCRA-plc ;
+Lathari+OLang/UND:Lathari ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Leijaur+Err/Lex+OLang/UND:Lei#jaur BERN-plc ; !
-Lenkkeri+OLang/UND:Lenkkeri ACCRA-sur ;
+Lenkkeri+OLang/UND:Lenkkeri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Lisl+OLang/UND:Lisl BERN-fem ;
-Litani+OLang/UND:Litani ACCRA-plc ;
+Litani+OLang/UND:Litani ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Littbarski+OLang/UND:Littbarski ACCRA-plc ;
-Lopperi+OLang/UND:Lopperi ACCRA-sur ;
+Lopperi+OLang/UND:Lopperi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Lucky+OLang/UND:Lucky ACCRA-ani ;
-Lukkari+OLang/UND:Lukkari ACCRA-sur ;
+Lukkari+OLang/UND:Lukkari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Luombbis+OLang/UND:Luombbis LONDON-plc ;
-Luostari+OLang/UND:Luostari ACCRA-sur ;
-Lääperi+OLang/UND:Lääperi ACCRA-sur ;
-Lääveri+OLang/UND:Lääveri ACCRA-sur ;
+Luostari+OLang/UND:Luostari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Lääperi+OLang/UND:Lääperi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Lääveri+OLang/UND:Lääveri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Lønahorgi+OLang/UND:Lønahorgi ACCRA-plc ;
-Majuri+OLang/UND:Majuri ACCRA-sur ;
-Makurdi+OLang/UND:Makurdi ACCRA-plc ;
-Malaki+OLang/UND:Malaki ACCRA-plc ;
-Malawi+OLang/UND:Malawi ACCRA-plc ;
+Majuri+OLang/UND:Majuri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Makurdi+OLang/UND:Makurdi ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Malaki+OLang/UND:Malaki ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Malawi+OLang/UND:Malawi ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Mamre+OLang/UND:Mamre ACCRA-plc ; !http+OLang/UND://en.wikipedia.org/wiki/Mamre
-Maroni+OLang/UND:Maroni ACCRA-sur ;
-Masudi+OLang/UND:Masudi ACCRA-sur ;
-Matadi+OLang/UND:Matadi ACCRA-sur ;
+Maroni+OLang/UND:Maroni ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Masudi+OLang/UND:Masudi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Matadi+OLang/UND:Matadi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Maui+OLang/UND:Maui ACCRA-plc ;
-Medici+OLang/UND:Medici ACCRA-sur ;
-Mehidi+OLang/UND:Mehidi ACCRA-sur ;
-Mentzoni+OLang/UND:Mentzoni ACCRA-sur ;
-Merari+OLang/UND:Merari ACCRA-sur ;
-Mesnali+OLang/UND:Mesnali ACCRA-plc ;
+Medici+OLang/UND:Medici ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Mehidi+OLang/UND:Mehidi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Mentzoni+OLang/UND:Mentzoni ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Merari+OLang/UND:Merari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Mesnali+OLang/UND:Mesnali ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Midlands+OLang/UND:Mid9#lands BERN-plc ;
 Mikel+OLang/UND:Mikel LONDON-mal ;
 Miren+OLang/UND:Miren LONDON-fem ;
 Morceli+OLang/UND:Morceli LONDON-sur ;  ! sma-LONDON: Morcelisnie 
 Moroni+OLang/UND:Moroni LONDON-sur ;! Moronisnie
-Muittari+OLang/UND:Muittari LONDON-sur ;! 
-Mylläri+OLang/UND:Mylläri LONDON-sur ;! sma-ERVASTI:
-Mänttäri+OLang/UND:Mänttäri LONDON-sur ;! sma-ERVASTI:
-Mölläri+OLang/UND:Mölläri LONDON-sur ;! sma-ERVASTI:
-Naftali+OLang/UND:Naftali LONDON-mal ;! sma-ERVASTI:
-Naftali+OLang/UND:Naftali LONDON-plc ;! sma-ERVASTI:
-Nahkuri+OLang/UND:Nahkuri LONDON-sur ;! sma-ERVASTI:
-Nakari+OLang/UND:Nakari LONDON-sur ;! sma-ERVASTI:
-Napari+OLang/UND:Napari LONDON-sur ;! sma-ERVASTI:
-Napoli+OLang/UND:Napoli LONDON-plc ;! sma-ERVASTI:
-Naskali+OLang/UND:Naskali LONDON-sur ;! sma-ERVASTI:
+Muittari+OLang/UND:Muittari LONDON-sur ;! ERVASTI
+Mylläri+OLang/UND:Mylläri LONDON-sur ;! sma-ERVASTI, sme:ERVASTI?
+Mänttäri+OLang/UND:Mänttäri LONDON-sur ;! sma-ERVASTI, sme:ERVASTI?
+Mölläri+OLang/UND:Mölläri LONDON-sur ;! sma-ERVASTI, sme:ERVASTI?
+Naftali+OLang/UND:Naftali LONDON-mal ;! sma-ERVASTI, sme:ERVASTI?
+Naftali+OLang/UND:Naftali LONDON-plc ;! sma-ERVASTI, sme:ERVASTI?
+Nahkuri+OLang/UND:Nahkuri LONDON-sur ;! sma-ERVASTI, sme:ERVASTI?
+Nakari+OLang/UND:Nakari LONDON-sur ;! sma-ERVASTI, sme:ERVASTI?
+Napari+OLang/UND:Napari LONDON-sur ;! sma-ERVASTI, sme:ERVASTI?
+Napoli+OLang/UND:Napoli LONDON-plc ;! sma-ERVASTI, sme:ERVASTI?
+Naskali+OLang/UND:Naskali LONDON-sur ;! sma-ERVASTI, sme:ERVASTI?
 Nasti+OLang/UND:Nasti ACCRA-org ;! A name of a pub
-Negeri+OLang/UND:Negeri LONDON-plc ;! sma-ERVASTI:
-Nestori+OLang/UND:Nestori LONDON-mal ;! sma-ERVASTI:
-Nikkari+OLang/UND:Nikkari ACCRA-sur ;! sma-ERVASTI:
+Negeri+OLang/UND:Negeri LONDON-plc ;! sma-ERVASTI, sme:ERVASTI?
+Nestori+OLang/UND:Nestori LONDON-mal ;! sma-ERVASTI, sme:ERVASTI?
+Nikkari+OLang/UND:Nikkari ACCRA-sur ;! sma-ERVASTI, sme:ERVASTI?
 Nikken+OLang/UND:Nikken LONDON-mal ;
 Njaarke+OLang/UND:Njaarke ACCRA-plc ;
 Njerrem+OLang/UND:Njerrem9 LONDON-plc ;
@@ -30653,51 +30648,51 @@ Nussir+OLang/UND:Nussir LONDON-org ;
 Nussir+OLang/UND:Nussir LONDON-plc ;
 Nykyri+OLang/UND:Nykyri ACCRA-plc ;
 Nätynki+OLang/UND:Nätynki ACCRA-sur ;
-Näveri+OLang/UND:Näveri ACCRA-sur ;
+Näveri+OLang/UND:Näveri ACCRA-sur ;! sma-ERVASTI, sme:ERVASTI?
 Oahpa+OLang/UND:Oahpa ACCRA-obj ;
-Oikari+OLang/UND:Oikari ACCRA-sur ;
-Olavi+OLang/UND:Olavi ACCRA-mal ;
+Oikari+OLang/UND:Oikari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Olavi+OLang/UND:Olavi ACCRA-mal ; ! sma-ERVASTI, sme:ERVASTI?
 Olivetti+OLang/UND:Olivetti ACCRA-org ;
-Paakkari+OLang/UND:Paakkari ACCRA-sur ;
+Paakkari+OLang/UND:Paakkari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Paasikivi+OLang/UND:Paasikivi ACCRA-sur ;
-Pahlavi+OLang/UND:Pahlavi ACCRA-plc ;
+Pahlavi+OLang/UND:Pahlavi ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Paldiski+OLang/UND:Paldiski ACCRA-plc ;
-Pallari+OLang/UND:Pallari LONDON-sur ;
-Panaggi+OLang/UND:Panaggi ACCRA-sur ;
+Pallari+OLang/UND:Pallari LONDON-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Panaggi+OLang/UND:Panaggi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Panu+OLang/UND:Panu ACCRA-mal ;
-Pareli+OLang/UND:Pareli ACCRA-sur ;
-Parkkari+OLang/UND:Parkkari ACCRA-sur ;
-Pasuri+OLang/UND:Pasuri ACCRA-sur ;
-Patteri+OLang/UND:Patteri ACCRA-sur ;
-Paukkeri+OLang/UND:Paukkeri ACCRA-sur ;
+Pareli+OLang/UND:Pareli ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Parkkari+OLang/UND:Parkkari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pasuri+OLang/UND:Pasuri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Patteri+OLang/UND:Patteri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Paukkeri+OLang/UND:Paukkeri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Paule+OLang/UND:Paule ACCRA-sur ;
 Pehlevi+OLang/UND:Pehlevi ACCRA-plc ;
 Pekuri+OLang/UND:Pekuri ACCRA-sur ;
 Pelttari+OLang/UND:Pelttari ACCRA-sur ;
-Penkkari+OLang/UND:Penkkari ACCRA-obj ;
-Peteri+OLang/UND:Peteri ACCRA-sur ;
-Petteri+OLang/UND:Petteri ACCRA-mal ;
-Peuhkuri+OLang/UND:Peuhkuri ACCRA-sur ;
-Piekkari+OLang/UND:Piekkari ACCRA-sur ;
-Piipari+OLang/UND:Piipari ACCRA-sur ;
-Pippuri+OLang/UND:Pippuri ACCRA-sur ;
-Pollari+OLang/UND:Pollari ACCRA-sur ;
-Pomeranssi+OLang/UND:Pomeranssi ACCRA-ani ;
-Porali+OLang/UND:Porali ACCRA-plc ;
-Porvali+OLang/UND:Porvali ACCRA-sur ;
-Pukari+OLang/UND:Pukari ACCRA-sur ;
-Punkari+OLang/UND:Punkari ACCRA-sur ;
-Puoskari+OLang/UND:Puoskari ACCRA-sur ;
+Penkkari+OLang/UND:Penkkari ACCRA-obj ; ! sma-ERVASTI, sme:ERVASTI?
+Peteri+OLang/UND:Peteri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Petteri+OLang/UND:Petteri ACCRA-mal ; ! sma-ERVASTI, sme:ERVASTI?
+Peuhkuri+OLang/UND:Peuhkuri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Piekkari+OLang/UND:Piekkari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Piipari+OLang/UND:Piipari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pippuri+OLang/UND:Pippuri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pollari+OLang/UND:Pollari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pomeranssi+OLang/UND:Pomeranssi ACCRA-ani ; ! sma-ERVASTI, sme:ERVASTI?
+Porali+OLang/UND:Porali ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Porvali+OLang/UND:Porvali ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pukari+OLang/UND:Pukari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Punkari+OLang/UND:Punkari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Puoskari+OLang/UND:Puoskari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Pusi+OLang/UND:Pusi ACCRA-ani ;
-Putkuri+OLang/UND:Putkuri ACCRA-sur ;
-Pynttäri+OLang/UND:Pynttäri ACCRA-sur ;
-Pyökäri+OLang/UND:Pyökäri ACCRA-sur ;
+Putkuri+OLang/UND:Putkuri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pynttäri+OLang/UND:Pynttäri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pyökäri+OLang/UND:Pyökäri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Pätäri+OLang/UND:Pätäri ACCRA-sur ;
-Pöyhtäri+OLang/UND:Pöyhtäri ACCRA-sur ;
+Pöyhtäri+OLang/UND:Pöyhtäri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Qadhafi+OLang/UND:Qadhafi ACCRA-sur ;
 Querini+OLang/UND:Querini ACCRA-sur ;
-Rabbuni+OLang/UND:Rabbuni ACCRA-sur ;
-Ragazzi+OLang/UND:Ragazzi ACCRA-sur ;
+Rabbuni+OLang/UND:Rabbuni ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Ragazzi+OLang/UND:Ragazzi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Rammstein+OLang/UND:Ramm9#stein9 BERN-org ;
 Rapanui+OLang/UND:Rapanui ACCRA-plc ;
 Reiseliv+OLang/UND:Reiseliv BERN-obj ;
@@ -30715,8 +30710,8 @@ Sakari+OLang/UND:Sakari ACCRA-mal ;
 Sallevarre+Err/Lex+OLang/UND:Sallevarre ACCRA-plc ;
 Samuli+OLang/UND:Samuli ACCRA-mal ;
 Sankari+OLang/UND:Sankari ACCRA-sur ;
-Sančuari+OLang/UND:Sančuari ACCRA-org ;
-Sassari+OLang/UND:Sassari ACCRA-sur ;
+Sančuari+OLang/UND:Sančuari ACCRA-org ; ! sma-ERVASTI, sme:ERVASTI?
+Sassari+OLang/UND:Sassari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Sauđarkròkur+OLang/UND:Sauđar9#kròkur LONDON-plc ;
 Scandinavia% Golf% Business+MWE+OLang/UND:Scandinavia% Golf% Business9 BERN-org ;
 Siglufjörđur+OLang/UND:Siglu#fjörđur LONDON-plc ;
@@ -30728,49 +30723,49 @@ Sluč+OLang/UND:Sluč BERN-sur ;
 Smierru+OLang/UND:Smierru ACCRA-obj ;
 Soikkeli+OLang/UND:Soikkeli ACCRA-sur ;
 Solccar+OLang/UND:Solccar LONDON-plc ; !FIN
-Sorvali+OLang/UND:Sorvali ACCRA-sur ;
-Sorvari+OLang/UND:Sorvari ACCRA-sur ;
-Suikkari+OLang/UND:Suikkari ACCRA-sur ;
+Sorvali+OLang/UND:Sorvali ACCRA-sur ;! sma-ERVASTI, sme:ERVASTI?
+Sorvari+OLang/UND:Sorvari ACCRA-sur ;! sma-ERVASTI, sme:ERVASTI?
+Suikkari+OLang/UND:Suikkari ACCRA-sur ;! sma-ERVASTI, sme:ERVASTI?
 Sujujujjá+OLang/SME:Sujujuj9j9á ACCRA-fem ;
-Supperi+OLang/UND:Supperi ACCRA-sur ;
-Suutari+OLang/UND:Suutari ACCRA-sur ;
+Supperi+OLang/UND:Supperi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Suutari+OLang/UND:Suutari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Suđuroy+OLang/UND:Suđur9#oy OY-plc ;
 Sámi% Jakki+MWE+OLang/UND:Sámi% Jakki ACCRA-obj ;
 Sámi% Grand% Prix+OLang/UND:Sámi% Grand% Prix BERN-obj ;
 Sámi% Amatör% Teáhter+MWE+Err/Lex+OLang/UND:Sámi% Amatör% Teáhter LONDON-org ; !
 Säteri+OLang/UND:Säteri ACCRA-plc ;
-Tanttari+OLang/UND:Tanttari ACCRA-sur ;
-Tapani+OLang/UND:Tapani ACCRA-mal ;
-Tappuri+OLang/UND:Tappuri ACCRA-plc ;
+Tanttari+OLang/UND:Tanttari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Tapani+OLang/UND:Tapani ACCRA-mal ; ! sma-ERVASTI, sme:ERVASTI?
+Tappuri+OLang/UND:Tappuri ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Taneli-Iisakki+OLang/UND:Taneli-Iisakki ACCRA-mal ;
-Tattari+OLang/UND:Tattari ACCRA-sur ;
+Tattari+OLang/UND:Tattari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Teikari+OLang/UND:Teikari ACCRA-sur ;
 Tessaloniki+OLang/UND:Tessaloniki ACCRA-plc ;
 Thessaloniki+OLang/UND:Thessaloniki ACCRA-plc ;
 Thuri+OLang/UND:Thuri ACCRA-sur ;
-Timperi+OLang/UND:Timperi ACCRA-sur ;
-Tissari+OLang/UND:Tissari ACCRA-sur ;
-Tofferi+OLang/UND:Tofferi ACCRA-sur ;
-Toivari+OLang/UND:Toivari ACCRA-sur ;
-Tomperi+OLang/UND:Tomperi ACCRA-sur ;
-Tompuri+OLang/UND:Tompuri ACCRA-sur ;
-Tonteri+OLang/UND:Tonteri ACCRA-sur ;
-Toppari+OLang/UND:Toppari ACCRA-sur ;
-Tottori+OLang/UND:Tottori ACCRA-plc ;
+Timperi+OLang/UND:Timperi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Tissari+OLang/UND:Tissari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Tofferi+OLang/UND:Tofferi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Toivari+OLang/UND:Toivari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Tomperi+OLang/UND:Tomperi ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Tompuri+OLang/UND:Tompuri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Tonteri+OLang/UND:Tonteri ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Toppari+OLang/UND:Toppari ACCRA-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Tottori+OLang/UND:Tottori ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Tulokas+OLang/UND:Tulokas BERN-ani ;
 Táhppán% Siun+MWE+OLang/UND:Táhppán% Siun9 LONDON-obj ;
 Táhppán% Siun+MWE+Err/Orth+OLang/UND:Táhppán% siun9 LONDON-obj ;
-Ussuri+OLang/UND:Ussuri ACCRA-plc ;
+Ussuri+OLang/UND:Ussuri ACCRA-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Uula+OLang/FIN:Uula ACCRA-mal ;
-Valeri+OLang/UND:Valeri ACCRA-mal ;
+Valeri+OLang/UND:Valeri ACCRA-mal ; ! sma-ERVASTI, sme:ERVASTI?
 Veijola+OLang/UND:Veijola ACCRA-sur ;
-Verneri+OLang/UND:Verneri ACCRA-mal ;
+Verneri+OLang/UND:Verneri ACCRA-mal ; ! sma-ERVASTI, sme:ERVASTI?
 Vjačeslav+OLang/UND:Vjačeslav BERN-sur ;
 Voijaa% minun% poroni+MWE+OLang/FIN:Voijaa% minun% poroni ACCRA-obj ;
 Vopnafjörđur+OLang/UND:Vopna#fjörđur LONDON-plc ;
 Vuontispirtti+OLang/UND:Vuontispirtti ACCRA-plc ;
 Waitangi+OLang/UND:Waitangi ACCRA-plc ;
-Wangari+OLang/UND:Wangari ACCRA-fem ;
+Wangari+OLang/UND:Wangari ACCRA-fem ; ! sma-ERVASTI, sme:ERVASTI?
 Warszawa+OLang/UND:Warszawa ACCRA-plc ; !
 Yerboli+OLang/UND:Yerboli ACCRA-org ;
 Yothu% Yindi+OLang/UND:Yothu% Yindi ACCRA-org ;

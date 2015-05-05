@@ -23610,8 +23610,7 @@ Siebenbürgen+OLang/UND:Sieben^bürgen9 LONDON-plc ;
 Siebke+OLang/UND:Siebke ACCRA-plc ;
 Sieck+OLang/UND:Sieck9 BERN-sur ;
 Siegen+OLang/UND:Siegen9 LONDON-plc ;
-Siekkeli+OLang/NOB:Siekkeli ACCRA-sur ; ! sma:ERVASTI,sme:ERVASTI?
-Siekkeli+OLang/UND:Siekkeli NYSTØ-sur ;
+Siekkeli+OLang/NOB:Siekkeli ERVASTI-sur ; ! sma:ERVASTI,sme:ERVASTI, smj:NYSTØ and ACCRA
 Siekkinen+OLang/FIN:Siekki C-FI-NEN-sur ;
 Siena+OLang/UND:Siena ACCRA-plc ;
 Sienna+OLang/NOB:Sienna ACCRA-plc ;

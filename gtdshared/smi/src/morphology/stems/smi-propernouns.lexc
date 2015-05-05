@@ -5180,8 +5180,7 @@ Disenå+OLang/UND:Disen#å NYSTØ-plc ;
 Disko+OLang/UND:Disko9 ACCRA-plc ;
 Disneyland+OLang/NOB:Disney#land9 BERN-sur ;
 Dispril+OLang/UND:Dispril BERN-obj ;
-Disraeli+OLang/NOB:Disra^eli ACCRA-obj ;
-Disraeli+OLang/NOB:Disra^eli NYSTØ-obj ;
+Disraeli+OLang/NOB:Disra^el ERVASTI-plc ;
 Dissing+OLang/NOB:Dissing9 LONDON-sur ;
 District+OLang/UND:District LONDON-plc ;
 Distriktsorganisasjon+OLang/UND:Distrikts^organisasjon9 BERN-org ;
@@ -11258,8 +11257,7 @@ Isotalo+OLang/FIN:Iso#talo9 ACCRA-sur ;
 Isotalus+OLang/UND:Iso^talus LONDON-sur ;
 Isotupa+OLang/UND:Iso#tupa ACCRA-sur ;
 Isoviita+OLang/UND:Iso#viita ACCRA-sur ;
-!Israel+OLang/UND:Isra^el LONDONBERN-plc ;! sma:BERN,smj:BERN,sme:? It sees to be LONDON-BERN
- !Israel+Use/NG+OLang/UND:Isra^el LONDON-plc ; ! Outcommented this one, because it seems to be BERN i all sami languages
+Israel+OLang/UND:Isra^el LONDONBERN-plc ;! sma:BERN,smj:BERN,sme:? It sees to be LONDON-BERN
 Israelsson+OLang/UND:Isra^els^son9 LONDON-sur ;
 Issakainen+OLang/FIN:Issakai C-FI-NEN-sur ;
 Issakar+OLang/UND:Issakar BERN-plc ;
@@ -23015,7 +23013,7 @@ Sara-aho+OLang/FIN:Sara-aho9 ACCRA-sur ;
 Saraby+OLang/NOB:Sara#by NYSTØ-plc;
 Saraelv+OLang/NOB:Sara#elv BERN-plc ;
 Sarah+OLang/UND:Sarah9 LONDON-fem ;
-Sarai+OLang/UND:Sarai DUBAI-femsur ;! 
+Sarai+OLang/UND:Sara DUBAI-fem ;
 Sarajevo+OLang/UND:Sarajevo9 ACCRA-plc ;
 Sarajärvi+OLang/FIN:Sara#järv MAKI-plc ;
 Saraksen+OLang/NOB:Saraksen9 LONDON-sur ;
@@ -30562,28 +30560,28 @@ Krasniqi+OLang/UND:Krasniqi ACCRA-plc ;
 Krooka-Verneri+OLang/UND:Krooka-Verneri ACCRA-mal ;
 Kukkohovi+OLang/UND:Kukkohovi ACCRA-sur ;
 Kumajri+OLang/UND:Kumaj9ri ACCRA-plc ;
-Kumari+OLang/UND:Kumar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Kumasi+OLang/UND:Kumas ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
-Kunnari+OLang/UND:Kunnar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Kumari+OLang/UND:Kumar ERVASTI-sur ; 
+Kumasi+OLang/UND:Kumas ERVASTI-plc ; 
+Kunnari+OLang/UND:Kunnar ERVASTI-sur ; 
 Kuottemjaur+Err/Lex+OLang/UND:Kuottem9#jaur BERN-plc ; !
-Kupari+OLang/UND:Kupar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Kupari+OLang/UND:Kupar ERVASTI-sur ;
 Kusadasi+OLang/UND:Kusadasi ACCRA-plc ;
 Kvepsendalstjønna+OLang/UND:Kvepsendals#tjønna ACCRA-plc ;
 Kviteggi+OLang/UND:Kviteggi ACCRA-plc ;
 Kykyri+OLang/UND:Kykyri ACCRA-plc ;
 Kyötikki+OLang/UND:Kyötikki ACCRA-sur ;
-Kähäri+OLang/UND:ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Kämäri+OLang/UND:ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Kähäri+OLang/UND:Kähär ERVASTI-sur ; 
+Kämäri+OLang/UND:Kämär ERVASTI-sur ; 
 Kåfjord% kommune+MWE+OLang/UND:Kåfjord% kommune ACCRA-LOAN-org ;
 Lahnstein+OLang/UND:Lahn#stein BERN-sur ;
 Lappecodisiila+OLang/UND:Lappe#codisiila ACCRA-obj ;
 Lappekodicilla+OLang/UND:Lappe#kodicil'la ACCRA-obj ;
 Lappekodisilla+OLang/UND:Lappe#kodisil'la ACCRA-obj ;
-Lathari+OLang/UND:Lathar ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Lathari+OLang/UND:Lathar ERVASTI-plc ; 
 Leijaur+Err/Lex+OLang/UND:Lei#jaur BERN-plc ; !
-Lenkkeri+OLang/UND:Lenkker ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Lenkkeri+OLang/UND:Lenkker ERVASTI-sur ; 
 Lisl+OLang/UND:Lisl BERN-fem ;
-Litani+OLang/UND:Litan ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Litani+OLang/UND:Litan ERVASTI-plc ; 
 Littbarski+OLang/UND:Littbarski ACCRA-plc ;
 Lopperi+OLang/UND:Lopper ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Lucky+OLang/UND:Lucky ACCRA-ani ;
@@ -30696,8 +30694,8 @@ Ruwenzori+OLang/UND:Ruwenzori ACCRA-plc ;
 Rytinki+OLang/UND:Rytinki ACCRA-sur ;
 Saame% Siita+OLang/UND:Saame% Siita ACCRA-obj ;
 Saapunki+OLang/UND:Saapunki ACCRA-sur ;
-Sahari+OLang/UND:ERVASTI ACCRA-sur ;
-Sakari+OLang/UND:ERVASTI ACCRA-mal ;
+Sahari+OLang/UND:Sahar ERVASTI-sur ;
+Sakari+OLang/UND:Sakar ERVASTI-mal ;
 Sallevarre+Err/Lex+OLang/UND:Sallevarre ACCRA-plc ;
 Samuli+OLang/UND:Samul ERVASTI-mal ;
 Sankari+OLang/UND:Sankar ERVASTI-sur ;

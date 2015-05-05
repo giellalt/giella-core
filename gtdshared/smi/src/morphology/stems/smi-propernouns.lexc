@@ -478,7 +478,6 @@ Rud+CmpNP/None+OLang/UND:Rud9 BERN-sur ;
 Rue+CmpNP/None+OLang/UND:Rue ACCRA-plc ;
 Rui+CmpNP/None+OLang/UND:Ru DUBAI-plc ;
 Rus+CmpNP/None+OLang/UND:Rus BERN-sur ;
-
 Rut+CmpNP/None+OLang/UND:Rut BERN-fem ;
 Ryd+CmpNP/None+OLang/UND:Ryd9 BERN-sur ;
 Rye+CmpNP/None+OLang/UND:Rye NYSTØ-sur ;
@@ -609,9 +608,6 @@ Izu+CmpNP/None+OLang/UND:Izu ACCRA-obj ;
 Ája+CmpNP/None+OLang/UND:Ája ACCRA-org ;
 Finn+OLang/UND:Finn9 BERN-sur ;
 Sibir+OLang/UND:Sibir BERN-LOAN-plc ;
-
-
-
 
 LEXICON ProperNoun-smi  !!= * __@CODE@__ Propernouns
 
@@ -851,7 +847,6 @@ Andalshatten+OLang/NOB:Andals^hatten9 LONDON-plc ;
 Ångermanälven+OLang/NOB:Ångermanälven LONDON-plc ;
 Havmannen+OLang/NOB:Havmannen LONDON-plc ;
 Tosenjutulen+OLang/NOB:Tosen^jutulen LONDON-plc ;
-
 Adygia+OLang/NOB:Adygia ACCRA-plc ;
 Aeroflot+OLang/UND:Aero#flot BERN-org ;
 Aetat+OLang/UND:Aetat BERN-org ;
@@ -10433,8 +10428,6 @@ Humlegård+OLang/NOB:Humle#gård9 BERN-plc ;
 Humlekjær+OLang/NOB:Humle#kjær BERN-plc ;
 Humpen+OLang/UND:Humpen9 LONDON-sur ;
 Autjoklimpen+OLang/UND:Autjo^klimpen9 LONDON-sur ;
-
-
 Hunan+OLang/UND:Hunan9 LONDON-plc ;
 Hundeidvik+OLang/NOB:Hund^eid9#vik BERN-plc ;
 Hunder+OLang/UND:Hunder LONDON-sur ;
@@ -11265,7 +11258,7 @@ Isotalo+OLang/FIN:Iso#talo9 ACCRA-sur ;
 Isotalus+OLang/UND:Iso^talus LONDON-sur ;
 Isotupa+OLang/UND:Iso#tupa ACCRA-sur ;
 Isoviita+OLang/UND:Iso#viita ACCRA-sur ;
-!Israel+OLang/UND:Isra^el LONDON-BERN-plc ;! sma:BERN,smj:BERN,sme:? It sees to be LONDON-BERN
+!Israel+OLang/UND:Isra^el LONDONBERN-plc ;! sma:BERN,smj:BERN,sme:? It sees to be LONDON-BERN
  !Israel+Use/NG+OLang/UND:Isra^el LONDON-plc ; ! Outcommented this one, because it seems to be BERN i all sami languages
 Israelsson+OLang/UND:Isra^els^son9 LONDON-sur ;
 Issakainen+OLang/FIN:Issakai C-FI-NEN-sur ;
@@ -21367,8 +21360,7 @@ Ranveig+OLang/UND:Ranveig9 BERN-sur ;
 Ranvik+OLang/NOB:Ran#vik BERN-sur ;
 Rapakko+OLang/UND:Rapakko9 ACCRA-sur ;
 Rapatti+OLang/UND:Rapatti PIPPI-sur ;
-Rapeli+OLang/NOB:Rapeli ACCRA-sur ;! SMA:ERVASTI, SMJ: 
-Rapeli+OLang/UND:Rapeli NYSTØ-sur ;! SMA:ERVASTI, SMJ: 
+Rapeli+OLang/NOB:Rapeli ERVASTI-sur ;! SMA:ERVASTI, SMJ:til ACCRA og NYSTØ, sme:ERVASTI 
 Raphamn+OLang/NNO:Rap9#hamn9 BERN-plc ;
 Rapids+OLang/UND:Rapids LONDON-plc ;
 Rapo+OLang/UND:Rapo9 ACCRA-sur ;
@@ -23023,7 +23015,7 @@ Sara-aho+OLang/FIN:Sara-aho9 ACCRA-sur ;
 Saraby+OLang/NOB:Sara#by NYSTØ-plc;
 Saraelv+OLang/NOB:Sara#elv BERN-plc ;
 Sarah+OLang/UND:Sarah9 LONDON-fem ;
-Sarai+OLang/UND:Sarai NYSTØ-femsur ;
+Sarai+OLang/UND:Sarai DUBAI-femsur ;! 
 Sarajevo+OLang/UND:Sarajevo9 ACCRA-plc ;
 Sarajärvi+OLang/FIN:Sara#järv MAKI-plc ;
 Saraksen+OLang/NOB:Saraksen9 LONDON-sur ;
@@ -23618,7 +23610,7 @@ Siebenbürgen+OLang/UND:Sieben^bürgen9 LONDON-plc ;
 Siebke+OLang/UND:Siebke ACCRA-plc ;
 Sieck+OLang/UND:Sieck9 BERN-sur ;
 Siegen+OLang/UND:Siegen9 LONDON-plc ;
-Siekkeli+OLang/NOB:Siekkeli ACCRA-sur ;
+Siekkeli+OLang/NOB:Siekkeli ACCRA-sur ; ! sma:ERVASTI,sme:ERVASTI?
 Siekkeli+OLang/UND:Siekkeli NYSTØ-sur ;
 Siekkinen+OLang/FIN:Siekki C-FI-NEN-sur ;
 Siena+OLang/UND:Siena ACCRA-plc ;

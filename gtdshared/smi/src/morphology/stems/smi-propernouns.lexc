@@ -27809,8 +27809,7 @@ Usbekistan+OLang/UND:Usbeki#stan9 BERN-LOAN-plc ;
 Usedom+OLang/UND:Usedom9 LONDON-sur ;
 Usenet+OLang/UND:Usenet BERN-obj ;
 Ushuaía+OLang/UND:Ushu^a^ía ACCRA-plc ;
-Uskali+OLang/NOB:Uskali ACCRA-plc ;
-Uskali+OLang/UND:Uskali NYSTØ-plc ;
+Uskali+OLang/NOB:Uskal ERVASTI-plc ;! sma:ERVASTI,sme:ERVASTI, smj:ACCRA,NYSTØ
 Uskedale+OLang/UND:Uske^dale ACCRA-plc ;
 Uskekalven+OLang/UND:Uske#kalven9 LONDON-plc ;
 Uski+OLang/UND:Uski PIPPI-sur ;
@@ -30608,23 +30607,22 @@ Mesnali+OLang/UND:Mesnal ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
 Midlands+OLang/UND:Mid9#lands BERN-plc ;
 Mikel+OLang/UND:Mikel LONDON-mal ;
 Miren+OLang/UND:Miren LONDON-fem ;
-Morceli+OLang/UND:Morcel ERVASTI-sur ;  ! sma-LONDON: Morcelisnie 
-Moroni+OLang/UND:Moron ERVASTI-sur ;! Moronisnie
-Muittari+OLang/UND:Muittar ERVASTI-sur ;! ERVASTI
-Mylläri+OLang/UND:Myllär ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
-Mänttäri+OLang/UND:Mänttär ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
-Mölläri+OLang/UND:Möllär ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
-Naftali+OLang/UND:Naftal ERVASTI-mal ;! sma-ERVASTI, sme:ERVASTI?
-Naftali+OLang/UND:Naftal ERVASTI-plc ;! sma-ERVASTI, sme:ERVASTI?
-Nahkuri+OLang/UND:Nahkur ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
-Nakari+OLang/UND:Nakar ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
-Napari+OLang/UND:Napar ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
-Napoli+OLang/UND:Napol ERVASTI-plc ;! sma-ERVASTI, sme:ERVASTI?
-Naskali+OLang/UND:Naskal ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
+Morceli+OLang/UND:Morcel ERVASTI-sur ;   
+Moroni+OLang/UND:Moron ERVASTI-sur ; 
+Muittari+OLang/UND:Muittar ERVASTI-sur ;
+Mylläri+OLang/UND:Myllär ERVASTI-sur ; 
+Mänttäri+OLang/UND:Mänttär ERVASTI-sur ;
+Mölläri+OLang/UND:Möllär ERVASTI-sur ;
+Naftali+OLang/UND:Naftal ERVASTI-plcmal ;
+Nahkuri+OLang/UND:Nahkur ERVASTI-sur ;
+Nakari+OLang/UND:Nakar ERVASTI-sur ;
+Napari+OLang/UND:Napar ERVASTI-sur ; 
+Napoli+OLang/UND:Napol ERVASTI-plc ; 
+Naskali+OLang/UND:Naskal ERVASTI-sur ; 
 Nasti+OLang/UND:Nasti ACCRA-org ;! A name of a pub
-Negeri+OLang/UND:Neger ERVASTI-plc ;! sma-ERVASTI, sme:ERVASTI?
-Nestori+OLang/UND:Nestor ERVASTI-mal ;! sma-ERVASTI, sme:ERVASTI?
-Nikkari+OLang/UND:Nikkar ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
+Negeri+OLang/UND:Neger ERVASTI-plc ; 
+Nestori+OLang/UND:Nestor ERVASTI-mal ; 
+Nikkari+OLang/UND:Nikkar ERVASTI-sur ; 
 Nikken+OLang/UND:Nikken LONDON-mal ;
 Njaarke+OLang/UND:Njaarke ACCRA-plc ;
 Njerrem+OLang/UND:Njerrem9 LONDON-plc ;

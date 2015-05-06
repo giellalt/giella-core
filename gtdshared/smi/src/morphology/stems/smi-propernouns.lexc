@@ -13093,7 +13093,7 @@ Kirsten+OLang/NOB:Kir9#sten9 LONDON-fem ;
 Kirsti+OLang/UND:Kirsti PIPPI-fem ;
 Kirstin+OLang/UND:Kirstin9 LONDON-fem ;
 Kirstine+OLang/UND:Kirstine ACCRA-fem ;
-Kiruna+OLang/NOB:Kiruna ACCRA-LOAN-plc ;
+Kiruna+OLang/NOB:Kiruna ACCRA-LOAN-plc ; ! ERVASTI ? Kirunisnie? LONDON smj and sme? ERVASTI :sma: Gïerene
 Kirves+OLang/UND:Kirves LONDON-sur ;
 Kirvesmäki+OLang/FIN:Kirves#mäk MAKI-sur ;
 Kirvesniemi+OLang/FIN:Kirves#niem NIEMI ;
@@ -13235,6 +13235,10 @@ Kjosfossen+OLang/NOB:Kjos#fossen9 LONDON-plc ;
 Kjus+OLang/UND:Kjus BERN-sur ;
 Kjårdavatn+OLang/NOB:Kjårdavatn9 BERN-plc ;
 Kjårdavatnet+OLang/NOB:Kjårda#vatnet LONDON-plc ;
+Rørskardvatnet+OLang/NOB:Rør^skard^vatnet LONDON-plc ;
+Simskardet+OLang/NOB:Sim^skardet LONDON-plc ;
+Vistvatnet+OLang/NOB:Vist^vatnet LONDON-plc ;
+Finnmarkken:Finn^markken LONDON-plc ;
 Kjær+OLang/NOB:Kjær BERN-sur ;
 Kjærgaard+OLang/NOB:Kjær9#gaard9 BERN-sur ;
 Kjærsgaard+OLang/NOB:Kjærs#gaard9 BERN-sur ;
@@ -28979,6 +28983,11 @@ Värri+OLang/UND:Värri PIPPI-sur ;
 Värtinen+OLang/FIN:Värti C-FI-NEN-sur ;
 Värtö+OLang/UND:Värt9#ö ACCRA-plc ;
 Västerbotten+OLang/UND:Väster9#botten9 LONDON-plc ;
+Västerbotten+Err/Orth:Váster^botten LONDON-orgplc ;
+Grapsantjärnen:Grapsan^tjärnen LONDON-plc ;
+
+Klemmetsson+OLang/SWE:Klemmetsson LONDON-sur;
+
 Västergötland+OLang/NOB:Väster^göt9#land9 BERN-LOAN-plc ;
 Västernorrlands+Err/Lex+OLang/UND:Väster^norr^lands BERN-plc ;
 Västervik+OLang/NOB:Väster9#vik BERN-plc ;
@@ -30518,9 +30527,10 @@ Jantar+OLang/UND:Jantar LONDON-plc ; !FIN
 Jeneda+OLang/UND:Jeneda ACCRA-fem ;
 Jokeri+OLang/UND:Jokeri ACCRA-ani ;
 Juhani+OLang/UND:Juhani ACCRA-mal ;
-Junkkari+OLang/UND:Junkkari ACCRA-sur ;
-Juoperi+OLang/UND:Juoperi ACCRA-sur ;
-Juopperi+OLang/UND:Juopperi ACCRA-sur ;
+Junkkari+OLang/UND:Junkkar ERVASTI-sur ;
+Juoperi+OLang/UND:Juoper ERVASTI-sur ;
+Juopperi+OLang/UND:Juopper ERVASTI-sur ;
+Laukholmen+OLang/UND:Lauk^holmen LONDON-plc ;
 Jylänki+OLang/UND:Jylänki ACCRA-sur ;
 Jyrinki+OLang/UND:Jyrinki ACCRA-plc ;
 Kaattari+OLang/UND:Kaattari ACCRA-sur ;
@@ -30582,28 +30592,28 @@ Lenkkeri+OLang/UND:Lenkker ERVASTI-sur ;
 Lisl+OLang/UND:Lisl BERN-fem ;
 Litani+OLang/UND:Litan ERVASTI-plc ; 
 Littbarski+OLang/UND:Littbarski ACCRA-plc ;
-Lopperi+OLang/UND:Lopper ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Lopperi+OLang/UND:Lopper ERVASTI-sur ; 
 Lucky+OLang/UND:Lucky ACCRA-ani ;
-Lukkari+OLang/UND:Lukkar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Lukkari+OLang/UND:Lukkar ERVASTI-sur ;
 Luombbis+OLang/UND:Luombbis LONDON-plc ;
-Luostari+OLang/UND:Luostar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Lääperi+OLang/UND:Lääper ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Lääveri+OLang/UND:Lääver ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Luostari+OLang/UND:Luostar ERVASTI-sur ; 
+Lääperi+OLang/UND:Lääper ERVASTI-sur ; 
+Lääveri+OLang/UND:Lääver ERVASTI-sur ; 
 Lønahorgi+OLang/UND:Lønahorgi ACCRA-plc ;
-Majuri+OLang/UND:Majur ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Makurdi+OLang/UND:Makurd ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
-Malaki+OLang/UND:Malak ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
-Malawi+OLang/UND:Malaw ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Majuri+OLang/UND:Majur ERVASTI-sur ; 
+Makurdi+OLang/UND:Makurd ERVASTI-plc ; 
+Malaki+OLang/UND:Malak ERVASTI-plc ; 
+Malawi+OLang/UND:Malaw ERVASTI-plc ; 
 Mamre+OLang/UND:Mamre ACCRA-plc ; !
-Maroni+OLang/UND:Maron ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Masudi+OLang/UND:Masud ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Matadi+OLang/UND:Matad ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Maroni+OLang/UND:Maron ERVASTI-sur ;  
+Masudi+OLang/UND:Masud ERVASTI-sur ;  
+Matadi+OLang/UND:Matad ERVASTI-sur ;  
 Maui+OLang/UND:Maui ACCRA-plc ;
-Medici+OLang/UND:Medic ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Mehidi+OLang/UND:Mehid ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Mentzoni+OLang/UND:Mentzon ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Merari+OLang/UND:Merar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Mesnali+OLang/UND:Mesnal ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Medici+OLang/UND:Medic ERVASTI-sur ; 
+Mehidi+OLang/UND:Mehid ERVASTI-sur ; 
+Mentzoni+OLang/UND:Mentzon ERVASTI-sur ;  
+Merari+OLang/UND:Merar ERVASTI-sur ; 
+Mesnali+OLang/UND:Mesnal ERVASTI-plc ;  
 Midlands+OLang/UND:Mid9#lands BERN-plc ;
 Mikel+OLang/UND:Mikel LONDON-mal ;
 Miren+OLang/UND:Miren LONDON-fem ;
@@ -30635,51 +30645,51 @@ Nussir+OLang/UND:Nussir LONDON-org ;
 Nussir+OLang/UND:Nussir LONDON-plc ;
 Nykyri+OLang/UND:Nykyr ERVASTI-plc ;
 Nätynki+OLang/UND:Nätynki ACCRA-sur ;
-Näveri+OLang/UND:Näver ERVASTI-sur ;! sma-ERVASTI, sme:ERVASTI?
+Näveri+OLang/UND:Näver ERVASTI-sur ;!
 Oahpa+OLang/UND:Oahpa ACCRA-obj ;
-Oikari+OLang/UND:Oikar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Olavi+OLang/UND:Olav ERVASTI-mal ; ! sma-ERVASTI, sme:ERVASTI?
+Oikari+OLang/UND:Oikar ERVASTI-sur ; ! 
+Olavi+OLang/UND:Olav ERVASTI-mal ; !
 Olivetti+OLang/UND:Olivett ERVASTI-org ;
-Paakkari+OLang/UND:Paakkar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Paakkari+OLang/UND:Paakkar ERVASTI-sur ; 
 Paasikivi+OLang/UND:Paasikivi ACCRA-sur ;
-Pahlavi+OLang/UND:Pahlav ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
+Pahlavi+OLang/UND:Pahlav ERVASTI-plc ; 
 Paldiski+OLang/UND:Paldiski ACCRA-plc ;
-Pallari+OLang/UND:Pallar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Panaggi+OLang/UND:Panagg ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pallari+OLang/UND:Pallar ERVASTI-sur ; 
+Panaggi+OLang/UND:Panagg ERVASTI-sur ; 
 Panu+OLang/UND:Panu ACCRA-mal ;
-Pareli+OLang/UND:Parel ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Parkkari+OLang/UND:Parkkar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Pasuri+OLang/UND:Pasur ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Patteri+OLang/UND:Patter ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Paukkeri+OLang/UND:Paukker ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pareli+OLang/UND:Parel ERVASTI-sur ;  
+Parkkari+OLang/UND:Parkkar ERVASTI-sur ; 
+Pasuri+OLang/UND:Pasur ERVASTI-sur ; 
+Patteri+OLang/UND:Patter ERVASTI-sur ;  
+Paukkeri+OLang/UND:Paukker ERVASTI-sur ;  
 Paule+OLang/UND:Paule ACCRA-sur ;
 Pehlevi+OLang/UND:Pehlevi ACCRA-plc ;
 Pekuri+OLang/UND:Pekur ERVASTI-sur ;
 Pelttari+OLang/UND:Pelttar ERVASTI-sur ;
-Penkkari+OLang/UND:Penkkar ERVASTI-obj ; ! sma-ERVASTI, sme:ERVASTI?
-Peteri+OLang/UND:Peter ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Petteri+OLang/UND:Petter ERVASTI-mal ; ! sma-ERVASTI, sme:ERVASTI?
-Peuhkuri+OLang/UND:Peuhkur ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Piekkari+OLang/UND:Piekkar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Piipari+OLang/UND:Piipar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Pippuri+OLang/UND:Pippur ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Pollari+OLang/UND:Pollar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Pomeranssi+OLang/UND:Pomeranssi ACCRA-ani ; ! sma-ERVASTI, sme:ERVASTI?
-Porali+OLang/UND:Poral ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
-Porvali+OLang/UND:Porval ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Pukari+OLang/UND:Pukar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Punkari+OLang/UND:Punkar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Puoskari+OLang/UND:Puoskar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Penkkari+OLang/UND:Penkkar ERVASTI-obj ; 
+Peteri+OLang/UND:Peter ERVASTI-sur ;  
+Petteri+OLang/UND:Petter ERVASTI-mal ;  
+Peuhkuri+OLang/UND:Peuhkur ERVASTI-sur ;  
+Piekkari+OLang/UND:Piekkar ERVASTI-sur ; 
+Piipari+OLang/UND:Piipar ERVASTI-sur ;  
+Pippuri+OLang/UND:Pippur ERVASTI-sur ; 
+Pollari+OLang/UND:Pollar ERVASTI-sur ;  
+Pomeranssi+OLang/UND:Pomeranssi ACCRA-ani ; 
+Porali+OLang/UND:Poral ERVASTI-plc ;
+Porvali+OLang/UND:Porval ERVASTI-sur ;
+Pukari+OLang/UND:Pukar ERVASTI-sur ;
+Punkari+OLang/UND:Punkar ERVASTI-sur ; 
+Puoskari+OLang/UND:Puoskar ERVASTI-sur ; 
 Pusi+OLang/UND:Pusi ACCRA-ani ;
-Putkuri+OLang/UND:Putkur ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Pynttäri+OLang/UND:Pynttär ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Pyökäri+OLang/UND:Pyökär ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Putkuri+OLang/UND:Putkur ERVASTI-sur ; 
+Pynttäri+OLang/UND:Pynttär ERVASTI-sur ; 
+Pyökäri+OLang/UND:Pyökär ERVASTI-sur ;  
 Pätäri+OLang/UND:Pätär ERVASTI-sur ;
-Pöyhtäri+OLang/UND:Pöyhtär ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Pöyhtäri+OLang/UND:Pöyhtär ERVASTI-sur ; 
 Qadhafi+OLang/UND:Qadhafi ACCRA-sur ;
 Querini+OLang/UND:Querini ACCRA-sur ;
-Rabbuni+OLang/UND:Rabbun ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
-Ragazzi+OLang/UND:Ragazz ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
+Rabbuni+OLang/UND:Rabbun ERVASTI-sur ;
+Ragazzi+OLang/UND:Ragazz ERVASTI-sur ; 
 Rammstein+OLang/UND:Ramm9#stein9 BERN-org ;
 Rapanui+OLang/UND:Rapanui ACCRA-plc ;
 Reiseliv+OLang/UND:Reiseliv BERN-obj ;

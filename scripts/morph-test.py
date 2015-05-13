@@ -530,7 +530,7 @@ class MorphTest:
 
 def parse_lexc(f, fallback=None):
     HEADER_RE = re.compile(r'^\!\!€([^\s:]+):\s*([^#]+)\s*#?')
-    TEST_RE = re.compile(r'^\!\!([€\$])\s+(\S+)\s+(\S+)\s*#?')
+    TEST_RE = re.compile(r'^\!\!([€\$])\s+([^:]+):\s+(\S[^#]*)\s*#?')
     POS = "€"
     NEG = "$"
 
@@ -563,9 +563,9 @@ def parse_lexc(f, fallback=None):
                 continue
 
             if TEST_RE.match(line):
-                test_type = match.group(1)
-                left = match.group(3)
-                right = match.group(2)
+                test_type = match.group(1).strip()
+                left = match.group(3).strip()
+                right = match.group(2).strip()
 
                 if test_type == NEG:
                     right = "~" + right

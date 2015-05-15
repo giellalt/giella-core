@@ -528,6 +528,10 @@ class MorphTest:
         return str(self.out)
 
 # Debug regex at: https://debuggex.com
+# Visualisation of the TEST_RE regex:
+# https://debuggex.com/i/kURzt7XS3t83-dvT.png
+# Link to debuggex page with this regex:
+# https://debuggex.com/r/kURzt7XS3t83-dvT
 def parse_lexc(f, fallback=None):
     HEADER_RE = re.compile(r'^\!\!€([^\s:]+):\s*([^#]+)\s*#?')
     TEST_RE = re.compile(r'^\!\!([€\$])\s+(\S.*):\s+(\S+|\S.*\S)(\s*$|\s+[#!])')

@@ -1,5 +1,5 @@
 $Rev$
-Rewrote foma code for compiling xfscripts - now IPK builds with the latest foma.
+More robust xfscript build code for hfst-xfst. Clean hfstol files.
 
 r113770:
 Extended Foma support to alternate writing systems and orthographies. At the

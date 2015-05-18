@@ -26,10 +26,13 @@
 
 ####### Xerox build rules: #######
 %.xfst: %.xfscript
-	$(AM_V_XFST)$(XFST) $(VERBOSITY) -l $< -e "save stack $@" -stop
+	$(AM_V_XFST)(cat $< ; echo "save stack $@"; echo "quit") \
+		| $(XFST) $(VERBOSITY)
 
 ####### Foma build rules: #######
 %.foma: %.xfscript
-	$(AM_V_FOMA)$(FOMA) $(VERBOSITY) -l $< -e "save stack $@" -s
+	$(AM_V_at)echo "save stack $@" | cat $< - | grep -v '^echo' > $@.script
+	$(AM_V_FOMA)$(FOMA) $(VERBOSITY) -f $@.script
+	$(AM_V_at)rm -f $@.script
 
 # vim: set ft=automake:

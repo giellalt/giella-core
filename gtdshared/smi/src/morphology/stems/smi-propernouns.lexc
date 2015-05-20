@@ -1809,7 +1809,7 @@ Aran+OLang/UND:Aran9 LONDON-plc ;
 Yran+OLang/UND:Yran9 LONDON-plc ;
 Ararat+OLang/UND:Ararat BERN-plc ;
 Arba+OLang/UND:Arba ACCRA-plc ;
-Arbeiderparti+OLang/NOB:Arbeider^parti NYSTØ-org ;
+Arbeiderparti+OLang/NOB:Arbeider^parti NYSTØ-org ;! PIPPI - sma
 Arbeiderpartiet+Err/Lex+OLang/UND:Arbeider^partiet9 LONDON-org ;
 Arbeidslyst+OLang/NOB:Arbeids^lyst9 BERN-obj ;
 Arbeidsplassen+OLang/NOB:Arbeidsplassen9 LONDON-org ;
@@ -22849,6 +22849,9 @@ Samenes% naturressursforbund+MWE+OLang/UND:Samenes% natur9#ressurs#forbund9 BERN
 Samerett+OLang/NOB:Same#rett BERN-obj ;
 Samerettsutvalget+OLang/UND:Same#retts#utvalget LONDON-org ;
 Samerna% för% framtiden+Err/Lex+MWE+OLang/UND:Samerna% för% fram9#tiden9 LONDON-org ;
+
+!Sosialistisk% Venstreparti+OLang/NOB:Sosialistisk9% parti NYSTØ-org ;! partijje - må gå som PIPPI i sma.
+
 Samerna+N+Prop+Sem/Org+Sg+Nom+OLang/SWE:Samerna flagK ;
 Samernas+OLang/UND:Samernas BERN-LOAN-obj ;
 Sameråd+OLang/UND:Same#råd9 BERN-LOAN-org ;
@@ -22869,8 +22872,10 @@ Samisk-etnografisk+Err/Lex+OLang/UND:Samisk9-etno^grafisk9 LONDON-atr ;
 Samkom+OLang/UND:Samkom9 LONDON-org ;
 Samland+OLang/NOB:Samland9 BERN-sur ;
 Samlinger+OLang/UND:Samlinger LONDON-obj ;
-Samlingsparti+OLang/NOB:Samlings^parti NYSTØ-org ;
+Samlingsparti+OLang/NOB:Samlings^parti NYSTØ-org ;! parti- partijje - gå som PIPPI i sma
 Samlingspartiet+Err/Lex+OLang/UND:Samlings#parti^et LONDON-org ;
+Fremskrittspartiet+OLang/UND:Fremskritts#parti^et LONDON-org ;
+Senterpartiet+OLang/UND:Senter#parti^et LONDON-org ;
 Sammalisto+OLang/FIN:Sammalisto9 ACCRA-plc ;
 Sammallahti+OLang/FIN:Sammal#lahti PIPPI-sur ;
 Sammu+OLang/UND:Sammu ACCRA-mal ;

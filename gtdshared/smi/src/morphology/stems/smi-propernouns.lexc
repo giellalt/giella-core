@@ -56,7 +56,8 @@
 !! Illativ i sma: - mãki  -> mäkan eller mäkijasse 
 !!                - niemi -> neaman
 !!                - buertie - buartan --> buertiejasse (rørossamisk)
-!!                - Stuehkie - Stuahkan - Stuehkese (Stuehkiejasse) ("Stockholm")
+!!                - Stuehkie - Stuahkan - Stuehkese (Stuehkiejasse) ("Stockholm") 
+!! niemi er grei, men MAKI og PIPPI er usikre.
 
 !! !!Modifications for sma
 !! __BETFAGE__ er spesifikk for lulesamisk, og er identisk med ACCRA for dei andre
@@ -647,7 +648,7 @@ Aakervik+OLang/NOB:Aaker9#vik BERN-sur ;
 Keflavík+OLang/NOB:Kefla#vík BERN-sur ;
 Aakrann+OLang/NOB:Aakrann9 BERN-sur ;
 Aakre+OLang/NOB:Aakre ACCRA-sur ;
-Aakula+OLang/FIN:Aakula ACCRA-sur ;
+Aakula+OLang/FIN:Aakula ACCRA-sur ; ! egentlig ODD
 Aakvik+OLang/NOB:Aak9#vik BERN-sur ;
 Aalberg+OLang/NOB:Aal#berg9 BERN-sur ;
 Aalborg+OLang/NOB:Aal#borg9 BERN-plc ;
@@ -661,7 +662,7 @@ Aall+OLang/NOB:Aall BERN-sur ;
 Aalsmeer+OLang/FIN:Aals#meer LONDON-sur ;
 Aalst+OLang/NOB:Aalst9 BERN-sur ;
 Aaltio+OLang/FIN:Aaltio9 ACCRA-sur ;
-Aaltola+OLang/FIN:Aaltola ACCRA-sur ;
+Aaltola+OLang/FIN:Aaltola ACCRA-sur ; ! egentlig ODD
 Aaltonen+OLang/FIN:Aalto C-FI-NEN-sur ;
 Aalvik+OLang/NOB:Aal#vik BERN-sur ;
 Aamodt+OLang/NOB:Aamodt BERN-sur ;
@@ -4163,8 +4164,6 @@ Bygningabalken+OLang/UND:Bygninga^balken9 LONDON-obj ;
 Bykle+OLang/UND:Bykle ACCRA-plc ;
 Byre+OLang/UND:Byre ACCRA-sur ;
 Byremo+OLang/NOB:Byremo9 NYSTØ-plc;
-Byrkije+Err/Orth+OLang/UND:Byrkiije ACCRA-plc ;
-Byrkije+OLang/UND:Byrkije ACCRA-plc ;
 Byrkjedal+OLang/NOB:Byrkje#dal BERN-plc ;
 Byrkjelo+OLang/UND:Byrkje#lo9 NYSTØ-plc;
 Byrknes+OLang/NOB:Byrk9#nes BERN-plc ;
@@ -12473,7 +12472,7 @@ Karhulahti+OLang/FIN:Karhu#lahti PIPPI-plc ;
 Karhumaa+OLang/FIN:Karhu#maa ACCRA-sur ;
 Karhumäki+OLang/FIN:Karhu#mäk MAKI-plc ;
 Karhunen+OLang/FIN:Karhu C-FI-NEN-sur ;
-Kari+OLang/UND:Kari PIPPI-malfem ;
+Kari+OLang/UND:Kari PIPPI-malfem ; ! Karijasse - * Karian(feil)
 Kari-Ann+OLang/UND:Kari-Ann9 BERN-sur ;
 Kari-Anne+OLang/UND:Kari-Anne ACCRA-fem ;
 Kari-Mette+OLang/UND:Kari-Mette ACCRA-fem ;
@@ -13023,7 +13022,7 @@ Kinna+OLang/NOB:Kinna ACCRA-plc ;
 Kinnarinen+OLang/FIN:Kinnari C-FI-NEN-sur ;
 Kinnarodden+OLang/UND:Kinnar9#odden9 LONDON-plc ;
 Kinni+OLang/UND:Kinni PIPPI-sur ;
-Kinnula+OLang/FIN:Kinnula ACCRA-plc ;
+Kinnula+OLang/FIN:Kinnula ACCRA-plc ; ! sma: kanskje ODD
 Kinnunen+OLang/FIN:Kinnu C-FI-NEN-sur ;
 Kinos+OLang/UND:Kinos LONDON-plc ;
 Kinsarvik+OLang/NOB:Kinsar9#vik BERN-plc ;

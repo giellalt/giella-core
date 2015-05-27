@@ -30552,7 +30552,7 @@ Kautokeino% kommune+MWE+OLang/UND:Kautokeino% kommune ACCRA-LOAN-org ;
 Kawasaki+OLang/UND:Kawasaki ACCRA-org ;
 Kayseri+OLang/UND:Kayser ERVASTI-sur ;
 Keituri+OLang/UND:Keitur ERVASTI-sur ;
-Kerberos+OLang/UND:Kerberos BERN-ani ;
+!Kerberos+OLang/UND:Kerberos BERN-ani ;! outcomment this one, because this one is allready as LONDON
 Kerässieppi+OLang/UND:Kerässieppi ACCRA-plc ;
 Kesälaki+OLang/UND:Kesälaki ACCRA-plc ;
 Khatami+OLang/UND:Khatami ACCRA-sur ;

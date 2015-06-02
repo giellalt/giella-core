@@ -52,16 +52,12 @@
 
 !! !!Modifications for sma
 !! __MAKI__ er for finske i-finale navn hvor sørsamisk og lulesamisk følger ulike
-!! mønster. PIPPi i smj, ACCRA i sme og sma.
+!! mønster. PIPPi i smj, ACCRA i sme og sma. 02.06.15: MAKI er nå ACCRA også i smj -Sandra
 !! Illativ i sma: - mãki  -> mäkan eller mäkijasse 
 !!                - niemi -> neaman
 !!                - buertie - buartan --> buertiejasse (rørossamisk)
 !!                - Stuehkie - Stuahkan - Stuehkese (Stuehkiejasse) ("Stockholm") 
 !! niemi er grei, men MAKI og PIPPI er usikre.
-
-!! !!Modifications for sma
-!! __BETFAGE__ er spesifikk for lulesamisk, og er identisk med ACCRA for dei andre
-!! samiske språka. BETFAGE skal brukast ved e-finale ACCRA-ord.
 
 !! !!Modifications for smn
 
@@ -1665,7 +1661,7 @@ Anne-Lise+OLang/UND:Anne-Lise ACCRA-fem ;
 Anne-Margrethe+OLang/UND:Anne-Mar^grethe ACCRA-fem ;
 Anne-Marie+OLang/UND:Anne-Marie ACCRA-fem ;
 Annecy+OLang/UND:Annecy ACCRA-plc ;
-Anneli+OLang/UND:Anneli NYSTØ-fem ;
++OLang/UND:Anneli NYSTØ-fem ;
 Annelie+OLang/UND:Annelie ACCRA-fem ;
 Annelise+OLang/UND:Anne#lise ACCRA-fem ;
 Annemarie+OLang/UND:Anne^marie ACCRA-fem ;
@@ -2981,9 +2977,9 @@ Betel+OLang/UND:Betel LONDON-org ;
 Betelgeuse+OLang/UND:Betel^geuse ACCRA-plc ;
 Betesda+OLang/NOB:Betesda ACCRA-fem ;
 Betfag+OLang/UND:Betfag9 BERN-plc ;
-Betfage+OLang/UND:Betfag BETFAGE-plc ;
-São% Tomé% &% Príncipe+OLang/UND:São% Tomé% &% Príncip BETFAGE-plc ;
-Yaounde+OLang/UND:Yaound BETFAGE-plc ;
+Betfage+OLang/UND:Betfage ACCRA-plc ;
+São% Tomé% &% Príncipe+OLang/UND:São% Tomé% &% Príncipe ACCRA-plc ;
+Yaounde+OLang/UND:Yaounde ACCRA-plc ;
 Beth+OLang/UND:Beth9 BERN-fem ;
 Bethel+OLang/UND:Bethel LONDON-plc ;
 Bethesda+OLang/NOB:Bethesda ACCRA-fem ;
@@ -5079,7 +5075,7 @@ Dennis+OLang/UND:Dennis LONDON-mal ;
 Denver+OLang/UND:Denver LONDON-sur ;
 Departementet+OLang/UND:Departementet LONDON-LOAN-org ;
 Departements-Tidende+OLang/UND:Departements-Tidende ACCRA-obj ;
-Derbe+OLang/UND:Derb BETFAGE-plc ;
+Derbe+OLang/UND:Derbe ACCRA-plc ;
 Derby+OLang/NOB:Derby NYSTØ-plc ;
 Derluguian+OLang/UND:Derluguian9 LONDON-sur ;
 Dervo+OLang/UND:Dervo9 ACCRA-sur ;
@@ -7006,8 +7002,8 @@ Fogh+OLang/UND:Fogh9 BERN-sur ;
 Fogn+OLang/UND:Fogn9 BERN-plc ;
 Fogstad+OLang/NOB:Fog9#stad9 BERN-plc ;
 Fogt+OLang/UND:Fogt LONDON-sur ;
-Foibe+OLang/UND:Foib BETFAGE-fem ;
-Vyöddale+OLang/UND:Vyöddal BETFAGE-plc ;
+Foibe+OLang/UND:Foibe ACCRA-fem ;
+Vyöddale+OLang/UND:Vyöddale ACCRA-plc ;
 Foibos+OLang/UND:Foibos LONDON-mal ;
 Foighel+OLang/UND:Foighel LONDON-sur ;
 Foinikia+OLang/NOB:Foinikia ACCRA-plc ;
@@ -11758,7 +11754,7 @@ Joona+OLang/NOB:Joona ACCRA-mal ;
 Jope+OLang/UND:Jope ACCRA-mal ;
 Joplin+OLang/UND:Joplin9 LONDON-sur ;
 Jopp+OLang/UND:Jopp9 BERN-sur ;
-Joppe+OLang/UND:Jopp BETFAGE-plc ;
+Joppe+OLang/UND:Joppe ACCRA-plc ;
 Joram+OLang/UND:Joram9 LONDON-mal ;
 Joramo+OLang/UND:Joramo9 NYSTØ-plc;
 Jord+OLang/UND:Jord9 BERN-sur ;
@@ -16523,7 +16519,7 @@ Manaen+OLang/UND:Mana^en9 LONDON-plc ;
 Managua+OLang/UND:Managua ACCRA-plc ;
 Manaka+OLang/UND:Manaka ACCRA-fem ;
 Manama+OLang/UND:Manama ACCRA-plc ;
-Manasse+OLang/UND:Manass BETFAGE-mal ;
+Manasse+OLang/UND:Manasse ACCRA-mal ;
 Mancha+OLang/UND:Mancha ACCRA-plc ;
 Manche+OLang/UND:Manche ACCRA-plc ;
 Manchester+OLang/UND:Man^chester LONDON-plc ;
@@ -17476,7 +17472,7 @@ Mitsuoka+OLang/UND:Mitsuoka  ACCRA-obj ;
 Mittet+OLang/UND:Mittet BERN-sur ;
 Mittådalen+OLang/NOB:Mitt^å#dalen9 LONDON-plc ;
 Mitylen+OLang/UND:Mitylen9 LONDON-sur ;
-Mitylene+OLang/UND:Mitylen BETFAGE-plc ;
+Mitylene+OLang/UND:Mitylene ACCRA-plc ;
 Mitzi+OLang/UND:Mitzi PIPPI-plc ;
 Miyazaki+OLang/UND:Mi^yazaki PIPPI-plc ;
 Mizoram+OLang/UND:Mizoram9 BERN-plc ;
@@ -20267,7 +20263,7 @@ Peres+OLang/UND:Peres LONDON-sur ;
 Perez+OLang/UND:Perez9 BERN-plc ;
 Perg+OLang/UND:Perg9 BERN-plc ;
 Pergamon+OLang/UND:Pergamon9 BERN-plc ;
-Perge+OLang/UND:Perg BETFAGE-plc ;
+Perge+OLang/UND:Perge ACCRA-plc ;
 Perges+OLang/UND:Perges LONDON-sur ;
 Perho+OLang/UND:Perho9 ACCRA-mal ;
 Peri+OLang/UND:Peri PIPPI-sur ;
@@ -22886,7 +22882,7 @@ Samordna% opptak+Err/Lex+MWE+OLang/UND:Samordna% opptak BERN-org ;
 Samordningsnemnda+OLang/NOB:Sam^ordnings#nemnda ACCRA-org ;
 Samos+OLang/UND:Samos LONDON-plc ;
 Samotrak+OLang/UND:Samotrak BERN-plc ;
-Samotrake+OLang/UND:Samotrak BETFAGE-plc ;
+Samotrake+OLang/UND:Samotrake ACCRA-plc ;
 Samoyed+OLang/UND:Samo^yed9 BERN-org ;
 Sampo+OLang/UND:Sampo9 ACCRA-mal ;
 Samppala+OLang/FIN:Samppala ACCRA-sur ;

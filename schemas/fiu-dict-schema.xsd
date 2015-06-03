@@ -71,6 +71,7 @@
 	   </xs:choice>
             <xs:element minOccurs="0" ref="sources"/>
             <xs:element maxOccurs="unbounded" ref="mg"/>
+            <xs:element minOccurs="0" ref="content"/>
          </xs:sequence>
          <xs:attribute ref="exclude"/>
          <xs:attribute name="order">
@@ -89,6 +90,7 @@
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
+               <xs:attribute name="fin_lemma_id" type="xs:string"/>
                <xs:attribute name="stamp" type="xs:string"/>
             </xs:extension>
          </xs:simpleContent>
@@ -102,12 +104,21 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_drv"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_cogn"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="lsub"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="variants"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
             <xs:element ref="stg"/>
             <xs:element minOccurs="0" ref="audio"/>
             <xs:element minOccurs="0" ref="infl"/>
             <xs:element minOccurs="0" ref="etymology"/>
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="variants">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_syn"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_var"/>
          </xs:sequence>
       </xs:complexType>
    </xs:element>
@@ -195,6 +206,24 @@
          </xs:simpleContent>
       </xs:complexType>
    </xs:element>
+   <xs:element name="l_syn">
+      <xs:complexType mixed="true">
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute ref="pl"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="l_var">
+      <xs:complexType mixed="true">
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute ref="pl"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
    <xs:element name="l_sci">
       <xs:complexType>
          <xs:simpleContent>
@@ -245,6 +274,7 @@
          </xs:simpleContent>
       </xs:complexType>
    </xs:element>
+   <xs:attribute name="pl" type="xs:string"/>
    <xs:element name="pos" type="posType"/>
    <xs:attribute name="pos" type="posType"/>
    <xs:simpleType name="posType">
@@ -977,8 +1007,8 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="sem">
-     <xs:complexType>
-           <xs:attribute ref="class"/>
+     <xs:complexType mixed="true">
+           <xs:attribute name="class" type="xs:string"/>
 <!-- leksa, morfac, morfas separated by commas -->
            <xs:attribute name="usage" type="xs:string"/>
       </xs:complexType>
@@ -1407,6 +1437,36 @@
          <xs:attribute ref="genreType"/>
       </xs:complexType>
    </xs:element>
+   <xs:element name="content">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="inc-sampling"/>
+	      <xs:element maxOccurs="unbounded" minOccurs="0" ref="inc-audio"/>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="inc-sampling">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="c"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="inc-audio">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="c"/>
+	 </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="c">
+      <xs:complexType mixed="true">
+        <xs:sequence/>
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+
 <xs:element name="xCtn">
 <xs:complexType>
          <xs:sequence>
@@ -1417,6 +1477,11 @@
 	 </xs:sequence>
 </xs:complexType>
 </xs:element>
+   <xs:element name="note">
+      <xs:complexType mixed="true">
+         <xs:sequence/>
+      </xs:complexType>
+   </xs:element>
    <xs:element name="x">
       <xs:complexType mixed="true">
          <xs:sequence/>

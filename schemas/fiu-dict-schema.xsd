@@ -74,6 +74,7 @@
             <xs:element minOccurs="0" ref="content"/>
          </xs:sequence>
          <xs:attribute ref="exclude"/>
+         <xs:attribute name="r" type="xs:string"/>
          <xs:attribute name="order">
             <xs:simpleType>
                <xs:restriction base="xs:string">
@@ -219,6 +220,7 @@
       <xs:complexType mixed="true">
          <xs:simpleContent>
             <xs:extension base="xs:string">
+         <xs:attribute ref="gloss"/>
                <xs:attribute ref="pl"/>
             </xs:extension>
          </xs:simpleContent>
@@ -815,9 +817,10 @@
    <xs:element name="form">
       <xs:complexType mixed="true">
          <xs:sequence/>
-         <xs:attribute name="gloss" type="xs:string"/>
+         <xs:attribute ref="gloss"/>
       </xs:complexType>
    </xs:element>
+   <xs:attribute name="gloss" type="xs:string"/>
    <xs:element name="audio">
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">

@@ -58,8 +58,9 @@
    <xs:element name="e">
       <xs:complexType>
          <xs:sequence>
+            <xs:element minOccurs="0" ref="map"/>
+            <xs:element name="rev-sort_key" type="xs:string"/>
             <xs:element ref="lg"/>
-            <xs:element minOccurs="0" ref="pos"/>
             <xs:element minOccurs="0" ref="posDescr"/>
             <xs:element minOccurs="0" ref="semRole"/>
             <xs:element minOccurs="0" ref="phonet"/>
@@ -80,6 +81,17 @@
                </xs:restriction>
             </xs:simpleType>
          </xs:attribute>
+	 <xs:attribute name="id" type="xs:string"/>
+	 <xs:attribute name="meta" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="map">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="stamp" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
       </xs:complexType>
    </xs:element>
    <xs:element name="lg">
@@ -92,6 +104,8 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="lsub"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
             <xs:element ref="stg"/>
+            <xs:element minOccurs="0" ref="audio"/>
+            <xs:element minOccurs="0" ref="infl"/>
             <xs:element minOccurs="0" ref="etymology"/>
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
          </xs:sequence>
@@ -195,6 +209,7 @@
          <xs:sequence/>
          <xs:attribute ref="exclude"/>
          <xs:attribute ref="Contlex"/>
+         <xs:attribute ref="inflexId"/>
          <xs:attribute ref="orthType"/>
          <xs:attribute ref="status"/>
       </xs:complexType>
@@ -678,6 +693,7 @@
       </xs:complexType>
    </xs:element>
    <xs:attribute name="Contlex" type="xs:string"/>
+   <xs:attribute name="inflexId" type="xs:string"/>
 
 
    <xs:element name="defg">
@@ -759,6 +775,33 @@
          </xs:attribute>
       </xs:complexType>
    </xs:element>
+   <xs:element name="infl">
+      <xs:complexType>
+         <xs:choice maxOccurs="unbounded">
+            <xs:element ref="form"/>
+         </xs:choice>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="form">
+      <xs:complexType mixed="true">
+         <xs:sequence/>
+         <xs:attribute name="gloss" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="audio">
+      <xs:complexType>
+         <xs:choice maxOccurs="unbounded">
+            <xs:element name="a">
+	      <xs:complexType mixed="true">
+		<xs:sequence/>
+		<xs:attribute name="dialect" type="xs:string"/>
+		<xs:attribute name="href" type="xs:string"/>
+		<xs:attribute name="speaker" type="xs:string"/>
+	      </xs:complexType>
+	    </xs:element>
+         </xs:choice>
+      </xs:complexType>
+   </xs:element>
    <xs:element name="etymology">
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
@@ -766,6 +809,7 @@
             <xs:element ref="cognate"/>
             <xs:element ref="etym"/>
             <xs:element ref="etymCtn"/>
+            <xs:element ref="note"/>
          </xs:choice>
       </xs:complexType>
    </xs:element>
@@ -997,13 +1041,9 @@
          <xs:attribute ref="nx"/>
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
+         <xs:attribute name="stat" type="xs:string"/>
          <xs:attribute name="tType"/>
-         <xs:attribute name="type">
-            <xs:simpleType>
-               <xs:restriction base="xs:string">
-               </xs:restriction>
-            </xs:simpleType>
-         </xs:attribute>
+         <xs:attribute name="type" type="xs:string"/>
          <xs:attribute ref="val"/>
       </xs:complexType>
    </xs:element>
@@ -1031,12 +1071,7 @@
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
          <xs:attribute ref="tType"/>
-         <xs:attribute name="type">
-            <xs:simpleType>
-               <xs:restriction base="xs:string">
-               </xs:restriction>
-            </xs:simpleType>
-         </xs:attribute>
+         <xs:attribute name="type" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="te">
@@ -1063,12 +1098,7 @@
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
          <xs:attribute ref="tType"/>
-         <xs:attribute name="type">
-            <xs:simpleType>
-               <xs:restriction base="xs:string">
-               </xs:restriction>
-            </xs:simpleType>
-         </xs:attribute>
+         <xs:attribute name="type" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="tf">
@@ -1096,12 +1126,7 @@
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
          <xs:attribute ref="tType"/>
-         <xs:attribute name="type">
-            <xs:simpleType>
-               <xs:restriction base="xs:string">
-               </xs:restriction>
-            </xs:simpleType>
-         </xs:attribute>
+         <xs:attribute name="type" type="xs:string"/>
          <xs:attribute ref="val"/>
       </xs:complexType>
    </xs:element>
@@ -1253,6 +1278,8 @@
      <xs:complexType>
        <xs:simpleContent>
 	 <xs:extension base="xs:string">
+	   <xs:attribute name="BEDLAN_ID" type="xs:string"/>
+	   <xs:attribute name="lesson" type="xs:string"/>
 	   <xs:attribute name="mgs" type="xs:string"/>
 	   <xs:attribute name="name" type="xs:string"/>
 	 </xs:extension>

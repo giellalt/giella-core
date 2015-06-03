@@ -138,12 +138,7 @@
                <xs:attribute ref="hid"/>
                <xs:attribute ref="pos" use="required"/>
                <xs:attribute ref="src"/>
-               <xs:attribute name="type">
-		 <xs:simpleType>
-		   <xs:restriction base="xs:string">
-		   </xs:restriction>
-		 </xs:simpleType>
-               </xs:attribute>
+               <xs:attribute name="type" type="PosType"/>
                <xs:attribute ref="val"/>
             </xs:extension>
          </xs:simpleContent>
@@ -277,9 +272,24 @@
       </xs:complexType>
    </xs:element>
    <xs:attribute name="pl" type="xs:string"/>
-   <xs:element name="pos" type="posType"/>
-   <xs:attribute name="pos" type="posType"/>
-   <xs:simpleType name="posType">
+   <xs:simpleType name="PosType">
+     <xs:restriction base="xs:string">
+       <xs:enumeration value="Card"/>
+       <xs:enumeration value="Dem"/>
+       <xs:enumeration value="Interr"/>
+       <xs:enumeration value="Iter"/>
+       <xs:enumeration value="Ord"/>
+       <xs:enumeration value="Pers"/>
+       <xs:enumeration value="Prop"/>
+       <xs:enumeration value="Recip"/>
+       <xs:enumeration value="Refl"/>
+       <xs:enumeration value="Rel"/>
+     </xs:restriction>
+   </xs:simpleType>
+
+   <xs:element name="pos" type="posCategory"/>
+   <xs:attribute name="pos" type="posCategory"/>
+   <xs:simpleType name="posCategory">
       <xs:restriction base="xs:string">
          <xs:enumeration value="A"/>
          <xs:enumeration value="Ad-A"/>
@@ -302,21 +312,17 @@
          <xs:enumeration value="CS">
             <!--SUBORD "subordinator"-->
          </xs:enumeration>
-         <xs:enumeration value="Card"/>
-         <xs:enumeration value="Dem"/>
          <xs:enumeration value="Descr"/>
          <xs:enumeration value="Det"/>
          <xs:enumeration value="Gen_A"/>
          <xs:enumeration value="Ger"/>
          <xs:enumeration value="Interj"/>
-         <xs:enumeration value="Iter"/>
          <xs:enumeration value="Ideoph"/>
          <xs:enumeration value="Modifier"/>
          <xs:enumeration value="DV_N"/>
          <xs:enumeration value="N"/>
          <xs:enumeration value="NN"/>
          <xs:enumeration value="Num"/>
-         <xs:enumeration value="Ord"/>
          <xs:enumeration value="Pcle"/>
          <xs:enumeration value="Suf"/>
          <xs:enumeration value="Pref"/>
@@ -337,7 +343,6 @@
             <!--secondary predication: чавонь кедть, ласте, озадо-->
          </xs:enumeration>
          <xs:enumeration value="Pron"/>
-         <xs:enumeration value="Prop"/>
 
          <xs:enumeration value="Qnt"/>
          <xs:enumeration value="Q_A"/>
@@ -1063,14 +1068,8 @@
                </xs:restriction>
             </xs:simpleType>
          </xs:attribute>
-         <xs:attribute name="gloss">
-            <xs:simpleType>
-               <xs:restriction base="xs:string">
-                  <xs:enumeration value="+"/>
-                  <xs:enumeration value="0"/>
-               </xs:restriction>
-            </xs:simpleType>
-         </xs:attribute>
+         <xs:attribute ref="gloss"/>
+         <xs:attribute ref="nr"/>
          <xs:attribute ref="nx"/>
          <xs:attribute ref="pos"/>
          <xs:attribute ref="register"/>
@@ -2056,11 +2055,13 @@
          </xs:restriction>
       </xs:simpleType>
    </xs:attribute>
+   <xs:attribute name="nr" type="nxType"/>
    <xs:attribute name="nx" type="nxType"/>
    <xs:attribute name="possNx" type="nxType"/>
    <xs:attribute name="semNx" type="nxType"/>
    <xs:simpleType name="nxType">
       <xs:restriction base="xs:string">
+         <xs:enumeration value="Du"/>
          <xs:enumeration value="Pl"/>
          <xs:enumeration value="Sg"/>
       </xs:restriction>

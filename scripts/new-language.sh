@@ -68,6 +68,9 @@ if test $(grep -c "^ALL_LANGS=" Makefile.am ) -eq 0 ; then
     exit 1
 fi
 
+echo "*** updating $$GTCORE before populating the new directory.***"
+svn up $GTCORE
+
 TEMPLATEDIR=$TEMPLATECOLL-templates
 
 # Copy template files to new language dir:

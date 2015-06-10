@@ -109,7 +109,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
             <xs:element ref="stg"/>
             <xs:element minOccurs="0" ref="audio"/>
-            <xs:element minOccurs="0" ref="infl"/>
+            <xs:element minOccurs="0" ref="mini_paradigm"/>
             <xs:element minOccurs="0" ref="etymology"/>
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
          </xs:sequence>
@@ -812,20 +812,22 @@
          </xs:attribute>
       </xs:complexType>
    </xs:element>
-   <xs:element name="infl">
+   <xs:element name="mini_paradigm">
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
-            <xs:element ref="form"/>
+            <xs:element ref="analysis"/>
          </xs:choice>
       </xs:complexType>
    </xs:element>
-   <xs:element name="form">
+   <xs:element name="analysis">
       <xs:complexType mixed="true">
-         <xs:sequence/>
-         <xs:attribute ref="gloss"/>
+         <xs:choice maxOccurs="unbounded">
+            <xs:element ref="wordform"/>
+         </xs:choice>
+         <xs:attribute ref="ms"/>
       </xs:complexType>
    </xs:element>
-   <xs:attribute name="gloss" type="xs:string"/>
+   <xs:attribute name="ms" type="xs:string"/>
    <xs:element name="audio">
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
@@ -1466,6 +1468,13 @@
       <xs:complexType mixed="true">
         <xs:sequence/>
         <xs:attribute name="name" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name="wordform">
+      <xs:complexType mixed="true">
+        <xs:sequence/>
+        <xs:attribute ref="src"/>
       </xs:complexType>
    </xs:element>
 

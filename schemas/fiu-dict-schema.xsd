@@ -59,15 +59,15 @@
       <xs:complexType>
          <xs:sequence>
             <xs:element minOccurs="0" ref="map"/>
-            <xs:element name="rev-sort_key" type="xs:string"/>
+            <xs:element minOccurs="0" name="rev-sort_key" type="xs:string"/>
             <xs:element ref="lg"/>
             <xs:element minOccurs="0" ref="posDescr"/>
             <xs:element minOccurs="0" ref="semRole"/>
             <xs:element minOccurs="0" ref="phonet"/>
             <xs:element minOccurs="0" ref="morphg"/>
 	   <xs:choice maxOccurs="unbounded" minOccurs="0">
-            <xs:element ref="drv"/>
-            <xs:element ref="etymg"/>
+            <xs:element minOccurs="0" ref="drv"/>
+            <xs:element minOccurs="0" ref="etymg"/>
 	   </xs:choice>
             <xs:element minOccurs="0" ref="sources"/>
             <xs:element maxOccurs="unbounded" ref="mg"/>
@@ -828,6 +828,7 @@
       </xs:complexType>
    </xs:element>
    <xs:attribute name="ms" type="xs:string"/>
+   <xs:attribute name="gloss" type="xs:string"/>
    <xs:element name="audio">
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">

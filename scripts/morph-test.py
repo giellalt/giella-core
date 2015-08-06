@@ -533,7 +533,7 @@ class MorphTest:
 # Link to debuggex page with this regex:
 # https://debuggex.com/r/kURzt7XS3t83-dvT
 def parse_lexc(f, fallback=None):
-    HEADER_RE = re.compile(r'^\!\!€([^\s:]+):\s*([^#]+)\s*#?')
+    HEADER_RE = re.compile(r'^\!\!€([^\s.:]+)(?:.[^\s:]+)?:\s*([^#]+)\s*#?')
     TEST_RE = re.compile(r'^\!\!([€\$])\s+(\S.*):\s+(\S+|\S.*\S)(\s*$|\s+[#!])')
     POS = "€"
     NEG = "$"

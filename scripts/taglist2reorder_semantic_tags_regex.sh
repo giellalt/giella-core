@@ -8,7 +8,7 @@ if ! test $# -eq 2 ; then
     echo "Usage: $0 OUTFILE TAGFILE"
     echo
     echo "OUTFILE = regex file to be created"
-    echo "TAGFILE = a file with the list of derivation tags"
+    echo "TAGFILE = a file with the list of semantic tags"
     echo
     exit 1
 fi

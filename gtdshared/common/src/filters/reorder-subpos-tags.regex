@@ -1,12 +1,4 @@
 # This script reshuffles sub-POS tags to follow the main POS.
 
-# MWE:
-%+N        %+MWE <- %+MWE %+N ,
-%+N %+Prop %+MWE <- %+MWE %+Prop %+N ,
-%+N %+Prop %+MWE <- %+MWE %+N %+Prop ,
-%+Pron     %+MWE <- %+MWE %+Pron ,
-%+Adv      %+MWE <- %+MWE %+Adv ,
-%+CS       %+MWE <- %+MWE %+CS ,
-
 # Prop:
 %+N %+Prop <- %+Prop %+N ;

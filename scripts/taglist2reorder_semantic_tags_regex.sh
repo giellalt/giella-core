@@ -20,9 +20,12 @@ TAGFILE=$2
 SED=sed
 
 # The list of POS's to move semantic tags for (use underscore for
-# multitag POS's):
+# multitag POS's, use =XX= for tag-internal slashes as in +Use/NG):
 
-POSes="%+N %+A %+N_%+Prop"
+POSes="%+N %+A %+N_%+Prop \
+%+v1_%+N %+v2_%+N %+v3_%+N %+v4_%+N %+v5_%+N %+v6_%+N %+v7_%+N %+v8_%+N \
+%+v1_%+Use=XX=NG%+N %+v2_%+Use=XX=NG%+N %+v3_%+Use=XX=NG%+N %+v4_%+Use=XX=NG%+N \
+%+v5_%+Use=XX=NG%+N %+v6_%+Use=XX=NG%+N %+v7_%+Use=XX=NG%+N %+v8_%+Use=XX=NG%+N"
 
 # Print header text:
 echo "# This is a generated file - do not edit!"    > $TMPFILE
@@ -36,14 +39,16 @@ for POS in $POSes; do
     echo "" >> $TMPFILE
     echo "# $REALPOS" >> $TMPFILE
 
-    # escape characters special to Xerox regex, then create the regex, and
-    # finally replace the last comma with a semicolon to end the regex.
+    # escape characters special to Xerox regex, then create the regex:
     $SED   's/\([+/_-]\)/%\1/g' $TAGFILE \
     | $SED "s/^\(.*\)/$REALPOS \1 <- \1 $REALPOS ,/" \
     >> $TMPFILE
 done
 
+    # finally replace =XX= with %/, and replace the last comma with a semicolon
+    # to end the regex:
 cat $TMPFILE \
+    | $SED 's/=XX=/%\//g' \
     | $SED '$ s/,/;/' \
     > $REGEXFILE
 

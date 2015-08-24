@@ -501,7 +501,7 @@ SUBSTITUTE (@OBJ> @<OBJ) (@OBJ>) TARGET (@OBJ>) (*1 @FMV)(NEGATE *1 @<SUBJ);
 #SUBSTITUTE (@OBJ> @<OBJ) (@<OBJ) TARGET
 
 #!! * __XX__
-SUBSTITUTE (@SPRED> @<SPRED) (@SPRED>) TARGET (@SPRED>) (*-1 @SUBJ>)(NEGATE *1 @<SUBJ)
+SUBSTITUTE (@SPRED> @<SPRED) (@SPRED>) TARGET (@SPRED>) (*-1 @SUBJ>)(NEGATE *1 @<SUBJ) ;
 #SUBSTITUTE (@SPRED> @<SPRED) (@<SPRED) TARGET
 #
 #SUBSTITUTE (@FS-<ADVL @FS-ADVL>) (@FS-<ADVL) TARGET
@@ -1226,8 +1226,8 @@ SETPARENT @APP-Pron< TO (*-1 Pron);
 # punctuation
 ### CLB
 SETPARENT:CLB CLB TO (@0 (*) LINK cA (*)) ;
-SETPARENT:PUNCTL (PUNCT LEFT) TO (1 (*)) #Hva skal vi gjøre med PUNCT?
-SETPARENT:PUNCTR (PUNCT RIGHT) TO (-1 (*)) #Hva skal vi gjøre med PUNCT?
+SETPARENT:PUNCTL (PUNCT LEFT) TO (1 (*)) ; #Hva skal vi gjøre med PUNCT?
+SETPARENT:PUNCTR (PUNCT RIGHT) TO (-1 (*)) ; #Hva skal vi gjøre med PUNCT?
 #SETPARENT:CLB CLB TO (1**A (*) LINK p (>>>)) ;
     # goes to @FAUX if there is one, if not to @FMV, if not to @SUBJ> in ellipsis
     # in any case to the first child of root

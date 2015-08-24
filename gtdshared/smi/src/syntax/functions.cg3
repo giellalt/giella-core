@@ -1360,7 +1360,7 @@ MAP:r315 (@APP-Pron<) TARGET (N Nom) IF (-1 (N Gen) OR (Pers Gen) LINK *-1 CC BA
 
 MAP:r316 (@APP-N<) TARGET (N Nom) IF (*-1 ("nugo") OR ("sihke") BARRIER APP-BOUNDARY LINK -1 COMMA LINK -1 (N Nom))(*1 EOS BARRIER APP-BOUNDARY) ;
 MAP:r317 (@APP-Pron<) TARGET (N Nom) IF (*-1 ("nugo") OR ("sihke") BARRIER APP-BOUNDARY LINK -1 COMMA LINK -1 (Pron Nom))(*1 EOS BARRIER APP-BOUNDARY) ;
-	#$ Návetgoađis ledje ealut, nugo sávzzat, gáiccat ja gusat. 
+	#$ Návetgoađis ledje ealut, nugo sávzzat, gáiccat ja gusat. 
 
 MAP:r318 (@APP-N<) TARGET (N Nom) IF (*-1 ("nugo") OR ("sihke") BARRIER APP-BOUNDARY LINK -1 COMMA LINK -1 (N Nom) LINK *-1 BOS BARRIER APP-BOUNDARY)(*1 COMMA BARRIER APP-BOUNDARY LINK 1 VFIN) ;
 MAP:r319 (@APP-Pron<) TARGET (N Nom) IF (*-1 ("nugo") OR ("sihke") BARRIER APP-BOUNDARY LINK -1 COMMA LINK -1 (Pron Nom) LINK *-1 BOS BARRIER APP-BOUNDARY)(*1 COMMA BARRIER APP-BOUNDARY LINK 1 VFIN) ;
@@ -1473,7 +1473,7 @@ MAP:<extsubjcoor (<ext> @<SUBJ) TARGET Nom - NOT-EXT - Pron (*-1 (CC @CNP) OR Ne
 MAP:Year (@N<) TARGET (Sem/Year Nom) (-1 (Sem/Sur Nom)) ;
 MAP:Year (@N<) TARGET (Sem/Year Nom) (-1 COMMA LINK *-1 (Sem/Sur Nom) BARRIER WORD - (Num Nom)) ;
 MAP:Year (@Num<) TARGET (Num Nom) (*-1 (":") BARRIER WORD - Num LINK -1 (Sem/Year Nom) LINK *-1 (Sem/Sur Nom) BARRIER WORD - (Num Nom)) ;
-MAP:Sur (@<ADVL) TARGET (Sem/Sur Nom) (-1 (":") OR (PUNCT LEFT) OR (";") LINK 2 (Sem/Year Nom))
+MAP:Sur (@<ADVL) TARGET (Sem/Sur Nom) (-1 (":") OR (PUNCT LEFT) OR (";") LINK 2 (Sem/Year Nom)) ;
 	#$ Nu lea ášši (Magga 2001; Johansen 1992).
 	#$ Oaivevearbbat ja koloratiivavearbbat gávdnojit maid davvisámegiela sátnegirjjiin (Sammallahti 1989, 1993; Vest 1995).
 	#$ Oaivevearbbat ja koloratiivavearbbat gávdnojit maid davvisámegiela sátnegirjjiin (Sammallahti 1989: 210; Vest 1995).
@@ -1578,7 +1578,7 @@ MAP:spredSg> (@SPRED>) TARGET (Sg Nom) IF (1 (Sg Nom) OR SGPRON + Nom OR (Indef 
 	#$ Mii mun lean?
 
 #!! * __AdjSpredSg>__ (@SPRED>) for A Sg Nom; if copulas to the right, but not if A or @<SPRED are found to the right of copulas
-MAP:AdjSpredSg> (@SPRED>) TARGET (A Sg Nom) IF (*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA OR CC LINK NOT *1 A OR @<SPRED BARRIER NOT-NPMOD); ;
+MAP:AdjSpredSg> (@SPRED>) TARGET (A Sg Nom) IF (*1 COPULAS + FMAINV BARRIER SV-BOUNDARY OR COMMA OR CC LINK NOT *1 A OR @<SPRED BARRIER NOT-NPMOD);
 	#$ Buorre lea oažžut su boahtit deike.
 	#$ Divrras ii leat gal barggu ektui.
 	#% Dási ferte árvvoštallat daláš gáibádusaid ektui, ja internáhtat ledje buorebut go priváhta olbmuid luhtte orrut.
@@ -1779,7 +1779,7 @@ MAP:advl>v (@ADVL>) TARGET ADVL OR TIME-N + Gen OR (Sem/Route Gen) ((*1 FMAINV O
 	#$ Guovdageainnu guovllut gal leat vel mu mielas sestojuvvon oalle bures dássážii, movt šat guhká.
 
 MAP:advl>cs (@ADVL>CS) TARGET Adv (*-1 BOC BARRIER NOT-ADV)(1 CS LINK *1 FMAINV) ;
-	#$ Danne go ..
+	#$ Danne go ..
 	#$ Nu guhká go ...
 
 

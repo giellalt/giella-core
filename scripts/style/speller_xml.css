@@ -1,0 +1,41 @@
+/* A CSS stylesheet to make speller test result xml files readable in
+ * browsers.
+ */
+
+spelltestresult, header {
+    display: block;
+    margin: 0.5em
+}
+
+results {
+    display: table;
+}
+
+word {
+    display: table-row;
+    border-color: gray ;
+    border-width: 2px ;
+    margin: 1em ;
+}
+
+original, expected, edit_dist, suggestions {
+    display: table-cell;
+    border-width: 2px ;
+}
+
+speller, position {
+    display: none;
+}
+
+suggestion {
+    display: list-item ;
+    margin-left: 2em ;
+}
+
+suggestion[expected] {
+    background-color: lime ;
+}
+
+word:nth-child(2n+1) {
+  background-color: rgb(216, 216, 216);
+}

@@ -7,6 +7,7 @@ spelltestresult, header {
     margin: 0.5em
 }
 
+/* Header and summary styling: */
 header engine::before {
     content: 'Engine: ' ;
     display: inline-block ;
@@ -34,15 +35,80 @@ timestamp {
 }
 
 truefalsesummary::before {
-    content: open-quote 'Precision & recall, total word count: ' attr(wordcount) close-quote ;
+    content: 'Precision & recall:' '\A' 'Total word count: ' attr(wordcount) ;
     display: block ;
+    white-space: pre ;
 }
 
 truefalsesummary original::before {
-    content: open-quote 'Original — correct: ' attr(correct) ', typos: ' attr(error) close-quote ;
+    content: 'Original — correct: ' attr(correct) ', typos: ' attr(error) ;
     display: block ;
 }
 
+truefalsesummary speller::before {
+    content: 'Speller — correct: ' attr(correct) ', typos: ' attr(error) ;
+    display: block ;
+}
+
+truefalsesummary positive::before {
+    content: 'True positives: ' attr(true) ;
+    display: block ;
+}
+
+truefalsesummary positive::after {
+    content: 'False positives: ' attr(false) ;
+    display: block ;
+}
+
+truefalsesummary negative::before {
+    content: 'True negatives: ' attr(true) ;
+    display: block ;
+}
+
+truefalsesummary negative::after {
+    content: 'False negatives: ' attr(false) ;
+    display: block ;
+}
+
+precision::before {
+    content: 'Precision: ' ;
+    display: inline-block ;
+}
+precision {
+    display: block ;
+}
+
+recall::before {
+    content: 'Recall: ' ;
+    display: inline-block ;
+}
+recall {
+    display: block ;
+}
+
+accuracy::before {
+    content: 'Accuracy: ' ;
+    display: inline-block ;
+}
+accuracy {
+    display: block ;
+}
+
+truefalsesummary {
+    margin-bottom: 1em;
+    display: block ;
+}
+
+suggestionsummary {
+    margin-top: 1em ;
+    margin-bottom: 1em ;
+    display: block ;
+}
+
+suggestionsummary::before {
+    display: block ;
+    content: 'Suggestion summary:' ;
+}
 
 /* The output of the speller: */
 results {
@@ -51,8 +117,7 @@ results {
 
 word {
     display: table-row;
-    border-color: gray ;
-    border-width: 2px ;
+    border: solid gray 2px ;
     margin: 1em ;
 }
 
@@ -60,12 +125,12 @@ speller[status=correct] + expected {
     background-color: rgb(255, 125, 125) ;
 }
 
-original, expected, edit_dist, suggestions {
+results original, expected, edit_dist, suggestions {
     display: table-cell;
     border-width: 2px ;
 }
 
-speller, position {
+results speller, position {
     display: none;
 }
 

@@ -7,6 +7,44 @@ spelltestresult, header {
     margin: 0.5em
 }
 
+header engine::before {
+    content: 'Engine: ' ;
+    display: inline-block ;
+}
+engine::after {
+    content: open-quote attr(abbreviation) close-quote ;
+    display: inline-block ;
+}
+toolversion { display: none ;}
+
+document::before {
+    content: 'Document: ' ;
+    display: inline-block ;
+}
+document {
+    display: block ;
+}
+
+timestamp::before {
+    content: 'Test date and time: ' ;
+    display: inline-block ;
+}
+timestamp {
+    display: block ;
+}
+
+truefalsesummary::before {
+    content: open-quote 'Precision & recall, total word count: ' attr(wordcount) close-quote ;
+    display: block ;
+}
+
+truefalsesummary original::before {
+    content: open-quote 'Original — correct: ' attr(correct) ', typos: ' attr(error) close-quote ;
+    display: block ;
+}
+
+
+/* The output of the speller: */
 results {
     display: table;
 }
@@ -16,6 +54,10 @@ word {
     border-color: gray ;
     border-width: 2px ;
     margin: 1em ;
+}
+
+speller[status=correct] + expected {
+    background-color: rgb(255, 125, 125) ;
 }
 
 original, expected, edit_dist, suggestions {

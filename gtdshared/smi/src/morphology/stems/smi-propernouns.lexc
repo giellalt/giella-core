@@ -25282,9 +25282,9 @@ Stjernøya+OLang/NOB:Stjern#øya ACCRA-LOAN-plc ;
 Stjørdal+OLang/NOB:Stjør9#dal BERN-plc ;
 Stoa+OLang/UND:Stoa ACCRA-plc ;
 Stock+OLang/UND:Stock BERN-plc ;
-Stockfleth+OLang/UND:Stock9#fleth9 BERN-sur ;
-Stockholm+OLang/NOB:Stock9#holm9 BERN-plc ;
-Stockmann+OLang/NOB:Stockmann9 BERN-sur ;
+!Stockfleth+OLang/UND:Stock9#fleth9 BERN-sur ;
+!Stockholm+OLang/NOB:Stock9#holm9 BERN-plc ;
+!Stockmann+OLang/NOB:Stockmann9 BERN-sur ;
 Stockport+OLang/UND:Stock9#port BERN-plc ;
 Stockton+OLang/UND:Stockton9 LONDON-plc ;
 Stockton-on-Tees+OLang/UND:Stockton-on-Tees BERN-plc ;
@@ -31153,7 +31153,15 @@ Mulingan+OLang/NOB:Mulingan LONDON-plc ;
 Avtsejen+OLang/NOB:Avtsejen LONDON-plc ;
 Nordsjösætrane+OLang/NOB:Nordsjösætrane LONDON-plc ;
 d'Arc+OLang/UND:d'7Arc BERN-sur ;
-
-
-
+Anssi+OLang/FIN:Anssi PIPPI-mal ;
+Lactarius+OLang/UND:Lactari^us BERN-sur ;
+Lehtikuva+OLang/FIN:Lehtikuva ACCRA-org ;
+Pinokkio+OLang/FIN:Pinokkio9 ACCRA-mal ;
+Gyllenberg+OLang/NOB:Gyllen#berg9 BERN-sur ;
+Tukholma+OLang/FIN:Tukholma ACCRA-plc ;
+Tansania+OLang/FIN:Tansania ACCRA-plc ;
+Charlie+OLang/NOB:Char#lie NYSTØ-sur ;
+Raija+OLang/UND:Rai^ja ACCRA-fem ;
+Högman+OLang/NOB:Högman9 LONDON-sur ;		  
+Salix+OLang/UND:Salix LONDON-mal ;
 

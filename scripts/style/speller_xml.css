@@ -107,7 +107,87 @@ suggestionsummary {
 
 suggestionsummary::before {
     display: block ;
-    content: 'Suggestion summary:' ;
+    content: 'Suggestion summary (edit dist 1, 2, 3+):' ;
+}
+
+sugg1::before {
+    display: inline-block ;
+    content: 'Suggestions in 1st position: ' ;
+}
+sugg1 {display: block}
+sugg1::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus);
+}
+
+sugg2::before {
+    display: inline-block ;
+    content: 'Suggestions in 2nd position: ' ;
+}
+sugg2 {display: block}
+sugg2::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+sugg3::before {
+    display: inline-block ;
+    content: 'Suggestions in 3rd position: ' ;
+}
+sugg3 {display: block}
+sugg3::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+sugg4::before {
+    display: inline-block ;
+    content: 'Suggestions in 4th position: ' ;
+}
+sugg4 {display: block}
+sugg4::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+sugg5::before {
+    display: inline-block ;
+    content: 'Suggestions in 5th position: ' ;
+}
+sugg5 {display: block}
+sugg5::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+suggbelow5::before {
+    display: inline-block ;
+    content: 'Suggestions below 5th position: ' ;
+}
+suggbelow5 {display: block}
+suggbelow5::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+badsuggs::before {
+    display: inline-block ;
+    content: 'Only wrong suggestions: ' ;
+}
+badsuggs {display: block}
+badsuggs::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+nosugg::before {
+    display: inline-block ;
+    content: 'No suggestions: ' ;
+}
+nosugg {display: block}
+nosugg::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
 }
 
 /* The output of the speller: */

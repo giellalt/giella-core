@@ -903,61 +903,59 @@ sub make_suggestion_position {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
-    if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
-        if ($rec->{'sugg'}) {
-            my @suggestions = @{$rec->{'sugg'}};
+    if ($rec->{'error'} && $rec->{'error'} eq "SplErr" && $rec->{'sugg'}) {
+        my @suggestions = @{$rec->{'sugg'}};
 
-            if ($rec->{'expected'}) {
-                my $i=0;
-                while ($suggestions[$i]) {
-                    if ($rec->{'expected'} eq $suggestions[$i]) {
-                        my $position = $doc->createElement('position');
-                        $position->appendTextNode($i + 1);
-                        $word->appendChild($position);
-                        last;
-                    }
-                    $i++;
+        if ($rec->{'expected'}) {
+            my $i=0;
+            while ($suggestions[$i]) {
+                if ($rec->{'expected'} eq $suggestions[$i]) {
+                    my $position = $doc->createElement('position');
+                    $position->appendTextNode($i + 1);
+                    $word->appendChild($position);
+                    last;
                 }
+                $i++;
             }
-
-            my $suggestions_elt = $doc->createElement('suggestions');
-
-            my $sugg_count = scalar @{ $rec->{'sugg'}};
-            $suggestions_elt->setAttribute('count' => $sugg_count);
-
-            my $near_miss_count = 0;
-            if ($rec->{'suggnr'}) {
-                $near_miss_count = $rec->{'suggnr'};
-            }
-
-            my @numbers;
-            if ($rec->{'num'}) {
-                @numbers =  @{$rec->{'num'}};
-            }
-            
-            for my $sugg (@suggestions) {
-                if ($sugg) {
-                    my $suggestion = $doc->createElement('suggestion');
-                    $suggestion->appendTextNode($sugg);
-                    if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
-                        $suggestion->setAttribute('expected' => "yes");
-                    }
-                    my $num;
-                    if (@numbers) {
-                        $num = shift @numbers;
-                        $suggestion->setAttribute('penscore' => $num);
-                    }
-                    if ($near_miss_count > 0) {
-                        $suggestion->setAttribute('miss' => "yes");
-                        $near_miss_count--;
-                    }
-
-                    $suggestions_elt->appendChild($suggestion);
-                }
-            }
-
-            $word->appendChild($suggestions_elt);
         }
+
+        my $suggestions_elt = $doc->createElement('suggestions');
+
+        my $sugg_count = scalar @{ $rec->{'sugg'}};
+        $suggestions_elt->setAttribute('count' => $sugg_count);
+
+        my $near_miss_count = 0;
+        if ($rec->{'suggnr'}) {
+            $near_miss_count = $rec->{'suggnr'};
+        }
+
+        my @numbers;
+        if ($rec->{'num'}) {
+            @numbers =  @{$rec->{'num'}};
+        }
+
+        for my $sugg (@suggestions) {
+            if ($sugg) {
+                my $suggestion = $doc->createElement('suggestion');
+                $suggestion->appendTextNode($sugg);
+                if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
+                    $suggestion->setAttribute('expected' => "yes");
+                }
+                my $num;
+                if (@numbers) {
+                    $num = shift @numbers;
+                    $suggestion->setAttribute('penscore' => $num);
+                }
+                if ($near_miss_count > 0) {
+                    $suggestion->setAttribute('miss' => "yes");
+                    $near_miss_count--;
+                }
+
+                $suggestions_elt->appendChild($suggestion);
+            }
+        }
+
+        $word->appendChild($suggestions_elt);
     }
 }
 

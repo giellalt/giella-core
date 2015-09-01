@@ -1193,7 +1193,8 @@ sub make_header {
 
     my $header = $doc->createElement('header');
 
-    make_tool($originals_ref, $header, $doc);
+    $header->appendChild(make_engine($doc));
+    $header->appendChild(make_lexicon($originals_ref, $doc));
     make_document($header, $doc);
     make_timestamp($header, $doc);
     make_truefalsesummary($originals_ref, $header, $doc);
@@ -1202,25 +1203,8 @@ sub make_header {
     return $header;
 }
 
-sub make_tool {
-    my ($originals_ref, $header, $doc) = @_;
-
-    # Print some header information
-    my $engine = $doc->createElement('engine');
-    $engine->setAttribute('abbreviation' => $input_type);
-
-    my $tool = $doc->createElement('toolversion');
-    $tool->appendTextNode($toolversion);
-    $engine->appendChild($tool);
-
-    my $processing = $doc->createElement('processing');
-    $processing->setAttribute('memoryusage' => $memoryuse);
-    $processing->setAttribute('realtime' => $alltime[0]);
-    $processing->setAttribute('usertime' => $alltime[1]);
-    $processing->setAttribute('systime' =>  $alltime[2]);
-    $engine->appendChild($processing);
-
-    $header->appendChild($engine);
+sub make_lexicon {
+    my ($originals_ref, $doc) = @_;
 
     # Get version info if it's available
     my $rec = ${$originals_ref}[0];
@@ -1243,7 +1227,29 @@ sub make_tool {
 
     my $lexicon = $doc->createElement('lexicon');
     $lexicon->setAttribute('version' => $version);
-    $header->appendChild($lexicon);
+
+    return $lexicon;
+}
+
+sub make_engine {
+    my ($doc) = @_;
+
+    # Print some header information
+    my $engine = $doc->createElement('engine');
+    $engine->setAttribute('abbreviation' => $input_type);
+
+    my $tool = $doc->createElement('toolversion');
+    $tool->appendTextNode($toolversion);
+    $engine->appendChild($tool);
+
+    my $processing = $doc->createElement('processing');
+    $processing->setAttribute('memoryusage' => $memoryuse);
+    $processing->setAttribute('realtime' => $alltime[0]);
+    $processing->setAttribute('usertime' => $alltime[1]);
+    $processing->setAttribute('systime' =>  $alltime[2]);
+    $engine->appendChild($processing);
+
+    return $engine;
 }
 
 sub calculate_truefalsesummary {

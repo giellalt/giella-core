@@ -1413,13 +1413,17 @@ sub make_document {
     my @doccu2 = split(/\./, $document);
     my @doccu1 = split(/-/, $doccu2[0]);
 
-    my $lang = $doc->createElement('lang');
-    $lang->appendTextNode($doccu1[2]);
-    $header->appendChild($lang);
+    if ($doccu1[2]) {
+        my $lang = $doc->createElement('lang');
+        $lang->appendTextNode($doccu1[2]);
+        $header->appendChild($lang);
+    }
 
-    my $testtype = $doc->createElement('testtype');
-    $testtype->appendTextNode($doccu1[1]);
-    $header->appendChild($testtype);
+    if ($doccu1[1]) {
+        my $testtype = $doc->createElement('testtype');
+        $testtype->appendTextNode($doccu1[1]);
+        $header->appendChild($testtype);
+    }
 }
 
 sub make_timestamp {

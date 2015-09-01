@@ -31,6 +31,5 @@ DICTDIR=$5
 
 VOIKKOSPELL=voikkospell
 
-{ time egrep -v "^[#!]" $1 | cut -f1 | $VOIKKOSPELL -s \
-        -d $LANGCODE-x-standard -p $DICTDIR/ ignore_dot=1 > $2 \
-        2>/dev/null ; } 2> $TIMEUSE
+{ time $VOIKKOSPELL -s -d $LANGCODE-x-standard -p $DICTDIR/ ignore_dot=1 \
+        < $1 > $2 2>/dev/null ; } 2> $TIMEUSE

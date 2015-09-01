@@ -844,6 +844,10 @@ sub print_xml_output {
 }
 
 sub make_original {
+    # Make the xml element original
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'orig'}) {
@@ -861,6 +865,10 @@ sub make_original {
 }
 
 sub make_expected {
+    # Make the xml element expected
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'expected'}){
@@ -875,6 +883,10 @@ sub make_expected {
 }
 
 sub make_speller {
+    # Make the xml element speller
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
     my $speller = $doc->createElement('speller');
@@ -891,6 +903,10 @@ sub make_speller {
 }
 
 sub make_suggestion_position {
+    # Make the xml elements position and suggestions
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
@@ -939,6 +955,10 @@ sub make_suggestion_position {
 }
 
 sub make_tokens {
+    # Make the xml element tokens
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'tokens'}) {
@@ -956,6 +976,10 @@ sub make_tokens {
 }
 
 sub make_bugid {
+    # Make the xml element bug
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'bugID'}){
@@ -967,6 +991,9 @@ sub make_bugid {
 }
 
 sub make_comment {
+    # word will be the parent element of original
+    # rec is a hash element representing one checked word
+    # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'comment'}){
@@ -977,6 +1004,10 @@ sub make_comment {
 }
 
 sub make_errors {
+    # Make the xml element errors
+    # errorinfo is a string containing error info
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($errorinfo, $word, $doc) = @_;
 
     if ($errorinfo) {
@@ -1009,6 +1040,10 @@ sub make_error_part {
 }
 
 sub make_origfile {
+    # Make the xml element origfile
+    # origfile is a string telling where the spelling error appeared
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
     my ($origfile, $word, $doc) = @_;
 
     if ($origfile) {
@@ -1020,6 +1055,10 @@ sub make_origfile {
 }
 
 sub make_word {
+    # Make the xml element word
+    # rec is a hash element representing one checked word
+    # results will be the parent element of all word
+    # doc is a XML::LibXML::Document
     my ($rec, $results, $doc) = @_;
 
     my $word = $doc->createElement('word');
@@ -1037,6 +1076,10 @@ sub make_word {
 }
 
 sub make_results {
+    # Make the xml element results
+    # originalrefs is an array containing all the data
+    # spelltestresult will be the parent element of results
+    # doc is a XML::LibXML::Document
     my ($originals_ref, $spelltestresult, $doc) = @_;
 
     my $results = $doc->createElement('results');
@@ -1261,6 +1304,7 @@ sub set_sugg {
         $sugg[$sugg_pos][2]++;
     }
 }
+
 sub update_suggestion {
     my ($rec) = @_;
 

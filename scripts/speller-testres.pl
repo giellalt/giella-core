@@ -830,8 +830,8 @@ sub print_xml_output {
 
     my $spelltestresult = $doc->createElement('spelltestresult');
 
-    make_header(\@originals, $spelltestresult, $doc);
-    make_results(\@originals, $spelltestresult, $doc);
+    $spelltestresult->appendChild(make_header(\@originals, $doc));
+    $spelltestresult->appendChild(make_results(\@originals, $doc));
 
     $doc->setDocumentElement($spelltestresult);
     $doc->toFile($print_xml, 1);
@@ -1100,7 +1100,7 @@ sub make_results {
     # originalrefs is an array containing all the data
     # spelltestresult will be the parent element of results
     # doc is a XML::LibXML::Document
-    my ($originals_ref, $spelltestresult, $doc) = @_;
+    my ($originals_ref, $doc) = @_;
 
     my $results = $doc->createElement('results');
 
@@ -1108,7 +1108,7 @@ sub make_results {
         make_word($rec, $results, $doc);
     }
 
-    $spelltestresult->appendChild($results);
+    return $results;
 }
 
 sub update_original {
@@ -1189,7 +1189,7 @@ sub update_accepted_words {
 }
 
 sub make_header {
-    my ($originals_ref, $spelltestresult, $doc) = @_;
+    my ($originals_ref, $doc) = @_;
 
     my $header = $doc->createElement('header');
 
@@ -1199,11 +1199,28 @@ sub make_header {
     make_truefalsesummary($originals_ref, $header, $doc);
     make_suggestionsummary($originals_ref, $header, $doc);
 
-    $spelltestresult->appendChild($header);
+    return $header;
 }
 
 sub make_tool {
     my ($originals_ref, $header, $doc) = @_;
+
+    # Print some header information
+    my $engine = $doc->createElement('engine');
+    $engine->setAttribute('abbreviation' => $input_type);
+
+    my $tool = $doc->createElement('toolversion');
+    $tool->appendTextNode($toolversion);
+    $engine->appendChild($tool);
+
+    my $processing = $doc->createElement('processing');
+    $processing->setAttribute('memoryusage' => $memoryuse);
+    $processing->setAttribute('realtime' => $alltime[0]);
+    $processing->setAttribute('usertime' => $alltime[1]);
+    $processing->setAttribute('systime' =>  $alltime[2]);
+    $engine->appendChild($processing);
+
+    $header->appendChild($engine);
 
     # Get version info if it's available
     my $rec = ${$originals_ref}[0];
@@ -1223,23 +1240,6 @@ sub make_tool {
             }
         }
     }
-
-    # Print some header information
-    my $engine = $doc->createElement('engine');
-    $engine->setAttribute('abbreviation' => $input_type);
-
-    my $tool = $doc->createElement('toolversion');
-    $tool->appendTextNode($toolversion);
-    $engine->appendChild($tool);
-
-    my $processing = $doc->createElement('processing');
-    $processing->setAttribute('memoryusage' => $memoryuse);
-    $processing->setAttribute('realtime' => $alltime[0]);
-    $processing->setAttribute('usertime' => $alltime[1]);
-    $processing->setAttribute('systime' =>  $alltime[2]);
-    $engine->appendChild($processing);
-
-    $header->appendChild($engine);
 
     my $lexicon = $doc->createElement('lexicon');
     $lexicon->setAttribute('version' => $version);

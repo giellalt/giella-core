@@ -1285,7 +1285,7 @@ sub make_truefalsesummary {
     }
 
     my $averageposition = $doc->createElement('averageposition');
-    $averageposition->appendTextNode(sprintf("Average: %.2f\n", $total/ scalar(@positions)));
+    $averageposition->appendTextNode(sprintf("%.2f\n", $total/ scalar(@positions)));
     $truefalsesummary->appendChild($averageposition);
 
     return $truefalsesummary;

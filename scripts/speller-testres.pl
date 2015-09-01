@@ -416,7 +416,6 @@ sub read_puki {
     print STDERR "\n";
 }
 
-
 sub read_polderland {
 
     print STDERR "$0: Reading Polderland output from $output\n";
@@ -911,8 +910,6 @@ sub make_suggestion_position {
             $sugg_count = scalar @{ $rec->{'sugg'}};
         }
         $suggestions_elt->setAttribute('count' => $sugg_count);
-        my $position = $doc->createElement('position');
-        my $pos=0;
         my $near_miss_count = 0;
         if ($rec->{'suggnr'}) {
             $near_miss_count = $rec->{'suggnr'};
@@ -925,7 +922,7 @@ sub make_suggestion_position {
                 @numbers =  @{$rec->{'num'}};
             }
             for my $sugg (@suggestions) {
-                if ( $sugg) {
+                if ($sugg) {
                     my $suggestion = $doc->createElement('suggestion');
                     $suggestion->appendTextNode($sugg);
                     if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
@@ -944,18 +941,20 @@ sub make_suggestion_position {
                     $suggestions_elt->appendChild($suggestion);
                 }
             }
-            my $i=0;
+
             if ($rec->{'expected'}) {
-                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) {
+                my $i=0;
+                while ($suggestions[$i]) {
+                    if ($rec->{'expected'} eq $suggestions[$i]) {
+                        my $position = $doc->createElement('position');
+                        $position->appendTextNode($i + 1);
+                        $word->appendChild($position);
+                        last;
+                    }
                     $i++;
-                }
-                if ($suggestions[$i]) {
-                    $pos = $i+1;
                 }
             }
         }
-        $position->appendTextNode($pos);
-        $word->appendChild($position);
         $word->appendChild($suggestions_elt);
     }
 }

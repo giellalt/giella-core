@@ -95,8 +95,14 @@ accuracy {
 }
 
 truefalsesummary {
+    margin-top: 1em;
     margin-bottom: 1em;
     display: block ;
+}
+
+averageposition::before {
+    content: 'Average suggestion position: ' ;
+    display: inline-block ;
 }
 
 suggestionsummary {

@@ -139,6 +139,25 @@ if ( $engine eq "mw") {
     exit;
 }
 
+# Get version info if it's available
+my $rec = $originals[0];
+if ($rec->{'orig'} eq "nuvviD" || $rec->{'orig'} eq "nuvviDspeller") {
+#        cluck "INFO: nuvviDspeller found.\n";
+    shift @originals;
+    if ($rec->{'sugg'}) {
+#            cluck "INFO: nuvviDspeller contains suggestions.\n";
+        my @suggestions = @{$rec->{'sugg'}};
+        for my $sugg (@suggestions) {
+#                print "SUGG $sugg\n";
+            if ($sugg && $sugg =~ /[0-9]/) {
+                $version = $sugg;
+#                    cluck "INFO: Version string is: $version\n";
+                last;
+            }
+        }
+    }
+}
+
 if ($print_xml) {
     print_xml_output();
 } else {
@@ -1205,25 +1224,6 @@ sub make_header {
 
 sub make_lexicon {
     my ($originals_ref, $doc) = @_;
-
-    # Get version info if it's available
-    my $rec = ${$originals_ref}[0];
-    if ($rec->{'orig'} eq "nuvviD" || $rec->{'orig'} eq "nuvviDspeller") {
-#        cluck "INFO: nuvviDspeller found.\n";
-        shift @{$originals_ref};
-        if ($rec->{'sugg'}) {
-#            cluck "INFO: nuvviDspeller contains suggestions.\n";
-            my @suggestions = @{$rec->{'sugg'}};
-            for my $sugg (@suggestions) {
-#                print "SUGG $sugg\n";
-                if ($sugg && $sugg =~ /[0-9]/) {
-                    $version = $sugg;
-#                    cluck "INFO: Version string is: $version\n";
-                    last;
-                }
-            }
-        }
-    }
 
     my $lexicon = $doc->createElement('lexicon');
     $lexicon->setAttribute('version' => $version);

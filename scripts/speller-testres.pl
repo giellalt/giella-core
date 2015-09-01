@@ -179,7 +179,7 @@ sub read_applescript {
     my $i=0;
     my @suggestions;
     my @numbers;
-    while(<FH>) {
+    while (<FH>) {
         chomp;
 
         if (/Prompt\:/) {
@@ -195,7 +195,7 @@ sub read_applescript {
         # First search the output word from the input list.
         my $j = $i;
 #        print "$originals[$j]{'orig'}\n";
-        while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+        while ($originals[$j] && $originals[$j]{'orig'} ne $orig) {
             $j++;
         }
 
@@ -236,7 +236,7 @@ sub read_hunspell {
     my $error;
     #my @numbers;
     my @tokens;
-    while(<FH>) {
+    while (<FH>) {
         chomp;
         # An empty line marks the beginning of next input
         if (/^\s*$/) {
@@ -332,7 +332,7 @@ sub read_puki {
     my $error;
     my @numbers = ();
     my @suggestions = ();
-    while(<FH>) {
+    while (<FH>) {
         my $line = $_ ;
         chomp $line ;
         my $root;
@@ -423,7 +423,7 @@ sub read_polderland {
     open(FH, $output) or die "Could not open file $output. $!";
 
     # Read until "Prompt"
-    while(<FH>) {
+    while (<FH>) {
         last if (/Prompt/);
     }
 
@@ -450,7 +450,7 @@ sub read_polderland {
             confess "Probably wrong format, start again with --mw\n";
         }
 
-        while($originals[$i] && $originals[$i]{'orig'} ne $orig) {
+        while ($originals[$i] && $originals[$i]{'orig'} ne $orig) {
             #print STDERR "$0: Input and output mismatch, removing $originals[$i]{'orig'}.\n";
             splice(@originals,$i,1);
         }
@@ -458,7 +458,7 @@ sub read_polderland {
         my @suggestions;
         my @numbers;
 
-        while(<FH>) {
+        while (<FH>) {
 
             $line = $_;
             next if ($reading && /Getting suggestions/);
@@ -497,7 +497,7 @@ sub read_polderland {
                 # Some simple adjustments to the input and output lists.
                 # First search the output word in the input list.
                 my $j = $i;
-                while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+                while ($originals[$j] && $originals[$j]{'orig'} ne $orig) {
                     $j++;
                 }
 
@@ -548,7 +548,7 @@ sub read_polderland {
             }
         }
         $i++;
-        while($originals[$i]) {
+        while ($originals[$i]) {
             $originals[$i]{'error'} = "SplCor"; $i++;
         }
     }
@@ -571,7 +571,7 @@ sub read_voikko {
     my @numbers;
     my $num = 0;
 
-    while(<FH>) {
+    while (<FH>) {
 
         $line = $_;
         chomp($line);
@@ -597,7 +597,7 @@ sub read_voikko {
             # Some simple adjustments to the input and output lists.
             # First search the output word in the input list.
             my $j = $i;
-            while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+            while ($originals[$j] && $originals[$j]{'orig'} ne $orig) {
                 $j++;
             }
 
@@ -641,7 +641,10 @@ sub read_voikko {
         }
     }
     $i++;
-    while($originals[$i]) { $originals[$i]{'error'} = "SplCor"; $i++; }
+    while ($originals[$i]) {
+        $originals[$i]{'error'} = "SplCor";
+        $i++;
+    }
 }
 
 sub read_hfst {
@@ -655,7 +658,7 @@ sub read_hfst {
     my $i=0;
 #    my $hfst-ospell-version = <FH>; # Only if we know we have a real lex version info string!
 
-    while(<FH>) {
+    while (<FH>) {
         # Typical input:
         #
         # Unable to correct "beena"!
@@ -727,7 +730,7 @@ sub read_hfst {
 #        print "$originals[$j]{'orig'}\n";
 #        print "-----------\n";
 
-        while($originals[$j] && $originals[$j]{'orig'} ne $orig) {
+        while ($originals[$j] && $originals[$j]{'orig'} ne $orig) {
             $j++;
         }
 
@@ -767,7 +770,7 @@ sub read_typos {
     print STDERR "Reading typos from $input\n";
     open(FH, "<$input") or die "Could not open $input";
 
-    while(<FH>) {
+    while (<FH>) {
         chomp;
         next if (/^[\#\!]/);
         next if (/^\s*$/);
@@ -943,7 +946,9 @@ sub make_suggestion_position {
             }
             my $i=0;
             if ($rec->{'expected'}) {
-                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) { $i++; }
+                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) {
+                    $i++;
+                }
                 if ($suggestions[$i]) {
                     $pos = $i+1;
                 }
@@ -1326,7 +1331,9 @@ sub update_suggestion {
             my $i=0;
             my @suggestions = @{$rec->{'sugg'}};
             if ($rec->{'expected'}) {
-                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) { $i++; }
+                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) {
+                    $i++;
+                }
                 if ($suggestions[$i]) {
                     $pos = $i+1;
                     if ($pos < 6) {

@@ -904,23 +904,37 @@ sub make_suggestion_position {
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
-        my $suggestions_elt = $doc->createElement('suggestions');
-        my $sugg_count=0;
-        if ($rec->{'sugg'}) {
-            $sugg_count = scalar @{ $rec->{'sugg'}};
-        }
-        $suggestions_elt->setAttribute('count' => $sugg_count);
-        my $near_miss_count = 0;
-        if ($rec->{'suggnr'}) {
-            $near_miss_count = $rec->{'suggnr'};
-        }
-
         if ($rec->{'sugg'}) {
             my @suggestions = @{$rec->{'sugg'}};
+
+            if ($rec->{'expected'}) {
+                my $i=0;
+                while ($suggestions[$i]) {
+                    if ($rec->{'expected'} eq $suggestions[$i]) {
+                        my $position = $doc->createElement('position');
+                        $position->appendTextNode($i + 1);
+                        $word->appendChild($position);
+                        last;
+                    }
+                    $i++;
+                }
+            }
+
+            my $suggestions_elt = $doc->createElement('suggestions');
+
+            my $sugg_count = scalar @{ $rec->{'sugg'}};
+            $suggestions_elt->setAttribute('count' => $sugg_count);
+
+            my $near_miss_count = 0;
+            if ($rec->{'suggnr'}) {
+                $near_miss_count = $rec->{'suggnr'};
+            }
+
             my @numbers;
             if ($rec->{'num'}) {
                 @numbers =  @{$rec->{'num'}};
             }
+            
             for my $sugg (@suggestions) {
                 if ($sugg) {
                     my $suggestion = $doc->createElement('suggestion');
@@ -942,20 +956,8 @@ sub make_suggestion_position {
                 }
             }
 
-            if ($rec->{'expected'}) {
-                my $i=0;
-                while ($suggestions[$i]) {
-                    if ($rec->{'expected'} eq $suggestions[$i]) {
-                        my $position = $doc->createElement('position');
-                        $position->appendTextNode($i + 1);
-                        $word->appendChild($position);
-                        last;
-                    }
-                    $i++;
-                }
-            }
+            $word->appendChild($suggestions_elt);
         }
-        $word->appendChild($suggestions_elt);
     }
 }
 

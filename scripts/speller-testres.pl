@@ -1277,6 +1277,17 @@ sub make_truefalsesummary {
     $accuracy->appendTextNode(sprintf("%.2f", (get_true_positive($results) + get_true_negative($results))/($total_words)));
     $truefalsesummary->appendChild($accuracy);
 
+
+    my @positions = $results->findnodes('.//position');
+    my $total = 0;
+    for my $position (@positions) {
+        $total += int($position->textContent);
+    }
+
+    my $averageposition = $doc->createElement('averageposition');
+    $averageposition->appendTextNode(sprintf("Average: %.2f\n", $total/ scalar(@positions)));
+    $truefalsesummary->appendChild($averageposition);
+
     return $truefalsesummary;
 }
 

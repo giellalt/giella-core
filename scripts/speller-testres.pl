@@ -267,34 +267,26 @@ sub read_hunspell {
         my $orig;
         my $offset;
         my ($flag, $rest) = split(/ /, $_, 2);
-        READ_OUTPUT: {
-            # Error symbol conversion:
-            if ($flag eq '*') {
-                $error = 'SplCor' ;
-                last READ_OUTPUT;
-            }
-            if ($flag eq '+') {
-                $error = 'SplCor' ;
-                $root = $rest;
-                last READ_OUTPUT;
-            }
-            if ($flag eq '-') {
-                $error = 'SplCor' ;
-                $compound =1;
-                last READ_OUTPUT;
-            }
-            if ($flag eq '#') {
-                $error = 'SplErr' ;
-                ($orig, $offset) = split(/ /, $rest, 2);
-                last READ_OUTPUT;
-            }
-            if ($flag eq '&') {
-                $error = 'SplErr' ;
-                my $sugglist;
-                ($orig, $suggnr, $offset, $sugglist) = split(/ /, $rest, 4);
-                @suggestions = split(/\, /, $sugglist);
-            }
+
+        # Error symbol conversion:
+        if ($flag eq '*') {
+            $error = 'SplCor' ;
+        } elsif ($flag eq '+') {
+            $error = 'SplCor' ;
+            $root = $rest;
+        } elsif ($flag eq '-') {
+            $error = 'SplCor' ;
+            $compound =1;
+        } elsif ($flag eq '#') {
+            $error = 'SplErr' ;
+            ($orig, $offset) = split(/ /, $rest, 2);
+        } elsif ($flag eq '&') {
+            $error = 'SplErr' ;
+            my $sugglist;
+            ($orig, $suggnr, $offset, $sugglist) = split(/ /, $rest, 4);
+            @suggestions = split(/\, /, $sugglist);
         }
+
         # Debug prints
         #print "Flag: $flag\n";
         #print "ERROR: $error\n";

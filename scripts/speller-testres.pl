@@ -863,7 +863,7 @@ sub make_expected {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
-    if ($rec->{'expected'}){
+    if ($rec->{'expected'}) {
         my $expected = $doc->createElement('expected');
         $expected->appendTextNode($rec->{'expected'});
         $word->appendChild($expected);
@@ -904,40 +904,49 @@ sub make_suggestion_position {
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
         my $suggestions_elt = $doc->createElement('suggestions');
         my $sugg_count=0;
-        if ($rec->{'sugg'}) { $sugg_count = scalar @{ $rec->{'sugg'}} };
+        if ($rec->{'sugg'}) {
+            $sugg_count = scalar @{ $rec->{'sugg'}};
+        }
         $suggestions_elt->setAttribute('count' => $sugg_count);
         my $position = $doc->createElement('position');
         my $pos=0;
         my $near_miss_count = 0;
-        if ($rec->{'suggnr'}) { $near_miss_count = $rec->{'suggnr'}; }
-        if ($rec->{'sugg'}) {
+        if ($rec->{'suggnr'}) {
+            $near_miss_count = $rec->{'suggnr'};
+        }
 
+        if ($rec->{'sugg'}) {
             my @suggestions = @{$rec->{'sugg'}};
             my @numbers;
-            if ($rec->{'num'}) { @numbers =  @{$rec->{'num'}}; }
+            if ($rec->{'num'}) {
+                @numbers =  @{$rec->{'num'}};
+            }
             for my $sugg (@suggestions) {
-                next if (! $sugg);
-                my $suggestion = $doc->createElement('suggestion');
-                $suggestion->appendTextNode($sugg);
-                if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
-                    $suggestion->setAttribute('expected' => "yes");
-                }
-                my $num;
-                if (@numbers) {
-                    $num = shift @numbers;
-                    $suggestion->setAttribute('penscore' => $num);
-                }
-                if ($near_miss_count > 0) {
-                    $suggestion->setAttribute('miss' => "yes");
-                    $near_miss_count--;
-                }
+                if ( $sugg) {
+                    my $suggestion = $doc->createElement('suggestion');
+                    $suggestion->appendTextNode($sugg);
+                    if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
+                        $suggestion->setAttribute('expected' => "yes");
+                    }
+                    my $num;
+                    if (@numbers) {
+                        $num = shift @numbers;
+                        $suggestion->setAttribute('penscore' => $num);
+                    }
+                    if ($near_miss_count > 0) {
+                        $suggestion->setAttribute('miss' => "yes");
+                        $near_miss_count--;
+                    }
 
-                $suggestions_elt->appendChild($suggestion);
+                    $suggestions_elt->appendChild($suggestion);
+                }
             }
             my $i=0;
             if ($rec->{'expected'}) {
                 while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) { $i++; }
-                if ($suggestions[$i]) { $pos = $i+1; }
+                if ($suggestions[$i]) {
+                    $pos = $i+1;
+                }
             }
         }
         $position->appendTextNode($pos);
@@ -974,7 +983,7 @@ sub make_bugid {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
-    if ($rec->{'bugID'}){
+    if ($rec->{'bugID'}) {
         #handle_comment would be used here
         my $bugID = $doc->createElement('bug');
         $bugID->appendTextNode($rec->{'bugID'});
@@ -988,7 +997,7 @@ sub make_comment {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
-    if ($rec->{'comment'}){
+    if ($rec->{'comment'}) {
         my ($errorinfo, $origfile) = ($rec->{'comment'} =~ m/errorinfo=(.+) file: (.*)/);
         make_errors($errorinfo, $word, $doc);
         make_origfile($origfile, $word, $doc);
@@ -1054,7 +1063,9 @@ sub make_word {
     my ($rec, $results, $doc) = @_;
 
     my $word = $doc->createElement('word');
-    if ($rec->{'forced'}){ $word->setAttribute('forced' => "yes"); }
+    if ($rec->{'forced'}){
+        $word->setAttribute('forced' => "yes");
+    }
 
     make_original($rec, $word, $doc);
     make_speller($rec, $word, $doc);
@@ -1303,7 +1314,9 @@ sub update_suggestion {
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
 
         my $sugg_count=0;
-        if ($rec->{'sugg'}) { $sugg_count = scalar @{ $rec->{'sugg'}} };
+        if ($rec->{'sugg'}) {
+            $sugg_count = scalar @{ $rec->{'sugg'}};
+        }
         if ($sugg_count == 0 && $rec->{'expected'}) {
             set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 7);
         }

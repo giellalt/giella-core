@@ -847,10 +847,13 @@ sub print_xml_output {
 
     my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
 
-    my $spelltestresult = $doc->createElement('spelltestresult');
 
-    $spelltestresult->appendChild(make_header(\@originals, $doc));
-    $spelltestresult->appendChild(make_results(\@originals, $doc));
+
+    my $spelltestresult = $doc->createElement('spelltestresult');
+    my $results = make_results(\@originals, $doc);
+    $spelltestresult->appendChild($results);
+
+    $spelltestresult->insertBefore(make_header(\@originals, $results, $doc), $results);
 
     $doc->setDocumentElement($spelltestresult);
     $doc->toFile($print_xml, 1);
@@ -1130,100 +1133,29 @@ sub make_results {
     return $results;
 }
 
-sub update_original {
-    my ($rec) = @_;
-
-    if ($rec->{'orig'}) {
-        if ($rec->{'expected'}) {
-            $original_error++;
-        } else {
-            $original_correct++;
-        }
-    }
-}
-
-sub update_speller {
-    my ($rec) = @_;
-
-    if ($rec->{'error'}) {
-        if ($rec->{'error'} eq "SplErr") {
-            $speller_error++;
-        }
-        if ($rec->{'error'} eq "SplCor") {
-            $speller_correct++;
-        }
-    }
-}
-
-sub update_true_positive {
-    my ($rec) = @_;
-
-    if ($rec->{'orig'} && $rec->{'expected'} &&
-        $rec->{'error'} && $rec->{'error'} eq "SplErr") {
-        $true_positive++;
-    }
-}
-
-sub update_true_negative {
-    my ($rec) = @_;
-
-    if ($rec->{'orig'} && !$rec->{'expected'} &&
-        $rec->{'error'} && $rec->{'error'} eq "SplCor") {
-        $true_negative++;
-    }
-}
-
-sub update_false_positive {
-    my ($rec) = @_;
-
-    if ($rec->{'orig'} && !$rec->{'expected'} &&
-        $rec->{'error'} && $rec->{'error'} eq "SplErr") {
-        $false_positive++;
-    }
-}
-
-sub update_false_negative {
-    my ($rec) = @_;
-
-    if ($rec->{'orig'} && $rec->{'expected'} &&
-        $rec->{'error'} && $rec->{'error'} eq "SplCor") {
-        $false_negative++;
-    }
-}
-
-sub update_flagged_words {
-    my ($rec) = @_;
-
-    if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
-        $flagged_words++;
-    }
-}
-
-sub update_accepted_words {
-    my ($rec) = @_;
-
-    if ($rec->{'error'} && $rec->{'error'} eq "SplCor") {
-        $accepted_words++;
-    }
-}
-
 sub make_header {
-    my ($originals_ref, $doc) = @_;
+    my ($originals_ref, $results, $doc) = @_;
 
     my $header = $doc->createElement('header');
 
     $header->appendChild(make_engine($doc));
-    $header->appendChild(make_lexicon($originals_ref, $doc));
-    make_document($header, $doc);
-    make_timestamp($header, $doc);
-    make_truefalsesummary($originals_ref, $header, $doc);
+    $header->appendChild(make_lexicon($doc));
+    $header->appendChild(make_document($doc));
+    if (get_lang()) {
+        $header->appendChild(make_lang($doc));
+    }
+    if (get_testtype()) {
+        $header->appendChild(make_testtype($doc));
+    }
+    $header->appendChild(make_timestamp($doc));
+    $header->appendChild(make_truefalsesummary($results, $doc));
     make_suggestionsummary($originals_ref, $header, $doc);
 
     return $header;
 }
 
 sub make_lexicon {
-    my ($originals_ref, $doc) = @_;
+    my ($doc) = @_;
 
     my $lexicon = $doc->createElement('lexicon');
     $lexicon->setAttribute('version' => $version);
@@ -1252,63 +1184,100 @@ sub make_engine {
     return $engine;
 }
 
-sub calculate_truefalsesummary {
-    my ($originals_ref) = @_;
+sub get_flagged_words {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//speller[@status="error"]')});
+}
 
-    for my $rec (@{$originals_ref}) {
-        update_original($rec);
-        update_speller($rec);
-        update_true_positive($rec);
-        update_true_negative($rec);
-        update_false_positive($rec);
-        update_false_negative($rec);
-        update_flagged_words($rec);
-        update_accepted_words($rec);
-    }
+sub get_accepted_words {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//speller[@status="correct"]')});
+}
+
+sub get_original_correct {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//word[original and not(expected)]')});
+}
+
+sub get_original_error {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//word[original and expected]')});
+}
+
+sub get_speller_correct {
+    # same as accepted words
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//speller[@status="correct"]')});
+}
+
+sub get_speller_error {
+    # same as flagged words
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//speller[@status="error"]')});
+}
+
+sub get_true_positive {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//word[original and expected and speller[@status="error"]]')});
+}
+
+sub get_false_positive {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//word[original and not(expected) and speller[@status="error"]]')});
+}
+
+sub get_true_negative {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//word[original and not(expected) and speller[@status="correct"]]')});
+}
+
+sub get_false_negative {
+    my ($results) = @_;
+    return scalar(@{$results->findnodes('.//word[original and expected and speller[@status="correct"]]')});
 }
 
 sub make_truefalsesummary {
-    my ($originals_ref, $header, $doc) = @_;
-
-    calculate_truefalsesummary($originals_ref);
+    my ($results, $doc) = @_;
 
     my $truefalsesummary = $doc->createElement('truefalsesummary');
-    $truefalsesummary->setAttribute('wordcount' => $flagged_words + $accepted_words);
+
+    my $total_words = get_flagged_words($results) + get_accepted_words($results);
+    $truefalsesummary->setAttribute('wordcount' => $total_words);
 
     my $original = $doc->createElement('original');
-    $original->setAttribute('correct' => $original_correct);
-    $original->setAttribute('error' => $original_error);
+    $original->setAttribute('correct' => get_original_correct($results));
+    $original->setAttribute('error' => get_original_error($results));
     $truefalsesummary->appendChild($original);
 
     my $speller = $doc->createElement('speller');
-    $speller->setAttribute('correct' => $speller_correct);
-    $speller->setAttribute('error' => $speller_error);
+    $speller->setAttribute('correct' => get_speller_correct($results));
+    $speller->setAttribute('error' => get_speller_error($results));
     $truefalsesummary->appendChild($speller);
 
     my $positive = $doc->createElement('positive');
-    $positive->setAttribute('true' => $true_positive);
-    $positive->setAttribute('false' => $false_positive);
+    $positive->setAttribute('true' => get_true_positive($results));
+    $positive->setAttribute('false' => get_false_positive($results));
     $truefalsesummary->appendChild($positive);
 
     my $negative = $doc->createElement('negative');
-    $negative->setAttribute('true' => $true_negative);
-    $negative->setAttribute('false' => $false_negative);
+    $negative->setAttribute('true' => get_true_negative($results));
+    $negative->setAttribute('false' => get_false_negative($results));
     $truefalsesummary->appendChild($negative);
 
     my $precision = $doc->createElement('precision');
-    $precision->appendTextNode(sprintf("%.2f", $true_positive/($true_positive + $false_positive)));
+    $precision->appendTextNode(sprintf("%.2f", get_true_positive($results)/(get_true_positive($results) + get_false_positive($results))));
     $truefalsesummary->appendChild($precision);
 
     my $recall = $doc->createElement('recall');
-    $recall->appendTextNode(sprintf("%.2f", $true_positive/($true_positive + $false_negative)));
+    $recall->appendTextNode(sprintf("%.2f", get_true_positive($results)/(get_true_positive($results) + get_false_negative($results))));
     $truefalsesummary->appendChild($recall);
 
 
     my $accuracy = $doc->createElement('accuracy');
-    $accuracy->appendTextNode(sprintf("%.2f", ($true_positive + $true_negative)/($flagged_words + $accepted_words)));
+    $accuracy->appendTextNode(sprintf("%.2f", (get_true_positive($results) + get_true_negative($results))/($total_words)));
     $truefalsesummary->appendChild($accuracy);
 
-    $header->appendChild($truefalsesummary);
+    return $truefalsesummary;
 }
 
 sub calculate_suggestionsummary {
@@ -1405,35 +1374,58 @@ sub make_suggestionsummary {
     $header->appendChild($suggestionsummary);
 }
 
+sub get_document {
+    if (!$document) {
+        $document = basename($input);
+    }
+
+    return $document;
+}
+
+sub get_lang {
+    my @doccu2 = split(/\./, get_document());
+    my @doccu1 = split(/-/, $doccu2[0]);
+
+    return $doccu1[2];
+}
+
+sub get_testtype {
+    my @doccu2 = split(/\./, get_document());
+    my @doccu1 = split(/-/, $doccu2[0]);
+
+    return $doccu1[1];
+}
+
+sub make_lang {
+    my ($doc) = @_;
+
+    my $lang = $doc->createElement('lang');
+    $lang->appendTextNode(get_lang());
+
+    return $lang;
+}
+
+sub make_testtype {
+    my ($doc) = @_;
+
+    my $testtype = $doc->createElement('testtype');
+    $testtype->appendTextNode(get_testtype());
+
+    return $testtype;
+}
+
 sub make_document {
-    my ($header, $doc) = @_;
+    my ($doc) = @_;
 
     # what was the checked document
     my $docu = $doc->createElement('document');
-    if (!$document) {
-        $document=basename($input);
-    }
-    $docu->appendTextNode($document);
-    $header->appendChild($docu);
+    $docu->appendTextNode(get_document());
 
-    my @doccu2 = split(/\./, $document);
-    my @doccu1 = split(/-/, $doccu2[0]);
-
-    if ($doccu1[2]) {
-        my $lang = $doc->createElement('lang');
-        $lang->appendTextNode($doccu1[2]);
-        $header->appendChild($lang);
-    }
-
-    if ($doccu1[1]) {
-        my $testtype = $doc->createElement('testtype');
-        $testtype->appendTextNode($doccu1[1]);
-        $header->appendChild($testtype);
-    }
+    return $docu;
 }
 
 sub make_timestamp {
-    my ($header, $doc) = @_;
+    my ($doc) = @_;
 
     # The date is the timestamp of speller output file if not given.
     my $timestamp = $doc->createElement('timestamp');
@@ -1442,7 +1434,8 @@ sub make_timestamp {
         #print "file $input updated at $date\n";
     }
     $timestamp->appendTextNode($date);
-    $header->appendChild($timestamp);
+
+    return $timestamp;
 }
 
 sub print_output {

@@ -896,8 +896,8 @@ sub make_speller {
     }
 }
 
-sub make_suggestion_position {
-    # Make the xml elements position and suggestions
+sub make_position {
+    # Make the xml element position
     # rec is a hash element representing one checked word
     # word will be the parent element of original
     # doc is a XML::LibXML::Document
@@ -918,6 +918,18 @@ sub make_suggestion_position {
                 $i++;
             }
         }
+    }
+}
+
+sub make_suggestions {
+    # Make the xml elements position and suggestions
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'error'} && $rec->{'error'} eq "SplErr" && $rec->{'sugg'}) {
+        my @suggestions = @{$rec->{'sugg'}};
 
         my $suggestions_elt = $doc->createElement('suggestions');
 
@@ -1074,7 +1086,8 @@ sub make_word {
     make_original($rec, $word, $doc);
     make_speller($rec, $word, $doc);
     make_expected($rec, $word, $doc);
-    make_suggestion_position($rec, $word, $doc);
+    make_position($rec, $word, $doc);
+    make_suggestions($rec, $word, $doc);
     make_tokens($rec, $word, $doc);
     make_bugid($rec, $word, $doc);
     make_comment($rec, $word, $doc);

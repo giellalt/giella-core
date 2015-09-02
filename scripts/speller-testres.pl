@@ -1179,6 +1179,9 @@ sub make_engine {
     while (my ($key, $value) = each(%$time_hash)) {
         $processing->setAttribute($key => $value);
     }
+
+    $processing->setAttribute('words_per_sec' => sprintf("%.2f", scalar(@originals) / $time_hash->{'realtime'}));
+
     $engine->appendChild($processing);
 
     return $engine;

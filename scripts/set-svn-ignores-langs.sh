@@ -60,6 +60,9 @@ build
 *.html
 *.pc" $1
 
+# Set the svn:ignore prop on the devtools dir:
+$svnignore "speller*.txt" $1/devtools
+
 # Set the svn:ignore prop on the doc dir:
 $svnignore "$mkfiles
 build" $1/doc

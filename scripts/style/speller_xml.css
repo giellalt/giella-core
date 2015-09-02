@@ -109,16 +109,18 @@ suggestionsummary {
     margin-top: 1em ;
     margin-bottom: 1em ;
     display: block ;
+    font-family: Monaco, monospace ;
+    font-size: 0.8em ;
 }
 
 suggestionsummary::before {
     display: block ;
-    content: 'Suggestion summary (edit dist 1, 2, 3+):' ;
+    content: 'Suggestion summary (edit dist   1,   2, 3+):' ;
 }
 
 sugg1::before {
     display: inline-block ;
-    content: 'Suggestions in 1st position: ' ;
+    content: 'Suggestions in 1st position:  ' ;
 }
 sugg1 {display: block}
 sugg1::after {
@@ -128,7 +130,7 @@ sugg1::after {
 
 sugg2::before {
     display: inline-block ;
-    content: 'Suggestions in 2nd position: ' ;
+    content: 'Suggestions in 2nd position:  ' ;
 }
 sugg2 {display: block}
 sugg2::after {
@@ -138,7 +140,7 @@ sugg2::after {
 
 sugg3::before {
     display: inline-block ;
-    content: 'Suggestions in 3rd position: ' ;
+    content: 'Suggestions in 3rd position:  ' ;
 }
 sugg3 {display: block}
 sugg3::after {
@@ -148,7 +150,7 @@ sugg3::after {
 
 sugg4::before {
     display: inline-block ;
-    content: 'Suggestions in 4th position: ' ;
+    content: 'Suggestions in 4th position:  ' ;
 }
 sugg4 {display: block}
 sugg4::after {
@@ -158,7 +160,7 @@ sugg4::after {
 
 sugg5::before {
     display: inline-block ;
-    content: 'Suggestions in 5th position: ' ;
+    content: 'Suggestions in 5th position:  ' ;
 }
 sugg5 {display: block}
 sugg5::after {
@@ -168,7 +170,7 @@ sugg5::after {
 
 suggbelow5::before {
     display: inline-block ;
-    content: 'Suggestions below 5th position: ' ;
+    content: 'Suggestions << 5th position:  ' ;
 }
 suggbelow5 {display: block}
 suggbelow5::after {
@@ -178,7 +180,7 @@ suggbelow5::after {
 
 badsuggs::before {
     display: inline-block ;
-    content: 'Only wrong suggestions: ' ;
+    content: 'Only wrong suggestions:       ' ;
 }
 badsuggs {display: block}
 badsuggs::after {
@@ -188,7 +190,7 @@ badsuggs::after {
 
 nosugg::before {
     display: inline-block ;
-    content: 'No suggestions: ' ;
+    content: 'No suggestions at all:        ' ;
 }
 nosugg {display: block}
 nosugg::after {

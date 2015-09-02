@@ -1149,7 +1149,7 @@ sub make_header {
     }
     $header->appendChild(make_timestamp($doc));
     $header->appendChild(make_truefalsesummary($results, $doc));
-    make_suggestionsummary($originals_ref, $header, $doc);
+    $header->appendChild(make_suggestionsummary($results, $doc));
 
     return $header;
 }
@@ -1291,98 +1291,54 @@ sub make_truefalsesummary {
     return $truefalsesummary;
 }
 
-sub calculate_suggestionsummary {
-    my ($originals_ref) = @_;
-
-    for my $rec (@{$originals_ref}) {
-        update_suggestion($rec);
-    }
-}
-
-sub set_sugg {
-    my ($edit_dist, $sugg_pos) = @_;
-
-    if ($edit_dist == 1) {
-        $sugg[$sugg_pos][0]++;
-    } elsif ($edit_dist == 2) {
-        $sugg[$sugg_pos][1]++;
-    } elsif ($edit_dist > 2) {
-        $sugg[$sugg_pos][2]++;
-    }
-}
-
-sub update_suggestion {
-    my ($rec) = @_;
-
-    if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
-
-        my $sugg_count=0;
-        if ($rec->{'sugg'}) {
-            $sugg_count = scalar @{ $rec->{'sugg'}};
-        }
-        if ($sugg_count == 0 && $rec->{'expected'}) {
-            set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 7);
-        }
-        my $pos=0;
-        if ($rec->{'sugg'}) {
-
-            my $i=0;
-            my @suggestions = @{$rec->{'sugg'}};
-            if ($rec->{'expected'}) {
-                while ($suggestions[$i] && $rec->{'expected'} ne $suggestions[$i]) {
-                    $i++;
-                }
-                if ($suggestions[$i]) {
-                    $pos = $i+1;
-                    if ($pos < 6) {
-                        set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), $i);
-                    } elsif ($pos > 5) {
-                        set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 5);
-                    }
-                } else {
-                    set_sugg(distance($rec->{'orig'}, $rec->{'expected'}, {-output=>'distance'}), 6);
-                }
-            }
-        }
-    }
-}
-
 sub make_suggestionsummary {
-    my ($originals_ref, $header, $doc) = @_;
-
-    calculate_suggestionsummary($originals_ref);
+    my ($results, $doc) = @_;
 
     my $suggestionsummary = $doc->createElement('suggestionsummary');
 
-    my $i = 0;
-    while ($i < 8) {
-        my $sugg;
-
-        if ($i == 7) {
-            $sugg = $doc->createElement('nosugg');
-        } elsif ($i == 6) {
-            $sugg = $doc->createElement('badsuggs');
-        } elsif ($i == 5) {
-            $sugg = $doc->createElement('suggbelow5');
-        } else {
-            $sugg = $doc->createElement('sugg' . ($i + 1));
+    my $x;
+    my $y;
+    my @editdistx;
+    my $sugg;
+    for ($x = 1; $x < 6; $x++) {
+        $sugg = $doc->createElement("sugg$x");
+        for ($y = 1; $y < 3; $y++) {
+            @editdistx = $results->findnodes(".//word[position/text() = $x and edit_dist/text() = $y]");
+            $sugg->setAttribute("editdist$y" => scalar(@editdistx));
         }
-        my $j = 0;
-        while ($j < 3) {
-            my $name;
-            if ($j == 2) {
-                $name = "editdist3plus";
-            } else {
-                $name = 'editdist' . ($j + 1);
-            }
-            $sugg->setAttribute($name => $sugg[$i][$j] ? $sugg[$i][$j] : 0);
-            $j++;
-        }
+        @editdistx = $results->findnodes(".//word[position/text() = $x and edit_dist/text() >= $y]");
+        $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
         $suggestionsummary->appendChild($sugg);
-        $i++;
     }
 
-    $header->appendChild($suggestionsummary);
+    $sugg = $doc->createElement("suggbelow5");
+    for ($y = 1; $y < 3; $y++) {
+        @editdistx = $results->findnodes(".//word[position/text() >= $x and edit_dist/text() = $y]");
+        $sugg->setAttribute("editdist$y" => scalar(@editdistx));
+    }
+    @editdistx = $results->findnodes(".//word[position/text() >= $x and edit_dist/text() >= $y]");
+    $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
+    $suggestionsummary->appendChild($sugg);
+
+    $sugg = $doc->createElement("badsuggs");
+    for ($y = 1; $y < 3; $y++) {
+        @editdistx = $results->findnodes(".//word[not(position) and suggestions and edit_dist/text() = $y]");
+        $sugg->setAttribute("editdist$y" => scalar(@editdistx));
+    }
+    @editdistx = $results->findnodes(".//word[not(position) and suggestions and edit_dist/text() >= $y]");
+    $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
+    $suggestionsummary->appendChild($sugg);
+
+    $sugg = $doc->createElement("nosugg");
+    for ($y = 1; $y < 3; $y++) {
+        @editdistx = $results->findnodes(".//word[not(position) and not(suggestions) and edit_dist/text() = $y]");
+        $sugg->setAttribute("editdist$y" => scalar(@editdistx));
+    }
+    @editdistx = $results->findnodes(".//word[not(position) and not(suggestions) and edit_dist/text() >= $y]");
+    $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
+    $suggestionsummary->appendChild($sugg);
+
+    return $suggestionsummary;
 }
 
 sub get_document {

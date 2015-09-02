@@ -1378,8 +1378,8 @@ sub make_suggestionsummary {
 
     $suggestionsummary->appendChild(make_averageposition($results, $doc));
 
-    $suggestionsummary->appendChild(make_allpos_percent($results, $doc));
     $suggestionsummary->appendChild(make_top5pos_percent($results, $doc));
+    $suggestionsummary->appendChild(make_allpos_percent($results, $doc));
     $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));
 
     return $suggestionsummary;

@@ -44,7 +44,6 @@ my $toolversion;
 my $corpusversion;
 my $memoryuse = "";
 my $timeuse   = "";
-my @alltime ;
 my $original_correct = 0;
 my $original_error = 0;
 my $speller_correct = 0;
@@ -110,9 +109,6 @@ if(! @originals) {
 $toolversion =~ s/\n/, /g;
 $toolversion =~ s/^, //;
 
-# Convert the system time input data to usable strings in seconds:
-@alltime = convert_systime( $timeuse );
-
 if ( $engine eq "mw") {
     $input_type="mw";
     read_applescript();
@@ -165,19 +161,21 @@ if ($print_xml) {
 }
 
 sub convert_systime {
-    my $times = shift(@_);
-    if ( $times ) {
-        my @alltimes = split /\n/, $times;
-        my @real = grep /^real/, @alltimes;
-        my @user = grep /^user/, @alltimes;
-        my @sys  = grep /^sys/,  @alltimes;
-        my $real = convert_systime_to_seconds( @real );
-        my $user = convert_systime_to_seconds( @user );
-        my $sys  = convert_systime_to_seconds( @sys  );
-        return ($real, $user, $sys);
-    } else {
-        return ("", "", "");
+    my %time_hash = ('realtime', '0', 'usertime', '0', 'systime', '0');
+
+    open my $input, '<', $timeuse;
+    while (<$input>) {
+        chomp;
+        if (/^real/) {
+            $time_hash{'realtime'} = convert_systime_to_seconds($_);
+        } elsif (/^user/) {
+            $time_hash{'usertime'} = convert_systime_to_seconds($_);
+        } elsif (/^sys/) {
+            $time_hash{'systime'} = convert_systime_to_seconds($_);
+        }
     }
+
+    return \%time_hash;
 }
 
 sub convert_systime_to_seconds {
@@ -1176,9 +1174,11 @@ sub make_engine {
 
     my $processing = $doc->createElement('processing');
     $processing->setAttribute('memoryusage' => $memoryuse);
-    $processing->setAttribute('realtime' => $alltime[0]);
-    $processing->setAttribute('usertime' => $alltime[1]);
-    $processing->setAttribute('systime' =>  $alltime[2]);
+
+    my $time_hash = convert_systime();
+    while (my ($key, $value) = each(%$time_hash)) {
+        $processing->setAttribute($key => $value);
+    }
     $engine->appendChild($processing);
 
     return $engine;

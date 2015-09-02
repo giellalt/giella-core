@@ -100,11 +100,6 @@ truefalsesummary {
     display: block ;
 }
 
-averageposition::before {
-    content: 'Average suggestion position: ' ;
-    display: inline-block ;
-}
-
 suggestionsummary {
     margin-top: 1em ;
     margin-bottom: 1em ;
@@ -115,7 +110,7 @@ suggestionsummary {
 
 suggestionsummary::before {
     display: block ;
-    content: 'Suggestion summary (edit dist   1,   2, 3+):' ;
+    content: 'Suggestion summary (edit dist 1,   2,   3+):' ;
 }
 
 sugg1::before {
@@ -196,6 +191,27 @@ nosugg {display: block}
 nosugg::after {
     display: inline-block ;
     content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+averageposition::before {
+    content: 'Average correct suggestion position: ' ;
+    display: inline-block ;
+    margin-top: 1em ;
+}
+
+top5pos_percent::before {
+    content: 'Percent of misspellings getting a correct suggestion in top 5: ' ;
+    display: inline-block ;
+}
+
+allpos_percent::before {
+    content: 'Percent of misspellings getting a correct suggestion anywhere: ' ;
+    display: inline-block ;
+}
+
+averagesuggs_with_correct::before {
+    content: 'Average number of suggestions for all correct suggestions: ' ;
+    display: inline-block ;
 }
 
 /* The output of the speller: */

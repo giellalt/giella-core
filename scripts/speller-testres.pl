@@ -1312,6 +1312,51 @@ sub make_suggx {
     return $sugg;
 }
 
+sub make_allpos_percent {
+    my ($results, $doc) = @_;
+
+    my $allpos_percent = $doc->createElement('allpos_percent');
+
+    my @spellererror = $results->findnodes('.//word[speller[@status = "error"]]');
+    my @positions = $results->findnodes('.//position');
+
+    $allpos_percent->appendTextNode(sprintf("%.2f", scalar(@positions) / scalar(@spellererror) * 100));
+
+    return $allpos_percent;
+}
+
+sub make_top5pos_percent {
+    my ($results, $doc) = @_;
+
+    my $top5pos_percent = $doc->createElement('top5pos_percent');
+
+    my @spellererror = $results->findnodes('.//word[speller[@status = "error"]]');
+    my @positions = $results->findnodes('.//position[text() < 6]');
+
+    $top5pos_percent->appendTextNode(sprintf("%.2f", scalar(@positions) / scalar(@spellererror) * 100));
+
+    return $top5pos_percent;
+}
+
+sub make_averagesuggs_with_correct {
+    my ($results, $doc) = @_;
+
+    my $top5pos_percent = $doc->createElement('averagesuggs_with_correct');
+
+    my $nodes = $results->findnodes('.//word[position and suggestions]');
+
+    my $total = 0;
+    for my $node ($nodes->get_nodelist) {
+        for ($node->findnodes('.//suggestion')->size) {
+            $total += $_;
+        }
+    }
+
+    $top5pos_percent->appendTextNode(sprintf("%.2f", $total / scalar($nodes->get_nodelist)));
+
+    return $top5pos_percent;
+}
+
 sub make_suggestionsummary {
     my ($results, $doc) = @_;
 
@@ -1329,6 +1374,10 @@ sub make_suggestionsummary {
     $suggestionsummary->appendChild(make_suggx("nosugg", "not(position) and not(suggestions)", $results, $doc));
 
     $suggestionsummary->appendChild(make_averageposition($results, $doc));
+
+    $suggestionsummary->appendChild(make_allpos_percent($results, $doc));
+    $suggestionsummary->appendChild(make_top5pos_percent($results, $doc));
+    $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));
 
     return $suggestionsummary;
 }

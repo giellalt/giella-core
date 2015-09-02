@@ -1277,6 +1277,11 @@ sub make_truefalsesummary {
     $accuracy->appendTextNode(sprintf("%.2f", (get_true_positive($results) + get_true_negative($results))/($total_words)));
     $truefalsesummary->appendChild($accuracy);
 
+    return $truefalsesummary;
+}
+
+sub make_averageposition {
+    my ($results, $doc) = @_;
 
     my @positions = $results->findnodes('.//position');
     my $total = 0;
@@ -1285,10 +1290,26 @@ sub make_truefalsesummary {
     }
 
     my $averageposition = $doc->createElement('averageposition');
-    $averageposition->appendTextNode(sprintf("%.2f\n", $total/ scalar(@positions)));
-    $truefalsesummary->appendChild($averageposition);
+    $averageposition->appendTextNode(sprintf("%.2f", $total / scalar(@positions)));
 
-    return $truefalsesummary;
+    return $averageposition;
+}
+
+sub make_suggx {
+    my ($suggname, $queryx, $results, $doc) = @_;
+
+    my $y;
+    my @editdistx;
+
+    my $sugg = $doc->createElement($suggname);
+    for ($y = 1; $y < 3; $y++) {
+        @editdistx = $results->findnodes(".//word[$queryx and edit_dist/text() = $y]");
+        $sugg->setAttribute("editdist$y" => scalar(@editdistx));
+    }
+    @editdistx = $results->findnodes(".//word[$queryx and edit_dist/text() >= $y]");
+    $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
+
+    return $sugg;
 }
 
 sub make_suggestionsummary {
@@ -1297,46 +1318,17 @@ sub make_suggestionsummary {
     my $suggestionsummary = $doc->createElement('suggestionsummary');
 
     my $x;
-    my $y;
-    my @editdistx;
-    my $sugg;
     for ($x = 1; $x < 6; $x++) {
-        $sugg = $doc->createElement("sugg$x");
-        for ($y = 1; $y < 3; $y++) {
-            @editdistx = $results->findnodes(".//word[position/text() = $x and edit_dist/text() = $y]");
-            $sugg->setAttribute("editdist$y" => scalar(@editdistx));
-        }
-        @editdistx = $results->findnodes(".//word[position/text() = $x and edit_dist/text() >= $y]");
-        $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
-        $suggestionsummary->appendChild($sugg);
+        $suggestionsummary->appendChild(make_suggx("sugg$x", "position/text() = $x", $results, $doc));
     }
 
-    $sugg = $doc->createElement("suggbelow5");
-    for ($y = 1; $y < 3; $y++) {
-        @editdistx = $results->findnodes(".//word[position/text() >= $x and edit_dist/text() = $y]");
-        $sugg->setAttribute("editdist$y" => scalar(@editdistx));
-    }
-    @editdistx = $results->findnodes(".//word[position/text() >= $x and edit_dist/text() >= $y]");
-    $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
-    $suggestionsummary->appendChild($sugg);
+    $suggestionsummary->appendChild(make_suggx("suggbelow5", "position/text() >= $x", $results, $doc));
 
-    $sugg = $doc->createElement("badsuggs");
-    for ($y = 1; $y < 3; $y++) {
-        @editdistx = $results->findnodes(".//word[not(position) and suggestions and edit_dist/text() = $y]");
-        $sugg->setAttribute("editdist$y" => scalar(@editdistx));
-    }
-    @editdistx = $results->findnodes(".//word[not(position) and suggestions and edit_dist/text() >= $y]");
-    $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
-    $suggestionsummary->appendChild($sugg);
+    $suggestionsummary->appendChild(make_suggx("badsuggs", "not(position) and suggestions", $results, $doc));
 
-    $sugg = $doc->createElement("nosugg");
-    for ($y = 1; $y < 3; $y++) {
-        @editdistx = $results->findnodes(".//word[not(position) and not(suggestions) and edit_dist/text() = $y]");
-        $sugg->setAttribute("editdist$y" => scalar(@editdistx));
-    }
-    @editdistx = $results->findnodes(".//word[not(position) and not(suggestions) and edit_dist/text() >= $y]");
-    $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
-    $suggestionsummary->appendChild($sugg);
+    $suggestionsummary->appendChild(make_suggx("nosugg", "not(position) and not(suggestions)", $results, $doc));
+
+    $suggestionsummary->appendChild(make_averageposition($results, $doc));
 
     return $suggestionsummary;
 }

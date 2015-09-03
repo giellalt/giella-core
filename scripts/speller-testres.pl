@@ -564,7 +564,7 @@ sub read_voikko {
     print STDERR "$0: Reading Voikko output from $output\n";
     open(FH, $output) or die "Could not open file $output. $!";
 
-    my $i=0;
+    my $i=-1;
     my $line;
 
     my $orig = "";
@@ -587,6 +587,9 @@ sub read_voikko {
 
         if ($line =~ /^W: / || $line =~ /^C: /) {
             #Store the suggestions from the last round.
+            # When the first input word is hit, suggestions will be empty.
+            # There will therefore be no attempt to add suggesitions to
+            # $originals[-1]{'sugg'}
             if (@suggestions) {
                 $originals[$i]{'sugg'} = [ @suggestions ];
                 @suggestions = ();

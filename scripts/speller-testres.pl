@@ -578,15 +578,8 @@ sub read_voikko {
 
     my $index=-1;
     my $line;
-
-    my $orig = "";
-    # variable to check whether the suggestions are already started.
-    # this is because the line "check returns" may be missing.
-    my $reading=0;
-
+    my $orig;
     my @suggestions;
-    my @numbers;
-    my $num = 0;
 
     while (<FH>) {
 

@@ -618,57 +618,8 @@ sub read_voikko {
                 $originals[$index]{'error'}="SplCor";
                 $orig = $line;
             }
-            # Some simple adjustments to the input and output lists.
-            # First search the output word in the input list.
-            my $j = $index;
-            while ($originals[$j] && $originals[$j]{'orig'} ne $orig) {
-                $j++;
-            }
-
-            # If the output word was not found in the input list, ignore it.
-            if (! $originals[$j]) {
-                cluck "WARNING: Output word $orig was not found in the input list.\n";
-                $orig=undef;
-                $index--;
-                next;
-            }
-
-            # If it was found later, mark the intermediate input as correct.
-            elsif($j != $index) {
-                my $k=$j-$index;
-                for (my $p=$index; $p<$j; $p++){
-                    $originals[$p]{'error'}="SplCor";
-                    $originals[$p]{'sugg'}=();
-                    pop @{ $originals[$p]{'sugg'} };
-                    #print STDERR "$0: Removing input word $originals[$p]{'orig'}.\n";
-                }
-                $index=$j;
-            }
-            next;
-        }
-
-        next if (! $orig);
     }
     close(FH);
-    if ($orig) {
-        #Store the suggestions from the last round.
-        if (@suggestions) {
-            $originals[$index]{'sugg'} = [ @suggestions ];
-            $originals[$index]{'num'} = [ @numbers ];
-            $originals[$index]{'error'} = "SplErr";
-            @suggestions = ();
-            pop @suggestions;
-            @numbers = ();
-            pop @numbers;
-        } elsif (! $originals[$index]{'error'}) {
-            $originals[$index]{'error'} = "SplCor";
-        }
-    }
-    $index++;
-    while ($originals[$index]) {
-        $originals[$index]{'error'} = "SplCor";
-        $index++;
-    }
 }
 
 sub read_hfst {

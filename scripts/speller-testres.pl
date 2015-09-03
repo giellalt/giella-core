@@ -564,7 +564,7 @@ sub read_voikko {
     print STDERR "$0: Reading Voikko output from $output\n";
     open(FH, $output) or die "Could not open file $output. $!";
 
-    my $i=-1;
+    my $index=-1;
     my $line;
 
     my $orig = "";
@@ -591,20 +591,20 @@ sub read_voikko {
             # There will therefore be no attempt to add suggesitions to
             # $originals[-1]{'sugg'}
             if (@suggestions) {
-                $originals[$i]{'sugg'} = [ @suggestions ];
+                $originals[$index]{'sugg'} = [ @suggestions ];
                 @suggestions = ();
             }
-            $i++;
+            $index++;
             if ($line =~ s/^W: //) {
-                $originals[$i]{'error'}="SplErr";
+                $originals[$index]{'error'}="SplErr";
                 $orig = $line;
             } elsif ($line =~ s/^C: //) {
-                $originals[$i]{'error'}="SplCor";
+                $originals[$index]{'error'}="SplCor";
                 $orig = $line;
             }
             # Some simple adjustments to the input and output lists.
             # First search the output word in the input list.
-            my $j = $i;
+            my $j = $index;
             while ($originals[$j] && $originals[$j]{'orig'} ne $orig) {
                 $j++;
             }
@@ -613,20 +613,20 @@ sub read_voikko {
             if (! $originals[$j]) {
                 cluck "WARNING: Output word $orig was not found in the input list.\n";
                 $orig=undef;
-                $i--;
+                $index--;
                 next;
             }
 
             # If it was found later, mark the intermediate input as correct.
-            elsif($j != $i) {
-                my $k=$j-$i;
-                for (my $p=$i; $p<$j; $p++){
+            elsif($j != $index) {
+                my $k=$j-$index;
+                for (my $p=$index; $p<$j; $p++){
                     $originals[$p]{'error'}="SplCor";
                     $originals[$p]{'sugg'}=();
                     pop @{ $originals[$p]{'sugg'} };
                     #print STDERR "$0: Removing input word $originals[$p]{'orig'}.\n";
                 }
-                $i=$j;
+                $index=$j;
             }
             next;
         }
@@ -637,21 +637,21 @@ sub read_voikko {
     if ($orig) {
         #Store the suggestions from the last round.
         if (@suggestions) {
-            $originals[$i]{'sugg'} = [ @suggestions ];
-            $originals[$i]{'num'} = [ @numbers ];
-            $originals[$i]{'error'} = "SplErr";
+            $originals[$index]{'sugg'} = [ @suggestions ];
+            $originals[$index]{'num'} = [ @numbers ];
+            $originals[$index]{'error'} = "SplErr";
             @suggestions = ();
             pop @suggestions;
             @numbers = ();
             pop @numbers;
-        } elsif (! $originals[$i]{'error'}) {
-            $originals[$i]{'error'} = "SplCor";
+        } elsif (! $originals[$index]{'error'}) {
+            $originals[$index]{'error'} = "SplCor";
         }
     }
-    $i++;
-    while ($originals[$i]) {
-        $originals[$i]{'error'} = "SplCor";
-        $i++;
+    $index++;
+    while ($originals[$index]) {
+        $originals[$index]{'error'} = "SplCor";
+        $index++;
     }
 }
 

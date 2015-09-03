@@ -198,21 +198,25 @@ averageposition::before {
     display: inline-block ;
     margin-top: 1em ;
 }
+averageposition {display: block ;}
 
 top5pos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion in top 5: ' ;
     display: inline-block ;
 }
+top5pos_percent {display: block ;}
 
 allpos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion anywhere: ' ;
     display: inline-block ;
 }
+allpos_percent {display: block ;}
 
 averagesuggs_with_correct::before {
     content: 'Average number of suggestions for all correct suggestions: ' ;
     display: inline-block ;
 }
+averagesuggs_with_correct {display: block ;}
 
 /* The output of the speller: */
 results {

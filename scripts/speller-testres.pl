@@ -560,6 +560,18 @@ sub read_polderland {
 }
 
 sub read_voikko {
+    # Read output from voikkospell -s
+    #
+    # There are no empty lines in the voikkospell output
+    # If voikkospell recognises an input word, the output is:
+    # C: <recognised_word>
+    # If voikkospell does not recognise the input word, the output is:
+    # W: <unrecognised_word>
+    # S: <sugg1>
+    # S: <sugg2>
+    # S: <sugg3>
+    # S: <sugg4>
+    # S: <sugg5>
 
     print STDERR "$0: Reading Voikko output from $output\n";
     open(FH, $output) or die "Could not open file $output. $!";
@@ -582,18 +594,24 @@ sub read_voikko {
         chomp($line);
 
         if ($line =~ s/^S: //) {
+            # We hit a suggestions from voikkospell
             push(@suggestions, $line);
         };
 
         if ($line =~ /^W: / || $line =~ /^C: /) {
-            #Store the suggestions from the last round.
+            # We hit an input word to voikkospell
+
+            # Store the suggestions belonging to $orig.
             # When the first input word is hit, suggestions will be empty.
-            # There will therefore be no attempt to add suggesitions to
+            # There will therefore be no attempt to add suggestions to
             # $originals[-1]{'sugg'}
             if (@suggestions) {
                 $originals[$index]{'sugg'} = [ @suggestions ];
                 @suggestions = ();
             }
+
+            # Increase the index when hitting an input word to voikkospell
+            # after the suggestions have been added to the previous input word
             $index++;
             if ($line =~ s/^W: //) {
                 $originals[$index]{'error'}="SplErr";

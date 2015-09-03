@@ -596,9 +596,7 @@ sub read_voikko {
         if ($line =~ s/^S: //) {
             # We hit a suggestions from voikkospell
             push(@suggestions, $line);
-        };
-
-        if ($line =~ /^W: / || $line =~ /^C: /) {
+        } elsif ($line =~ /^W: / || $line =~ /^C: /) {
             # We hit an input word to voikkospell
 
             # Store the suggestions belonging to $orig.

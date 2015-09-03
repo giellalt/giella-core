@@ -44,17 +44,6 @@ my $toolversion;
 my $corpusversion;
 my $memoryuse = "";
 my $timeuse   = "";
-my $original_correct = 0;
-my $original_error = 0;
-my $speller_correct = 0;
-my $speller_error = 0;
-my $true_positive = 0;
-my $true_negative = 0;
-my $false_positive = 0;
-my $false_negative = 0;
-my $flagged_words = 0;
-my $accepted_words = 0;
-my @sugg;
 
 use Getopt::Long;
 Getopt::Long::Configure ("bundling");

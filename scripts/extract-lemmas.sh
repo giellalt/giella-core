@@ -16,6 +16,7 @@ function print_usage() {
     echo "  --exclude '(pattern)'  Exclude (egrep) patterns from the lemma list"
     echo "  --include '(pattern)'  Include (egrep) patterns from the lemma list"
     echo "  -k --keep-contlex      Keep the continuation lexicon in the output"
+    echo "  -H --keep-homonyms     Keep homonymy tags to separate such lemmas"
     echo
 }
 
@@ -32,6 +33,8 @@ while test $# -ge 1 ; do
         exit 0
     elif test x$1 = x--keep-contlex -o x$1 = x-k ; then
         keep_contlex=true
+    elif test x$1 = x--keep-homonyms -o x$1 = x-H ; then
+        keep_homonyms=true
     elif test x$1 = x--exclude ; then
         if test -z "$2" ; then
             print_usage
@@ -81,6 +84,15 @@ cut_fields () {
     fi
 }
 
+# Use this function to keep homonymy tags depending on the option given:
+keep_hom_tags () {
+    if test "$keep_homonyms" = "true" ; then
+        perl -pe 's/(\w)\+(Hom[0-9])/\1__\2__/'
+    else
+        cat
+    fi
+}
+
 # The first lines do:
 # 1. grep only lines containing ;
 # 2. do NOT grep lines beginning with (space +) !, @ or <
@@ -89,8 +101,10 @@ cut_fields () {
 # 5. do NOT grep things specified in each test script
 # The rest is general mangling, the XXXXX part is needed to take care of
 # "lemma:stem CONTLEX" vs "word CONTLEX" when retaining the CONTLEX.
+# The penultimate perl s/__Hom..// thing is to restore the homonymy tags if kept
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
+   | keep_hom_tags \
    | egrep -v "^[[:space:]]*[[:alpha:]_-]+[[:space:]]*;" \
    | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex)" \
    | exclgrep "$excludepattern" \
@@ -115,4 +129,5 @@ grep ";" $inputfile \
    | tr "¥" "#" \
    | tr "£" "@" \
    | egrep -v "(^$|^;|^[0-9]$|^\!)" \
+   | perl -pe 's/__(Hom[0-9]+)__/\+\1/' \
    | sort -u

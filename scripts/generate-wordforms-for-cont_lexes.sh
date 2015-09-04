@@ -128,6 +128,7 @@ for lexicon in $@; do
     ${GTCORE}/scripts/extract-lemmas.sh \
         --include "($lexicon)" \
         --keep-contlex \
+        --keep-homonyms \
         $source_file \
         | head -n $lemmacount
 done

@@ -2133,7 +2133,7 @@ LIST SEMTAGS = sem_act sem_ani sem_body sem_build sem_build-part sem_clth sem_cu
 
 SELECT SEMTAGS ;
 
-
+SUBSTITUTE:apertium-unsubstitute (←vdic→) (*) TARGET (←vdic→) ;
 
 	#=====#
       END #

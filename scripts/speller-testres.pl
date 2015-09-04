@@ -44,6 +44,7 @@ my $toolversion;
 my $corpusversion;
 my $memoryuse = "";
 my $timeuse   = "";
+my $corrsugg = 0; # whether to set the corrsugg attribute in word elements
 
 use Getopt::Long;
 Getopt::Long::Configure ("bundling");
@@ -64,6 +65,7 @@ GetOptions (
             "corpusversion|co=s" => \$corpusversion,
             "memoryuse|mem=s"    => \$memoryuse,
             "timeuse|ti=s"       => \$timeuse,
+            "corrsugg"           => \$corrsugg,
             );
 
 if ($help) {
@@ -1047,6 +1049,29 @@ sub make_origfile {
     }
 }
 
+sub set_corrsugg_attribute {
+    # corrsugg=1..5: correct suggestion found in this position
+    # corrsugg=6: correct suggestion found below the 5th suggestion
+    # corrsugg=0: no suggestions
+    # corrsugg=-1: no correct suggestions
+    # corrsugg=accept: the word is accepted by the speller
+    my ($word) = @_;
+
+    if ($word->find('./position')) {
+        if ($word->find('./position/text() > 0 and ./position/text() < 6')) {
+            $word->setAttribute('corrsugg' => $word->findvalue('./position/text()'));
+        } else {
+            $word->setAttribute('corrsugg' => '6');
+        }
+    } elsif (! $word->find('./suggestions') && $word->find('./expected')) {
+        $word->setAttribute('corrsugg' => '0');
+    } elsif (! $word->find('./position') && $word->find('./suggestions')) {
+        $word->setAttribute('corrsugg' => '-1');
+    } elsif ($word->find('./speller[@status="correct"]')) {
+        $word->setAttribute('corrsugg' => 'accept');
+    }
+}
+
 sub make_word {
     # Make the xml element word
     # rec is a hash element representing one checked word
@@ -1055,9 +1080,6 @@ sub make_word {
     my ($rec, $results, $doc) = @_;
 
     my $word = $doc->createElement('word');
-    if ($rec->{'forced'}){
-        $word->setAttribute('forced' => "yes");
-    }
 
     make_original($rec, $word, $doc);
     make_speller($rec, $word, $doc);
@@ -1067,6 +1089,14 @@ sub make_word {
     make_tokens($rec, $word, $doc);
     make_bugid($rec, $word, $doc);
     make_comment($rec, $word, $doc);
+
+    if ($rec->{'forced'}){
+        $word->setAttribute('forced' => "yes");
+    }
+
+    if ($corrsugg) {
+        set_corrsugg_attribute($word);
+    }
 
     $results->appendChild($word);
 }
@@ -1136,7 +1166,9 @@ sub make_engine {
         $processing->setAttribute($key => $value);
     }
 
-    $processing->setAttribute('words_per_sec' => sprintf("%.2f", scalar(@originals) / $time_hash->{'realtime'}));
+    if ($time_hash->{'realtime'} != 0) {
+        $processing->setAttribute('words_per_sec' => sprintf("%.2f", scalar(@originals) / $time_hash->{'realtime'}));
+    }
 
     $engine->appendChild($processing);
 
@@ -1224,12 +1256,15 @@ sub make_truefalsesummary {
     $truefalsesummary->appendChild($negative);
 
     my $precision = $doc->createElement('precision');
-    $precision->appendTextNode(sprintf("%.2f", get_true_positive($results)/(get_true_positive($results) + get_false_positive($results))));
-    $truefalsesummary->appendChild($precision);
-
     my $recall = $doc->createElement('recall');
-    $recall->appendTextNode(sprintf("%.2f", get_true_positive($results)/(get_true_positive($results) + get_false_negative($results))));
-    $truefalsesummary->appendChild($recall);
+
+    my $positives = (get_true_positive($results) + get_false_positive($results));
+    if ($positives > 0) {
+        $precision->appendTextNode(sprintf("%.2f", get_true_positive($results)/$positives));
+        $truefalsesummary->appendChild($precision);
+        $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / $positives));
+        $truefalsesummary->appendChild($recall);
+    }
 
 
     my $accuracy = $doc->createElement('accuracy');
@@ -1249,7 +1284,9 @@ sub make_averageposition {
     }
 
     my $averageposition = $doc->createElement('averageposition');
-    $averageposition->appendTextNode(sprintf("%.2f", $total / scalar(@positions)));
+    if (scalar(@positions) > 0) {
+        $averageposition->appendTextNode(sprintf("%.2f", $total / scalar(@positions)));
+    }
 
     return $averageposition;
 }
@@ -1276,10 +1313,12 @@ sub make_allpos_percent {
 
     my $allpos_percent = $doc->createElement('allpos_percent');
 
-    my @spellererror = $results->findnodes('.//word[speller[@status = "error"]]');
-    my @positions = $results->findnodes('.//position');
+    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]]')->size;
+    my $positions = $results->findnodes('.//position')->size;
 
-    $allpos_percent->appendTextNode(sprintf("%.2f", scalar(@positions) / scalar(@spellererror) * 100));
+    if ($spellererror) {
+        $allpos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
+    }
 
     return $allpos_percent;
 }
@@ -1289,10 +1328,12 @@ sub make_top5pos_percent {
 
     my $top5pos_percent = $doc->createElement('top5pos_percent');
 
-    my @spellererror = $results->findnodes('.//word[speller[@status = "error"]]');
-    my @positions = $results->findnodes('.//position[text() < 6]');
+    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]]')->size;
+    my $positions = $results->findnodes('.//position[text() < 6]')->size;
 
-    $top5pos_percent->appendTextNode(sprintf("%.2f", scalar(@positions) / scalar(@spellererror) * 100));
+    if ($spellererror > 0) {
+        $top5pos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
+    }
 
     return $top5pos_percent;
 }
@@ -1311,7 +1352,9 @@ sub make_averagesuggs_with_correct {
         }
     }
 
-    $top5pos_percent->appendTextNode(sprintf("%.2f", $total / scalar($nodes->get_nodelist)));
+    if (scalar($nodes->get_nodelist) > 0) {
+        $top5pos_percent->appendTextNode(sprintf("%.2f", $total / scalar($nodes->get_nodelist)));
+    }
 
     return $top5pos_percent;
 }

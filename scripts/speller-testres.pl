@@ -1371,9 +1371,9 @@ sub make_suggestionsummary {
 
     $suggestionsummary->appendChild(make_suggx("suggbelow5", "position/text() >= $x", $results, $doc));
 
-    $suggestionsummary->appendChild(make_suggx("badsuggs", "not(position) and suggestions", $results, $doc));
-
     $suggestionsummary->appendChild(make_suggx("nosugg", "not(position) and not(suggestions)", $results, $doc));
+
+    $suggestionsummary->appendChild(make_suggx("badsuggs", "not(position) and suggestions", $results, $doc));
 
     $suggestionsummary->appendChild(make_averageposition($results, $doc));
 

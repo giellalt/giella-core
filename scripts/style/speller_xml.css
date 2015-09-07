@@ -165,7 +165,7 @@ sugg5::after {
 
 suggbelow5::before {
     display: inline-block ;
-    content: 'Suggestions << 5th position:  ' ;
+    content: 'Suggestions >> 5th position:  ' ;
 }
 suggbelow5 {display: block}
 suggbelow5::after {
@@ -221,21 +221,46 @@ averagesuggs_with_correct {display: block ;}
 /* The output of the speller: */
 results {
     display: table;
+    border-spacing: 0 0.5em;
+    border-collapse: separate;
 }
 
 word {
     display: table-row;
-    border: solid gray 2px ;
-    margin: 1em ;
+}
+
+word[corrsugg="1"] > * {
+    background-color: rgb(0, 155, 0) ;
+}
+word[corrsugg="2"] > * {
+    background-color: rgb(102, 180, 0) ;
+}
+word[corrsugg="3"] > * {
+    background-color: rgb(102, 204, 0) ;
+}
+word[corrsugg="4"] > * {
+    background-color: rgb(160, 204, 0) ;
+}
+word[corrsugg="5"] > * {
+    background-color: rgb(255, 210, 55) ;
+}
+word[corrsugg="6"] > * {
+    background-color: rgb(255, 190, 0) ;
+}
+word[corrsugg="0"] > * {
+    background-color: rgb(255, 130, 0) ;
+}
+word[corrsugg="-1"] > * {
+    background-color: rgb(255, 60, 0) ;
 }
 
 speller[status=correct] + expected {
-    background-color: rgb(255, 125, 125) ;
+    background-color: red ;
 }
 
 results original, expected, edit_dist, suggestions {
     display: table-cell;
-    border-width: 2px ;
+    padding: 0.2em;
 }
 
 results speller, position {
@@ -249,8 +274,4 @@ suggestion {
 
 suggestion[expected] {
     background-color: lime ;
-}
-
-word:nth-child(2n+1) {
-  background-color: rgb(216, 216, 216);
 }

@@ -102,6 +102,7 @@ Marainens% Sameslöjd% &% Silver+MWE+CmpNP/None+OLang/UND:Marainens% Sameslöj9d
 Mo+CmpNP/None+OLang/UND:Mo9 NYSTØ-plc ; !
 Mouton% de% Gruyter+MWE+CmpNP/None+OLang/UND:Mouton% de% Gruyter LONDON-org ;
 My+CmpNP/None+OLang/UND:My NYSTØ-fem ;
+Myy+CmpNP/None+OLang/FIN:Myy NYSTØ-fem ;
 Nikkeby% lufthavn+MWE+CmpNP/None+OLang/UND:Nikkeby% lufthavn9 BERN-org ;
 No% milk% today+MWE+CmpNP/None+OLang/UND:No% milk% today BERN-obj ;
 Nord-Norsk% Hotelldrift+MWE+CmpNP/None+OLang/NOB:Nord9-Norsk% Hotell#drift BERN-org ;
@@ -8818,6 +8819,7 @@ Haapakoski+OLang/FIN:Haapa#koski PIPPI-plc ;
 Haapala+OLang/FIN:Haapala ACCRA-sur ;
 Magdala+OLang/UND:Magdala ACCRA-fem ;
 Haapalahti+OLang/FIN:Haapa#lahti PIPPI-plc ;
+Pohjanlahti+OLang/FIN:Pohjan#lahti PIPPI-plc ;
 Haapalainen+OLang/FIN:Haapalai C-FI-NEN-sur ;
 Haapalehto+OLang/FIN:Haapalehto9 ACCRA-sur ;
 Haapamäki+OLang/FIN:Haapa#mäk MAKI-plc ;
@@ -26865,7 +26867,7 @@ Tigris+OLang/UND:Tigris LONDON-plc ;
 Tiguan+OLang/UND:Tigu^an9 LONDON-obj ;
 Tihinen+OLang/FIN:Tihi C-FI-NEN-sur ;
 Tihveräinen+OLang/FIN:Tihveräi C-FI-NEN-sur ;
-Tiia+OLang/NOB:Ti^ia ACCRA-fem ;
+Tiia+OLang/FIN:Ti^ia ACCRA-fem ;
 Tiihonen+OLang/FIN:Tiiho C-FI-NEN-sur ;
 Tiikkainen+OLang/FIN:Tiikkai C-FI-NEN-sur ;
 Tiikkaja+OLang/UND:Tiikkaja ACCRA-sur ;
@@ -31033,7 +31035,7 @@ Säteri+OLang/UND:Säter ERVASTI-plc ;
 Tanttari+OLang/UND:Tanttar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI? - Tuntturi -Doedtere
 Tapani+OLang/UND:Tapan ERVASTI-mal ; ! sma-ERVASTI, sme:ERVASTI?
 Tappuri+OLang/UND:Tappur ERVASTI-plc ; ! sma-ERVASTI, sme:ERVASTI?
-Taneli-Iisakki+OLang/UND:Taneli-Iisakki ACCRA-mal ;
+Iisakki+OLang/FIN:Iisakki ACCRA-mal ;
 Tattari+OLang/UND:Tattar ERVASTI-sur ; ! sma-ERVASTI, sme:ERVASTI?
 Teikari+OLang/UND:Teikar ERVASTI-sur ;
 Tessaloniki+OLang/UND:Tessaloniki ACCRA-plc ;
@@ -31196,4 +31198,10 @@ Ironworld+OLang/ENG:Iron#world BERN-plc ;
 Marika+OLang/UND:Marika ACCRA-fem ;
 Pete+OLang/UND:Pete ACCRA-mal ;
 Seipiharju+OLang/FIN:Seipi#harju ACCRA-sur ;
-
+Samuelsson+OLang/SWE:Samuelsson9 BERN-sur ;
+Leinonen+OLang/FIN:Leino C-FI-NEN-sur ;
+Pavlus+OLang/FIN:Pavlus LONDON-mal ;
+Nestor+OLang/UND:Nestor LONDON-mal ;
+Piia+OLang/FIN:Pi^ia ACCRA-fem ;
+Erkkii+OLang/FIN:Erkkii ACCRA-mal ;
+Sammeli+OLang/FIN:Sammeli NYSTØ-mal ;

@@ -3,11 +3,6 @@
 # For debugging, uncomment this command:
 # set -x
 
-if test -z "${GTCORE}" ; then
-    echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"
-    exit 1
-fi
-
 function print_usage() {
     echo "Usage: $0 [OPTIONS...] INPUTFILE"
     echo "Extract lemmas from INPUTFILE (lexc)"

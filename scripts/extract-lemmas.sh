@@ -105,7 +105,6 @@ grep ";" $inputfile \
    | exclgrep "$excludepattern" \
    | egrep    "$includepattern" \
    | sed 's/^[ 	]*//' \
-   | grep -v "^\-" \
    | sed 's/% /€/g' \
    | sed 's/%:/¢/g' \
    | sed 's/%#/¥/g' \

@@ -118,10 +118,10 @@ grep ";" $inputfile \
    | sed 's/XXXXX.*//' \
    | tr -d "#"  \
    | tr " " "\t" \
-   | tr "€" " " \
-   | tr "¢" ":" \
-   | tr "¥" "#" \
-   | tr "£" "@" \
+   | sed 's/€/ /g' \
+   | sed 's/¢/:/g' \
+   | sed 's/£/@/g' \
+   | sed 's/¥/#/g' \
    | egrep -v "(^$|^;|^[0-9]$|^\!)" \
    | perl -pe 's/__(Hom[0-9]+)__/\+\1/' \
    | sort -u

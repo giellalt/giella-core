@@ -9,13 +9,18 @@ spelltestresult, header {
 
 /* Header and summary styling: */
 header engine::before {
-    content: 'Engine: ' ;
-    display: inline-block ;
+    content: 'Engine: ' open-quote attr(abbreviation) close-quote ;
+    display: block ;
 }
-engine::after {
-    content: open-quote attr(abbreviation) close-quote ;
-    display: inline-block ;
+
+engine processing {
+    display: block ;
 }
+engine processing::after {
+    display: inline-block ;
+    content: 'Words/second: ' attr(words_per_sec) ;
+}
+
 toolversion { display: none ;}
 
 document::before {

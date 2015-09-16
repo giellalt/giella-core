@@ -7,7 +7,7 @@ use Getopt::Long;
 #use Data::Dumper; # for DEBUGging %paradigms
 
 # Module to communicate with program's user interfaces
-use langTools::Util;
+use Util;
 
 
 binmode( STDIN, ':utf8' );

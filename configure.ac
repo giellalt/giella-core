@@ -23,6 +23,8 @@ AC_CONFIG_FILES([Makefile])
 AC_CONFIG_SUBDIRS([scripts])
 AC_OUTPUT
 
+./update-subdirs.mk.sh
+
 cat<<EOF
 -- Building $PACKAGE_STRING:
 

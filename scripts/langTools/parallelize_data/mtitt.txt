@@ -1,4 +1,0 @@
-@m.titt:Juovllat
-m.titt:Guolli
-@mtitt:Juovllat
-@m.titt:@ingress:Romssa OG

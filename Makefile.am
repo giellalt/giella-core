@@ -16,4 +16,9 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 SUBDIRS = . scripts
+
+include $(srcdir)/subfiles.mk
+
+nobase_dist_pkgdata_DATA = $(subdir_files)
+
 # templates

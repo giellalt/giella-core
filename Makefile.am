@@ -22,7 +22,6 @@ include $(srcdir)/subfiles.mk
 nobase_dist_pkgdata_DATA = $(subdir_files)
 
 nobase_dist_pkgdata_SCRIPTS = \
-   scripts/cg-tag-convertor-for-apertium.py \
    scripts/clean_weight_corpus.sh \
    scripts/data/cohort_to_table_footer.html \
    scripts/data/cohort_to_table_header.html \

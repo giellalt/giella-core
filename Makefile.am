@@ -31,6 +31,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/edit-distance.bash \
    scripts/editdist.py \
    scripts/extract-abbr.pl \
+   scripts/Util.pm \
    scripts/extract-lemmas.sh \
    scripts/extract-tags.sh \
    scripts/extract-yaml-lemmas.sh \

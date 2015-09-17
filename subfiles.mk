@@ -7,33 +7,21 @@ subdir_files = \
    giella-shared/common/src/filters/extract-OLang_SME-strings.regex \
    giella-shared/common/src/filters/extract-OLang_SWE-strings.regex \
    giella-shared/common/src/filters/extract-Sem_Plc-strings.regex \
+   giella-shared/common/src/filters/make-optional-NGminip-tags.regex \
    giella-shared/common/src/filters/make-optional-adv_comp-tags.regex \
    giella-shared/common/src/filters/make-optional-homonymy-tags.regex \
    giella-shared/common/src/filters/make-optional-hyph-tags.regex \
-   giella-shared/common/src/filters/make-optional-NGminip-tags.regex \
    giella-shared/common/src/filters/make-optional-transitivity-tags.regex \
    giella-shared/common/src/filters/make-optional-v1-tags.regex \
    giella-shared/common/src/filters/make-optional-variant-tags.regex \
    giella-shared/common/src/filters/remove-ABBR-strings.regex \
    giella-shared/common/src/filters/remove-ACR-strings.regex \
-   giella-shared/common/src/filters/remove-adv_comp-tags.regex \
    giella-shared/common/src/filters/remove-CLB-strings.regex \
-   giella-shared/common/src/filters/remove-derivation-position-tags.regex \
-   giella-shared/common/src/filters/remove-homonymy-tags.regex \
-   giella-shared/common/src/filters/remove-hyphenated-strings.regex \
-   giella-shared/common/src/filters/remove-hyphenation-marks.regex \
-   giella-shared/common/src/filters/remove-infl_boundary-marks.regex \
-   giella-shared/common/src/filters/remove-infl_deriv-borders.regex \
-   giella-shared/common/src/filters/remove-MinusSpell-strings.regex \
    giella-shared/common/src/filters/remove-MT-strings.regex \
-   giella-shared/common/src/filters/remove-mwe-strings.regex \
-   giella-shared/common/src/filters/remove-mwe-tags.regex \
+   giella-shared/common/src/filters/remove-MinusSpell-strings.regex \
    giella-shared/common/src/filters/remove-NA-strings.regex \
    giella-shared/common/src/filters/remove-NG-strings.regex \
    giella-shared/common/src/filters/remove-NGminip-strings.regex \
-   giella-shared/common/src/filters/remove-nonfirst_infl_boundary-marks.regex \
-   giella-shared/common/src/filters/remove-norm-comp-tags.regex \
-   giella-shared/common/src/filters/remove-number-string-tags.regex \
    giella-shared/common/src/filters/remove-OLang_ENG-strings.regex \
    giella-shared/common/src/filters/remove-OLang_FIN-strings.regex \
    giella-shared/common/src/filters/remove-OLang_NNO-strings.regex \
@@ -41,18 +29,30 @@ subdir_files = \
    giella-shared/common/src/filters/remove-OLang_SME-strings.regex \
    giella-shared/common/src/filters/remove-OLang_SWE-strings.regex \
    giella-shared/common/src/filters/remove-OLang_UND-strings.regex \
-   giella-shared/common/src/filters/remove-orig_lang-tags.regex \
    giella-shared/common/src/filters/remove-Orth_IPA-strings.regex \
    giella-shared/common/src/filters/remove-Orth_Strd-strings.regex \
-   giella-shared/common/src/filters/remove-orthography-tags.regex \
-   giella-shared/common/src/filters/remove-Prop-strings.regex \
    giella-shared/common/src/filters/remove-PUNCT-strings.regex \
+   giella-shared/common/src/filters/remove-Prop-strings.regex \
    giella-shared/common/src/filters/remove-RCmpnd-strings.regex \
+   giella-shared/common/src/filters/remove-UseCirc-strings.regex \
+   giella-shared/common/src/filters/remove-adv_comp-tags.regex \
+   giella-shared/common/src/filters/remove-derivation-position-tags.regex \
+   giella-shared/common/src/filters/remove-homonymy-tags.regex \
+   giella-shared/common/src/filters/remove-hyphenated-strings.regex \
+   giella-shared/common/src/filters/remove-hyphenation-marks.regex \
+   giella-shared/common/src/filters/remove-infl_boundary-marks.regex \
+   giella-shared/common/src/filters/remove-infl_deriv-borders.regex \
+   giella-shared/common/src/filters/remove-mwe-strings.regex \
+   giella-shared/common/src/filters/remove-mwe-tags.regex \
+   giella-shared/common/src/filters/remove-nonfirst_infl_boundary-marks.regex \
+   giella-shared/common/src/filters/remove-norm-comp-tags.regex \
+   giella-shared/common/src/filters/remove-number-string-tags.regex \
+   giella-shared/common/src/filters/remove-orig_lang-tags.regex \
+   giella-shared/common/src/filters/remove-orthography-tags.regex \
    giella-shared/common/src/filters/remove-transitivity-tags.regex \
    giella-shared/common/src/filters/remove-usage-tags.regex \
    giella-shared/common/src/filters/remove-usage_except_NGminip-tags.regex \
    giella-shared/common/src/filters/remove-use_marg-strings.regex \
-   giella-shared/common/src/filters/remove-UseCirc-strings.regex \
    giella-shared/common/src/filters/remove-variant-strings.regex \
    giella-shared/common/src/filters/remove-variant-tags.regex \
    giella-shared/common/src/filters/remove-word-boundary.regex \

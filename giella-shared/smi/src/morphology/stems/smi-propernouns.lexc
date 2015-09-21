@@ -25311,9 +25311,9 @@ Stjernøya+OLang/NOB:Stjern#øya ACCRA-LOAN-plc ;
 Stjørdal+OLang/NOB:Stjør9#dal BERN-plc ;
 Stoa+OLang/UND:Stoa ACCRA-plc ;
 Stock+OLang/UND:Stock BERN-plc ;
-!Stockfleth+OLang/UND:Stock9#fleth9 BERN-sur ;
-!Stockholm+OLang/NOB:Stock9#holm9 BERN-plc ;
-!Stockmann+OLang/NOB:Stockmann9 BERN-sur ;
+Stockfleth+OLang/UND:Stock9#fleth9 BERN-sur ;
+Stockholm+OLang/NOB:Stock9#holm9 BERN-plc ;
+Stockmann+OLang/NOB:Stockmann9 BERN-sur ;
 Stockport+OLang/UND:Stock9#port BERN-plc ;
 Stockton+OLang/UND:Stockton9 LONDON-plc ;
 Stockton-on-Tees+OLang/UND:Stockton-on-Tees BERN-plc ;
@@ -31220,5 +31220,7 @@ Arden+OLang/UND:Arden LONDON-fem ;
 Jeobald+OLang/UND:Jeobald9 BERN-mal ;
 Alisa+OLang/UND:Alisa ACCRA-fem ;
 Kone+OLang/FIN:Kone ACCRA-org ;
+Oulanka+OLang/FIN:Oulanka ACCRA-plc ;
+Kiehinen+OLang/FIN:Kiehi C-FI-NEN-sur ;
 
 

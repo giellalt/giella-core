@@ -611,6 +611,8 @@ Izu+CmpNP/None+OLang/UND:Izu ACCRA-obj ;
 Ája+CmpNP/None+OLang/UND:Ája ACCRA-org ;
 Finn+OLang/UND:Finn9 BERN-sur ;
 Sibir+OLang/UND:Sibir BERN-LOAN-plc ;
+Korp+OLang/UND:Korp BERN-obj ;
+
 
 LEXICON ProperNoun-smi  !!= * __@CODE@__ Propernouns
 
@@ -31223,5 +31225,7 @@ Alisa+OLang/UND:Alisa ACCRA-fem ;
 Kone+OLang/FIN:Kone ACCRA-org ;
 Oulanka+OLang/FIN:Oulanka ACCRA-plc ;
 Kiehinen+OLang/FIN:Kiehi C-FI-NEN-sur ;
+Sikor+OLang/UND:Sikor LONDON-obj ;
+
 
 

@@ -2,5 +2,6 @@
 ! Coming from the old tag-not-save.regex file in gt/common/src/.
 
 0 (<-) %+TV,
-0 (<-) %+IV
+0 (<-) %+IV,
+0 (<-) %+Pass
 ;

@@ -11407,11 +11407,11 @@ Investeringsselskap+OLang/UND:Investerings^selskap9 BERN-org ;
 Inzell+OLang/UND:Inzell LONDON-plc ;
 Ionia+OLang/NOB:Ionia ACCRA-plc ;
 Iowa+OLang/UND:Iowa ACCRA-plc ;
-Ipad+OLang/ENG:Ipad9 BERN-obj ;
-Ipod+OLang/ENG:Ipod9 BERN-obj ;
+!Ipad+OLang/ENG:Ipad9 BERN-obj ; !iPad
+!Ipod+OLang/ENG:Ipod9 BERN-obj ; !iPod
 Ipanema+OLang/UND:Ipanema ACCRA-plc ;
 Iphigenia+OLang/NOB:Iphigenia ACCRA-plc ;
-Iphone+OLang/ENG:Iphone ACCRA-obj ;
+!Iphone+OLang/ENG:Iphone ACCRA-obj ; !iPhone
 Ipin+OLang/UND:Ipin9 LONDON-sur ;
 Ipoh+OLang/UND:Ipoh9 LONDON-plc ;
 Ipsen+OLang/NOB:Ipsen9 LONDON-sur ;
@@ -30089,8 +30089,9 @@ eNorge+OLang/UND:e^Norge ACCRA-org ;
 emacs+OLang/UND:e^macs BERN-obj ;
 fiskerserie+Err/Lex+OLang/UND:fisker9#serie ACCRA-obj ;
 fylkesbibliotek+OLang/UND:fylkes^bibliotek BERN-org ;
-iPhone+OLang/UND:iPhone ACCRA-obj ;
-iPod+OLang/UND:iPod9 BERN-obj ;
+iPad+OLang/ENG:iPad BERN-obj ;
+iPhone+OLang/ENG:iPhone ACCRA-obj ;
+iPod+OLang/ENG:iPod9 BERN-obj ;
 iTet+OLang/UND:iTet BERN-org ;
 iTromsø+OLang/NOB:i#Tromsø NYSTØ-org ;
 komvux+OLang/UND:kom9#vux BERN-org ;

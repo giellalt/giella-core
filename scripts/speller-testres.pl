@@ -618,6 +618,13 @@ sub read_voikko {
             }
         }
     }
+    if (@suggestions) {
+        if (! $orig eq $originals[$index]{'orig'}) {
+            die "\nThese suggestions do not seem to belong here\nCurrent orig: $orig:\nIndex: $index\nOriginal word at this index: $originals[$index]{'orig'}\nSuggestions: @suggestions\n\n";
+        }
+        $originals[$index]{'sugg'} = [ @suggestions ];
+        @suggestions = ();
+    }
     close(FH);
 }
 

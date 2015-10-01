@@ -63,6 +63,7 @@
 		  <e>
 		    <xsl:copy-of select="../../l/@hid"/>
 		    <xsl:copy-of select="../../l/@sem_type"/>
+		    <xsl:copy-of select="../../l/@etym_orig"/>
 		    <xsl:copy-of select="./@status"/>
 		    <xsl:attribute name="stem">
 		      <xsl:value-of select="replace(
@@ -128,6 +129,12 @@
 							   then
 							   concat('+Sem/',./@sem_type)
 							   else concat('','')"/>
+		  <xsl:variable name="current_etym_orig" select="if (./@etym_orig
+							   and
+							   not(normalize-space(./@etym_orig)=''))
+							   then
+							   concat('+EOLang/',./@etym_orig)
+							   else concat('','')"/>
 		  <xsl:variable name="current_status" select="if (./@status
 							   and
 							   not(normalize-space(./@status)=''))
@@ -135,7 +142,7 @@
 							   concat('+',./@status)
 							   else concat('','')"/>
 		  <xsl:value-of select="if (./@stem = '') then concat(., $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)
-					else concat(.,$current_hid,$current_sem_type,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+					else concat(.,$current_hid,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
 		</xsl:for-each>
 	      </xsl:if>
 	    </xsl:for-each>

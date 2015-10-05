@@ -28401,7 +28401,7 @@ Vapalahti+OLang/FIN:Vapa#lahti PIPPI-sur ;
 Vapola+OLang/FIN:Vapol HANNOLA-sur ; ! ERVASTI elelr annen ODD? 
 Vappula+OLang/FIN:Vappul HANNOLA-sur ; ! ERVASTI elelr annen ODD? 
 Vapsten+OLang/NOB:Vap^sten9 BERN-plc ;
-Vara+Use/-Spell+OLang/UND:Vara ACCRA-plc ;
+Vara+OLang/UND:Vara ACCRA-plc ; ! removed Use/-Spell due to problem in smn. It was the only word with -Spell. (32 Vara, 180 Wara) 
 Varaldsøy+OLang/NOB:Varalds#øy OY-plc ;
 Varanasi+OLang/UND:Varanasi ACCRA-plc ;
 Varanger% Vilt+MWE+OLang/UND:Varanger% Vilt BERN-org ;

@@ -119,7 +119,7 @@
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
-      xml:lang ( sme | sma | nob | swe | eng | deu ) #IMPLIED
+      xml:lang ( sme | sma | nob | swe | eng | deu | fin | rus) #IMPLIED
       check CDATA #IMPLIED
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->

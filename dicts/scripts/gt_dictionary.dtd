@@ -113,7 +113,7 @@
 
 <!ELEMENT mg (semantics?,  tg+, xg* ) >
 <!ATTLIST mg 
-      xml:lang ( sme | nob ) #IMPLIED
+      xml:lang ( sme | nob | fin | swe | rus) #IMPLIED
 >      
 <!ATTLIST mg re CDATA #IMPLIED >
 

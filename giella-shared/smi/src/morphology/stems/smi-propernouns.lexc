@@ -254,6 +254,8 @@ Ege+CmpNP/None+OLang/UND:Ege ACCRA-sur ;
 Egå+CmpNP/None+OLang/UND:Eg9#å NYSTØ-plc ;
 Ehi+CmpNP/None+OLang/UND:Ehi PIPPI-plc ;
 Eia+CmpNP/None+OLang/NOB:Eia ACCRA-sur ;
+
+Herodia+CmpNP/None+OLang/NOB:Herodia ACCRA-sur ;
 Eid+CmpNP/None+OLang/UND:Eid9 BERN-sur ;
 Eie+CmpNP/None+OLang/UND:E^ie ACCRA-sur ;
 Eik+CmpNP/None+OLang/UND:Eik BERN-sur ;
@@ -2093,6 +2095,9 @@ Ashington+OLang/ENG:Ashington9 BERN-plc ;
 Ashoka+OLang/UND:Ashoka ACCRA-plc ;
 Ashraf+OLang/UND:Ashraf LONDON-mal ;
 Asia+OLang/NOB:Asia ACCRA-LOAN-plc ;
+Avia+OLang/NOB:Avia ACCRA-LOAN-plc ;
+Asia+Err/Orth+OLang/NOB:Aasia ACCRA-LOAN-plc ;
+
 Dubno+OLang/NOB:Dubno9 ACCRA-plc ;
 Gniezno+OLang/NOB:Gniezno9 ACCRA-plc ;
 Eriksjorda+OLang/NOB:Eriks#jorda ACCRA-plc ;
@@ -2217,6 +2222,8 @@ Atrå+OLang/UND:Atrå NYSTØ-plc ;
 Attac+OLang/UND:Attac BERN-org ;
 Attaleia+OLang/NOB:Attale^ia ACCRA-plc ;
 Attaliai+Err/Orth+OLang/UND:Attali^ai NYSTØ-plc ;
+
+
 Attaliai+OLang/UND:Attali^a DUBAI-plc ;
 Attika+OLang/UND:Attika ACCRA-plc ;
 Auastad+OLang/NOB:Aua#stad9 BERN-plc ;
@@ -3119,6 +3126,8 @@ Biilgreen+OLang/UND:Biil#green9 BERN-sur ;
 Bikini+OLang/UND:Bikini PIPPI-obj ;
 Bilba+OLang/UND:Bilba ACCRA-plc ;
 Bilbao+OLang/UND:Bilbao9 ACCRA-mal ;
+Farao+OLang/UND:Farao9 ACCRA-mal ;
+
 Bilde+OLang/UND:Bilde ACCRA-obj ;
 Bileam+OLang/UND:Bileam9 BERN-plc ;
 Bilet+OLang/UND:Bilet LONDON-plc ;
@@ -10413,6 +10422,7 @@ Holmgard+OLang/NOB:Holm9#gard9 BERN-sur ;
 Holmgren+OLang/NOB:Holm9#gren9 BERN-sur ;
 Holmgård+OLang/NOB:Holm9#gård9 BERN-plc ;
 Holmi+OLang/UND:Holmi PIPPI-fem ;
+Noomi+OLang/UND:Noomi PIPPI-fem ;
 Holming+OLang/NOB:Holming9 LONDON-sur ;
 Holmlia+OLang/NOB:Holm9#lia ACCRA-plc ;
 Holmlie+OLang/NOB:Holm9#lie ACCRA-sur ;

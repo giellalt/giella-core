@@ -52,6 +52,7 @@ subdir_files = \
    giella-shared/common/src/filters/remove-transitivity-tags.regex \
    giella-shared/common/src/filters/remove-usage-tags.regex \
    giella-shared/common/src/filters/remove-usage_except_NGminip-tags.regex \
+   giella-shared/common/src/filters/remove-usage_except_speller-tags.regex \
    giella-shared/common/src/filters/remove-use_marg-strings.regex \
    giella-shared/common/src/filters/remove-variant-strings.regex \
    giella-shared/common/src/filters/remove-variant-tags.regex \

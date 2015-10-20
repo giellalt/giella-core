@@ -151,10 +151,12 @@ easteregg.*
 *.service
 *.zhfst
 *.oxt
+*.xpi
 spellercorpus.*
 test.*
 build
 unitweight
+editdist.default.regex
 3" $1/tools/spellcheckers/fstbased/hfst
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/weighting/ dir:

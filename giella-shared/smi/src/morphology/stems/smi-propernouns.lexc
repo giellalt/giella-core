@@ -31143,7 +31143,7 @@ McLean+OLang/UND:McLean9 BERN-sur ;
 Stensgård+OLang/NOB:Stens#gård9 BERN-sur ;
 Turnbull+OLang/UND:Turnbull LONDON-sur ;
 Västi+OLang/FIN:Västi ACCRA-sur ;
-Storbækken+OLang/UND:Stor^bækken9 LONDON-plc ;
+Storbækken+OLang/NOB:Stor^bækken9 LONDON-plc ;
 Saeed+OLang/SWE:Saeed9 BERN-sur ;
 Emilia+OLang/NOB:Emilia ACCRA-fem ;
 Haaland+OLang/NOB:Haa#land9 BERN-sur ;
@@ -31249,6 +31249,6 @@ Kone+OLang/FIN:Kone ACCRA-org ;
 Oulanka+OLang/FIN:Oulanka ACCRA-plc ;
 Kiehinen+OLang/FIN:Kiehi C-FI-NEN-sur ;
 Sikor+OLang/UND:Sikor LONDON-obj ;
-
-
-
+Fidu+OLang/UND:Fidu ACCRA-ani ;
+Fiboline+OLang/UND:Fiboline ACCRA-ani ;
+Imad+OLang/UND:Imad9 LONDON-fem ;

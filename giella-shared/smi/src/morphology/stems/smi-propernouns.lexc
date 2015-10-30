@@ -14610,7 +14610,7 @@ Kuza+OLang/UND:Kuza ACCRA-plc ;
 Kuzbass+OLang/UND:Kuzbass9 BERN-plc ;
 Kuznetsk+OLang/UND:Kuznetsk BERN-plc ;
 Kvaal+OLang/UND:Kvaal BERN-sur ;
-Kvadrat+OLang/UND:Kvadrat LONDON-plc ;
+Kvadrat+OLang/UND+Use/-Spell:Kvadrat LONDON-plc ;
 Kvalavåg+OLang/NOB:Kvala#våg9 BERN-plc ;
 Kvale+OLang/UND:Kvale ACCRA-sur ;
 Kvalfeltet+OLang/UND:Kval^feltet LONDON-plc ;

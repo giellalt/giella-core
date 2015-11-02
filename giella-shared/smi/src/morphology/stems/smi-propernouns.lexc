@@ -150,7 +150,7 @@ høgskole+CmpNP/None+OLang/NOB:høg9#skole ACCRA-org ;
 Ås+CmpNP/None+OLang/UND:Ås BERN-plc ;
 Øy+CmpNP/None+OLang/NOB:Øy BERN-plc ;
 Sámi% Boy+CmpNP/None+OLang/UND:Sámi% Boy BERN-obj ; !
-A-ha+CmpNP/None+OLang/NOB:A-ha ACCRA-org ;			    !!= @CODE@ \\
+A-ha+CmpNP/None+OLang/NOB:A-ha ACCRA-org ;			 !!= @CODE@ \\
 ABC-Company+CmpNP/None+OLang/UND:ABC-Company ACCRA-obj ;
 ABC-company+CmpNP/None+Err/Orth+OLang/UND:ABC-company NYSTØ-org ;
 ABC-company+CmpNP/None+OLang/UND:ABC-company ACCRA-org ;
@@ -616,13 +616,13 @@ Sibir+OLang/UND:Sibir BERN-LOAN-plc ;
 Korp+OLang/UND:Korp BERN-obj ;
 
 
-LEXICON ProperNoun-smi  !!= * __@CODE@__ Propernouns
+LEXICON ProperNoun-smi !!= * __@CODE@__ Propernouns
 
-Aabakken+OLang/NOB:Aa#bakken9 LONDON-sur ;  !!= @CODE@ \\
-Aabel+OLang/NOB:Aabel LONDON-sur ;		    !!= @CODE@ \\
-Husserl+OLang/NOB:Husserl LONDON-sur ;		    !!= @CODE@ \\
-Frykman+OLang/NOB:Frykman9 LONDON-sur ;		    !!= @CODE@ \\
-Aabenraa+OLang/NOB:Aabenraa NYSTØ-sur ;	    !!= @CODE@ \\
+Aabakken+OLang/NOB:Aa#bakken9 LONDON-sur ; !!= @CODE@ \\
+Aabel+OLang/NOB:Aabel LONDON-sur ;		 !!= @CODE@ \\
+Husserl+OLang/NOB:Husserl LONDON-sur ;		 !!= @CODE@ \\
+Frykman+OLang/NOB:Frykman9 LONDON-sur ;		 !!= @CODE@ \\
+Aabenraa+OLang/NOB:Aabenraa NYSTØ-sur ;	 !!= @CODE@ \\
 Levenshtein+OLang/NOB:Levenshtein9 BERN-sur ;
 Habermas+OLang/NOB:Habermas BERN-sur ;
 Gadamer+OLang/NOB:Gadamer LONDON-sur ;
@@ -654,7 +654,7 @@ Aakervik+OLang/NOB:Aaker9#vik BERN-sur ;
 Keflavík+OLang/NOB:Kefla#vík BERN-sur ;
 Aakrann+OLang/NOB:Aakrann9 BERN-sur ;
 Aakre+OLang/NOB:Aakre ACCRA-sur ;
-Aakula+OLang/FIN:Aakula ACCRA-sur ; !  ERVAST?
+Aakula+OLang/FIN:Aakula ACCRA-sur ; ! ERVAST?
 Aakvik+OLang/NOB:Aak9#vik BERN-sur ;
 Aalberg+OLang/NOB:Aal#berg9 BERN-sur ;
 Aalborg+OLang/NOB:Aal#borg9 BERN-plc ;
@@ -944,7 +944,7 @@ Aitola+OLang/FIN:Aitol HANNOLA-sur;! ERVASTI?
 Aittola+OLang/FIN:Aittol HANNOLA-sur;! ERVASTI?
 Ala-Nikkola+OLang/FIN:Ala-Nikkol HANNOLA-sur;! ERVASTI?
 Alhola+OLang/FIN:Alhol HANNOLA-sur ;! ERVASTI?
-Annola+OLang/FIN:Annol  HANNOLA-sur ; ! ERVASTI?
+Annola+OLang/FIN:Annol HANNOLA-sur ; ! ERVASTI?
 Arola+OLang/FIN:Arol HANNOLA-plc ;! ERVASTI?
 Arvola+OLang/FIN:Arvol HANNOLA-sur ;! ERVASTI?
 Askola+OLang/FIN:Askol HANNOLA-plc ; ! ERVASTI?
@@ -1395,7 +1395,7 @@ Kildin+OLang/UND:Kildin9 LONDON-plc ;
 Alsøy+OLang/NOB:Als#øy OY-plc ;
 Alta+OLang/UND:Alta ACCRA-plc ;
 AltaVista+OLang/NOB:Alta^Vista ACCRA-org ;
-Keitele+OLang/FIN:Keitele ACCRA-plc ;  ! ACCRA? Keitelisnie, it seems to be ODD
+Keitele+OLang/FIN:Keitele ACCRA-plc ; ! ACCRA? Keitelisnie, it seems to be ODD
 Khatanga+OLang/UND:Khatanga ACCRA-plc ;
 Altadalen+OLang/NOB:Alta#dalen9 LONDON-LOAN-plc ;
 Altaelva+OLang/NOB:Alta#elva ACCRA-LOAN-plc ;
@@ -1845,7 +1845,7 @@ Apollonia+OLang/NOB:Apolloni ACCRA-A-plc ;
 Apollos+OLang/UND:Apollos LONDON-mal ;
 Apollosa+OLang/UND:Apollosa ACCRA-plc ;
 Apollyon+OLang/UND:Apolly^on9 LONDON-org ;
-Apotekergata+OLang/NOB:Apoteker# GATA-plc ;   
+Apotekergata+OLang/NOB:Apoteker# GATA-plc ; 
 Appenzell+OLang/UND:Appenzell BERN-plc ;
 Appfjell+OLang/NOB:App9#fjell BERN-plc ;
 Appfjell-Eira+OLang/UND:Appfjell-Eira ACCRA-femsur ;
@@ -1884,7 +1884,7 @@ Arbien+OLang/UND:Arbi^en9 LONDON-plc ;
 Arboga+OLang/NOB:Arboga ACCRA-plc ;
 Arbor+OLang/UND:Arbor LONDON-plc ;
 Archer+OLang/UND:Archer LONDON-sur ;
-Archie+OLang/UND:Archie ACCRA-mal ;  !  CHECK!!!
+Archie+OLang/UND:Archie ACCRA-mal ; ! CHECK!!!
 Archimedes+OLang/UND:Archimedes LONDON-obj ;
 Arctander+OLang/UND:Arctander LONDON-sur ;
 Arctandria+OLang/NOB:Arctandria ACCRA-obj ;
@@ -4579,7 +4579,7 @@ Cher+OLang/UND:Cher BERN-sur ;
 Cherbourg+OLang/UND:Cher^bourg9 BERN-plc ;
 Cherrapunji+OLang/UND:Cherrapunji ACCRA-plc ;
 Cherry+OLang/UND:Cherry ACCRA-Y-fem ;
-Chery+OLang/UND:Chery   ACCRA-Y-obj ;
+Chery+OLang/UND:Chery ACCRA-Y-obj ;
 Chesapeake+OLang/UND:Chesapeake ACCRA-plc ;
 Chess+OLang/UND:Chess9 BERN-org ;
 Chester+OLang/UND:Chester LONDON-plc ;
@@ -5418,7 +5418,7 @@ Down+OLang/UND:Down9 BERN-plc ;
 Downing+OLang/NOB:Downing9 LONDON-plc ;
 Drabløs+OLang/NOB:Drabløs BERN-sur ;
 Drachmann+OLang/NOB:Drach9#mann9 BERN-sur ;
-Dracula+OLang/FIN:Dracul HANNOLA-sur ; ! ERVASTI elelr annen ODD?  Draculasse- Draculisnie
+Dracula+OLang/FIN:Dracul HANNOLA-sur ; ! ERVASTI elelr annen ODD? Draculasse- Draculisnie
 Drag+OLang/UND:Drag9 BERN-plc ;
 Drage+OLang/UND:Drage ACCRA-sur ;
 Dragnes+OLang/NOB:Drag9#nes BERN-sur ;
@@ -7941,7 +7941,7 @@ Gednje+OLang/UND:Gednje ACCRA-sur ;
 Gedser+OLang/UND:Gedser LONDON-sur ;
 Geelmuyden+OLang/UND:Geelmuyden9 LONDON-sur ;
 Geelong+OLang/UND:Geelong9 BERN-plc ;
-Geely+OLang/UND:Geely   ACCRA-Y-obj ;
+Geely+OLang/UND:Geely ACCRA-Y-obj ;
 Geertsen+OLang/NOB:Geertsen9 LONDON-sur ;
 Gefle+OLang/UND:Gefle ACCRA-plc ;
 Geggen+OLang/UND:Geggen9 LONDON-sur ;
@@ -9688,7 +9688,7 @@ Heikko+OLang/UND:Heikko9 NYSTØ-mal ;
 Heikkola+OLang/FIN:Heikkol HANNOLA-sur ; ! ERVASTI?
 Heikkonen+OLang/FIN:Heikko C-FI-NEN-sur ;
 Heikkurinen+OLang/FIN:Heikkuri C-FI-NEN-sur ;
-Heikola+OLang/FIN:Heikol HANNOLA-sur  ; ! ERVASTI?
+Heikola+OLang/FIN:Heikol HANNOLA-sur ; ! ERVASTI?
 Heikura+OLang/UND:Heikura ACCRA-sur ;
 Heikurainen+OLang/FIN:Heikurai C-FI-NEN-sur ;
 HeilagOlav+OLang/UND:Heilag9#Olav LONDON-mal ;
@@ -10597,7 +10597,7 @@ Hougen+OLang/UND:Hougen9 LONDON-sur ;
 Houm+OLang/UND:Ho^um9 LONDON-sur ;
 Houni+OLang/UND:Houn PIPPI-sur ;
 Hount+OLang/UND:Hount BERN-sur ;
-Hourula+OLang/FIN:Hourul HANNOLA-sur  ; ! ERVASTI elelr annen ODD? 
+Hourula+OLang/FIN:Hourul HANNOLA-sur ; ! ERVASTI elelr annen ODD? 
 Houseman+OLang/NOB:House#man9 BERN-sur ;
 Housken+OLang/UND:Housken9 LONDON-sur ;
 Houston+OLang/UND:Houston9 LONDON-plc ;
@@ -12523,7 +12523,7 @@ Kalgan+OLang/UND:Kalgan9 LONDON-sur ;
 Kalgoorlie-Boulder+OLang/UND:Kalgoorlie-Boulder LONDON-sur ;
 Kali+OLang/UND:Kal PIPPI-sur ;
 Kalidasa+OLang/UND:Kalidasa ACCRA-plc ;
-Kalifornia+OLang/NOB:Kalifornia ACCRA-LOAN-plc  ;
+Kalifornia+OLang/NOB:Kalifornia ACCRA-LOAN-plc ;
 Kalijärvi+OLang/FIN:Kali#järv MAKI-plc ;
 Kalimantan+OLang/UND:Kalimantan9 BERN-plc ;
 Kalinin+OLang/UND:Kalinin9 LONDON-sur ;
@@ -16671,7 +16671,7 @@ Mahanajim+OLang/UND:Mahanaj9im9 BERN-sur ;
 Maharashtra+OLang/UND:Maharashtra ACCRA-plc ;
 Mahat+OLang/UND:Mahat LONDON-mal ;
 Mahaweli+OLang/UND:Mahawel PIPPI-sur ;
-Mahindra+OLang/UND:Mahindra  ACCRA-obj ;
+Mahindra+OLang/UND:Mahindra ACCRA-obj ;
 Mahkonen+OLang/FIN:Mahko C-FI-NEN-sur ;
 Mahlakaarto+OLang/UND:Mahlakaarto9 ACCRA-sur ;
 Mahlamäki+OLang/FIN:Mahla#mäk MAKI-sur ;
@@ -17219,7 +17219,7 @@ Mauland+OLang/NOB:Mau#land9 BERN-plc ;
 Mauno+OLang/UND:Mauno9 ACCRA-mal ;
 Maunu+OLang/UND:Maunu ACCRA-sur ;
 Maunuksela+OLang/FIN:Maunuksela ACCRA-sur ;
-Maunula+OLang/FIN:Maunul HANNOLA-plc;  ! ERVASTI elelr annen ODD? 
+Maunula+OLang/FIN:Maunul HANNOLA-plc; ! ERVASTI elelr annen ODD? 
 Maunumäki+OLang/FIN:Maunu#mäk MAKI-plc ;
 Maura+OLang/UND:Maura ACCRA-plc ;
 Mauranger+OLang/UND:Maur9#anger LONDON-plc ;
@@ -17756,7 +17756,7 @@ Mitikka+OLang/FIN:Mitikka ACCRA-sur ;
 Mitrofan+OLang/UND:Mitrofan9 BERN-plc ;
 Mitrunen+OLang/FIN:Mitru C-FI-NEN-sur ;
 Mitsubishi+OLang/UND:Mitsubish PIPPI-obj ;
-Mitsuoka+OLang/UND:Mitsuoka  ACCRA-obj ;
+Mitsuoka+OLang/UND:Mitsuoka ACCRA-obj ;
 Mittet+OLang/UND:Mittet BERN-sur ;
 Mittådalen+OLang/NOB:Mitt^å#dalen9 LONDON-plc ;
 Mitylen+OLang/UND:Mitylen9 LONDON-sur ;
@@ -19062,7 +19062,7 @@ Nome+OLang/UND:Nome ACCRA-sur ;
 Nonni+OLang/UND:Nonn PIPPI-sur ;
 Monni+OLang/FIN:Monn PIPPI-sur ;
 Nonsrichai+OLang/UND:Nonsricha DUBAI-sur ;
-Noomie+OLang/UND:Noomie ACCRA-fem  ; ! 
+Noomie+OLang/UND:Noomie ACCRA-fem ; ! 
 Noora+OLang/UND:Noora ACCRA-fem ;
 Noord-Brabant+OLang/UND:Noord9-Brabant BERN-plc ;
 Noord-Holland+Err/Lex+OLang/NOB:Noord-Hol#land9 BERN-plc ;
@@ -20298,7 +20298,7 @@ Panjab+OLang/UND:Panjab9 LONDON-plc ;
 Pankka+OLang/FIN:Pankka ACCRA-sur ;
 Panmunjom+OLang/UND:Panmunjom9 BERN-plc ;
 Pannonia+OLang/NOB:Pannoni ACCRA-A-plc ;
-Pannula+OLang/FIN:Pannul HANNOLA-sur ;  ! ERVASTI elelr annen ODD? 
+Pannula+OLang/FIN:Pannul HANNOLA-sur ; ! ERVASTI elelr annen ODD? 
 Pantdalen+OLang/NOB:Pant9#dalen9 LONDON-plc ;
 Pantdalsklumpen+OLang/UND:Pant^dals#klumpen9 LONDON-plc ;
 Pantelleria+OLang/NOB:Pantelleri ACCRA-A-plc ;
@@ -20381,7 +20381,7 @@ Pasma+OLang/UND:Pasma ACCRA-sur ;
 Paso+OLang/UND:Paso9 ACCRA-plc ;
 Pasonen+OLang/FIN:Paso C-FI-NEN-sur ;
 Pasrjetsk+OLang/UND:Pasrjetsk LONDON-plc ;
-Passat+OLang/UND:Passat  LONDON-obj ;
+Passat+OLang/UND:Passat LONDON-obj ;
 Passau+OLang/UND:Passau ACCRA-plc ;
 Passbekk+OLang/UND:Pass9#bekk BERN-plc ;
 Passebekk+Err/Orth+OLang/UND:Pass9#bekk BERN-plc ;
@@ -22609,7 +22609,7 @@ Ruohonen+OLang/FIN:Ruoho C-FI-NEN-sur ;
 Ruohoniemi+OLang/FIN:Ruoho#niem NIEMI ;
 Ruokamo+OLang/FIN:Ruokamo9 ACCRA-sur ;
 Ruokanen+OLang/FIN:Ruoka C-FI-NEN-sur ;
-Ruokola+OLang/FIN:Ruokol HANNOLA-sur ;  ! ERVASTI elelr annen ODD? 
+Ruokola+OLang/FIN:Ruokol HANNOLA-sur ; ! ERVASTI elelr annen ODD? 
 Ruokolainen+OLang/FIN:Ruokolai C-FI-NEN-sur ;
 Ruokonen+OLang/FIN:Ruoko C-FI-NEN-sur ;
 Ruokoniemi+OLang/FIN:Ruoko#niem NIEMI ;
@@ -24981,7 +24981,7 @@ Southend-on-Sea+OLang/UND:South^end-on-Sea ACCRA-plc ;
 Southport+OLang/UND:South9#port BERN-plc ;
 Sova+OLang/NOB:Sova ACCRA-plc ;
 
-!  Tiffany's+Err/Orth:Tiffany's CNAME_EVEN-org ;  ! Lånemønsteret på dette??
+! Tiffany's+Err/Orth:Tiffany's CNAME_EVEN-org ; ! Lånemønsteret på dette??
 
 Sovjet+OLang/UND:Sovjet BERN-plc ;
 Sovjetunionen+Err/Lex+OLang/UND:Sovjet^unionen9 LONDON-plc ;
@@ -28111,7 +28111,7 @@ Urpalainen+OLang/FIN:Urpalai C-FI-NEN-sur ;
 Urpilainen+OLang/FIN:Urpilai C-FI-NEN-sur ;
 Ursfjord+OLang/NOB:Urs#fjord9 BERN-plc ;
 Ursin+OLang/UND:Ursin9 LONDON-sur ;
-Ursula+OLang/FIN:Ursul HANNOLA-sur ; ! ERVASTI elelr annen ODD?  Kanskje..nei..
+Ursula+OLang/FIN:Ursul HANNOLA-sur ; ! ERVASTI elelr annen ODD? Kanskje..nei..
 Ursus+OLang/UND:Ursus LONDON-obj ;
 Urtegård+OLang/NOB:Urte#gård9 BERN-sur ;
 Uruguay+OLang/UND:Urugu^ay BERN-plc ;
@@ -28490,7 +28490,7 @@ Vassdal+OLang/NOB:Vass9#dal BERN-plc ;
 Vassdalen+OLang/NOB:Vass9#dalen9 LONDON-plc ;
 Vassdalsvik+OLang/NOB:Vass9#dals#vik BERN-plc ;
 Vassenden+OLang/NOB:Vass9#enden9 LONDON-sur ;
-Vasskardet+OLang/UND:Vas^skardet LONDON-plc ;     ! XXX - ss vs ss-s
+Vasskardet+OLang/UND:Vas^skardet LONDON-plc ; ! XXX - ss vs ss-s
 Vasslag+OLang/UND:Vass9#lag9 BERN-plc ;
 Vasstrand+OLang/NOB:Vas#strand9 BERN-plc ;
 Vasstuland+OLang/NOB:Vasstu#land9 BERN-plc ;
@@ -30602,7 +30602,7 @@ Pinja+OLang/FIN:Pinja ACCRA-fem ;
 Mervi+OLang/FIN:Merv PIPPI-fem ;
 Marjaana+OLang/FIN:Marjaana ACCRA-fem ;
 Nanook+OLang/UND:Nanook BERN-org ;
-Kontoniemi+OLang/FIN:Konto#niem NIEMI ;  
+Kontoniemi+OLang/FIN:Konto#niem NIEMI ; 
 Koshkendei+OLang/UND:Koshkende DUBAI-plc ;
 Gelencsér+OLang/UND:Gelencsér BERN-sur ;
 Arhinmäki+OLang/FIN:Arhin#mäk MAKI-sur ;
@@ -30618,7 +30618,7 @@ Søyland+OLang/NOB:Søy#land9 BERN-sur ;
 Guldal+OLang/NOB:Gul#dal BERN-sur ;
 Finnmarks% Fylkesrederi+MWE+OLang/UND:Finnmarks% Fylkesrederi NYSTØ-org ;
 Hyltenstam+OLang/UND:Hylten#stam9 BERN-sur ;
-Fishman+OLang/NOB:Fishman9 LONDON-sur ;		  
+Fishman+OLang/NOB:Fishman9 LONDON-sur ;		 
 Dressler+OLang/NOB:Dressler LONDON-sur ;
 Sajavaara+OLang/FIN:Saja#vaara ACCRA-sur ;
 Zilliacus+OLang/UND:Zilliacus LONDON-sur ;
@@ -30636,7 +30636,7 @@ Quay+OLang/UND:Quay BERN-sur ;
 Galbajok+OLang/UND:Galba#jok BERN-LOAN-plc ;
 Tomasello+OLang/UND:Tomasello9 ACCRA-sur ;
 Romaine+OLang/UND:Romaine ACCRA-sur ;
-Haegeman+OLang/UND:Haegeman9 BERN-sur ;		  
+Haegeman+OLang/UND:Haegeman9 BERN-sur ;		 
 Beske+OLang/UND:Beske ACCRA-mal ;
 Karpf+OLang/UND:Karpf BERN-sur ;
 Pienne+OLang/UND:Pienne ACCRA-sur ;
@@ -30654,7 +30654,7 @@ Varangerfjorden+OLang/NOB:Varanger#fjorden9 LONDON-LOAN-plc ;
 Jouste+OLang/FIN:Jouste ACCRA-sur ;
 Stroud+OLang/UND:Stroud9 BERN-sur ;
 Stahl+OLang/UND:Stahl BERN-sur ;
-Meisel+OLang/UND:Meisel LONDON-sur ;		  
+Meisel+OLang/UND:Meisel LONDON-sur ;		 
 Marmier+OLang/UND:Marmi^er BERN-plc ;
 Lyons+OLang/UND:Lyons BERN-sur ;
 Lieko+OLang/UND:Lieko9 ACCRA-sur ;
@@ -30846,7 +30846,7 @@ Hakuli+OLang/UND:Hakuli ACCRA-sur ;
 Holmvassdalen+OLang/UND:Holmvassdalen9 LONDON-plc ;
 Huotari+OLang/UND:Huotar ERVASTI-sur ;
 Husbanken+OLang/UND:Husbanken LONDON-org ;
-Huui+OLang/UND:Huu PIPPI-org ;  ! 
+Huui+OLang/UND:Huu PIPPI-org ; ! 
 Hyväri+OLang/UND:Hyvär ERVASTI-sur ;
 Iivari+OLang/UND:Iivar ERVASTI-sur ;
 Ilmari+OLang/UND:Ilmar ERVASTI-mal ;
@@ -30938,19 +30938,19 @@ Makurdi+OLang/UND:Makurd ERVASTI-plc ;
 Malaki+OLang/UND:Malak ERVASTI-plc ; 
 Malawi+OLang/UND:Malaw ERVASTI-plc ; 
 Mamre+OLang/UND:Mamre ACCRA-plc ; !
-Maroni+OLang/UND:Maron ERVASTI-sur ;  
-Masudi+OLang/UND:Masud ERVASTI-sur ;  
-Matadi+OLang/UND:Matad ERVASTI-sur ;  
+Maroni+OLang/UND:Maron ERVASTI-sur ; 
+Masudi+OLang/UND:Masud ERVASTI-sur ; 
+Matadi+OLang/UND:Matad ERVASTI-sur ; 
 Maui+OLang/UND:Maui ACCRA-plc ;
 Medici+OLang/UND:Medic ERVASTI-sur ; 
 Mehidi+OLang/UND:Mehid ERVASTI-sur ; 
-Mentzoni+OLang/UND:Mentzon ERVASTI-sur ;  
+Mentzoni+OLang/UND:Mentzon ERVASTI-sur ; 
 Merari+OLang/UND:Merar ERVASTI-sur ; 
-Mesnali+OLang/UND:Mesnal ERVASTI-plc ;  
+Mesnali+OLang/UND:Mesnal ERVASTI-plc ; 
 Midlands+OLang/UND:Mid9#lands BERN-plc ;
 Mikel+OLang/UND:Mikel LONDON-mal ;
 Miren+OLang/UND:Miren LONDON-fem ;
-Morceli+OLang/UND:Morcel ERVASTI-sur ;   
+Morceli+OLang/UND:Morcel ERVASTI-sur ; 
 Moroni+OLang/UND:Moron ERVASTI-sur ; 
 Muittari+OLang/UND:Muittar ERVASTI-sur ;
 Mylläri+OLang/UND:Myllär ERVASTI-sur ; 
@@ -30990,23 +30990,23 @@ Paldiski+OLang/UND:Paldiski ACCRA-plc ;
 Pallari+OLang/UND:Pallar ERVASTI-sur ; 
 Panaggi+OLang/UND:Panagg ERVASTI-sur ; 
 Panu+OLang/UND:Panu ACCRA-mal ;
-Pareli+OLang/UND:Parel ERVASTI-sur ;  
+Pareli+OLang/UND:Parel ERVASTI-sur ; 
 Parkkari+OLang/UND:Parkkar ERVASTI-sur ; 
 Pasuri+OLang/UND:Pasur ERVASTI-sur ; 
-Patteri+OLang/UND:Patter ERVASTI-sur ;  
-Paukkeri+OLang/UND:Paukker ERVASTI-sur ;  
+Patteri+OLang/UND:Patter ERVASTI-sur ; 
+Paukkeri+OLang/UND:Paukker ERVASTI-sur ; 
 Paule+OLang/UND:Paule ACCRA-sur ;
 Pehlevi+OLang/UND:Pehlevi ACCRA-plc ;
 Pekuri+OLang/UND:Pekur ERVASTI-sur ;
 Pelttari+OLang/UND:Pelttar ERVASTI-sur ;
 Penkkari+OLang/UND:Penkkar ERVASTI-obj ; 
-Peteri+OLang/UND:Peter ERVASTI-sur ;  
-Petteri+OLang/UND:Petter ERVASTI-mal ;  
-Peuhkuri+OLang/UND:Peuhkur ERVASTI-sur ;  
+Peteri+OLang/UND:Peter ERVASTI-sur ; 
+Petteri+OLang/UND:Petter ERVASTI-mal ; 
+Peuhkuri+OLang/UND:Peuhkur ERVASTI-sur ; 
 Piekkari+OLang/UND:Piekkar ERVASTI-sur ; 
-Piipari+OLang/UND:Piipar ERVASTI-sur ;  
+Piipari+OLang/UND:Piipar ERVASTI-sur ; 
 Pippuri+OLang/UND:Pippur ERVASTI-sur ; 
-Pollari+OLang/UND:Pollar ERVASTI-sur ;  
+Pollari+OLang/UND:Pollar ERVASTI-sur ; 
 Pomeranssi+OLang/UND:Pomeranssi ACCRA-ani ; 
 Porali+OLang/UND:Poral ERVASTI-plc ;
 Porvali+OLang/UND:Porval ERVASTI-sur ;
@@ -31016,7 +31016,7 @@ Puoskari+OLang/UND:Puoskar ERVASTI-sur ;
 Pusi+OLang/UND:Pusi ACCRA-ani ;
 Putkuri+OLang/UND:Putkur ERVASTI-sur ; 
 Pynttäri+OLang/UND:Pynttär ERVASTI-sur ; 
-Pyökäri+OLang/UND:Pyökär ERVASTI-sur ;  
+Pyökäri+OLang/UND:Pyökär ERVASTI-sur ; 
 Pätäri+OLang/UND:Pätär ERVASTI-sur ;
 Pöyhtäri+OLang/UND:Pöyhtär ERVASTI-sur ; 
 Qadhafi+OLang/UND:Qadhafi ACCRA-sur ;
@@ -31104,7 +31104,7 @@ Yucatán+OLang/UND:Yucatán9 BERN-plc ;
 Zoubari+OLang/UND:Zoubari ACCRA-sur ;
 eNorga+OLang/UND:e#Nor'ga ACCRA-org ;
 eSkuvla+OLang/UND:e#Skuv'la ACCRA-org ;
-eSápmi+OLang/UND:e#Sápm PIPPI-org ;  !!! Is this possible? Check NRK_Sápmi!
+eSápmi+OLang/UND:e#Sápm PIPPI-org ; !!! Is this possible? Check NRK_Sápmi!
 ÁLGU+OLang/UND:ÁLGU ACCRA-obj ;
 Ähtäri+OLang/UND:Ähtäri ACCRA-plc ;
 Öræfajökull+OLang/UND:Öræfa#jökull JOKULL-plc ;
@@ -31151,7 +31151,7 @@ Twitter+OLang/ENG:Twitter LONDON-org ;
 Instagram+OLang/UND:Instagram9 BERN-org ;
 Kjerråtjønnin+OLang/UND:Kjerråtjønnin9 LONDON-mal ;
 Heiberg-øyane/Axel:Hei^berg9-øyane/Axel BERN-plc ;
-Jean-Marie+OLang/UND:Jean-Marie  ACCRA-fem ;
+Jean-Marie+OLang/UND:Jean-Marie ACCRA-fem ;
 TWOL+OLang/UND:TWOL BERN-org ;
 British+OLang/UND:British LONDON-obj ;
 Ceylon+OLang/UND:Ceylon9 LONDON-plc ;
@@ -31223,7 +31223,7 @@ Tukholma+OLang/FIN:Tukholma ACCRA-plc ;
 Tansania+OLang/FIN:Tansani ACCRA-A-plc ;
 Charlie+OLang/NOB:Char#lie NYSTØ-sur ;
 Raija+OLang/UND:Rai^ja ACCRA-fem ;
-Högman+OLang/NOB:Högman9 LONDON-sur ;		  
+Högman+OLang/NOB:Högman9 LONDON-sur ;		 
 Salix+OLang/UND:Salix LONDON-mal ;
 Pengilly+OLang/UND:Pengilly ACCRA-Y-plc ;
 Ironworld+OLang/ENG:Iron#world BERN-plc ;

@@ -19,9 +19,23 @@ engine processing {
 engine processing::after {
     display: inline-block ;
     content: 'Words/second: ' attr(words_per_sec) ;
+    font-weight: bold ;
 }
 
 toolversion { display: none ;}
+
+lexicon::before {
+    content: 'Speller lexicon version: ' ;
+    display: inline-block ;
+}
+lexicon {
+    display: block ;
+}
+lexicon::after {
+    display: inline-block ;
+    content: attr(version) ;
+    font-weight: bold ;
+}
 
 document::before {
     content: 'Document: ' ;
@@ -34,9 +48,11 @@ document {
 timestamp::before {
     content: 'Test date and time: ' ;
     display: inline-block ;
+    font-weight: normal ;
 }
 timestamp {
     display: block ;
+    font-weight: bold ;
 }
 
 truefalsesummary::before {

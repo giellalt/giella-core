@@ -32,4 +32,4 @@ DICTDIR=$5
 VOIKKOSPELL=voikkospell
 
 { time $VOIKKOSPELL -s -d $LANGCODE-x-standard -p $DICTDIR/ ignore_dot=1 \
-        < $1 > $2 2>/dev/null ; } 2> $TIMEUSE
+        < $INFILE > $OUTFILE 2>/dev/null ; } 2> $TIMEUSE

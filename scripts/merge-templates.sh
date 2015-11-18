@@ -167,7 +167,7 @@ fi
 
 TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
-SVNREPOROOT="https://${username}victorio.uit.no/langtech"
+SVNREPOROOT="https://${username}gtsvn.uit.no/langtech"
 
 for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
     macrolang=${macrolangdir#${GTCORE}/${TEMPLATEDIR}/}

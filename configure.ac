@@ -17,7 +17,7 @@
 AC_INIT([giella-core], [0.1], [bugs@divvun.no], [giella-core], [http://divvun.no])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_SUBDIRS([scripts])

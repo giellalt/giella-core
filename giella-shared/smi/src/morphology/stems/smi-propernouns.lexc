@@ -1875,7 +1875,7 @@ Aran+OLang/UND:Aran9 LONDON-plc ;
 Yran+OLang/UND:Yran9 LONDON-plc ;
 Ararat+OLang/UND:Ararat BERN-plc ;
 Arba+OLang/UND:Arba ACCRA-plc ;
-Arbeiderparti+OLang/NOB:Arbeider^parti NYSTØ-org ;! PIPPI - sma
+Arbeiderparti+OLang/NOB:Arbeider^part PIPPI-org ;! PIPPI - sma
 Arbeiderpartiet+Err/Lex+OLang/UND:Arbeider^partiet9 LONDON-org ;
 Arbeidslyst+OLang/NOB:Arbeids^lyst9 BERN-obj ;
 Arbeidsplassen+OLang/NOB:Arbeidsplassen9 LONDON-org ;

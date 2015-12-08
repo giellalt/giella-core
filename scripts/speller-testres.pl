@@ -121,6 +121,9 @@ if ( $engine eq "mw") {
 } elsif ( $engine eq "hf") {
     $input_type="hf";
     read_hfst();
+} elsif ( $engine eq "to") {
+    $input_type="to";
+    read_hfst_tino();
 } else {
     print STDERR "$0: Specify the speller engine: --engine=[pl|pk|mw|hu|fo|hf|vk]\n";
     exit;
@@ -742,6 +745,43 @@ sub read_hfst {
     }
     close(FH);
     $/ = $eol; # restore default value of record separator
+}
+
+# This funcition reads the Tino Didriksen hfst-ospell output
+sub read_hfst_tino {
+
+    print STDERR "Reading Tino Didriksen hfst-ospell output from $output\n";
+    open(FH, $output);
+
+    my $i=0;
+    my @suggestions;
+    my $error;
+    #my @numbers;
+    my @tokens;
+    while (<FH>) {
+        chomp;
+        if (! /@@/) {
+            my ($flag, $sugglist) = split(/\t/, $_, 2);
+
+            if ($flag eq '*') {
+                $originals[$i]{'error'} = 'SplCor';
+            } elsif ($flag eq '#') {
+                $originals[$i]{'error'} = 'SplErr';
+                if (length($sugglist)) {
+                    $originals[$i]{'sugg'} = [ split(/\t/, $sugglist) ];
+                }
+            } elsif ($flag eq '&') {
+                $originals[$i]{'error'} = 'SplErr' ;
+                $originals[$i]{'sugg'} = [ split(/\t/, $sugglist) ];
+            } else {
+                print STDERR __LINE__ . " unknown input, stopping\n";
+                exit(18);
+            }
+
+            $i++;
+        }
+    }
+    close(FH);
 }
 
 # This function reads the correct data to evaluate the performance of the speller

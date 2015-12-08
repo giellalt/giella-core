@@ -775,8 +775,12 @@ sub read_hfst_tino {
             } elsif ($flag eq '&') {
                 $originals[$i]{'error'} = 'SplErr' ;
                 $originals[$i]{'sugg'} = [ split(/\t/, $sugglist) ];
+            } elsif ($flag eq '!') {
+                print STDERR "empty line fed to speller: «" . $_ . "»\n";
             } else {
-                print STDERR __LINE__ . " unknown input, stopping\n";
+                print STDERR __LINE__ . " unknown input\n";
+                print STDERR $_;
+                print STDERR "\nstopping\n";
                 exit(18);
             }
 

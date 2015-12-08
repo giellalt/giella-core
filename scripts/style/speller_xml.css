@@ -9,8 +9,16 @@ spelltestresult, header {
 
 /* Header and summary styling: */
 header engine::before {
-    content: 'Engine: ' open-quote attr(abbreviation) close-quote ;
     display: block ;
+    font-weight: bold ;
+}
+
+header engine[abbreviation="to"]::before {
+    content: 'Engine: ' open-quote 'hfst-ospell-office' close-quote ;
+}
+
+header engine[abbreviation="vk"]::before {
+    content: 'Engine: ' open-quote 'voikkospell' close-quote ;
 }
 
 engine processing {

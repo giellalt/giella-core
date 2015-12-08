@@ -125,7 +125,8 @@ if ( $engine eq "mw") {
     $input_type="to";
     read_hfst_tino();
 } else {
-    print STDERR "$0: Specify the speller engine: --engine=[pl|pk|mw|hu|fo|hf|vk]\n";
+    print STDERR
+        "$0: Specify the speller engine: --engine=[pl|pk|mw|hu|fo|hf|to|vk]\n";
     exit;
 }
 
@@ -1543,7 +1544,7 @@ Usage: speller-testres.pl [OPTIONS]
 --document=<name> The name of the original speller input, if not the input file name.
 -d <name>
 
---engine=[pl|pk|mw|hu|fo|hf|vk]
+--engine=[pl|pk|mw|hu|fo|hf|to|vk]
                   The speller engine used is one of:
                   * pl - Polderland
                   * pk - Icelandic Púki
@@ -1551,6 +1552,7 @@ Usage: speller-testres.pl [OPTIONS]
                   * hu - Hunspell
                   * fo - foma-trie (output format = Hunspell)
                   * hf - Hfst-ospell
+                  * to - Hfst-ospell-office, by Tino Didriksen
                   * vk - Voikko
 
 --ccat            The input is from ccat, the default is typos.txt. Not yet in use.

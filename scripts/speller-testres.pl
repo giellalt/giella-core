@@ -748,10 +748,11 @@ sub read_hfst {
     $/ = $eol; # restore default value of record separator
 }
 
-# This funcition reads the Tino Didriksen hfst-ospell output
+# This funcition reads the hfst-ospell-office tool output, which is quite
+# different from the data from hfst-ospell.
 sub read_hfst_tino {
 
-    print STDERR "Reading Tino Didriksen hfst-ospell output from $output\n";
+    print STDERR "Reading hfst-ospell-office data from $output\n";
     open(FH, $output);
 
     my $i=0;

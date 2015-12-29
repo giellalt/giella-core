@@ -939,8 +939,6 @@ Ahokainen+OLang/FIN:Aho^kai C-FI-NEN-sur ;
 Ahokangas+OLang/FIN:Aho#kangas LONDON-plc ;
 Ahokas+OLang/UND:Aho^kas BERN-sur ;
 Ahola+OLang/UND:Aho^l HANNOLA-sur ; 
-Ahtola+OLang/FIN:Ahtola HANNOLA-plc ;! ERVASTI?
-Aitola+OLang/FIN:Aitol HANNOLA-sur ;! ERVASTI?
 Aittola+OLang/FIN:Aittol HANNOLA-sur ;! ERVASTI?
 Ala-Nikkola+OLang/FIN:Ala-Nikkol HANNOLA-sur ;! ERVASTI?
 Alhola+OLang/FIN:Alhol HANNOLA-sur ;! ERVASTI?
@@ -1067,7 +1065,6 @@ Aitola+OLang/FIN:Aitol HANNOLA-sur ;! ERVASTI?
 Aitta+OLang/UND:Aitta ACCRA-sur ;
 Aittamäki+OLang/FIN:Aitta#mäk MAKI-plc ;
 Aitto-oja+OLang/UND:Aitto-oja ACCRA-sur ;
-Aittola+OLang/FIN:Aittol HANNOLA-sur ;! ERVASTI?
 Aittomäki+OLang/FIN:Aitto#mäk MAKI-sur ;
 Aittoniemi+OLang/FIN:Aitto#niem NIEMI ;
 Aix-en-Provence+OLang/UND:Aix-en-Provence ACCRA-plc ;
@@ -1167,7 +1164,6 @@ Al-Khalil+OLang/UND:Al-Khalil LONDON-plc ;
 Al-Khums+OLang/UND:Al-Khums BERN-plc ;
 Ala-Aho+OLang/UND:Ala-Aho9 ACCRA-sur ;
 Ala-Heikkilä+OLang/FIN:Ala-Heikkilä ACCRA-sur ;
-Ala-Nikkola+OLang/FIN:Ala-Nikkol HANNOLA-sur ;! ERVASTI?
 Ala-Outinen+OLang/FIN:Ala-Outi C-FI-NEN-sur ;
 Ala-Riesto+OLang/FIN:Ala-Riesto9 ACCRA-sur ;
 Alabama+OLang/UND:Alabama ACCRA-plc ;
@@ -1289,7 +1285,6 @@ Algrøy+OLang/NOB:Algr9#øy OY-plc ;
 Alhainen+OLang/FIN:Alhai C-FI-NEN-plc ;
 Alhambra+OLang/UND:Alhambra ACCRA-plc ;
 Alho+OLang/UND:Alho9 ACCRA-sur ;
-Alhola+OLang/FIN:Alhol HANNOLA-sur ;! ERVASTI?
 Alhonen+OLang/FIN:Alho C-FI-NEN-sur ;
 Alhusstrand+OLang/NOB:Alhus#strand9 BERN-plc ;
 Alicante+OLang/UND:Alicante ACCRA-plc ;
@@ -1747,7 +1742,6 @@ Anniken+OLang/UND:Anniken9 LONDON-fem ;
 Annikken+OLang/UND:Annikken9 LONDON-sur ;
 Annka+OLang/UND:Annka ACCRA-fem ;
 Annlaug+OLang/UND:Annlaug9 BERN-fem ;
-Annola+OLang/FIN:Annol HANNOLA-sur ; ! ERVASTI?
 Annolsetra+OLang/UND:Annol^setra ACCRA-plc ;
 Annonay+OLang/UND:Annonay BERN-plc ;
 Annukka+OLang/FIN:Annukka ACCRA-fem ;
@@ -2009,7 +2003,6 @@ Arnvika+OLang/NOB:Arn#vika ACCRA-plc ;
 Gambosjövika+OLang/NOB:Gambosjö#vika ACCRA-plc ;
 Arnøy+OLang/NOB:Arn#øy OY-plc ;
 Arnøyhamn+OLang/NOB:Arnøy#hamn9 BERN-plc ;
-Arola+OLang/FIN:Arol HANNOLA-plc ;! ERVASTI?
 Arole+OLang/UND:Arole ACCRA-sur ;
 Aromaa+OLang/FIN:Aro#maa ACCRA-sur ;
 Aromäki+OLang/FIN:Aro#mäk MAKI-sur ;
@@ -2063,7 +2056,6 @@ Arvila+OLang/FIN:Arvila ACCRA-sur ;
 Arvinen+OLang/FIN:Arvi C-FI-NEN-sur ;
 Arvio+OLang/UND:Arvio9 ACCRA-sur ;
 Arvo+OLang/UND:Arvo9 ACCRA-mal ;
-Arvola+OLang/FIN:Arvol HANNOLA-sur ;! ERVASTI?
 Arvonen+OLang/FIN:Arvo C-FI-NEN-sur ;
 Arøy+OLang/NOB:Ar9#øy OY-plc ;
 Asaf+OLang/UND:Asaf LONDON-mal ;
@@ -2124,7 +2116,6 @@ Askja+OLang/NOB:Askja ACCRA-plc ;
 Askjer+OLang/UND:As^kjer BERN-plc ;
 Asklepios+OLang/UND:Asklepi#os BERN-plc ;
 Asko+OLang/UND:Asko9 ACCRA-mal ;
-Askola+OLang/FIN:Askol HANNOLA-plc ; ! ERVASTI?
 Askrova+OLang/NOB:Askrova ACCRA-sur ;
 Askvik+OLang/NOB:Ask9#vik BERN-plc ;
 Askvoll+OLang/NOB:Ask9#voll BERN-plc ;
@@ -5178,7 +5169,6 @@ Derbe+OLang/UND:Derbe ACCRA-plc ;
 Derby+OLang/NOB:Derby NYSTØ-plc ;
 Derluguian+OLang/UND:Derluguian9 LONDON-sur ;
 Dervo+OLang/UND:Dervo9 ACCRA-sur ;
-Dervola+OLang/FIN:Dervol HANNOLA-sur ; ! ERVASTI?
 Derås+OLang/NOB:Der9#ås BERN-sur ;
 Descendants+OLang/UND:De^scendants LONDON-org ;
 Deset+OLang/UND:Deset LONDON-plc ;
@@ -7898,7 +7888,6 @@ Gaularfjellet+OLang/UND:Gaular9#fjellet LONDON-plc ;
 Gauldal+OLang/NOB:Gaul#dal BERN-plc ;
 Gauldalen+OLang/NOB:Gaul#dalen9 LONDON-plc ;
 Gauldølafylke+OLang/NOB:Gaul^døla#fylke ACCRA-LOAN-plc ;
-Gaulhåvola+OLang/FIN:Gaulhåvol HANNOLA-sur ; ! ERVASTI?
 Gaulis+OLang/UND:Gaulis LONDON-sur ;
 Gaunan+OLang/UND:Gaunan9 LONDON-plc ;
 Gaundal+OLang/NOB:Gaun#dal BERN-plc ;
@@ -8958,7 +8947,6 @@ Haikara+OLang/UND:Haikara ACCRA-sur ;
 Haikarainen+OLang/FIN:Haikarai C-FI-NEN-sur ;
 Haikka+OLang/FIN:Haikka ACCRA-plc ;
 Haiko+OLang/UND:Haiko9 ACCRA-sur ;
-Haikola+OLang/FIN:Haikol HANNOLA-plc ;! ERVASTI?
 Haikonen+OLang/FIN:Haiko C-FI-NEN-sur ;
 Haile+OLang/UND:Haile ACCRA-mal ;
 Haili+OLang/UND:Haili NYSTØ-sur ;
@@ -8988,11 +8976,9 @@ Hakenes+OLang/NOB:Hake#nes BERN-plc ;
 Hakkarainen+OLang/FIN:Hakkarai C-FI-NEN-sur ;
 Hakkas+OLang/UND:Hakkas LONDON-plc ;
 Hakkloa+OLang/UND:Hakkloa ACCRA-plc ;
-Hakkola+OLang/FIN:Hakkol HANNOLA-sur ;! ERVASTI?
 Hakkstabben+OLang/UND:Hakk9#stabben9 LONDON-plc ;
 Hakluyt+OLang/UND:Hakluyt BERN-plc ;
 Hakodate+OLang/UND:Hakodate ACCRA-plc ;
-Hakola+OLang/FIN:Hakol HANNOLA-sur ;! ERVASTI?
 Hakomäki+OLang/FIN:Hako#mäk MAKI-sur ;
 Hakonen+OLang/FIN:Hako C-FI-NEN-sur ;
 Hakoniemi+OLang/FIN:Hako#niem NIEMI ;
@@ -9072,7 +9058,6 @@ Halifax+OLang/UND:Halifax BERN-plc ;
 Halikarnassos+OLang/UND:Halikarnassos LONDON-plc ;
 Halinen+OLang/FIN:Hali C-FI-NEN-sur ;
 Halko+OLang/UND:Halko9 ACCRA-sur ;
-Halkola+OLang/FIN:Halkol HANNOLA-sur ;! ERVASTI?
 Halkosaari+OLang/FIN:Halko#saar PIPPI-plc ;
 Hall+OLang/UND:Hall BERN-sur ;
 Halla+OLang/UND:Halla ACCRA-sur ;
@@ -9271,7 +9256,6 @@ Hannila+OLang/FIN:Hannila ACCRA-sur ;
 Hanninen+OLang/FIN:Hanni C-FI-NEN-sur ;
 Hannisdal+OLang/NOB:Hannis#dal BERN-plc ;
 Hanno+OLang/UND:Hanno9 ACCRA-mal ;
-Hannola+OLang/FIN:Hannol HANNOLA-sur ; ! ERVASTI?
 Hannonen+OLang/FIN:Hanno C-FI-NEN-sur ;
 Hannover+OLang/UND:Hannover LONDON-plc ;
 Hannu+OLang/UND:Hannu ACCRA-mal ;
@@ -9685,10 +9669,8 @@ Heikkiarmas+OLang/UND:Heikki^armas LONDON-mal ;
 Heikkilä+OLang/FIN:Heikkilä ACCRA-sur ;
 Heikkinen+OLang/FIN:Heikki C-FI-NEN-sur ;
 Heikko+OLang/UND:Heikko9 NYSTØ-mal ; 
-Heikkola+OLang/FIN:Heikkol HANNOLA-sur ; ! ERVASTI?
 Heikkonen+OLang/FIN:Heikko C-FI-NEN-sur ;
 Heikkurinen+OLang/FIN:Heikkuri C-FI-NEN-sur ;
-Heikola+OLang/FIN:Heikol HANNOLA-sur ; ! ERVASTI?
 Heikura+OLang/UND:Heikura ACCRA-sur ;
 Heikurainen+OLang/FIN:Heikurai C-FI-NEN-sur ;
 HeilagOlav+OLang/UND:Heilag9#Olav LONDON-mal ;
@@ -9712,7 +9694,6 @@ Heimen-Tidsskrift+OLang/UND:Heimen-Tids#skrift BERN-obj ;
 Heimlund+OLang/NOB:Heim9#lund9 BERN-sur ;
 Heimly+OLang/UND:Heim9#ly NYSTØ-sur ;
 Heimo+OLang/UND:Heimo9 ACCRA-mal ; ! Finnish name
-Heimola+OLang/FIN:Heimol HANNOLA-sur ; ! ERVASTI?
 Heimonen+OLang/FIN:Heimo C-FI-NEN-sur ;
 Heimset+OLang/UND:Heimset BERN-plc ;
 Heimsil+OLang/UND:Heimsil LONDON-plc ;
@@ -9735,7 +9716,6 @@ Heininen+OLang/FIN:Heini C-FI-NEN-sur ;
 Heinisuo+OLang/FIN:Heini#suo9 ACCRA-sur ;
 Heiniö+OLang/UND:Heiniö ACCRA-plc ;
 Heino+OLang/UND:Heino9 ACCRA-mal ;
-Heinola+OLang/FIN:Heinol HANNOLA-plc ; ! ERVASTI?
 Heinonen+OLang/FIN:Heino C-FI-NEN-sur ;
 Heinrich+OLang/UND:Heinrich9 LONDON-mal ;
 Heintze+OLang/UND:Heintze ACCRA-plc ;
@@ -9757,7 +9737,6 @@ Heistadmoen+OLang/NOB:Hei^stad9#mo^en9 LONDON-plc ;
 Heitman+OLang/NOB:Heit9#man9 BERN-sur ;
 Heitmann+OLang/NOB:Heit9#mann9 BERN-sur ;
 Heitos+OLang/UND:Heitos LONDON-mal ;
-Heittola+OLang/FIN:Heittol HANNOLA-sur ; !! ERVASTI?
 Hejlesen+OLang/NOB:Hej9lesen9 LONDON-sur ;
 Hekate+OLang/UND:Hekate ACCRA-sur ;
 Hekkala+OLang/FIN:Hekkala ACCRA-sur ;
@@ -10509,7 +10488,6 @@ Honkaranta+OLang/FIN:Honka#ranta ACCRA-plc ;
 Honkasalo+OLang/FIN:Honka#salo9 ACCRA-sur ;
 Honkavaara+OLang/FIN:Honka#vaara ACCRA-plc ;
 Honko+OLang/UND:Honko9 ACCRA-sur ;
-Honkola+OLang/FIN:Honkol HANNOLA-sur ; ! ERVASTI?
 Honkonen+OLang/FIN:Honko C-FI-NEN-sur ;
 Honna+OLang/NOB:Honna ACCRA-fem ;
 Honne+OLang/UND:Honne ACCRA-sur ;
@@ -11169,7 +11147,6 @@ Iisak+OLang/UND:Iisak LONDON-mal ;
 Iisakka+OLang/FIN:Iisakka ACCRA-sur ;
 Iisko+OLang/UND:Iisko9 ACCRA-sur ;
 Iisko-Matti+OLang/UND:Iisko-Matt PIPPI-mal ;
-Iiskola+OLang/FIN:Iiskol HANNOLA-sur ; ! ERVASTI?
 Iitti+OLang/UND:Iitt PIPPI-plc ;
 Iivanainen+OLang/FIN:Iivanai C-FI-NEN-sur ;
 Iivar+OLang/UND:Iivar LONDON-mal ;
@@ -11221,7 +11198,6 @@ Ilmarinen+OLang/FIN:Ilmari C-FI-NEN-sur ;
 Ilmasti+OLang/UND:Ilmast ERVASTI-sur ;
 Ilmasti+OLang/UND:Ilmast PIPPI-sur ;
 Ilmen+OLang/UND:Ilmen9 LONDON-plc ;
-Ilmola+OLang/FIN:Ilmol HANNOLA-sur ; ! ERVASTI?
 Ilmonen+OLang/FIN:Ilmo C-FI-NEN-sur ;
 Ilola+OLang/FIN:Ilola ACCRA-plc ;
 Ilomäki+OLang/FIN:Ilo#mäk MAKI-sur ;
@@ -11246,7 +11222,6 @@ Immingham+OLang/UND:Imming9#ham9 BERN-plc ;
 Immonen+OLang/FIN:Immo C-FI-NEN-sur ;
 Imperial+OLang/UND:Imperi^al LONDON-org ;
 Impiö+OLang/UND:Impiö ACCRA-plc ;
-Impola+OLang/FIN:Impol HANNOLA-sur ; ! ERVASTI?
 Imponen+OLang/FIN:Impo C-FI-NEN-sur ;
 Imsen+OLang/NOB:Imsen9 LONDON-sur ;
 Imsroa+OLang/UND:Imsroa ACCRA-plc ;
@@ -11580,10 +11555,8 @@ Izmir+OLang/UND:Izmir LONDON-plc ;
 Izvatas+OLang/UND:Izvatas LONDON-org ;
 J%:son+OLang/UND:J%:son9 LONDON-sur ;
 Jaakko+OLang/UND:Jaakko9 ACCRA-mal ;
-Jaakkola+OLang/FIN:Jaakkol HANNOLA-sur ; ! ERVASTI? Ihvertfall ODD på sma: Jaakkolasse -Jaakkolisnie 
 Jaakkonen+OLang/FIN:Jaakko C-FI-NEN-sur ;
 Jaako+OLang/UND:Jaako9 ACCRA-mal ;
-Jaakola+OLang/FIN:Jaakol HANNOLA-sur ; ! ERVASTI?
 Jaakonaho+OLang/FIN:Jaakon#aho9 ACCRA-sur ;
 Jaakonsaari+OLang/FIN:Jaakon#saar PIPPI-sur ;
 Jaala+OLang/FIN:Jaala ACCRA-plc ;
@@ -11650,7 +11623,6 @@ Jakobsli+Err/Orth+OLang/UND:Jakobs#li NYSTØ-plc ;
 Jakobsli+OLang/NOB:Jakobs#li NYSTØ-plc ;
 Jakobsnes+OLang/NOB:Jakobs#nes BERN-plc ;
 Jakobstad+OLang/NOB:Jakob9#stad9 BERN-plc ;
-Jakola+OLang/FIN:Jakol HANNOLA-sur ;! ERVASTI?
 Jakonen+OLang/FIN:Jako C-FI-NEN-sur ;
 Jakov+OLang/UND:Jakov LONDON-plc ;
 Jakovlev+OLang/UND:Jakovlev LONDON-sur ;
@@ -11749,10 +11721,8 @@ Jarveläinen+Err/Lex+OLang/FIN:Jarveläi C-FI-NEN-sur ;
 Jaskari+OLang/UND:Jaskar ERVASTI-sur ;
 Jason+OLang/UND:Jason9 LONDON-mal ;
 Jassy+OLang/UND:Jassy ACCRA-Y-plc ;
-Jatkola+OLang/FIN:Jatkol HANNOLA-sur ;! ERVASTI? eller annen ODD? - 
 Jauhiainen+OLang/FIN:Jauhi^ai C-FI-NEN-sur ;
 Jauho+OLang/UND:Jauho9 ACCRA-sur ;
-Jauhola+OLang/FIN:Jauhol HANNOLA-sur ;! ERVASTI? eller annen ODD? - 
 Java+OLang/UND:Java ACCRA-plc ;
 JavaScript+OLang/UND:Java^Script BERN-obj ;
 Javan+OLang/UND:Javan9 LONDON-plc ;
@@ -12153,15 +12123,12 @@ Juhls% Silvergallery+MWE+OLang/UND:Juhls% Silvergallery ACCRA-Y-obj ;
 Juhls+OLang/UND:Juhls BERN-sur ;
 Juhn+OLang/UND:Juhn9 BERN-sur ;
 Juho+OLang/UND:Juho9 ACCRA-mal ;
-Juhola+OLang/FIN:Juhol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Juka+OLang/UND:Juka ACCRA-plc ;
 Jukarainen+OLang/FIN:Jukarai C-FI-NEN-sur ;
 Jukatan+OLang/UND:Jukatan9 BERN-plc ;
 Jukka+OLang/FIN:Jukka ACCRA-mal ;
 Jukkala+OLang/FIN:Jukkala ACCRA-sur ;
 Jukkara+OLang/UND:Jukkara ACCRA-sur ;
-Jukkola+OLang/FIN:Jukkol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
-Jukola+OLang/FIN:Jukol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Julestraumen+OLang/NOB:Jule#straumen9 LONDON-plc ;
 Julevu+OLang/UND:Julevu ACCRA-plc ;
 Julia% Spacehead+MWE+OLang/UND:Julia% Space^head9 BERN-org ;
@@ -12261,7 +12228,6 @@ Juurikka+OLang/FIN:Juurikka ACCRA-sur ;
 Juurinen+OLang/FIN:Juuri C-FI-NEN-sur ;
 Juusela+OLang/FIN:Juusela ACCRA-sur ;
 Juuso+OLang/FIN:Juuso9 ACCRA-sur ;
-Juusola+OLang/FIN:Juusol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Juusti+OLang/UND:Juust PIPPI-sur ;
 Juuti+OLang/UND:Juut PIPPI-sur ;
 Juutila+OLang/FIN:Juutila ACCRA-sur ;
@@ -12389,7 +12355,6 @@ Kaakko+OLang/UND:Kaakko9 ACCRA-sur ;
 Kaald+OLang/NOB:Kaald9 BERN-sur ;
 Kaali+OLang/UND:Kaal PIPPI-mal ;
 Kaalund+OLang/NOB:Kaa#lund9 BERN-sur ;
-Kaappola+OLang/FIN:Kaappol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kaarakainen+OLang/FIN:Kaarakai C-FI-NEN-sur ;
 Kaare+OLang/UND:Kaare ACCRA-mal ;
 Kaarela+OLang/FIN:Kaarela ACCRA-sur ;
@@ -12483,7 +12448,6 @@ Kaitajärvi+OLang/FIN:Kaita#järv MAKI-plc ;
 Kaitala+OLang/FIN:Kaitala ACCRA-sur ;
 Kaitanen+OLang/FIN:Kaita C-FI-NEN-sur ;
 Kaitila+OLang/FIN:Kaitila ACCRA-sur ;
-Kaivola+OLang/FIN:Kaivol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kaivonen+OLang/FIN:Kaivo C-FI-NEN-sur ;
 Kaivosoja+OLang/FIN:Kaivos#oja ACCRA-sur ;
 Kaja+OLang/UND:Kaja ACCRA-fem ;
@@ -12694,7 +12658,6 @@ Kantanen+OLang/FIN:Kanta C-FI-NEN-sur ;
 Kantelinen+OLang/FIN:Kanteli C-FI-NEN-sur ;
 Kanto+OLang/UND:Kanto9 ACCRA-sur ;
 Kantojärvi+OLang/FIN:Kanto#järv MAKI-plc ;
-Kantola+OLang/FIN:Kantol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kantoluoto+OLang/FIN:Kanto#luoto9 ACCRA-sur ;
 Hailuoto+OLang/FIN:Hai#luoto9 ACCRA-plc ;
 Kanton+OLang/UND:Kanton9 LONDON-plc ;
@@ -12787,7 +12750,6 @@ Karjanmaa+OLang/FIN:Karjan#maa ACCRA-sur ;
 Karjula+OLang/FIN:Karjula ACCRA-sur ;
 Karjunen+OLang/FIN:Karju C-FI-NEN-sur ;
 Karkiainen+OLang/FIN:Karki^ai C-FI-NEN-sur ;
-Karkkola+OLang/FIN:Karkkol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Karkulahti+OLang/FIN:Karku#laht PIPPI-sur ;
 Karl+OLang/UND:Karl BERN-mal ;
 Karl-Arne+OLang/UND:Karl-Arne ACCRA-mal ;
@@ -12958,7 +12920,6 @@ Kaukasus+OLang/UND:Kaukasus BERN-plc ;
 Kaukiainen+OLang/FIN:Kauki^ai C-FI-NEN-sur ;
 Kaukinen+OLang/FIN:Kauki C-FI-NEN-sur ;
 Kauko+OLang/UND:Kauko9 ACCRA-mal ;
-Kaukola+OLang/FIN:Kaukol HANNOLA-plc ; ! ERVASTI? eller annen ODD? - 
 Kaukoranta+OLang/FIN:Kauko#ranta ACCRA-sur ;
 Kaukua+OLang/UND:Kaukua ACCRA-plc ;
 Kaulio+OLang/UND:Kaulio9 ACCRA-sur ;
@@ -13036,7 +12997,6 @@ Kejonen+OLang/FIN:Kejo C-FI-NEN-sur ;
 Kekarainen+OLang/FIN:Kekarai C-FI-NEN-sur ;
 Kekki+OLang/UND:Kekk PIPPI-sur ;
 Kekkonen+OLang/FIN:Kekko C-FI-NEN-sur ;
-Kekola+OLang/FIN:Kekol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kekäle+OLang/UND:Kekäl RONDANE-sur ;
 Kekäläinen+OLang/FIN:Kekäläi C-FI-NEN-sur ;
 Kela+OLang/FIN:Kela ACCRA-sur ; ! Also org
@@ -13316,7 +13276,6 @@ Kipinä+OLang/UND:Kipinä ACCRA-plc ;
 Kippe+OLang/UND:Kippe ACCRA-sur ;
 Kippinge+OLang/NOB:Kipping RONDANE-SG-plc ;
 Kippo+OLang/UND:Kippo9 ACCRA-sur ;
-Kippola+OLang/FIN:Kippol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kire+OLang/UND:Kire ACCRA-sur ;
 Kirgisistan+OLang/UND:Kirgisi#stan9 BERN-plc ;
 Kirgisjalgadas+OLang/UND:Kirgisjalgadas BERN-plc ;
@@ -13787,7 +13746,6 @@ Koivusilta+OLang/UND:Koivu#silta ACCRA-sur ;
 Kojak+OLang/UND:Kojak LONDON-mal ;
 Kojima+OLang/UND:Kojima ACCRA-obj ;
 Kojo+OLang/UND:Kojo9 ACCRA-mal ;
-Kojola+OLang/FIN:Kojol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kojonen+OLang/FIN:Kojo C-FI-NEN-sur ;
 Kokand+OLang/NOB:Kokand9 BERN-sur ;
 Kokelv+OLang/NOB:Kok9#elv BERN-plc ;
@@ -13799,7 +13757,6 @@ Kokki+OLang/UND:Kokk PIPPI-sur ;
 Kokkila+OLang/FIN:Kokkila ACCRA-plc ;
 Kokkinen+OLang/FIN:Kokki C-FI-NEN-sur ;
 Kokko+OLang/UND:Kokko9 ACCRA-sur ;
-Kokkola+OLang/FIN:Kokkol HANNOLA-plc ; ! ERVASTI? eller annen ODD? - 
 Kokkonen+OLang/FIN:Kokko C-FI-NEN-sur ;
 Kokkoniemi+OLang/FIN:Kokko#niem NIEMI ;
 Kokkvold+OLang/NOB:Kokkvold9 BERN-sur ;
@@ -13949,7 +13906,6 @@ Kontiainen+OLang/FIN:Konti^ai C-FI-NEN-sur ;
 Kontinen+OLang/FIN:Konti C-FI-NEN-sur ;
 Kontio+OLang/UND:Kontio9 ACCRA-sur ;
 Kontkanen+OLang/FIN:Kontka C-FI-NEN-sur ;
-Kontola+OLang/FIN:Kontol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kontorservice+OLang/UND:Kontor^service ACCRA-org ;
 Kontro+OLang/UND:Kontro9 ACCRA-sur ;
 Kontrollkommisjonen+OLang/UND:Kontroll#kommisjonen9 LONDON-org ;
@@ -13974,7 +13930,6 @@ Koparnes+OLang/NOB:Kopar9#nes BERN-plc ;
 Koper+OLang/UND:Koper LONDON-sur ;
 Kopervik+OLang/NOB:Koper9#vik BERN-plc ;
 Kopinor+OLang/UND:Kopi^nor BERN-org ;
-Kopola+OLang/FIN:Kopol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Koponen+OLang/FIN:Kopo C-FI-NEN-sur ;
 Koppanen+OLang/FIN:Koppa C-FI-NEN-sur ;
 Koppang+OLang/UND:Kopp9#ang9 BERN-plc ;
@@ -14144,7 +14099,6 @@ Kosmo+OLang/NOB:Kos#mo9 NYSTØ-sur ;
 Kosmoli+Err/Orth+OLang/UND:Kosmo#li NYSTØ-plc ;! Place in 81 Misvaer, Norway
 Kosmoli+OLang/NOB:Kosmo#li NYSTØ-plc ;
 Koso+OLang/UND:Koso9 ACCRA-plc ;
-Kosola+OLang/FIN:Kosol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kosonen+OLang/FIN:Koso C-FI-NEN-sur ;
 Kosova+OLang/NOB:Kosova ACCRA-sur ;
 Kosovo+OLang/UND:Kosovo9 ACCRA-plc ;
@@ -14178,7 +14132,6 @@ Kotiteollisuusyhdistys+OLang/UND:Koti#teollisuus#yhdistys BERN-org ;
 Kotka+OLang/UND:Kotka ACCRA-plc ;
 Kotlas+OLang/UND:Kotlas LONDON-plc ; ! Also sur
 Kotlin+OLang/UND:Kotlin9 BERN-sur ;
-Kotola+OLang/FIN:Kotol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kotonen+OLang/FIN:Koto C-FI-NEN-sur ;
 Kotor+OLang/UND:Kotor LONDON-plc ;
 Kotro+OLang/UND:Kotro9 ACCRA-sur ;
@@ -14316,7 +14269,6 @@ Kristofer+OLang/UND:Kristofer LONDON-mal ;
 Kristoffer+OLang/UND:Kristoffer LONDON-mal ;
 Kristoffersen+OLang/NOB:Kristoffersen9 LONDON-sur ;
 Kristoffervalen+OLang/UND:Kristoffer^valen9 LONDON-plc ;
-Kristola+OLang/FIN:Kristol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kristus+OLang/UND:Kristus LONDON-mal ;
 Krivoj+OLang/UND:Krivoj9 LONDON-plc ;
 Kroa+OLang/UND:Kroa ACCRA-obj ;
@@ -14444,7 +14396,6 @@ Kukka+OLang/FIN:Kukka ACCRA-sur ;
 Kukkamäki+OLang/FIN:Kukka#mäk MAKI-sur ;
 Kukkanen+OLang/FIN:Kukka C-FI-NEN-sur ;
 Kukko+OLang/UND:Kukko9 ACCRA-sur ;
-Kukkola+OLang/FIN:Kukkol HANNOLA-plc ; ! ERVASTI? eller annen ODD? - 
 Kukkonen+OLang/FIN:Kukko C-FI-NEN-sur ;
 Kukkula+OLang/FIN:Kukkula ACCRA-plc ;
 Kukkurainen+OLang/FIN:Kukkurai C-FI-NEN-sur ;
@@ -14548,7 +14499,6 @@ Kurki+OLang/UND:Kurk PIPPI-sur ;
 Kurkinen+OLang/FIN:Kurki C-FI-NEN-sur ;
 Kurko+OLang/UND:Kurko9 ACCRA-sur ; !And obj
 Kurland+OLang/NOB:Kur9#land9 BERN-LOAN-plc ;
-Kurola+OLang/FIN:Kurol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Kuronen+OLang/FIN:Kuro C-FI-NEN-sur ;
 Kuroshio+OLang/UND:Kuroshio9 ACCRA-plc ;
 Kurppa+OLang/UND:Kurppa ACCRA-sur ;
@@ -15070,7 +15020,6 @@ Lampila+OLang/FIN:Lampila ACCRA-sur ;
 Lampimäki+OLang/FIN:Lampi#mäk MAKI-sur ;
 Lampinen+OLang/FIN:Lampi C-FI-NEN-sur ;
 Lampio+OLang/UND:Lampio9 ACCRA-sur ;
-Lampola+OLang/FIN:Lampol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Lamponen+OLang/FIN:Lampo C-FI-NEN-sur ;
 Lamppu+OLang/UND:Lamppu ACCRA-sur ;
 Lamprecht+OLang/UND:Lamp^recht BERN-sur ;
@@ -15433,7 +15382,6 @@ Lehtisaari+OLang/FIN:Lehti#saar PIPPI-plc ;
 Lehtisalo+OLang/FIN:Lehti#salo9 ACCRA-sur ;
 Lehtiö+OLang/UND:Lehtiö ACCRA-plc ;
 Lehto+OLang/UND:Lehto9 ACCRA-sur ;
-Lehtola+OLang/FIN:Lehtol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Lehtolainen+OLang/FIN:Lehtolai C-FI-NEN-sur ;
 Lehtomaa+OLang/FIN:Lehto#maa ACCRA-sur ;
 Lehtomäki+OLang/FIN:Lehto#mäk MAKI-sur ;
@@ -15539,7 +15487,6 @@ Lemmetyinen+OLang/FIN:Lemmetyi C-FI-NEN-sur ;
 Lemmich+OLang/UND:Lemmich9 BERN-sur ;
 Lemmick+OLang/UND:Lemmick LONDON-sur ;
 Lemmo+OLang/UND:Lemmo9 ACCRA-sur ;
-Lemola+OLang/FIN:Lemol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Lemonsjø+OLang/NOB:Lemon#sjø NYSTØ-plc ;
 Lempi+OLang/UND:Lemp PIPPI-mal ;
 Lempinen+OLang/FIN:Lempi C-FI-NEN-sur ;
@@ -15585,7 +15532,6 @@ Leopold+OLang/UND:Leopold9 BERN-mal ;
 Lepidus+OLang/UND:Lepidus LONDON-malsur ;
 Lepistö+OLang/FIN:Lepistö ACCRA-plc ;
 Lepo+OLang/UND:Lepo9 ACCRA-mal ;
-Lepola+OLang/FIN:Lepol HANNOLA-plc ; ! ERVASTI? eller annen ODD? - 
 Lepomäki+OLang/FIN:Lepo#mäk MAKI-sur ;
 Leponiemi+OLang/FIN:Lepo#niem NIEMI ;
 Leppihalme+OLang/UND:Leppi#halme ACCRA-sur ;
@@ -16302,7 +16248,6 @@ Luosujärvi+OLang/FIN:Luosu#järv MAKI-plc ;
 Luoti+OLang/UND:Luot PIPPI-sur ;
 Luoto+OLang/FIN:Luoto9 ACCRA-plc ;
 Luotokorpi+OLang/UND:Luoto#korp PIPPI-sur ;
-Luotola+OLang/FIN:Luotol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Luotonen+OLang/FIN:Luoto C-FI-NEN-sur ;
 Luoyang+OLang/UND:Luo^yang9 BERN-sur ;
 Lura+OLang/UND:Lura ACCRA-plc ;
@@ -16576,7 +16521,6 @@ Maaren+OLang/UND:Maaren9 LONDON-sur ;
 Maarit+OLang/UND:Maarit LONDON-fem ;
 Maarthai+OLang/UND:Maartha DUBAI-sur ; !Ill. seems to be Maarthaijii.
 Maas+OLang/NOB:Maas BERN-sur ;
-Maaskola+OLang/FIN:Maaskol HANNOLA-sur ; ! ERVASTI? eller annen ODD? - 
 Maastricht+OLang/UND:Maastricht BERN-plc ;
 Maastrichttraktaten+Err/Lex+OLang/UND:Maastricht^traktaten9 LONDON-obj ;
 Maattivuono+OLang/FIN:Maatti#vuono9 ACCRA-plc ;

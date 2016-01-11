@@ -41,7 +41,8 @@ $(LP)/bin/$(GOAL).fst: $(LP)/bin/$(GOAL).lexc
 	@echo
 	@echo "*** Building $@ ***"
 	@echo
-	@printf "read text $< \n\
+	@printf "read lexc $<  \n\
+	invert net  \n\
 	save stack $@ \n\
 	quit \n" > tmp/$(GOAL)-fst-script
 	$(XFST)  < tmp/$(GOAL)-fst-script

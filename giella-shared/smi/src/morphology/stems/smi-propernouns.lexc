@@ -213,7 +213,7 @@ Boe+Err/Orth+CmpNP/None+OLang/UND:Boe NYSTØ-mal ;
 Boe+CmpNP/None+OLang/UND:Boe ACCRA-mal ;
 Boo+CmpNP/None+OLang/UND:Boo9 ACCRA-plc ;
 Bow+CmpNP/None+OLang/UND:Bow BERN-sur ;
-Bowie+CmpNP/None+OLang/UND:Lie NYSTØ-sur ;
+Bowie+CmpNP/None+OLang/UND:Bowie NYSTØ-sur ;
 Box+CmpNP/None+OLang/UND:Box BERN-sur ;
 Bru+CmpNP/None+OLang/UND:Bru ACCRA-plc ;
 Bud+CmpNP/None+OLang/UND:Bud9 BERN-sur ;
@@ -31264,4 +31264,3 @@ Oula+OLang/FIN:Oula ACCRA-mal ;
 Šelef+OLang/UND:Šelef LONDON-mal ;
 Mika+OLang/FIN:Mika ACCRA-mal ;
 Jorma+OLang/FIN:Jorma ACCRA-mal ;
-

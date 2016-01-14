@@ -87,8 +87,8 @@ truefalsesummary positive::before {
 truefalsesummary positive::after {
     content: 'False positives: ' attr(false) ;
     display: block ;
-    background-color: #D800DD ;
-    border: 2px ridge #D800DD ;
+    background-color: #3670FF ;
+    border: 2px ridge #3670FF ;
 }
 
 truefalsesummary negative::before {
@@ -101,8 +101,8 @@ truefalsesummary negative::before {
 truefalsesummary negative::after {
     content: 'False negatives: ' attr(false) ;
     display: block ;
-    background-color: #3670FF ;
-    border: 2px ridge #3670FF ;
+    background-color: #D800DD ;
+    border: 2px ridge #D800DD ;
 }
 
 precision::before {
@@ -323,16 +323,16 @@ word[corrsugg="goodaccept"] original {
 }
 
 word[corrsugg="badaccept"] {
-    background-color: #3670FF ;
+    background-color: #D800DD ;
 }
 word[corrsugg="badaccept"] original {
-    border: 2px ridge #3670FF ;
+    border: 2px ridge #D800DD ;
     border-collapse: separate ;
     border-spacing: 2px ;
 }
 
 word[corrsugg="falsealarm"] {
-    background-color: #D800DD ;
+    background-color: #3670FF ;
 }
 
 speller[status=correct] + expected {

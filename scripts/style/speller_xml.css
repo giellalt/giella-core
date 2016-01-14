@@ -87,16 +87,22 @@ truefalsesummary positive::before {
 truefalsesummary positive::after {
     content: 'False positives: ' attr(false) ;
     display: block ;
+    background-color: #D800DD ;
+    border: 2px ridge #D800DD ;
 }
 
 truefalsesummary negative::before {
     content: 'True negatives: ' attr(true) ;
     display: block ;
+    background-color: green ;
+    border: 2px ridge green ;
 }
 
 truefalsesummary negative::after {
     content: 'False negatives: ' attr(false) ;
     display: block ;
+    background-color: #3670FF ;
+    border: 2px ridge #3670FF ;
 }
 
 precision::before {
@@ -307,11 +313,33 @@ word[corrsugg="-1"] {
     background-color: rgb(255, 60, 0) ;
 }
 
+word[corrsugg="goodaccept"] {
+    background-color: green ;
+}
+word[corrsugg="goodaccept"] original {
+    border: 2px ridge green ;
+    border-collapse: separate ;
+    border-spacing: 2px ;
+}
+
+word[corrsugg="badaccept"] {
+    background-color: #3670FF ;
+}
+word[corrsugg="badaccept"] original {
+    border: 2px ridge #3670FF ;
+    border-collapse: separate ;
+    border-spacing: 2px ;
+}
+
+word[corrsugg="falsealarm"] {
+    background-color: #D800DD ;
+}
+
 speller[status=correct] + expected {
     background-color: red ;
 }
 
-results original, expected, edit_dist, suggestions {
+results original, expected, edit_dist, suggestions, errors, origfile {
     display: table-cell;
     padding: 0.2em;
 }
@@ -320,11 +348,15 @@ results speller, position {
     display: none;
 }
 
-suggestion {
+suggestion, error {
     display: list-item ;
     margin-left: 2em ;
 }
 
 suggestion[expected] {
     background-color: lime ;
+}
+
+error::after {
+    content: ' (' attr(type) ')' ;
 }

@@ -37,6 +37,8 @@ aclocal.m4"
 # Set svn:ignore props on all dirs:
 for f in $(find $1/ \
 			-not -iwholename '*.svn*' \
+			-not -iwholename '*build*' \
+			-not -iwholename '*.cache*' \
 			-type d) ; do
 	$svnignore "$mkfiles" $f
 done

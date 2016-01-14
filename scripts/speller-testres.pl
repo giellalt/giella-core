@@ -856,7 +856,9 @@ sub print_xml_output {
 
     my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
 
-
+    my $pi = $doc->createProcessingInstruction("xml-stylesheet");
+    $pi->setData(href=>'https://gtsvn.uit.no/langtech/trunk/gtcore/scripts/style/speller_xml.css', type=>'text/css');
+    $doc->appendChild( $pi );
 
     my $spelltestresult = $doc->createElement('spelltestresult');
     my $results = make_results(\@originals, $doc);

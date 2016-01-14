@@ -146,7 +146,7 @@ AC_PATH_PROG([PUKI], [puki], [],
 AC_MSG_CHECKING([whether we can enable Púki speller testing - Linux only])
 AS_IF([test "x$PUKI" != "x" -a \
 			-d puki/$GTLANG2-latest/ -a \
-			"$(expr substr $(uname -s) 1 5)" == "Linux"],
+			"$(uname -s)" == "Linux"],
       [pukispell_test=yes],
       [pukispell_test=no])
 AC_MSG_RESULT([$pukispell_test])
@@ -162,6 +162,16 @@ AS_IF([test "x$VOIKKOSPELL" != "x" -a -d voikko/$GTLANG2-latest/ ],
 AC_MSG_RESULT([$voikkospell_test])
 AM_CONDITIONAL([CAN_VOIKKOSPELL], [test "x$voikkospell_test" != "xno"])
 
+# Check for hfst-ospell-office
+AC_PATH_PROG([HFST_OSPELL_OFFICE], [hfst-ospell-office], [],
+             [$PATH$PATH_SEPARATOR$with_hfstospelloffice])
+AC_MSG_CHECKING([whether we can enable hfst-ospell-office testing])
+AS_IF([test "x$HFST_OSPELL_OFFICE" != "x" -a -d hfst-mso/$GTLANG2-latest/ ],
+      [hfstospelloffice_test=yes],
+      [hfstospelloffice_test=no])
+AC_MSG_RESULT([$hfstospelloffice_test])
+AM_CONDITIONAL([CAN_HFST_OSPELL_OFFICE], [test "x$hfstospelloffice_test" != "xno"])
+
 ]) # gt_PROG_SCRIPTS_PATHS
 
 AC_DEFUN([gt_PRINT_FOOTER],
@@ -173,6 +183,7 @@ cat<<EOF
     * test PLX: $plxspell_test
     * test Púki: $pukispell_test
     * test Voikko: $voikkospell_test
+    * test Hfst_MSO: $hfstospelloffice_test
     * Html reports using forrest: $html_report
 
  -- Available test corpora:

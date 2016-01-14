@@ -26,10 +26,6 @@ LEXICONVERSION=$(shell readlink $(GTLANG2)-latest | tr -d '/')
 # Forrest publishing:
 SPLTESTREPDIR   = $(GTBIG)/techdoc/proof/spelling/testing2
 
-# Generate speller input:
-$(SPELLERINPUT): $(GSDATA)
-	cut -f1 $< > $@
-
 # Convert the speller output to an xml format:
 $(SPELLERTESTRESULT): \
 		$(GSDATA) \
@@ -47,6 +43,7 @@ $(SPELLERTESTRESULT): \
 		--corpusversion="`cat ../corpusrevisions.txt`" \
 		--memoryuse="`cat spellermemusage.txt`" \
 		--timeuse="`cat spellertimeusage.txt`" \
+		--corrsugg \
 		--xml=$@
 
 $(FORRESTTESTRESULT): $(SPELLERTESTRESULT)

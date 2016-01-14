@@ -1,4 +1,9 @@
 $Rev$
+Added support for the new hfst-ospell-office speller made by Tino, and the
+library version of which is used in the MS Office speller. A number of other
+code changes to improve readability and reduce copy-paste.
+
+r102373:
 Moved gold standard test results for the new version of the test bench to a
 new directory, to not mix new and old test results. Made the filename of the
 test results more transparent and less idiosyncratic.

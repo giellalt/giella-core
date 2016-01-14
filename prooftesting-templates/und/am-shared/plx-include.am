@@ -23,6 +23,10 @@ endif # CAN_PLXSPELLSMA
 # Variables:
 TESTTOOL=pl
 
+# Generate speller input:
+$(SPELLERINPUT): $(GSDATA)
+	cut -f1 $< > $@
+
 # Extract the name of the tool from the AM variable, used by the memory probing
 # shell script:
 SPELLERTOOL=$(notdir $(SPELLER))

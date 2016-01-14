@@ -7,27 +7,28 @@
 # This include file contains targets specific to the hunspell speller.
 
 # Variables:
-SPELLER = $(VOIKKOSPELL)
-TESTTOOL=vk
+SPELLER = $(HFST_OSPELL_OFFICE)
+TESTTOOL=to
 
 # Generate speller input:
 $(SPELLERINPUT): $(GSDATA)
-	cut -f1 $< > $@
+	cut -f1 $< | sed 's/^/$(NO_OF_SUGGS) /'> $@
 
 # Extract the name of the tool from the AM variable, used by the memory probing
 # shell script:
-SPELLERTOOL=$(notdir $(SPELLER))
+SPELLERTOOL=$(notdir $(HFST_OSPELL_OFFICE))
 
 # Run the actual speller command to generate the speller output; the command is
 # wrapped in another call, and followed by yet another shell script, to capture
 # processing time and memory consumption.
 $(SPELLEROUTPUT): $(SPELLERINPUT)
-	{ time $(SPELLER) -s -d $(GTLANG2)-x-standard -p $(GTLANG)-latest/ \
-		ignore_dot=1 < $< > $@ ; } 2> spellertimeusage.txt &
+	{ time $(SPELLER) $(GTLANG)-latest/$(GTLANG).zhfst \
+		< $< > $@ ; } 2> spellertimeusage.txt &
 	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
 
 # Add speller tool version:
 $(SPELLERVERSION):
-	$(SPELLER) --version > $@
+#	$(SPELLER) --version > $@
+	echo "0.1" > $@
 
 include $(top_srcdir)/am-shared/convert_spelleroutput-include.am

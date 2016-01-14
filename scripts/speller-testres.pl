@@ -1109,7 +1109,9 @@ sub set_corrsugg_attribute {
     # corrsugg=6: correct suggestion found below the 5th suggestion
     # corrsugg=0: no suggestions
     # corrsugg=-1: no correct suggestions
-    # corrsugg=accept: the word is accepted by the speller
+    # corrsugg=goodaccept: the word is correctly accepted by the speller
+    # corrsugg=badaccept:  the word is accepted by the speller, but is misspelled
+    # corrsugg=falsealarm: the word is flagged by the speller, but should not
     my ($word) = @_;
 
     if ($word->find('./position')) {
@@ -1118,12 +1120,19 @@ sub set_corrsugg_attribute {
         } else {
             $word->setAttribute('corrsugg' => '6');
         }
+    } elsif ($word->find('./speller[@status="error"]') && 
+            $word->find('./original[@status="correct"]')) {
+        $word->setAttribute('corrsugg' => 'falsealarm');
+    } elsif ($word->find('./speller[@status="correct"]') && 
+            $word->find('./original[@status="error"]')) {
+        $word->setAttribute('corrsugg' => 'badaccept');
     } elsif (! $word->find('./suggestions') && $word->find('./expected')) {
         $word->setAttribute('corrsugg' => '0');
     } elsif (! $word->find('./position') && $word->find('./suggestions')) {
         $word->setAttribute('corrsugg' => '-1');
-    } elsif ($word->find('./speller[@status="correct"]')) {
-        $word->setAttribute('corrsugg' => 'accept');
+    } elsif ($word->find('./speller[@status="correct"]') && 
+            $word->find('./original[@status="correct"]')) {
+        $word->setAttribute('corrsugg' => 'goodaccept');
     }
 }
 

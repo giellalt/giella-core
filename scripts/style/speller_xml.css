@@ -335,10 +335,6 @@ word[corrsugg="falsealarm"] {
     background-color: #3670FF ;
 }
 
-speller[status=correct] + expected {
-    background-color: red ;
-}
-
 results original, expected, edit_dist, suggestions, errors, origfile {
     display: table-cell;
     padding: 0.2em;

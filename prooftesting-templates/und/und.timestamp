@@ -1,4 +1,7 @@
 $Rev$
+Use GTLANG2 instead of GTLANG - caused speller failures when testing SME.
+
+r128420:
 Remove the first line of the hfst-ospell-office output - it is just a signature
 indicating that the speller is working, and may trip off output data parsing.
 

@@ -1377,7 +1377,9 @@ sub make_allpos_percent {
 
     my $allpos_percent = $doc->createElement('allpos_percent');
 
-    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]]')->size;
+    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
+                                               and original[@status = "error"]]
+                                           ')->size;
     my $positions = $results->findnodes('.//position')->size;
 
     if ($spellererror) {
@@ -1392,7 +1394,9 @@ sub make_top5pos_percent {
 
     my $top5pos_percent = $doc->createElement('top5pos_percent');
 
-    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]]')->size;
+    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
+                                               and original[@status = "error"]]
+                                           ')->size;
     my $positions = $results->findnodes('.//position[text() < 6]')->size;
 
     if ($spellererror > 0) {

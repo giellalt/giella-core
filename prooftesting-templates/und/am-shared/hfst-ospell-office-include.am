@@ -23,8 +23,10 @@ SPELLERTOOL=$(notdir $(HFST_OSPELL_OFFICE))
 # processing time and memory consumption.
 $(SPELLEROUTPUT): $(SPELLERINPUT)
 	{ time $(SPELLER) $(GTLANG)-latest/$(GTLANG).zhfst \
-		< $< > $@ ; } 2> spellertimeusage.txt &
+		< $< > $@.tmp ; } 2> spellertimeusage.txt &
 	$(SCRIPTDIR)/scripted-memusg.sh $(SPELLERTOOL) 2> spellermemusage.txt
+	tail +2 $@.tmp > $@
+	rm -f $@.tmp
 
 # Add speller tool version:
 $(SPELLERVERSION):

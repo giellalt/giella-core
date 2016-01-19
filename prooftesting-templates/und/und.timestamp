@@ -1,4 +1,8 @@
 $Rev$
+Remove the first line of the hfst-ospell-office output - it is just a signature
+indicating that the speller is working, and may trip off output data parsing.
+
+r128174:
 Added support for the new hfst-ospell-office speller made by Tino, and the
 library version of which is used in the MS Office speller. A number of other
 code changes to improve readability and reduce copy-paste.

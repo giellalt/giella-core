@@ -1120,17 +1120,17 @@ sub set_corrsugg_attribute {
         } else {
             $word->setAttribute('corrsugg' => '6');
         }
-    } elsif ($word->find('./speller[@status="error"]') && 
+    } elsif ($word->find('./speller[@status="error"]') &&
             $word->find('./original[@status="correct"]')) {
         $word->setAttribute('corrsugg' => 'falsealarm');
-    } elsif ($word->find('./speller[@status="correct"]') && 
+    } elsif ($word->find('./speller[@status="correct"]') &&
             $word->find('./original[@status="error"]')) {
         $word->setAttribute('corrsugg' => 'badaccept');
     } elsif (! $word->find('./suggestions') && $word->find('./expected')) {
         $word->setAttribute('corrsugg' => '0');
     } elsif (! $word->find('./position') && $word->find('./suggestions')) {
         $word->setAttribute('corrsugg' => '-1');
-    } elsif ($word->find('./speller[@status="correct"]') && 
+    } elsif ($word->find('./speller[@status="correct"]') &&
             $word->find('./original[@status="correct"]')) {
         $word->setAttribute('corrsugg' => 'goodaccept');
     }

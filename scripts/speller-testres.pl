@@ -158,15 +158,15 @@ if ($print_xml) {
 sub convert_systime {
     my %time_hash = ('realtime', '0', 'usertime', '0', 'systime', '0');
 
-    open my $input, '<', $timeuse;
-    while (<$input>) {
-        chomp;
-        if (/^real/) {
-            $time_hash{'realtime'} = convert_systime_to_seconds($_);
-        } elsif (/^user/) {
-            $time_hash{'usertime'} = convert_systime_to_seconds($_);
-        } elsif (/^sys/) {
-            $time_hash{'systime'} = convert_systime_to_seconds($_);
+    my @timelines = split(/\n/, $timeuse);
+    for my $timeline (@timelines) {
+        chomp $timeline;
+        if ($timeline =~ /^real/) {
+            $time_hash{'realtime'} = convert_systime_to_seconds($timeline);
+        } elsif ($timeline =~ /^user/) {
+            $time_hash{'usertime'} = convert_systime_to_seconds($timeline);
+        } elsif ($timeline =~ /^sys/) {
+            $time_hash{'systime'} = convert_systime_to_seconds($timeline);
         }
     }
 

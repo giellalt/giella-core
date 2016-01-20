@@ -306,7 +306,7 @@ sub read_hunspell {
         #if (@suggestions) { print "Suggs: @suggestions\n"; }
 
         # remove extra space from original
-        if ($orig) {
+        if (length($orig) > 0) {
             $orig =~ s/^\s*(.*?)\s*$/$1/;
         }
         if ($offset) {
@@ -315,7 +315,7 @@ sub read_hunspell {
 
         if ($error && $error eq "SplCor") {
             $originals[$i]{'error'} = $error;
-        } elsif ($orig && $originals[$i] && $originals[$i]{'orig'} ne $orig) {
+        } elsif (length($orig) > 0 && $originals[$i] && $originals[$i]{'orig'} ne $orig) {
             # Some simple adjustments to the input and output lists.
             # First search the output word in the input list.
             push (@tokens, $orig);
@@ -390,7 +390,7 @@ sub read_puki {
 #        if (@numbers) { print "Nums: @numbers\n"; }
 
         # remove extra space from original
-        if ($orig) {
+        if (length($orig) > 0) {
             $orig =~ s/^\s*(.*?)\s*$/$1/;
         }
 
@@ -544,7 +544,7 @@ sub read_polderland {
             }
         }
         close(FH);
-        if ($orig) {
+        if (length($orig) > 0) {
             #Store the suggestions from the last round.
             if (@suggestions) {
                 $originals[$i]{'sugg'} = [ @suggestions ];
@@ -703,7 +703,7 @@ sub read_hfst {
 #        if (@numbers) { print "Nums: @numbers\n"; }
 
         # remove extra space from original
-        if ($orig) {
+        if (length($orig) > 0) {
             $orig =~ s/^\s*(.*?)\s*$/$1/;
         }
 
@@ -807,7 +807,7 @@ sub read_typos {
 #        print STDERR "Original: $orig\n";
 #        print STDERR "Expected: $expected\n" if $expected;
 #        print STDERR "Comment:  $comment\n" if $comment;
-        if ( $orig ) {
+        if (length($orig) > 0) {
             my $rec = {};
             $orig =~ s/\s*$//;
             $rec->{'orig'} = $orig;
@@ -877,7 +877,7 @@ sub make_original {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
-    if ($rec->{'orig'}) {
+    if (length($rec->{'orig'})) {
         my $original = $doc->createElement('original');
         $original->appendTextNode($rec->{'orig'});
 
@@ -1520,7 +1520,7 @@ sub print_output {
 
     for my $rec (@originals) {
         my @suggestions;
-        if ($rec->{'orig'}) {
+        if (length($rec->{'orig'})) {
             print "Orig: $rec->{'orig'} | ";
         }
         if ($rec->{'expected'}) {

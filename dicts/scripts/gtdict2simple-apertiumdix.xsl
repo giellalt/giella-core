@@ -23,10 +23,10 @@
 
   
   <!-- Input file: customize as you need it -->
-  <xsl:param name="inFile" select="'nobtull/ns.xml'"/>
+  <xsl:param name="inFile" select="'finsms/sms2fin_tries_02.xml'"/>
 
   <!-- Output dir: customize as you need it -->
-  <xsl:param name="outDir" select="'nobtull2'"/>
+  <xsl:param name="outDir" select="'smsRev'"/>
   
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>

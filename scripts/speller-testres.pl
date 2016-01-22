@@ -248,7 +248,7 @@ containing status and results produced by hunspell ended by an empty line.</p>
 <p>Exceptions to this rule are:</p>
 
 <ul>
-    <li>input lines starting with - produce no output</li>
+    <li>input lines starting with - or + produce no output</li>
     <li>mail and web adresses produce only an empty line</li>
 </ul>
 
@@ -289,7 +289,7 @@ sub read_hunspell {
     my $orig_i = 0;
 
     while ($orig_i < $origsize) {
-        if ($originals[$orig_i]{'orig'} =~ /^-/) {
+        if ($originals[$orig_i]{'orig'} =~ /^[-+]/) {
             $originals[$orig_i]{'error'} = "SplCor";
         } elsif ($originals[$orig_i]{'orig'} =~ /@|^http:\/\//) {
             $originals[$orig_i]{'error'} = "SplCor";

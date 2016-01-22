@@ -238,101 +238,130 @@ sub read_applescript {
     close(FH);
 }
 
+=pod
+
+=begin html
+
+<p>Every input line to hunspell produces one or more lines of output
+containing status and results produced by hunspell ended by an empty line.</p>
+
+<p>Exceptions to this rule are:</p>
+
+<ul>
+    <li>input lines starting with - produce no output</li>
+    <li>mail and web adresses produce only an empty line</li>
+</ul>
+
+<p>The speller output file is read into an array, @outlines</p>
+
+<p>To keep input and output in sync, for each input, check the input word</p>
+
+<ul>
+    <li>if input starts with -, go the next input, ignore output line</li>
+    <li>if input is a mail or webadress, go to the next input and output line</li>
+    <li>on other input</li>
+    <ul>
+        <li>read output lines until an empty line is hit</li>
+        <ul>
+            <li>if there is one output line, set the data</li>
+            <li>if there are more output lines, look for an error flag,
+            ignore suggestions, as this will not make sense</li>
+        </ul>
+    </ul>
+</ul>
+
+=end html
+
+=cut
+
 sub read_hunspell {
-
     print STDERR "Reading Hunspell output from $output\n";
-    open(FH, $output);
+    open(FH, '<', $output);
+    my @lines = <FH>;
+    my $outlines = scalar(@lines);
 
-    my $i=0;
-    my @suggestions;
-    my $error;
-    #my @numbers;
-    my @tokens;
-    while (<FH>) {
-        chomp;
-        # An empty line marks the beginning of next input
-        if (/^\s*$/) {
-            if ($originals[$i] && ! $originals[$i]{'error'}) {
-                $originals[$i]{'error'} = "TokErr";
-                $originals[$i]{'tokens'} =  [ @tokens ];
+    # Start indexing output at the second line, because the first
+    # line is only a message from hunspell that it is alive
+    my $out_i = 1;
+
+    my $origsize = scalar(@originals);
+    # Input is indexed from the first item
+    my $orig_i = 0;
+
+    while ($orig_i < $origsize) {
+        if ($originals[$orig_i]{'orig'} =~ /^-/) {
+            $originals[$orig_i]{'error'} = "SplCor";
+        } elsif ($originals[$orig_i]{'orig'} =~ /@|^http:\/\//) {
+            $originals[$orig_i]{'error'} = "SplCor";
+            # compensate for the empty line produced in the output
+            $out_i++;
+        } else {
+            my @errorlines;
+            while ($out_i < $outlines && $lines[$out_i] !~ /^$/) {
+                push(@errorlines, $lines[$out_i]);
+                $out_i++;
             }
-            @tokens = undef;
-            pop @tokens;
-            $i++;
-            next;
+
+            my $lines_len = scalar(@errorlines);
+            if ($lines_len == 1) {
+                handle_hunspell_line($errorlines[0], $orig_i);
+            } elsif ($lines_len > 1) {
+                $originals[$orig_i]{'error'} = handle_hunspell_lines(\@errorlines);
+            } else {
+                die "$originals[$orig_i]{'orig'} $out_i whoops, out of sync!\n";
+            }
+
+            # compensate for the empty line
+            $out_i++;
         }
-        if (! $originals[$i]) {
-            cluck "Warning: the number of output words did not match the input\n";
-            cluck "Skipping part of the output..\n";
+        # ready for the next input
+        $orig_i++;
+    }
+}
+
+sub handle_hunspell_line {
+    my ($errorline, $orig_i) = @_;
+
+    chomp $errorline;
+    my ($flag, $rest) = split(/ /, $errorline, 2);
+
+    if ($flag eq '*') {
+        $originals[$orig_i]{'error'} = 'SplCor';
+    } elsif ($flag eq '+') {
+        $originals[$orig_i]{'error'} = 'SplCor';
+    } elsif ($flag eq '-') {
+        $originals[$orig_i]{'error'} = 'SplCor';
+    } elsif ($flag eq '#') {
+        $originals[$orig_i]{'error'} = 'SplErr';
+    } elsif ($flag eq '&') {
+        $originals[$orig_i]{'error'} = 'SplErr';
+        my @parts = split(/ /, $rest, 4);
+
+        if (! $parts[0] eq $originals[$orig_i]{'orig'}) {
+            die "$parts[0], $originals[$orig_i]{'orig'}\n";
+        }
+
+        my @sugglist = split(/\, /, $parts[3]);
+        $originals[$orig_i]{'sugg'} = [ @sugglist ];
+        $originals[$orig_i]{'suggnr'} = scalar(@sugglist);
+    }
+}
+
+sub handle_hunspell_lines {
+    my ($errorlines_ref) = @_;
+
+    my $errors = "#&";
+    my $error = 'SplCor';
+    for my $errorline (@{$errorlines_ref}) {
+        chomp $errorline;
+        my @parts = split(/ /, $errorline, 2);
+        if (index($errors, $parts[0]) != -1) {
+            $error = 'SplErr';
             last;
         }
-        # Typical input:
-        # & Eskil 4 0: Esski, Eskaleri, Skilla, Eskaperi
-        # & = misspelling with suggestions
-        # Eskil = original input
-        # 4 = number of suggestions
-        # 0: offset in input line of orig word
-        # The rest is the comma-separated list of suggestion
-        my $root;
-        my $suggnr;
-        my $compound;
-        my $orig;
-        my $offset;
-        my ($flag, $rest) = split(/ /, $_, 2);
-
-        # Error symbol conversion:
-        if ($flag eq '*') {
-            $error = 'SplCor' ;
-        } elsif ($flag eq '+') {
-            $error = 'SplCor' ;
-            $root = $rest;
-        } elsif ($flag eq '-') {
-            $error = 'SplCor' ;
-            $compound =1;
-        } elsif ($flag eq '#') {
-            $error = 'SplErr' ;
-            ($orig, $offset) = split(/ /, $rest, 2);
-        } elsif ($flag eq '&') {
-            $error = 'SplErr' ;
-            my $sugglist;
-            ($orig, $suggnr, $offset, $sugglist) = split(/ /, $rest, 4);
-            @suggestions = split(/\, /, $sugglist);
-        }
-
-        # Debug prints
-        #print "Flag: $flag\n";
-        #print "ERROR: $error\n";
-        #if ($orig) { print "Orig: $orig\n"; }
-        #if (@suggestions) { print "Suggs: @suggestions\n"; }
-
-        # remove extra space from original
-        if (length($orig) > 0) {
-            $orig =~ s/^\s*(.*?)\s*$/$1/;
-        }
-        if ($offset) {
-            $offset =~ s/\://;
-        }
-
-        if ($error && $error eq "SplCor") {
-            $originals[$i]{'error'} = $error;
-        } elsif (length($orig) > 0 && $originals[$i] && $originals[$i]{'orig'} ne $orig) {
-            # Some simple adjustments to the input and output lists.
-            # First search the output word in the input list.
-            push (@tokens, $orig);
-        } elsif ($originals[$i] && (! $orig || $originals[$i]{'orig'} eq $orig)) {
-            if ($error) {
-                $originals[$i]{'error'} = $error;
-            } else {
-                $originals[$i]{'error'} = "not_known";
-            }
-            $originals[$i]{'sugg'} = [ @suggestions ];
-            if ($suggnr) {
-                $originals[$i]{'suggnr'} = $suggnr;
-            }
-            #$originals[$i]{'num'} = [ @numbers ];
-        }
     }
-    close(FH);
+
+    return $error;
 }
 
 sub read_puki {
@@ -748,7 +777,7 @@ sub read_hfst {
     $/ = $eol; # restore default value of record separator
 }
 
-# This funcition reads the hfst-ospell-office tool output, which is quite
+# This function reads the hfst-ospell-office tool output, which is quite
 # different from the data from hfst-ospell.
 sub read_hfst_tino {
 

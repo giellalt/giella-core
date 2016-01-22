@@ -308,7 +308,7 @@ sub read_hunspell {
             } elsif ($lines_len > 1) {
                 $originals[$orig_i]{'error'} = handle_hunspell_lines(\@errorlines);
             } else {
-                die "$originals[$orig_i]{'orig'} $out_i whoops, out of sync!\n";
+                die "orig: $originals[$orig_i]{'orig'} no: $orig_i spoutline: $out_i whoops, out of sync!\n";
             }
 
             # compensate for the empty line

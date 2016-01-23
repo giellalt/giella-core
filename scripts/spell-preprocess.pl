@@ -17,23 +17,23 @@ binmode( STDERR, ':utf8' );
 use open 'utf8';
 
 while(<>) {
-	# if the line contains a tab, there is an error correction pair - all is ok:
-	if (/.+\t.+/) { print; next; }
+    # if the line contains a tab, there is an error correction pair - all is ok:
+    if (/.+\t.+/) { print; next; }
 
-	# discard lines which don't contain any letters or numbers.
-	next if (! /[\p{L}\p{Nd}]+/); # No letters or numbers
-	next if (/^\p{P}+$/);         # Remove lines with only punctuation
-	next if (/^[\p{P}\p{S}]+[\p{L}\p{N}]$/); # Remove smilies
+    # discard lines which don't contain any letters or numbers.
+    next if (! /[\p{L}\p{Nd}]+/); # No letters or numbers
+    next if (/^\p{P}+$/);         # Remove lines with only punctuation
+    next if (/^[\p{P}\p{S}]+[\p{L}\p{N}]$/); # Remove smilies
 
-	chomp;
+    chomp;
 
-	# Remove a few punctuation chars from the beginning and end of
-	# the expression, preserving full stops at the end.
-	s/^[".\(\/«”“]+//;  # Remove from the start of the word
-	s/["),!?»”“]+\.?$//; # Remove from the end, including a final full stop
-	s/[.]+$/./; # Collapse multiple full stops to one
+    # Remove a few punctuation chars from the beginning and end of
+    # the expression, preserving full stops at the end.
+    s/^[".\(\/«”“]+//;  # Remove from the start of the word
+    s/["),!?»”“]+\.?$//; # Remove from the end, including a final full stop
+    s/[.]+$/./; # Collapse multiple full stops to one
 
-	# add a tab and a newline to the end of the word, then print:
-	my $word = $_ . "\t\n";
-	print $word;
+    # add a tab and a newline to the end of the word, then print:
+    my $word = $_ . "\t\n";
+    print $word;
 }

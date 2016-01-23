@@ -827,9 +827,6 @@ sub read_typos {
     open(FH, "<$input") or die "Could not open $input";
 
     while (<FH>) {
-        chomp;
-        next if (/^[\#\!]/);
-        next if (/^\s*$/);
 #        s/[\#\!].*$//; # not applicable anymore - we want to preserve comments
         my ($testpair, $comment) = split(/[\#\!]\s*/);
         my ($orig, $expected) = split(/\t+/,$testpair);

@@ -17,6 +17,9 @@ binmode( STDERR, ':utf8' );
 use open 'utf8';
 
 while(<>) {
+    chomp;
+    next if (/^[\#\!]/);
+    next if (/^\s*$/);
     # if the line contains a tab, there is an error correction pair - all is ok:
     if (/.+\t.+/) { print; next; }
 
@@ -25,7 +28,6 @@ while(<>) {
     next if (/^\p{P}+$/);         # Remove lines with only punctuation
     next if (/^[\p{P}\p{S}]+[\p{L}\p{N}]$/); # Remove smilies
 
-    chomp;
 
     # Remove a few punctuation chars from the beginning and end of
     # the expression, preserving full stops at the end.

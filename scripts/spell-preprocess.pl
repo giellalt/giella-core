@@ -2,7 +2,7 @@
 #
 # spell-preprocess.pl
 # Preprocesses input data before spell checking, to ensure
-# consistent and valid data. The output format follows typos.txt. 
+# consistent and valid data. The output format follows typos.txt.
 #
 # Usage: spell-preprocess.pl < INFILE > OUTFILE
 

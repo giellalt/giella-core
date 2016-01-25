@@ -1348,13 +1348,10 @@ sub make_truefalsesummary {
     my $precision = $doc->createElement('precision');
     my $recall = $doc->createElement('recall');
 
-    my $positives = (get_true_positive($results) + get_false_positive($results));
-    if ($positives > 0) {
-        $precision->appendTextNode(sprintf("%.2f", get_true_positive($results)/$positives));
-        $truefalsesummary->appendChild($precision);
-        $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / $positives));
-        $truefalsesummary->appendChild($recall);
-    }
+    $precision->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_positive($results))));
+    $truefalsesummary->appendChild($precision);
+    $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_negative($results))));
+    $truefalsesummary->appendChild($recall);
 
 
     my $accuracy = $doc->createElement('accuracy');

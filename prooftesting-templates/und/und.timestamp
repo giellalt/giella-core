@@ -1,4 +1,8 @@
 $Rev$
+No need to use a tmp file + tail - the comment lines are stripped by the script
+reading the data file.
+
+r128423:
 Use GTLANG2 instead of GTLANG - caused speller failures when testing SME.
 
 r128420:

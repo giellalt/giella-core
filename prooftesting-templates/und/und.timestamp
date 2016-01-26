@@ -1,4 +1,7 @@
 $Rev$
+Get real hfst-ospell-office version number from man file.
+
+r128657:
 No need to use a tmp file + tail - the comment lines are stripped by the script
 reading the data file.
 

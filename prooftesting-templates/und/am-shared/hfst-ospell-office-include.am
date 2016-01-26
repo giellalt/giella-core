@@ -28,7 +28,7 @@ $(SPELLEROUTPUT): $(SPELLERINPUT)
 
 # Add speller tool version:
 $(SPELLERVERSION):
-#	$(SPELLER) --version > $@
-	echo "0.1" > $@
+	man hfst-ospell-office | grep 'hfst' | egrep '\d\.\d' | tr -s ' ' \
+		| cut -d' ' -f3  > $@
 
 include $(top_srcdir)/am-shared/convert_spelleroutput-include.am

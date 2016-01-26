@@ -1,4 +1,7 @@
 $Rev$
+Change the order of testing, Hunspell last.
+
+r128694:
 Get real hfst-ospell-office version number from man file.
 
 r128657:

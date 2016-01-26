@@ -21,7 +21,7 @@ while(<>) {
     next if (/^[\#\!]/);
     next if (/^\s*$/);
     # if the line contains a tab, there is an error correction pair - all is ok:
-    if (/.+\t.+/) { print; next; }
+    if (/.+\t.+/) { print $_ , "\n"; next; }
 
     # discard lines which don't contain any letters or numbers.
     next if (! /[\p{L}\p{Nd}]+/); # No letters or numbers

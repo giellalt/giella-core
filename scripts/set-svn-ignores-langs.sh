@@ -42,6 +42,7 @@ fstfiles="*fst
 for f in $(find $1/ \
 			-not -iwholename '*.svn*' \
 			-not -iwholename '*build*' \
+			-not -iwholename '*bygg*' \
 			-not -iwholename '*.cache*' \
 			-not -iwholename '*hfst/3*' \
 			-not -iwholename '*hfst/MacVoikko*' \
@@ -216,12 +217,12 @@ $svnignore "$mkfiles
 *.txt
 *.sh" $1/test/tools/spellcheckers
 
-# Set the svn:ignore prop on the test/tools/spellcheckers/fstbased/hfst dir:
+# Set the svn:ignore prop on the test/tools/spellcheckers/fstbased/desktop/hfst dir:
 $svnignore "$mkfiles
 *.log
 *.trs
 *.txt
-*.sh" $1/test/tools/spellcheckers/fstbased/hfst
+*.sh" $1/test/tools/spellcheckers/fstbased/desktop/hfst
 
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/src/morphology/affixes

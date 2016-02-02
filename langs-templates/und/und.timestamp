@@ -1,4 +1,7 @@
 $Rev$
+Corrected a miss in the previous commit.
+
+r128981:
 Moving the hfst speller test dir inside
 test/tools/spellcheckers/fstbased/desktop/.
 

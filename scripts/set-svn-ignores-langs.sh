@@ -140,10 +140,15 @@ apertium.relabel" $1/tools/mt/apertium/tagsets
 $svnignore "$mkfiles
 abbr.txt" $1/tools/preprocess
 
-# Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
+# Set the svn:ignore prop on the tools/spellcheckers/fstbased/desktop/ dir:
 $svnignore "$mkfiles
 $fstfiles
-*.txt" $1/tools/spellcheckers/fstbased
+*.txt" $1/tools/spellcheckers/fstbased/desktop/
+
+# Set the svn:ignore prop on the tools/spellcheckers/fstbased/mobile/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.txt" $1/tools/spellcheckers/fstbased/mobile/
 
 # Set the svn:ignore prop on the hfst speller dir:
 $svnignore "$mkfiles
@@ -158,12 +163,12 @@ test.*
 build
 unitweight
 editdist.default.regex
-3" $1/tools/spellcheckers/fstbased/hfst
+3" $1/tools/spellcheckers/fstbased/desktop/hfst
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/weighting/ dir:
 $svnignore "$mkfiles
 $fstfiles
-spellercorpus.clean.txt" $1/tools/spellcheckers/fstbased/weighting
+spellercorpus.clean.txt" $1/tools/spellcheckers/fstbased/desktop/weighting
 
 # Set the svn:ignore prop on the grammarchecker dir:
 $svnignore "$mkfiles

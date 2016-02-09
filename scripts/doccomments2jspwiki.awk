@@ -34,7 +34,7 @@ function expand_variables(s) {
 }
 /^!![€$][^ ]/ {
     printf("\n__%s examples:__\n", 
-           gensub("!![€$][^ ]* *", "", ""));
+           gensub("!![€$][^ ]* *", "", 1));
 }
 /^!!€ / {
     if (NF >= 4) {
@@ -76,36 +76,36 @@ function expand_variables(s) {
     printf("This construct is not supported anymore:\n {{{%s}}} ", $0);
 }
 /.*!!= / {
-    CODE=gensub("!!=.*", "", "");
+    CODE=gensub("!!=.*", "", 1);
     if ($0 ~ /@CODE@/)
     {
-        print(expand_variables(gensub(".*!!=", "", "")));
+        print(expand_variables(gensub(".*!!=", "", 1)));
     }
     else
     {
-        print(expand_variables(gensub("!!=", " ", "")));
+        print(expand_variables(gensub("!!=", " ", 1)));
     }
 }
 /.*!!≈ / {
     CODE=gensub("  *", " ", "g",
-           gensub("^ *", "", "",
-           gensub(" *!!≈.*", "", "")));
+           gensub("^ *", "", 1,
+           gensub(" *!!≈.*", "", 1)));
     if ($0 ~ /@CODE@/)
     {
-        print(expand_variables(gensub(".*!!≈", "", "")));
+        print(expand_variables(gensub(".*!!≈", "", 1)));
     }
     else
     {
         printf("%s ", CODE);
-        print(expand_variables(gensub("!!≈", " ", "")));
+        print(expand_variables(gensub("!!≈", " ", 1)));
     }
 }
-/.*!! / {print(expand_variables(gensub(".*!! ", "", ""))); }
+/.*!! / {print(expand_variables(gensub(".*!! ", "", 1))); }
 /!!/ {SOMETHING_WRONG="FALSE";}
 /^Multichar_Symbols/ {LEXNAME=$1;}
 /^LEXICON / {LEXNAME=$2;}
 /^"[^"]*"/ {
-    RULENAME=gensub("!.*", "", "", gensub("\"", "", "g"));
+    RULENAME=gensub("!.*", "", 1, gensub("\"", "", "g"));
 }
 END {
     if (SOMETHING_WRONG=="TRUE") {

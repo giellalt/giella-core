@@ -5,7 +5,7 @@
 /^!! \$/ {
     printf("\n- \\**%s* (is not standard language)\n\n", $3);
 }
-/^!! [^$€]/ {print(gensub("!! ?", "", "")); }
+/^!! [^$€]/ {print(gensub("!! ?", "", 1)); }
 /^LEXICON / {
     print($2);
     print(gensub(".", "-", "g", $2)); 

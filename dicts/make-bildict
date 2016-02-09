@@ -28,7 +28,7 @@ SLANG       = sme
 TLANG       = nob
 LP          = $(SLANG)$(TLANG)
 # translation number: values 'first' = use only the first t-element; 'all' = use all t-elements 
-TNUM        = first
+TNUM        = all
 GOAL        = $(LP)-$(TNUM)
 BEGIN       = @echo "*** Generating $@-file ***"
 END         = @echo "Done."

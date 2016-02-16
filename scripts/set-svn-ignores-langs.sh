@@ -159,17 +159,31 @@ easteregg.*
 *.zhfst
 *.oxt
 *.xpi
-spellercorpus.*
+*.zip
 test.*
 build
-unitweight
 editdist.default.regex
 3" $1/tools/spellcheckers/fstbased/desktop/hfst
 
-# Set the svn:ignore prop on the tools/spellcheckers/fstbased/weighting/ dir:
+# Set svn:ignore on the tools/spellcheckers/fstbased/desktop/weighting/ dir:
 $svnignore "$mkfiles
 $fstfiles
 spellercorpus.clean.txt" $1/tools/spellcheckers/fstbased/desktop/weighting
+
+# Set the svn:ignore prop on the mobile hfst speller dir:
+$svnignore "$mkfiles
+$fstfiles
+easteregg.*
+*.zhfst
+test.*
+build
+editdist.default.regex
+3" $1/tools/spellcheckers/fstbased/mobile/hfst
+
+# Set svn:ignore on the tools/spellcheckers/fstbased/mobile/weighting/ dir:
+$svnignore "$mkfiles
+$fstfiles
+spellercorpus.clean.txt" $1/tools/spellcheckers/fstbased/mobile/weighting
 
 # Set the svn:ignore prop on the grammarchecker dir:
 $svnignore "$mkfiles

@@ -114,7 +114,7 @@ if test x$HFST_INFO != xfalse; then
 else
     AC_MSG_RESULT([no])
     gt_prog_hfst=no
-    if test $with_hfst != "no"; the
+    if test $with_hfst != "no"; then
         AC_MSG_ERROR([You requested --with-hfst, but hfst is too old or not installed])
     fi
 fi

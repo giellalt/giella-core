@@ -1,0 +1,70 @@
+## Process this file with automake to produce Makefile.in
+
+## Copyright (C) 2011 Samediggi
+
+## This program is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+
+## You should have received a copy of the GNU General Public License
+## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# All languages that can be built
+ALL_LANGS=
+
+# Languages that need to be bootstrapped
+NEW_LANGS=
+
+if COMPILE_ALL
+LANG_TARGETS=$(ALL_LANGS)
+else !COMPILE_ALL
+LANG_TARGETS=$(ENABLED_LANGS)
+endif
+
+all-local:
+	$(AM_V_GEN)for ll in $(NEW_LANGS) ; do \
+		if ! test -d $$ll ; then \
+			${GTCORE}/scripts/new-language.sh $$ll ; \
+			cd $$ll && ./autogen.sh && cd .. ; \
+		fi ; \
+	done
+
+SUBDIRS = $(LANG_TARGETS)
+
+### Template merge targets and variables below here ###
+
+# svn username for the repository being merged from
+USERNAME=
+
+# Target to merge in changes from the langs template by calling the merge script
+# in every language directory.
+.PHONY: templatemerge
+templatemerge:
+	$(AM_V_GEN)for ll in $(ALL_LANGS) ; do \
+	    Language=$$( ${GTCORE}/scripts/iso639-to-name.sh $$ll); \
+	    cd $(abs_top_srcdir); \
+	    if test x$(USERNAME) != "x"; then \
+	       USERNAMEOPTION="--username $(USERNAME)" ; \
+	    fi ; \
+	    if test -d $$ll ; then \
+	        echo ; \
+	        echo "*** Updating language $$ll - $$Language ***"; \
+	        echo ; \
+	        cd $$ll \
+	           && ${GTCORE}/scripts/merge-templates.sh \
+	               -t und \
+	               --templatecoll langs \
+	               $$USERNAMEOPTION ; \
+	    else \
+	        echo ; \
+	        echo "### WARNING!!! Directory for language $$ll - \
+	$$Language missing ###"; \
+	        echo ; \
+	    fi \
+	done

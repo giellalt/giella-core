@@ -1,6 +1,5 @@
 prefix=@prefix@
 exec_prefix=${prefix}
-libdir=@libdir@
 datadir=@datarootdir@
 gtlang=__UND__
 dir=${datadir}/giella/${gtlang}

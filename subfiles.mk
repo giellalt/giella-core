@@ -36,7 +36,6 @@ subdir_files = \
    giella-shared/common/src/filters/remove-RCmpnd-strings.regex \
    giella-shared/common/src/filters/remove-UseCirc-strings.regex \
    giella-shared/common/src/filters/remove-adv_comp-tags.regex \
-   giella-shared/common/src/filters/remove-derivation-position-tags.regex \
    giella-shared/common/src/filters/remove-homonymy-tags.regex \
    giella-shared/common/src/filters/remove-hyphenated-strings.regex \
    giella-shared/common/src/filters/remove-hyphenation-marks.regex \

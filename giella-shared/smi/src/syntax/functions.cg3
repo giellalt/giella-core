@@ -2138,6 +2138,10 @@ SELECT SEMTAGS ;
 
 SUBSTITUTE:apertium-unsubstitute (←vdic→) (*) TARGET (←vdic→) ;
 
+SUBSTITUTE:apertium-unhide-derivtags (VV) (V) TARGET (VV) ;
+SUBSTITUTE:apertium-unhide-derivtags (AA) (A) TARGET (AA) ;
+SUBSTITUTE:apertium-unhide-derivtags (NN) (N) TARGET (NN) ;
+
 	#=====#
       END #
 	#=====#

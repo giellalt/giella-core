@@ -68,3 +68,10 @@ templatemerge:
 	        echo ; \
 	    fi \
 	done
+
+# Update the Makefile.am when the one in $GTCORE is updated, using svn merge:
+Makefile.am: ${GTCORE}/langs-templates/Makefile.am
+	makefilerevdate=$(LC_ALL=C svn info  --xml $@ \
+			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
+		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
+			--ignore-ancestry --accept postpone; exit 1

@@ -35,6 +35,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/extract-lemmas.sh \
    scripts/extract-tags.sh \
    scripts/extract-yaml-lemmas.sh \
+   scripts/generate-area-filter-regex.sh \
    scripts/generate-dialect-filter-regex.sh \
    scripts/generate-wordforms-for-cont_lexes.sh \
    scripts/grep_analysed_sentences.pl \

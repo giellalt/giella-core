@@ -2135,12 +2135,15 @@ SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 LIST SEMTAGS = sem_act sem_ani sem_body sem_build sem_build-part sem_clth sem_curr sem_edu sem_hum sem_lang sem_measr sem_org sem_plc sem_time sem_tool sem_txt sem_group sem_semcon sem_veh ;
 
 SELECT SEMTAGS ;
-
+SUBSTITUTE (sem_year num) (num sem_year) ;
 SUBSTITUTE:apertium-unsubstitute (←vdic→) (*) TARGET (←vdic→) ;
 
 SUBSTITUTE:apertium-unhide-derivtags (ex_vblex) (vblex) TARGET (ex_vblex) ;
+SUBSTITUTE:apertium-unhide-derivtags SUB:1 (ex_vblex) (vblex) TARGET (ex_vblex) ;
 SUBSTITUTE:apertium-unhide-derivtags (ex_adj) (adj) TARGET (ex_adj) ;
+SUBSTITUTE:apertium-unhide-derivtags SUB:1 (ex_adj) (adj) TARGET (ex_adj) ;
 SUBSTITUTE:apertium-unhide-derivtags (ex_n) (n) TARGET (ex_n) ;
+SUBSTITUTE:apertium-unhide-derivtags SUB:1  (ex_n) (n) TARGET (ex_n) ;
 
 	#=====#
       END #

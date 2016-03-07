@@ -151,7 +151,9 @@ generate_word_forms () {
 
 ######## Open in default browser if on Mac:
 macopen() {
-    if hash open 2>/dev/null; then
+    if hash xdg-open 2> /dev/null; then
+        xdg-open "$@"
+    elif hash open 2>/dev/null; then
         open "$@"
     fi
 }

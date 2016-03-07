@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Debug:
+#set -x
+
 if test -z "${GTCORE}" ; then
     echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"
     exit 1
@@ -87,13 +91,15 @@ done
 
 # Update Makefile.am with the new language:
 cp Makefile.am Makefile.am~
-sed -e "s/NEW_LANGS=\(.*\)$1/NEW_LANGS=\1/" \
-    -e "s/ALL_LANGS=/ALL_LANGS=$1 /" \
+old_langs=$(grep "ALL_LANGS=" < Makefile.am | cut -d'=' -f2)
+new_langs=$(echo "$old_langs $1" | tr ' ' '\n' | sort -u | tr '\n' ' ' )
+sed -e "s/NEW_LANGS=\(.*\)$1\(.*\)/NEW_LANGS=\1\2/" \
+    -e "s/ALL_LANGS=.*/ALL_LANGS=$new_langs/" \
     < Makefile.am~ > Makefile.am
 
 # Update configure.ac with the new language:
 cp configure.ac configure.ac~
-sed -e "s/AC_CONFIG_SUBDIRS(\\[/AC_CONFIG_SUBDIRS([$1 /" \
+sed -e "s/AC_CONFIG_SUBDIRS(\\[.*/AC_CONFIG_SUBDIRS([$new_langs])/" \
 	< configure.ac~ > configure.ac
 
 # Stamp new language dir with latest template merging time
@@ -120,8 +126,8 @@ ${GTCORE}/scripts/set-svn-ignores-$TEMPLATECOLL.sh $1
 cat<<EOF
     The new language $1 has been added to the top-level Makefile.
     The old Makefile has been backed up as Makefile.am~
-    All dirs and files in $1 have been added to svn. Either \"svn ci $1\" if
-    all is ok, or \"svn revert $1\" if not.
+    All dirs and files in $1 have been added to svn. Either "svn ci $1" if
+    all is ok, or "svn revert $1" if not.
     If all is ok, remember to also commit the changes to ./Makefile.am and
     ./configure.ac, to ensure that automatic processes are aware
     of the new language.

@@ -15,6 +15,9 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# The name of the template for this Makefile.am:
+TEMPLATENAME=langs
+
 # All languages that can be built
 ALL_LANGS=
 
@@ -29,11 +32,19 @@ endif
 
 all-local: $(srcdir)/Makefile.am
 	$(AM_V_GEN)for ll in $(NEW_LANGS) ; do \
-		if ! test -d $$ll ; then \
-			${GTCORE}/scripts/new-language.sh $$ll ; \
-			cd $$ll && ./autogen.sh && cd .. ; \
+		if ! test -d $(abs_top_srcdir)/$$ll ; then \
+			cd $(abs_top_srcdir) ; \
+			${GTCORE}/scripts/new-language.sh $$ll $(TEMPLATENAME) ; \
+			cd $$ll && ./autogen.sh ; \
 		fi ; \
-	done
+	done ; \
+	if test "x$(NEW_LANGS)" != x; then \
+		echo "***" ; \
+		echo "*** The language(s) \"$(NEW_LANGS)\" has/have been added! " ; \
+		echo "*** Please review & commit/revert before continuing! " ; \
+		echo "***" ; \
+		exit 1 ; \
+	fi
 
 SUBDIRS = . $(LANG_TARGETS)
 
@@ -70,7 +81,6 @@ templatemerge:
 	done
 
 # Target for updating svn ignores using a script in $GTCORE:
-TEMPLATENAME=langs
 .PHONY: svnignores
 svnignores:
 	$(AM_V_GEN)for ll in $(ALL_LANGS) ; do \

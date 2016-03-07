@@ -69,6 +69,18 @@ templatemerge:
 	    fi \
 	done
 
+.PHONY: svnignores
+svnignores:
+	$(AM_V_GEN)for ll in $(ALL_LANGS) ; do \
+	    Language=$$( ${GTCORE}/scripts/iso639-to-name.sh $$ll); \
+	    cd $(abs_top_srcdir) ; \
+	    echo "- setting svn:ignore's for $$ll - $$Language" ; \
+	    if test -d $$ll ; then \
+	        cd $$ll ; ${GTCORE}/scripts/set-svn-ignores-langs.sh \
+	        	$(abs_top_srcdir)/$$ll ; \
+	    fi \
+	done
+
 # Update the Makefile.am when the one in $GTCORE is updated, using svn merge:
 $(srcdir)/Makefile.am: $(GTCORE)/langs-templates/Makefile.am
 	makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \

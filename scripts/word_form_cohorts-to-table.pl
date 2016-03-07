@@ -1,4 +1,4 @@
-#!/usr/bin/env perl -w
+#!/usr/bin/env perl
 
 # This Perl script takes three input argument, and produces an html table in
 # the file specified in the fourth argument. The arguments are:

@@ -69,6 +69,8 @@ templatemerge:
 	    fi \
 	done
 
+# Target for updating svn ignores using a script in $GTCORE:
+TEMPLATENAME=langs
 .PHONY: svnignores
 svnignores:
 	$(AM_V_GEN)for ll in $(ALL_LANGS) ; do \
@@ -76,7 +78,7 @@ svnignores:
 	    cd $(abs_top_srcdir) ; \
 	    echo "- setting svn:ignore's for $$ll - $$Language" ; \
 	    if test -d $$ll ; then \
-	        cd $$ll ; ${GTCORE}/scripts/set-svn-ignores-langs.sh \
+	        cd $$ll ; ${GTCORE}/scripts/set-svn-ignores-$(TEMPLATENAME).sh \
 	        	$(abs_top_srcdir)/$$ll ; \
 	    fi \
 	done

@@ -83,9 +83,15 @@ svnignores:
 	    fi \
 	done
 
-# Update the Makefile.am when the one in $GTCORE is updated, using svn merge:
+# Update the Makefile.am when the one in $GTCORE is updated, using svn merge,
+# then stop to allow for committing the changes before continuing:
 $(srcdir)/Makefile.am: $(GTCORE)/langs-templates/Makefile.am
 	makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
-			--ignore-ancestry --accept postpone; exit 1
+			--ignore-ancestry --accept postpone; \
+		echo "***" ; \
+		echo "*** The $(abs_top_srcdir)/Makefile.am has been updated! " ; \
+		echo "*** Please review & commit the changes before continuing! " ; \
+		echo "***" ; \
+		exit 1

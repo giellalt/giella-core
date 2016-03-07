@@ -108,11 +108,10 @@ svn add --force $1
 # the new infra - the svn revert commands do not make sense outside the langs
 # template collection):
 if [[ x$TEMPLATECOLL = "xlangs" ]]; then
-    svn revert $1/src/morphology/*/*
+    svn revert $1/src/morphology/affixes/*
+    svn revert $1/src/morphology/stems/*
     svn revert $1/src/morphology/root.lexc
-    svn revert $1/src/syntax/disambiguation.cg3
     svn revert $1/src/phonology/*phon.*
-    svn revert $1/src/transcriptions/*.lexc
 fi
 
 # Now that the files are known to svn, add svn:ignore properties:

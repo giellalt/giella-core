@@ -2144,6 +2144,10 @@ SUBSTITUTE:apertium-unhide-derivtags (ex_adj) (adj) TARGET (ex_adj) ;
 SUBSTITUTE:apertium-unhide-derivtags SUB:1 (ex_adj) (adj) TARGET (ex_adj) ;
 SUBSTITUTE:apertium-unhide-derivtags (ex_n) (n) TARGET (ex_n) ;
 SUBSTITUTE:apertium-unhide-derivtags SUB:1  (ex_n) (n) TARGET (ex_n) ;
+SUBSTITUTE:apertium-unhide-derivtags (tvv) (tv) TARGET (tvv) ;
+SUBSTITUTE:apertium-unhide-derivtags SUB:1  (tvv) (tv) TARGET (tvv) ;
+SUBSTITUTE:apertium-unhide-derivtags (ivv) (iv) TARGET (ivv) ;
+SUBSTITUTE:apertium-unhide-derivtags SUB:1  (ivv) (iv) TARGET (ivv) ;
 
 	#=====#
       END #

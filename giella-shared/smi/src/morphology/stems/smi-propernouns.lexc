@@ -223,6 +223,7 @@ Bui+CmpNP/None+OLang/UND:Bui NYSTØ-plc ;
 Bye+CmpNP/None+OLang/UND:Bye NYSTØ-sur ;
 Byg+CmpNP/None+OLang/UND:Byg9 BERN-sur ;
 Bål+CmpNP/None+OLang/UND:Bål BERN-sur ;
+Båhl+CmpNP/None+OLang/UND:Båhl BERN-sur ;
 Bær+CmpNP/None+OLang/NOB:Bær BERN-sur ;
 Bøe+CmpNP/None+OLang/NOB:Bøe ACCRA-sur ;
 Bøn+CmpNP/None+OLang/NOB:Bøn9 BERN-sur ;
@@ -31264,3 +31265,7 @@ Oula+OLang/FIN:Oula ACCRA-mal ;
 Šelef+OLang/UND:Šelef LONDON-mal ;
 Mika+OLang/FIN:Mika ACCRA-mal ;
 Jorma+OLang/FIN:Jorma ACCRA-mal ;
+Lennon+OLang/UND:Lennon9 LONDON-sur ;
+Starr+OLang/UND:Starr BERN-sur ;
+Harrison+OLang/UND:Harrison9 BERN-sur ;
+

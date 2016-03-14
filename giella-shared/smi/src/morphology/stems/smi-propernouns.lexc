@@ -31297,8 +31297,19 @@ Marilyn+OLang/UND:Marilyn BERN-fem ;
 Lennon+OLang/UND:Lennon9 LONDON-sur ;
 Starr+OLang/UND:Starr BERN-sur ;
 Harrison+OLang/UND:Harrison9 BERN-sur ;
-Arctic% Frontiers+OLang/ENG:Arctic% Frontiers LONDON-org ;
+Arctic% Frontiers+MWE+OLang/ENG:Arctic% Frontiers LONDON-org ;
 Junkerdalsura+OLang/NOB:Junkerdalsura ACCRA-plc ;
 Raudfjell+OLang/NOB:Raud9#fjell BERN-plc ;
+Bjerkenes+OLang/NOB:Bjerke#nes BERN-plc ;
+Skarpdalen+OLang/NOB:Skarp#dalen9 LONDON-plc ;
+Skrovkjosen+OLang/NOB:Skrov#kjosen9 LONDON-plc ;
+Sandeng+OLang/NOB:Sand9#eng9 BERN-plc ;
+Husjordøya+OLang/NOB:Husjord#øya ACCRA-plc ;
+Zakarias+OLang/UND:Zakari^as LONDON-mal ;
+Aaraas+OLang/NOB:Aar#aas BERN-sur ;
+Acapela+OLang/UND:Acapela ACCRA-org ;
+Arnstad+OLang/NOB:Arn#stad9 BERN-plc ;
+Baastede+OLang/UND:Baastede ACCRA-org ;
+Guvsàm+OLang/UND:Guvsàm9 LONDON-sur ;
 
 

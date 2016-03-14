@@ -2148,6 +2148,8 @@ SUBSTITUTE:apertium-unhide-derivtags (ex_tv) (tv) TARGET (ex_tv) ;
 SUBSTITUTE:apertium-unhide-derivtags SUB:1  (ex_tv) (tv) TARGET (ex_tv) ;
 SUBSTITUTE:apertium-unhide-derivtags (ex_iv) (iv) TARGET (ex_iv) ;
 SUBSTITUTE:apertium-unhide-derivtags SUB:1  (ex_iv) (iv) TARGET (ex_iv) ;
+SUBSTITUTE:apertium-unhide-derivtags (Num Sem/Year Sg) (Num Sg) TARGET (Num Sem/Year Sg) ;
+SUBSTITUTE:apertium-unhide-derivtags (Sem/Year Num Sg) (num sg) TARGET (Sem/Year Num Sg) ;
 
 	#=====#
       END #

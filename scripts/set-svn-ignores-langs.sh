@@ -141,6 +141,12 @@ apertium.relabel" $1/tools/mt/apertium/tagsets
 $svnignore "$mkfiles
 abbr.txt" $1/tools/preprocess
 
+# Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.att
+*.txt" $1/tools/spellcheckers/fstbased/
+
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/desktop/ dir:
 $svnignore "$mkfiles
 $fstfiles

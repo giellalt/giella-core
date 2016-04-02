@@ -2134,6 +2134,8 @@ SUBSTITUTE:smaRemove (<sma>) (*) TARGET (<sma>) ;
 SET SEMTAGS = Sem/Act OR Sem/Adr OR Sem/Amount OR Sem/Ani OR Sem/Aniprod OR Sem/Body OR Sem/Body-abstr OR Sem/Build OR Sem/Build-part OR Sem/Cat OR Sem/Clth OR Sem/Clth-jewl OR Sem/Clth-part  OR Sem/Ctain OR Sem/Ctain-abstr OR Sem/Ctain-clth OR Sem/Curr OR Sem/Date OR Sem/Dance OR Sem/Dir OR Sem/Domain OR Sem/Drink OR (Sem/Dummytag) OR Sem/Edu OR Sem/Event OR  Sem/Feat-phys OR Sem/Feat OR Sem/Feat-measr OR Sem/Feat-phys OR Sem/Feat-psych OR Sem/Fem OR Sem/Food OR Sem/Food-med OR Sem/Furn OR Sem/Game OR Sem/Geom OR Sem/Group OR Sem/Hum OR Sem/Hum-abstr OR Sem/Ideol OR Sem/Lang OR Sem/Mal OR Sem/Mat OR Sem/Measr OR Sem/Money OR Sem/Obj OR Sem/Obj-clo OR Sem/Obj-cogn OR Sem/Obj-el OR Sem/Obj-ling OR Sem/Obj-play OR Sem/Obj-rope OR Sem/Obj-surfc OR Sem/Org OR Sem/Part OR Sem/Perc-cogn OR Sem/Perc-emo OR Sem/Perc-phys OR Sem/Perc-psych OR Sem/Plant OR Sem/Plant-part OR Sem/Plc OR Sem/Plc-abstr OR Sem/Plc-elevate OR Sem/Plc-line OR Sem/Plc-water OR Sem/Pos OR Sem/Process OR Sem/Prod OR Sem/Prod-audio OR Sem/Prod-cogn OR Sem/Prod-ling OR Sem/Prod-vis OR Sem/Rel OR Sem/Route OR Sem/Rule OR Sem/Semcon OR Sem/Sign OR Sem/Sport OR Sem/State OR Sem/State-sick OR Sem/Substnc OR Sem/Sur OR Sem/Symbol OR Sem/Time OR Sem/Tool OR Sem/Tool-catch OR Sem/Tool-clean OR Sem/Tool-it OR Sem/Tool-measr OR Sem/Tool-music OR Sem/Tool-write OR Sem/Txt OR Sem/Veh OR Sem/Wthr OR Sem/Wpn ;
 
 SELECT SEMTAGS ;
+SELECT SUB:1 SEMTAGS ; #For Apertium
+SELECT SUB:2 SEMTAGS ; #For Apertium
 #SUBSTITUTE (sem_year num) (num sem_year) ;
 SUBSTITUTE:apertium-unsubstitute (←vdic→) (*) TARGET (←vdic→) ;
 
@@ -2147,8 +2149,8 @@ SUBSTITUTE:apertium-unhide-derivtags (ex_tv) (tv) TARGET (ex_tv) ;
 SUBSTITUTE:apertium-unhide-derivtags SUB:1  (ex_tv) (tv) TARGET (ex_tv) ;
 SUBSTITUTE:apertium-unhide-derivtags (ex_iv) (iv) TARGET (ex_iv) ;
 SUBSTITUTE:apertium-unhide-derivtags SUB:1  (ex_iv) (iv) TARGET (ex_iv) ;
-#SUBSTITUTE:apertium-unhide-derivtags (Num Sem/Year Sg) (Num Sg) TARGET (Num Sem/Year Sg) ;
-#SUBSTITUTE:apertium-unhide-derivtags (Sem/Year Num Sg) (num sg) TARGET (Sem/Year Num Sg) ;
+#SUBSTITUTE:apertium-change-order (Num Sem/Year Sg) (Num Sg) TARGET (Num Sem/Year Sg) ;
+#SUBSTITUTE:apertium-change-order (Sem/Year Num Sg) (num sg) TARGET (Sem/Year Num Sg) ;
 
 	#=====#
       END #

@@ -31328,6 +31328,11 @@ Aarre+OLang/FIN:Aarre ACCRA-sur ;
 Solhjell+OLang/NOB:Sol^hjell BERN-plc ;
 Skjolvor+OLang/NOB:Skjolvor LONDON-fem ;
 Bodåddjo+OLang/SMA:Bodåddjo ACCRA-plc ;
-Plata+OLang/UND:Plata ACCRA-plc ;
-
+Plata+OLang/NOB:Plata ACCRA-plc ;
+Aalmo+OLang/FIN:Aalmo9 ACCRA-sur ;
+Aalto+OLang/FIN:Aalto9 ACCRA-sur ;
+Aano+OLang/FIN:Aano9 ACCRA-sur ;
+Aapo+OLang/FIN:Aapo9 ACCRA-sur ;
+Aapro+OLang/FIN:Aapro9 ACCRA-sur ;
+Aarnipuro+OLang/FIN:Aarni#puro9 ACCRA-sur ;
 

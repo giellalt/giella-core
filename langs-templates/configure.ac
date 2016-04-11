@@ -37,7 +37,9 @@ cat<<EOF
     * included languages: $enable_langs
 
 Running make here will compile all of the included languages mentioned above;
-to compile only one language, say (to compile several languages but not all
-list the codes space-separated between double quotes):
+to compile only one language, say:
     ./configure --enable-langs=langcode
+
+To compile several languages but not all,
+list the codes space-separated between double quotes
 EOF

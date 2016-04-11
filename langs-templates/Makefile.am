@@ -101,7 +101,7 @@ $(srcdir)/Makefile.am: $(GTCORE)/$(TEMPLATENAME)-templates/Makefile.am
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
 			--ignore-ancestry --accept postpone; \
-		echo "***" ; \
+		echo '***' ;\
 		echo "*** The $(abs_top_srcdir)/Makefile.am has been updated! " ;\
 		echo "*** Please review & commit the changes before continuing!";\
 		echo '***' ;\
@@ -114,7 +114,7 @@ $(srcdir)/configure.ac: $(GTCORE)/$(TEMPLATENAME)-templates/configure.ac
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
 			--ignore-ancestry --accept postpone; \
-		echo "***" ; \
+		echo '***' ;\
 		echo "*** The $(abs_top_srcdir)/configure.ac has been updated! " ;\
 		echo "*** Please review & commit the changes before continuing! ";\
 		echo '***' ;\

@@ -97,7 +97,9 @@ svnignores:
 # Update the Makefile.am when the one in $GTCORE is updated, using svn merge,
 # then stop to allow for committing the changes before continuing:
 $(srcdir)/Makefile.am: $(GTCORE)/$(TEMPLATENAME)-templates/Makefile.am
-	$(AM_V_GEN)makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
+	$(AM_V_GEN)\
+		echo " *** Merging changes from the GIELLACORE" ; \
+		makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
 			--ignore-ancestry --accept postpone; \
@@ -110,7 +112,9 @@ $(srcdir)/Makefile.am: $(GTCORE)/$(TEMPLATENAME)-templates/Makefile.am
 # Update the configure.ac when the one in $GTCORE is updated, using svn merge,
 # then stop to allow for committing the changes before continuing:
 $(srcdir)/configure.ac: $(GTCORE)/$(TEMPLATENAME)-templates/configure.ac
-	$(AM_V_GEN)makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
+	$(AM_V_GEN)\
+		echo " *** Merging changes from the GIELLACORE" ; \
+		makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
 			--ignore-ancestry --accept postpone; \

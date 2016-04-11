@@ -96,30 +96,32 @@ svnignores:
 
 # Update the Makefile.am when the one in $GTCORE is updated, using svn merge,
 # then stop to allow for committing the changes before continuing:
+#
+# Do NOT add a @, echo or $(AM_V_GEN) in front of the first shell command - it
+# creates a shell syntax error after M4 processing!
 $(srcdir)/Makefile.am: $(GTCORE)/$(TEMPLATENAME)-templates/Makefile.am
-	$(AM_V_GEN)\
-		echo " *** Merging changes from the GIELLACORE" ; \
-		makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
+	makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
-			--ignore-ancestry --accept postpone; \
+			--ignore-ancestry --accept postpone ; \
 		echo " *** " ; \
-		echo " *** The $(abs_top_srcdir)/Makefile.am has been updated! " ;\
-		echo " *** Please review & commit the changes before continuing!";\
+		echo " *** The file $(abs_top_srcdir)/Makefile.am has been updated! " ;\
+		echo " *** Please review and commit the changes before continuing! " ; \
 		echo " *** " ; \
 		exit 1
 
 # Update the configure.ac when the one in $GTCORE is updated, using svn merge,
 # then stop to allow for committing the changes before continuing:
+#
+# Do NOT add a @, echo or $(AM_V_GEN) in front of the first shell command - it
+# creates a shell syntax error after M4 processing!
 $(srcdir)/configure.ac: $(GTCORE)/$(TEMPLATENAME)-templates/configure.ac
-	$(AM_V_GEN)\
-		echo " *** Merging changes from the GIELLACORE" ; \
-		makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
+	makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
-			--ignore-ancestry --accept postpone; \
+			--ignore-ancestry --accept postpone ; \
 		echo " *** " ; \
-		echo " *** The $(abs_top_srcdir)/configure.ac has been updated! " ;\
-		echo " *** Please review & commit the changes before continuing! ";\
+		echo " *** The file $(abs_top_srcdir)/configure.ac has been updated! ";\
+		echo " *** Please review and commit the changes before continuing! " ; \
 		echo " *** " ; \
 		exit 1

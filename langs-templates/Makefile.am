@@ -70,7 +70,7 @@ templatemerge:
 	        cd $$ll \
 	           && ${GTCORE}/scripts/merge-templates.sh \
 	               -t und \
-	               --templatecoll langs \
+	               --templatecoll $(TEMPLATENAME) \
 	               $$USERNAMEOPTION ; \
 	    else \
 	        echo ; \

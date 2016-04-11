@@ -30,7 +30,8 @@ else !COMPILE_ALL
 LANG_TARGETS=$(ENABLED_LANGS)
 endif
 
-all-local: $(srcdir)/Makefile.am
+all-local: $(srcdir)/Makefile.am \
+		   $(srcdir)/configure.ac
 	$(AM_V_GEN)for ll in $(NEW_LANGS) ; do \
 		if ! test -d $(abs_top_srcdir)/$$ll ; then \
 			cd $(abs_top_srcdir) ; \
@@ -96,12 +97,25 @@ svnignores:
 # Update the Makefile.am when the one in $GTCORE is updated, using svn merge,
 # then stop to allow for committing the changes before continuing:
 $(srcdir)/Makefile.am: $(GTCORE)/$(TEMPLATENAME)-templates/Makefile.am
-	makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
+	$(AM_V_GEN)makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
 			--ignore-ancestry --accept postpone; \
 		echo "***" ; \
-		echo "*** The $(abs_top_srcdir)/Makefile.am has been updated! " ; \
-		echo "*** Please review & commit the changes before continuing! " ; \
+		echo "*** The $(abs_top_srcdir)/Makefile.am has been updated! " ;\
+		echo "*** Please review & commit the changes before continuing!";\
+		echo '***' ;\
+		exit 1
+
+# Update the configure.ac when the one in $GTCORE is updated, using svn merge,
+# then stop to allow for committing the changes before continuing:
+$(srcdir)/configure.ac: $(GTCORE)/$(TEMPLATENAME)-templates/configure.ac
+	$(AM_V_GEN)makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
+			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
+		svn merge -r{$$makefilerevdate}:HEAD $< $@ \
+			--ignore-ancestry --accept postpone; \
 		echo "***" ; \
+		echo "*** The $(abs_top_srcdir)/configure.ac has been updated! " ;\
+		echo "*** Please review & commit the changes before continuing! ";\
+		echo '***' ;\
 		exit 1

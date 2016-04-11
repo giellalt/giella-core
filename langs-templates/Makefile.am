@@ -95,7 +95,7 @@ svnignores:
 
 # Update the Makefile.am when the one in $GTCORE is updated, using svn merge,
 # then stop to allow for committing the changes before continuing:
-$(srcdir)/Makefile.am: $(GTCORE)/langs-templates/Makefile.am
+$(srcdir)/Makefile.am: $(GTCORE)/$(TEMPLATENAME)-templates/Makefile.am
 	makefilerevdate=$$( LC_ALL=C svn info  --xml $@ \
 			| fgrep '<date>' | sed -e 's/date//g' | tr -d '<>/') ; \
 		svn merge -r{$$makefilerevdate}:HEAD $< $@ \

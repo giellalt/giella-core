@@ -1,4 +1,9 @@
 $Revision$
+Cleaned out everything related to defining an environmental variable for the
+language in question - not relevant for keyboards, and will only confuse users,
+or override more useful values of the variable.
+
+r132326:
 Modernised yaml structure for keyboard layouts.
 
 r132325:

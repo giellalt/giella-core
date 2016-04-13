@@ -46,9 +46,5 @@ done
 # Set the svn:ignore prop on the top level lang dir:
 $svnignore "$autofiles
 $mkfiles
-build" $1
-
-# Set the svn:ignore prop on the top level lang dir:
-$svnignore "$mkfiles
 build
-deps" $1/mobile
+deps" $1

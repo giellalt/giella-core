@@ -11,6 +11,9 @@ locales:
 author: The Divvun Group, UiT Norgga árktalaš universitehta
 email: feedback@divvun.no
 
+copyright: (c) 2016 Divvun/Giellatekno/UiT
+organisation: UiT Norgga árktalaš universitehta
+
 layouts: [__UND__]
 
 version: 1.0
@@ -19,9 +22,16 @@ build: 1
 targets:
   android:
     packageId: no.uit.giella.keyboards.__COLLECTION__
+    icon: sami-icon.pdf
     keyStore: /Users/brendan/git/softkbdgen/test.keystore
     keyAlias: sami_keyboard
 
-  ios:
+  ios: &AppleID
+    codeSignId: "iOS Development"
+    provisioningProfileId: Test
     packageId: no.uit.giella.keyboards.__COLLECTION__
     bundleName: *bundleName
+    icon:
+        90: sami-icon-small.png
+        150: sami-icon.png
+  osx: *AppleID

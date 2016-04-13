@@ -63,6 +63,9 @@ templatemerge:
 	    if test x$(USERNAME) != "x"; then \
 	       USERNAMEOPTION="--username $(USERNAME)" ; \
 	    fi ; \
+	    if test x$(UNSAFE) == "xyes"; then \
+	       UNSAFEOPTION="--unsafe" ; \
+	    fi ; \
 	    if test -d $$ll ; then \
 	        echo ; \
 	        echo "*** Updating language $$ll - $$Language ***"; \
@@ -71,7 +74,8 @@ templatemerge:
 	           && ${GTCORE}/scripts/merge-templates.sh \
 	               -t und \
 	               --templatecoll $(TEMPLATENAME) \
-	               $$USERNAMEOPTION ; \
+	               $$USERNAMEOPTION \
+	               $$UNSAFEOPTION ; \
 	    else \
 	        echo ; \
 	        echo "### WARNING!!! Directory for language $$ll - \

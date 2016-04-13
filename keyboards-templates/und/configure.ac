@@ -58,8 +58,7 @@ AC_PROG_MKDIR_P
 AC_PROG_LN_S
 
 # List all non-script files processed by Autoconf.
-AC_CONFIG_FILES([Makefile       \
-                 mobile/Makefile])
+AC_CONFIG_FILES([Makefile])
 
 # This must be near the end of all configure.ac files:
 AC_OUTPUT

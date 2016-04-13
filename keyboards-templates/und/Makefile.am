@@ -2,9 +2,14 @@
 ## Copyright: Sámediggi/Divvun/UiT
 ## Licence: GPL v3+
 
-SUBDIRS=.
-
 EXTRA_DIST = und.timestamp
+
+IOS_AUTOTOOLS=ios-autotools
+IOS_AUTOTOOLS_PATH=$(shell echo $$(pwd)/deps/$(IOS_AUTOTOOLS))
+IOS_IME=tasty-imitation-keyboard
+ANDROID_IME=giella-ime
+SOFTKBDGEN=kbdgen
+# RELEASE=-R
 
 configure: banner
 
@@ -31,5 +36,98 @@ und.timestamp: ${GTCORE}/keyboards-templates/und/und.timestamp
 	-cp -v -f $< $@
 endif
 
+
+all-local: mobile
+
+.PHONY: deps mobile ios android desktop svg osx win x11
+deps:
+	@echo
+	@echo "*** Deps check! ***"
+	@echo
+	$(MKDIR_P) deps
+	cd deps; \
+	if ! [ -d $(IOS_AUTOTOOLS) ]; then\
+		git clone https://github.com/bbqsrc/$(IOS_AUTOTOOLS).git ; \
+	fi ; \
+	cd $(IOS_AUTOTOOLS)/ && git pull --all && cd ../ ; \
+	if ! [ -d $(IOS_IME) ]; then\
+		git clone https://github.com/bbqsrc/$(IOS_IME).git ; \
+	fi ; \
+	cd $(IOS_IME)/ && git checkout hfst && git pull --all && cd .. ; \
+	if ! [ -d $(ANDROID_IME) ]; then\
+		git clone https://github.com/bbqsrc/$(ANDROID_IME).git ; \
+	fi ; \
+	cd $(ANDROID_IME)/ && git pull --all && cd .. ; \
+	if ! [ -d $(SOFTKBDGEN) ]; then\
+		git clone https://github.com/bbqsrc/$(SOFTKBDGEN).git ; \
+	fi ; \
+	cd $(SOFTKBDGEN)/ && git pull --all && cd ..
+
+mobile: ios android
+
+ios: deps
+	@echo
+	@echo "*** iOS build! ***"
+	@echo
+	PYTHONPATH=deps/$(SOFTKBDGEN) \
+	PATH=$(IOS_AUTOTOOLS_PATH):$(PATH) \
+	python3.5 -m $(SOFTKBDGEN) -t ios \
+		-b hfst -r deps/$(IOS_IME) $(RELEASE) \
+		project.yaml
+
+android: deps
+	@echo
+	@echo "*** Android build! ***"
+	@echo
+	if ! [[ -z "$(ANDROID_SDK)" ]]; then \
+	PYTHONPATH=deps/$(SOFTKBDGEN) python3.5 -m $(SOFTKBDGEN) -t android \
+		-r deps/$(ANDROID_IME) -b master $(RELEASE) \
+		project.yaml \
+		-K targets.android.keyStore=$(GTPRIV)/admin/dev-accounts/dev_keys/sami_keyboard.keystore ; \
+	else \
+		echo "$$ANDROID_SDK is not defined!";\
+		echo "Unable to build the Android keyboard";\
+		echo "See the following URL for details, section Installation:";\
+		echo "https://github.com/bbqsrc/$(SOFTKBDGEN)/blob/master/doc/targets/android.md";\
+	fi
+
+desktop: svg osx win x11
+
+osx: deps
+	@echo
+	@echo "*** OSX build! ***"
+	@echo
+	PYTHONPATH=deps/$(SOFTKBDGEN) \
+	python3.5 -m $(SOFTKBDGEN) -t osx \
+		-b hfst $(RELEASE) \
+		project.yaml
+
+svg: deps
+	@echo
+	@echo "*** SVG build! ***"
+	@echo
+	PYTHONPATH=deps/$(SOFTKBDGEN) \
+	python3.5 -m $(SOFTKBDGEN) -t svg \
+		-b hfst $(RELEASE) \
+		project.yaml
+
+win: deps
+	@echo
+	@echo "*** Windows build! ***"
+	@echo
+	PYTHONPATH=deps/$(SOFTKBDGEN) \
+	python3.5 -m $(SOFTKBDGEN) -t win \
+		-b hfst $(RELEASE) \
+		project.yaml
+
+x11: deps
+	@echo
+	@echo "*** X11 build! ***"
+	@echo
+	PYTHONPATH=deps/$(SOFTKBDGEN) \
+	python3.5 -m $(SOFTKBDGEN) -t x11 \
+		-b hfst $(RELEASE) \
+		project.yaml
+
 clean-local:
-	-rm -f *.txt
+	-rm -rf *.txt build deps

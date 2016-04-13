@@ -1,4 +1,8 @@
 $Revision$
+Removed the desktop and mobile subdirs, moving all build code to the project
+root dir.
+
+r103881:
 no.uit.giella instead of no.divvun.
 
 r103627:

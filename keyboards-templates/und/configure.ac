@@ -1,6 +1,6 @@
-## Process this file with autoconf to produce configure script
+## Process this file with autoconf to produce the configure script
 
-## Copyright (C) 2011 Samediggi/Divvun/UiT
+## Copyright (C) 2016 Divvun/Giellatekno/UiT
 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -15,15 +15,15 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Following things just need to be at top of all configure.ac files:
+# The following things just need to be at the top of all configure.ac files:
 
-# AC_INIT sets up project metadata:
-# first field the name of the "software"
-# second field is version identifie iso 8901 date is good if you have no other
-#   versioining schemes in mind
-# third is email address for bug reports
-# fourth is name of packages made by make dist, excluding .tar.gz
-# fifth is the project web address
+# AC_INIT sets up the project metadata:
+# first field is the name of the "software"
+# second field is the version identifier - iso 8901 date is good if you
+#   have no other versioining scheme in mind
+# third field is email address for bug reports
+# fourth field is the name of the package made by make dist, excluding .tar.gz
+# fifth field is the project web address
 AC_INIT([giellakeyboards-__UND__], [20130628], [feedback@divvun.no],
         [giellakeyboards-__UND__], [http://divvun.no])
 # AC_REVISION is used to get SVN revision into bug reports
@@ -35,9 +35,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([1.11 -Wall -Werror foreign -Wno-portability])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
-# Some software that we either depend on or we need for certain functionality:
-
-# Following Giellatekno specific variables are used to make external software
+# The following Giella specific variables are used to make external software
 # work; HFST analysers, spell-checkers and so on. These also control
 # some temporary file names etc.
 
@@ -45,12 +43,13 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 # as the directory name in gtsvn and same as ISO 639 three-letter code for the
 # language if possible
 AC_SUBST([GTLANG], [__UND__])
+
 # GTLANG2 is the shortest unambiguous language code for this project; it
 # should be the ISO 639-1 two-letter code if possible, otherwise usually same
 # as above
 AC_SUBST([GTLANG2], [__UND2C__])
 
-# Tests and sets up giellatekno directories and scripts
+# Tests and sets up directories and scripts neeeded by the Giella infra:
 gt_PROG_SCRIPTS_PATHS
 
 # Check for other programs:
@@ -63,5 +62,5 @@ AC_CONFIG_FILES([Makefile])
 # This must be near the end of all configure.ac files:
 AC_OUTPUT
 
-# Prints the informative blurb at the end of ./configure command
+# Prints the informative blurb at the end of the ./configure command
 gt_PRINT_FOOTER

@@ -1,4 +1,8 @@
 $Revision$
+Text cleanup: giellatekno -> Giella in appropriate places, improved syntax and
+formulations, corrections.
+
+r132251:
 Removed the desktop and mobile subdirs, moving all build code to the project
 root dir.
 

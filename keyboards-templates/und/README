@@ -12,10 +12,10 @@ named in the AUTHORS file are available to grant other licencing choices.
 Installation and compilation, and a short note on usage, is documented in the
 file INSTALL.
 
-Documentation is scattered around on giellateknos pages, e.g.:
+Documentation is scattered around on the Giellatekno and Divvun pages, e.g.:
 
 * http://giellatekno.uit.no/__UND__doc/index.html
-* http://giellatekno.uit.no/doc/tools/docu-__UND__-manual.html
+* http://divvun.no/doc/tools/docu-__UND__-manual.html
 
 The keyboards will be submitted to the CLDR - Unicode Common Locale Data
 Repository, where they will be available for OS developers to be included. Where
@@ -32,10 +32,10 @@ In order to compile and use __UNDEFINED__ keyboards you need:
 Downloading
 -----------
 
-The __UNDEFINED__ language sources can be acquired using `giellatekno SVN
+The __UNDEFINED__ keyboard sources can be acquired using the `Giella SVN
 repository <http://divvun.no/doc/infra/anonymous-svn.html>`_, from the
-language specific directory, after the core has been downloaded and initial
-setup has been performed.
+language specific directory for keyboards, after the core has been downloaded
+and initial setup has been performed.
 
 Installation
 ------------

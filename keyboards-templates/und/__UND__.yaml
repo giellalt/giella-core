@@ -7,12 +7,12 @@ displayNames:
 locale: __UND2C__
 
 modes:
-  default: [
+  mobile-default: [
     á š e r t y u i o p ŋ,
     a s d f g h j k l đ ŧ,
     ž z č c v b n m w
   ]
-  shift: [
+  mobile-shift: [
     Á Š E R T Y U I O P Ŋ,
     A S D F G H J K L Đ Ŧ,
     Ž Z Č C V B N M W

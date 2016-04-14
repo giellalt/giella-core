@@ -139,6 +139,8 @@ apertium.relabel" $1/tools/mt/apertium/tagsets
 
 # Set the svn:ignore prop on the test/tools/preprocess/ dir:
 $svnignore "$mkfiles
+*.hfst
+*.pmhfst
 abbr.txt" $1/tools/preprocess
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:

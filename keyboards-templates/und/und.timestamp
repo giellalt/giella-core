@@ -1,4 +1,7 @@
 $Revision$
+Added support for drafting a keyboard based on existing cldr keyboard data.
+
+r132385:
 Renamed giellatekno.m4 to giella_macros.m4.
 
 r132359:

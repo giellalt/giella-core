@@ -11,6 +11,15 @@ ANDROID_IME=giella-ime
 SOFTKBDGEN=kbdgen
 # RELEASE=-R
 
+# XML_SRC can be a language code or the full xml file name, both given
+# by the user
+XML_SRC=
+CLDR_SRC=$(shell if test ${file: -4} == ".xml" ; then \
+                    echo $(XML_SRC) ; \
+                else \
+                    echo "$(XML_SRC)-t-k0-osx-extended.xml" ; \
+                fi )
+
 configure: banner
 
 .PHONY: banner
@@ -39,7 +48,7 @@ endif
 
 all-local: mobile
 
-.PHONY: deps mobile ios android desktop svg osx win x11
+.PHONY: deps mobile ios android desktop svg osx win x11 draft
 deps:
 	@echo
 	@echo "*** Deps check! ***"
@@ -128,6 +137,18 @@ x11: deps
 	python3.5 -m $(SOFTKBDGEN) -t x11 \
 		-b hfst $(RELEASE) \
 		project.yaml
+
+draft: $(GTLANG)-draft.yaml
+$(GTLANG)-draft.yaml: deps \
+				$(GTCORE)/keyboards-templates/cldr/keyboards/osx/$(CLDR_SRC)
+	@echo
+	@echo "*** Building draft keyboard yaml file based on: ***"
+	@echo "*** $$GTCORE/keyboards-templates/cldr/keyboards/osx/$(CLDR_SRC)"
+	@echo
+	PYTHONPATH=deps/$(SOFTKBDGEN) \
+	python3.5 -m kbdgen.cldr cldr2kbdgen \
+		$(GTCORE)/keyboards-templates/cldr/keyboards/osx/$(CLDR_SRC) \
+		$@
 
 clean-local:
 	-rm -rf *.txt build deps

@@ -1,4 +1,7 @@
 $Revision$
+Renamed giellatekno.m4 to giella_macros.m4.
+
+r132359:
 Corrected syntax error in yaml file.
 
 r132355:

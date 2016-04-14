@@ -1,4 +1,7 @@
 $Revision$
+Corrected syntax error in yaml file.
+
+r132355:
 Expanded the template keyboard layout and project fiels with data for
 desktop keyboards.
 

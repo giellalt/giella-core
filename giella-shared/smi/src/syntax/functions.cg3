@@ -730,7 +730,7 @@ LIST ADV-NOT-NAMES = "Ain" "Anne" "Diego" "Dieppe" "Enge" "Galle" "Haga"
 SET ADV-NOT-OTHER-POS = ADV-NOT-VERB OR ADV-NOT-NOUN OR ADV-NOT-NAMES ;
 
 LIST HAB-CASE = Loc (<smj> Ine) (<sma> Gen) ;
-LIST HAB-ACTOR-ALL = Sem/Hum Sem/Mal Sem/Sur Sem/Fem Sem/Ani Sem/Org  Pers ("gii") Indef Coll ;
+SET HAB-ACTOR-ALL = Sem/Hum OR Sem/Mal OR Sem/Sur OR Sem/Fem OR Sem/Ani OR Sem/Org OR Pers OR ("gii") OR Indef OR Coll ;
 SET HAB-ACTOR = HAB-ACTOR-ALL - ("cihca") ;
 SET HAB-ACTOR-NOT-HUMAN = Sem/Org ;
 

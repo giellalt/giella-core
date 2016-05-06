@@ -153,11 +153,12 @@ sentence="${sentence//(/\(}"
 sentence="${sentence//)/\)}"
 
 # path to the shared syntax
-SD_PATH='gtdshared/smi/src/syntax'
+SD_PATH='giella-shared/smi/src/syntax'
 
 # define commands
 # common pos_cmd
-pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTHOME/gt/script/lookup2cg"
+#pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTHOME/gt/script/lookup2cg"
+pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTCORE/scripts/lookup2cg"
 
 if [ $l == fao ] || [ $l == crk ]; then
     dis_cmd=$pos_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/disambiguation.cg3 $t"

@@ -191,6 +191,77 @@ LIST vv = vv ;
 LIST nv = nv ;
 LIST vn = vn ;
 
+# crk POS and grammar tags
+
+LIST Ipc = Ipc ;
+
+LIST AN = AN ;
+LIST IN = IN ;
+
+LIST IA = IA ;
+LIST II = II ;
+LIST TA = TA ;
+LIST TI = TI ;
+
+
+LIST Cnj = Cnj ;
+LIST ConNeg = ConNeg ;
+LIST Cond = Cond ;
+LIST Def = Def ;
+LIST Del = Del ;
+LIST Dim = Dim ;
+LIST Dim/Der = Dim/Der ;
+LIST Dist = Dist ;
+LIST Fut = Fut ;
+LIST Imm = Imm ;
+LIST Imp = Imp ;
+LIST Incl = Incl ;
+LIST Ind = Ind ;
+LIST Inf = Inf ;
+LIST Int = Int ;
+LIST Loc = Loc ;
+LIST Med = Med ;
+LIST Neg = Neg ;
+LIST Num = Num ;
+LIST Obv =  Obv ;
+LIST Pos = Pos ;
+LIST Prf = Prf ;
+LIST Pron = Pron ;
+LIST Prox = Prox ;
+LIST Prs = Prs ;
+LIST Prt = Prt ;
+LIST Qst = Qst ;
+LIST Sbj = Sbj ;
+
+LIST Sg = Sg ;
+LIST SgO = SgO ;
+LIST P2lO = P2lO ;
+LIST Pl = Pl ;
+LIST PlO = PlO ;
+LIST 12Pl = 12Pl ;
+LIST 5Sg = 5Sg ;
+
+LIST Px12Pl = Px12Pl ;
+LIST Px1Pl = Px1Pl ;
+LIST Px1Sg = Px1Sg ;
+LIST Px2Pl = Px2Pl ;
+LIST Px2Sg = Px2Sg ;
+LIST Px3Pl = Px3Pl ;
+LIST Px3Sg = Px3Sg ;
+LIST Px4Pl = Px4Pl ;
+LIST Px4Sg = Px4Sg ;
+
+
+LIST @ACT = @ACT ;
+LIST @<ACT = @<ACT ;
+LIST @ACT> = @ACT> ;
+LIST @GOAL = @GOAL ;
+LIST @<GOAL = @<GOAL ;
+LIST @GOAL> = @GOAL> ;
+
+
+
+
 
 SET POSSESSUM3 = (N 3SgPoss) | (N 3PlPoss) | (N* 3SgPoss) | (N* 3PlPoss) | (Num 3SgPoss) | (Num 3PlPoss) ;
 SET POSSESSUM4 = (N 4SgPoss) | (N 4PlPoss) | (N* 4SgPoss) | (N* 4PlPoss) ;
@@ -903,6 +974,11 @@ SETPARENT:Set-FObjToLeftMv @-F<OPRED TO (*-1 NONVFIN BARRIER S-BOUNDARY OR @-FSU
 # kal
 SETPARENT:kal_SetObjToRightMv @MIK-OBJ> TO (*1 (<mv>) BARRIER S-BOUNDARY OR @-FSUBJ>) ; #kalspectagrules
 
+# crk
+SETPARENT:crk_SetObjToRightMv @GOAL> TO (*1 @FMV BARRIER S-BOUNDARY OR @-FSUBJ>) ; #kalspectagrules
+SETPARENT:crk_SetObjToLeftMv @<GOAL TO (*-1 @FMV BARRIER S-BOUNDARY) ; #kalspectagrules
+
+
 ### Advl
 SETPARENT:SetAdvlToSubj @<ADVL TO (*-1 SUBJ) ;
 	## Mov mænngan båata dihte gie manneste veaksahkåbpoe.
@@ -1141,6 +1217,9 @@ SETPARENT:kal_OBJsentenceToSentence @CAU> TO (*1 (<mv>)); #kalspectagrules
 SETPARENT:kal_OBJsentenceToSentence @CON TO (*-1 (<mv>)); #kalspectagrules
 SETPARENT:kal_OBJsentenceToSentence @CON TO (*1 (<mv>));  #kalspectagrules
 
+# crk
+SETPARENT:crk_CNJsentenceToSentence @FMV TO (*-1 @FMV + Ind)(0 Cnj) ;  
+SETPARENT:crk_CNJsentenceToSentence @FMV TO (*1 @FMV + Ind)(0 Cnj) ;  
 
 
 SETPARENT:VCoord $$VERBCOORD TO (*-1 COMMA OR CC BARRIER CS OR Rel LINK *-1 $$VERBCOORD + <ctjHead>);
@@ -1217,6 +1296,12 @@ SETPARENT SPRED (NONE p (*)) TO (@0 (*));
 # kal-rules
 SETPARENT:kalVokativ @VOKATIV TO (*1 @MV); #kalspectagrules
 
+# crk-rules
+SETPARENT @ACT> TO (*1 VFIN) ; # @SUBJ - there is no vfin for the subj - no cases in our gollecorpora
+SETPARENT @<ACT TO (*-1 VFIN) ; # @SUBJ - there is no vfin for the subj
+
+
+
 # SUBSTITUTE:kalNeverMainV (V <mv>) (V) TARGET V ; ##kalspectagrules
 
 # appositions
@@ -1289,39 +1374,6 @@ SUBSTITUTE (IV*) (*) TARGET (IV*) ;
 
 
 
-#SUBSTITUTE (@<ADVL) (@<ADVL-Ill) TARGET (Ill) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Ill) TARGET (Ill) ;
-#SUBSTITUTE (@<ADVL) (@<ADVL-Loc) TARGET (Loc) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Loc) TARGET (Loc) ;
-#SUBSTITUTE (@<ADVL) (@<ADVL-Com) TARGET (Com) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Com) TARGET (Com) ;
-#SUBSTITUTE (@<ADVL) (@<ADVL-Acc) TARGET (Acc) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Acc) TARGET (Acc) ;
-#SUBSTITUTE (@<ADVL) (@<ADVL-Gen) TARGET (Gen) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Gen) TARGET (Gen) ;
-#SUBSTITUTE (@<ADVL) (@<ADVL-Ess) TARGET (Ess) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Ess) TARGET (Ess) ;
-#SUBSTITUTE (@<ADVL) (@<ADVL-Nom) TARGET (Nom) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Nom) TARGET (Nom) ;
-#SUBSTITUTE (@<ADVL) (@<ADVL-Adv) TARGET (Adv) ;
-#SUBSTITUTE (@ADVL>) (@ADVL>-Adv) TARGET (Adv) ;
-#
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Ill) TARGET (Ill) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Ill) TARGET (Ill) ;
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Loc) TARGET (Loc) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Loc) TARGET (Loc) ;
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Com) TARGET (Com) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Com) TARGET (Com) ;
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Acc) TARGET (Acc) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Acc) TARGET (Acc) ;
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Gen) TARGET (Gen) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Gen) TARGET (Gen) ;
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Ess) TARGET (Ess) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Ess) TARGET (Ess) ;
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Nom) TARGET (Nom) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Nom) TARGET (Nom) ;
-#SUBSTITUTE (@-F<ADVL) (@-F<ADVL-Adv) TARGET (Adv) ;
-#SUBSTITUTE (@-FADVL>) (@-FADVL>-Adv) TARGET (Adv) ;
 
 
 

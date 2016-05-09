@@ -17,8 +17,9 @@
 ! ========================================================================== !
 
 LEXICON ProperNoun-eng
-
+   EngWords ;
 Aaron prop ;
+Alberta prop ;
 Alex prop ;
 Alice prop ;
 Amy prop ;
@@ -28,26 +29,24 @@ Ben prop ;
 Betty prop ;
 Beverly prop ;
 Bill prop ;
-Biscuits prop ;
+Board prop ;
 Bob prop ;
 Boss prop ;
 Brian prop ;
+CSC prop ;
+CCRA prop ;
+Canada prop ;
 Carl prop ;
 Cathy prop ;
 Charlie prop ;
 Connie prop ;
-Dog prop ;
 Dorothy prop ;
 Edith prop ;
 Elizabeth prop ;
 Emily prop ;
-Escape prop ;
-First prop ;
 Frank prop ;
-Great prop ;
 Henry prop ; !NS152IntrCree: Henrywa
 Hiro prop ;
-I prop ;
 Irene prop ;
 James prop ;
 Jane prop ;
@@ -61,7 +60,6 @@ Jordan prop ;
 Joseph prop ;
 Kathy prop ;
 Lana prop ;
-Last prop ;
 Linda prop ;
 Marjorie prop ; !NS152IntrCree: Marjoriewa
 Mark prop ;
@@ -69,26 +67,58 @@ Mary prop ;
 Mike prop ;
 Nancy prop ;
 Nang prop ;
-Night prop ;
-Older prop ;
 Pat prop ;
 Paul prop ;
-Residential prop ;
 Richard prop ;
 Rita prop ;
 Robert prop ;
 Sarah prop ;
-School prop ;
-Second prop ;
 Shirley prop ;
-Silent prop ;
 Steve prop ;
 Sylvie prop ;
 Tammy prop ;
-The prop ;
-Third prop ;
 Tim prop ;
 Tom prop ;
 Vernon prop ;
 Victor prop ;
+
+LEXICON EngWords  ! typically parts of English names
+Act prop ;
+Advisory prop ;
+Biscuits prop ;
+Children prop ;
+Committee prop ;
+Conditional prop ;
+Correctional prop ; !Correctional Services of Canada
+Correctional% Services% of% Canada prop ;
+Cree prop ;
+Dog prop ;
+Escape prop ;
+Family prop ;
+First prop ;
+Great prop ;
+I prop ;
+Kool-Aid prop ;
+Last prop ;
+Line prop ;
+Night prop ;
+Older prop ;
+Plains% Cree prop ;
+Plains prop ;
+Residential prop ;
+School prop ;
+Second prop ;
+Services prop ;
+Silent prop ;
+Tang prop ;
+The prop ;
+Third prop ;
+VAC prop ;
+Victim prop ;
+Victims prop ;
+Violence prop ;
 What prop ;
+Youth prop ;
+of prop ;
+
+

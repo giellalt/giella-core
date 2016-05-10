@@ -38,7 +38,7 @@ fstfiles="*fst
 *.bin
 *.bcg3"
 
-# Set svn:ignore props on all dirs:
+### Set svn:ignore props on all dirs:  ###
 for f in $(find $1/ \
 			-not -iwholename '*.svn*' \
 			-not -iwholename '*build*' \
@@ -52,6 +52,9 @@ for f in $(find $1/ \
 	$svnignore "$mkfiles
 $fstfiles" $f
 done
+
+### Then reset the default ignore pattern with the following values for ###
+### specific directories:                                               ###
 
 # Set the svn:ignore prop on the top level lang dir, ignoring build, bygg,
 # *.html and *.pc:
@@ -142,6 +145,10 @@ $svnignore "$mkfiles
 *.hfst
 *.pmhfst
 abbr.txt" $1/tools/preprocess
+
+# Set the svn:ignore prop on the tools/spellcheckers/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles" $1/tools/spellcheckers/filters/
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
 $svnignore "$mkfiles

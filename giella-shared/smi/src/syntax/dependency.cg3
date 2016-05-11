@@ -198,7 +198,7 @@ LIST Ipc = Ipc ;
 LIST AN = AN ;
 LIST IN = IN ;
 
-LIST IA = IA ;
+LIST AI = AI ;
 LIST II = II ;
 LIST TA = TA ;
 LIST TI = TI ;
@@ -502,6 +502,11 @@ LIST APP = @APP>Pron @APP-ADVL< @APP-N< @APP-Num< @APP-Pron< ;
 LIST @<ARG = @<SUBJ @<SPRED @<OBJ @<OPRED @-F<OBJ @-F<OPRED @<IOBJ ;
 
 LIST ADVL = @<ADVL @ADVL> @ADVL @-FADVL> @-F<ADVL @APP-ADVL< @CL-<ADVL @CL-ADVL> ; # @i-<ADVL @i-ADVL> ; 		         # adverbial
+
+
+LIST @INS = @INS ;
+LIST @<INS = @<INS ;
+LIST @INS> = @INS> ;
 
 LIST @IAUX = @IAUX ;
 LIST @FS-IAUX = @FS-IAUX ;
@@ -975,8 +980,8 @@ SETPARENT:Set-FObjToLeftMv @-F<OPRED TO (*-1 NONVFIN BARRIER S-BOUNDARY OR @-FSU
 SETPARENT:kal_SetObjToRightMv @MIK-OBJ> TO (*1 (<mv>) BARRIER S-BOUNDARY OR @-FSUBJ>) ; #kalspectagrules
 
 # crk
-SETPARENT:crk_SetObjToRightMv @GOAL> TO (*1 @FMV BARRIER S-BOUNDARY OR @-FSUBJ>) ; #kalspectagrules
-SETPARENT:crk_SetObjToLeftMv @<GOAL TO (*-1 @FMV BARRIER S-BOUNDARY) ; #kalspectagrules
+SETPARENT:crk_SetObjToRightMv @GOAL> TO (*1 @FMV BARRIER S-BOUNDARY) ; 
+SETPARENT:crk_SetObjToLeftMv @<GOAL TO (*-1 @FMV BARRIER S-BOUNDARY) ; 
 
 
 ### Advl

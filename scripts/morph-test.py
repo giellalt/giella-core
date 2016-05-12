@@ -41,17 +41,18 @@ def invert_dict(data):
                     d.append(key)
         return tmp
 
+COLORS = {
+    "red": "\033[1;31m",
+    "green": "\033[0;32m",
+    "orange": "\033[0;33m",
+    "yellow": "\033[1;33m",
+    "blue": "\033[0;34m",
+    "light_blue": "\033[0;36m",
+    "reset": "\033[m"
+}
+
 def colourise(string, *args, **kwargs):
-    colors = {
-        "red": "\033[1;31m",
-        "green": "\033[0;32m",
-        "orange": "\033[0;33m",
-        "yellow": "\033[1;33m",
-        "blue": "\033[0;34m",
-        "light_blue": "\033[0;36m",
-        "reset": "\033[m"
-    }
-    kwargs.update(colors)
+    kwargs.update(COLORS)
     return string.format(*args, **kwargs)
 
 def check_path_exists(program):
@@ -313,9 +314,9 @@ class MorphTest:
         if args.verbose:
             self.out.info("`%s` will be used for parsing dictionaries.\n" % self.program[0])
 
-        # TODO: reintroduce the removal of colour!
-        #if not args.colour:
-        #    colourise = lambda x, y=None: x
+        if not args.colour:
+            for key in list(COLORS.keys()):
+                COLORS[key] = ""
 
     def run_tests(self, single_test=None):
         args = self.args

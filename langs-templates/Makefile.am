@@ -64,6 +64,9 @@ templatemerge:
 	    if test x$(USERNAME) != "x"; then \
 	       USERNAMEOPTION="--username $(USERNAME)" ; \
 	    fi ; \
+	    if test x$(REVISION) != "x"; then \
+	       REVISIONOPTION="--revision $(REVISION)" ; \
+	    fi ; \
 	    if test x$(UNSAFE) == "xyes"; then \
 	       UNSAFEOPTION="--unsafe" ; \
 	    fi ; \
@@ -76,6 +79,7 @@ templatemerge:
 	               -t und \
 	               --templatecoll $(TEMPLATENAME) \
 	               $$USERNAMEOPTION \
+	               $$REVISIONOPTION \
 	               $$UNSAFEOPTION ; \
 	    else \
 	        echo ; \

@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Function to clean dirnames from irrelevant ../../ intermediate steps:
+function myreadlink() {
+  (
+  cd $(dirname $1)         # or  cd ${1%/*}
+  echo $PWD/$(basename $1) # or  echo $PWD/${1##*/}
+  )
+}
+
 # Wrong usage - short instruction:
 if ! test $# -eq 1 ; then
     echo "Usage: $0 LANGUAGE_DIR"
@@ -38,19 +46,26 @@ fstfiles="*fst
 *.bin
 *.bcg3"
 
-### Set svn:ignore props on all dirs:  ###
-for f in $(find $1/ \
-			-not -iwholename '*.svn*' \
-			-not -iwholename '*build*' \
-			-not -iwholename '*bygg*' \
+# Get the list of dirs to work on:
+dirlist=$(find $1 \
 			-not -iwholename '*.cache*' \
 			-not -iwholename '*hfst/3*' \
 			-not -iwholename '*hfst/MacVoikko*' \
 			-not -iwholename '*grammarcheckers/4*' \
 			-not -iwholename '*grammarcheckers/*-x-standard*' \
-			-type d) ; do
-	$svnignore "$mkfiles
+			-type d)
+
+# Remove intermediate ../../:
+shorteneddirlist=$(for d in $dirlist; do
+    myreadlink $d;
+done)
+
+### Set svn:ignore props on all found dirs, but skip 'bygg' and 'build': ###
+for f in $shorteneddirlist ; do
+	if echo $f | egrep -v -q "(bygg|build)"; then
+		$svnignore "$mkfiles
 $fstfiles" $f
+    fi
 done
 
 ### Then reset the default ignore pattern with the following values for ###
@@ -145,10 +160,6 @@ $svnignore "$mkfiles
 *.hfst
 *.pmhfst
 abbr.txt" $1/tools/preprocess
-
-# Set the svn:ignore prop on the tools/spellcheckers/filters/ dir:
-$svnignore "$mkfiles
-$fstfiles" $1/tools/spellcheckers/filters/
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
 $svnignore "$mkfiles

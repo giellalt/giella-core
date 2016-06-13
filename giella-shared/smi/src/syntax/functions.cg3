@@ -390,8 +390,13 @@ LIST @ADVL = @ADVL @ADVL> @ADVL< @<ADVL @>ADVL @-F<ADVL ;
 LIST @>ADVL = @>ADVL ;
 LIST @ADVL< = @ADVL< ;
 LIST @<ADVL = @<ADVL ;
+LIST @<ADVL-ela = @<ADVL-ela ;
+LIST @<ADVL-ine = @<ADVL-ine ;
 LIST @ADVL> = @ADVL> ;
+LIST @ADVL-ela> = @ADVL-ela> ;
+LIST @ADVL-ine> = @ADVL-ine> ;
 LIST @ADVL>CS = @ADVL>CS ;
+
 
 LIST <hab> = <hab> ;
 LIST <ext> = <ext> ;
@@ -1731,9 +1736,19 @@ MAP:f<advl (@-F<ADVL) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Rout
 MAP:fadvl> (@-FADVL>) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen)(NEGATE *-1 FMAINV BARRIER S-BOUNDARY OR CS)(*1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS OR FMAINV) ;
 	#$ Anán buorebun odne vuolgit go ihttážii vuordit.
 
+LIST ELA-VERBS-sme = "boahtit" "fárret" "beassat" "čuoigat" "jearrat" "vuodjit" "girdit" "johtit" "sirdit" "sihkkelastit" "viehkat" "vuolgit" "váldit" "oažžut"  ;
+
+LIST INE-VERBS-sme =  "čálašit"  "čállit" "geahččat" "goddot" "leat" "lahkonit" "oađđit" "oidnot" "veallát" "čohkkát"  ;
+
+
+MAP:ext (@<ADVL-ine) TARGET ADVL + Loc (*1 (<ext>) BARRIER SV-BOUNDARY) ;
+MAP:ext (@ADVL-ine>) TARGET ADVL + Loc (*-1 (<ext>) BARRIER SV-BOUNDARY) ;
 
 
 #!! * __s-boundary=advl>__ (@ADVL>) for ADVL that resemble s-booundaries. Mainverb to the right.
+MAP:s-boundary=advl> (@ADVL-ine>) TARGET ADVL + Rel (*1 FMAINV + INE-VERBS-sme) ;
+MAP:s-boundary=advl> (@ADVL-ela>) TARGET ADVL + Rel (*1 FMAINV - INE-VERBS-sme) ;
+
 MAP:s-boundary=advl> (@ADVL>) TARGET ADVL + S-BOUNDARY (*1 FMAINV) ;
 	#$ Dál de viimmat asttan lohkat reivve.
 
@@ -1757,6 +1772,14 @@ MAP:-fobj> (@-FOBJ>) TARGET Acc (-1 ADVL + Sem/Hum)(1 (TV Inf @<OBJ) LINK NOT 1 
 
 
 #!! * __advl>mainV__ (@ADVL>) if; finite mainverb not found to the left, but the finite mainverb is found to the right.
+
+
+
+MAP (@ADVL-ine>) TARGET N + Loc OR Pron + Loc (NEGATE *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAINV + INE-VERBS-sme BARRIER SV-BOUNDARY) ;
+
+MAP (@ADVL-ela>) TARGET N + Loc  (NEGATE *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAINV - INE-VERBS-sme BARRIER SV-BOUNDARY) ;
+
+
 MAP:advl>mainV (@ADVL>) TARGET ADVL (NEGATE *-1 FMAINV BARRIER S-BOUNDARY)(*1 FMAINV BARRIER SV-BOUNDARY) ;
 	#$ Dál de viimmat asttan lohkat reivve.
 	#$ Jos ja go suodjalus ii šat dárbbaš guovllu, dat galgá máhcahuvvot sámi geavahussii, Skum cealká.
@@ -1764,6 +1787,18 @@ MAP:advl>mainV (@ADVL>) TARGET ADVL (NEGATE *-1 FMAINV BARRIER S-BOUNDARY)(*1 FM
 
 
 #!! * __V<advl__ (@<ADVL) if; finite mainverb found to the left. Not if a comma is found immediately to the left and a finite mainverb is located somewhere to the right of this comma.
+MAP:V<advl (@<ADVL-ine) TARGET ADVL + N + Loc (*-1 FMAINV + INE-VERBS-sme BARRIER SV-BOUNDARY - (":"))(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+MAP:V<advl (@<ADVL-ine) TARGET ADVL + Loc + Sem/Time (*-1 FMAINV BARRIER SV-BOUNDARY - (":"))(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+
+
+MAP:V<advl (@<ADVL-ela) TARGET ADVL + N + Loc (*-1 FMAINV - INE-VERBS-sme BARRIER SV-BOUNDARY - (":"))(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+
+
+MAP:V<advl (@<ADVL-ine) TARGET N + Loc (*-1 FMAINV + INE-VERBS-sme BARRIER SV-BOUNDARY - (":"))(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+
+MAP:V<advl (@<ADVL-ela) TARGET N + Loc (*-1 FMAINV - INE-VERBS-sme BARRIER SV-BOUNDARY - (":"))(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
+
+
 MAP:V<advl (@<ADVL) TARGET ADVL - MO - Rel - MOD-ADV - Attr OR TIME-N + Gen OR (Sem/Route Gen) OR Sem/Date OR Sem/Year (*-1 FMAINV BARRIER SV-BOUNDARY - (":"))(NEGATE -1 COMMA LINK *1 FMAINV BARRIER S-BOUNDARY) ;
 	#$ Giellatekno álggahuvvui 1.8.2001 prošeaktan ráhkadit sámegiela grammatihkalaš analysa.
 	#$ Dán filmma leat Kárášjoga nuorat oaidnán, eaige šat vuolgge sirkusii.

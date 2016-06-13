@@ -1932,11 +1932,6 @@
       <xs:attribute ref="tx"/>
    </xs:attributeGroup>
    <!--"CX" might be adapted for several languages but there are a lot of issues to deal with -->
-   <xs:attribute name="ms">
-     <xs:simpleType>
-       <xs:restriction base="xs:string"/>
-     </xs:simpleType>
-   </xs:attribute>
    <xs:attribute name="cx">
       <!--case marker-->
       <xs:simpleType>

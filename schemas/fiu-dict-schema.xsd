@@ -238,7 +238,7 @@
          <xs:attribute ref="exclude"/>
          <xs:attribute ref="Contlex"/>
          <xs:attribute ref="inflexId"/>
-         <xs:attribute ref="NumContlex"/>
+         <xs:attribute name="NumContlex" type="xs:string"/>
          <xs:attribute ref="orthType"/>
          <xs:attribute ref="status"/>
       </xs:complexType>

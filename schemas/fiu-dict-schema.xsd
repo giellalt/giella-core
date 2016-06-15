@@ -109,6 +109,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
             <xs:element ref="stg"/>
             <xs:element minOccurs="0" ref="audio"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="inc-audio"/>
             <xs:element minOccurs="0" ref="mini_paradigm"/>
             <xs:element minOccurs="0" ref="etymology"/>
             <xs:element minOccurs="0" ref="compg"/>

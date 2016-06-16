@@ -1731,7 +1731,7 @@ MAP:f<advl (@-F<ADVL) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Rout
 MAP:fadvl> (@-FADVL>) TARGET ADVL - MO - S-BOUNDARY OR TIME-N + Gen OR (Sem/Route Gen)(NEGATE *-1 FMAINV BARRIER S-BOUNDARY OR CS)(*1 SYN-V - VGen - VAbess BARRIER SV-BOUNDARY OR CS OR FMAINV) ;
 	#$ Anán buorebun odne vuolgit go ihttážii vuordit.
 
-LIST ELA-VERBS-sme = "boahtit" "fárret" "beassat" "čuoigat" "jearrat" "vuodjit" "girdit" "johtit" "sirdit" "sihkkelastit" "viehkat" "vuolgit" "váldit" "oažžut" "vázzit"  ;
+LIST ELA-VERBS-sme = "beroštit" "boahtit" "čoaggit" "čohkket" "fárret" "beassat" "čuoigat" "jearrat" "vuodjit" "girdit" "johtit" "sirdit" "sihkkelastit" "viehkat" "vuolgit" "váldit" "oažžut" "vázzit"  ;
 
 LIST INE-VERBS-sme =  "ássat" "buolvvastallat" "buolvvastit" "čálašit" "čippostallat"  "čohkahit" "čohkkát" "čuččodit" "čuožžut" "čállit" "eallit" "geahččat" "goddot"  "gohččát" "gullát" "leat" "lahkonit" "morihit" "morránit" "oađđit" "oidnot" "orodit" "orrut" "stuorrut" "veallahit" "veallát"  ;
 

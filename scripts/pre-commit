@@ -1,0 +1,97 @@
+#!/usr/bin/env python
+'''svn pre-commit script
+
+Most of it comes from: http://wordaligned.org/articles/a-subversion-pre-commit-hook
+'''
+from __future__ import print_function
+import io
+import lxml.etree as etree
+from optparse import OptionParser
+import subprocess
+import sys
+
+
+def command_output(cmd):
+    '''Capture a command's standard output'''
+    return subprocess.Popen(
+        cmd.split(), stdout=subprocess.PIPE).communicate()[0]
+
+
+def files_changed(look_cmd):
+    '''List the files added or updated by this transaction
+
+    "svnlook changed" gives output like:
+    U   trunk/file1.cpp
+    A   trunk/file2.cpp
+    '''
+    def filename(line):
+        return line[4:]
+
+    def added_or_updated(line):
+        return line and line[0] in ('A', 'U')
+
+    return [
+        filename(line)
+        for line in command_output(look_cmd % 'changed').split('\n')
+        if added_or_updated(line)]
+
+
+def file_contents(filename, look_cmd):
+    '''Return a file's contents for this transaction'''
+    return command_output("%s %s" % (look_cmd % "cat", filename))
+
+
+def is_valid_xml(fname):
+    '''Check if an xml file is valid
+
+    Args:
+        fname: svn path of the file to check
+
+    Raises:
+        SyntaxWarning: the file is not valid
+    '''
+    tree = etree.parse(fname)
+    if tree.docinfo.system_url:
+        dtd = etree.DTD(tree.docinfo.system_url)
+        if not dtd.validate(tree):
+            raise SyntaxWarning('\n'.join([str(entry) for entry in dtd.error_log]))
+
+
+def check_xml_files(look_cmd):
+    '''Check if xml files in this transaction are wellformed and valid'''
+    errors = 0
+    for ff in files_changed(look_cmd):
+        if ff.endswith('.xml'):
+            try:
+                is_valid_xml(io.BytesIO(file_contents(ff, look_cmd)))
+            except etree.XMLSyntaxError as e:
+                errors += 1
+                print(ff, 'is not wellformed\nError:', e,
+                      file=sys.stderr)
+            except SyntaxWarning as e:
+                errors += 1
+                print(ff, 'is not valid according to DTD\n', e,
+                      file=sys.stderr)
+
+    return errors
+
+
+def main():
+    usage = '''usage: %prog REPOS TXN
+
+    Run pre-commit options on a repository transaction.'''
+
+    parser = OptionParser(usage=usage)
+    parser.add_option("-r", "--revision",
+                        help="Test mode. TXN actually refers to a revision.",
+                        action="store_true", default=False)
+    errors = 0
+    (opts, (repos, txn_or_rvn)) = parser.parse_args()
+    look_opt = ("--transaction", "--revision")[opts.revision]
+    look_cmd = "svnlook %s %s %s %s" % (
+        "%s", repos, look_opt, txn_or_rvn)
+    errors += check_xml_files(look_cmd)
+    return errors
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -21,7 +21,7 @@
 Multichar_Symbols  !!≈ !!!Definitions for @CODE@
 
 !! !!Analysis symbols
-!! ----------------
+!  ----------------
 !! The morphological analyses of wordforms for the __UNDEFINED__
 !! language are presented in this system in terms of the following symbols.
 !! (It is highly suggested to follow existing standards when adding new tags).
@@ -97,7 +97,7 @@ Multichar_Symbols  !!≈ !!!Definitions for @CODE@
 
 
 !! Morphophonology
-!! ---------------
+!  ---------------
 !! To represent phonologic variations in word forms we use the following
 !! symbols in the lexicon files:
  {aä} {oö} {uü}

@@ -38,17 +38,17 @@ function expand_variables(s) {
 }
 /^!!€ / {
     if (NF >= 4) {
-        printf("* __%s__ {{%s}} (Eng.", $2, $3);
+        printf("* __%s __ {{%s}} (Eng.", $2, $3);
         for (i = 4; i <= NF; i++) {
             printf(" %s", $i);
         }
         printf(")\n");
     }
     else if (NF == 3) {
-        printf("* __%s__ {{%s}}\n", $2, $3);
+        printf("* __%s __ {{%s}}\n", $2, $3);
     }
     else if (NF == 2) {
-        printf("* __%s__\n", $2);
+        printf("* __%s __\n", $2);
     }
     else {
         print("* ???");
@@ -56,17 +56,17 @@ function expand_variables(s) {
 }
 /^!!\$ / {
     if (NF >= 4) {
-        printf("* __*%s__ {{%s}} (is not standard language", $2, $3);
+        printf("* __*%s __ {{%s}} (is not standard language", $2, $3);
         for (i = 4; i <= NF; i++) {
             printf(" %s", $i);
         }
         printf(")\n");
     }
     else if (NF == 3) {
-        printf("* __*%s__ {{%s}} (is not standard language)\n", $2, $3);
+        printf("* __*%s __ {{%s}} (is not standard language)\n", $2, $3);
     }
     else if (NF == 2) {
-        printf("* __*%s__ (is not standard language)\n", $2);
+        printf("* __*%s __ (is not standard language)\n", $2);
     }
     else {
         print("* ???");

@@ -75,7 +75,7 @@ function expand_variables(s) {
 /^!!¥ / {
     printf("This construct is not supported anymore:\n {{{%s}}} ", $0);
 }
-/.*!!= / {
+/^[^!].*!!= / {
     CODE=gensub("!!=.*", "", 1);
     if ($0 ~ /@CODE@/)
     {
@@ -86,7 +86,7 @@ function expand_variables(s) {
         print(expand_variables(gensub("!!=", " ", 1)));
     }
 }
-/.*!!≈ / {
+/^[^!].*!!≈ / {
     CODE=gensub("  *", " ", "g",
            gensub("^ *", "", 1,
            gensub(" *!!≈.*", "", 1)));
@@ -100,7 +100,8 @@ function expand_variables(s) {
         print(expand_variables(gensub("!!≈", " ", 1)));
     }
 }
-/.*!! / {print(expand_variables(gensub(".*!! ", "", 1))); }
+/^!! / {print(expand_variables(gensub(".*!! ", "", 1))); }
+/^[^!]+!! / {print(expand_variables(gensub(".*!! ", "", 1))); }
 /!!/ {SOMETHING_WRONG="FALSE";}
 /^Multichar_Symbols/ {LEXNAME=$1;}
 /^LEXICON / {LEXNAME=$2;}

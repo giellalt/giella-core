@@ -25,7 +25,9 @@ headers = re.compile('''^(!{1,3})\s*([^!]+)''')
 ordered = re.compile('''^(#{1,3})\s*([^#]+)''')
 unordered =  re.compile('''^(\*{1,3})\s*([^*]+)''')
 horisontal = re.compile('''^(-{4,})$''')
-
+complete_pre_inline = re.compile('''^(.*){{{(.+)}}}([^}]*)$''')
+start_of_pre = re.compile('''^(.*){{{([^}]*)$''')
+end_of_pre = re.compile('''^(.*)}}}([^}]*)$''')
 
 Entry = collections.namedtuple('Entry', ['name', 'data'])
 
@@ -146,6 +148,31 @@ class DocMaker(object):
         else:
             self.document[-1].data.append(b)
 
+    def make_inline_pre(self, b):
+        m = complete_pre_inline.match(b)
+        if m.group(1):
+            self.handle_line(m.group(1))
+        self.close_block()
+        self.document.append(Entry(name='pre', data=[m.group(2)]))
+        self.close_block()
+        if m.group(3):
+            self.handle_line(m.group(3))
+
+    def start_inline(self, b):
+        m = start_of_pre.match(b)
+        if m.group(1):
+            self.handle_line(m.group(1))
+        self.close_block()
+        self.document.append(Entry(name='pre', data=[m.group(2)]))
+
+    def close_inline(self, b):
+        m = end_of_pre.match(b)
+        if m.group(1):
+            self.handle_line(m.group(1))
+        self.close_block()
+        if m.group(2):
+            self.handle_line(m.group(2))
+
     def close_block(self):
         self.document.append(Entry(name='empty', data=[]))
 
@@ -153,6 +180,12 @@ class DocMaker(object):
         for b in block:
             if horisontal.match(b):
                 self.make_horisontal(b)
+            elif complete_pre_inline.match(b):
+                self.make_inline_pre(b)
+            elif start_of_pre.match(b):
+                self.start_inline(b)
+            elif end_of_pre.match(b):
+                self.close_inline(b)
             elif b[0] in self.tjoff.keys():
                 self.tjoff[b[0]](b)
             else:

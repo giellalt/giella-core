@@ -161,12 +161,13 @@ class DocMaker(object):
             raise ValueError('Error!\nFake unordered entry! {}'.format(b))
 
     def make_horisontal(self, b):
-        if len(b.content) == 5:
-            self.document.append(Entry(name='hr', data=[]))
-        else:
-            raise ValueError(
-                'Please shorten the hr line to four hyphens.\n'
-                'This is the erroneous line:\n{}\n'.format(b))
+        if not self.inside_pre:
+            if len(b.content) == 5:
+                self.document.append(Entry(name='hr', data=[]))
+            else:
+                raise ValueError(
+                    'Please shorten the hr line to four hyphens.\n'
+                    'This is the erroneous line:\n{}\n'.format(b))
 
     def make_table(self, b):
         links_removed = '='.join(re.split('\[.+\]', b.content))

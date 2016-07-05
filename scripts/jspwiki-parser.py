@@ -54,7 +54,6 @@ class DocMaker(object):
             '!': self.make_header,
             '*': self.make_unordered,
             '#': self.make_ordered,
-            '-': self.make_horisontal,
             '|': self.make_table,
         }
         self.header_level = 0
@@ -128,8 +127,12 @@ class DocMaker(object):
             raise ValueError('Fake unordered entry! {}'.format(b))
 
     def make_horisontal(self, b):
-        if horisontal.match(b):
+        if len(b) == 4:
             self.document.append(Entry(name='hr', data=[]))
+        else:
+            raise ValueError(
+                'Please shorten the hr line to four hyphens.\n'
+                'This is the erroneous line:\n{}\n'.format(b))
 
     def make_table(self, b):
         if b.startswith('||'):
@@ -148,7 +151,9 @@ class DocMaker(object):
 
     def parse_block(self, block):
         for b in block:
-            if b[0] in self.tjoff.keys():
+            if horisontal.match(b):
+                self.make_horisontal(b)
+            elif b[0] in self.tjoff.keys():
                 self.tjoff[b[0]](b)
             else:
                 self.handle_line(b)

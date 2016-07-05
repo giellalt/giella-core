@@ -178,7 +178,14 @@ class DocMaker(object):
 def main():
     dm = DocMaker()
     dm.parse_blocks()
-    print(dm.document)
+    for entry in dm.document:
+        if entry.name == 'empty':
+            print()
+        elif entry.name == 'hr':
+            print('<hr/>')
+        else:
+            print('<{tag}>{text}</{tag}>'.format(tag=entry.name,
+                                                 text='\n'.join(entry.data)))
 
 if __name__ == '__main__':
     main()

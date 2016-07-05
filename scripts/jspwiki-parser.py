@@ -100,6 +100,8 @@ class DocMaker(object):
                 'Erroneous line is {}\n'.format(b))
 
         if ordered.match(b.content):
+            self.check_for_wrong_char('!*', b)
+            
             this_level = len(ordered.match(b.content).group(1))
             if self.ordered_level == 0 and this_level != 1:
                 raise ValueError(
@@ -115,15 +117,25 @@ class DocMaker(object):
                         '#' * 2, b))
             else:
                 self.ordered_level = this_level
-                self.check_inline(b)
                 self.document.append(Entry(
                     name='o{}'.format(this_level),
                     data=[ordered.match(b.content).group(2)]))
         else:
             raise ValueError('Error!\nInvalid ordered entry! {}'.format(b))
 
+
+    def check_for_wrong_char(self, possible_wrong_chars, b):
+        for possible_wrong_char in possible_wrong_chars:
+            if possible_wrong_char in b.content:
+                self.error(
+                    ':#{}:\n\tLines starting with «{}» cannon contain '
+                    '«{}». {}'.format(b.number, b.content[0],
+                                      possible_wrong_char, 
+                                      b.content))
     def make_header(self, b):
         if headers.match(b.content):
+            self.check_for_wrong_char('#*', b)
+            
             this_level = 4 - len(headers.match(b.content).group(1))
             if self.first_level == 0:
                 self.first_level = this_level
@@ -165,6 +177,7 @@ class DocMaker(object):
                 'Erroneous line is {}\n'.format(b))
 
         if unordered.match(b.content):
+            self.check_for_wrong_char('#!', b)
             this_level = len(unordered.match(b.content).group(1))
             if self.unordered_level == 0 and this_level != 1:
                 raise ValueError(
@@ -247,21 +260,23 @@ class DocMaker(object):
     def make_inline_pre(self, b):
         m = complete_pre_inline.match(b.content)
         if m.group(1):
-            if self.document[-1].name != 'pre':
+            if not self.inside_pre:
                 self.check_inline(Line(b.number, m.group(1)))
             self.handle_line(m.group(1))
         self.close_block()
         self.document.append(Entry(name='pre', data=[m.group(2)]))
         self.close_block()
         if m.group(3):
-            if self.document[-1].name != 'pre':
+            if not self.inside_pre:
                 self.check_inline(Line(b.number, m.group(3)))
             self.handle_line(m.group(3))
 
     def start_pre(self, b):
         m = start_of_pre.match(b.content)
         if m.group(1):
-            if self.document[-1].name != 'pre':
+            util.print_frame()
+            if not self.inside_pre:
+                util.print_frame()
                 self.check_inline(Line(b.number, m.group(1)))
             self.handle_line(m.group(1))
         self.close_block()
@@ -273,7 +288,7 @@ class DocMaker(object):
             self.handle_line(m.group(1))
         self.close_block()
         if m.group(2):
-            if self.document[-1].name != 'pre':
+            if not self.inside_pre:
                 self.check_inline(Line(b.number, m.group(2)))
             self.handle_line(m.group(2))
 
@@ -281,6 +296,59 @@ class DocMaker(object):
         if self.document[-1].name != 'empty':
             self.document.append(Entry(name='empty', data=[]))
 
+    def check_wrong_endchar(self, b):
+        markup = {
+            "'": 'italic',
+            '}': 'monospaced',
+            '_': 'bold',
+        }
+        for wrong_endchar1 in markup.keys():
+            regex = '''^.+[^{wc}]{wc}$'''.format(wc=wrong_endchar1)
+            if re.match(regex, b.content):
+                self.error(
+                    ':#{}:\n\tLine ends with {}.\n\t'
+                    'Either add a space character at the line ending, '
+                    'mark it up as {wc} (two {wc}\'s at each side) or '
+                    'place the entire line inside a pre '
+                    'block: {}\n'.format(b.number, wrong_endchar1, b.content, 
+                                         wc=markup[wrong_endchar1]))
+            
+            for wrong_endchar2 in markup.keys():
+                if wrong_endchar1 == wrong_endchar2:
+                    exp = '''{first}{second}{second}'''.format(
+                        first=wrong_endchar1, second=wrong_endchar2)
+                    if exp in b.content:
+                        self.error(
+                            ':#{}:\n\tErroneous {wc} markup.\n\t'
+                            'Either add a space character between «{first}» '
+                            'and «{second}» or place the entire line inside '
+                            'a pre block: {}\n'.format(b.number, b.content,
+                                                       wc=markup[wrong_endchar2],
+                                                       first=wrong_endchar1,
+                                                       second=wrong_endchar2))
+    def check_unbalanced_markup(self, b):
+        markups = {
+            'italic': ("'", "'"),
+            'monospaced': ('{', '}'),
+            'bold': ('_', '_'),
+        }
+        for name, markup in markups.items():
+            start = b.content.find(''.join(2 * markup[0]))
+            end = b.content.rfind(''.join(2 * markup[1]))
+                               
+            #if start > -1 or end > -1:
+                #print(start, end, b)
+            if (start > 0 and end == -1) or \
+                (start == -1 and end > 0 ) or \
+                    (start > -1 and end > -1 and start == end):
+                self.error(
+                    ':#{}:\n\tLine contains a single {name} markup.\n\t'
+                    'Either remove the single {name} markup or remove the '
+                    'newline in the {name} markup: {}\n'.format(
+                        b.number, b.content, 
+                        name=name))
+                    
+        
     def check_inline(self, b):
         if not self.inside_pre:
             m = possible_twolc_rule.match(b.content)
@@ -290,59 +358,85 @@ class DocMaker(object):
                     'Please either remove it from the documentation or '
                     'place it in a pre-block: {}'.format(b.number, b.content))
 
-            elif possible_links.match(b.content) and 'langs/' not in os.path.abspath(self.filename):
+            elif possible_links.match(b.content):
                 m = possible_links.match(b.content)
                 if not m.group(1).endswith('['):
                     self.handle_link_content(m, b)
 
-            if re.match('^.*[^}]}$', b.content):
-                self.error(
-                    ':#%s:\n\tLine endswith «}».\n\tTo fix this, add at least a '
-                    'space at the end of the line: %s' % (b.number, b.content))
-
-            #if erroneous_bold.match(b.content):
-                #m = erroneous_bold.match(b.content)
-                #self.error(
-                    #':#{}:\n\tErroneous bold markup.\n\t'
-                    #'Either remove «_» chars around {}, add another '
-                    #'«_» on either side or place it inside a pre '
-                    #'block: {}\n'.format(b.number, m.group(1), b.content))
-
-            if '-__ ' in b.content:
-                self.error(
-                    ':#{}:\n\tErroneous bold markup.\n\t'
-                    'Either space character between «-» and «_» or '
-                    'place the entire line inside a pre '
-                    'block: {}\n'.format(b.number, b.content))
-
+            self.check_wrong_endchar(b)
+            self.check_unbalanced_markup(b)
 
     def handle_link_content(self, link_match, block):
         parts = link_match.group(2).split('|')
-        if len(parts) > 2:
-            self.error(
-                ':#{}:\n\tLink content has to many parts.\n\t'
-                'If this is a link, fix the content. If it is not a '
-                'link prepend {} with «[»: {}'.format(block.number,
-                                                      link_match.group(2),
-                                                      block.content))
-        elif len(parts) == 2 and not self.is_correct_link(parts[1][:-1].strip()):
-            self.error(
-                ':#{}:\n\tLink content «{}» does not point to a valid document.\n\t'
-                'If this is a link, fix the content. If it is not a '
-                'link prepend «{}» with «[»: {}'.format(block.number,
-                                                        parts[1][:-1],
-                                                        link_match.group(2),
-                                                        block.content))
-        elif len(parts) == 1:
-            if not parts[0][1:-1].strip():
+        #if len(parts) > 2:
+            #self.error(
+                #':#{}:\n\tLink content has to many parts.\n\t'
+                #'If this is a link, fix the content. If it is not a '
+                #'link prepend {} with «[»: {}'.format(block.number,
+                                                      #link_match.group(2),
+                                                      #block.content))
+        #el
+        if len(parts) == 2:
+            #if not parts[1][1:-1].strip():
+                #self.error(
+                    #':#{}:\n\tLink content «{}» is empty.\n\t'
+                    #'If this is a link, fix the content. If it is not a '
+                    #'link prepend «{}» with «[»: {}'.format(block.number,
+                                                            #parts[0][:-1],
+                                                            #link_match.group(2),
+                                                            #block.content))
+            #elif re.match('^\d+$', parts[1][1:-1].strip()):
+                #self.error(
+                    #':#{}:\n\tLink content «{}» contains only numbers.\n\t'
+                    #'If this is a link, fix the content. If it is not a '
+                    #'link prepend «{}» with «[»: {}'.format(block.number,
+                                                            #parts[1][:-1],
+                                                            #link_match.group(2),
+                                                            #block.content))
+            #el
+            if '%^' in parts[1]:
+                self.error(':#{}:\n\tLink content «{}» contains a '
+                    'URI-hex pattern.\n\t'
+                    'If this is a link, fix the content. If it is not a '
+                    'link prepend «{}» with «[»: {}'.format(block.number,
+                                                            parts[1][:-1],
+                                                            link_match.group(2),
+                                                            block.content))
+            elif not self.is_correct_link(parts[1][:-1].strip()) and  'langs/' not in os.path.abspath(self.filename):
                 self.error(
-                    ':#{}:\n\tLink content «{}» is empty.\n\t'
+                    ':#{}:\n\tLink content «{}» does not point to a valid document.\n\t'
+                    'If this is a link, fix the content. If it is not a '
+                    'link prepend «{}» with «[»: {}'.format(block.number,
+                                                            parts[1][:-1],
+                                                            link_match.group(2),
+                                                            block.content))
+        elif len(parts) == 1:
+            #if not parts[0][1:-1].strip():
+                #self.error(
+                    #':#{}:\n\tLink content «{}» is empty.\n\t'
+                    #'If this is a link, fix the content. If it is not a '
+                    #'link prepend «{}» with «[»: {}'.format(block.number,
+                                                            #parts[0][:-1],
+                                                            #link_match.group(2),
+                                                            #block.content))
+            #elif re.match('^\d+$', parts[0][1:-1].strip()):
+                #self.error(
+                    #':#{}:\n\tLink content «{}» contains only numbers.\n\t'
+                    #'If this is a link, fix the content. If it is not a '
+                    #'link prepend «{}» with «[»: {}'.format(block.number,
+                                                            #parts[0][:-1],
+                                                            #link_match.group(2),
+                                                            #block.content))
+            #el
+            if '%^' in parts[0]:
+                self.error(':#{}:\n\tLink content «{}» contains a '
+                    'URI-hex pattern.\n\t'
                     'If this is a link, fix the content. If it is not a '
                     'link prepend «{}» with «[»: {}'.format(block.number,
                                                             parts[0][:-1],
                                                             link_match.group(2),
                                                             block.content))
-            elif not self.is_correct_link(parts[0][1:-1].strip()):
+            elif not self.is_correct_link(parts[0][1:-1].strip()) and  'langs/' not in os.path.abspath(self.filename):
                 self.error(
                     ':#{}:\n\tLink content «{}» does not point to a '
                     'valid document.\n\t'
@@ -398,9 +492,10 @@ class DocMaker(object):
                 'Reached end of document without finding closing }}}\n')
 
     def parse_block(self, b):
-        if horisontal.match(b.content):
+        if horisontal.match(b.content) and not self.inside_pre:
+            self.check_inline(b)
             self.make_horisontal(b)
-        elif complete_pre_inline.match(b.content):
+        elif complete_pre_inline.match(b.content) and not self.inside_pre:
             self.make_inline_pre(b)
         elif start_of_pre.match(b.content):
             if self.inside_pre:
@@ -421,10 +516,10 @@ class DocMaker(object):
                 self.close_inline(b)
                 self.inside_pre = False
         elif b.content[0] in self.tjoff.keys() and not self.inside_pre:
+            self.check_inline(b)
             self.tjoff[b.content[0]](b)
-        else:
-            if not self.inside_pre:
-                self.check_inline(b)
+        elif not self.inside_pre:
+            self.check_inline(b)
             self.handle_line(b.content)
 
     def jspwiki_blocks(self):
@@ -442,7 +537,7 @@ class DocMaker(object):
             if rulename_re.match(line):
                 rulename = rulename_re.match(line).group(1)
 
-            if '!! ' in line:
+            if re.match('^[^!]+!! ', line):
                 lexc_doc = re.compile('.*!! (.+)')
                 m = lexc_doc.match(line)
                 if m:
@@ -487,7 +582,7 @@ class DocMaker(object):
                     self.parse_block(Line(number=x + 1,
                                       content='__{} examples:__'.format(
                                           m.group(1))))
-            elif re.match('.+!![=≈]', line):
+            elif re.match('^[^!]+!![=≈]', line):
 
                 def check_validity(lineno, origline, line, code):
                     parts = line.split('@CODE@')
@@ -497,7 +592,12 @@ class DocMaker(object):
                             'will replace it ends with «}». Either remove «_» '
                             'from @CODE@ or insert a space between @CODE@ '
                             'and _: %s' % (lineno, origline))
-
+                    if re.match('^\s*!', code) and re.match('^\s*\*\s+$', parts[0]):
+                        self.error(
+                            ':#%s:\n\t@CODE@ contains «!». '
+                            'Either remove «!» or @CODE@: %s «%s»' % (lineno, 
+                                                                 origline,
+                                                                 parts[0]))
                 def get_replacement(s1, s2):
                     return s1 if s2 == '!!=' else s1.strip()
 
@@ -520,8 +620,8 @@ class DocMaker(object):
 def handle_file(path):
 
     dm = DocMaker(path)
-    if path.endswith('.lexc') or path.endswith('.xfscript') or path.endswith('.twolc'):
-        dm.first_level = 1
+    #if path.endswith('.lexc') or path.endswith('.xfscript') or path.endswith('.twolc'):
+        #dm.first_level = 1
     if not ('errors/' in path or
             'generated_files' in path or
             'lexicon.' in path or
@@ -537,12 +637,12 @@ def main():
 
     for uff in sys.argv[1:]:
         if os.path.isfile(uff):
-            if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript'): # or uff.endswith('.jspwiki')
+            if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript') or uff.endswith('.jspwiki'):
                 handle_file(uff)
         else:
             for root, dirs, files in os.walk(uff):
                 for f in files:
-                    if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc'): # or f.endswith('.jspwiki')
+                    if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc') or f.endswith('.jspwiki'):
                         handle_file(os.path.join(root, f))
 
 

@@ -135,7 +135,10 @@ class DocMaker(object):
         print('table', b)
 
     def handle_line(self, b):
-        print('handle_line', b)
+        if self.document[-1].name in ['empty', 'h1', 'h2', 'h3', 'th', 'tr']:
+            self.document.append(Entry(name='p', data=[b]))
+        else:
+            self.document[-1].data.append(b)
 
     def close_block(self):
         self.document.append(Entry(name='empty', data=[]))

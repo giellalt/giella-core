@@ -43,6 +43,7 @@ Line = collections.namedtuple('Line', ['number', 'content'])
 
 
 def test_match():
+    print('testing')
     for c in [(headers, '!'), (ordered, '#'), (unordered, '*')]:
         if not c[0].match('  {} '.format(c[1])):
             print('{} did not pass'.format(c[1]))
@@ -66,6 +67,9 @@ def test_match():
     m = possible_twolc_rule.match('''Cns: (ˈ:|:ˈ) _ Vow: Cns:* PenBetweenStemAndVowelLoss (%^RmVow:) %^PALNo: (%^DeVC:) RBound ;''')
     if m:
         util.print_frame('YEY2!')
+    m = possible_twolc_rule.match('''define uwChange [ u -> w || _ %> a ] ;''')
+    if m:
+        util.print_frame('YEY3!')
 
 
 class DocMaker(object):
@@ -383,6 +387,7 @@ class DocMaker(object):
             '.jspwiki': self.jspwiki_blocks,
             '.lexc': self.lexc_blocks,
             '.twolc': self.lexc_blocks,
+            '.xfscript': self.lexc_blocks,
         }
 
         get_blocks[os.path.splitext(self.filename)[1]]()
@@ -514,31 +519,30 @@ class DocMaker(object):
 
 def handle_file(path):
 
-    if path.endswith('.lexc') or path.endswith('.twolc') or path.endswith('.jspwiki'):
-        dm = DocMaker(path)
-        if path.endswith('.lexc') or path.endswith('.twolc'):
-            dm.first_level = 1
-        if not ('errors/' in path or
-                'generated_files' in path or
-                'lexicon.' in path or
-                '/kal/' in path):
-            try:
-                dm.parse_blocks()
-            except ValueError as e:
-                util.print_frame(path)
-                util.print_frame(str(e))
+    dm = DocMaker(path)
+    if path.endswith('.lexc') or path.endswith('.xfscript') or path.endswith('.twolc'):
+        dm.first_level = 1
+    if not ('errors/' in path or
+            'generated_files' in path or
+            'lexicon.' in path or
+            '/kal/' in path):
+        try:
+            dm.parse_blocks()
+        except ValueError as e:
+            util.print_frame(path)
+            util.print_frame(str(e))
 
 def main():
     x = 1
 
     for uff in sys.argv[1:]:
         if os.path.isfile(uff):
-            if uff.endswith('.lexc') or uff.endswith('.twolc'): # or uff.endswith('.jspwiki')
+            if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript'): # or uff.endswith('.jspwiki')
                 handle_file(uff)
         else:
             for root, dirs, files in os.walk(uff):
                 for f in files:
-                    if f.endswith('.lexc') or f.endswith('.twolc'): # or f.endswith('.jspwiki')
+                    if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc'): # or f.endswith('.jspwiki')
                         handle_file(os.path.join(root, f))
 
 

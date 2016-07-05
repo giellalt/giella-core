@@ -64,6 +64,7 @@ class DocMaker(object):
             '#': self.make_ordered,
             '|': self.make_table,
         }
+        self.first_level = 0
         self.header_level = 0
         self.unordered_level = 0
         self.ordered_level = 0
@@ -101,6 +102,21 @@ class DocMaker(object):
     def make_header(self, b):
         if headers.match(b.content):
             this_level = 4 - len(headers.match(b.content).group(1))
+            if self.first_level == 0:
+                self.first_level = this_level
+
+            if this_level < self.first_level:
+                raise ValueError(
+                    'Error!\n'
+                    'This header is {}\n'
+                    'Because the first header was «{}», only '
+                    'headers at this or lower levels are allowed.\n'
+                    'If you want to use this level, increase the level '
+                    'of the first header to at least this level.\n'
+                    'Erroneous line is {}\n'.format(
+                        headers.match(b.content).group(1),
+                        '!' * self.first_level,
+                        b))
             if self.header_level == 1 and this_level == 3:
                 raise ValueError(
                     'Error!\nThis header starts with {}, but can only '

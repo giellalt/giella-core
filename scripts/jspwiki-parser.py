@@ -21,14 +21,17 @@ import os
 import re
 import sys
 
+from corpustools import util
+
 
 headers = re.compile('''^\s*(!{1,3})\s*([^!]+)''')
 ordered = re.compile('''^\s*(#{1,3})\s*([^#]+)''')
-unordered =  re.compile('''^\s*(\*{1,3})\s*([^*]+)''')
+unordered = re.compile('''^\s*(\*{1,3})\s*([^*]+)''')
 horisontal = re.compile('''^\s*(-{4,})$''')
 complete_pre_inline = re.compile('''^(.*){{{(.+)}}}([^}]*)$''')
 start_of_pre = re.compile('''^\s*(.*){{{([^}]*)$''')
 end_of_pre = re.compile('''^\s*(.*)}}}([^}]*)$''')
+erroneous_bold = re.compile(u'''[^_].* _([^_]+)_[^_]*$''')
 
 
 Entry = collections.namedtuple('Entry', ['name', 'data'])
@@ -52,7 +55,11 @@ def test_match():
     assert horisontal.match(' ----') is not None
     assert horisontal.match(' -----') is not None
     assert horisontal.match(' -------a;dskjfaf') is None
-
+    m = erroneous_bold.match('assuming stem _kååʹmmerd_')
+    if m:
+        util.print_frame('hurra!')
+    else:
+        util.print_frame('å nei!!!!')
 
 class DocMaker(object):
     def __init__(self, filename):
@@ -94,8 +101,9 @@ class DocMaker(object):
                         '#' * 2, b))
             else:
                 self.ordered_level = this_level
-                self.document.append(Entry(name='o{}'.format(this_level),
-                                           data=[ordered.match(b.content).group(2)]))
+                self.document.append(Entry(
+                    name='o{}'.format(this_level),
+                    data=[ordered.match(b.content).group(2)]))
         else:
             raise ValueError('Error!\nFake ordered entry! {}'.format(b))
 
@@ -126,8 +134,9 @@ class DocMaker(object):
                         '!' * 2, b))
             else:
                 self.header_level = this_level
-                self.document.append(Entry(name='h{}'.format(this_level),
-                                           data=[headers.match(b.content).group(2)]))
+                self.document.append(Entry(
+                    name='h{}'.format(this_level),
+                    data=[headers.match(b.content).group(2)]))
         else:
             raise ValueError('Error!\nFake header! {}\n'.format(b))
 
@@ -155,14 +164,15 @@ class DocMaker(object):
                         '*' * 2, b))
             else:
                 self.unordered_level = this_level
-                self.document.append(Entry(name='u{}'.format(this_level),
-                                           data=[unordered.match(b.content).group(2)]))
+                self.document.append(Entry(
+                    name='u{}'.format(this_level),
+                    data=[unordered.match(b.content).group(2)]))
         else:
             raise ValueError('Error!\nFake unordered entry! {}'.format(b))
 
     def make_horisontal(self, b):
         if not self.inside_pre:
-            if len(b.content) == 5:
+            if len(b.content.strip()) == 4:
                 self.document.append(Entry(name='hr', data=[]))
             else:
                 raise ValueError(
@@ -271,12 +281,25 @@ class DocMaker(object):
                     self.inside_pre = False
             elif b.content[0] in self.tjoff.keys() and not self.inside_pre:
                 self.tjoff[b.content[0]](b)
+            elif erroneous_bold.match(b.content):
+                m = erroneous_bold.match(b.content)
+                raise ValueError(
+                    'Error!\n'
+                    'Erroneous bold markup\n'
+                    'Either remove «_» chars around {} or add another '
+                    '«_» on either side\n'
+                    'Erroneous line is {}\n'.format(m.group(1), b))
             else:
                 self.handle_line(b.content)
         self.close_block()
 
     def parse_blocks(self):
-        for block in self.make_blocks():
+        get_blocks = {
+            '.jspwiki': self.jspwiki_blocks,
+            '.lexc': self.lexc_blocks,
+        }
+
+        for block in get_blocks[os.path.splitext(self.filename)[1]]():
             self.parse_block(block)
 
         if self.inside_pre:
@@ -284,7 +307,7 @@ class DocMaker(object):
                 'Error! Unbalanced pre\n'
                 'Reached end of document without finding closing }}}\n')
 
-    def make_blocks(self):
+    def jspwiki_blocks(self):
         block = []
         blocks = []
         for x, line in enumerate(fileinput.FileInput(self.filename)):
@@ -300,37 +323,135 @@ class DocMaker(object):
 
         return blocks
 
+    def lexc_blocks(self):
+        block = []
+        blocks = []
+
+        for x, line in enumerate(fileinput.FileInput(self.filename)):
+            if '!! ' in line:
+                lexc_doc = re.compile('.*!! (.+)')
+                m = lexc_doc.match(line)
+                if m:
+                    block.append(Line(number=x + 1,
+                                      content=m.group(1)))
+            elif line.startswith('!!€ '):
+                parts = line[len('!!€ '):].split()
+                c = ['*']
+                if parts:
+                    c.append('__%s__' % parts[0])
+                    if len(parts) > 1:
+                        c.append('{{%s}}' % parts[1])
+                    if len(parts) > 2:
+                        c.append('(Eng.')
+                        c.extend(parts[2:])
+                else:
+                    c.append('???')
+
+                block.append(Line(number=x + 1, content=' '.join(c)))
+
+            elif line.startswith('!!€'):
+                a = re.compile('(!!€.+:\s+)(.+)')
+                m = a.match(line)
+                if m:
+                    block.append(Line(number=x + 1,
+                                      content='__{} examples:__'.format(
+                                          m.group(1))))
+            elif re.match('.+!![=≈]', line):
+
+                def check_validity(lineno, origline, line, code):
+                    parts = line.split('@CODE@')
+                    if parts[1].startswith('__') and code.endswith('}'):
+                        raise ValueError(
+                            'Error!\n'
+                            '@CODE@ is surrounded with «__» and the string that '
+                            'will replace it ends with «}». Either remove «__» '
+                            'from @CODE@ or insert a space between @CODE@ '
+                            'and __.\n'
+                            'Erroneous line is %s %s' % (lineno, origline))
+
+                def get_replacement(s1, s2):
+                    return s1 if s2 == '!!=' else s1.strip()
+
+                m = re.match('(.+)(!![=≈])(.*)', line)
+
+                if '@CODE@' in m.group(3):
+                    replacement = get_replacement(m.group(1), m.group(2))
+                    check_validity(x + 1, line, m.group(3), replacement)
+                    c = m.group(3).replace('@CODE@', m.group(1))
+                    if m.group(2) == '!!≈':
+                        c = re.sub(' +', ' ', c)
+                else:
+                    c = line.replace(m.group(2), '')
+
+                block.append(Line(number=x + 1, content=c))
+                
+                if block[-1].content.endswith('}'):
+                    error_line = (
+                        'Error!\n'
+                        'Line endswith «}». To fix this, add at least a '
+                        'space at the end of the line.\n'
+                        'Erroneous line is %s %s')
+                    raise ValueError(error_line % (x + 1, line))
+
+            else:
+                if block:
+                    for b in block:
+                        print(b.content)
+                    print()
+                    blocks.append(block)
+                block = []
+
+        if block:
+            for b in block:
+                print(b.content)
+            print()
+            blocks.append(block)
+
+        return blocks
+
+
+def handle_file(path):
+
+    if path.endswith('.lexc') or path.endswith('.jspwiki'):
+        dm = DocMaker(path)
+        if path.endswith('.lexc'):
+            dm.first_level = 1
+        if not ('errors/' in path or
+                'generated_files' in path or
+                'lexicon.' in path or
+                '/kal/' in path):
+            try:
+                dm.parse_blocks()
+            except ValueError as e:
+                    try:
+                        os.symlink(path, os.path.join(
+                            '/home/boerre/repos/langtech/xtdoc/gtuit/src/'
+                            'documentation/content/xdocs/errors',
+                            os.path.basename(path)))
+                    except OSError:
+                        pass
+                    util.print_frame(path)
+                    if path.endswith('.jspwiki'):
+                        print('http://localhost:8888/errors/{}'.format(
+                            os.path.basename(path.replace('.jspwiki',
+                                                        '.html'))))
+                    util.print_frame(str(e))
 
 def main():
     x = 1
-    for root, dirs, files in os.walk(sys.argv[1]):
-        for f in files:
-            if f.endswith('.jspwiki'):
-                path = os.path.join(root, f)
-                dm = DocMaker(path)
-                try:
-                    dm.parse_blocks()
-                except ValueError as e:
-                    x += 1
-                    if not ('langs/' in path or 'errors/' in path):
-                        try:
-                            os.symlink(path, os.path.join('/home/boerre/repos/langtech/xtdoc/gtuit/src/documentation/content/xdocs/errors', os.path.basename(path)))
-                        except FileExistsError:
-                            pass
-                        print(path)
-                        print('http://localhost:8888/errors/{}'.format(os.path.basename(path.replace('.jspwiki', '.html'))))
-                        print(e)
-    print(x)
+    uff = sys.argv[1]
 
-    #for entry in dm.document:
-        #if entry.name == 'empty':
-            #print()
-        #elif entry.name == 'hr':
-            #print('<hr/>')
-        #else:
-            #print('<{tag}>{text}</{tag}>'.format(tag=entry.name,
-                                                 #text='\n'.join(entry.data)))
+    if os.path.isfile(uff):
+        if uff.endswith('.lexc'): # or f.endswith('.jspwiki'):
+            handle_file(uff)
+    else:
+        for root, dirs, files in os.walk(uff):
+            for f in files:
+                if f.endswith('.lexc'): # or f.endswith('.jspwiki'):
+                    handle_file(os.path.join(root, f))
+
+
 
 if __name__ == '__main__':
     main()
-    test_match()
+    #test_match()

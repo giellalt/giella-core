@@ -61,6 +61,7 @@ class DocMaker(object):
         self.header_level = 0
         self.unordered_level = 0
         self.ordered_level = 0
+        self.inside_pre = False
 
     def make_ordered(self, b):
         if ordered.match(b):
@@ -183,9 +184,21 @@ class DocMaker(object):
             elif complete_pre_inline.match(b):
                 self.make_inline_pre(b)
             elif start_of_pre.match(b):
-                self.start_inline(b)
+                if self.inside_pre:
+                    raise ValueError(
+                        'Error! Unbalanced pre\n'
+                        'Found start of pre inside pre')
+                else:
+                    self.start_inline(b)
+                    self.inside_pre = True
             elif end_of_pre.match(b):
-                self.close_inline(b)
+                if not self.inside_pre:
+                    raise ValueError(
+                        'Error! Unbalanced pre\n'
+                        'Found end of pre without start of pre')
+                else:
+                    self.close_inline(b)
+                    self.inside_pre = False
             elif b[0] in self.tjoff.keys():
                 self.tjoff[b[0]](b)
             else:
@@ -195,6 +208,11 @@ class DocMaker(object):
     def parse_blocks(self):
         for block in self.make_blocks():
             self.parse_block(block)
+
+        if self.inside_pre:
+            raise ValueError(
+                'Error! Unbalanced pre\n'
+                'Reached end of document without finding closing }}}')
 
     def make_blocks(self):
         block = []
@@ -215,7 +233,12 @@ class DocMaker(object):
 
 def main():
     dm = DocMaker()
-    dm.parse_blocks()
+    try:
+        dm.parse_blocks()
+    except ValueError as e:
+        print(e)
+        sys.exit(1)
+
     for entry in dm.document:
         if entry.name == 'empty':
             print()

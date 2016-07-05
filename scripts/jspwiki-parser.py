@@ -138,7 +138,7 @@ class DocMaker(object):
         print('handle_line', b)
 
     def close_block(self):
-        print('close_block\n')
+        self.document.append(Entry(name='empty', data=[]))
 
     def parse_block(self, block):
         for b in block:

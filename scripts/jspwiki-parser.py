@@ -68,7 +68,6 @@ def test_match():
         util.print_frame('YEY2!')
 
 
-
 class DocMaker(object):
     def __init__(self, filename):
         self.filename = filename
@@ -305,45 +304,13 @@ class DocMaker(object):
                     #'«_» on either side or place it inside a pre '
                     #'block: {}\n'.format(b.number, m.group(1), b.content))
 
-            if '-_' in b.content:
+            if '-__ ' in b.content:
                 self.error(
                     ':#{}:\n\tErroneous bold markup.\n\t'
                     'Either space character between «-» and «_» or '
                     'place the entire line inside a pre '
                     'block: {}\n'.format(b.number, b.content))
 
-
-    def parse_block(self, block):
-        for b in block:
-            if horisontal.match(b.content):
-                self.make_horisontal(b)
-            elif complete_pre_inline.match(b.content):
-                self.make_inline_pre(b)
-            elif start_of_pre.match(b.content):
-                if self.inside_pre:
-                    raise ValueError(
-                        'Error!Unbalanced pre\n'
-                        'Found start of pre inside pre\n'
-                        'Erroneous line is {}\n'.format(b))
-                else:
-                    self.start_pre(b)
-                    self.inside_pre = True
-            elif end_of_pre.match(b.content):
-                if not self.inside_pre:
-                    raise ValueError(
-                        'Error! Unbalanced pre\n'
-                        'Found end of pre without start of pre\n'
-                        'Erroneous line is {}\n'.format(b))
-                else:
-                    self.close_inline(b)
-                    self.inside_pre = False
-            elif b.content[0] in self.tjoff.keys() and not self.inside_pre:
-                self.tjoff[b.content[0]](b)
-            else:
-                if not self.inside_pre:
-                    self.check_inline(b)
-                self.handle_line(b.content)
-        self.close_block()
 
     def handle_link_content(self, link_match, block):
         parts = link_match.group(2).split('|')
@@ -418,33 +385,51 @@ class DocMaker(object):
             '.twolc': self.lexc_blocks,
         }
 
-        for block in get_blocks[os.path.splitext(self.filename)[1]]():
-            self.parse_block(block)
+        get_blocks[os.path.splitext(self.filename)[1]]()
 
         if self.inside_pre:
             raise ValueError(
                 'Error! Unbalanced pre\n'
                 'Reached end of document without finding closing }}}\n')
 
+    def parse_block(self, b):
+        if horisontal.match(b.content):
+            self.make_horisontal(b)
+        elif complete_pre_inline.match(b.content):
+            self.make_inline_pre(b)
+        elif start_of_pre.match(b.content):
+            if self.inside_pre:
+                raise ValueError(
+                    'Error!Unbalanced pre\n'
+                    'Found start of pre inside pre\n'
+                    'Erroneous line is {}\n'.format(b))
+            else:
+                self.start_pre(b)
+                self.inside_pre = True
+        elif end_of_pre.match(b.content):
+            if not self.inside_pre:
+                raise ValueError(
+                    'Error! Unbalanced pre\n'
+                    'Found end of pre without start of pre\n'
+                    'Erroneous line is {}\n'.format(b))
+            else:
+                self.close_inline(b)
+                self.inside_pre = False
+        elif b.content[0] in self.tjoff.keys() and not self.inside_pre:
+            self.tjoff[b.content[0]](b)
+        else:
+            if not self.inside_pre:
+                self.check_inline(b)
+            self.handle_line(b.content)
+
     def jspwiki_blocks(self):
-        block = []
-        blocks = []
         for x, line in enumerate(fileinput.FileInput(self.filename)):
             if line.strip():
-                block.append(Line(number=x + 1, content=line))
+                self.parse_block(Line(number=x + 1, content=line))
             else:
-                if block:
-                    blocks.append(block)
-                block = []
-
-        if block:
-            blocks.append(block)
-
-        return blocks
+                self.close_block()
 
     def lexc_blocks(self):
-        block = []
-        blocks = []
         rulename_re = re.compile('''^"([^"]+)"''')
         rulename = ''
 
@@ -469,11 +454,11 @@ class DocMaker(object):
                                 'from @RULENAME@ or insert a space between @RULENAME@ '
                                 'and _: {}'.format(x + 1, rulename, line))
                         else:
-                            block.append(Line(number=x + 1,
+                            self.parse_block(Line(number=x + 1,
                                               content=m.group(1).replace(
                                                   '@RULENAME@', rulename)))
                     else:
-                        block.append(Line(number=x + 1,
+                        self.parse_block(Line(number=x + 1,
                                         content=m.group(1)))
             elif line.startswith('!!€ '):
                 parts = line[len('!!€ '):].split()
@@ -488,13 +473,13 @@ class DocMaker(object):
                 else:
                     c.append('???')
                 c.append(' ')
-                block.append(Line(number=x + 1, content=' '.join(c)))
+                self.parse_block(Line(number=x + 1, content=' '.join(c)))
 
             elif line.startswith('!!€'):
                 a = re.compile('(!!€.+:\s+)(.+)')
                 m = a.match(line)
                 if m:
-                    block.append(Line(number=x + 1,
+                    self.parse_block(Line(number=x + 1,
                                       content='__{} examples:__'.format(
                                           m.group(1))))
             elif re.match('.+!![=≈]', line):
@@ -522,17 +507,10 @@ class DocMaker(object):
                 else:
                     c = line.replace(m.group(2), '')
 
-                block.append(Line(number=x + 1, content=c))
+                self.parse_block(Line(number=x + 1, content=c))
 
             else:
-                blocks.append(block)
-                block = []
-
-        if block:
-            blocks.append(block)
-
-        return blocks
-
+                self.close_block()
 
 def handle_file(path):
 
@@ -555,12 +533,12 @@ def main():
 
     for uff in sys.argv[1:]:
         if os.path.isfile(uff):
-            if uff.endswith('.lexc') or uff.endswith('.jspwiki') or uff.endswith('.twolc'):
+            if uff.endswith('.lexc') or uff.endswith('.twolc'): # or uff.endswith('.jspwiki')
                 handle_file(uff)
         else:
             for root, dirs, files in os.walk(uff):
                 for f in files:
-                    if f.endswith('.lexc') or f.endswith('.jspwiki') or f.endswith('.twolc'):
+                    if f.endswith('.lexc') or f.endswith('.twolc'): # or f.endswith('.jspwiki')
                         handle_file(os.path.join(root, f))
 
 

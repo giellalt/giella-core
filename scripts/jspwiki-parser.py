@@ -162,6 +162,9 @@ class DocMaker(object):
                     blocks.append(block)
                 block = []
 
+        if block:
+            blocks.append(block)
+
         return blocks
 
 

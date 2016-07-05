@@ -132,7 +132,10 @@ class DocMaker(object):
             self.document.append(Entry(name='hr', data=[]))
 
     def make_table(self, b):
-        print('table', b)
+        if b.startswith('||'):
+            self.document.append(Entry(name='th', data=[b]))
+        elif b.startswith('|'):
+            self.document.append(Entry(name='tr', data=[b]))
 
     def handle_line(self, b):
         if self.document[-1].name in ['empty', 'h1', 'h2', 'h3', 'th', 'tr']:

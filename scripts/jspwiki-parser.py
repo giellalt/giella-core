@@ -17,6 +17,7 @@ bold, italic, monospace, link
 '''
 import collections
 import fileinput
+import os
 import re
 import sys
 
@@ -50,8 +51,9 @@ def test_match():
 
 
 class DocMaker(object):
-    def __init__(self):
-        self.document = []
+    def __init__(self, filename):
+        self.filename = filename
+        self.document = [Entry(name='empty', data=[])]
         self.tjoff = {
             '!': self.make_header,
             '*': self.make_unordered,
@@ -130,12 +132,12 @@ class DocMaker(object):
             raise ValueError('Fake unordered entry! {}'.format(b))
 
     def make_horisontal(self, b):
-        if len(b) == 4:
-            self.document.append(Entry(name='hr', data=[]))
-        else:
-            raise ValueError(
-                'Please shorten the hr line to four hyphens.\n'
-                'This is the erroneous line:\n{}\n'.format(b))
+        #if len(b) == 4:
+        self.document.append(Entry(name='hr', data=[]))
+        #else:
+            #raise ValueError(
+                #'Please shorten the hr line to four hyphens.\n'
+                #'This is the erroneous line:\n{}\n'.format(b))
 
     def make_table(self, b):
         if b.startswith('||'):
@@ -199,7 +201,7 @@ class DocMaker(object):
                 else:
                     self.close_inline(b)
                     self.inside_pre = False
-            elif b[0] in self.tjoff.keys():
+            elif b[0] in self.tjoff.keys() and not self.inside_pre:
                 self.tjoff[b[0]](b)
             else:
                 self.handle_line(b)
@@ -217,7 +219,7 @@ class DocMaker(object):
     def make_blocks(self):
         block = []
         blocks = []
-        for line in fileinput.FileInput(sys.argv[1]):
+        for line in fileinput.FileInput(self.filename):
             if line.strip():
                 block.append(line.strip())
             else:
@@ -232,21 +234,26 @@ class DocMaker(object):
 
 
 def main():
-    dm = DocMaker()
-    try:
-        dm.parse_blocks()
-    except ValueError as e:
-        print(e)
-        sys.exit(1)
+    for root, dirs, files in os.walk(sys.argv[1]):
+        for f in files:
+            if f.endswith('.jspwiki'):
+                path = os.path.join(root, f)
+                dm = DocMaker(path)
+                try:
+                    dm.parse_blocks()
+                except ValueError as e:
+                    print(path)
+                    print(e)
 
-    for entry in dm.document:
-        if entry.name == 'empty':
-            print()
-        elif entry.name == 'hr':
-            print('<hr/>')
-        else:
-            print('<{tag}>{text}</{tag}>'.format(tag=entry.name,
-                                                 text='\n'.join(entry.data)))
+
+    #for entry in dm.document:
+        #if entry.name == 'empty':
+            #print()
+        #elif entry.name == 'hr':
+            #print('<hr/>')
+        #else:
+            #print('<{tag}>{text}</{tag}>'.format(tag=entry.name,
+                                                 #text='\n'.join(entry.data)))
 
 if __name__ == '__main__':
     main()

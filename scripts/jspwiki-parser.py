@@ -128,7 +128,8 @@ class DocMaker(object):
             raise ValueError('Fake unordered entry! {}'.format(b))
 
     def make_horisontal(self, b):
-        print('horisontal', b)
+        if horisontal.match(b):
+            self.document.append(Entry(name='hr', data=[]))
 
     def make_table(self, b):
         print('table', b)

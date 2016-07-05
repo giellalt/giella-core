@@ -32,6 +32,7 @@ complete_pre_inline = re.compile('''^(.*){{{(.+)}}}([^}]*)$''')
 start_of_pre = re.compile('''^\s*(.*){{{([^}]*)$''')
 end_of_pre = re.compile('''^\s*(.*)}}}([^}]*)$''')
 erroneous_bold = re.compile(u'''[^_].* _([^_]+)_[^_]*$''')
+possible_links = re.compile(u'''^([^[].*)(\[[^[]*\])([^]]*)$''')
 
 
 Entry = collections.namedtuple('Entry', ['name', 'data'])
@@ -55,11 +56,13 @@ def test_match():
     assert horisontal.match(' ----') is not None
     assert horisontal.match(' -----') is not None
     assert horisontal.match(' -------a;dskjfaf') is None
-    m = erroneous_bold.match('assuming stem _kååʹmmerd_')
-    if m:
-        util.print_frame('hurra!')
-    else:
-        util.print_frame('å nei!!!!')
+    assert erroneous_bold.match('assuming stem _kååʹmmerd_') is not None
+    assert possible_links.match('a [b]') is not None
+    assert possible_links.match('a [[b]') is not None
+    m = possible_links.match('''Vow:i (%^1VOW:) (%{%ʹØ%}:ʹ) _ [Cns:+ (%{XC%}:)|Cns:+ (ˈ:|:ˈ) Cns:+] BetweenStemAndHeight %^VOWRaise:  %^VYY2XYY: ;''')
+    for g in m.groups():
+        util.print_frame(g)
+    
 
 class DocMaker(object):
     def __init__(self, filename):
@@ -101,6 +104,7 @@ class DocMaker(object):
                         '#' * 2, b))
             else:
                 self.ordered_level = this_level
+                self.check_inline(ordered.match(b.content).group(2))
                 self.document.append(Entry(
                     name='o{}'.format(this_level),
                     data=[ordered.match(b.content).group(2)]))
@@ -134,6 +138,7 @@ class DocMaker(object):
                         '!' * 2, b))
             else:
                 self.header_level = this_level
+                self.check_inline(headers.match(b.content).group(2))
                 self.document.append(Entry(
                     name='h{}'.format(this_level),
                     data=[headers.match(b.content).group(2)]))
@@ -164,6 +169,7 @@ class DocMaker(object):
                         '*' * 2, b))
             else:
                 self.unordered_level = this_level
+                self.check_inline(unordered.match(b.content).group(2))
                 self.document.append(Entry(
                     name='u{}'.format(this_level),
                     data=[unordered.match(b.content).group(2)]))
@@ -222,6 +228,9 @@ class DocMaker(object):
             self.document.append(Entry(name='tr', data=[b.content]))
 
     def handle_line(self, b):
+        if self.document[-1].name != 'pre':
+            self.check_inline(b)
+            
         if self.document[-1].name in ['empty', 'h1', 'h2', 'h3', 'th', 'tr']:
             self.document.append(Entry(name='p', data=[b]))
         else:
@@ -255,6 +264,10 @@ class DocMaker(object):
     def close_block(self):
         self.document.append(Entry(name='empty', data=[]))
 
+    def check_inline(self, content):
+        #util.print_frame(content)
+        pass
+    
     def parse_block(self, block):
         for b in block:
             if horisontal.match(b.content):
@@ -279,6 +292,11 @@ class DocMaker(object):
                 else:
                     self.close_inline(b)
                     self.inside_pre = False
+            elif possible_links.match(b.content):
+                if not self.inside_pre:
+                    m = possible_links.match(b.content)
+                    if not m.group(1).endswith('['):
+                        self.handle_link_content(m, b)
             elif b.content[0] in self.tjoff.keys() and not self.inside_pre:
                 self.tjoff[b.content[0]](b)
             elif erroneous_bold.match(b.content):
@@ -293,6 +311,67 @@ class DocMaker(object):
                 self.handle_line(b.content)
         self.close_block()
 
+    def handle_link_content(self, link_match, block):
+        parts = link_match.group(2).split('|')
+        if len(parts) > 2:
+            raise ValueError(
+                'Error!\n'
+                'Link content has to many parts.\n'
+                'If this is a link, fix the content. If it is not a '
+                'link prepend {} by «[».\n'
+                'Erroneous line is {}\n'.format(link_match.group(2), block))
+        elif len(parts) == 2:
+            if not self.is_correct_link(parts[1][:-1]):
+                raise ValueError(
+                'Error!\n'
+                'Link content «{}» does not point to a valid document.\n'
+                'If this is a link, fix the content. If it is not a '
+                'link prepend «{}» by «[».\n'
+                'Erroneous line is {}\n'.format(parts[1], link_match.group(2), block))
+        elif len(parts) == 1:
+            if len(parts[0]) == 2:
+                raise ValueError(
+                    'Error!\n'
+                    'Link content «{}» is empty.\n'
+                    'If this is a link, fix the content. If it is not a '
+                    'link prepend «{}» by «[».\n'
+                    'Erroneous line is {}\n'.format(parts[0], link_match.group(2), block))
+            elif not self.is_correct_link(parts[0][1:-1]):
+                raise ValueError(
+                    'Error!\n'
+                    'Link content «{}» does not point to a valid document.\n'
+                    'If this is a link, fix the content. If it is not a '
+                    'link prepend «{}» by «[».\n'
+                    'Erroneous line is {}\n'.format(parts[0], link_match.group(2), block))
+        
+    def is_correct_link(self, link_content):
+        return (
+            link_content.startswith('http://') or 
+            self.jspwiki_file_exists(link_content) or
+            self.lexc_file_exists(link_content)
+        )
+    
+    def jspwiki_file_exists(self, link_content):
+        return (
+            self.filename.endswith('.jspwiki') and (
+                os.path.exists(link_content) or
+                os.path.exists(link_content.replace('.html', '.jspwiki')) or
+                os.path.exists(link_content.replace('.html', '.xml'))
+            )
+        )
+    
+    def lexc_file_exists(self, link_content):
+        return (
+            self.filename.endswith('.lexc') and (
+                os.path.exists(
+                    os.path.join(
+                        self.filename[:self.filename.find('langs/') + len('langs/') + 4], 
+                        'doc', link_content.replace('.html', '.jspwiki')
+                    )
+                )
+            )
+        )   
+    
     def parse_blocks(self):
         get_blocks = {
             '.jspwiki': self.jspwiki_blocks,
@@ -423,31 +502,31 @@ def handle_file(path):
             try:
                 dm.parse_blocks()
             except ValueError as e:
-                    try:
-                        os.symlink(path, os.path.join(
-                            '/home/boerre/repos/langtech/xtdoc/gtuit/src/'
-                            'documentation/content/xdocs/errors',
-                            os.path.basename(path)))
-                    except OSError:
-                        pass
-                    util.print_frame(path)
-                    if path.endswith('.jspwiki'):
-                        print('http://localhost:8888/errors/{}'.format(
-                            os.path.basename(path.replace('.jspwiki',
-                                                        '.html'))))
-                    util.print_frame(str(e))
+                try:
+                    os.symlink(path, os.path.join(
+                        '/home/boerre/repos/langtech/xtdoc/gtuit/src/'
+                        'documentation/content/xdocs/errors',
+                        os.path.basename(path)))
+                except OSError:
+                    pass
+                util.print_frame(path)
+                if path.endswith('.jspwiki'):
+                    print('http://localhost:8888/errors/{}'.format(
+                        os.path.basename(path.replace('.jspwiki',
+                                                    '.html'))))
+                util.print_frame(str(e))
 
 def main():
     x = 1
     uff = sys.argv[1]
 
     if os.path.isfile(uff):
-        if uff.endswith('.lexc'): # or f.endswith('.jspwiki'):
+        if uff.endswith('.lexc') or uff.endswith('.jspwiki'):
             handle_file(uff)
     else:
         for root, dirs, files in os.walk(uff):
             for f in files:
-                if f.endswith('.lexc'): # or f.endswith('.jspwiki'):
+                if f.endswith('.lexc') or f.endswith('.jspwiki'):
                     handle_file(os.path.join(root, f))
 
 

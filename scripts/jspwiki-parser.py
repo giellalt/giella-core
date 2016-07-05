@@ -22,8 +22,8 @@ import sys
 
 
 headers = re.compile('''^(!{1,3})\s*([^!]+)''')
-ordered = re.compile('''^(#{1,3})\s*[^#]+''')
-unordered =  re.compile('''^(\*{1,3})\s*[^*]+''')
+ordered = re.compile('''^(#{1,3})\s*([^#]+)''')
+unordered =  re.compile('''^(\*{1,3})\s*([^*]+)''')
 horisontal = re.compile('''^(-{4,})$''')
 
 
@@ -62,7 +62,26 @@ class DocMaker(object):
         self.ordered_level = 0
 
     def make_ordered(self, b):
-        print('ordered', b)
+        if ordered.match(b):
+            this_level = len(ordered.match(b).group(1))
+            if self.ordered_level == 0 and this_level != 1:
+                raise ValueError(
+                    'Error! This ordered entry must start with «#», but '
+                    'starts with {}\n. This is the erroneous entry '
+                    '\n{}\nPlease fix this ' 'error'.format(ordered.match(b).group(1), b))
+            elif self.ordered_level == 1 and this_level == 3:
+                raise ValueError(
+                    'Error! This entry starts with {}, but can only '
+                    'start with «{}» or «{}». This is the erroneous '
+                    'entry\n{}\nPlease fix this error'.format(
+                        ordered.match(b).group(1), '#',
+                        '#' * 2, b))
+            else:
+                self.ordered_level = this_level
+                self.document.append(Entry(name='o{}'.format(this_level),
+                                           data=[ordered.match(b).group(2)]))
+        else:
+            raise ValueError('Fake ordered entry! {}'.format(b))
 
     def make_header(self, b):
         if headers.match(b):
@@ -87,7 +106,26 @@ class DocMaker(object):
             raise ValueError('Fake header! {}'.format(b))
 
     def make_unordered(self, b):
-        print('unordered', b)
+        if unordered.match(b):
+            this_level = len(unordered.match(b).group(1))
+            if self.unordered_level == 0 and this_level != 1:
+                raise ValueError(
+                    'Error! This unordered entry must start with «#», but '
+                    'starts with {}\n. This is the erroneous entry '
+                    '\n{}\nPlease fix this ' 'error'.format(unordered.match(b).group(1), b))
+            elif self.unordered_level == 1 and this_level == 3:
+                raise ValueError(
+                    'Error! This entry starts with {}, but can only '
+                    'start with «{}» or «{}». This is the erroneous '
+                    'entry\n{}\nPlease fix this error'.format(
+                        unordered.match(b).group(1), '#',
+                        '#' * 2, b))
+            else:
+                self.unordered_level = this_level
+                self.document.append(Entry(name='u{}'.format(this_level),
+                                           data=[unordered.match(b).group(2)]))
+        else:
+            raise ValueError('Fake unordered entry! {}'.format(b))
 
     def make_horisontal(self, b):
         print('horisontal', b)

@@ -16,7 +16,7 @@
 <!ELEMENT a (#PCDATA)>
 <!ELEMENT i (#PCDATA)>
 
-<!ELEMENT e (lg, stem*, sources?, mg+) >
+<!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+) >
 <!ATTLIST e 
       usage ( mt | vd | dict | other ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other ) #IMPLIED
@@ -57,7 +57,6 @@
       umlaut ( full ) #IMPLIED
       num ( pl ) #IMPLIED
       val ( IV | TV ) #IMPLIED
-
 >      
 
 <!-- decl: i indeclineable -->
@@ -83,6 +82,14 @@
 
 <!-- lc = lemma comment, misused as stem field -->
 <!ELEMENT lc (#PCDATA) >
+<!ELEMENT source (book) >
+<!ATTLIST book
+	  name CDATA #IMPLIED >
+<!ELEMENT semantics (sem) >
+<!ATTLIST sem 
+	  name CDATA #IMPLIED >
+
+
 
 <!-- the real stem field -->
 <!ELEMENT stem (#PCDATA) >
@@ -93,8 +100,9 @@
 <!ELEMENT sources (book*, frequency?, geography*) >
 <!ELEMENT book EMPTY >
 <!ATTLIST book 
-      name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 | xxx ) #IMPLIED
->      
+	  name CDATA #IMPLIED >
+<!--      name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 | xxx ) #IMPLIED -->
+
 <!ELEMENT frequency EMPTY >
 <!ATTLIST frequency
       class ( common | rare ) #IMPLIED
@@ -113,18 +121,18 @@
 
 <!ELEMENT mg (semantics?,  tg+, xg* ) >
 <!ATTLIST mg 
-      xml:lang ( sme | nob | fin | swe | rus) #IMPLIED
+      xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
 >      
 <!ATTLIST mg re CDATA #IMPLIED >
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
-      xml:lang ( sme | sma | nob | swe | eng | deu | fin | rus) #IMPLIED
+      xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus) #IMPLIED
       check CDATA #IMPLIED
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ATTLIST re 
-	  xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED
+	  xml:lang ( nob | sme | sma | smn | swe | eng | deu ) #IMPLIED
 >
 
 <!ELEMENT t (#PCDATA) >

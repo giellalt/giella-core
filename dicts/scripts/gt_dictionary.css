@@ -58,9 +58,9 @@ e > lg ~ mg xg:before {
     content: "Usage example:";
 }
 
-e:after {
+/*e:after {
     display: block;
-    content: "exclude: ";
+    content: "exclude: ";*/
 }
 exclude {
     display: none;

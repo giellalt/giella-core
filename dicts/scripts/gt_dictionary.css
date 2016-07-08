@@ -63,11 +63,14 @@ e:after {
     content: "exclude: ";
 }
 exclude {
+exclude{display: none;}
+
+/*
     display: inline;
     font-style: italic;
     content: attr(name);
 }
-
+*/
 
 xg + xg:before {
     margin-left: -.3em;

@@ -278,9 +278,7 @@ class DocMaker(object):
     def start_pre(self, b):
         m = start_of_pre.match(b.content)
         if m.group(1):
-            util.print_frame()
             if not self.inside_pre:
-                util.print_frame()
                 self.check_inline(Line(b.number, m.group(1)))
             self.handle_line(m.group(1))
         self.close_block()

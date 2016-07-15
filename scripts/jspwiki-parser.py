@@ -21,6 +21,9 @@ import os
 import re
 import sys
 
+from nose_parameterized import parameterized
+import unittest
+
 from corpustools import util
 
 
@@ -74,6 +77,96 @@ def test_match():
     m = possible_twolc_rule.match('''define uwChange [ u -> w || _ %> a ] ;''')
     if m:
         util.print_frame('YEY3!')
+
+def make_misc_test():
+    return [
+        ('too long hr','-----'),
+    ]
+
+
+def make_link_tests():
+    return [
+        ('no link one part', 'abc [abc] abc'),
+        ('no link two parts', 'abc [abc|abc] abc'),
+        ('contains hex pattern', 'abc [^%Xabc] abc'),
+    ]
+
+
+def make_endswith(markups):
+    return [('ends with {}'.format(name), 'abc{}'.format(chars[1]))
+            for name, chars in markups.items()]
+
+
+def make_single_starts(markups):
+    return [('single {} start'.format(name), 'abc {}abc abc'.format(2 * chars[0]))
+            for name, chars in markups.items()]
+
+
+def make_single_ends(markups):
+    return [('single {} end'.format(name), 'abc abc{} abc'.format(2 * chars[1]))
+            for name, chars in markups.items()]
+
+
+def make_markup_within_markup(markups):
+    test_cases = []
+    for name1, markups1 in markups.items():
+        inner_markup = '{}{}{}'.format(markups1[0] * 2, name1, markups1[1] * 2)
+        for name2, markups2 in markups.items():
+            if name1 != name2:
+                outer_markup = 'a {}{}{} b'.format(markups2[0] * 2,
+                                                   inner_markup,
+                                                   markups2[1] * 2)
+                test_cases.append(
+                    ('{} within {}'.format(name1, name2), outer_markup))
+
+    return test_cases
+
+
+def make_colliding_markup_within_markup(markups):
+    test_cases = []
+    for name1, markups1 in markups.items():
+        inner_markup = 'half {}{}'.format(name1, markups1[1])
+        for name2, markups2 in markups.items():
+            if name1 != name2:
+                outer_markup = 'a {}{}{} '.format(markups2[0] * 2,
+                                                   inner_markup,
+                                                   markups2[1] * 2)
+                test_cases.append(
+                    ('half {} within {}'.format(name1, name2), outer_markup))
+
+    return test_cases
+
+
+def make_tests():
+    test_cases = []
+    markups = {
+        'italic': ("'", "'"),
+        'monospaced': ('{', '}'),
+        'bold': ('_', '_'),
+    }
+
+    for name in [make_misc_test, make_link_tests]:
+        test_cases.extend(name())
+
+    for name in [make_single_ends, make_single_starts, make_endswith,
+                 make_markup_within_markup,
+                 make_colliding_markup_within_markup]:
+        test_cases.extend(name(markups))
+
+    return test_cases
+
+
+class TestDocMaker(unittest.TestCase):
+    def setUp(self):
+        self.dm = DocMaker('bogus')
+
+    @parameterized.expand(make_tests())
+    def test_huff(self, name, content):
+        with self.assertRaises(LineError):
+            self.dm.parse_block(Line(number=1, content=content))
+
+
+#def test_match():
 
 
 class DocMaker(object):

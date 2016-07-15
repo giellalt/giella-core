@@ -27,7 +27,7 @@ def jspwiki_file_exists(link_content, filename, xdocs_dir):
     link_content = link_content.split('#')[0].strip()
     link_content = link_content.replace('slidy/', '')
     ext_replacements = []
-    if link_content and link_content != '/':
+    if link_content and link_content != '/' and not link_content.startswith('cgi'):
         #util.print_frame(link_content)
         dirname = os.path.dirname(os.path.abspath(filename))
         if link_content.startswith('/'):
@@ -62,7 +62,7 @@ def check_xml_file(filename, xdocs_dir):
     try:
         tree = etree.parse(filename)
         for a in tree.iter('a'):
-            if not is_correct_link(a.get('href'), filename, xdocs_dir):
+            if not is_correct_link(a.get('href').strip(), filename, xdocs_dir):
                 errors += 1
                 util.print_frame('{} :#{}: wrong address {}\n'.format(filename, a.sourceline, a.get('href')))
     except etree.XMLSyntaxError as e:
@@ -88,7 +88,7 @@ def main():
             for f in files:
                 no_files += 1
                 path = os.path.join(root, f)
-                if f.endswith('.xml'):
+                if f.endswith('.xml') and 'obsolete' not in path and '/cgi' not in path:
                     errors += check_xml_file(path, fullpath)
 
     util.print_frame(errors)

@@ -88,8 +88,12 @@ class DocMaker(object):
         self.ordered_level = 0
         self.inside_pre = False
 
-    def error(self, errorline):
-        print(self.filename, errorline, '\n', file=sys.stderr)
+    def error(self, error_message, block):
+        error_line = (
+            ':#{b.number}:\n\t'
+            '{e}\n\t'
+            '{b.content}'.format(b=block, e=error_message))
+        print(self.filename, error_line, file=sys.stderr)
 
     def make_ordered(self, b):
         ordered_endings = re.compile('''\s*\#+\s*$''')
@@ -129,11 +133,11 @@ class DocMaker(object):
         for possible_wrong_char in possible_wrong_chars:
             if rest_of_line.startswith(possible_wrong_char):
                 self.error(
-                    ':#{}:\n\tLines starting with «{}» can not have '
-                    '«{}» as the first char. {}'.format(b.number,
-                                                        b.content[0],
-                                                        possible_wrong_char,
-                                                        b.content))
+                    'Lines starting with «{}» can not have '
+                    '«{}» as the first char.'.format(b.content[0],
+                                                     possible_wrong_char),
+                    b)
+
     def make_header(self, b):
         if headers.match(b.content):
             self.check_for_wrong_char('#*', headers.match(b.content).group(2),
@@ -210,8 +214,8 @@ class DocMaker(object):
                 self.document.append(Entry(name='hr', data=[]))
             else:
                 self.error(
-                    ':#{}:\n\tPlease shorten the hr line to four '
-                    'hyphens. {}'.format(b.number, b.content))
+                    'Please shorten the hr line to four hyphens.',
+                    b)
 
     def make_table(self, b):
         links_removed = '='.join(re.split('\[.+\]', b.content))
@@ -310,12 +314,13 @@ class DocMaker(object):
                 regex = '''^.+[^{wc}]{wc}$'''.format(wc=wrong_endchar1)
                 if re.match(regex, b.content):
                     self.error(
-                        ':#{}:\n\tLine ends with {}.\n\t'
+                        'Line ends with {wc}.\n\t'
                         'Either add a space character at the line ending, '
-                        'mark it up as {wc} (two {wc}\'s at each side) or '
+                        'mark it up as {name} (two {wc}\'s at each side) or '
                         'place the entire line inside a pre '
-                        'block: {}\n'.format(b.number, wrong_endchar1, b.content,
-                                            wc=markup[wrong_endchar1]))
+                        'block.'.format(name=markup[wrong_endchar1],
+                                        wc=wrong_endchar1),
+                        b)
 
                 for wrong_endchar2 in markup.keys():
                     if wrong_endchar1 == wrong_endchar2:
@@ -323,13 +328,14 @@ class DocMaker(object):
                             first=wrong_endchar1, second=wrong_endchar2)
                         if exp in b.content:
                             self.error(
-                                ':#{}:\n\tErroneous {wc} markup.\n\t'
+                                'Erroneous {wc} markup.\n\t'
                                 'Either add a space character between «{first}» '
                                 'and «{second}» or place the entire line inside '
-                                'a pre block: {}\n'.format(b.number, b.content,
-                                                        wc=markup[wrong_endchar2],
-                                                        first=wrong_endchar1,
-                                                        second=wrong_endchar2))
+                                'a pre block.'.format(
+                                    wc=markup[wrong_endchar2],
+                                    first=wrong_endchar1,
+                                    second=wrong_endchar2),
+                                b)
 
     def check_unbalanced_markup(self, b):
         markups = {
@@ -347,11 +353,10 @@ class DocMaker(object):
                 (start == -1 and end > 0 ) or \
                     (start > -1 and end > -1 and start == end):
                 self.error(
-                    ':#{}:\n\tLine contains a single {name} markup.\n\t'
+                    'Line contains a single {name} markup.\n\t'
                     'Either remove the single {name} markup or remove the '
-                    'newline in the {name} markup: {}\n'.format(
-                        b.number, b.content,
-                        name=name))
+                    'newline in the {name} markup.'.format(name=name),
+                    b)
 
     def check_markup_within_markup(self, b):
         markups = {
@@ -375,20 +380,21 @@ class DocMaker(object):
                             if m:
                                 for group2 in m.groups():
                                     self.error(
-                                        ':#{}:\n\tLine contains {name2} '
+                                        'Line contains {name2} '
                                         'within {name1}.\n\t'
-                                        'Remove one of the markups: '
-                                        '{}\n'.format(b.number, b.content,
-                                                      name1=name1, name2=name2))
+                                        'Remove one of the markups.'.format(
+                                            name1=name1, name2=name2),
+                                        b)
 
     def check_inline(self, b):
         if not self.inside_pre:
             m = possible_twolc_rule.match(b.content)
             if m:
                 self.error(
-                    ':#{}:\n\tPossible twolc rule.\n\t'
+                    'Possible twolc rule.\n\t'
                     'Please either remove it from the documentation or '
-                    'place it in a pre-block: {}'.format(b.number, b.content))
+                    'place it in a pre-block.',
+                    b)
 
             elif possible_links.match(b.content):
                 m = possible_links.match(b.content)
@@ -428,21 +434,20 @@ class DocMaker(object):
                                                             #block.content))
             #el
             if '%^' in parts[1]:
-                self.error(':#{}:\n\tLink content «{}» contains a '
+                self.error(
+                    'Link content «{}» contains a '
                     'URI-hex pattern.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            parts[1][:-1],
-                                                            link_match.group(2),
-                                                            block.content))
+                    'link prepend «{}» with «[».'.format(parts[1][:-1],
+                                                         link_match.group(2)),
+                    block)
             elif not self.is_correct_link(parts[1][:-1].strip()) and  'langs/' not in os.path.abspath(self.filename):
                 self.error(
-                    ':#{}:\n\tLink content «{}» does not point to a valid document.\n\t'
+                    'Link content «{}» does not point to a valid document.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            parts[1][:-1],
-                                                            link_match.group(2),
-                                                            block.content))
+                    'link prepend «{}» with «[».'.format(parts[1][:-1],
+                                                         link_match.group(2)),
+                    block)
         elif len(parts) == 1:
             #if not parts[0][1:-1].strip():
                 #self.error(
@@ -462,22 +467,21 @@ class DocMaker(object):
                                                             #block.content))
             #el
             if '%^' in parts[0]:
-                self.error(':#{}:\n\tLink content «{}» contains a '
+                self.error(
+                    'Link content «{}» contains a '
                     'URI-hex pattern.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            parts[0][:-1],
-                                                            link_match.group(2),
-                                                            block.content))
+                    'link prepend «{}» with «[».'.format(parts[0][:-1],
+                                                        link_match.group(2)),
+                    block)
             elif not self.is_correct_link(parts[0][1:-1].strip()) and  'langs/' not in os.path.abspath(self.filename):
                 self.error(
-                    ':#{}:\n\tLink content «{}» does not point to a '
+                    'Link content «{}» does not point to a '
                     'valid document.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            parts[0][:-1],
-                                                            link_match.group(2),
-                                                            block.content))
+                    'link prepend «{}» with «[».'.format(parts[0][:-1],
+                                                         link_match.group(2)),
+                    block)
 
     def is_correct_link(self, link_content):
         return (
@@ -590,10 +594,11 @@ class DocMaker(object):
                         parts = m.group(1).split('@RULENAME@')
                         if (rulename.endswith('-') and parts[1].startswith('__') ):
                             self.error(
-                                ':#{}:\n\t@RULENAME@ is surrounded with «_» and the string that '
-                                'will replace it ({}) ends with «-». Either remove «_» '
-                                'from @RULENAME@ or insert a space between @RULENAME@ '
-                                'and _: {}'.format(x + 1, rulename, line))
+                                '@RULENAME@ is surrounded with «_» and the string that '
+                                'will replace it ({}) ends with «-».\n\t'
+                                'Either remove «_» from @RULENAME@ or insert a space '
+                                'between @RULENAME@ and _: {}'.format(rulename),
+                                Line(number=x + 1, content=line))
                         else:
                             self.parse_block(Line(number=x + 1,
                                               content=m.group(1).replace(
@@ -629,16 +634,16 @@ class DocMaker(object):
                     parts = line.split('@CODE@')
                     if parts[1].startswith('__') and (code.endswith('}') or code.endswith('-')):
                         self.error(
-                            ':#%s:\n\t@CODE@ is surrounded with «_» and the string that '
-                            'will replace it ends with «}». Either remove «_» '
-                            'from @CODE@ or insert a space between @CODE@ '
-                            'and _: %s' % (lineno, origline))
+                            '@CODE@ is surrounded with «_» and the string '
+                            'that will replace it ends with «}».\n\t'
+                            'Either remove «_» from @CODE@ or insert a space between '
+                            '@CODE@ and _.',
+                            Line(number=lineno, content=origline))
                     if re.match('^\s*!', code) and re.match('^\s*\*\s+$', parts[0]):
                         self.error(
-                            ':#%s:\n\t@CODE@ contains «!». '
-                            'Either remove «!» or @CODE@: %s «%s»' % (lineno,
-                                                                 origline,
-                                                                 parts[0]))
+                            '@CODE@ contains «!».\n\t'
+                            'Either remove «!» or @CODE@.',
+                            Line(number=lineno, content=origline))
                 def get_replacement(s1, s2):
                     return s1 if s2 == '!!=' else s1.strip()
 

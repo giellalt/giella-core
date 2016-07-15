@@ -489,11 +489,15 @@ class DocMaker(object):
 
     def jspwiki_file_exists(self, link_content):
         basename = os.path.dirname(os.path.abspath(self.filename))
+        normpath = os.path.normpath(os.path.join(basename, link_content))
+        jspwiki = normpath.replace('.html', '.jspwiki')
+        xml = normpath.replace('.html', '.xml')
+
         return (
             self.filename.endswith('.jspwiki') and (
-                os.path.exists(os.path.join(basename, link_content)) or
-                os.path.exists(os.path.join(basename, link_content.replace('.html', '.jspwiki'))) or
-                os.path.exists(os.path.join(basename, link_content.replace('.html', '.xml')))
+                os.path.exists(normpath) or
+                os.path.exists(jspwiki) or
+                os.path.exists(xml)
             )
         )
 

@@ -352,8 +352,35 @@ class DocMaker(object):
                     'newline in the {name} markup: {}\n'.format(
                         b.number, b.content, 
                         name=name))
-                    
-        
+
+    def check_markup_within_markup(self, b):
+        markups = {
+            'italic': ("'", "'"),
+            'monospaced': ('{', '}'),
+            'bold': ('_', '_'),
+        }
+
+        for name1, markup1 in markups.items():
+            re_text1 = '''.*{first}{first}([^{second}]+){second}{second}.*'''.format(first=markup1[0], second=markup1[1])
+            markup1_re = re.compile(re_text1)
+            m = markup1_re.search(b.content)
+
+            if m:
+                for group in m.groups():
+                    for name2, markup2 in markups.items():
+                        if name1 != name2:
+                            re_text2 = '''.*{first}{first}([^{second}]+){second}{second}.*'''.format(first=markup2[0], second=markup2[1])
+                            markup2_re = re.compile(re_text2)
+                            m = markup2_re.search(group)
+                            if m:
+                                for group2 in m.groups():
+                                    self.error(
+                                        ':#{}:\n\tLine contains {name2} '
+                                        'within {name1}.\n\t'
+                                        'Remove one of the markups: '
+                                        '{}\n'.format(b.number, b.content,
+                                                      name1=name1, name2=name2))
+
     def check_inline(self, b):
         if not self.inside_pre:
             m = possible_twolc_rule.match(b.content)
@@ -370,6 +397,7 @@ class DocMaker(object):
 
             self.check_wrong_endchar(b)
             self.check_unbalanced_markup(b)
+            self.check_markup_within_markup(b)
 
     def handle_link_content(self, link_match, block):
         parts = link_match.group(2).split('|')

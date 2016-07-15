@@ -677,6 +677,7 @@ class DocMaker(object):
             '.lexc': self.lexc_blocks,
             '.twolc': self.lexc_blocks,
             '.xfscript': self.lexc_blocks,
+            '.cg3': self.lexc_blocks,
         }
 
         get_blocks[os.path.splitext(self.filename)[1]]()

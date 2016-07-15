@@ -100,9 +100,9 @@ class DocMaker(object):
                 'Erroneous line is {}\n'.format(b))
 
         if ordered.match(b.content):
-            self.check_for_wrong_char('!*', ordered.match(b.content).group(2), 
+            self.check_for_wrong_char('!*', ordered.match(b.content).group(2),
                                       b)
-            
+
             this_level = len(ordered.match(b.content).group(1))
             if self.ordered_level == 0 and this_level != 1:
                 raise ValueError(
@@ -130,15 +130,15 @@ class DocMaker(object):
             if rest_of_line.startswith(possible_wrong_char):
                 self.error(
                     ':#{}:\n\tLines starting with «{}» can not have '
-                    '«{}» as the first char. {}'.format(b.number, 
+                    '«{}» as the first char. {}'.format(b.number,
                                                         b.content[0],
-                                                        possible_wrong_char, 
+                                                        possible_wrong_char,
                                                         b.content))
     def make_header(self, b):
         if headers.match(b.content):
-            self.check_for_wrong_char('#*', headers.match(b.content).group(2), 
+            self.check_for_wrong_char('#*', headers.match(b.content).group(2),
                                       b)
-            
+
             this_level = 4 - len(headers.match(b.content).group(1))
             if self.first_level == 0:
                 self.first_level = this_level
@@ -180,7 +180,7 @@ class DocMaker(object):
                 'Erroneous line is {}\n'.format(b))
 
         if unordered.match(b.content):
-            self.check_for_wrong_char('#!', unordered.match(b.content).group(2), 
+            self.check_for_wrong_char('#!', unordered.match(b.content).group(2),
                                       b)
             this_level = len(unordered.match(b.content).group(1))
             if self.unordered_level == 0 and this_level != 1:
@@ -304,7 +304,7 @@ class DocMaker(object):
             '}': 'monospaced',
             '_': 'bold',
         }
-        
+
         if not b.content[:-1].endswith('{}'):
             for wrong_endchar1 in markup.keys():
                 regex = '''^.+[^{wc}]{wc}$'''.format(wc=wrong_endchar1)
@@ -314,9 +314,9 @@ class DocMaker(object):
                         'Either add a space character at the line ending, '
                         'mark it up as {wc} (two {wc}\'s at each side) or '
                         'place the entire line inside a pre '
-                        'block: {}\n'.format(b.number, wrong_endchar1, b.content, 
+                        'block: {}\n'.format(b.number, wrong_endchar1, b.content,
                                             wc=markup[wrong_endchar1]))
-                
+
                 for wrong_endchar2 in markup.keys():
                     if wrong_endchar1 == wrong_endchar2:
                         exp = '''{first}{second}{second}'''.format(
@@ -330,7 +330,7 @@ class DocMaker(object):
                                                         wc=markup[wrong_endchar2],
                                                         first=wrong_endchar1,
                                                         second=wrong_endchar2))
-                                
+
     def check_unbalanced_markup(self, b):
         markups = {
             'italic': ("'", "'"),
@@ -340,7 +340,7 @@ class DocMaker(object):
         for name, markup in markups.items():
             start = b.content.find(''.join(2 * markup[0]))
             end = b.content.rfind(''.join(2 * markup[1]))
-                               
+
             #if start > -1 or end > -1:
                 #print(start, end, b)
             if (start > 0 and end == -1) or \
@@ -350,7 +350,7 @@ class DocMaker(object):
                     ':#{}:\n\tLine contains a single {name} markup.\n\t'
                     'Either remove the single {name} markup or remove the '
                     'newline in the {name} markup: {}\n'.format(
-                        b.number, b.content, 
+                        b.number, b.content,
                         name=name))
 
     def check_markup_within_markup(self, b):
@@ -628,7 +628,7 @@ class DocMaker(object):
                     if re.match('^\s*!', code) and re.match('^\s*\*\s+$', parts[0]):
                         self.error(
                             ':#%s:\n\t@CODE@ contains «!». '
-                            'Either remove «!» or @CODE@: %s «%s»' % (lineno, 
+                            'Either remove «!» or @CODE@: %s «%s»' % (lineno,
                                                                  origline,
                                                                  parts[0]))
                 def get_replacement(s1, s2):

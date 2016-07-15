@@ -77,6 +77,9 @@ def test_match():
     m = possible_twolc_rule.match('''define uwChange [ u -> w || _ %> a ] ;''')
     if m:
         util.print_frame('YEY3!')
+class OutlineError(Exception):
+    pass
+
 
 def make_misc_test():
     return [
@@ -229,6 +232,12 @@ class DocMaker(object):
     def check_for_wrong_char(self, possible_wrong_chars, rest_of_line, b):
         for possible_wrong_char in possible_wrong_chars:
             if rest_of_line.startswith(possible_wrong_char):
+    def critical(self, error_message, block):
+        raise OutlineError(
+            '{} :#{b.number}:\n\t'
+            '{e}\n\t'
+            '{b.content}'.format(self.filename, b=block, e=error_message))
+
                 self.error(
                     'Lines starting with «{}» can not have '
                     '«{}» as the first char.'.format(b.content[0],

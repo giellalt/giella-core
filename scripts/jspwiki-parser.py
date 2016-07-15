@@ -420,7 +420,7 @@ class DocMaker(object):
                         b)
 
                 for wrong_endchar2 in markup.keys():
-                    if wrong_endchar1 == wrong_endchar2:
+                    if wrong_endchar1 != wrong_endchar2:
                         exp = '''{first}{second}{second}'''.format(
                             first=wrong_endchar1, second=wrong_endchar2)
                         if exp in b.content:

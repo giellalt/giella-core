@@ -18,6 +18,8 @@ def is_correct_link(link_content, filename, xdocs_dir):
         link_content.startswith('mailto:') or
         link_content.startswith('news:') or
         link_content.startswith('ftp://') or
+        link_content.startswith('svn://') or
+        link_content.startswith('see://') or
         jspwiki_file_exists(link_content, filename, xdocs_dir)
     )
 
@@ -84,11 +86,11 @@ def main():
     no_files = 0
     for site in sys.argv[1:]:
         fullpath = os.path.join(os.getenv('GTHOME'), sites[site])
-        for root, dirs, files in os.walk(fullpath):
+        for root, dirs, files in os.walk(fullpath, followlinks=True):
             for f in files:
                 no_files += 1
                 path = os.path.join(root, f)
-                if f.endswith('.xml') and 'obsolete' not in path and '/cgi' not in path:
+                if f.endswith('.xml') and 'obsolete' not in path and '/cgi' not in path and 'uped/' not in path:
                     errors += check_xml_file(path, fullpath)
 
     util.print_frame(errors)

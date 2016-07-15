@@ -229,18 +229,18 @@ class DocMaker(object):
             raise ValueError('Error!\nInvalid ordered entry! {}'.format(b))
 
 
-    def check_for_wrong_char(self, possible_wrong_chars, rest_of_line, b):
-        for possible_wrong_char in possible_wrong_chars:
-            if rest_of_line.startswith(possible_wrong_char):
     def critical(self, error_message, block):
         raise OutlineError(
             '{} :#{b.number}:\n\t'
             '{e}\n\t'
             '{b.content}'.format(self.filename, b=block, e=error_message))
 
+    def check_for_wrong_char(self, match, b):
+        for possible_wrong_char in '!#*':
+            if match.group(2).startswith(possible_wrong_char):
                 self.error(
                     'Lines starting with «{}» can not have '
-                    '«{}» as the first char.'.format(b.content[0],
+                    '«{}» as the first char.'.format(match.group(1),
                                                      possible_wrong_char),
                     b)
 

@@ -265,37 +265,19 @@ class DocMaker(object):
             self.error('Empty list entries are not allowed.', b)
 
     def make_unordered(self, b):
-        unordered_endings = re.compile('''\s*\*+\s*$''')
-        if unordered_endings.match(b.content):
-            raise ValueError(
-                'Error!\n'
-                'Empty list entries are not allowed.'
-                'Erroneous line is {}\n'.format(b))
+        m = unordered.match(b.content)
+        this_level = len(m.group(1))
 
-        if unordered.match(b.content):
-            self.check_for_wrong_char('#!', unordered.match(b.content).group(2),
-                                      b)
-            this_level = len(unordered.match(b.content).group(1))
-            if self.unordered_level == 0 and this_level != 1:
-                raise ValueError(
-                    'Error! This unordered entry must start with «*», but '
-                    'starts with {}\n. This is the erroneous entry '
-                    '\n{}\n'.format(unordered.match(b.content).group(1), b))
-            elif self.unordered_level == 1 and this_level == 3:
-                raise ValueError(
-                    'Error! This entry starts with {}, but can only '
-                    'start with «{}» or «{}». This is the erroneous '
-                    'entry\n{}\n'.format(
-                        unordered.match(b.content).group(1), '*',
-                        '*' * 2, b))
-            else:
-                self.unordered_level = this_level
-                self.check_inline(b)
-                self.document.append(Entry(
-                    name='u{}'.format(this_level),
-                    data=[unordered.match(b.content).group(2)]))
-        else:
-            raise ValueError('Error!\nInvalid unordered entry! {}'.format(b))
+        self.check_for_wrong_char(m, b)
+        self.check_outline_ending(m.group(2), b)
+        self.check_inline(b)
+
+        self.check_unordered_level(m.group(1), this_level, b)
+
+        self.document.append(Entry(
+            name='u{}'.format(this_level),
+            data=[m.group(2)]))
+
     def check_ordered_level(self, ordered_intro, this_level, b):
         if self.ordered_level == 0 and this_level != 1:
             self.critical(

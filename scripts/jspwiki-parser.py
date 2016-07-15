@@ -483,6 +483,8 @@ class DocMaker(object):
         return (
             link_content.startswith('http://') or
             link_content.startswith('https://') or
+            link_content.startswith('mailto:') or
+            link_content.startswith('news:') or
             self.jspwiki_file_exists(link_content) or
             self.lexc_file_exists(link_content)
         )
@@ -491,12 +493,14 @@ class DocMaker(object):
         basename = os.path.dirname(os.path.abspath(self.filename))
         normpath = os.path.normpath(os.path.join(basename, link_content))
         jspwiki = normpath.replace('.html', '.jspwiki')
+        added_jspwiki = normpath + '.jspwiki'
         xml = normpath.replace('.html', '.xml')
 
         return (
             self.filename.endswith('.jspwiki') and (
                 os.path.exists(normpath) or
                 os.path.exists(jspwiki) or
+                os.path.exists(added_jspwiki) or
                 os.path.exists(xml)
             )
         )
@@ -676,12 +680,14 @@ def main():
         if os.path.isfile(uff):
             if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript') or uff.endswith('.jspwiki'):
                 handle_file(uff)
-        else:
+        elif os.path.exists(uff):
             for root, dirs, files in os.walk(uff, followlinks=True):
-                for f in files:
-                    if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc') or f.endswith('.jspwiki'):
-                        handle_file(os.path.join(root, f))
-
+                if 'doc/lang' not in root:
+                    for f in files:
+                        if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc') or f.endswith('.jspwiki'):
+                            handle_file(os.path.join(root, f))
+        else:
+            print(uff, 'does not exist', file=sys.stderr)
 
 
 if __name__ == '__main__':

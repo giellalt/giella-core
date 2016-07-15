@@ -42,6 +42,10 @@ Entry = collections.namedtuple('Entry', ['name', 'data'])
 Line = collections.namedtuple('Line', ['number', 'content'])
 
 
+class LineError(Exception):
+    pass
+
+
 def test_match():
     print('testing')
     for c in [(headers, '!'), (ordered, '#'), (unordered, '*')]:
@@ -89,11 +93,11 @@ class DocMaker(object):
         self.inside_pre = False
 
     def error(self, error_message, block):
-        error_line = (
-            ':#{b.number}:\n\t'
+        raise LineError(
+            '{} :#{b.number}:\n\t'
             '{e}\n\t'
-            '{b.content}'.format(b=block, e=error_message))
-        print(self.filename, error_line, file=sys.stderr)
+            '{b.content}'.format(self.filename, b=block, e=error_message))
+
 
     def make_ordered(self, b):
         ordered_endings = re.compile('''\s*\#+\s*$''')
@@ -570,7 +574,10 @@ class DocMaker(object):
     def jspwiki_blocks(self):
         for x, line in enumerate(fileinput.FileInput(self.filename)):
             if line.strip():
-                self.parse_block(Line(number=x + 1, content=line))
+                try:
+                    self.parse_block(Line(number=x + 1, content=line))
+                except LineError as e:
+                    print(e, file=sys.stderr)
             else:
                 self.close_block()
 
@@ -579,89 +586,93 @@ class DocMaker(object):
         rulename = ''
 
         for x, line in enumerate(fileinput.FileInput(self.filename)):
-            if rulename_re.match(line):
-                rulename = rulename_re.match(line).group(1)
+            try:
+                if rulename_re.match(line):
+                    rulename = rulename_re.match(line).group(1)
 
-            if re.match('^[^!]+!! ', line):
-                lexc_doc = re.compile('.*!! (.+)')
-                m = lexc_doc.match(line)
-                if m:
-                    if '@RULENAME@' in m.group(1):
-                        if not rulename:
-                            raise ValueError(
-                                'rulename is empty!: {}'.format(x + 1, line))
+                if re.match('^[^!]+!! ', line):
+                    lexc_doc = re.compile('.*!! (.+)')
+                    m = lexc_doc.match(line)
+                    if m:
+                        if '@RULENAME@' in m.group(1):
+                            if not rulename:
+                                raise ValueError(
+                                    'rulename is empty!: {}'.format(x + 1, line))
 
-                        parts = m.group(1).split('@RULENAME@')
-                        if (rulename.endswith('-') and parts[1].startswith('__') ):
-                            self.error(
-                                '@RULENAME@ is surrounded with «_» and the string that '
-                                'will replace it ({}) ends with «-».\n\t'
-                                'Either remove «_» from @RULENAME@ or insert a space '
-                                'between @RULENAME@ and _: {}'.format(rulename),
-                                Line(number=x + 1, content=line))
+                            parts = m.group(1).split('@RULENAME@')
+                            if (rulename.endswith('-') and parts[1].startswith('__') ):
+                                self.error(
+                                    '@RULENAME@ is surrounded with «_» and the string that '
+                                    'will replace it ({}) ends with «-».\n\t'
+                                    'Either remove «_» from @RULENAME@ or insert a space '
+                                    'between @RULENAME@ and _: {}'.format(rulename),
+                                    Line(number=x + 1, content=line))
+                            else:
+                                self.parse_block(Line(number=x + 1,
+                                                content=m.group(1).replace(
+                                                    '@RULENAME@', rulename)))
                         else:
                             self.parse_block(Line(number=x + 1,
-                                              content=m.group(1).replace(
-                                                  '@RULENAME@', rulename)))
+                                            content=m.group(1)))
+                elif line.startswith('!!€ '):
+                    parts = line[len('!!€ '):].split()
+                    c = ['*']
+                    if parts:
+                        c.append('__%s __' % parts[0])
+                        if len(parts) > 1:
+                            c.append('{{%s}}' % parts[1])
+                        if len(parts) > 2:
+                            c.append('(Eng.')
+                            c.extend(parts[2:])
                     else:
+                        c.append('???')
+                    c.append(' ')
+                    self.parse_block(Line(number=x + 1, content=' '.join(c)))
+
+                elif line.startswith('!!€'):
+                    a = re.compile('(!!€.+:\s+)(.+)')
+                    m = a.match(line)
+                    if m:
                         self.parse_block(Line(number=x + 1,
-                                        content=m.group(1)))
-            elif line.startswith('!!€ '):
-                parts = line[len('!!€ '):].split()
-                c = ['*']
-                if parts:
-                    c.append('__%s __' % parts[0])
-                    if len(parts) > 1:
-                        c.append('{{%s}}' % parts[1])
-                    if len(parts) > 2:
-                        c.append('(Eng.')
-                        c.extend(parts[2:])
+                                        content='__{} examples:__'.format(
+                                            m.group(1))))
+                elif re.match('^[^!]+!![=≈]', line):
+
+                    def check_validity(lineno, origline, line, code):
+                        parts = line.split('@CODE@')
+                        if parts[1].startswith('__') and (code.endswith('}') or code.endswith('-')):
+                            self.error(
+                                '@CODE@ is surrounded with «_» and the string '
+                                'that will replace it ends with «}».\n\t'
+                                'Either remove «_» from @CODE@ or insert a space between '
+                                '@CODE@ and _.',
+                                Line(number=lineno, content=origline))
+                        if re.match('^\s*!', code) and re.match('^\s*\*\s+$', parts[0]):
+                            self.error(
+                                '@CODE@ contains «!».\n\t'
+                                'Either remove «!» or @CODE@.',
+                                Line(number=lineno, content=origline))
+                    def get_replacement(s1, s2):
+                        return s1 if s2 == '!!=' else s1.strip()
+
+                    m = re.match('(.+)(!![=≈])(.*)', line)
+
+                    if '@CODE@' in m.group(3):
+                        replacement = get_replacement(m.group(1), m.group(2))
+                        check_validity(x + 1, line, m.group(3), replacement)
+                        c = m.group(3).replace('@CODE@', m.group(1))
+                        if m.group(2) == '!!≈':
+                            c = re.sub(' +', ' ', c)
+                    else:
+                        c = line.replace(m.group(2), '')
+
+                    self.parse_block(Line(number=x + 1, content=c))
+
                 else:
-                    c.append('???')
-                c.append(' ')
-                self.parse_block(Line(number=x + 1, content=' '.join(c)))
+                    self.close_block()
+            except LineError as e:
+                print(e, file=sys.stderr)
 
-            elif line.startswith('!!€'):
-                a = re.compile('(!!€.+:\s+)(.+)')
-                m = a.match(line)
-                if m:
-                    self.parse_block(Line(number=x + 1,
-                                      content='__{} examples:__'.format(
-                                          m.group(1))))
-            elif re.match('^[^!]+!![=≈]', line):
-
-                def check_validity(lineno, origline, line, code):
-                    parts = line.split('@CODE@')
-                    if parts[1].startswith('__') and (code.endswith('}') or code.endswith('-')):
-                        self.error(
-                            '@CODE@ is surrounded with «_» and the string '
-                            'that will replace it ends with «}».\n\t'
-                            'Either remove «_» from @CODE@ or insert a space between '
-                            '@CODE@ and _.',
-                            Line(number=lineno, content=origline))
-                    if re.match('^\s*!', code) and re.match('^\s*\*\s+$', parts[0]):
-                        self.error(
-                            '@CODE@ contains «!».\n\t'
-                            'Either remove «!» or @CODE@.',
-                            Line(number=lineno, content=origline))
-                def get_replacement(s1, s2):
-                    return s1 if s2 == '!!=' else s1.strip()
-
-                m = re.match('(.+)(!![=≈])(.*)', line)
-
-                if '@CODE@' in m.group(3):
-                    replacement = get_replacement(m.group(1), m.group(2))
-                    check_validity(x + 1, line, m.group(3), replacement)
-                    c = m.group(3).replace('@CODE@', m.group(1))
-                    if m.group(2) == '!!≈':
-                        c = re.sub(' +', ' ', c)
-                else:
-                    c = line.replace(m.group(2), '')
-
-                self.parse_block(Line(number=x + 1, content=c))
-
-            else:
-                self.close_block()
 
 def handle_file(path):
 

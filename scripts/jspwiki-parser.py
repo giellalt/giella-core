@@ -233,15 +233,21 @@ class DocMaker(object):
         self.header_level = this_level
 
     def make_header(self, b):
-        if headers.match(b.content):
-            self.check_for_wrong_char('#*', headers.match(b.content).group(2),
-                                      b)
+        #util.print_frame(b)
+        m = headers.match(b.content)
+        this_level = 4 - len(m.group(1))
+        if self.first_level == 0:
+            self.first_level = this_level
 
-            this_level = 4 - len(headers.match(b.content).group(1))
-            if self.first_level == 0:
-                self.first_level = this_level
+        self.check_for_wrong_char(m, b)
+        self.check_outline_ending(m.group(2), b)
+        self.check_inline(b)
 
         self.check_header_level(m.group(1), this_level, b)
+
+        self.document.append(Entry(
+            name='h{}'.format(this_level),
+            data=[m.group(2)]))
 
     def check_unordered_level(self, unordered_intro, this_level, b):
         if self.unordered_level == 0 and this_level != 1:

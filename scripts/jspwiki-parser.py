@@ -35,7 +35,7 @@ complete_pre_inline = re.compile('''^(.*){{{(.+)}}}([^}]*)$''')
 start_of_pre = re.compile('''^\s*(.*){{{([^}]*)$''')
 end_of_pre = re.compile('''^\s*(.*)}}}([^}]*)$''')
 erroneous_bold = re.compile(u'''[^_].* _([^_]+)_[^_]*$''')
-possible_links = re.compile(u'''^([^[].*)(\[[^[]*\])([^]]*)$''')
+possible_links = re.compile(u'''(\[[^[]*\])''')
 possible_twolc_rule = re.compile(u'''(^[^[].+\[[^[]*\][^]]+;\s*.*)|([^(]+\([^(]+\|[^)]*\).+;.*)''')
 
 
@@ -498,7 +498,6 @@ class DocMaker(object):
             re_text1 = '''.*{first}{first}([^{second}]+){second}{second}.*'''.format(first=markup1[0], second=markup1[1])
             markup1_re = re.compile(re_text1)
             m = markup1_re.search(b.content)
-
             if m:
                 for group in m.groups():
                     for name2, markup2 in markups.items():
@@ -517,31 +516,34 @@ class DocMaker(object):
 
     def check_inline(self, b):
         if not self.inside_pre:
-            m = possible_twolc_rule.match(b.content)
-            if m:
-                self.error(
-                    'Possible twolc rule.\n\t'
-                    'Please either remove it from the documentation or '
-                    'place it in a pre-block.',
-                    b)
+            #m = possible_twolc_rule.match(b.content)
+            #if m:
+                #self.error(
+                    #'Possible twolc rule.\n\t'
+                    #'Please either remove it from the documentation or '
+                    #'place it in a pre-block.',
+                    #b)
 
-            elif possible_links.match(b.content):
-                m = possible_links.match(b.content)
-                if not m.group(1).endswith('['):
-                    self.handle_link_content(m, b)
+            #el
+            if possible_links.search(b.content):
+                for m in possible_links.finditer(b.content):
+                    #util.print_frame(b.content[m.span()[0] - 1], m.group())
+                    if b.content[m.span()[0] - 1] != '[':
+                        for g in m.groups():
+                            self.handle_link_content(g, b)
 
             self.check_wrong_endchar(b)
             self.check_unbalanced_markup(b)
             self.check_markup_within_markup(b)
 
     def handle_link_content(self, link_match, block):
-        parts = link_match.group(2).split('|')
+        parts = link_match.split('|')
         #if len(parts) > 2:
             #self.error(
                 #':#{}:\n\tLink content has to many parts.\n\t'
                 #'If this is a link, fix the content. If it is not a '
                 #'link prepend {} with «[»: {}'.format(block.number,
-                                                      #link_match.group(2),
+                                                      #link_match,
                                                       #block.content))
         #el
         if len(parts) == 2:
@@ -551,7 +553,7 @@ class DocMaker(object):
                     #'If this is a link, fix the content. If it is not a '
                     #'link prepend «{}» with «[»: {}'.format(block.number,
                                                             #parts[0][:-1],
-                                                            #link_match.group(2),
+                                                            #link_match,
                                                             #block.content))
             #elif re.match('^\d+$', parts[1][1:-1].strip()):
                 #self.error(
@@ -559,7 +561,7 @@ class DocMaker(object):
                     #'If this is a link, fix the content. If it is not a '
                     #'link prepend «{}» with «[»: {}'.format(block.number,
                                                             #parts[1][:-1],
-                                                            #link_match.group(2),
+                                                            #link_match,
                                                             #block.content))
             #el
             if '%^' in parts[1]:
@@ -568,23 +570,24 @@ class DocMaker(object):
                     'URI-hex pattern.\n\t'
                     'If this is a link, fix the content. If it is not a '
                     'link prepend «{}» with «[».'.format(parts[1][:-1],
-                                                         link_match.group(2)),
+                                                         link_match),
                     block)
-            elif not self.is_correct_link(parts[1][:-1].strip()) and  'langs/' not in os.path.abspath(self.filename):
+            elif not self.is_correct_link(parts[1][:-1].strip()):
                 self.error(
                     'Link content «{}» does not point to a valid document.\n\t'
                     'If this is a link, fix the content. If it is not a '
                     'link prepend «{}» with «[».'.format(parts[1][:-1],
-                                                         link_match.group(2)),
+                                                         link_match),
                     block)
         elif len(parts) == 1:
+            #util.print_frame(parts[0])
             #if not parts[0][1:-1].strip():
                 #self.error(
                     #':#{}:\n\tLink content «{}» is empty.\n\t'
                     #'If this is a link, fix the content. If it is not a '
                     #'link prepend «{}» with «[»: {}'.format(block.number,
                                                             #parts[0][:-1],
-                                                            #link_match.group(2),
+                                                            #link_match,
                                                             #block.content))
             #elif re.match('^\d+$', parts[0][1:-1].strip()):
                 #self.error(
@@ -592,7 +595,7 @@ class DocMaker(object):
                     #'If this is a link, fix the content. If it is not a '
                     #'link prepend «{}» with «[»: {}'.format(block.number,
                                                             #parts[0][:-1],
-                                                            #link_match.group(2),
+                                                            #link_match,
                                                             #block.content))
             #el
             if '%^' in parts[0]:
@@ -601,30 +604,48 @@ class DocMaker(object):
                     'URI-hex pattern.\n\t'
                     'If this is a link, fix the content. If it is not a '
                     'link prepend «{}» with «[».'.format(parts[0][:-1],
-                                                        link_match.group(2)),
+                                                        link_match),
                     block)
-            elif not self.is_correct_link(parts[0][1:-1].strip()) and  'langs/' not in os.path.abspath(self.filename):
+            elif not self.is_correct_link(parts[0][1:-1].strip()):
                 self.error(
                     'Link content «{}» does not point to a '
                     'valid document.\n\t'
                     'If this is a link, fix the content. If it is not a '
                     'link prepend «{}» with «[».'.format(parts[0][:-1],
-                                                         link_match.group(2)),
+                                                         link_match),
                     block)
 
     def is_correct_link(self, link_content):
         return (
+            re.match('''\d+''', link_content) or
+            link_content.endswith('.ics') or
             link_content.startswith('http://') or
             link_content.startswith('https://') or
             link_content.startswith('mailto:') or
             link_content.startswith('news:') or
+            link_content.startswith('ftp://') or
+            link_content.startswith('file://') or
             self.jspwiki_file_exists(link_content) or
             self.lexc_file_exists(link_content)
         )
 
     def jspwiki_file_exists(self, link_content):
-        basename = os.path.dirname(os.path.abspath(self.filename))
-        normpath = os.path.normpath(os.path.join(basename, link_content))
+        #util.print_frame(link_content)
+        link_content = link_content.split('#')[0]
+        link_content = link_content.replace('slidy/', '')
+        if link_content.startswith('/') and self.xdocs_dir:
+            dirname = self.xdocs_dir
+            link_content = link_content[1:]
+        elif 'langs/' in self.filename and 'doc/' in self.filename and '..' in link_content and 'meetings' not in self.filename:
+            dirname = os.path.join(os.getenv('GTHOME'), 'xtdoc/gtuit/src/documentation/content/xdocs/doc/lang')
+            link_content = link_content[1:]
+        elif 'langs/' in self.filename and 'doc/' in self.filename and link_content.startswith('[/doc'):
+            dirname = os.path.join(os.getenv('GTHOME'), 'xtdoc/gtuit/src/documentation/content/xdocs/')
+            link_content = link_content[1:]
+        else:
+            dirname = os.path.dirname(os.path.abspath(self.filename))
+
+        normpath = os.path.normpath(os.path.join(dirname, link_content))
         jspwiki = normpath.replace('.html', '.jspwiki')
         added_jspwiki = normpath + '.jspwiki'
         xml = normpath.replace('.html', '.xml')

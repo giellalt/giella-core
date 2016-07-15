@@ -304,30 +304,33 @@ class DocMaker(object):
             '}': 'monospaced',
             '_': 'bold',
         }
-        for wrong_endchar1 in markup.keys():
-            regex = '''^.+[^{wc}]{wc}$'''.format(wc=wrong_endchar1)
-            if re.match(regex, b.content):
-                self.error(
-                    ':#{}:\n\tLine ends with {}.\n\t'
-                    'Either add a space character at the line ending, '
-                    'mark it up as {wc} (two {wc}\'s at each side) or '
-                    'place the entire line inside a pre '
-                    'block: {}\n'.format(b.number, wrong_endchar1, b.content, 
-                                         wc=markup[wrong_endchar1]))
-            
-            for wrong_endchar2 in markup.keys():
-                if wrong_endchar1 == wrong_endchar2:
-                    exp = '''{first}{second}{second}'''.format(
-                        first=wrong_endchar1, second=wrong_endchar2)
-                    if exp in b.content:
-                        self.error(
-                            ':#{}:\n\tErroneous {wc} markup.\n\t'
-                            'Either add a space character between «{first}» '
-                            'and «{second}» or place the entire line inside '
-                            'a pre block: {}\n'.format(b.number, b.content,
-                                                       wc=markup[wrong_endchar2],
-                                                       first=wrong_endchar1,
-                                                       second=wrong_endchar2))
+        
+        if not b.content[:-1].endswith('{}'):
+            for wrong_endchar1 in markup.keys():
+                regex = '''^.+[^{wc}]{wc}$'''.format(wc=wrong_endchar1)
+                if re.match(regex, b.content):
+                    self.error(
+                        ':#{}:\n\tLine ends with {}.\n\t'
+                        'Either add a space character at the line ending, '
+                        'mark it up as {wc} (two {wc}\'s at each side) or '
+                        'place the entire line inside a pre '
+                        'block: {}\n'.format(b.number, wrong_endchar1, b.content, 
+                                            wc=markup[wrong_endchar1]))
+                
+                for wrong_endchar2 in markup.keys():
+                    if wrong_endchar1 == wrong_endchar2:
+                        exp = '''{first}{second}{second}'''.format(
+                            first=wrong_endchar1, second=wrong_endchar2)
+                        if exp in b.content:
+                            self.error(
+                                ':#{}:\n\tErroneous {wc} markup.\n\t'
+                                'Either add a space character between «{first}» '
+                                'and «{second}» or place the entire line inside '
+                                'a pre block: {}\n'.format(b.number, b.content,
+                                                        wc=markup[wrong_endchar2],
+                                                        first=wrong_endchar1,
+                                                        second=wrong_endchar2))
+                                
     def check_unbalanced_markup(self, b):
         markups = {
             'italic': ("'", "'"),

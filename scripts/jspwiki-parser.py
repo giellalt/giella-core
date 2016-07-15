@@ -100,7 +100,8 @@ class DocMaker(object):
                 'Erroneous line is {}\n'.format(b))
 
         if ordered.match(b.content):
-            self.check_for_wrong_char('!*', b)
+            self.check_for_wrong_char('!*', ordered.match(b.content).group(2), 
+                                      b)
             
             this_level = len(ordered.match(b.content).group(1))
             if self.ordered_level == 0 and this_level != 1:
@@ -124,17 +125,19 @@ class DocMaker(object):
             raise ValueError('Error!\nInvalid ordered entry! {}'.format(b))
 
 
-    def check_for_wrong_char(self, possible_wrong_chars, b):
+    def check_for_wrong_char(self, possible_wrong_chars, rest_of_line, b):
         for possible_wrong_char in possible_wrong_chars:
-            if possible_wrong_char in b.content:
+            if rest_of_line.startswith(possible_wrong_char):
                 self.error(
-                    ':#{}:\n\tLines starting with «{}» can not contain '
-                    '«{}». {}'.format(b.number, b.content[0],
-                                      possible_wrong_char, 
-                                      b.content))
+                    ':#{}:\n\tLines starting with «{}» can not have '
+                    '«{}» as the first char. {}'.format(b.number, 
+                                                        b.content[0],
+                                                        possible_wrong_char, 
+                                                        b.content))
     def make_header(self, b):
         if headers.match(b.content):
-            self.check_for_wrong_char('#*', b)
+            self.check_for_wrong_char('#*', headers.match(b.content).group(2), 
+                                      b)
             
             this_level = 4 - len(headers.match(b.content).group(1))
             if self.first_level == 0:
@@ -177,7 +180,8 @@ class DocMaker(object):
                 'Erroneous line is {}\n'.format(b))
 
         if unordered.match(b.content):
-            self.check_for_wrong_char('#!', b)
+            self.check_for_wrong_char('#!', unordered.match(b.content).group(2), 
+                                      b)
             this_level = len(unordered.match(b.content).group(1))
             if self.unordered_level == 0 and this_level != 1:
                 raise ValueError(

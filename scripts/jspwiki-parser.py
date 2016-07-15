@@ -128,7 +128,7 @@ class DocMaker(object):
         for possible_wrong_char in possible_wrong_chars:
             if possible_wrong_char in b.content:
                 self.error(
-                    ':#{}:\n\tLines starting with «{}» cannon contain '
+                    ':#{}:\n\tLines starting with «{}» can not contain '
                     '«{}». {}'.format(b.number, b.content[0],
                                       possible_wrong_char, 
                                       b.content))

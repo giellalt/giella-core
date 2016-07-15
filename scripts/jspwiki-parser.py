@@ -673,7 +673,7 @@ def main():
             if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript') or uff.endswith('.jspwiki'):
                 handle_file(uff)
         else:
-            for root, dirs, files in os.walk(uff):
+            for root, dirs, files in os.walk(uff, followlinks=True):
                 for f in files:
                     if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc') or f.endswith('.jspwiki'):
                         handle_file(os.path.join(root, f))

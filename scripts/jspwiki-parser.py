@@ -176,7 +176,7 @@ def make_inline_error_tests():
 
 class TestDocMaker(unittest.TestCase):
     def setUp(self):
-        self.dm = DocMaker('bogus')
+        self.dm = DocMaker('bogus', None)
 
     @parameterized.expand(make_inline_error_tests())
     def test_inline_errors(self, name, content, expected):
@@ -194,7 +194,7 @@ class TestDocMaker(unittest.TestCase):
 
 
 class DocMaker(object):
-    def __init__(self, filename):
+    def __init__(self, filename, xdocs_dir):
         self.filename = filename
         self.document = [Entry(name='empty', data=[])]
         self.tjoff = {
@@ -208,6 +208,7 @@ class DocMaker(object):
         self.unordered_level = 0
         self.ordered_level = 0
         self.inside_pre = False
+        self.xdocs_dir = xdocs_dir
 
     def error(self, error_message, block):
         raise LineError(
@@ -799,37 +800,89 @@ class DocMaker(object):
                 print(e, file=sys.stderr)
 
 
-def handle_file(path):
+def handle_file(path, xdocs_dir):
 
-    dm = DocMaker(path)
     #if path.endswith('.lexc') or path.endswith('.xfscript') or path.endswith('.twolc'):
         #dm.first_level = 1
     if not ('errors/' in path or
             'generated_files' in path or
             'lexicon.' in path or
             '/kal/' in path):
-        try:
-            dm.parse_blocks()
-        except OutlineError as e:
-            util.print_frame(path)
-            util.print_frame(str(e))
-        except ValueError as e:
-            util.print_frame(path)
-            util.print_frame(str(e))
+        uff = compute_lexc_name(path)
+        if not uff:
+            uff = path
+        if os.path.exists(uff):
+            dm = DocMaker(uff, xdocs_dir)
+            try:
+                dm.parse_blocks()
+            except OutlineError as e:
+                util.print_frame(path)
+                util.print_frame(str(e))
+            except ValueError as e:
+                util.print_frame(path)
+                util.print_frame(str(e))
+
+
+def compute_lexc_name(jspwiki):
+    if 'langs/' in jspwiki and '/doc/' in jspwiki:
+        if jspwiki.endswith('-syntax.jspwiki'):
+            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/syntax')
+            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki', '.cg3')
+            return os.path.join(dirname, basename)
+
+        if jspwiki.endswith('-phonology.jspwiki'):
+            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/phonology')
+            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki', '.twolc')
+            if os.path.exists(os.path.join(dirname, basename)):
+                return os.path.join(dirname, basename)
+            else:
+                basename = os.path.basename(jspwiki).replace('-syntax.jspwiki', '.xfscript')
+                return os.path.join(dirname, basename)
+
+        if jspwiki.endswith('-morphology.jspwiki'):
+            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/morphology')
+            basename = os.path.basename(jspwiki).replace('-morphology.jspwiki', '.lexc')
+            return os.path.join(dirname, basename)
+
+        if jspwiki.endswith('-stems.jspwiki'):
+            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/morphology/stems')
+            basename = os.path.basename(jspwiki).replace('-stems.jspwiki', '.lexc')
+            return os.path.join(dirname, basename)
+
+        if jspwiki.endswith('-affixes.jspwiki'):
+            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/morphology/affixes')
+            basename = os.path.basename(jspwiki).replace('-affixes.jspwiki', '.lexc')
+            return os.path.join(dirname, basename)
+
+
+def check_forrest_properties(directory):
+    fp = os.path.join(directory, 'forrest.properties')
+    if os.path.exists(fp):
+        for line in fileinput.FileInput(fp):
+            if not line.startswith('#') and 'project.xdocs-dir' in line:
+                return os.path.join(directory, line.split('=')[1].strip())
+        else:
+            return os.path.join(directory, 'src/documentation/content/xdocs')
+
 
 def main():
     x = 1
 
     for uff in sys.argv[1:]:
         if os.path.isfile(uff):
-            if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript') or uff.endswith('.jspwiki'):
-                handle_file(uff)
+            #if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript') or
+            if uff.endswith('.jspwiki'):
+                handle_file(uff, None)
         elif os.path.exists(uff):
+            xdocs_dir = check_forrest_properties(uff)
+            if '$' in xdocs_dir:
+                xdocs_dir = None
+            util.print_frame(xdocs_dir)
             for root, dirs, files in os.walk(uff, followlinks=True):
-                if 'doc/lang' not in root:
-                    for f in files:
-                        if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc') or f.endswith('.jspwiki'):
-                            handle_file(os.path.join(root, f))
+                for f in files:
+                    #if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc') or
+                    if f.endswith('.jspwiki'):
+                        handle_file(os.path.join(root, f), xdocs_dir)
         else:
             print(uff, 'does not exist', file=sys.stderr)
 

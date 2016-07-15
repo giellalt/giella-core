@@ -669,7 +669,8 @@ class DocMaker(object):
                 self.inside_pre = False
         elif re.match('''\s*([{}])'''.format(''.join(self.tjoff.keys())), b.content) and not self.inside_pre:
             self.check_inline(b)
-            self.tjoff[re.match('''\s*([{}])'''.format(''.join(self.tjoff.keys())), b.content).group(1)]
+            key = re.match('''\s*([{}])'''.format(''.join(self.tjoff.keys())), b.content).group(1)
+            self.tjoff[key](b)
         elif not self.inside_pre:
             self.check_inline(b)
             self.handle_line(b.content)

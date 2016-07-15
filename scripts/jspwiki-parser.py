@@ -77,36 +77,45 @@ def test_match():
     m = possible_twolc_rule.match('''define uwChange [ u -> w || _ %> a ] ;''')
     if m:
         util.print_frame('YEY3!')
+
+
 class OutlineError(Exception):
     pass
 
 
 def make_misc_test():
     return [
-        ('too long hr','-----'),
+        ('too long hr','-----', 'Please shorten'),
     ]
 
 
 def make_link_tests():
     return [
-        ('no link one part', 'abc [abc] abc'),
-        ('no link two parts', 'abc [abc|abc] abc'),
-        ('contains hex pattern', 'abc [^%Xabc] abc'),
+        ('no link one part', 'abc [abc] abc',
+         'point to a valid document'),
+        ('no link two parts', 'abc [abc|abc] abc',
+         'does not point to a valid document'),
+        ('contains hex pattern', 'abc [%^Xabc] abc', 'URI-hex pattern'),
     ]
 
 
 def make_endswith(markups):
-    return [('ends with {}'.format(name), 'abc{}'.format(chars[1]))
+    return [('ends with {}'.format(name), 'abc{}'.format(chars[1]),
+             'Line ends with ')
             for name, chars in markups.items()]
 
 
 def make_single_starts(markups):
-    return [('single {} start'.format(name), 'abc {}abc abc'.format(2 * chars[0]))
+    return [('single {} start'.format(name),
+             'abc {}abc abc'.format(2 * chars[0]),
+             'Either remove the single ')
             for name, chars in markups.items()]
 
 
 def make_single_ends(markups):
-    return [('single {} end'.format(name), 'abc abc{} abc'.format(2 * chars[1]))
+    return [('single {} end'.format(name),
+             'abc abc{} abc'.format(2 * chars[1],),
+             'Either remove the single ')
             for name, chars in markups.items()]
 
 
@@ -120,7 +129,8 @@ def make_markup_within_markup(markups):
                                                    inner_markup,
                                                    markups2[1] * 2)
                 test_cases.append(
-                    ('{} within {}'.format(name1, name2), outer_markup))
+                    ('{} within {}'.format(name1, name2), outer_markup,
+                     ' within '))
 
     return test_cases
 
@@ -135,13 +145,14 @@ def make_colliding_markup_within_markup(markups):
                                                    inner_markup,
                                                    markups2[1] * 2)
                 test_cases.append(
-                    ('half {} within {}'.format(name1, name2), outer_markup))
+                    ('half {} within {}'.format(name1, name2), outer_markup,
+                     'Either add a space character'))
 
     return test_cases
 
 
 def make_header_inline_error_tests():
-    return [('4 {}'.format(n), n * 4) for n in '!*#']
+    return [('4 {}'.format(n), n * 4, 'Lines starting with ') for n in '!*#']
 
 
 def make_inline_error_tests():
@@ -168,18 +179,18 @@ class TestDocMaker(unittest.TestCase):
         self.dm = DocMaker('bogus')
 
     @parameterized.expand(make_inline_error_tests())
-    def test_inline_errors(self, name, content):
-        with self.assertRaises(LineError):
-            self.dm.parse_block(Line(number=1, content=content))
-
-    @parameterized.expand(make_header_inline_error_tests())
-    def test_outline_errors(self, name, content):
+    def test_inline_errors(self, name, content, expected):
         with self.assertRaises(LineError) as e:
             self.dm.parse_block(Line(number=1, content=content))
-            util.print_frame(str(e.exception))
 
+        self.assertTrue(expected in str(e.exception))
 
-#def test_match():
+    @parameterized.expand(make_header_inline_error_tests())
+    def test_outline_errors(self, name, content, expected):
+        with self.assertRaises(LineError) as e:
+            self.dm.parse_block(Line(number=1, content=content))
+
+        self.assertTrue(expected in str(e.exception))
 
 
 class DocMaker(object):
@@ -441,9 +452,9 @@ class DocMaker(object):
 
                 for wrong_endchar2 in markup.keys():
                     if wrong_endchar1 != wrong_endchar2:
-                        exp = '''{first}{second}{second}'''.format(
+                        regex = '''[^{first}]{first}{second}{second}'''.format(
                             first=wrong_endchar1, second=wrong_endchar2)
-                        if exp in b.content:
+                        if re.search(regex, b.content):
                             self.error(
                                 'Erroneous {wc} markup.\n\t'
                                 'Either add a space character between «{first}» '

@@ -244,6 +244,29 @@ class DocMaker(object):
                                                      possible_wrong_char),
                     b)
 
+    def check_header_level(self, header_intro, this_level, b):
+        if this_level < self.first_level:
+            self.critical(
+                'This header is {}\n'
+                'Because the first header was «{}», only '
+                'headers at this or lower levels are allowed.\n'
+                'If you want to use this level, increase the level '
+                'of the first header to at least this level'.format(
+                    header_intro,
+                    '!' * self.first_level),
+                b
+            )
+        if self.header_level == 1 and this_level == 3:
+            self.critical(
+                'This header starts with {}, but can only '
+                'start with «{}» or «{}».'.format(
+                    header_intro, '!' * 3,
+                    '!' * 2),
+                b
+            )
+
+        self.header_level = this_level
+
     def make_header(self, b):
         if headers.match(b.content):
             self.check_for_wrong_char('#*', headers.match(b.content).group(2),
@@ -253,33 +276,7 @@ class DocMaker(object):
             if self.first_level == 0:
                 self.first_level = this_level
 
-            if this_level < self.first_level:
-                raise ValueError(
-                    'Error!\n'
-                    'This header is {}\n'
-                    'Because the first header was «{}», only '
-                    'headers at this or lower levels are allowed.\n'
-                    'If you want to use this level, increase the level '
-                    'of the first header to at least this level.\n'
-                    'Erroneous line is {}\n'.format(
-                        headers.match(b.content).group(1),
-                        '!' * self.first_level,
-                        b))
-            if self.header_level == 1 and this_level == 3:
-                raise ValueError(
-                    'Error!\nThis header starts with {}, but can only '
-                    'start with «{}» or «{}». This is the erroneous '
-                    'header\n{}\n'.format(
-                        headers.match(b.content).group(1), '!' * 3,
-                        '!' * 2, b))
-            else:
-                self.header_level = this_level
-                self.check_inline(b)
-                self.document.append(Entry(
-                    name='h{}'.format(this_level),
-                    data=[headers.match(b.content).group(2)]))
-        else:
-            raise ValueError('Error!\nInvalid header! {}\n'.format(b))
+        self.check_header_level(m.group(1), this_level, b)
 
     def make_unordered(self, b):
         unordered_endings = re.compile('''\s*\*+\s*$''')

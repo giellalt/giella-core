@@ -278,6 +278,10 @@ class DocMaker(object):
 
         self.check_header_level(m.group(1), this_level, b)
 
+    def check_outline_ending(self, outline_content, b):
+        if not outline_content.strip():
+            self.error('Empty list entries are not allowed.', b)
+
     def make_unordered(self, b):
         unordered_endings = re.compile('''\s*\*+\s*$''')
         if unordered_endings.match(b.content):

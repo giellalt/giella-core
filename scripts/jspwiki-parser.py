@@ -137,7 +137,7 @@ def make_colliding_markup_within_markup(markups):
     return test_cases
 
 
-def make_tests():
+def make_inline_error_tests():
     test_cases = []
     markups = {
         'italic': ("'", "'"),
@@ -160,8 +160,8 @@ class TestDocMaker(unittest.TestCase):
     def setUp(self):
         self.dm = DocMaker('bogus')
 
-    @parameterized.expand(make_tests())
-    def test_huff(self, name, content):
+    @parameterized.expand(make_inline_error_tests())
+    def test_inline_errors(self, name, content):
         with self.assertRaises(LineError):
             self.dm.parse_block(Line(number=1, content=content))
 

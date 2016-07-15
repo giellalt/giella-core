@@ -27,9 +27,9 @@ import unittest
 from corpustools import util
 
 
-headers = re.compile('''^\s*(!{1,3})(.+)''')
-ordered = re.compile('''^\s*(#{1,3})(.+)''')
-unordered = re.compile('''^\s*(\*{1,3})(.+)''')
+headers = re.compile('''^\s*(!{1,3})\s*(.+)''')
+ordered = re.compile('''^\s*(#{1,3})\s*(.+)''')
+unordered = re.compile('''^\s*(\*{1,3})\s*(.+)''')
 horisontal = re.compile('''^\s*(-{4,})$''')
 complete_pre_inline = re.compile('''^(.*){{{(.+)}}}([^}]*)$''')
 start_of_pre = re.compile('''^\s*(.*){{{([^}]*)$''')

@@ -140,6 +140,10 @@ def make_colliding_markup_within_markup(markups):
     return test_cases
 
 
+def make_header_inline_error_tests():
+    return [('4 {}'.format(n), n * 4) for n in '!*#']
+
+
 def make_inline_error_tests():
     test_cases = []
     markups = {
@@ -167,6 +171,12 @@ class TestDocMaker(unittest.TestCase):
     def test_inline_errors(self, name, content):
         with self.assertRaises(LineError):
             self.dm.parse_block(Line(number=1, content=content))
+
+    @parameterized.expand(make_header_inline_error_tests())
+    def test_outline_errors(self, name, content):
+        with self.assertRaises(LineError) as e:
+            self.dm.parse_block(Line(number=1, content=content))
+            util.print_frame(str(e.exception))
 
 
 #def test_match():

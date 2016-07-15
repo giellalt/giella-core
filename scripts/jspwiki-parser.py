@@ -194,41 +194,6 @@ class DocMaker(object):
             '{e}\n\t'
             '{b.content}'.format(self.filename, b=block, e=error_message))
 
-
-    def make_ordered(self, b):
-        ordered_endings = re.compile('''\s*\#+\s*$''')
-        if ordered_endings.match(b.content):
-            raise ValueError(
-                'Error!\n'
-                'Empty list entries are not allowed.'
-                'Erroneous line is {}\n'.format(b))
-
-        if ordered.match(b.content):
-            self.check_for_wrong_char('!*', ordered.match(b.content).group(2),
-                                      b)
-
-            this_level = len(ordered.match(b.content).group(1))
-            if self.ordered_level == 0 and this_level != 1:
-                raise ValueError(
-                    'Error! This ordered entry must start with «#», but '
-                    'starts with {}\n. This is the erroneous entry '
-                    '\n{}\n'.format(ordered.match(b.content).group(1), b))
-            elif self.ordered_level == 1 and this_level == 3:
-                raise ValueError(
-                    'Error! This entry starts with {}, but can only '
-                    'start with «{}» or «{}». This is the erroneous '
-                    'entry\n{}\n'.format(
-                        ordered.match(b.content).group(1), '#',
-                        '#' * 2, b))
-            else:
-                self.ordered_level = this_level
-                self.document.append(Entry(
-                    name='o{}'.format(this_level),
-                    data=[ordered.match(b.content).group(2)]))
-        else:
-            raise ValueError('Error!\nInvalid ordered entry! {}'.format(b))
-
-
     def critical(self, error_message, block):
         raise OutlineError(
             '{} :#{b.number}:\n\t'
@@ -348,6 +313,19 @@ class DocMaker(object):
             )
         self.ordered_level = this_level
 
+    def make_ordered(self, b):
+        m = ordered.match(b.content)
+        this_level = len(m.group(1))
+
+        self.check_for_wrong_char(m, b)
+        self.check_outline_ending(m.group(2), b)
+        self.check_inline(b)
+
+        self.check_ordered_level(m.group(1), this_level, b)
+
+        self.document.append(Entry(
+            name='o{}'.format(this_level),
+            data=[m.group(2)]))
 
     def make_horisontal(self, b):
         if not self.inside_pre:

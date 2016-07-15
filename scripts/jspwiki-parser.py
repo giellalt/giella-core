@@ -278,6 +278,23 @@ class DocMaker(object):
 
         self.check_header_level(m.group(1), this_level, b)
 
+    def check_unordered_level(self, unordered_intro, this_level, b):
+        if self.unordered_level == 0 and this_level != 1:
+            self.critical(
+                'This unordered entry must start with «*», but '
+                'starts with {}.'.format(unordered_intro),
+                b
+            )
+        elif self.unordered_level == 1 and this_level == 3:
+            self.critical(
+                'This entry starts with {}, but can only '
+                'start with «{}» or «{}».'.format(
+                    unordered_intro, '*',
+                    '*' * 2),
+                b
+            )
+        self.unordered_level = this_level
+
     def check_outline_ending(self, outline_content, b):
         if not outline_content.strip():
             self.error('Empty list entries are not allowed.', b)
@@ -314,6 +331,23 @@ class DocMaker(object):
                     data=[unordered.match(b.content).group(2)]))
         else:
             raise ValueError('Error!\nInvalid unordered entry! {}'.format(b))
+    def check_ordered_level(self, ordered_intro, this_level, b):
+        if self.ordered_level == 0 and this_level != 1:
+            self.critical(
+                'This unordered entry must start with «#», but '
+                'starts with {}.'.format(ordered_intro),
+                b
+            )
+        elif self.ordered_level == 1 and this_level == 3:
+            self.critical(
+                'This entry starts with {}, but can only '
+                'start with «{}» or «{}».'.format(
+                    ordered_intro, '#',
+                    '#' * 2),
+                b
+            )
+        self.ordered_level = this_level
+
 
     def make_horisontal(self, b):
         if not self.inside_pre:

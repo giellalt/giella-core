@@ -414,7 +414,6 @@ def main():
             print(datetime.datetime.now(), file=lockfile)
 
         builder = StaticSiteBuilder(args.sitehome, args.destination, args.langs)
-        builder.validate()
         builder.build_all_langs()
         builder.copy_to_site()
         os.remove(lockname)

@@ -799,6 +799,9 @@ def handle_file(path):
             '/kal/' in path):
         try:
             dm.parse_blocks()
+        except OutlineError as e:
+            util.print_frame(path)
+            util.print_frame(str(e))
         except ValueError as e:
             util.print_frame(path)
             util.print_frame(str(e))

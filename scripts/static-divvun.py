@@ -404,9 +404,8 @@ def main():
                 'Logging level is set to debug. Output will very verbose')
         logger.setLevel(logging_dict[args.verbosity])
     else:
-        logging.error('-V|--verbosity must be one of: {}\n{} was given.'.format(
+        raise SystemExit('-V|--verbosity must be one of: {}\n{} was given.'.format(
             '|'.join(logging_dict.keys()), args.verbosity))
-        sys.exit(1)
 
     lockname = os.path.join(args.sitehome, '.lock')
     if not os.path.exists(lockname):

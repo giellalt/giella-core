@@ -95,7 +95,10 @@ def main():
     }
     errors = 0
     no_files = 0
-    for site in sys.argv[1:]:
+
+    sites_to_check = sites if len(sys.argv) == 1 else sys.argv[1:]
+
+    for site in sites_to_check:
         fullpath = os.path.join(os.getenv('GTHOME'), sites[site])
         for root, dirs, files in os.walk(fullpath, followlinks=True):
             for f in files:

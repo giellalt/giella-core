@@ -82,6 +82,41 @@ def get_tree(filename):
         util.print_frame(filename, 'is not wellformed\nError:', e)
 
 
+def parse_site(xdocs_dir):
+    filename = os.path.join(xdocs_dir, 'site.xml')
+    site = get_tree(filename)
+    get_site_href(site.getroot(), xdocs_dir, filename)
+
+
+def get_site_href(element, directory, filename):
+    href = element.get('href')
+
+    if href is not None:
+        if element.tag == '{http://www.w3.org/2001/XInclude}include':
+            parts = href.split('#')
+            site_dirname = os.path.dirname(filename)
+            site_filename = os.path.join(site_dirname, parts[0])
+            try:
+                site = get_tree(site_filename)
+                if len(parts) == 2:
+                    for element in site.xpath(re.match('xpointer\((.+)\)', parts[1]).group(1)):
+                        get_tabs_href(element, directory, site_filename)
+                elif len(parts) == 1:
+                    get_site_href(site.getroot(), directory, site_filename)
+            except OSError as e:
+                util.print_frame('{}: #{}: {} {} does not exist'.format(filename, element.sourceline, etree.tostring(element, encoding='unicode'), site_filename))
+        else:
+            if href.endswith('.html') and not href.startswith('cgi') and not href.startswith('http'):
+                if not is_forrest_file(os.path.join(directory, href)):
+                    util.print_frame('{} :#{}: wrong address {}\n'.format(filename, element.sourceline, os.path.join(directory, href)))
+            else:
+                directory = os.path.join(directory, href)
+
+    if len(element):
+        for node in element:
+            get_site_href(node, directory, filename)
+
+
 
 
 def main():
@@ -100,6 +135,7 @@ def main():
 
     for site in sites_to_check:
         fullpath = os.path.join(os.getenv('GTHOME'), sites[site])
+        parse_site(fullpath)
         for root, dirs, files in os.walk(fullpath, followlinks=True):
             for f in files:
                 no_files += 1

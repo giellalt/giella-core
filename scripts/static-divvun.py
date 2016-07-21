@@ -274,7 +274,7 @@ class StaticSiteBuilder(object):
 
     def copy_to_site(self):
         '''Copy the entire site to self.destination'''
-        (returncode, _) = self.run_command('rsync -avz -e ssh --exclude=static_files --delete {src} {dst}'.format(
+        (returncode, _) = self.run_command('rsync -avz -e ssh {src} {dst}'.format(
             src=os.path.join(self.builddir, 'built/'), dst=self.destination))
         if returncode != 0:
             raise SystemExit(returncode)

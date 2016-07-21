@@ -28,7 +28,6 @@ def jspwiki_file_exists(link_content, filename, xdocs_dir):
     #util.print_frame(link_content)
     link_content = link_content.split('#')[0].strip()
     link_content = link_content.replace('slidy/', '')
-    ext_replacements = []
     if link_content and link_content != '/' and not link_content.startswith('cgi'):
         #util.print_frame(link_content)
         dirname = os.path.dirname(os.path.abspath(filename))
@@ -36,27 +35,34 @@ def jspwiki_file_exists(link_content, filename, xdocs_dir):
             dirname = xdocs_dir
             link_content = link_content[1:]
 
-        normpath = os.path.normpath(os.path.join(dirname, link_content))
-        #util.print_frame(normpath)
-
-        (normpath, ext) = os.path.splitext(normpath)
-        #util.print_frame(normpath, '\n')
-        ext_replacements.append(ext)
-        if ext in ['.html', '.pdf']:
-            ext_replacements.append('.jspwiki')
-            ext_replacements.append('.xml')
-            ext_replacements.append('.pdf')
-            ext_replacements.append('.en' + ext)
-            ext_replacements.append('.en' + '.jspwiki')
-            ext_replacements.append('.en' + '.xml')
-            ext_replacements.append('.en' + '.pdf')
-
-
-        for r in ext_replacements:
-            if os.path.exists(normpath + r):
-                return True
+        return is_forrest_file(os.path.normpath(os.path.join(dirname, link_content)))
     else:
         return True
+
+
+def is_forrest_file(normpath):
+    ext_replacements = []
+    #util.print_frame(normpath)
+
+    (normpath, ext) = os.path.splitext(normpath)
+    #util.print_frame(normpath, '\n')
+    ext_replacements.append(ext)
+    if ext in ['.html', '.pdf']:
+        ext_replacements.append('.jspwiki')
+        ext_replacements.append('.xml')
+        ext_replacements.append('.pdf')
+        ext_replacements.append('.en' + ext)
+        ext_replacements.append('.en' + '.jspwiki')
+        ext_replacements.append('.en' + '.xml')
+        ext_replacements.append('.en' + '.pdf')
+
+
+    for r in ext_replacements:
+        if os.path.exists(normpath + r):
+            return True
+    else:
+        return False
+
 
 def check_xml_file(filename, xdocs_dir):
     '''Check if xml file is wellformed and valid'''

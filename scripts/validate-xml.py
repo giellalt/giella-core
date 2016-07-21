@@ -67,16 +67,21 @@ def is_forrest_file(normpath):
 def check_xml_file(filename, xdocs_dir):
     '''Check if xml file is wellformed and valid'''
     errors = 0
+    for a in get_tree(filename).iter('a'):
+        if not is_correct_link(a.get('href').strip(), filename, xdocs_dir):
+            errors += 1
+            util.print_frame('{} :#{}: wrong address {}\n'.format(filename, a.sourceline, a.get('href')))
+
+    return errors
+
+
+def get_tree(filename):
     try:
-        tree = etree.parse(filename)
-        for a in tree.iter('a'):
-            if not is_correct_link(a.get('href').strip(), filename, xdocs_dir):
-                errors += 1
-                util.print_frame('{} :#{}: wrong address {}\n'.format(filename, a.sourceline, a.get('href')))
+        return etree.parse(filename)
     except etree.XMLSyntaxError as e:
         util.print_frame(filename, 'is not wellformed\nError:', e)
 
-    return errors
+
 
 
 def main():

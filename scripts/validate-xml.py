@@ -89,7 +89,7 @@ def main():
         'divvun': 'xtdoc/divvun/src/documentation/content/xdocs',
         'gtuit': 'xtdoc/gtuit/src/documentation/content/xdocs',
         'techdoc': 'xtdoc/techdoc/src/documentation/content/xdocs',
-        'ped': 'ped/userdocs',
+        'ped': 'ped/userdoc',
         'dicts': 'xtdoc/dicts/src/documentation/content/xdocs',
         'divvun.org': 'xtdoc/divvun.org/src/documentation/content/xdocs',
     }

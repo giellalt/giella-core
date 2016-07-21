@@ -117,6 +117,33 @@ def get_site_href(element, directory, filename):
             get_site_href(node, directory, filename)
 
 
+def get_tabs_href(element, directory, filename):
+    try:
+        href = os.path.join(directory, element.get('dir'),
+                            element.get('indexfile'))
+        if not is_forrest_file(href):
+            util.print_frame('{} :#{}: {} wrong address {}\n'.format(filename, element.sourceline, etree.tostring(element, encoding='unicode'), os.path.join(directory, href)))
+    except TypeError as e:
+        try:
+            element.attrib['href']
+        except KeyError:
+            util.print_frame(e, etree.tostring(element, encoding='unicode'), element.sourceline, filename)
+
+def parse_tabs(xdocs_dir):
+    filename = os.path.join(xdocs_dir, 'tabs.xml')
+    tabs = get_tree(filename)
+    for element in tabs.getroot().iter('tab'):
+        get_tabs_href(element, xdocs_dir, filename)
+    for element in tabs.getroot().iter('{http://www.w3.org/2001/XInclude}include'):
+        parts = element.get('href').split('#')
+        include_name = os.path.join(xdocs_dir, parts[0])
+        tabs = etree.parse(os.path.join(xdocs_dir, parts[0]))
+        if len(parts) == 2:
+            for element in tabs.xpath(re.match('xpointer\((.+)\)', parts[1]).group(1)):
+                get_tabs_href(element, xdocs_dir, include_name)
+        elif len(parts) == 1:
+            for element in tabs.getroot().iter('tab'):
+                get_tabs_href(element, xdocs_dir, include_name)
 
 
 def main():
@@ -136,6 +163,7 @@ def main():
     for site in sites_to_check:
         fullpath = os.path.join(os.getenv('GTHOME'), sites[site])
         parse_site(fullpath)
+        parse_tabs(fullpath)
         for root, dirs, files in os.walk(fullpath, followlinks=True):
             for f in files:
                 no_files += 1

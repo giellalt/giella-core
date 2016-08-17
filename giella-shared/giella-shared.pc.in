@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+datadir=@datarootdir@
+packagename=@PACKAGE@
+dir=${datadir}/${packagename}
+srcdir=${datadir}/${packagename}
+
+Name: @PACKAGE@
+Description: Shared data resources for the Giella language technology infrastructure
+URL: http://divvun.no/doc/index.html
+Version: @VERSION@

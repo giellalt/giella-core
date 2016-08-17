@@ -23,7 +23,8 @@ AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
 AC_PROG_MKDIR_P()
 AC_PROG_INSTALL()
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile \
+                 giella-shared])
 AC_OUTPUT
 
 cat<<EOF

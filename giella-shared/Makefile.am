@@ -18,7 +18,7 @@
 EXTRA_DIST = common eng smi urj-Cyrl
 
 pkgconfigdir = $(prefix)/share/pkgconfig
-pkgconfig_DATA = giella-shared.pc
+pkgconfig_DATA = giella-common.pc
 
 install-data-hook:
 	$(MKDIR_P) $(DESTDIR)$(pkgdatadir)

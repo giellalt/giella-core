@@ -1,3 +1,4 @@
+
 ## Process this file with autoconf to produce configure script
 
 ## Copyright (C) 2011 Samediggi
@@ -14,7 +15,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-shared], [0.1.0], [bugs@divvun.no], [giella-shared], [http://divvun.no])
+AC_INIT([giella-common], [0.1.0], [bugs@divvun.no], [giella-common], [http://divvun.no])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
@@ -24,7 +25,7 @@ AC_PROG_MKDIR_P()
 AC_PROG_INSTALL()
 
 AC_CONFIG_FILES([Makefile \
-                 giella-shared.pc])
+                 giella-common.pc])
 AC_OUTPUT
 
 cat<<EOF

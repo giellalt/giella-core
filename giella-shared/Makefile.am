@@ -16,3 +16,13 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 EXTRA_DIST = common eng smi urj-Cyrl
+
+install-data-hook:
+	$(MKDIR_P) $(DESTDIR)$(pkgdatadir)
+	for dir in $(EXTRA_DIST); do \
+		find $(srcdir)/$$dir -type f \
+		| xargs -I file $(INSTALL_DATA) file $(DESTDIR)$(pkgdatadir) ;\
+	done
+
+uninstall-local:
+	rm -rf $(DESTDIR)$(pkgdatadir)

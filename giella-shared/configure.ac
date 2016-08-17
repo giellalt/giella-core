@@ -19,6 +19,10 @@ AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
 
+## Program checks:
+AC_PROG_MKDIR_P()
+AC_PROG_INSTALL()
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

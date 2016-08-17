@@ -25,7 +25,7 @@ AC_PROG_MKDIR_P()
 AC_PROG_INSTALL()
 
 AC_CONFIG_FILES([Makefile \
-                 giella-common.pc])
+                 $PACKAGE.pc])
 AC_OUTPUT
 
 cat<<EOF

@@ -7,9 +7,14 @@ if test -z "${GTCORE}" ; then
     exit 1
 fi
 
+if test -z "${GTHOME}" ; then
+    echo "Unable to determine GTHOME, re-run gtsetup.sh and re-try"
+    exit 1
+fi
+
 function print_usage() {
     echo "Usage: $0 [OPTIONS...]"
-    echo "Merges templates from gtcore to current working dir"
+    echo "Merges templates from giella-templates to current working dir"
     echo
     echo "  -h, --help                 print this usage info"
     echo "  --unsafe                   also try to merge unsafe mergables"
@@ -143,7 +148,8 @@ else
 fi
 
 # Get the list of available template collections:
-availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
+availableTemplateColls=$(for t in \
+            $GTHOME/giella-templates/*-templates; do n=$(basename $t); \
                         n2=${n%-templates}; echo "$n2"; done)
 
 availableTemplateCollsAsList=$(echo $availableTemplateColls | tr ' ' '|')
@@ -169,8 +175,8 @@ TEMPLATEDIR=${CURTOPDIR}-templates
 SVNMERGE_OPTIONS="--ignore-ancestry --accept postpone"
 SVNREPOROOT="https://${username}gtsvn.uit.no/langtech"
 
-for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
-    macrolang=${macrolangdir#${GTCORE}/${TEMPLATEDIR}/}
+for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
+    macrolang=${macrolangdir#${GTHOME}/giella-templates/${TEMPLATEDIR}/}
     if test ! -r ${macrolang}.timestamp ; then
         # this is a macro language that has not been subscribed
         echo "Not merging ${macrolang} because ${CURLANG} is not in that set"
@@ -191,7 +197,7 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
     fi
 
     for f in $(svn diff -r${macrolangrev}:HEAD --summarize \
-            ${SVNREPOROOT}/trunk/gtcore/${TEMPLATEDIR}/${macrolang}/ \
+            ${SVNREPOROOT}/trunk/giella-templates/${TEMPLATEDIR}/${macrolang}/ \
             | awk '{print $2}' ) ; do
         localf_tmp=./${f#$SVNREPOROOT*${TEMPLATEDIR}/${macrolang}/}
         # Replace __UND__ in local filenames, so that merging can be done:
@@ -243,7 +249,7 @@ for macrolangdir in ${GTCORE}/${TEMPLATEDIR}/${tpl} ; do
 
     # Make sure we know we have updated the templated files:
     # use plain cp until we have svn DIR merge in place:
-    cp -v -f ${GTCORE}/${TEMPLATEDIR}/${macrolang}/${macrolang}.timestamp \
+    cp -v -f ${GTHOME}/giella-templates/${TEMPLATEDIR}/${macrolang}/${macrolang}.timestamp \
     		 ${macrolang}.timestamp
     if test -s ${unmerged} ; then
         echo There were files that are not safe to merge:

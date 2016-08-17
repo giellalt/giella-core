@@ -24,7 +24,7 @@ AC_PROG_MKDIR_P()
 AC_PROG_INSTALL()
 
 AC_CONFIG_FILES([Makefile \
-                 giella-shared])
+                 giella-shared.pc])
 AC_OUTPUT
 
 cat<<EOF

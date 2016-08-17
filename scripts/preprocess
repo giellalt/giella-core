@@ -1228,7 +1228,7 @@ sub combine_punctuation_with_numeral
     # cases like 123- 456 and 123 -456 and 123 456 and 123 - 456
     # 10 000,- and math expressions like 2 * 4 = 8
     # many times connects long sequences of numbers into one token.
-    while (($word =~ /^[\d$NUM_PUNCT\- ]+$/o) && ($words_aref->[0]{word} && $words_aref->[0]{word} =~ /^[\d$NUM_PUNCT\- ]+(\,\-)?\.?$/o)) {
+    while (($word =~ /^[\d$NUM_PUNCT\- ]+$/o) && ($words_aref->[0]{word} && $words_aref->[0]{word} =~ /\d/o && $words_aref->[0]{word} =~ /^[\d$NUM_PUNCT\- ]+(\,\-)?\.?$/o)) {
         $word = $word . $words_aref->[0]{space} . $words_aref->[0]{word};
         verbose ("process_numeral/combine", $word, __LINE__);
         shift @{$words_aref};

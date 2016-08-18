@@ -17,7 +17,7 @@
 
 SRC_DIRS = common eng smi urj-Cyrl
 
-EXTRA_DIST = $(SRC_DIRS) giella-common.pc.in
+EXTRA_DIST = $(SRC_DIRS) $(PACKAGE).pc.in
 
 pkgconfigdir = $(prefix)/share/pkgconfig
 pkgconfig_DATA = $(PACKAGE).pc
@@ -27,7 +27,11 @@ install-data-hook:
 	for dir in $(SRC_DIRS); do \
 		cp -R $(srcdir)/$$dir $(DESTDIR)$(pkgdatadir)/ ;\
 	done
-	chmod -R 644 $(DESTDIR)$(pkgdatadir)
+	find $(DESTDIR)$(pkgdatadir) -type d | xargs chmod 0755
+	find $(DESTDIR)$(pkgdatadir) -type f | xargs chmod 0644
 
 uninstall-local:
 	rm -rf $(DESTDIR)$(pkgdatadir)
+
+distclean-local:
+	rm -f $(PACKAGE).pc

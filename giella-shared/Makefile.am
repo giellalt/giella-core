@@ -23,9 +23,9 @@ pkgconfig_DATA = $(PACKAGE).pc
 install-data-hook:
 	$(MKDIR_P) $(DESTDIR)$(pkgdatadir)
 	for dir in $(EXTRA_DIST); do \
-		find $(srcdir)/$$dir -type f \
-		| xargs -I file $(INSTALL_DATA) file $(DESTDIR)$(pkgdatadir) ;\
+		cp -R $(srcdir)/$$dir $(DESTDIR)$(pkgdatadir)/ ;\
 	done
+	chmod -R 644 $(DESTDIR)$(pkgdatadir)
 
 uninstall-local:
 	rm -rf $(DESTDIR)$(pkgdatadir)

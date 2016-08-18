@@ -17,9 +17,9 @@
 
 SUBDIRS = . scripts
 
-# include $(srcdir)/subfiles.mk
-# 
-# nobase_dist_pkgdata_DATA = $(subdir_files)
+include $(srcdir)/subfiles.mk
+
+nobase_dist_pkgdata_DATA = $(subdir_files)
 
 nobase_dist_pkgdata_SCRIPTS = \
    scripts/clean_weight_corpus.sh \

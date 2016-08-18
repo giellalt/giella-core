@@ -15,14 +15,16 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-EXTRA_DIST = common eng smi urj-Cyrl
+SRC_DIRS = common eng smi urj-Cyrl
+
+EXTRA_DIST = $(SRC_DIRS) giella-common.pc.in
 
 pkgconfigdir = $(prefix)/share/pkgconfig
 pkgconfig_DATA = $(PACKAGE).pc
 
 install-data-hook:
 	$(MKDIR_P) $(DESTDIR)$(pkgdatadir)
-	for dir in $(EXTRA_DIST); do \
+	for dir in $(SRC_DIRS); do \
 		cp -R $(srcdir)/$$dir $(DESTDIR)$(pkgdatadir)/ ;\
 	done
 	chmod -R 644 $(DESTDIR)$(pkgdatadir)

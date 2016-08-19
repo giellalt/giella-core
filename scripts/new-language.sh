@@ -8,6 +8,11 @@ if test -z "${GTCORE}" ; then
     exit 1
 fi
 
+if test -z "${GTHOME}" ; then
+    echo "Unable to determine GTHOME, re-run gtsetup.sh and re-try"
+    exit 1
+fi
+
 # Wrong usage - short instruction:
 if ! test $# -eq 1 -o $# -eq 2 ; then
     echo "Usage: $0 NEW_LANGUAGE_ISOCODE [TEMPLATECOLLECTION]"
@@ -29,7 +34,8 @@ else
 fi
 
 # Get the list of available template collections:
-availableTemplateColls=$(for t in $GTCORE/*-templates; do n=$(basename $t); \
+availableTemplateColls=$(for t in $GTHOME/giella-templates/*-templates; \
+                        do n=$(basename $t); \
                         n2=${n%-templates}; echo "$n2"; done)
 
 # Check if the current directory name matches one of the template collection
@@ -72,13 +78,13 @@ if test $(grep -c "^ALL_LANGS=" Makefile.am ) -eq 0 ; then
     exit 1
 fi
 
-echo "*** updating $$GTCORE before populating the new directory.***"
-svn up $GTCORE
+echo "*** updating $$GTHOME/giella-templates before populating the new directory.***"
+svn up $GTHOME/giella-templates
 
 TEMPLATEDIR=$TEMPLATECOLL-templates
 
 # Copy template files to new language dir:
-rsync -avzC ${GTCORE}/${TEMPLATEDIR}/und/ $1/
+rsync -avzC $GTHOME/giella-templates/${TEMPLATEDIR}/und/ $1/
 
 # Replace placeholder language code with real language code:
 ${GTCORE}/scripts/replace-dummy-langcode.sh "$curDir/$1" $1

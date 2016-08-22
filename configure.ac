@@ -19,11 +19,11 @@ AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
 
-AC_MSG_CHECKING([whether we can define GTCORE])
-AS_IF([test "x$GTCORE"  = x], [GTCORE=$(dirname $(pwd) ); AC_MSG_RESULT([yes - from pwd])],
-	  [test "x$GTCORE" != x], [AC_MSG_RESULT([yes - from env])],
-      [AC_MSG_ERROR([no - could not define GTCORE])])
-AC_ARG_VAR([GTCORE], [directory holding core scripts and data for the Giella infrastructure])
+AC_MSG_CHECKING([whether we can define GIELLA_CORE])
+AS_IF([test "x$GIELLA_CORE"  = x], [GIELLA_CORE=$(dirname $(pwd) ); AC_MSG_RESULT([yes - from pwd])],
+	  [test "x$GIELLA_CORE" != x], [AC_MSG_RESULT([yes - from env])],
+      [AC_MSG_ERROR([no - could not define GIELLA_CORE])])
+AC_ARG_VAR([GIELLA_CORE], [directory holding core scripts and data for the Giella infrastructure])
 
 SVNREVISION="$Revision$"
 SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)

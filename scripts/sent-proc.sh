@@ -153,7 +153,7 @@ sentence="${sentence//(/\(}"
 sentence="${sentence//)/\)}"
 
 # path to the shared syntax
-SD_PATH='giella-shared/smi/src/syntax'
+SD_PATH='$GTHOME/giella-shared/smi/src/syntax'
 
 # define commands
 # common pos_cmd
@@ -165,11 +165,11 @@ if [ $l == fao ] || [ $l == crk ]; then
     syn_cmd=$dis_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/functions.cg3 $t"
 else
     dis_cmd=$pos_cmd" | vislcg3 -g $DIS $t"
-    syn_cmd=$dis_cmd" | vislcg3 -g $GTCORE/$SD_PATH/korp.cg3 $t"
+    syn_cmd=$dis_cmd" | vislcg3 -g $SD_PATH/korp.cg3 $t"
 fi
 
 # common dep_cmd
-dep_cmd=$syn_cmd" | vislcg3 -g $GTCORE/$SD_PATH/dependency.cg3 $t"
+dep_cmd=$syn_cmd" | vislcg3 -g $SD_PATH/dependency.cg3 $t"
 
 
 # processing step

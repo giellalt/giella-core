@@ -14,13 +14,27 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [0.1.2], [bugs@divvun.no], [giella-core], [http://divvun.no])
+AC_INIT([giella-core], [0.2.37], [bugs@divvun.no], [giella-core], [http://divvun.no/doc/])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
 
-AC_CONFIG_FILES([Makefile])
-AC_CONFIG_SUBDIRS([scripts])
+AC_MSG_CHECKING([whether we can define GTCORE])
+AS_IF([test "x$GTCORE"  = x], [GTCORE=$(dirname $(pwd) ); AC_MSG_RESULT([yes - from pwd])],
+	  [test "x$GTCORE" != x], [AC_MSG_RESULT([yes - from env])],
+      [AC_MSG_ERROR([no - could not define GTCORE])])
+AC_ARG_VAR([GTCORE], [directory holding core scripts and data for the Giella infrastructure])
+
+SVNREVISION="$Revision$"
+SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
+
+AC_SUBST([GIELLA_CORE_VERSION], [$VERSION-${SVNREVNUM}])
+
+AC_CONFIG_FILES([Makefile
+                 scripts/Makefile])
+AC_CONFIG_FILES([scripts/gt-version.sh], [chmod +x scripts/gt-version.sh])
+AC_CONFIG_FILES([scripts/gt-core.sh],    [chmod +x scripts/gt-core.sh])
+
 AC_OUTPUT
 
 cat<<EOF

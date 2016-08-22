@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "@GT_SCRIPTVERSION@"
+echo "@GIELLA_CORE_VERSION@"

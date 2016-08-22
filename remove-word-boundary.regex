@@ -1,0 +1,5 @@
+! Remove word boundary mark from the lower side of the transducer:
+! 😱 is used in some languages to prefix # in dynamic compounds.
+
+ %#  -> 0,
+"😱" -> 0;

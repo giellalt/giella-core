@@ -44,10 +44,13 @@ Line = collections.namedtuple('Line', ['number', 'content'])
 
 
 class LineError(Exception):
+    """Raised when errors in lines happens."""
+
     pass
 
 
 def test_match():
+    """Not really a test."""
     print('testing')
     for c in [(headers, '!'), (ordered, '#'), (unordered, '*')]:
         if not c[0].match('  {} '.format(c[1])):
@@ -83,16 +86,20 @@ def test_match():
 
 
 class OutlineError(Exception):
+    """Raised when errors in outline elements happens."""
+
     pass
 
 
 def make_misc_test():
+    """Make misc tests."""
     return [
         ('too long hr','-----', 'Please shorten'),
     ]
 
 
 def make_link_tests():
+    """Make tests for links."""
     return [
         ('no link one part', 'abc [abc] abc',
          'point to a valid document'),
@@ -103,12 +110,14 @@ def make_link_tests():
 
 
 def make_endswith(markups):
+    """Make tests that check line endings."""
     return [('ends with {}'.format(name), 'abc{}'.format(chars[1]),
              'Line ends with ')
             for name, chars in markups.items()]
 
 
 def make_single_starts(markups):
+    """Make tests that start with a single markup."""
     return [('single {} start'.format(name),
              'abc {}abc abc'.format(2 * chars[0]),
              'Either remove the single ')
@@ -116,6 +125,7 @@ def make_single_starts(markups):
 
 
 def make_single_ends(markups):
+    """Make tests that end with a single markup."""
     return [('single {} end'.format(name),
              'abc abc{} abc'.format(2 * chars[1],),
              'Either remove the single ')
@@ -123,6 +133,7 @@ def make_single_ends(markups):
 
 
 def make_markup_within_markup(markups):
+    """Make tests that have markup within markup."""
     test_cases = []
     for name1, markups1 in markups.items():
         inner_markup = '{}{}{}'.format(markups1[0] * 2, name1, markups1[1] * 2)
@@ -139,6 +150,7 @@ def make_markup_within_markup(markups):
 
 
 def make_colliding_markup_within_markup(markups):
+    """Make tests that contain colliding markups."""
     test_cases = []
     for name1, markups1 in markups.items():
         inner_markup = 'half {}{}'.format(name1, markups1[1])
@@ -155,10 +167,12 @@ def make_colliding_markup_within_markup(markups):
 
 
 def make_header_inline_error_tests():
+    """Make outline elements that have errors."""
     return [('4 {}'.format(n), n * 4, 'Lines starting with ') for n in '!*#']
 
 
 def make_inline_error_tests():
+    """Make tests that contain inline errors."""
     test_cases = []
     markups = {
         'italic': ("'", "'"),
@@ -178,11 +192,15 @@ def make_inline_error_tests():
 
 
 class TestDocMaker(unittest.TestCase):
+    """Class to test the DocMaker class."""
+
     def setUp(self):
+        """Setup the test class."""
         self.dm = DocMaker('bogus', None)
 
     @parameterized.expand(make_inline_error_tests())
     def test_inline_errors(self, name, content, expected):
+        """Test inline errors in jspwiki files."""
         with self.assertRaises(LineError) as e:
             self.dm.parse_block(Line(number=1, content=content))
 
@@ -190,6 +208,7 @@ class TestDocMaker(unittest.TestCase):
 
     @parameterized.expand(make_header_inline_error_tests())
     def test_outline_errors(self, name, content, expected):
+        """Test errors in headers and lists."""
         with self.assertRaises(LineError) as e:
             self.dm.parse_block(Line(number=1, content=content))
 
@@ -197,7 +216,10 @@ class TestDocMaker(unittest.TestCase):
 
 
 class DocMaker(object):
+    """Class to parse a document."""
+
     def __init__(self, filename, xdocs_dir):
+        """Set up the class."""
         self.filename = filename
         self.document = [Entry(name='empty', data=[])]
         self.tjoff = {
@@ -214,18 +236,21 @@ class DocMaker(object):
         self.xdocs_dir = xdocs_dir
 
     def error(self, error_message, block):
+        """Raise a non-critical error."""
         raise LineError(
             '{} :#{b.number}:\n\t'
             '{e}\n\t'
             '{b.content}'.format(self.filename, b=block, e=error_message))
 
     def critical(self, error_message, block):
+        """Raise a critical error."""
         raise OutlineError(
             '{} :#{b.number}:\n\t'
             '{e}\n\t'
             '{b.content}'.format(self.filename, b=block, e=error_message))
 
     def check_for_wrong_char(self, match, b):
+        """Check for wrong characters in headers and lists."""
         for possible_wrong_char in '!#*':
             if match.group(2).startswith(possible_wrong_char):
                 self.error(
@@ -235,6 +260,7 @@ class DocMaker(object):
                     b)
 
     def check_header_level(self, header_intro, this_level, b):
+        """Check whether headers are at the correct level."""
         if this_level < self.first_level:
             self.critical(
                 'This header is {}\n'
@@ -259,6 +285,7 @@ class DocMaker(object):
 
     def make_header(self, b):
         #util.print_frame(b)
+        """Check validity of jspwiki header lines."""
         m = headers.match(b.content)
         this_level = 4 - len(m.group(1))
         if self.first_level == 0:
@@ -275,6 +302,7 @@ class DocMaker(object):
             data=[m.group(2)]))
 
     def check_unordered_level(self, unordered_intro, this_level, b):
+        """Check whether an unordered list line is at the correct level."""
         if self.unordered_level == 0 and this_level != 1:
             self.critical(
                 'This unordered entry must start with «*», but '
@@ -292,10 +320,12 @@ class DocMaker(object):
         self.unordered_level = this_level
 
     def check_outline_ending(self, outline_content, b):
+        """Check whether header and list lines end correctly."""
         if not outline_content.strip():
             self.error('Empty list entries are not allowed.', b)
 
     def make_unordered(self, b):
+        """Parse unordered list lines."""
         m = unordered.match(b.content)
         this_level = len(m.group(1))
 
@@ -310,6 +340,7 @@ class DocMaker(object):
             data=[m.group(2)]))
 
     def check_ordered_level(self, ordered_intro, this_level, b):
+        """Check whether an ordered list line is at the correct level."""
         if self.ordered_level == 0 and this_level != 1:
             self.critical(
                 'This unordered entry must start with «#», but '
@@ -327,6 +358,7 @@ class DocMaker(object):
         self.ordered_level = this_level
 
     def make_ordered(self, b):
+        """Parse ordered list lines."""
         m = ordered.match(b.content)
         this_level = len(m.group(1))
 
@@ -341,6 +373,7 @@ class DocMaker(object):
             data=[m.group(2)]))
 
     def make_horisontal(self, b):
+        """Parse lines containing hr markup."""
         if not self.inside_pre:
             if len(b.content.strip()) == 4:
                 self.document.append(Entry(name='hr', data=[]))
@@ -350,6 +383,7 @@ class DocMaker(object):
                     b)
 
     def make_table(self, b):
+        """Parse lines containg table markup."""
         links_removed = '='.join(re.split('\[.+\]', b.content))
         only_space = re.compile("""^[ \t]+$""")
 
@@ -392,12 +426,14 @@ class DocMaker(object):
             self.document.append(Entry(name='tr', data=[b.content]))
 
     def handle_line(self, b):
+        """Handle jspwiki lines."""
         if self.document[-1].name in ['empty', 'h1', 'h2', 'h3', 'th', 'tr']:
             self.document.append(Entry(name='p', data=[b]))
         else:
             self.document[-1].data.append(b)
 
     def make_inline_pre(self, b):
+        """Parse lines that seem to contain a pre in one line."""
         m = complete_pre_inline.match(b.content)
         if m.group(1):
             if not self.inside_pre:
@@ -412,6 +448,7 @@ class DocMaker(object):
             self.handle_line(m.group(3))
 
     def start_pre(self, b):
+        """Parse line that seem to contain the start of a pre element."""
         m = start_of_pre.match(b.content)
         if m.group(1):
             if not self.inside_pre:
@@ -421,6 +458,7 @@ class DocMaker(object):
         self.document.append(Entry(name='pre', data=[m.group(2)]))
 
     def close_inline(self, b):
+        """Handle inline markup."""
         m = end_of_pre.match(b.content)
         if m.group(1):
             self.handle_line(m.group(1))
@@ -431,10 +469,12 @@ class DocMaker(object):
             self.handle_line(m.group(2))
 
     def close_block(self):
+        """Handle the end of a jspwiki block."""
         if self.document[-1].name != 'empty':
             self.document.append(Entry(name='empty', data=[]))
 
     def check_wrong_endchar(self, b):
+        """Check whether a line ends with an erroneous character."""
         markup = {
             "'": 'italic',
             '}': 'monospaced',
@@ -470,6 +510,7 @@ class DocMaker(object):
                                 b)
 
     def check_unbalanced_markup(self, b):
+        """Check whether markup is unbalanced."""
         markups = {
             'italic': ("'", "'"),
             'monospaced': ('{', '}'),
@@ -491,6 +532,7 @@ class DocMaker(object):
                     b)
 
     def check_markup_within_markup(self, b):
+        """Check if there is markup within markup."""
         markups = {
             'italic': ("'", "'"),
             'monospaced': ('{', '}'),
@@ -521,6 +563,7 @@ class DocMaker(object):
                                         b)
 
     def check_inline(self, b):
+        """Check for inline errors."""
         if not self.inside_pre:
             #m = possible_twolc_rule.match(b.content)
             #if m:
@@ -543,6 +586,7 @@ class DocMaker(object):
             self.check_markup_within_markup(b)
 
     def handle_link_content(self, link_match, block):
+        """Parse link content."""
         parts = link_match.split('|')
         #if len(parts) > 2:
             #self.error(
@@ -622,6 +666,7 @@ class DocMaker(object):
                     block)
 
     def is_correct_link(self, link_content):
+        """Check if the link content is valid."""
         return (
             re.match("""\d+""", link_content) or
             link_content.endswith('.ics') or
@@ -637,6 +682,7 @@ class DocMaker(object):
 
     def jspwiki_file_exists(self, link_content):
         #util.print_frame(link_content)
+        """Check whether link content points to an existing file."""
         link_content = link_content.split('#')[0]
         link_content = link_content.replace('slidy/', '')
         if link_content.startswith('/') and self.xdocs_dir:
@@ -666,6 +712,7 @@ class DocMaker(object):
         )
 
     def lexc_file_exists(self, link_content):
+        """Check whether link content points to an existing file."""
         return (
             self.filename.endswith('.lexc') and (
                 os.path.exists(
@@ -678,6 +725,7 @@ class DocMaker(object):
         )
 
     def parse_blocks(self):
+        """Parse jspwiki blocks."""
         get_blocks = {
             '.jspwiki': self.jspwiki_blocks,
             '.lexc': self.lexc_blocks,
@@ -694,6 +742,7 @@ class DocMaker(object):
                 'Reached end of document without finding closing }}}\n')
 
     def parse_block(self, b):
+        """Parse a jspwiki block."""
         if horisontal.match(b.content) and not self.inside_pre:
             self.check_inline(b)
             self.make_horisontal(b)
@@ -728,6 +777,7 @@ class DocMaker(object):
             self.handle_line(b.content)
 
     def jspwiki_blocks(self):
+        """Parse a jspwiki file."""
         for x, line in enumerate(fileinput.FileInput(self.filename)):
             if line.strip():
                 try:
@@ -796,6 +846,7 @@ class DocMaker(object):
                 elif re.match('^[^!]+!![=≈]', line):
 
                     def check_validity(lineno, origline, line, code):
+                        """Check the validity of lexc docstring."""
                         parts = line.split('@CODE@')
                         if parts[1].startswith('__') and (code.endswith('}') or code.endswith('-')):
                             self.error(
@@ -835,6 +886,7 @@ def handle_file(path, xdocs_dir):
 
     #if path.endswith('.lexc') or path.endswith('.xfscript') or path.endswith('.twolc'):
         #dm.first_level = 1
+    """Handle files given to the script."""
     if not ('errors/' in path or
             'generated_files' in path or
             'lexicon.' in path or
@@ -855,6 +907,7 @@ def handle_file(path, xdocs_dir):
 
 
 def compute_lexc_name(jspwiki):
+    """Map filename back to a source file."""
     if 'langs/' in jspwiki and '/doc/' in jspwiki:
         if jspwiki.endswith('-syntax.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc', '/src/syntax')
@@ -887,6 +940,7 @@ def compute_lexc_name(jspwiki):
 
 
 def check_forrest_properties(directory):
+    """Parse forrest.properties."""
     fp = os.path.join(directory, 'forrest.properties')
     if os.path.exists(fp):
         for line in fileinput.FileInput(fp):
@@ -897,6 +951,7 @@ def check_forrest_properties(directory):
 
 
 def main():
+    """Parse the files and directories given to the script."""
     x = 1
 
     for uff in sys.argv[1:]:

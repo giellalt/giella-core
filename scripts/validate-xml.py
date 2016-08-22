@@ -10,6 +10,7 @@ from corpustools import util
 
 
 def is_correct_link(link_content, filename, xdocs_dir):
+    """Determine if link_content is a valid link."""
     return (
         re.match("""\d+""", link_content) or
         'static_files' in link_content or
@@ -26,6 +27,8 @@ def is_correct_link(link_content, filename, xdocs_dir):
 
 def jspwiki_file_exists(link_content, filename, xdocs_dir):
     #util.print_frame(link_content)
+    """Check if link_content points to a file."""
+    # util.print_frame(link_content)
     link_content = link_content.split('#')[0].strip()
     link_content = link_content.replace('slidy/', '')
     if link_content and link_content != '/' and not link_content.startswith('cgi'):
@@ -41,6 +44,7 @@ def jspwiki_file_exists(link_content, filename, xdocs_dir):
 
 
 def is_forrest_file(normpath):
+    """Check if file exists."""
     ext_replacements = []
     #util.print_frame(normpath)
 
@@ -76,6 +80,7 @@ def check_xml_file(filename, xdocs_dir):
 
 
 def get_tree(filename):
+    """Get the etree of a xml file."""
     try:
         return etree.parse(filename)
     except etree.XMLSyntaxError as e:
@@ -83,12 +88,14 @@ def get_tree(filename):
 
 
 def parse_site(xdocs_dir):
+    """Parse forrests site.xml file."""
     filename = os.path.join(xdocs_dir, 'site.xml')
     site = get_tree(filename)
     get_site_href(site.getroot(), xdocs_dir, filename)
 
 
 def get_site_href(element, directory, filename):
+    """Compute the href from a site.xml file."""
     href = element.get('href')
 
     if href is not None:
@@ -118,6 +125,7 @@ def get_site_href(element, directory, filename):
 
 
 def get_tabs_href(element, directory, filename):
+    """Compute the address from the tabs.xml file."""
     try:
         href = os.path.join(directory, element.get('dir'),
                             element.get('indexfile'))
@@ -130,6 +138,7 @@ def get_tabs_href(element, directory, filename):
             util.print_frame(e, etree.tostring(element, encoding='unicode'), element.sourceline, filename)
 
 def parse_tabs(xdocs_dir):
+    """Parse forrests tabs.xml file."""
     filename = os.path.join(xdocs_dir, 'tabs.xml')
     tabs = get_tree(filename)
     for element in tabs.getroot().iter('tab'):
@@ -147,6 +156,7 @@ def parse_tabs(xdocs_dir):
 
 
 def main():
+    """Parse xml files found in forrest sites."""
     sites = {
         'divvun': 'xtdoc/divvun/src/documentation/content/xdocs',
         'gtuit': 'xtdoc/gtuit/src/documentation/content/xdocs',

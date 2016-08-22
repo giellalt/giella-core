@@ -94,7 +94,7 @@ class OutlineError(Exception):
 def make_misc_test():
     """Make misc tests."""
     return [
-        ('too long hr','-----', 'Please shorten'),
+        ('too long hr', '-----', 'Please shorten'),
     ]
 
 
@@ -157,8 +157,8 @@ def make_colliding_markup_within_markup(markups):
         for name2, markups2 in markups.items():
             if name1 != name2:
                 outer_markup = 'a {}{}{} '.format(markups2[0] * 2,
-                                                   inner_markup,
-                                                   markups2[1] * 2)
+                                                  inner_markup,
+                                                  markups2[1] * 2)
                 test_cases.append(
                     ('half {} within {}'.format(name1, name2), outer_markup,
                      'Either add a space character'))
@@ -255,8 +255,8 @@ class DocMaker(object):
             if match.group(2).startswith(possible_wrong_char):
                 self.error(
                     'Lines starting with «{}» can not have '
-                    '«{}» as the first char.'.format(match.group(1),
-                                                     possible_wrong_char),
+                    '«{}» as the first char.'.format(
+                        match.group(1), possible_wrong_char),
                     b)
 
     def check_header_level(self, header_intro, this_level, b):
@@ -500,9 +500,9 @@ class DocMaker(object):
                         if re.search(regex, b.content):
                             self.error(
                                 'Erroneous {wc} markup.\n\t'
-                                'Either add a space character between «{first}» '
-                                'and «{second}» or place the entire line inside '
-                                'a pre block.'.format(
+                                'Either add a space character between '
+                                '«{first}» and «{second}» or place the entire '
+                                'line inside a pre block.'.format(
                                     wc=markup[wrong_endchar2],
                                     first=wrong_endchar1,
                                     second=wrong_endchar2),
@@ -519,11 +519,9 @@ class DocMaker(object):
             start = b.content.find(''.join(2 * markup[0]))
             end = b.content.rfind(''.join(2 * markup[1]))
 
-            #if start > -1 or end > -1:
-                #print(start, end, b)
-            if (start > 0 and end == -1) or \
-                (start == -1 and end > 0 ) or \
-                    (start > -1 and end > -1 and start == end):
+            if ((start > 0 and end == -1) or
+                    (start == -1 and end > 0) or
+                    (start > -1 and end > -1 and start == end)):
                 self.error(
                     'Line contains a single {name} markup.\n\t'
                     'Either remove the single {name} markup or remove the '
@@ -539,7 +537,9 @@ class DocMaker(object):
         }
 
         for name1, markup1 in markups.items():
-            re_text1 = '''.*{first}{first}([^{second}]+){second}{second}.*'''.format(first=markup1[0], second=markup1[1])
+            re_text1 = (""".*{first}{first}([^{second}]+)"""
+                        """{second}{second}.*""".format(first=markup1[0],
+                                                        second=markup1[1]))
             markup1_re = re.compile(re_text1)
             m = markup1_re.search(b.content)
             if m:
@@ -566,7 +566,7 @@ class DocMaker(object):
         if not self.inside_pre:
             if possible_links.search(b.content):
                 for m in possible_links.finditer(b.content):
-                    #util.print_frame(b.content[m.span()[0] - 1], m.group())
+                    # util.print_frame(b.content[m.span()[0] - 1], m.group())
                     if b.content[m.span()[0] - 1] != '[':
                         for g in m.groups():
                             self.handle_link_content(g, b)
@@ -584,15 +584,15 @@ class DocMaker(object):
                     'Link content «{}» contains a '
                     'URI-hex pattern.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[».'.format(parts[1][:-1],
-                                                         link_match),
+                    'link prepend «{}» with «[».'.format(
+                        parts[1][:-1], link_match),
                     block)
             elif not self.is_correct_link(parts[1][:-1].strip()):
                 self.error(
                     'Link content «{}» does not point to a valid document.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[».'.format(parts[1][:-1],
-                                                         link_match),
+                    'link prepend «{}» with «[».'.format(
+                        parts[1][:-1], link_match),
                     block)
         elif len(parts) == 1:
             if '%^' in parts[0]:
@@ -600,16 +600,16 @@ class DocMaker(object):
                     'Link content «{}» contains a '
                     'URI-hex pattern.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[».'.format(parts[0][:-1],
-                                                        link_match),
+                    'link prepend «{}» with «[».'.format(
+                        parts[0][:-1], link_match),
                     block)
             elif not self.is_correct_link(parts[0][1:-1].strip()):
                 self.error(
                     'Link content «{}» does not point to a '
                     'valid document.\n\t'
                     'If this is a link, fix the content. If it is not a '
-                    'link prepend «{}» with «[».'.format(parts[0][:-1],
-                                                         link_match),
+                    'link prepend «{}» with «[».'.format(
+                        parts[0][:-1], link_match),
                     block)
 
     def is_correct_link(self, link_content):
@@ -634,11 +634,19 @@ class DocMaker(object):
         if link_content.startswith('/') and self.xdocs_dir:
             dirname = self.xdocs_dir
             link_content = link_content[1:]
-        elif 'langs/' in self.filename and 'doc/' in self.filename and '..' in link_content and 'meetings' not in self.filename:
-            dirname = os.path.join(os.getenv('GTHOME'), 'xtdoc/gtuit/src/documentation/content/xdocs/doc/lang')
+        elif ('langs/' in self.filename and
+                'doc/' in self.filename and
+                '..' in link_content and
+                'meetings' not in self.filename):
+            dirname = os.path.join(os.getenv('GTHOME'),
+                                   'xtdoc/gtuit/src/documentation/content/'
+                                   'xdocs/doc/lang')
             link_content = link_content[1:]
-        elif 'langs/' in self.filename and 'doc/' in self.filename and link_content.startswith('[/doc'):
-            dirname = os.path.join(os.getenv('GTHOME'), 'xtdoc/gtuit/src/documentation/content/xdocs/')
+        elif ('langs/' in self.filename and 'doc/' in self.filename and
+                link_content.startswith('[/doc')):
+            dirname = os.path.join(os.getenv('GTHOME'),
+                                   'xtdoc/gtuit/src/documentation/content/'
+                                   'xdocs/')
             link_content = link_content[1:]
         else:
             dirname = os.path.dirname(os.path.abspath(self.filename))
@@ -663,7 +671,8 @@ class DocMaker(object):
             self.filename.endswith('.lexc') and (
                 os.path.exists(
                     os.path.join(
-                        self.filename[:self.filename.find('langs/') + len('langs/') + 4],
+                        self.filename[:self.filename.find('langs/') +
+                                      len('langs/') + 4],
                         'doc', link_content.replace('.html', '.jspwiki')
                     )
                 )
@@ -750,23 +759,30 @@ class DocMaker(object):
                         if '@RULENAME@' in m.group(1):
                             if not rulename:
                                 raise ValueError(
-                                    'rulename is empty!: {}'.format(x + 1, line))
+                                    'rulename is empty!: {}'.format(
+                                        x + 1, line)
+                                )
 
                             parts = m.group(1).split('@RULENAME@')
-                            if (rulename.endswith('-') and parts[1].startswith('__') ):
+                            if (rulename.endswith('-') and
+                                    parts[1].startswith('__')):
                                 self.error(
-                                    '@RULENAME@ is surrounded with «_» and the string that '
-                                    'will replace it ({}) ends with «-».\n\t'
-                                    'Either remove «_» from @RULENAME@ or insert a space '
-                                    'between @RULENAME@ and _: {}'.format(rulename),
+                                    '@RULENAME@ is surrounded with «_» and '
+                                    'the string that will replace it ({}) '
+                                    'ends  with «-».\n\t'
+                                    'Either remove «_» from @RULENAME@ or '
+                                    'insert a space between @RULENAME@ and '
+                                    '_: {}'.format(rulename),
                                     Line(number=x + 1, content=line))
                             else:
-                                self.parse_block(Line(number=x + 1,
-                                                content=m.group(1).replace(
-                                                    '@RULENAME@', rulename)))
+                                self.parse_block(
+                                    Line(number=x + 1,
+                                         content=m.group(1).replace(
+                                            '@RULENAME@', rulename)))
                         else:
-                            self.parse_block(Line(number=x + 1,
-                                            content=m.group(1)))
+                            self.parse_block(
+                                Line(number=x + 1,
+                                     content=m.group(1)))
                 elif line.startswith('!!€ '):
                     parts = line[len('!!€ '):].split()
                     c = ['*']
@@ -786,26 +802,30 @@ class DocMaker(object):
                     a = re.compile('(!!€.+:\s+)(.+)')
                     m = a.match(line)
                     if m:
-                        self.parse_block(Line(number=x + 1,
-                                        content='__{} examples:__'.format(
-                                            m.group(1))))
+                        self.parse_block(
+                            Line(number=x + 1,
+                                 content='__{} examples:__'.format(
+                                    m.group(1))))
                 elif re.match('^[^!]+!![=≈]', line):
 
                     def check_validity(lineno, origline, line, code):
                         """Check the validity of lexc docstring."""
                         parts = line.split('@CODE@')
-                        if parts[1].startswith('__') and (code.endswith('}') or code.endswith('-')):
+                        if (parts[1].startswith('__') and
+                                (code.endswith('}') or code.endswith('-'))):
                             self.error(
                                 '@CODE@ is surrounded with «_» and the string '
                                 'that will replace it ends with «}».\n\t'
-                                'Either remove «_» from @CODE@ or insert a space between '
-                                '@CODE@ and _.',
+                                'Either remove «_» from @CODE@ or insert a '
+                                'space between @CODE@ and _.',
                                 Line(number=lineno, content=origline))
-                        if re.match('^\s*!', code) and re.match('^\s*\*\s+$', parts[0]):
+                        if re.match('^\s*!', code) and re.match('^\s*\*\s+$',
+                                                                parts[0]):
                             self.error(
                                 '@CODE@ contains «!».\n\t'
                                 'Either remove «!» or @CODE@.',
                                 Line(number=lineno, content=origline))
+
                     def get_replacement(s1, s2):
                         return s1 if s2 == '!!=' else s1.strip()
 
@@ -854,31 +874,41 @@ def compute_lexc_name(jspwiki):
     if 'langs/' in jspwiki and '/doc/' in jspwiki:
         if jspwiki.endswith('-syntax.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc', '/src/syntax')
-            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki', '.cg3')
+            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+                                                         '.cg3')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-phonology.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/phonology')
-            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki', '.twolc')
+            dirname = os.path.dirname(jspwiki).replace('/doc',
+                                                       '/src/phonology')
+            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+                                                         '.twolc')
             if os.path.exists(os.path.join(dirname, basename)):
                 return os.path.join(dirname, basename)
             else:
-                basename = os.path.basename(jspwiki).replace('-syntax.jspwiki', '.xfscript')
+                basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+                                                             '.xfscript')
                 return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-morphology.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/morphology')
-            basename = os.path.basename(jspwiki).replace('-morphology.jspwiki', '.lexc')
+            dirname = os.path.dirname(jspwiki).replace('/doc',
+                                                       '/src/morphology')
+            basename = os.path.basename(jspwiki).replace('-morphology.jspwiki',
+                                                         '.lexc')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-stems.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/morphology/stems')
-            basename = os.path.basename(jspwiki).replace('-stems.jspwiki', '.lexc')
+            dirname = os.path.dirname(jspwiki).replace('/doc',
+                                                       '/src/morphology/stems')
+            basename = os.path.basename(jspwiki).replace('-stems.jspwiki',
+                                                         '.lexc')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-affixes.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/morphology/affixes')
-            basename = os.path.basename(jspwiki).replace('-affixes.jspwiki', '.lexc')
+            dirname = os.path.dirname(jspwiki).replace(
+                '/doc', '/src/morphology/affixes')
+            basename = os.path.basename(jspwiki).replace('-affixes.jspwiki',
+                                                         '.lexc')
             return os.path.join(dirname, basename)
 
 

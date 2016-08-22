@@ -30,14 +30,16 @@ def jspwiki_file_exists(link_content, filename, xdocs_dir):
     # util.print_frame(link_content)
     link_content = link_content.split('#')[0].strip()
     link_content = link_content.replace('slidy/', '')
-    if link_content and link_content != '/' and not link_content.startswith('cgi'):
         #util.print_frame(link_content)
+    if (link_content and link_content != '/' and not
+            link_content.startswith('cgi')):
         dirname = os.path.dirname(os.path.abspath(filename))
         if link_content.startswith('/'):
             dirname = xdocs_dir
             link_content = link_content[1:]
 
-        return is_forrest_file(os.path.normpath(os.path.join(dirname, link_content)))
+        return is_forrest_file(os.path.normpath(os.path.join(dirname,
+                                                             link_content)))
     else:
         return True
 
@@ -57,7 +59,6 @@ def is_forrest_file(normpath):
         ext_replacements.append('.en' + '.xml')
         ext_replacements.append('.en' + '.pdf')
 
-
     for r in ext_replacements:
         if os.path.exists(normpath + r):
             return True
@@ -71,7 +72,8 @@ def check_xml_file(filename, xdocs_dir):
     for a in get_tree(filename).iter('a'):
         if not is_correct_link(a.get('href').strip(), filename, xdocs_dir):
             errors += 1
-            util.print_frame('{} :#{}: wrong address {}\n'.format(filename, a.sourceline, a.get('href')))
+            util.print_frame('{} :#{}: wrong address {}\n'.format(
+                filename, a.sourceline, a.get('href')))
 
     return errors
 
@@ -103,16 +105,24 @@ def get_site_href(element, directory, filename):
             try:
                 site = get_tree(site_filename)
                 if len(parts) == 2:
-                    for element in site.xpath(re.match('xpointer\((.+)\)', parts[1]).group(1)):
+                    for element in site.xpath(re.match('xpointer\((.+)\)',
+                                                       parts[1]).group(1)):
                         get_tabs_href(element, directory, site_filename)
                 elif len(parts) == 1:
                     get_site_href(site.getroot(), directory, site_filename)
             except OSError as e:
-                util.print_frame('{}: #{}: {} {} does not exist'.format(filename, element.sourceline, etree.tostring(element, encoding='unicode'), site_filename))
+                util.print_frame(
+                    '{}: #{}: {} {} does not exist.\nError: {}'.format(
+                        filename, element.sourceline,
+                        etree.tostring(element, encoding='unicode'),
+                        site_filename, str(e)))
         else:
-            if href.endswith('.html') and not href.startswith('cgi') and not href.startswith('http'):
+            if (href.endswith('.html') and not href.startswith('cgi') and not
+                    href.startswith('http')):
                 if not is_forrest_file(os.path.join(directory, href)):
-                    util.print_frame('{} :#{}: wrong address {}\n'.format(filename, element.sourceline, os.path.join(directory, href)))
+                    util.print_frame('{} :#{}: wrong address {}\n'.format(
+                        filename, element.sourceline, os.path.join(directory,
+                                                                   href)))
             else:
                 directory = os.path.join(directory, href)
 
@@ -127,12 +137,17 @@ def get_tabs_href(element, directory, filename):
         href = os.path.join(directory, element.get('dir'),
                             element.get('indexfile'))
         if not is_forrest_file(href):
-            util.print_frame('{} :#{}: {} wrong address {}\n'.format(filename, element.sourceline, etree.tostring(element, encoding='unicode'), os.path.join(directory, href)))
+            util.print_frame('{} :#{}: {} wrong address {}\n'.format(
+                filename, element.sourceline,
+                etree.tostring(element, encoding='unicode'),
+                os.path.join(directory, href)))
     except TypeError as e:
         try:
             element.attrib['href']
         except KeyError:
-            util.print_frame(e, etree.tostring(element, encoding='unicode'), element.sourceline, filename)
+            util.print_frame(e, etree.tostring(element, encoding='unicode'),
+                             element.sourceline, filename)
+
 
 def parse_tabs(xdocs_dir):
     """Parse forrests tabs.xml file."""
@@ -140,12 +155,14 @@ def parse_tabs(xdocs_dir):
     tabs = get_tree(filename)
     for element in tabs.getroot().iter('tab'):
         get_tabs_href(element, xdocs_dir, filename)
-    for element in tabs.getroot().iter('{http://www.w3.org/2001/XInclude}include'):
+    for element in tabs.getroot().iter(
+            '{http://www.w3.org/2001/XInclude}include'):
         parts = element.get('href').split('#')
         include_name = os.path.join(xdocs_dir, parts[0])
         tabs = etree.parse(os.path.join(xdocs_dir, parts[0]))
         if len(parts) == 2:
-            for element in tabs.xpath(re.match('xpointer\((.+)\)', parts[1]).group(1)):
+            for element in tabs.xpath(re.match('xpointer\((.+)\)',
+                                               parts[1]).group(1)):
                 get_tabs_href(element, xdocs_dir, include_name)
         elif len(parts) == 1:
             for element in tabs.getroot().iter('tab'):
@@ -175,7 +192,8 @@ def main():
             for f in files:
                 no_files += 1
                 path = os.path.join(root, f)
-                if f.endswith('.xml') and 'obsolete' not in path and '/cgi' not in path and 'uped/' not in path:
+                if (f.endswith('.xml') and 'obsolete' not in path and
+                        '/cgi' not in path and 'uped/' not in path):
                     errors += check_xml_file(path, fullpath)
 
     util.print_frame(errors)

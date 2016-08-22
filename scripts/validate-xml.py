@@ -30,9 +30,9 @@ def jspwiki_file_exists(link_content, filename, xdocs_dir):
     # util.print_frame(link_content)
     link_content = link_content.split('#')[0].strip()
     link_content = link_content.replace('slidy/', '')
-        #util.print_frame(link_content)
     if (link_content and link_content != '/' and not
             link_content.startswith('cgi')):
+        # util.print_frame(link_content)
         dirname = os.path.dirname(os.path.abspath(filename))
         if link_content.startswith('/'):
             dirname = xdocs_dir

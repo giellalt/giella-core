@@ -929,7 +929,8 @@ def main():
 
     for uff in sys.argv[1:]:
         if os.path.isfile(uff):
-            #if uff.endswith('.lexc') or uff.endswith('.twolc') or uff.endswith('.xfscript') or
+            # if uff.endswith('.lexc') or uff.endswith('.twolc') or
+            # uff.endswith('.xfscript') or
             if uff.endswith('.jspwiki'):
                 handle_file(uff, None)
         elif os.path.exists(uff):
@@ -939,7 +940,8 @@ def main():
             util.print_frame(xdocs_dir)
             for root, dirs, files in os.walk(uff, followlinks=True):
                 for f in files:
-                    #if f.endswith('.lexc') or f.endswith('.twolc') or f.endswith('.twolc') or
+                    # if f.endswith('.lexc') or f.endswith('.twolc') or
+                    # f.endswith('.twolc') or
                     if f.endswith('.jspwiki'):
                         handle_file(os.path.join(root, f), xdocs_dir)
         else:
@@ -948,4 +950,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    #test_match()
+    # test_match()

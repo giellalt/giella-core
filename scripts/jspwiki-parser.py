@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''Parse a jspwiki document
+"""Parse a jspwiki document.
 
 !!!Main tags
 section1, 2, 3
@@ -14,7 +14,7 @@ p, ol, ul, dl, pre, hl, br
 !!!Inline tags
 
 bold, italic, monospace, link
-'''
+"""
 import collections
 import fileinput
 import os
@@ -26,17 +26,16 @@ import unittest
 
 from corpustools import util
 
-
-headers = re.compile('''^\s*(!{1,3})\s*(.+)''')
-ordered = re.compile('''^\s*(#{1,3})\s*(.+)''')
-unordered = re.compile('''^\s*(\*{1,3})\s*(.+)''')
-horisontal = re.compile('''^\s*(-{4,})$''')
-complete_pre_inline = re.compile('''^(.*){{{(.+)}}}([^}]*)$''')
-start_of_pre = re.compile('''^\s*(.*){{{([^}]*)$''')
-end_of_pre = re.compile('''^\s*(.*)}}}([^}]*)$''')
-erroneous_bold = re.compile(u'''[^_].* _([^_]+)_[^_]*$''')
-possible_links = re.compile(u'''(\[[^[]*\])''')
-possible_twolc_rule = re.compile(u'''(^[^[].+\[[^[]*\][^]]+;\s*.*)|([^(]+\([^(]+\|[^)]*\).+;.*)''')
+headers = re.compile("""^\s*(!{1,3})\s*(.+)""")
+ordered = re.compile("""^\s*(#{1,3})\s*(.+)""")
+unordered = re.compile("""^\s*(\*{1,3})\s*(.+)""")
+horisontal = re.compile("""^\s*(-{4,})$""")
+complete_pre_inline = re.compile("""^(.*){{{(.+)}}}([^}]*)$""")
+start_of_pre = re.compile("""^\s*(.*){{{([^}]*)$""")
+end_of_pre = re.compile("""^\s*(.*)}}}([^}]*)$""")
+erroneous_bold = re.compile(u"""[^_].* _([^_]+)_[^_]*$""")
+possible_links = re.compile(u"""(\[[^[]*\])""")
+possible_twolc_rule = re.compile(u"""(^[^[].+\[[^[]*\][^]]+;\s*.*)|([^(]+\([^(]+\|[^)]*\).+;.*)""")
 
 
 Entry = collections.namedtuple('Entry', ['name', 'data'])
@@ -68,13 +67,18 @@ def test_match():
     assert erroneous_bold.match('assuming stem _kååʹmmerd_') is not None
     assert possible_links.match('a [b]') is not None
     assert possible_links.match('a [[b]') is not None
-    m = possible_twolc_rule.match('''  Vow:i (%^1VOW:) (%{%ʹØ%}:ʹ) _ [[Cns:+ (%{XC%}:)|Cns:+ (ˈ:|:ˈ) Cns:+] BetweenStemAndHeight %^VOWRaise:  %^VYY2XYY: ;''')
+    m = possible_twolc_rule.match("""  Vow:i (%^1VOW:) (%{%ʹØ%}:ʹ) _ """
+                                  """[[Cns:+ (%{XC%}:)|Cns:+ (ˈ:|:ˈ) Cns:+] """
+                                  """BetweenStemAndHeight %^VOWRaise:  """
+                                  """%^VYY2XYY: ;""")
     if m:
         util.print_frame('YEY1!')
-    m = possible_twolc_rule.match('''Cns: (ˈ:|:ˈ) _ Vow: Cns:* PenBetweenStemAndVowelLoss (%^RmVow:) %^PALNo: (%^DeVC:) RBound ;''')
+    m = possible_twolc_rule.match("""Cns: (ˈ:|:ˈ) _ Vow: Cns:* """
+                                  """PenBetweenStemAndVowelLoss (%^RmVow:) """
+                                  """%^PALNo: (%^DeVC:) RBound ;""")
     if m:
         util.print_frame('YEY2!')
-    m = possible_twolc_rule.match('''define uwChange [ u -> w || _ %> a ] ;''')
+    m = possible_twolc_rule.match("""define uwChange [ u -> w || _ %> a ] ;""")
     if m:
         util.print_frame('YEY3!')
 
@@ -348,9 +352,9 @@ class DocMaker(object):
 
     def make_table(self, b):
         links_removed = '='.join(re.split('\[.+\]', b.content))
-        only_space = re.compile('''^[ \t]+$''')
+        only_space = re.compile("""^[ \t]+$""")
 
-        table_endings = re.compile('''.+\|$''')
+        table_endings = re.compile(""".+\|$""")
 
         if table_endings.match(links_removed):
             raise ValueError(
@@ -440,7 +444,7 @@ class DocMaker(object):
 
         if not b.content[:-1].endswith('{}'):
             for wrong_endchar1 in markup.keys():
-                regex = '''^.+[^{wc}]{wc}$'''.format(wc=wrong_endchar1)
+                regex = """^.+[^{wc}]{wc}$""".format(wc=wrong_endchar1)
                 if re.match(regex, b.content):
                     self.error(
                         'Line ends with {wc}.\n\t'
@@ -453,7 +457,7 @@ class DocMaker(object):
 
                 for wrong_endchar2 in markup.keys():
                     if wrong_endchar1 != wrong_endchar2:
-                        regex = '''[^{first}]{first}{second}{second}'''.format(
+                        regex = """[^{first}]{first}{second}{second}""".format(
                             first=wrong_endchar1, second=wrong_endchar2)
                         if re.search(regex, b.content):
                             self.error(
@@ -502,7 +506,10 @@ class DocMaker(object):
                 for group in m.groups():
                     for name2, markup2 in markups.items():
                         if name1 != name2:
-                            re_text2 = '''.*{first}{first}([^{second}]+){second}{second}.*'''.format(first=markup2[0], second=markup2[1])
+                            re_text2 = (""".*{first}{first}([^{second}]+)"""
+                                        """{second}{second}.*""".format(
+                                            first=markup2[0],
+                                            second=markup2[1]))
                             markup2_re = re.compile(re_text2)
                             m = markup2_re.search(group)
                             if m:
@@ -617,7 +624,7 @@ class DocMaker(object):
 
     def is_correct_link(self, link_content):
         return (
-            re.match('''\d+''', link_content) or
+            re.match("""\d+""", link_content) or
             link_content.endswith('.ics') or
             link_content.startswith('http://') or
             link_content.startswith('https://') or
@@ -711,9 +718,11 @@ class DocMaker(object):
             else:
                 self.close_inline(b)
                 self.inside_pre = False
-        elif re.match('''\s*([{}])'''.format(''.join(self.tjoff.keys())), b.content) and not self.inside_pre:
+        elif re.match("""\s*([{}])""".format(''.join(self.tjoff.keys())),
+                      b.content) and not self.inside_pre:
             self.check_inline(b)
-            key = re.match('''\s*([{}])'''.format(''.join(self.tjoff.keys())), b.content).group(1)
+            key = re.match("""\s*([{}])""".format(''.join(self.tjoff.keys())),
+                           b.content).group(1)
             self.tjoff[key](b)
         elif not self.inside_pre:
             self.check_inline(b)
@@ -730,7 +739,8 @@ class DocMaker(object):
                 self.close_block()
 
     def lexc_blocks(self):
-        rulename_re = re.compile('''^"([^"]+)"''')
+        """Parse a lexc file."""
+        rulename_re = re.compile("""^"([^"]+)"""")
         rulename = ''
 
         for x, line in enumerate(fileinput.FileInput(self.filename)):

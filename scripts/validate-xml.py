@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''Check if forrest docs are wellformed and that the addresses are correct'''
+"""Check if forrest docs are wellformed and that the addresses are correct."""
 import os
 import re
 import sys
@@ -11,7 +11,7 @@ from corpustools import util
 
 def is_correct_link(link_content, filename, xdocs_dir):
     return (
-        re.match('''\d+''', link_content) or
+        re.match("""\d+""", link_content) or
         'static_files' in link_content or
         link_content.startswith('http://') or
         link_content.startswith('https://') or
@@ -65,7 +65,7 @@ def is_forrest_file(normpath):
 
 
 def check_xml_file(filename, xdocs_dir):
-    '''Check if xml file is wellformed and valid'''
+    """Check if xml file is wellformed and valid."""
     errors = 0
     for a in get_tree(filename).iter('a'):
         if not is_correct_link(a.get('href').strip(), filename, xdocs_dir):

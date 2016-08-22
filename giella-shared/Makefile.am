@@ -15,7 +15,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SRC_DIRS = common eng smi urj-Cyrl
+SRC_DIRS = all_langs eng smi urj-Cyrl
 
 EXTRA_DIST = $(SRC_DIRS) $(PACKAGE).pc.in
 

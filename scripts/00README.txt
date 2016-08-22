@@ -1,5 +1,6 @@
-This dir contains script files used by the GTCORE module, a set of tools and
-templates required for all work on language files using the new infrastructure.
+This dir contains script files used by the giella-core module, a set of tools
+and scripts required for all work on language files using the Giella
+infrastructure.
 
 Some of the files are:
 

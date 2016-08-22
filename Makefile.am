@@ -17,6 +17,11 @@
 
 SUBDIRS = . scripts
 
+EXTRA_DIST = $(PACKAGE).pc.in
+
+pkgconfigdir = $(prefix)/share/pkgconfig
+pkgconfig_DATA = $(PACKAGE).pc
+
 include $(srcdir)/subfiles.mk
 
 nobase_dist_pkgdata_DATA = $(subdir_files)

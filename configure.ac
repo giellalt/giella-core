@@ -30,7 +30,8 @@ SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
 
 AC_SUBST([GIELLA_CORE_VERSION], [$VERSION-${SVNREVNUM}])
 
-AC_CONFIG_FILES([Makefile
+AC_CONFIG_FILES([Makefile \
+                 $PACKAGE.pc \
                  scripts/Makefile])
 AC_CONFIG_FILES([scripts/gt-version.sh], [chmod +x scripts/gt-version.sh])
 AC_CONFIG_FILES([scripts/gt-core.sh],    [chmod +x scripts/gt-core.sh])

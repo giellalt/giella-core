@@ -284,7 +284,6 @@ class DocMaker(object):
         self.header_level = this_level
 
     def make_header(self, b):
-        #util.print_frame(b)
         """Check validity of jspwiki header lines."""
         m = headers.match(b.content)
         this_level = 4 - len(m.group(1))
@@ -565,15 +564,6 @@ class DocMaker(object):
     def check_inline(self, b):
         """Check for inline errors."""
         if not self.inside_pre:
-            #m = possible_twolc_rule.match(b.content)
-            #if m:
-                #self.error(
-                    #'Possible twolc rule.\n\t'
-                    #'Please either remove it from the documentation or '
-                    #'place it in a pre-block.',
-                    #b)
-
-            #el
             if possible_links.search(b.content):
                 for m in possible_links.finditer(b.content):
                     #util.print_frame(b.content[m.span()[0] - 1], m.group())
@@ -588,32 +578,7 @@ class DocMaker(object):
     def handle_link_content(self, link_match, block):
         """Parse link content."""
         parts = link_match.split('|')
-        #if len(parts) > 2:
-            #self.error(
-                #':#{}:\n\tLink content has to many parts.\n\t'
-                #'If this is a link, fix the content. If it is not a '
-                #'link prepend {} with «[»: {}'.format(block.number,
-                                                      #link_match,
-                                                      #block.content))
-        #el
         if len(parts) == 2:
-            #if not parts[1][1:-1].strip():
-                #self.error(
-                    #':#{}:\n\tLink content «{}» is empty.\n\t'
-                    #'If this is a link, fix the content. If it is not a '
-                    #'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            #parts[0][:-1],
-                                                            #link_match,
-                                                            #block.content))
-            #elif re.match('^\d+$', parts[1][1:-1].strip()):
-                #self.error(
-                    #':#{}:\n\tLink content «{}» contains only numbers.\n\t'
-                    #'If this is a link, fix the content. If it is not a '
-                    #'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            #parts[1][:-1],
-                                                            #link_match,
-                                                            #block.content))
-            #el
             if '%^' in parts[1]:
                 self.error(
                     'Link content «{}» contains a '
@@ -630,24 +595,6 @@ class DocMaker(object):
                                                          link_match),
                     block)
         elif len(parts) == 1:
-            #util.print_frame(parts[0])
-            #if not parts[0][1:-1].strip():
-                #self.error(
-                    #':#{}:\n\tLink content «{}» is empty.\n\t'
-                    #'If this is a link, fix the content. If it is not a '
-                    #'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            #parts[0][:-1],
-                                                            #link_match,
-                                                            #block.content))
-            #elif re.match('^\d+$', parts[0][1:-1].strip()):
-                #self.error(
-                    #':#{}:\n\tLink content «{}» contains only numbers.\n\t'
-                    #'If this is a link, fix the content. If it is not a '
-                    #'link prepend «{}» with «[»: {}'.format(block.number,
-                                                            #parts[0][:-1],
-                                                            #link_match,
-                                                            #block.content))
-            #el
             if '%^' in parts[0]:
                 self.error(
                     'Link content «{}» contains a '
@@ -681,7 +628,6 @@ class DocMaker(object):
         )
 
     def jspwiki_file_exists(self, link_content):
-        #util.print_frame(link_content)
         """Check whether link content points to an existing file."""
         link_content = link_content.split('#')[0]
         link_content = link_content.replace('slidy/', '')
@@ -883,9 +829,6 @@ class DocMaker(object):
 
 
 def handle_file(path, xdocs_dir):
-
-    #if path.endswith('.lexc') or path.endswith('.xfscript') or path.endswith('.twolc'):
-        #dm.first_level = 1
     """Handle files given to the script."""
     if not ('errors/' in path or
             'generated_files' in path or

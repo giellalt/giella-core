@@ -26,7 +26,6 @@ def is_correct_link(link_content, filename, xdocs_dir):
 
 
 def jspwiki_file_exists(link_content, filename, xdocs_dir):
-    #util.print_frame(link_content)
     """Check if link_content points to a file."""
     # util.print_frame(link_content)
     link_content = link_content.split('#')[0].strip()
@@ -46,10 +45,8 @@ def jspwiki_file_exists(link_content, filename, xdocs_dir):
 def is_forrest_file(normpath):
     """Check if file exists."""
     ext_replacements = []
-    #util.print_frame(normpath)
 
     (normpath, ext) = os.path.splitext(normpath)
-    #util.print_frame(normpath, '\n')
     ext_replacements.append(ext)
     if ext in ['.html', '.pdf']:
         ext_replacements.append('.jspwiki')

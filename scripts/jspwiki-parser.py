@@ -20,11 +20,10 @@ import fileinput
 import os
 import re
 import sys
-
-from nose_parameterized import parameterized
 import unittest
 
 from corpustools import util
+from nose_parameterized import parameterized
 
 headers = re.compile("""^\s*(!{1,3})\s*(.+)""")
 ordered = re.compile("""^\s*(#{1,3})\s*(.+)""")

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''This script builds a multilingual forrest site.
+"""This script builds a multilingual forrest site.
+
 --destination (-d) an ssh destination
 --sitehome (-s) where sd and techdoc lives
-'''
+"""
 from __future__ import absolute_import, print_function
 
 import argparse
@@ -26,22 +27,26 @@ logger = logging.getLogger(__name__)
 
 
 class StaticSiteBuilder(object):
-    '''Class to build a multilingual static version of the divvun site.
-
-    Args:
-        builddir (str):     The directory where the forrest site is
-        destination (str):  Where the built site is copied (using rsync)
-        langs (list):       List of langs to be built
+    """Class to build a multilingual static version of the divvun site.
 
     Attributes:
         builddir (str): The directory where the forrest site is
         destination (str): where the built site is copied (using rsync)
         langs (list): list of langs to be built
         logfile (file handle)
-    '''
+    """
 
     def __init__(self, builddir, destination, langs):
+        """Init StaticSiteBuilder with builddir, destination and langs.
+
+        Args:
+            builddir (str):     The directory where the forrest site is
+            destination (str):  Where the built site is copied (using rsync)
+            langs (list):       List of langs to be built
+
+        """
         if builddir.endswith('/'):
+
             builddir = builddir[:-1]
         self.builddir = builddir
         self.clean()
@@ -56,24 +61,25 @@ class StaticSiteBuilder(object):
         os.mkdir(os.path.join(self.builddir, 'built'))
 
     def clean(self):
+        """Run forrest clean."""
         (returncode, _) = self.run_command('forrest validate')
         if returncode != 0:
             logger.warn('forrest clean failed in {}'.format(self.builddir))
             raise SystemExit(returncode)
 
     def validate(self):
-        '''Run forrest validate'''
+        """Run forrest validate."""
         (returncode, _) = self.run_command('forrest validate')
         if returncode != 0:
             logger.warn('Invalid xml files found, site was not built')
             raise SystemExit(returncode)
 
     def set_forrest_lang(self, lang):
-        '''Set the language that should be built
+        """Set the language that should be built.
 
         Args:
             lang (str): a two or three character long string
-        '''
+        """
         logger.debug('Setting language {}'.format(lang))
         for line in fileinput.FileInput(
             os.path.join(self.builddir, 'forrest.properties'),
@@ -88,10 +94,10 @@ class StaticSiteBuilder(object):
             print(line.rstrip())
 
     def parse_broken_links(self):
-        '''Parse brokenlinks.xml
+        """Parse brokenlinks.xml.
 
         Since the xml file is not valid xml, do plain text parsing
-        '''
+        """
         logger.error('Broken links:')
 
         counter = collections.Counter()
@@ -128,6 +134,7 @@ class StaticSiteBuilder(object):
             logger.error('{} broken links'.format(number))
 
     def parse_buildtimes(self, log):
+        """Parse the buildtimes found in the logfile."""
         def print_buildtime_distribution(buildtimes):
             def make_info(build_time, buildtimes):
                 return '{time}: {infolist}'.format(
@@ -158,7 +165,7 @@ class StaticSiteBuilder(object):
         print_buildtime_distribution(buildtimes)
 
     def buildsite(self, lang):
-        '''Builds a site in the specified language
+        """Build a site in the specified language.
 
         Clean up the build files
         Validate files. If they don't validate, exit program
@@ -168,7 +175,7 @@ class StaticSiteBuilder(object):
 
         Args:
             lang (str): a two or three character long string
-        '''
+        """
         # This ensures that the build directory is build/site/en
         logger.debug('Building {}'.format(lang))
         os.environ['LC_ALL'] = 'C'
@@ -184,11 +191,11 @@ class StaticSiteBuilder(object):
         self.parse_broken_links()
 
     def add_language_changer(self, this_lang):
-        '''Add a language changer in all .html files for one language
+        """Add a language changer in all .html files for one language.
 
         Args:
             this_lang (str): a two or three character long string
-        '''
+        """
         builddir = os.path.join(self.builddir, 'build/site/en')
 
         for root, dirs, files in os.walk(builddir):
@@ -199,15 +206,14 @@ class StaticSiteBuilder(object):
                     f2b.add_lang_info()
 
     def rename_site_files(self, lang):
-        '''Search for files ending with html and pdf in the build site.
+        """Search for files ending with html and pdf in the build site.
 
         Give all these files the ending '.lang'.
         Move them to the 'built' dir
 
         Args:
             lang (str): a two or three character long string
-        '''
-
+        """
         builddir = os.path.join(self.builddir, 'build/site/en')
         builtdir = os.path.join(self.builddir, 'built')
 
@@ -233,7 +239,7 @@ class StaticSiteBuilder(object):
             shutil.move(builddir, os.path.join(builtdir, lang))
 
     def build_all_langs(self):
-        '''Build all the langs'''
+        """Build all the langs."""
         logger.info('Building all langs')
         for lang in self.langs:
             self.buildsite(lang)
@@ -242,11 +248,11 @@ class StaticSiteBuilder(object):
             self.rename_site_files(lang)
 
     def run_command(self, command):
-        '''Run a shell command
+        """Run a shell command.
 
         Arguments:
             command: string containing the shell command
-        '''
+        """
         logger.info('Running {}'.format(command))
         subp = subprocess.Popen(
             command.split(),
@@ -272,9 +278,10 @@ class StaticSiteBuilder(object):
         return (subp.returncode, output)
 
     def copy_to_site(self):
-        '''Copy the entire site to self.destination'''
-        (returncode, _) = self.run_command('rsync -avz -e ssh {src} {dst}'.format(
-            src=os.path.join(self.builddir, 'built/'), dst=self.destination))
+        """Copy the entire site to self.destination."""
+        (returncode, _) = self.run_command(
+            'rsync -avz -e ssh {src} {dst}'.format(src=os.path.join(
+                self.builddir, 'built/'), dst=self.destination))
         if returncode != 0:
             raise SystemExit(returncode)
 
@@ -286,15 +293,9 @@ class StaticSiteBuilder(object):
             if returncode != 0:
                 raise SystemExit(returncode)
 
-class LanguageAdder(object):
-    '''Add a language changer to an html document
 
-    Args:
-        filename (str):     path to the html file
-        this_lang (str):     The language of this document
-        langs (list):   The list of all languages that should added to the
-                        language element
-        builddir (str): The basedir where the html files are found
+class LanguageAdder(object):
+    """Add a language changer to an html document.
 
     Attributes:
         filename (str):     path to the html file
@@ -304,8 +305,18 @@ class LanguageAdder(object):
         builddir (str): The basedir where the html files are found
         namespace (dict):   the namespace used in the html document
         tree (lxml etree):  an lxml etree of the parsed file
-    '''
+    """
+
     def __init__(self, filename, this_lang, langs, builddir):
+        """Init the LanguageAdder.
+
+        Args:
+            filename (str):     path to the html file
+            this_lang (str):     The language of this document
+            langs (list):   The list of all languages that should added to the
+                            language element
+            builddir (str): The basedir where the html files are found
+        """
         self.filename = filename
         self.this_lang = this_lang
         self.langs = langs
@@ -315,21 +326,19 @@ class LanguageAdder(object):
         self.tree = etree.parse(filename, etree.HTMLParser())
 
     def __del__(self):
-        '''Write self.tree to self.filename'''
+        """Write self.tree to self.filename."""
         with open(self.filename, 'w') as outhtml:
             outhtml.write(etree.tostring(self.tree, encoding='utf8',
                                          pretty_print=True, method='html'))
 
     def add_lang_info(self):
-        '''Create the language navigation element and add it to self.tree
-
-        '''
+        """Create the language navigation element and add it to self.tree."""
         my_nav_bar = self.tree.getroot().find('.//div[@id="myNavbar"]',
                                               namespaces=self.namespace)
         my_nav_bar.append(self.make_lang_menu())
 
     def make_lang_menu(self):
-        '''Make the language menu for self.this_lang'''
+        """Make the language menu for self.this_lang."""
         trlangs = {u'fi': u'Suomeksi', u'no': u'På norsk',
                    u'sma': u'Åarjelsaemien', u'se': u'Davvisámegillii',
                    u'smj': u'Julevsábmáj', u'sv': u'På svenska',
@@ -372,6 +381,7 @@ class LanguageAdder(object):
 
 
 def parse_options():
+    """Parse command line options."""
     parser = argparse.ArgumentParser(
         description='This script builds a multilingual forrest site.')
     parser.add_argument('--destination', '-d',
@@ -393,6 +403,7 @@ def parse_options():
 
 
 def main():
+    """Build a forrest site, copy the static site to its destination."""
     logging_dict = {'info': logging.INFO,
                     'warning': logging.WARNING,
                     'debug': logging.DEBUG}
@@ -404,15 +415,17 @@ def main():
                 'Logging level is set to debug. Output will very verbose')
         logger.setLevel(logging_dict[args.verbosity])
     else:
-        raise SystemExit('-V|--verbosity must be one of: {}\n{} was given.'.format(
-            '|'.join(logging_dict.keys()), args.verbosity))
+        raise SystemExit(
+            '-V|--verbosity must be one of: {}\n{} was given.'.format(
+                '|'.join(logging_dict.keys()), args.verbosity))
 
     lockname = os.path.join(args.sitehome, '.lock')
     if not os.path.exists(lockname):
         with open(lockname, 'w') as lockfile:
             print(datetime.datetime.now(), file=lockfile)
 
-        builder = StaticSiteBuilder(args.sitehome, args.destination, args.langs)
+        builder = StaticSiteBuilder(args.sitehome, args.destination,
+                                    args.langs)
         builder.build_all_langs()
         builder.copy_to_site()
         os.remove(lockname)
@@ -422,7 +435,8 @@ def main():
             datestring = lockfile.read().strip()
             starttime = datetime.datetime.strptime(datestring, dateformat)
             delta = datetime.datetime.now() - starttime
-            logger.error('A build of this site is still running and was started {} ago'.format(delta))
+            logger.error('A build of this site is still running and was '
+                         'started {} ago'.format(delta))
 
 
 if __name__ == '__main__':

@@ -15,6 +15,7 @@ p, ol, ul, dl, pre, hl, br
 
 bold, italic, monospace, link
 """
+import attr
 import collections
 import fileinput
 import os
@@ -213,6 +214,36 @@ class TestDocMaker(unittest.TestCase):
             self.dm.parse_block(Line(number=1, content=content))
 
         self.assertTrue(expected in str(e.exception))
+
+
+@attr.s
+class PropertiesParser(object):
+    """Parse a forrest.properties file."""
+
+    properties_file = attr.ib()
+    properties = attr.ib(
+        default={'project.xdocs-dir': 'src/documentation/content/xdocs'})
+
+    def parse(self):
+        """Parse the forrest.properties file."""
+        with open(self.properties_file) as p:
+            for line in p:
+                if not line.startswith('#') and '=' in line:
+                    self.parse_line(line.strip())
+
+    def parse_line(self, line):
+        """Parse a line in the file."""
+        parts = line.split('=')
+        if len(parts) == 2:
+            key = parts[0].strip()
+            value = parts[1].strip()
+
+            if value.startswith('$'):
+                self.properties[key] = self.properties[value[2:-1].strip()]
+            else:
+                self.properties[key] = value
+        else:
+            raise ValueError('Error in line: '.format(line))
 
 
 class DocMaker(object):
@@ -916,11 +947,10 @@ def check_forrest_properties(directory):
     """Parse forrest.properties."""
     fp = os.path.join(directory, 'forrest.properties')
     if os.path.exists(fp):
-        for line in fileinput.FileInput(fp):
-            if not line.startswith('#') and 'project.xdocs-dir' in line:
-                return os.path.join(directory, line.split('=')[1].strip())
-        else:
-            return os.path.join(directory, 'src/documentation/content/xdocs')
+        pp = PropertiesParser(fp)
+        pp.parse()
+
+        return pp.properties['project.xdocs-dir']
 
 
 def main():
@@ -935,8 +965,6 @@ def main():
                 handle_file(uff, None)
         elif os.path.exists(uff):
             xdocs_dir = check_forrest_properties(uff)
-            if '$' in xdocs_dir:
-                xdocs_dir = None
             util.print_frame(xdocs_dir)
             for root, dirs, files in os.walk(uff, followlinks=True):
                 for f in files:

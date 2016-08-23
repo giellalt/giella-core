@@ -733,10 +733,10 @@ class DocMaker(object):
 
     def jspwiki_blocks(self):
         """Parse a jspwiki file."""
-        for x, line in enumerate(fileinput.FileInput(self.filename)):
+        for x, line in enumerate(fileinput.FileInput(self.filename), start=1):
             if line.strip():
                 try:
-                    self.parse_block(Line(number=x + 1, content=line))
+                    self.parse_block(Line(number=x, content=line))
                 except LineError as e:
                     print(e, file=sys.stderr)
             else:
@@ -747,7 +747,7 @@ class DocMaker(object):
         rulename_re = re.compile('''^"([^"]+)"''')
         rulename = ''
 
-        for x, line in enumerate(fileinput.FileInput(self.filename)):
+        for x, line in enumerate(fileinput.FileInput(self.filename), start=1):
             try:
                 if rulename_re.match(line):
                     rulename = rulename_re.match(line).group(1)
@@ -760,7 +760,7 @@ class DocMaker(object):
                             if not rulename:
                                 raise ValueError(
                                     'rulename is empty!: {}'.format(
-                                        x + 1, line)
+                                        x, line)
                                 )
 
                             parts = m.group(1).split('@RULENAME@')
@@ -773,15 +773,15 @@ class DocMaker(object):
                                     'Either remove «_» from @RULENAME@ or '
                                     'insert a space between @RULENAME@ and '
                                     '_: {}'.format(rulename),
-                                    Line(number=x + 1, content=line))
+                                    Line(number=x, content=line))
                             else:
                                 self.parse_block(
-                                    Line(number=x + 1,
+                                    Line(number=x,
                                          content=m.group(1).replace(
                                             '@RULENAME@', rulename)))
                         else:
                             self.parse_block(
-                                Line(number=x + 1,
+                                Line(number=x,
                                      content=m.group(1)))
                 elif line.startswith('!!€ '):
                     parts = line[len('!!€ '):].split()
@@ -796,14 +796,14 @@ class DocMaker(object):
                     else:
                         c.append('???')
                     c.append(' ')
-                    self.parse_block(Line(number=x + 1, content=' '.join(c)))
+                    self.parse_block(Line(number=x, content=' '.join(c)))
 
                 elif line.startswith('!!€'):
                     a = re.compile('(!!€.+:\s+)(.+)')
                     m = a.match(line)
                     if m:
                         self.parse_block(
-                            Line(number=x + 1,
+                            Line(number=x,
                                  content='__{} examples:__'.format(
                                     m.group(1))))
                 elif re.match('^[^!]+!![=≈]', line):
@@ -840,7 +840,7 @@ class DocMaker(object):
                     else:
                         c = line.replace(m.group(2), '')
 
-                    self.parse_block(Line(number=x + 1, content=c))
+                    self.parse_block(Line(number=x, content=c))
 
                 else:
                     self.close_block()

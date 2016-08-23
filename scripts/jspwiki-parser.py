@@ -744,7 +744,7 @@ class DocMaker(object):
 
     def lexc_blocks(self):
         """Parse a lexc file."""
-        rulename_re = re.compile("""^"([^"]+)"""")
+        rulename_re = re.compile('''^"([^"]+)"''')
         rulename = ''
 
         for x, line in enumerate(fileinput.FileInput(self.filename)):

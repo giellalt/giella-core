@@ -22,10 +22,6 @@ EXTRA_DIST = $(PACKAGE).pc.in
 pkgconfigdir = $(prefix)/share/pkgconfig
 pkgconfig_DATA = $(PACKAGE).pc
 
-# include $(srcdir)/subfiles.mk
-# 
-# nobase_dist_pkgdata_DATA = $(subdir_files)
-
 nobase_dist_pkgdata_SCRIPTS = \
    scripts/clean_weight_corpus.sh \
    scripts/data/cohort_to_table_footer.html \

@@ -1,0 +1,1409 @@
+#!/usr/bin/perl
+use warnings;
+use strict;
+use utf8;
+use open 'utf8';
+# permit named arguments
+use Getopt::Long;
+
+
+# These definitions ensure that the script works
+# also in environments, where PERL_UNICODE is not set.
+binmode( STDIN, ':utf8' );
+binmode( STDOUT, ':utf8' );
+binmode( STDERR, ':utf8' );
+
+# preprocess
+# Perl-script for text preprocessing
+#  - Cuts text into sentences and sentences into words (tokens).
+#  - Reads plain text from STDIN and outputs
+#    a list of words separated by newline.
+#
+# An abbreviation file may be given as input parameter --abbr,
+# the file has special syntax and the usage is connected
+# to other sámi tools. See documentation in
+# http://giellatekno.uit.no/doc/ling/preprocessor.html
+#
+# $Id$
+
+
+my %abbrs;
+my %corrections;
+my %corr_short;
+my $TRAB="TRAB";
+my $ITRAB="ITRAB";
+my $TRNUMAB="TRNUMAB";
+my $IDIOM="IDIOM";
+my $NOAB="NOAB";
+my $NUMNOAB="NUMNOAB";
+
+# Max size of a multi-word expression.
+my $MULTIWORD_SIZE = 3;
+
+my $abbr_file;
+my $help=0;
+my $verbose=0;
+my $hyph=0;
+my $use_hyph_tag=0;
+my $corr;
+my $sentence_break=".";
+my $xml;
+my $no_xml_out;
+my $line;
+my $next_line;
+my $connect;
+my $space=0;
+my $ltag = "<";
+my $rtag = ">";
+my $no_utf8=0;
+my $preserve_newline=0;
+
+GetOptions ("abbr=s" => \$abbr_file,
+            "corr=s" => \$corr,
+            "break=s" => \$sentence_break,
+            "xml" => \$xml,
+            "no-xml-out" => \$no_xml_out,
+            "connect=s" => \$connect,
+            "help" => \$help,
+            "space" => \$space,
+            "ltag" => \$ltag,
+            "rtag" => \$rtag,
+            "v" => \$verbose,
+
+            "hyph" => \$hyph,
+            "use-hyph-tag" => \$use_hyph_tag) ;
+
+if ($help) {
+    &print_usage;
+    exit;
+}
+
+
+my %connecting;
+if ($connect) {
+    for my $w ( split(",", $connect)) {
+        $connecting{$w} = 1;
+    }
+}
+
+# my $quotations = quotemeta("«»‹›“”„‘’‚´`'\""); # original
+my $quotations = quotemeta("«»‹›“”„‘’‚`'\"");   # Skolt Sami fix without ACUTE ACCENT as delimiter
+my $other = quotemeta("…•¶½¾¼°◊√∆"); # dash to be added
+my $parentheses = quotemeta("|{}[]()<>");
+if ($xml) { $parentheses = quotemeta("|{}[]()"); }
+my $general_punct = quotemeta("\$.*?!,;:.%");
+
+# Punctuation marks that are always their own tokens,
+# whether word or numeral expression.
+# There are characters added to this list depending on if
+# the processed string is word or numeral.
+my $SINGLE_PUNCT = $quotations . $parentheses . quotemeta("?!,;/\\") . $other;
+
+# Regex for tokens that nevertheless contain punctuation that
+# is specified in variable $SINGLE_PUNCT.
+my $CONTAIN_PUNCT = 'ja\/dahje|http|:\/\/|km\/h|www|@|\.jpg|\.doc|\.pdf|\.html|\.com|\.txt|\.no|¹|²|³|™';
+if ($xml) {
+    $CONTAIN_PUNCT .= "|<.*>";
+}
+
+# Punctuation that connects two or more numerals
+# into one numeral expressions.
+my $NUM_PUNCT=quotemeta("-+*=/≈·");
+
+my %idioms;
+my %idioms_short;
+my %num;
+my %regex;
+
+
+my @next_words;
+my @words;
+
+preprocess_lines();
+
+###
+# Sub routines from here on
+###
+
+sub preprocess_lines
+{
+    read_abbr (\%abbrs, \%idioms, \%idioms_short, \%num, \%regex);
+    read_corr (\%corrections, \%corr_short);
+
+    loop_on_input();
+}
+
+# Read one line at a time but keep track of the next line.
+sub loop_on_input {
+
+    while (<>) {
+        chomp;
+
+        if (/^$/) {
+            $_ = "¶";
+        }
+
+        if (!(/^\s*$/ && !eof)) {
+
+            s/^\s*//;
+
+            # Process the <hyph> tag.
+            if (! $use_hyph_tag) {
+                if ($hyph) {
+                    s/\<hyph\>/-/g;
+                } else {
+                    s/\<hyph\>//g;
+                }
+            }
+
+            # Process always the previous line, unless first line.
+            if(!$line && ! @words && !eof) {
+                $line = $_;
+            } else {
+                process_lines($_);
+                process_words();
+
+                @words = @next_words;
+            }
+        }
+    }
+
+    process_words();
+}
+
+sub process_lines
+{
+    my ($this_line) = @_;
+
+    verbose("process_lines", $this_line, __LINE__);
+    if (!$line && ! @words && eof) {
+        $line = $this_line;
+        $next_line = undef;
+    } elsif(eof && ! $this_line) {
+        $next_line = undef;
+    } else {
+        $next_line = $this_line;
+    }
+
+    process_line();
+
+    if ($preserve_newline) {
+        $words[-1]{space} .= "\n";
+    }
+}
+
+sub process_line
+{
+    # If no XML-processing, split line to tokens.
+    if(! $xml) {
+        if (! @words) {
+            line2words($line);
+            $line = undef;
+        }
+
+        if ($next_line) {
+            line2words($next_line);
+            $next_line = undef;
+        }
+
+    } else {
+        # If the xml-tags are included in the preprocessor output they are
+        # left untouched and just added to the tokens array.
+        # The xml-markup without space, like in <italics>word</italics>
+        # is taken into account.
+
+        if (!@words) {
+            xml_tags($line, \@words);
+        }
+        xml_tags($next_line, \@next_words)
+    }
+}
+
+sub line2words
+{
+    my ($this_line) = @_;
+
+    verbose("line2words", $this_line, __LINE__);
+    while($this_line =~ s/^(\s*)([^\s]+)//) {
+        my $word = $2;
+        my $spacechar = $1;
+        # Assume that a word containing a dot followed by a hyphen or parenthesis is
+        # an abbreviation followed by another word. Split this word
+        # into two words, inserting a space after each of them
+        if ($word =~ /(.*\D)\.([-\)])(.*)/) {
+            push_word($1 . '.', " ");
+            push_word($2 .$3, " ");
+        } else {
+            push_word($word, $spacechar);
+        }
+    }
+}
+
+sub push_word {
+    my ($word, $spacechar) = @_;
+    my %w = ('word' => $2, 'space' => $1);
+    if ($space) {
+        %w = ('word' => $word, 'space' => $spacechar);
+    } else {
+        %w = ('word' => $word, 'space' => " ");
+    }
+    push (@words, \%w);
+}
+
+sub xml_tags {
+    my ($line, $aref) = @_;
+
+    @$aref = undef;
+    pop @$aref;
+    chomp $line;
+
+    while ($line) {
+        verbose("processing xml-tag", $line , __LINE__);
+
+        if ($line =~ /^\s*$/) {
+            last;
+        }
+
+        if ($line =~ s/^(\s*)([^<\s]+?)(?=(?:\s|$))//) {
+            verbose("read", $2 , __LINE__);
+            my %w = ('word' => $2, 'space' => $1);
+            push (@$aref, \%w);
+            next;
+        }
+
+        if ($line =~ s/^(\s*)(<[^<]*?>)//) {
+            if ($2) {
+                verbose("read", $2 , __LINE__);
+                my %w = ('xml' => $2, 'space' => $1 );
+                push (@$aref, \%w);
+            }
+            next;
+        }
+
+        while($line =~ s/^(\s*)([^<\s]+)//) {
+            verbose("read", $2 , __LINE__);
+            my %w = ('word' => $2, 'space' => $1);
+            push (@$aref, \%w);
+        }
+    }
+}
+
+sub process_words {
+
+    while (@words) {
+
+        my $w_token = shift @words;
+        # Leave xml-tags untouched.
+        if ($xml && $w_token->{xml}) {
+            if ($space && $w_token->{space}) {
+                print $ltag, $w_token->{space}, $rtag, "\n";
+            }
+            if (! $no_xml_out) {
+                print $w_token->{xml}, "\n";
+            }
+
+        } else {
+
+            my $word = $w_token->{word};
+
+            if (defined ($word) && $word ne "") {
+
+                verbose("process_words", $word , __LINE__);
+                # An array for storing the tokens, each token in its own slot.
+                my @tokens;
+
+                # Move forward if the word is nothing special.
+                # This is for making preprocessing faster.
+
+                if ($word =~ /^[^\W\d\s\n]*$/ && ((! $corr || ! $corr_short{$word}) && ! ($idioms_short{$word} || $idioms_short{lc($word)}))) {
+                    verbose("no correction, no idiom", $word , __LINE__);
+                    add_token(\@tokens, $w_token, $word);
+
+                } else {
+                    $word = process_word1_hyphen_and_word2_string($word);
+                    @tokens = handle_leading_punctuation($word, $w_token);
+                }
+
+                print_tokens(\@tokens);
+            }
+        }
+    }
+}
+
+# Process "word1- og word2" strings.
+sub process_word1_hyphen_and_word2_string
+{
+    my ($word) = @_;
+
+    verbose("process_word1_hyphen_and_word2_string", $word, __LINE__);
+    if ($word =~ /\w+\p{Pd}$/) {
+        if (@words && $words[0]{word}) {
+            my $next_w = $words[0]{word};
+            if ($connecting{$next_w}) {
+                $word .= $words[0]{space} . $next_w;
+                shift @words;
+                verbose("connecting", $word , __LINE__);
+                if ($words[0] && (! $xml || $words[0]{word} !~ /^</)) {
+                    $word .= $words[0]{space} . $words[0]{word};
+                    shift @words;
+                } elsif (@next_words && (! $xml || $next_words[0]{word} !~ /^</)) {
+                    $word .= $next_words[0]{space} . $next_words[0]{word};
+                    shift @next_words;
+                }
+            }
+        } elsif(@next_words && $next_words[0]{word}) {
+            my $connect = $next_words[0]{word};
+            if ($connecting{$connect} && $next_words[1]) {
+                verbose("connecting", $word , __LINE__);
+                $word .= $next_words[0]{space} . $connect;
+                $word .= $next_words[1]{word} . $next_words[1]{word};
+                shift @next_words;
+                shift @next_words;
+            }
+        }
+    }
+
+    return $word;
+}
+
+sub process_word {
+    my ($word, $w_token, $words_aref, $next_aref, $tokens_aref) = @_;
+
+    verbose ("entering process_word", $word, __LINE__);
+    # variable for storing all the punctuation at the end of the word.
+    # except dot (for abbreviations) and some other punct. if needed
+    my $end_punct = "";
+
+    # Store the punctuation at the end of the string to a variable
+    if ($word =~ s/([+=%:$SINGLE_PUNCT\§]+)$//o) {
+        $end_punct = $1;
+        verbose ("process_word/end_punct", $end_punct, __LINE__);
+        verbose ("process_word/end_punct/word", $word, __LINE__);
+    }
+
+    my $word1 = test_corr($word, $words_aref, $tokens_aref);
+
+    # Test for multiword expression.
+    if ($idioms_short{$word1} || $idioms_short{lc($word1)}) {
+        test_idiom(\$word1, $words_aref, $next_aref, $MULTIWORD_SIZE, $end_punct);
+    }
+
+    my $word2 = store_leading_punctuation($word1, $tokens_aref);
+
+    $end_punct = test_punctuation($word2, $end_punct, $words_aref, $tokens_aref, $w_token, $next_aref);
+
+    my @ep = split(//, $end_punct);
+    add_array($tokens_aref, \@ep);
+}
+
+sub store_leading_punctuation {
+    my ($word, $tokens_aref) = @_;
+
+    verbose("store_leading_punctuation", $word, __LINE__);
+    # Store the punctuation at the front of the string to tokens array.
+    if ($word =~ s/^([*+=%:\p{Pd}$other]+)//o) {
+        my @punct = split(//, $1);
+        add_array($tokens_aref, \@punct);
+        verbose ("process_word/front_punct", $1, __LINE__);
+    }
+
+    return $word;
+}
+
+sub check_if_word_is_abbr {
+    my ($word, $w_token, $words_aref, $tokens_aref) = @_;
+
+    verbose("check_if_word_is_abbr", $word, __LINE__);
+    my $is_abbr = 0;
+
+    my $abbr = $word;
+    $abbr =~ s/\.$//;
+    if ($abbrs{$abbr} || $abbrs{lc($abbr)}) {
+        verbose ("process_word/go_to_is_word_abbreviation", $abbr, __LINE__);
+        is_word_abbreviation($word, $w_token, $words_aref->[0]{word}, $tokens_aref);
+
+        # This really is an abbr
+        $is_abbr = 1;
+    } elsif ($abbr =~ /^[\p{Lu}]{2,3}$/o ) {
+        # Check for abbreviation with 2-3 capital letters
+        # If followed by a capital letter or number,
+        # There is a sentence boundary. todo: Remove this as irrelevant!!
+
+        verbose ("process_word/test_two_three_cap_letters", $abbr, __LINE__);
+
+
+        if ($words_aref->[0]{word} && $words_aref->[0]{word} !~ /^\p{Ll}/o ) {
+            if($corr) {
+                if ($corrections{$word}) {
+                    test_corr(\$word, $words_aref, $tokens_aref);
+                }
+            }
+            my @tmp = ($abbr, ".");
+            add_array($tokens_aref, \@tmp);
+            # This really is an abbr
+            $is_abbr = 1;
+        } else {
+            add_token($tokens_aref, $w_token, $word);
+            # This really is an abbr
+            $is_abbr = 1;
+        }
+    } elsif ($abbr =~ /^\p{Ll}$/){
+        # If an abbreviation like b.
+        if (
+            # Is our $abbr truely an abbr
+            ($abbrs{$abbr} || $abbrs{lc($abbr)})
+            # Is there a word after our abbr
+            && $words_aref->[0]{word}
+            ## Does this word start with an uppercase letter
+            && $words_aref->[0]{word} !~ /^[\p{Ll}]/o
+            )
+        {
+            add_token($tokens_aref, $w_token, $word);
+            my @tmp = (".");
+            add_array($tokens_aref, \@tmp);
+        } else {
+            # This is not an abbr
+            $is_abbr = 0;
+        }
+    }
+
+    return $is_abbr;
+}
+
+sub test_punctuation {
+    my ($word, $end_punct, $words_aref, $tokens_aref, $w_token, $next_aref) = @_;
+
+    verbose ("test_punctuation", $word, __LINE__);
+    # If the punctuation at the end contains a sentence delimiter
+    # ? or !, the word ends the sentence in any case, so the word can
+    # be treated as a token.
+    if ($end_punct =~ /[¶\?\!\.]/) {
+        verbose ("end_punct", $word, __LINE__);
+        if($corr) {
+            if ($corr_short{$word}) {
+                test_corr(\$word, $words_aref, $tokens_aref);
+            }
+        }
+        add_token($tokens_aref, $w_token, $word);
+    } elsif ($word) {
+        # The word is checked for abbreviation and sentence boundary.
+        if (!check_if_word_is_abbr($word, $w_token, $words_aref, $tokens_aref)) {
+            # Cut the word into tokens if there is punctuation in the middle.
+            # e.g. gielddat/guovllut
+            # Check for expressions in $CONTAIN_PUNCT -variable.
+            verbose ("process_word/not_abbr", "$word", __LINE__);
+            if (($word =~ /^(\pL+\.)([\p{pD}\pL]+.*)$/ || $word =~ /([\pL\p{Pd}]+)([^\pL0-9\. \:\-\`]+[\p{pD}\pL]+.*)$/) && $word !~ /$CONTAIN_PUNCT/o) {
+                    $word = $1;
+                    my %w = ('word' => $2 . $end_punct);
+                    $end_punct = "";
+                    unshift (@{$words_aref}, \%w);
+
+                    verbose ("process_word/contain_punct", "$word", __LINE__);
+                    process_word($1, $w_token, $words_aref, $next_aref, $tokens_aref);
+            } else {
+                remove_dot($word, $corr, $words_aref, $tokens_aref, $w_token);
+            }
+        }
+    }
+
+    return $end_punct;
+}
+
+# If the word was not an abbreviation, the rest
+# of the punctuation is removed and stored as separate tokens.
+# This operation is for taking the dot out.
+sub remove_dot
+{
+    my ($word, $corr, $words_aref, $tokens_aref, $w_token) = @_;
+
+    if ($word =~ s/([$SINGLE_PUNCT\.:]+)$//o) {
+        my $rest_punct =  $1;
+        verbose ("process_word/rest_punct", "$word $rest_punct", __LINE__);
+        if($corr) {
+            if ($corrections{$word}) {
+                test_corr(\$word, $words_aref, $tokens_aref);
+            }
+        }
+        add_token($tokens_aref, $w_token, $word);
+
+        my @rest = split ("", $rest_punct);
+        add_array($tokens_aref, \@rest);
+
+    } else {
+        add_token($tokens_aref, $w_token, $word);
+    }
+
+}
+
+sub concatenate_three_or_more_leading_dots {
+    my ($first_word, $middle_punct, $second_word, $word, $w_token, $words_aref, $next_words_aref, $tokens_aref) = @_;
+
+    verbose("process_word, punctuation", $word , __LINE__);
+    if ($first_word) {
+        if ($first_word =~ /^[\W]?[^\W\d]+/) {
+            verbose("if word with dots", $first_word , __LINE__);
+            process_word ($first_word, $w_token, $words_aref, $next_words_aref, $tokens_aref);
+        } else {
+            verbose("if numeral with dots", $first_word , __LINE__);
+            process_numeral ($first_word, $w_token, $words_aref, $next_words_aref, $tokens_aref);
+        }
+    }
+    my $subpunct = substr($middle_punct, 0, 3);
+    add_new_token ($tokens_aref, $subpunct);
+    if ($second_word) {
+        my %w = ('word' => $second_word);
+        if ($second_word =~ /^[\W]?[^\W\d]+/) {
+            verbose("if word with dots", $second_word , __LINE__);
+            process_word ($second_word, \%w, $words_aref, $next_words_aref, $tokens_aref);
+        } else {
+            verbose("if numeral with dots", $second_word , __LINE__);
+            process_numeral ($second_word, \%w, $words_aref, $next_words_aref, $tokens_aref);
+        }
+    }
+}
+
+sub handle_two_or_less_leading_dots {
+    my ($word, $tokens_aref) = @_;
+    # store punctuation from the front of the expression
+    # to the tokens array. (todo: check variable $CONTAIN_PUNCT)
+    if ($word =~ s/^([$SINGLE_PUNCT\.]+)//o) {
+        verbose("if front punct ", $word , __LINE__);
+        my @punct = split(//, $1);
+        add_array($tokens_aref, \@punct);
+    }
+
+    return $word;
+}
+
+sub handle_leading_punctuation {
+    my ($word, $w_token) = @_;
+
+    my @tokens;
+
+    verbose("handle_leading_punctuation", $word , __LINE__);
+    # Fix some punctuation, like ...voxende and ----whatelse
+    if ($word =~ /^(.*?)((:?\.){3,}|(:?\-){3,})(.*)$/) {
+        concatenate_three_or_more_leading_dots  ($1, $2, $5, $word, $w_token, \@words, \@next_words, \@tokens);
+    } else {
+        $word = handle_two_or_less_leading_dots($word, \@tokens);
+        if (defined ($word) && $word ne "") {
+            if ($word =~ /^[\W]?\pL+/) {
+                # Examine the type of the string. If the expression contains
+                # alphabetical characters optionally preceded by one punctuation
+                # character, it is a word.
+
+                verbose("if word", $word , __LINE__);
+                process_word ($word, $w_token, \@words, \@next_words, \@tokens);
+            } else {
+                # Otherwise it is processed like numeral.
+                verbose("else numerical", $word , __LINE__);
+                process_numeral ($word, $w_token, \@words, \@next_words, \@tokens);
+            }
+        }
+    }
+
+    return @tokens;
+}
+
+sub is_abbreviation {
+    my ($abbr, $class) = @_;
+
+    return (($abbrs{$abbr} && $abbrs{$abbr} eq $class) || ($abbrs{lc($abbr)} && $abbrs{lc($abbr)} eq $class));
+}
+
+sub add_TRAB {
+    my ($tokens_aref, $w_token, $word) = @_;
+
+    # Transitive abbreviations are never followed
+    # by sentence boundary.
+    verbose("TRAB", $word, __LINE__);
+    add_token($tokens_aref, $w_token, $word);
+}
+
+sub add_TRNUMAB {
+    my ($tokens_aref, $w_token, $word, $next_word) = @_;
+
+    # There is CLB after TRNUMAB only for the capital+small combinations
+    # and all small-initial strings that consist of more than one letter.
+    # For all other strings (one small letter, one or several capital letters, number) we
+    # want no CLB after TRNUMAB.
+    verbose("TRNUMAB", $word, __LINE__);
+    add_token ($tokens_aref, $w_token, $word);
+    if (!$next_word or ($next_word && $next_word =~ /^\p{Lu}/ && $next_word !~ /^(\p{Lu}|[IVXCDLM]+)$/o)) {
+        add_new_token ($tokens_aref, $sentence_break);
+    }
+}
+
+sub add_ITRAB {
+    my ($tokens_aref, $w_token, $word, $next_word) = @_;
+    verbose("ITRAB", $word, __LINE__);
+    # There is a sentence boundary if intransitive abbreviation
+    # is NOT followed by a small alphabetic char or punctuation,
+    # or if it is the last word
+
+    add_token ($tokens_aref, $w_token, $word);
+    if (!$next_word or ($next_word && $next_word !~ /^[\p{Ll}\pP]/o)) {
+        verbose("ITRAB", $next_word, __LINE__);
+        add_new_token ($tokens_aref, $sentence_break);
+    }
+}
+
+sub add_NUMNOAB {
+    my ($tokens_aref, $w_token, $word, $next_word) = @_;
+
+    verbose("NUMNOAB", $word, __LINE__);
+    # The expected behaviour of $NUMNOAB is shown in $GTHOME/tools/abbrtester/abbrtester.py
+    if ($next_word) {
+        if ($next_word =~ /^\p{Lu}/) {
+            $word =~ s/\.$//;
+            add_token ($tokens_aref, $w_token, $word);
+            add_new_token ($tokens_aref, $sentence_break);
+        } elsif ($next_word =~ /^\d/) {
+            add_token ($tokens_aref, $w_token, $word);
+        } elsif ($next_word =~ /^\p{Ll}/) {
+            add_token ($tokens_aref, $w_token, $word);
+        }
+    } else {
+        $word =~ s/\.//;
+        add_token ($tokens_aref, $w_token, $word);
+        add_new_token ($tokens_aref, $sentence_break);
+    }
+}
+
+sub add_NOAB {
+    my ($tokens_aref, $w_token, $word, $next_word) = @_;
+
+    # if next_word isn't defined, then we are at the end of a sentence
+    # -> this is not an abbr
+    # if next word is defined, and not uppercase
+    # -> this is not an abbr
+    verbose("NOAB", $word, __LINE__);
+    if (!$next_word || ($next_word && $next_word !~ /^[\p{Ll}\pP]/o)) {
+        $word =~ s/\.$//;
+        add_token($tokens_aref, $w_token, $word);
+        add_new_token ($tokens_aref, $sentence_break);
+    } else {
+        add_token($tokens_aref, $w_token, $word);
+    }
+}
+
+sub is_word_abbreviation {
+    my ($word, $w_token, $next_word, $tokens_aref) = @_;
+
+    my $abbr = $word;
+    $abbr =~ s/\.$//;
+
+    verbose("is_word_abbreviation", $abbr, __LINE__);
+    if (is_abbreviation($abbr, $TRAB)) {
+        add_TRAB($tokens_aref, $w_token, $word);
+        return 1;
+    } elsif (is_abbreviation($abbr, $TRNUMAB)) {
+        add_TRNUMAB($tokens_aref, $w_token, $word, $next_word);
+        return 1;
+    } elsif (is_abbreviation($abbr, $ITRAB)) {
+        add_ITRAB($tokens_aref, $w_token, $word, $next_word);
+        return 1;
+    } elsif (is_abbreviation($abbr, $NUMNOAB)) {
+        add_NUMNOAB($tokens_aref, $w_token, $word, $next_word);
+        return 1;
+    } elsif (is_abbreviation($abbr, $NOAB)) {
+        add_NOAB($tokens_aref, $w_token, $word, $next_word);
+        return 1;
+    }
+    return 0;
+}
+
+# If a word is in the typos-list, it is replaced by the correct reading.
+
+sub test_corr {
+    my ($word, $words_aref, $next_aref, $tokens_aref) = @_;
+
+    # Correct the word, if corrections is defined
+    if ($corr ) {
+        if ($corr_short{$word}) {
+
+            verbose("test_corr", $word, __LINE__);
+            # If the word is single part.
+            if (my $correct = $corrections{$word}) {
+                $word = single_part($correct, $word, $tokens_aref);
+            } else {
+                $word = define_word($word, $tokens_aref, $words_aref, $next_aref);
+            }
+        }
+    }
+    return $word;
+}
+
+sub single_part
+{
+    my ($correct, $word, $tokens_aref) = @_;
+
+    my @parts = split (/ /o, $correct);
+    if (scalar @parts > 1) {
+        if ( $idioms{$correct}) {
+            $word = $correct;
+            verbose ("test_corr/split_words", "$correct", __LINE__);
+        } else {
+            $word = pop @parts;
+            add_array($tokens_aref, \@parts);
+            verbose ("test_corr/split_words", "$correct", __LINE__);
+        }
+    } else {
+        $word = $correct;
+    }
+
+    return $word;
+}
+
+sub define_word
+{
+    my ($word, $tokens_aref, $words_aref, $next_aref) = @_;
+
+    verbose("define_word", $word, __LINE__);
+    my $next;
+    my $idiom;
+    my $ucidiom;
+
+    if( $words_aref->[0]{word} ) {
+        $idiom = $word . $words_aref->[0]{space} . $words_aref->[0]{word};
+        $ucidiom = ucfirst($word) . $next_aref->[0]{space} . ucfirst($next_aref->[0]{word});
+    } elsif ($next_aref->[0]{word}) {
+        $idiom = $word . $next_aref->[0]{space} . $next_aref->[0]{word};
+        $ucidiom = ucfirst($word) . $next_aref->[0]{space} . ucfirst($next_aref->[0]{word});
+        $next=1;
+    }
+
+    return loop_correction($word, $idiom, $ucidiom, $tokens_aref, $next, $words_aref, $next_aref);
+}
+
+sub loop_correction
+{
+    my ($word, $idiom, $ucidiom, $tokens_aref, $next, $words_aref, $next_aref) = @_;
+
+    verbose("loop_correction", $word, __LINE__);
+    my $size=2;
+    my $i=1;
+    while ($i <= $size) {
+
+        # Remove the punctuation at the end of the expression.
+        (my $idiom2 = $idiom) =~ s/([^\w]*)$//;
+        (my $ucidiom2 = $ucidiom) =~ s/([^\w]*)$//;
+        my $end_punct = $1;
+
+        # If the expressions contains punctuation in the middle, return.
+        if ($idiom2 =~ /[^\w\s\d\.\-]/) {
+            last;
+        } elsif ($corrections{$idiom2} || $corrections{lc($idiom2)} || $corrections{($ucidiom2)}) {
+            # Test if the formed multiword expression exists in the
+            # idiom list. Test also lower case version.
+            my $correct = $corrections{$idiom};
+            verbose ("test_corr/correction", "$correct", __LINE__);
+            $word = check_idiom($correct, $word, $end_punct, $tokens_aref);
+
+            # Remove the parts of the multiword expression from
+            # the word array.
+            if($next) {
+                splice (@{$next_aref}, 0, $i+1);
+            } else {
+                splice (@{$words_aref}, 0, $i+1);
+            }
+
+            last;
+        } else {
+            $i++;
+            if($words_aref->[$i]) {
+                $idiom = $idiom .  $words_aref->[$i]{space} . $words_aref->[$i]{word};
+            } elsif(! $next && $next_aref->[0]) {
+                $idiom = $idiom . $next_aref->[0]{space} . $next_aref->[0]{word};
+                $next=1;
+            } else {
+                last;
+            }
+        }
+    }
+
+    return $word;
+}
+
+sub check_idiom
+{
+    my ($correct, $word, $end_punct, $tokens_aref) = @_;
+    if ( $idioms{$correct}) {
+        $word = $correct;
+        $word .= $end_punct;
+        verbose ("test_corr/idiom", "$correct", __LINE__);
+    } else {
+        my @parts = split (/ /o, $correct);
+        if (scalar @parts > 1) {
+            $word = pop @parts;
+            $word .= $end_punct;
+            add_array($tokens_aref, \@parts);
+            verbose ("test_corr/split_words", "$correct", __LINE__);
+        }
+    }
+
+    return $word;
+}
+
+# If the word starts an multiword expression, it is replaced
+# with the expression. The other parts are
+# removed from the words array.
+sub test_idiom {
+    my ($word_ref, $words_aref, $next_aref, $size, $end_punct) = @_;
+
+    # Test for multiword expressions by growing the token
+    # one word at a time
+    my $next=0;
+    my $i=0;
+    my $last_part;
+    my $idiom;
+    my $ucidiom;
+
+    verbose("test_idiom", "", __LINE__);
+    if ($words_aref->[0]{word} or $next_aref->[0]{word}) {
+        if( $words_aref->[0]{word} ) {
+            if ($words_aref->[0]{space}) {
+                $idiom = $$word_ref . $words_aref->[0]{space} . $words_aref->[0]{word};
+                $ucidiom = ucfirst($$word_ref) . $words_aref->[0]{space} . ucfirst($words_aref->[0]{word});
+            } else {
+                $idiom = $$word_ref . $words_aref->[0]{word};
+                $ucidiom = ucfirst($$word_ref) . ucfirst($words_aref->[0]{word});
+            }
+        } elsif ($next_aref->[0]{word}) {
+            $idiom = $$word_ref . $next_aref->[0]{space} . $next_aref->[0]{word};
+            $ucidiom = ucfirst($$word_ref) . $next_aref->[0]{space} . ucfirst($next_aref->[0]{word});
+            $next=1;
+        }
+
+        # Only test for multi word expression if end_punct is emtpy
+        if ($end_punct eq "") {
+            while ($i <= $size) {
+
+                # Remove the punctuation at the end of the expression.
+                (my $idiom2 = $idiom) =~ s/[^\w]*$//;
+                (my $ucidiom2 = $ucidiom) =~ s/[^\w]*$//;
+
+                # If the expressions contains punctuation in the middle, return.
+                return if ($idiom2 =~ /[^\w\s\d\.\-]/);
+
+                # Test if the formed multiword expression exists in the
+                # idiom list. Test also lower case version.
+
+                verbose ("test_idiom", $idiom, __LINE__);
+
+                if ($idioms{$idiom2} || $idioms{lc($idiom2)}) {
+                    for (my $j=0; $j <= $i; $j++) {
+                        # Construct the new multiword processing unit.
+                        # Remove the parts of the multiword expression from
+                        # the word array.
+                        if($next) {
+                            $$word_ref = $$word_ref . $next_aref->[0]{space} . $next_aref->[0]{word};
+                            shift @{$next_aref};
+                        } else {
+                            if ($words_aref->[0]{space}) {
+                                $$word_ref = $$word_ref . $words_aref->[0]{space};
+                            }
+                            if ($words_aref->[0]{word}) {
+                                $$word_ref = $$word_ref . $words_aref->[0]{word};
+                            }
+                            shift @{$words_aref};
+                        }
+                    }
+                    return 1;
+                }
+
+                $i++;
+                if($words_aref->[$i]) {
+                    if ($words_aref->[$i]{space}) {
+                        $idiom = $idiom . $words_aref->[$i]{space};
+                        $ucidiom = $ucidiom . $words_aref->[$i]{space};
+                    }
+                    if ($words_aref->[$i]{word}) {
+                        $idiom = $idiom . $words_aref->[$i]{word};
+                        $ucidiom = $ucidiom . ucfirst($words_aref->[$i]{word});
+                    }
+                } elsif(! $next && $next_aref->[0]{word} && $next_aref->[0]{space}) {
+                    $idiom = $idiom . $next_aref->[0]{space} . $next_aref->[0]{word};
+                    $ucidiom = $ucidiom . $next_aref->[0]{space} . ucfirst($next_aref->[0]{word});
+                    $next=1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    } else {
+        return 0;
+    }
+}
+
+sub process_numeral {
+    my ($word, $w_token, $words_aref, $next_aref, $tokens_aref) = @_;
+
+    verbose ("process_numeral", $word, __LINE__);
+
+    if ($corr ) {
+        if ($corr_short{$word}) {
+            test_corr(\$word, $words_aref, $next_aref, $tokens_aref);
+        }
+    }
+
+    ($word, $words_aref) = fix_numeral_expressions_containing_spaces($word, $words_aref);
+
+    my $end_punct;
+    ($end_punct, $word) = find_endpunct($end_punct, $word);
+
+    verbose ("process_numeral", $word, __LINE__);
+
+    my $end_word;
+
+    if  ( $word =~ /^(\d+)([\:\'\-]?)([\pL]+)(\.)?$/o && ! $2 && ! $num{$3}) {
+        word_as_inflected_numeral($tokens_aref, $word, $w_token, $words_aref, $next_aref, $end_punct);
+
+    } elsif ($word =~ /\.([^\W\d]+\.?)$/ && $word !~ /$CONTAIN_PUNCT/o) {
+        word_or_abbr_attached_to_numeral($word, $w_token, $words_aref, $next_aref, $tokens_aref, $end_punct);
+    } else {
+
+        my $rest_punct;
+
+        compute_end_and_restpunct($end_punct, $rest_punct, $word, $end_word, $w_token, $words_aref, $next_aref, $tokens_aref);
+    }
+}
+
+# Check if there is an abbreviation or a word attached to
+# numeral. E.g. 6.b. ...ovdal. This introduces problems with some
+# mispellings with headings, like 1.6.Vuonain
+sub word_or_abbr_attached_to_numeral
+{
+    my ($word, $w_token, $words_aref, $next_aref, $tokens_aref, $end_punct) = @_;
+
+    verbose("word_or_abbr_attached_to_numeral", $word, __LINE__);
+    $word =~ s/([^\W\d]+\.?)$//;
+
+    process_numeral($word, $w_token, $words_aref, $next_aref, $tokens_aref);
+    my $new_word = "";
+    if ($end_punct) {
+        $new_word = $1 . $end_punct;
+    } else {
+        $new_word = $1;
+    }
+    my %w = ('word' => $new_word);
+    unshift (@$words_aref, \%w);
+}
+
+# Check if the word is an inflected numeral. 12s, etc.
+sub word_as_inflected_numeral
+{
+    my ($tokens_aref, $word, $w_token, $words_aref, $next_aref, $end_punct) = @_;
+
+    verbose("word_as_inflected_numeral", $word, __LINE__);
+    add_token($tokens_aref, $w_token, $1);
+    my %w = ('word' => $3);
+    process_word ($3, \%w, $words_aref, $next_aref, $tokens_aref);
+
+    if ($end_punct) {
+        if ($4) { $end_punct = $4 . $end_punct; }
+    } else {
+        $end_punct = $4;
+    }
+
+    if ($end_punct) {
+        my @ep = split(//, $end_punct);
+        add_array($tokens_aref, \@ep);
+    }
+}
+
+sub compute_end_and_restpunct
+{
+    my ($end_punct, $rest_punct, $word, $end_word, $w_token, $words_aref, $next_aref, $tokens_aref) = @_;
+
+    # Check for ending dot, it is a separate token if
+    # the following word starts with capital letter.
+    # If there is an abbreviation with numeral, don't do checking.
+    # Otherwise the dot belongs to the expression.
+
+    # Process first the abbreviation or word
+    # that is attached to the numeral
+    if (defined($end_word) && $end_word ne "") {
+        verbose ("process_numeral/is_word_abbreviation", $end_word, __LINE__);
+        my $abbr = $end_word;
+        if (( $abbr =~ s/\.$//)  && ($abbrs{$abbr} || $abbrs{lc($abbr)})) {
+            verbose ("process_numeral/is_word_abbreviation", $abbr, __LINE__);
+            is_word_abbreviation($end_word, $w_token, $words_aref->[0], $tokens_aref);
+        }
+        else {
+            verbose ("process_numeral/is_word_abbreviation", $abbr, __LINE__);
+            process_word ($end_word, $w_token, $words_aref, $next_aref, $tokens_aref);
+        }
+    } else {
+
+        ($word, $end_punct, $rest_punct) = dot_test($word, $end_punct, $rest_punct, $words_aref);
+
+        verbose ("process_numeral", $word, __LINE__);
+
+        # Push everything to the tokens array.
+        verbose ("add_token", "$word", __LINE__);
+        add_token($tokens_aref, $w_token, $word);
+
+        if (defined($end_word) && $end_word ne "") {
+            verbose ("add_token", "$end_word", __LINE__);
+            add_token($tokens_aref, $w_token, $end_word);
+        }
+
+    }
+
+
+    if (defined($rest_punct) && $rest_punct ne "") {
+        my @rp = split(//, $rest_punct);
+        verbose ("add_array", "$word", __LINE__);
+        add_array($tokens_aref, \@rp);
+    }
+
+    if (defined($end_punct) && $end_punct ne "") {
+        my @ep = split(//, $end_punct);
+        verbose ("add_array", "$word", __LINE__);
+        add_array($tokens_aref, \@ep);
+    }
+}
+
+sub dot_test
+{
+    my ($word, $end_punct, $rest_punct, $words_aref) = @_;
+
+    verbose("dot_test", $word, __LINE__);
+    unless ($word !~ /\.$/) {
+        (my $nopunct = $word) =~ s/\.$//;
+        # If the number contains other than digits or is a year,
+        # and the next word does not exist or does not start uppercase, then
+        # the ending dot is removed.
+        if($nopunct =~ /[§\d\pP\pL]/ &&
+            ((!($words_aref->[0]{word}) ||
+            $words_aref->[0]{word} =~ /^[\p{Lu}]/o))){
+            $word = $nopunct;
+            $end_punct = compute_endpunct($end_punct);
+            $rest_punct = compute_restpunct($word, $rest_punct);
+            verbose("dot_test", $words_aref->[0]{word}, __LINE__);
+        } elsif($nopunct =~ /[§\d\pP\pL]/ &&
+            ((!($words_aref->[0]{word}) ||
+            $words_aref->[0]{word} =~ /¶/))){
+            $word = $nopunct;
+            $end_punct = compute_endpunct($end_punct);
+            $rest_punct = compute_restpunct($word, $rest_punct);
+            verbose("dot_test", $words_aref->[0]{word}, __LINE__);
+        } elsif ($word =~ /^\d{1,3}\.$/ ) {
+            if ($words_aref->[0]{word} =~ /^[\p{Lu}]/o) {
+                $end_punct = compute_endpunct($end_punct);
+                $rest_punct = compute_restpunct($word, $rest_punct);
+            verbose("dot_test", $words_aref->[0]{word}, __LINE__);
+            }
+        } elsif ($nopunct =~ /[§\d\pP\pL]/ && $words_aref->[0]{word} =~ /^[$parentheses°]/o) {
+            $word = $nopunct;
+            $end_punct = compute_endpunct($end_punct);
+            $rest_punct = compute_restpunct($word, $rest_punct);
+            verbose("dot_test", $words_aref->[0]{word}, __LINE__);
+        }
+
+    }
+
+    return ($word, $end_punct, $rest_punct);
+}
+
+sub compute_endpunct
+{
+    my ($end_punct) = @_;
+
+    if ($end_punct) {
+        $end_punct = "." . $end_punct;
+    } else {
+        $end_punct = ".";
+    }
+
+    return $end_punct
+}
+
+sub compute_restpunct
+{
+    my ($word, $rest_punct) = @_;
+
+    # Clean the rest of the token:
+    # cases like 123). where dot is preceded by punctuation.
+    if ($word =~ s/([$SINGLE_PUNCT:]+)$//o) {
+        $rest_punct =  $1;
+    }
+
+    return $rest_punct;
+
+}
+sub find_endpunct
+{
+    my ($end_punct, $word) = @_;
+
+        # Clean first the end of the token, where punctuation follows
+    # the numeral or an ordinal and does not belong to the expression.
+    # cases like: 123! and 123.), 123). 10,-.
+    # problem: 123.? and 123 is an ordinal.
+    if ($word =~ s/([$SINGLE_PUNCT:]+\.?)$//o){
+        $end_punct = $1;
+    }
+
+    if ($word =~ /([$SINGLE_PUNCT:\p{Pd}\%]+\.?)$/o){
+        $word =~ s/(\.?)$//;
+        $end_punct = $1;
+    }
+
+    return ($end_punct, $word);
+}
+
+# Combine percent sign to the numeral when separate.
+# covers cases like: 50 %
+sub combine_numeral_and_percent
+{
+    my ($word, $words_aref) = @_;
+
+    if (($word =~ /\d$/) && ($words_aref->[0]{word} && $words_aref->[0]{word} =~ /^\%/)) {
+        $word = $word . $words_aref->[0]{space} . $words_aref->[0]{word};
+        verbose ("process_numeral/combine", $word, __LINE__);
+        shift @{$words_aref};
+    }
+
+    return ($word, $words_aref);
+}
+
+sub combine_date_expression
+{
+    my ($word, $words_aref) = @_;
+
+    verbose("combine_date_expression", $word, __LINE__);
+    # Consider date expressions first.
+    # at the moment covers years: 1984-2000, 1984- 2000 etc.
+    if ($word =~ /^\d{4}\p{Pd}?$/o) {
+        while ($words_aref->[0] && $words_aref->[0]{word} && $words_aref->[0]{word} =~ /^(?:\p{Pd}|\p{Pd}?(?:\d{4}|\d{2}))\.?$/o) {
+            if ($word =~ /\-/ || $words_aref->[0]{word} =~ /\-/) {
+                $word = $word . $words_aref->[0]{space} . $words_aref->[0]{word};
+                verbose ("process_numeral/combine date", $word, __LINE__);
+                shift @{$words_aref};
+            } else {
+                return ($word, $words_aref);
+            }
+        }
+        return ($word, $words_aref);
+    }
+
+    return ($word, $words_aref);
+}
+
+sub combine_date_ranges
+{
+    my ($word, $words_aref) = @_;
+
+    verbose("combine_date_ranges", $word, __LINE__);
+    # Look for date ranges, e.g. 2. - 3. mars
+    # First check that all variables that are accessed are initialized
+    if ($word && $words_aref->[0]{word} && $words_aref->[1]{word}) {
+        # Then do the real work
+        if (
+            ($word =~ /^\d{1,2}\.$/ || # Test if $word is a number with at most two digits ending with a dot
+            $word =~ /^\d{1,2}\.\d{1,2}\.$/ ) && # Or a number of the format dd.dd.
+            $words_aref->[0]{word} =~ /-/ && # Test if the first word following $word is a hyphen
+            ($words_aref->[1]{word} =~ /^\d{1,2}\.$/ || # Test if the second word following $word is a number with at most two digits ending with a dot
+            $words_aref->[1]{word} =~ /^\d{1,2}\.\d{1,2}\.\d{1,2}/) # or has the dd.dd.dd
+        ) {
+            $word = $word . $words_aref->[0]{space} . $words_aref->[0]{word};
+            shift @{$words_aref};
+            $word = $word . $words_aref->[0]{space} . $words_aref->[0]{word};
+            shift @{$words_aref};
+            verbose ("process_numeral/combine", $word, __LINE__);
+            return ($word, $words_aref);
+        }
+    }
+
+    return ($word, $words_aref);
+}
+
+sub combine_punctuation_with_numeral
+{
+    my ($word, $words_aref) = @_;
+
+    verbose("combine_punctuation_with_numeral", $word, __LINE__);
+    # Combine punctuation with numeral if followed by other numeral.
+    # cases like 123- 456 and 123 -456 and 123 456 and 123 - 456
+    # 10 000,- and math expressions like 2 * 4 = 8
+    # many times connects long sequences of numbers into one token.
+    while (($word =~ /^[\d$NUM_PUNCT\- ]+$/o) && ($words_aref->[0]{word} && $words_aref->[0]{word} =~ /\d/o && $words_aref->[0]{word} =~ /^[\d$NUM_PUNCT\- ]+(\,\-)?\.?$/o)) {
+        $word = $word . $words_aref->[0]{space} . $words_aref->[0]{word};
+        verbose ("process_numeral/combine", $word, __LINE__);
+        shift @{$words_aref};
+    }
+
+    return ($word, $words_aref);
+}
+
+# Search for numeral expressions with spaces.
+sub fix_numeral_expressions_containing_spaces
+{
+    my ($word, $words_aref) = @_;
+
+    ($word, $words_aref) = combine_date_expression($word, $words_aref);
+    ($word, $words_aref) = combine_date_ranges($word, $words_aref);
+    ($word, $words_aref) = combine_punctuation_with_numeral($word, $words_aref);
+    ($word, $words_aref) = combine_numeral_and_percent($word, $words_aref);
+
+    return ($word, $words_aref);
+}
+
+sub verbose {
+    my ($from, $word, $linenumber) = @_;
+
+    if ($verbose) {
+        print STDERR "[$from:$linenumber] $word\n";
+    }
+}
+
+# Add text to an existing token.
+sub add_token{
+    my ($tokens_aref, $w_token, $content) = @_;
+
+    $$w_token{word} = $content;
+    push @{$tokens_aref}, $w_token;
+}
+
+# Create a new token and add text to it
+sub add_new_token{
+    my ($tokens_aref, $content) = @_;
+
+    my %w = ('word' => $content);
+    push @{$tokens_aref}, \%w;
+}
+
+# Create several new tokens from an array
+sub add_array{
+    my ($tokens_aref, $content_aref) = @_;
+
+    for my $p (@{$content_aref}) {
+        my %w = ('word' => $p);
+        push @{$tokens_aref}, \%w;
+    }
+}
+
+sub print_token{
+    my ($w_token) = @_;
+
+    if ($space && $w_token->{space}) {
+        print $ltag, $w_token->{space}, $rtag, "\n";
+    }
+    print $w_token->{word}, "\n";
+}
+
+# Print the list of tokens.
+sub print_tokens{
+    my ($tokens_aref) = @_;
+
+    verbose("print_tokens", "", __LINE__);
+    for my $t (@$tokens_aref) {
+        if ($space && $t->{space}) {
+            print $ltag, $t->{space}, $rtag, "\n";
+        }
+        if (defined($t->{word}) && $t->{word} ne "") {
+            if ($t->{word} !~ /^$/) {
+                my $w = $t->{word};
+                $w =~ s/ $//;
+                print "$w\n";
+            }
+        }
+    }
+}
+
+# Read the typos list
+# Read the corrections file (typos.txt)
+sub read_corr {
+    my ($corr_href, $corr_short_href) = @_;
+
+    if ($corr) {
+        local $/="\n";
+
+        open CORR, "< $corr" or die "preprocess: Can't open the corr file $corr: $!\n";
+
+        while (<CORR>) {
+            chomp;
+
+            next if (/^!/);
+            next if (/^\s*$/);
+            next if (/^\#/);
+            s/\s$//;
+
+            my ($error, $correct) = split(/\t+/);
+            if ($error && $correct) {
+                $error =~ s/\s$//;
+                $$corr_href{$error} = $correct;
+                my ($first, $last) = split(/ /, $error, 2);
+                $$corr_short_href{$first} = 1;
+            } else {
+                print STDERR "preprocess warning: Line not included to typos: $_\n";
+            }
+        }
+    }
+}
+
+
+# If the abbreviation file is given,
+# read the abbreviations from the file to a hash.
+sub read_abbr {
+    my ($abbr_href, $idiom_href, $idiom_short_href, $num_href, $regex_href) = @_;
+
+    if ($abbr_file) {
+        open LEX, "< $abbr_file" or die "preprocess: Can't open the abbr file: $!\n";
+
+        my $current;
+        while (<LEX>) {
+            chomp;
+            last if (/^LEXICON IDIOM/);
+            if (/^LEXICON\s+(.*?)\s*$/) {
+                $current = $1;
+                next;
+            }
+            $$abbr_href{$_} = $current;
+        }
+        while (<LEX>) {
+            chomp;
+            last if (/^LEXICON NUM/);
+            my ($first, $last) = split(/ /, $_, 2);
+            $$idiom_href{$_} = 1;
+            if ($first) {
+                $$idiom_short_href{$first} = 1;
+            }
+        }
+
+        while (<LEX>) {
+            next if /^\s*$/;
+            chomp;
+            $$num_href{$_} = 1;
+        }
+
+        close LEX;
+    }
+}
+
+sub print_usage {
+    print <<END;
+Usage: preprocess [OPTIONS] --abbr=<file_name> FILE
+Split text in FILE into sentences and words.
+Options:
+    --hyph|h         show the hyphenation points, i.e. change the <hyph> tags
+                     to hyphens. The default is to just remove the <hyph> tags.
+    --use-hyph-tags  leave the <hyph> tags untouched
+    --break=<string> use <string> instead of . as sentence delimiter.
+    --connect=<list> comma separated list of words which connect expressions
+                     like fisk- og vilthandelen
+    --space|s        Preserve space.
+    --ltag=<string>  Left tag for space, default <
+    --rtag=<string>  Right tag for space, default >
+    --help           Prints the help text and exit.
+    --v              Prints information of the execution of the script
+    --corr=<file>    List of common typos and their corrections (e.g. typos.txt)
+    --xml|x          Accept xml-formatted input, print each tag on its own line.
+    --no-xml-out|n   Used together with --xml, does not print the xml-tags.
+
+END
+}
+
+
+

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:hfp="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty">
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+   <xs:attribute name="kpvContlex" type="xs:string"/>
+
+   <xs:attribute name="kpvMorph">
+      <xs:simpleType>
+         <xs:restriction base="xs:string">
+            <xs:enumeration value="CX-ACC"/>
+            <xs:enumeration value="CX-DAT"/>
+            <xs:enumeration value="CX-GEN"/>
+            <xs:enumeration value="CX-NOM"/>
+            <xs:enumeration value="CX-аддза"/>
+            <xs:enumeration value="CX-лань"/>
+            <xs:enumeration value="CX-ӧ"/>
+            <xs:enumeration value="CX-ӧн"/>
+            <xs:enumeration value="CX-нас"/>
+            <xs:enumeration value="CX-сянь"/>
+            <xs:enumeration value="CX-ті"/>
+            <xs:enumeration value="CX-тӧг"/>
+            <xs:enumeration value="CX-ӧдз"/>
+            <xs:enumeration value="CX-ысь"/>
+            <xs:enumeration value="CX-ын"/>
+            <xs:enumeration value="DA-а"/>
+            <xs:enumeration value="DA-лун"/>
+            <xs:enumeration value="DA-торй"/>
+            <xs:enumeration value="DV-ыл"/>
+            <xs:enumeration value="DV-ышт"/>
+            <xs:enumeration value="DN-а"/>
+            <xs:enumeration value="DN-ась"/>
+            <xs:enumeration value="DN-ін"/>
+            <xs:enumeration value="DN-са"/>
+            <xs:enumeration value="DN-ся"/>
+            <xs:enumeration value="DN-торй"/>
+            <xs:enumeration value="DN-тӧм"/>
+            <xs:enumeration value="DN-ук"/>
+            <xs:enumeration value="DN-ӧс"/>
+            <xs:enumeration value="DV-игӧн"/>
+            <xs:enumeration value="DV-мӧн"/>
+            <xs:enumeration value="DV-ӧм"/>
+            <xs:enumeration value="DV-тӧм"/>
+            <xs:enumeration value="DV-сь"/>
+            <xs:enumeration value="DV-сьы"/>
+            <xs:enumeration value="DV-чы"/>
+            <xs:enumeration value="DV-зьы"/>
+            <xs:enumeration value="DV-ӧд"/>
+            <xs:enumeration value="DV-тӧг"/>
+            <xs:enumeration value="DV-тӧдз"/>
+            <xs:enumeration value="DV-ал"/>
+            <xs:enumeration value="DV-ан"/>
+            <xs:enumeration value="DV-ысь"/>
+            <xs:enumeration value="DN-мӧд"/>
+            <xs:enumeration value="DN-мы"/>
+            <xs:enumeration value="DV-лы"/>
+            <xs:enumeration value="DV-л"/>
+            <xs:enumeration value="DV-ся"/>
+            <xs:enumeration value="DN-ал"/>
+            <!--denominal and deverbal morphology-->
+            <xs:enumeration value="FIN-PRES-3Sg"/>
+            <xs:enumeration value="FIN-IMP-2Pl"/>
+            <xs:enumeration value="FIN-IMP-2Sg"/>
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+
+   <xs:attribute name="kpvSrc">
+      <xs:simpleType>
+         <xs:restriction base="xs:string">
+            <xs:enumeration value="BIB"/>
+            <xs:enumeration value="PS"/>
+            <xs:enumeration value="Торопов"/>
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:attribute>
+
+</xs:schema>

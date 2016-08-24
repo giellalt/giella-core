@@ -1,0 +1,358 @@
+/* A CSS stylesheet to make speller test result xml files readable in
+ * browsers.
+ */
+
+spelltestresult, header {
+    display: block;
+    margin: 0.5em
+}
+
+/* Header and summary styling: */
+header engine::before {
+    display: block ;
+    font-weight: bold ;
+}
+
+header engine[abbreviation="to"]::before {
+    content: 'Engine: ' open-quote 'hfst-ospell-office' close-quote ;
+}
+
+header engine[abbreviation="vk"]::before {
+    content: 'Engine: ' open-quote 'voikkospell' close-quote ;
+}
+
+engine processing {
+    display: block ;
+}
+engine processing::after {
+    display: inline-block ;
+    content: 'Words/second: ' attr(words_per_sec) ;
+    font-weight: bold ;
+}
+
+toolversion { display: none ;}
+
+lexicon::before {
+    content: 'Speller lexicon version: ' ;
+    display: inline-block ;
+}
+lexicon {
+    display: block ;
+}
+lexicon::after {
+    display: inline-block ;
+    content: attr(version) ;
+    font-weight: bold ;
+}
+
+document::before {
+    content: 'Document: ' ;
+    display: inline-block ;
+}
+document {
+    display: block ;
+}
+
+timestamp::before {
+    content: 'Test date and time: ' ;
+    display: inline-block ;
+    font-weight: normal ;
+}
+timestamp {
+    display: block ;
+    font-weight: bold ;
+}
+
+truefalsesummary::before {
+    content: 'Precision & recall:' '\A' 'Total word count: ' attr(wordcount) ;
+    display: block ;
+    white-space: pre ;
+}
+
+truefalsesummary original::before {
+    content: 'Original — correct: ' attr(correct) ', typos: ' attr(error) ;
+    display: block ;
+}
+
+truefalsesummary speller::before {
+    content: 'Speller — correct: ' attr(correct) ', typos: ' attr(error) ;
+    display: block ;
+}
+
+truefalsesummary positive::before {
+    content: 'True positives: ' attr(true) ;
+    display: block ;
+}
+
+truefalsesummary positive::after {
+    content: 'False positives: ' attr(false) ;
+    display: block ;
+    background-color: #3670FF ;
+    border: 2px ridge #3670FF ;
+}
+
+truefalsesummary negative::before {
+    content: 'True negatives: ' attr(true) ;
+    display: block ;
+    background-color: green ;
+    border: 2px ridge green ;
+}
+
+truefalsesummary negative::after {
+    content: 'False negatives: ' attr(false) ;
+    display: block ;
+    background-color: #D800DD ;
+    border: 2px ridge #D800DD ;
+}
+
+precision::before {
+    content: 'Precision: ' ;
+    display: inline-block ;
+}
+precision {
+    display: block ;
+}
+
+recall::before {
+    content: 'Recall: ' ;
+    display: inline-block ;
+}
+recall {
+    display: block ;
+}
+
+accuracy::before {
+    content: 'Accuracy: ' ;
+    display: inline-block ;
+}
+accuracy {
+    display: block ;
+}
+
+truefalsesummary {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: block ;
+}
+
+suggestionsummary {
+    margin-top: 1em ;
+    margin-bottom: 1em ;
+    display: block ;
+    font-family: Monaco, monospace ;
+    font-size: 0.8em ;
+}
+
+suggestionsummary::before {
+    display: block ;
+    content: 'Suggestion summary (edit dist 1,   2,   3+):' ;
+}
+
+sugg1::before {
+    display: inline-block ;
+    content: 'Suggestions in 1st position:  ' ;
+}
+sugg1 {
+    display: block ;
+    background-color: rgb(0, 155, 0) ;
+}
+sugg1::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus);
+}
+
+sugg2::before {
+    display: inline-block ;
+    content: 'Suggestions in 2nd position:  ' ;
+}
+sugg2 {
+    display: block ;
+    background-color: rgb(0, 180, 0) ;
+}
+sugg2::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+sugg3::before {
+    display: inline-block ;
+    content: 'Suggestions in 3rd position:  ' ;
+}
+sugg3 {
+    display: block ;
+    background-color: rgb(100, 200, 0) ;
+}
+sugg3::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+sugg4::before {
+    display: inline-block ;
+    content: 'Suggestions in 4th position:  ' ;
+}
+sugg4 {
+    display: block ;
+    background-color: rgb(200, 230, 0) ;
+}
+sugg4::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+sugg5::before {
+    display: inline-block ;
+    content: 'Suggestions in 5th position:  ' ;
+}
+sugg5 {
+    display: block ;
+    background-color: rgb(255, 255, 55) ;
+}
+sugg5::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+suggbelow5::before {
+    display: inline-block ;
+    content: 'Suggestions >> 5th position:  ' ;
+}
+suggbelow5 {
+    display: block ;
+    background-color: rgb(255, 190, 0) ;
+}
+suggbelow5::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+nosugg::before {
+    display: inline-block ;
+    content: 'No suggestions at all:        ' ;
+}
+nosugg {
+    display: block ;
+    background-color: rgb(255, 130, 0) ;
+}
+nosugg::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+badsuggs::before {
+    display: inline-block ;
+    content: 'Only wrong suggestions:       ' ;
+}
+badsuggs {
+    display: block ;
+    background-color: rgb(255, 60, 0) ;
+}
+badsuggs::after {
+    display: inline-block ;
+    content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus) ;
+}
+
+averageposition::before {
+    content: 'Average correct suggestion position: ' ;
+    display: inline-block ;
+    margin-top: 1em ;
+}
+averageposition {display: block ;}
+
+top5pos_percent::before {
+    content: 'Percent of misspellings getting a correct suggestion in top 5: ' ;
+    display: inline-block ;
+}
+top5pos_percent {display: block ;}
+
+allpos_percent::before {
+    content: 'Percent of misspellings getting a correct suggestion anywhere: ' ;
+    display: inline-block ;
+}
+allpos_percent {display: block ;}
+
+averagesuggs_with_correct::before {
+    content: 'Average number of suggestions for all correct suggestions: ' ;
+    display: inline-block ;
+}
+averagesuggs_with_correct {display: block ;}
+
+/* The output of the speller: */
+results {
+    display: table;
+    border-spacing: 0 0.5em;
+    border-collapse: separate;
+}
+
+word {
+    display: table-row;
+}
+
+word[corrsugg="1"] {
+    background-color: rgb(0, 155, 0) ;
+}
+word[corrsugg="2"] {
+    background-color: rgb(0, 180, 0) ;
+}
+word[corrsugg="3"] {
+    background-color: rgb(100, 200, 0) ;
+}
+word[corrsugg="4"] {
+    background-color: rgb(200, 230, 0) ;
+}
+word[corrsugg="5"] {
+    background-color: rgb(255, 255, 55) ;
+}
+word[corrsugg="6"] {
+    background-color: rgb(255, 190, 0) ;
+}
+word[corrsugg="0"] {
+    background-color: rgb(255, 130, 0) ;
+}
+word[corrsugg="-1"] {
+    background-color: rgb(255, 60, 0) ;
+}
+
+word[corrsugg="goodaccept"] {
+    background-color: green ;
+}
+word[corrsugg="goodaccept"] original {
+    border: 2px ridge green ;
+    border-collapse: separate ;
+    border-spacing: 2px ;
+}
+
+word[corrsugg="badaccept"] {
+    background-color: #D800DD ;
+}
+word[corrsugg="badaccept"] original {
+    border: 2px ridge #D800DD ;
+    border-collapse: separate ;
+    border-spacing: 2px ;
+}
+
+word[corrsugg="falsealarm"] {
+    background-color: #3670FF ;
+}
+
+results original, expected, edit_dist, suggestions, errors, origfile {
+    display: table-cell;
+    padding: 0.2em;
+}
+
+results speller, position {
+    display: none;
+}
+
+suggestion, error {
+    display: list-item ;
+    margin-left: 2em ;
+}
+
+suggestion[expected] {
+    background-color: lime ;
+}
+
+error::after {
+    content: ' (' attr(type) ')' ;
+}

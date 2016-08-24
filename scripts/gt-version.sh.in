@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "@GIELLA_CORE_VERSION@"

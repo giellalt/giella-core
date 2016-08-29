@@ -1429,6 +1429,23 @@ sub make_top5pos_percent {
     return $top5pos_percent;
 }
 
+sub make_top1pos_percent {
+    my ($results, $doc) = @_;
+
+    my $top1pos_percent = $doc->createElement('top1pos_percent');
+
+    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
+                                               and original[@status = "error"]]
+                                           ')->size;
+    my $positions = $results->findnodes('.//position[text() = 1]')->size;
+
+    if ($spellererror > 0) {
+        $top1pos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
+    }
+
+    return $top1pos_percent;
+}
+
 sub make_averagesuggs_with_correct {
     my ($results, $doc) = @_;
 
@@ -1468,6 +1485,7 @@ sub make_suggestionsummary {
 
     $suggestionsummary->appendChild(make_averageposition($results, $doc));
 
+    $suggestionsummary->appendChild(make_top1pos_percent($results, $doc));
     $suggestionsummary->appendChild(make_top5pos_percent($results, $doc));
     $suggestionsummary->appendChild(make_allpos_percent($results, $doc));
     $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));

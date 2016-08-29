@@ -268,7 +268,6 @@ averagesuggs_with_correct {display: block ;}
 top1pos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion in 1 pos: ' ;
     display: inline-block ;
-    background-color: rgb(0, 155, 0) ;
 }
 top1pos_percent {
     display: block ;
@@ -278,27 +277,24 @@ top1pos_percent {
 top5pos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion in top 5: ' ;
     display: inline-block ;
-    background: linear-gradient(to left, green , yellow);
 }
 top5pos_percent {
     display: block ;
-    background: linear-gradient(to right, green , yellow);
+    background: linear-gradient(to right, rgb(0, 155, 0) , yellow);
 }
 
 allpos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion anywhere: ' ;
     display: inline-block ;
-    background: linear-gradient(to left, green , orange);
 }
 allpos_percent {
     display: block ;
-    background: linear-gradient(to right, green , orange);
+    background: linear-gradient(to right, rgb(0, 155, 0) , orange);
 }
 
 nosugg_percent::before {
     content: 'Percent of misspellings getting no suggestions:                ' ;
     display: inline-block ;
-    background-color: rgb(255, 130, 0) ;
 }
 nosugg_percent {
     display: block ;
@@ -308,7 +304,6 @@ nosugg_percent {
 badsugg_percent::before {
     content: 'Percent of misspellings getting only wrong suggestions:        ' ;
     display: inline-block ;
-    background-color: rgb(255, 60, 0) ;
 }
 badsugg_percent {
     display: block ;

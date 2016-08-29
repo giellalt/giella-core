@@ -289,6 +289,16 @@ allpos_percent {
     background: linear-gradient(to right, green , orange);
 }
 
+nosugg_percent::before {
+    content: 'Percent of misspellings getting no suggestions:                ' ;
+    display: inline-block ;
+    background-color: rgb(255, 130, 0) ;
+}
+nosugg_percent {
+    display: block ;
+    background-color: rgb(255, 130, 0) ;
+}
+
 badsugg_percent::before {
     content: 'Percent of misspellings getting only wrong suggestions:        ' ;
     display: inline-block ;

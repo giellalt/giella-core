@@ -259,20 +259,48 @@ averageposition::before {
 }
 averageposition {display: block ;}
 
+top1pos_percent::before {
+    content: 'Percent of misspellings getting a correct suggestion in 1 pos: ' ;
+    display: inline-block ;
+    background-color: rgb(0, 155, 0) ;
+}
+top1pos_percent {
+    display: block ;
+    background-color: rgb(0, 155, 0) ;
+}
+
 top5pos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion in top 5: ' ;
     display: inline-block ;
+    background: linear-gradient(to left, green , yellow);
 }
-top5pos_percent {display: block ;}
+top5pos_percent {
+    display: block ;
+    background: linear-gradient(to right, green , yellow);
+}
 
 allpos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion anywhere: ' ;
     display: inline-block ;
+    background: linear-gradient(to left, green , orange);
 }
-allpos_percent {display: block ;}
+allpos_percent {
+    display: block ;
+    background: linear-gradient(to right, green , orange);
+}
+
+badsugg_percent::before {
+    content: 'Percent of misspellings getting only wrong suggestions:        ' ;
+    display: inline-block ;
+    background-color: rgb(255, 60, 0) ;
+}
+badsugg_percent {
+    display: block ;
+    background-color: rgb(255, 60, 0) ;
+}
 
 averagesuggs_with_correct::before {
-    content: 'Average number of suggestions for all correct suggestions: ' ;
+    content: 'Average number of suggestions for all correct suggestions (≈noise): ' ;
     display: inline-block ;
 }
 averagesuggs_with_correct {display: block ;}
@@ -280,8 +308,13 @@ averagesuggs_with_correct {display: block ;}
 /* The output of the speller: */
 results {
     display: table;
-    border-spacing: 0 0.5em;
+    border-spacing: 0 0.25em;
     border-collapse: separate;
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
 }
 
 word {

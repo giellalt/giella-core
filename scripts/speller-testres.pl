@@ -1446,6 +1446,23 @@ sub make_top1pos_percent {
     return $top1pos_percent;
 }
 
+sub make_badsugg_percent {
+    my ($results, $doc) = @_;
+
+    my $badsugg_percent = $doc->createElement('badsugg_percent');
+
+    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
+                                               and original[@status = "error"]]
+                                           ')->size;
+    my $badsuggs = $results->findnodes('./word[@corrsugg = "-1"]')->size;
+
+    if ($spellererror > 0) {
+        $badsugg_percent->appendTextNode(sprintf("%.2f", $badsuggs / $spellererror * 100));
+    }
+
+    return $badsugg_percent;
+}
+
 sub make_averagesuggs_with_correct {
     my ($results, $doc) = @_;
 
@@ -1488,6 +1505,7 @@ sub make_suggestionsummary {
     $suggestionsummary->appendChild(make_top1pos_percent($results, $doc));
     $suggestionsummary->appendChild(make_top5pos_percent($results, $doc));
     $suggestionsummary->appendChild(make_allpos_percent($results, $doc));
+    $suggestionsummary->appendChild(make_badsugg_percent($results, $doc));
     $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));
 
     return $suggestionsummary;

@@ -883,7 +883,7 @@ sub print_xml_output {
     my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
 
     my $pi = $doc->createProcessingInstruction("xml-stylesheet");
-    $pi->setData(href=>'https://gtsvn.uit.no/langtech/trunk/gtcore/scripts/style/speller_xml.css', type=>'text/css');
+    $pi->setData(href=>'https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css', type=>'text/css');
     $doc->appendChild( $pi );
 
     my $spelltestresult = $doc->createElement('spelltestresult');
@@ -1395,21 +1395,21 @@ sub make_suggx {
     return $sugg;
 }
 
-sub make_allpos_percent {
+sub make_top1pos_percent {
     my ($results, $doc) = @_;
 
-    my $allpos_percent = $doc->createElement('allpos_percent');
+    my $top1pos_percent = $doc->createElement('top1pos_percent');
 
     my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
                                                and original[@status = "error"]]
                                            ')->size;
-    my $positions = $results->findnodes('.//position')->size;
+    my $positions = $results->findnodes('.//position[text() = 1]')->size;
 
-    if ($spellererror) {
-        $allpos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
+    if ($spellererror > 0) {
+        $top1pos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
     }
 
-    return $allpos_percent;
+    return $top1pos_percent;
 }
 
 sub make_top5pos_percent {
@@ -1429,21 +1429,21 @@ sub make_top5pos_percent {
     return $top5pos_percent;
 }
 
-sub make_top1pos_percent {
+sub make_allpos_percent {
     my ($results, $doc) = @_;
 
-    my $top1pos_percent = $doc->createElement('top1pos_percent');
+    my $allpos_percent = $doc->createElement('allpos_percent');
 
     my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
                                                and original[@status = "error"]]
                                            ')->size;
-    my $positions = $results->findnodes('.//position[text() = 1]')->size;
+    my $positions = $results->findnodes('.//position')->size;
 
-    if ($spellererror > 0) {
-        $top1pos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
+    if ($spellererror) {
+        $allpos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
     }
 
-    return $top1pos_percent;
+    return $allpos_percent;
 }
 
 sub make_badsugg_percent {
@@ -1461,6 +1461,23 @@ sub make_badsugg_percent {
     }
 
     return $badsugg_percent;
+}
+
+sub make_nosugg_percent {
+    my ($results, $doc) = @_;
+
+    my $nosugg_percent = $doc->createElement('badsugg_percent');
+
+    my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
+                                               and original[@status = "error"]]
+                                           ')->size;
+    my $nosuggs = $results->findnodes('./word[@corrsugg = "0"]')->size;
+
+    if ($spellererror > 0) {
+        $nosugg_percent->appendTextNode(sprintf("%.2f", $nosuggs / $spellererror * 100));
+    }
+
+    return $nosugg_percent;
 }
 
 sub make_averagesuggs_with_correct {
@@ -1493,20 +1510,18 @@ sub make_suggestionsummary {
     for ($x = 1; $x < 6; $x++) {
         $suggestionsummary->appendChild(make_suggx("sugg$x", "position/text() = $x", $results, $doc));
     }
-
     $suggestionsummary->appendChild(make_suggx("suggbelow5", "position/text() >= $x", $results, $doc));
-
     $suggestionsummary->appendChild(make_suggx("nosugg", "not(position) and not(suggestions)", $results, $doc));
-
     $suggestionsummary->appendChild(make_suggx("badsuggs", "not(position) and suggestions", $results, $doc));
 
     $suggestionsummary->appendChild(make_averageposition($results, $doc));
+    $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));
 
     $suggestionsummary->appendChild(make_top1pos_percent($results, $doc));
     $suggestionsummary->appendChild(make_top5pos_percent($results, $doc));
-    $suggestionsummary->appendChild(make_allpos_percent($results, $doc));
+    $suggestionsummary->appendChild(make_allpos_percent( $results, $doc));
+    $suggestionsummary->appendChild(make_nosugg_percent( $results, $doc));
     $suggestionsummary->appendChild(make_badsugg_percent($results, $doc));
-    $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));
 
     return $suggestionsummary;
 }

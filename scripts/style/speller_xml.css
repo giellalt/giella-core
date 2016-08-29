@@ -253,11 +253,17 @@ badsuggs::after {
 }
 
 averageposition::before {
-    content: 'Average correct suggestion position: ' ;
+    content: 'Average position for the correct suggestions:                   ' ;
     display: inline-block ;
     margin-top: 1em ;
 }
 averageposition {display: block ;}
+
+averagesuggs_with_correct::before {
+    content: 'Average number of suggestions pr correct suggestion (≈noise):   ' ;
+    display: inline-block ;
+}
+averagesuggs_with_correct {display: block ;}
 
 top1pos_percent::before {
     content: 'Percent of misspellings getting a correct suggestion in 1 pos: ' ;
@@ -309,12 +315,6 @@ badsugg_percent {
     background-color: rgb(255, 60, 0) ;
 }
 
-averagesuggs_with_correct::before {
-    content: 'Average number of suggestions for all correct suggestions (≈noise): ' ;
-    display: inline-block ;
-}
-averagesuggs_with_correct {display: block ;}
-
 /* The output of the speller: */
 results {
     display: table;
@@ -325,6 +325,7 @@ results {
     border-color: grey;
     padding-left: 0.25em;
     padding-right: 0.25em;
+    margin: 0.25em
 }
 
 word {

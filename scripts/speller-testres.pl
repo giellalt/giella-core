@@ -1466,7 +1466,7 @@ sub make_badsugg_percent {
 sub make_nosugg_percent {
     my ($results, $doc) = @_;
 
-    my $nosugg_percent = $doc->createElement('badsugg_percent');
+    my $nosugg_percent = $doc->createElement('nosugg_percent');
 
     my $spellererror = $results->findnodes('.//word[speller[@status = "error"]
                                                and original[@status = "error"]]

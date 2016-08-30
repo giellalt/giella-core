@@ -280,7 +280,7 @@ top5pos_percent::before {
 }
 top5pos_percent {
     display: block ;
-    background: linear-gradient(to right, rgb(0, 155, 0) , yellow);
+    background: linear-gradient(to right, rgb(0, 155, 0) , rgb(255, 255, 55));
 }
 
 allpos_percent::before {
@@ -289,7 +289,7 @@ allpos_percent::before {
 }
 allpos_percent {
     display: block ;
-    background: linear-gradient(to right, rgb(0, 155, 0) , orange);
+    background: linear-gradient(to right, rgb(0, 155, 0) , rgb(255, 190, 0));
 }
 
 nosugg_percent::before {

@@ -9,7 +9,7 @@ echo ""
 echo ""
 echo " ------------------------------------------ na, ferten muđui dárkkistit gtcore "
 echo ""
-pushd $GTHOME/gtcore && svn up && make
+pushd $GTHOME/giella-core && svn up && make
 echo ""
 echo " ------------------------------------------ de gtcore lea ortnegis. "
 echo ""

@@ -277,6 +277,16 @@ class StaticSiteBuilder(object):
 
         return (subp.returncode, output)
 
+    def copy_ckeditor(self):
+        """Copy the ckeditor to the built version of the site."""
+        ckdir = os.path.join(self.builddir,
+                             'src/documentation/resources/ckeditor')
+        if os.path.exists(ckdir):
+            returncode = self.run_command('rsync -av {src} {dst}'.format(
+                src=ckdir, dst=os.path.join(self.builddir, 'build/site/en')))
+            if returncode != 0:
+                raise SystemExit(returncode)
+
     def copy_to_site(self):
         """Copy the entire site to self.destination."""
         (returncode, _) = self.run_command(
@@ -284,14 +294,6 @@ class StaticSiteBuilder(object):
                 self.builddir, 'built/'), dst=self.destination))
         if returncode != 0:
             raise SystemExit(returncode)
-
-        ckdir = os.path.join(self.builddir,
-                             'src/documentation/resources/ckeditor/')
-        if os.path.exists(ckdir):
-            self.run_command('rsync -avz -e ssh {src} {dst}'.format(
-                src=ckdir, dst=self.destination + 'ckeditor/'))
-            if returncode != 0:
-                raise SystemExit(returncode)
 
 
 class LanguageAdder(object):

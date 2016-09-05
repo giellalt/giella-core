@@ -286,7 +286,7 @@ class StaticSiteBuilder(object):
             raise SystemExit(returncode)
 
         ckdir = os.path.join(self.builddir,
-                             'src/documentation/resources/ckeditor')
+                             'src/documentation/resources/ckeditor/')
         if os.path.exists(ckdir):
             self.run_command('rsync -avz -e ssh {src} {dst}'.format(
                 src=ckdir, dst=self.destination + 'ckeditor/'))

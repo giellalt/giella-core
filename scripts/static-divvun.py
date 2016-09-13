@@ -254,6 +254,7 @@ class StaticSiteBuilder(object):
         logger.info('Building all langs')
         for lang in self.langs:
             self.buildsite(lang)
+            self.copy_ckeditor()
             if len(self.langs) > 1:
                 self.add_language_changer(lang)
             self.rename_site_files(lang)

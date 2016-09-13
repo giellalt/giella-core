@@ -82,8 +82,7 @@ class StaticSiteBuilder(object):
         """
         logger.debug('Setting language {}'.format(lang))
         for line in fileinput.FileInput(
-            os.path.join(self.builddir, 'forrest.properties'),
-                inplace=1):
+                os.path.join(self.builddir, 'forrest.properties'), inplace=1):
             if 'forrest.jvmargs' in line:
                 line = (
                     'forrest.jvmargs=-Djava.awt.headless=true '

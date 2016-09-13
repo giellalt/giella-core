@@ -230,6 +230,7 @@ class StaticSiteBuilder(object):
 
         if len(self.langs) == 1:
             for item in glob.glob(builddir + '/*'):
+                self.copy_ckeditor()
                 shutil.move(item, builtdir)
         else:
             for root, dirs, files in os.walk(builddir):
@@ -247,6 +248,7 @@ class StaticSiteBuilder(object):
                         os.path.join(root, file_),
                         os.path.join(goal_dir, newname))
 
+            self.copy_ckeditor()
             shutil.move(builddir, os.path.join(builtdir, lang))
 
     def build_all_langs(self):
@@ -254,7 +256,6 @@ class StaticSiteBuilder(object):
         logger.info('Building all langs')
         for lang in self.langs:
             self.buildsite(lang)
-            self.copy_ckeditor()
             if len(self.langs) > 1:
                 self.add_language_changer(lang)
             self.rename_site_files(lang)

@@ -189,6 +189,21 @@ class StaticSiteBuilder(object):
         self.parse_buildtimes(output)
         self.parse_broken_links()
 
+    def files_to_collect(self, builddir, extension):
+        """Search for files with extension in builddir.
+
+        Args:
+            builddir (str): the directory where interesting files are.
+            extension (str): interesting files has this extension.
+
+        Yields:
+            str: path to the interesting file
+        """
+        for root, _, files in os.walk(builddir):
+            for f in files:
+                if f.endswith(extension):
+                    yield os.path.join(root, f)
+
     def add_language_changer(self, this_lang):
         """Add a language changer in all .html files for one language.
 
@@ -197,12 +212,9 @@ class StaticSiteBuilder(object):
         """
         builddir = os.path.join(self.builddir, 'build/site/en')
 
-        for root, dirs, files in os.walk(builddir):
-            for f in files:
-                if f.endswith('.html'):
-                    f2b = LanguageAdder(os.path.join(root, f), this_lang,
-                                        self.langs, builddir)
-                    f2b.add_lang_info()
+        for path in self.files_to_collect(builddir, '.html'):
+            f2b = LanguageAdder(path, this_lang, self.langs, builddir)
+            f2b.add_lang_info()
 
     def rename_site_files(self, lang):
         """Search for files ending with html and pdf in the build site.

@@ -309,6 +309,8 @@ class LanguageAdder(object):
         tree (lxml etree):  an lxml etree of the parsed file
     """
 
+    namespace = {'html': 'http://www.w3.org/1999/xhtml'}
+
     def __init__(self, filename, this_lang, langs, builddir):
         """Init the LanguageAdder.
 
@@ -324,7 +326,6 @@ class LanguageAdder(object):
         self.langs = langs
         self.builddir = builddir
 
-        self.namespace = {'html': 'http://www.w3.org/1999/xhtml'}
         self.tree = etree.parse(filename, etree.HTMLParser())
 
     def __del__(self):

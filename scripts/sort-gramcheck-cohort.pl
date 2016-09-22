@@ -33,13 +33,13 @@ use utf8;
 # "<gos>" 
 # "<Balsan>" 	&SUGGEST  	&msyn-com-not-ess  
 
-# Read while not eol
+# Read while not EOF:
 while(<>) {
-	chomp ;
 	if ($_ =~ m/\t/) { # Process line only if it contains a tab:
+		chomp ;
 		process_line($_);
 	} else { # ... otherwise just print the line:
-		print "$_\n";
+		print;
 	}
 }
 
@@ -49,18 +49,13 @@ sub process_line
     $rest =~ tr/\t/ /; # convert tab to space in the cohort part
     $rest =~ s/ +/ /g; # collaps multiple spaces into one
     my @cohort = split(" ", $rest); # split on space so that the cohort line becomes an array
-    my @sorted = sort @cohort; # sort the array
-    my @grep_sorted = grep(!/\"/, @sorted); # grep away the lemma strings, we don't need them
-    my @filtered = uniq(@grep_sorted); # Remove duplicates. NB! Must be last, see below
+    my @grep_sorted = grep(!/\"/, @cohort); # grep away the lemma strings, we don't need them
 
-    $rest = join("\t",@filtered); # Join the array elements with a tab
+	my %hash   = map { $_, 1 } @grep_sorted; # Make a hash out of the array
+	my @unique = keys %hash; # put the keys back into an array - they are by definition (of a hash) unique; see:
+			# http://stackoverflow.com/questions/7651/how-do-i-remove-duplicate-items-from-an-array-in-perl
+    my @sorted = sort @unique; # sort the array
+
+    $rest = join("\t",@sorted); # Join the array elements with a tab
     print "$wordform\t$rest\n"; # print everything - we're done!
   }
-
-# Call this function as the very last function before joining, it is not 100%
-# reliable. Taken from:
-# http://stackoverflow.com/questions/7651/how-do-i-remove-duplicate-items-from-an-array-in-perl
-sub uniq {
-    my %seen;
-    grep !$seen{$_}++, @_;
-}

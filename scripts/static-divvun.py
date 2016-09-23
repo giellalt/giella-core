@@ -49,8 +49,6 @@ class StaticSiteBuilder(object):
 
             builddir = builddir[:-1]
         self.builddir = builddir
-        self.clean()
-
         if not destination.endswith('/'):
             destination = destination + '/'
         self.destination = destination
@@ -59,6 +57,29 @@ class StaticSiteBuilder(object):
             shutil.rmtree(os.path.join(self.builddir, 'built'))
 
         os.mkdir(os.path.join(self.builddir, 'built'))
+
+    def __enter__(self):
+        """Open a lock file."""
+        lockname = os.path.join(self.builddir, '.lock')
+
+        if os.path.exists(lockname):
+            with open(lockname) as lock:
+                logger.warn('Another build with PID {} has been running '
+                            'since {}'.format(
+                                lock.read(), datetime.datetime.fromtimestamp(
+                                    os.path.getmtime(lockname))))
+                raise SystemExit(5)
+
+        self.lockfile = open(lockname, 'w')
+        self.lockfile.write(str(os.getpid()))
+        self.lockfile.flush()
+
+        return self
+
+    def __exit__(self, *args):
+        """Close the lockfile and remove the lockfile."""
+        self.lockfile.close()
+        os.remove(os.path.join(self.builddir, '.lock'))
 
     def clean(self):
         """Run forrest clean."""
@@ -435,24 +456,11 @@ def main():
             '-V|--verbosity must be one of: {}\n{} was given.'.format(
                 '|'.join(logging_dict.keys()), args.verbosity))
 
-    lockname = os.path.join(args.sitehome, '.lock')
-    if not os.path.exists(lockname):
-        with open(lockname, 'w') as lockfile:
-            print(datetime.datetime.now(), file=lockfile)
-
-        builder = StaticSiteBuilder(args.sitehome, args.destination,
-                                    args.langs)
+    with StaticSiteBuilder(args.sitehome, args.destination,
+                           args.langs) as builder:
+        builder.clean()
         builder.build_all_langs()
         builder.copy_to_site()
-        os.remove(lockname)
-    else:
-        with open(lockname) as lockfile:
-            dateformat = "%Y-%m-%d %H:%M:%S.%f"
-            datestring = lockfile.read().strip()
-            starttime = datetime.datetime.strptime(datestring, dateformat)
-            delta = datetime.datetime.now() - starttime
-            logger.error('A build of this site is still running and was '
-                         'started {} ago'.format(delta))
 
 
 if __name__ == '__main__':

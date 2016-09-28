@@ -13,8 +13,15 @@
 
 # change to 'true' to debug paths of analysis tools
 debug='false'
-LOOKUP=`which lookup`
-HLOOKUP='/opt/local/bin/hfst-optimized-lookup'
+HLOOKUP=`which hfst-optimized-lookup`
+
+if [ -n "$HLOOKUP" ]; then
+  echo "using hfst-optimized-lookup"
+else
+  echo "no hfst-lookup found: please install it!"
+  echo "See you later!"
+  exit 0
+fi
 
 # -l sme|sma|fao|etc. => default: sme
 l='sme'
@@ -132,10 +139,16 @@ fi
 
 
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
-    MORPH="$LOOKUP $current_path/src/analyser-disamb-gt-desc.xfst"
+    MORPH="$HLOOKUP $current_path/src/analyser-disamb-gt-desc.hfstol"
     DIS="$current_path/src/syntax/disambiguation.cg3"
+    if [ ! -f "$current_path/src/analyser-disamb-gt-desc.hfstol" ]; then
+        echo "no hfst file found: please compile the language tools for $l"
+        echo "See you later!"
+        exit 0
+    fi
+
 else
-    MORPH="$LOOKUP -q -flags mbTT -utf8 $current_path/bin/$l.fst"
+    MORPH="$HLOOKUP -flags mbTT -utf8 $current_path/bin/$l.fst"
     DIS="$current_path/src/$l-dis.rle"
 fi
 
@@ -158,7 +171,7 @@ SD_PATH='$GTHOME/giella-shared/smi/src/syntax'
 # define commands
 # common pos_cmd
 #pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTHOME/gt/script/lookup2cg"
-pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTCORE/scripts/lookup2cg"
+pos_cmd="echo $sentence | preprocess $abbr | $MORPH |cut -f1,2| $GTCORE/scripts/lookup2cg"
 
 if [ $l == fao ] || [ $l == crk ]; then
     dis_cmd=$pos_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/disambiguation.cg3 $t"

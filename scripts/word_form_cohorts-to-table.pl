@@ -91,7 +91,9 @@ for (my $ix = 0; $ix <= $#word_form_array; $ix += $number_of_codes ) {
         print HTMLTABLE "<td>";
         for my $wordform (@word_forms) {
             my ($input, $word, $questionmark) = split ('\t',$wordform);
-            if ($questionmark) {
+            if ($questionmark =~ /0,000/) {
+                print HTMLTABLE "$word</br>";
+            } elsif ($questionmark) {
                 print HTMLTABLE "$questionmark";
             }
             else {

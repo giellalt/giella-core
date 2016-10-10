@@ -37,7 +37,7 @@ exception_lexicons="$6"
 #### Script-internal variables: ####
 lexicon_filename=$(basename $source_file .lexc)
 generator_filename=$(basename $generator_file)
-fst_types="hfst hfstol xfst"
+fst_types="hfst hfstol xfst foma"
 
 #Filenames:
 lemma_lexicon_list=lemma_lexicon_list_${lexicon_filename}.txt
@@ -91,6 +91,8 @@ elif test "$suffix" = "hfst" ; then
     lookuptool=hfst-lookup
 elif test "$suffix" = "hfstol" ; then
     lookuptool=hfst-optimized-lookup
+elif test "$suffix" = "foma" ; then
+    lookuptool=flookup
 else
     echo "ERROR: No lookup tool found!"
     exit 1

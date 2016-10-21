@@ -223,6 +223,8 @@ sub line2words
 {
     my ($this_line) = @_;
 
+    $this_line =~ s/(\w)(\()/$1 $2/g;
+
     verbose("line2words", $this_line, __LINE__);
     while($this_line =~ s/^(\s*)([^\s]+)//) {
         my $word = $2;

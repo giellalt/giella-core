@@ -275,6 +275,11 @@ def parse_options():
     return args
 
 if __name__ == u'__main__':
+    UTF8Reader = codecs.getreader('utf8')
+    sys.stdin = UTF8Reader(sys.stdin)
+    UTF8Writer = codecs.getwriter('utf8')
+    sys.stdout = UTF8Writer(sys.stdout)
+
     args = parse_options()
 
     with open(args.lexcfile) as f:

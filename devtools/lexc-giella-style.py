@@ -103,6 +103,17 @@ jah Cc ;
         l.parse_lines(input)
         self.assertEqual(expected_result, l.adjust_lines())
 
+    def test_output_with_lines_with_leading_non_w(self):
+        input = u'''LEXICON Cc
++CC:0 # ;
+'''.split(u'\n')
+        expected_result = u'''LEXICON Cc
++CC:0 # ;
+'''.split(u'\n')
+        l = Lines()
+        l.parse_lines(input)
+        self.assertEqual(expected_result, l.adjust_lines())
+
     def test_output(self):
         input = [u'LEXICON DAKTERE\n',
            u' +N+Sg:             N_ODD_SG       ;\n',

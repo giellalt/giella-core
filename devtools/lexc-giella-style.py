@@ -75,6 +75,22 @@ class TestLines(unittest.TestCase):
         self.assertEqual(expected_result, l.adjust_lines())
 
     def test_output_with_lines_starting_with_chars(self):
+        input = u'''LEXICON Conjunction
+
+!dovne Cc ; ! dovne A jïh B , cf. "Det er sikkert A og B", dovne=Adv.
+jïh Cc ;
+jah Cc ;
+'''.split(u'\n')
+        expected_result = u'''LEXICON Conjunction
+
+!dovne Cc ; ! dovne A jïh B , cf. "Det er sikkert A og B", dovne=Adv.
+jïh Cc ;
+jah Cc ;
+'''.split('\n')
+        l = Lines()
+        l.parse_lines(input)
+        self.assertEqual(expected_result, l.adjust_lines())
+
     def test_output(self):
         input = [u'LEXICON DAKTERE\n',
            u' +N+Sg:             N_ODD_SG       ;\n',
@@ -182,7 +198,7 @@ class Lines(object):
 
             contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
             contlexmatch = contlexre.search(line)
-            if contlexmatch and not line.startswith(u'LEXICON '):
+            if contlexmatch and not re.match(u'^\w', line):
                 l = Line()
                 l.parse_line(line)
                 self.lines.append(l)

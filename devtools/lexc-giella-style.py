@@ -228,8 +228,8 @@ class Lines(object):
             if isinstance(l, Line):
                 s = io.StringIO()
 
-                pre = self.longest[u'upper'] - len(l.line[u'upper']) + 1
-                s.write(u' ' * pre)
+                s.write(u' ' *
+                        (self.longest[u'upper'] - len(l.line[u'upper']) + 1))
                 s.write(l.line[u'upper'])
 
                 if not (l.line[u'upper'] == u'' and l.line[u'lower'] == u''):
@@ -238,19 +238,22 @@ class Lines(object):
                     s.write(u' ')
 
                 s.write(l.line[u'lower'])
-                post = self.longest[u'lower'] - len(l.line[u'lower']) + 1
-                s.write(u' ' * post)
+
+                s.write(u' ' *
+                        (self.longest[u'lower'] - len(l.line[u'lower']) + 1))
 
                 s.write(l.line[u'contlex'])
 
-                post = self.longest[u'contlex'] - len(l.line[u'contlex']) + 1
-                s.write(u' ' * post)
+                s.write(u' ' *
+                        (self.longest[u'contlex'] -
+                         len(l.line[u'contlex']) + 1))
 
                 s.write(l.line[u'translation'])
 
                 if self.longest[u'translation'] > 0:
-                    post = self.longest[u'translation'] - len(l.line[u'translation']) + 1
-                    s.write(u' ' * post)
+                    s.write(u' ' *
+                            (self.longest[u'translation'] -
+                             len(l.line[u'translation']) + 1))
 
                 s.write (u';')
 

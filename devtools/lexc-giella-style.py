@@ -276,25 +276,22 @@ def parse_options():
 
 if __name__ == u'__main__':
     args = parse_options()
-    f = open(args.lexcfile)
 
-    newlines = []
-    readlines = []
-    for l in f.readlines():
-        if l.startswith(u'LEXICON '):
-            lines = Lines()
-            lines.parseLines(readlines)
-            newlines += lines.adjustLines()
-            readlines = []
+    with open(args.lexcfile) as f:
+        newlines = []
+        readlines = []
+        for l in f.readlines():
+            if l.startswith(u'LEXICON '):
+                lines = Lines()
+                lines.parseLines(readlines)
+                newlines += lines.adjustLines()
+                readlines = []
 
-        readlines.append(l)
+            readlines.append(l)
 
-    lines = Lines()
-    lines.parseLines(readlines)
-    newlines += lines.adjustLines()
+        lines = Lines()
+        lines.parseLines(readlines)
+        newlines += lines.adjustLines()
 
-    f.close()
-
-    f = open(args.lexcfile, u'w')
-    f.writelines(newlines)
-    f.close()
+    with open(args.lexcfile, u'w') as f:
+        f.writelines(newlines)

@@ -19,12 +19,14 @@
 #
 
 
+from __future__ import absolute_import
 import unittest
+from io import open
 
 class TestLines(unittest.TestCase):
 
     def testLongest(self):
-        input = ''' +N+Sg:             N_ODD_SG       ;
+        input = u''' +N+Sg:             N_ODD_SG       ;
  +N+Pl:             N_ODD_PL       ;
  +N:             N_ODD_ESS      ;
  +N+SgNomCmp:e%^DISIMP    R              ;
@@ -35,21 +37,21 @@ class TestLines(unittest.TestCase):
 '''
 
         l = Lines()
-        l.parseLines(input.split('\n'))
+        l.parseLines(input.split(u'\n'))
 
         longest = {}
-        longest['upper'] = 19
-        longest['lower'] = 12
-        longest['contlex'] = 14
-        longest['translation'] = 8
+        longest[u'upper'] = 19
+        longest[u'lower'] = 12
+        longest[u'contlex'] = 14
+        longest[u'translation'] = 8
 
         self.assertEqual(longest, l.longest)
 
     def testOutputWithEmptyUpperLower(self):
-        input = [' FINAL1         ;\n',
-           ' +N+Sg:             N_ODD_SG       ;\n']
-        expectedResult = ['        FINAL1   ;\n',
-                    ' +N+Sg: N_ODD_SG ;\n']
+        input = [u' FINAL1         ;\n',
+           u' +N+Sg:             N_ODD_SG       ;\n']
+        expectedResult = [u'        FINAL1   ;\n',
+                    u' +N+Sg: N_ODD_SG ;\n']
 
         l = Lines()
         l.parseLines(input)
@@ -57,96 +59,96 @@ class TestLines(unittest.TestCase):
         self.assertEqual(expectedResult, l.adjustLines())
 
     def testOutputWithLexiconAndSemicolon(self):
-        input = ['LEXICON GOAHTI-NE  !!= * __@CODE@__ Bisyll. V-Nouns; Nominative Sg. and Essive\n',
-            ' NomV ;\n',
-            ' EssV ;\n']
+        input = [u'LEXICON GOAHTI-NE  !!= * __@CODE@__ Bisyll. V-Nouns; Nominative Sg. and Essive\n',
+            u' NomV ;\n',
+            u' EssV ;\n']
 
-        expectedResult = ['LEXICON GOAHTI-NE  !!= * __@CODE@__ Bisyll. V-Nouns; Nominative Sg. and Essive\n',
-            '   NomV ;\n',
-            '   EssV ;\n']
+        expectedResult = [u'LEXICON GOAHTI-NE  !!= * __@CODE@__ Bisyll. V-Nouns; Nominative Sg. and Essive\n',
+            u'   NomV ;\n',
+            u'   EssV ;\n']
 
         l = Lines()
         l.parseLines(input)
         self.assertEqual(expectedResult, l.adjustLines())
 
     def testOutput(self):
-        input = ['LEXICON DAKTERE\n',
-           ' +N+Sg:             N_ODD_SG       ;\n',
-           ' +N+Pl:             N_ODD_PL       ;\n',
-           ' +N:             N_ODD_ESS      ;\n',
-           ' +N+SgNomCmp:e%^DISIMP    R              ;\n',
-           ' +N+SgGenCmp:e%>%^DISIMPn R              ;\n',
-           ' +N+PlGenCmp:%>%^DISIMPi  R              ;\n',
-           ' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE ;\n',
-           '+A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa\n',
-           '   +A:%>X7 NomVadj "good A" ;',
-           '  ! Test data:\n',
-           '!!€gt-norm: daktere # Odd-syllable test\n']
+        input = [u'LEXICON DAKTERE\n',
+           u' +N+Sg:             N_ODD_SG       ;\n',
+           u' +N+Pl:             N_ODD_PL       ;\n',
+           u' +N:             N_ODD_ESS      ;\n',
+           u' +N+SgNomCmp:e%^DISIMP    R              ;\n',
+           u' +N+SgGenCmp:e%>%^DISIMPn R              ;\n',
+           u' +N+PlGenCmp:%>%^DISIMPi  R              ;\n',
+           u' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE ;\n',
+           u'+A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa\n',
+           u'   +A:%>X7 NomVadj "good A" ;',
+           u'  ! Test data:\n',
+           u'!!€gt-norm: daktere # Odd-syllable test\n']
         l = Lines()
         l.parseLines(input)
 
-        expectedResult = ['LEXICON DAKTERE\n',
-                    '               +N+Sg:             N_ODD_SG                ;\n',
-                    '               +N+Pl:             N_ODD_PL                ;\n',
-                    '                  +N:             N_ODD_ESS               ;\n',
-                    '         +N+SgNomCmp:e%^DISIMP    R                       ;\n',
-                    '         +N+SgGenCmp:e%>%^DISIMPn R                       ;\n',
-                    '         +N+PlGenCmp:%>%^DISIMPi  R                       ;\n',
-                    ' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE          ;\n',
-                    '        +A+Comp+Attr:%>abpa       ATTRCONT                ; ! båajasabpa,   *båajoesabpa\n',
-                    '                  +A:%>X7         NomVadj        "good A" ;\n',
-                    '! Test data:\n',
-                    '!!€gt-norm: daktere # Odd-syllable test\n']
+        expectedResult = [u'LEXICON DAKTERE\n',
+                    u'               +N+Sg:             N_ODD_SG                ;\n',
+                    u'               +N+Pl:             N_ODD_PL                ;\n',
+                    u'                  +N:             N_ODD_ESS               ;\n',
+                    u'         +N+SgNomCmp:e%^DISIMP    R                       ;\n',
+                    u'         +N+SgGenCmp:e%>%^DISIMPn R                       ;\n',
+                    u'         +N+PlGenCmp:%>%^DISIMPi  R                       ;\n',
+                    u' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE          ;\n',
+                    u'        +A+Comp+Attr:%>abpa       ATTRCONT                ; ! båajasabpa,   *båajoesabpa\n',
+                    u'                  +A:%>X7         NomVadj        "good A" ;\n',
+                    u'! Test data:\n',
+                    u'!!€gt-norm: daktere # Odd-syllable test\n']
         self.maxDiff = None
-        print(expectedResult)
-        print(l.adjustLines())
+        print expectedResult
+        print l.adjustLines()
         self.assertEqual(expectedResult, l.adjustLines())
 
 class TestLine(unittest.TestCase):
 
     def testLineParserUpperLower(self):
-        input = '''        +N+SgNomCmp:e%^DISIMP    R              ;'''
-        expectedResult = {'upper': '+N+SgNomCmp', 'lower': 'e%^DISIMP', 'contlex': 'R', 'translation': '', 'comment': ''}
+        input = u'''        +N+SgNomCmp:e%^DISIMP    R              ;'''
+        expectedResult = {u'upper': u'+N+SgNomCmp', u'lower': u'e%^DISIMP', u'contlex': u'R', u'translation': u'', u'comment': u''}
 
         aligner = Line()
         aligner.parseLine(input)
         self.assertEqual(aligner.line, expectedResult)
 
     def testLineParserNoLower(self):
-        input = '''               +N+Sg:             N_ODD_SG       ;'''
-        expectedResult = {'upper': '+N+Sg', 'lower': '', 'contlex': 'N_ODD_SG', 'translation': '', 'comment': ''}
+        input = u'''               +N+Sg:             N_ODD_SG       ;'''
+        expectedResult = {u'upper': u'+N+Sg', u'lower': u'', u'contlex': u'N_ODD_SG', u'translation': u'', u'comment': u''}
 
         aligner = Line()
         aligner.parseLine(input)
         self.assertEqual(aligner.line, expectedResult)
 
     def testLineParserNoUpperNoLower(self):
-        input = ''' N_ODD_ESS;''';
-        expectedResult = {'upper': '', 'lower': '', 'contlex': 'N_ODD_ESS', 'translation': '', 'comment': ''}
+        input = u''' N_ODD_ESS;''';
+        expectedResult = {u'upper': u'', u'lower': u'', u'contlex': u'N_ODD_ESS', u'translation': u'', u'comment': u''}
 
         aligner = Line()
         aligner.parseLine(input)
         self.assertEqual(aligner.line, expectedResult)
 
     def testLineParserEmptyUpperLower(self):
-        input = ''' : N_ODD_E;''';
-        expectedResult = {'upper': '', 'lower': '', 'contlex': 'N_ODD_E', 'translation': '', 'comment': ''}
+        input = u''' : N_ODD_E;''';
+        expectedResult = {u'upper': u'', u'lower': u'', u'contlex': u'N_ODD_E', u'translation': u'', u'comment': u''}
 
         aligner = Line()
         aligner.parseLine(input)
         self.assertEqual(aligner.line, expectedResult)
 
     def testLineParserWithComment(self):
-        input = ''' +A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa'''
-        expectedResult = {'upper': '+A+Comp+Attr', 'lower': '%>abpa', 'contlex': 'ATTRCONT', 'translation': '', 'comment': '! båajasabpa,   *båajoesabpa'}
+        input = u''' +A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa'''
+        expectedResult = {u'upper': u'+A+Comp+Attr', u'lower': u'%>abpa', u'contlex': u'ATTRCONT', u'translation': u'', u'comment': u'! båajasabpa,   *båajoesabpa'}
 
         aligner = Line()
         aligner.parseLine(input)
         self.assertEqual(aligner.line, expectedResult)
 
     def testLineParserWithComment(self):
-        input = '''  +A:%>X7 NomVadj "good A" ;'''
-        expectedResult = {'upper': '+A', 'lower': '%>X7', 'contlex': 'NomVadj', 'translation': '"good A"', 'comment': ''}
+        input = u'''  +A:%>X7 NomVadj "good A" ;'''
+        expectedResult = {u'upper': u'+A', u'lower': u'%>X7', u'contlex': u'NomVadj', u'translation': u'"good A"', u'comment': u''}
 
         aligner = Line()
         aligner.parseLine(input)
@@ -156,27 +158,27 @@ import re
 import io
 import argparse
 
-class Lines:
+class Lines(object):
     def __init__(self):
         self.longest = {}
-        self.longest['upper'] = 0
-        self.longest['lower'] = 0
-        self.longest['contlex'] = 0
-        self.longest['translation'] = 0
+        self.longest[u'upper'] = 0
+        self.longest[u'lower'] = 0
+        self.longest[u'contlex'] = 0
+        self.longest[u'translation'] = 0
         self.lines = []
 
     def parseLines(self, lines):
-        commentre = re.compile(r'^\s*!')
+        commentre = re.compile(ur'^\s*!')
         for line in lines:
 
             commentmatch = commentre.match(line)
             if commentmatch:
-                self.lines.append(commentre.sub('!', line))
+                self.lines.append(commentre.sub(u'!', line))
                 continue
 
-            contlexre = re.compile(r'(?P<contlex>\S+)\s*;')
+            contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
             contlexmatch = contlexre.search(line)
-            if contlexmatch and not line.startswith('LEXICON '):
+            if contlexmatch and not line.startswith(u'LEXICON '):
                 l = Line()
                 l.parseLine(line)
                 self.lines.append(l)
@@ -185,7 +187,7 @@ class Lines:
                 self.lines.append(line)
 
     def findLongest(self, l):
-        for name in ['upper', 'lower', 'translation', 'contlex']:
+        for name in [u'upper', u'lower', u'translation', u'contlex']:
             if self.longest[name] < len(l.line[name]):
                 self.longest[name] = len(l.line[name])
 
@@ -196,89 +198,89 @@ class Lines:
             if isinstance(l, Line):
                 s = io.StringIO()
 
-                pre = self.longest['upper'] - len(l.line['upper']) + 1
-                for i in range(0, pre):
-                    s.write(' ')
-                s.write(l.line['upper'])
+                pre = self.longest[u'upper'] - len(l.line[u'upper']) + 1
+                for i in xrange(0, pre):
+                    s.write(u' ')
+                s.write(l.line[u'upper'])
 
-                if not (l.line['upper'] == '' and l.line['lower'] == ''):
-                    s.write(':')
+                if not (l.line[u'upper'] == u'' and l.line[u'lower'] == u''):
+                    s.write(u':')
                 else:
-                    s.write(' ')
+                    s.write(u' ')
 
-                s.write(l.line['lower'])
-                post = self.longest['lower'] - len(l.line['lower']) + 1
-                for i in range(0, post):
-                    s.write(' ')
+                s.write(l.line[u'lower'])
+                post = self.longest[u'lower'] - len(l.line[u'lower']) + 1
+                for i in xrange(0, post):
+                    s.write(u' ')
 
-                s.write(l.line['contlex'])
+                s.write(l.line[u'contlex'])
 
-                post = self.longest['contlex'] - len(l.line['contlex']) + 1
+                post = self.longest[u'contlex'] - len(l.line[u'contlex']) + 1
 
-                for i in range(0, post):
-                    s.write(' ')
+                for i in xrange(0, post):
+                    s.write(u' ')
 
-                s.write(l.line['translation'])
+                s.write(l.line[u'translation'])
 
-                if self.longest['translation'] > 0:
-                    post = self.longest['translation'] - len(l.line['translation']) + 1
-                    for i in range(0, post):
-                        s.write(' ')
+                if self.longest[u'translation'] > 0:
+                    post = self.longest[u'translation'] - len(l.line[u'translation']) + 1
+                    for i in xrange(0, post):
+                        s.write(u' ')
 
-                s.write (';')
+                s.write (u';')
 
-                if l.line['comment'] != '':
-                    s.write(' ')
-                    s.write(l.line['comment'])
+                if l.line[u'comment'] != u'':
+                    s.write(u' ')
+                    s.write(l.line[u'comment'])
 
-                s.write('\n')
+                s.write(u'\n')
                 newlines.append(s.getvalue())
             else:
                 newlines.append(l)
 
         return newlines
 
-class Line:
-    def __init__(self, upper = '', lower = '', contlex = '', translation = '', comment = ''):
+class Line(object):
+    def __init__(self, upper = u'', lower = u'', contlex = u'', translation = u'', comment = u''):
         self.line = {}
-        self.line['upper'] = upper
-        self.line['lower'] = lower
-        self.line['contlex'] = contlex
-        self.line['translation'] = translation
-        self.line['comment'] = comment
+        self.line[u'upper'] = upper
+        self.line[u'lower'] = lower
+        self.line[u'contlex'] = contlex
+        self.line[u'translation'] = translation
+        self.line[u'comment'] = comment
 
     def parseLine(self, line):
-        contlexre = re.compile(r'(?P<contlex>\S+)(?P<translation>\s+".+")*\s*;\s*(?P<comment>.*)')
+        contlexre = re.compile(ur'(?P<contlex>\S+)(?P<translation>\s+".+")*\s*;\s*(?P<comment>.*)')
         m = contlexre.search(line)
 
-        self.line['contlex'] = contlexre.search(line).group('contlex')
-        if m.group('translation'):
-            self.line['translation'] = contlexre.search(line).group('translation').strip()
-        self.line['comment'] = contlexre.search(line).group('comment').strip()
+        self.line[u'contlex'] = contlexre.search(line).group(u'contlex')
+        if m.group(u'translation'):
+            self.line[u'translation'] = contlexre.search(line).group(u'translation').strip()
+        self.line[u'comment'] = contlexre.search(line).group(u'comment').strip()
 
-        line = contlexre.sub('', line)
+        line = contlexre.sub(u'', line)
 
-        m = line.find(":")
+        m = line.find(u":")
 
         if m != -1:
-            self.line['upper'] = line[:m].strip()
-            self.line['lower'] = line[m + 1:].strip()
+            self.line[u'upper'] = line[:m].strip()
+            self.line[u'lower'] = line[m + 1:].strip()
 
 def parse_options():
-    parser = argparse.ArgumentParser(description = 'Align rules given in lexc files')
-    parser.add_argument('lexcfile', help = 'lexc file where rules should be aligned')
+    parser = argparse.ArgumentParser(description = u'Align rules given in lexc files')
+    parser.add_argument(u'lexcfile', help = u'lexc file where rules should be aligned')
 
     args = parser.parse_args()
     return args
 
-if __name__ == '__main__':
+if __name__ == u'__main__':
     args = parse_options()
     f = open(args.lexcfile)
 
     newlines = []
     readlines = []
     for l in f.readlines():
-        if l.startswith('LEXICON '):
+        if l.startswith(u'LEXICON '):
             lines = Lines()
             lines.parseLines(readlines)
             newlines += lines.adjustLines()
@@ -292,6 +294,6 @@ if __name__ == '__main__':
 
     f.close()
 
-    f = open(args.lexcfile, 'w')
+    f = open(args.lexcfile, u'w')
     f.writelines(newlines)
     f.close()

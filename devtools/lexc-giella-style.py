@@ -49,13 +49,14 @@ class TestLines(unittest.TestCase):
         longest[u'lower'] = 12
         longest[u'contlex'] = 14
         longest[u'translation'] = 8
+        longest[u'divisor'] = 1
 
         self.assertEqual(longest, l.longest)
 
     def test_output_with_empty_upper_lower(self):
         input = [u' FINAL1         ;\n',
            u' +N+Sg:             N_ODD_SG       ;\n']
-        expected_result = [u'        FINAL1   ;\n',
+        expected_result = [u'       FINAL1   ;\n',
                     u' +N+Sg: N_ODD_SG ;\n']
 
         l = Lines()
@@ -69,48 +70,38 @@ class TestLines(unittest.TestCase):
             u' EssV ;\n']
 
         expected_result = [u'LEXICON GOAHTI-NE  !!= * __@CODE@__ Bisyll. V-Nouns; Nominative Sg. and Essive\n',
-            u'   NomV ;\n',
-            u'   EssV ;\n']
+            u'  NomV ;\n',
+            u'  EssV ;\n']
 
         l = Lines()
         l.parse_lines(input)
         self.assertEqual(expected_result, l.adjust_lines())
 
     def test_output_with_lines_starting_with_chars(self):
-        input = u'''LEXICON Conjunction
-
-!dovne Cc ; ! dovne A jïh B , cf. "Det er sikkert A og B", dovne=Adv.
-jïh Cc ;
-jah Cc ;
-'''.split(u'\n')
-        expected_result = u'''LEXICON Conjunction
-
-!dovne Cc ; ! dovne A jïh B , cf. "Det er sikkert A og B", dovne=Adv.
-jïh Cc ;
-jah Cc ;
-'''.split('\n')
+        input = (
+            u'LEXICON Conjunction\n'
+            u'jïh Cc ;\n'
+            u'jah Cc ;\n'
+        ).split('\n')
+        expected_result = [
+            u'LEXICON Conjunction',
+            u' jïh Cc ;\n',
+            u' jah Cc ;\n',
+            u''
+        ]
         l = Lines()
         l.parse_lines(input)
         self.assertEqual(expected_result, l.adjust_lines())
 
     def test_output_with_lines_with_leading_non_w(self):
-        input = u'''LEXICON Cc
-+CC:0 # ;
-'''.split(u'\n')
-        expected_result = u'''LEXICON Cc
-+CC:0 # ;
-'''.split(u'\n')
-        l = Lines()
-        l.parse_lines(input)
-        self.assertEqual(expected_result, l.adjust_lines())
-
-    def test_output_with_lines_with_leading_non_w(self):
-        input = u'''LEXICON Cc
-+CC:0 # ;
-'''.split(u'\n')
-        expected_result = u'''LEXICON Cc
-+CC:0 # ;
-'''.split(u'\n')
+        input = [
+            u'LEXICON Cc\n',
+            u'+CC:0 # ;\n'
+        ]
+        expected_result = [
+            u'LEXICON Cc\n',
+            u' +CC:0 # ;\n'
+        ]
         l = Lines()
         l.parse_lines(input)
         self.assertEqual(expected_result, l.adjust_lines())
@@ -124,7 +115,7 @@ jah Cc ;
            u' +N+SgGenCmp:e%>%^DISIMPn R              ;\n',
            u' +N+PlGenCmp:%>%^DISIMPi  R              ;\n',
            u' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE ;\n',
-           u' +A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa\n',
+           u'+A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa\n',
            u'   +A:%>X7 NomVadj "good A" ;',
            u'  ! Test data:\n',
            u'!!€gt-norm: daktere # Odd-syllable test\n']
@@ -151,13 +142,13 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_upper_lower(self):
         input = u'''        +N+SgNomCmp:e%^DISIMP    R              ;'''
-        expected_result = {u'upper': u'+N+SgNomCmp', u'lower': u'e%^DISIMP', u'contlex': u'R', u'comment': u''}
+        expected_result = {u'upper': u'+N+SgNomCmp', u'lower': u'e%^DISIMP', u'contlex': u'R', u'comment': u'', u'divisor': u':'}
 
         self.assertEqual(parse_line(input), expected_result)
 
     def test_line_parser_no_lower(self):
         input = u'''               +N+Sg:             N_ODD_SG       ;'''
-        expected_result = {u'upper': u'+N+Sg', u'lower': u'', u'contlex': u'N_ODD_SG', u'comment': u''}
+        expected_result = {u'upper': u'+N+Sg', u'lower': u'', u'contlex': u'N_ODD_SG', u'comment': u'', u'divisor': u':'}
 
         self.assertEqual(parse_line(input), expected_result)
 
@@ -169,19 +160,19 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_empty_upper_lower(self):
         input = u''' : N_ODD_E;''';
-        expected_result = {u'upper': u'', u'lower': u'', u'contlex': u'N_ODD_E', u'comment': u''}
+        expected_result = {u'upper': u'', u'lower': u'', u'contlex': u'N_ODD_E', u'comment': u'', u'divisor': u':'}
 
         self.assertEqual(parse_line(input), expected_result)
 
     def test_line_parser_with_comment(self):
         input = u''' +A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa'''
-        expected_result = {u'upper': u'+A+Comp+Attr', u'lower': u'%>abpa', u'contlex': u'ATTRCONT', u'comment': u'! båajasabpa,   *båajoesabpa'}
+        expected_result = {u'upper': u'+A+Comp+Attr', u'lower': u'%>abpa', u'contlex': u'ATTRCONT', u'comment': u'! båajasabpa,   *båajoesabpa', u'divisor': u':'}
 
         self.assertEqual(parse_line(input), expected_result)
 
     def test_line_parser_with_translation(self):
         input = u'''  +A:%>X7 NomVadj "good A" ;'''
-        expected_result = {u'upper': u'+A', u'lower': u'%>X7', u'contlex': u'NomVadj', u'translation': u'"good A"', u'comment': u''}
+        expected_result = {u'upper': u'+A', u'lower': u'%>X7', u'contlex': u'NomVadj', u'translation': u'"good A"', u'comment': u'', u'divisor': u':'}
 
         self.assertEqual(parse_line(input), expected_result)
 
@@ -236,10 +227,8 @@ class Lines(object):
                         (self.longest[u'upper'] - len(l[u'upper']) + 1))
                 s.write(l[u'upper'])
 
-                if not (l[u'upper'] == u'' and l[u'lower'] == u''):
-                    s.write(u':')
-                else:
-                    s.write(u' ')
+                if l[u'divisor']:
+                    s.write(l[u'divisor'])
 
                 s.write(l[u'lower'])
                 s.write(u' ' *
@@ -288,6 +277,7 @@ def parse_line(line):
 
     if m != -1:
         line_dict[u'upper'] = line[:m].strip()
+        line_dict[u'divisor'] = u':'
         line_dict[u'lower'] = line[m + 1:].strip()
     else:
         if line.strip():

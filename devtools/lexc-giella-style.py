@@ -24,6 +24,7 @@ from __future__ import absolute_import, print_function
 import codecs
 import unittest
 import sys
+from collections import defaultdict
 from io import open
 
 class TestLines(unittest.TestCase):
@@ -138,31 +139,31 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_upper_lower(self):
         input = u'''        +N+SgNomCmp:e%^DISIMP    R              ;'''
-        expected_result = {u'upper': u'+N+SgNomCmp', u'lower': u'e%^DISIMP', u'contlex': u'R', u'translation': u'', u'comment': u''}
+        expected_result = {u'upper': u'+N+SgNomCmp', u'lower': u'e%^DISIMP', u'contlex': u'R', u'comment': u''}
 
         self.assertEqual(parse_line(input), expected_result)
 
     def test_line_parser_no_lower(self):
         input = u'''               +N+Sg:             N_ODD_SG       ;'''
-        expected_result = {u'upper': u'+N+Sg', u'lower': u'', u'contlex': u'N_ODD_SG', u'translation': u'', u'comment': u''}
+        expected_result = {u'upper': u'+N+Sg', u'lower': u'', u'contlex': u'N_ODD_SG', u'comment': u''}
 
         self.assertEqual(parse_line(input), expected_result)
 
     def test_line_parser_no_upper_no_lower(self):
         input = u''' N_ODD_ESS;''';
-        expected_result = {u'upper': u'', u'lower': u'', u'contlex': u'N_ODD_ESS', u'translation': u'', u'comment': u''}
+        expected_result = {u'contlex': u'N_ODD_ESS', u'comment': u''}
 
         self.assertEqual(parse_line(input), expected_result)
 
     def test_line_parser_empty_upper_lower(self):
         input = u''' : N_ODD_E;''';
-        expected_result = {u'upper': u'', u'lower': u'', u'contlex': u'N_ODD_E', u'translation': u'', u'comment': u''}
+        expected_result = {u'upper': u'', u'lower': u'', u'contlex': u'N_ODD_E', u'comment': u''}
 
         self.assertEqual(parse_line(input), expected_result)
 
     def test_line_parser_with_comment(self):
         input = u''' +A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa'''
-        expected_result = {u'upper': u'+A+Comp+Attr', u'lower': u'%>abpa', u'contlex': u'ATTRCONT', u'translation': u'', u'comment': u'! båajasabpa,   *båajoesabpa'}
+        expected_result = {u'upper': u'+A+Comp+Attr', u'lower': u'%>abpa', u'contlex': u'ATTRCONT', u'comment': u'! båajasabpa,   *båajoesabpa'}
 
         self.assertEqual(parse_line(input), expected_result)
 
@@ -178,11 +179,7 @@ import argparse
 
 class Lines(object):
     def __init__(self):
-        self.longest = {}
-        self.longest[u'upper'] = 0
-        self.longest[u'lower'] = 0
-        self.longest[u'contlex'] = 0
-        self.longest[u'translation'] = 0
+        self.longest = defaultdict(int)
         self.lines = []
 
     def parse_lines(self, lines):
@@ -256,12 +253,7 @@ class Lines(object):
         return newlines
 
 def parse_line(line):
-    line_dict = {}
-    line_dict[u'upper'] = u''
-    line_dict[u'lower'] = u''
-    line_dict[u'contlex'] = u''
-    line_dict[u'translation'] = u''
-    line_dict[u'comment'] = u''
+    line_dict = defaultdict(unicode)
 
     contlexre = re.compile(ur'(?P<contlex>\S+)(?P<translation>\s+".+")*\s*;\s*(?P<comment>.*)')
     m = contlexre.search(line)

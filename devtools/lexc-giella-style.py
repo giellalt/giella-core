@@ -21,7 +21,9 @@
 
 
 from __future__ import absolute_import
+import codecs
 import unittest
+import sys
 from io import open
 
 class TestLines(unittest.TestCase):
@@ -282,7 +284,8 @@ if __name__ == u'__main__':
 
     args = parse_options()
 
-    with open(args.lexcfile) as f:
+    with (open(args.lexcfile) if args.lexcfile is not "-"
+          else sys.stdin as f):
         newlines = []
         readlines = []
         for l in f.readlines():
@@ -298,5 +301,6 @@ if __name__ == u'__main__':
         lines.parseLines(readlines)
         newlines += lines.adjustLines()
 
-    with open(args.lexcfile, u'w') as f:
+    with (open(args.lexcfile, u'w') if args.lexcfile is not "-"
+          else sys.stdout as f):
         f.writelines(newlines)

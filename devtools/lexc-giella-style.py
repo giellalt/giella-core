@@ -271,7 +271,7 @@ class Line(object):
 
 def parse_options():
     parser = argparse.ArgumentParser(description = u'Align rules given in lexc files')
-    parser.add_argument(u'lexcfile', help = u'lexc file where rules should be aligned')
+    parser.add_argument(u'lexcfile', help = u'Lexc file where rules should be aligned\nIf filename is -, then the file is read from stdin and written to stdout.')
 
     args = parser.parse_args()
     return args

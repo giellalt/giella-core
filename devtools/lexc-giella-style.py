@@ -111,7 +111,7 @@ jah Cc ;
            u' +N+SgGenCmp:e%>%^DISIMPn R              ;\n',
            u' +N+PlGenCmp:%>%^DISIMPi  R              ;\n',
            u' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE ;\n',
-           u'+A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa\n',
+           u' +A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa\n',
            u'   +A:%>X7 NomVadj "good A" ;',
            u'  ! Test data:\n',
            u'!!€gt-norm: daktere # Odd-syllable test\n']

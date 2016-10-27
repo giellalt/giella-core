@@ -131,8 +131,7 @@ jah Cc ;
                     u'! Test data:\n',
                     u'!!€gt-norm: daktere # Odd-syllable test\n']
         self.maxDiff = None
-        print(expected_result)
-        print(l.adjust_lines())
+
         self.assertEqual(expected_result, l.adjust_lines())
 
 class TestLine(unittest.TestCase):

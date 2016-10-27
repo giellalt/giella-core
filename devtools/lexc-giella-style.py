@@ -20,7 +20,7 @@
 #
 
 
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 import codecs
 import unittest
 import sys
@@ -104,9 +104,9 @@ class TestLines(unittest.TestCase):
                     u'! Test data:\n',
                     u'!!€gt-norm: daktere # Odd-syllable test\n']
         self.maxDiff = None
-        print expectedResult
-        print l.adjustLines()
-        self.assertEqual(expectedResult, l.adjustLines())
+        print(expected_result)
+        print(l.adjust_lines())
+        self.assertEqual(expected_result, l.adjust_lines())
 
 class TestLine(unittest.TestCase):
 

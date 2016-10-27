@@ -173,6 +173,7 @@ class TestLine(unittest.TestCase):
 
         self.assertEqual(parse_line(input), expected_result)
 
+
 import re
 import io
 import argparse

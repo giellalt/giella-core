@@ -206,7 +206,7 @@ class Lines(object):
 
             contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
             contlexmatch = contlexre.search(line)
-            if contlexmatch and not re.match(u'^\S', line):
+            if contlexmatch and not line.startswith('LEXICON '):
                 l = parse_line(line)
                 self.lines.append(l)
                 self.find_longest(l)

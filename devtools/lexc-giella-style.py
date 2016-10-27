@@ -284,8 +284,8 @@ if __name__ == u'__main__':
 
     args = parse_options()
 
-    with (open(args.lexcfile) if args.lexcfile is not "-"
-          else sys.stdin as f):
+    with open(args.lexcfile) if args.lexcfile is not "-" \
+            else sys.stdin as f:
         newlines = []
         readlines = []
         for l in f.readlines():
@@ -301,6 +301,6 @@ if __name__ == u'__main__':
         lines.parseLines(readlines)
         newlines += lines.adjustLines()
 
-    with (open(args.lexcfile, u'w') if args.lexcfile is not "-"
-          else sys.stdout as f):
+    with open(args.lexcfile, u'w') if args.lexcfile is not "-" \
+            else sys.stdout as f:
         f.writelines(newlines)

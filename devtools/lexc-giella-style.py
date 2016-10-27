@@ -93,6 +93,24 @@ class TestLines(unittest.TestCase):
         l.parse_lines(input)
         self.assertEqual(expected_result, l.adjust_lines())
 
+    def test_output_with_lines_starting_with_exclam(self):
+        input = (
+            u'LEXICON Conjunction\n'
+            u'!dovne Cc ; ! dovne A jïh B\n'
+            u'jïh Cc ;\n'
+            u'jah Cc ;\n'
+        ).split('\n')
+        expected_result = [
+            u'LEXICON Conjunction',
+            u'! dovne Cc ; ! dovne A jïh B\n',
+            u'    jïh Cc ;\n',
+            u'    jah Cc ;\n',
+            u''
+        ]
+        l = Lines()
+        l.parse_lines(input)
+        self.assertEqual(expected_result, l.adjust_lines())
+
     def test_output_with_lines_with_leading_non_w(self):
         input = [
             u'LEXICON Cc\n',
@@ -117,7 +135,7 @@ class TestLines(unittest.TestCase):
            u' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE ;\n',
            u'+A+Comp+Attr:%>abpa      ATTRCONT    ;  ! båajasabpa,   *båajoesabpa\n',
            u'   +A:%>X7 NomVadj "good A" ;',
-           u'  ! Test data:\n',
+           u'! Test data:\n',
            u'!!€gt-norm: daktere # Odd-syllable test\n']
         l = Lines()
         l.parse_lines(input)
@@ -183,6 +201,13 @@ class TestLine(unittest.TestCase):
 
         self.assertEqual(parse_line(input), expected_result)
 
+    def test_line_parser_with_leading_exclam(self):
+        input = u'!dovne Cc ; ! dovne A jïh B'
+
+        expected_result = {u'comment': u'! dovne A jïh B', u'upper': u'dovne', u'contlex': u'Cc', u'exclam': u'!'}
+
+        self.assertEqual(parse_line(input), expected_result)
+
 
 import re
 import io
@@ -194,15 +219,9 @@ class Lines(object):
         self.lines = []
 
     def parse_lines(self, lines):
-        commentre = re.compile(ur'^\s*!')
+        contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
+
         for line in lines:
-
-            commentmatch = commentre.match(line)
-            if commentmatch:
-                self.lines.append(commentre.sub(u'!', line))
-                continue
-
-            contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
             contlexmatch = contlexre.search(line)
             if contlexmatch and not line.startswith('LEXICON '):
                 l = parse_line(line)
@@ -218,10 +237,15 @@ class Lines(object):
 
     def adjust_lines(self):
         newlines = []
-
         for l in self.lines:
             if isinstance(l, dict):
                 s = io.StringIO()
+
+                if self.longest[u'exclam']:
+                    if l[u'exclam']:
+                        s.write(l[u'exclam'])
+                    else:
+                        s.write(u' ')
 
                 s.write(u' ' *
                         (self.longest[u'upper'] - len(l[u'upper']) + 1))
@@ -262,6 +286,12 @@ class Lines(object):
 
 def parse_line(line):
     line_dict = defaultdict(unicode)
+
+    commentre = re.compile(ur'^\s*!')
+    commentmatch = commentre.match(line)
+    if commentmatch:
+        line = commentre.sub('', line)
+        line_dict[u'exclam'] = u'!'
 
     contlexre = re.compile(ur'(?P<contlex>\S+)(?P<translation>\s+".+")*\s*;\s*(?P<comment>.*)')
     m = contlexre.search(line)

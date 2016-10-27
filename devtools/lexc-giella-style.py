@@ -44,6 +44,7 @@ class TestLines(unittest.TestCase):
         l.parse_lines(input.split(u'\n'))
 
         longest = {}
+        longest[u'comment'] = 0
         longest[u'upper'] = 19
         longest[u'lower'] = 12
         longest[u'contlex'] = 14
@@ -213,7 +214,7 @@ class Lines(object):
                 self.lines.append(line)
 
     def find_longest(self, l):
-        for name in [u'upper', u'lower', u'translation', u'contlex']:
+        for name in l:
             if self.longest[name] < len(l[name]):
                 self.longest[name] = len(l[name])
 

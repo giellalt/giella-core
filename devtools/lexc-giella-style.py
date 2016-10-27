@@ -208,7 +208,7 @@ class Lines(object):
 
             contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
             contlexmatch = contlexre.search(line)
-            if contlexmatch and not re.match(u'^\w', line):
+            if contlexmatch and not re.match(u'^\S', line):
                 l = Line()
                 l.parse_line(line)
                 self.lines.append(l)

@@ -234,7 +234,6 @@ class Lines(object):
                     s.write(u' ')
 
                 s.write(l[u'lower'])
-
                 s.write(u' ' *
                         (self.longest[u'lower'] - len(l[u'lower']) + 1))
 

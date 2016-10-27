@@ -179,7 +179,7 @@ class TestLine(unittest.TestCase):
 
         self.assertEqual(parse_line(input), expected_result)
 
-    def test_line_parser_withComment(self):
+    def test_line_parser_with_translation(self):
         input = u'''  +A:%>X7 NomVadj "good A" ;'''
         expected_result = {u'upper': u'+A', u'lower': u'%>X7', u'contlex': u'NomVadj', u'translation': u'"good A"', u'comment': u''}
 

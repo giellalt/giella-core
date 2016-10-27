@@ -185,6 +185,13 @@ class TestLine(unittest.TestCase):
 
         self.assertEqual(parse_line(input), expected_result)
 
+    def test_line_parser_with_leading_upper_and_contlex(self):
+        input = u'jïh Cc ;'
+
+        expected_result = {u'upper': u'jïh', u'contlex': u'Cc', u'comment': u''}
+
+        self.assertEqual(parse_line(input), expected_result)
+
 
 import re
 import io
@@ -282,6 +289,9 @@ def parse_line(line):
     if m != -1:
         line_dict[u'upper'] = line[:m].strip()
         line_dict[u'lower'] = line[m + 1:].strip()
+    else:
+        if line.strip():
+            line_dict[u'upper'] = line.strip()
 
     return line_dict
 

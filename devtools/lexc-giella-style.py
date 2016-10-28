@@ -65,7 +65,7 @@ class TestLines(unittest.TestCase):
  +N+Sg:             N_ODD_SG       ;
 '''
         expected_result = u'''
-       FINAL1   ;
+        FINAL1   ;
  +N+Sg: N_ODD_SG ;
 '''
 

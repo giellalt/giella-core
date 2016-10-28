@@ -279,10 +279,8 @@ class Lines(object):
                         (self.longest[u'upper'] - len(l[u'upper']) + 1))
                 s.write(l[u'upper'])
 
-                if not (l[u'upper'] == u'' and l[u'lower'] == u''):
-                    s.write(u':')
-                else:
-                    s.write(u' ')
+                if l[u'divisor']:
+                    s.write(l[u'divisor'])
 
                 s.write(l[u'lower'])
                 s.write(u' ' *

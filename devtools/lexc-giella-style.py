@@ -64,8 +64,8 @@ class TestLines(unittest.TestCase):
             u' +N+Sg:             N_ODD_SG       ;\n'
         ]
         expected_result = [
-            u'       FINAL1   ;\n',
-            u' +N+Sg: N_ODD_SG ;\n'
+            u'       FINAL1   ;',
+            u' +N+Sg: N_ODD_SG ;'
         ]
 
         l = Lines()
@@ -81,9 +81,9 @@ class TestLines(unittest.TestCase):
         ]
 
         expected_result = [
-            u'LEXICON GOAHTI-NE  !!= * __@CODE@__ Bisyll. V-Nouns\n',
-            u'  NomV ;\n',
-            u'  EssV ;\n'
+            u'LEXICON GOAHTI-NE  !!= * __@CODE@__ Bisyll. V-Nouns',
+            u'  NomV ;',
+            u'  EssV ;'
         ]
 
         l = Lines()
@@ -98,8 +98,8 @@ class TestLines(unittest.TestCase):
         ).split('\n')
         expected_result = [
             u'LEXICON Conjunction',
-            u' jïh Cc ;\n',
-            u' jah Cc ;\n',
+            u' jïh Cc ;',
+            u' jah Cc ;',
             u''
         ]
         l = Lines()
@@ -115,9 +115,9 @@ class TestLines(unittest.TestCase):
         ).split('\n')
         expected_result = [
             u'LEXICON Conjunction',
-            u'! dovne Cc ; ! dovne A jïh B\n',
-            u'    jïh Cc ;\n',
-            u'    jah Cc ;\n',
+            u'! dovne Cc ; ! dovne A jïh B',
+            u'    jïh Cc ;',
+            u'    jah Cc ;',
             u''
         ]
         l = Lines()
@@ -130,8 +130,8 @@ class TestLines(unittest.TestCase):
             u'+CC:0 # ;\n'
         ]
         expected_result = [
-            u'LEXICON Cc\n',
-            u' +CC:0 # ;\n'
+            u'LEXICON Cc',
+            u' +CC:0 # ;'
         ]
         l = Lines()
         l.parse_lines(input)
@@ -157,19 +157,19 @@ class TestLines(unittest.TestCase):
         l.parse_lines(input)
 
         expected_result = [
-            u'LEXICON DAKTERE\n',
-            u'               +N+Sg:             N_ODD_SG                ;\n',
-            u'               +N+Pl:             N_ODD_PL                ;\n',
-            u'                  +N:             N_ODD_ESS               ;\n',
-            u'         +N+SgNomCmp:e%^DISIMP    R                       ;\n',
-            u'         +N+SgGenCmp:e%>%^DISIMPn R                       ;\n',
-            u'         +N+PlGenCmp:%>%^DISIMPi  R                       ;\n',
-            u' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE          ;\n',
+            u'LEXICON DAKTERE',
+            u'               +N+Sg:             N_ODD_SG                ;',
+            u'               +N+Pl:             N_ODD_PL                ;',
+            u'                  +N:             N_ODD_ESS               ;',
+            u'         +N+SgNomCmp:e%^DISIMP    R                       ;',
+            u'         +N+SgGenCmp:e%>%^DISIMPn R                       ;',
+            u'         +N+PlGenCmp:%>%^DISIMPi  R                       ;',
+            u' +N+Der1+Der/Dimin+N:%»adtj       GIERIEHTSADTJE          ;',
             u'        +A+Comp+Attr:%>abpa       ATTRCONT                ; ! '
-            u'båajasabpa,   *båajoesabpa\n',
-            u'                  +A:%>X7         NomVadj        "good A" ;\n',
-            u'! Test data:\n',
-            u'!!€gt-norm: daktere # Odd-syllable test\n'
+            u'båajasabpa,   *båajoesabpa',
+            u'                  +A:%>X7         NomVadj        "good A" ;',
+            u'! Test data:',
+            u'!!€gt-norm: daktere # Odd-syllable test',
         ]
         self.maxDiff = None
 
@@ -250,6 +250,7 @@ class Lines(object):
         contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
 
         for line in lines:
+            line = line.rstrip()
             contlexmatch = contlexre.search(line)
             if contlexmatch and not line.startswith('LEXICON '):
                 l = parse_line(line)
@@ -305,7 +306,6 @@ class Lines(object):
                     s.write(u' ')
                     s.write(l[u'comment'])
 
-                s.write(u'\n')
                 newlines.append(s.getvalue())
             else:
                 newlines.append(l)
@@ -387,4 +387,4 @@ if __name__ == u'__main__':
 
     with open(args.lexcfile, u'w') if args.lexcfile is not "-" \
             else sys.stdout as f:
-        f.writelines(newlines)
+        f.write('\n'.join(newlines))

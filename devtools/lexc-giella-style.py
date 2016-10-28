@@ -307,6 +307,8 @@ class Lines(object):
 
                 if l[u'divisor']:
                     s.write(l[u'divisor'])
+                elif self.longest[u'divisor']:
+                    s.write(u' ')
 
                 s.write(l[u'lower'])
                 s.write(u' ' *

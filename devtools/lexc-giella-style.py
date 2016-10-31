@@ -62,7 +62,6 @@ abb ; babb
         l.parse_lines(input.split(u'\n'))
 
         longest = {}
-        longest[u'comment'] = 0
         longest[u'upper'] = 19
         longest[u'lower'] = 12
         longest[u'contlex'] = 14
@@ -184,54 +183,82 @@ LEXICON DAKTERE
         l.parse_lines(input.split(u'\n'))
         self.assertEqual(expected_result, '\n'.join(l.adjust_lines()))
 
+    def test_less_great(self):
+        input = u'''
+LEXICON test
++V+IV+Inf+Err/Orth-a/á:uvvát K ;
+< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» "+Der/NomAct":m > ContLex ;
++V+IV+Inf+Err/Orth-a/á:uvvát K ;
+'''
+        expected_result = u'''
+LEXICON test
+                                                 +V+IV+Inf+Err/Orth-a/á:uvvát K       ;
+ < "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» "+Der/NomAct":m >       ContLex ;
+                                                 +V+IV+Inf+Err/Orth-a/á:uvvát K       ;
+'''
+        self.maxDiff = None
+
+
+        l = Lines()
+        l.parse_lines(input.split(u'\n'))
+
+        self.assertEqual(expected_result, '\n'.join(l.adjust_lines()))
+
 
 class TestLine(unittest.TestCase):
 
     def test_line_parser_upper_lower(self):
-        input = u'''        +N+SgNomCmp:e%^DISIMP    R              ;'''
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'''        +N+SgNomCmp:e%^DISIMP    R              ;''')
         expected_result = {
             u'upper': u'+N+SgNomCmp',
             u'lower': u'e%^DISIMP',
             u'contlex': u'R',
-            u'comment': u'',
             u'divisor': u':'
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
 
     def test_line_parser_no_lower(self):
-        input = u'''               +N+Sg:             N_ODD_SG       ;'''
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'''               +N+Sg:             N_ODD_SG       ;''')
         expected_result = {
             u'upper': u'+N+Sg',
             u'lower': u'',
             u'contlex': u'N_ODD_SG',
-            u'comment': u'',
             u'divisor': u':'
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
 
     def test_line_parser_no_upper_no_lower(self):
-        input = u''' N_ODD_ESS;'''
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u''' N_ODD_ESS;''')
         expected_result = {
             u'contlex': u'N_ODD_ESS',
-            u'comment': u''
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
 
     def test_line_parser_empty_upper_lower(self):
-        input = u''' : N_ODD_E;'''
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u''' : N_ODD_E;''')
         expected_result = {
             u'upper': u'', u'lower': u'',
-            u'contlex': u'N_ODD_E', u'comment': u'',
+            u'contlex': u'N_ODD_E',
             u'divisor': u':'
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
 
     def test_line_parser_with_comment(self):
-        input = u'''+A+Comp+Attr:%>abpa ATTRCONT; ! båajasabpa, *båajoesabpa'''
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'''+A+Comp+Attr:%>abpa ATTRCONT; ! båajasabpa, *båajoesabpa''')
         expected_result = {
             u'upper': u'+A+Comp+Attr',
             u'lower': u'%>abpa',
@@ -240,33 +267,37 @@ class TestLine(unittest.TestCase):
             u'divisor': u':'
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
 
     def test_line_parser_with_translation(self):
-        input = u'''  +A:%>X7 NomVadj "good A" ;'''
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'''  +A:%>X7 NomVadj "good A" ;''')
         expected_result = {
             u'upper': u'+A', u'lower': u'%>X7',
             u'contlex': u'NomVadj',
             u'translation': u'"good A"',
-            u'comment': u'',
             u'divisor': u':'
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
 
     def test_line_parser_with_leading_upper_and_contlex(self):
-        input = u'jïh Cc ;'
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'jïh Cc ;')
 
         expected_result = {
             u'upper': u'jïh',
             u'contlex': u'Cc',
-            u'comment': u''
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
 
     def test_line_parser_with_leading_exclam(self):
-        input = u'!dovne Cc ; ! dovne A jïh B'
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'!dovne Cc ; ! dovne A jïh B')
 
         expected_result = {
             u'comment': u'! dovne A jïh B',
@@ -275,28 +306,41 @@ class TestLine(unittest.TestCase):
             u'exclam': u'!'
         }
 
-        self.assertEqual(parse_line(input), expected_result)
+        self.assertDictEqual(parse_line(input), expected_result)
+
+    def test_line_parser_less_great(self):
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» "+Der/NomAct":m > ContLex ;')
+
+        expected_result = {u'contlex': u'ContLex', u'upper': u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":\xbb "+Der/NomAct":m >'}
+
+        self.assertDictEqual(parse_line(input), expected_result)
 
 
 class Lines(object):
+
+    lexc_line_re = re.compile(r'''
+        (?P<exclam>^\s*!)?          #  optional comment
+        (?P<content>(<.+>)|(\S+))?           #  optional content
+        (\s+)?
+        (?P<contlex>\S+)            #  any nonspace
+        (?P<translation>\s+".+")?   #  optional translation
+        \s*;\s*                     #  skip space and semicolon
+        (?P<comment>!.*)?           #  followed by an optional comment
+        $
+    ''', re.VERBOSE|re.UNICODE)
+
     def __init__(self):
         self.longest = defaultdict(int)
         self.lines = []
 
     def parse_lines(self, lines):
-        lexc_line_re = re.compile(r'''
-            (.*\s+)?
-            (?P<contlex>\S+)            #  any nonspace
-            \s*;\s*                     #  skip space and semicolon
-            (?P<comment>!.*)?           #  followed by an optional comment
-            $
-        ''', re.VERBOSE|re.UNICODE)
-
         for line in lines:
             line = line.rstrip()
-            lexc_line_match = lexc_line_re.search(line)
+            lexc_line_match = self.lexc_line_re.search(line)
             if lexc_line_match and not line.startswith('LEXICON '):
-                l = parse_line(line)
+                l = parse_line(lexc_line_match)
                 self.lines.append(l)
                 self.find_longest(l)
             else:
@@ -358,40 +402,33 @@ class Lines(object):
         return newlines
 
 
-def parse_line(line):
+def parse_line(old_match):
     line_dict = defaultdict(unicode)
 
-    commentre = re.compile(r'^\s*!')
-    commentmatch = commentre.match(line)
-    if commentmatch:
-        line = commentre.sub('', line)
+    if old_match.group('exclam'):
         line_dict[u'exclam'] = u'!'
 
-    lexc_line_re = re.compile(r'''
-        (?P<contlex>\S+)
-        (?P<translation>\s+".+")
-        *\s*;\s*
-        (?P<comment>.*)
-    ''', re.VERBOSE|re.UNICODE)
-    lexc_line_match = lexc_line_re.search(line)
+    line_dict[u'contlex'] = old_match.group(u'contlex')
+    if old_match.group(u'translation'):
+        line_dict[u'translation'] = old_match.group(u'translation').strip()
 
-    line_dict[u'contlex'] = lexc_line_re.search(line).group(u'contlex')
-    if lexc_line_match.group(u'translation'):
-        line_dict[u'translation'] = lexc_line_re.search(
-            line).group(u'translation').strip()
-    line_dict[u'comment'] = lexc_line_re.search(line).group(u'comment').strip()
+    if old_match.group(u'comment'):
+        line_dict[u'comment'] = old_match.group(u'comment').strip()
 
-    line = lexc_line_re.sub(u'', line)
+    line = old_match.group('content')
+    if line:
+        if line.startswith(u'<') and line.endswith(u'>'):
+            line_dict[u'upper'] = line
+        else:
+            lexc_line_match = line.find(u":")
 
-    lexc_line_match = line.find(u":")
-
-    if lexc_line_match != -1:
-        line_dict[u'upper'] = line[:lexc_line_match].strip()
-        line_dict[u'divisor'] = u':'
-        line_dict[u'lower'] = line[lexc_line_match + 1:].strip()
-    else:
-        if line.strip():
-            line_dict[u'upper'] = line.strip()
+            if lexc_line_match != -1:
+                line_dict[u'upper'] = line[:lexc_line_match].strip()
+                line_dict[u'divisor'] = u':'
+                line_dict[u'lower'] = line[lexc_line_match + 1:].strip()
+            else:
+                if line.strip():
+                    line_dict[u'upper'] = line.strip()
 
     return line_dict
 

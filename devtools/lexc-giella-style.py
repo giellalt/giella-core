@@ -34,6 +34,18 @@ from io import open
 
 class TestLines(unittest.TestCase):
 
+    def test_non_lexc_line(self):
+        input = u'''
+abb ; babb
+'''
+        expected_result = u'''
+abb ; babb
+'''
+        l = Lines()
+        l.parse_lines(input.split(u'\n'))
+
+        self.assertEqual(expected_result, '\n'.join(l.adjust_lines()))
+
     def test_longest(self):
         input = u'''
  +N+Sg:             N_ODD_SG       ;
@@ -273,8 +285,11 @@ class Lines(object):
 
     def parse_lines(self, lines):
         contlexre = re.compile(ur'''
+            (.*\s+)?
             (?P<contlex>\S+)            #  any nonspace
-            \s*;                        #  skip optional space
+            \s*;\s*                     #  skip space and semicolon
+            (?P<comment>!.*)?           #  followed by an optional comment
+            $
         ''', re.VERBOSE)
 
         for line in lines:

@@ -284,18 +284,18 @@ class Lines(object):
         self.lines = []
 
     def parse_lines(self, lines):
-        contlexre = re.compile(ur'''
+        lexc_line_re = re.compile(r'''
             (.*\s+)?
             (?P<contlex>\S+)            #  any nonspace
             \s*;\s*                     #  skip space and semicolon
             (?P<comment>!.*)?           #  followed by an optional comment
             $
-        ''', re.VERBOSE)
+        ''', re.VERBOSE|re.UNICODE)
 
         for line in lines:
             line = line.rstrip()
-            contlexmatch = contlexre.search(line)
-            if contlexmatch and not line.startswith('LEXICON '):
+            lexc_line_match = lexc_line_re.search(line)
+            if lexc_line_match and not line.startswith('LEXICON '):
                 l = parse_line(line)
                 self.lines.append(l)
                 self.find_longest(l)
@@ -361,32 +361,34 @@ class Lines(object):
 def parse_line(line):
     line_dict = defaultdict(unicode)
 
-    commentre = re.compile(ur'^\s*!')
+    commentre = re.compile(r'^\s*!')
     commentmatch = commentre.match(line)
     if commentmatch:
         line = commentre.sub('', line)
         line_dict[u'exclam'] = u'!'
 
-    contlexre = re.compile(ur'(?P<contlex>\S+)'
-                           ur'(?P<translation>\s+".+")'
-                           ur'*\s*;\s*'
-                           ur'(?P<comment>.*)')
-    m = contlexre.search(line)
+    lexc_line_re = re.compile(r'''
+        (?P<contlex>\S+)
+        (?P<translation>\s+".+")
+        *\s*;\s*
+        (?P<comment>.*)
+    ''', re.VERBOSE|re.UNICODE)
+    lexc_line_match = lexc_line_re.search(line)
 
-    line_dict[u'contlex'] = contlexre.search(line).group(u'contlex')
-    if m.group(u'translation'):
-        line_dict[u'translation'] = contlexre.search(
+    line_dict[u'contlex'] = lexc_line_re.search(line).group(u'contlex')
+    if lexc_line_match.group(u'translation'):
+        line_dict[u'translation'] = lexc_line_re.search(
             line).group(u'translation').strip()
-    line_dict[u'comment'] = contlexre.search(line).group(u'comment').strip()
+    line_dict[u'comment'] = lexc_line_re.search(line).group(u'comment').strip()
 
-    line = contlexre.sub(u'', line)
+    line = lexc_line_re.sub(u'', line)
 
-    m = line.find(u":")
+    lexc_line_match = line.find(u":")
 
-    if m != -1:
-        line_dict[u'upper'] = line[:m].strip()
+    if lexc_line_match != -1:
+        line_dict[u'upper'] = line[:lexc_line_match].strip()
         line_dict[u'divisor'] = u':'
-        line_dict[u'lower'] = line[m + 1:].strip()
+        line_dict[u'lower'] = line[lexc_line_match + 1:].strip()
     else:
         if line.strip():
             line_dict[u'upper'] = line.strip()

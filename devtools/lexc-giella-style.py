@@ -272,7 +272,10 @@ class Lines(object):
         self.lines = []
 
     def parse_lines(self, lines):
-        contlexre = re.compile(ur'(?P<contlex>\S+)\s*;')
+        contlexre = re.compile(ur'''
+            (?P<contlex>\S+)            #  any nonspace
+            \s*;                        #  skip optional space
+        ''', re.VERBOSE)
 
         for line in lines:
             line = line.rstrip()

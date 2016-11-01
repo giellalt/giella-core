@@ -472,3 +472,4 @@ if __name__ == u'__main__':
     with open(args.lexcfile, u'w') if args.lexcfile is not "-" \
             else sys.stdout as f:
         f.write('\n'.join(newlines))
+        f.write('\n')

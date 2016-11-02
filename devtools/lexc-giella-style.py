@@ -325,7 +325,8 @@ class TestLine(unittest.TestCase):
     def test_line_parser_less_great(self):
         l = Lines()
         input = l.lexc_line_re.search(
-            u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» "+Der/NomAct":m > ContLex ;')
+            u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» '
+            u'"+Der/NomAct":m > ContLex ;')
 
         expected_result = {u'contlex': u'ContLex',
                            u'upper':

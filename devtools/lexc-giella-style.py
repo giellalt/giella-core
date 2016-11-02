@@ -313,7 +313,10 @@ class TestLine(unittest.TestCase):
         input = l.lexc_line_re.search(
             u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» "+Der/NomAct":m > ContLex ;')
 
-        expected_result = {u'contlex': u'ContLex', u'upper': u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":\xbb "+Der/NomAct":m >'}
+        expected_result = {u'contlex': u'ContLex',
+                           u'upper':
+                               u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> '
+                               u'"+Der4":» "+Der/NomAct":m >'}
 
         self.assertDictEqual(parse_line(input), expected_result)
 

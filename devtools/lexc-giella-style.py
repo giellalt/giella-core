@@ -206,11 +206,13 @@ LEXICON test
 
     def test_line_percent_space_ending(self):
         input = u'''
-            abb:babb%    ContLex ;
+            abb:babb%    ContLex;
+uff:puf Contlex;
 '''
 
         expected_result = u'''
  abb:babb%  ContLex ;
+ uff:puf    Contlex ;
 '''
 
         l = Lines()
@@ -335,6 +337,18 @@ class TestLine(unittest.TestCase):
 
         self.assertDictEqual(parse_line(input), expected_result)
 
+    def test_line_parser_lower_ends_with_percent(self):
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'abb:babb%  ContLex ;')
+
+        expected_result = {u'contlex': u'ContLex',
+                           u'upper': u'abb',
+                           u'lower': u'babb% ',
+                           u'divisor': u':',}
+
+        self.assertDictEqual(parse_line(input), expected_result)
+
 
 class Lines(object):
 
@@ -391,8 +405,6 @@ class Lines(object):
                     s.write(u' ')
 
                 s.write(l[u'lower'])
-                if l[u'lower'].endswith('%'):
-                    s.write(u' ')
 
                 s.write(u' ' *
                         (self.longest[u'lower'] - len(l[u'lower']) + 1))
@@ -447,6 +459,9 @@ def parse_line(old_match):
                 line_dict[u'upper'] = line[:lexc_line_match].strip()
                 line_dict[u'divisor'] = u':'
                 line_dict[u'lower'] = line[lexc_line_match + 1:].strip()
+                if line_dict[u'lower'].endswith('%'):
+                   line_dict[u'lower'] = line_dict[u'lower'] + u' '
+
             else:
                 if line.strip():
                     line_dict[u'upper'] = line.strip()

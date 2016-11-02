@@ -204,6 +204,20 @@ LEXICON test
 
         self.assertEqual(expected_result, '\n'.join(l.adjust_lines()))
 
+    def test_line_percent_space_ending(self):
+        input = u'''
+            abb:babb%    ContLex ;
+'''
+
+        expected_result = u'''
+ abb:babb%  ContLex ;
+'''
+
+        l = Lines()
+        l.parse_lines(input.split(u'\n'))
+
+        self.assertEqual(expected_result, '\n'.join(l.adjust_lines()))
+
 
 class TestLine(unittest.TestCase):
 
@@ -376,6 +390,9 @@ class Lines(object):
                     s.write(u' ')
 
                 s.write(l[u'lower'])
+                if l[u'lower'].endswith('%'):
+                    s.write(u' ')
+
                 s.write(u' ' *
                         (self.longest[u'lower'] - len(l[u'lower']) + 1))
 

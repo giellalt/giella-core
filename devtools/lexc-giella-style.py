@@ -480,10 +480,12 @@ def parse_line(old_match):
 
     line_dict[u'contlex'] = old_match.group(u'contlex')
     if old_match.group(u'translation'):
-        line_dict[u'translation'] = old_match.group(u'translation').strip()
+        line_dict[u'translation'] = old_match.group(
+            u'translation').strip().replace(u'%¥', u'% ')
 
     if old_match.group(u'comment'):
-        line_dict[u'comment'] = old_match.group(u'comment').strip()
+        line_dict[u'comment'] = old_match.group(
+            u'comment').strip().replace(u'%¥', u'% ')
 
     line = old_match.group('content')
     if line:

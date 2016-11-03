@@ -349,6 +349,18 @@ class TestLine(unittest.TestCase):
 
         self.assertDictEqual(parse_line(input), expected_result)
 
+    def test_line_parser_multiple_percent_space(self):
+        l = Lines()
+        input = l.lexc_line_re.search(
+            u'+N+Der+Der/viđá+Adv+Use/-PLX:»X7% viđá%  K ;')
+
+        expected_result = {u'contlex': u'K',
+                           u'upper': u'+N+Der+Der/viđá+Adv+Use/-PLX',
+                           u'lower': u'»X7% viđá% ',
+                           u'divisor': u':',}
+
+        self.assertDictEqual(parse_line(input), expected_result)
+
 
 class Lines(object):
 

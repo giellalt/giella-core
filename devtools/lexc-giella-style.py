@@ -248,8 +248,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_upper_lower(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u'        +N+SgNomCmp:e%^DISIMP    R              ;').groupdict()
+        line = u'        +N+SgNomCmp:e%^DISIMP    R              ;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'+N+SgNomCmp',
             u'lower': u'e%^DISIMP',
@@ -261,8 +263,11 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_no_lower(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u'               +N+Sg:             N_ODD_SG   ;').groupdict()
+        line = (
+            u'               +N+Sg:             N_ODD_SG   ;')
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'+N+Sg',
             u'lower': u'',
@@ -274,8 +279,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_no_upper_no_lower(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u' N_ODD_ESS;').groupdict()
+        line = u' N_ODD_ESS;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'contlex': u'N_ODD_ESS',
         }
@@ -284,8 +291,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_empty_upper_lower(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u' : N_ODD_E;').groupdict()
+        line = u' : N_ODD_E;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'', u'lower': u'',
             u'contlex': u'N_ODD_E',
@@ -296,9 +305,12 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_with_comment(self):
         l = Lines()
-        input = l.lexc_line_re.search(
+        line = (
             u'+A+Comp+Attr:%>abpa ATTRCONT; '
-            u'! båajasabpa, *båajoesabpa').groupdict()
+            u'! båajasabpa, *båajoesabpa')
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'+A+Comp+Attr',
             u'lower': u'%>abpa',
@@ -311,8 +323,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_with_translation(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u'  +A:%>X7 NomVadj "good A" ;').groupdict()
+        line = u'  +A:%>X7 NomVadj "good A" ;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'+A', u'lower': u'%>X7',
             u'contlex': u'NomVadj',
@@ -324,9 +338,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_with_leading_upper_and_contlex(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u'jïh Cc ;').groupdict()
-
+        line = u'jïh Cc ;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'jïh',
             u'contlex': u'Cc',
@@ -336,9 +351,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_with_leading_exclam(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u'!dovne Cc ; ! dovne A jïh B').groupdict()
-
+        line = u'!dovne Cc ; ! dovne A jïh B'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {
             u'comment': u'! dovne A jïh B',
             u'upper': u'dovne',
@@ -350,10 +366,12 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_less_great(self):
         l = Lines()
-        input = l.lexc_line_re.search(
+        line = (
             u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» '
-            u'"+Der/NomAct":m > ContLex ;').groupdict()
-
+            u'"+Der/NomAct":m > ContLex ;')
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {u'contlex': u'ContLex',
                            u'upper':
                                u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> '
@@ -363,9 +381,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_lower_ends_with_percent(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u'abb:babb%¥ ContLex ;').groupdict()
-
+        line = u'abb:babb%¥ ContLex ;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {u'contlex': u'ContLex',
                            u'upper': u'abb',
                            u'lower': u'babb% ',
@@ -375,9 +394,10 @@ class TestLine(unittest.TestCase):
 
     def test_line_parser_multiple_percent_space(self):
         l = Lines()
-        input = l.lexc_line_re.search(
-            u'+N+Der+Der/viđá+Adv+Use/-PLX:»X7%¥viđá%¥ K ;').groupdict()
-
+        line = u'+N+Der+Der/viđá+Adv+Use/-PLX:»X7%¥viđá%¥ K ;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
         expected_result = {u'contlex': u'K',
                            u'upper': u'+N+Der+Der/viđá+Adv+Use/-PLX',
                            u'lower': u'»X7% viđá% ',
@@ -389,14 +409,16 @@ class TestLine(unittest.TestCase):
 class Lines(object):
 
     lexc_line_re = re.compile(r'''
-        (?P<exclam>^\s*!)?          #  optional comment
-        (?P<content>(<.+>)|(\S+))?           #  optional content
-        (\s+)?
         (?P<contlex>\S+)            #  any nonspace
         (?P<translation>\s+".+")?   #  optional translation
         \s*;\s*                     #  skip space and semicolon
         (?P<comment>!.*)?           #  followed by an optional comment
         $
+    ''', re.VERBOSE | re.UNICODE)
+
+    lexc_content_re = re.compile(r'''
+        (?P<exclam>^\s*!\s*)?          #  optional comment
+        (?P<content>(<.+>)|(.+))?      #  optional content
     ''', re.VERBOSE | re.UNICODE)
 
     def __init__(self):
@@ -409,7 +431,10 @@ class Lines(object):
             line = line.replace(u'% ', u'%¥')
             lexc_line_match = self.lexc_line_re.search(line)
             if lexc_line_match and not line.startswith('LEXICON '):
-                l = parse_line(lexc_line_match.groupdict())
+                input = lexc_line_match.groupdict()
+                input.update(self.lexc_content_re.match(
+                self.lexc_line_re.sub('', line)).groupdict())
+                l = parse_line(input)
                 self.lines.append(l)
                 self.find_longest(l)
             else:

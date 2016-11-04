@@ -243,6 +243,34 @@ LEXICON GOAHTILONGSHORT !!= * __@CODE@__ Sometimes long nom-compound-forms, long
 
         self.assertEqual(expected_result, '\n'.join(l.adjust_lines()))
 
+    def test_line_startswith_contlex(self):
+        input = u'''
+LEXICON NounRoot
+N_NEWWORDS ;
+ N_sms2x ;
+! N-INCOMING ;
+
+LEXICON nouns
+!! This is a temporary solution until nouns are moved to xml
+N_NEWWORDS ;
+'''
+        expected_result = u'''
+LEXICON NounRoot
+   N_NEWWORDS ;
+   N_sms2x    ;
+!  N-INCOMING ;
+
+LEXICON nouns
+!! This is a temporary solution until nouns are moved to xml
+   N_NEWWORDS ;
+'''
+
+        self.maxDiff = None
+        l = Lines()
+        l.parse_lines(input.split(u'\n'))
+
+        self.assertEqual(expected_result, '\n'.join(l.adjust_lines()))
+
 
 class TestLine(unittest.TestCase):
 
@@ -402,6 +430,16 @@ class TestLine(unittest.TestCase):
                            u'upper': u'+N+Der+Der/viđá+Adv+Use/-PLX',
                            u'lower': u'»X7% viđá% ',
                            u'divisor': u':', }
+
+        self.assertDictEqual(parse_line(input), expected_result)
+
+    def test_only_contlex(self):
+        l = Lines()
+        line = u'N_NEWWORDS ;'
+        input = l.lexc_line_re.search(line).groupdict()
+        input.update(l.lexc_content_re.match(
+            l.lexc_line_re.sub('', line)).groupdict())
+        expected_result = {u'contlex': u'N_NEWWORDS'}
 
         self.assertDictEqual(parse_line(input), expected_result)
 

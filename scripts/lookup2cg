@@ -7,11 +7,11 @@ use utf8;
 
 # lookup2cg
 # Perl-script for converting lookup-output to CG-2 input.
-# - Rates and removes compound analyses according to 
+# - Rates and removes compound analyses according to
 #   the number of word boundaries.
 # - Reformats compound analyses and base forms, removes duplicates
 #
-# Input: 
+# Input:
 # Dan     dat+Pron+Dem+Sg+Acc
 # Dan     dat+Pron+Dem+Sg+Gen
 #
@@ -45,15 +45,15 @@ while(<>) {
   my @Analyses;
   my %forms;
   my %rated;
-  
+
   my $word;
   my $comp_rate = 0;
   my $max_comp_rate = 0;
-  
+
   my @lines = split(/\n/, $_);
   for my $line (@lines) {
     next if ($line =~ /^\s*$/);
-    
+
     # store word to a scalar and
     # analysis (=base form and tags) to an array
     my $analysis;
@@ -62,25 +62,25 @@ while(<>) {
     $analysis =~ tr/\t//d;
     push @Analyses, $analysis;
     $comp_rate = ($line =~ tr/\#//);
-    if ($comp_rate > $max_comp_rate) { 
-      $max_comp_rate = $comp_rate; 
+    if ($comp_rate > $max_comp_rate) {
+      $max_comp_rate = $comp_rate;
     }
   }
   # format the output and print
-  if ($max_comp_rate > 0) { 
+  if ($max_comp_rate > 0) {
     while (@Analyses) {
       my $line = pop @Analyses;
       $rated{$line} = 1;
     }
     pop @Analyses;
-    rate_compounds(\%rated); 
+    rate_compounds(\%rated);
     # If dictionary use, try to prefer lexicalized compounds
     if ( $dict ) { select_lexicalized(\%rated); }
     for my $key (keys %rated) {
       push @Analyses, $key;
     }
   }
-  
+
   # Format each analysis
   for my $line (@Analyses) {
     # Separate the base form from the analysis
@@ -94,49 +94,52 @@ while(<>) {
       $base = $1;
       $line2 = $2;
     }
-    else { 
+    else {
       if ($line =~ s/^\+//) { $plus = "+"; }
       ($base, $line2) = split(/\+/, $line, 2);
     }
     $line2 =~ tr/+/ /;
     $base =~ tr/+//;
     $line2 =~ s/=/ = /g; # relevant to kal XXX
-    #		$base =~ s/=/ = /g;  # relevant to kal 
+    #		$base =~ s/=/ = /g;  # relevant to kal
     if ($plus) { $base = $plus . $base; }
-    
+
     # If line contains a compound
     if ( $comp_rate > 0 && ! $der && ! $dict) {
-      format_compound(\$base, \$line2, \$word); 
+      format_compound(\$base, \$line2, \$word);
     }
     # Mark derivational tags
     # 1. basic tags
-    1 while $line2 =~ s/\b(V|N|Adv|A)(\ |\ .*?\ )(V|N|Adv|A)\b/$1\*$2$3/g;
-    
+		# redifine word boundary in order to catch correctly the patterns comming from the FST
+		my $w = '\w/-';
+		my $b = "(?:(?<![$w])(?=[$w])|(?<=[$w])(?![$w]))";
+    1 while $line2 =~ s/${b}(V|N|Adv|A)(\ |\ .*?\ )(V|N|Adv|A)${b}/$1\*$2$3/g;
+
     # 2. star IV if last occurence is TV (causative derivation)
-    1 while $line2 =~ s/\b(IV)(\ |\ .*?\ )(TV)\b/$1\*$2$3/g;
-    
+    1 while $line2 =~ s/${b}(IV)(\ |\ .*?\ )(TV)${b}/$1\*$2$3/g;
+
     #(Fixes to bug 954)
     # 3. star TV if last occurence is IV (passive derivation)
-    1 while $line2 =~ s/\b(TV)(\ |\ .*?\ )(IV)\b/$1\*$2$3/g;
+    1 while $line2 =~ s/${b}(TV)(\ |\ .*?\ )(IV)${b}/$1\*$2$3/g;
 
     # 4. star TV|IV if last occurence is N (nominal derivation)
-    1 while $line2 =~ s/\b(TV|IV)(\ |\ .*?\ )(N)\b/$1\*$2$3/g;
+    1 while $line2 =~ s/${b}(TV|IV)(\ |\ .*?\ )(N)${b}/$1\*$2$3/g;
 
     # 5. star IV if last occurence is IV (derivation without transitivity change, e.g. 'gildojuvvon')
-    1 while $line2 =~ s/\b(IV)(\ |\ .*?\ )(IV)\b/$1\*$2$3/g;
+    1 while $line2 =~ s/${b}(IV)(\ |\ .*?\ )(IV)${b}/$1\*$2$3/g;
 
     #Format output
     $line =  "\t" . " \"$base\" " . $line2 . "\n";
-    
+
     # Store the analysis to a hash
     if ($base) { $forms{$line} = 1; }
   }
-  
+
   # Print output
   if (@Analyses) {
     print "\"<$word>\"\n";
-    for my $line (keys %forms) 
-      { 
+    for my $line (keys %forms)
+      {
 	$line =~ s/("[^"]+?)\s+([^"]+?")/$1_$2/g;
 	print "$line"; }
   }
@@ -145,7 +148,7 @@ while(<>) {
 
 sub rate_compounds {
 	my $href = shift @_;
-	
+
 	# Rate compounds and remove extra readings.
 	my $min_boundary_count=5;
 	my $boundary_count=0;
@@ -183,7 +186,7 @@ sub select_lexicalized {
 	my %lexicalized;
 
 	# Select the forms which do not have any compound tags
-	for (keys %$href) { 
+	for (keys %$href) {
 		next if (m/\+.*\#/);
 		$lexicalized{$_} = 1;
 	}
@@ -222,7 +225,7 @@ sub format_compound {
 	my $i=4;
 	# this is the problem with Bug 1746: the substring
 	my $substring = substr($last_word,0,$i);
-	
+
 	while ($i > 1) {
 	    if ($$refword =~ m/.*(\Q$substring\E)/) {
 		my $pos = rindex $$refword,$substring,;
@@ -237,7 +240,7 @@ sub format_compound {
 	my $substring_trigger;
 
 	if ($$refword =~ m/.*\Q$substring\E/) {
-	  # If the compound boundary is found, 
+	  # If the compound boundary is found,
 	  # replace the last word by its base form, and insert a # mark in front of
 	  # it, in order to mark the result as a compound.
 	  my $orig = $$refbase;
@@ -250,11 +253,11 @@ sub format_compound {
 	}
 
 	if (!$substring_trigger)  {
-	  #last_word don't match the refword: Mázecabaret vs. Máze#kabarea issue 
-	  
+	  #last_word don't match the refword: Mázecabaret vs. Máze#kabarea issue
+
 	  (my $lemma_initial, my $lemma_rest) = $substring =~ /^(\w)(.*)$/;
 	  my $wordform_initial;
-	  
+
 	  if ($lemma_initial eq 'k') {
 	    $wordform_initial='c';
 	  } elsif ($lemma_initial eq 'b') {
@@ -267,7 +270,7 @@ sub format_compound {
 	    # else {
 	    #	    print STDERR "Nothing to map\n";
 	    #	  }
-	    
+
 	  #commented out due to installation problems with Trond's configuration
 	  #switch($lemma_initial){
 	  #  case "k" { $wordform_initial='c'; }
@@ -276,18 +279,18 @@ sub format_compound {
 	  #  case "g" { $wordform_initial='k'; }
 	  #  #else { print "previous case not true" }
 	  #}
-	  
+
 	  my $wf_substring = $wordform_initial+$lemma_rest;
-	  
+
 	  if ($refword =~ m/.*\Q$wf_substring\E/) {
 	    my $orig = $$refbase;
-	    
+
 	    $$refbase =~ s/(^[^\+]+).*$/$1\#$last_word/;
-	    
+
 	    # coping with geassi vs. geasse issue
 	    my $first_l_part = lc($1);
 	    my $first_wf_part = lc(substr($$refword, 0, length($first_l_part)));
-	    
+
 	    if ($first_l_part ne $first_wf_part) {
 	      $$refbase = $first_wf_part.'#'.$last_word;
 	    }
@@ -344,4 +347,3 @@ sub print_help {
     print "    --dict=<DICTIONARY> Dictionary\n";
     print "    --help              Print this message and exit.\n";
 };
-

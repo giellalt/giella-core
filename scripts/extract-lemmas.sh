@@ -97,12 +97,11 @@ keep_hom_tags () {
 # The rest is general mangling, the XXXXX part is needed to take care of
 # "lemma:stem CONTLEX" vs "word CONTLEX" when retaining the CONTLEX.
 # The penultimate perl s/__Hom..// thing is to restore the homonymy tags if kept
-# Vkielt etc for mhr
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
    | keep_hom_tags \
    | egrep -v "^[[:space:]]*[[:alpha:]_-]+[[:space:]]*;" \
-   | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex|STRAYFORMS|\+Neg|Vkielt|INTERJ_)" \
+   | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex)" \
    | exclgrep "$excludepattern" \
    | egrep    "$includepattern" \
    | sed 's/^[ 	]*//' \

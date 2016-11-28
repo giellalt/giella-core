@@ -158,7 +158,15 @@ if ($print_xml) {
 sub convert_systime {
     my %time_hash = ('realtime', '0', 'usertime', '0', 'systime', '0');
 
-    my @timelines = split(/\n/, $timeuse);
+    # Open and read file, storing content in string variable:
+    local $/ = undef;
+    open FILE, $timeuse or die "Couldn't open file: $!";
+    binmode FILE;
+    my $timeusestring = <FILE>;
+    close FILE;
+
+    # Process the string variable containing the time measures:
+    my @timelines = split(/\n/, $timeusestring);
     for my $timeline (@timelines) {
         chomp $timeline;
         if ($timeline =~ /^real/) {

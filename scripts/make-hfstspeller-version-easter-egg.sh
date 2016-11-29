@@ -34,7 +34,6 @@ Variant=$4
 
 Date=$(date +%d.%m.%Y)
 HfstVersion=$(hfst-info | grep 'HFST version' | grep -Eo '[0-9.]+')
-HfstRevision=$(hfst-info | grep 'revision' | grep -Eo '[0-9.]+')
 
 if test $Variant == 'default' -o "x$Variant" == 'x'; then
     VariantText=""
@@ -46,4 +45,4 @@ fi
 
 echo "Divvun speller for $Language$VariantText"
 echo "$1$Variant version $Version, $Date, rev$Revision"
-echo "Built using HFST $HfstVersion, rev$HfstRevision"
+echo "Built using HFST $HfstVersion"

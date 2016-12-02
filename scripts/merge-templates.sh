@@ -184,13 +184,12 @@ for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
     fi
     if test -z ${forcerev} ; then
         # assume we are merging from the revision of timestamp to today
-        macrolangrev=$(LC_ALL=C svn info ${macrolang}.timestamp \
-            | fgrep 'Last Changed Rev' | $SED -e 's/Last Changed Rev: //')
+        macrolangrev=$(head -n1 ${macrolang}.timestamp | cut -d' ' -f2)
         if test -z $macrolangrev ; then
             echo could not find revision of ${macrolang}.timestamp
             continue
         fi
-        echo "Revision of ${macrolang}.timestamp is: $macrolangrev (merging all newer revisions)"
+        echo "${macrolang}.timestamp was last merged at: $macrolangrev (merging all newer revisions)"
     else
         macrolangrev=${forcerev}
         echo "Merging from explicit version: $macrolangrev to HEAD"

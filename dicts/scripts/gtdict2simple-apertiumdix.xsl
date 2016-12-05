@@ -28,7 +28,7 @@
   <xsl:param name="inFile" select="'tull/tull.xml'"/>
 
   <!-- Output dir: customize as you need it -->
-  <xsl:param name="outDir" select="'smsRev'"/>
+  <xsl:param name="outDir" select="'tull/ut'"/>
   
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>

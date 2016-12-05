@@ -23,7 +23,7 @@
 
   
   <!-- Input file: customize as you need it -->
-  <xsl:param name="inFile" select="'finsms/sms2fin_tries_02.xml'"/>
+  <xsl:param name="inFile" select="'tull/out_simple-apertium/tull.xml'"/>
 
   <!-- Output dir: customize as you need it -->
   <xsl:param name="outDir" select="'smsRev'"/>

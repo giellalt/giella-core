@@ -82,8 +82,9 @@ truefalsesummary speller::before {
 truefalsesummary positive::before {
     content: 'True positives: ' attr(true) ;
     display: block ;
-    background: linear-gradient(to right, rgb(0, 155, 0) , rgb(255, 255, 55), rgb(255, 60, 0)); ;
-    border: 2px ridge ;
+    background: linear-gradient(to right, rgb(0, 155, 0) , rgb(255, 255, 55), rgb(255, 60, 0));
+    border: 2px ridge gray ;
+    margin-top: 0.5em ;
 }
 
 truefalsesummary positive::after {
@@ -105,6 +106,7 @@ truefalsesummary negative::after {
     display: block ;
     background-color: #D800DD ;
     border: 2px ridge #D800DD ;
+    margin-bottom: 0.5em ;
 }
 
 precision::before {

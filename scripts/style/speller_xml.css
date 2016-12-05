@@ -82,6 +82,8 @@ truefalsesummary speller::before {
 truefalsesummary positive::before {
     content: 'True positives: ' attr(true) ;
     display: block ;
+    background: linear-gradient(to right, rgb(0, 155, 0) , rgb(255, 255, 55), rgb(255, 60, 0)); ;
+    border: 2px ridge ;
 }
 
 truefalsesummary positive::after {
@@ -289,7 +291,7 @@ allpos_percent::before {
 }
 allpos_percent {
     display: block ;
-    background: linear-gradient(to right, rgb(0, 155, 0) , rgb(255, 190, 0));
+    background: linear-gradient(to right, rgb(0, 155, 0), rgb(255, 255, 55), rgb(255, 190, 0));
 }
 
 nosugg_percent::before {

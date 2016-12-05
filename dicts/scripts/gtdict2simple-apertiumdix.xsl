@@ -23,9 +23,7 @@
 
   
   <!-- Input file: customize as you need it -->
-  <!-- path to the correct input type: gtdict format, and
-   NOT tull/out_simple-apertium/tull.xml --> 
-  <xsl:param name="inFile" select="'tull/tull.xml'"/>
+  <xsl:param name="inFile" select="'tull/out_simple-apertium/tull.xml'"/>
 
   <!-- Output dir: customize as you need it -->
   <xsl:param name="outDir" select="'tull/ut'"/>

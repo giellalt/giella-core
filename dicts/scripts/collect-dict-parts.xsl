@@ -4,7 +4,7 @@
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to compile
-    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main collect-dict-parts.xsl inDir=INPUT_DIR > PATH_TO_OUTPUT_FILE
+    | Usage: java -Xmx2048m net.sf.saxon.Transform -it:main collect-dict-parts.xsl inDir=INPUT_DIR > PATH_TO_OUTPUT_DIR
     | 
     +-->
 

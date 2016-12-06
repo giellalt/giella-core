@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-import resource
-import subprocess
 import sys
-import time
 import timeit
+from collections import defaultdict
 
 import pexpect
 
@@ -30,28 +28,50 @@ DICTDIR  = directory containing a subdir 3/ containin a zhfst file.
     sys.exit(1)
 
 
-def test():
-    INFILE = sys.argv[1]
-    OUTFILE = sys.argv[2]
-    LANGCODE = sys.argv[4]
-    DICTDIR = sys.argv[5]
+LANGCODE = sys.argv[4]
+DICTDIR = sys.argv[5]
 
-    COMMAND = 'hfst-ospell-office {}/{}.zhfst'.format(DICTDIR, LANGCODE)
-    try:
-        subp = subprocess.Popen(
-            COMMAND.split(),
-            stdin=open(INFILE, 'rb'),
-            stdout=open(OUTFILE, 'wb')
-        )
-    except OSError:
-        print('Please install {}'.format(COMMAND.split()[0]))
-        sys.exit(2)
+COMMAND = 'hfst-ospell-office {}/{}.zhfst'.format(DICTDIR, LANGCODE)
 
-    subp.communicate()
-    print(resource.getrusage(resource.RUSAGE_CHILDREN))
+HFSTOSPELL = pexpect.spawn(COMMAND)
+
+
+def set_baseline():
+    """Get a baseline time for known words.
+
+    Compute the time python uses to send and receive an answer for word
+    known to hfst-ospell.
+    """
+    correct = '5 jïh\n'.encode('utf8')
+    times = 10
+    return timeit.timeit(
+        'test({})'.format(correct),
+        number=times,
+        globals=globals()) / times
+
+
+def test(word):
+    HFSTOSPELL.send(word)
+    HFSTOSPELL.expect('[*#&!].*\r\n')
+
 
 if __name__ == '__main__':
+    time = defaultdict(float)
+    HFSTOSPELL.expect('@@ hfst-ospell-office is alive\r\n')
+    with open(sys.argv[1], 'rb') as infile, open(sys.argv[2], 'wb') as outfile:
+        basetime = set_baseline()
+        for x, word in enumerate(infile, start=1):
+            t = timeit.timeit(
+                'test({})'.format(word), number=1, globals=globals())
+            time['real'] += t
+            time['user'] += (t - basetime)
+            print(
+                x, '{}: {:f}'.format(word.decode('utf8').strip(), t - basetime))
+            outfile.write(HFSTOSPELL.after.replace(b'\x0D', b''))
+
     TIMEUSE = sys.argv[3]
     with open(TIMEUSE, 'w') as timeuse:
-        seconds = timeit.timeit(test, number=1)
-        print("user\t%02dm%02.03fs" % divmod(seconds, 60), file=timeuse)
+        for key in time.keys():
+            uff = divmod(time[key], 60)
+            print('{}\t{:d}m{:f}s'.format(key, int(uff[0]), uff[1]),
+                  file=timeuse)

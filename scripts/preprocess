@@ -88,7 +88,7 @@ if ($connect) {
 
 # my $quotations = quotemeta("«»‹›“”„‘’‚´`'\""); # original
 my $quotations = quotemeta("«»‹›“”„‘’‚`'\"");   # Skolt Sami fix without ACUTE ACCENT as delimiter
-my $other = quotemeta("…•¶½¾¼°◊√∆"); # dash to be added
+my $other = quotemeta("…•¶½¾¼°º◊√∆⁰¹²³⁴⁵⁶⁷⁸⁹₀₁₂₃₄₅₆₇₈₉℠™"); # dash to be added
 my $parentheses = quotemeta("|{}[]()<>");
 if ($xml) { $parentheses = quotemeta("|{}[]()"); }
 my $general_punct = quotemeta("\$.*?!,;:.%");

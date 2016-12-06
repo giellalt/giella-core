@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
+import resource
 import subprocess
 import sys
 import time
 import timeit
-import resource
 
 import pexpect
 

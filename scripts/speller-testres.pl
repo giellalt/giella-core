@@ -896,6 +896,30 @@ sub print_xml_output {
     my $meta = $doc->createElement('meta');
     $meta->setAttribute('charset' => 'UTF-8');
     $head->appendChild($meta);
+
+    my $script;
+
+    $script = $doc->createElement('script');
+    $script->setAttribute('src' => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js");
+    $script->setAttribute('integrity' => "sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=");
+    $script->setAttribute('crossorigin' => "anonymous");
+    $script->appendTextNode(' ');
+    $head->appendChild($script);
+
+    $script = $doc->createElement('script');
+    $script->setAttribute('src' => "https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js");
+    $script->setAttribute('integrity' => "sha256-/kLSC4kLFkslkJlaTgB7TjurN5TIcmWfMfaXyB6dVh0=");
+    $script->setAttribute('crossorigin' => "anonymous");
+    $script->appendTextNode(' ');
+    $head->appendChild($script);
+
+    my $link = $doc->createElement('link');
+    $link->setAttribute('rel' => "stylesheet");
+    $link->setAttribute('href' => "https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.css");
+    $link->setAttribute('integrity' => "sha256-lxcbK1S14B8LMgrEir2lv2akbdyYwD1FwMhFgh2ihls=");
+    $link->setAttribute('crossorigin' => "anonymous");
+    $head->appendChild($link);
+
     $spelltestresult->appendChild($head);
 
 #     my $pi = $doc->createProcessingInstruction("xml-stylesheet");

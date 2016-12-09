@@ -906,7 +906,7 @@ sub print_xml_output {
     my $results = make_results(\@originals, $doc);
     $spelltestbody->appendChild($results);
 
-#     $spelltestresult->insertBefore(make_header(\@originals, $results, $doc), $results);
+    $spelltestbody->insertBefore(make_header(\@originals, $results, $doc), $results);
 
 
     $spelltestresult->appendChild($spelltestbody);

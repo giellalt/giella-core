@@ -932,6 +932,9 @@ sub print_xml_output {
 
     $spelltestbody->insertBefore(make_header(\@originals, $results, $doc), $results);
 
+    $script = $doc->createElement('script');
+    $script->appendTextNode('$(document).ready( function() {$("#results").dynatable();});');
+    $spelltestbody->appendChild($script);
 
     $spelltestresult->appendChild($spelltestbody);
 

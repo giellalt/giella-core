@@ -1133,7 +1133,8 @@ sub make_bugid {
 
     if ($rec->{'bugID'}) {
         #handle_comment would be used here
-        my $bugID = $doc->createElement('bug');
+        my $bugID = $doc->createElement('td');
+        $bugID->setAttribute('class' => 'bug');
         $bugID->appendTextNode($rec->{'bugID'});
         $word->appendChild($bugID);
     }
@@ -1160,10 +1161,14 @@ sub make_errors {
     my ($errorinfo, $word, $doc) = @_;
 
     if ($errorinfo) {
-        my $errors = $doc->createElement('errors');
+        my $errors = $doc->createElement('td');
+        $errors->setAttribute('class' => 'errors');
+
+        my $list = $doc->createElement('ul');
+
         my @e = split(';', $errorinfo);
         foreach my $part (@e) {
-            make_error_part($part, $errors, $doc);
+            make_error_part($part, $list, $doc);
         }
 
         $word->appendChild($errors);
@@ -1173,7 +1178,8 @@ sub make_errors {
 sub make_error_part {
     my ($part, $errors, $doc) = @_;
 
-    my $error = $doc->createElement('error');
+    my $error = $doc->createElement('li');
+    $error->setAttribute('class' => 'error');
 
     if ($part =~ /,$/) {
         $part = substr($part, 0, -1);
@@ -1196,7 +1202,8 @@ sub make_origfile {
     my ($origfile, $word, $doc) = @_;
 
     if ($origfile) {
-        my $f = $doc->createElement('origfile');
+        my $f = $doc->createElement('div');
+        $f->setAttribute('id' => 'origfile');
         $f->appendTextNode($origfile);
 
         $word->appendChild($f);
@@ -1286,7 +1293,8 @@ sub make_results {
 sub make_header {
     my ($originals_ref, $results, $doc) = @_;
 
-    my $header = $doc->createElement('header');
+    my $header = $doc->createElement('div');
+    $header->setAttribute('id' => 'header');
 
     $header->appendChild(make_engine($doc));
     $header->appendChild(make_lexicon($doc));
@@ -1307,7 +1315,8 @@ sub make_header {
 sub make_lexicon {
     my ($doc) = @_;
 
-    my $lexicon = $doc->createElement('lexicon');
+    my $lexicon = $doc->createElement('div');
+    $lexicon->setAttribute('id' => 'lexicon');
     $lexicon->setAttribute('version' => $version);
 
     return $lexicon;
@@ -1317,14 +1326,17 @@ sub make_engine {
     my ($doc) = @_;
 
     # Print some header information
-    my $engine = $doc->createElement('engine');
+    my $engine = $doc->createElement('div');
+    $engine->setAttribute('id' => 'engine');
     $engine->setAttribute('abbreviation' => $input_type);
 
-    my $tool = $doc->createElement('toolversion');
+    my $tool = $doc->createElement('div');
+    $tool->setAttribute('id' => 'toolversion');
     $tool->appendTextNode($toolversion);
     $engine->appendChild($tool);
 
-    my $processing = $doc->createElement('processing');
+    my $processing = $doc->createElement('div');
+    $processing->setAttribute('id' => 'processing');
     $processing->setAttribute('memoryusage' => $memoryuse);
 
     my $time_hash = convert_systime();
@@ -1396,33 +1408,40 @@ sub get_false_negative {
 sub make_truefalsesummary {
     my ($results, $doc) = @_;
 
-    my $truefalsesummary = $doc->createElement('truefalsesummary');
+    my $truefalsesummary = $doc->createElement('div');
+    $truefalsesummary->setAttribute('id' => 'truefalsesummary');
 
     my $total_words = get_flagged_words($results) + get_accepted_words($results);
     $truefalsesummary->setAttribute('wordcount' => $total_words);
 
-    my $original = $doc->createElement('original');
+    my $original = $doc->createElement('div');
+    $original->setAttribute('id' => 'originals');
     $original->setAttribute('correct' => get_original_correct($results));
     $original->setAttribute('error' => get_original_error($results));
     $truefalsesummary->appendChild($original);
 
-    my $speller = $doc->createElement('speller');
+    my $speller = $doc->createElement('div');
+    $speller->setAttribute('id' => 'spellers');
     $speller->setAttribute('correct' => get_speller_correct($results));
     $speller->setAttribute('error' => get_speller_error($results));
     $truefalsesummary->appendChild($speller);
 
-    my $positive = $doc->createElement('positive');
+    my $positive = $doc->createElement('div');
+    $positive->setAttribute('id' => 'positives');
     $positive->setAttribute('true' => get_true_positive($results));
     $positive->setAttribute('false' => get_false_positive($results));
     $truefalsesummary->appendChild($positive);
 
-    my $negative = $doc->createElement('negative');
+    my $negative = $doc->createElement('div');
+    $negative->setAttribute('id' => 'negatives');
     $negative->setAttribute('true' => get_true_negative($results));
     $negative->setAttribute('false' => get_false_negative($results));
     $truefalsesummary->appendChild($negative);
 
-    my $precision = $doc->createElement('precision');
-    my $recall = $doc->createElement('recall');
+    my $precision = $doc->createElement('div');
+    $precision->setAttribute('id' => 'precisions');
+    my $recall = $doc->createElement('div');
+    $recall->setAttribute('id' => 'recall');
 
     $precision->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_positive($results))));
     $truefalsesummary->appendChild($precision);
@@ -1430,7 +1449,8 @@ sub make_truefalsesummary {
     $truefalsesummary->appendChild($recall);
 
 
-    my $accuracy = $doc->createElement('accuracy');
+    my $accuracy = $doc->createElement('div');
+    $accuracy->setAttribute('id' => 'accuracy');
     $accuracy->appendTextNode(sprintf("%.2f", (get_true_positive($results) + get_true_negative($results))/($total_words)));
     $truefalsesummary->appendChild($accuracy);
 
@@ -1446,7 +1466,8 @@ sub make_averageposition {
         $total += int($position->textContent);
     }
 
-    my $averageposition = $doc->createElement('averageposition');
+    my $averageposition = $doc->createElement('div');
+    $averageposition->setAttribute('id' => 'averageposition');
     if (scalar(@positions) > 0) {
         $averageposition->appendTextNode(sprintf("%.2f", $total / scalar(@positions)));
     }
@@ -1460,7 +1481,8 @@ sub make_suggx {
     my $y;
     my @editdistx;
 
-    my $sugg = $doc->createElement($suggname);
+    my $sugg = $doc->createElement('div');
+    $sugg->setAttribute('id' => $suggname);
     for ($y = 1; $y < 3; $y++) {
         my $haff = './/tr[@class="word"][' . $queryx . ' and td[@class="edit_dist"]/text() = ' . $y . ']';
         @editdistx = $results->findnodes($haff);
@@ -1476,7 +1498,8 @@ sub make_suggx {
 sub make_top1pos_percent {
     my ($results, $doc) = @_;
 
-    my $top1pos_percent = $doc->createElement('top1pos_percent');
+    my $top1pos_percent = $doc->createElement('div');
+    $top1pos_percent->setAttribute('id' => 'top1pos_percent');
 
     my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
                                                and td[@class="original" and @status = "error"]]
@@ -1493,7 +1516,8 @@ sub make_top1pos_percent {
 sub make_top5pos_percent {
     my ($results, $doc) = @_;
 
-    my $top5pos_percent = $doc->createElement('top5pos_percent');
+    my $top5pos_percent = $doc->createElement('div');
+    $top5pos_percent->setAttribute('id' => 'top5pos_percent');
 
     my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
                                                and td[@class="original" and @status = "error"]]
@@ -1510,7 +1534,8 @@ sub make_top5pos_percent {
 sub make_allpos_percent {
     my ($results, $doc) = @_;
 
-    my $allpos_percent = $doc->createElement('allpos_percent');
+    my $allpos_percent = $doc->createElement('div');
+    $allpos_percent->setAttribute('id' => 'allpos_percent');
 
     my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
                                                and td[@class="original" and @status = "error"]]
@@ -1527,7 +1552,8 @@ sub make_allpos_percent {
 sub make_badsugg_percent {
     my ($results, $doc) = @_;
 
-    my $badsugg_percent = $doc->createElement('badsugg_percent');
+    my $badsugg_percent = $doc->createElement('div');
+    $badsugg_percent->setAttribute('id' => 'badsugg_percent');
 
     my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
                                                and td[@class="original" and @status = "error"]]
@@ -1544,7 +1570,8 @@ sub make_badsugg_percent {
 sub make_nosugg_percent {
     my ($results, $doc) = @_;
 
-    my $nosugg_percent = $doc->createElement('nosugg_percent');
+    my $nosugg_percent = $doc->createElement('div');
+    $nosugg_percent->setAttribute('id' => 'nosugg_percent');
 
     my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
                                                and td[@class="original" and @status = "error"]]
@@ -1561,7 +1588,8 @@ sub make_nosugg_percent {
 sub make_averagesuggs_with_correct {
     my ($results, $doc) = @_;
 
-    my $top5pos_percent = $doc->createElement('averagesuggs_with_correct');
+    my $top5pos_percent = $doc->createElement('div');
+    $top5pos_percent->setAttribute('id' => 'averagesuggs_with_correct');
 
     my $nodes = $results->findnodes('.//tr[@class="word"][td[@class="position"] and td[@class="suggestions"]]');
 
@@ -1582,7 +1610,8 @@ sub make_averagesuggs_with_correct {
 sub make_suggestionsummary {
     my ($results, $doc) = @_;
 
-    my $suggestionsummary = $doc->createElement('suggestionsummary');
+    my $suggestionsummary = $doc->createElement('div');
+    $suggestionsummary->setAttribute('id' => 'suggestionsummary');
 
     my $x;
     for ($x = 1; $x < 6; $x++) {
@@ -1629,7 +1658,8 @@ sub get_testtype {
 sub make_lang {
     my ($doc) = @_;
 
-    my $lang = $doc->createElement('lang');
+    my $lang = $doc->createElement('div');
+    $lang->setAttribute('id' => 'lang');
     $lang->appendTextNode(get_lang());
 
     return $lang;
@@ -1638,7 +1668,8 @@ sub make_lang {
 sub make_testtype {
     my ($doc) = @_;
 
-    my $testtype = $doc->createElement('testtype');
+    my $testtype = $doc->createElement('div');
+    $testtype->setAttribute('id' => 'testtype');
     $testtype->appendTextNode(get_testtype());
 
     return $testtype;
@@ -1648,7 +1679,8 @@ sub make_document {
     my ($doc) = @_;
 
     # what was the checked document
-    my $docu = $doc->createElement('document');
+    my $docu = $doc->createElement('div');
+    $docu->setAttribute('id' => 'document');
     $docu->appendTextNode(get_document());
 
     return $docu;
@@ -1658,7 +1690,8 @@ sub make_timestamp {
     my ($doc) = @_;
 
     # The date is the timestamp of speller output file if not given.
-    my $timestamp = $doc->createElement('timestamp');
+    my $timestamp = $doc->createElement('div');
+    $timestamp->setAttribute('id' => 'timestamp');
     if (!$date) {
         $date = ctime(stat($output)->mtime);
         #print "file $input updated at $date\n";

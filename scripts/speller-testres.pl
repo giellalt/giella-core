@@ -1286,6 +1286,20 @@ sub make_results {
     my $results = $doc->createElement('table');
     $results->setAttribute('id' => 'results');
 
+    my $thead = $doc->createElement('thead');
+    my $tr = $doc->createElement('tr');
+    $thead->appendChild($tr);
+
+    my $th;
+
+    foreach my $text ("original", "speller", "expected", "edit dist", "time", "position", "suggestions", "tokens", "bugid", "comment") {
+        $th = $doc->createElement('th');
+        $th->appendTextNode($text);
+        $tr->appendChild($th);
+    }
+
+    $results->appendChild($thead);
+
     for my $rec (@{$originals_ref}) {
         make_word($rec, $results, $doc);
     }

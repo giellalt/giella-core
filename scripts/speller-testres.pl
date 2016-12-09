@@ -891,16 +891,25 @@ sub print_xml_output {
     }
 
     my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
+    my $spelltestresult = $doc->createElement('html');
+    my $head = $doc->createElement('head');
+    my $meta = $doc->createElement('meta');
+    $meta->setAttribute('charset' => 'UTF-8');
+    $head->appendChild($meta);
+    $spelltestresult->appendChild($head);
 
-    my $pi = $doc->createProcessingInstruction("xml-stylesheet");
-    $pi->setData(href=>'https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css', type=>'text/css');
-    $doc->appendChild( $pi );
+#     my $pi = $doc->createProcessingInstruction("xml-stylesheet");
+#     $pi->setData(href=>'https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css', type=>'text/css');
+#     $doc->appendChild( $pi );
 
-    my $spelltestresult = $doc->createElement('spelltestresult');
+    my $spelltestbody = $doc->createElement('body');
     my $results = make_results(\@originals, $doc);
-    $spelltestresult->appendChild($results);
+    $spelltestbody->appendChild($results);
 
-    $spelltestresult->insertBefore(make_header(\@originals, $results, $doc), $results);
+#     $spelltestresult->insertBefore(make_header(\@originals, $results, $doc), $results);
+
+
+    $spelltestresult->appendChild($spelltestbody);
 
     $doc->setDocumentElement($spelltestresult);
     $doc->toFile($print_xml, 1);
@@ -914,7 +923,8 @@ sub make_original {
     my ($rec, $word, $doc) = @_;
 
     if (length($rec->{'orig'})) {
-        my $original = $doc->createElement('original');
+        my $original = $doc->createElement('td');
+        $original->setAttribute('class' => 'original');
         $original->appendTextNode($rec->{'orig'});
 
         if ($rec->{'expected'}) {
@@ -935,7 +945,8 @@ sub make_time {
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'time'}) {
-        my $time = $doc->createElement('time');
+        my $time = $doc->createElement('td');
+        $time->setAttribute('class' => 'time');
         $time->appendTextNode($rec->{'time'});
 
         $word->appendChild($time);
@@ -950,11 +961,14 @@ sub make_expected {
     my ($rec, $word, $doc) = @_;
 
     if ($rec->{'expected'}) {
-        my $expected = $doc->createElement('expected');
+        my $expected = $doc->createElement('td');
+        $expected->setAttribute('class' => 'expected');
         $expected->appendTextNode($rec->{'expected'});
         $word->appendChild($expected);
+
         my $distance=distance($rec->{'orig'},$rec->{'expected'},{-output=>'distance'});
-        my $edit_dist = $doc->createElement('edit_dist');
+        my $edit_dist = $doc->createElement('td');
+        $edit_dist->setAttribute('class' => 'edit_dist');
         $edit_dist->appendTextNode($distance);
         $word->appendChild($edit_dist);
     }
@@ -967,7 +981,8 @@ sub make_speller {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
-    my $speller = $doc->createElement('speller');
+    my $speller = $doc->createElement('td');
+    $speller->setAttribute('class' => 'speller');
     if ($rec->{'error'}) {
         if ($rec->{'error'} eq "SplErr") {
             $speller->setAttribute('status' => "error");
@@ -994,7 +1009,8 @@ sub make_position {
             my $i=0;
             while ($suggestions[$i]) {
                 if ($rec->{'expected'} eq $suggestions[$i]) {
-                    my $position = $doc->createElement('position');
+                    my $position = $doc->createElement('td');
+                    $position->setAttribute('class' => 'position');
                     $position->appendTextNode($i + 1);
                     $word->appendChild($position);
                     last;
@@ -1015,7 +1031,8 @@ sub make_suggestions {
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr" && $rec->{'sugg'}) {
         my @suggestions = @{$rec->{'sugg'}};
 
-        my $suggestions_elt = $doc->createElement('suggestions');
+        my $suggestions_elt = $doc->createElement('td');
+        $suggestions_elt->setAttribute('class' => 'suggestions');
 
         my $sugg_count = scalar @{ $rec->{'sugg'}};
         $suggestions_elt->setAttribute('count' => $sugg_count);
@@ -1030,9 +1047,11 @@ sub make_suggestions {
             @numbers =  @{$rec->{'num'}};
         }
 
+        my $sugg_list = $doc->createElement('ul');
         for my $sugg (@suggestions) {
             if ($sugg) {
-                my $suggestion = $doc->createElement('suggestion');
+                my $suggestion = $doc->createElement('li');
+                $suggestion->setAttribute('class' => 'suggestion');
                 $suggestion->appendTextNode($sugg);
                 if ($rec->{'expected'} && $sugg eq $rec->{'expected'}) {
                     $suggestion->setAttribute('expected' => "yes");
@@ -1047,10 +1066,10 @@ sub make_suggestions {
                     $near_miss_count--;
                 }
 
-                $suggestions_elt->appendChild($suggestion);
+                $sugg_list->appendChild($suggestion);
             }
         }
-
+        $suggestions_elt->appendChild($sugg_list);
         $word->appendChild($suggestions_elt);
     }
 }
@@ -1065,13 +1084,18 @@ sub make_tokens {
     if ($rec->{'tokens'}) {
         my @tokens = @{$rec->{'tokens'}};
         my $tokens_num = scalar @tokens;
-        my $tokens_elt = $doc->createElement('tokens');
+        my $tokens_elt = $doc->createElement('td');
+        $tokens_elt->setAttribute('class' => 'tokens');
         $tokens_elt->setAttribute('count' => $tokens_num);
+
+        my $token_list = $doc->createElement('ul');
         for my $t (@tokens) {
-            my $token_elt = $doc->createElement('token');
+            my $token_elt = $doc->createElement('li');
+            $token_elt->setAttribute('class' => 'token');
             $token_elt->appendTextNode($t);
-            $tokens_elt->appendChild($token_elt);
+            $token_list->appendChild($token_elt);
         }
+        $tokens_elt->appendChild($token_list);
         $word->appendChild($tokens_elt);
     }
 }
@@ -1194,7 +1218,8 @@ sub make_word {
     # doc is a XML::LibXML::Document
     my ($rec, $results, $doc) = @_;
 
-    my $word = $doc->createElement('word');
+    my $word = $doc->createElement('tr');
+    $word->setAttribute('class' => 'word');
 
     make_original($rec, $word, $doc);
     make_speller($rec, $word, $doc);
@@ -1224,7 +1249,8 @@ sub make_results {
     # doc is a XML::LibXML::Document
     my ($originals_ref, $doc) = @_;
 
-    my $results = $doc->createElement('results');
+    my $results = $doc->createElement('table');
+    $results->setAttribute('id' => 'results');
 
     for my $rec (@{$originals_ref}) {
         make_word($rec, $results, $doc);
@@ -1374,15 +1400,15 @@ sub make_truefalsesummary {
     my $precision = $doc->createElement('precision');
     my $recall = $doc->createElement('recall');
 
-    $precision->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_positive($results))));
-    $truefalsesummary->appendChild($precision);
-    $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_negative($results))));
-    $truefalsesummary->appendChild($recall);
-
-
-    my $accuracy = $doc->createElement('accuracy');
-    $accuracy->appendTextNode(sprintf("%.2f", (get_true_positive($results) + get_true_negative($results))/($total_words)));
-    $truefalsesummary->appendChild($accuracy);
+#     $precision->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_positive($results))));
+#     $truefalsesummary->appendChild($precision);
+#     $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_negative($results))));
+#     $truefalsesummary->appendChild($recall);
+#
+#
+#     my $accuracy = $doc->createElement('accuracy');
+#     $accuracy->appendTextNode(sprintf("%.2f", (get_true_positive($results) + get_true_negative($results))/($total_words)));
+#     $truefalsesummary->appendChild($accuracy);
 
     return $truefalsesummary;
 }

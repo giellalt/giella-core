@@ -800,7 +800,9 @@ sub read_hfst_tino {
     while (<FH>) {
         chomp;
         if (! /@@/) {
-            my ($flag, $sugglist) = split(/\t/, $_, 2);
+            my ($time, $flag, $sugglist) = split(/\t/, $_, 3);
+
+            $originals[$i]{'time'} = $time;
 
             if ($flag eq '*') {
                 $originals[$i]{'error'} = 'SplCor';
@@ -922,6 +924,21 @@ sub make_original {
         }
 
         $word->appendChild($original);
+    }
+}
+
+sub make_time {
+    # Make the xml element original
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
+    my ($rec, $word, $doc) = @_;
+
+    if ($rec->{'time'}) {
+        my $time = $doc->createElement('time');
+        $time->appendTextNode($rec->{'time'});
+
+        $word->appendChild($time);
     }
 }
 
@@ -1182,6 +1199,7 @@ sub make_word {
     make_original($rec, $word, $doc);
     make_speller($rec, $word, $doc);
     make_expected($rec, $word, $doc);
+    make_time($rec, $word, $doc);
     make_position($rec, $word, $doc);
     make_suggestions($rec, $word, $doc);
     make_tokens($rec, $word, $doc);

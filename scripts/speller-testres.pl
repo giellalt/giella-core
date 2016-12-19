@@ -949,8 +949,8 @@ sub make_original {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $original = $doc->createElement('td');
     if (length($rec->{'orig'})) {
-        my $original = $doc->createElement('td');
         $original->setAttribute('class' => 'original');
         $original->appendTextNode($rec->{'orig'});
 
@@ -971,8 +971,8 @@ sub make_time {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $time = $doc->createElement('td');
     if ($rec->{'time'}) {
-        my $time = $doc->createElement('td');
         $time->setAttribute('class' => 'time');
         $time->appendTextNode($rec->{'time'});
 
@@ -987,8 +987,8 @@ sub make_expected {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $expected = $doc->createElement('td');
     if ($rec->{'expected'}) {
-        my $expected = $doc->createElement('td');
         $expected->setAttribute('class' => 'expected');
         $expected->appendTextNode($rec->{'expected'});
         $word->appendChild($expected);
@@ -1029,6 +1029,7 @@ sub make_position {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $position = $doc->createElement('td');
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr" && $rec->{'sugg'}) {
         my @suggestions = @{$rec->{'sugg'}};
 
@@ -1036,7 +1037,6 @@ sub make_position {
             my $i=0;
             while ($suggestions[$i]) {
                 if ($rec->{'expected'} eq $suggestions[$i]) {
-                    my $position = $doc->createElement('td');
                     $position->setAttribute('class' => 'position');
                     $position->appendTextNode($i + 1);
                     $word->appendChild($position);
@@ -1055,10 +1055,10 @@ sub make_suggestions {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $suggestions_elt = $doc->createElement('td');
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr" && $rec->{'sugg'}) {
         my @suggestions = @{$rec->{'sugg'}};
 
-        my $suggestions_elt = $doc->createElement('td');
         $suggestions_elt->setAttribute('class' => 'suggestions');
 
         my $sugg_count = scalar @{ $rec->{'sugg'}};
@@ -1108,10 +1108,10 @@ sub make_tokens {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $tokens_elt = $doc->createElement('td');
     if ($rec->{'tokens'}) {
         my @tokens = @{$rec->{'tokens'}};
         my $tokens_num = scalar @tokens;
-        my $tokens_elt = $doc->createElement('td');
         $tokens_elt->setAttribute('class' => 'tokens');
         $tokens_elt->setAttribute('count' => $tokens_num);
 
@@ -1134,9 +1134,9 @@ sub make_bugid {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $bugID = $doc->createElement('td');
     if ($rec->{'bugID'}) {
         #handle_comment would be used here
-        my $bugID = $doc->createElement('td');
         $bugID->setAttribute('class' => 'bug');
         $bugID->appendTextNode($rec->{'bugID'});
         $word->appendChild($bugID);
@@ -1163,8 +1163,8 @@ sub make_errors {
     # doc is a XML::LibXML::Document
     my ($errorinfo, $word, $doc) = @_;
 
+    my $errors = $doc->createElement('td');
     if ($errorinfo) {
-        my $errors = $doc->createElement('td');
         $errors->setAttribute('class' => 'errors');
 
         my $list = $doc->createElement('ul');

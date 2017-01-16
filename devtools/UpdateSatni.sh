@@ -1,4 +1,5 @@
 #!/bin/bash
+source /home/tomi/.bash_profile
 dump=$GTHOME/words/terms/termwiki/dump.xml
 line=$(head -n 1 $dump)
 
@@ -13,6 +14,6 @@ if [ "$(svn status $dump | awk '{ print $1 }')" == "M" ]; then
   echo "XML dump has updated."
   ant -buildfile $GTHOME/tools/TermWikiExporter/build.xml run xslt
   rm $GTHOME/tools/TermWikiExporter/terms/*
-  # /opt/local/bin/gulp --gulpfile ../../words/Gulpfile.js --cwd ../../words store --passwd "$1"
+  # /opt/local/bin/gulp --gulpfile $GTHOME/words/Gulpfile.js --cwd $GTHOME/words store --passwd "$1"
   svn commit -m"Automatic commit of recent changes in the Termwiki." $GTHOME/words/terms/termwiki
 fi

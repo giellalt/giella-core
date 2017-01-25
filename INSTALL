@@ -16,7 +16,7 @@ Prepare your environment
 1. define the $GTCORE variable as follows (in ~/.bashrc or similar, but in the
 same file where GTHOME is defined, and ***after*** the definition of GTHOME):
 
-export GTCORE=$GTHOME/gtcore
+export GTCORE=$GTHOME/giella-core
 
 2. source ~/.bashrc (or the file you edited) or open a new shell
 

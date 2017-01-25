@@ -7,11 +7,11 @@ echo ""
 echo " ==> Kompileren dál buot prográmmaid sme-smn-MT dihte <=="
 echo ""
 echo ""
-echo " ------------------------------------------ na, ferten muđui dárkkistit gtcore "
+echo " ------------------------------------------ na, ferten muđui dárkkistit giella-core "
 echo ""
 pushd $GTHOME/giella-core && svn up && make
 echo ""
-echo " ------------------------------------------ de gtcore lea ortnegis. "
+echo " ------------------------------------------ de giella-core lea ortnegis. "
 echo ""
 echo " ------------------------------------------ Ozan ođđa fiillaid sme:i "
 pushd $GTHOME/langs/sme 

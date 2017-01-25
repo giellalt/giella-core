@@ -5,7 +5,7 @@
 #   Script that prints out lemmas in
 #   $GTHOME/langs/sma/src/morphology/stems/sm[x]-propernouns.lexc that are found
 #   in both $GTHOME/langs/sma/src/morphology/stems/sm[x]-propernouns.lexc and
-#   $GTHOME//gtcore/templates/smi/src/morphology/stems/smi-propernouns.lexc
+#   $GTHOME/giella-core/templates/smi/src/morphology/stems/smi-propernouns.lexc
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ def addSmxLines(line):
             possiblesmxduplicates.append(line)
 
 def readSmi():
-    with open(os.getenv("GTHOME") + "/gtcore/templates/smi/src/morphology/stems/smi-propernouns.lexc", 'r') as content_file:
+    with open(os.getenv("GTHOME") + "/giella-core/templates/smi/src/morphology/stems/smi-propernouns.lexc", 'r') as content_file:
         for line in content_file:
             if line.startswith("!"):
                 pass

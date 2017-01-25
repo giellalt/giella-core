@@ -37,7 +37,6 @@
 # Define GTCORE as relative to GTHOME for now. The use of GTHOME should be
 # discouraged, and be replaced with GTCORE. Only GTCORE should be needed,
 # everything else should be optional, but presently that is not the case.
-#export GTCORE=$GTHOME/gtcore
 export GTCORE=$GTHOME/giella-core
 
 # Add predefined lookup aliases for all languages:

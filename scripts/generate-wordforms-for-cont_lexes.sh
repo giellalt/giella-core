@@ -8,7 +8,7 @@
 # word forms for each continuation lexicon used in a given lexc lexicon source
 # file. The options are:
 #
-# $1    - path to gtcore (we don't use Autotools for this script)
+# $1    - path to giella-core (we don't use Autotools for this script)
 # $2    - the set of morphosyntactic tags used for word form generation
 # $3    - the source lexc file
 # $4    - the generator file (without suffix)
@@ -16,8 +16,8 @@
 # $6    - [OPTIONAL] list of lexicons NOT to include in the table
 
 #### User variables from the calling shell script: ####
-# Location of gtcore:
-gtcore="$1"
+# Location of giella-core:
+giella_core="$1"
 
 # Codes for the word forms to be generated:
 morf_codes="$2"
@@ -43,8 +43,8 @@ fst_types="hfst hfstol xfst foma"
 lemma_lexicon_list=lemma_lexicon_list_${lexicon_filename}.txt
 generated_word_forms=word_form_list_${lexicon_filename}.txt
 generated_table=word_form_${lexicon_filename}_${generator_filename}_table.html
-html_header=$gtcore/scripts/data/cohort_to_table_header.html
-html_footer=$gtcore/scripts/data/cohort_to_table_footer.html
+html_header=$giella_core/scripts/data/cohort_to_table_header.html
+html_footer=$giella_core/scripts/data/cohort_to_table_footer.html
 
 ######## Check that the source lexicon file exists:
 if ! test -e "$source_file" ; then

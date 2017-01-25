@@ -8,7 +8,7 @@ elif test   "$(gt-core.sh)"; then
     MYGTCORE=$(gt-core.sh)
 else
     echo "Unable to determine GTCORE, either run 'sudo make install' in" >&2
-    echo "your gtcore directory, or set GTCORE in .profile or similar."  >&2
+    echo "your giella-core directory, or set GTCORE in .profile or similar."  >&2
     exit 1
 fi
 

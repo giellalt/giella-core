@@ -1,0 +1,36 @@
+<!-- tools.dtd -->
+<!-- $Id$ -->
+
+<!ENTITY % common.att '
+  xml:lang NMTOKEN #IMPLIED'>
+
+<!-- =============================================================== -->
+<!-- Input and output of e.g. the different xerox tools -->
+<!-- =============================================================== -->
+<!ELEMENT root (w*)>
+<!ATTLIST root 
+  %common.att; >
+
+<!ELEMENT w (reading*|surface*|hyphenated*)>
+<!ATTLIST w
+    lemma    CDATA   #IMPLIED
+    analysis CDATA   #IMPLIED
+    form     CDATA   #IMPLIED
+>
+
+<!ELEMENT reading EMPTY>
+<!ATTLIST reading
+    lemma    CDATA   #IMPLIED
+    analysis CDATA   #IMPLIED
+>
+
+<!ELEMENT surface EMPTY>
+<!ATTLIST surface
+    form    CDATA   #IMPLIED
+    analysis CDATA   #IMPLIED
+>
+
+<!ELEMENT hyphenated EMPTY>
+<!ATTLIST hyphenated
+    form    CDATA   #IMPLIED
+>

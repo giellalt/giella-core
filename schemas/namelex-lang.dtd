@@ -1,0 +1,59 @@
+<!-- lang-proper.dtd -->
+<!-- XML-specification for the proper name lexicon that is specific -->
+<!-- for a language. Grammatical info etc. -->
+
+
+<!ELEMENT entry (stem, infl, name-parts?, variants?, etym?, rel-name?, senses? )>
+<!ATTLIST entry
+          id        CDATA  #REQUIRED
+          type      CDATA  #IMPLIED
+>
+
+<!ELEMENT stem (#PCDATA)>
+<!ATTLIST stem
+          lexc      CDATA       #REQUIRED
+>
+
+<!ELEMENT infl (#PCDATA)>
+<!ATTLIST infl
+          lexc      CDATA       #REQUIRED
+>
+
+<!ELEMENT variant EMPTY>
+<!ATTLIST variant
+          ref      CDATA       #REQUIRED
+>
+
+<!ELEMENT senses (sense*)>
+
+<!ELEMENT sense (legal?, source?)>
+<!ATTLIST senses
+          ref      CDATA       #REQUIRED
+>
+
+<!ELEMENT legal (status?, decision?)>
+<!ELEMENT status (#PCDATA) >
+<!ELEMENT decision (#PCDATA) >
+
+<!ELEMENT source (informants?, collectors?, archive?, other?)>
+
+<!ELEMENT informants (informant*)>
+<!ELEMENT informant (explanation*)>
+          id      CDATA       #REQUIRED
+>
+
+<!ELEMENT explanation EMPTY>
+<!ATTLIST explanation
+          date      CDATA       #REQUIRED
+>
+
+<!ELEMENT collectors (collector*)>
+<!ELEMENT collector EMPTY
+          id      CDATA       #REQUIRED
+	  year	  CDATA	      #IMPLIED
+>
+<!ELEMENT archive (#PCDATA) >
+<!ELEMENT other (print) >
+<!ELEMENT print (#PCDATA) >
+
+

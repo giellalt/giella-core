@@ -1,0 +1,53 @@
+<!-- corpus-analyzed.dtd -->
+<!--+ Common attributes
+    +-->
+<!ENTITY % common.att '
+  xml:lang NMTOKEN #IMPLIED'>
+
+<!-- =============================================================== -->
+<!-- -->
+<!-- Analyzed corpus -->
+<!-- =============================================================== -->
+<!-- -->
+
+<!ELEMENT document (p+)>
+<!ATTLIST document 
+  %common.att; >
+
+<!ELEMENT p (s+) >
+<!ATTLIST p type ( title | listitem | text | tablecell ) "text"
+  %common.att; >
+
+<!ELEMENT s (w+)>
+<!ATTLIST s
+          id CDATA #REQUIRED >
+
+<!ELEMENT w (reading*)>
+<!ATTLIST w
+          form CDATA #REQUIRED >
+
+<!ELEMENT reading EMPTY>
+<!ATTLIST reading
+          lemma CDATA #IMPLIED 
+          Wordclass CDATA #IMPLIED
+	Subclass CDATA #IMPLIED
+	Number CDATA #IMPLIED
+	Case CDATA #IMPLIED
+	Attributive CDATA #IMPLIED
+	Grade CDATA #IMPLIED
+	Possessive CDATA #IMPLIED
+	Tense CDATA #IMPLIED
+	Mood CDATA #IMPLIED
+	Person-Number CDATA #IMPLIED
+	Transitivity CDATA #IMPLIED
+	Polarity CDATA #IMPLIED
+	Diathesis CDATA #IMPLIED
+	Infinite CDATA #IMPLIED
+	Clitic CDATA #IMPLIED
+	Punctuation CDATA #IMPLIED
+	Nametype CDATA #IMPLIED
+	Numeraltype CDATA #IMPLIED
+	Syntax CDATA #IMPLIED
+	Derivation CDATA #IMPLIED
+	DerivedRoot CDATA #IMPLIED
+>

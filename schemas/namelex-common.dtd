@@ -1,0 +1,37 @@
+<!-- namelex-common.dtd -->
+<!-- XML-specification for the proper name lexicon that is common to -->
+<!-- all languages. Contains links to entries in the language-specific -->
+<!-- lexicons. -->
+
+<!ELEMENT entry (sem, langentry*)>
+<!ATTLIST entry
+          id        CDATA  #REQUIRED
+          type      CDATA  #IMPLIED
+>
+
+<!ELEMENT sem (ani|plc|fem|mal|sur|surplc|org|obj|tit|surmal)>
+<!ELEMENT ani EMPTY>
+<!ELEMENT fem EMPTY>
+<!ELEMENT mal EMPTY>
+<!ELEMENT sur EMPTY>
+<!ELEMENT surplc EMPTY>
+<!ELEMENT obj EMPTY>
+<!ELEMENT org EMPTY>
+<!ELEMENT tit EMPTY>
+<!ELEMENT surmal EMPTY>
+
+<!ELEMENT plc (geo?, regul?)>
+<!ATTLIST plc
+          type      CDATA       #IMPLIED
+          ssrcode   CDATA       #IMPLIED
+>
+
+<!ELEMENT geo (country?, region?, munic?, coord?)>
+
+<!ELEMENT regul (gnr?, bnr?)>
+
+<!ELEMENT langentry EMPTY>
+<!ATTLIST langentry
+          lang      CDATA       #REQUIRED
+          ref       CDATA       #REQUIRED
+>

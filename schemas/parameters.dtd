@@ -1,0 +1,28 @@
+<!-- parameters.dtd -->
+<!-- $Id$ -->
+
+<!ENTITY % common.att '
+  xml:lang NMTOKEN #IMPLIED'>
+
+<!-- =============================================================== -->
+<!-- Parameters for the server application -->
+<!-- =============================================================== -->
+<!ELEMENT parameters (action*, lang*, xml_out?, xml_in?)>
+<!ATTLIST parameters 
+  %common.att; >
+
+<!ELEMENT action EMPTY>
+<!ATTLIST action
+    tool  (prep|anl|dis|hyph|gen|para) "anl"
+    fst     CDATA   #IMPLIED
+    args    CDATA   #IMPLIED
+    abbr    CDATA   #IMPLIED
+    corr    CDATA   #IMPLIED
+    mode    CDATA   #IMPLIED
+    filter  CDATA   #IMPLIED
+    filter_script  CDATA   #IMPLIED
+>
+
+<!ELEMENT lang (#PCDATA)>
+<!ELEMENT xml_out EMPTY>
+<!ELEMENT xml_in EMPTY>

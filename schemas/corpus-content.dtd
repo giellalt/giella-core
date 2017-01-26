@@ -1,0 +1,55 @@
+<!-- corpus content.dtd -->
+
+<!--+ Common attributes
+    +-->
+<!ENTITY % common.att '
+  xml:lang NMTOKEN #IMPLIED'>
+
+<!-- =============================================================== -->
+<!-- -->
+<!-- Corpus summary, information of each file in the corpus repo. -->
+<!-- =============================================================== -->
+<!-- -->
+
+<!ELEMENT summary (language*)>
+<!ATTLIST summary
+  %common.att; >
+
+<!ELEMENT language (genre)*>
+<!ATTLIST language
+  %common.att; >
+
+<!ELEMENT genre (file)*>
+<!ATTLIST genre
+  name CDATA    #REQUIRED
+  %common.att; >
+
+<!ELEMENT file (title?, nonvalid?, availability?, translated_from?,
+                multilingual?, size?, filename)>
+
+<!ELEMENT nonvalid EMPTY >
+
+<!ELEMENT title (#PCDATA)>
+
+<!-- License information -->
+<!ELEMENT availability (free|license)>
+<!ELEMENT free EMPTY>
+<!ELEMENT license EMPTY>
+<!ATTLIST license
+    type  (standard|other) "standard"
+>
+
+<!ELEMENT translated_from EMPTY >
+<!ATTLIST translated_from
+%common.att; >
+
+<!ELEMENT size (wordcount?, pcount?, sectioncount?)>
+<!ELEMENT wordcount (#PCDATA)>
+<!ELEMENT pcount (#PCDATA)>
+<!ELEMENT sectioncount (#PCDATA)>
+
+<!-- List of languages that appear in the document -->
+<!-- The list is used in language recognition -->
+<!ELEMENT multilingual (lang)*>
+
+<!ELEMENT filename (#PCDATA)>

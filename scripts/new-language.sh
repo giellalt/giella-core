@@ -114,18 +114,6 @@ touch $1/und.timestamp
 # Add the new language to svn:
 svn add --force $1
 
-# Revert the addition of the source files to make the transition from old to
-# new easier - we want to svn move the old files, so no new source files in
-# svn (remove these commands when all languages have been moved from the old to
-# the new infra - the svn revert commands do not make sense outside the langs
-# template collection):
-if [[ x$TEMPLATECOLL = "xlangs" ]]; then
-    svn revert $1/src/morphology/affixes/*
-    svn revert $1/src/morphology/stems/*
-    svn revert $1/src/morphology/root.lexc
-    svn revert $1/src/phonology/*phon.*
-fi
-
 # Now that the files are known to svn, add svn:ignore properties:
 ${GTCORE}/scripts/set-svn-ignores-$TEMPLATECOLL.sh $1
 

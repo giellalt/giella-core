@@ -1,0 +1,6 @@
+# A simple regex to transform word boundaries and hyphenation symbols to
+# the required symbols for the TeX hyphenation patterns.
+
+%# -> %-,
+%^ -> %-
+;

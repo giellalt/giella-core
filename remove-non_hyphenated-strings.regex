@@ -1,0 +1,8 @@
+# Remove all non-hyphenated words, by matching against the hyphenation symbols:
+
+ $[ %^ | %# ]
+ &
+~$[ %:
+  | %/
+  | " "
+  ] ;

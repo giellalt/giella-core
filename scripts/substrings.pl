@@ -7,9 +7,10 @@ if (!defined $ARGV[1]) {
     print "" .
 "substrings.pl - convert TeX (Patgen) hyphenation patterns to Libhnj format\n" . 
 "(A utility for finding substring embeddings in patterns)\n" .
-"usage: substrings.pl infile outfile [encoding [lefthyphenmin [righthyphenmin]]]\n";
+"usage: substrings.pl [ -q | --quiet ] infile outfile [encoding [lefthyphenmin [righthyphenmin]]]\n";
     exit 1;
 }
+if ($ARGV[0] eq "-q" || $ARGV[0] eq "--quiet") { $quiet = shift; }
 $fn = $ARGV[0];
 if (!-e $fn) { $fn = "hyphen.us"; }
 open HYPH, $fn;
@@ -85,13 +86,13 @@ foreach $pat (@patlist) {
         for $j (1..$patsize - $i) {
             $subpat = substr ($pat, $i, $j);
             if (defined $pattab{$subpat}) {
-                print "$pattab{$subpat} is embedded in $pattab{$pat}\n";
+                print "$pattab{$subpat} is embedded in $pattab{$pat}\n" if ! $quiet ;
                 $newpat = substr $pat, 0, $i + $j;
                 if (!defined $newpattab{$newpat}) {
                     $newpattab{$newpat} =
                         substr ($pat, 0, $i).$pattab{$subpat};
                     $ss = substr $pat, 0, $i;
-                    print "$ss+$pattab{$subpat}\n";
+                    print "$ss+$pattab{$subpat}\n" if ! $quiet ;
                     push @newpatlist, $newpat;
                     if (defined $repltab{$subpat}) {
                         $begcorr = (($pat =~ /^[.]/) && !($subpat =~ /^[.]/)) ? 1 : 0;
@@ -103,7 +104,7 @@ foreach $pat (@patlist) {
                     $tmp =  $newpattab{$newpat};
                     $newpattab{$newpat} =
                         combine ($newpattab{$newpat}, $pattab{$subpat});
-                    print "$tmp + $pattab{$subpat} -> $newpattab{$newpat}\n";
+                    print "$tmp + $pattab{$subpat} -> $newpattab{$newpat}\n" if ! $quiet ;
                 }
             }
         }
@@ -163,7 +164,7 @@ sub combine {
                     }
                 }
             }
-            print ("$pat1 includes $pat2 at pos $i\n");
+            print ("$pat1 includes $pat2 at pos $i\n") if ! $quiet ;
         }
     }
     return join ('', map { $_ eq '0' ? () : $_ } @exp);

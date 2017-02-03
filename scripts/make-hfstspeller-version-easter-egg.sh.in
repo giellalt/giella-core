@@ -1,17 +1,5 @@
 #!/bin/bash
 
-MYGTCORE=
-
-if   test   "${GTCORE}";     then
-    MYGTCORE=${GTCORE}
-elif test   "$(gt-core.sh)"; then
-    MYGTCORE=$(gt-core.sh)
-else
-    echo "Unable to determine GTCORE, either run 'sudo make install' in" >&2
-    echo "your giella-core directory, or set GTCORE in .profile or similar."  >&2
-    exit 1
-fi
-
 # Wrong usage - short instruction:
 if ! test $# -eq 3 -o $# -eq 4 ; then
     echo
@@ -26,7 +14,7 @@ if ! test $# -eq 3 -o $# -eq 4 ; then
     exit 1
 fi
 
-Language=$(${MYGTCORE}/scripts/iso639-to-name.sh $1)
+Language=$(@GIELLA_CORE@/scripts/iso639-to-name.sh $1)
 Revision=$(svn info --xml $2 | grep -A 4 '<entry' \
 		 | grep revision | grep -Eo '[0-9]+')
 Version=$(cat $3)

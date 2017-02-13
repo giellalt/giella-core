@@ -44,6 +44,7 @@ my $toolversion;
 my $corpusversion;
 my $memoryuse = "";
 my $timeuse   = "";
+my $suggtiming = "";
 my $corrsugg = 0; # whether to set the corrsugg attribute in word elements
 
 use Getopt::Long;
@@ -65,6 +66,7 @@ GetOptions (
             "corpusversion|co=s" => \$corpusversion,
             "memoryuse|mem=s"    => \$memoryuse,
             "timeuse|ti=s"       => \$timeuse,
+            "suggtiming|st=s"    => \$suggtiming,
             "corrsugg"           => \$corrsugg,
             );
 
@@ -797,10 +799,17 @@ sub read_hfst_tino {
     my $error;
     #my @numbers;
     my @tokens;
+    my $time;
+    my $flag;
+    my $sugglist;
     while (<FH>) {
         chomp;
         if (! /@@/) {
-            my ($time, $flag, $sugglist) = split(/\t/, $_, 3);
+            if ($suggtiming eq 'yes') {
+                ($time, $flag, $sugglist) = split(/\t/, $_, 3);
+            } else {
+                ($flag, $sugglist) = split(/\t/, $_, 2);
+            }
 
             $originals[$i]{'time'} = $time;
 
@@ -1817,6 +1826,10 @@ Usage: speller-testres.pl [OPTIONS]
 
 --timeuse         Time used by the speller process, as reported by 'time'.
 --ti
+
+--suggtiming      Whether to measure for every input word the time spent
+--st              generating suggestions. Possible values: 'yes' and 'no'.
+                  Default is 'no'.
 END
 
 }

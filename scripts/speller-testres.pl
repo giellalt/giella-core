@@ -1036,25 +1036,31 @@ sub make_position {
     my ($rec, $word, $doc) = @_;
 
     my $position = $doc->createElement('td');
-    if ($rec->{'error'} && $rec->{'error'} eq "SplErr" && $rec->{'sugg'}) {
-        my @suggestions = @{$rec->{'sugg'}};
-
-        if ($rec->{'expected'}) {
-            my $i=0;
-            while ($suggestions[$i]) {
-                if ($rec->{'expected'} eq $suggestions[$i]) {
-                    $position->setAttribute('class' => 'position');
-                    $position->appendTextNode($i + 1);
-                    $word->appendChild($position);
-                    last;
+    if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
+        if($rec->{'sugg'}) {
+            my @suggestions = @{$rec->{'sugg'}};
+    
+            if ($rec->{'expected'}) {
+                my $i=0;
+                while ($suggestions[$i]) {
+                    if ($rec->{'expected'} eq $suggestions[$i]) {
+                        $position->setAttribute('class' => 'position');
+                        $position->appendTextNode($i + 1);
+                        $word->appendChild($position);
+                        last;
+                    }
+                    $i++;
                 }
-                $i++;
+                if (! $word->find('./td[@class="position"]') ) {
+                    $position->setAttribute('class' => 'position');
+                    $position->appendTextNode("0");
+                    $word->appendChild($position);
+                }
             }
-            if (! $word->find('./td[@class="position"]') ) {
-                $position->setAttribute('class' => 'position');
-                $position->appendTextNode("0");
-                $word->appendChild($position);
-            }
+        } else {
+            $position->setAttribute('class' => 'position');
+            $position->appendTextNode("-1");
+            $word->appendChild($position);
         }
     }
 }

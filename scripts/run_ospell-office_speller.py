@@ -63,7 +63,7 @@ def imitate_bash_time(time):
 
 ARGS = parse_options()
 SPELLER_ARCHIVE = '{}/{}.zhfst'.format(ARGS.dictdir, ARGS.langcode)
-if os.path.exists(SPELLER_ARCHIVE)
+if os.path.exists(SPELLER_ARCHIVE):
     HFSTOSPELL = pexpect.spawn(
         'hfst-ospell-office {}'.format(SPELLER_ARCHIVE))
 else:

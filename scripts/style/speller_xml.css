@@ -64,33 +64,46 @@ lexicon::after,
     display: block ;
 }
 
-timestamp::before {
+timestamp::before,
+#timestamp::before {
     content: 'Test date and time: ' ;
     display: inline-block ;
     font-weight: normal ;
 }
-timestamp {
+timestamp,
+#timestamp {
     display: block ;
     font-weight: bold ;
 }
 
-truefalsesummary::before {
+truefalsesummary,
+#truefalsesummary {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: block ;
+}
+
+truefalsesummary::before,
+#truefalsesummary::before {
     content: 'Precision & recall:' '\A' 'Total word count: ' attr(wordcount) ;
     display: block ;
     white-space: pre ;
 }
 
-truefalsesummary original::before {
+truefalsesummary original::before,
+#originals::before {
     content: 'Original — correct: ' attr(correct) ', typos: ' attr(error) ;
     display: block ;
 }
 
-truefalsesummary speller::before {
+truefalsesummary speller::before,
+#spellers::before {
     content: 'Speller — correct: ' attr(correct) ', typos: ' attr(error) ;
     display: block ;
 }
 
-truefalsesummary positive::before {
+truefalsesummary positive::before,
+#positives::before {
     content: 'True positives: ' attr(true) ;
     display: block ;
     background: linear-gradient(to right, rgb(0, 155, 0) , rgb(255, 255, 55), rgb(255, 60, 0));
@@ -98,21 +111,24 @@ truefalsesummary positive::before {
     margin-top: 0.5em ;
 }
 
-truefalsesummary positive::after {
+truefalsesummary positive::after,
+#positives::after {
     content: 'False positives: ' attr(false) ;
     display: block ;
     background-color: #3670FF ;
     border: 2px ridge #3670FF ;
 }
 
-truefalsesummary negative::before {
+truefalsesummary negative::before,
+#negatives::before {
     content: 'True negatives: ' attr(true) ;
     display: block ;
     background-color: green ;
     border: 2px ridge green ;
 }
 
-truefalsesummary negative::after {
+truefalsesummary negative::after,
+#negatives::after {
     content: 'False negatives: ' attr(false) ;
     display: block ;
     background-color: #D800DD ;
@@ -120,37 +136,38 @@ truefalsesummary negative::after {
     margin-bottom: 0.5em ;
 }
 
-precision::before {
+precision::before,
+#precisions::before {
     content: 'Precision: ' ;
     display: inline-block ;
 }
-precision {
+precision,
+#precisions {
     display: block ;
 }
 
-recall::before {
+recall::before,
+#recall::before {
     content: 'Recall: ' ;
     display: inline-block ;
 }
-recall {
+recall,
+#recall {
     display: block ;
 }
 
-accuracy::before {
+accuracy::before,
+#accuracy::before {
     content: 'Accuracy: ' ;
     display: inline-block ;
 }
-accuracy {
+accuracy,
+#accuracy {
     display: block ;
 }
 
-truefalsesummary {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    display: block ;
-}
-
-suggestionsummary {
+suggestionsummary,
+#suggestionsummary {
     margin-top: 1em ;
     margin-bottom: 1em ;
     display: block ;
@@ -158,20 +175,24 @@ suggestionsummary {
     font-size: 0.8em ;
 }
 
-suggestionsummary::before {
+suggestionsummary::before,
+#suggestionsummary::before {
     display: block ;
     content: 'Suggestion summary (edit dist 1,   2,   3+):' ;
 }
 
-sugg1::before {
+sugg1::before,
+#sugg1::before {
     display: inline-block ;
     content: 'Suggestions in 1st position:  ' ;
 }
-sugg1 {
+sugg1,
+#sugg1 {
     display: block ;
     background-color: rgb(0, 155, 0) ;
 }
-sugg1::after {
+sugg1::after,
+#sugg1::after {
     display: inline-block ;
     content: attr(editdist1) ', ' attr(editdist2) ', ' attr(editdist3plus);
 }

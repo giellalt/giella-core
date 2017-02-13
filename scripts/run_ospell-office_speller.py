@@ -49,9 +49,12 @@ def test(word):
 
 
 ARGS = parse_options()
-HFSTOSPELL = pexpect.spawn(
-    'hfst-ospell-office {}/{}.zhfst'.format(ARGS.dictdir,
-                                            ARGS.langcode))
+SPELLER_ARCHIVE = '{}/{}.zhfst'.format(ARGS.dictdir, ARGS.langcode)
+if os.path.exists(SPELLER_ARCHIVE)
+    HFSTOSPELL = pexpect.spawn(
+        'hfst-ospell-office {}'.format(SPELLER_ARCHIVE))
+else:
+    raise SystemExit('{} does not exist'.format(SPELLER_ARCHIVE))
 
 
 if __name__ == '__main__':

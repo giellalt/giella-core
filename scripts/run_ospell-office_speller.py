@@ -48,6 +48,19 @@ def test(word):
     HFSTOSPELL.expect('[*#&!].*\r\n')
 
 
+def imitate_bash_time(time):
+    """Imitate the bash function time.
+
+    Arguments:
+        time (defaultdict of floats): contains real and user times.
+    """
+    with open(ARGS.timeuse, 'w') as timeuse:
+        for key in time.keys():
+            uff = divmod(time[key], 60)
+            print('{}\t{:d}m{:f}s'.format(key, int(uff[0]), uff[1]),
+                  file=timeuse)
+
+
 ARGS = parse_options()
 SPELLER_ARCHIVE = '{}/{}.zhfst'.format(ARGS.dictdir, ARGS.langcode)
 if os.path.exists(SPELLER_ARCHIVE)
@@ -87,8 +100,4 @@ if __name__ == '__main__':
         print('Max:             {:f}'.format(max))
         print('Baseline:        {:f}'.format(basetime))
 
-    with open(ARGS.timeuse, 'w') as timeuse:
-        for key in time.keys():
-            uff = divmod(time[key], 60)
-            print('{}\t{:d}m{:f}s'.format(key, int(uff[0]), uff[1]),
-                  file=timeuse)
+    imitate_bash_time(time)

@@ -920,6 +920,11 @@ sub print_xml_output {
     $link->setAttribute('crossorigin' => "anonymous");
     $head->appendChild($link);
 
+    my $link = $doc->createElement('link');
+    $link->setAttribute('rel' => "stylesheet");
+    $link->setAttribute('href' => "https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css");
+    $head->appendChild($link);
+
     $spelltestresult->appendChild($head);
 
 #     my $pi = $doc->createProcessingInstruction("xml-stylesheet");
@@ -1044,6 +1049,11 @@ sub make_position {
                 }
                 $i++;
             }
+            if ($word->find('./td[@class="position"]/text() = ""') ) {
+            }
+                $position->setAttribute('class' => 'position');
+                $position->appendTextNode("0");
+                $word->appendChild($position);
         }
     }
 }

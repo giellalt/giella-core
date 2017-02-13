@@ -898,6 +898,7 @@ sub print_xml_output {
     $head->appendChild($meta);
 
     my $script;
+    my $link;
 
     $script = $doc->createElement('script');
     $script->setAttribute('src' => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js");
@@ -913,14 +914,14 @@ sub print_xml_output {
     $script->appendTextNode(' ');
     $head->appendChild($script);
 
-    my $link = $doc->createElement('link');
+    $link = $doc->createElement('link');
     $link->setAttribute('rel' => "stylesheet");
     $link->setAttribute('href' => "https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.css");
     $link->setAttribute('integrity' => "sha256-lxcbK1S14B8LMgrEir2lv2akbdyYwD1FwMhFgh2ihls=");
     $link->setAttribute('crossorigin' => "anonymous");
     $head->appendChild($link);
 
-    my $link = $doc->createElement('link');
+    $link = $doc->createElement('link');
     $link->setAttribute('rel' => "stylesheet");
     $link->setAttribute('href' => "https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css");
     $head->appendChild($link);
@@ -1049,11 +1050,11 @@ sub make_position {
                 }
                 $i++;
             }
-            if ($word->find('./td[@class="position"]/text() = ""') ) {
-            }
+            if (! $word->find('./td[@class="position"]') ) {
                 $position->setAttribute('class' => 'position');
                 $position->appendTextNode("0");
                 $word->appendChild($position);
+            }
         }
     }
 }

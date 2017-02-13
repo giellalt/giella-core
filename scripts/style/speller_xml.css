@@ -8,48 +8,59 @@ spelltestresult, header {
 }
 
 /* Header and summary styling: */
-header engine::before {
+header engine::before,
+div #engine::before {
     display: block ;
     font-weight: bold ;
 }
 
-header engine[abbreviation="to"]::before {
+header engine[abbreviation="to"]::before,
+div   #engine[abbreviation="to"]::before {
     content: 'Engine: ' open-quote 'hfst-ospell-office' close-quote ;
 }
 
-header engine[abbreviation="vk"]::before {
+header engine[abbreviation="vk"]::before,
+div   #engine[abbreviation="vk"]::before {
     content: 'Engine: ' open-quote 'voikkospell' close-quote ;
 }
 
-engine processing {
+engine processing,
+div   #processing {
     display: block ;
 }
-engine processing::after {
+engine processing::after,
+div   #processing::after {
     display: inline-block ;
     content: 'Words/second: ' attr(words_per_sec) ;
     font-weight: bold ;
 }
 
-toolversion { display: none ;}
+ toolversion,
+#toolversion { display: none ;}
 
-lexicon::before {
+ lexicon::before,
+#lexicon::before {
     content: 'Speller lexicon version: ' ;
     display: inline-block ;
 }
-lexicon {
+ lexicon,
+#lexicon {
     display: block ;
 }
-lexicon::after {
+lexicon::after,
+#lexicon::after {
     display: inline-block ;
     content: attr(version) ;
     font-weight: bold ;
 }
 
-document::before {
+ document::before,
+#document::before {
     content: 'Document: ' ;
     display: inline-block ;
 }
-document {
+ document,
+#document {
     display: block ;
 }
 
@@ -392,7 +403,8 @@ suggestion, error {
     margin-left: 2em ;
 }
 
-suggestion[expected] {
+suggestion[expected],
+[expected~=yes] {
     background-color: lime ;
 }
 

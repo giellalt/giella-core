@@ -1252,9 +1252,9 @@ sub set_corrsugg_attribute {
     my ($word) = @_;
 
     if ($word->find('./td[@class="position"]')) {
-        if ($word->find('./td[@class="position"]/text() > 0 and ./td[@class="position"]/text() < 6')) {
+        if ($word->find('./td[@class="position"]/text() < 6')) {
             $word->setAttribute('corrsugg' => $word->findvalue('./td[@class="position"]/text()'));
-        } else {
+        } elsif ($word->find('./td[@class="position"]/text() >= 6')) {
             $word->setAttribute('corrsugg' => '6');
         }
     } elsif ($word->find('./td[@class="speller" and @status="error"]') &&
@@ -1263,10 +1263,6 @@ sub set_corrsugg_attribute {
     } elsif ($word->find('./td[@class="speller" and @status="correct"]') &&
             $word->find('./td[@class="original" and @status="error"]')) {
         $word->setAttribute('corrsugg' => 'badaccept');
-    } elsif (! $word->find('./td[@class="suggestions"]') && $word->find('./td[@class="expected"]')) {
-        $word->setAttribute('corrsugg' => '0');
-    } elsif (! $word->find('./td[@class="position"]') && $word->find('./td[@class="suggestions"]')) {
-        $word->setAttribute('corrsugg' => '-1');
     } elsif ($word->find('./td[@class="speller" and @status="correct"]') &&
             $word->find('./td[@class="original" and @status="correct"]')) {
         $word->setAttribute('corrsugg' => 'goodaccept');

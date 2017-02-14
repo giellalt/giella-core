@@ -1367,6 +1367,7 @@ sub make_lexicon {
     my $lexicon = $doc->createElement('div');
     $lexicon->setAttribute('id' => 'lexicon');
     $lexicon->setAttribute('version' => $version);
+    $lexicon->appendTextNode(' ');
 
     return $lexicon;
 }
@@ -1467,24 +1468,28 @@ sub make_truefalsesummary {
     $original->setAttribute('id' => 'originals');
     $original->setAttribute('correct' => get_original_correct($results));
     $original->setAttribute('error' => get_original_error($results));
+    $original->appendTextNode(' ');
     $truefalsesummary->appendChild($original);
 
     my $speller = $doc->createElement('div');
     $speller->setAttribute('id' => 'spellers');
     $speller->setAttribute('correct' => get_speller_correct($results));
     $speller->setAttribute('error' => get_speller_error($results));
+    $speller->appendTextNode(' ');
     $truefalsesummary->appendChild($speller);
 
     my $positive = $doc->createElement('div');
     $positive->setAttribute('id' => 'positives');
     $positive->setAttribute('true' => get_true_positive($results));
     $positive->setAttribute('false' => get_false_positive($results));
+    $positive->appendTextNode(' ');
     $truefalsesummary->appendChild($positive);
 
     my $negative = $doc->createElement('div');
     $negative->setAttribute('id' => 'negatives');
     $negative->setAttribute('true' => get_true_negative($results));
     $negative->setAttribute('false' => get_false_negative($results));
+    $negative->appendTextNode(' ');
     $truefalsesummary->appendChild($negative);
 
     my $precision = $doc->createElement('div');
@@ -1540,6 +1545,7 @@ sub make_suggx {
     my $haff = './/tr[@class="word"][' . $queryx . ' and td[@class="edit_dist"]/text() = ' . $y . ']';
     @editdistx = $results->findnodes($haff);
     $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
+    $sugg->appendTextNode(' ');
 
     return $sugg;
 }

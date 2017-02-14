@@ -900,8 +900,14 @@ sub print_xml_output {
     }
 
     my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
+    my $dtd = $doc->createInternalSubset( "html", undef, undef );
+
     my $spelltestresult = $doc->createElement('html');
     my $head = $doc->createElement('head');
+    my $title = $doc->createElement('title');
+    $title->appendTextNode('Speller test results for SMA XXX');
+    $head->appendChild($title);
+
     my $meta = $doc->createElement('meta');
     $meta->setAttribute('charset' => 'UTF-8');
     $head->appendChild($meta);

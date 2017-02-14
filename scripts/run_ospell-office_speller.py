@@ -47,7 +47,7 @@ def set_baseline(lang):
         'fin': 'ja',
     }
 
-    correct = '5 {}\n'.format(testword.get(lang, 'qwerty')).encode('utf8')
+    correct = '5 {}\n'.format(testword.get(lang, 'qw')).encode('utf8')
     times = 10
     return timeit.timeit(
         'test({})'.format(correct),

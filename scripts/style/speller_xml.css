@@ -381,8 +381,14 @@ badsugg_percent,
     background-color: rgb(255, 60, 0) ;
 }
 
+/* Placement of the dynatable search box: */
+#dynatable-search-results {
+    float: left;
+}
+
 /* The output of the speller: */
-results {
+results,
+#results {
     display: table;
     border-spacing: 0 0.25em;
     border-collapse: separate;
@@ -391,7 +397,11 @@ results {
     border-color: grey;
     padding-left: 0.25em;
     padding-right: 0.25em;
-    margin: 0.25em
+    margin: 0.25em;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    clear: both;
 }
 
 word {

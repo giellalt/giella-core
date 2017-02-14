@@ -1392,6 +1392,7 @@ sub make_engine {
     my $processing = $doc->createElement('div');
     $processing->setAttribute('id' => 'processing');
     $processing->setAttribute('memoryusage' => $memoryuse);
+    $processing->appendTextNode(' ');
 
     my $time_hash = convert_systime();
     while (my ($key, $value) = each(%$time_hash)) {

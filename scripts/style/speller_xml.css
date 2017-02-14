@@ -407,50 +407,63 @@ word {
     display: table-row;
 }
 
-word[corrsugg="1"] {
+word[corrsugg="1"],
+tr[corrsugg="1"] {
     background-color: rgb(0, 155, 0) ;
 }
-word[corrsugg="2"] {
+word[corrsugg="2"],
+tr[corrsugg="2"] {
     background-color: rgb(0, 180, 0) ;
 }
-word[corrsugg="3"] {
+word[corrsugg="3"],
+tr[corrsugg="3"] {
     background-color: rgb(100, 200, 0) ;
 }
-word[corrsugg="4"] {
+word[corrsugg="4"],
+tr[corrsugg="4"] {
     background-color: rgb(200, 230, 0) ;
 }
-word[corrsugg="5"] {
+word[corrsugg="5"],
+tr[corrsugg="5"] {
     background-color: rgb(255, 255, 55) ;
 }
-word[corrsugg="6"] {
+word[corrsugg="6"],
+tr[corrsugg="6"] {
     background-color: rgb(255, 190, 0) ;
 }
-word[corrsugg="0"] {
+word[corrsugg="0"],
+tr[corrsugg="0"] {
     background-color: rgb(255, 130, 0) ;
 }
-word[corrsugg="-1"] {
+word[corrsugg="-1"],
+tr[corrsugg="-1"] {
     background-color: rgb(255, 60, 0) ;
 }
 
-word[corrsugg="goodaccept"] {
+word[corrsugg="goodaccept"],
+tr[corrsugg="goodaccept"] {
     background-color: green ;
 }
-word[corrsugg="goodaccept"] original {
+word[corrsugg="goodaccept"] original,
+tr[corrsugg="goodaccept"] original {
     border: 2px ridge green ;
     border-collapse: separate ;
     border-spacing: 2px ;
 }
 
-word[corrsugg="badaccept"] {
+word[corrsugg="badaccept"],
+tr[corrsugg="badaccept"] {
     background-color: #D800DD ;
 }
-word[corrsugg="badaccept"] original {
+word[corrsugg="badaccept"] original,
+tr[corrsugg="badaccept"]:first-child {
     border: 2px ridge #D800DD ;
     border-collapse: separate ;
     border-spacing: 2px ;
 }
 
-word[corrsugg="falsealarm"] {
+word[corrsugg="falsealarm"],
+tr[corrsugg="falsealarm"] {
     background-color: #3670FF ;
 }
 

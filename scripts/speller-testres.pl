@@ -1574,7 +1574,7 @@ sub make_top5pos_percent {
     my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
                                                and td[@class="original" and @status = "error"]]
                                            ')->size;
-    my $positions = $results->findnodes('.//td[@class="position"][text() < 6]')->size;
+    my $positions = $results->findnodes('.//td[@class="position"][text() > 0 and text() < 6]')->size;
 
     if ($spellererror > 0) {
         $top5pos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));

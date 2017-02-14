@@ -1592,10 +1592,17 @@ sub make_allpos_percent {
     my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
                                                and td[@class="original" and @status = "error"]]
                                            ')->size;
-    my $positions = $results->findnodes('.//td[@class="position"]')->size;
+    my @positions = $results->findnodes('.//td[@class="position"]/text()');
+
+    my $hits = 0;
+    for my $position (@positions) {
+        if (!($position eq '0' or $position eq '-1')) {
+            $hits++;
+        }
+    }
 
     if ($spellererror) {
-        $allpos_percent->appendTextNode(sprintf("%.2f", $positions / $spellererror * 100));
+        $allpos_percent->appendTextNode(sprintf("%.2f", $hits / $spellererror * 100));
     }
 
     return $allpos_percent;

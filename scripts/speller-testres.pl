@@ -904,8 +904,23 @@ sub print_xml_output {
 
     my $spelltestresult = $doc->createElement('html');
     my $head = $doc->createElement('head');
+
+    my $enginetext = "";
+    for ($input_type) {
+        if    (/to/)  { $enginetext = "Hfst-Office"        ; }
+        elsif (/pl/)  { $enginetext = "Polderland"         ; }
+        elsif (/pk/)  { $enginetext = "Icelandic Púki"     ; }
+        elsif (/mw/)  { $enginetext = "AppleScript+MSWord" ; }
+        elsif (/hu/)  { $enginetext = "Hunspell"           ; }
+        elsif (/fo/)  { $enginetext = "Foma-trie"          ; }
+        elsif (/hf/)  { $enginetext = "Hfst-ospell"        ; }
+        elsif (/vk/)  { $enginetext = "Voikko"             ; }
+        else          { $enginetext = "Unknown engine"     ; }
+    }
+
     my $title = $doc->createElement('title');
-    $title->appendTextNode('Speller test results for SMA XXX');
+    my $titletext = $enginetext . " speller test results for " . uc $lang;
+    $title->appendTextNode($titletext);
     $head->appendChild($title);
 
     my $meta = $doc->createElement('meta');
@@ -940,6 +955,8 @@ sub print_xml_output {
     $link->setAttribute('rel' => "stylesheet");
     $link->setAttribute('href' => "https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css");
     $head->appendChild($link);
+
+#    $link->setAttribute('href' => "file:///Users/smo036/langtech/main/giella-core/scripts/style/speller_xml.css");
 
     $spelltestresult->appendChild($head);
 

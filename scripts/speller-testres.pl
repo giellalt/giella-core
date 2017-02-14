@@ -1085,12 +1085,12 @@ sub make_position {
                 }
                 if (! $word->find('./td[@class="position"]') ) {
                     $position->setAttribute('class' => 'position');
-                    $position->appendTextNode("0");
+                    $position->appendTextNode("-1");
                 }
             }
         } else {
             $position->setAttribute('class' => 'position');
-            $position->appendTextNode("-1");
+            $position->appendTextNode("0");
         }
     }
 }

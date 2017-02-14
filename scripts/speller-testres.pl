@@ -1324,7 +1324,11 @@ sub make_results {
 
     my $th;
 
-    foreach my $text ("original", "speller", "expected", "edit dist", "time", "position", "suggestions", "tokens", "bugid", "comment") {
+    my @tableheaders = ("original", "speller", "expected", "edit dist", "position", "suggestions", "tokens", "bugid", "comment");
+    if ($suggtiming eq 'yes') {
+        splice @tableheaders, 4, 0, "time";
+    }
+    foreach my $text (@tableheaders) {
         $th = $doc->createElement('th');
         $th->appendTextNode($text);
         $tr->appendChild($th);

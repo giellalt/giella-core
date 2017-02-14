@@ -956,8 +956,6 @@ sub print_xml_output {
     $link->setAttribute('href' => "https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css");
     $head->appendChild($link);
 
-#    $link->setAttribute('href' => "file:///Users/smo036/langtech/main/giella-core/scripts/style/speller_xml.css");
-
     $spelltestresult->appendChild($head);
 
 #     my $pi = $doc->createProcessingInstruction("xml-stylesheet");

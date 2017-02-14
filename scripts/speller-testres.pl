@@ -1325,7 +1325,7 @@ sub make_results {
 
     my $th;
 
-    my @tableheaders = ("original", "speller", "expected", "edit dist", "position", "suggestions", "tokens", "bugid", "comment");
+    my @tableheaders = ("original", "speller", "expected", "edit dist", "position", "suggestions", "tokens", "bugid", "errors", "origfile");
     if ($suggtiming eq 'yes') {
         splice @tableheaders, 4, 0, "time";
     }

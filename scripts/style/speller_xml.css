@@ -407,6 +407,16 @@ word {
     display: table-row;
 }
 
+td, th {
+    vertical-align: top;
+}
+
+td:nth-child(2n) {
+    border: solid grey 0;
+    border-left-width: 1px;
+    border-right-width: 1px;
+}
+
 word[corrsugg="1"],
 tr[corrsugg="1"] {
     background-color: rgb(0, 155, 0) ;

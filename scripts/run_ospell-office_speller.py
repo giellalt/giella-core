@@ -30,13 +30,24 @@ def parse_options():
     return parser.parse_args()
 
 
-def set_baseline():
+def set_baseline(lang):
     """Get a baseline time for known words.
 
     Compute the time python uses to send and receive an answer for word
     known to hfst-ospell.
+
+    Arguments:
+        lang (str): a language code
     """
-    correct = '5 jïh\n'.encode('utf8')
+    testword = {
+        'sma': 'jïh',
+        'sme': 'ja',
+        'smj': 'ja',
+        'nob': 'ja',
+        'fin': 'ja',
+    }
+
+    correct = '5 {}\n'.format(testword.get(lang, 'qwerty')).encode('utf8')
     times = 10
     return timeit.timeit(
         'test({})'.format(correct),
@@ -74,7 +85,7 @@ else:
 if __name__ == '__main__':
     time = defaultdict(float)
     HFSTOSPELL.expect('@@ hfst-ospell-office is alive\r\n')
-    basetime = set_baseline()
+    basetime = set_baseline(ARGS.langcode)
 
     max = 0
     min = 1000000

@@ -972,6 +972,7 @@ sub make_original {
     my ($rec, $word, $doc) = @_;
 
     my $original = $doc->createElement('td');
+    $word->appendChild($original);
     if (length($rec->{'orig'})) {
         $original->setAttribute('class' => 'original');
         $original->appendTextNode($rec->{'orig'});
@@ -981,8 +982,6 @@ sub make_original {
         } else {
             $original->setAttribute('status' => "correct");
         }
-
-        $word->appendChild($original);
     }
 }
 
@@ -1010,16 +1009,17 @@ sub make_expected {
     my ($rec, $word, $doc) = @_;
 
     my $expected = $doc->createElement('td');
+    $word->appendChild($expected);
+    my $edit_dist = $doc->createElement('td');
+    $word->appendChild($edit_dist);
+
     if ($rec->{'expected'}) {
         $expected->setAttribute('class' => 'expected');
         $expected->appendTextNode($rec->{'expected'});
-        $word->appendChild($expected);
 
         my $distance=distance($rec->{'orig'},$rec->{'expected'},{-output=>'distance'});
-        my $edit_dist = $doc->createElement('td');
         $edit_dist->setAttribute('class' => 'edit_dist');
         $edit_dist->appendTextNode($distance);
-        $word->appendChild($edit_dist);
     }
 }
 
@@ -1032,6 +1032,7 @@ sub make_speller {
 
     my $speller = $doc->createElement('td');
     $speller->setAttribute('class' => 'speller');
+    $word->appendChild($speller);
     if ($rec->{'error'}) {
         if ($rec->{'error'} eq "SplErr") {
             $speller->setAttribute('status' => "error");
@@ -1039,8 +1040,6 @@ sub make_speller {
         if ($rec->{'error'} eq "SplCor") {
             $speller->setAttribute('status' => "correct");
         }
-
-        $word->appendChild($speller);
     }
 }
 
@@ -1052,17 +1051,17 @@ sub make_position {
     my ($rec, $word, $doc) = @_;
 
     my $position = $doc->createElement('td');
+    $word->appendChild($position);
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr") {
         if($rec->{'sugg'}) {
             my @suggestions = @{$rec->{'sugg'}};
-    
+
             if ($rec->{'expected'}) {
                 my $i=0;
                 while ($suggestions[$i]) {
                     if ($rec->{'expected'} eq $suggestions[$i]) {
                         $position->setAttribute('class' => 'position');
                         $position->appendTextNode($i + 1);
-                        $word->appendChild($position);
                         last;
                     }
                     $i++;
@@ -1070,13 +1069,11 @@ sub make_position {
                 if (! $word->find('./td[@class="position"]') ) {
                     $position->setAttribute('class' => 'position');
                     $position->appendTextNode("0");
-                    $word->appendChild($position);
                 }
             }
         } else {
             $position->setAttribute('class' => 'position');
             $position->appendTextNode("-1");
-            $word->appendChild($position);
         }
     }
 }
@@ -1089,6 +1086,7 @@ sub make_suggestions {
     my ($rec, $word, $doc) = @_;
 
     my $suggestions_elt = $doc->createElement('td');
+    $word->appendChild($suggestions_elt);
     if ($rec->{'error'} && $rec->{'error'} eq "SplErr" && $rec->{'sugg'}) {
         my @suggestions = @{$rec->{'sugg'}};
 
@@ -1130,7 +1128,6 @@ sub make_suggestions {
             }
         }
         $suggestions_elt->appendChild($sugg_list);
-        $word->appendChild($suggestions_elt);
     }
 }
 
@@ -1142,6 +1139,7 @@ sub make_tokens {
     my ($rec, $word, $doc) = @_;
 
     my $tokens_elt = $doc->createElement('td');
+    $word->appendChild($tokens_elt);
     if ($rec->{'tokens'}) {
         my @tokens = @{$rec->{'tokens'}};
         my $tokens_num = scalar @tokens;
@@ -1156,7 +1154,6 @@ sub make_tokens {
             $token_list->appendChild($token_elt);
         }
         $tokens_elt->appendChild($token_list);
-        $word->appendChild($tokens_elt);
     }
 }
 
@@ -1168,11 +1165,11 @@ sub make_bugid {
     my ($rec, $word, $doc) = @_;
 
     my $bugID = $doc->createElement('td');
+    $word->appendChild($bugID);
     if ($rec->{'bugID'}) {
         #handle_comment would be used here
         $bugID->setAttribute('class' => 'bug');
         $bugID->appendTextNode($rec->{'bugID'});
-        $word->appendChild($bugID);
     }
 }
 
@@ -1182,32 +1179,34 @@ sub make_comment {
     # doc is a XML::LibXML::Document
     my ($rec, $word, $doc) = @_;
 
+    my $error_elt = $doc->createElement('td');
+    $word->appendChild($error_elt);
+    my $origfile_elt = $doc->createElement('td');
+    $word->appendChild($origfile_elt);
+
     if ($rec->{'comment'}) {
         my ($errorinfo, $origfile) = ($rec->{'comment'} =~ m/errorinfo=(.+) file: (.*)/);
-        make_errors($errorinfo, $word, $doc);
-        make_origfile($origfile, $word, $doc);
+        make_errors($errorinfo, $error_elt, $doc);
+        make_origfile($origfile, $origfile_elt);
     }
 }
 
 sub make_errors {
     # Make the xml element errors
     # errorinfo is a string containing error info
-    # word will be the parent element of original
-    # doc is a XML::LibXML::Document
-    my ($errorinfo, $word, $doc) = @_;
+    # error_elt is the element the info will be added to
+    my ($errorinfo, $error_elt, $doc) = @_;
 
-    my $errors = $doc->createElement('td');
     if ($errorinfo) {
-        $errors->setAttribute('class' => 'errors');
+        $error_elt->setAttribute('class' => 'errors');
 
         my $list = $doc->createElement('ul');
+        $error_elt->appendChild($list);
 
         my @e = split(';', $errorinfo);
         foreach my $part (@e) {
             make_error_part($part, $list, $doc);
         }
-
-        $word->appendChild($errors);
     }
 }
 
@@ -1233,16 +1232,12 @@ sub make_error_part {
 sub make_origfile {
     # Make the xml element origfile
     # origfile is a string telling where the spelling error appeared
-    # word will be the parent element of original
-    # doc is a XML::LibXML::Document
-    my ($origfile, $word, $doc) = @_;
+    # origfile_elt is the element where the data is set
+    my ($origfile, $origfile_elt) = @_;
 
     if ($origfile) {
-        my $f = $doc->createElement('div');
-        $f->setAttribute('id' => 'origfile');
-        $f->appendTextNode($origfile);
-
-        $word->appendChild($f);
+        $origfile_elt->setAttribute('id' => 'origfile');
+        $origfile_elt->appendTextNode($origfile);
     }
 }
 
@@ -1279,7 +1274,7 @@ sub set_corrsugg_attribute {
 }
 
 sub make_word {
-    # Make the xml element word
+    # Make the tr element with the class word
     # rec is a hash element representing one checked word
     # results will be the parent element of all word
     # doc is a XML::LibXML::Document

@@ -997,6 +997,14 @@ sub make_original {
         } else {
             $original->setAttribute('status' => "correct");
         }
+        if ($rec->{'error'}) {
+            if ($rec->{'error'} eq "SplErr") {
+                $original->setAttribute('speller' => "error");
+            }
+            if ($rec->{'error'} eq "SplCor") {
+                $original->setAttribute('speller' => "correct");
+            }
+        }
     }
 }
 
@@ -1035,26 +1043,6 @@ sub make_expected {
         my $distance=distance($rec->{'orig'},$rec->{'expected'},{-output=>'distance'});
         $edit_dist->setAttribute('class' => 'edit_dist');
         $edit_dist->appendTextNode($distance);
-    }
-}
-
-sub make_speller {
-    # Make the xml element speller
-    # rec is a hash element representing one checked word
-    # word will be the parent element of original
-    # doc is a XML::LibXML::Document
-    my ($rec, $word, $doc) = @_;
-
-    my $speller = $doc->createElement('td');
-    $speller->setAttribute('class' => 'speller');
-    $word->appendChild($speller);
-    if ($rec->{'error'}) {
-        if ($rec->{'error'} eq "SplErr") {
-            $speller->setAttribute('status' => "error");
-        }
-        if ($rec->{'error'} eq "SplCor") {
-            $speller->setAttribute('status' => "correct");
-        }
     }
 }
 
@@ -1272,14 +1260,11 @@ sub set_corrsugg_attribute {
         } elsif ($word->find('./td[@class="position"]/text() >= 6')) {
             $word->setAttribute('corrsugg' => '6');
         }
-    } elsif ($word->find('./td[@class="speller" and @status="error"]') &&
-            $word->find('./td[@class="original" and @status="correct"]')) {
+    } elsif ($word->find('./td[@class="original" and @status="correct" and @cspeller="error"]')) {
         $word->setAttribute('corrsugg' => 'falsealarm');
-    } elsif ($word->find('./td[@class="speller" and @status="correct"]') &&
-            $word->find('./td[@class="original" and @status="error"]')) {
+    } elsif ($word->find('./td[@class="original" and @status="error" and @speller="correct"]')) {
         $word->setAttribute('corrsugg' => 'badaccept');
-    } elsif ($word->find('./td[@class="speller" and @status="correct"]') &&
-            $word->find('./td[@class="original" and @status="correct"]')) {
+    } elsif ($word->find('./td[@class="original" and @status="correct" and @speller="correct"]')) {
         $word->setAttribute('corrsugg' => 'goodaccept');
     }
 }
@@ -1295,7 +1280,6 @@ sub make_word {
     $word->setAttribute('class' => 'word');
 
     make_original($rec, $word, $doc);
-    make_speller($rec, $word, $doc);
     make_expected($rec, $word, $doc);
     make_time($rec, $word, $doc);
     make_position($rec, $word, $doc);
@@ -1331,9 +1315,9 @@ sub make_results {
 
     my $th;
 
-    my @tableheaders = ("original", "speller", "expected", "edit dist", "position", "suggestions", "tokens", "bugid", "errors", "origfile");
+    my @tableheaders = ("original", "expected", "edit dist", "position", "suggestions", "tokens", "bugid", "errors", "origfile");
     if ($suggtiming eq 'yes') {
-        splice @tableheaders, 4, 0, "time";
+        splice @tableheaders, 3, 0, "time";
     }
     foreach my $text (@tableheaders) {
         $th = $doc->createElement('th');
@@ -1417,12 +1401,12 @@ sub make_engine {
 
 sub get_flagged_words {
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//td[@class="speller" and @status="error"]')});
+    return scalar(@{$results->findnodes('.//td[@speller="error"]')});
 }
 
 sub get_accepted_words {
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//td[@class="speller" and @status="correct"]')});
+    return scalar(@{$results->findnodes('.//td[@speller="correct"]')});
 }
 
 sub get_original_correct {
@@ -1438,33 +1422,33 @@ sub get_original_error {
 sub get_speller_correct {
     # same as accepted words
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//td[@class="speller" and @status="correct"]')});
+    return scalar(@{$results->findnodes('.//td[@speller="correct"]')});
 }
 
 sub get_speller_error {
     # same as flagged words
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//td[@class="speller" and @status="error"]')});
+    return scalar(@{$results->findnodes('.//td[@speller="error"]')});
 }
 
 sub get_true_positive {
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original"] and td[@class="expected"] and td[@class="speller" and @status="error"]]')});
+    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original" and @speller="error"] and td[@class="expected"]]')});
 }
 
 sub get_false_positive {
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original"] and not(td[@class="expected"]) and td[@class="speller" and @status="error"]]')});
+    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original" and @speller="error"] and not(td[@class="expected"])]')});
 }
 
 sub get_true_negative {
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original"] and not(td[@class="expected"]) and td[@class="speller" and @status="correct"]]')});
+    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original" and @speller="correct"] and not(td[@class="expected"])]')});
 }
 
 sub get_false_negative {
     my ($results) = @_;
-    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original"] and td[@class="expected"] and td[@class="speller" and @status="correct"]]')});
+    return scalar(@{$results->findnodes('.//tr[@class="word"][td[@class="original" and @speller="correct"] and td[@class="expected"]]')});
 }
 
 sub make_truefalsesummary {
@@ -1568,8 +1552,7 @@ sub make_top1pos_percent {
     my $top1pos_percent = $doc->createElement('div');
     $top1pos_percent->setAttribute('id' => 'top1pos_percent');
 
-    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
-                                               and td[@class="original" and @status = "error"]]
+    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="original" and @status="error" and @speller="error"]]
                                            ')->size;
     my $positions = $results->findnodes('.//td[@class="position"][text() = 1]')->size;
 
@@ -1586,8 +1569,7 @@ sub make_top5pos_percent {
     my $top5pos_percent = $doc->createElement('div');
     $top5pos_percent->setAttribute('id' => 'top5pos_percent');
 
-    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
-                                               and td[@class="original" and @status = "error"]]
+    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="original" and @status="error" and @speller="error"]]
                                            ')->size;
     my $positions = $results->findnodes('.//td[@class="position"][text() > 0 and text() < 6]')->size;
 
@@ -1604,8 +1586,7 @@ sub make_allpos_percent {
     my $allpos_percent = $doc->createElement('div');
     $allpos_percent->setAttribute('id' => 'allpos_percent');
 
-    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
-                                               and td[@class="original" and @status = "error"]]
+    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="original" and @status="error" and @speller="error"]]
                                            ')->size;
     my $hits = $results->findnodes('.//td[@class="position"][text() > 0]')->size;
 
@@ -1622,8 +1603,7 @@ sub make_badsugg_percent {
     my $badsugg_percent = $doc->createElement('div');
     $badsugg_percent->setAttribute('id' => 'badsugg_percent');
 
-    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
-                                               and td[@class="original" and @status = "error"]]
+    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="original" and @status="error" and @speller="error"]]
                                            ')->size;
     my $badsuggs = $results->findnodes('./tr[@class="word"][@corrsugg = "-1"]')->size;
 
@@ -1640,8 +1620,7 @@ sub make_nosugg_percent {
     my $nosugg_percent = $doc->createElement('div');
     $nosugg_percent->setAttribute('id' => 'nosugg_percent');
 
-    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="speller" and @status = "error"]
-                                               and td[@class="original" and @status = "error"]]
+    my $spellererror = $results->findnodes('.//tr[@class="word"][td[@class="original" and @status="error" and @speller="error"]]
                                            ')->size;
     my $nosuggs = $results->findnodes('./tr[@class="word"][@corrsugg = "0"]')->size;
 

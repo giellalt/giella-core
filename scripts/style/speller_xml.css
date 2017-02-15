@@ -402,6 +402,10 @@ results,
     clear: both;
 }
 
+results {
+    margin: 0.25em;
+}
+
 word {
     display: table-row;
 }

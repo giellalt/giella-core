@@ -491,6 +491,11 @@ suggestion, error {
     margin-left: 2em ;
 }
 
+td ul {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
 suggestion[expected],
 [expected~=yes] {
     background-color: lime ;

@@ -1046,6 +1046,28 @@ sub make_expected {
     }
 }
 
+sub make_speller {
+    # Make the xml element speller
+    # rec is a hash element representing one checked word
+    # word will be the parent element of original
+    # doc is a XML::LibXML::Document
+    my ($rec, $word, $doc) = @_;
+
+    my $speller = $doc->createElement('td');
+    my $spellerText = "";
+    if      ($word->find('./td[@class="original" and @status="error"   and @speller="error"]'  )) {
+        $spellerText = 'TP';
+    } elsif ($word->find('./td[@class="original" and @status="correct" and @speller="error"]'  )) {
+        $spellerText = 'FP';
+    } elsif ($word->find('./td[@class="original" and @status="error"   and @speller="correct"]')) {
+        $spellerText = 'FN';
+    } elsif ($word->find('./td[@class="original" and @status="correct" and @speller="correct"]')) {
+        $spellerText = 'TN';
+    }
+    $speller->appendTextNode($spellerText);
+    $word->appendChild($speller);
+}
+
 sub make_position {
     # Make the xml element position
     # rec is a hash element representing one checked word
@@ -1260,7 +1282,7 @@ sub set_corrsugg_attribute {
         } elsif ($word->find('./td[@class="position"]/text() >= 6')) {
             $word->setAttribute('corrsugg' => '6');
         }
-    } elsif ($word->find('./td[@class="original" and @status="correct" and @cspeller="error"]')) {
+    } elsif ($word->find('./td[@class="original" and @status="correct" and @speller="error"]')) {
         $word->setAttribute('corrsugg' => 'falsealarm');
     } elsif ($word->find('./td[@class="original" and @status="error" and @speller="correct"]')) {
         $word->setAttribute('corrsugg' => 'badaccept');
@@ -1280,6 +1302,7 @@ sub make_word {
     $word->setAttribute('class' => 'word');
 
     make_original($rec, $word, $doc);
+    make_speller($rec, $word, $doc);
     make_expected($rec, $word, $doc);
     make_time($rec, $word, $doc);
     make_position($rec, $word, $doc);
@@ -1315,9 +1338,9 @@ sub make_results {
 
     my $th;
 
-    my @tableheaders = ("original", "expected", "edit dist", "position", "suggestions", "tokens", "bugid", "errors", "origfile");
+    my @tableheaders = ("original", "TFPN", "expected", "edit dist", "position", "suggestions", "tokens", "bugid", "errors", "origfile");
     if ($suggtiming eq 'yes') {
-        splice @tableheaders, 3, 0, "time";
+        splice @tableheaders, 4, 0, "time";
     }
     foreach my $text (@tableheaders) {
         $th = $doc->createElement('th');

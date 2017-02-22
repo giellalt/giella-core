@@ -14,6 +14,7 @@ if [ "$(svn status $dump | awk '{ print $1 }')" == "M" ]; then
   echo "XML dump has updated."
   ant -buildfile $GTHOME/tools/TermWikiExporter/build.xml run xslt
   rm $GTHOME/tools/TermWikiExporter/terms/*
-  # /opt/local/bin/gulp --gulpfile $GTHOME/words/Gulpfile.js --cwd $GTHOME/words store --passwd "$1"
   svn commit -m"Automatic commit of recent changes in the Termwiki." $GTHOME/words/terms/termwiki
+  /opt/local/bin/gulp --gulpfile $GTHOME/words/Gulpfile.js --cwd $GTHOME/words store --host satni.uit.no --passwd "$1"
+  $GTHOME/words/terms/termwiki/tools/run-analylser.sh
 fi

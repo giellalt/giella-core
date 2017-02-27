@@ -16,5 +16,6 @@ if [ "$(svn status $dump | awk '{ print $1 }')" == "M" ]; then
   rm $GTHOME/tools/TermWikiExporter/terms/*
   svn commit -m"Automatic commit of recent changes in the Termwiki." $GTHOME/words/terms/termwiki
   gulp --gulpfile $GTHOME/words/Gulpfile.js --cwd $GTHOME/words store --host satni.uit.no --passwd "$1"
+  gulp --gulpfile $GTHOME/words/Gulpfile.js --cwd $GTHOME/words store --host gtweb.uit.no --passwd "$1"
   $GTHOME/words/terms/termwiki/tools/run-analyser.sh
 fi

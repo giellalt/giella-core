@@ -75,6 +75,7 @@ done
 # *.html and *.pc:
 $svnignore "$autofiles
 $mkfiles
+Desktop.ini
 build
 bygg
 *.html

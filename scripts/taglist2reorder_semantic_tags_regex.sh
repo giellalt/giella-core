@@ -23,9 +23,12 @@ SED=sed
 # multitag POS's, use =XX= for tag-internal slashes as in +Use/NG):
 
 POSes="%+N %+A %+N_%+Prop \
-%+v1_%+N %+v2_%+N %+v3_%+N %+v4_%+N %+v5_%+N %+v6_%+N %+v7_%+N %+v8_%+N \
-%+v1_%+Use=XX=NG_%+N %+v2_%+Use=XX=NG_%+N %+v3_%+Use=XX=NG_%+N %+v4_%+Use=XX=NG_%+N \
-%+v5_%+Use=XX=NG_%+N %+v6_%+Use=XX=NG_%+N %+v7_%+Use=XX=NG_%+N %+v8_%+Use=XX=NG_%+N"
+%+v1_%+A %+v2_%+A %+v3_%+A %+v4_%+A \
+%+v1_%+N %+v2_%+N %+v3_%+N %+v4_%+N \
+%+v5_%+N %+v6_%+N %+v7_%+N %+v8_%+N \
+%+v1_%+Use=XX=NG_%+N %+v2_%+Use=XX=NG_%+N %+v3_%+Use=XX=NG_%+N \
+%+v4_%+Use=XX=NG_%+N %+v5_%+Use=XX=NG_%+N %+v6_%+Use=XX=NG_%+N \
+%+v7_%+Use=XX=NG_%+N %+v8_%+Use=XX=NG_%+N"
 
 # Print header text:
 echo "# This is a generated file - do not edit!"    > $TMPFILE

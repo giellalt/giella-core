@@ -10,4 +10,5 @@
 0 <- %+OLang%/NOB, !!≈ * @CODE@ - Norw. bokmål
 0 <- %+OLang%/NNO, !!≈ * @CODE@ - Norw. nynorsk
 0 <- %+OLang%/ENG, !!≈ * @CODE@ - English
+0 <- %+OLang%/RUS, !!≈ * @CODE@ - Russian
 0 <- %+OLang%/UND; !!≈ * @CODE@ - Undefined

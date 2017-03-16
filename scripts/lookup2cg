@@ -129,7 +129,7 @@ while(<>) {
     1 while $line2 =~ s/${b}(IV)(\ |\ .*?\ )(IV)${b}/$1\*$2$3/g;
 
     #Format output
-    $line =  "\t" . " \"$base\" " . $line2 . "\n";
+    $line =  "\t" . "\"$base\" " . $line2 . "\n";
 
     # Store the analysis to a hash
     if ($base) { $forms{$line} = 1; }

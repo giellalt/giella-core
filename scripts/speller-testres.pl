@@ -1518,7 +1518,11 @@ sub make_truefalsesummary {
 
     $precision->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_positive($results))));
     $truefalsesummary->appendChild($precision);
-    $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_negative($results))));
+    if ( (get_true_positive($results) + get_false_negative($results)) > 0) {
+        $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_negative($results))));
+    } else {
+        $recall->appendTextNode(sprintf("%.2f", 0));
+    }
     $truefalsesummary->appendChild($recall);
 
 

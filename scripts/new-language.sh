@@ -17,9 +17,12 @@ fi
 if ! test $# -eq 1 -o $# -eq 2 ; then
     echo "Usage: $0 NEW_LANGUAGE_ISOCODE [TEMPLATECOLLECTION]"
     echo
-    echo "e.g.:"
-    echo "$0 sme"
+    echo "Examples:"
+    echo "$0 sme # Implicit template collection, derived from the name"
+    echo "         of the current working dir"
     echo "$0 kal langs"
+    echo "$0 hdn keyboards"
+    echo "$0 fao prooftesting"
     echo
     exit 1
 fi
@@ -59,7 +62,7 @@ fi
 if ! [ -f Makefile.am ]
 then
     echo "No Makefile.am file in this directory. It seems this is not a proper"
-    echo "Giellatekno/Divvun infrastructure directory holding template-based"
+    echo "Giella infrastructure directory holding template-based"
     echo "language directories."
     exit 1
 fi
@@ -67,7 +70,7 @@ fi
 if ! [ -f configure.ac ]
 then
     echo "No configure.ac file in this directory. It seems this is not a proper"
-    echo "Giellatekno/Divvun infrastructure directory holding template-based"
+    echo "Giella infrastructure directory holding template-based"
     echo "language directories."
     exit 1
 fi
@@ -126,6 +129,6 @@ cat<<EOF
     ./configure.ac, to ensure that automatic processes are aware
     of the new language.
     To start working on the new language, fill in license and copyright
-    info in the $1/LICENCE file, and then start filling the files in
-    $1/src/ with linguistic content.
+    info in the $1/LICENCE file, and start the real work. See
+    http://divvun.no/doc/GettingStarted.html for details.
 EOF

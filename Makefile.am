@@ -59,7 +59,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/make-hfstspeller-version-easter-egg.sh \
    scripts/merge-templates.sh \
    scripts/morph-test.py \
-   scripts/new-keyboards.sh \
    scripts/new-language.sh \
    scripts/preprocess \
    scripts/replace-dummy-langcode.sh \

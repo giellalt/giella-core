@@ -242,7 +242,7 @@ for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
 
         # Replace placeholder language code with real language code in newly
         # added files:
-        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG langs ${localf}
+        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG ${localf}
 
     done
 

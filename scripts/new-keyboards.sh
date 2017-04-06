@@ -5,11 +5,11 @@ if test -z "${GTCORE}" ; then
 fi
 
 # Wrong usage - short instruction:
-if ! test $# -ge 2; then
-    echo "Usage: $0 KEYBOARD_COLL_NAME LANG1 [LANG2 .. LANGn]"
+if ! test $# -eq 1; then
+    echo "Usage: $0 LANG"
     echo
     echo "e.g.:"
-    echo "$0 Sami sma sme smj nob"
+    echo "$0 sma"
     echo
     exit 1
 fi
@@ -66,7 +66,7 @@ rsync -avzC ${GTCORE}/${TEMPLATEDIR}/und/ $COLLECTION_NAME/
 
 # Replace placeholder language code with real language code:
 ${GTCORE}/scripts/replace-dummy-langcode.sh \
-                  "$curDir/$COLLECTION_NAME" $first_lang $COLLECTION_NAME
+                  "$curDir/$COLLECTION_NAME" $first_lang
 
 # Rename files with placeholder language code:
 for f in $(find ./$COLLECTION_NAME -name "*__UND__*") ; do

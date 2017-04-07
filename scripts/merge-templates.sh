@@ -186,7 +186,7 @@ for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
         # assume we are merging from the revision of timestamp to today
         macrolangrev=$(head -n1 ${macrolang}.timestamp | cut -d' ' -f2)
         if test -z $macrolangrev ; then
-            echo could not find revision of ${macrolang}.timestamp
+            echo "Could not find revision of ${macrolang}.timestamp"
             continue
         fi
         echo "${macrolang}.timestamp was last merged at: $macrolangrev (merging all newer revisions)"
@@ -251,18 +251,18 @@ for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
     cp -v -f ${GTHOME}/giella-templates/${TEMPLATEDIR}/${macrolang}/${macrolang}.timestamp \
     		 ${macrolang}.timestamp
     if test -s ${unmerged} ; then
-        echo There were files that are not safe to merge:
+        echo "There were files that are not safe to merge:"
         cat ${unmerged}
-        echo To merge above files as well, do:
+        echo "To merge above files as well, do:"
         echo "  (svn revert --depth infinity *)"
-        echo   $0 --unsafe
+        echo "  $0 --unsafe"
         echo
-        echo The timestamp file ${macrolang}.timestamp has been updated as well.
+        echo "The timestamp file ${macrolang}.timestamp was updated as well."
         echo
-        echo If you commit the merge, the unsafe changes will be discarded.
-        echo Review the local changes, and do 'svn revert' on the files you
-        echo want to restore to the previous state, or 'svn revert .' to
-        echo undo the whole merge.
+        echo "If you commit the merge, the unsafe changes will be discarded."
+        echo "Review the local changes, and do 'svn revert' on the files you"
+        echo "want to restore to the previous state, or 'svn revert .' to"
+        echo "undo the whole merge."
     else
         cat<<EOF
 

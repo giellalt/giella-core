@@ -73,7 +73,14 @@ else
 				-not -iwholename '*.svn*' \
 				-not -iwholename '*build*' \
 				-not -iwholename '*deps*' \
+				-not -iwholename '*autom4te.cache*' \
+				-not -name '.DS_Store' \
 				-not -name 'und.timestamp' \
+				-not -name 'aclocal.m4' \
+				-not -name 'autogen.sh' \
+				-not -name 'configure' \
+				-not -name 'Makefile.in' \
+				-not -name 'Makefile' \
 				-not -name '*~' \
 				-not -name '*.xfst' \
 				-not -name '*.hfst' \
@@ -95,6 +102,30 @@ else
 	    if test ! $f = $newfile ; then
 	        # Only process files starting with 'und' followed by punctuation:
 	        if [ $(echo $f | grep -c '^und[.-]') -ne 0 ] ; then
+	            # Check whether the file is already known to svn:
+	            if [ $(svn st $f | grep -c '^\?') -eq 0 ] ; then
+	                svn mv $f $newfile
+	            else
+	                mv $f $newfile
+	            fi
+	        fi
+	    fi
+	done
+	# Then finally do the same for directory names:
+	for f in $(find $1 \
+				-not -iwholename '*.svn*' \
+				-not -iwholename '*build*' \
+				-not -iwholename '*deps*' \
+				-not -iwholename '*autom4te.cache*' \
+				-type d) ; do
+	    # And do the same with filenames:
+	    dir=$(dirname $f)
+	    undfilename=$(basename $f)
+	    newfilename=$(echo $undfilename | $SED -e "s/__UND__/$2/")
+	    newfile=$(echo $dir/$newfilename)
+	    if test ! $f = $newfile ; then
+	        # Only process dirs containing '__UND__':
+	        if [ $(echo $f | fgrep -c '__UND__') -ne 0 ] ; then
 	            # Check whether the file is already known to svn:
 	            if [ $(svn st $f | grep -c '^\?') -eq 0 ] ; then
 	                svn mv $f $newfile

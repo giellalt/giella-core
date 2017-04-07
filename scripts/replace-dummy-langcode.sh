@@ -70,10 +70,20 @@ else
 # ... or in all files in a given dir
 # (but don't touch .svn files and the und.timestamp file):
 	for f in $(find $1 \
-				-not -iwholename '*.svn*' \
-				-not -iwholename '*build*' \
-				-not -iwholename '*deps*' \
-				-not -iwholename '*autom4te.cache*' \
+				-not -wholename '*.svn*' \
+				-not -wholename '*.git*' \
+				-not -wholename '*autom4te.cache*' \
+				-not -wholename '*build*' \
+				-not -wholename '*deps*' \
+				-not -wholename '*.bundle*' \
+				-not -wholename '*.xcodeproj*' \
+				-not -wholename '*.xcassets*' \
+				-not -wholename '*Generated*' \
+				-not -wholename '*HostingApp*' \
+				-not -wholename '*Keyboard*' \
+				-not -wholename '*hfst-ospell*' \
+				-not -wholename '*libarchive*' \
+				-not -wholename '*/xz/*' \
 				-not -name '.DS_Store' \
 				-not -name 'und.timestamp' \
 				-not -name 'aclocal.m4' \
@@ -86,6 +96,13 @@ else
 				-not -name '*.hfst' \
 				-not -name '*.hfstol' \
 				-not -name '*.png' \
+				-not -name '*.pdf' \
+				-not -name '*.swift' \
+				-not -name '*.h' \
+				-not -name '*.xib' \
+				-not -name '*.plist' \
+				-not -name '*.cpp' \
+				-not -name '*.m' \
 				-type f) ; do
 	    # In file content:
 	    cp $f $f~
@@ -113,10 +130,20 @@ else
 	done
 	# Then finally do the same for directory names:
 	for f in $(find $1 \
-				-not -iwholename '*.svn*' \
-				-not -iwholename '*build*' \
-				-not -iwholename '*deps*' \
-				-not -iwholename '*autom4te.cache*' \
+				-not -wholename '*.svn*' \
+				-not -wholename '*.git*' \
+				-not -wholename '*autom4te.cache*' \
+				-not -wholename '*build*' \
+				-not -wholename '*deps*' \
+				-not -wholename '*.bundle*' \
+				-not -wholename '*.xcodeproj*' \
+				-not -wholename '*.xcassets*' \
+				-not -wholename '*Generated*' \
+				-not -wholename '*HostingApp*' \
+				-not -wholename '*Keyboard*' \
+				-not -wholename '*hfst-ospell*' \
+				-not -wholename '*libarchive*' \
+				-not -wholename '*/xz/*' \
 				-type d) ; do
 	    # And do the same with filenames:
 	    dir=$(dirname $f)

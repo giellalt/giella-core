@@ -48,9 +48,7 @@ if [[ $? -gt 0 ]] ; then
 	exit 3
 fi
 
-collection=$3
-
-file=$4
+file=$3
 
 # Replace placeholder language code with real language code
 # In either a single file:

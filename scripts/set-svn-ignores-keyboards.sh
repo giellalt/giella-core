@@ -58,6 +58,3 @@ $mkfiles
 build
 deps
 *.zhfst" $1
-
-# Set the svn:ignore prop on the iOS build dir:
-$svnignore "*" $1/ios/no.uit.giella.keyboards.*/

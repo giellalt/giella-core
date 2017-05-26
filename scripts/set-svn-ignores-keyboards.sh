@@ -10,7 +10,7 @@ if test ! -r $1/und.timestamp ; then
     echo "This script must have a top-level language directory as its only"
     echo "argument, e.g."
     echo
-    echo "${GTHOME}/keyboards/smi/"
+    echo "${GTHOME}/keyboards/sme/"
     echo
     echo and not:
     echo "$1"
@@ -58,3 +58,6 @@ $mkfiles
 build
 deps
 *.zhfst" $1
+
+# Set the svn:ignore prop on the top level lang dir:
+$svnignore "*.unsigned.pkg" $1/macos

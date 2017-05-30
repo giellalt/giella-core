@@ -61,3 +61,6 @@ deps
 
 # Set the svn:ignore prop on the top level lang dir:
 $svnignore "*.unsigned.pkg" $1/macos
+
+# Set the svn:ignore prop on the top level lang dir:
+$svnignore "deps" $1/android

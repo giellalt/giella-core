@@ -184,7 +184,7 @@ class StaticSiteBuilder(object):
                     buildtimes[seconds].append(info(link=parts[-1],
                                                     size=parts[-2]))
             except ValueError as error:
-                print(
+                logger.info(
                     'Error parsing buildtimes.\n'
                     'Line: {}\n'
                     'Error: {}\n'.format(line, str(error)))

@@ -177,11 +177,18 @@ class StaticSiteBuilder(object):
         info = collections.namedtuple('info', ['link', 'size'])
 
         for line in log.split('\n'):
-            if buildline.match(line):
-                parts = line.split()
-                seconds = int(parts[-3].split('.')[0])
-                buildtimes[seconds].append(info(link=parts[-1],
-                                                size=parts[-2]))
+            try:
+                if buildline.match(line):
+                    parts = line.split()
+                    seconds = int(parts[-3].split('.')[0])
+                    buildtimes[seconds].append(info(link=parts[-1],
+                                                    size=parts[-2]))
+            except ValueError as error:
+                print(
+                    'Error parsing buildtimes.\n'
+                    'Line: {}\n'
+                    'Error: {}\n'.format(line, str(error)))
+
         print_buildtime_distribution(buildtimes)
 
     def buildsite(self, lang):

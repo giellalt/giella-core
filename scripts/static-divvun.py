@@ -118,8 +118,6 @@ class StaticSiteBuilder(object):
 
         Since the xml file is not valid xml, do plain text parsing
         """
-        logger.error('Broken links:')
-
         counter = collections.Counter()
         for line in fileinput.FileInput(os.path.join(self.builddir, 'build',
                                                      'tmp',

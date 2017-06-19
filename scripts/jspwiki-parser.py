@@ -233,17 +233,11 @@ class PropertiesParser(object):
 
     def parse_line(self, line):
         """Parse a line in the file."""
-        parts = line.split('=')
-        if len(parts) == 2:
-            key = parts[0].strip()
-            value = parts[1].strip()
-
-            if value.startswith('$'):
-                self.properties[key] = self.properties[value[2:-1].strip()]
-            else:
-                self.properties[key] = value
-        else:
-            raise ValueError('Error in line: '.format(line))
+        util.print_frame(line)
+        equal_pos = line.find('=')
+        key = line[:equal_pos].strip()
+        value = line[equal_pos + 1:].strip()
+        self.properties[key] = value
 
 
 class DocMaker(object):

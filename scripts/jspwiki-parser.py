@@ -908,7 +908,7 @@ def compute_lexc_name(jspwiki):
         if jspwiki.endswith('-phonology.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc',
                                                        '/src/phonology')
-            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+            basename = os.path.basename(jspwiki).replace('-phonology.jspwiki',
                                                          '.twolc')
             if os.path.exists(os.path.join(dirname, basename)):
                 return os.path.join(dirname, basename)

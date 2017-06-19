@@ -755,6 +755,11 @@ class DocMaker(object):
         elif not self.inside_pre:
             self.check_inline(b)
             self.handle_line(b.content)
+        if b.content.strip().endswith('-__'):
+            raise ValueError(
+                'Error!\n'
+                'Add a space between - and __ at the line ending.\n'
+                'Erroneous line is {}\n'.format(b))
 
     def jspwiki_blocks(self):
         """Parse a jspwiki file."""

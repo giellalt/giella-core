@@ -233,7 +233,6 @@ class PropertiesParser(object):
 
     def parse_line(self, line):
         """Parse a line in the file."""
-        util.print_frame(line)
         equal_pos = line.find('=')
         key = line[:equal_pos].strip()
         value = line[equal_pos + 1:].strip()
@@ -961,7 +960,6 @@ def main():
                 handle_file(uff, None)
         elif os.path.exists(uff):
             xdocs_dir = check_forrest_properties(uff)
-            util.print_frame(xdocs_dir)
             for root, dirs, files in os.walk(uff, followlinks=True):
                 for f in files:
                     # if f.endswith('.lexc') or f.endswith('.twolc') or

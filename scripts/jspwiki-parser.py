@@ -891,12 +891,9 @@ def handle_file(path, xdocs_dir):
             dm = DocMaker(uff, xdocs_dir)
             try:
                 dm.parse_blocks()
-            except OutlineError as e:
+            except (OutlineError, ValueError) as error:
                 util.print_frame(path)
-                util.print_frame(str(e))
-            except ValueError as e:
-                util.print_frame(path)
-                util.print_frame(str(e))
+                util.print_frame(str(error))
 
 
 def compute_lexc_name(jspwiki):

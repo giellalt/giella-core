@@ -59,11 +59,18 @@ build
 deps
 *.zhfst" $1
 
-# Set the svn:ignore prop on the top level lang dir:
+# Set the svn:ignore prop on the macos dir:
 $svnignore "*.unsigned.pkg" $1/macos
 
-# Set the svn:ignore prop on the top level lang dir:
+# Set the svn:ignore prop on the android dir:
 $svnignore "deps" $1/android
 
-# Set the svn:ignore prop on the top level lang dir:
+# Set the svn:ignore prop on the ios dir:
 $svnignore "*build" $1/ios
+
+# Set the svn:ignore prop on the win dir:
+$svnignore "amd64
+i386
+install.iss
+kbdi.exe
+wow64" $1/win

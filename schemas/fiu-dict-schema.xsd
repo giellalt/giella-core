@@ -242,6 +242,7 @@
          <xs:attribute name="NumContlex" type="xs:string"/>
          <xs:attribute ref="orthType"/>
          <xs:attribute ref="status"/>
+	 <xs:attribute name="varid" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="mini_paradigm">
@@ -289,7 +290,7 @@
          <xs:enumeration value="Art"/>
          <xs:enumeration value="Clt"/>
          <xs:enumeration value="Conj">
-            <!--Conjunction that still needs to classified as either coordinator or subordinator-->
+            <!--Conjunction that still needs to be classified as either coordinator or subordinator-->
          </xs:enumeration>
          <xs:enumeration value="CC">
             <!--COORD "coordinator"-->
@@ -795,6 +796,7 @@
 	      </xs:complexType>
 	    </xs:element>
          </xs:choice>
+	 <xs:attribute name="varid" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="etymology">
@@ -1408,6 +1410,7 @@
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="c"/>
 	 </xs:sequence>
+	 <xs:attribute name="varid" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="c">

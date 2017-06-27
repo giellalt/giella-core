@@ -494,7 +494,7 @@ sub test_punctuation {
             # e.g. gielddat/guovllut
             # Check for expressions in $CONTAIN_PUNCT -variable.
             verbose ("process_word/not_abbr", "$word", __LINE__);
-            if (($word =~ /^(\pL+\.)([\p{pD}\pL]+.*)$/ || $word =~ /([\pL\p{Pd}]+)([^\pL0-9\. \:\-\`]+[\p{pD}\pL]+.*)$/) && $word !~ /$CONTAIN_PUNCT/o) {
+            if (($word =~ /^(\pL+\.)([\p{pD}\pL]+.*)$/ || $word =~ /([\pL\p{Pd}]+)([^\pL0-9\. \:\-\`\̄]+[\p{pD}\pL]+.*)$/) && $word !~ /$CONTAIN_PUNCT/o) {
                     $word = $1;
                     my %w = ('word' => $2 . $end_punct);
                     $end_punct = "";

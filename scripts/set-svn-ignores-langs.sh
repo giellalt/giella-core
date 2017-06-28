@@ -107,6 +107,7 @@ $fstfiles
 # Ignore all temporary and generated files in the src/morphology/ dir:
 $svnignore "$mkfiles
 $fstfiles
+url.lexc
 lexicon.*" $1/src/morphology
 
 # Ignore all files in the src/morphology/generated_files dir:
@@ -239,6 +240,7 @@ $svnignore "$mkfiles
 
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 $svnignore "$mkfiles
+filtered-*
 *.log
 *.trs
 *.txt

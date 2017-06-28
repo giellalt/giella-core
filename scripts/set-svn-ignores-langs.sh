@@ -82,7 +82,8 @@ bygg
 *.pc" $1
 
 # Set the svn:ignore prop on the devtools dir:
-$svnignore "speller*.txt" $1/devtools
+$svnignore "speller*.txt
+check_analysis_regressions.sh" $1/devtools
 
 # Set the svn:ignore prop on the doc dir:
 $svnignore "$mkfiles

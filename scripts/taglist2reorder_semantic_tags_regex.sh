@@ -32,6 +32,8 @@ POSes="%+N %+A %+N_%+Prop \
 
 # Print header text:
 echo "# This is a generated file - do not edit!"    > $TMPFILE
+echo "# The script file that generates it is " >> $TMPFILE
+echo "# $GTHOME/giella-core/scripts/taglist2reorder_semantic_tags_regex.sh" >> $TMPFILE
 echo "# The generated regex reorders all semantic" >> $TMPFILE
 echo "# tags with respect to some POS tags."       >> $TMPFILE
 

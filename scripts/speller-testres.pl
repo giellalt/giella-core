@@ -1516,7 +1516,13 @@ sub make_truefalsesummary {
     my $recall = $doc->createElement('div');
     $recall->setAttribute('id' => 'recall');
 
-    $precision->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_positive($results))));
+    if ( (get_true_positive($results) = 0) && ( get_false_positive($results) > 0) ) {
+        $precision->appendTextNode(sprintf("%.2f", 1));
+    } elsif ( (get_true_positive($results) + get_false_positive($results)) > 0) {
+        $precision->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_positive($results))));
+    } else {
+        $precision->appendTextNode(sprintf("%.2f", 0));
+    }
     $truefalsesummary->appendChild($precision);
     if ( (get_true_positive($results) + get_false_negative($results)) > 0) {
         $recall->appendTextNode(sprintf("%.2f", get_true_positive($results) / (get_true_positive($results) + get_false_negative($results))));

@@ -14,7 +14,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [0.2.40], [bugs@divvun.no], [giella-core], [http://divvun.no/doc/])
+AC_INIT([giella-core], [0.2.41], [bugs@divvun.no], [giella-core], [http://divvun.no/doc/])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])

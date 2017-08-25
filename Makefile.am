@@ -70,6 +70,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/smx-smi.py \
    scripts/spell-preprocess.pl \
    scripts/style/speller_xml.css \
+   scripts/taglist2make_CG_tags_regex.sh \
    scripts/taglist2make_optional_tags_regex.sh \
    scripts/taglist2remove_semantic_tags_regex.sh \
    scripts/taglist2remove_strings_regex.sh \

@@ -1134,6 +1134,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="xg"/>
          </xs:sequence>
          <xs:attribute name="id" type="xs:string"/>
+         <xs:attribute ref="domain"/>
          <xs:attribute ref="No"/>
          <xs:attribute ref="src"/>
       </xs:complexType>
@@ -1492,6 +1493,7 @@
                <xs:restriction base="xs:string">
                   <xs:enumeration value="antonym"/>
                   <xs:enumeration value="confer"/>
+                  <xs:enumeration value="holonym"/>
                   <xs:enumeration value="hyponym"/>
                   <xs:enumeration value="hypernym"/>
                   <xs:enumeration value="meronym"/>
@@ -1535,6 +1537,42 @@
        <xs:restriction base="xs:string">
 	 <xs:enumeration value="equivalent"/>
 	 <xs:enumeration value="literal"/>
+       </xs:restriction>
+     </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="domain">
+     <xs:simpleType>
+       <xs:restriction base="xs:string">
+         <xs:enumeration value="anatomy"/>
+         <xs:enumeration value="archeology"/>
+         <xs:enumeration value="astronomy"/>
+         <xs:enumeration value="biology"/>
+         <xs:enumeration value="botany"/>
+         <xs:enumeration value="chemistry"/>
+         <xs:enumeration value="economics"/>
+         <xs:enumeration value="ethnography"/>
+         <xs:enumeration value="finance"/>
+         <xs:enumeration value="fishery"/>
+         <xs:enumeration value="geography"/>
+         <xs:enumeration value="geology"/>
+         <xs:enumeration value="grammar"/>
+         <xs:enumeration value="hunting"/>
+         <xs:enumeration value="linguistics"/>
+         <xs:enumeration value="literature"/>
+         <xs:enumeration value="mathematics"/>
+         <xs:enumeration value="medicine"/>
+         <xs:enumeration value="military"/>
+         <xs:enumeration value="mineralology"/>
+         <xs:enumeration value="music"/>
+         <xs:enumeration value="mythology"/>
+         <xs:enumeration value="physics"/>
+         <xs:enumeration value="politics"/>
+         <xs:enumeration value="religion"/>
+         <xs:enumeration value="sports"/>
+         <xs:enumeration value="technology"/>
+         <xs:enumeration value="theater"/>
+         <xs:enumeration value="veterinary"/>
+         <xs:enumeration value="zoology"/>
        </xs:restriction>
      </xs:simpleType>
    </xs:attribute>

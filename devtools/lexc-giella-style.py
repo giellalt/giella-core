@@ -607,15 +607,31 @@ def align_lexicon(readlines):
 
     return lines.adjust_lines()
 
+
+def sort_lexicon(readlines):
+    lines = LexcSorter()
+    lines.parse_lines(readlines)
+
+    return lines.adjust_lines()
+
+
 def parse_options():
     parser = argparse.ArgumentParser(
         description=u'Align rules given in lexc files')
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument(u'--align',
+                       action=u'store_true',
+                       help=u'Align lexicon entries')
+    group.add_argument(u'--sort',
+                       action=u'store_true',
+                       help=u'Sort lexicon entries')
     parser.add_argument(u'lexcfile',
-                        help=u'Lexc file where rules should be aligned\n'
-                        'If filename is -, then the file is read from '
-                        'stdin and written to stdout.')
+                        help=u'Lexc file where lexicon entries should '
+                        'be manipulated. If filename is -, then the file '
+                        'is read from stdin and written to stdout.')
 
     args = parser.parse_args()
+
     return args
 
 if __name__ == u'__main__':
@@ -633,18 +649,24 @@ if __name__ == u'__main__':
 
         for l in f:
             if l.startswith(u'LEXICON '):
-                newlines.extend(newlines)
+                newlines.extend(readlines)
                 readlines = [l.rstrip()]
                 break
             readlines.append(l.rstrip())
 
         for l in f:
             if l.startswith(u'LEXICON '):
-                newlines.extend(align_lexicon(readlines))
+                if args.align:
+                    newlines.extend(align_lexicon(readlines))
+                if args.sort:
+                    newlines.extend(sort_lexicon(readlines))
                 readlines = []
             readlines.append(l.rstrip())
 
-        newlines.extend(align_lexicon(readlines))
+        if args.align:
+            newlines.extend(align_lexicon(readlines))
+        if args.sort:
+            newlines.extend(sort_lexicon(readlines))
 
     with open(args.lexcfile, u'w') if args.lexcfile is not "-" \
             else sys.stdout as f:

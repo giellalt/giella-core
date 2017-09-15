@@ -465,7 +465,6 @@ class LexcAligner(object):
 
     def parse_lines(self, lines):
         for line in lines:
-            line = line.rstrip()
             line = line.replace(u'% ', u'%¥')
             lexc_line_match = self.lexc_line_re.search(line)
             if lexc_line_match and not line.startswith('LEXICON '):
@@ -602,7 +601,7 @@ if __name__ == u'__main__':
                 newlines += lines.adjust_lines()
                 readlines = []
 
-            readlines.append(l)
+            readlines.append(l.rstrip())
 
         lines = LexcAligner()
         lines.parse_lines(readlines)

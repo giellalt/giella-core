@@ -570,6 +570,12 @@ def parse_line(old_match):
     return line_dict
 
 
+def align_lexicon(readlines):
+    lines = LexcAligner()
+    lines.parse_lines(readlines)
+
+    return lines.adjust_lines()
+
 def parse_options():
     parser = argparse.ArgumentParser(
         description=u'Align rules given in lexc files')
@@ -594,18 +600,20 @@ if __name__ == u'__main__':
         newlines = []
         readlines = []
 
-        for l in f():
+        for l in f:
             if l.startswith(u'LEXICON '):
-                lines = LexcAligner()
-                lines.parse_lines(readlines)
-                newlines += lines.adjust_lines()
-                readlines = []
-
+                newlines.extend(newlines)
+                readlines = [l.rstrip()]
+                break
             readlines.append(l.rstrip())
 
-        lines = LexcAligner()
-        lines.parse_lines(readlines)
-        newlines += lines.adjust_lines()
+        for l in f:
+            if l.startswith(u'LEXICON '):
+                newlines.extend(align_lexicon(readlines))
+                readlines = []
+            readlines.append(l.rstrip())
+
+        newlines.extend(align_lexicon(readlines))
 
     with open(args.lexcfile, u'w') if args.lexcfile is not "-" \
             else sys.stdout as f:

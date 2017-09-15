@@ -534,6 +534,48 @@ class LexcAligner(object):
         return newlines
 
 
+class LexcSorter(object):
+    """Sort entries in a lexc lexicon."""
+
+    lexc_line_re = re.compile(r'''
+        (?P<contlex>\S+)            #  any nonspace
+        (?P<translation>\s+".+")?   #  optional translation
+        \s*;\s*                     #  skip space and semicolon
+        (?P<comment>!.*)?           #  followed by an optional comment
+        $
+    ''', re.VERBOSE | re.UNICODE)
+
+    lexc_content_re = re.compile(r'''
+        (?P<exclam>^\s*!\s*)?          #  optional comment
+        (?P<content>(<.+>)|(.+))?      #  optional content
+    ''', re.VERBOSE | re.UNICODE)
+
+    def __init__(self):
+        self.lines = []
+        self.lexc_lines = []
+
+    def parse_lines(self, lines):
+        for line in lines:
+            lexc_line_match = self.lexc_line_re.search(line)
+            if lexc_line_match and not line.startswith('LEXICON '):
+                input = lexc_line_match.groupdict()
+                input.update(self.lexc_content_re.match(
+                    self.lexc_line_re.sub('', line)).groupdict())
+                l = parse_line(input)
+                self.lexc_lines.append((l[u'upper'], line))
+            else:
+                if line.strip():
+                    self.lines.append(line)
+
+    def adjust_lines(self):
+        newlines = []
+        newlines.extend(self.lines)
+        newlines.extend([l[1] for l in sorted(self.lexc_lines)])
+        newlines.append('')
+
+        return newlines
+
+
 def parse_line(old_match):
     line_dict = defaultdict(unicode)
 

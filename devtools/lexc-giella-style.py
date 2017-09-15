@@ -594,7 +594,8 @@ if __name__ == u'__main__':
             else sys.stdin as f:
         newlines = []
         readlines = []
-        for l in f.readlines():
+
+        for l in f():
             if l.startswith(u'LEXICON '):
                 lines = LexcAligner()
                 lines.parse_lines(readlines)

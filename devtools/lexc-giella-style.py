@@ -655,7 +655,7 @@ if __name__ == u'__main__':
             readlines.append(l.rstrip())
 
         for l in f:
-            if l.startswith(u'LEXICON '):
+            if l.startswith(u'LEXICON ') or l.startswith('!!'):
                 if args.align:
                     newlines.extend(align_lexicon(readlines))
                 if args.sort:

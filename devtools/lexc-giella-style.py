@@ -717,7 +717,7 @@ if __name__ == u'__main__':
             READLINES.append(lexc_line.rstrip())
 
         for lexc_line in file_:
-            if l.startswith(u'LEXICON ') or l.startswith('!!'):
+            if lexc_line.startswith(u'LEXICON ') or lexc_line.startswith('!!'):
                 if ARGS.align:
                     NEWLINES.extend(align_lexicon(READLINES))
                 if ARGS.sort:

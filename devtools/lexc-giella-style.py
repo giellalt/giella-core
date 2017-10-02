@@ -697,14 +697,9 @@ def parse_options():
 
 
 if __name__ == u'__main__':
-    UTF8READER = codecs.getreader('utf8')
-    sys.stdin = UTF8READER(sys.stdin)
-    UTF8WRITER = codecs.getwriter('utf8')
-    sys.stdout = UTF8WRITER(sys.stdout)
-
     ARGS = parse_options()
 
-    with open(ARGS.lexcfile) if ARGS.lexcfile is not "-" \
+    with io.open(ARGS.lexcfile) if ARGS.lexcfile is not "-" \
             else sys.stdin as file_:
         NEWLINES = []
         READLINES = []
@@ -730,7 +725,7 @@ if __name__ == u'__main__':
         if ARGS.sort:
             NEWLINES.extend(sort_lexicon(READLINES))
 
-    with open(ARGS.lexcfile, u'w') if ARGS.lexcfile is not "-" \
+    with io.open(ARGS.lexcfile, u'w') if ARGS.lexcfile is not "-" \
             else sys.stdout as file_:
         file_.write(u'\n'.join(NEWLINES))
         file_.write(u'\n')

@@ -678,7 +678,7 @@ def sort_lexicon(lexc_lines):
 def parse_options():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
-        description=u'Align rules given in lexc files')
+        description=u'Align or sort rules given in lexc files')
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(u'--align',
                        action=u'store_true',

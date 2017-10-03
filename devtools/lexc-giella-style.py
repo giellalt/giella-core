@@ -26,7 +26,6 @@
 from __future__ import absolute_import, print_function
 
 import argparse
-import codecs
 import io
 import re
 import sys
@@ -203,7 +202,6 @@ LEXICON DAKTERE
 ! Test data:
 !!€gt-norm: daktere # Odd-syllable test
 '''  # nopep8
-        self.maxDiff = None
 
         aligner = LexcAligner()
         aligner.parse_lines(content.split(u'\n'))
@@ -223,7 +221,6 @@ LEXICON test
  < "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» "+Der/NomAct":m >       ContLex ;
                                                  +V+IV+Inf+Err/Orth-a/á:uvvát K       ;
 '''  # nopep8
-        self.maxDiff = None
 
         aligner = LexcAligner()
         aligner.parse_lines(content.split(u'\n'))
@@ -266,7 +263,6 @@ LEXICON GOAHTILONGSHORT !!= * __@CODE@__ Sometimes long nom-compound-forms, long
                   +N+Der+Der/viđá+Adv+Use/-PLX:»X7% viđá%  K                  ;
                   +N+Der+Der/viđi+Adv+Use/-PLX:»X7viđi     K                  ;
 '''  # nopep8
-        self.maxDiff = None
         aligner = LexcAligner()
         aligner.parse_lines(content.split(u'\n'))
 
@@ -295,7 +291,6 @@ LEXICON nouns
    N_NEWWORDS ;
 '''
 
-        self.maxDiff = None
         aligner = LexcAligner()
         aligner.parse_lines(content.split(u'\n'))
 
@@ -477,7 +472,9 @@ class TestLineParser(unittest.TestCase):
 
 class TestSorting(unittest.TestCase):
     """Test how individual lines are parsed."""
+
     def setUp(self):
+        """Set up common resources."""
         self.sorting_lines = [
             u'ábčđ:cdef ABBR;',
             u'aŋđŧá:abcd CABBR;',
@@ -485,18 +482,21 @@ class TestSorting(unittest.TestCase):
         ]
 
     def test_alpha(self):
+        """Test sorting by lemma."""
         self.assertListEqual(
             [u'aŋđŧá:abcd CABBR;', u'bžčŋ:bcde BABBR;',
              u'ábčđ:cdef ABBR;', u''],
             sort_lexicon(self.sorting_lines, mode='alpha'))
 
     def test_contlex(self):
+        """Test sorting by continuation lexicon."""
         self.assertListEqual(
             [u'ábčđ:cdef ABBR;', u'bžčŋ:bcde BABBR;',
              u'aŋđŧá:abcd CABBR;', u''],
             sort_lexicon(self.sorting_lines, mode='contlex'))
 
     def test_revstem(self):
+        """Test sorting by reverted stem."""
         self.assertListEqual(
             [u'aŋđŧá:abcd CABBR;', u'bžčŋ:bcde BABBR;',
              u'ábčđ:cdef ABBR;', u''],
@@ -550,8 +550,8 @@ class LexcAligner(object):
                         string_buffer.append(u' ')
 
                 string_buffer.append(u' ' *
-                                    (self.longest[u'upper'] -
-                                     len(line[u'upper']) + 1))
+                                     (self.longest[u'upper'] -
+                                      len(line[u'upper']) + 1))
                 string_buffer.append(line[u'upper'])
 
                 if line[u'divisor']:
@@ -562,21 +562,21 @@ class LexcAligner(object):
                 string_buffer.append(line[u'lower'])
 
                 string_buffer.append(u' ' *
-                                    (self.longest[u'lower'] -
-                                     len(line[u'lower']) + 1))
+                                     (self.longest[u'lower'] -
+                                      len(line[u'lower']) + 1))
 
                 string_buffer.append(line[u'contlex'])
 
                 string_buffer.append(u' ' *
-                                    (self.longest[u'contlex'] -
-                                     len(line[u'contlex']) + 1))
+                                     (self.longest[u'contlex'] -
+                                      len(line[u'contlex']) + 1))
 
                 string_buffer.append(line[u'translation'])
 
                 if self.longest[u'translation'] > 0:
                     string_buffer.append(u' ' *
-                                        (self.longest[u'translation'] -
-                                         len(line[u'translation']) + 1))
+                                         (self.longest[u'translation'] -
+                                          len(line[u'translation']) + 1))
 
                 string_buffer.append(u';')
 

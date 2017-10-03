@@ -513,50 +513,50 @@ class LexcAligner(object):
         adjusted_lines = []
         for line in self.lines:
             if isinstance(line, dict):
-                string_buffer = io.StringIO()
+                string_buffer = []
 
                 if self.longest[u'exclam']:
                     if line[u'exclam']:
-                        string_buffer.write(line[u'exclam'])
+                        string_buffer.append(line[u'exclam'])
                     else:
-                        string_buffer.write(u' ')
+                        string_buffer.append(u' ')
 
-                string_buffer.write(u' ' *
+                string_buffer.append(u' ' *
                                     (self.longest[u'upper'] -
                                      len(line[u'upper']) + 1))
-                string_buffer.write(line[u'upper'])
+                string_buffer.append(line[u'upper'])
 
                 if line[u'divisor']:
-                    string_buffer.write(line[u'divisor'])
+                    string_buffer.append(line[u'divisor'])
                 elif self.longest[u'divisor']:
-                    string_buffer.write(u' ')
+                    string_buffer.append(u' ')
 
-                string_buffer.write(line[u'lower'])
+                string_buffer.append(line[u'lower'])
 
-                string_buffer.write(u' ' *
+                string_buffer.append(u' ' *
                                     (self.longest[u'lower'] -
                                      len(line[u'lower']) + 1))
 
-                string_buffer.write(line[u'contlex'])
+                string_buffer.append(line[u'contlex'])
 
-                string_buffer.write(u' ' *
+                string_buffer.append(u' ' *
                                     (self.longest[u'contlex'] -
                                      len(line[u'contlex']) + 1))
 
-                string_buffer.write(line[u'translation'])
+                string_buffer.append(line[u'translation'])
 
                 if self.longest[u'translation'] > 0:
-                    string_buffer.write(u' ' *
+                    string_buffer.append(u' ' *
                                         (self.longest[u'translation'] -
                                          len(line[u'translation']) + 1))
 
-                string_buffer.write(u';')
+                string_buffer.append(u';')
 
                 if line[u'comment'] != u'':
-                    string_buffer.write(u' ')
-                    string_buffer.write(line[u'comment'])
+                    string_buffer.append(u' ')
+                    string_buffer.append(line[u'comment'])
 
-                adjusted_lines.append(string_buffer.getvalue())
+                adjusted_lines.append(''.join(string_buffer))
             else:
                 adjusted_lines.append(line)
 

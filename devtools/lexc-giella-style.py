@@ -475,6 +475,34 @@ class TestLineParser(unittest.TestCase):
         self.assertDictEqual(parse_line(content), expected_result)
 
 
+class TestSorting(unittest.TestCase):
+    """Test how individual lines are parsed."""
+    def setUp(self):
+        self.sorting_lines = [
+            u'ábčđ:cdef ABBR;',
+            u'aŋđŧá:abcd CABBR;',
+            u'bžčŋ:bcde BABBR;',
+        ]
+
+    def test_alpha(self):
+        self.assertListEqual(
+            [u'aŋđŧá:abcd CABBR;', u'bžčŋ:bcde BABBR;',
+             u'ábčđ:cdef ABBR;', u''],
+            sort_lexicon(self.sorting_lines, mode='alpha'))
+
+    def test_contlex(self):
+        self.assertListEqual(
+            [u'ábčđ:cdef ABBR;', u'bžčŋ:bcde BABBR;',
+             u'aŋđŧá:abcd CABBR;', u''],
+            sort_lexicon(self.sorting_lines, mode='contlex'))
+
+    def test_revstem(self):
+        self.assertListEqual(
+            [u'aŋđŧá:abcd CABBR;', u'bžčŋ:bcde BABBR;',
+             u'ábčđ:cdef ABBR;', u''],
+            sort_lexicon(self.sorting_lines, mode='revstem'))
+
+
 class LexcAligner(object):
     """Class to align lexc elements inside a lexicon."""
 
@@ -566,10 +594,11 @@ class LexcAligner(object):
 class LexcSorter(object):
     """Sort entries in a lexc lexicon."""
 
-    def __init__(self):
+    def __init__(self, mode):
         """Initialise the LexcSorter class."""
         self.lines = []
         self.lexc_lines = []
+        self.mode = mode
 
     def parse_lines(self, lines):
         """Parse the lines of a lexicon.
@@ -584,20 +613,37 @@ class LexcSorter(object):
                 content.update(LEXC_CONTENT_RE.match(
                     LEXC_LINE_RE.sub('', line)).groupdict())
                 line_dict = parse_line(content)
-                self.lexc_lines.append((line_dict[u'upper'], line))
+                self.lexc_lines.append((self.sorting_key(line_dict), line))
             else:
                 if line.strip():
                     self.lines.append(line)
 
+    def sorting_key(self, line_tuple):
+        """Revert the sorting key depending on sorting mode.
+
+        Arguments:
+            line_tuple (dict): dict containing the different parts of a lexc
+                line.
+
+        Returns:
+            unicode
+        """
+        if self.mode == 'alpha':
+            return line_tuple['upper']
+        elif self.mode == 'revstem':
+            # nopep8 https://stackoverflow.com/questions/931092/reverse-a-string-in-python
+            return line_tuple['lower'][::-1] if line_tuple.get('lower') \
+                else line_tuple['upper'][::-1]
+        elif self.mode == 'contlex':
+            return line_tuple['contlex']
+        else:
+            raise KeyError('No sorting mode given')
+
     def adjust_lines(self):
         """Sort the lines."""
-        adjusted_lines = []
-        adjusted_lines.extend(self.lines)
-        adjusted_lines.extend([line_tuple[1]
-                               for line_tuple in sorted(self.lexc_lines)])
-        adjusted_lines.append('')
-
-        return adjusted_lines
+        self.lines.extend([line_tuple[1]
+                           for line_tuple in sorted(self.lexc_lines)])
+        self.lines.append('')
 
 
 def parse_line(old_match):
@@ -660,19 +706,21 @@ def align_lexicon(lexc_lines):
     return lines.adjust_lines()
 
 
-def sort_lexicon(lexc_lines):
+def sort_lexicon(lexc_lines, mode):
     """Sort lexicons.
 
     Arguments:
         lexc_lines (list of str): contents of a lexicon to be sorted.
+        mode (str): the sorting mode applied
 
     Returns:
         list of str: sorted lines.
     """
-    lines = LexcSorter()
+    lines = LexcSorter(mode=mode)
     lines.parse_lines(lexc_lines)
+    lines.adjust_lines()
 
-    return lines.adjust_lines()
+    return lines.lines
 
 
 def parse_options():
@@ -684,7 +732,8 @@ def parse_options():
                        action=u'store_true',
                        help=u'Align lexicon entries')
     group.add_argument(u'--sort',
-                       action=u'store_true',
+                       default='alpha',
+                       choices=['alpha', 'revstem', 'contlex'],
                        help=u'Sort lexicon entries')
     parser.add_argument(u'lexcfile',
                         help=u'Lexc file where lexicon entries should '
@@ -716,14 +765,14 @@ if __name__ == u'__main__':
                 if ARGS.align:
                     NEWLINES.extend(align_lexicon(READLINES))
                 if ARGS.sort:
-                    NEWLINES.extend(sort_lexicon(READLINES))
+                    NEWLINES.extend(sort_lexicon(READLINES, ARGS.sort))
                 READLINES = []
             READLINES.append(lexc_line.rstrip())
 
         if ARGS.align:
             NEWLINES.extend(align_lexicon(READLINES))
         if ARGS.sort:
-            NEWLINES.extend(sort_lexicon(READLINES))
+            NEWLINES.extend(sort_lexicon(READLINES, ARGS.sort))
 
     with io.open(ARGS.lexcfile, u'w') if ARGS.lexcfile is not "-" \
             else sys.stdout as file_:

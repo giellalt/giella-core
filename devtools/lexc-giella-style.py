@@ -470,6 +470,142 @@ class TestLineParser(unittest.TestCase):
         self.assertDictEqual(parse_line(content), expected_result)
 
 
+class TestLineCompactor(unittest.TestCase):
+    """Test how individual lines are compacted."""
+
+    def test_line_parser_upper_lower(self):
+        """Check that lines with upper and lower defined are handled."""
+        content = {
+            u'upper': u'+N+SgNomCmp',
+            u'lower': u'e%^DISIMP',
+            u'contlex': u'R',
+            u'divisor': u':'
+        }
+        expected_result = u'+N+SgNomCmp:e%^DISIMP R ;'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_line_parser_no_lower(self):
+        """Check how lines with empty lower are handled."""
+        content = {
+            u'upper': u'+N+Sg',
+            u'lower': u'',
+            u'contlex': u'N_ODD_SG',
+            u'divisor': u':'
+        }
+        expected_result = (u'+N+Sg: N_ODD_SG ;')
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_line_contlex_only(self):
+        """Check how lines without upper and lower parts are handled."""
+        content = {
+            u'contlex': u'N_ODD_ESS',
+        }
+        expected_result = u'N_ODD_ESS ;'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_empty_upper_lower(self):
+        """Check how empty upper/lower combo is handled."""
+        content = {
+            u'upper': u'', u'lower': u'',
+            u'contlex': u'N_ODD_E',
+            u'divisor': u':'
+        }
+        expected_result = u': N_ODD_E ;'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_comment(self):
+        """Check how commented lines are handled."""
+        content = {
+            u'upper': u'+A+Comp+Attr',
+            u'lower': u'%>abpa',
+            u'contlex': u'ATTRCONT',
+            u'comment': u'! båajasabpa, *båajoesabpa',
+            u'divisor': u':'
+        }
+        expected_result = (
+            u'+A+Comp+Attr:%>abpa ATTRCONT ; '
+            u'! båajasabpa, *båajoesabpa')
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_translation(self):
+        """Check how lines containing translations are handled."""
+        content = {
+            u'upper': u'+A', u'lower': u'%>X7',
+            u'contlex': u'NomVadj',
+            u'translation': u'"good A"',
+            u'divisor': u':'
+        }
+        expected_result = u'+A:%>X7 NomVadj "good A" ;'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_upper_contlex(self):
+        """Check how entries with only upper and contlex are handled."""
+        content = {
+            u'upper': u'jïh',
+            u'contlex': u'Cc',
+        }
+        expected_result = u'jïh Cc ;'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_leading_exclam(self):
+        """Check how entries with a leading exclam are handled."""
+        content = {
+            u'comment': u'! dovne A jïh B',
+            u'upper': u'dovne',
+            u'contlex': u'Cc',
+            u'exclam': u'!'
+        }
+        expected_result = u'!dovne Cc ; ! dovne A jïh B'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_less_great(self):
+        """Check that entries within <> are correctly handled."""
+        content = {u'contlex': u'ContLex',
+                   u'upper':
+                       u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> '
+                       u'"+Der4":» "+Der/NomAct":m >'}
+        expected_result = (
+            u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» '
+            u'"+Der/NomAct":m > ContLex ;')
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_ends_with_percent(self):
+        """Check that entries containing percent are correctly handled."""
+        content = {u'contlex': u'ContLex',
+                   u'upper': u'abb',
+                   u'lower': u'babb% ',
+                   u'divisor': u':', }
+        expected_result = u'abb:babb%  ContLex ;'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_multiple_percent(self):
+        """Check how entries with multiple percent signs are handled."""
+        content = {u'contlex': u'K',
+                   u'upper': u'+N+Der+Der/vida+Adv+Use/-PLX',
+                   u'lower': u'»X7% vida% ',
+                   u'divisor': u':', }
+        expected_result = u'+N+Der+Der/vida+Adv+Use/-PLX:»X7% vida%  K ;'
+
+        self.assertEqual(compact_line(content), expected_result)
+
+    def test_only_contlex(self):
+        """Check how contlex only lines are handled."""
+        expected_result = u'N_NEWWORDS ;'
+        content = {u'contlex': u'N_NEWWORDS'}
+
+        self.assertEqual(compact_line(content), expected_result)
+
+
 class TestSorting(unittest.TestCase):
     """Test how individual lines are parsed."""
 
@@ -484,22 +620,22 @@ class TestSorting(unittest.TestCase):
     def test_alpha(self):
         """Test sorting by lemma."""
         self.assertListEqual(
-            [u'aŋđŧá:abcd CABBR;', u'bžčŋ:bcde BABBR;',
-             u'ábčđ:cdef ABBR;', u''],
+            [u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;',
+             u'ábčđ:cdef ABBR ;', u''],
             sort_lexicon(self.sorting_lines, mode='alpha'))
 
     def test_contlex(self):
         """Test sorting by continuation lexicon."""
         self.assertListEqual(
-            [u'ábčđ:cdef ABBR;', u'bžčŋ:bcde BABBR;',
-             u'aŋđŧá:abcd CABBR;', u''],
+            [u'ábčđ:cdef ABBR ;', u'bžčŋ:bcde BABBR ;',
+             u'aŋđŧá:abcd CABBR ;', u''],
             sort_lexicon(self.sorting_lines, mode='contlex'))
 
     def test_revstem(self):
         """Test sorting by reverted stem."""
         self.assertListEqual(
-            [u'aŋđŧá:abcd CABBR;', u'bžčŋ:bcde BABBR;',
-             u'ábčđ:cdef ABBR;', u''],
+            [u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;',
+             u'ábčđ:cdef ABBR ;', u''],
             sort_lexicon(self.sorting_lines, mode='revstem'))
 
 
@@ -613,7 +749,8 @@ class LexcSorter(object):
                 content.update(LEXC_CONTENT_RE.match(
                     LEXC_LINE_RE.sub('', line)).groupdict())
                 line_dict = parse_line(content)
-                self.lexc_lines.append((self.sorting_key(line_dict), line))
+                self.lexc_lines.append((self.sorting_key(line_dict),
+                                        compact_line(line_dict)))
             else:
                 if line.strip():
                     self.lines.append(line)
@@ -644,6 +781,40 @@ class LexcSorter(object):
         self.lines.extend([line_tuple[1]
                            for line_tuple in sorted(self.lexc_lines)])
         self.lines.append('')
+
+
+def compact_line(line_dict):
+    """Remove unneeded white space from a lexc entry."""
+    string_buffer = []
+
+    if line_dict.get(u'exclam'):
+        string_buffer.append(line_dict[u'exclam'])
+
+    if line_dict.get(u'upper'):
+        string_buffer.append(line_dict[u'upper'])
+
+    if line_dict.get(u'divisor'):
+        string_buffer.append(line_dict[u'divisor'])
+
+    if line_dict.get(u'lower'):
+        string_buffer.append(line_dict[u'lower'])
+
+    if string_buffer:
+        string_buffer.append(' ')
+
+    string_buffer.append(line_dict[u'contlex'])
+
+    if line_dict.get(u'translation'):
+        string_buffer.append(' ')
+        string_buffer.append(line_dict[u'translation'])
+
+    string_buffer.append(u' ;')
+
+    if line_dict.get(u'comment'):
+        string_buffer.append(u' ')
+        string_buffer.append(line_dict[u'comment'])
+
+    return ''.join(string_buffer)
 
 
 def parse_line(old_match):

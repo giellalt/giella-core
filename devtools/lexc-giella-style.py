@@ -35,7 +35,7 @@ from collections import defaultdict
 
 LEXC_LINE_RE = re.compile(r'''
     (?P<contlex>\S+)            #  any nonspace
-    (?P<translation>\s+".+")?   #  optional translation
+    (?P<translation>\s+".*")?   #  optional translation, might be empty
     \s*;\s*                     #  skip space and semicolon
     (?P<comment>!.*)?           #  followed by an optional comment
     $
@@ -466,6 +466,20 @@ class TestLineParser(unittest.TestCase):
         content.update(LEXC_CONTENT_RE.match(
             LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {u'contlex': u'N_NEWWORDS'}
+
+        self.assertDictEqual(parse_line(content), expected_result)
+
+    def test_empty_translation(self):
+        """Check lines with empty translation."""
+        line = u'tsollegidh:tsolleg GOLTELIDH_IV "" ;'
+        content = LEXC_LINE_RE.search(line).groupdict()
+        content.update(LEXC_CONTENT_RE.match(
+            LEXC_LINE_RE.sub('', line)).groupdict())
+        expected_result = {u'contlex': u'GOLTELIDH_IV',
+                           u'upper': u'tsollegidh',
+                           u'lower': u'tsolleg',
+                           u'translation': u'""',
+                           u'divisor': u':'}
 
         self.assertDictEqual(parse_line(content), expected_result)
 

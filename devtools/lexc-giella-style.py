@@ -918,7 +918,6 @@ def parse_options():
                        action=u'store_true',
                        help=u'Align lexicon entries')
     group.add_argument(u'--sort',
-                       default='alpha',
                        choices=['alpha', 'revstem', 'contlex'],
                        help=u'Sort lexicon entries')
     parser.add_argument(u'lexcfile',

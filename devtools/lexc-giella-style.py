@@ -26,6 +26,7 @@
 from __future__ import absolute_import, print_function
 
 import argparse
+import codecs
 import io
 import re
 import sys
@@ -931,6 +932,12 @@ def parse_options():
 
 
 if __name__ == u'__main__':
+    # https://stackoverflow.com/questions/2737966/how-to-change-the-stdin-encoding-on-python  nopep8
+    UTF8Reader = codecs.getreader('utf8')
+    sys.stdin = UTF8Reader(sys.stdin)
+    UTF8Writer = codecs.getwriter('utf8')
+    sys.stdout = UTF8Writer(sys.stdout)
+
     ARGS = parse_options()
 
     with io.open(ARGS.lexcfile) if ARGS.lexcfile is not "-" \

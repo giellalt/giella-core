@@ -166,18 +166,14 @@ abbr.txt" $1/tools/tokenisers
 
 # Set the svn:ignore prop on the test/tools/tokenisers/filters/ dir:
 $svnignore "$mkfiles
-*.?fst
-*.foma
+$fstfiles
 *.regex
 *.txt" $1/tools/tokenisers/filters
 
 # Set the svn:ignore prop on the test/tools/grammarcheckers/ dir:
 $svnignore "$mkfiles
-*.?fst
-*.hfstol
-*.foma
+$fstfiles
 *.pmhfst
-*.bin
 *.cg3
 *.zhfst
 *.zcheck
@@ -185,8 +181,7 @@ modes" $1/tools/grammarcheckers
 
 # Set the svn:ignore prop on the test/tools/grammarcheckers/filters/ dir:
 $svnignore "$mkfiles
-*.?fst
-*.foma
+$fstfiles
 *.regex
 *.txt" $1/tools/grammarcheckers/filters
 

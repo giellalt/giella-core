@@ -235,12 +235,6 @@ $svnignore "$mkfiles
 $fstfiles
 spellercorpus.clean.txt" $1/tools/spellcheckers/fstbased/mobile/weighting
 
-# Set the svn:ignore prop on the grammarchecker dir:
-$svnignore "$mkfiles
-$fstfiles
-*-x-standard
-4" $1/tools/grammarcheckers
-
 # Set the svn:ignore prop on the shellscripts dir:
 $svnignore "$mkfiles
 *.sh

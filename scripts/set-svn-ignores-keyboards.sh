@@ -71,6 +71,6 @@ $svnignore "*build" $1/ios
 # Set the svn:ignore prop on the win dir:
 $svnignore "amd64
 i386
-install.iss
+*.iss
 kbdi.exe
 wow64" $1/win

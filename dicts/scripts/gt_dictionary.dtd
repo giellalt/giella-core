@@ -23,6 +23,7 @@
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED
+      id CDATA #IMPLIED 
 >      
 <!ELEMENT lg (l, l_ref*, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
@@ -53,11 +54,16 @@
       rime CDATA #IMPLIED
       margo CDATA #IMPLIED
       vow CDATA #IMPLIED
+      tt_auto CDATA #IMPLIED
       diph ( yes ) #IMPLIED
       umlaut ( full ) #IMPLIED
       num ( pl ) #IMPLIED
       val ( IV | TV ) #IMPLIED
+      r1_par CDATA #IMPLIED	  
+      r2_par CDATA #IMPLIED	  
 >      
+<!ATTLIST l comma CDATA #IMPLIED >
+<!ATTLIST l syn CDATA #IMPLIED >
 
 <!-- decl: i indeclineable -->
 
@@ -85,7 +91,7 @@
 <!ELEMENT source (book) >
 <!ATTLIST book
 	  name CDATA #IMPLIED >
-<!ELEMENT semantics (sem) >
+<!ELEMENT semantics (sem | sem* ) >
 <!ATTLIST sem 
 	  name CDATA #IMPLIED >
 
@@ -98,9 +104,7 @@
 >      
 
 <!ELEMENT sources (book*, frequency?, geography*) >
-<!ELEMENT book EMPTY >
-<!ATTLIST book 
-	  name CDATA #IMPLIED >
+<!--<!ELEMENT book EMPTY >-->
 <!--      name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 | xxx ) #IMPLIED -->
 
 <!ELEMENT frequency EMPTY >
@@ -113,7 +117,6 @@
 >      
 <!--      name CDATA #REQUIRED -->
 
-<!ELEMENT semantics (sem*) >
 <!ELEMENT sem EMPTY >
 <!ATTLIST sem
       class CDATA #IMPLIED
@@ -124,6 +127,7 @@
       xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
 >      
 <!ATTLIST mg re CDATA #IMPLIED >
+<!ATTLIST mg id CDATA #IMPLIED >
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg 
@@ -163,6 +167,15 @@
 <!ATTLIST t nob-stat CDATA #IMPLIED >
 <!ATTLIST t sem-cl CDATA #IMPLIED >
 <!ATTLIST t src CDATA #IMPLIED >
+<!ATTLIST t l_par CDATA #IMPLIED >
+<!ATTLIST t wf CDATA #IMPLIED >
+<!ATTLIST t t_tld CDATA #IMPLIED >
+<!ATTLIST t syn_dash CDATA #IMPLIED >
+<!ATTLIST t attr CDATA #IMPLIED >
+<!ATTLIST t r_par CDATA #IMPLIED >
+<!ATTLIST t mwe CDATA #IMPLIED >
+<!ATTLIST t syn CDATA #IMPLIED >
+
 <!ATTLIST t alt_str CDATA #IMPLIED >
 <!ATTLIST t tcomm ( yes | no ) #IMPLIED  >
 <!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >

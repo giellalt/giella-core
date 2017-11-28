@@ -1,13 +1,13 @@
 # This is a makefile that builds the dictionaries
 
-# java -Xmx2048m net.sf.saxon.Transform -it main collect-smanob-parts.xsl
+# java -Xmx2048m net.sf.saxon.Transform -it:main collect-smanob-parts.xsl
 
 # =========== Tools: ============= #
 LEXC = lexc -utf8
 XFST = xfst -utf8
 JV   = java
 MF   = -Xmx2048m
-EF   = -it main
+EF   = -it:main
 XSL  = net.sf.saxon.Transform
 XQL  = net.sf.saxon.Query
 SSH  = /usr/bin/ssh
@@ -101,7 +101,7 @@ $(DICT_PATH)/$(BIN)/$(MACDICT): $(DICT_PATH)/$(BIN)/$(DICT_XML) \
 	@echo
 	@echo "*** Compiling the dictionary. ***"
 	@echo
-	$(JV) $(MF) $(XSL) -it main $(SCRIPTS)/$(COMPDICT) dir=$(ONE_UP)/$(DICT_PATH)/$(BIN)/$(XMLPARAD) > $@.tmp
+	$(JV) $(MF) $(XSL) -it:main $(SCRIPTS)/$(COMPDICT) dir=$(ONE_UP)/$(DICT_PATH)/$(BIN)/$(XMLPARAD) > $@.tmp
 	@echo
 	@echo "*** Transforming the dictionary into mac-format. ***"
 	@echo

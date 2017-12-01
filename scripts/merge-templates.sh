@@ -136,7 +136,7 @@ if test ! -r und.timestamp ; then
 fi
 
 # Identify language:
-CURLANG=$(fgrep 'AC_SUBST([GTLANG]' configure.ac \
+CURLANG=$(fgrep 'AC_SUBST([GLANG]' configure.ac \
 		  | cut -d',' -f2 | cut -d'[' -f2 | cut -d']' -f1)
 CUR2LANG=$( ${GTCORE}/scripts/iso3-to-2.sh $CURLANG )
 

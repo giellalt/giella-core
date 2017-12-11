@@ -63,7 +63,8 @@ deps
 $svnignore "*.unsigned.pkg" $1/macos
 
 # Set the svn:ignore prop on the android dir:
-$svnignore "deps" $1/android
+$svnignore "deps
+*.apk" $1/android
 
 # Set the svn:ignore prop on the ios dir:
 $svnignore "*build" $1/ios

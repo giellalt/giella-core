@@ -24,8 +24,8 @@ SCRIPTS       = scripts
 L1_L2         = extract_l-t-lexc.xsl
 
 # target lang= ISO code
-SLANG       = fin
-TLANG       = smn
+SLANG       = sma
+TLANG       = nob
 LP          = $(SLANG)$(TLANG)
 # translation number: values 'first' = use only the first t-element; 'all' = use all t-elements 
 TNUM        = all

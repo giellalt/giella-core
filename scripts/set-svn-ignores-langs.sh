@@ -49,6 +49,8 @@ fstfiles="*fst
 # Get the list of dirs to work on:
 dirlist=$(find $1 \
 			-not -iwholename '*.cache*' \
+			-not -iwholename '*inc/*' \
+			-not -iwholename '*incoming*' \
 			-not -iwholename '*hfst/3*' \
 			-not -iwholename '*hfst/MacVoikko*' \
 			-not -iwholename '*grammarcheckers/4*' \

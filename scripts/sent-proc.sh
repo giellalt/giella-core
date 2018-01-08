@@ -12,7 +12,7 @@
 # parametrized for processing step: -s pos, -s dis, -s syn, -s dep
 
 # change to 'true' to debug paths of analysis tools
-debug='true'
+debug='false'
 HLOOKUP=`which hfst-optimized-lookup`
 
 if [ -n "$HLOOKUP" ]; then

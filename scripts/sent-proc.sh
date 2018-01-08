@@ -12,7 +12,7 @@
 # parametrized for processing step: -s pos, -s dis, -s syn, -s dep
 
 # change to 'true' to debug paths of analysis tools
-debug='false'
+debug='true'
 HLOOKUP=`which hfst-optimized-lookup`
 
 if [ -n "$HLOOKUP" ]; then
@@ -140,7 +140,7 @@ fi
 
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
     MORPH="$HLOOKUP $current_path/src/analyser-disamb-gt-desc.hfstol"
-    DIS="$current_path/src/syntax/disambiguation.cg3"
+    DIS="$current_path/src/syntax/disambiguator.cg3"
     if [ ! -f "$current_path/src/analyser-disamb-gt-desc.hfstol" ]; then
         echo "no hfst file found: please compile the language tools for $l"
         echo "See you later!"
@@ -174,7 +174,7 @@ SD_PATH='$GTHOME/giella-shared/smi/src/syntax'
 pos_cmd="echo $sentence | preprocess $abbr | $MORPH |cut -f1,2| $GTCORE/scripts/lookup2cg"
 
 if [ $l == fao ] || [ $l == crk ]; then
-    dis_cmd=$pos_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/disambiguation.cg3 $t"
+    dis_cmd=$pos_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/disambiguator.cg3 $t"
     syn_cmd=$dis_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/functions.cg3 $t"
 else
     dis_cmd=$pos_cmd" | vislcg3 -g $DIS $t"

@@ -2,4 +2,8 @@
 ! 😱 is used in some languages to prefix # in dynamic compounds.
 
  %#  -> 0,
-"😱" -> 0;
+"##" -> 0,
+"😱" -> 0,
+
+! Also convert escaped symbols to their real surface form:
+"#7" -> %#;

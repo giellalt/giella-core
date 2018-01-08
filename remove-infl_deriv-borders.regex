@@ -8,6 +8,7 @@
 ! Also make sure that escaped literal quotes are unescaped on the surface:
 »7 -> »,
 «7 -> «,
+"_7" -> %_,
 %[%>%] -> %>,
 %[%<%] -> %<
 ;

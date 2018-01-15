@@ -17,7 +17,7 @@ fi
 Language=$(@GIELLA_CORE@/scripts/iso639-to-name.sh $1)
 Revision=$(svn info --xml $2 | grep -A 4 '<entry' \
 		 | grep revision | grep -Eo '[0-9]+')
-Version=$(cat $3)
+Version=$3
 Variant=$4
 
 Date=$(date +%d.%m.%Y)

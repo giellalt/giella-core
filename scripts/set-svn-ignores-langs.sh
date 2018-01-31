@@ -136,12 +136,21 @@ $fstfiles
 dependency.cg3
 functions.cg3" $1/src/syntax
 
-# Set the svn:ignore prop on the test/tools/mt/apertium/ dir:
+# Set the svn:ignore prop on the test/tools/grammarcheckers/ dir:
 $svnignore "$mkfiles
-*.log
-*.trs
-*.txt
-*.sh" $1/test/tools/mt/apertium
+$fstfiles
+*.pmhfst
+*.cg3
+*.zhfst
+*.zcheck
+modes
+pipespec.xml" $1/tools/grammarcheckers
+
+# Set the svn:ignore prop on the test/tools/grammarcheckers/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.regex
+*.txt" $1/tools/grammarcheckers/filters
 
 # Set the svn:ignore prop on the tools/mt/apertium/ dir:
 $svnignore "$mkfiles
@@ -160,33 +169,6 @@ $svnignore "$mkfiles
 $fstfiles
 apertiumtags.txt
 apertium.relabel" $1/tools/mt/apertium/tagsets
-
-# Set the svn:ignore prop on the test/tools/tokenisers/ dir:
-$svnignore "$mkfiles
-*.hfst
-*.pmhfst
-abbr.txt" $1/tools/tokenisers
-
-# Set the svn:ignore prop on the test/tools/tokenisers/filters/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.regex
-*.txt" $1/tools/tokenisers/filters
-
-# Set the svn:ignore prop on the test/tools/grammarcheckers/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.pmhfst
-*.cg3
-*.zhfst
-*.zcheck
-modes" $1/tools/grammarcheckers
-
-# Set the svn:ignore prop on the test/tools/grammarcheckers/filters/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.regex
-*.txt" $1/tools/grammarcheckers/filters
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
 $svnignore "$mkfiles
@@ -243,6 +225,18 @@ $svnignore "$mkfiles
 *.sh
 *.txt" $1/tools/shellscripts
 
+# Set the svn:ignore prop on the test/tools/tokenisers/ dir:
+$svnignore "$mkfiles
+*.hfst
+*.pmhfst
+abbr.txt" $1/tools/tokenisers
+
+# Set the svn:ignore prop on the test/tools/tokenisers/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.regex
+*.txt" $1/tools/tokenisers/filters
+
 # Set the svn:ignore prop on the test/ dir:
 $svnignore "$mkfiles
 run-morph-tester.sh" $1/test
@@ -271,6 +265,13 @@ $svnignore "$mkfiles
 *.trs
 *.txt
 *.sh" $1/test/src/phonology
+
+# Set the svn:ignore prop on the test/tools/mt/apertium/ dir:
+$svnignore "$mkfiles
+*.log
+*.trs
+*.txt
+*.sh" $1/test/tools/mt/apertium
 
 # Set the svn:ignore prop on the test/tools/spellcheckers/ dir:
 $svnignore "$mkfiles

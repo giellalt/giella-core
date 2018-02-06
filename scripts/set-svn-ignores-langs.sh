@@ -144,6 +144,7 @@ $fstfiles
 *.zhfst
 *.zcheck
 modes
+errors.xml
 pipespec.xml" $1/tools/grammarcheckers
 
 # Set the svn:ignore prop on the test/tools/grammarcheckers/filters/ dir:
@@ -239,6 +240,7 @@ $fstfiles
 
 # Set the svn:ignore prop on the test/ dir:
 $svnignore "$mkfiles
+run-yaml-testcases.sh
 run-morph-tester.sh" $1/test
 
 # Set the svn:ignore prop on the test/src/ dir:

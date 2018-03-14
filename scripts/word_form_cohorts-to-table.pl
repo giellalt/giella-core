@@ -87,17 +87,21 @@ for (my $ix = 0; $ix <= $#word_form_array; $ix += $number_of_codes ) {
     # For each of the codes, extract the generated word forms and print them:
     for (my $j = 0; $j < $number_of_codes; $j += 1 ) {
         my $word_forms = $word_form_array[$ix + $j];
+        #DEBUG: print "Ordformer: $word_forms\n";
         my @word_forms = split ('\n',$word_forms);
         print HTMLTABLE "<td>";
         for my $wordform (@word_forms) {
             my ($input, $word, $questionmark) = split ('\t',$wordform);
-            if ($questionmark =~ /0,000/) {
+            if ($questionmark =~ /[0-9]/) {
                 print HTMLTABLE "$word</br>";
+                #DEBUG: print "Ord 97: $word\n";
             } elsif ($questionmark) {
                 print HTMLTABLE "$questionmark";
+                #DEBUG: print "Ord 100: $questionmark\n";
             }
             else {
                 print HTMLTABLE "$word</br>";
+                #DEBUG: print "Ord 104: $word\n";
             }
         }
         print HTMLTABLE "</td>";

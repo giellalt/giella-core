@@ -1,6 +1,7 @@
 ! File for making transitivity tags optional. Used for generating transducers.
 ! Coming from the old tag-not-save.regex file in gt/common/src/.
 
-0 (<-) %+TV,
-0 (<-) %+IV
-;
+0 (<-) "+TV",
+0 (<-) "+IV",
+0 (<-) "+Gram/TV",
+0 (<-) "+Gram/IV";

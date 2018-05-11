@@ -31,7 +31,6 @@ echo "# the semantic tags before the same POS's, so" >> $REGEXFILE
 echo "# that the total effect will be that the tags" >> $REGEXFILE
 echo "# are moved."                                  >> $REGEXFILE
 
-$SED 's/^\(.*\)$/[ "\1"     <- [..] || "\1" ( ? ) [ "+N" | "+A" ]    "+Prop" _ ,,\
-  "\1"     <- [..] || "\1" ( ? ) [ "+N" | "+A" ] _ \\"+Prop"   ] .o./' $TAGFILE \
+$SED 's/^\(.*\)$/[ "\1"	 <- [..] || "\1"	( ? ) [ "+N" | "+A" ] _ ] .o./' $TAGFILE \
     | $SED '$ s/ .o./ ;/' \
     >> $REGEXFILE

@@ -170,7 +170,8 @@ $fstfiles
 $svnignore "$mkfiles
 $fstfiles
 apertiumtags.txt
-apertium.relabel" $1/tools/mt/apertium/tagsets
+apertium.relabel
+gttags.txt" $1/tools/mt/apertium/tagsets
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
 $svnignore "$mkfiles
@@ -231,6 +232,7 @@ $svnignore "$mkfiles
 $svnignore "$mkfiles
 *.hfst
 *.pmhfst
+*.tmp
 abbr.txt" $1/tools/tokenisers
 
 # Set the svn:ignore prop on the test/tools/tokenisers/filters/ dir:

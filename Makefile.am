@@ -70,10 +70,12 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/smx-smi.py \
    scripts/spell-preprocess.pl \
    scripts/style/speller_xml.css \
+   scripts/taglist2insert_semantic_tags_after_pos_regex.sh \
    scripts/taglist2make_CG_tags_regex.sh \
    scripts/taglist2make_optional_tags_regex.sh \
    scripts/taglist2remove_semantic_tags_regex.sh \
    scripts/taglist2remove_strings_regex.sh \
+   scripts/taglist2remove_tags_before_pos_regex.sh \
    scripts/taglist2remove_tags_regex.sh \
    scripts/taglist2reorder_semantic_tags_regex.sh \
    scripts/uniq_count2tropical_weight.awk \

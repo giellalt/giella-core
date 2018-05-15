@@ -118,7 +118,7 @@ def sort_tags(line_dict, tagsets):
     for tag in tags[1:]:
         for start in [
                 'Cmp', 'Sem', 'v', 'Err', 'Der', 'Use', 'OLang', 'Dial',
-                'Pref', 'Foc', 'Hom'
+                'Pref', 'Foc', 'Hom', 'Area'
         ]:
             if tag.startswith(start):
                 tagsets[start].add(tag)

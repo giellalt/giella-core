@@ -35,7 +35,6 @@ from collections import defaultdict
 
 import yaml
 
-
 LEXC_LINE_RE = re.compile(r'''
     (?P<contlex>\S+)            #  any nonspace
     (?P<translation>\s+".*")?   #  optional translation, might be empty
@@ -130,13 +129,11 @@ def sort_tags(line_dict, tagsets):
 def parse_file(filename, tagsets):
     with io.open(filename) as lexc:
         for lexc_line in lexc:
-            #print('.', end='')
-            #sys.stdout.flush()
             if not lexc_line.startswith('LEXICON'):
                 line_dict = line2dict(lexc_line.rstrip())
-                if line_dict and '<' not in line_dict['upper']:
+                if line_dict and '<' not in line_dict['upper'] and not line_dict.get(
+                        'exclam'):
                     sort_tags(line_dict, tagsets)
-        #print()
 
 
 def main():

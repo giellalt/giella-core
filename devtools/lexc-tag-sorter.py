@@ -155,7 +155,10 @@ def main():
             parse_file(filename, tagsets)
 
         with open(os.path.join(stemroot, 'tags.yaml'), 'w') as outfile:
-            yaml.dump(tagsets, outfile, default_flow_style=False)
+            for key in sorted(tagsets):
+                print(key, file=outfile)
+                for tag in sorted(tagsets[key]):
+                    print('\t{}'.format(tag.encode('utf8')), file=outfile)
 
 
 if __name__ == '__main__':

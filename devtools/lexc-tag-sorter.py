@@ -23,6 +23,7 @@
 
 from __future__ import absolute_import, print_function
 
+import fileinput
 import argparse
 import codecs
 import glob
@@ -62,34 +63,34 @@ def parse_line(old_match):
     line_dict = defaultdict(str)
 
     if old_match.get('exclam'):
-        line_dict[u'exclam'] = u'!'
+        line_dict['exclam'] = '!'
 
-    line_dict[u'contlex'] = old_match.get(u'contlex')
-    if old_match.get(u'translation'):
-        line_dict[u'translation'] = old_match.get(
-            u'translation').strip().replace(u'%¥', u'% ')
+    line_dict['contlex'] = old_match.get('contlex')
+    if old_match.get('translation'):
+        line_dict['translation'] = old_match.get(
+            'translation').strip().replace('%¥', '% ')
 
-    if old_match.get(u'comment'):
-        line_dict[u'comment'] = old_match.get(u'comment').strip().replace(
-            u'%¥', u'% ')
+    if old_match.get('comment'):
+        line_dict['comment'] = old_match.get('comment').strip().replace(
+            '%¥', '% ')
 
     line = old_match.get('content')
     if line:
-        line = line.replace(u'%¥', u'% ')
-        if line.startswith(u'<') and line.endswith(u'>'):
-            line_dict[u'upper'] = line
+        line = line.replace('%¥', '% ')
+        if line.startswith('<') and line.endswith('>'):
+            line_dict['upper'] = line
         else:
-            lexc_line_match = line.find(u":")
+            lexc_line_match = line.find(':')
 
             if lexc_line_match != -1:
-                line_dict[u'upper'] = line[:lexc_line_match].strip()
-                line_dict[u'divisor'] = u':'
-                line_dict[u'lower'] = line[lexc_line_match + 1:].strip()
-                if line_dict[u'lower'].endswith('%'):
-                    line_dict[u'lower'] = line_dict[u'lower'] + u' '
+                line_dict['upper'] = line[:lexc_line_match].strip()
+                line_dict['divisor'] = ':'
+                line_dict['lower'] = line[lexc_line_match + 1:].strip()
+                if line_dict['lower'].endswith('%'):
+                    line_dict['lower'] = line_dict['lower'] + ' '
             else:
                 if line.strip():
-                    line_dict[u'upper'] = line.strip()
+                    line_dict['upper'] = line.strip()
 
     return line_dict
 
@@ -100,7 +101,7 @@ def line2dict(line):
     Args:
         line: a lexc line
     """
-    line = line.replace(u'% ', u'%¥')
+    line = line.replace('% ', '%¥')
     lexc_line_match = LEXC_LINE_RE.search(line)
     if lexc_line_match:
         content = lexc_line_match.groupdict()
@@ -111,35 +112,87 @@ def line2dict(line):
     return {}
 
 
-def sort_tags(line_dict, tagsets):
-    tags = line_dict['upper'].split('+')
+def sort_tags(line_dict):
+    tagsets = defaultdict(list)
+    tags = [tag for tag in line_dict['upper'].split('+') if tag.strip()]
 
-    if not re.search('\w+', tags[0], flags=re.UNICODE):
-        raise ValueError(tags[0])
+    if tags:
+        if tags[0] and not re.search('\w+', tags[0], flags=re.UNICODE):
+            raise ValueError(tags[0])
 
-    for tag in tags[1:]:
-        for start in [
-                'Cmp', 'Sem', 'v', 'Err', 'Der', 'Use', 'OLang', 'Dial',
-                'Pref', 'Foc', 'Hom', 'Area'
-        ]:
-            if tag.startswith(start):
-                tagsets[start].add(tag)
-                break
-        else:
-            tagsets['resten'].add(tag)
+        tagsets['lemma'].append(tags[0])
+
+        for tag in tags[1:]:
+            if tag in ['NomAg', 'G3'] or tag.startswith('Hom'):
+                tagsets['Hom'].append(tag)
+            elif tag.startswith('v'):
+                tagsets['v'].append(tag)
+            elif tag.startswith('Cmp'):
+                tagsets['Cmp'].append(tag)
+            elif tag.startswith('Sem'):
+                tagsets['Sem'].append(tag)
+            else:
+                tagsets['resten'].append(tag)
+
+        if len(tagsets['v']) > 1:
+            raise ValueError('too many v')
+        if len(tagsets['Hom']) > 1:
+            raise ValueError('too many hom')
+
+        haff = '+'.join(valid_tags(tagsets))
+        if haff != line_dict['upper']:
+            line_dict['upper'] = haff
+            return compact_line(line_dict)
 
 
-def parse_file(filename, tagsets):
-    with io.open(filename) as lexc:
-        for lexc_line in lexc:
-            if not lexc_line.startswith('LEXICON'):
-                line_dict = line2dict(lexc_line.rstrip())
-                if line_dict and '<' not in line_dict['upper'] and not line_dict.get(
-                        'exclam'):
-                    try:
-                        sort_tags(line_dict, tagsets)
-                    except ValueError as error:
-                        print(u'Strange line {}: {}'.format(lexc_line.rstrip(), filename))
+def valid_tags(tagsets):
+    for tug in ['lemma', 'Hom', 'v', 'Cmp', 'Sem', 'resten']:
+        if tagsets.get(tug):
+            for tog in tagsets[tug]:
+                yield tog
+
+
+def compact_line(line_dict):
+    """Remove unneeded white space from a lexc entry."""
+    string_buffer = []
+
+    if line_dict.get('exclam'):
+        string_buffer.append(line_dict['exclam'])
+
+    if line_dict.get('upper'):
+        string_buffer.append(line_dict['upper'])
+
+    if line_dict.get('divisor'):
+        string_buffer.append(line_dict['divisor'])
+
+    if line_dict.get('lower'):
+        string_buffer.append(line_dict['lower'])
+
+    if string_buffer:
+        string_buffer.append(' ')
+
+    string_buffer.append(line_dict['contlex'])
+
+    if line_dict.get('translation'):
+        string_buffer.append(' ')
+        string_buffer.append(line_dict['translation'])
+
+    string_buffer.append(' ;')
+
+    if line_dict.get('comment'):
+        string_buffer.append(' ')
+        string_buffer.append(line_dict['comment'])
+
+    return ''.join(string_buffer)
+
+
+def parse_file(lexc_line):
+    if not lexc_line.startswith('LEXICON'):
+        line_dict = line2dict(lexc_line)
+        if line_dict and '<' not in line_dict['upper'] and not line_dict.get(
+                'exclam') and not line_dict['upper'].endswith('+') and '+' in line_dict['upper']:
+            return sort_tags(line_dict)
+
 
 
 def main():
@@ -152,13 +205,15 @@ def main():
         stemroot = os.path.join(
             os.getenv('GTHOME'), 'langs', lang, 'src/morphology')
         for filename in glob.glob(stemroot + '/stems/*.lexc'):
-            parse_file(filename, tagsets)
-
-        with open(os.path.join(stemroot, 'tags.yaml'), 'w') as outfile:
-            for key in sorted(tagsets):
-                print(key, file=outfile)
-                for tag in sorted(tagsets[key]):
-                    print('\t{}'.format(tag.encode('utf8')), file=outfile)
+            for line in fileinput.input(filename, inplace=True):
+                try:
+                    huff = parse_file(line.rstrip())
+                    if huff is not None:
+                        print(huff)
+                    else:
+                        print(line, end='')
+                except ValueError:
+                    print(line, end='')
 
 
 if __name__ == '__main__':

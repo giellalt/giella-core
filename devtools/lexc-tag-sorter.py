@@ -114,6 +114,9 @@ def line2dict(line):
 def sort_tags(line_dict, tagsets):
     tags = line_dict['upper'].split('+')
 
+    if not re.search('\w+', tags[0], flags=re.UNICODE):
+        raise ValueError(tags[0])
+
     for tag in tags[1:]:
         for start in [
                 'Cmp', 'Sem', 'v', 'Err', 'Der', 'Use', 'OLang', 'Dial',
@@ -133,7 +136,10 @@ def parse_file(filename, tagsets):
                 line_dict = line2dict(lexc_line.rstrip())
                 if line_dict and '<' not in line_dict['upper'] and not line_dict.get(
                         'exclam'):
-                    sort_tags(line_dict, tagsets)
+                    try:
+                        sort_tags(line_dict, tagsets)
+                    except ValueError as error:
+                        print(u'Strange line {}: {}'.format(lexc_line.rstrip(), filename))
 
 
 def main():
@@ -146,7 +152,6 @@ def main():
         stemroot = os.path.join(
             os.getenv('GTHOME'), 'langs', lang, 'src/morphology')
         for filename in glob.glob(stemroot + '/stems/*.lexc'):
-            print(filename)
             parse_file(filename, tagsets)
 
         with open(os.path.join(stemroot, 'tags.yaml'), 'w') as outfile:

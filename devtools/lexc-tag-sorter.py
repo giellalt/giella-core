@@ -84,10 +84,17 @@ def sort_tags(tags):
             tagsets['Hom'].append(tag)
         elif tag.startswith('+v'):
             tagsets['v'].append(tag)
-        elif tag.startswith('+Cmp'):
-            tagsets['Cmp'].append(tag)
+        elif tag.startswith('+CmpNP'):
+            tagsets['CmpNP'].append(tag)
+        elif tag.startswith('+CmpN'):
+            tagsets['CmpN'].append(tag)
         elif tag.startswith('+Sem'):
             tagsets['Sem'].append(tag)
+        elif tag in [
+                '+N', '+A', '+Adv', '+V', '+Pron', '+CS', '+CC', '+Adp', '+Po',
+                '+Pr', '+Interj', '+Pcle', '+Num'
+        ]:
+            tagsets['Pos'].append(tag)
         else:
             tagsets['resten'].append(tag)
 
@@ -100,7 +107,7 @@ def sort_tags(tags):
 
 
 def valid_tags(tagsets):
-    for tug in ['Hom', 'v', 'Cmp', 'Sem', 'resten']:
+    for tug in ['v', 'Hom', 'Pos', 'Sem', 'CmpNP', 'CmpN', 'resten']:
         if tagsets.get(tug):
             for tog in tagsets[tug]:
                 yield tog

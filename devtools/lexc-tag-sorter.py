@@ -19,8 +19,11 @@
 #                         the Norwegian Sámi Parliament
 #   http://giellatekno.uit.no & http://divvun.no
 #
-"""Script to sort and align lexc entries."""
+"""Sort tags in lexc lines.
 
+We are only interested in lexc lines that have two or more tags. Other
+lines should go untouched.
+"""
 
 import fileinput
 import glob

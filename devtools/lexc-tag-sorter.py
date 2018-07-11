@@ -107,10 +107,10 @@ def sort_tags(tags):
 
 
 def valid_tags(tagsets):
-    for tug in ['v', 'Hom', 'Pos', 'Sem', 'CmpNP', 'CmpN', 'resten']:
-        if tagsets.get(tug):
-            for tog in tagsets[tug]:
-                yield tog
+    for tag_group in ['v', 'Hom', 'Pos', 'Sem', 'CmpNP', 'CmpN', 'resten']:
+        if tagsets.get(tag_group):
+            for tag in tagsets[tag_group]:
+                yield tag
 
 
 def stemroots():

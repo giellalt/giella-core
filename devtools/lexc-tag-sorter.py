@@ -126,7 +126,7 @@ def main():
     for filename in filenames():
         print(filename)
         for line in fileinput.input(filename, inplace=True):
-            print(is_interesting_line(line[:-1]))
+            print(is_interesting_line(line[:-1] if line[-1] == '\n' else line))
 
 
 if __name__ == '__main__':

@@ -187,33 +187,40 @@ def compact_line(line_dict):
 
 
 def parse_file(lexc_line):
-    if not lexc_line.startswith('LEXICON'):
+    if not lexc_line.startswith('LEXICON') and not lexc_line.startswith('+'):
         line_dict = line2dict(lexc_line)
         if line_dict and '<' not in line_dict['upper'] and not line_dict.get(
                 'exclam') and not line_dict['upper'].endswith('+') and '+' in line_dict['upper']:
             return sort_tags(line_dict)
 
 
-
-def main():
+def stemroots():
     for lang in [
             'chp', 'cor', 'deu', 'est', 'fin', 'hdn', 'kal', 'koi', 'kpv',
             'mdf', 'mhr', 'myv', 'nob', 'olo', 'sje', 'sma', 'sme', 'smj',
             'smn', 'sms', 'som', 'vro'
     ]:
-        tagsets = defaultdict(set)
-        stemroot = os.path.join(
-            os.getenv('GTHOME'), 'langs', lang, 'src/morphology')
-        for filename in glob.glob(stemroot + '/stems/*.lexc'):
-            for line in fileinput.input(filename, inplace=True):
-                try:
-                    huff = parse_file(line.rstrip())
-                    if huff is not None:
-                        print(huff)
-                    else:
-                        print(line, end='')
-                except ValueError:
+        yield os.path.join(
+            os.getenv('GTHOME'), 'langs', lang, 'src/morphology/stems/')
+
+
+def filenames():
+    for stemroot in stemroots():
+        for filename in glob.glob(stemroot + '*.lexc'):
+            yield filename
+
+
+def main():
+    for filename in filenames():
+        for line in fileinput.input(filename, inplace=True):
+            try:
+                huff = parse_file(line.rstrip())
+                if huff is not None:
+                    print(huff)
+                else:
                     print(line, end='')
+            except ValueError:
+                print(line, end='')
 
 
 if __name__ == '__main__':

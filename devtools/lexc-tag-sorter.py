@@ -23,17 +23,10 @@
 
 
 import fileinput
-import argparse
-import codecs
 import glob
-import io
 import os
 import re
-import sys
-import unittest
 from collections import defaultdict
-
-import yaml
 
 LEXC_LINE_RE = re.compile(r'''
     (?P<contlex>\S+)            #  any nonspace

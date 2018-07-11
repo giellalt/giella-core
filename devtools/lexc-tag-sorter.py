@@ -29,6 +29,9 @@ import re
 from collections import defaultdict
 
 LEXC_LINE_RE = re.compile(r'''
+    (?P<exclam>^\s*!\s*)?       #  optional comment
+    (?P<content>(<.+>)|(.+))?   #  optional content
+    \s+                         #  skip space after content
     (?P<contlex>\S+)            #  any nonspace
     (?P<translation>\s+".*")?   #  optional translation, might be empty
     \s*;\s*                     #  skip space and semicolon
@@ -36,10 +39,6 @@ LEXC_LINE_RE = re.compile(r'''
     $
 ''', re.VERBOSE | re.UNICODE)
 
-LEXC_CONTENT_RE = re.compile(r'''
-    (?P<exclam>^\s*!\s*)?          #  optional comment
-    (?P<content>(<.+>)|(.+))?      #  optional content
-''', re.VERBOSE | re.UNICODE)
 
 
 def parse_line(old_match):

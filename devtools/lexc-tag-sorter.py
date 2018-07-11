@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #
@@ -21,7 +21,6 @@
 #
 """Script to sort and align lexc entries."""
 
-from __future__ import absolute_import, print_function
 
 import fileinput
 import argparse

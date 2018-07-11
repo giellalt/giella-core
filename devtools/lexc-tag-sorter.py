@@ -34,10 +34,10 @@ from collections import defaultdict
 LEXC_LINE_RE = re.compile(r'''
     (?P<exclam>^\s*!\s*)?       #  optional comment
     (?P<content>(<.+>)|(.+))?   #  optional content
-    \s+                         #  skip space after content
+    (?P<contlex_space>\s+)      #  space between content and contlex
     (?P<contlex>\S+)            #  any nonspace
     (?P<translation>\s+".*")?   #  optional translation, might be empty
-    \s*;\s*                     #  skip space and semicolon
+    (?P<semicolon>\s*;\s*)      #  semicolon and space surrounding it
     (?P<comment>!.*)?           #  followed by an optional comment
     $
 ''', re.VERBOSE | re.UNICODE)
@@ -62,20 +62,16 @@ def is_interesting_line(line):
                 tags = TAG.findall(upper)
                 if len(tags) > 1:
 
-                    new_content = ''.join(
-                        [TAG.sub('', upper),
-                         sort_tags(tags), lower])
-                    new_parts = [new_content, groupdict.pop('contlex')]
+                    new_parts = [TAG.sub('', upper), sort_tags(tags), lower]
+                    new_parts.extend([
+                        groupdict[key]
+                        for key in [
+                            'contlex_space', 'contlex', 'translation',
+                            'semicolon', 'comment'
+                        ] if groupdict.get(key)
+                    ])
 
-                    if groupdict.get('translation'):
-                        new_parts.append(groupdict['translation'])
-
-                    new_parts.append(';')
-
-                    if groupdict.get('comment'):
-                        new_parts.append(groupdict['comment'])
-
-                    return ' '.join(new_parts)
+                    return ''.join(new_parts)
 
     return line
 

@@ -142,6 +142,7 @@
 >
 
 <!ELEMENT t (#PCDATA) >
+<!ATTLIST t freq CDATA #IMPLIED >
 <!ATTLIST t oa ( first | yes | no ) #IMPLIED  >
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
 <!ATTLIST t t_type ( Pers | expl ) #IMPLIED  >

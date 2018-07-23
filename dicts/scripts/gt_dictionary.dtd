@@ -8,7 +8,9 @@
 
 <!-- the header -->
 <!ELEMENT lics (lic, ref*, sourcenote*) >
-<!ATTLIST lics xml:space (default|preserve) 'preserve'>
+<!ATTLIST lics xml:space (default|preserve) 'preserve'
+    xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml"
+>
 <!ELEMENT lic (#PCDATA|a)*>
 <!ATTLIST lic xml:lang ( en | nno ) #IMPLIED >
 <!ELEMENT ref (#PCDATA|a|i)*>

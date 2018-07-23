@@ -133,7 +133,7 @@
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg
-      xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus) #IMPLIED
+      xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus | smj) #IMPLIED
       check CDATA #IMPLIED
       re CDATA #IMPLIED
 >

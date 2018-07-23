@@ -28,6 +28,7 @@
       id CDATA #IMPLIED
 >
 <!ELEMENT lg (l, l_ref*, lsub*, lc*, stem*) >
+<!ATTLIST lg freq CDATA #IMPLIED >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l
       pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |

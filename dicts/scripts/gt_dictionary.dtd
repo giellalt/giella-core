@@ -134,6 +134,7 @@
 <!ATTLIST tg 
       xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus) #IMPLIED
       check CDATA #IMPLIED
+      re CDATA #IMPLIED
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ATTLIST re 

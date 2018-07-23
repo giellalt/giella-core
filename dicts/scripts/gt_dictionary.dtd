@@ -6,7 +6,6 @@
       id ( smenob | nobsme | smnfin | finsmn | finsme | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin ) #IMPLIED >
 
 
-      
 <!-- the header -->
 <!ELEMENT lics (lic, ref*, sourcenote*) >
 <!ATTLIST lics xml:space (default|preserve) 'preserve'>
@@ -18,29 +17,29 @@
 <!ELEMENT i (#PCDATA)>
 
 <!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+) >
-<!ATTLIST e 
+<!ATTLIST e
       usage ( mt | vd | dict | other ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg ) #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED
-      id CDATA #IMPLIED 
->      
+      id CDATA #IMPLIED
+>
 <!ELEMENT lg (l, l_ref*, lsub*, lc*, stem*) >
 <!ELEMENT l (#PCDATA) >
-<!ATTLIST l 
+<!ATTLIST l
       pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |
             Num | CC | CS | Prop | Proppl | G3 | Actor | Npl |
             Prsprc | Fp-Cmp | Lp-Cmp | Cmp | Mwe | X | Xxx | Qu | Abbr | Clt |
             Phrase_N | Phrase_A | Phrase_V | Phrase_Adv ) #REQUIRED
       attr ( ok | no ) #IMPLIED
-      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
+      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED
       nr ( Sg | Pl ) #IMPLIED
       gen_only CDATA #IMPLIED
       context CDATA #IMPLIED
-      type ( rel | pers | indef | refl | dem | interr | 
+      type ( rel | pers | indef | refl | dem | interr |
       pre | post | ord | TV | IV | actor | g3 | NomAg ) #IMPLIED
-      class ( I | II | III | IV | V | VI | xxx ) #IMPLIED 
+      class ( I | II | III | IV | V | VI | xxx ) #IMPLIED
       stem ( even | odd | 2syll | 3syll | xsyll | weak ) #IMPLIED
       pg ( yes | no ) #IMPLIED
       p3p CDATA #IMPLIED
@@ -60,9 +59,9 @@
       umlaut ( full ) #IMPLIED
       num ( pl ) #IMPLIED
       val ( IV | TV ) #IMPLIED
-      r1_par CDATA #IMPLIED	  
-      r2_par CDATA #IMPLIED	  
->      
+      r1_par CDATA #IMPLIED
+      r2_par CDATA #IMPLIED
+>
 <!ATTLIST l comma CDATA #IMPLIED >
 <!ATTLIST l syn CDATA #IMPLIED >
 
@@ -70,13 +69,13 @@
 
 <!-- lsub = frequent subform of lemma -->
 <!ELEMENT lsub (#PCDATA) >
-<!ATTLIST lsub 
+<!ATTLIST lsub
       attr ( ok | no ) #IMPLIED
-      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED 
+      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED
       nr ( sg | pl ) #IMPLIED
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
-      class ( I | II | III | IV | V | VI ) #IMPLIED 
+      class ( I | II | III | IV | V | VI ) #IMPLIED
       stem ( even | odd | 2syll | 3syll | xsyll | weak ) #IMPLIED
       p3p CDATA #IMPLIED
       minip ( notSg1 | onlyPl ) #IMPLIED
@@ -85,7 +84,7 @@
       grad ( pos | comp | sup ) #IMPLIED
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED
->      
+>
 
 <!-- lc = lemma comment, misused as stem field -->
 <!ELEMENT lc (#PCDATA) >
@@ -93,16 +92,16 @@
 <!ATTLIST book
 	  name CDATA #IMPLIED >
 <!ELEMENT semantics (sem | sem* ) >
-<!ATTLIST sem 
+<!ATTLIST sem
 	  name CDATA #IMPLIED >
 
 
 
 <!-- the real stem field -->
 <!ELEMENT stem (#PCDATA) >
-<!ATTLIST stem 
+<!ATTLIST stem
       class ( bisyllabic | trisyllabic | contracted ) #IMPLIED
->      
+>
 
 <!ELEMENT sources (book*, frequency?, geography*) >
 <!--<!ELEMENT book EMPTY >-->
@@ -111,33 +110,33 @@
 <!ELEMENT frequency EMPTY >
 <!ATTLIST frequency
       class ( common | rare ) #IMPLIED
->      
+>
 <!ELEMENT geography EMPTY >
 <!ATTLIST geography
       class ( other | south | mid | north ) #IMPLIED
->      
+>
 <!--      name CDATA #REQUIRED -->
 
 <!ELEMENT sem EMPTY >
 <!ATTLIST sem
       class CDATA #IMPLIED
->      
+>
 
 <!ELEMENT mg (semantics?,  tg+, xg* ) >
-<!ATTLIST mg 
+<!ATTLIST mg
       xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
->      
+>
 <!ATTLIST mg re CDATA #IMPLIED >
 <!ATTLIST mg id CDATA #IMPLIED >
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
-<!ATTLIST tg 
+<!ATTLIST tg
       xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus) #IMPLIED
       check CDATA #IMPLIED
       re CDATA #IMPLIED
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
-<!ATTLIST re 
+<!ATTLIST re
 	  xml:lang ( nob | sme | sma | smn | swe | eng | deu ) #IMPLIED
 >
 
@@ -147,18 +146,18 @@
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
 <!ATTLIST t t_type ( Pers | expl ) #IMPLIED  >
 <!ATTLIST t nr ( Sg | Pl ) #IMPLIED  >
-<!ATTLIST t pos ( A | S  | N  | V | 
+<!ATTLIST t pos ( A | S  | N  | V |
             Adv | P | Pr | Po | Det |
             Pron | Prop | I | Interj | CC | CS | Im | Npl | Num |
             Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
-	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp ) #IMPLIED > 
-	    
+	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp ) #IMPLIED >
+
 <!--
-<!ATTLIST t pos ( a | S  | n  | v | 
+<!ATTLIST t pos ( a | S  | n  | v |
             adv | p | pr | po | det |
             pron | prop | i | interj | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | cmp | x  | xxx |
-	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED > 
+	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED >
 -->
 <!ATTLIST t type ( expl ) #IMPLIED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i | yyy ) #IMPLIED> <!-- irr irregular -->
@@ -231,7 +230,7 @@ This document is not quite finished yet...
 Here are the pos tags:
  a  = Adjective
  m  = Masculine (nob)
- f  = Feminine (nob) 
+ f  = Feminine (nob)
  n  = Neuter (nob), noun (sme)
  S  = noun, still not given gender (nob)
  v  = verb
@@ -254,11 +253,11 @@ Documenting
 r  root
 e  entry
 l  lemma
-lc lemma comment 
+lc lemma comment
 m  meaning
 re restriction (semantic restriction of the following t)
 t  translation
 x  example
 xt example translation
-.g group 
+.g group
 -->

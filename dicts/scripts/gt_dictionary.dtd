@@ -42,6 +42,7 @@
       context CDATA #IMPLIED
       type ( rel | pers | indef | refl | dem | interr |
       pre | post | ord | TV | IV | actor | g3 | NomAg ) #IMPLIED
+      spec ( ABBR | ACR | Attr | Cmpar.Comp | Cmp_SgNom.Cmpnd | Cmp_Sh.Cmpnd | Coll | Dem | G3 | Ind | Indef | Indef.Attr | Indef.Pl.Nom | Indef.Sg.Loc.Attr | Interr | IV | IV.VAbess | Logo.3p.Du | Logo.3p.Pl | Logo.3p.Sg | NomAg | Ord | Pers.1p.Du | Pers.1p.Pl | Pers.1p.Sg | Pers.2p.Du | Pers.2p.Pl | Pers.2p.pl | Pers.2p.Sg | Pers.3p.Du | Pers.3p.Pl | Pers.3p.Sg | Pl | PrfPrc | PrsPrc | Qst | Refl | Rel | Sem_Act | Sem_Ani | Sem_Ani_Group.Sg | Sem_Body.Pl | Sem_Build | Sem_Clth.Pl | Sem_Dummytag | Sem_Dummytag.Attr | Sem_Dummytag.Pl | Sem_Dummytag.Sg | Sem_Dummytag.Sg.Nom | Sem_Event.Pl | Sem_Feat-psych.Sg | Sem_Hum.Attr | Sem_Hum_Plc | Sem_Money.Sg | Sem_Org | Sem_Org.Sg | Sem_Plc | Sem_Plc.Pl | Sem_Process.Sg.Nom | Sem_Prod-cogn.Sg | Sem_Substnc.Pl | Sem_Substnc.Sg | Sem_Time | Sem_Time.Pl | Sem_Tool-catch.Sg | Sg | Sg.Ela | Sg.Gen | Sg.Ill | Sg.Ine | Sg.Nom | Superl | Superl.Attr | Superl.Sg.Nom | TV | TV.Der_PassL.V | TV.Der_PassL.V.IV | .V.IV ) #IMPLIED
       class ( I | II | III | IV | V | VI | xxx ) #IMPLIED
       stem ( even | odd | 2syll | 3syll | xsyll | weak ) #IMPLIED
       pg ( yes | no ) #IMPLIED
@@ -181,7 +182,7 @@
 <!ATTLIST t r_par CDATA #IMPLIED >
 <!ATTLIST t mwe CDATA #IMPLIED >
 <!ATTLIST t syn CDATA #IMPLIED >
-
+<!ATTLIST t spec ( .A.Attr | ABBR | ACR | Attr | Cmpar | Cmpar.Comp | .Cmpnd | Cmp_SgNom.Cmpnd | Cmp_Sh.Cmpnd | Coll | Dem | Der_lasj.A | Der_NomAg.Sem_Hum.Pl | Der_t.A | G3 | Indef | Indef.Attr | Indef.Attr.Foc_Neg-ge | Indef.Pl.Acc | Indef.Pl.Nom | Indef.Sg.Acc.Foc_Neg-ge | Indef.Sg.Nom | Indef.Sg.Nom.Foc_Neg-ge | Inf | Interr | Interr.Pl.Acc | Interr.Sg.Acc. | Interr.Sg.Acc | Interr.Sg.Nom | IV | IV.Der_NomAct.N | IV.Inf | IV..V | IV.VAbess | Logo.3p.Pl | Logo.3p.Sg | NomAg | Ord | Pers.1p.Du | Pers.1p.Pl | Pers.1p.Sg | Pers.2p.Du | Pers.2p.Pl | Pers.2p.Sg | Pers.3p.Du | Pers.3p.Pl | Pers.3p.Sg | Pl | Pl.Nom | PrsPrc | Qst | Recipr | Refl | Rel | Rel.Pl | Rel.Pl.Acc | Rel.Sg | Rel.Sg.Acc. | Rel.Sg.Acc | Sem_Act | Sem_Amount.Sg.Ill | Sem_Ani | Sem_Build | Sem_Clth.Pl | Sem_Dummytag | Sem_Dummytag.Attr | Sem_Dummytag.Cmpar.Comp | Sem_Dummytag.Pl | Sem_Event.Pl | Sem_Feat.Sg.Loc | Sem_Hum.Attr | Sem_Hum.Cmpar.Comp | Sem_Hum.Sg.Nom | Sem_Org | Sem_Plc | Sem_Plc.Foc_Neg-ge | Sem_Process.Sg.Nom | Sem_Time | Sem_Time.Pl | Sem_Time.Sg.Ill | Sg | Sg.Ela | Sg.Gen | Sg.Ill | Sg.Ine | Sg.Nom | Superl | Superl.Attr | Superl.Sg.Nom | TV | TV.Der_Caus.V.TV.Der_PassL.V.IV | TV.Der_PassL.V | TV.Der_PassL.V.IV | .V.IV ) #IMPLIED >  <!-- Is this perhaps the same as type in l? -->
 <!ATTLIST t alt_str CDATA #IMPLIED >
 <!ATTLIST t tcomm ( yes | no ) #IMPLIED  >
 <!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >

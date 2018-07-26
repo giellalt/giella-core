@@ -26,7 +26,10 @@
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED
       id CDATA #IMPLIED
+      xpos CDATA #IMPLIED
 >
+<!ATTLIST e r ( LR | RL ) #IMPLIED > <!-- found in all_smnsme.xml -->
+
 <!ELEMENT lg (l, l_ref*, lsub*, lc*, stem*) >
 <!ATTLIST lg freq CDATA #IMPLIED >
 <!ELEMENT l (#PCDATA) >

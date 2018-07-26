@@ -33,7 +33,7 @@
 <!ATTLIST l
       pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |
             Num | CC | CS | Prop | Proppl | G3 | Actor | Npl |
-            Prsprc | Fp-Cmp | Lp-Cmp | Cmp | Mwe | X | Xxx | Qu | Abbr | Clt |
+            Prsprc | Fp-Cmp | Lp-Cmp | Cmp | mwe | X | Xxx | Qu | Abbr | Clt |
             Phrase_N | Phrase_A | Phrase_V | Phrase_Adv ) #REQUIRED
       attr ( ok | no ) #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED

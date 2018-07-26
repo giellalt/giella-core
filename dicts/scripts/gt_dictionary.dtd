@@ -65,6 +65,7 @@
       r1_par CDATA #IMPLIED
       r2_par CDATA #IMPLIED
 >
+<!ATTLIST l mwe CDATA #IMPLIED >
 <!ATTLIST l comma CDATA #IMPLIED >
 <!ATTLIST l syn CDATA #IMPLIED >
 

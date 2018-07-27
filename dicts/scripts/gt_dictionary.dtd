@@ -29,6 +29,8 @@
       xpos CDATA #IMPLIED
 >
 <!ATTLIST e r ( LR | RL ) #IMPLIED > <!-- found in all_smnsme.xml -->
+<!ATTLIST e note CDATA #IMPLIED >
+<!ATTLIST e oa_unif ( done | s | N | E ) #IMPLIED >
 
 <!ELEMENT lg (l, l_ref*, lsub*, lemma_ref*, lc*, stem*, analysis*, mini_paradigm*) >
 <!ELEMENT lemma_ref (#PCDATA) >

@@ -3,7 +3,7 @@
 	  xml:lang ( nob | sme | sma | swe | eng | deu | smn | fin | sms | myv | mhr | sjd | rus | smj ) #IMPLIED
 >
 <!ATTLIST r
-      id ( smenob | nobsme | smnfin | finsmn | finsme | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin | swesma ) #IMPLIED >
+      id ( smenob | nobsme | smnfin | finsmn | finsme | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin | swesma | smeeng ) #IMPLIED >
 
 
 <!-- the header -->

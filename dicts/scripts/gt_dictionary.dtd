@@ -108,6 +108,8 @@
       base CDATA #IMPLIED
       dialect CDATA #IMPLIED
 >
+<!ATTLIST lsub src CDATA #IMPLIED >
+<!ATTLIST lsub x ( fad ) #IMPLIED >
 
 <!-- lc = lemma comment, misused as stem field -->
 <!ELEMENT lc (#PCDATA) >

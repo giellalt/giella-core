@@ -181,6 +181,8 @@
             Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
 	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp
 	        | Abbr | Foc_ba ) #IMPLIED >
+<!ATTLIST t reg CDATA #IMPLIED >
+<!ATTLIST t country CDATA #IMPLIED >
 
 <!--
 <!ATTLIST t pos ( a | S  | n  | v |
@@ -215,6 +217,10 @@
 <!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >
 <!ATTLIST t gen_only CDATA #IMPLIED > <!-- Fetched from l -->
 <!ATTLIST t sem_type ( Obj | Plc | Org | Mal ) #IMPLIED >
+<!ATTLIST t re CDATA #IMPLIED >
+<!ATTLIST t comment CDATA #IMPLIED >
+<!ATTLIST t hid CDATA #IMPLIED >
+
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
 <!ELEMENT l_ref (#PCDATA) >

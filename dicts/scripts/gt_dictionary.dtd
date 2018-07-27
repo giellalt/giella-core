@@ -153,6 +153,8 @@
 >
 <!ATTLIST mg re CDATA #IMPLIED >
 <!ATTLIST mg id CDATA #IMPLIED >
+<!ATTLIST mg src CDATA #IMPLIED >
+<!ATTLIST mg x ( fad ) #IMPLIED >
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg

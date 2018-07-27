@@ -21,7 +21,7 @@
 <!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+) >
 <!ATTLIST e
       usage ( mt | vd | dict | other ) #IMPLIED
-      src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg ) #IMPLIED
+      src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK | PS_SA | KAL | nou94 | PS)  #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED

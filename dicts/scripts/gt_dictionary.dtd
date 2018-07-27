@@ -248,6 +248,7 @@
 
 
 <!ELEMENT xg ((x, xt+)+)>
+<!ATTLIST xg re CDATA #IMPLIED >
 <!ELEMENT x (#PCDATA)>
 <!ATTLIST x src CDATA #IMPLIED >
 <!ELEMENT xt (#PCDATA)>

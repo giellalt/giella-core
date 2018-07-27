@@ -167,6 +167,7 @@
 	  xml:lang ( nob | sme | sma | smn | swe | eng | deu ) #IMPLIED
 >
 <!ATTLIST re x ( fad ) #IMPLIED >
+<!ATTLIST re comment CDATA #IMPLIED >
 
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t freq CDATA #IMPLIED >

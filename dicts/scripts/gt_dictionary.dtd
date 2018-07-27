@@ -30,8 +30,14 @@
 >
 <!ATTLIST e r ( LR | RL ) #IMPLIED > <!-- found in all_smnsme.xml -->
 
-<!ELEMENT lg (l, l_ref*, lsub*, lc*, stem*) >
+<!ELEMENT lg (l, l_ref*, lsub*, lemma_ref*, lc*, stem*, analysis*, mini_paradigm*) >
+<!ELEMENT lemma_ref (#PCDATA) >
+<!ATTLIST lemma_ref lemmaID CDATA #IMPLIED >
 <!ATTLIST lg freq CDATA #IMPLIED >
+<!ELEMENT analysis (#PCDATA|wordform)* >
+<!ATTLIST analysis ms CDATA #IMPLIED >
+<!ELEMENT wordform (#PCDATA) >
+<!ELEMENT mini_paradigm (analysis+) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l
       pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |

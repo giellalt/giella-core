@@ -72,7 +72,7 @@
       vow CDATA #IMPLIED
       tt_auto CDATA #IMPLIED
       diph ( yes ) #IMPLIED
-      umlaut ( full ) #IMPLIED
+      umlaut ( full | A | C | B | D | E | F ) #IMPLIED
       num ( pl ) #IMPLIED
       val ( IV | TV ) #IMPLIED
       r1_par CDATA #IMPLIED

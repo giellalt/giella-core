@@ -73,6 +73,7 @@
 <!ATTLIST l mwe CDATA #IMPLIED >
 <!ATTLIST l comma CDATA #IMPLIED >
 <!ATTLIST l syn CDATA #IMPLIED >
+<!ATTLIST l sem_type ( Obj | Plc | Fem | Org | Mal ) #IMPLIED >
 
 <!-- decl: i indeclineable -->
 
@@ -148,6 +149,7 @@
 <!ATTLIST re
 	  xml:lang ( nob | sme | sma | smn | swe | eng | deu ) #IMPLIED
 >
+<!ATTLIST re x ( fad ) #IMPLIED >
 
 <!ELEMENT t (#PCDATA) >
 <!ATTLIST t freq CDATA #IMPLIED >
@@ -192,7 +194,8 @@
 <!ATTLIST t alt_str CDATA #IMPLIED >
 <!ATTLIST t tcomm ( yes | no ) #IMPLIED  >
 <!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >
-
+<!ATTLIST t gen_only CDATA #IMPLIED > <!-- Fetched from l -->
+<!ATTLIST t sem_type ( Obj | Plc | Org | Mal ) #IMPLIED >
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
 <!ELEMENT l_ref (#PCDATA) >

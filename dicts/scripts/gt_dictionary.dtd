@@ -91,6 +91,7 @@
 <!ATTLIST l src CDATA #IMPLIED >
 <!ATTLIST l value CDATA #IMPLIED >
 <!ATTLIST l t_type ( Pers | expl ) #IMPLIED  >
+<!ATTLIST l re CDATA #IMPLIED >
 
 <!-- decl: i indeclineable -->
 
@@ -238,6 +239,10 @@
 <!ATTLIST t num CDATA #IMPLIED >
 <!ATTLIST t illpl CDATA #IMPLIED >
 <!ATTLIST t case CDATA #IMPLIED >
+<!ATTLIST t x ( fad ) #IMPLIED >
+<!ATTLIST t umlaut ( full | A | C | B | D | E | F ) #IMPLIED >
+<!ATTLIST t diph CDATA #IMPLIED >
+<!ATTLIST t mod CDATA #IMPLIED >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 

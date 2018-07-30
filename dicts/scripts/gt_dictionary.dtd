@@ -21,7 +21,7 @@
 
 <!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+) >
 <!ATTLIST e
-      usage ( mt | vd | dict | other ) #IMPLIED
+      usage ( mt | vd | dict | other | nds | fad ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK | PS_SA | KAL | nou94 | PS)  #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
@@ -198,7 +198,7 @@
 -->
 <!ATTLIST t type ( expl
                   | Prop | indef | g3 | NomAg | Coll | Recipr | pers
-                  | grammar | refl | dem | Poss | Logo | rel | Interr ) #IMPLIED >
+                  | grammar | refl | dem | Poss | Logo | rel | Interr | TV | IV ) #IMPLIED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i | yyy ) #IMPLIED> <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n | xxx ) #IMPLIED >
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >

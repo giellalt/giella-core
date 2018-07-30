@@ -197,7 +197,7 @@
 -->
 <!ATTLIST t type ( expl
                   | Prop | indef | g3 | NomAg | Coll | Recipr | pers
-                  | grammar | refl | dem | Poss ) #IMPLIED >
+                  | grammar | refl | dem | Poss | Logo | rel | Interr ) #IMPLIED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i | yyy ) #IMPLIED> <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n | xxx ) #IMPLIED >
 <!ATTLIST t lang ( swe | nob ) #IMPLIED >

@@ -88,6 +88,9 @@
 <!ATTLIST l case CDATA #IMPLIED >
 <!ATTLIST l mod CDATA #IMPLIED >
 <!ATTLIST l hid CDATA #IMPLIED >
+<!ATTLIST l src CDATA #IMPLIED >
+<!ATTLIST l value CDATA #IMPLIED >
+<!ATTLIST l t_type ( Pers | expl ) #IMPLIED  >
 
 <!-- decl: i indeclineable -->
 
@@ -221,6 +224,20 @@
 <!ATTLIST t re CDATA #IMPLIED >
 <!ATTLIST t comment CDATA #IMPLIED >
 <!ATTLIST t hid CDATA #IMPLIED >
+<!ATTLIST t href CDATA #IMPLIED >
+<!ATTLIST t value CDATA #IMPLIED >
+<!ATTLIST t stem CDATA #IMPLIED >
+<!ATTLIST t pg (no) #IMPLIED >
+<!ATTLIST t class ( I | II | III | IV | V | VI ) #IMPLIED >
+<!ATTLIST t context CDATA #IMPLIED >
+<!ATTLIST t margo CDATA #IMPLIED >
+<!ATTLIST t minip CDATA #IMPLIED >
+<!ATTLIST t p3p CDATA #IMPLIED >
+<!ATTLIST t soggi CDATA #IMPLIED >
+<!ATTLIST t vow CDATA #IMPLIED >
+<!ATTLIST t num CDATA #IMPLIED >
+<!ATTLIST t illpl CDATA #IMPLIED >
+<!ATTLIST t case CDATA #IMPLIED >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 
@@ -246,7 +263,6 @@
 <!ATTLIST te oa ( first | yes | no ) #IMPLIED >
 <!ATTLIST te stat ( pref ) #IMPLIED >
 <!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
-
 
 <!ELEMENT xg ((x, xt+)+)>
 <!ATTLIST xg re CDATA #IMPLIED >

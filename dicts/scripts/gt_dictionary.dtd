@@ -92,6 +92,8 @@
 <!ATTLIST l value CDATA #IMPLIED >
 <!ATTLIST l t_type ( Pers | expl ) #IMPLIED  >
 <!ATTLIST l re CDATA #IMPLIED >
+<!ATTLIST l tt CDATA #IMPLIED >
+<!ATTLIST l syn_or CDATA #IMPLIED >
 
 <!-- decl: i indeclineable -->
 
@@ -185,7 +187,8 @@
             Pron | Prop | I | Interj | CC | CS | Im | Npl | Num |
             Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
 	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp
-	        | Abbr | Foc_ba ) #IMPLIED >
+	        | Abbr | Foc_ba
+	        | Adv-N | N-Pron | Adv-CC | Adv-Pron | Adv-CS | CC-CS | A-N | Adv-Po | CMP | A-Adv | Adv-Po-Pron | A-Adv-Pron | A-Adv-N | Adv-N-Po | N-Po | Po-Pron | A-Pron ) #IMPLIED >
 <!ATTLIST t reg CDATA #IMPLIED >
 <!ATTLIST t country CDATA #IMPLIED >
 
@@ -243,6 +246,7 @@
 <!ATTLIST t umlaut ( full | A | C | B | D | E | F ) #IMPLIED >
 <!ATTLIST t diph CDATA #IMPLIED >
 <!ATTLIST t mod CDATA #IMPLIED >
+<!ATTLIST t xxx CDATA #IMPLIED >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 

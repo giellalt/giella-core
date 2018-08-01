@@ -225,7 +225,6 @@
 <!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >
 <!ATTLIST t gen_only CDATA #IMPLIED > <!-- Fetched from l -->
 <!ATTLIST t sem_type ( Obj | Plc | Org | Mal ) #IMPLIED >
-<!ATTLIST t re CDATA #IMPLIED >
 <!ATTLIST t comment CDATA #IMPLIED >
 <!ATTLIST t hid CDATA #IMPLIED >
 <!ATTLIST t href CDATA #IMPLIED >

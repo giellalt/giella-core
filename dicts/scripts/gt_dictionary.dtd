@@ -186,7 +186,7 @@
             Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
 	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp
 	        | Abbr | Foc_ba
-	        | Adv-N | N-Pron | Adv-CC | Adv-Pron | Adv-CS | CC-CS | A-N | Adv-Po | CMP | A-Adv | Adv-Po-Pron | A-Adv-Pron | A-Adv-N | Adv-N-Po | N-Po | Po-Pron | A-Pron ) #IMPLIED >
+	        | Adv-N | N-Pron | Adv-CC | Adv-Pron | Adv-CS | CC-CS | A-N | Adv-Po | CMP | A-Adv | Adv-Po-Pron | A-Adv-Pron | A-Adv-N | Adv-N-Po | N-Po | Po-Pron | A-Pron | Foc_gis | Foc_han ) #IMPLIED >
 <!ATTLIST t reg CDATA #IMPLIED >
 <!ATTLIST t country CDATA #IMPLIED >
 

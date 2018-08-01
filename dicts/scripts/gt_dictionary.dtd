@@ -158,7 +158,6 @@
 <!ATTLIST mg
       xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
 >
-<!ATTLIST mg re CDATA #IMPLIED >
 <!ATTLIST mg id CDATA #IMPLIED >
 <!ATTLIST mg src CDATA #IMPLIED >
 <!ATTLIST mg x ( fad ) #IMPLIED >

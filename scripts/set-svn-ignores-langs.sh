@@ -108,10 +108,16 @@ $fstfiles
 *.txt
 *.regex" $1/src/filters
 
+# Ignore all temporary and generated files in the src/hyphenation/ dir:
+$svnignore "$mkfiles
+$fstfiles
+hyphenation.xfscript" $1/src/hyphenation
+
 # Ignore all temporary and generated files in the src/morphology/ dir:
 $svnignore "$mkfiles
 $fstfiles
 url.lexc
+*.tmp.*
 lexicon.*" $1/src/morphology
 
 # Ignore all files in the src/morphology/generated_files dir:
@@ -152,6 +158,11 @@ $svnignore "$mkfiles
 $fstfiles
 *.regex
 *.txt" $1/tools/grammarcheckers/filters
+
+# Set the svn:ignore prop on the tools/hyphenators/fstbased/ dir:
+$svnignore "$mkfiles
+$fstfiles
+all_tags.txt" $1/tools/hyphenators/fstbased
 
 # Set the svn:ignore prop on the tools/mt/apertium/ dir:
 $svnignore "$mkfiles

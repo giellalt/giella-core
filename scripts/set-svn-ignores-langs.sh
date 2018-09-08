@@ -50,6 +50,7 @@ fstfiles="*fst
 dirlist=$(find $1 \
 			-not -iwholename '*.cache*' \
 			-not -iwholename '*inc/*' \
+			-not -iwholename '*/ext-*' \
 			-not -iwholename '*incoming*' \
 			-not -iwholename '*hfst/3*' \
 			-not -iwholename '*hfst/MacVoikko*' \

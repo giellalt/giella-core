@@ -181,9 +181,8 @@ $fstfiles
 # Set the svn:ignore prop on the tools/mt/apertium/tagsets/ dir:
 $svnignore "$mkfiles
 $fstfiles
-apertiumtags.txt
 apertium.relabel
-gttags.txt" $1/tools/mt/apertium/tagsets
+*tags.txt" $1/tools/mt/apertium/tagsets
 
 # Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
 $svnignore "$mkfiles

@@ -82,13 +82,16 @@ $mkfiles
 Desktop.ini
 build
 bygg
+in.txt
 *.html
 *.pc" $1
 
 # Set the svn:ignore prop on the devtools dir:
 $svnignore "speller*.txt
 check_analysis_regressions.sh
-*suggestions.sh" $1/devtools
+*suggestions.sh
+*.hfstol.txt
+*.xfst.txt" $1/devtools
 
 # Set the svn:ignore prop on the doc dir:
 $svnignore "$mkfiles
@@ -143,6 +146,11 @@ $svnignore "$mkfiles
 $fstfiles
 dependency.cg3
 functions.cg3" $1/src/syntax
+
+# Set the svn:ignore prop on the test/data/ dir:
+$svnignore "$mkfiles
+$fstfiles
+missing_*" $1/test/data
 
 # Set the svn:ignore prop on the test/tools/grammarcheckers/ dir:
 $svnignore "$mkfiles
@@ -271,6 +279,8 @@ $svnignore "$mkfiles
 # Set the svn:ignore prop on the test/src/morphology/ dir:
 $svnignore "$mkfiles
 filtered-*
+missing_*
+*adjectives
 *.log
 *.trs
 *.txt

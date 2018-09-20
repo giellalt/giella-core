@@ -82,7 +82,7 @@
 <!ATTLIST l mwe CDATA #IMPLIED >
 <!ATTLIST l comma CDATA #IMPLIED >
 <!ATTLIST l syn CDATA #IMPLIED >
-<!ATTLIST l sem_type ( Obj | Plc | Fem | Org | Mal ) #IMPLIED >
+<!ATTLIST l sem_type ( Obj | Plc | Fem | Org | Mal | Txt ) #IMPLIED >
 <!ATTLIST l paradigme ( cases ) #IMPLIED >
 <!ATTLIST l comment CDATA #IMPLIED >
 <!ATTLIST l case CDATA #IMPLIED >

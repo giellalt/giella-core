@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """Print only Cmp parts of diffs
 
 Usage:
@@ -20,7 +20,7 @@ for line in sys.stdin:
             print(''.join(part), end='')
             found_cmp = False
         part = []
-    part.append(line.decode('utf8'))
+    part.append(line)
 
 if found_cmp:
     print(''.join(part), end='')

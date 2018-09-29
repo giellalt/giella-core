@@ -5,9 +5,8 @@ Usage:
 cmp_patch.py < input.patch
 cat input.patch | cmp_patch.py
 """
-from __future__ import absolute_import, print_function, unicode_literals
-import sys
 import re
+import sys
 
 part = []
 found_cmp = False

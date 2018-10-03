@@ -11,8 +11,10 @@ from lxml import etree
 
 LEXC_LINE_RE = re.compile(
     r'''
-    (?P<exclam>^\s*!\s*)?       #  optional comment
-    (?P<content>(<.+>)|(.+))?   #  optional content
+    (?P<start>\s*)?       #  optional space
+    (?P<upper>[\w%¥+/]+)   #  optional upper
+    (?P<colon>:)? #  optional colon
+    (?P<lower>\S+)? # optional lower
     (?P<contlex_space>\s+)      #  space between content and contlex
     (?P<contlex>\S+)            #  any nonspace
     (?P<translation>\s+".*")?   #  optional translation, might be empty
@@ -23,6 +25,26 @@ LEXC_LINE_RE = re.compile(
 
 TAG = re.compile(r'''\+[^+]+''')
 COUNTER = 0
+
+
+def test_re():
+    lines = [
+        'al+Cmp/Sh+Err/CmpSub:al        Rreal ;',
+        'al:al        Rreal ;',
+        'al        Rreal ;',
+        'a% l:a% l        Rreal ;',
+        '!al:al        Rreal ;',
+        '  !al:al        Rreal ;',
+        '<al:al>        Rreal ;',
+    ]
+
+    for line in lines:
+        lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
+        if lexc_match:
+            print(lexc_match.groupdict())
+            print()
+        else:
+            print(line, 'failed')
 
 
 def lexc_name(lang, pos):
@@ -144,4 +166,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    test_re()

@@ -14,6 +14,8 @@
 # change to 'true' to debug paths of analysis tools
 debug='false'
 HLOOKUP=`which hfst-optimized-lookup`
+# HLOOKUP=`which hfst-lookup` # TODO: use this one instead
+
 
 if [ -n "$HLOOKUP" ]; then
   echo "using hfst-optimized-lookup"
@@ -22,6 +24,23 @@ else
   echo "See you later!"
   exit 0
 fi
+
+# Plan for revision of this script:
+# Use both analysers (hfst-tokenize / xfst+lookup2cg) for all lgs
+# Have two pipelines and a parameter for choosing, for all lgs, according to list.
+# List of language catalogues:
+# langs
+# bak bxr chp chr ciw cor crk deu est evn fao fin fit fkv hdn hun ipk izh kal kca koi kpv lav liv lut mdf mhr mns mrj myv nds nio nob oji olo otw ron rus sjd sje sma sme smj smn sms som tat tku udm vep vot vro yrk
+# startup_langs:
+# aka amh bla chr crj crl dgr epo eus gle grn hin iku khk kio kjh kmr krl luo mhr moe moh ndl nno non nso rup sel srs sto swe tau tel tgl tir tlh tuv tyv xal xwo zul
+# experiment_langs:
+# ara bul ces eng est fin sms sqi
+# closed_lags (ignore)
+# dan isl
+# closedSA-langs (ignore)
+# zul
+
+
 
 # -l sme|sma|fao|etc. => default: sme
 l='sme'

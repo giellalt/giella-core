@@ -145,7 +145,7 @@ def add_semtags(line, smx):
             else:
                 new_parts.append(' !')
 
-            new_parts.append('tags_via_apertium')
+            new_parts.append(' tags_via_apertium')
             return ''.join(new_parts)
 
     return line

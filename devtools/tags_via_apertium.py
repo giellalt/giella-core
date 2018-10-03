@@ -78,6 +78,7 @@ def extract_nonsem_tags(upper):
 
 
 def lang_tags(lang, pos):
+    """Extract lemma and tags from the upper part of a lexc expression."""
     for line in open(lexc_name(lang, pos)):
         lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
         if lexc_match:
@@ -90,12 +91,20 @@ def lang_tags(lang, pos):
 
 
 def possible_smx_tags(lang1, pos, tree):
+    """Transfer sme semtags to smX lemma.
+
+    """
+    # Extract lemma: tags from sme .lexc file
     sme_sem_tag = {word: sem_tags for word, sem_tags in lang_tags(lang1, pos)}
 
+    # Iterate through all lemmas in bidix where n = pos
     for s in tree.xpath('.//p/l/s[@n="{}"]'.format(pos)):
+        # Get the bidix p element
         p = s.getparent().getparent()
+        # Extract sem_tags for the sme word
         sem_tags = sme_sem_tag.get(p.find('l').text)
         if sem_tags:
+            # Extract the smX lemma, add the sme semtags to it
             yield (p.find('r').text, sorted(sem_tags))
 
 

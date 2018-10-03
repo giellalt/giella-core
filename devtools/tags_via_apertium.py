@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
-"""Copy semtag from sme to other languages."""
+"""Copy semtag from sme to other languages.
+
+Clone apertium:
+git clone git@github.com:apertium/apertium-sme-sma.git
+git clone git@github.com:apertium/apertium-sme-smj.git
+git clone git@github.com:apertium/apertium-sme-smn.git
+
+Run it like this:
+
+for lang in sma smj smn;
+do
+    $GTHOME/giella-core/devtools/tags_via_apertium.py apertium-sme-$lang/apertium-sme-$lang.sme-$lang.dix ;
+done
+"""
 
 import fileinput
 import os
@@ -24,7 +37,7 @@ LEXC_LINE_RE = re.compile(
 ''', re.VERBOSE | re.UNICODE)
 
 TAG = re.compile(r'''\+[^+]+''')
-COUNTER = 0
+COUNTER = defaultdict(int)
 
 
 def test_re():
@@ -53,35 +66,27 @@ def lexc_name(lang, pos):
         os.getenv('GTHOME'), 'langs', lang, 'src/morphology/stems/', filename)
 
 
-def lexc_matches(lang, pos):
-    for line in open(lexc_name(lang, pos)):
-        lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
-        if lexc_match:
-            yield lexc_match
+def extract_sem_tags(upper):
+    return [
+        tag for tag in TAG.findall(upper)
+        if tag.startswith('+Sem') and tag != '+Sem/Dummytag'
+    ]
 
 
-def valid_upper_lower(lang, pos):
-    for lexc_match in lexc_matches(lang, pos):
-        groupdict = lexc_match.groupdict()
-
-        if not groupdict.get('exclam') and groupdict.get('content'):
-            content = groupdict.get('content').replace('%¥', '% ')
-            lexc_line_match = content.find(':')
-
-            if (not (content.startswith('<') and content.endswith('>'))
-                    and lexc_line_match != -1):
-                yield (content[:lexc_line_match], content[lexc_line_match:])
+def extract_nonsem_tags(upper):
+    return [tag for tag in TAG.findall(upper) if tag != '+Sem/Dummytag']
 
 
 def lang_tags(lang, pos):
-    for upper, lower in valid_upper_lower(lang, pos):
-        sem_tags = [
-            tag for tag in TAG.findall(upper)
-            if tag.startswith('+Sem') and tag != '+Sem/Dummytag'
-        ]
-        if sem_tags:
-            new_upper = TAG.sub('', upper)
-            yield new_upper, sem_tags
+    for line in open(lexc_name(lang, pos)):
+        lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
+        if lexc_match:
+            upper = lexc_match.group('upper').replace('%¥', '% ')
+            sem_tags = extract_sem_tags(upper)
+
+            if sem_tags:
+                new_upper = TAG.sub('', upper)
+                yield new_upper, sem_tags
 
 
 def possible_smx_tags(lang1, pos, tree):
@@ -94,50 +99,45 @@ def possible_smx_tags(lang1, pos, tree):
             yield (p.find('r').text, sorted(sem_tags))
 
 
-def is_interesting_line(line, smx):
+def add_semtags(line, smx):
     global COUNTER
 
     lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
 
     if lexc_match:
+        COUNTER['possible_lines'] += 1
         groupdict = lexc_match.groupdict()
-        if not groupdict.get('exclam') and groupdict.get('content'):
-            content = groupdict.get('content').replace('%¥', '% ')
-            lexc_line_match = content.find(':')
+        upper = groupdict['upper']
+        if groupdict.get('lower'):
+            groupdict['lower'] = groupdict['lower'].replace('%¥', '% ')
 
-            if (not (content.startswith('<') and content.endswith('>'))
-                    and lexc_line_match != -1):
-                upper = content[:lexc_line_match]
-                lower = content[lexc_line_match:]
+        tags = extract_nonsem_tags(upper)
+        sem_tags = extract_sem_tags(upper)
+        tag_free_upper = TAG.sub('', upper).replace('%¥', '% ')
 
-                tags = [
-                    tag for tag in TAG.findall(upper) if tag != '+Sem/Dummytag'
-                ]
-                sem_tags = [tag for tag in tags if tag.startswith('+Sem')]
+        if sem_tags and smx.get(
+                tag_free_upper) and sem_tags != smx.get(tag_free_upper):
+            print(line, sem_tags, smx.get(tag_free_upper), file=sys.stderr)
 
-                tag_free_upper = TAG.sub('', upper)
-                if sem_tags and smx.get(
-                        tag_free_upper
-                ) and sem_tags != smx.get(tag_free_upper):
-                    print(
-                        line,
-                        sem_tags,
-                        smx.get(tag_free_upper),
-                        file=sys.stderr)
+        if smx.get(tag_free_upper) and not len(sem_tags):
+            COUNTER['changed_lines'] += 1
+            tags.extend(smx.get(tag_free_upper))
 
-                if smx.get(tag_free_upper) and not len(sem_tags):
-                    COUNTER += 1
-                    tags.extend(smx.get(tag_free_upper))
+            new_parts = [tag_free_upper, ''.join(tags)]
+            new_parts.extend([
+                groupdict[key] for key in [
+                    'colon', 'lower', 'contlex_space', 'contlex',
+                    'translation', 'semicolon'
+                ] if groupdict.get(key)
+            ])
 
-                    new_parts = [tag_free_upper, ''.join(tags), lower]
-                    new_parts.extend([
-                        groupdict[key] for key in [
-                            'contlex_space', 'contlex', 'translation',
-                            'semicolon', 'comment'
-                        ] if groupdict.get(key)
-                    ])
+            if groupdict.get('comment'):
+                new_parts.append(groupdict.get('comment'))
+            else:
+                new_parts.append(' !')
 
-                    return ''.join(new_parts)
+            new_parts.append('tags_via_apertium')
+            return ''.join(new_parts)
 
     return line
 
@@ -158,12 +158,12 @@ def main():
         }
         total += len(smx)
         for line in fileinput.input(lexc_name(lang2, pos), inplace=True):
-            print(
-                is_interesting_line(line[:-1] if line[-1] == '\n' else line,
-                                    smx))
+            print(add_semtags(line[:-1] if line[-1] == '\n' else line, smx))
 
-    print('hits', COUNTER, 'of', total)
+    for key, value in COUNTER.items():
+        print(key, value)
 
 
 if __name__ == '__main__':
-    test_re()
+    #test_re()
+    main()

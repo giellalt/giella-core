@@ -171,6 +171,7 @@ def main():
 
     for key, value in COUNTER.items():
         print(key, value)
+    print()
 
 
 if __name__ == '__main__':

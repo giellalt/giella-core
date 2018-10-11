@@ -126,7 +126,7 @@ def add_semtags(line, smx):
 
         if sem_tags and smx.get(
                 tag_free_upper) and sem_tags != smx.get(tag_free_upper):
-            print(line, sem_tags, smx.get(tag_free_upper), file=sys.stderr)
+            line = '{} !tags_via_apertium northsami was {}'.format(line, ''.join(smx.get(tag_free_upper)))
 
         if sem_tags:
             COUNTER['already_has_semtags'] += 1

@@ -126,7 +126,9 @@ def add_semtags(line, smx):
 
         if sem_tags and smx.get(
                 tag_free_upper) and sem_tags != smx.get(tag_free_upper):
-            line = '{} !tags_via_apertium northsami was {}'.format(line, ''.join(smx.get(tag_free_upper)))
+            COUNTER['conflicting_semtags'] += 1
+            return '{} !tags_via_apertium northsami was {}'.format(
+                line, ''.join(smx.get(tag_free_upper)))
 
         if sem_tags:
             COUNTER['already_has_semtags'] += 1

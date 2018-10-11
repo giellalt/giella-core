@@ -181,7 +181,7 @@ def add_semtags(line: str, smx: [str, List[str]]):
             COUNTER['already_has_semtags'] += 1
             return line
 
-        if smx.get(tag_free_upper) and not len(sem_tags):
+        if smx.get(tag_free_upper) and not sem_tags:
             COUNTER['added_semtags'] += 1
             tags.extend(smx.get(tag_free_upper))
 

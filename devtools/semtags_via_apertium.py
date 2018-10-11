@@ -154,6 +154,21 @@ def add_semtags(line, smx):
             new_parts.append(' tags_via_apertium')
             return ''.join(new_parts)
 
+        if '+Sem/Dummytag' not in line:
+            COUNTER['added_dummy'] += 1
+            tags.append('+Sem/Dummytag')
+            new_parts = [tag_free_upper, ''.join(tags)]
+            new_parts.extend([
+                groupdict[key] for key in [
+                    'colon', 'lower', 'contlex_space', 'contlex',
+                    'translation', 'semicolon'
+                ] if groupdict.get(key)
+            ])
+            return ''.join(new_parts).rstrip()
+
+        if '+Sem/Dummytag' in line:
+            COUNTER['has_dummy_nothing_added'] += 1
+
     return line
 
 

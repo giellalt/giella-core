@@ -74,7 +74,10 @@ def extract_sem_tags(upper):
 
 
 def extract_nonsem_tags(upper):
-    return [tag for tag in TAG.findall(upper) if tag != '+Sem/Dummytag']
+    return [
+        tag for tag in TAG.findall(upper)
+        if tag != '+Sem/Dummytag' and not tag.startswith('+Sem')
+    ]
 
 
 def lang_tags(lang, pos):

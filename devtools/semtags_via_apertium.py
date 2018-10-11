@@ -111,7 +111,7 @@ def extract_nonsem_tags(upper: str) -> List[str]:
     """
     return [
         tag for tag in TAG.findall(upper)
-        if tag != '+Sem/Dummytag' and not tag.startswith('+Sem')
+        if not tag.startswith('+Sem')
     ]
 
 

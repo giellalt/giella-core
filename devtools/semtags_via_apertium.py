@@ -35,6 +35,7 @@ LEXC_LINE_RE = re.compile(
     (?P<comment>!.*)?           #  followed by an optional comment
     $
 ''', re.VERBOSE | re.UNICODE)
+"""Regex that catches lexc lines."""
 
 TAG = re.compile(r'''\+[^+]+''')
 COUNTER = defaultdict(int)
@@ -61,12 +62,29 @@ def test_re():
 
 
 def lexc_name(lang, pos):
+    """Compile lexc name.
+
+    Args:
+        lang: the wanted language.
+        pos: the wanted part of speech.
+
+    Returns:
+        Path to the wanted lexc file.
+    """
     filename = 'nouns.lexc' if pos == 'n' else 'adjectives.lexc'
     return os.path.join(
         os.getenv('GTHOME'), 'langs', lang, 'src/morphology/stems/', filename)
 
 
 def extract_sem_tags(upper):
+    """Extract semantic tags from the upper part of a lexc line.
+
+    Args:
+        upper: the string to the left of the colon of a lexc line
+
+    Returns:
+        A list of strings containing the semantic tags.
+    """
     return [
         tag for tag in TAG.findall(upper)
         if tag.startswith('+Sem') and tag != '+Sem/Dummytag'
@@ -74,6 +92,14 @@ def extract_sem_tags(upper):
 
 
 def extract_nonsem_tags(upper):
+    """Extract non semantic tags from the upper part of a lexc line.
+
+    Args:
+        upper: the string to the left of the colon of a lexc line
+
+    Returns:
+        A list of strings containing the non semantic tags.
+    """
     return [
         tag for tag in TAG.findall(upper)
         if tag != '+Sem/Dummytag' and not tag.startswith('+Sem')
@@ -112,6 +138,15 @@ def possible_smx_tags(lang1, pos, tree):
 
 
 def add_semtags(line, smx):
+    """Add semtags to non sme languages.
+
+    Args:
+        line: a lexc line.
+        smx: the smx lemma: semtags from sme dictionary
+
+    Returns:
+        Either the amended line or the original one.
+    """
     global COUNTER
 
     lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
@@ -176,6 +211,7 @@ def add_semtags(line, smx):
 
 
 def main():
+    """Via apertium bidix files, add semtags found in sme to smx."""
     path = sys.argv[1]
 
     lang1, lang2 = os.path.basename(path).split('.')[1].split('-')

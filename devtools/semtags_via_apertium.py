@@ -14,22 +14,15 @@ do
 done
 """
 
-from lxml.etree import _ElementTree
-from typing import (
-    Dict,
-    Iterator,
-    List,
-    Optional,
-    Tuple,
-    Union,
-)
 import fileinput
 import os
 import re
 import sys
 from collections import defaultdict
+from typing import Dict, Iterator, List, Tuple
 
 from lxml import etree
+from lxml.etree import _ElementTree
 
 LEXC_LINE_RE = re.compile(
     r'''
@@ -48,26 +41,6 @@ LEXC_LINE_RE = re.compile(
 
 TAG = re.compile(r'''\+[^+]+''')
 COUNTER = defaultdict(int)
-
-
-def test_re():
-    lines = [
-        'al+Cmp/Sh+Err/CmpSub:al        Rreal ;',
-        'al:al        Rreal ;',
-        'al        Rreal ;',
-        'a% l:a% l        Rreal ;',
-        '!al:al        Rreal ;',
-        '  !al:al        Rreal ;',
-        '<al:al>        Rreal ;',
-    ]
-
-    for line in lines:
-        lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
-        if lexc_match:
-            print(lexc_match.groupdict())
-            print()
-        else:
-            print(line, 'failed')
 
 
 def lexc_name(lang: str, pos: str) -> str:
@@ -109,14 +82,19 @@ def extract_nonsem_tags(upper: str) -> List[str]:
     Returns:
         A list of strings containing the non semantic tags.
     """
-    return [
-        tag for tag in TAG.findall(upper)
-        if not tag.startswith('+Sem')
-    ]
+    return [tag for tag in TAG.findall(upper) if not tag.startswith('+Sem')]
 
 
 def lang_tags(lang: str, pos: str) -> Iterator[Tuple[str, List[str]]]:
-    """Extract lemma and tags from the upper part of a lexc expression."""
+    """Extract lemma and tags from the upper part of a lexc expression.
+
+    Args:
+        lang: the language where the lemma and semtags is extracted.
+        pos: the part of speech of the wanted lemmas and semtags
+
+    Yields:
+        A tuple containing the lemma and its semtags.
+    """
     for line in open(lexc_name(lang, pos)):
         lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
         if lexc_match:
@@ -128,27 +106,35 @@ def lang_tags(lang: str, pos: str) -> Iterator[Tuple[str, List[str]]]:
                 yield new_upper, sem_tags
 
 
-def possible_smx_tags(lang1, pos, tree):
+def possible_smx_tags(lang1: str, pos: str,
+                      tree: _ElementTree) -> Iterator[Tuple[str, List[str]]]:
     """Transfer sme semtags to smX lemma.
 
-    TODO: Merge semtags
+    Args:
+        lang1: the language where the semtags should be fetched.
+        pos: part of speech of the lemmas.
+        tree: an etree containing the content of a apertium bidix file.
 
+    Yields:
+        A tuple containing a lemma of the other language and the
+        semtags of the corresponding lang1 lemma.
     """
+    # TODO: Merge semtags
     # Extract lemma: tags from sme .lexc file
     sme_sem_tag = {word: sem_tags for word, sem_tags in lang_tags(lang1, pos)}
 
     # Iterate through all lemmas in bidix where n = pos
-    for s in tree.xpath('.//p/l/s[@n="{}"]'.format(pos)):
+    for symbol in tree.xpath('.//p/l/s[@n="{}"]'.format(pos)):
         # Get the bidix p element
-        p = s.getparent().getparent()
+        pair = symbol.getparent().getparent()
         # Extract sem_tags for the sme word
-        sem_tags = sme_sem_tag.get(p.find('l').text)
-        if sem_tags:
+        sem_tags = sme_sem_tag.get(pair.find('l').text)
+        if sem_tags and pair.find('r').text is not None:
             # Extract the smX lemma, add the sme semtags to it
-            yield (p.find('r').text, sorted(sem_tags))
+            yield (pair.find('r').text, sorted(sem_tags))
 
 
-def add_semtags(line: str, smx: [str, List[str]]):
+def add_semtags(line: str, smx: Dict[str, List[str]]):
     """Add semtags to non sme languages.
 
     Args:
@@ -247,5 +233,4 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    #test_re()
     main()

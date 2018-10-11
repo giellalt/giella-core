@@ -131,6 +131,8 @@ def lang_tags(lang: str, pos: str) -> Iterator[Tuple[str, List[str]]]:
 def possible_smx_tags(lang1, pos, tree):
     """Transfer sme semtags to smX lemma.
 
+    TODO: Merge semtags
+
     """
     # Extract lemma: tags from sme .lexc file
     sme_sem_tag = {word: sem_tags for word, sem_tags in lang_tags(lang1, pos)}
@@ -161,6 +163,7 @@ def add_semtags(line: str, smx: [str, List[str]]):
     lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
 
     if lexc_match:
+        # TODO: If tags_via_apertium exists, update sem tags
         COUNTER['possible_lines'] += 1
         groupdict = lexc_match.groupdict()
         upper = groupdict['upper']

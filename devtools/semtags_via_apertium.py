@@ -14,6 +14,15 @@ do
 done
 """
 
+from lxml.etree import _ElementTree
+from typing import (
+    Dict,
+    Iterator,
+    List,
+    Optional,
+    Tuple,
+    Union,
+)
 import fileinput
 import os
 import re
@@ -61,7 +70,7 @@ def test_re():
             print(line, 'failed')
 
 
-def lexc_name(lang, pos):
+def lexc_name(lang: str, pos: str) -> str:
     """Compile lexc name.
 
     Args:
@@ -76,7 +85,7 @@ def lexc_name(lang, pos):
         os.getenv('GTHOME'), 'langs', lang, 'src/morphology/stems/', filename)
 
 
-def extract_sem_tags(upper):
+def extract_sem_tags(upper: str) -> List[str]:
     """Extract semantic tags from the upper part of a lexc line.
 
     Args:
@@ -91,7 +100,7 @@ def extract_sem_tags(upper):
     ]
 
 
-def extract_nonsem_tags(upper):
+def extract_nonsem_tags(upper: str) -> List[str]:
     """Extract non semantic tags from the upper part of a lexc line.
 
     Args:
@@ -106,7 +115,7 @@ def extract_nonsem_tags(upper):
     ]
 
 
-def lang_tags(lang, pos):
+def lang_tags(lang: str, pos: str) -> Iterator[Tuple[str, List[str]]]:
     """Extract lemma and tags from the upper part of a lexc expression."""
     for line in open(lexc_name(lang, pos)):
         lexc_match = LEXC_LINE_RE.match(line.replace('% ', '%¥'))
@@ -137,7 +146,7 @@ def possible_smx_tags(lang1, pos, tree):
             yield (p.find('r').text, sorted(sem_tags))
 
 
-def add_semtags(line, smx):
+def add_semtags(line: str, smx: [str, List[str]]):
     """Add semtags to non sme languages.
 
     Args:
@@ -210,7 +219,7 @@ def add_semtags(line, smx):
     return line
 
 
-def main():
+def main() -> None:
     """Via apertium bidix files, add semtags found in sme to smx."""
     path = sys.argv[1]
 

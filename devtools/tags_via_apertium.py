@@ -25,7 +25,7 @@ from lxml import etree
 LEXC_LINE_RE = re.compile(
     r'''
     (?P<start>\s*)?       #  optional space
-    (?P<upper>[\w%¥+/]+)   #  optional upper
+    (?P<upper>[\w\d%¥+/-]+)   #  optional upper
     (?P<colon>:)? #  optional colon
     (?P<lower>\S+)? # optional lower
     (?P<contlex_space>\s+)      #  space between content and contlex

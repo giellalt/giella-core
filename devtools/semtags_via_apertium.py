@@ -135,7 +135,7 @@ def add_semtags(line, smx):
             return line
 
         if smx.get(tag_free_upper) and not len(sem_tags):
-            COUNTER['changed_lines'] += 1
+            COUNTER['added_semtags'] += 1
             tags.extend(smx.get(tag_free_upper))
 
             new_parts = [tag_free_upper, ''.join(tags)]

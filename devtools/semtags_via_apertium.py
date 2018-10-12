@@ -134,6 +134,23 @@ def possible_smx_tags(lang1: str, pos: str,
             yield (pair.find('r').text, sorted(sem_tags))
 
 
+def groupdict_to_line(groupdict: Dict[str, str]) -> str:
+    """Turn the lexc groupdict into a lexc line.
+
+    Args:
+        groupdict: the dict produced in add_semtags
+
+    Returns:
+        A lexc string
+    """
+    return ''.join([
+        groupdict[key] for key in [
+            'upper', 'colon', 'lower', 'contlex_space', 'contlex',
+            'translation', 'semicolon', 'comment'
+        ] if groupdict.get(key)
+    ])
+
+
 def add_semtags(line: str, smx: Dict[str, List[str]]):
     """Add semtags to non sme languages.
 
@@ -153,57 +170,58 @@ def add_semtags(line: str, smx: Dict[str, List[str]]):
         COUNTER['possible_lines'] += 1
         groupdict = lexc_match.groupdict()
         upper = groupdict['upper']
-        if groupdict.get('lower'):
-            groupdict['lower'] = groupdict['lower'].replace('%¥', '% ')
 
         tags = extract_nonsem_tags(upper)
         sem_tags = extract_sem_tags(upper)
         tag_free_upper = TAG.sub('', upper).replace('%¥', '% ')
+        if groupdict.get('lower'):
+            groupdict['lower'] = groupdict['lower'].replace('%¥', '% ')
+        else:
+            groupdict['colon'] = ':'
+            groupdict['lower'] = tag_free_upper
 
         if sem_tags and smx.get(
                 tag_free_upper) and sem_tags != smx.get(tag_free_upper):
             COUNTER['conflicting_semtags'] += 1
-            return '{} !tags_via_apertium northsami was {}'.format(
-                line, ''.join(smx.get(tag_free_upper)))
+            if groupdict.get('comment'):
+                groupdict['comment'] = groupdict.get(
+                    'comment') + ' tags_via_apertium northsami was {}'.format(
+                        ''.join(smx.get(tag_free_upper)))
+            else:
+                groupdict[
+                    'comment'] = ' ! tags_via_apertium northsami was {}'.format(
+                        ''.join(smx.get(tag_free_upper)))
+
+            return groupdict_to_line(groupdict)
 
         if sem_tags:
             COUNTER['already_has_semtags'] += 1
-            return line
+            return groupdict_to_line(groupdict)
 
         if smx.get(tag_free_upper) and not sem_tags:
             COUNTER['added_semtags'] += 1
             tags.extend(smx.get(tag_free_upper))
 
-            new_parts = [tag_free_upper, ''.join(tags)]
-            new_parts.extend([
-                groupdict[key] for key in [
-                    'colon', 'lower', 'contlex_space', 'contlex',
-                    'translation', 'semicolon'
-                ] if groupdict.get(key)
-            ])
+            groupdict['upper'] = ''.join([tag_free_upper, ''.join(tags)])
 
             if groupdict.get('comment'):
-                new_parts.append(groupdict.get('comment'))
+                groupdict['comment'] = groupdict.get(
+                    'comment') + ' tags_via_apertium'
             else:
-                new_parts.append(' !')
+                groupdict['comment'] = ' ! tags_via_apertium'
 
-            new_parts.append(' tags_via_apertium')
-            return ''.join(new_parts)
+            return groupdict_to_line(groupdict)
 
         if '+Sem/Dummytag' not in line:
             COUNTER['added_dummy'] += 1
             tags.append('+Sem/Dummytag')
-            new_parts = [tag_free_upper, ''.join(tags)]
-            new_parts.extend([
-                groupdict[key] for key in [
-                    'colon', 'lower', 'contlex_space', 'contlex',
-                    'translation', 'semicolon'
-                ] if groupdict.get(key)
-            ])
-            return ''.join(new_parts).rstrip()
+            groupdict['upper'] = ''.join([tag_free_upper, ''.join(tags)])
+
+            return groupdict_to_line(groupdict)
 
         if '+Sem/Dummytag' in line:
             COUNTER['has_dummy_nothing_added'] += 1
+            return groupdict_to_line(groupdict)
 
     return line
 

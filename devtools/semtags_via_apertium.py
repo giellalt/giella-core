@@ -211,6 +211,9 @@ def add_semtags(line: str, smx: Dict[str, List[str]]):
         tag_free_upper, tags, sem_tags = split_upper(groupdict['upper'])
         smx_sem_tags = smx.get(tag_free_upper)
 
+        if not tag_free_upper:
+            return line
+
         if sem_tags:
             COUNTER['already_has_semtags'] += 1
             return groupdict_to_line(groupdict)

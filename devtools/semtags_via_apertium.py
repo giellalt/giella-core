@@ -19,7 +19,7 @@ import os
 import re
 import sys
 from collections import defaultdict
-from typing import Dict, Iterator, List, Tuple
+from typing import Dict, Iterator, List, Tuple, Union
 
 from lxml import etree
 from lxml.etree import _ElementTree
@@ -151,6 +151,45 @@ def groupdict_to_line(groupdict: Dict[str, str]) -> str:
     ])
 
 
+def change_comment(orig_comment: Union[None, str], new_comment: str) -> str:
+    return '{} {}'.format(
+        orig_comment if orig_comment else ' !', new_comment)
+
+
+def amend_lower(lexc_match):
+    """Tweak the regex groupdict to our needs.
+
+    Args:
+        lexc_match: a lexc line regex match
+
+    Returns:
+        A dict containing the groupdict.
+    """
+    groupdict = lexc_match.groupdict()
+    if groupdict.get('lower'):
+        groupdict['lower'] = groupdict['lower'].replace('%¥', '% ')
+    else:
+        groupdict['colon'] = ':'
+        groupdict['lower'] = TAG.sub('', groupdict['upper']).replace('%¥', '% ')
+
+    return groupdict
+
+
+def split_upper(upper: str) -> Tuple[str, List[str], List[str]]:
+    """Split the upper part of a lexc line.
+
+    Args:
+        upper: the upper part of a lexc line
+
+    Returns:
+        a tuple containing the lemma, non-semantic tags, and semantic tags
+    """
+    return (
+        TAG.sub('', upper).replace('%¥', '% '),
+        extract_nonsem_tags(upper),
+        extract_sem_tags(upper))
+
+
 def add_semtags(line: str, smx: Dict[str, List[str]]):
     """Add semtags to non sme languages.
 
@@ -168,48 +207,28 @@ def add_semtags(line: str, smx: Dict[str, List[str]]):
     if lexc_match:
         # TODO: If tags_via_apertium exists, update sem tags
         COUNTER['possible_lines'] += 1
-        groupdict = lexc_match.groupdict()
-        upper = groupdict['upper']
-
-        tags = extract_nonsem_tags(upper)
-        sem_tags = extract_sem_tags(upper)
-        tag_free_upper = TAG.sub('', upper).replace('%¥', '% ')
-        if groupdict.get('lower'):
-            groupdict['lower'] = groupdict['lower'].replace('%¥', '% ')
-        else:
-            groupdict['colon'] = ':'
-            groupdict['lower'] = tag_free_upper
-
-        if sem_tags and smx.get(
-                tag_free_upper) and sem_tags != smx.get(tag_free_upper):
-            COUNTER['conflicting_semtags'] += 1
-            if groupdict.get('comment'):
-                groupdict['comment'] = groupdict.get(
-                    'comment') + ' tags_via_apertium northsami was {}'.format(
-                        ''.join(smx.get(tag_free_upper)))
-            else:
-                groupdict[
-                    'comment'] = ' ! tags_via_apertium northsami was {}'.format(
-                        ''.join(smx.get(tag_free_upper)))
-
-            return groupdict_to_line(groupdict)
+        groupdict = amend_lower(lexc_match)
+        tag_free_upper, tags, sem_tags = split_upper(groupdict['upper'])
+        smx_sem_tags = smx.get(tag_free_upper)
 
         if sem_tags:
             COUNTER['already_has_semtags'] += 1
             return groupdict_to_line(groupdict)
 
-        if smx.get(tag_free_upper) and not sem_tags:
+        if smx_sem_tags and not sem_tags:
             COUNTER['added_semtags'] += 1
-            tags.extend(smx.get(tag_free_upper))
+            tags.extend(smx_sem_tags)
 
             groupdict['upper'] = ''.join([tag_free_upper, ''.join(tags)])
+            change_comment(
+                groupdict, ' tags_via_apertium')
 
-            if groupdict.get('comment'):
-                groupdict['comment'] = groupdict.get(
-                    'comment') + ' tags_via_apertium'
-            else:
-                groupdict['comment'] = ' ! tags_via_apertium'
+            return groupdict_to_line(groupdict)
 
+        if smx_sem_tags and sem_tags != smx_sem_tags:
+            COUNTER['conflicting_semtags'] += 1
+            change_comment(' tags_via_apertium northsami was {}'.format(
+                        ''.join(smx_sem_tags)))
             return groupdict_to_line(groupdict)
 
         if '+Sem/Dummytag' not in line:
@@ -221,7 +240,6 @@ def add_semtags(line: str, smx: Dict[str, List[str]]):
 
         if '+Sem/Dummytag' in line:
             COUNTER['has_dummy_nothing_added'] += 1
-            return groupdict_to_line(groupdict)
 
     return line
 

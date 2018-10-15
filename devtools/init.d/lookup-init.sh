@@ -361,7 +361,7 @@ alias   uces='$LOOKUP $GTHOME/st/ces/bin/ces.fst'
 alias   ueus='$LOOKUP $GTHOME/st/eus/bin/eus.fst'
 alias   uiku='$LOOKUP $GTHOME/st/iku/bin/iku.fst'
 alias   unno='$LOOKUP $GTHOME/st/nno/bin/nno.fst'
-alias   unon='$LOOKUP $GTHOME/st/non/bin/non.fst'
+alias   unon='$LOOKUP $GTHOME/startup-langs/non/src/analyser-gt-desc.xfst'
 
 
 alias   дбхр='$LOOKUP $GTHOME/st/bxr/bin/ibxr.fst'
@@ -394,7 +394,9 @@ alias smanob='$LOOKUP $GTHOME/words/dicts/smanob/bin/smanob-all.fst'
 alias smeeng='$LOOKUP $GTHOME/words/dicts/smeeng/bin/smeeng-all.fst'
 alias smefin='$LOOKUP $GTHOME/words/dicts/smefin/bin/smefin-all.fst'
 alias smenob='$LOOKUP $GTHOME/words/dicts/smenob/bin/smenob-all.fst'
+alias smesma='$LOOKUP $GTHOME/words/dicts/smesma/bin/smesma-all.fst'
 alias smesmj='$LOOKUP $GTHOME/words/dicts/smesmj/bin/smesmj-all.fst'
+alias smasme='$LOOKUP $GTHOME/words/dicts/smasme/bin/smasme-all.fst'
 alias smesmn='$LOOKUP $GTHOME/words/dicts/smesmn/bin/smesmn-all.fst'
 alias smjsme='$LOOKUP $GTHOME/words/dicts/smesmj/bin/smjsme-all.fst'
 alias smnfin='$LOOKUP $GTHOME/words/dicts/smnfin/bin/smnfin-all.fst'
@@ -533,6 +535,7 @@ alias husjd='$HLOOKUP $GTHOME/langs/sjd/src/analyser-gt-desc.hfstol'
 alias husje='$HLOOKUP $GTHOME/langs/sje/src/analyser-gt-desc.hfstol'
 alias husma='$HLOOKUP $GTHOME/langs/sma/src/analyser-gt-desc.hfstol'
 alias husme='$HLOOKUP $GTHOME/langs/sme/src/analyser-gt-desc.hfstol'
+alias husmedis='$HLOOKUP $GTHOME/langs/sme/src/analyser-disamb-gt-desc.hfstol'
 alias husmj='$HLOOKUP $GTHOME/langs/smj/src/analyser-gt-desc.hfstol'
 alias husmn='$HLOOKUP $GTHOME/langs/smn/src/analyser-gt-desc.hfstol'
 alias husms='$HLOOKUP $GTHOME/langs/sms/src/analyser-gt-desc.hfstol'
@@ -764,6 +767,23 @@ alias ugeo='$LOOKUP $GTHOME/words/dicts/smi/geo/bin/geo.fst'
 
 
 # Direct sentence analysis:
+
+alias kpvtoka="hfst-tokenise --giella-cg $GTHOME/langs/kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \
+               sed 's/ <W:0.0000000000>//g;'"
+alias kpvtoks="hfst-tokenise --giella-cg $GTHOME/langs/kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \
+               vislcg3 -g $GTHOME/langs/kpv/src/syntax/disambiguator.cg3 | \
+               sed 's/ <W:0.0000000000>//g;'"
+alias kpvtokst="hfst-tokenise --giella-cg $GTHOME/langs/kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \
+               vislcg3 -g $GTHOME/langs/kpv/src/syntax/disambiguator.cg3 -t | \
+               sed 's/ <W:0.0000000000>//g;'"
+
+alias myvtoka="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \  
+               sed 's/ <W:0.0000000000>//g;'"
+alias myvtoks="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst |  vislcg3 -g $GTHOME/langs/myv/src/syntax/disambiguator.cg3 | \  
+               sed 's/ <W:0.0000000000>//g;'"
+alias myvtokst="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g $GTHOME/langs/myv/src/syntax/disambiguator.cg3 -t | \  
+               sed 's/ <W:0.0000000000>//g;'"
+
 
 alias bakdep="sent-proc.sh -l bak -s dep"
 alias bakdept="sent-proc.sh -l bak -s dep -t"

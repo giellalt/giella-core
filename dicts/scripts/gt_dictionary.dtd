@@ -53,7 +53,7 @@
       gen_only CDATA #IMPLIED
       context CDATA #IMPLIED
       type ( Rel | Pers | Indef | Refl | Dem | interr |
-      pre | post | ord | TV | IV | actor | G3 | NomAg
+      pre | post | ord | TV | IV | actor | G3 | G7 | NomAg
       | Prop | Recipr | Coll | Interr | Logo ) #IMPLIED
       spec ( ABBR | ACR | Attr | Cmpar.Comp | Cmp_SgNom.Cmpnd | Cmp_Sh.Cmpnd | Coll | Dem | G3 | Ind | Indef | Indef.Attr | Indef.Pl.Nom | Indef.Sg.Loc.Attr | Interr | IV | IV.VAbess | Logo.3p.Du | Logo.3p.Pl | Logo.3p.Sg | NomAg | Ord | Pers.1p.Du | Pers.1p.Pl | Pers.1p.Sg | Pers.2p.Du | Pers.2p.Pl | Pers.2p.pl | Pers.2p.Sg | Pers.3p.Du | Pers.3p.Pl | Pers.3p.Sg | Pl | PrfPrc | PrsPrc | Qst | Refl | Rel | Sem_Act | Sem_Ani | Sem_Ani_Group.Sg | Sem_Body.Pl | Sem_Build | Sem_Clth.Pl | Sem_Dummytag | Sem_Dummytag.Attr | Sem_Dummytag.Pl | Sem_Dummytag.Sg | Sem_Dummytag.Sg.Nom | Sem_Event.Pl | Sem_Feat-psych.Sg | Sem_Hum.Attr | Sem_Hum_Plc | Sem_Money.Sg | Sem_Org | Sem_Org.Sg | Sem_Plc | Sem_Plc.Pl | Sem_Process.Sg.Nom | Sem_Prod-cogn.Sg | Sem_Substnc.Pl | Sem_Substnc.Sg | Sem_Time | Sem_Time.Pl | Sem_Tool-catch.Sg | Sg | Sg.Ela | Sg.Gen | Sg.Ill | Sg.Ine | Sg.Nom | Superl | Superl.Attr | Superl.Sg.Nom | TV | TV.Der_PassL.V | TV.Der_PassL.V.IV | .V.IV ) #IMPLIED
       class ( I | II | III | IV | V | VI | xxx ) #IMPLIED

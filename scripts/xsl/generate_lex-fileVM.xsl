@@ -62,6 +62,11 @@
 		<out>
 		  <e>
 		    <xsl:copy-of select="../../l/@hid"/>
+<!-- beginning of insertion pos, type, val 2018-11-09 -->
+		    <xsl:copy-of select="../../l/@pos"/>
+		    <xsl:copy-of select="../../l/@type"/>
+		    <xsl:copy-of select="../../l/@val"/>
+<!-- end of insertion pos, type, val 2018-11-09 -->
 		    <xsl:copy-of select="../../l/@sem_type"/>
 		    <xsl:copy-of select="../../l/@etym_orig"/>
 		    <xsl:copy-of select="./@status"/>
@@ -123,6 +128,26 @@
 							   then
 							   concat('+',./@hid)
 							   else concat('','')"/>
+<!-- beginning of insertion pos, type, val 2018-11-09 Jaska -->
+		  <xsl:variable name="current_pos" select="if (./@pos
+							   and
+							   not(normalize-space(./@pos)=''))
+							   then
+							   concat('+',./@pos)
+							   else concat('','')"/>
+		  <xsl:variable name="current_type" select="if (./@type
+							   and
+							   not(normalize-space(./@type)=''))
+							   then
+							   concat('+',./@type)
+							   else concat('','')"/>
+		  <xsl:variable name="current_val" select="if (./@val
+							   and
+							   not(normalize-space(./@val)=''))
+							   then
+							   concat('+',./@val)
+							   else concat('','')"/>
+<!-- end of insertion pos, type, val 2018-11-09 -->
 		  <xsl:variable name="current_sem_type" select="if (./@sem_type
 							   and
 							   not(normalize-space(./@sem_type)=''))
@@ -141,8 +166,10 @@
 							   then
 							   concat('+',./@status)
 							   else concat('','')"/>
+<!-- beginning of insertion pos, type, val 2018-11-09 -->
 		  <xsl:value-of select="if (./@stem = '') then concat(., $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)
-					else concat(.,$current_hid,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+					else concat(.,$current_hid,$current_pos,$current_type,$current_val,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+<!-- end of insertion pos, type, val 2018-11-09 -->
 		</xsl:for-each>
 	      </xsl:if>
 	    </xsl:for-each>

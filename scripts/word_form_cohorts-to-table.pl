@@ -40,12 +40,14 @@ GetOptions ("input=s"    => \$word_form_file,
 $code_list =~ s/ +/ /g;
 $number_of_codes = @code_array = split(' ',$code_list);
 
-# Debug prints:
-#print "Test: $code_list\n";
-#print "Test2: $number_of_codes\n";
-#print "$code_array[0]\n";
-#print "$code_array[1]\n";
-#print "$code_array[2]\n";
+# DEBUG prints:
+# print "Morph Code List: $code_list\n";
+# print "#Morph codes: $number_of_codes\n";
+# print "Actual Morph Codes:\n";
+# print "$code_array[0]\n";
+# print "$code_array[1]\n";
+# print "$code_array[2]\n";
+# print "---\n";
 
 open (WORDFORMS,"$word_form_file");
 my @word_form_array;
@@ -57,12 +59,15 @@ close (WORDFORMS);
 
 chomp @word_form_array ;
 
+# Protect homonymy tags:
+s/\+Hom/_Hom/ for @word_form_array ;
+
 open (LEMLEX,"$lemma_lexicon_list");
 my @lemlex_array = <LEMLEX>;
 close (LEMLEX);
 
-# Debug prints:
-#print "$word_form_array[6]";
+# DEBUG prints:
+# print "Word form array 6: $word_form_array[6]\n";
 
 # Start printing the html table:
 open (HTMLTABLE,'>',"$word_form_table_file");
@@ -79,6 +84,8 @@ print HTMLTABLE "</tr>\n";
 for (my $ix = 0; $ix <= $#word_form_array; $ix += $number_of_codes ) {
     # Extract lemma and print it:
     my ($lemma, $rest) = split('\+',$word_form_array[$ix],2);
+    # Clean the homonymy marker before printout:
+    $lemma =~ s/_Hom/, Hom/;
     my $lemlexindex=(($ix+1+$number_of_codes) / $number_of_codes)-1;
     my ($lemlexlem, $lemlexlex) = split('\t', $lemlex_array[$lemlexindex]);
     print HTMLTABLE "<tr><th>$lemma</th>";
@@ -87,21 +94,29 @@ for (my $ix = 0; $ix <= $#word_form_array; $ix += $number_of_codes ) {
     # For each of the codes, extract the generated word forms and print them:
     for (my $j = 0; $j < $number_of_codes; $j += 1 ) {
         my $word_forms = $word_form_array[$ix + $j];
-        #DEBUG: print "Ordformer: $word_forms\n";
+        #DEBUG:
+        # print "\n";
+        # print "Ordformer:\n$word_forms";
         my @word_forms = split ('\n',$word_forms);
         print HTMLTABLE "<td>";
         for my $wordform (@word_forms) {
             my ($input, $word, $questionmark) = split ('\t',$wordform);
+            # If the question mark field contains weights, just skip the field
+            # and print the generated word form(s):
             if ($questionmark =~ /[0-9]/) {
                 print HTMLTABLE "$word</br>";
-                #DEBUG: print "Ord 97: $word\n";
-            } elsif ($questionmark) {
+                #DEBUG:
+                # print "Ordform med vekt (vekt ignorert): $word\n";
+            } # Or: if the question mark field contains something else, like ?
+            elsif ($questionmark) {
                 print HTMLTABLE "$questionmark";
-                #DEBUG: print "Ord 100: $questionmark\n";
-            }
+                #DEBUG:
+                # print "Ordform med problem: $questionmark\n";
+            } # Or: no extra weight or other information was found, print it:
             else {
                 print HTMLTABLE "$word</br>";
-                #DEBUG: print "Ord 104: $word\n";
+                #DEBUG:
+                # print "Ordform utan vekt og utan problem: $word\n";
             }
         }
         print HTMLTABLE "</td>";

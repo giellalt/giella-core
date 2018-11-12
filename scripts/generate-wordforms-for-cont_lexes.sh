@@ -124,7 +124,7 @@ grep ";" $@ \
    | sort -u
 }
 
-######## For each lexicon found, extract the 10 first entries:
+######## For each lexicon found, extract the N(=$lemmacount) first entries:
 lemma_extraction () {
 for lexicon in $@; do
     ${GTCORE}/scripts/extract-lemmas.sh \

@@ -18,7 +18,7 @@
 
 
 r {
-    column-count: 2;
+#    column-count: 2;
     column-rule-style: solid;
     column-rule-width: 1px;
     column-rule: 1px solid black;

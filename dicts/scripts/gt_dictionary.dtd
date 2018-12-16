@@ -162,7 +162,7 @@
 <!ATTLIST mg src CDATA #IMPLIED >
 <!ATTLIST mg x ( fad ) #IMPLIED >
 
-<!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?) | tf | te ))+, xg*, syng?) >
+<!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?, morph_expl?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg
       xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus | smj | fra) #REQUIRED
       check CDATA #IMPLIED
@@ -269,6 +269,9 @@
 <!ATTLIST te oa ( first | yes | no ) #IMPLIED >
 <!ATTLIST te stat ( pref ) #IMPLIED >
 <!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
+
+<!ELEMENT morph_expl (#PCDATA) >
+
 
 <!ELEMENT xg ((x, xt+)+)>
 <!ATTLIST xg re CDATA #IMPLIED >

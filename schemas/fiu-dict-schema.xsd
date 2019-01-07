@@ -61,7 +61,6 @@
             <xs:element minOccurs="0" ref="map"/>
             <xs:element minOccurs="0" name="rev-sort_key" type="xs:string"/>
             <xs:element ref="lg"/>
-            <xs:element minOccurs="0" ref="posDescr"/>
             <xs:element minOccurs="0" ref="semRole"/>
             <xs:element minOccurs="0" ref="phonet"/>
             <xs:element minOccurs="0" ref="morphg"/>
@@ -98,9 +97,11 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="lg">
+<!-- lemma group -->
       <xs:complexType>
          <xs:sequence>
             <xs:element ref="l"/>
+<!-- lemma -->
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_ref"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_drv"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_cogn"/>
@@ -108,11 +109,15 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="variants"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
             <xs:element ref="stg"/>
+<!-- stem group -->
             <xs:element minOccurs="0" ref="audio"/>
+<!-- audio: has link reference to audio, e.g. at MPI in Nijmegen -->
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="inc-audio"/>
             <xs:element minOccurs="0" ref="mini_paradigm"/>
             <xs:element minOccurs="0" ref="etymology"/>
+<!-- etymology: contains etymons and cognates -->
             <xs:element minOccurs="0" ref="compg"/>
+<!-- composition group: contains compounding, derivation -->
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
          </xs:sequence>
       </xs:complexType>
@@ -126,6 +131,7 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="stg">
+<!-- stem group -->
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
             <xs:element ref="st"/>
@@ -134,12 +140,15 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="l">
+<!-- lemma -->
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
                <xs:attribute ref="gen"/>
                <xs:attribute ref="hid"/>
+<!-- homonym id -->
                <xs:attribute ref="pos" use="required"/>
+<!-- part of speech -->
                <xs:attribute ref="src"/>
                <xs:attribute name="type" type="PosType"/>
                <xs:attribute ref="val"/>
@@ -234,6 +243,7 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="st">
+<!-- stem  -->
       <xs:complexType mixed="true">
          <xs:sequence/>
          <xs:attribute ref="exclude"/>
@@ -242,6 +252,7 @@
          <xs:attribute name="NumContlex" type="xs:string"/>
          <xs:attribute ref="orthType"/>
          <xs:attribute ref="status"/>
+<!-- status: contains indication of +Err/... -->
 	 <xs:attribute name="varid" type="xs:string"/>
       </xs:complexType>
    </xs:element>
@@ -254,6 +265,7 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="stress">
+<!-- stress element: contains phonetic or other representation of lemma, which might contain pedagogically informative information on stress, vowel or consonant quality or quantity -->
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -263,20 +275,38 @@
    </xs:element>
    <xs:attribute name="pl" type="xs:string"/>
    <xs:simpleType name="PosType">
+<!-- part of speech type: contains subtypes of various parts of speech -->
      <xs:restriction base="xs:string">
+       <xs:enumeration value="Ad-A"/>
+<!-- ad-adjective or ad-adverb -->
        <xs:enumeration value="Card"/>
+<!-- cardinal -->
        <xs:enumeration value="Coll"/>
+<!-- collective -->
        <xs:enumeration value="Dem"/>
+<!-- demonstrative -->
        <xs:enumeration value="Distr"/>
+<!-- distributive -->
+       <xs:enumeration value="Ger"/>
+<!-- gerund -->
        <xs:enumeration value="Indef"/>
+<!-- indefinite -->
        <xs:enumeration value="Interr"/>
+<!-- interrogative -->
        <xs:enumeration value="Iter"/>
+<!-- iterative -->
        <xs:enumeration value="Ord"/>
+<!-- ordinal -->
        <xs:enumeration value="Pers"/>
+<!-- personal -->
        <xs:enumeration value="Prop"/>
+<!-- proper -->
        <xs:enumeration value="Recip"/>
+<!-- reciprocal -->
        <xs:enumeration value="Refl"/>
+<!-- reflexive -->
        <xs:enumeration value="Rel"/>
+<!-- relative -->
      </xs:restriction>
    </xs:simpleType>
 
@@ -285,12 +315,15 @@
    <xs:simpleType name="posCategory">
       <xs:restriction base="xs:string">
          <xs:enumeration value="A"/>
-         <xs:enumeration value="Ad-A"/>
+<!-- adjective  -->
          <xs:enumeration value="Adv"/>
+<!-- adverb -->
          <xs:enumeration value="Art"/>
+<!-- article -->
          <xs:enumeration value="Clt"/>
+<!-- clitic -->
          <xs:enumeration value="Conj">
-            <!--Conjunction that still needs to be classified as either coordinator or subordinator-->
+            <!--Conjunction that still needs to be classified as either coordinator or subordinator. It will be removed -->
          </xs:enumeration>
          <xs:enumeration value="CC">
             <!--COORD "coordinator"-->
@@ -299,28 +332,42 @@
             <!--SUBORD "subordinator"-->
          </xs:enumeration>
          <xs:enumeration value="Descr"/>
+<!-- descriptive this is problematic -->
          <xs:enumeration value="Det"/>
-         <xs:enumeration value="Ger"/>
+<!-- determinative -->
          <xs:enumeration value="Interj"/>
+<!-- interjection -->
          <xs:enumeration value="Ideoph"/>
+<!-- ideophone -->
          <xs:enumeration value="N"/>
+<!-- noun -->
          <xs:enumeration value="NN"/>
          <xs:enumeration value="Num"/>
+<!-- numeral -->
          <xs:enumeration value="Pcle"/>
+<!-- particle -->
          <xs:enumeration value="Suf"/>
+<!-- suffix: A problem -->
          <xs:enumeration value="Prefix"/>
+<!-- prefix: A problem -->
          <xs:enumeration value="Po"/>
+<!-- postposition, which should be a subtype, i.e. orientation -->
          <xs:enumeration value="Pr"/>
+<!-- preposition, which should be a subtype, i.e. orientation -->
          <xs:enumeration value="Prc"/>
+<!-- participle -->
          <xs:enumeration value="Pred2">
             <!--secondary predication: чавонь кедть, ласте, озадо-->
          </xs:enumeration>
          <xs:enumeration value="Pron"/>
-
+<!-- pronoun  -->
          <xs:enumeration value="Qnt"/>
+<!-- quantifier -->
          <xs:enumeration value="V"/>
+<!-- verb -->
       </xs:restriction>
    </xs:simpleType>
+<!-- For deprication begin -->
    <xs:element name="posDescr" type="posDescrType"/>
    <xs:attribute name="posDescr" type="posDescrType"/>
    <xs:simpleType name="posDescrType">
@@ -362,10 +409,10 @@
          <xs:enumeration value="ADV-MANNER"/>
          <xs:enumeration value="ADV-SPAT"/>
          <xs:enumeration value="ADV-TEMP"/>
-<!-- "CEK" indicates the form of the adverb "Erzya" -->
          <xs:enumeration value="CEK_ADV"/>
-<!-- "NEK" indicates the form of the adverb "Erzya" -->
+<!-- "CEK" indicates the form of the adverb "Erzya" -->
          <xs:enumeration value="NEK_ADV"/>
+<!-- "NEK" indicates the form of the adverb "Erzya" -->
          <xs:enumeration value="PRON_ADV"/>
          <xs:enumeration value="ADV-GEN"/>
          <xs:enumeration value="ADV-TRA"/>
@@ -574,31 +621,16 @@
          <xs:enumeration value="Spat-DEM"/>
          <xs:enumeration value="Spat-DISTR"/>
          <xs:enumeration value="ADV-Spat-GEN"/>
-         <xs:enumeration value="Spat-DEICT"/>
-         <xs:enumeration value="Spat-INDEP"/>
-         <xs:enumeration value="Spat-DEPEND"/>
-         <xs:enumeration value="Spat-GOAL"/>
-         <xs:enumeration value="Spat-SOURCE"/>
-         <xs:enumeration value="Spat-LOC"/>
-         <xs:enumeration value="Spat-MULTIPOINT"/>
          <xs:enumeration value="STATE"/>
          <xs:enumeration value="SUMMON"/>
          <xs:enumeration value="TEMP"/>
-         <xs:enumeration value="TEMP-Spat"/>
-         <xs:enumeration value="TEMP-DISTR"/>
          <xs:enumeration value="TERMINATIVE">
             <!--Adverb indicating temporal terminative limit. Erzya: -->
          </xs:enumeration>
          <xs:enumeration value="QNT"/>
-         <xs:enumeration value="QNT-ADN"/>
-         <xs:enumeration value="QNT-ADV"/>
          <xs:enumeration value="QNT-PRON"/>
-         <xs:enumeration value="QNT-INDEF"/>
-         <xs:enumeration value="QNT-COLL"/>
-         <xs:enumeration value="QNT-COLL-UNIV"/>
          <xs:enumeration value="QNT-DISTR"/>
          <xs:enumeration value="QNT-GEN"/>
-         <xs:enumeration value="QNT-ITER"/>
          <xs:enumeration value="QNT-UNIV"/>
          <xs:enumeration value="QNT-UNIV-ADN"/>
          <xs:enumeration value="QNT-UNIV-PRON"/>
@@ -615,23 +647,6 @@
          <xs:enumeration value="V-REFL"/><!-- change V-REFL to VR -->
          <xs:enumeration value="VR"/>
          <xs:enumeration value="V-INST"/>
-         <xs:enumeration value="PRON-INTERR"/>
-         <xs:enumeration value="Q_A"/>
-         <xs:enumeration value="Q_ADV"/>
-         <xs:enumeration value="Q_DET"/>
-         <xs:enumeration value="Q_ITER"/>
-         <xs:enumeration value="Q_MANNER"/>
-         <xs:enumeration value="Q_N"/>
-         <xs:enumeration value="Q_ORD"/>
-         <xs:enumeration value="Q_ORD-ITER"/>
-         <xs:enumeration value="Q_PCLE"/>
-         <xs:enumeration value="Q_PRON"/>
-         <xs:enumeration value="Q_PERS"/>
-         <xs:enumeration value="Q_QNT"/>
-         <xs:enumeration value="Q_REASON"/>
-         <xs:enumeration value="Q_Spat"/>
-         <xs:enumeration value="Q_TEMP"/>
-         <xs:enumeration value="R_ORD"/>
          <xs:enumeration value="R_QNT"/>
          <xs:enumeration value="R_Spat"/>
          <xs:enumeration value="R_TEMP"/>
@@ -645,6 +660,7 @@
          <xs:enumeration value="Pcle"/>
       </xs:restriction>
    </xs:simpleType>
+<!-- for deprication END -->
    <xs:element name="src">
       <xs:complexType>
          <xs:simpleContent>

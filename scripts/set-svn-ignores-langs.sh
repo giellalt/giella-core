@@ -56,6 +56,7 @@ dirlist=$(find $1 \
 			-not -iwholename '*hfst/3*' \
 			-not -iwholename '*hfst/MacVoikko*' \
 			-not -iwholename '*grammarcheckers/4*' \
+			-not -iwholename '*grammarcheckers/modes*' \
 			-not -iwholename '*grammarcheckers/*-x-standard*' \
 			-type d)
 

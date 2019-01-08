@@ -257,6 +257,7 @@ $svnignore "$mkfiles
 *.hfst
 *.pmhfst
 *.tmp
+*.bin
 abbr.txt" $1/tools/tokenisers
 
 # Set the svn:ignore prop on the test/tools/tokenisers/filters/ dir:

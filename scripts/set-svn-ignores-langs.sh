@@ -123,7 +123,8 @@ $svnignore "$mkfiles
 $fstfiles
 url.lexc
 *.tmp.*
-lexicon.*" $1/src/morphology
+lexicon*
+root.lexc" $1/src/morphology
 
 # Ignore all files in the src/morphology/generated_files dir:
 $svnignore "*" $1/src/morphology/generated_files
@@ -145,6 +146,7 @@ $fstfiles
 $svnignore "$mkfiles
 $fstfiles
 dependency.cg3
+disambiguator.cg3
 functions.cg3" $1/src/syntax
 
 # Set the svn:ignore prop on the test/data/ dir:
@@ -161,6 +163,7 @@ $fstfiles
 *.zcheck
 modes
 errors.xml
+schemas.xml
 pipespec.xml" $1/tools/grammarcheckers
 
 # Set the svn:ignore prop on the test/tools/grammarcheckers/filters/ dir:

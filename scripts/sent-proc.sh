@@ -13,7 +13,8 @@
 
 # change to 'true' to debug paths of analysis tools
 debug='false'
-HLOOKUP=`which hfst-optimized-lookup`
+#HLOOKUP=`which hfst-optimized-lookup`
+HLOOKUP=`which hfst-lookup`
 # HLOOKUP=`which hfst-lookup` # TODO: use this one instead
 
 
@@ -56,7 +57,7 @@ lg='langs'
 abbr='$GTHOME/$lg/$l/bin/abbr.txt'
 
 #long_lang_list
-long_lang_list=(bxr chp ciw cor crk est fao fin fkv
+long_lang_list=(bxr chp ciw cor crk fao fin fkv
                 hdn ipk izh kal kca kpv liv mdf
                 mhr mrj myv ndl nio nob olo ron rus
                 sjd sje sma sme smj smn sms som tat tku
@@ -66,7 +67,7 @@ long_lang_list=(bxr chp ciw cor crk est fao fin fkv
 startup_lang_list=(amh bla evn sel sto tlh zul)
 
 #experiment_lang_list
-experiment_lang_list=(deu eng)
+experiment_lang_list=(deu eng est)
 
 if [[ "$debug" == "true" ]] ; then
     echo "_pre l  ${l}"
@@ -122,27 +123,6 @@ if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
        echo "  $GTHOME/$lg/$l/tools/tokenisers/abbr.txt" 1>&2;
        echo "............. preprocessing without it!" 1>&2;
     fi 
-# commented this branch due to the sme moved to the langs in newinfra
-# elif [[ "$l" == "sme" ]]; then
-#     lg='gt'
-#     if [  -f $GTHOME/$lg/$l/bin/abbr.txt ]; then
-#        abbr="--abbr=$GTHOME/$lg/$l/bin/abbr.txt"  # <--- sme exception
-#     else
-#        echo "Error: no abbr file found" 1>&2; 
-#        echo "  $GTHOME/$lg/$l/bin/abbr.txt" 1>&2;
-#        echo "............. please generate it!" 1>&2;
-#        exit 1;
-#     fi 
-# else
-#     lg='st'
-#     if [  -f $GTHOME/$lg/$l/bin/abbr.txt ]; then
-#        abbr="--abbr=$GTHOME/$lg/$l/bin/abbr.txt"  # <--- leftovers in the old infra (st)
-#     else
-#        abbr=''
-#        echo "Warning: no abbr file found" 1>&2; 
-#        echo "  $GTHOME/$lg/$l/bin/abbr.txt" 1>&2; 
-#        echo "............. preprocessing without it!" 1>&2; 
-#     fi
 fi
 
 current_path="$GTHOME/$lg/$l"
@@ -158,7 +138,7 @@ fi
 
 
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
-    MORPH="$HLOOKUP $current_path/src/analyser-disamb-gt-desc.hfstol"
+    MORPH="$HLOOKUP $current_path/src/analyser-disamb-gt-desc.hfstol -q"
     DIS="$current_path/src/syntax/disambiguator.cg3"
     if [ ! -f "$current_path/src/analyser-disamb-gt-desc.hfstol" ]; then
         echo "no hfst file found: please compile the language tools for $l"

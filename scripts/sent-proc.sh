@@ -115,6 +115,8 @@ shift $((OPTIND-1))
 # language parameter test and abbr file assignment
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
     lg='langs'
+#    if [[ "${experiment_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
+#    lg='experiment-langs'
     if [  -f $GTHOME/$lg/$l/tools/tokenisers/abbr.txt ]; then
        abbr="--abbr=$GTHOME/$lg/$l/tools/tokenisers/abbr.txt"  # <--- new infra
     else

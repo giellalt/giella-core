@@ -8,6 +8,10 @@
 # See e.g. langs/sme/src/morphology/compounding.lexc for how to implement the
 # other part of this filter, to actually block the compounds.
 # See also langs/sme/src/Makefile.am.
+#
+# NB2! The use of this filter is incompatible with the Xerox tools, as it
+# requires the operation twosided flag-diacritics, which causes the Xerox
+# tools to crash.
 
-# delete +MWE tags from sme:
+# Change the +MWE tag into a flag diacritic:
 "@U.CmpNone.TRUE@" <- "+MWE" ;

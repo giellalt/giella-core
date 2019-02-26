@@ -27,6 +27,7 @@ L1_L2         = extract_l-t-lexc.xsl
 SLANG       = sma
 TLANG       = nob
 LP          = $(SLANG)$(TLANG)
+#LP         = ../../langs/$(SLANG)/src/morphology/
 # translation number: values 'first' = use only the first t-element; 'all' = use all t-elements 
 TNUM        = all
 GOAL        = $(LP)-$(TNUM)

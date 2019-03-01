@@ -7,7 +7,7 @@
 # ==> builds a bilingdict fst using the values for SLANG, TLANG and TNUM declared in the script itself
 # 
 # to overwrite the defaults 
-# make -f make-bildict SLANG=swe TLANG=sma TNUM=all
+# make -f make-bildict SLANG=nob TLANG=sma TNUM=all
 #
 #
 #

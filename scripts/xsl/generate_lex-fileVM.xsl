@@ -70,6 +70,7 @@
 		    <xsl:copy-of select="../../l/@sem_type"/>
 		    <xsl:copy-of select="../../l/@etym_orig"/>
 		    <xsl:copy-of select="./@status"/>
+		    <xsl:copy-of select="./@variant"/>
 		    <xsl:attribute name="stem">
 		      <xsl:value-of select="replace(
 		                            replace(
@@ -128,6 +129,14 @@
 							   then
 							   concat('+',./@hid)
 							   else concat('','')"/>
+<!-- beginning variant 2019-03-26 Jaska -->
+		  <xsl:variable name="current_status" select="if (./@variant
+							   and
+							   not(normalize-space(./@variant)=''))
+							   then
+							   concat('+',./@variant)
+							   else concat('','')"/>
+<!-- end variant 2019-03-26 Jaska -->
 <!-- beginning of insertion pos, type, val 2018-11-09 Jaska -->
 		  <xsl:variable name="current_pos" select="if (./@pos
 							   and

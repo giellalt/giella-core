@@ -130,7 +130,7 @@
 							   concat('+',./@hid)
 							   else concat('','')"/>
 <!-- beginning variant 2019-03-26 Jaska -->
-		  <xsl:variable name="current_status" select="if (./@variant
+		  <xsl:variable name="current_variant" select="if (./@variant
 							   and
 							   not(normalize-space(./@variant)=''))
 							   then
@@ -177,7 +177,7 @@
 							   else concat('','')"/>
 <!-- beginning of insertion pos, type, val 2018-11-09 -->
 		  <xsl:value-of select="if (./@stem = '') then concat(., $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)
-					else concat(.,$current_hid,$current_pos,$current_type,$current_val,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+					else concat(.,$current_hid,$current_variant,$current_pos,$current_type,$current_val,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
 <!-- end of insertion pos, type, val 2018-11-09 -->
 		</xsl:for-each>
 	      </xsl:if>

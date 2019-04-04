@@ -328,6 +328,11 @@ class StaticSiteBuilder(object):
 
     def copy_to_site(self):
         """Copy the entire site to self.destination."""
+        if 'techdoc' in self.builddir:
+            offending_file = os.path.join(self.builddir, 'built', 'index.html')
+            if os.path.exists(offending_file):
+                print('Removing {}'.format(offending_file))
+                os.remove(offending_file)
         (returncode, _) = self.run_command(
             'rsync -avz -e ssh {src} {dst}'.format(src=os.path.join(
                 self.builddir, 'built/'), dst=self.destination))

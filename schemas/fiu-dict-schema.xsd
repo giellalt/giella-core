@@ -254,6 +254,7 @@
          <xs:attribute ref="status"/>
 <!-- status: contains indication of +Err/... -->
 	 <xs:attribute name="varid" type="xs:string"/>
+<!-- varid: variation contains indication of +v1, +v2 -->
       </xs:complexType>
    </xs:element>
    <xs:element name="mini_paradigm">
@@ -338,7 +339,7 @@
          <xs:enumeration value="Interj"/>
 <!-- interjection -->
          <xs:enumeration value="Ideoph"/>
-<!-- ideophone -->
+<!-- ideophone !NB should this be dealt with? -->
          <xs:enumeration value="N"/>
 <!-- noun -->
          <xs:enumeration value="NN"/>
@@ -362,7 +363,7 @@
          <xs:enumeration value="Pron"/>
 <!-- pronoun  -->
          <xs:enumeration value="Qnt"/>
-<!-- quantifier -->
+<!-- quantifier !NB THIS IS A PROBLEM  -->
          <xs:enumeration value="V"/>
 <!-- verb -->
       </xs:restriction>

@@ -70,7 +70,7 @@
 		    <xsl:copy-of select="../../l/@sem_type"/>
 		    <xsl:copy-of select="../../l/@etym_orig"/>
 		    <xsl:copy-of select="./@status"/>
-		    <xsl:copy-of select="./@variant"/>
+		    <xsl:copy-of select="./@varid"/>
 		    <xsl:attribute name="stem">
 		      <xsl:value-of select="replace(
 		                            replace(
@@ -129,14 +129,14 @@
 							   then
 							   concat('+',./@hid)
 							   else concat('','')"/>
-<!-- beginning variant 2019-03-26 Jaska -->
-		  <xsl:variable name="current_variant" select="if (./@variant
+<!-- beginning varid 2019-03-26 Jaska -->
+		  <xsl:variable name="current_varid" select="if (./@varid
 							   and
-							   not(normalize-space(./@variant)=''))
+							   not(normalize-space(./@varid)=''))
 							   then
-							   concat('+',./@variant)
+							   concat('+v',./@varid)
 							   else concat('','')"/>
-<!-- end variant 2019-03-26 Jaska -->
+<!-- end varid 2019-03-26 Jaska -->
 <!-- beginning of insertion pos, type, val 2018-11-09 Jaska -->
 		  <xsl:variable name="current_pos" select="if (./@pos
 							   and
@@ -177,7 +177,7 @@
 							   else concat('','')"/>
 <!-- beginning of insertion pos, type, val 2018-11-09 -->
 		  <xsl:value-of select="if (./@stem = '') then concat(., $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)
-					else concat(.,$current_hid,$current_variant,$current_pos,$current_type,$current_val,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+					else concat(.,$current_hid,$current_varid,$current_pos,$current_type,$current_val,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
 <!-- end of insertion pos, type, val 2018-11-09 -->
 		</xsl:for-each>
 	      </xsl:if>

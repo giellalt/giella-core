@@ -40,7 +40,7 @@
 export GTCORE=$GTHOME/giella-core
 
 # Add predefined lookup aliases for all languages:
-. $GTHOME/gt/script/init.d/lookup-init.sh
+. $GTHOME/giella-core/devtools/init.d/lookup-init.sh
 
 # Alias for svn update
 alias svnup="svn up $GTHOME $GTBIG $GTFREE $GTPRIV $GTHOME/art"

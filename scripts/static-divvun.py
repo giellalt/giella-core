@@ -379,8 +379,9 @@ class LanguageAdder(object):
 
     def add_lang_info(self):
         """Create the language navigation element and add it to self.tree."""
-        my_nav_bar = self.tree.getroot().find('.//div[@id="myNavbar"]',
-                                              namespaces=self.namespace)
+        my_nav_bar = self.tree.getroot().find(
+            './/ul[@class="navbar-nav"]',
+            namespaces=self.namespace)
         my_nav_bar.append(self.make_lang_menu())
 
     def make_lang_menu(self):
@@ -390,38 +391,29 @@ class LanguageAdder(object):
                    u'smj': u'Julevsábmáj', u'sv': u'På svenska',
                    u'en': u'In English'}
 
-        right_menu = etree.Element('ul')
-        right_menu.set('class', 'nav navbar-nav navbar-right')
+        right_menu = etree.Element('li')
+        right_menu.set('class', 'nav-item dropdown')
 
-        dropdown = etree.Element('li')
-        dropdown.set('class', 'dropdown')
-        right_menu.append(dropdown)
+        dropdown = etree.SubElement(right_menu, 'a')
+        dropdown.set('aria-expanded', 'false')
+        dropdown.set('aria-haspopup', 'true')
+        dropdown.set('data-toggle', 'dropdown')
+        dropdown.set('class', 'nav-link dropdown-toggle')
+        dropdown.set('href', '#')
+        dropdown.text = u'Change language'
 
-        dropdown_toggle = etree.Element('a')
-        dropdown_toggle.set('class', 'dropdown-toggle')
-        dropdown_toggle.set('data-toggle', 'dropdown')
-        dropdown_toggle.set('href', '#')
-        dropdown_toggle.text = u'Change language'
-        dropdown.append(dropdown_toggle)
-
-        span = etree.Element('span')
-        span.set('class', 'caret')
-        dropdown_toggle.append(span)
-
-        dropdown_menu = etree.Element('ul')
-        dropdown_menu.set('class', 'dropdown-menu')
-        dropdown.append(dropdown_menu)
+        dropdown_toggle = etree.SubElement(right_menu, 'div')
+        dropdown_toggle.set('aria-labelledby', 'navbarDropdownMenuLink')
+        dropdown_toggle.set('class', 'dropdown-menu')
 
         for lang in self.langs:
             if lang != self.this_lang:
-                li = etree.Element('li')
-                a = etree.Element('a')
+                a = etree.SubElement(dropdown_toggle, 'a')
+                a.set('class', 'dropdown-item')
                 filename = '/' + lang + self.filename.replace(self.builddir,
                                                               '')
                 a.set('href', filename)
                 a.text = trlangs[lang]
-                li.append(a)
-                dropdown_menu.append(li)
 
         return right_menu
 

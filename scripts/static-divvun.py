@@ -328,7 +328,7 @@ class StaticSiteBuilder(object):
 
     def copy_to_site(self):
         """Copy the entire site to self.destination."""
-        if 'techdoc' in self.builddir:
+        if 'techdoc' in self.builddir and 'commontec' not in self.builddir:
             offending_file = os.path.join(self.builddir, 'built', 'index.html')
             if os.path.exists(offending_file):
                 os.remove(offending_file)

@@ -2,11 +2,14 @@
 <xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	   xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:hfp="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty">
-   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="https://www.w3.org/2001/03/xml.xsd"/>
+<!--   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+This has been changed 2019-05-13 -->
 <!--<xs:include schemaLocation="semanticSetFor-dict-schema.xsd"/> This has been brought back into the schema 2013-11-11 -->
-<xs:include schemaLocation="kpv-dict-schema.xsd"/>
+<!--<xs:include schemaLocation="kpv-dict-schema.xsd"/>
 <xs:include schemaLocation="mrj-dict-schema.xsd"/>
 <xs:include schemaLocation="myv-dict-schema.xsd"/>
+-->
    <xs:element name="r">
       <xs:complexType>
          <xs:sequence>
@@ -208,7 +211,6 @@
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
-               <xs:attribute ref="myvSrc"/>
                <xs:attribute ref="orthType"/>
             </xs:extension>
          </xs:simpleContent>
@@ -662,15 +664,6 @@
       </xs:restriction>
    </xs:simpleType>
 <!-- for deprication END -->
-   <xs:element name="src">
-      <xs:complexType>
-         <xs:simpleContent>
-            <xs:extension base="xs:string">
-               <xs:attribute ref="kpvSrc"/>
-            </xs:extension>
-         </xs:simpleContent>
-      </xs:complexType>
-   </xs:element>
    <xs:attribute name="orthType">
       <xs:simpleType>
          <xs:restriction base="xs:string">
@@ -727,8 +720,6 @@
                <xs:attribute ref="dx"/>
                <xs:attribute ref="lemmaID"/>
                <xs:attribute ref="stemID"/>
-               <xs:attribute ref="kpvMorph"/>
-               <xs:attribute ref="myvMorph"/>
                <xs:attribute ref="mx"/>
                <xs:attribute ref="nx"/>
                <xs:attribute ref="px"/>

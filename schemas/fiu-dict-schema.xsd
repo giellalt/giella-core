@@ -111,6 +111,7 @@ This has been changed 2019-05-13 -->
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="lsub"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="variants"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="inc-sampling"/>
             <xs:element ref="stg"/>
 <!-- stem group -->
             <xs:element minOccurs="0" ref="audio"/>
@@ -152,6 +153,7 @@ This has been changed 2019-05-13 -->
 <!-- homonym id -->
                <xs:attribute ref="pos" use="required"/>
 <!-- part of speech -->
+               <xs:attribute name="sem_type" type="xs:string"/>
                <xs:attribute ref="src"/>
                <xs:attribute name="type" type="PosType"/>
                <xs:attribute ref="val"/>
@@ -259,6 +261,7 @@ This has been changed 2019-05-13 -->
 <!-- varid: variation contains indication of +v1, +v2 -->
       </xs:complexType>
    </xs:element>
+
    <xs:element name="mini_paradigm">
       <xs:complexType>
          <xs:sequence>
@@ -319,6 +322,8 @@ This has been changed 2019-05-13 -->
       <xs:restriction base="xs:string">
          <xs:enumeration value="A"/>
 <!-- adjective  -->
+         <xs:enumeration value="Adp"/>
+<!-- adposition most languages use Po and Pr for orientation -->
          <xs:enumeration value="Adv"/>
 <!-- adverb -->
          <xs:enumeration value="Art"/>
@@ -875,6 +880,9 @@ This has been changed 2019-05-13 -->
          <xs:attribute ref="lemmaID"/>
 	 <xs:attribute ref="stemID"/>
          <xs:attribute ref="nx"/>
+         <xs:attribute ref="pos"/>
+         <xs:attribute name="modality" type="xs:string"/>
+         <xs:attribute ref="src"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="comp">
@@ -892,6 +900,7 @@ This has been changed 2019-05-13 -->
             </xs:simpleType>
          </xs:attribute>
          <xs:attribute name="drv" type="xs:string"/>
+         <xs:attribute name="fin" type="xs:string"/>
          <xs:attribute ref="ms"/>
          <xs:attribute ref="pos"/>
          <xs:attribute ref="xml:lang"/>
@@ -941,6 +950,8 @@ This has been changed 2019-05-13 -->
          <xs:attribute ref="lemmaID"/>
 	 <xs:attribute ref="stemID"/>
          <xs:attribute ref="nx"/>
+         <xs:attribute name="algu_lekseemi_id" type="xs:string"/>
+         <xs:attribute name="id" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="etym">
@@ -998,9 +1009,10 @@ This has been changed 2019-05-13 -->
    <xs:element name="semantics">
       <xs:complexType>
          <xs:sequence>
-            <xs:element ref="sem" maxOccurs="unbounded"/>
+            <xs:element ref="sem" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="semRel"/>
          </xs:sequence>
+         <xs:attribute name="sem_type" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="sem">
@@ -1020,6 +1032,7 @@ This has been changed 2019-05-13 -->
             <xs:element ref="tCtn"/>
          </xs:choice>
          <xs:attribute ref="xml:lang"/>
+         <xs:attribute name="descr_trans" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="tCtn">
@@ -1142,6 +1155,7 @@ This has been changed 2019-05-13 -->
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="xg"/>
          </xs:sequence>
          <xs:attribute name="id" type="xs:string"/>
+         <xs:attribute name="relId" type="xs:string"/>
          <xs:attribute ref="domain"/>
          <xs:attribute ref="No"/>
          <xs:attribute ref="src"/>
@@ -1273,6 +1287,8 @@ This has been changed 2019-05-13 -->
 	   <xs:attribute name="lesson" type="xs:string"/>
 	   <xs:attribute name="mgs" type="xs:string"/>
 	   <xs:attribute name="name" type="xs:string"/>
+	   <xs:attribute name="page" type="xs:string"/>
+	   <xs:attribute name="type" type="xs:string"/>
 	 </xs:extension>
        </xs:simpleContent>
      </xs:complexType>

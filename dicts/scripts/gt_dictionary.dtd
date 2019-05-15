@@ -170,7 +170,7 @@
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ATTLIST re
-	  xml:lang ( nob | sme | sma | smn | swe | eng | deu ) #IMPLIED
+	  xml:lang ( nob | sme | sma | smn | swe | eng | deu | lat) #IMPLIED
 >
 <!ATTLIST re x ( fad ) #IMPLIED >
 <!ATTLIST re comment CDATA #IMPLIED >

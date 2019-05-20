@@ -65,9 +65,9 @@
 <!-- beginning of insertion pos, type, val 2018-11-09 -->
 		    <xsl:copy-of select="../../l/@pos"/>
 		    <xsl:copy-of select="../../l/@type"/>
-		    <xsl:copy-of select="../../l/@val"/>
+<!-- val is given in lexc  <xsl:copy-of select="../../l/@val"/> 2019-05-20 -->
 <!-- end of insertion pos, type, val 2018-11-09 -->
-		    <xsl:copy-of select="../../l/@sem_type"/>
+		    <xsl:copy-of select="../../../mg[1]/semantics[1]/@sem_type"/>
 		    <xsl:copy-of select="../../l/@etym_orig"/>
 		    <xsl:copy-of select="./@status"/>
 		    <xsl:copy-of select="./@varid"/>
@@ -150,12 +150,13 @@
 							   then
 							   concat('+',./@type)
 							   else concat('','')"/>
-		  <xsl:variable name="current_val" select="if (./@val
+<!--		  <xsl:variable name="current_val" select="if (./@val
 							   and
 							   not(normalize-space(./@val)=''))
 							   then
 							   concat('+',./@val)
 							   else concat('','')"/>
+Remove val 2019-05-20 -->
 <!-- end of insertion pos, type, val 2018-11-09 -->
 		  <xsl:variable name="current_sem_type" select="if (./@sem_type
 							   and
@@ -177,7 +178,7 @@
 							   else concat('','')"/>
 <!-- beginning of insertion pos, type, val 2018-11-09 -->
 		  <xsl:value-of select="if (./@stem = '') then concat(., $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)
-					else concat(.,$current_hid,$current_varid,$current_pos,$current_type,$current_val,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
+					else concat(.,$current_hid,$current_varid,$current_pos,$current_type,$current_sem_type,$current_etym_orig,$current_status, $cl, ./@stem, $spc, ./@cl, $spc, $spc, $qm, ./@t, $qm, $spc, $scl, $nl)"/>
 <!-- end of insertion pos, type, val 2018-11-09 -->
 		</xsl:for-each>
 	      </xsl:if>

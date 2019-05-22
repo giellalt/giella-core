@@ -101,8 +101,6 @@ for lang in sys.argv[1:]:
     if err_len != corr_len:
         raise SystemExit(f'erroneous input. err: {err_len}, corr: {corr_len}')
 
-    print(f'all well so far. err: {err_len}, corr: {corr_len}')
-
     for sentence_no, error_sentence in enumerate(error_sentences):
         if sentence_no < 50:
             if error_sentence.strip():

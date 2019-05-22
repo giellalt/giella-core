@@ -26,41 +26,47 @@ import sys
 from corpustools import util
 
 
-def getpath(lang: str) -> str:
+def getpath(corpus_lang: str) -> str:
+    """Get the corpus path."""
     gtfree = str(os.getenv('GTFREE'))
 
-    return os.path.join(gtfree, 'goldstandard/converted', lang)
+    return os.path.join(gtfree, 'goldstandard/converted', corpus_lang)
 
 
-def get_error_sentences(lang: str, runner: util.ExternalCommandRunner) -> str:
+def get_error_sentences(corpus_lang: str,
+                        runner: util.ExternalCommandRunner) -> str:
+    """Get the sentences containing errors from the corpus."""
     runner = util.ExternalCommandRunner()
-    runner.run(f'ccat -a -l {lang} {getpath(lang)}'.split())
+    runner.run(f'ccat -a -l {corpus_lang} {getpath(corpus_lang)}'.split())
     return runner.stdout.decode('utf-8')
 
 
-def get_correct_sentences(lang: str,
+def get_correct_sentences(corpus_lang: str,
                           runner: util.ExternalCommandRunner) -> str:
-    runner.run(f'ccat -c -a -l {lang} {getpath(lang)}'.split())
+    """Get the corrected sentences from the corpus."""
+    runner.run(f'ccat -c -a -l {corpus_lang} {getpath(corpus_lang)}'.split())
     return runner.stdout.decode('utf-8')
 
 
-def correct(error: list, to_correct: str) -> str:
+def correct(error: list, sentence: str) -> str:
+    """Replace the given error with the first correction."""
     print(error)
     start = error[1]
     fixes = error[5]
     end = error[2]
     if fixes:
-        return ''.join([to_correct[:start], fixes[0], to_correct[end:]])
-    else:
-        return to_correct
+        return ''.join([sentence[:start], fixes[0], sentence[end:]])
+
+    return sentence
 
 
-def gramcheck(error_sentence: str, lang: str,
+def gramcheck(sentence: str, corpus_lang: str,
               runner: util.ExternalCommandRunner) -> str:
+    """Run the gramchecker on the error_sentence."""
     three2two = {'sme': 'se'}
     runner.run(
-        f'divvun-checker -l {three2two[lang]} -n smegram'.split(),
-        to_stdin=error_sentence.encode('utf-8'))
+        f'divvun-checker -l {three2two[corpus_lang]} -n smegram'.split(),
+        to_stdin=sentence.encode('utf-8'))
 
     output = json.loads(runner.stdout)
     if output['errs']:
@@ -69,10 +75,26 @@ def gramcheck(error_sentence: str, lang: str,
     return output
 
 
+def get_gramcheck_results(sentence: str, errors: dict) -> str:
+    """Replace errors with corrections from the error dict."""
+    corrected_sentence = sentence
+    for error in reversed(errors):
+        corrected_sentence = correct(error, corrected_sentence)
+
+    return corrected_sentence
+
+
 for lang in sys.argv[1:]:
-    runner = util.ExternalCommandRunner()
-    error_sentences = get_error_sentences(lang, runner).split(u'\n')
-    correct_sentences = get_correct_sentences(lang, runner).split(u'\n')
+    command_runner = util.ExternalCommandRunner()
+    error_sentences = [
+        sentence
+        for sentence in get_error_sentences(lang, command_runner).split(u'\n')
+        if sentence.strip()
+    ]
+    correct_sentences = [
+        sentence for sentence in get_correct_sentences(lang, command_runner).
+        split(u'\n') if sentence.strip()
+    ]
 
     err_len = len(error_sentences)
     corr_len = len(correct_sentences)
@@ -81,22 +103,23 @@ for lang in sys.argv[1:]:
 
     print(f'all well so far. err: {err_len}, corr: {corr_len}')
 
-    for x, error_sentence in enumerate(error_sentences):
-        if x < 50:
+    for sentence_no, error_sentence in enumerate(error_sentences):
+        if sentence_no < 50:
             if error_sentence.strip():
-                check_output = gramcheck(error_sentence, lang, runner)
+                check_output = gramcheck(error_sentence, lang, command_runner)
                 corrected = check_output['text']
-                y = 0
-                while check_output['errs'] and y < 10:
-                    print(f'hoi! {y} {check_output}')
+                gramcheck_runs = 0
+                while check_output['errs'] and gramcheck_runs < 10:
                     to_correct = corrected
-                    for error in reversed(check_output['errs']):
-                        print(f'before {y}: {corrected}')
-                        corrected = correct(error, corrected)
-                        print(f'after {y}: {corrected}\n')
-                    check_output = gramcheck(corrected, lang, runner)
-                    y += 1
-                if y:  #  to only print those with errors
-                    print(f'{x} {error_sentence}')
-                    print(f'{x} {corrected}')
+                    corrected = get_gramcheck_results(to_correct,
+                                                      check_output['errs'])
+                    check_output = gramcheck(corrected, lang, command_runner)
+                    gramcheck_runs += 1
+                if gramcheck_runs:  # to only print those with errors
+                    print(f'errorsentence\t{sentence_no} {gramcheck_runs} '
+                          f'{error_sentence}')
+                    print(f'gramcheck\t{sentence_no} {gramcheck_runs} '
+                          f'{corrected}')
+                    print(f'ccat facit\t{sentence_no} {gramcheck_runs} '
+                          f'{correct_sentences[sentence_no]}')
                     print()

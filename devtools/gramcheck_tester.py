@@ -140,9 +140,9 @@ def make_error(error_parts: list) -> str:
     ]):
         errors = []
         errors.append(f'<li><span class="error{errno}">«')
-        errors.append(error[0])
-        errors.append('» ➞ «')
-        errors.append(', '.join(error[1]))
+        errors.append(error[0].replace(' ', ' '))
+        errors.append('» ➞<br/>«')
+        errors.append('<br/>'.join(error[1]))
         errors.append('»</span></li>')
         unordered_list.append(etree.fromstring(''.join(errors)))
 

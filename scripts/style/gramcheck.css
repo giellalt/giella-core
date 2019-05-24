@@ -1,0 +1,115 @@
+/* A CSS stylesheet to make speller test result xml files readable in
+ * browsers.
+ */
+
+#results {
+    display: table-cell;
+    padding: 0.2em;
+    display: table;
+    border-spacing: 0 0.25em;
+    border-collapse: separate;
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    text-align: left;
+    background-color: #fff;
+    clear: both;
+}
+
+td, th {
+    vertical-align: top;
+}
+
+td {
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.error0 {
+    background-color: #aa5500 ;
+}
+
+.error1 {
+    background-color: #00aa00 ;
+}
+
+.error2 {
+    background-color: #aaaa00 ;
+}
+
+.error3 {
+    background-color: #00ff00 ;
+}
+
+.error4 {
+    background-color: #aaff00 ;
+}
+
+.error5 {
+    background-color: #aa557f ;
+}
+
+.error6 {
+    background-color: #00aa7f ;
+}
+
+.error7 {
+    background-color: #aaaa7f ;
+}
+
+.error8 {
+    background-color: #00ff7f ;
+}
+
+.error9 {
+    background-color: #aaff7f ;
+}
+
+.error10 {
+    background-color: #aa55ff ;
+}
+
+.error11 {
+    background-color: #00aaff ;
+}
+
+.error12 {
+    background-color: #aaaaff ;
+}
+
+.error13 {
+    background-color: #00ffff ;
+}
+
+.error14 {
+    background-color: #aaffff ;
+}
+
+.error15 {
+    background-color: #ff5500 ;
+}
+
+.error16 {
+    background-color: #55aa00 ;
+}
+
+.error17 {
+    background-color: #ffaa00 ;
+}
+
+.error18 {
+    background-color: #55ff00 ;
+}
+
+.error19 {
+    background-color: #ffff00 ;
+}
+
+.error20 {
+    background-color: #ff557f ;
+}

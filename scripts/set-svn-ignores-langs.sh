@@ -112,6 +112,7 @@ $fstfiles
 $svnignore "$mkfiles
 $fstfiles
 *.txt
+*.lexc
 *.regex" $1/src/filters
 
 # Ignore all temporary and generated files in the src/hyphenation/ dir:

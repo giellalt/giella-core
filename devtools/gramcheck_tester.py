@@ -139,13 +139,15 @@ def make_error(error_parts: list) -> str:
             error_part for error_part in error_parts
             if not isinstance(error_part, str)
     ]):
-        errors = []
-        errors.append(f'<li><span class="error{errno}">«')
-        errors.append(error[0].replace(' ', ' '))
-        errors.append('» ➞<br/>«')
-        errors.append('<br/>'.join(error[1]))
-        errors.append('»</span></li>')
-        unordered_list.append(etree.fromstring(''.join(errors)))
+        unordered_list = etree.SubElement(table_d, 'ul')
+        list_element = etree.SubElement(unordered_list, 'li')
+        list_element.set('class', f'error{errno}')
+        list_element.text = f'«{error[0]}» ➞'.replace(' ', ' ')
+        sublist = etree.SubElement(list_element, 'ul')
+        for suberror in error[1]:
+            sub_li = etree.SubElement(sublist, 'li')
+            sub_li.set('class', f'error{errno}')
+            sub_li.text = f'«{suberror}»'.replace(' ', ' ')
 
     return table_d
 

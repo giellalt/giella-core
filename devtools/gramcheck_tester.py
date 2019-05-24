@@ -83,7 +83,7 @@ def make_orig(error_parts: list) -> str:
 
     Mark it up with error classes.
     """
-    orig = ['<td>']
+    orig = ['<div class="grid-item">']
 
     error_count = 0
     for error_part in error_parts:
@@ -93,7 +93,7 @@ def make_orig(error_parts: list) -> str:
             orig.append(
                 f'<span class="error{error_count}">{error_part[0]}</span>')
             error_count += 1
-    orig.append('</td>')
+    orig.append('</div>')
 
     return ''.join(orig)
 
@@ -105,7 +105,7 @@ def make_corrected(error_parts: list, for_web: bool = False) -> str:
     """
     orig = []
     if for_web:
-        orig.append('<td>')
+        orig.append('<div class="grid-item">')
     error_count = 0
     for error_part in error_parts:
         if isinstance(error_part, str):
@@ -122,7 +122,7 @@ def make_corrected(error_parts: list, for_web: bool = False) -> str:
             error_count += 1
 
     if for_web:
-        orig.append('</td>')
+        orig.append('</div>')
 
     return ''.join(orig)
 
@@ -132,7 +132,8 @@ def make_error(error_parts: list) -> str:
 
     It has the same class as the errors.
     """
-    table_d = etree.Element('td')
+    table_d = etree.Element('div')
+    table_d.set('class', 'grid-item')
     unordered_list = etree.SubElement(table_d, 'ul')
     for errno, error in enumerate([
             error_part for error_part in error_parts
@@ -151,21 +152,19 @@ def make_error(error_parts: list) -> str:
 
 def make_error_parts_table(error_parts_list: list):
     """Make the sub table to display errors."""
-    error_table = etree.Element('table')
-    error_table_head = etree.SubElement(error_table, 'thead')
-    first_tr = etree.SubElement(error_table_head, 'tr')
+
+    error_table = etree.Element('div')
+    error_table.set('class', 'grid-container')
     for header in ['error sentence', 'corrections', 'errors']:
-        thead = etree.SubElement(first_tr, 'th')
+        thead = etree.SubElement(error_table, 'div')
+        thead.set('class', 'grid-item')
         thead.text = header
 
-    main_table_tbody = etree.SubElement(error_table, 'tbody')
-
     for error_parts in error_parts_list:
-        table_row = etree.SubElement(main_table_tbody, 'tr')
-        table_row.append(etree.fromstring(make_orig(error_parts)))
-        table_row.append(
+        error_table.append(etree.fromstring(make_orig(error_parts)))
+        error_table.append(
             etree.fromstring(make_corrected(error_parts, for_web=True)))
-        table_row.append(make_error(error_parts))
+        error_table.append(make_error(error_parts))
 
     return error_table
 

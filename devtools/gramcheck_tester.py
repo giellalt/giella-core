@@ -226,7 +226,7 @@ def make_html():
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"> </script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.js" integrity="sha256-/kLSC4kLFkslkJlaTgB7TjurN5TIcmWfMfaXyB6dVh0=" crossorigin="anonymous"> </script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.css" integrity="sha256-lxcbK1S14B8LMgrEir2lv2akbdyYwD1FwMhFgh2ihls=" crossorigin="anonymous"/>
-            <link rel="stylesheet" href="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/gramcheck.css"/>
+            <link type="text/css" rel="stylesheet" href="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/gramcheck.css"/>
         </head>
     '''))  # noqa: E501
 

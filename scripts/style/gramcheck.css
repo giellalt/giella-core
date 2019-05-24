@@ -30,88 +30,84 @@ td {
     margin-bottom: 2px;
 }
 
-.error0 {
+.error0, .error20, .error40 {
     background-color: #aa5500 ;
 }
 
-.error1 {
+.error1, .error21, .error41 {
     background-color: #00aa00 ;
 }
 
-.error2 {
+.error2, .error22, .error42 {
     background-color: #aaaa00 ;
 }
 
-.error3 {
+.error3, .error23, .error43 {
     background-color: #00ff00 ;
 }
 
-.error4 {
+.error4, .error24, .error44 {
     background-color: #aaff00 ;
 }
 
-.error5 {
+.error5, .error25, .error45 {
     background-color: #aa557f ;
 }
 
-.error6 {
+.error6, .error26, .error46 {
     background-color: #00aa7f ;
 }
 
-.error7 {
+.error7, .error27, .error47 {
     background-color: #aaaa7f ;
 }
 
-.error8 {
+.error8, .error28, .error48 {
     background-color: #00ff7f ;
 }
 
-.error9 {
+.error9, .error29, .error49 {
     background-color: #aaff7f ;
 }
 
-.error10 {
+.error10, .error30, .error50 {
     background-color: #aa55ff ;
 }
 
-.error11 {
+.error11, .error31, .error51 {
     background-color: #00aaff ;
 }
 
-.error12 {
+.error12, .error32, .error52 {
     background-color: #aaaaff ;
 }
 
-.error13 {
+.error13, .error33, .error53 {
     background-color: #00ffff ;
 }
 
-.error14 {
+.error14, .error34, .error54 {
     background-color: #aaffff ;
 }
 
-.error15 {
+.error15, .error35, .error55 {
     background-color: #ff5500 ;
 }
 
-.error16 {
+.error16, .error36, .error56 {
     background-color: #55aa00 ;
 }
 
-.error17 {
+.error17, .error37, .error57 {
     background-color: #ffaa00 ;
 }
 
-.error18 {
+.error18, .error38, .error58 {
     background-color: #55ff00 ;
 }
 
-.error19 {
+.error19, .error39, .error59 {
     background-color: #ffff00 ;
-}
-
-.error20 {
-    background-color: #ff557f ;
 }
 
 .grid-container {

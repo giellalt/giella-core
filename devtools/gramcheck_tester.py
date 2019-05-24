@@ -267,11 +267,11 @@ def main():
         html = make_html()
         body = etree.SubElement(html, 'body')
         body.append(make_table(error_data_list))
-        body.append(
-            etree.fromstring('''
-            <script
-                src="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/javascript/tablesorter.js">
-            </script>'''))
+        # body.append(
+        #    etree.fromstring('''
+        #    <script
+        #        src="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/javascript/tablesorter.js">
+        #    </script>'''))
 
         with open('/tmp/tmp1.html', 'wb') as tmp1:
             tmp1.write(

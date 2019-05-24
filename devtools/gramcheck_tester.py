@@ -236,9 +236,9 @@ def parse_options():
     """Parse the options given to the program."""
     parser = argparse.ArgumentParser(description='Test the grammarchecker.')
 
-    parser.add_argument('zcheck_file', help='Name of the zcheck file to use.')
+    parser.add_argument('zcheck_file', help='Path to the zcheck file to use.')
 
-    parser.add_argument('result_file', help='Name the resulting html file.')
+    parser.add_argument('result_file', help='Path to resulting html file.')
 
     args = parser.parse_args()
     return args

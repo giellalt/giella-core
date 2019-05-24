@@ -20,11 +20,10 @@
 #
 """Run grammarchecker tests."""
 import argparse
-import json
 import os
-import sys
 from pathlib import Path
 
+import libdivvun
 from lxml import etree
 
 from corpustools import util
@@ -51,14 +50,25 @@ def get_correct_sentences(lang: str,
     return runner.stdout.decode('utf-8')
 
 
-def gramcheck(sentence: str, zcheck_file: str,
-              runner: util.ExternalCommandRunner) -> str:
-    """Run the gramchecker on the error_sentence."""
-    runner.run(
-        f'divvun-checker -a {zcheck_file} -n smegram'.split(),
-        to_stdin=sentence.encode('utf-8'))
+def libdivvun2dict(libdivvun_error) -> list:
+    """Turn libdivvun error format to dict."""
+    return [
+        libdivvun_error.form, libdivvun_error.beg, libdivvun_error.end,
+        libdivvun_error.err, libdivvun_error.dsc,
+        list(libdivvun_error.rep)
+    ]
 
-    return json.loads(runner.stdout)
+
+def gramcheck(sentence: str, checker) -> dict:
+    """Run the gramchecker on the error_sentence."""
+    errors = {'errs': [], 'text': sentence}
+
+    errors['errs'] = [
+        libdivvun2dict(libdivvun_error)
+        for libdivvun_error in libdivvun.proc_errs_bytes(checker, sentence)
+    ]
+
+    return errors
 
 
 def make_error_parts(grammarcheck_result: dict) -> list:
@@ -71,7 +81,10 @@ def make_error_parts(grammarcheck_result: dict) -> list:
     text: str = grammarcheck_result['text']
     for error in grammarcheck_result['errs']:
         hint.append(text[previous_end:error[1]])
-        hint.append([error[0], error[5] if error[5] else ['']])
+        if error[3] == 'typo':
+            hint.append([error[0], error[5] if error[5] else [error[0]]])
+        else:
+            hint.append([error[0], error[5] if error[5] else ['']])
         previous_end = error[2]
     hint.append(text[previous_end:])
 
@@ -171,10 +184,9 @@ def make_error_parts_table(error_parts_list: list):
     return error_table
 
 
-def make_gramcheck_runs(error_sentence: str, lang: str,
-                        runner: util.ExternalCommandRunner) -> list:
+def make_gramcheck_runs(error_sentence: str, checker) -> list:
     """Turn error_sentence and grammar checks to a list."""
-    gramcheck_dict: dict = gramcheck(error_sentence, lang, runner)
+    gramcheck_dict: dict = gramcheck(error_sentence, checker)
     error_parts_list: list = []
 
     gramcheck_runs = 0
@@ -182,7 +194,7 @@ def make_gramcheck_runs(error_sentence: str, lang: str,
         error_parts = make_error_parts(gramcheck_dict)
         error_parts_list.append(error_parts)
         gramcheck_runs += 1
-        gramcheck_dict = gramcheck(make_corrected(error_parts), lang, runner)
+        gramcheck_dict = gramcheck(make_corrected(error_parts), checker)
 
     return error_parts_list
 
@@ -246,25 +258,18 @@ def parse_options():
     return args
 
 
-def main():
-    """The main routine of the grammarcheck result script."""
-    args = parse_options()
+def get_sentences(lang):
+    """Get error and reference sentences from goldstandard corpus."""
+    runner = util.ExternalCommandRunner()
 
-    urg = Path(sys.argv[1])
-    lang = urg.name.replace(urg.suffix, '')
-
-    if lang == 'se':
-        lang = 'sme'
-
-    command_runner = util.ExternalCommandRunner()
     error_sentences = [
-        sentence
-        for sentence in get_error_sentences(lang, command_runner).split(u'\n')
+        sentence for sentence in get_error_sentences(lang, runner).split(u'\n')
         if sentence.strip()
     ]
     correct_sentences = [
-        sentence for sentence in get_correct_sentences(lang, command_runner).
-        split(u'\n') if sentence.strip()
+        sentence
+        for sentence in get_correct_sentences(lang, runner).split(u'\n')
+        if sentence.strip()
     ]
 
     err_len = len(error_sentences)
@@ -272,27 +277,54 @@ def main():
     if err_len != corr_len:
         raise SystemExit(f'erroneous input. err: {err_len}, corr: {corr_len}')
 
-    huff = [(error_sentence, correct_sentence)
+    return [(error_sentence, correct_sentence)
             for error_sentence, correct_sentence in zip(
                 error_sentences, correct_sentences)]
 
-    error_data_list = [
-        (error_sentence, correct_sentence,
-         make_gramcheck_runs(error_sentence, args.zcheck_file, command_runner))
-        for error_sentence, correct_sentence in huff[2440:]
-        if error_sentence.strip()
-        and not ('Nu fal. Nu dehalaš' in error_sentence
-                 or 'Okta joavku mas čuojahan' in error_sentence)
-    ]
 
+def get_checker(zcheck_file: str):
+    """Get a divvun gramchecker."""
+    spec = libdivvun.ArCheckerSpec(zcheck_file)
+    return spec.getChecker(spec.defaultPipe(), False)
+
+
+def get_error_data_list(zcheck_file: str) -> list:
+    """Make error data from grammar checker."""
+    zcheck_path = Path(zcheck_file)
+    lang = zcheck_path.name.replace(zcheck_path.suffix, '')
+    if lang == 'se':
+        lang = 'sme'
+
+    checker = get_checker(zcheck_file)
+
+    return [(error_sentence, correct_sentence,
+             make_gramcheck_runs(error_sentence, checker))
+            for error_sentence, correct_sentence in get_sentences(lang)
+            if error_sentence.strip()
+            and not ('Nu fal. Nu dehalaš' in error_sentence
+                     or 'Okta joavku mas čuojahan' in error_sentence)]
+
+
+def create_html(error_data_list: list) -> etree.Element:
+    """Create errordata html."""
     html = make_html()
     body = etree.SubElement(html, 'body')
     body.append(make_table(error_data_list))
     body.append(
-       etree.fromstring('''
+        etree.fromstring('''
        <script
            src="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/javascript/tablesorter.js">
        </script>'''))  # noqa: E501
+
+    return html
+
+
+def main() -> None:
+    """The main routine of the grammarcheck result script."""
+    args = parse_options()
+
+    error_data_list = get_error_data_list(args.zcheck_file)
+    html = create_html(error_data_list)
 
     with open(args.result_file, 'wb') as result_stream:
         result_stream.write(

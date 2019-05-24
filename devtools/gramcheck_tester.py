@@ -18,10 +18,12 @@
 #   Copyright © 2019 The University of Tromsø
 #   http://giellatekno.uit.no & http://divvun.no
 #
-"""Classes and functions to run grammarchecker tests."""
+"""Run grammarchecker tests."""
+import argparse
 import json
 import os
 import sys
+from pathlib import Path
 
 from lxml import etree
 
@@ -49,12 +51,11 @@ def get_correct_sentences(lang: str,
     return runner.stdout.decode('utf-8')
 
 
-def gramcheck(sentence: str, corpus_lang: str,
+def gramcheck(sentence: str, zcheck_file: str,
               runner: util.ExternalCommandRunner) -> str:
     """Run the gramchecker on the error_sentence."""
-    three2two = {'sme': 'se'}
     runner.run(
-        f'divvun-checker -l {three2two[corpus_lang]} -n smegram'.split(),
+        f'divvun-checker -a {zcheck_file} -n smegram'.split(),
         to_stdin=sentence.encode('utf-8'))
 
     return json.loads(runner.stdout)
@@ -227,59 +228,79 @@ def make_html():
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.min.css" integrity="sha256-lxcbK1S14B8LMgrEir2lv2akbdyYwD1FwMhFgh2ihls=" crossorigin="anonymous"/>
             <link rel="stylesheet" href="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/gramcheck.css"/>
         </head>
-    '''))
+    '''))  # noqa: E501
 
     return html
 
 
+def parse_options():
+    """Parse the options given to the program."""
+    parser = argparse.ArgumentParser(description='Test the grammarchecker.')
+
+    parser.add_argument('zcheck_file', help='Name of the zcheck file to use.')
+
+    parser.add_argument('result_file', help='Name the resulting html file.')
+
+    args = parser.parse_args()
+    return args
+
+
 def main():
     """The main routine of the grammarcheck result script."""
-    for lang in sys.argv[1:]:
-        command_runner = util.ExternalCommandRunner()
-        error_sentences = [
-            sentence for sentence in get_error_sentences(lang, command_runner).
-            split(u'\n') if sentence.strip()
-        ]
-        correct_sentences = [
-            sentence for sentence in get_correct_sentences(
-                lang, command_runner).split(u'\n') if sentence.strip()
-        ]
+    args = parse_options()
 
-        err_len = len(error_sentences)
-        corr_len = len(correct_sentences)
-        if err_len != corr_len:
-            raise SystemExit(
-                f'erroneous input. err: {err_len}, corr: {corr_len}')
+    urg = Path(sys.argv[1])
+    lang = urg.name.replace(urg.suffix, '')
 
-        huff = [(error_sentence, correct_sentence)
-                for error_sentence, correct_sentence in zip(
-                    error_sentences, correct_sentences)]
+    if lang == 'se':
+        lang = 'sme'
 
-        error_data_list = [
-            (error_sentence, correct_sentence,
-             make_gramcheck_runs(error_sentence, lang, command_runner))
-            for error_sentence, correct_sentence in huff[2440:]
-            if error_sentence.strip()
-            and not ('Nu fal. Nu dehalaš' in error_sentence
-                     or 'Okta joavku mas čuojahan' in error_sentence)
-        ]
+    command_runner = util.ExternalCommandRunner()
+    error_sentences = [
+        sentence
+        for sentence in get_error_sentences(lang, command_runner).split(u'\n')
+        if sentence.strip()
+    ]
+    correct_sentences = [
+        sentence for sentence in get_correct_sentences(lang, command_runner).
+        split(u'\n') if sentence.strip()
+    ]
 
-        html = make_html()
-        body = etree.SubElement(html, 'body')
-        body.append(make_table(error_data_list))
-        # body.append(
-        #    etree.fromstring('''
-        #    <script
-        #        src="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/javascript/tablesorter.js">
-        #    </script>'''))
+    err_len = len(error_sentences)
+    corr_len = len(correct_sentences)
+    if err_len != corr_len:
+        raise SystemExit(f'erroneous input. err: {err_len}, corr: {corr_len}')
 
-        with open('/tmp/tmp1.html', 'wb') as tmp1:
-            tmp1.write(
-                etree.tostring(
-                    html,
-                    pretty_print=True,
-                    encoding='utf-8',
-                    xml_declaration=True))
+    huff = [(error_sentence, correct_sentence)
+            for error_sentence, correct_sentence in zip(
+                error_sentences, correct_sentences)]
+
+    error_data_list = [
+        (error_sentence, correct_sentence,
+         make_gramcheck_runs(error_sentence, args.zcheck_file, command_runner))
+        for error_sentence, correct_sentence in huff[2440:]
+        if error_sentence.strip()
+        and not ('Nu fal. Nu dehalaš' in error_sentence
+                 or 'Okta joavku mas čuojahan' in error_sentence)
+    ]
+
+    html = make_html()
+    body = etree.SubElement(html, 'body')
+    body.append(make_table(error_data_list))
+    # body.append(
+    #    etree.fromstring('''
+    #    <script
+    #        src="https://gtsvn.uit.no/langtech/
+    #        trunk/giella-core/scripts/javascript/tablesorter.js">
+    #    </script>'''))
+
+    with open(args.result_file, 'wb') as result_stream:
+        result_stream.write(
+            etree.tostring(
+                html,
+                pretty_print=True,
+                encoding='utf-8',
+                xml_declaration=True))
 
 
 main()

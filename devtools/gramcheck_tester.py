@@ -286,12 +286,11 @@ def main():
     html = make_html()
     body = etree.SubElement(html, 'body')
     body.append(make_table(error_data_list))
-    # body.append(
-    #    etree.fromstring('''
-    #    <script
-    #        src="https://gtsvn.uit.no/langtech/
-    #        trunk/giella-core/scripts/javascript/tablesorter.js">
-    #    </script>'''))
+    body.append(
+       etree.fromstring('''
+       <script
+           src="https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/javascript/tablesorter.js">
+       </script>'''))  # noqa: E501
 
     with open(args.result_file, 'wb') as result_stream:
         result_stream.write(

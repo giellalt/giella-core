@@ -20,10 +20,12 @@
 #
 """Run grammarchecker tests."""
 import argparse
+import json
+import multiprocessing
 import os
+import pickle
 from pathlib import Path
 
-import libdivvun
 from lxml import etree
 
 from corpustools import util
@@ -50,25 +52,14 @@ def get_correct_sentences(lang: str,
     return runner.stdout.decode('utf-8')
 
 
-def libdivvun2dict(libdivvun_error) -> list:
-    """Turn libdivvun error format to dict."""
-    return [
-        libdivvun_error.form, libdivvun_error.beg, libdivvun_error.end,
-        libdivvun_error.err, libdivvun_error.dsc,
-        list(libdivvun_error.rep)
-    ]
-
-
-def gramcheck(sentence: str, checker) -> dict:
+def gramcheck(sentence: str, zcheck_file: str,
+              runner: util.ExternalCommandRunner) -> dict:
     """Run the gramchecker on the error_sentence."""
-    errors = {'errs': [], 'text': sentence}
+    runner.run(
+        f'divvun-checker -a {zcheck_file} -n smegram'.split(),
+        to_stdin=sentence.encode('utf-8'))
 
-    errors['errs'] = [
-        libdivvun2dict(libdivvun_error)
-        for libdivvun_error in libdivvun.proc_errs_bytes(checker, sentence)
-    ]
-
-    return errors
+    return json.loads(runner.stdout)
 
 
 def make_error_parts(grammarcheck_result: dict) -> list:
@@ -96,48 +87,64 @@ def make_orig(error_parts: list) -> str:
 
     Mark it up with error classes.
     """
-    orig = ['<div class="grid-item">']
+    orig = etree.Element('div')
+    orig.set('class', 'grid-item')
+    orig.text = error_parts[0]
 
     error_count = 0
-    for error_part in error_parts:
+    span = etree.Element('span')
+    for error_part in error_parts[1:]:
         if isinstance(error_part, str):
-            orig.append(error_part)
+            span.tail = error_part
+            orig.append(span)
+            span = etree.Element('span')
         else:
-            orig.append(
-                f'<span class="error{error_count}">{error_part[0]}</span>')
+            span.set('class', 'error{error_count}')
+            span.text = f'{error_part[0]}'
             error_count += 1
-    orig.append('</div>')
 
-    return ''.join(orig)
+    return orig
 
 
-def make_corrected(error_parts: list, for_web: bool = False) -> str:
-    """Make a corrected sentence.
-
-    If web ready, mark it up with error classes.
-    """
+def make_corrected(error_parts: list) -> str:
+    """Make a corrected sentence."""
     orig = []
-    if for_web:
-        orig.append('<div class="grid-item">')
     error_count = 0
     for error_part in error_parts:
         if isinstance(error_part, str):
             orig.append(error_part)
         else:
-            if for_web:
-                orig.append(f'<span class="error{error_count}">')
             if error_part[1][0].strip():
                 orig.append(error_part[1][0])
             else:
                 orig.append('😱')
-            if for_web:
-                orig.append('</span>')
             error_count += 1
 
-    if for_web:
-        orig.append('</div>')
-
     return ''.join(orig)
+
+
+def make_corrected_web(error_parts: list) -> etree.Element:
+    """Make a corrected sentence to be used in the html report."""
+    corrected = etree.Element('div')
+    corrected.set('class', 'grid-item')
+    corrected.text = error_parts[0]
+
+    error_count = 0
+    span = etree.Element('span')
+    for error_part in error_parts[1:]:
+        if isinstance(error_part, str):
+            span.tail = error_part
+            corrected.append(span)
+            span = etree.Element('span')
+        else:
+            span.set('class', 'error{error_count}')
+            if error_part[1][0].strip():
+                span.text = error_part[1][0]
+            else:
+                span.text = '😱'
+            error_count += 1
+
+    return corrected
 
 
 def make_error(error_parts: list) -> str:
@@ -176,17 +183,17 @@ def make_error_parts_table(error_parts_list: list):
         thead.text = header
 
     for error_parts in error_parts_list:
-        error_table.append(etree.fromstring(make_orig(error_parts)))
-        error_table.append(
-            etree.fromstring(make_corrected(error_parts, for_web=True)))
+        error_table.append(make_orig(error_parts))
+        error_table.append(make_corrected_web(error_parts))
         error_table.append(make_error(error_parts))
 
     return error_table
 
 
-def make_gramcheck_runs(error_sentence: str, checker) -> list:
+def make_gramcheck_runs(error_sentence: str, correct_sentence: str, lang: str,
+                        runner: util.ExternalCommandRunner) -> tuple:
     """Turn error_sentence and grammar checks to a list."""
-    gramcheck_dict: dict = gramcheck(error_sentence, checker)
+    gramcheck_dict: dict = gramcheck(error_sentence, lang, runner)
     error_parts_list: list = []
 
     gramcheck_runs = 0
@@ -194,9 +201,11 @@ def make_gramcheck_runs(error_sentence: str, checker) -> list:
         error_parts = make_error_parts(gramcheck_dict)
         error_parts_list.append(error_parts)
         gramcheck_runs += 1
-        gramcheck_dict = gramcheck(make_corrected(error_parts), checker)
+        gramcheck_dict = gramcheck(make_corrected(error_parts), lang, runner)
 
-    return error_parts_list
+    util.print_frame(gramcheck_runs, len(error_sentence))
+
+    return error_sentence, correct_sentence, error_parts_list
 
 
 def make_table(error_data_list: list):
@@ -249,17 +258,19 @@ def make_html():
 def parse_options():
     """Parse the options given to the program."""
     parser = argparse.ArgumentParser(description='Test the grammarchecker.')
-
     parser.add_argument('zcheck_file', help='Path to the zcheck file to use.')
-
     parser.add_argument('result_file', help='Path to resulting html file.')
 
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
-def get_sentences(lang):
+def get_sentences(zcheck_file):
     """Get error and reference sentences from goldstandard corpus."""
+    zcheck_path = Path(zcheck_file)
+    lang = zcheck_path.name.replace(zcheck_path.suffix, '')
+    if lang == 'se':
+        lang = 'sme'
+
     runner = util.ExternalCommandRunner()
 
     error_sentences = [
@@ -282,27 +293,27 @@ def get_sentences(lang):
                 error_sentences, correct_sentences)]
 
 
-def get_checker(zcheck_file: str):
-    """Get a divvun gramchecker."""
-    spec = libdivvun.ArCheckerSpec(zcheck_file)
-    return spec.getChecker(spec.defaultPipe(), False)
-
-
 def get_error_data_list(zcheck_file: str) -> list:
     """Make error data from grammar checker."""
-    zcheck_path = Path(zcheck_file)
-    lang = zcheck_path.name.replace(zcheck_path.suffix, '')
-    if lang == 'se':
-        lang = 'sme'
+    runner = util.ExternalCommandRunner()
+    sentences = get_sentences(zcheck_file)
 
-    checker = get_checker(zcheck_file)
+    pool = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
+    results = [
+        pool.apply_async(
+            make_gramcheck_runs,
+            args=(
+                error_sentence,
+                correct_sentence,
+                zcheck_file,
+                runner,
+            )) for error_sentence, correct_sentence in sentences
+        if error_sentence.strip()
+        and not ('Nu fal. Nu dehalaš' in error_sentence
+                 or 'Okta joavku mas čuojahan' in error_sentence)
+    ]
 
-    return [(error_sentence, correct_sentence,
-             make_gramcheck_runs(error_sentence, checker))
-            for error_sentence, correct_sentence in get_sentences(lang)
-            if error_sentence.strip()
-            and not ('Nu fal. Nu dehalaš' in error_sentence
-                     or 'Okta joavku mas čuojahan' in error_sentence)]
+    return [result.get() for result in results]
 
 
 def create_html(error_data_list: list) -> etree.Element:
@@ -319,14 +330,8 @@ def create_html(error_data_list: list) -> etree.Element:
     return html
 
 
-def main() -> None:
-    """The main routine of the grammarcheck result script."""
-    args = parse_options()
-
-    error_data_list = get_error_data_list(args.zcheck_file)
-    html = create_html(error_data_list)
-
-    with open(args.result_file, 'wb') as result_stream:
+def write_html(html: etree.Element, result_file: str) -> None:
+    with open(result_file, 'wb') as result_stream:
         result_stream.write(
             etree.tostring(
                 html,
@@ -335,4 +340,40 @@ def main() -> None:
                 xml_declaration=True))
 
 
-main()
+def main() -> None:
+    """The main routine of the grammarcheck result script."""
+    args = parse_options()
+
+    runner = util.ExternalCommandRunner()
+    sentences = get_sentences(args.zcheck_file)
+
+    pool = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
+    results = [
+        pool.apply_async(
+            make_gramcheck_runs,
+            args=(
+                error_sentence,
+                correct_sentence,
+                args.zcheck_file,
+                runner,
+            )) for error_sentence, correct_sentence in sentences
+        if error_sentence.strip()
+        and not ('Nu fal. Nu dehalaš' in error_sentence
+                 or 'Okta joavku mas čuojahan' in error_sentence)
+    ]
+
+    error_data_list = [result.get() for result in results]
+
+    with open('test.txt', 'wb') as kruff:
+        pickle.dump(error_data_list, kruff)
+
+    #with open('test.txt', 'rb') as kruff:
+        #error_data_list = pickle.load(kruff)
+
+    print('so far, so good')
+    html = create_html(error_data_list)
+    write_html(html, args.result_file)
+
+
+if __name__ == '__main__':
+    main()

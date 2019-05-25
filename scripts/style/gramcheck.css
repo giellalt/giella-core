@@ -1,14 +1,8 @@
-/* A CSS stylesheet to make speller test result xml files readable in
+/* A CSS stylesheet to make grammar checker test result xml files readable in
  * browsers.
  */
 
-table {
-  width: 100%;
-  table-layout: fixed;
-}
-
 #results {
-    display: table-cell;
     padding: 0.2em;
     display: table;
     border-spacing: 0 0.25em;
@@ -21,6 +15,16 @@ table {
     text-align: left;
     background-color: #fff;
     clear: both;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#orig, #ref {
+    width: 12%;
+}
+
+#runs {
+    width: 6%;
 }
 
 td, th {

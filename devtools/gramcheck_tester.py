@@ -72,10 +72,7 @@ def make_error_parts(grammarcheck_result: dict) -> list:
     text: str = grammarcheck_result['text']
     for error in grammarcheck_result['errs']:
         hint.append(text[previous_end:error[1]])
-        if error[3] == 'typo':
-            hint.append([error[0], error[5] if error[5] else [error[0]]])
-        else:
-            hint.append([error[0], error[5] if error[5] else ['']])
+        hint.append([error[0], error[5] if error[5] else ['']])
         previous_end = error[2]
     hint.append(text[previous_end:])
 

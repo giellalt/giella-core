@@ -2,6 +2,11 @@
  * browsers.
  */
 
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
 #results {
     display: table-cell;
     padding: 0.2em;

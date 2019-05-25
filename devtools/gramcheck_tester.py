@@ -176,7 +176,7 @@ def make_error_parts_table(error_parts_list: list):
     error_table.set('class', 'grid-container')
     for header in ['ErrorSentence', 'Corrections', 'Suggestions']:
         thead = etree.SubElement(error_table, 'div')
-        thead.set('class', header)
+        thead.set('class', f'grid-item {header.replace(" ", "_")}')
         thead.text = header
 
     for error_parts in error_parts_list:

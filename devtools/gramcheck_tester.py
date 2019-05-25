@@ -293,29 +293,6 @@ def get_sentences(zcheck_file):
                 error_sentences, correct_sentences)]
 
 
-def get_error_data_list(zcheck_file: str) -> list:
-    """Make error data from grammar checker."""
-    runner = util.ExternalCommandRunner()
-    sentences = get_sentences(zcheck_file)
-
-    pool = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
-    results = [
-        pool.apply_async(
-            make_gramcheck_runs,
-            args=(
-                error_sentence,
-                correct_sentence,
-                zcheck_file,
-                runner,
-            )) for error_sentence, correct_sentence in sentences
-        if error_sentence.strip()
-        and not ('Nu fal. Nu dehalaš' in error_sentence
-                 or 'Okta joavku mas čuojahan' in error_sentence)
-    ]
-
-    return [result.get() for result in results]
-
-
 def create_html(error_data_list: list) -> etree.Element:
     """Create errordata html."""
     html = make_html()
@@ -340,7 +317,7 @@ def write_html(html: etree.Element, result_file: str) -> None:
                 xml_declaration=True))
 
 
-def main() -> None:
+if __name__ == '__main__':
     """The main routine of the grammarcheck result script."""
     args = parse_options()
 
@@ -373,7 +350,3 @@ def main() -> None:
     print('so far, so good')
     html = create_html(error_data_list)
     write_html(html, args.result_file)
-
-
-if __name__ == '__main__':
-    main()

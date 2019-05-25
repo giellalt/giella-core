@@ -116,8 +116,10 @@ td {
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    min-height: 0;  /* NEW */
+    min-width: 0;   /* NEW; needed for Firefox */
 }
 
 .grid-item {
@@ -126,4 +128,5 @@ td {
     border-color: grey;
     margin: 0.2em ;
     padding: 0.2em ;
+    min-width: 0;      /* NEW; needed for Firefox */
 }

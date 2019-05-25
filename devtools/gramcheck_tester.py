@@ -212,11 +212,14 @@ def make_table(error_data_list: list):
     main_table_head = etree.SubElement(main_table, 'thead')
     first_tr = etree.SubElement(main_table_head, 'tr')
     for header in [
-            'Original', 'Reference', 'Runs', 'Corrections'
+            ('Original', 'orig'),
+            ('Reference', 'ref'),
+            ('Runs', 'runs'),
+            ('Corrections', 'corrections')
     ]:
         thead = etree.SubElement(first_tr, 'th')
-        thead.set('id', header)
-        thead.text = header
+        thead.text = header[0]
+        thead.set('id', header[1])
 
     main_table_tbody = etree.SubElement(main_table, 'tbody')
     for error_data in error_data_list:

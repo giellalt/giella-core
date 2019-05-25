@@ -99,7 +99,7 @@ def make_orig(error_parts: list) -> str:
             orig.append(span)
             span = etree.Element('span')
         else:
-            span.set('class', 'error{error_count}')
+            span.set('class', f'error{error_count}')
             span.text = f'{error_part[0]}'
             error_count += 1
 
@@ -137,7 +137,7 @@ def make_corrected_web(error_parts: list) -> etree.Element:
             corrected.append(span)
             span = etree.Element('span')
         else:
-            span.set('class', 'error{error_count}')
+            span.set('class', f'error{error_count}')
             if error_part[1][0].strip():
                 span.text = error_part[1][0]
             else:

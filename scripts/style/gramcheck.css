@@ -19,11 +19,11 @@
     table-layout: fixed;
 }
 
-#orig, #ref {
+#Original, #Reference {
     width: 12%;
 }
 
-#runs {
+#Runs {
     width: 6%;
 }
 

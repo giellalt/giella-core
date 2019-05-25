@@ -212,9 +212,10 @@ def make_table(error_data_list: list):
     main_table_head = etree.SubElement(main_table, 'thead')
     first_tr = etree.SubElement(main_table_head, 'tr')
     for header in [
-            'orig sentence', 'reference sentence', 'runs', 'corrections'
+            'Original', 'Reference', 'Runs', 'Corrections'
     ]:
         thead = etree.SubElement(first_tr, 'th')
+        thead.set('id', header)
         thead.text = header
 
     main_table_tbody = etree.SubElement(main_table, 'tbody')

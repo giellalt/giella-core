@@ -323,7 +323,7 @@ if __name__ == '__main__':
     args = parse_options()
 
     runner = util.ExternalCommandRunner()
-    sentences = get_sentences(args.zcheck_file)[:10]
+    sentences = get_sentences(args.zcheck_file)
 
     pool = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
     results = [

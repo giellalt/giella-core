@@ -275,11 +275,11 @@ def get_sentences(zcheck_file):
     runner = util.ExternalCommandRunner()
 
     error_sentences = [
-        sentence for sentence in get_error_sentences(lang, runner).split(u'\n')
+        sentence.replace(' ¶', '') for sentence in get_error_sentences(lang, runner).split(u'\n')
         if sentence.strip()
     ]
     correct_sentences = [
-        sentence
+        sentence.replace(' ¶', '')
         for sentence in get_correct_sentences(lang, runner).split(u'\n')
         if sentence.strip()
     ]
@@ -323,7 +323,7 @@ if __name__ == '__main__':
     args = parse_options()
 
     runner = util.ExternalCommandRunner()
-    sentences = get_sentences(args.zcheck_file)
+    sentences = get_sentences(args.zcheck_file)[:10]
 
     pool = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
     results = [

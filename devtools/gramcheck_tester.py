@@ -171,8 +171,14 @@ def make_gramcheck_runs(error_sentence: str, correct_sentence: str, lang: str,
     while gramcheck_dict['errs'] and gramcheck_runs < 10:
         gramcheck_dicts.append(gramcheck_dict)
         gramcheck_runs += 1
-        gramcheck_dict = gramcheck(
-            make_corrected(gramcheck_dicts[-1]), lang, runner)
+        try:
+            gramcheck_dict = gramcheck(
+                make_corrected(gramcheck_dicts[-1]), lang, runner)
+        except json.decoder.JSONDecodeError:
+            util.print_frame(gramcheck_runs, gramcheck_dicts[-1])
+            util.print_frame(
+                f'failed on sentence: {make_corrected(gramcheck_dicts[-1])}')
+            break
 
     return error_sentence, correct_sentence, gramcheck_dicts
 

@@ -129,16 +129,15 @@ def make_error(gramcheck_dict: list) -> etree.Element:
     table_d = etree.Element('div')
     table_d.set('class', 'grid-item')
     unordered_list = etree.SubElement(table_d, 'ul')
-    for errno, error in enumerate(gramcheck_dict['errs'], start=1):
+    for error_count, error in enumerate(gramcheck_dict['errs'], start=1):
         unordered_list = etree.SubElement(table_d, 'ul')
         list_element = etree.SubElement(unordered_list, 'li')
-        list_element.set('class', f'error{errno}')
-        list_element.text = f'«{error[0]}» ➞ [{error[3]}]'.replace(
-            ' ', ' ')
+        list_element.set('class', f'error{error_count}')
+        list_element.text = f'«{error[0]}» ➞ [{error[3]}]'.replace(' ', ' ')
         sublist = etree.SubElement(list_element, 'ul')
         for suberror in error[5]:
             sub_li = etree.SubElement(sublist, 'li')
-            sub_li.set('class', f'error{errno}')
+            sub_li.set('class', f'error{error_count}')
             sub_li.text = f'«{suberror}»'.replace(' ', ' ')
 
     return table_d

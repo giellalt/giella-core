@@ -23,7 +23,6 @@ import argparse
 import json
 import multiprocessing
 import os
-import pickle
 from pathlib import Path
 
 from lxml import etree
@@ -62,89 +61,67 @@ def gramcheck(sentence: str, zcheck_file: str,
     return json.loads(runner.stdout)
 
 
-def make_error_parts(grammarcheck_result: dict) -> list:
-    """Make a list out of a grammarchecker error dict.
+def make_corrected(gramcheck_dict: dict) -> str:
+    """Make a corrected sentence."""
+    text = gramcheck_dict['text']
+    for error in reversed(gramcheck_dict['errs']):
+        before = text[:error[1]]
+        after = text[error[2]:]
+        correction = error[5][0] if error[5] else ''
+        text = f'{before}{correction}{after}'
 
-    This list will later be used to construct strings for the report.
-    """
-    hint: list = []
-    previous_end: int = 0
-    text: str = grammarcheck_result['text']
-    for error in grammarcheck_result['errs']:
-        hint.append(text[previous_end:error[1]])
-        hint.append([error[0], error[5] if error[5] else ['']])
-        previous_end = error[2]
-    hint.append(text[previous_end:])
-
-    return hint
+    return text
 
 
-def make_orig(error_parts: list) -> str:
-    """Make a original sentence.
+def make_orig(gramcheck_dict: dict) -> etree.Element:
+    """Make an original sentence.
 
     Mark it up with error classes.
     """
+    text = gramcheck_dict['text']
+    errors = gramcheck_dict['errs']
+
     orig = etree.Element('div')
     orig.set('class', 'grid-item')
-    orig.text = error_parts[0]
+    orig.text = text[:errors[0][1]]
 
-    error_count = 0
-    span = etree.Element('span')
-    for error_part in error_parts[1:]:
-        if isinstance(error_part, str):
-            span.tail = error_part
-            orig.append(span)
-            span = etree.Element('span')
+    for error_count, error in enumerate(errors, start=1):
+        span = etree.SubElement(orig, 'span')
+        span.set('class', f'error{error_count}')
+        span.text = text[error[1]:error[2]]
+        if error_count < len(errors):
+            span.tail = text[error[2]:errors[error_count][1]]
         else:
-            span.set('class', f'error{error_count}')
-            span.text = f'{error_part[0]}'
-            error_count += 1
+            span.tail = text[error[2]:]
 
     return orig
 
 
-def make_corrected(error_parts: list) -> str:
-    """Make a corrected sentence."""
-    orig = []
-    error_count = 0
-    for error_part in error_parts:
-        if isinstance(error_part, str):
-            orig.append(error_part)
-        else:
-            if error_part[1][0].strip():
-                orig.append(error_part[1][0])
-            else:
-                orig.append('😱')
-            error_count += 1
-
-    return ''.join(orig)
-
-
-def make_corrected_web(error_parts: list) -> etree.Element:
+def make_corrected_web(gramcheck_dict: dict) -> etree.Element:
     """Make a corrected sentence to be used in the html report."""
+    text = gramcheck_dict['text']
+    errors = gramcheck_dict['errs']
+
     corrected = etree.Element('div')
     corrected.set('class', 'grid-item')
-    corrected.text = error_parts[0]
+    corrected.text = text[:errors[0][1]]
 
-    error_count = 0
-    span = etree.Element('span')
-    for error_part in error_parts[1:]:
-        if isinstance(error_part, str):
-            span.tail = error_part
-            corrected.append(span)
-            span = etree.Element('span')
+    for error_count, error in enumerate(errors, start=1):
+        span = etree.SubElement(corrected, 'span')
+        span.set('class', f'error{error_count}')
+        if error[5] and error[5][0].strip():
+            span.text = error[5][0]
         else:
-            span.set('class', f'error{error_count}')
-            if error_part[1][0].strip():
-                span.text = error_part[1][0]
-            else:
-                span.text = '😱'
-            error_count += 1
+            span.text = '😱'
+        if error_count < len(errors):
+            span.tail = text[error[2]:errors[error_count][1]]
+        else:
+            span.tail = text[error[2]:]
 
     return corrected
 
 
-def make_error(error_parts: list) -> str:
+def make_error(gramcheck_dict: list) -> etree.Element:
     """Make an error list.
 
     It has the same class as the errors.
@@ -152,16 +129,14 @@ def make_error(error_parts: list) -> str:
     table_d = etree.Element('div')
     table_d.set('class', 'grid-item')
     unordered_list = etree.SubElement(table_d, 'ul')
-    for errno, error in enumerate([
-            error_part for error_part in error_parts
-            if not isinstance(error_part, str)
-    ]):
+    for errno, error in enumerate(gramcheck_dict['errs'], start=1):
         unordered_list = etree.SubElement(table_d, 'ul')
         list_element = etree.SubElement(unordered_list, 'li')
         list_element.set('class', f'error{errno}')
-        list_element.text = f'«{error[0]}» ➞'.replace(' ', ' ')
+        list_element.text = f'«{error[0]}» ➞ [{error[3]}]'.replace(
+            ' ', ' ')
         sublist = etree.SubElement(list_element, 'ul')
-        for suberror in error[1]:
+        for suberror in error[5]:
             sub_li = etree.SubElement(sublist, 'li')
             sub_li.set('class', f'error{errno}')
             sub_li.text = f'«{suberror}»'.replace(' ', ' ')
@@ -169,7 +144,7 @@ def make_error(error_parts: list) -> str:
     return table_d
 
 
-def make_error_parts_table(error_parts_list: list):
+def make_error_parts_table(gramcheck_dicts: list):
     """Make the sub table to display errors."""
 
     error_table = etree.Element('div')
@@ -179,10 +154,10 @@ def make_error_parts_table(error_parts_list: list):
         thead.set('class', f'grid-item {header.replace(" ", "_")}')
         thead.text = header
 
-    for error_parts in error_parts_list:
-        error_table.append(make_orig(error_parts))
-        error_table.append(make_corrected_web(error_parts))
-        error_table.append(make_error(error_parts))
+    for gramcheck_dict in gramcheck_dicts:
+        error_table.append(make_orig(gramcheck_dict))
+        error_table.append(make_corrected_web(gramcheck_dict))
+        error_table.append(make_error(gramcheck_dict))
 
     return error_table
 
@@ -190,19 +165,17 @@ def make_error_parts_table(error_parts_list: list):
 def make_gramcheck_runs(error_sentence: str, correct_sentence: str, lang: str,
                         runner: util.ExternalCommandRunner) -> tuple:
     """Turn error_sentence and grammar checks to a list."""
+    gramcheck_dicts: list = []
     gramcheck_dict: dict = gramcheck(error_sentence, lang, runner)
-    error_parts_list: list = []
 
     gramcheck_runs = 0
     while gramcheck_dict['errs'] and gramcheck_runs < 10:
-        error_parts = make_error_parts(gramcheck_dict)
-        error_parts_list.append(error_parts)
+        gramcheck_dicts.append(gramcheck_dict)
         gramcheck_runs += 1
-        gramcheck_dict = gramcheck(make_corrected(error_parts), lang, runner)
+        gramcheck_dict = gramcheck(
+            make_corrected(gramcheck_dicts[-1]), lang, runner)
 
-    util.print_frame(gramcheck_runs, len(error_sentence))
-
-    return error_sentence, correct_sentence, error_parts_list
+    return error_sentence, correct_sentence, gramcheck_dicts
 
 
 def make_table(error_data_list: list):
@@ -211,12 +184,9 @@ def make_table(error_data_list: list):
     main_table.set('id', 'results')
     main_table_head = etree.SubElement(main_table, 'thead')
     first_tr = etree.SubElement(main_table_head, 'tr')
-    for header in [
-            ('Original', 'orig'),
-            ('Reference', 'ref'),
-            ('Runs', 'runs'),
-            ('Corrections', 'corrections')
-    ]:
+    for header in [('Original', 'orig'), ('Reference', 'ref'), ('Runs',
+                                                                'runs'),
+                   ('Corrections', 'corrections')]:
         thead = etree.SubElement(first_tr, 'th')
         thead.text = header[0]
         thead.set('id', header[1])
@@ -275,7 +245,8 @@ def get_sentences(zcheck_file):
     runner = util.ExternalCommandRunner()
 
     error_sentences = [
-        sentence.replace(' ¶', '') for sentence in get_error_sentences(lang, runner).split(u'\n')
+        sentence.replace(' ¶', '')
+        for sentence in get_error_sentences(lang, runner).split(u'\n')
         if sentence.strip()
     ]
     correct_sentences = [
@@ -309,6 +280,7 @@ def create_html(error_data_list: list) -> etree.Element:
 
 
 def write_html(html: etree.Element, result_file: str) -> None:
+    """Write the report."""
     with open(result_file, 'wb') as result_stream:
         result_stream.write(
             etree.tostring(

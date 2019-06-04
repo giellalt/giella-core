@@ -135,10 +135,15 @@ def make_error(gramcheck_dict: list) -> etree.Element:
         list_element.set('class', f'error{error_count}')
         list_element.text = f'«{error[0]}» ➞ [{error[3]}]'.replace(' ', ' ')
         sublist = etree.SubElement(list_element, 'ul')
-        for suberror in error[5]:
+        if error[5]:
+            for suberror in error[5]:
+                sub_li = etree.SubElement(sublist, 'li')
+                sub_li.set('class', f'error{error_count}')
+                sub_li.text = f'«{suberror}»'.replace(' ', ' ')
+        else:
             sub_li = etree.SubElement(sublist, 'li')
             sub_li.set('class', f'error{error_count}')
-            sub_li.text = f'«{suberror}»'.replace(' ', ' ')
+            sub_li.text = 'No suggestions'
 
     return table_d
 

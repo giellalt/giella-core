@@ -319,35 +319,27 @@ def write_html(html: etree.Element, result_file: str) -> None:
 
 
 if __name__ == '__main__':
-    """The main routine of the grammarcheck result script."""
-    args = parse_options()
+    ARGS = parse_options()
 
-    runner = util.ExternalCommandRunner()
-    sentences = get_sentences(args.zcheck_file)
+    RUNNER = util.ExternalCommandRunner()
+    SENTENCES = get_sentences(ARGS.zcheck_file)
 
-    pool = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
-    results = [
-        pool.apply_async(
+    POOL = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
+    RESULTS = [
+        POOL.apply_async(
             make_gramcheck_runs,
             args=(
                 error_sentence,
                 correct_sentence,
-                args.zcheck_file,
-                runner,
-            )) for error_sentence, correct_sentence in sentences
+                ARGS.zcheck_file,
+                RUNNER,
+            )) for error_sentence, correct_sentence in SENTENCES
         if error_sentence.strip()
         and not ('Nu fal. Nu dehalaš' in error_sentence
                  or 'Okta joavku mas čuojahan' in error_sentence)
     ]
 
-    error_data_list = [result.get() for result in results]
+    GRAMCHECK_RESULTS = [result.get() for result in RESULTS]
 
-    with open('test.txt', 'wb') as kruff:
-        pickle.dump(error_data_list, kruff)
-
-    #with open('test.txt', 'rb') as kruff:
-        #error_data_list = pickle.load(kruff)
-
-    print('so far, so good')
-    html = create_html(error_data_list)
-    write_html(html, args.result_file)
+    HTML = create_html(GRAMCHECK_RESULTS)
+    write_html(HTML, ARGS.result_file)

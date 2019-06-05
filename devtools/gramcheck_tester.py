@@ -19,6 +19,7 @@
 #   http://giellatekno.uit.no & http://divvun.no
 #
 """Run grammarchecker tests."""
+import editdistance
 import argparse
 import json
 import multiprocessing
@@ -198,13 +199,36 @@ def make_gramcheck_runs(error_sentence: str, correct_sentence: str, lang: str,
     return error_sentence, correct_sentence, gramcheck_dicts
 
 
+def make_levenshtein(error_data: list) -> etree.Element:
+    """Make levenshtein, TP/FN/TN/FP"""
+    levenshtein = etree.Element('p')
+    lev = editdistance.eval(error_data[0], error_data[1])
+    if not lev and error_data[2]:
+        levenshtein.set('class', 'false_positive')
+        levenshtein.text = f'FP {lev}'
+    elif lev and not error_data[2]:
+        levenshtein.set('class', 'false_negative')
+        levenshtein.text = f'FN {lev}'
+    elif lev and error_data[2]:
+        if lev < 20:
+            levenshtein.set('class', f'true_positive_{lev}')
+        else:
+            levenshtein.set('class', f'true_positive_20')
+        levenshtein.text = f'TP {lev}'
+    else:
+        levenshtein.set('class', 'true_negative')
+        levenshtein.text = f'TN {lev}'
+
+    return levenshtein
+
+
 def make_table(error_data_list: list):
     """Make the main table that displays all error data."""
     main_table = etree.Element('table')
     main_table.set('id', 'results')
     main_table_head = etree.SubElement(main_table, 'thead')
     first_tr = etree.SubElement(main_table_head, 'tr')
-    for header in [('Original', 'orig'), ('Reference', 'ref'), ('Runs',
+    for header in [('Original', 'orig'), ('Reference', 'ref'), ('Leven', 'leven'), ('Runs',
                                                                 'runs'),
                    ('Corrections', 'corrections')]:
         thead = etree.SubElement(first_tr, 'th')
@@ -219,12 +243,14 @@ def make_table(error_data_list: list):
         td2 = etree.SubElement(table_row, 'td')
         td2.text = error_data[1]
         td3 = etree.SubElement(table_row, 'td')
-        td3.text = str(len(error_data[2]) if error_data[2] else 1)
+        td3.append(make_levenshtein(error_data))
         td4 = etree.SubElement(table_row, 'td')
+        td4.text = str(len(error_data[2]) if error_data[2] else 1)
+        td5 = etree.SubElement(table_row, 'td')
         if error_data[2]:
-            td4.append(make_error_parts_table(error_data[2]))
+            td5.append(make_error_parts_table(error_data[2]))
         else:
-            td4.text = 'No errors found'
+            td5.text = 'No errors found'
 
     return main_table
 

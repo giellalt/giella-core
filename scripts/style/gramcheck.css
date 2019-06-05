@@ -119,6 +119,98 @@ td {
     background-color: #ffff00 ;
 }
 
+.true_negative {
+    background-color: #aaffff;
+}
+
+.false_negative {
+    background-color: #ff0000;
+}
+
+.true_positive_1 {
+    background-color: #1fcba0;
+}
+
+.true_positive_2 {
+    background-color: #20cb68;
+}
+
+.true_positive_3 {
+    background-color: #21cb49;
+}
+
+.true_positive_4 {
+    background-color: #2acb22;
+}
+
+.true_positive_5 {
+    background-color: #4fcb22;
+}
+
+.true_positive_6 {
+    background-color: #6ecb22;
+}
+
+.true_positive_7 {
+    background-color: #8acb22;
+}
+
+.true_positive_8 {
+    background-color: #a4cb24;
+}
+
+.true_positive_9 {
+    background-color: #b5cb25;
+}
+
+.true_positive_10 {
+    background-color: #c9cb26;
+}
+
+.true_positive_11 {
+    background-color: #cbb826;
+}
+
+.true_positive_12 {
+    background-color: #cbaa26;
+}
+
+.true_positive_13 {
+    background-color: #cb9822;
+}
+
+.true_positive_14 {
+    background-color: #cb7b20;
+}
+
+.true_positive_15 {
+    background-color: #cb7122;
+}
+
+.true_positive_16 {
+    background-color: #cb6923;
+}
+
+.true_positive_17 {
+    background-color: #cb5a22;
+}
+
+.true_positive_18 {
+    background-color: #cb5c37;
+}
+
+.true_positive_19 {
+    background-color: #cb8449;
+}
+
+.true_positive_20 {
+    background-color: #cb8850;
+}
+
+.false_positive {
+    background-color: #c45bcb;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

@@ -67,7 +67,13 @@ def make_corrected(gramcheck_dict: dict) -> str:
     for error in reversed(gramcheck_dict['errs']):
         before = text[:error[1]]
         after = text[error[2]:]
-        correction = error[5][0] if error[5] else ''
+        if error[5]:
+            correction = error[5][0]
+        elif error[3] == 'typo' and not error[5]:
+            correction = error[0]
+        else:
+            correction = ''
+
         text = f'{before}{correction}{after}'
 
     return text
@@ -111,6 +117,8 @@ def make_corrected_web(gramcheck_dict: dict) -> etree.Element:
         span.set('class', f'error{error_count}')
         if error[5] and error[5][0].strip():
             span.text = error[5][0]
+        elif error[3] == 'typo' and not error[5]:
+            span.text = error[0]
         else:
             span.text = '😱'
         if error_count < len(errors):
@@ -175,6 +183,8 @@ def make_gramcheck_runs(error_sentence: str, correct_sentence: str, lang: str,
     gramcheck_runs = 0
     while gramcheck_dict['errs'] and gramcheck_runs < 10:
         gramcheck_dicts.append(gramcheck_dict)
+        if len(gramcheck_dicts) > 1 and gramcheck_dict == gramcheck_dicts[-1]:
+            break
         gramcheck_runs += 1
         try:
             gramcheck_dict = gramcheck(

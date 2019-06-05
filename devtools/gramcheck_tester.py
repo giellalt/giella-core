@@ -205,19 +205,19 @@ def make_levenshtein(error_data: list) -> etree.Element:
     lev = editdistance.eval(error_data[0], error_data[1])
     if not lev and error_data[2]:
         levenshtein.set('class', 'false_positive')
-        levenshtein.text = f'FP {lev}'
+        levenshtein.text = f'FP {lev:02}'
     elif lev and not error_data[2]:
         levenshtein.set('class', 'false_negative')
-        levenshtein.text = f'FN {lev}'
+        levenshtein.text = f'FN {lev:02}'
     elif lev and error_data[2]:
         if lev < 20:
             levenshtein.set('class', f'true_positive_{lev}')
         else:
             levenshtein.set('class', f'true_positive_20')
-        levenshtein.text = f'TP {lev}'
+        levenshtein.text = f'TP {lev:02}'
     else:
         levenshtein.set('class', 'true_negative')
-        levenshtein.text = f'TN {lev}'
+        levenshtein.text = f'TN {lev:02}'
 
     return levenshtein
 

@@ -20,7 +20,7 @@
 }
 
 #orig, #ref {
-    min-width: 6em;
+    min-width: 10em;
     width: 15%;
     max-width: 16em;
 }

@@ -202,14 +202,14 @@ def make_gramcheck_runs(error_sentence: str, correct_sentence: str, lang: str,
 def make_levenshtein(error_data: list) -> etree.Element:
     """Make levenshtein, TP/FN/TN/FP"""
     levenshtein = etree.Element('p')
-    lev = editdistance.eval(error_data[0], error_data[1])
-    if not lev and error_data[2]:
+    if error_data[0] == error_data[1] and error_data[2]:
         levenshtein.set('class', 'false_positive')
-        levenshtein.text = f'FP {lev:02}'
-    elif lev and not error_data[2]:
+        levenshtein.text = 'FP'
+    elif error_data[0] != error_data[1] and not error_data[2]:
         levenshtein.set('class', 'false_negative')
-        levenshtein.text = f'FN {lev:02}'
-    elif lev and error_data[2]:
+        levenshtein.text = 'FN'
+    elif error_data[0] != error_data[1]  and error_data[2]:
+        lev = editdistance.eval(error_data[1], make_corrected(error_data[2][-1]))
         if lev < 20:
             levenshtein.set('class', f'true_positive_{lev}')
         else:
@@ -217,7 +217,7 @@ def make_levenshtein(error_data: list) -> etree.Element:
         levenshtein.text = f'TP {lev:02}'
     else:
         levenshtein.set('class', 'true_negative')
-        levenshtein.text = f'TN {lev:02}'
+        levenshtein.text = 'TN'
 
     return levenshtein
 

@@ -20,7 +20,9 @@
 }
 
 #orig, #ref {
+    min-width: 6em;
     width: 16em;
+    max-width: 16em;
 }
 
 #leven {

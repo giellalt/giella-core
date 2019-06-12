@@ -130,5 +130,5 @@ cat<<EOF
     of the new language.
     To start working on the new language, fill in license and copyright
     info in the $1/LICENCE file, and start the real work. See
-    http://divvun.no/doc/GettingStarted.html for details.
+    https://giellalt.uit.no/GettingStarted.html for details.
 EOF

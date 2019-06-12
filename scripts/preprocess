@@ -22,7 +22,7 @@ binmode( STDERR, ':utf8' );
 # An abbreviation file may be given as input parameter --abbr,
 # the file has special syntax and the usage is connected
 # to other sámi tools. See documentation in
-# http://giellatekno.uit.no/doc/ling/preprocessor.html
+# https://giellalt.uit.no/ling/preprocessor.html
 #
 # $Id$
 

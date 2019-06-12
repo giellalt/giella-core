@@ -212,7 +212,7 @@
 	  <xsl:text>inf. </xsl:text>
 	</xsl:if>
 
-<!-- http://giellatekno.uit.no/doc/lang/sme/docu-sme-grammartags.html -->
+<!-- https://giellalt.uit.no/lang/sme/docu-sme-grammartags.html -->
 <!-- 	<xsl:if test="(normalize-space(.)='Act')"> -->
 <!-- 	  <xsl:text>not yet documented </xsl:text> -->
 <!-- 	</xsl:if> -->

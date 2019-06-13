@@ -127,7 +127,7 @@ grep ";" $@ \
 ######## For each lexicon found, extract the N(=$lemmacount) first entries:
 lemma_extraction () {
 for lexicon in $@; do
-    ${GTCORE}/scripts/extract-lemmas.sh \
+    ${giella_core}/scripts/extract-lemmas.sh \
         --include "($lexicon)" \
         --keep-contlex \
         --keep-homonyms \
@@ -178,7 +178,7 @@ lemma_code_list=$(add_morf_codes "$lemma_list" | sed 's/__XXYYZZ__/ /g')
 find_generator
 generate_word_forms "$lemma_code_list" > $generated_word_forms
 
-$GTCORE/scripts/word_form_cohorts-to-table.pl   \
+$giella_core/scripts/word_form_cohorts-to-table.pl   \
             --input    "$generated_word_forms"  \
             --output   "${generated_table}.tmp" \
             --lemlex   "$lemma_lexicon_list"    \

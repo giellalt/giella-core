@@ -33,9 +33,11 @@ from corpustools import util
 
 def getpath(lang: str) -> str:
     """Get the corpus path."""
-    gtfree = str(os.getenv('GTFREE'))
-
-    return os.path.join(gtfree, 'goldstandard/converted', lang)
+    return ' '.join([
+        os.path.join(corpus, 'correct-no-gs/converted', lang)
+        for corpus in [str(os.getenv('GTFREE')),
+                       str(os.getenv('GTBOUND'))]
+    ])
 
 
 def get_error_sentences(lang: str, runner: util.ExternalCommandRunner) -> str:

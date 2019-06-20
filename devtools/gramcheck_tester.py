@@ -19,13 +19,13 @@
 #   http://giellatekno.uit.no & http://divvun.no
 #
 """Run grammarchecker tests."""
-import editdistance
 import argparse
 import json
 import multiprocessing
 import os
 from pathlib import Path
 
+import editdistance
 from lxml import etree
 
 from corpustools import util

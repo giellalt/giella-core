@@ -210,8 +210,9 @@ def make_levenshtein(error_data: list) -> etree.Element:
     elif error_data[0] != error_data[1] and not error_data[2]:
         levenshtein.set('class', 'false_negative')
         levenshtein.text = 'FN'
-    elif error_data[0] != error_data[1]  and error_data[2]:
-        lev = editdistance.eval(error_data[1], make_corrected(error_data[2][-1]))
+    elif error_data[0] != error_data[1] and error_data[2]:
+        lev = editdistance.eval(error_data[1],
+                                make_corrected(error_data[2][-1]))
         if lev < 20:
             levenshtein.set('class', f'true_positive_{lev}')
         else:
@@ -230,8 +231,8 @@ def make_table(error_data_list: list):
     main_table.set('id', 'results')
     main_table_head = etree.SubElement(main_table, 'thead')
     first_tr = etree.SubElement(main_table_head, 'tr')
-    for header in [('Original', 'orig'), ('Reference', 'ref'), ('Leven', 'leven'), ('Runs',
-                                                                'runs'),
+    for header in [('Original', 'orig'), ('Reference', 'ref'),
+                   ('Leven', 'leven'), ('Runs', 'runs'),
                    ('Corrections', 'corrections')]:
         thead = etree.SubElement(first_tr, 'th')
         thead.text = header[0]

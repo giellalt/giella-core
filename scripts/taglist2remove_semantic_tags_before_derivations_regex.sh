@@ -14,5 +14,5 @@ AWK=awk
 
 $SED 's/^/0 <- "/' $1 \
 | $SED 's/$/",/' \
-| $SED '$ s/,/ || _ ( ? ) [ "+Der" | "+Der1" | "+Der2" | "+Der3" | "+Der4" | "+Der5" ] ;/' \
+| $SED '$ s/,/ || _ ( ? ) [ "+Der" | "+Der2" | "+Der3" | "+Der4" | "+Der5" ] ;/' \
 | $AWK 'NR==1{$0="### This is a file generated with $GIELLA_CORE/scripts/taglist2remove_semantic_tags_before_derivations_regex.sh - DO NOT EDIT!!!\n\n"$0}1'

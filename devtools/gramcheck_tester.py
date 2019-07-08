@@ -58,7 +58,7 @@ def gramcheck(sentence: str, zcheck_file: str,
               runner: util.ExternalCommandRunner) -> dict:
     """Run the gramchecker on the error_sentence."""
     runner.run(
-        f'divvun-checker -a {zcheck_file} -n smegram'.split(),
+        f'divvun-checker -a {zcheck_file} '.split(),
         to_stdin=sentence.encode('utf-8'))
 
     return json.loads(runner.stdout)

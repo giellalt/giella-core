@@ -31,26 +31,30 @@ from lxml import etree
 from corpustools import util
 
 
-def getpath(lang: str) -> str:
+def getpath(
+        lang: str,
+        converted_corpus: str,
+) -> str:
     """Get the corpus path."""
     return ' '.join([
-        os.path.join(corpus, 'correct-no-gs/converted', lang)
+        os.path.join(corpus, converted_corpus, 'converted', lang)
         for corpus in [str(os.getenv('GTFREE')),
                        str(os.getenv('GTBOUND'))]
     ])
 
 
-def get_error_sentences(lang: str, runner: util.ExternalCommandRunner) -> str:
+def get_error_sentences(lang: str, converted_corpus: str,
+                        runner: util.ExternalCommandRunner) -> str:
     """Get the sentences containing errors from the corpus."""
-    runner = util.ExternalCommandRunner()
-    runner.run(f'ccat -a -l {lang} {getpath(lang)}'.split())
+    runner.run(f'ccat -a -l {lang} {getpath(lang, converted_corpus)}'.split())
     return runner.stdout.decode('utf-8')
 
 
-def get_correct_sentences(lang: str,
+def get_correct_sentences(lang: str, converted_corpus: str,
                           runner: util.ExternalCommandRunner) -> str:
     """Get the corrected sentences from the corpus."""
-    runner.run(f'ccat -c -a -l {lang} {getpath(lang)}'.split())
+    runner.run(
+        f'ccat -c -a -l {lang} {getpath(lang, converted_corpus)}'.split())
     return runner.stdout.decode('utf-8')
 
 
@@ -278,13 +282,20 @@ def make_html():
 def parse_options():
     """Parse the options given to the program."""
     parser = argparse.ArgumentParser(description='Test the grammarchecker.')
+    parser.add_argument(
+        '-goldstandard',
+        dest='goldstandard',
+        action='store_true',
+        help='Set this for testing with the goldstandard corpus. The default '
+        'is to use correct-no-gs, which is meant to be used for development '
+        'of this tool.')
     parser.add_argument('zcheck_file', help='Path to the zcheck file to use.')
     parser.add_argument('result_file', help='Path to resulting html file.')
 
     return parser.parse_args()
 
 
-def get_sentences(zcheck_file):
+def get_sentences(zcheck_file, converted_corpus: str):
     """Get error and reference sentences from goldstandard corpus."""
     zcheck_path = Path(zcheck_file)
     lang = zcheck_path.name.replace(zcheck_path.suffix, '')
@@ -294,14 +305,12 @@ def get_sentences(zcheck_file):
     runner = util.ExternalCommandRunner()
 
     error_sentences = [
-        sentence.replace(' ¶', '')
-        for sentence in get_error_sentences(lang, runner).split(u'\n')
-        if sentence.strip()
+        sentence.replace(' ¶', '') for sentence in get_error_sentences(
+            lang, converted_corpus, runner).split(u'\n') if sentence.strip()
     ]
     correct_sentences = [
-        sentence.replace(' ¶', '')
-        for sentence in get_correct_sentences(lang, runner).split(u'\n')
-        if sentence.strip()
+        sentence.replace(' ¶', '') for sentence in get_correct_sentences(
+            lang, converted_corpus, runner).split(u'\n') if sentence.strip()
     ]
 
     err_len = len(error_sentences)
@@ -341,9 +350,9 @@ def write_html(html: etree.Element, result_file: str) -> None:
 
 if __name__ == '__main__':
     ARGS = parse_options()
-
+    CORPUS = 'goldstandard' if ARGS.goldstandard else 'correct-no-gs'
     RUNNER = util.ExternalCommandRunner()
-    SENTENCES = get_sentences(ARGS.zcheck_file)
+    SENTENCES = get_sentences(ARGS.zcheck_file, CORPUS)
 
     POOL = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
     RESULTS = [

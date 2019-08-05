@@ -92,6 +92,7 @@ $svnignore "speller*.txt
 check_analysis_regressions.sh
 *suggestions.sh
 *.hfstol.txt
+*.hfsttok.txt
 *.xfst.txt" $1/devtools
 
 # Set the svn:ignore prop on the doc dir:
@@ -149,7 +150,8 @@ $svnignore "$mkfiles
 $fstfiles
 dependency.cg3
 disambiguator.cg3
-functions.cg3" $1/src/syntax
+functions.cg3
+korp.cg3" $1/src/syntax
 
 # Set the svn:ignore prop on the test/data/ dir:
 $svnignore "$mkfiles

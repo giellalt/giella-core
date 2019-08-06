@@ -327,7 +327,10 @@ def create_html(error_data_list: list) -> etree.Element:
     """Create errordata html."""
     html = make_html()
     body = etree.SubElement(html, 'body')
-    body.append(make_table(error_data_list))
+    error_table = make_table(error_data_list)
+    stat = statistics(error_table)
+    body.append(stat)
+    body.append(error_table)
     body.append(
         etree.fromstring('''
        <script
@@ -346,6 +349,33 @@ def write_html(html: etree.Element, result_file: str) -> None:
                 pretty_print=True,
                 encoding='utf-8',
                 xml_declaration=True))
+
+
+def statistics(html):
+    """Basic statistics
+
+    presicion = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    """
+    searches = [
+        './/p[@class="false_positive"]', './/p[@class="false_negative"]',
+        './/p[@class="true_negative"]', './/p[starts-with(text(), "TP")]'
+    ]
+
+    results = [len(html.xpath(search)) for search in searches]
+    stat = etree.Element('div')
+
+    for text in [
+            f'Total sentences: {sum(results)}',
+            f'False positive: {results[0]}', f'False negative: {results[1]}',
+            f'True negative: {results[2]}', f'True positive: {results[3]}',
+            f'Presicion: {results[-1]*100/(results[-1] + results[0])}',
+            f'Recall: {results[-1]*100/(results[-1] + results[1])}'
+    ]:
+        abba = etree.SubElement(stat, 'p')
+        abba.text = text
+
+    return stat
 
 
 if __name__ == '__main__':

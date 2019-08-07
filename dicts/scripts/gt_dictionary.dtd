@@ -155,7 +155,7 @@
       class CDATA #IMPLIED
 >
 
-<!ELEMENT mg (semantics?,  tg+, xg* ) >
+<!ELEMENT mg (semantics?, l_ref?, tg+, xg* ) >
 <!ATTLIST mg
       xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
 >

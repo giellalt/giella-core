@@ -74,7 +74,7 @@ def make_corrected(gramcheck_dict: dict) -> str:
     for error in reversed(gramcheck_dict['errs']):
         before = text[:error[1]]
         after = text[error[2]:]
-        if error[5]:
+        if error[5] and error[5][0]:
             correction = error[5][0]
         else:
             correction = error[0]
@@ -120,7 +120,7 @@ def make_corrected_web(gramcheck_dict: dict) -> etree.Element:
     for error_count, error in enumerate(errors, start=1):
         span = etree.SubElement(corrected, 'span')
         span.set('class', f'error{error_count}')
-        if error[5] and error[5][0].strip():
+        if error[5] and error[5][0]:
             span.text = error[5][0]
         else:
             span.text = error[0]

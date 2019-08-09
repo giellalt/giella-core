@@ -401,5 +401,5 @@ if __name__ == '__main__':
 
     GRAMCHECK_RESULTS = [result.get() for result in RESULTS]
 
-    HTML = create_html(GRAMCHECK_RESULTS)
+    HTML = create_html(sorted(GRAMCHECK_RESULTS))
     write_html(HTML, ARGS.result_file)

@@ -76,10 +76,8 @@ def make_corrected(gramcheck_dict: dict) -> str:
         after = text[error[2]:]
         if error[5]:
             correction = error[5][0]
-        elif error[3] == 'typo' and not error[5]:
-            correction = error[0]
         else:
-            correction = ''
+            correction = error[0]
 
         text = f'{before}{correction}{after}'
 

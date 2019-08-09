@@ -124,10 +124,9 @@ def make_corrected_web(gramcheck_dict: dict) -> etree.Element:
         span.set('class', f'error{error_count}')
         if error[5] and error[5][0].strip():
             span.text = error[5][0]
-        elif error[3] == 'typo' and not error[5]:
-            span.text = error[0]
         else:
-            span.text = '😱'
+            span.text = error[0]
+
         if error_count < len(errors):
             span.tail = text[error[2]:errors[error_count][1]]
         else:

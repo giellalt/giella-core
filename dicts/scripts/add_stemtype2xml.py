@@ -31,6 +31,9 @@
         Ex.
         python add_stemtype2xml.py ~/main/langs/sme/src/morphology/stems/nouns.lexc ~/main/words/dicts/smenob/scripts/nouns_stemtypes.txt ~/main/apps/dicts/nds/src/neahtta/dicts/sme-nob.all.xml
 
+        Ex. (gtdict)
+        python add_stemtype2xml.py $GTHOME/langs/sme/src/morphology/stems/nouns.lexc $GTHOME/words/dicts/smenob/scripts/nouns_stemtypes.txt /home/neahtta/neahtta/dicts/sme-nob.all.xml
+
     The output file is created as <PATH_TO_DICT>.stem.xml
 
         Ex.
@@ -144,7 +147,7 @@ line_dd = dfi.readline()
 
 import re
 while line_dd:
-    if "<l" in line_dd:
+    if "<l" in line_dd and not 'stem=' in line_dd:
         match = re.search('>.+<', line_dd)
         if match:
             lemma = match.group(0).replace('>', '').replace('<', '')

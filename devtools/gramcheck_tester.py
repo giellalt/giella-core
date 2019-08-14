@@ -302,12 +302,14 @@ def get_sentences(zcheck_file, converted_corpus: str):
     runner = util.ExternalCommandRunner()
 
     error_sentences = [
-        sentence.replace(' ¶', '') for sentence in get_error_sentences(
+        sentence.replace(' ¶', '').strip() for sentence in get_error_sentences(
             lang, converted_corpus, runner).split(u'\n') if sentence.strip()
     ]
     correct_sentences = [
-        sentence.replace(' ¶', '') for sentence in get_correct_sentences(
-            lang, converted_corpus, runner).split(u'\n') if sentence.strip()
+        sentence.replace(' ¶',
+                         '').strip() for sentence in get_correct_sentences(
+                             lang, converted_corpus, runner).split(u'\n')
+        if sentence.strip()
     ]
 
     err_len = len(error_sentences)

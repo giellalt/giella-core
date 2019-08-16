@@ -41,36 +41,33 @@
 '''
 
 import sys
+from fabric.colors import cyan, green, red
 
 try:
     lexc_file = sys.argv[1]
     stem_file = sys.argv[2]
     dict_file_in = sys.argv[3]
 except IndexError:
-    print '>>>>>'
-    print 'You forgot one of the input parameters!'
-    print 'You need to pass paths for the lexc file, the stemtype file and the dict file.'
+    print(red('** You forgot one of the input parameters!'))
+    print(red('** You need to pass paths for the lexc file, the stemtype file and the dict file.'))
     quit()
 
 try:
     lf = open(lexc_file, "r")
 except IOError:
-    print '>>>>>'
-    print 'The path/name you entered for the lexc file is wrong!'
+    print(red('** The path/name you entered for the lexc file is wrong!'))
     quit()
 
 try:
     sf = open(stem_file, "r")
 except IOError:
-    print '>>>>>'
-    print 'The path/name you entered for the stemtype file is wrong!'
+    print(red('** The path/name you entered for the stemtype file is wrong!'))
     quit()
 
 try:
     dfi = open(dict_file_in, "r")
 except IOError:
-    print '>>>>>'
-    print 'The path/name you entered for the dict file is wrong!'
+    print(red('** The path/name you entered for the dict file is wrong!'))
     quit()
 
 dict_file_out = sys.argv[3] + ".stem.xml"
@@ -84,8 +81,7 @@ list_3syll = []
 list_Csyll = []
 
 
-print '===================================================='
-print 'creating 2syll, 3syll, Csyll lists'
+print(cyan('** Creating 2syll, 3syll, Csyll lists'))
 line = sf.readline()
 cnt = 0
 while line:
@@ -108,12 +104,10 @@ while line:
         if stem_Csyll and not 'stem=' in l:
             list_Csyll.append(l)
     line = sf.readline()
-print 'DONE'
-print '===================================================='
+print(green('** Done'))
 
 
-print '===================================================='
-print 'creating python dict with lexc and stems'
+print(cyan('** Creating python dict with lexc and stems'))
 dict_lex_stem = {}
 
 line = lf.readline()
@@ -137,12 +131,10 @@ while line:
 
 lf.close()
 sf.close()
-print 'DONE'
-print '===================================================='
+print(green('** Done'))
 
 
-print '===================================================='
-print 'adding stem type to xml dict'
+print(cyan('** Adding stem type to xml dict'))
 line_dd = dfi.readline()
 
 import re
@@ -165,5 +157,4 @@ while line_dd:
 
 dfi.close()
 dfo.close()
-print 'DONE'
-print '===================================================='
+print(green('** Done'))

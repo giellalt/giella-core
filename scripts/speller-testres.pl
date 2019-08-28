@@ -187,7 +187,7 @@ sub convert_systime_to_seconds {
     my $time = shift(@_);
     my ($text, $digits) = split /\t/, $time;
     my ($minutes, $seconds) = split /m/, $digits;
-
+    $seconds =~ s/,/./;
     # Remove the final 's' in the input string:
     chop $seconds;
     return $minutes * 60 + $seconds;

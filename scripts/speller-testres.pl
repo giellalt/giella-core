@@ -1698,7 +1698,7 @@ sub make_suggestionsummary {
     }
     $suggestionsummary->appendChild(make_suggx("suggbelow5", 'td[@class="position"]/text() >= ' .$x, $results, $doc));
     $suggestionsummary->appendChild(make_suggx("nosugg", 'not(td[@class="position"]) and not(td[@class="suggestions"])', $results, $doc));
-    $suggestionsummary->appendChild(make_suggx("badsuggs", 'not(td[@class="position"]) and td[@class="suggestions"]', $results, $doc));
+    $suggestionsummary->appendChild(make_suggx("badsuggs", 'td[@class="position"]/text() = -1', $results, $doc));
 
     $suggestionsummary->appendChild(make_averageposition($results, $doc));
     $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));

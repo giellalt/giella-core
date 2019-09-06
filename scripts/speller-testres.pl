@@ -7,7 +7,11 @@
 #    Polderland          (pl)
 #    AppleScript/MS Word (mw)
 #    Hunspell            (hu)
+#    Foma (Tino)         (fo)
 #    Voikko              (vk)
+#    Púki                (pk)
+#    HfstOspell          (hf)
+#    HfstOspellOffice    (to)
 # Prints to  an XML file.
 #
 # Usage: speller-testres.pl -h
@@ -1694,11 +1698,12 @@ sub make_suggestionsummary {
 
     my $x;
     for ($x = 1; $x < 6; $x++) {
-        $suggestionsummary->appendChild(make_suggx("sugg$x", 'td[@class="position"]/text() = ' . $x, $results, $doc));
+        $suggestionsummary->appendChild(make_suggx("sugg$x", 'td[@class="position"]/text() =  '.$x, $results, $doc));
     }
-    $suggestionsummary->appendChild(make_suggx("suggbelow5", 'td[@class="position"]/text() >= ' .$x, $results, $doc));
-    $suggestionsummary->appendChild(make_suggx("nosugg", 'not(td[@class="position"]) and not(td[@class="suggestions"])', $results, $doc));
-    $suggestionsummary->appendChild(make_suggx("badsuggs", 'td[@class="position"]/text() = -1', $results, $doc));
+    # print STDERR "$x: Ferdig med 1-5.\n";
+    $suggestionsummary->appendChild(make_suggx("suggbelow5", 'td[@class="position"]/text() >= '.$x, $results, $doc));
+    $suggestionsummary->appendChild(make_suggx("nosugg",     'td[@class="position"]/text() =  0',   $results, $doc));
+    $suggestionsummary->appendChild(make_suggx("badsuggs",   'td[@class="position"]/text() = -1',   $results, $doc));
 
     $suggestionsummary->appendChild(make_averageposition($results, $doc));
     $suggestionsummary->appendChild(make_averagesuggs_with_correct($results, $doc));

@@ -67,7 +67,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/set-svn-ignores-keyboards.sh \
    scripts/set-svn-ignores-langs.sh \
    scripts/set-svn-ignores-prooftesting.sh \
-   scripts/smx-smi.py \
    scripts/spell-preprocess.pl \
    scripts/style/speller_xml.css \
    scripts/taglist2insert_semantic_tags_after_pos_regex.sh \

@@ -4,41 +4,58 @@ import pickle
 from collections import defaultdict
 
 
-def correct_not_in_dc(correct, dc):
-    nices = [
-        (c_error['error'], c_error['correct'], d_error[5])
-        for c_error in correct for d_error in dc
-        if (c_error['start'] == d_error[1] and c_error['end'] == d_error[2])
-        and (c_error['error'] == d_error[0]
-             and c_error['correct'] not in d_error[5])
+def correct_no_suggestion_in_dc(correct, dc):
+    return [
+        (c_error, d_error) for c_error in correct
+        for d_error in dc
+        if has_no_suggestions(c_error, d_error)
     ]
 
+
+def corrections_no_suggestion(nices):
+    if nices:
+        print('~~~~~~')
+        print('\tcorrect and dc align, but dc has no suggestions')
+        for nice in nices:
+            if nice[0]['error'] != nice[1][0]:
+                print('Krise!')
+            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}')
+
+
+def correct_not_in_dc(correct, dc):
+    return [
+        (c_error, d_error) for c_error in correct
+        for d_error in dc
+        if has_suggestions_without_hit(c_error, d_error)
+    ]
+
+
+def corrections_not_in_suggestion_per_sentence(nices):
     if nices:
         print('~~~~~~')
         print('\tcorrect and dc align, but correction not found in dc')
         for nice in nices:
-            print(f'\t\t{nice[0]} -> {nice[1]}, dc-suggestions {nice[2]}')
-
-    return len(nices)
+            if nice[0]['error'] != nice[1][0]:
+                print('Krise!')
+            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, suggestions {nice[1][5]}')
 
 
 def correct_in_dc(correct, dc):
-    nices = [
-        (c_error['error'], c_error['correct'],
-         d_error[5].index(c_error['correct'])) for c_error in correct
+    return [
+        (c_error, d_error) for c_error in correct
         for d_error in dc
-        if (c_error['start'] == d_error[1] and c_error['end'] == d_error[2]
-            and d_error[5]) and
-        (c_error['error'] == d_error[0] and c_error['correct'] in d_error[5])
+        if has_suggestions_with_hit(c_error, d_error)
     ]
 
+
+def correction_in_suggestion_per_sentence(nices):
     if nices:
         print('~~~~~~')
         print('\tcorrect and dc align, and correction found in dc')
         for nice in nices:
-            print(f'\t\t{nice[0]} -> {nice[1]}, position {nice[2]}')
-
-    return len(nices)
+            if nice[0]['error'] != nice[1][0]:
+                print('Krise!')
+            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, position {nice[1][5].index(nice[0]["correct"])}')
 
 
 def corrects_not_in_dc(correct, dc):
@@ -50,13 +67,15 @@ def corrects_not_in_dc(correct, dc):
         else:
             corrects.append(c_error)
 
+    return corrects
+
+
+def marked_errors_not_reported_per_sentence(corrects):
     if corrects:
         print('~~~~~~')
         print('\tcorrect errors not found in dc')
         for c_error in corrects:
             print(f'\t\t{c_error}')
-
-    return len(corrects)
 
 
 def dcs_not_in_correct(correct, dc):
@@ -68,22 +87,36 @@ def dcs_not_in_correct(correct, dc):
         else:
             corrects.append(d_error)
 
+    return corrects
+
+
+def reported_errors_not_marked_per_sentence(corrects):
     if corrects:
         print('~~~~~~')
         print('\tdc errors not found in correct')
         for c_error in corrects:
             print(f'\t\t{c_error}')
 
-    return len(corrects)
+
+def has_suggestions_with_hit(c_error, d_error):
+    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and d_error[5] and c_error['correct'] in d_error[5]
+
+
+def has_suggestions_without_hit(c_error, d_error):
+    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and d_error[5] and c_error['correct'] not in d_error[5]
+
+
+def has_no_suggestions(c_error, d_error):
+    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and not d_error[5]
 
 
 with open('results.pickle', 'rb') as pickle_stream:
     results = pickle.load(pickle_stream)
 
-print(f'Paragraphs {len(results)}')
 counter = defaultdict(int)
 for result in results:
     if result[1] or result[3]["errs"]:
+        counter ['paragraphs_with_errors'] += 1
         counter['total_manually_marked_errors'] += len(result[1])
         for manual in result[1]:
             counter[f'manually_marked_errors_{manual["type"]}'] += 1
@@ -92,13 +125,105 @@ for result in results:
             counter[f'grammarchecker_errors_{dc_error[3].replace(" ", "_")}'] += 1
         print('==========')
         print(result[0])
-        counter['total_manual_errors_not_found_by_grammarchecker'] += corrects_not_in_dc(result[1],
-                                                     result[3]["errs"])
-        counter['total_grammarchecker_errors_not_found_in_manual_markup'] += dcs_not_in_correct(result[1], result[3]["errs"])
-        counter['total_manual_and_grammarchecker_align_correction_with_suggestion'] += correct_in_dc(result[1], result[3]["errs"])
-        counter['total_manual_and_grammarchecker_align_correction_without_suggestion'] += correct_not_in_dc(
-            result[1], result[3]["errs"])
+
+        # oppmerkede feil som ikke blir rapportert
+        marked_errors_not_reported = corrects_not_in_dc(result[1], result[3]["errs"])
+        marked_errors_not_reported_per_sentence(marked_errors_not_reported)
+        counter['total_manual_errors_not_found_by_grammarchecker'] += len(marked_errors_not_reported)
+        for marked_error_not_reported in marked_errors_not_reported:
+            counter[f'manually_marked_errors_{marked_error_not_reported["type"]}_not_reported'] += 1
+
+        # rapporterte feil som ikke er oppmerket
+        reported_errors_not_marked = dcs_not_in_correct(result[1], result[3]["errs"])
+        reported_errors_not_marked_per_sentence(reported_errors_not_marked)
+        counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(reported_errors_not_marked)
+        for reported_error_not_marked in reported_errors_not_marked:
+            counter[f'grammarchecker_errors_{reported_error_not_marked[3]}_not_reported'] += 1
+
+        # Oppmerket feil blir rapportert, rapporterte feil har forslag, og manuell retting er blant disse
+        corrections_in_suggestion = correct_in_dc(result[1], result[3]["errs"])
+        correction_in_suggestion_per_sentence(corrections_in_suggestion)
+        counter['correction_in_suggestion'] += len(corrections_in_suggestion)
+        for correction_in_suggestion in corrections_in_suggestion:
+            counter[f'correction_in_suggestion_{correction_in_suggestion[0]["type"]}_{correction_in_suggestion[1][3]}'] += 1
+
+        # Oppmerket feil blir rapportert, rapporterte feil har forslag, og manuell retting er *ikke* blant disse
+        corrections_not_in_suggestion = correct_not_in_dc(result[1], result[3]["errs"])
+        corrections_not_in_suggestion_per_sentence(corrections_not_in_suggestion)
+        counter['correction_not_in_suggestion'] += len(corrections_not_in_suggestion)
+        for correction_not_in_suggestion in corrections_not_in_suggestion:
+            counter[f'correction_not_in_suggestion_{correction_in_suggestion[0]["type"]}_{correction_in_suggestion[1][3]}'] += 1
+
+        # Oppmerket feil blir rapportert, rapporterte feil har ingen forslag
+        corrections_no_suggestion = correct_no_suggestion_in_dc(result[1], result[3]["errs"])
+        corrections_not_in_suggestion_per_sentence(corrections_no_suggestion)
+        counter['correction_no_suggestion'] += len(corrections_no_suggestion)
+        for correction_no_suggestion in corrections_no_suggestion:
+            counter[f'correction_no_suggestion_{correction_in_suggestion[0]["type"]}_{correction_in_suggestion[1][3]}'] += 1
+
         print()
 
-for label in sorted(counter):
+
+# Oversikt
+all_categories = {label for label in counter}
+used_categories = set()
+
+print(f'Paragraphs {len(results)}')
+print(f'Paragraphs with errors {counter["paragraphs_with_errors"]}\n')
+used_categories.add("paragraphs_with_errors")
+print(f'Manually marked errors: {counter["total_manually_marked_errors"]}')
+used_categories.add("total_manually_marked_errors")
+print(f'Manually marked errors found by the grammarchecker: {counter["total_manually_marked_errors"] - counter["total_manual_errors_not_found_by_grammarchecker"]}')
+print(f'Manually marked errors not found by the grammarchecker: {counter["total_manual_errors_not_found_by_grammarchecker"]}')
+used_categories.add("total_manual_errors_not_found_by_grammarchecker")
+print('By type')
+for label in [label for label in counter if label.startswith('manually_marked_errors') and not label.endswith('not_reported')]:
     print(f'{label}: {counter[label]}')
+    print(f'{label + "_not_reported"}: {counter[label + "_not_reported"]}')
+    print(f'{label + "_found"}: {counter[label] - counter[label + "_not_reported"]}')
+    used_categories.add(label)
+    used_categories.add(label + "_not_reported")
+
+print('\n\n')
+print(f'Errors reported by grammarchecker: {counter["total_grammarchecker_errors"]}')
+used_categories.add("total_grammarchecker_errors")
+print(f'Grammar checker errors that align with manually marked up errors: {counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}')
+print(f'Grammar checker errors that don\'t align with manually marked up errors: {counter["total_grammarchecker_errors_not_found_in_manual_markup"]}')
+used_categories.add("total_grammarchecker_errors_not_found_in_manual_markup")
+print('By type')
+for label in [label for label in counter if label.startswith('grammarchecker_errors') and not label.endswith('not_reported')]:
+    print(f'{label}: {counter[label]}')
+    print(f'{label + "_not_reported"}: {counter[label + "_not_reported"]}')
+    print(f'{label + "_found"}: {counter[label] - counter[label + "_not_reported"]}')
+    used_categories.add(label)
+    used_categories.add(label + "_not_reported")
+
+print('\n\n')
+
+print(f'Manually marked errors and reported errors that align: {counter["correction_in_suggestion"] + counter["correction_not_in_suggestion"] + counter["correction_no_suggestion"]}\n')
+print(f'Reported errors where correction is among suggestions {counter["correction_in_suggestion"]}')
+used_categories.add("correction_in_suggestion")
+print('By manual error and grammarchecker error pairs')
+for label in [label for label in counter if label.startswith('correction_in_suggestion_')]:
+    print(f'{label}: {counter[label]}')
+    used_categories.add(label)
+
+print()
+print(f'Reported errors where correction is not among suggestions {counter["correction_not_in_suggestion"]}')
+used_categories.add("correction_not_in_suggestion")
+print('By manual error and grammarchecker error pairs')
+for label in [label for label in counter if label.startswith('correction_not_in_suggestion_')]:
+    print(f'{label}: {counter[label]}')
+    used_categories.add(label)
+
+print()
+print(f'Reported errors without suggestions {counter["correction_no_suggestion"]}')
+used_categories.add("correction_no_suggestion")
+print('By manual error and grammarchecker error pairs')
+for label in [label for label in counter if label.startswith('correction_no_suggestion_')]:
+    print(f'{label}: {counter[label]}')
+    used_categories.add(label)
+
+if all_categories - used_categories:
+    print('\n\n\n\n')
+    print(all_categories - used_categories)

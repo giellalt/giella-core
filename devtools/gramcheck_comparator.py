@@ -17,8 +17,6 @@ def corrections_no_suggestion(nices):
         print('~~~~~~')
         print('\tcorrect and dc align, but dc has no suggestions')
         for nice in nices:
-            if nice[0]['error'] != nice[1][0]:
-                print('Krise!')
             print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}')
 
 
@@ -35,8 +33,6 @@ def corrections_not_in_suggestion_per_sentence(nices):
         print('~~~~~~')
         print('\tcorrect and dc align, but correction not found in dc')
         for nice in nices:
-            if nice[0]['error'] != nice[1][0]:
-                print('Krise!')
             print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, suggestions {nice[1][5]}')
 
 
@@ -53,8 +49,6 @@ def correction_in_suggestion_per_sentence(nices):
         print('~~~~~~')
         print('\tcorrect and dc align, and correction found in dc')
         for nice in nices:
-            if nice[0]['error'] != nice[1][0]:
-                print('Krise!')
             print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, position {nice[1][5].index(nice[0]["correct"])}')
 
 
@@ -99,15 +93,15 @@ def reported_errors_not_marked_per_sentence(corrects):
 
 
 def has_suggestions_with_hit(c_error, d_error):
-    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and d_error[5] and c_error['correct'] in d_error[5]
+    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0] and d_error[5] and c_error['correct'] in d_error[5]
 
 
 def has_suggestions_without_hit(c_error, d_error):
-    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and d_error[5] and c_error['correct'] not in d_error[5]
+    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0] and d_error[5] and c_error['correct'] not in d_error[5]
 
 
 def has_no_suggestions(c_error, d_error):
-    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and not d_error[5]
+    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0] and not d_error[5]
 
 
 with open('results.pickle', 'rb') as pickle_stream:

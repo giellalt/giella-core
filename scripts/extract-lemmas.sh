@@ -100,7 +100,7 @@ keep_hom_tags () {
 grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
    | keep_hom_tags \
-   | egrep -v "^[[:space:]]*[[:alpha:]_-]+[[:space:]]*;" \
+   | egrep -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" \
    | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex)" \
    | exclgrep "$excludepattern" \
    | egrep    "$includepattern" \

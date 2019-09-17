@@ -104,7 +104,7 @@ with open('results.pickle', 'rb') as pickle_stream:
 
 counter = defaultdict(int)
 for result in results:
-    if result[1] or result[3]["errs"]:
+    if result[1] or result[3]['errs']:
         counter ['paragraphs_with_errors'] += 1
         counter['total_manually_marked_errors'] += len(result[1])
         for manual in result[1]:
@@ -114,6 +114,31 @@ for result in results:
             counter[f'grammarchecker_errors_{dc_error[3].replace(" ", "_")}'] += 1
         print('==========')
         print(result[0])
+
+        # Alle oppmerkede feil
+        argh = defaultdict(int)
+        for c_error in result[1]:
+            argh[(c_error['start'], c_error['end'])] += 1
+
+        for indexes in argh:
+            if argh[indexes] > 1:
+                print(f'Markup duplicates of {indexes}')
+                for c_error in result[1]:
+                    if c_error['start'] == indexes[0] and c_error['end'] == indexes[1]:
+                        counter['markup_dupes'] += 1
+                        print(f'\t{c_error}')
+
+        urgh = defaultdict(int)
+        for d_error in result[3]['errs']:
+            urgh[(d_error[1], d_error[2])] += 1
+
+        for indexes in urgh:
+            if urgh[indexes] > 1:
+                print(f'dc duplicates of {indexes}')
+                for d_error in result[3]['errs']:
+                    if d_error[1] == indexes[0] and d_error[2] == indexes[1]:
+                        counter['dc_dupes'] += 1
+                        print(f'\t{d_error}')
 
         # oppmerkede feil som ikke blir rapportert
         marked_errors_not_reported = corrects_not_in_dc(result[1], result[3]["errs"])
@@ -213,6 +238,8 @@ for label in [label for label in counter if label.startswith('correction_no_sugg
     print(f'{label}: {counter[label]}')
     used_categories.add(label)
 
-if all_categories - used_categories:
-    print('\n\n\n\n')
-    print(all_categories - used_categories)
+not_used = all_categories - used_categories
+if not_used:
+    print('\n\nnot used\n\n')
+    for label in not_used:
+        print(f'{label}: {counter[label]}')

@@ -12,14 +12,6 @@ def correct_no_suggestion_in_dc(correct, dc):
     ]
 
 
-def corrections_no_suggestion(nices):
-    if nices:
-        print('~~~~~~')
-        print('\tcorrect and dc align, but dc has no suggestions')
-        for nice in nices:
-            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}')
-
-
 def correct_not_in_dc(correct, dc):
     return [
         (c_error, d_error) for c_error in correct

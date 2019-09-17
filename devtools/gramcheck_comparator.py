@@ -135,7 +135,7 @@ for result in results:
         reported_errors_not_marked_per_sentence(reported_errors_not_marked)
         counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(reported_errors_not_marked)
         for reported_error_not_marked in reported_errors_not_marked:
-            counter[f'grammarchecker_errors_{reported_error_not_marked[3]}_not_reported'] += 1
+            counter[f'grammarchecker_errors_{reported_error_not_marked[3]}_not_markedup'] += 1
 
         # Oppmerket feil blir rapportert, rapporterte feil har forslag, og manuell retting er blant disse
         corrections_in_suggestion = correct_in_dc(result[1], result[3]["errs"])
@@ -190,8 +190,8 @@ used_categories.add("total_grammarchecker_errors_not_found_in_manual_markup")
 print('By type')
 for label in [label for label in counter if label.startswith('grammarchecker_errors') and not label.endswith('not_reported')]:
     print(f'{label}: {counter[label]}')
-    print(f'{label + "_not_reported"}: {counter[label + "_not_reported"]}')
-    print(f'{label + "_found"}: {counter[label] - counter[label + "_not_reported"]}')
+    print(f'{label + "_not_markedup"}: {counter[label + "_not_markedup"]}')
+    print(f'{label + "_found"}: {counter[label] - counter[label + "_not_markedup"]}')
     used_categories.add(label)
     used_categories.add(label + "_not_reported")
 

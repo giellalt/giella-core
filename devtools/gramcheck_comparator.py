@@ -31,9 +31,9 @@ def correct_not_in_dc(correct, dc):
 def corrections_not_in_suggestion_per_sentence(nices):
     if nices:
         print('~~~~~~')
-        print('\tcorrect and dc align, but correction not found in dc')
+        print('\tcorrect and dc align, but dc has no suggestions')
         for nice in nices:
-            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, suggestions {nice[1][5]}')
+            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}')
 
 
 def correct_in_dc(correct, dc):

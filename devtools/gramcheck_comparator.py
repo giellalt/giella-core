@@ -56,7 +56,7 @@ def corrects_not_in_dc(correct, dc):
     corrects = []
     for c_error in correct:
         for d_error in dc:
-            if c_error['start'] == d_error[1] and c_error['end'] == d_error[2]:
+            if has_same_range_and_error(c_error, d_error):
                 break
         else:
             corrects.append(c_error)
@@ -76,7 +76,7 @@ def dcs_not_in_correct(correct, dc):
     corrects = []
     for d_error in dc:
         for c_error in correct:
-            if c_error['start'] == d_error[1] and c_error['end'] == d_error[2]:
+            if has_same_range_and_error(c_error, d_error):
                 break
         else:
             corrects.append(d_error)
@@ -92,16 +92,19 @@ def reported_errors_not_marked_per_sentence(corrects):
             print(f'\t\t{c_error}')
 
 
+def has_same_range_and_error(c_error, d_error):
+    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0]
+
 def has_suggestions_with_hit(c_error, d_error):
-    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0] and d_error[5] and c_error['correct'] in d_error[5]
+    return has_same_range_and_error(c_error, d_error) and d_error[5] and c_error['correct'] in d_error[5]
 
 
 def has_suggestions_without_hit(c_error, d_error):
-    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0] and d_error[5] and c_error['correct'] not in d_error[5]
+    return has_same_range_and_error(c_error, d_error)  and d_error[5] and c_error['correct'] not in d_error[5]
 
 
 def has_no_suggestions(c_error, d_error):
-    return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0] and not d_error[5]
+    return has_same_range_and_error(c_error, d_error)  and not d_error[5]
 
 
 with open('results.pickle', 'rb') as pickle_stream:

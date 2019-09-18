@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+import argparse
 import pickle
 import sys
 from collections import defaultdict
@@ -98,9 +99,8 @@ def has_no_suggestions(c_error, d_error):
     return has_same_range_and_error(c_error, d_error) and not d_error[5]
 
 
-def get_results():
+def get_results(filters):
     with open('results.pickle', 'rb') as pickle_stream:
-        filters = sys.argv[1].split(',')
         print(f'filters: {filters}')
         return [(result[0], [
             c_error for c_error in result[1] if c_error['type'] not in filters
@@ -345,7 +345,19 @@ def overview(results, counter, used_categories):
     overview_hits(counter, used_categories)
 
 
+def parse_options():
+    """Parse the options given to the program."""
+    parser = argparse.ArgumentParser(
+        description='Report on manual markup versus grammarchecker.')
+
+    parser.add_argument('--filtererror', help='Remove named errortags')
+
+    args = parser.parse_args()
+    return args
+
+
 def main():
+    args = parse_options()
     counter = defaultdict(int)
     errortags = set()
 
@@ -356,9 +368,8 @@ def main():
     #errorsyn
     #errorort
 
-    results = get_results()
+    results = get_results(args.filtererror.split(',') if args.filtererror else [])
     per_sentence(results, counter, errortags)
-    # Oversikt
     used_categories = set()
     overview(results, counter, used_categories)
 

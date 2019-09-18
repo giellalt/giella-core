@@ -61,28 +61,27 @@ def get_error_corrections(para):
         parts.append(child.get('correct'))
         for grandchild in child:
             parts.append(get_error_corrections(grandchild))
+
     if para.tail:
         parts.append(para.tail)
+
     return ''.join(parts)
 
 
-def print_orig(parts, errors, para, is_errorchild=False):
+def print_orig(parts, errors, para):
     info = {}
     if para.tag.startswith('error'):
         for name, value in para.items():
             info[name] = value
         info['type'] = para.tag
         info['start'] = len("".join(parts))
-        info['error'] = para.text if not is_errorchild else get_error_corrections(para)
+        info['error'] = get_error_corrections(para) if len(para) else para.text
 
     if para.text:
         parts.append(para.text)
 
     for child in para:
-        if para.tag.startswith('error'):
-            errors.append(print_orig(parts, errors, child, is_errorchild=True))
-        else:
-            errors.append(print_orig(parts, errors, child))
+        errors.append(print_orig(parts, errors, child))
 
     if para.tag.startswith('error'):
         info['end'] = len("".join(parts))

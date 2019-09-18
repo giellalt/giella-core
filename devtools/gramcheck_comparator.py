@@ -259,11 +259,12 @@ def overview_grammarchecker(counter, used_categories):
     )
     used_categories.add("total_grammarchecker_errors")
     print(
-        f'Grammar checker errors that align with manually marked up errors: {counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}'
+        f'Grammar checker errors that align with manually marked up errors: {counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]} == True positives'
     )
     print(
-        f'Grammar checker errors that don\'t align with manually marked up errors: {counter["total_grammarchecker_errors_not_found_in_manual_markup"]}'
+        f'Grammar checker errors that don\'t align with manually marked up errors: {counter["total_grammarchecker_errors_not_found_in_manual_markup"]} == False positives'
     )
+
     used_categories.add(
         "total_grammarchecker_errors_not_found_in_manual_markup")
     print('By type')
@@ -338,11 +339,18 @@ def overview_hits(counter, used_categories):
     overview_hits_no_suggestions(counter, used_categories)
 
 
+
+def overview_precision_recall(counter):
+    print(f'\nOverall precision: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_grammarchecker_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_grammarchecker_errors"]})')
+    print(f'Overall recall: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_manually_marked_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_manually_marked_errors"]})\n')
+
+
 def overview(results, counter, used_categories):
     overview_header(results, counter, used_categories)
     overview_markup(counter, used_categories)
     overview_grammarchecker(counter, used_categories)
     overview_hits(counter, used_categories)
+    overview_precision_recall(counter)
 
 
 def parse_options():

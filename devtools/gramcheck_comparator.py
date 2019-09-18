@@ -2,6 +2,7 @@
 
 import pickle
 from collections import defaultdict
+import sys
 
 
 def correct_no_suggestion_in_dc(correct, dc):
@@ -103,6 +104,23 @@ with open('results.pickle', 'rb') as pickle_stream:
     results = pickle.load(pickle_stream)
 
 counter = defaultdict(int)
+errortags = set()
+
+#errormorphsyn
+#errorlang
+#errorortreal
+#errorlex
+#errorsyn
+#errorort
+
+filters = sys.argv[1].split(',')
+print(filters)
+for x, result in enumerate(results):
+    if result[1]:
+        oldresult = result
+        results[x] = (result[0], [c_error for c_error in result[1] if c_error['type'] not in filters], result[2], result[3])
+
+
 for result in results:
     if result[1] or result[3]['errs']:
         counter ['paragraphs_with_errors'] += 1
@@ -118,6 +136,7 @@ for result in results:
         # Alle oppmerkede feil
         argh = defaultdict(int)
         for c_error in result[1]:
+            errortags.add(c_error['type'])
             argh[(c_error['start'], c_error['end'])] += 1
 
         for indexes in argh:
@@ -243,3 +262,7 @@ if not_used:
     print('\n\nnot used\n\n')
     for label in not_used:
         print(f'{label}: {counter[label]}')
+
+print('Errortags')
+for errortag in errortags:
+    print(errortag)

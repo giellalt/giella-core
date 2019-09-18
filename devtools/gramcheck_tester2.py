@@ -62,7 +62,7 @@ def get_error_corrections(para):
         for grandchild in child:
             parts.append(get_error_corrections(grandchild))
 
-    if para.tail:
+    if not len(para) and para.tail:
         parts.append(para.tail)
 
     return ''.join(parts)

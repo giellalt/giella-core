@@ -22,7 +22,12 @@ def gramcheck(sentence: str, zcheck_file: str,
     runner.run(
         f'divvun-checker -a {zcheck_file} '.split(),
         to_stdin=sentence.encode('utf-8'))
-    return json.loads(runner.stdout)
+
+    d_result = json.loads(runner.stdout)
+    if any([d_error[3] == 'double-space-before' for d_error in d_result['errs']]):
+        fix_double_space(d_result['errs'])
+
+    return d_result
 
 
 def parse_options():
@@ -52,7 +57,7 @@ def get_all(targets):
             print_orig(parts, errors, para)
             text = ''.join(parts)
             if not text.startswith('#'):
-                yield text.replace('\n', ' '), errors, filename
+                yield text.replace('\n', ' '), [error for error in errors if error], filename
 
 
 def get_error_corrections(para):
@@ -92,6 +97,61 @@ def print_orig(parts, errors, para):
     return info
 
 
+def fix_double_space_d_error(d_error, zcheck_file, runner):
+    """Fix double space errors reported by divvun-checker."""
+    double_space_position = d_error[0].find('  ')
+    if double_space_position == -1:
+        new_errors = [[
+            "  ", d_error[1] - 2, d_error[1], d_error[3], d_error[4], [' '],
+            d_error[6]
+        ]]
+        return new_errors
+
+    new_errors = []
+    if double_space_position:
+        before_json = gramcheck(d_error[0][:double_space_position],
+                                zcheck_file, runner)
+        for before_d_error in before_json['errs']:
+            before_d_error[1] += d_error[1]
+            before_d_error[2] += d_error[1]
+            new_errors.append(before_d_error)
+
+    new_errors.append([
+        "  ", d_error[1] + double_space_position,
+        d_error[1] + double_space_position + 2, d_error[3], d_error[4], [' '],
+        d_error[6]
+    ])
+
+    after_json = gramcheck(d_error[0][double_space_position + 2:], zcheck_file,
+                           runner)
+    for after_d_error in after_json['errs']:
+        after_d_error[1] += d_error[1] + double_space_position + 2
+        after_d_error[2] += d_error[1] + double_space_position + 2
+        new_errors.append(after_d_error)
+
+    return new_errors
+
+
+def fix_double_space(d_error):
+    """d_error has at least on double-space-before"""
+    positions_to_remove = [
+        x for x, err in enumerate(d_error)
+        if err[3] == 'typo' and '  ' in err[0]
+    ]
+    for x in positions_to_remove:
+        del d_error[x]
+
+    double_space_positions = [
+        x for x, err in enumerate(d_error)
+        if err[3] == 'double-space-before'
+    ]
+    for x in reversed(double_space_positions):
+        new_errors = fix_double_space_d_error(d_error.pop(x),
+                                              ARGS.zcheck_file, RUNNER)
+        for y, new_error in enumerate(new_errors, start=x):
+            d_error.insert(y, new_error)
+
+
 if __name__ == '__main__':
     ARGS = parse_options()
     RUNNER = util.ExternalCommandRunner()
@@ -99,14 +159,9 @@ if __name__ == '__main__':
     RESULTS = [
         POOL.apply_async(
             make_gramcheck_runs,
-            args=(
-                text,
-                errors,
-                filename,
-                ARGS.zcheck_file,
-                RUNNER
-            )) for text, errors, filename in get_all(ARGS.targets)
-        ]
+            args=(text, errors, filename, ARGS.zcheck_file, RUNNER))
+        for text, errors, filename in get_all(ARGS.targets)
+    ]
 
     with open('results.pickle', 'wb') as pickle_stream:
         pickle.dump([result.get() for result in RESULTS], pickle_stream)

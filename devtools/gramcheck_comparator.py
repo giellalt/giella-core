@@ -342,11 +342,20 @@ def overview_hits(counter, used_categories):
 
 
 def overview_precision_recall(counter):
+    """
+    precision: TP / TP + FP =
+    Recall: TP / TP + FN =
+    Accuracty = TP + TN / TP + TN + FP + FN
+    """
+    true_positives = counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]
+    false_positives = counter["total_grammarchecker_errors_not_found_in_manual_markup"]
+    # TP + FP = all errors found by grammarchecker
+    false_negatives = counter["total_grammarchecker_errors"] - counter["total_manually_marked_errors"]
     print(
-        f'\nOverall precision: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_grammarchecker_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_grammarchecker_errors"]})'
+        f'\nOverall precision: {true_positives/counter["total_grammarchecker_errors"]:.2f} ({true_positives}/{counter["total_grammarchecker_errors"]})'
     )
     print(
-        f'Overall recall: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_manually_marked_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_manually_marked_errors"]})\n'
+        f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n'
     )
 
 

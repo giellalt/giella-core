@@ -23,11 +23,7 @@ def gramcheck(sentence: str, zcheck_file: str,
         f'divvun-checker -a {zcheck_file} '.split(),
         to_stdin=sentence.encode('utf-8'))
 
-    d_result = json.loads(runner.stdout)
-    if any([d_error[3] == 'double-space-before' for d_error in d_result['errs']]):
-        fix_double_space(d_result['errs'])
-
-    return d_result
+    return json.loads(runner.stdout)
 
 
 def parse_options():
@@ -38,9 +34,8 @@ def parse_options():
 
     parser.add_argument('zcheck_file', help='The grammarchecker archive')
     parser.add_argument(
-        'targets',
-        nargs='+',
-        help='Name of the files or directories to process. \
+        'target',
+        help='Name of the file or directorie to process. \
                         If a directory is given, all files in this directory \
                         and its subdirectories will be listed.')
 
@@ -160,8 +155,8 @@ if __name__ == '__main__':
         POOL.apply_async(
             make_gramcheck_runs,
             args=(text, errors, filename, ARGS.zcheck_file, RUNNER))
-        for text, errors, filename in get_all(ARGS.targets)
+        for text, errors, filename in get_all([ARGS.target])
     ]
 
-    with open('results.pickle', 'wb') as pickle_stream:
+    with open(f'{ARGS.target.replace("/", "_")}.pickle', 'wb') as pickle_stream:
         pickle.dump([result.get() for result in RESULTS], pickle_stream)

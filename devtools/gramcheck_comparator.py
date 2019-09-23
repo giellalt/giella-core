@@ -101,9 +101,9 @@ def has_no_suggestions(c_error, d_error):
     return has_same_range_and_error(c_error, d_error) and not d_error[5]
 
 
-def get_results(filters):
-    with open('_home_boerre_repos_freecorpus_correct-no-gs_converted_sme.pickle', 'rb') as pickle_stream:
-        print(f'filters: {filters}')
+def get_results(filters, pickle_file):
+    with open(pickle_file, 'rb') as pickle_stream:
+        print(f'filters: {filters}, file: {pickle_file}')
         return [(result[0], [
             c_error for c_error in result[1] if c_error['type'] not in filters
         ], result[2], result[3])
@@ -364,6 +364,7 @@ def parse_options():
         description='Report on manual markup versus grammarchecker.')
 
     parser.add_argument('--filtererror', help='Remove named errortags')
+    parser.add_argument('pickle_file', help='The pickle file')
 
     args = parser.parse_args()
     return args
@@ -382,7 +383,7 @@ def main():
     #errorort
 
     results = get_results(
-        args.filtererror.split(',') if args.filtererror else [])
+        args.filtererror.split(',') if args.filtererror else [], args.pickle_file)
     per_sentence(results, counter, errortags)
     used_categories = set()
     overview(results, counter, used_categories)

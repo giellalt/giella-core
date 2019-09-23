@@ -3,7 +3,9 @@
 import argparse
 import pickle
 import sys
+import json
 from collections import defaultdict
+from corpustools import ccat, util
 
 
 def correct_no_suggestion_in_dc(correct, dc):
@@ -100,7 +102,7 @@ def has_no_suggestions(c_error, d_error):
 
 
 def get_results(filters):
-    with open('results.pickle', 'rb') as pickle_stream:
+    with open('_home_boerre_repos_freecorpus_correct-no-gs_converted_sme.pickle', 'rb') as pickle_stream:
         print(f'filters: {filters}')
         return [(result[0], [
             c_error for c_error in result[1] if c_error['type'] not in filters
@@ -204,7 +206,7 @@ def per_sentence(results, counter, errortags):
                 counter[
                     f'grammarchecker_errors_{dc_error[3].replace(" ", "_")}'] += 1
             print('==========')
-            print(result[0])
+            print(result[0], '<-', result[2])
 
             report_markup_dupes(result[1], errortags, counter)
             report_dc_dupes(result[3]['errs'], counter)
@@ -339,10 +341,13 @@ def overview_hits(counter, used_categories):
     overview_hits_no_suggestions(counter, used_categories)
 
 
-
 def overview_precision_recall(counter):
-    print(f'\nOverall precision: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_grammarchecker_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_grammarchecker_errors"]})')
-    print(f'Overall recall: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_manually_marked_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_manually_marked_errors"]})\n')
+    print(
+        f'\nOverall precision: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_grammarchecker_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_grammarchecker_errors"]})'
+    )
+    print(
+        f'Overall recall: {(counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"])/counter["total_manually_marked_errors"]:.2f} ({counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]}/{counter["total_manually_marked_errors"]})\n'
+    )
 
 
 def overview(results, counter, used_categories):
@@ -376,7 +381,8 @@ def main():
     #errorsyn
     #errorort
 
-    results = get_results(args.filtererror.split(',') if args.filtererror else [])
+    results = get_results(
+        args.filtererror.split(',') if args.filtererror else [])
     per_sentence(results, counter, errortags)
     used_categories = set()
     overview(results, counter, used_categories)

@@ -235,7 +235,7 @@ def overview_markup(counter, used_categories):
         f'Manually marked errors found by the grammarchecker: {counter["total_manually_marked_errors"] - counter["total_manual_errors_not_found_by_grammarchecker"]}'
     )
     print(
-        f'Manually marked errors not found by the grammarchecker: {counter["total_manual_errors_not_found_by_grammarchecker"]}'
+        f'Manually marked errors not found by the grammarchecker: {counter["total_manual_errors_not_found_by_grammarchecker"]} == False negatives'
     )
     used_categories.add("total_manual_errors_not_found_by_grammarchecker")
     print('By type')

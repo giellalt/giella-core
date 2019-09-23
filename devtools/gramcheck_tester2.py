@@ -57,6 +57,8 @@ def get_all(targets):
 
 def get_error_corrections(para):
     parts = []
+    if para.text is not None:
+        parts.append(para.text)
     for child in para:
         parts.append(child.get('correct'))
         for grandchild in child:

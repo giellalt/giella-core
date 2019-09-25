@@ -1,4 +1,4 @@
-filters: ['errorlang', 'errorlex', 'errorortreal', 'errormorphsyn']
+filters: ['errorlang', 'errorlex', 'errormorphsyn', 'errorortreal'], file: _home_boerre_repos_freecorpus_correct-no-gs_converted_sme.pickle
 ==========
 KAFEA-LÁGIDIEAPMI  2009- 2010      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
 ~~~~~~
@@ -34,9 +34,6 @@ Doalut bistte gitta dii. 16:00. Maŋŋá doaluid fertejit maiddái čorget ovtta
 
 ==========
 Váhnenfierpmádagas lea stivračoahkkin čakčamánus 26. b. gos mearriduvvo dáhton goas káfea doalut lágiduvvojit. Stivračoahkkima maŋŋel oahpaheaddjit sáddejit ođđa ovddasvástádus listtu váhnemiidda. Jus háliidehpet rievdadit evttohuvvon áiggi dieđihehket midjiide ovdal disdaga čakčamánu 29.b. Váhnemat fertejit gaskaneaset šiehtadit gii bargá maid. Mielddus: ovdamearkan mo juogadit barggu. Giitu!      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-dc duplicates of (23, 37)
-	['stivračoahkkin', 23, 37, 'msyn-wrong-case-stivrra', ' "stivračoahkkin" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['stivračoahkkin', 23, 37, 'typo', 'Ii leat sátnelisttus', ['stivrračoahkkin'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct errors not found in dc
 		{'correct': 'ovddasvástáduslisttu', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 162, 'error': 'ovddasvástádus listtu', 'end': 183}
@@ -45,9 +42,6 @@ dc duplicates of (23, 37)
 		stivračoahkkin -> stivrračoahkkin, position 0
 		káfea -> kafea, position 0
 		Stivračoahkkima -> Stivrračoahkkima, position 0
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		stivračoahkkin -> stivrračoahkkin
 
 ==========
 DIEĐUT  KAFEA-LÁGIDIEAMI BIRRA  2009- 2010      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
@@ -197,18 +191,6 @@ Israelmišuvnnas lotnahuvvan jođiheaddji      <- /home/boerre/repos/freecorpus/
 
 ==========
 Svein Granerud ja Bjørn Hesselberg leaba evttohasat ođđa stivrajođiheaddjin Norgga Israelmišuvdnii. Dáláš stivrajođiheaddji Torgeir Flateby, ii hálit šat válljejuvvot. Son lea 8 jagi leamaš stivrajođiheaddjin. Goappaš evttohasat leaba vihahuvvon báhpat. Svein Granerud jođiha Normisjona barggu Norggas ja Bjørn Hesselberg lea Hommelvika suohkanbáhppa. Válga dahkkojuvvo go Israelmišuvnnas lea riikačoahkkin Ulsteinvikas, geassemánu 27. beaivvis suoidnemánu 1. beaivái.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (57, 75)
-	['stivrajođiheaddjin', 57, 75, 'msyn-wrong-case-stivrra', ' "stivrajođiheaddjin" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['stivrajođiheaddjin', 57, 75, 'typo', 'Ii leat sátnelisttus', ['stivrrajođiheaddjin', 'stivrrajođiheaddján'], 'Čállinmeattáhusat']
-dc duplicates of (106, 123)
-	['stivrajođiheaddji', 106, 123, 'msyn-wrong-case-stivrra', ' "stivrajođiheaddji" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['stivrajođiheaddji', 106, 123, 'typo', 'Ii leat sátnelisttus', ['stivrrajođiheaddji'], 'Čállinmeattáhusat']
-dc duplicates of (190, 208)
-	['stivrajođiheaddjin', 190, 208, 'msyn-wrong-case-stivrra', ' "stivrajođiheaddjin" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['stivrajođiheaddjin', 190, 208, 'typo', 'Ii leat sátnelisttus', ['stivrrajođiheaddjin', 'stivrrajođiheaddján'], 'Čállinmeattáhusat']
-dc duplicates of (393, 406)
-	['riikačoahkkin', 393, 406, 'msyn-wrong-case-riikka', ' "riikačoahkkin" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['riikačoahkkin', 393, 406, 'typo', 'Ii leat sátnelisttus', ['riikkačoahkkin'], 'Čállinmeattáhusat']
 ~~~~~~
 	dc errors not found in correct
 		['Normisjona', 276, 286, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -222,18 +204,9 @@ dc duplicates of (393, 406)
 	correct and dc align, but dc has no suggestions
 		Israelmišuvdnii -> Israelmiššuvdnii
 		Israelmišuvnnas -> Israelmiššuvnnas
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		stivrajođiheaddjin -> stivrrajođiheaddjin
-		stivrajođiheaddji -> stivrrajođiheaddji
-		stivrajođiheaddjin -> stivrrajođiheaddjin
-		riikačoahkkin -> riikkačoahkkin
 
 ==========
 Brit Hvalvik, Slattum, Bjørn Lauritzen, Tønsberg ja Randi Marie Kristiansen, Vennesla, leat evttohuvvon ođđa stivramiellahttun. Arne Berge ja Gunvor Fyllingsnes heaitiba stivrras. KPK      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (109, 126)
-	['stivramiellahttun', 109, 126, 'msyn-wrong-case-stivrra', ' "stivramiellahttun" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['stivramiellahttun', 109, 126, 'typo', 'Ii leat sátnelisttus', ['stivrramiellahttun'], 'Čállinmeattáhusat']
 ~~~~~~
 	dc errors not found in correct
 		['Hvalvik', 5, 12, 'typo', 'Ii leat sátnelisttus', ['Kvalvik'], 'Čállinmeattáhusat']
@@ -241,9 +214,6 @@ dc duplicates of (109, 126)
 ~~~~~~
 	correct and dc align, and correction found in dc
 		stivramiellahttun -> stivrramiellahttun, position 0
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		stivramiellahttun -> stivrramiellahttun
 
 ==========
 Dađistaga lassánit oahppit geat hálidit álbmotallaskuvllaide. Boahtte skuvlajahkái leat lassánan nuorat geat hálidit álbmotallaskuvllaide Davvi-Norgii. Dan čállá folkebladet.no      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
@@ -376,13 +346,9 @@ Mišuvdnaolbmui gonagasa ánsu      <- /home/boerre/repos/freecorpus/correct-no-
 
 ==========
 Per-Inge Søreng, Finnsnesas eret, oaččui Gonagasa silba ánsomedálja. Romssa fylkkamánni, Svein Ludvigsen, geigii ánssu, ja čoahkkanan ledje bearaš ja ustibat ja dasa lassin ledje ásahusat nu mo Norgga Lutherlaš Mišuvdnalihttu (NLM), KrF, Lenvik suohkan ja Gaska-Romssa ealáhusat boahtán dilálašvuhtii.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (245, 252)
-	['suohkan', 245, 252, 'msyn-addhyphen', 'Dákkár goallossániin lea sáhcu ', [], 'Sáhcu']
-	['suohkan', 245, 252, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
 	dc errors not found in correct
 		['silba ánsomedálja', 50, 67, 'msyn-compound', '"silba ánsomedálja" orru leamen goallossátni', ['silbaánsomedálja'], 'Goallosteapmi']
-		['suohkan', 245, 252, 'msyn-addhyphen', 'Dákkár goallossániin lea sáhcu ', [], 'Sáhcu']
 		['suohkan', 245, 252, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, but dc has no suggestions
@@ -462,20 +428,12 @@ Jagis 2011 ožžo lagabui 9 miljon kruvnno stáhtadoarjaga. Dat ruđat manne K-s
 
 ==========
 Norgga Samemišuvnna riikastivrras mearridedje ahte Samenes Venn-bláđđi ii šat ilmma dán jagi rájes nu dávjá go ovdal. Ovdal ilbme 11 nummara ja dál galget 8 nummara jahkái.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (20, 33)
-	['riikastivrras', 20, 33, 'msyn-wrong-case-riikka', ' "riikastivrras" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['riikastivrras', 20, 33, 'msyn-wrong-case-stivrra', ' "riikastivrras" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['riikastivrras', 20, 33, 'typo', 'Ii leat sátnelisttus', ['riikkastivrras'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
 		riikastivrras -> riikkastivrras, position 0
 ~~~~~~
 	correct and dc align, but dc has no suggestions
 		Samemišuvnna -> Sámemiššuvnna
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		riikastivrras -> riikkastivrras
-		riikastivrras -> riikkastivrras
 
 ==========
 Duogáš lea go mišuvnna bargiidlohku lea unnon maŋemus jagiid. Dan dilis sii hálidit ovddemusat Samemišuvnna neahttasiidduid ođastit dássedit. Redaktevrra bargu bláđiin galgá ráddjejuvvot ja son galgá baicca eambbo bargat neahttasiidduid ođastemiin. Nu dieđiha Samenes Venn. KPK      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
@@ -674,9 +632,6 @@ Maáŋga mearraolbmáidgirku livčče vuollebáhcagiin šaddan rahčat jus eai l
 
 ==========
 Jus ii heive dán oidnosii buktit juste dan beaivvi, de sáhttá dan dahkat ipmilbálvalusas beaivvi ovdal. Norgga girku ipmilbálvalusa ođastusas lea Sámi álbmoga beaivi váldojuvvon vuosttaš geardde mielde mearkabeaivin girkolaš ortnegiidda. Johnsena mielas leage dasto lunddolaš čuovvolit sihke riikadásis ja báikkálaš dásis Norgga girku mihtu ja dohkkehit ahte sápmelaččat leat dán riikkas. KPK      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (292, 302)
-	['riikadásis', 292, 302, 'msyn-wrong-case-riikka', ' "riikadásis" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['riikadásis', 292, 302, 'typo', 'Ii leat sátnelisttus', ['riikkadásis'], 'Čállinmeattáhusat']
 ~~~~~~
 	dc errors not found in correct
 		['mearkabeaivin', 202, 215, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -684,9 +639,6 @@ dc duplicates of (292, 302)
 ~~~~~~
 	correct and dc align, and correction found in dc
 		riikadásis -> riikkadásis, position 0
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		riikadásis -> riikkadásis
 
 ==========
 Knut Refsdal lea Norgga Kristtalaš Ráđi ođđa váldočálli9      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
@@ -696,24 +648,14 @@ Knut Refsdal lea Norgga Kristtalaš Ráđi ođđa váldočálli9      <- /home/b
 
 ==========
 Ráđi stivrajođiheaddji Else-Britt Nilsen muitala leamaš máŋga čeahpes kandidáhta geaid sii árvvoštalle, muhto Refsdalas bođii ovdan buorre bargoduogáš, gelbbolašvuohta ja beroštupmi.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (5, 22)
-	['stivrajođiheaddji', 5, 22, 'msyn-wrong-case-stivrra', ' "stivrajođiheaddji" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['stivrajođiheaddji', 5, 22, 'typo', 'Ii leat sátnelisttus', ['stivrrajođiheaddji'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
 		stivrajođiheaddji -> stivrrajođiheaddji, position 0
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		stivrajođiheaddji -> stivrrajođiheaddji
 
 ==========
 -Mii galgat ain nannet barggu ahte oažžut kristtalašvuođa oidnosii almmolašvuhtii, mii galgat čielgasit muitalit maid mii oaivvildit, ja makkár árvvuid mii ovddastit. Mii galgat maiddái ovddidit dan ahte gudnis atnit oskkkufriddjavuođa ja olmmošvuoigatvuođaid. Mis lea jáhkku dán olahit go Refsdal lea njunnošis ja mun illudan suinna ovttasbargat, dadjá Nilsen. KPK      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (217, 235)
-	['oskkkufriddjavuođa', 217, 235, 'msyn-addhyphen', 'Dákkár goallossániin lea sáhcu ', ['oskkufriddjavuođa', 'oskkufriddjavuohta'], 'Sáhcu']
-	['oskkkufriddjavuođa', 217, 235, 'typo', 'Ii leat sátnelisttus', ['oskkufriddjavuođa', 'oskkufriddjavuohta'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
-		oskkkufriddjavuođa -> oskkufriddjavuođa, position 0
 		oskkkufriddjavuođa -> oskkufriddjavuođa, position 0
 
 ==========
@@ -896,12 +838,6 @@ NLM Davvi oasis ođđa bargit      <- /home/boerre/repos/freecorpus/correct-no-g
 
 ==========
 Norgga Lutherlaš Miššonlihttu (NLM) lea Davvi regiovnna guovlostivrračoahkkimis juovlamánu virgádan Evelyn ja Per Inge Søreng kanturbargin ja hálddahusjođiheaddjin guovlokantuvrii.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
-dc duplicates of (56, 79)
-	['guovlostivrračoahkkimis', 56, 79, 'msyn-wrong-case-guovllu', ' "guovlostivrračoahkkimis" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['guovlostivrračoahkkimis', 56, 79, 'typo', 'Ii leat sátnelisttus', ['guovllustivrračoahkkimis'], 'Čállinmeattáhusat']
-dc duplicates of (164, 179)
-	['guovlokantuvrii', 164, 179, 'msyn-wrong-case-guovllu', ' "guovlokantuvrii" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['guovlokantuvrii', 164, 179, 'typo', 'Ii leat sátnelisttus', ['guovllukantuvrii'], 'Čállinmeattáhusat']
 ~~~~~~
 	dc errors not found in correct
 		['Davvi regiovnna', 40, 55, 'msyn-compound', '"Davvi regiovnna" orru leamen goallossátni', ['Davviregiovnna'], 'Goallosteapmi']
@@ -913,10 +849,6 @@ dc duplicates of (164, 179)
 ~~~~~~
 	correct and dc align, but dc has no suggestions
 		Lutherlaš -> Luteralaš
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		guovlostivrračoahkkimis -> guovllustivrračoahkkimis
-		guovlokantuvrii -> guovllukantuvrii
 
 ==========
 Evelyn Søreng álgá jahkemolsumis 20 % kanturvirgái gitta suoidnemánu 31.beaivái 2012. Per Inge Søreng álgá seammá áiggis 50 % virgái hálddahusjođiheaddjin suoidnemánu 31.beaivái 2012.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/kpk_web.correct.txt.xml
@@ -1434,15 +1366,11 @@ Boahttevaš Anára Heargegonagasgilvvuid gonagasluohkkái besset searvat 24 suop
 
 ==========
 Bálgesiid ovttastumis čohkkeje manna giđa bargojoavkku, man ulbmilin lei čoavdit olgoriikka herggiid searvama gonagasgilvvuide. Bargojoavkku evttohusa vuođul bálgesiid ovttastumi stivra čoahkkanii čakčamánus gieđahallat dán ášši. Čoakkámis jienaste deinna boađusin, ahte guhtta stivralahtu dorjo olgoriikka herggiid oassálastima ja gávccis vuosttilde.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/lk_norgga_samis_s.correct.txt.xml
-dc duplicates of (278, 289)
-	['stivralahtu', 278, 289, 'msyn-wrong-case-stivrra', ' "stivralahtu" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['stivralahtu', 278, 289, 'typo', 'Ii leat sátnelisttus', ['stivrralahtu'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct errors not found in dc
 		{'correct': 'dainna bohtosiin', 'errorinfo': 'case,ess-com', 'type': 'errorort', 'start': 249, 'error': 'dainna', 'end': 264}
 ~~~~~~
 	dc errors not found in correct
-		['stivralahtu', 278, 289, 'msyn-wrong-case-stivrra', ' "stivralahtu" orru leamen boasttukásusis', [], 'Boasttuhápmi']
 		['stivralahtu', 278, 289, 'typo', 'Ii leat sátnelisttus', ['stivrralahtu'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
@@ -2183,9 +2111,6 @@ Sámedikkeáirras Trond Are Anti háliida ahte ásahuvvo sámi bearráigeahčču
 
 ==========
 Sámelága giellanjuolggadusaid mielde galget almmolaš bálvalusaid geavaheaddjit sámi giellahálddašanguovlluin hálddašuvvot sámegillii, sihke čálalažžat ja njálmmálažžat, dadjá Trond Are Anti, ja muittuha ahte Sámediggi juohke jagi juolluda guovttegielatruđaid suohkaniidda ja fylkasuohkaniidda mat leat sámi giellahálddašanguovllus. – Mii NSRas ja Sámealbmot bellodagas evttohit ahte dál ásahuvvo bearráigeahčči mii galgá čuovvut mielde guovttegielatruđaid geavaheami. – Dakkár bearráigeahčču sáhttá muitalit gosa manne dat 46 miljovnna maid Sámediggi juolludii 2012, dadjá Anti.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/nsr_web1.correct.txt.xml
-dc duplicates of (275, 292)
-	['fylkasuohkaniidda', 275, 292, 'msyn-wrong-case-fylkka', ' "fylkasuohkaniidda" orru leamen boasttukásusis', [], 'Boasttuhápmi']
-	['fylkasuohkaniidda', 275, 292, 'typo', 'Ii leat sátnelisttus', ['fylkkasuohkaniidda'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct errors not found in dc
 		{'correct': 'guovttegielatvuođaruđaid', 'errorinfo': 'der,0-vuođa', 'type': 'errorort', 'start': 239, 'error': 'guovttegielatruđaid', 'end': 258}
@@ -2197,9 +2122,6 @@ dc duplicates of (275, 292)
 		fylkasuohkaniidda -> fylkkasuohkaniidda, position 0
 		NSRas -> NSR:s, position 0
 		Sámealbmot -> Sámeálbmot, position 1
-~~~~~~
-	correct and dc align, but dc has no suggestions
-		fylkasuohkaniidda -> fylkkasuohkaniidda
 
 ==========
 Sámedikkeáirras Trond Are Anti evttoha ahte Sámediggi guorahallá ásaheamis dakkár bearráigeahču. – Guorahallan (berre leat sajis čakčamánu dievasčoahkkimii ja bidjot ovdán das mas lea mihttun ásahit orgána 2013is mii lea našunálálaš giellajahk.      <- /home/boerre/repos/freecorpus/correct-no-gs/converted/sme/Len/other_files/nsr_web1.correct.txt.xml
@@ -4644,7 +4566,7 @@ Paragraphs with errors 454
 
 Manually marked errors: 1137
 Manually marked errors found by the grammarchecker: 972
-Manually marked errors not found by the grammarchecker: 165
+Manually marked errors not found by the grammarchecker: 165 == False negatives
 By type
 manually_marked_errors_errorsyn: 29
 manually_marked_errors_errorsyn_not_reported: 27
@@ -4655,16 +4577,13 @@ manually_marked_errors_errorort_found: 970
 
 
 
-Errors reported by grammarchecker: 1447
-Grammar checker errors that align with manually marked up errors: 986 == True positives
-Grammar checker errors that don't align with manually marked up errors: 461 == False negatives
+Errors reported by grammarchecker: 1431
+Grammar checker errors that align with manually marked up errors: 972 == True positives
+Grammar checker errors that don't align with manually marked up errors: 459 == False positives
 By type
 grammarchecker_errors_double-space-before: 15
 grammarchecker_errors_double-space-before_not_markedup: 14
 grammarchecker_errors_double-space-before_found: 1
-grammarchecker_errors_msyn-wrong-case-stivrra: 8
-grammarchecker_errors_msyn-wrong-case-stivrra_not_markedup: 1
-grammarchecker_errors_msyn-wrong-case-stivrra_found: 7
 grammarchecker_errors_typo: 1305
 grammarchecker_errors_typo_not_markedup: 359
 grammarchecker_errors_typo_found: 946
@@ -4677,15 +4596,12 @@ grammarchecker_errors_msyn-unspace-compound_found: 21
 grammarchecker_errors_no-space-after-punct-mark: 16
 grammarchecker_errors_no-space-after-punct-mark_not_markedup: 16
 grammarchecker_errors_no-space-after-punct-mark_found: 0
-grammarchecker_errors_msyn-wrong-case-riikka: 3
-grammarchecker_errors_msyn-wrong-case-riikka_not_markedup: 0
-grammarchecker_errors_msyn-wrong-case-riikka_found: 3
 grammarchecker_errors_msyn-compound: 26
 grammarchecker_errors_msyn-compound_not_markedup: 24
 grammarchecker_errors_msyn-compound_found: 2
-grammarchecker_errors_msyn-addhyphen: 12
-grammarchecker_errors_msyn-addhyphen_not_markedup: 10
-grammarchecker_errors_msyn-addhyphen_found: 2
+grammarchecker_errors_msyn-addhyphen: 10
+grammarchecker_errors_msyn-addhyphen_not_markedup: 9
+grammarchecker_errors_msyn-addhyphen_found: 1
 grammarchecker_errors_punct-aistton-left: 7
 grammarchecker_errors_punct-aistton-left_not_markedup: 7
 grammarchecker_errors_punct-aistton-left_found: 0
@@ -4695,9 +4611,6 @@ grammarchecker_errors_punct-aistton-right_found: 0
 grammarchecker_errors_space-before-paren-end: 3
 grammarchecker_errors_space-before-paren-end_not_markedup: 3
 grammarchecker_errors_space-before-paren-end_found: 0
-grammarchecker_errors_msyn-wrong-case-guovllu: 2
-grammarchecker_errors_msyn-wrong-case-guovllu_not_markedup: 0
-grammarchecker_errors_msyn-wrong-case-guovllu_found: 2
 grammarchecker_errors_no-space-before-parent-start: 7
 grammarchecker_errors_no-space-before-parent-start_not_markedup: 7
 grammarchecker_errors_no-space-before-parent-start_found: 0
@@ -4707,24 +4620,20 @@ grammarchecker_errors_no-space-after-parent-end_found: 0
 grammarchecker_errors_punct-aistton-both: 1
 grammarchecker_errors_punct-aistton-both_not_markedup: 1
 grammarchecker_errors_punct-aistton-both_found: 0
-grammarchecker_errors_msyn-wrong-case-fylkka: 1
-grammarchecker_errors_msyn-wrong-case-fylkka_not_markedup: 0
-grammarchecker_errors_msyn-wrong-case-fylkka_found: 1
 grammarchecker_errors_space-after-paren-beg: 1
 grammarchecker_errors_space-after-paren-beg_not_markedup: 1
 grammarchecker_errors_space-after-paren-beg_found: 0
 
 
 
-Manually marked errors and reported errors that align: 986
+Manually marked errors and reported errors that align: 972
 
-Reported errors where correction is among suggestions 811
+Reported errors where correction is among suggestions 810
 By manual error and grammarchecker error pairs
 correction_in_suggestion_errorsyn_double-space-before: 1
 correction_in_suggestion_errorort_typo: 787
 correction_in_suggestion_errorsyn_space-before-punct-mark: 1
 correction_in_suggestion_errorort_msyn-unspace-compound: 19
-correction_in_suggestion_errorort_msyn-addhyphen: 1
 correction_in_suggestion_errorort_msyn-compound: 2
 
 Reported errors where correction is not among suggestions 122
@@ -4732,25 +4641,21 @@ By manual error and grammarchecker error pairs
 correction_not_in_suggestion_errorort_typo: 120
 correction_not_in_suggestion_errorort_msyn-unspace-compound: 2
 
-Reported errors without suggestions 53
+Reported errors without suggestions 40
 By manual error and grammarchecker error pairs
-correction_no_suggestion_errorort_msyn-wrong-case-stivrra: 7
 correction_no_suggestion_errorort_typo: 39
-correction_no_suggestion_errorort_msyn-wrong-case-riikka: 3
 correction_no_suggestion_errorort_msyn-addhyphen: 1
-correction_no_suggestion_errorort_msyn-wrong-case-guovllu: 2
-correction_no_suggestion_errorort_msyn-wrong-case-fylkka: 1
 
-Overall precision: 0.68 (986/1447)
-Overall recall: 0.87 (986/1137)
+Overall precision: 0.68 (972/1431)
+Overall recall: 0.77 (972/1266)
 
 
 
 not used
 
 
-dc_dupes: 45
+dc_dupes: 14
 markup_dupes: 4
 Errortags
-errorort
 errorsyn
+errorort

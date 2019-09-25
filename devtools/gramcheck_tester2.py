@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 import argparse
 import json
@@ -130,7 +131,7 @@ def fix_double_space_d_error(d_error, zcheck_file, runner):
 
 
 def fix_double_space(d_error):
-    """d_error has at least on double-space-before"""
+    """d_error has at least one double-space-before"""
     positions_to_remove = [
         x for x, err in enumerate(d_error)
         if err[3] == 'typo' and '  ' in err[0]

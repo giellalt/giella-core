@@ -17,6 +17,7 @@ svn log -v -r5037:HEAD | awk -v username="thomas" '{print username} /^r[0-9]+ / 
 
 echo "Finished with conversion"
 
+cd $GTHOME/giella-core/devtools/
 for i in $2 $3
 do
     for j in correct-no-gs goldstandard

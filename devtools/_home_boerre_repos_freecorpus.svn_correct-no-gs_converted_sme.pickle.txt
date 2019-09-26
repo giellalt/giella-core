@@ -1,4 +1,4 @@
-filters: [], file: _home_boerre_repos_freecorpus.svn_correct-no-gs_converted_sme.pickle
+filters: ['errorlang', 'errormorphsyn', 'errorlex', 'errorortreal'], file: _home_boerre_repos_freecorpus.svn_correct-no-gs_converted_sme.pickle
 ==========
 KAFEA-LÁGIDIEAPMI  2009- 2010      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
 ~~~~~~
@@ -15,72 +15,16 @@ OVDDASVÁSTÁDUS LISTTU GUOVSSAHAS MÁNÁIDGÁRDDIS      <- /home/boerre/repos/f
 		OVDDASVÁSTÁDUS LISTTU -> OVDDASVÁSTÁDUSLISTU -> [OVDDASVÁSTÁDUSLISTTU]
 
 ==========
-Sis geas lea ovddasvástádus lágidit kaféa, vižžet kaféa-kássa skuvllas. Doppe leat ee. gohput, servieahtat ja smávvaruđat. Kássas galgá álohit leat 1000,- smávvaruhtan. Kirsten Alette viežžá smávvaruđaid sámeluohká kontos ja bidjá kaféa-kássii.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(0, 27): 2, (136, 142): 1})
-	{'correct': 'Sii geas lea ovddasvástádus', 'errorinfo': 'pers,subj,nompl,locpl,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sis geas lea ovddasvástádus', 'end': 27}
-	{'correct': 'Sii geain lea ovddasvástádus', 'errorinfo': 'rel,hab,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sii geas lea ovddasvástádus', 'end': 27}
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sii geas lea ovddasvástádus', 'errorinfo': 'pers,subj,nompl,locpl,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sis geas lea ovddasvástádus', 'end': 27}
-		{'correct': 'Sii geain lea ovddasvástádus', 'errorinfo': 'rel,hab,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sii geas lea ovddasvástádus', 'end': 27}
-		{'correct': 'álohii', 'errorinfo': 'adv,fin', 'type': 'errorortreal', 'start': 136, 'error': 'álohit', 'end': 142}
-
-==========
 Sisaboahtu addojuvvo Kirsten Alehttái ja son bidjá ruđa sámeluohká kontui.  Nugo mii leat váhnenčoahkkimis šiehtadan de manná ruhta skuvla giđđa-mátkái.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'de manná ruhta skuvlla giđđa-mátkái', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 117, 'error': 'de manná ruhta skuvla giđđa-mátkái', 'end': 151}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		.  Nugo -> . Nugo, position 0
 
 ==========
 Mirja ja Line leaba gulahallan olbmožat. Jus kaféa-kássas váilu mii dál nu, dieđihehket oahpaheddjiide. Fuom! Jus dat beaivi ii heive didjiide de fertebehtet ieža gaskaneaset molsut earáiguin.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(20, 39): 2, (64, 74): 1, (143, 174): 1, (175, 191): 1})
-	{'correct': 'gulahallanolbmožat, ja váldet oktavuođa sudnuin jus dárbbašehket', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 20, 'error': 'gulahallan olbmožat', 'end': 39}
-	{'correct': 'jus dárbbašehpet', 'errorinfo': 'verb,fin,ind,imprt,mode', 'type': 'errormorphsyn', 'start': 20, 'error': 'gulahallanolbmožat, ja váldet oktavuođa sudnuin jus dárbbašehket', 'end': 39}
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'jus dárbbašehpet', 'errorinfo': 'verb,fin,ind,imprt,mode', 'type': 'errormorphsyn', 'start': 20, 'error': 'gulahallanolbmožat, ja váldet oktavuođa sudnuin jus dárbbašehket', 'end': 39}
-		{'correct': 'mii dal nu', 'errorinfo': 'adv,a', 'type': 'errorortreal', 'start': 64, 'error': 'mii dál nu', 'end': 74}
-		{'correct': 'de fertebehtet ieža gaskaneattet', 'errorinfo': 'adv,advl,pl2,pl3,kongr', 'type': 'errormorphsyn', 'start': 143, 'error': 'de fertebehtet ieža gaskaneaset', 'end': 174}
-		{'correct': 'lonuhit earáiguin', 'errorinfo': 'verb', 'type': 'errorlex', 'start': 175, 'error': 'molsut earáiguin', 'end': 191}
 ~~~~~~
 	correct and dc align, correction not among suggestions
 		gulahallan olbmožat -> gulahallanolbmožat, ja váldet oktavuođa sudnuin jus dárbbašehket -> [gulahallanolbmožat]
-
-==========
-Sámi váhnenfierpmádaga ovddasteaddji rahpá Guovssahas mánáidgárddi uvssaid álohit go leat doalut. Sis geas lea ovddasvástádus lágidit kaféa bohtet dii. 12.00 ja kaféa rahppasa dii. 13.00.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(75, 81): 1, (98, 125): 2, (167, 175): 1, (161, 175): 1})
-	{'correct': 'Sii geas lea ovddasvástádus', 'errorinfo': 'pers,subj,nompl,locpl,case', 'type': 'errormorphsyn', 'start': 98, 'error': 'Sis geas lea ovddasvástádus', 'end': 125}
-	{'correct': 'Sii geain lea ovddasvástádus', 'errorinfo': 'rel,hab,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 98, 'error': 'Sii geas lea ovddasvástádus', 'end': 125}
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'álohii', 'errorinfo': 'adv,fin', 'type': 'errorortreal', 'start': 75, 'error': 'álohit', 'end': 81}
-		{'correct': 'Sii geas lea ovddasvástádus', 'errorinfo': 'pers,subj,nompl,locpl,case', 'type': 'errormorphsyn', 'start': 98, 'error': 'Sis geas lea ovddasvástádus', 'end': 125}
-		{'correct': 'Sii geain lea ovddasvástádus', 'errorinfo': 'rel,hab,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 98, 'error': 'Sii geas lea ovddasvástádus', 'end': 125}
-		{'correct': 'rahpasa', 'errorinfo': 'verb,conc', 'type': 'errorortreal', 'start': 167, 'error': 'rahppasa', 'end': 175}
-		{'correct': 'kaféa rahppojuvvo', 'errorinfo': 'der', 'type': 'errorlex', 'start': 161, 'error': 'kaféa rahpasa', 'end': 175}
-
-==========
-Doalut bistte gitta dii. 16:00. Maŋŋá doaluid fertejit maiddái čorget ovttas sámi váhnenfierpmádat miellahtuiguin.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Doalut bistet', 'errorinfo': 'verb,fin,pl3prs,conneg,infl', 'type': 'errormorphsyn', 'start': 0, 'error': 'Doalut bistte', 'end': 13}
-		{'correct': 'čorget ovttas sámi váhnenfierpmádaga miellahtuiguin', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 63, 'error': 'čorget ovttas sámi váhnenfierpmádat miellahtuiguin', 'end': 113}
-
-==========
-Sii geat lágidit kaféa fertejit váldit mielde daid maid galget vuovdit omd. Pizza, gáhkuid, váffelat, mállásat jna.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Pizza, gáhkuid, váffeliid, mállásiid', 'errorinfo': 'noun,obj,accpl,nompl,case', 'type': 'errormorphsyn', 'start': 71, 'error': 'omd. Pizza, gáhkuid, váffelat, mállásat', 'end': 110}
-
-==========
-Bruvssa, káfe, teaja, sohkkarat, muorje-meastu, servieahta jna. leat kaféa-kássas. váldet áinnas oktavuođa jus leaš eahpečielggas.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Bruvssat, káfe, teadja, sohkkarat, muorje-meastu, servieahtat jna leat', 'errorinfo': 'noun,subj,accsg,nompl,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Bruvssa, káfe, teaja, sohkkarat, muorje-meastu, servieahta jna. leat', 'end': 68}
-		{'correct': '. Váldet', 'errorinfo': 'verb,cap', 'type': 'errorortreal', 'start': 81, 'error': '. váldet', 'end': 89}
 
 ==========
 Váhnenfierpmádagas lea stivračoahkkin čakčamánus 26. b. gos mearriduvvo dáhton goas káfea doalut lágiduvvojit. Stivračoahkkima maŋŋel oahpaheaddjit sáddejit ođđa ovddasvástádus listtu váhnemiidda. Jus háliidehpet rievdadit evttohuvvon áiggi dieđihehket midjiide ovdal disdaga čakčamánu 29.b. Váhnemat fertejit gaskaneaset šiehtadit gii bargá maid. Mielddus: ovdamearkan mo juogadit barggu. Giitu!      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
@@ -108,18 +52,7 @@ dc duplicates of (0, 24)
 		BIRRA  2009-2010 -> BIRRA 2009-2010 -> [BIRRA 2009- 2010]
 
 ==========
-Mii eat doala kaféa juovlamánus go dalle lea muđui olu eará barggut.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'leat muđui olu eará barggut', 'errorinfo': 'verb,fin,pl3prs,sg3prs,kongr', 'type': 'errormorphsyn', 'start': 41, 'error': 'lea muđui olu eará barggut', 'end': 67}
-
-==========
 Skábmamánus leat 4 oahpi geas lea ovddasvástádus, jus dalle šaddat omd. Juovlabeavdi lágidit ovttas Sámi váhnenfierpmádagas      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': '4 oahppi geain', 'errorinfo': 'rel,hab,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 17, 'error': '4 oahppi', 'end': 29}
-		{'correct': 'omd. Juovlabeavddi lágidit', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 67, 'error': 'omd. Juovlabeavdi lágidit', 'end': 92}
-		{'correct': 'ovttas Sámi váhnenfierpmádagain', 'errorinfo': 'noun,advl,comsg,locsg,case', 'type': 'errormorphsyn', 'start': 93, 'error': 'ovttas Sámi váhnenfierpmádagas', 'end': 123}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		oahpi -> oahppi, position 0
@@ -127,40 +60,18 @@ Skábmamánus leat 4 oahpi geas lea ovddasvástádus, jus dalle šaddat omd. Juo
 ==========
 Guovvamánus leat 4 oahpi. Jus lágidit 6.b ovttas Sámi váhnenfierpmádagas      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'ovttas Sámi váhnenfierpmádagain', 'errorinfo': 'noun,advl,comsg,locsg,case', 'type': 'errormorphsyn', 'start': 42, 'error': 'ovttas Sámi váhnenfierpmádagas', 'end': 72}
-~~~~~~
 	correct and dc align, and correction found in dc
 		oahpi -> oahppi, position 0
 
 ==========
-Geassemánus leat 4 oahppit. Maŋemus doalut ovdal geasseluomu.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': '4 oahppi', 'errorinfo': 'noun,numph,gensg,nompl,kongr', 'type': 'errormorphsyn', 'start': 17, 'error': '4 oahppit', 'end': 26}
-
-==========
 ČORGEN: Maŋŋel kaféa doaluid dalle fertejit sii geas leat ovddasvástádus čorget seammá bures nu go lei. Láhtti moppain, ruskkaid doalvut, bevddiid ja stuoluid saddjái bidjat nu mo lei, jna. ovdal lea leamaš nu ahte Sámi váhnenfierpmádat lea leamaš mielde čorgemis, jus dát šaddá dán jagi maid ii leat vuos čielgan.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(44, 72): 2, (159, 166): 1, (188, 195): 1})
-	{'correct': 'sii geas lea ovddasvástádus', 'errorinfo': 'pers,subj,nompl,locpl,case', 'type': 'errormorphsyn', 'start': 44, 'error': 'sii geas leat ovddasvástádus', 'end': 72}
-	{'correct': 'sii geain lea ovddasvástádus', 'errorinfo': 'rel,hab,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 44, 'error': 'sii geas lea ovddasvástádus', 'end': 72}
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'sii geas lea ovddasvástádus', 'errorinfo': 'pers,subj,nompl,locpl,case', 'type': 'errormorphsyn', 'start': 44, 'error': 'sii geas leat ovddasvástádus', 'end': 72}
-		{'correct': 'sii geain lea ovddasvástádus', 'errorinfo': 'rel,hab,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 44, 'error': 'sii geas lea ovddasvástádus', 'end': 72}
-		{'correct': '. Ovdal', 'errorinfo': 'adv,cap', 'type': 'errorortreal', 'start': 188, 'error': '. ovdal', 'end': 195}
 ~~~~~~
 	dc errors not found in correct
 		['seammá', 80, 86, 'typo', 'Ii leat sátnelisttus', ['seamma'], 'Čállinmeattáhusat']
-~~~~~~
-	correct and dc align, and correction found in dc
-		saddjái -> sadjái, position 0
+		['saddjái', 159, 166, 'typo', 'Ii leat sátnelisttus', ['sadjái'], 'Čállinmeattáhusat']
 
 ==========
 KAFEA-KÁSSA: kaféa-kássa vižžojuvvo skuvllas. Gii dan viežžá fertebehtet ieža mearridit. Maŋŋel doaluid de galgá kaféa-kássa buktojuvvot skuvlii mánnodagas. Jus lea mii nu mii váilu kássas- de fertebehtet čálistit unna girjážii mii lea ruhta-kássas.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'mánnodaga', 'errorinfo': 'noun,advl,gensg,locsg,case', 'type': 'errormorphsyn', 'start': 145, 'error': 'mánnodagas', 'end': 155}
 ~~~~~~
 	dc errors not found in correct
 		['kássas-', 182, 189, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -170,10 +81,6 @@ KAFEA-KÁSSA: kaféa-kássa vižžojuvvo skuvllas. Gii dan viežžá fertebehtet
 
 ==========
 RUHTA-KÁSSAS: galgá álohit leat 1000,- . Maŋŋel doaluid, fertebehtet rehkenastit dietnasa ja čállet dan unna girjjážii mii lea ruhta-kássas. Dietnasa bidjabehtet sierra (plastihka-bosi nu ahte mii skuvllas eat dárbbaš lohkat dáid.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'álohii', 'errorinfo': 'adv,fin', 'type': 'errorortreal', 'start': 20, 'error': 'álohit', 'end': 26}
-		{'correct': 'plastihkkabussii', 'errorinfo': 'noun,mix', 'type': 'errorortreal', 'start': 170, 'error': 'plastihka-bosi', 'end': 184}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		1000,- . -> 1000,-., position 0
@@ -186,14 +93,6 @@ MÁNÁID-GÁRDDI RAHPAN JA LÁSSEN: Dát ášši ii leat vuos čielggas. Ovdal l
 ~~~~~~
 	correct and dc align, correction not among suggestions
 		rahpán -> rahpá -> [rahpan]
-
-==========
-MUĐUI: ođđa dieđut bohtet go buot leat čielggas jna. jus lea mii dál nu, de váldet oktavuođa minguin skuvllas dahje čállet dan unna girjjážii mii lea ruhta-kássas).      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'buot lea', 'errorinfo': 'verb,fin,sg3prs,pl3prs,kongr', 'type': 'errormorphsyn', 'start': 29, 'error': 'buot leat', 'end': 38}
-		{'correct': '. Jus', 'errorinfo': 'cs,cap', 'type': 'errorortreal', 'start': 51, 'error': '. jus', 'end': 56}
-		{'correct': 'mii dál nu', 'errorinfo': 'adv,a', 'type': 'errorortreal', 'start': 61, 'error': 'mii dál nu', 'end': 71}
 
 ==========
 no-decode    <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/admin/other_files/nps-001_kafealagideapmi.correct.txt.xml
@@ -351,25 +250,13 @@ Oba davviriikkaid vuosttaš juoigankonsearta dollui Heahtás Márjjábeaivve 197
 		mánggat -> máŋggat, position 0
 
 ==========
-Mari Boine ii loga ábuhit čiegadit dan mii lei báhčá, váivi ja lossat, go eallimis leat máŋggalágan vásáhusat.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'mii lei bahča', 'errorinfo': 'adj,mix', 'type': 'errorortreal', 'start': 39, 'error': 'mii lei báhčá', 'end': 52}
-
-==========
 Mari Boine lea viimmat fas boahtán ruoktot, Kárášjohkii. Dál son áigo vuoiŋŋastit guokte mánu iežas lagámušaid luhtte.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'son áigu', 'errorinfo': 'verb,fin,sg3prs,pl3prt,infl', 'type': 'errormorphsyn', 'start': 61, 'error': 'son áigo', 'end': 69}
 ~~~~~~
 	correct and dc align, correction not among suggestions
 		lagámušaid -> lagamušaid -> [lagamusaid, laggamušaid, lagamušaids, laigamušaid, álgámušaid]
 
 ==========
 – Lei hui somá fas vuoddjit duoddara badjel Leavnnjas deike. Mun dovddan ahte lean váillahan ritnon muoraid ja skábma čuovgga, lohká Mari.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Lei hui somá fas vuodjit', 'errorinfo': 'verb,conc', 'type': 'errorortreal', 'start': 2, 'error': 'Lei hui somá fas vuoddjit', 'end': 27}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		skábma čuovgga -> skábmačuovgga, position 0
@@ -395,39 +282,14 @@ Mari Boine lea viimmat fas boahtán ruoktot, Kárášjohkii. Dál son áigo vuoi
 		['Thonstadin', 77, 87, 'typo', 'Ii leat sátnelisttus', ['Tonstadain', 'Tonstadii', 'Tronstadii', 'Tronstadan', 'Tonstadan', 'Tronstadain'], 'Čállinmeattáhusat']
 
 ==========
-Dat sáhttá ahte dakkár olbmuide geat juo dihtet ovdagihtii daid áššiid ahte sii háliidit njuikut. -Eat mii viša dien lohkkat, mii háliidit lohkat eambbo Mari birra.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Eat mii viša dien lohkat', 'errorinfo': 'verb,conc', 'type': 'errorortreal', 'start': 99, 'error': 'Eat mii viša dien lohkkat', 'end': 124}
-
-==========
        Kárášjoga bahčá muittut           <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Kárášjoga bahča muittut', 'errorinfo': 'adj,a', 'type': 'errorortreal', 'start': 7, 'error': 'Kárášjoga bahčá muittut', 'end': 30}
 ~~~~~~
 	dc errors not found in correct
 		['Kárášjoga', 7, 16, 'double-space-before', 'Leat guokte gaskka ovdal "Kárášjoga"', [], 'Sátnegaskameattáhusat']
 		['bahčá', 17, 22, 'typo', 'Ii leat sátnelisttus', ['bahča'], 'Čállinmeattáhusat']
 
 ==========
-- Dat lea nu go gálga muitalit muitalusa, de lea mus dat oaidnu ahte ii don ábut čiegadit dat mii lei bahča ja váivi ja lossat, go eallimis leat máŋggalágan vásáhusat ja mun dovddan ahte mun lean muitalan dien ja mun lean olu lávlagiid čállán dieid birra.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'go galgá muitalit muitalusa', 'errorinfo': 'verb,mix', 'type': 'errorortreal', 'start': 13, 'error': 'go gálga muitalit muitalusa', 'end': 40}
-
-==========
-Mun gal lean ieš geargan ja addán ándagassii, muhto mu mielas lei dehálaš muitalit ahte vaikko lei olu mii ii lean nu álki, de sáhtát lihkka ovdánit, nanusmuvvat ja váldit iežas eret morrašiiguin ja váivviiguin. Mun lean álo háliidan inspireret earáid.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'de sáhttá lihkka ovdánit, nanusmuvvat ja váldit iežas eret', 'errorinfo': 'verb,fin,sg3prs,sg2prs,infl', 'type': 'errormorphsyn', 'start': 165, 'error': 'váldit iežas eret', 'end': 182}
-		{'correct': 'váldit iežas eret morrašiin ja váivviin', 'errorinfo': 'noun,advl,locpl,compl,case', 'type': 'errormorphsyn', 'start': 124, 'error': 'de sáhtát lihkka ovdánit, nanusmuvvat ja de sáhttá lihkka ovdánit, nanusmuvvat ja váldit iežas eret', 'end': 210}
-
-==========
 Máŋgii sáhttet olbmot jurddašit go oidnet olbmuid geat lihkostuvvet ja manna bures ahte daiguin lea álo leamaš beare álki. Olbmo eallin lea girjái ja doppe leat buorit ja bahát.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'dain lea álo leamaš beare álki', 'errorinfo': 'dem,hab,locgpl,compl,case', 'type': 'errormorphsyn', 'start': 88, 'error': 'daiguin lea álo leamaš beare álki', 'end': 121}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		manna -> manná, position 0
@@ -435,17 +297,11 @@ Máŋgii sáhttet olbmot jurddašit go oidnet olbmuid geat lihkostuvvet ja manna
 ==========
 - Lei hui somá fas vuoddjit duoddara badjel Leavnnjas deike. Mun dovddan ahte lean váillahan ritnon muoraid ja skábma čuovgga. Mun lean dál dáppe guokte mánu ja mun áibbašan vuoiŋŋastit, muitala Mari Boine.    <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_45.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Lei hui somá fas vuodjit', 'errorinfo': 'verb,conc', 'type': 'errorortreal', 'start': 2, 'error': 'Lei hui somá fas vuoddjit', 'end': 27}
-~~~~~~
 	correct and dc align, and correction found in dc
 		skábma čuovgga -> skábmačuovgga, position 0
 
 ==========
 26-jahkásaš Ruben Klipper logaldallá Deanu nuoraidskuvla-oahppiide iežas váivves mánná- ja nuorravuođa vásáhusaid. Miela vuostá gárrudit, dahje fáhkka huikkádit. Nu soaittát jos dus leat sihke ADHD- ja Tourettes-dávddat. Ruben Klipper lea fasttit givssiduvvon dáid dávddaid dihtii, ja johtá dál ja muitala iežas vásáhusaid birra.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_7.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Miela vuostá garrudit, dahje fáhkka huikkádit. Nu soaittát jos dus leat sihke ADHD- ja Tourettes-dávddat', 'errorinfo': 'verb,a', 'type': 'errorortreal', 'start': 115, 'error': 'Miela vuostá gárrudit, dahje fáhkka huikkádit. Nu soaittát jos dus leat sihke ADHD- ja Tourettes-dávddat', 'end': 219}
 ~~~~~~
 	dc errors not found in correct
 		['Klipper', 18, 25, 'typo', 'Ii leat sátnelisttus', ['Flipper'], 'Čállinmeattáhusat']
@@ -490,9 +346,6 @@ Filbmejuvvon šloahtas Čeahkas      <- /home/boerre/repos/freecorpus.svn/correc
 ==========
 Šloahta dat dárbbašedje dán filbmii, ainnat filmmas lea sáhka nieiddas gean namma lea Sonja. Sonja ohcagoahtá juovlanásti, danne go háliidivčii veahkehit gonagasa čoavdit nieiddas, Gyllenhår` garuhusas. Sonja deaivida olu hehttuhusaiguin, váddáseamos hehttehus lea bahágas noaideáhkku. Lihkkus leat Sonjas veahkkit geat dorjot su mátkis, nugo juovlanigá ja ulddat.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_17.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sonja ohcagoahtá juovlanástti', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errorortreal', 'start': 93, 'error': 'Sonja ohcagoahtá juovlanásti', 'end': 121}
-~~~~~~
 	dc errors not found in correct
 		['Gyllenhår', 181, 190, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
@@ -513,9 +366,6 @@ Malin Soli ja Kim Haugen neaktiba Sonja ja juovlanigá filmmas      <- /home/boe
 ==========
 Čeahkas dat leat bádden filmma, Pernstein šloahtas álggogeahčen jagis. Ffilbmenbarggu gal lohká Nils Gaup lean áddjás bargun, danne go mánát eai beassan bargat eanet go njeallja diimmu beaivái.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_17.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Čeahkas dat leat bádden filmma, Pernstein šloahtas álggogeahčen jagi', 'errorinfo': 'noun,pph,gensg,locsg,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Čehkkias', 'end': 69}
-~~~~~~
 	dc errors not found in correct
 		['Pernstein', 32, 41, 'typo', 'Ii leat sátnelisttus', ['Bernstein'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -525,6 +375,9 @@ Malin Soli ja Kim Haugen neaktiba Sonja ja juovlanigá filmmas      <- /home/boe
 
 ==========
 Filmmas lei vuosttas čájahus ovddit sotnabeaivvi, ja dát váldui bures vuostá, lohká Gaup. Seammás leat filmma juo vuovdán 67 riikii, earret eará Durkui, Gaska Nuortái, Indonesijai, ovddeš Jugosláviai ja Thailándii. Dáinna Gaup illuda.    <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_17.correct.txt.xml
+~~~~~~
+	dc errors not found in correct
+		['Thailándii', 203, 213, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
 		čájahus -> čájáhus, position 0
@@ -536,7 +389,6 @@ Filmmas lei vuosttas čájahus ovddit sotnabeaivvi, ja dát váldui bures vuost�
 ~~~~~~
 	correct and dc align, no suggestions
 		Jugosláviai -> Jugoslaviai
-		Thailándii -> Thaieatnamii
 
 ==========
 Meahciráđđehusa meahccebearráigehččiid bargogieddin leat Meahciráđđehusa dikšun stáhta eanan- ja čáhceviidodagat. Dát viidodagat leat sulaid golmmádas riikkamet ollesviidodagas. Meahccebearráigeahččit bearráigehččet ja bagadallet luonddus lihkadeddjiid. Meahccebearráigeahčču ollašuhttojuvvo oktasašbargun sierra eiseválddiiguin ja čanusjoavkkuiguin.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/meahccebearraigeahccu_s.correct.txt.xml
@@ -588,9 +440,6 @@ Kárášjogas lea kulturvahkku dán vahku ja dasa gullet diehttalasat mállásat
 ==========
 - Ášš, almmánolbmot leat njoazit boahtit, lohká Berit Nikkinen Varsi ja lokteba dan lossa kásterolla mas leat dievva gumposat      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_18.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'lokteba dan lossa kásterola', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 72, 'error': 'lokteba dan lossa kásterolla', 'end': 100}
-~~~~~~
 	dc errors not found in correct
 		['Ášš', 2, 5, 'typo', 'Ii leat sátnelisttus', ['Ášši', 'Ieš', 'Leš', 'Áššu', 'Ášu', 'Á.', 'Ášo', 'Áššo', 'Ášoš'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -600,17 +449,11 @@ Kárášjogas lea kulturvahkku dán vahku ja dasa gullet diehttalasat mállásat
 ==========
 – Moai han lávime leat hui gievrra, lasiha Laila Rasmus gis.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_18.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Moai han láviime leat hui gievrrat', 'errorinfo': 'adj,spred,plnom,accsg,kongr', 'type': 'errormorphsyn', 'start': 2, 'error': 'Moai han láviime', 'end': 34}
-~~~~~~
 	correct and dc align, and correction found in dc
 		lávime -> láviime, position 1
 
 ==========
 Olles Kárasjohka veadjá boahtit borrat gumposiid servodatviesus dál guokte beaivvi, muhto nissonolbmo guovttos eaba gal dara dan dihti ja leaikkastallaba das gaskaneaskka.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_18.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'eaba gal dara dan dihtii', 'errorinfo': 'adv,fin', 'type': 'errorortreal', 'start': 111, 'error': 'eaba gal dara dan dihti', 'end': 134}
 ~~~~~~
 	dc errors not found in correct
 		['dihti', 129, 134, 'typo', 'Ii leat sátnelisttus', ['dihte', 'dihtii'], 'Čállinmeattáhusat']
@@ -626,9 +469,6 @@ Gumposat Karasjoga kulturvahku      <- /home/boerre/repos/freecorpus.svn/correct
 
 ==========
 Kásterolain duldet gumposat ja bierggut. Nisson guovttos máisttašeaba - lea go son doarváid sálttit - ja jorbeba vel eambbo gumposiid, vai livččii doarvái buohkaide.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_18.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'leat go son doarvái sálttit', 'errorinfo': 'verb,fin,pl3prs,sg3prs,kongr', 'type': 'errormorphsyn', 'start': 72, 'error': 'lea go son doarvái', 'end': 99}
 ~~~~~~
 	correct and dc align, correction not among suggestions
 		doarváid -> doarvái -> [čoarváid, durváid, doavaid]
@@ -651,9 +491,6 @@ Ruhta mii dán gávppis boahtá manná Kárásjoga searvegoddái. Berit Nikkinen
 ==========
 Olbmot gal bohtet. Go diibmu lea guokte lea serdodatviessu dievva olbmuin geat borret gumposiid ja geahčađit daid unna gávppažiin mat vuvdet girjjiid ja dudjiid.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/Len/other_files/nrk_18.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'dain unna gávppážiin', 'errorinfo': 'dem,det,locsg,gensg,case', 'type': 'errormorphsyn', 'start': 109, 'error': 'daid unna gávppážiin', 'end': 129}
-~~~~~~
 	correct and dc align, and correction found in dc
 		serdodatviessu -> servodatviessu, position 0
 		geahčađit -> geahčadit, position 0
@@ -662,15 +499,8 @@ Olbmot gal bohtet. Go diibmu lea guokte lea serdodatviessu dievva olbmuin geat b
 
 ==========
 Ii lean gusto dat feasta makkárge revolušuvdna mu eallimis. Muhto dobddan ahte anán dál vejolašvuođaid maid in basi ovdal atnán. Goitge lean ollu eivákto, muhto lea veaha dan dihte go liikon dasa, ja go olmmoš diehtá ahte lea iešválljejuvvon aktonasvuohta, ahte gámnojit alternatiivvat: Dalle ii leat nu várálaš eivákto leahkit. Lea báicce kuula. Veaha indie. Muhto iešdobdu lea loktejuvvon, ja dat lea dagahan ahte in leat lanjas čiehkádan dan vahku nugo ovddes vahku. Lean dan vahku duostan leahkit hybelvistti gievkkanis, ii beare fitnat doppe stumppasneaiddaid suvležit, ja de báhtarit fas latnjii seaibi juolgegaskkas. Lean gullan ovtta nieidda birra guhte muhtomin lávii hybelvisttis bassit bierggu čáhceduoldi liekkaselementtaid nalde iežas lanjas dan dihte go ii gierdan mannat gievkkanii. Jáhkán lea studeanttaleaika, muhto munnje han orru jáhkehahtti; nu measta dagalin mannan vahku, muhto in dál šat leat nu váivvis.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-006_ihpil.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(66, 73): 1, (146, 153): 1, (165, 170): 1, (262, 270): 1, (312, 319): 1, (333, 339): 1, (340, 345): 1, (347, 352): 1, (366, 374): 1, (424, 440): 1, (416, 450): 1, (456, 462): 2, (470, 484): 1, (547, 564): 1, (717, 735): 1, (809, 825): 1})
-	{'correct': 'ovddeš', 'errorinfo': 'adj,lime', 'type': 'errorort', 'start': 456, 'error': 'ovddes', 'end': 462}
-	{'correct': 'ovddit', 'errorinfo': 'w', 'type': 'errorlex', 'start': 456, 'error': 'ovddeš', 'end': 462}
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'lanjas čiehkádallan', 'errorinfo': 'verb,infin,frek,refl,der', 'type': 'errormorphsyn', 'start': 424, 'error': 'lanjas čiehkádan', 'end': 440}
-		{'correct': 'in leat lanjas čiehkádallan dán vahku', 'errorinfo': 'dem,a-á', 'type': 'errormorphsyn', 'start': 416, 'error': 'in leat lanjas čiehkádallan', 'end': 450}
-		{'correct': 'ovddit', 'errorinfo': 'w', 'type': 'errorlex', 'start': 456, 'error': 'ovddeš', 'end': 462}
-		{'correct': 'Lean dán vahku', 'errorinfo': 'dem,a-á', 'type': 'errormorphsyn', 'start': 470, 'error': 'Lean dan vahku', 'end': 484}
 		{'correct': 'stumpasneaiddaid', 'errorinfo': 'noun,cmp,gen,nom', 'type': 'errorort', 'start': 547, 'error': 'stumppasneaiddaid', 'end': 564}
 		{'correct': 'studeantaleaika', 'errorinfo': 'noun,cmp,gen,nom', 'type': 'errorort', 'start': 809, 'error': 'studeanttaleaika', 'end': 825}
 ~~~~~~
@@ -696,10 +526,6 @@ Markup duplicates of defaultdict(<class 'int'>, {(66, 73): 1, (146, 153): 1, (16
 ==========
 Lean báicce veaha oahpasmuvvan ránnjáiguin dan vahku. Leat máŋga olgoriikkalačča mu lobus, ja lea buorre vejolašvuohta munnje beassat eŋgelasgielan hárjehallat. Lea nai hui suohtas singuin hoallat, go in leat duođas deaivan nie máŋgasiid amas kultuvrrain. Ja mielagiddevaš hájat leat gievkkanáimmus ovttelit... Muhto lea rivgonieida geainna lean eanemusat hoallan, orru guokte uvssa mus eret, ja orru oalle hávski. Lea moadde jagi mus boarráset, dego 23-24 jagi boares, ja muhtun sivas váldá muinna oktavuođa go oaidná mu. Soaitá munnje liikot, in dieđe, muhto in jáhke dat lea sivva ge. Ii leat nu ahte orru munnje viggame, muhto orru hálideame oktavuođa. Imaš.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-006_ihpil.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Lean baicce veahá oahpásmuvvan ránnjáiguin dán vahku', 'errorinfo': 'dem,a-á', 'type': 'errormorphsyn', 'start': 0, 'error': 'Lean baicceveaháoahpásmuvvan', 'end': 52}
-		{'correct': '23-24 jagi boaris', 'errorinfo': 'adj,spred,nomsg,attr,infl', 'type': 'errormorphsyn', 'start': 451, 'error': '23-24 jagi boares,', 'end': 469}
-~~~~~~
 	dc errors not found in correct
 		['olgoriikkalačča', 65, 80, 'typo', 'Ii leat sátnelisttus', ['olgoriikalačča'], 'Čállinmeattáhusat']
 		['lobus', 84, 89, 'typo', 'Ii leat sátnelisttus', ['logus', 'lobis', 'lolus', 'lođus', 'globus', 'sobus', 'lobmos', 'lumus', 'logos'], 'Čállinmeattáhusat']
@@ -719,10 +545,6 @@ Lean báicce veaha oahpasmuvvan ránnjáiguin dan vahku. Leat máŋga olgoriikka
 
 ==========
 Muđui ii leat mu eallimis nu ollu govvádallat, eará go jurdagat ja gudnihipmu. Mánnodaga lei girjjálašvuođalogaldallan, ja ožžon guokte ođđa ustiba eaba ieš dan dieđe, muhto leaba. In leat dan ovdal dál huomedan, muhto girjjálašvuođalogaldalli lea sápmelaš! Lei mánnodaga čilgeme midjiide lyrihka, ja buvttii moadde ovdamearkka iešguđetlágan lyrálaš minstáriidda, ja nubbi ovdamearkan geavahii Sámisoga lávlaga! Áibbas šohkka! Ja de geahčai birra ja jearai jus oktaFge máhtii sámegiela, ja ii oktage vástidan (ieš in duostan in maidige jietnadit), ja de ieš logai moadde strofa sámegillii čuvgežit.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-006_ihpil.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'eaba ieža', 'errorinfo': 'refl,kongr', 'type': 'errormorphsyn', 'start': 148, 'error': 'eaba ieš', 'end': 156}
-		{'correct': 'nubbin ovdamearkan', 'errorinfo': 'adj,attr,ess,nomsg,agr', 'type': 'errormorphsyn', 'start': 367, 'error': 'nubbi ovdamearkan', 'end': 384}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		huomedan -> huomihan, position 7
@@ -750,9 +572,6 @@ Oba imaš jurddašit ahte nubbi ii dieđe nubbi lea sámegielahoalli. Doppe soit
 ==========
 Muhto vel ustiba logaldallamis ožžon, ja dat dat orru vuogas nissonolmmožin! Dahje orui. Logaldalli muitalii dološ grehkalaš lyrihkkár Sapfo birra, guhte orui Lesbos-sullos dego 600 jagi Kristusa ovdal. Lei hui iešstivrejeaddji nisu, ja lea son guhte lea “lesbálaš-sáni” mearkkašumi álgga, dan dihte go ráhkistii nissonolbmuid ja doppe sullos anii nissonolbmo njáŋŋáid. Doppe orui iežas nissončorraga olis, ja čálii hearvás lávlagiid eallima stuorimus sivdnádusaid birra.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-006_ihpil.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'lyrihkkára Sapfo birra', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 125, 'error': 'lyrihkkár Sapfo birra', 'end': 146}
-~~~~~~
 	dc errors not found in correct
 		['lyrihkkár', 125, 134, 'typo', 'Ii leat sátnelisttus', ['lyrihkkan'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -766,9 +585,6 @@ Muhto vel ustiba logaldallamis ožžon, ja dat dat orru vuogas nissonolmmožin! 
 
 ==========
 Nu jurddašan mon nai: Hálidan leahkit dego Sapfo, stivret máilmmi iežan háluid mielde ja čállit divttaid mat gusket juohke olbmo eallimii ja millii. Eallin, jápmin, ráhkisvuohta, mearra: Maid vel sáhttá olmmoš sihtat govvádallat, midjas vel lea olahit diktačálli eallimis? In dieđe anán go dan midjas lea dárbbášlaš atnit olbmuid eallimiid čuvgežit, nugo The Smiths mu eallima čuvgejit, muhto seavdnjadagas riehtis oahpaha mánáide ipmašiid, ja mon niegadan sániid birra; sánit mat darvánit olbmuid millii, mat sivdnidit olbmuid árgabeivviid, maid duohtatvuohta suddá duohtatmeahttunvuhtii, mat leat máŋgaláganat, seammaláganat, juohkeláganat, ja mat boktet olbmuid: Ráhkisvuhtii, smiehttalasvuhtii, imašvuhtii, eallimii.    <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-006_ihpil.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'maid vel lea olahit', 'errorinfo': 'pron,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 230, 'error': 'mii', 'end': 251}
 ~~~~~~
 	dc errors not found in correct
 		['Smiths', 359, 365, 'typo', 'Ii leat sátnelisttus', ['Smith', 'Smithas', 'Smitha', 'Smittas'], 'Čállinmeattáhusat']
@@ -788,9 +604,7 @@ Nu jurddašan mon nai: Hálidan leahkit dego Sapfo, stivret máilmmi iežan hál
 Jus lea okta maid mii sápmelaččat leat máilmmi čeahpimussan, de lea vuoigatvuođaid gáibidit. Beaivvalaččat oidnojit min polihkkarat tv:s hoahkame álgoálbmotrivttiid, ILO 169 ja ON deklarašuvnnaid birra. Lávejit nu máilmmi fiidnat orrome diet doahpagat. Gaskkariikkalaččat ja solidaralaččat. Olmmoš dego govahalla ahte mii sápmelaččat doarrut ovttas buot eará máilmmi vealahuvvon olbmuiguin, báhadahkkiid vuoigatmeahttunvuođaid vuostta. Mii áŋgiruššat buot sápmelaččaid, indiánaid, inuihtaid ja eará badjelgehččojuvvon olbmuid rivttiid ovddas.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-009_soadis_dacca_calmmis_ja_muorra_iezamet_calmmis.correct.txt.xml
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'mas mii sápmelaččat leat máilmmi čeahpimussan', 'errorinfo': 'rel,advl,locsg,accsg,case', 'type': 'errormorphsyn', 'start': 13, 'error': 'maid mii sápmelaččat leat máilmmi čeahpimussan', 'end': 59}
 		{'correct': 'ON-deklarašuvnnaid', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 177, 'error': 'ON deklarašuvnnaid', 'end': 195}
-		{'correct': 'Lávejit nu máilmmi fiidnát orrut', 'errorinfo': 'verb,infin,infinite,act,mode', 'type': 'errormorphsyn', 'start': 203, 'error': 'Lávejit nu máilmmi fiidnát', 'end': 236}
 		{'correct': 'Gaskariikkalaččat', 'errorinfo': 'adv,cmp,conc', 'type': 'errorort', 'start': 253, 'error': 'Gaskkariikkalaččat', 'end': 271}
 ~~~~~~
 	correct and dc align, and correction found in dc
@@ -828,7 +642,6 @@ Váldde lullisápmelaččaid ovdamearkan. Doppe lea sámegiella rašes dilis. A�
 ~~~~~~
 	correct errors not found in dc
 		{'correct': 'lullisámeguovllus', 'errorinfo': 'noun,cmp,svow', 'type': 'errorort', 'start': 49, 'error': 'lullisámiguovllus', 'end': 66}
-		{'correct': 'lei seamma vuoigatmeahttumit juohkit', 'errorinfo': 'verb,fin,ind,cond,mode', 'type': 'errormorphsyn', 'start': 347, 'error': 'livččii seamma vuoigatmeahttumit', 'end': 391}
 ~~~~~~
 	dc errors not found in correct
 		['Sámeguovllu', 258, 269, 'typo', 'Ii leat sátnelisttus', ['Sámiguovllu'], 'Čállinmeattáhusat']
@@ -854,18 +667,13 @@ Muhto vaikko soaita váttis jahkit, de lea sámejoavku mii lea ain rašit dilis.
 ==========
 Jus mii sápmelaččat livččiimet beroštit vuoigatmeahttunvuođain Sámis, de livččiimet bidjat buot iežamet návccaid dien guvlui. Leimmet sáddet olles giellačeahppeveaga dohko, mat livčče stensiillaid ja eará oahpponeavvuid ráhkadit bivastatgálluid. Sámi tv-ođđasat ges livčče sin barggu birra muitalit beaivvalaččat, ja mii earát livččiimet dárjjilsápmelaččaid dili digaštallat gievkkanbeavdegáttiin miehta sámi.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-009_soadis_dacca_calmmis_ja_muorra_iezamet_calmmis.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'leimmet beroštit', 'errorinfo': 'verb,fin,indic,cond,mode', 'type': 'errormorphsyn', 'start': 20, 'error': 'livččiimet beroštit', 'end': 39}
-		{'correct': 'leimmet bidjat', 'errorinfo': 'verb,fin,indic,cond,mode', 'type': 'errormorphsyn', 'start': 73, 'error': 'livččiimet bidjat', 'end': 90}
-		{'correct': 'ledje stensiillaid ja eará oahpponeavvuid ráhkadit', 'errorinfo': 'verb,fin,indic,cond,mode', 'type': 'errormorphsyn', 'start': 177, 'error': 'livčče stensiillaid ja eará oahpponeavvuid ráhkadit', 'end': 228}
-		{'correct': 'ledje sin barggu birra muitalit', 'errorinfo': 'verb,fin,indic,cond,mode', 'type': 'errormorphsyn', 'start': 266, 'error': 'livčče sin barggu birra muitalit', 'end': 298}
-		{'correct': 'leimmet dárjilsápmelaččaid dili digaštallat', 'errorinfo': 'verb,fin,indic,cond,mode', 'type': 'errormorphsyn', 'start': 327, 'error': 'livččiimet dárjilsápmelaččaid', 'end': 374}
+	dc errors not found in correct
+		['miehta', 397, 403, 'typo', 'Ii leat sátnelisttus', ['miehtá'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
 		giellačeahppeveaga -> giellačeahppiveaga, position 0
 		beaivvalaččat -> beaivválaččat, position 0
 		dárjjilsápmelaččaid -> dárjilsápmelaččaid, position 0
-		miehta -> miehtá, position 0
 
 ==========
 Muhto nu ii dáhpahuva, iige oktage dan imaštala. Nu daida olbmo luondu. Olbmui lea álkit beroštit vuoigatmeahttunvuođain jus dáhpahuvva láhkosis. Biilalihkosvuohta ruovttogilis, gos moattis lápmašuvvet, lea miha dehaleabbo go nealgekatastrofa Afriikas gos duhahat duššet.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-009_soadis_dacca_calmmis_ja_muorra_iezamet_calmmis.correct.txt.xml
@@ -903,13 +711,9 @@ Danin lea davvisápmelažžii dehaleabbo ahte ruovttosuohkan jorgala buot ášš
 
 ==========
 Soaita leat lunddolaš, iige gánnahivččii) eddot. Muhto jus nu, de fertešii maid dohkkehit ahte dáččat geat orrot guhkkin eret Sámis meannudit sápmelaččaid seamma vuogi mielde, go mii ieža meannudit eará sápmelaččaid. Vai leago nu ahte mii oaidnit soađđasa dáčča čalmmis, muhto eat oainne muora iežamet čalmmis.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-009_soadis_dacca_calmmis_ja_muorra_iezamet_calmmis.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(0, 6): 1, (23, 40): 2, (247, 255): 1})
-	{'correct': 'gánnáhivččii', 'errorinfo': 'verb,á', 'type': 'errorort', 'start': 23, 'error': 'iige gánnahivččii', 'end': 40}
-	{'correct': 'iige gánnáhivčče', 'errorinfo': 'verb,infin,conneg,sg3,infl', 'type': 'errormorphsyn', 'start': 23, 'error': 'gánnáhivččii', 'end': 40}
 ~~~~~~
 	correct errors not found in dc
 		{'correct': 'gánnáhivččii', 'errorinfo': 'verb,á', 'type': 'errorort', 'start': 23, 'error': 'iige gánnahivččii', 'end': 40}
-		{'correct': 'iige gánnáhivčče', 'errorinfo': 'verb,infin,conneg,sg3,infl', 'type': 'errormorphsyn', 'start': 23, 'error': 'gánnáhivččii', 'end': 40}
 ~~~~~~
 	dc errors not found in correct
 		['gánnahivččii', 28, 40, 'typo', 'Ii leat sátnelisttus', ['gánnáhivččii', 'gánnáhii', 'gávnnahivččii', 'gánnihivččii', 'gánnehivččii'], 'Čállinmeattáhusat']
@@ -926,9 +730,6 @@ Markup duplicates of defaultdict(<class 'int'>, {(0, 6): 1, (23, 40): 2, (247, 2
 
 ==========
 Boraspiret leat dehaleabbo go ahte oarjelsámi kultuvra galga seailut, oaivvilda 40 proseantta Trønder-Avisa iskadeamis (loga dás). Oarjelsámi boazodoallu ja giella sáhtta jávkat stuora guovlluin, muhto sámi servodat ii oro berošteame. Leatgo mii hilgume Elsa Laula Renberg ja Daniel Mortenssona árbbi?      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-016_sami_sivilisasuvdna_heahtedilis.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Boraspiret leat deháleappot', 'errorinfo': 'adj,spred,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 0, 'error': 'Boraspiret leat deháleabbo', 'end': 26}
 ~~~~~~
 	dc errors not found in correct
 		['Trønder-Avisa', 94, 107, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -951,8 +752,6 @@ Oarjesápmelaččat gehččet sámi-tv ja lohket sámi aviissaid, muhto hárve g
 2003s dutken journalistaoahpu bachelorbarggustan ahte man dávja lullisápmelaš ášši oidno sámi tv:s. Čájehuvvui ahte gaskkamearalaččat golla guokte vahkku juohke ášši gaskas. Illá jáhkan dili buorranan namuhanveara dan rájes. Dasgo davvisámi majoritehtta orru oalat hilgume oarjelsápmelaččaid ráhččamušaid. Gieskkat celkkii Janoš Trosten ahte oarjelsápmelaččat eai ánssaš seamma rivttiid go davvisápmelaččat. Orru leame ahte Trosten lea oalat vajaldahttan ahte oarjelsámis dat álggahuvvui sámi lihkadus 1917s. Oarjelasámiguovttos Elsa Laula Renberg ja Daniel Mortensson leigga njunnožis cahkkeheame dola mii galggái čatnat sápmelaččaid oktii ja cegget sámi našuvnna (ii fal stáda. Loga definišuvnna dás). Leatgo sámi politihkkarat vuollanan oktasaš sámi servodaga hukset, muhto geavahit baicca buot návccaid iežaset ruovttogilliide háhpohallat?      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-016_sami_sivilisasuvdna_heahtedilis.correct.txt.xml
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'rahčamušaid', 'errorinfo': 'noun,mix', 'type': 'errorortreal', 'start': 292, 'error': 'ráhččamušaid', 'end': 304}
-		{'correct': 'vuollánan oktasaš sámi servodaga hukset', 'errorinfo': 'vow,a-á', 'type': 'errorortreal', 'start': 730, 'error': 'vuollanan oktasaš sámi servodaga hukset', 'end': 769}
 		{'correct': 'ruovttugiliide', 'errorinfo': 'noun,mix', 'type': 'errorort', 'start': 815, 'error': 'ruovttogilliide', 'end': 830}
 ~~~~~~
 	dc errors not found in correct
@@ -993,10 +792,6 @@ Sivilisašuvdna definerejuvvo dávja dan vuođul ahte moht dat meannuda iežas g
 
 ==========
 Ollusiin, eandalii dáppe lulde, lea dat govva ahte sápmelaš lea riehpu, gii stuoraservodaga vealaheami dihte ii nákce váldit ovddasvástadusa iežas dillái. Dáruiduhttin, badjelgeahččanvuohta, oahppováilevašvuohta dehe eará čiekŋalis sivat dat dagahit ahte mii leat dego mánát geat dárbbahit veahki. Dávja mii goitge ieža leat veahkkin doalaheame oaffargová. Dávja go ieža juogaládje meaddit, de dadjat ahte ii leat min sivva go nuo ja ná manna). Ja jus goitge soaita leat min sivva, de gávdnojit álo juogalagan dološ sivvá mainna sáhtte čilget ahte manne manái nu go manái. Lea álo dáčča sivvái.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-008_biehkuma_vahat.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'ovddasvástádusa iežas dilis', 'errorinfo': 'noun,advl,loc,ill,case', 'type': 'errormorphsyn', 'start': 125, 'error': 'ovddasvástádusa', 'end': 153}
-		{'correct': 'gávdno álo juogalágan dološ sivva', 'errorinfo': 'verb,fin,sg3prs,pl3prs,kongr', 'type': 'errormorphsyn', 'start': 485, 'error': 'gávdnojit álo juogalágansivva', 'end': 521}
 ~~~~~~
 	dc errors not found in correct
 		['álo', 577, 580, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -1042,27 +837,19 @@ Muhto dál de gullo ahte sápmelaččat háliidit earanassii oaffárrollas. Lund
 ==========
 Gieskkat gullen NSR-jođiheaddji Aili Keskitalo dolkan neaktimis oaffarrollas, ja geavaheames oaffara gulahallanvugiid – biehkut ja váidalit. Son garrasit moittii sámeáššiid stádačálli Raimo Valle, guhte ávččuha sápmelaččaid váidalit jus ii beasa sámástit almmolaš bálvalusaid oktavuođas. Dien čuoččohussii ii liiko Aili Keskitalo, guhte lohka ahte sápmelaš han álo gárta biehkut ja váidalit.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-008_biehkuma_vahat.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'gártá', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 365, 'error': 'gárta', 'end': 370}
-~~~~~~
 	dc errors not found in correct
+		['lohka', 337, 342, 'typo', 'Ii leat sátnelisttus', ['lohká'], 'Čállinmeattáhusat']
 		['álo', 361, 364, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
 		ávččuha -> ávžžuha, position 0
 		čuoččohussii -> čuoččuhussii, position 0
-		lohka -> lohká, position 0
 ~~~~~~
 	correct and dc align, correction not among suggestions
 		Gieskkat -> Gieskat -> [Jieskkat, Gieškkat, Beaskkat, Leaskkat, Easkkat]
 
 ==========
 Vuosttažettin lea dieđus somá go politihkkar viimmat čielgasit čuoččuha ahte dál ii šat dohkket oaffarrollii bidjot. Eandalii leat nuorat dolkan ahte sápmelaš álo galga govviduvvot heajubun, guhte ferte veahkehuvvot vai galggaš birget. Dán áigasaš nuorain leat buorit birgejumit ja oahput, ja leat ovttadássasaččat juohkelagan arenain. Danin liikojin jámás go soapmasat dál leat árvališgoahtan ahte livččii áigi heaittihit ortnega mii dahka sámi nuoraide álkibun beassat doavtteohppui. Dálá sámi nuorat leat lihkka čeahpit go dáčča nuorat, ja danin sidjiide diehttelasat galget seammá gáibadusat gullat go earáide. Ii leat olmmošvuoigatvuohta doavttiroahpu gaccat, ja mun háliidan ahte sámi doaktarat galget leat lihkka nannosat go earát. Jus buohccan, de siđan doaktara guhte máhttá dálkkodit ja máhtta vástidit dávddaid birra – leačča dál sápmelaš dehe pakistanalaš.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-008_biehkuma_vahat.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'ii šat dohkket oaffarrollii biddjot', 'errorinfo': 'verb,conc', 'type': 'errorortreal', 'start': 81, 'error': 'ii šat dohkket oaffarrollii bidjot', 'end': 115}
-		{'correct': 'Ii leat olmmošvuoigatvuohta doavtteroahpu gazzat', 'errorinfo': 'verb,conc', 'type': 'errorortreal', 'start': 615, 'error': 'Ii leat olmmošvuoigatvuohta doavtteroahpu', 'end': 663}
-		{'correct': 'leažžá dál sápmelaš', 'errorinfo': 'verb,fin,sg3prs,conneg,infl', 'type': 'errormorphsyn', 'start': 841, 'error': 'sápmelaš', 'end': 849}
 ~~~~~~
 	dc errors not found in correct
 		['bidjot', 109, 115, 'typo', 'Ii leat sátnelisttus', ['biddjot'], 'Čállinmeattáhusat']
@@ -1095,9 +882,6 @@ Vuosttažettin lea dieđus somá go politihkkar viimmat čielgasit čuoččuha a
 ==========
 Muhto Aili Keskitalo cealkamuš vuoseha goitge ahte eat vuos riekta dieđet moht galgat oaffarrollas beassat earranassii. Oaffará gulahallanvuohki lea oainnat biehkut, ja dađi eambbo mii biehkut dađi váddaseappo lea beassat eret eará rollii. Go Keskitalo biehku ahte leat dolkan biehkumis – de aiston joatka biehkumis. Orru leame ahte sámi politihkkarat eai dieđe eará gulahallanvugiid birra, go bihkot velá dan ahte fertejit biehkut.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-008_biehkuma_vahat.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'váddáseabbo lea', 'errorinfo': 'adj,spred,nomsg,accsg,case', 'type': 'errormorphsyn', 'start': 198, 'error': 'váddáseappo', 'end': 213}
-~~~~~~
 	correct and dc align, and correction found in dc
 		cealkamuš -> cealkámuš, position 0
 		dieđet -> dieđe, position 2
@@ -1110,14 +894,10 @@ Muhto Aili Keskitalo cealkamuš vuoseha goitge ahte eat vuos riekta dieđet moht
 
 ==========
 Ja die dat leage stuora hástalus sámi politihkkariidda. Sámi nuoraid mielas lea sámi servodat ovttaárvosaš stuora servodagain. Nuorain lea nanu iešdovdu, ja leat gergosat hálddašit iežaset boahtteáiggi almma dáččas ánuhit buorredáhtolašvuođa. Sii geat háliidit njunnožii sámi servodaga stivret, fertejit diekkar lagan árvvuid ovdanbuktit. Nuorat eai hálidt oaffariid min stivret, muhto dakkariid mat ieža máhttet nuppastuhttit ja máilmmi doalvut viidaseappo.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-008_biehkuma_vahat.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(261, 270): 1, (304, 311): 1, (312, 317): 1, (304, 317): 1, (350, 356): 1, (386, 395): 1, (413, 426): 1, (438, 457): 2})
-	{'correct': 'viidáseappo', 'errorinfo': 'adj,á', 'type': 'errorort', 'start': 438, 'error': 'doalvut viidaseappo', 'end': 457}
-	{'correct': 'doalvut viidaseappot', 'errorinfo': 'adv,advl,adv,adj,infl', 'type': 'errormorphsyn', 'start': 438, 'error': 'viidáseappo', 'end': 457}
 ~~~~~~
 	correct errors not found in dc
 		{'correct': 'diekkárlágan', 'errorinfo': 'adj,cmp', 'type': 'errorort', 'start': 304, 'error': 'diekkárlágan', 'end': 317}
 		{'correct': 'viidáseappo', 'errorinfo': 'adj,á', 'type': 'errorort', 'start': 438, 'error': 'doalvut viidaseappo', 'end': 457}
-		{'correct': 'doalvut viidaseappot', 'errorinfo': 'adv,advl,adv,adj,infl', 'type': 'errormorphsyn', 'start': 438, 'error': 'viidáseappo', 'end': 457}
 ~~~~~~
 	dc errors not found in correct
 		['viidaseappo', 446, 457, 'typo', 'Ii leat sátnelisttus', ['viidáseappo', 'viidáseappot'], 'Čállinmeattáhusat']
@@ -1149,11 +929,6 @@ Aili Keskitalo lea dieđusge čeahpes ja duosttilis politihkkar gii dien daida �
 
 ==========
 Muhto mun balan sakka ahte min politihkkarat eai duođas oba hálitge ovddasvástadusa. Makkar jierbmeolmmoš bat dan oktiibuot háliida? Mii sápmelaččat geat buriin oamedovdduin sáhttit gáibidit ahte dáčča galga midjiide láhččit dili, ja aivve láitit jus ii oro duhtadeame buot min dárbbuid. Gii bat čovdosiid háliida gávdnat, go nubbái sáhtta čujuhit váttisvuođaid ja vuordit son daid gálga.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-008_biehkuma_vahat.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'háliitge', 'errorinfo': 'verb,vow', 'type': 'errorortreal', 'start': 60, 'error': 'hálitge', 'end': 67}
-		{'correct': 'dáčča galgá midjiide láhčit', 'errorinfo': 'verb,conc', 'type': 'errorortreal', 'start': 196, 'error': 'dáčča galgá', 'end': 224}
-		{'correct': 'vuordit son daid gálgá', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 365, 'error': 'vuordit son daid gálga', 'end': 387}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		ovddasvástadusa -> ovddasvástádusa, position 0
@@ -1193,10 +968,6 @@ Ođđaáigasaš boaresolbmot      <- /home/boerre/repos/freecorpus.svn/correct-n
 
 ==========
 Máilmmis leat guokte olmmošjoavkku geat nagodit additt heajos oamedovddu moht dál ain leaš – mánát ja boarrasat. Vaikko man olu rážastivččiimet sin ovddas, de eat nagot goasse sin doarvai duhtadit. Álo livččii juoga maid galggašii dahkat ja hoidet, ja álo lea juoga mii báhca dagatkeahtta. Muhto hárve lea asttu, ja áigegárživuohta deadda.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-007_oddaaigasas_boaresolbmot.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'báhcá', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 270, 'error': 'báhca', 'end': 275}
-		{'correct': 'lea astu', 'errorinfo': 'verb,fin,nom,gen,case', 'type': 'errormorphsyn', 'start': 302, 'error': 'lea asttu', 'end': 311}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		additt -> addit, position 0
@@ -1243,12 +1014,6 @@ Boahttevaš vuorrasat leat oainnat visot ollesolbmo agi geavahan gáibidt vuoiga
 ==========
 Jurddaš mat ovdamearkka dihte láhkačeahpi Trond Biti. Jus su bijálii feaskarii orrut go (boarrasiid siidii ollešii, iige beasalii sámi kultuvrra dikšut. Boađalii go son dan dohkkehit. Ii heađisge. Árvidan ahte son boahtá gáibidit ahte suohkan veahkeha boarrasiid buot sámi árbevieruid čađahit. Dego ovdamearkka dihte ealgga bivdit.. Trond Biti boahta ILO konvenšuvnna nummár169 doallat gieđas, ja čeargut suohkanstivrrain ahte buot álgoálbmogiin lea riekti doalahit iežaset árbevieruid – maiddái go ieža eai šat goastta meahccái. Jago eambbo smiehtan, de in jáhke Biti oba dohkkehivččiige njeallječiegat lanjasge orrut, muhto gáibidivččii ahte suohkan ásahivččii jorba lanjaid sápmealaččaide mat heivejit álgoálbmot jurddašeapmái.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-007_oddaaigasas_boaresolbmot.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'iige beasale', 'errorinfo': 'verb,infin,conneg,sg3,infl', 'type': 'errormorphsyn', 'start': 116, 'error': 'iige beasalii', 'end': 129}
-		{'correct': 'ILO-konvenšuvnna', 'errorinfo': 'noun,hyph', 'type': 'errorortreal', 'start': 351, 'error': 'ILO konvenšuvnna', 'end': 367}
-		{'correct': 'njealječiegat lanjasge', 'errorinfo': 'adj,conc', 'type': 'errorortreal', 'start': 589, 'error': 'njeallječiegat lanjasge', 'end': 612}
-		{'correct': 'álgoálbmoga jurddašeapmái', 'errorinfo': 'noun,der,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 705, 'error': 'álgoálbmot jurddašeapmái', 'end': 729}
-~~~~~~
 	dc errors not found in correct
 		['dohkkehivččii', 573, 586, 'typo', 'Ii leat sátnelisttus', ['dohkkehivčče'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -1289,10 +1054,6 @@ Ole Heandarat Magga ges šadda (boarrasiid siidda giella- ja árbevirolaš máht
 ==========
 Eará mii maid boahta dagahit stuorat hástalusaid boahttevaš boaresolbmuid ektui, lea jus hovkkiduvvojit. Lea oainnat nu ahte hovkkiduvvon olbmot sáhttet (boarrasiid siiddas bijádit, ohcat dološ duvdagiid. Dán rádjái lea nu leamaš ahte boarrasat leat vácci dollen meahccái. Muhto eai leat guhkas. Lea oainnat leamaš álki sin joksat, go leat nu njozet vánddardan.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-007_oddaaigasas_boaresolbmot.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'stuorát hástalusaid', 'errorinfo': 'adj,attr,attr,nomsg,infl', 'type': 'errormorphsyn', 'start': 29, 'error': 'stuorat hástalusaid', 'end': 48}
-		{'correct': 'duovdagiid', 'errorinfo': 'noun,vowc', 'type': 'errorortreal', 'start': 194, 'error': 'duvdagiid', 'end': 203}
-~~~~~~
 	correct and dc align, and correction found in dc
 		boahta -> boahtá, position 0
 		hovkkiduvvojit -> hovkkiiduvvojit, position 1
@@ -1307,8 +1068,8 @@ Eará mii maid boahta dagahit stuorat hástalusaid boahttevaš boaresolbmuid ekt
 ==========
 Muhto boahtteáigásaš boaresolbmot leat hárjanan áibbas eará fievrruide. Sii máhttet biillain vuodjit ja vela girdibileahtaid nai diŋgot. Dan dihte balan sakka ahte jus eat leat gozuid nalde, de lea báha ribahit sápmelaččaid nugo Ragnhild Nystad ja Ánde Somby bijádit guhkás čieža vári duohkai. Soai daidiba olgoriikkii dollet jus gávdnaba vuogas liibba. New Yorkii dehe Genevai ON álgoálbmotčoahkkimiid čuovvut. Soai eaba boađe váillahit meahcceduvdagiid, muhto stuoragávpogiid ja dehalaš čoahkkimiid. Sii geat dalle barget (boarrasiid siiddas fertejit ráhkkanit, amas eai ribat diekkariid čalmmis.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-007_oddaaigasas_boaresolbmot.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'meahcceduovdagiid', 'errorinfo': 'noun,vowc', 'type': 'errorortreal', 'start': 438, 'error': 'meahcceduvdagiid', 'end': 454}
+	dc errors not found in correct
+		['Genevai', 370, 377, 'typo', 'Ii leat sátnelisttus', ['Genevei', 'Genevii'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
 		hárjanan -> hárjánan, position 0
@@ -1317,16 +1078,12 @@ Muhto boahtteáigásaš boaresolbmot leat hárjanan áibbas eará fievrruide. Si
 		bijádit -> bijadit, position 0
 		daidiba -> dáidiba, position 0
 		olgoriikkii -> olgoriikii, position 0
-		Genevai -> Genevii, position 1
 		dehalaš -> dehálaš, position 0
 		boarrasiid -> boarrásiid, position 0
 		diekkariid -> diekkáriid, position 0
 
 ==========
 Lea nu ahte dáčča dávja hoahka boarrasiidbáru birra. Dat mearkkaša ahte moaddeloht jagi geahčen bohtet leat ollu eambbo boaresolbmot dálá logu ektui, muhto unnán nuorat. Nu šadda divrras deavdit servodaga ovddasvástadusa boarrasiid ektui.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-007_oddaaigasas_boaresolbmot.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'hoahká', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 24, 'error': 'hoahka', 'end': 30}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		dávja -> dávjá, position 0
@@ -1354,9 +1111,6 @@ Mun goitge in bala ahte šadda divrras dikšut iežamet boarrasiid. Dan sii gal 
 ==========
 Ollugat leat jearran ingo almmohivččii kåseriijaid maid Sámi Radios láven lohkat iežan bloggii. Dá boahta okta:      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-017_guovdageainnu_fuolkevalggat.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'ingo almmuhivčče', 'errorinfo': 'verb,infin,conneg,sg3,infl', 'type': 'errormorphsyn', 'start': 21, 'error': 'ingo almmohivččii', 'end': 38}
-~~~~~~
 	dc errors not found in correct
 		['almmohivččii', 26, 38, 'typo', 'Ii leat sátnelisttus', ['almmuhivččii', 'almmuhii'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -1365,9 +1119,6 @@ Ollugat leat jearran ingo almmohivččii kåseriijaid maid Sámi Radios láven l
 
 ==========
 Dál de leat suohkanválggat dollojuvvon Norggabeal, ja jienasteaddjit leat mearridan guđemuš politihkkarat sin besset ovddastit boahtte njeallje jagi. Guovdageainnus, gosa mun ain gulan, lea olbmot buohtastahttan sohkagirjjii válgalisttuiguin, gávnnahan dihte guđe listtus livčče lagamus fuolkkit ja sin de leat jienastan.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-017_guovdageainnu_fuolkevalggat.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'leat olbmot', 'errorinfo': 'verb,fin,pl3prs,sg3prs,kongr', 'type': 'errormorphsyn', 'start': 186, 'error': 'lea olbmot', 'end': 196}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		sohkagirjjii -> sohkagirjjiid, position 1
@@ -1380,9 +1131,6 @@ Dál de leat suohkanválggat dollojuvvon Norggabeal, ja jienasteaddjit leat mear
 
 ==========
 Nie doaibma nu gohčoduvvon demokratiija Guovdageainnus. Mis leat logenar listtu maid gaskas galgat válljet, nu ahte válljenmunni gal eahppitkeahtta lea. Muhto dávja lea eahpečielggas makkár politihkka iešguđet listus lea, dasgo olbmot beroštit eambbo listtonjunnožiid sohkagullevašvuođas, go das maid sii duođas oaivvildit. Beroštitgo evttohasat obanassinge boarrasiid ja nuoraid dilis, ja ipmirdit go sii maidege ruđalaš áššiin, ii oro nu dehalaš, nu guhkka go fuolki dehe giliolmmoš oažžu válddi.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-017_guovdageainnu_fuolkevalggat.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'doaibmá', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 4, 'error': 'doaibma', 'end': 11}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		eahppitkeahtta -> eahpitkeahttá, position 1
@@ -1413,15 +1161,12 @@ Danin oaivvildan ahte Guovdageainnus leat measta beare unnán listtut, eaige bea
 	correct errors not found in dc
 		{'correct': 'diekkár', 'errorinfo': 'dem,á', 'type': 'errorort', 'start': 246, 'error': 'diekkar', 'end': 253}
 		{'correct': 'oaivemozihiid', 'errorinfo': 'noun,suf', 'type': 'errorort', 'start': 254, 'error': 'oaivemoziid', 'end': 265}
-		{'correct': 'Mun lean ovdamearkka dihte rahčan gávdnat listtu', 'errorinfo': 'verb,mix', 'type': 'errorortreal', 'start': 342, 'error': 'Mun lean ovdamearkka dihte ráhččan gávdnat listtu', 'end': 391}
 		{'correct': 'jienastit', 'errorinfo': 'verb,typo', 'type': 'errorort', 'start': 431, 'error': 'jienasit', 'end': 439}
 		{'correct': 'ávžžuhan', 'errorinfo': 'verb,conc', 'type': 'errorort', 'start': 496, 'error': 'ávččuhan', 'end': 504}
-		{'correct': 'ceggejuvvo midjiide nai listtu', 'errorinfo': 'noun,subj,nomsg,accsg,case', 'type': 'errormorphsyn', 'start': 528, 'error': 'ceggejuvvo midjiide nai listtu', 'end': 558}
 		{'correct': 'bearráigeahččat', 'errorinfo': 'verb,á', 'type': 'errorort', 'start': 584, 'error': 'bearraigeahččat', 'end': 599}
 		{'correct': 'juste', 'errorinfo': 'adv,conc', 'type': 'errorort', 'start': 605, 'error': 'justte', 'end': 611}
 		{'correct': 'fávdnát', 'errorinfo': 'adj,á', 'type': 'errorort', 'start': 656, 'error': 'fávdnat', 'end': 663}
 		{'correct': 'mahkáš', 'errorinfo': 'adv,mix', 'type': 'errorort', 'start': 698, 'error': 'mákkaš', 'end': 704}
-		{'correct': 'olbmot midjiide viessosajiid láhčet', 'errorinfo': 'verb,infin,infinite,imprt,infl', 'type': 'errormorphsyn', 'start': 731, 'error': 'olbmot midjiide viessosajiid láhččet', 'end': 767}
 ~~~~~~
 	dc errors not found in correct
 		['??', 234, 236, 'no-space-after-punct-mark', 'Ii leat gaska "?" maŋis', ['? ?'], 'Sátnegaskameattáhusat']
@@ -1441,9 +1186,6 @@ Danin oaivvildan ahte Guovdageainnus leat measta beare unnán listtut, eaige bea
 ==========
 Ávččuhan vel ahte Iŋgorat, Nilsset, Rugažat ja buot eará sogat maid morihit ja ceggegohtet listtuid. Makkar demokratiijas bat mii navdit ahte eallit jus eat leat mielde váikkuheame báikkalaš politihka? Lea njulgestaga láikkodat go buot sogain ii leat listtu.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-017_guovdageainnu_fuolkevalggat.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'ii leat listu', 'errorinfo': 'noun,spred,nomsg,accsg,case', 'type': 'errormorphsyn', 'start': 243, 'error': 'ii leat listtu', 'end': 257}
-~~~~~~
 	correct and dc align, and correction found in dc
 		Ávččuhan -> Ávžžuhan, position 0
 		Makkar -> Makkár, position 0
@@ -1453,16 +1195,15 @@ Danin oaivvildan ahte Guovdageainnus leat measta beare unnán listtut, eaige bea
 Dasa lassin ávččuhivččen buot dálá listtut heaitit dáhkaluddame ahte sis máhkaš livččii makkarge politihkka, muhto rahpasit baicca muitalivčče makkar soga sii ovddasttit. Mu mielas lea njulgestaga dáruiduhttin gohčodit listtuid Olgešbellodahkan, Bargiibellodahkan ja nu ain. Manne baicca eai čuovu sámi árbevieru ja bija sohkanamaid listtuide? Dat livččii álkidahttit jienasteddjiid barggu, go eai lean dárbbašit nu dárkilit studeret listtuid ohcan dihte fulkkiid. De livččii beare válljet dan soga masa gulla, ja dasto mannat ruoktot.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-017_guovdageainnu_fuolkevalggat.correct.txt.xml
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'ávžžuhivččen buot dálá listtuid', 'errorinfo': 'noun,obj,accpl,nompl,case', 'type': 'errormorphsyn', 'start': 12, 'error': 'ávžžuhivččen', 'end': 42}
 		{'correct': 'makkárge', 'errorinfo': 'indef,á', 'type': 'errorort', 'start': 88, 'error': 'makkarge', 'end': 96}
 ~~~~~~
 	dc errors not found in correct
+		['máhkaš', 73, 79, 'typo', 'Ii leat sátnelisttus', ['mahkáš'], 'Čállinmeattáhusat']
 		['makkar', 88, 94, 'typo', 'Ii leat sátnelisttus', ['makkár'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
 		ávččuhivččen -> ávžžuhivččen, position 0
 		dáhkaluddame -> dahkaluddame, position 0
-		máhkaš -> mahkáš, position 0
 		makkar -> makkár, position 0
 		ovddasttit -> ovddastit, position 0
 		Bargiibellodahkan -> Bargiidbellodahkan, position 0
@@ -1479,9 +1220,6 @@ Dehe vel buoret. Eat lean galgat oba lágiditge válggaid. Leimmet galgat sohkag
 Nu fal. Nu dehalaš lea sohkavuohta Guovdageainnus, ahte diet evttohusat ledje roahkka doaibmat duohta máilmmis. Muitalan dan čielgasit, ahte min sáhtta buoremusat buohtastahttit Afghanistanain dehe eará riikkaiguin gos dološ servodatvuogadat ain doibmet. Muhto ovtta gal dajan, dunnje gii dál čohkkat radio bálddas ja boagustat guovdageaidnulaččaid jallan go vuoruhit fuolkevuođa politihka ovdalii. Muitalan ahte mii dat gal beare čuovvut sámi árbevirolaš jurddašeami. Eat mii vuollan orajemáilmmi demokratiijamálle doahttalit, muhto doalahit baicca dološ árbevirolaš siidajurddašeami. Lea oainnat áibbas lunddolaš doarjut lagas olbmuid, iige su geainna justte dál soaita ovttaoaivilis leat. Juohkehaš han dan diehta ahte politihkkalaš oaivilat han dat gal rievddadit beaivvis beaivái. Muhto fuolkevuohta bistta agibeaivve. Sogas ii beasa earranassii vaikko hálidivččiige.    <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-017_guovdageainnu_fuolkevalggat.correct.txt.xml
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'servodatvuogádagat ain doibmet', 'errorinfo': 'noun,subh,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 225, 'error': 'servodatvuogádat', 'end': 253}
-		{'correct': 'vuollán', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 477, 'error': 'vuollan', 'end': 484}
-		{'correct': 'juste', 'errorinfo': 'adv,conc', 'type': 'errorortreal', 'start': 654, 'error': 'justte', 'end': 660}
 		{'correct': 'háliidivččiige', 'errorinfo': 'verb,vow', 'type': 'errorort', 'start': 858, 'error': 'hálidivččiige', 'end': 871}
 ~~~~~~
 	dc errors not found in correct
@@ -1517,9 +1255,6 @@ Mon in riekta ipmir dan máilmmi :(      <- /home/boerre/repos/freecorpus.svn/co
 ==========
 Na, ja de buvttadin - mon ohppen buvttadit. Buvttadin ahte buvttadin, ohppen ahte ohppen. Čállen čielgasit, čuojahin čalbmáičuohcci šuoŋaid, čuhppen čuorbivuođa eret mus... Ja mon liikká in oaččo daid tiŋggaid maid ledjen vuordán.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-014_tahpejin_fas.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'čuhppen čuorbivuođa eret alddán', 'errorinfo': 'refl,pers,w', 'type': 'errorlex', 'start': 141, 'error': 'čuhppen čuorbivuođa eret mus', 'end': 169}
-~~~~~~
 	dc errors not found in correct
 		['mus...', 166, 172, 'no-space-after-punct-mark', 'Ii leat gaska "mus." maŋis', ['mus. ..'], 'Sátnegaskameattáhusat']
 
@@ -1541,9 +1276,6 @@ Okta joavku mas čuojahan lea reggaejoavku man namma lea Svarta stjärnan. Odne 
 ==========
 Ja mon in riekta hálit dohkkehit ahte lea ná. Mon hálidan diehtit: Manne mon galggan leahkit nu čeahppi buotlágán hommáiguin? Manne ii leat doarvái? Manne ii leat doarvái beare čuojahit sáksofovnna bures? Manne ná galgá?      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-014_tahpejin_fas.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'in riekta háliit dohkkehit', 'errorinfo': 'verb,vow', 'type': 'errorortreal', 'start': 7, 'error': 'in riekta hálit dohkkehit', 'end': 32}
-~~~~~~
 	correct and dc align, and correction found in dc
 		hálidan -> háliidan, position 0
 		sáksofovnna -> saksofovnna, position 0
@@ -1563,12 +1295,6 @@ Ja mon in riekta hálit dohkkehit ahte lea ná. Mon hálidan diehtit: Manne mon 
 ==========
 Oslos lei dán giđa maŋimus árktalaš parlamentárihkkariid bissovaš komitea čoakkán 7.6.2010. Čoakkán lei ollislaččat geahčadettiin hui beroštahtti ja ávkkálaš. Dánmárkku olgoáššiidministtar Lene Espersen muitalii čoakkáma álggus Dánmárkku árktalaš ráđi ságadoalli áigodaga ulbmiliin. Árktalaš ráđi jođiheapmi lea dán vuoru dan dáfus hárvenaš, ahte ságadoalliriikka báiki lea guhtta jagi maŋŋálaga davviriikkaid hálddus. Ságadoallivuohta sirdása Norggas Dánmárkui, mas dat sirdása Ruŧŧii jagi geahčen. Dánmárku sávvá gávdnat iežas jođihanáigodaga áigge čovdosa ođđa bissovaš dárkojeddjiid váldimii árktalaš ráđđái. Eatnamat dego Kiinná, Lulli-Korea ja Japána ja organisašuvnnat dego Eurohpá uniovdna leat viggame árktalaš ráđi bissovaš dárkojeaddjin.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-011_arktalas_parlamentarihkkariid_coakkamis.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 238, 'error': 'árktalaš ráđi', 'end': 251}
-		{'correct': 'Árktalaš ráđđái', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 596, 'error': 'árktalaš ráđđái', 'end': 611}
-		{'correct': 'Eurohpá Uniovdna', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 681, 'error': 'Eurohpá uniovdna', 'end': 697}
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 711, 'error': 'árktalaš ráđi', 'end': 724}
-~~~~~~
 	dc errors not found in correct
 		['Ságadoallivuohta', 419, 435, 'typo', 'Ii leat sátnelisttus', ['Ságadoallimuohta', 'Ságadoallinuohta', 'Ságadoallisuohta', 'Ságadoallivuotta', 'Ságadoallivuohpa', 'Ságadoallivuohtan', 'Ságadoallivuokta', 'Ságadoalliruohta', 'Fágadoallinuohta', 'Fágadoallivuohtan'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -1580,14 +1306,6 @@ Oslos lei dán giđa maŋimus árktalaš parlamentárihkkariid bissovaš komitea
 
 ==========
 Bukten čoakkámis ovdan hui stuora fuola earenoamážit Kiinná ohcamuša buohta. Válden ovdan dan, ahte mot árktalaš ráđđái sáhttá váldit dárkojeddjiid, mat eai gudnejahte olmmošvuoigatvuođaid ja álgoálbmogiid vuoigatvuođaid ja mot árktalaš ráđi váldegaskavuođaid, politihka ja olmmošvuoigatvuohtalinnjái geavalii dákkár ođđa dárkojeddjiid mielde. Evttohin, ahte ođđa dárkojeaddjit eai galggale váldojuvvot mielde muđuid go dakkár organisašuvnnat, main lea gaskavuohta árktalaš guvlui dego EU ja Unesco. Dánmárkku olgoáššiidministtar dajai dása, ahte sii dollet geažos áigge ovdan olmmošriektegažaldagaid ja čujuhii maid Norgga olgoáššiidministtar Størei. Ođđa lahtut galggale váldojuvvot danin, vai ságastallan árktalaš guovlluin ii sirdásivčče eará forumaidda muhto bisolii árktalaš ráđi kontevsttas. Dánmárkku olgoáššiidministtar deattuhii vástádusastis maid árktalaš guovllu vejolašvuhtii beassat Ásia márkaniidda.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-011_arktalas_parlamentarihkkariid_coakkamis.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Árktalaš ráđđái', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 104, 'error': 'árktalaš ráđđái', 'end': 119}
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 228, 'error': 'árktalaš ráđi', 'end': 241}
-		{'correct': 'mot Árktalaš ráđi váldegaskavuođaide, politihkkii ja olmmošvuoigatvuođalinnjái geavalii', 'errorinfo': 'noun,advl,ill,acc,case', 'type': 'errormorphsyn', 'start': 224, 'error': 'mot Árktalaš ráđiolmmošvuoigatvuođalinnjái', 'end': 309}
-		{'correct': 'čujuhii maid Norgga olgoáššiidministarii', 'errorinfo': 'noun,advl,ill,nom,case', 'type': 'errormorphsyn', 'start': 604, 'error': 'čujuhii maid Norgga olgoáššiidministtar', 'end': 643}
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 772, 'error': 'árktalaš ráđi', 'end': 785}
-		{'correct': 'deattuhii vástádusastis maid árktalaš guovllu vejolašvuođa', 'errorinfo': 'noun,obj,acc,ill,case', 'type': 'errormorphsyn', 'start': 829, 'error': 'deattuhii vástádusastis maid árktalaš guovllu vejolašvuhtii', 'end': 888}
 ~~~~~~
 	dc errors not found in correct
 		['olmmošvuoigatvuođaid', 168, 188, 'msyn-addhyphen', 'Dákkár goallossániin lea sáhcu ', [], 'Sáhcu']
@@ -1602,11 +1320,6 @@ Bukten čoakkámis ovdan hui stuora fuola earenoamážit Kiinná ohcamuša buoht
 ==========
 Dánmárkku olgoáššiidministara vástádus ii jávkadan mu fuola árktalaš ráđi boahttevuođas vejolaš ođđa dárkojeddjiid váikkuhusa mielde. Mishan lea juo ON, ja doppe ságastallojuvvo maid árktalaš gažaldagain ja de leat vel iešguđetlágán G-čoakkámat. Lea morašlaš, jos gávpeberoštumit Ásia márkaniidda mannet badjel biras- ja olmmosvuoigatvuođaid dárbbuid. Čoakkámis bođii maid ovdan fuolla nannanjuolgeriikkaid oktasaščoakkámiin ja čoakkámiid váikkuhusain árktalaš ráđi bargui. Ipmirdin bures fuola, muhto nuppe dáfus nannanjuolgenákkut eai guoskka Suoma. Čoakkámis gieđahallui maid árktalaš guovllu gádjundoaimma organiseren. Dát lea mu mielas okta mávssolaččamus árktalaš ráđi doaimma ulbmiliin, daningo lassáneaddji mearrajohtalus, oljofievrredeapmi ja offshore-bohkan buktet hui stuora birasriskkaid, maidda ferte ráhkkanit. Livččii dehálaš oažžut árktalaš guvlui soahpamuša, mii stivre mearrajohtalusa, vai lihkohisvuođat eai dáhpáhuvale váilevaš teknologiija geažil.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-011_arktalas_parlamentarihkkariid_coakkamis.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 60, 'error': 'árktalaš ráđi', 'end': 73}
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 452, 'error': 'árktalaš ráđi', 'end': 465}
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 661, 'error': 'árktalaš ráđi', 'end': 674}
-~~~~~~
 	dc errors not found in correct
 		['offshore-bohkan', 752, 767, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
@@ -1618,27 +1331,17 @@ Dánmárkku olgoáššiidministara vástádus ii jávkadan mu fuola árktalaš r
 ==========
 Dánmárkku olgoáššiidministara sága maŋŋel Norgga olgoáššiidministtar Støre muitalii Norgga árktalaš politihkas ja Norgga rádječáhcesoahpamušas Ruoššain. Jerren olgoáššiidministaris, ahte gullágo davviriikkalaš sámi soahpamuša ratifiseren Norgga árktalaš politihkkii ja mot sápmelaččaid váikkuhanvejolašvuođat leat sihkkarastojuvvon. Olgoáššiidministtar vástidii, ahte su ovddasvástádussan ii leat sámi soahpamuš. Mu ipmárdusa mielde maiddái Norggas stáhtasoahpamušat gullet olgoáššiidministeriija doaibmasuorgái. Olgoáššiidministtar maid dajai, ahte son gullá sámedikki ovdal go oassálastá Barents- ja árktalaš ráđi čoakkámiidda ja ná son ovddasta maid sápmelaččaid oainnuid čoakkámis. In dieđe juohkágo Norgga sámediggi liikká positiivvalaš gova Norgga olgoriikkapolitihkas. Norgga sámediggeláhka lea dán goris geahnoheabbo go Suoma sámediggeláhka, daningo Suomas dušše sámediggi ovddasta virggálaččat sápmelaččaid sihke nášuvnnalaš ja riikkaidgaskasaš oktavuođain.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-011_arktalas_parlamentarihkkariid_coakkamis.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Árktalaš ráđi', 'errorinfo': 'prop,cap', 'type': 'errorortreal', 'start': 602, 'error': 'árktalaš ráđi', 'end': 615}
-~~~~~~
 	correct and dc align, and correction found in dc
 		nášuvnnalaš -> našuvnnalaš, position 0
 
 ==========
 Gulaimet čoakkámis maid riikkaidgaskasaš prošeavtta gaskaraporttas, mii gieđahallá árktalaš guovllu hálddašeami. Prošeavttas gávdno lassidiehtu mielčuovvu čujuhusas: http://www.arcticgovernance.org/ Prošeaktajođiheaddji, dr Robert Corell muitalii prošeavtta duogážis ja mearkkašumis. Son čájehii čoakkánoasseváldiide ođđa, suorggahahtti árvvoštallamiid mearradási loktaneamis ja dan váikkuhusain globála dásis. Prošeavtta ulbmilin lea ohcat vugiid mot árktalaš guovllu hálddašeapmi sáhttá gárgehuvvot dávistit jur dálkkádatrievdama buktin hástalusaide. Soabaime dr Corelliin, ahte son boahtá Sámi parlamentáralaš ráđi stivrra guossin čakčat ja gullá sámedikkiid oainnuid árktalaš guovllu hálddašeamis.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-011_arktalas_parlamentarihkkariid_coakkamis.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'url', 'type': 'errorlang', 'start': 166, 'error': 'http://www.arcticgovernance.org', 'end': 197}
-~~~~~~
 	dc errors not found in correct
 		['Corelliin', 565, 574, 'typo', 'Ii leat sátnelisttus', ['Corellain'], 'Čállinmeattáhusat']
 
 ==========
 Muitalin bissovaš komitea čoakkáma loahpas oanehaččat Sámi parlamentáralaš ráđi dálkkádatpolitihkalaš strategiijas, mii laktojuvvui maid čoakkánbeavdegirjji čuovusin. Das leat dál gárvánan dál jorgalusat buot Suomas hubmon sámegielaide, ruošša-, eŋgelas-, ruoŧa- ja spánskagillii. Dat gávdnojit sámedikki ruovttusiidduin. Árktalaš parlamentárihkkariid bissovaš komiteas lea dán jagi vel guokte čoakkáma. Suoma stáhtaráđđi lei addán árktalaš strategiija riikkabeivviide jur seamma beaivve min bissovaš komitea čoakkámiin. In leat vel háhppehan vel oahpásnuvvat strategiijai, muhto dat gávdno čujuhusas: http://www.vn.fi/tiedostot/julkinen/pdf/2010/arktinen_strategia-0706/arktinen_strategia_070610.pdf      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-011_arktalas_parlamentarihkkariid_coakkamis.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'leat dán jagi vel guokte', 'errorinfo': 'verb,fin,pl3prs,sg3prs,kongr', 'type': 'errormorphsyn', 'start': 370, 'error': 'lea dán jagi vel guokte', 'end': 393}
-		{'correct': 'url', 'type': 'errorlang', 'start': 602, 'error': 'http://www.vn.fi/tiedostot/julkinen/pdf/2010/arktinen_strategia-0706/arktinen_strategia_070610.pdf', 'end': 700}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		parlamentárihkkariid -> parlamentarihkkáriid, position 1
@@ -1668,12 +1371,10 @@ Vuottesjávrres 14.6.2010    <- /home/boerre/repos/freecorpus.svn/correct-no-gs/
 ==========
 Davvi nuorra-ášši lea gártan ovdamearkan dasá ahte moht II galgga meannudit váivves áššiid. Ii oktage oro diehtime gean lea ovddasvástadus go nuoraidorganisašuvdná masii coavcci, iige oktage oro berošteames duohtavuođa buktit beaivečuvgii. Dan sadjái bealalaččat leat diktan márkánságaid leavvat, ja dainna lágiin ráŋggaštan dárbbašmeahttumiid.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-012_nuoraid_skandala.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'oro berošteamen', 'errorinfo': 'verb,infin,ess,loc,case', 'type': 'errormorphsyn', 'start': 191, 'error': 'oro berošteames', 'end': 206}
-		{'correct': 'diktán', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 268, 'error': 'diktan', 'end': 274}
+	dc errors not found in correct
+		['Davvi nuorra-ášši', 0, 17, 'typo', 'Ii leat sátnelisttus', ['Davvi Nuorra-ášši'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct and dc align, and correction found in dc
-		Davvi nuorra-ášši -> Davvi Nuorra-ášši, position 0
 		dasá -> dasa, position 0
 		moht -> movt, position 0
 		ovddasvástadus -> ovddasvástádus, position 0
@@ -1700,9 +1401,6 @@ Dán mánu 25. beaivvi dollojuvvo Davvi Nuora, árvideames, maŋemus čoahkkin. 
 
 ==========
 Muhto dál manna loahpa guvlui, dan sivás go nuorra áŋgirvuohta lea leamaš stuorát go čehppodat ja dárkilvuohta. Davvi Nuorra ii leat nagodan duođaštit masá lea geavahan juolloduvvon ruđa, ja Sámediggi lea gáibidan stuora oasi ruovttoluotta máksojuvvot.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-012_nuoraid_skandala.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'duođaštit masa lea geavahan juolluduvvon ruđa', 'errorinfo': 'rel,a', 'type': 'errorortreal', 'start': 141, 'error': 'duođaštit masá lea geavahan juolluduvvon', 'end': 186}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		manna -> manná, position 0
@@ -1746,9 +1444,6 @@ Dađi duođaleabbo lea goitge go ášši lea gártan stuorá noađđin, sihke si
 ==========
 Boađus lea ahte dálá nuorat daidet bálton organisašuvdnabargguin ja ahte sivákeahtes olbmot leat šaddan gillat go ii oktage sealgat ášši albmaládje čielggadit. Dan sadjái leat diktan márkánságaid leavvat, mii dieđusge ráŋggašta iežas dáhpedorpmehis vugiin.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-012_nuoraid_skandala.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'diktán', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 176, 'error': 'diktan', 'end': 182}
-~~~~~~
 	correct and dc align, and correction found in dc
 		daidet -> dáidet, position 0
 		gillat -> gillát, position 0
@@ -1790,7 +1485,6 @@ Hui buorre gullat ahte Norgga bealde leat maiddái morihan Deatnogátti ođđa d
 Ášši mii ii leat vel boahtán ovdan doarvái bures lea gáddeláva nuppi bealli; dat ahte báikkálaš olbmuid huksenlobit leat dál hui ráddjejuvvon ja máŋgasat eai oaččo šat hukset iežaset eatnamiidda Deatnogáttis. Ohcejoga gielda orru háliideamen oažžut eambbo turisttaid dan sadjái ahte báikkálaš olbmot eai fárre eret dahje ahte nuorat máhccet ruoktobáikái. Turisttat sáhttet buktit muhtin dietnasa gildii, muhto ollu stuorát mearkkašupmi ja boađut leat olbmuin geat ásset báikegottis birra jagi, eai dušše moadde vahku jagis. Jos mii háliidit ahte sámit orrot Sámis, dát lea okta stuorra hástalus Sámi parlamentáralaš ráđđái ja buohkaide earáide.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-010_deanuleagi_goarideapmi_ja_ohcejoga_beastin.correct.txt.xml
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'nubbi bealli', 'errorinfo': 'adj,attr,nomsg,gensg,case', 'type': 'errormorphsyn', 'start': 63, 'error': 'nuppi bealli', 'end': 75}
 		{'correct': 'ruovttubáikái', 'errorinfo': 'noun,cmp,mix', 'type': 'errorort', 'start': 341, 'error': 'ruoktobáikái', 'end': 353}
 
 ==========
@@ -1814,10 +1508,6 @@ Guokte beaivvi dassái lei ođđasiin ahte Ohcejoga gielda áigu dinet miljovnna
 ==========
 Dán vuoro galgá turista beastit gieldda. Turista gii diŋgosta gárvves bártta interneahtas mii šaddá olu hálbbibun go oastit báikkálaš huksenfitnodagain. Turista gii buktá iežas buđehiidge fárus go dat leat hálbbit máddin bo báikegotti gávppis. Turista gii dálostallá moadde vahku jagis bárttastis ja geas ii leat mangelágan čanastagat báikái dahje beroštupmi dan buresbirgejupmái. (Smiehta ieš: man ollu don beroštat báikkálaš buresbirgejumis go leat lieggariikkas luomu doallamin? Juos deaivvat leat nu lihkolaš ahte dus lea doppe iežat bárta, de áidna fuolla dus lea ahte ii giige bilit du priváhta opmodaga dan botta go leat eret.)      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-010_deanuleagi_goarideapmi_ja_ohcejoga_beastin.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'leat hálbbibut máddin go', 'errorinfo': 'adj,spred,nompl,nomsg,kongr', 'type': 'errormorphsyn', 'start': 201, 'error': 'leat hálbbit máddin go', 'end': 223}
-		{'correct': 'ii leat mangelágan čanastat', 'errorinfo': 'noun,spred,nomsg,nompl,kongr', 'type': 'errormorphsyn', 'start': 305, 'error': 'ii leat mangelágan čanastagat', 'end': 334}
-~~~~~~
 	correct and dc align, and correction found in dc
 		bártta -> bartta, position 0
 		bárta -> barta, position 0
@@ -1829,9 +1519,6 @@ Dán vuoro galgá turista beastit gieldda. Turista gii diŋgosta gárvves bártt
 ==========
 Dat lea stuorra imaš go Ohcejoga gielda ii oro nákcemin ráhkadit plánaid, main livččii vehá guhkitáigge perspektiiva ja mat válddášedje buorebut vuhtii mii máilmmis dáhpáhuvvá. Ođđasat dál jo muitalit ahte turistamearri davvin lea dán gease unnon alla bensinhattiid dihte. Sáhttá leat nu ahte  turisttat duođaid huksejit 400 ođđa (bártta Suomabeal Deatnogáddái. Muhto naba jos dat moadde jagi geahčen eai šat suittege mátkkoštit davás ja bárttat báhcet guorusin? Gos dalle Ohcejoga gildii dat stuorra vearroboađut?      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-010_deanuleagi_goarideapmi_ja_ohcejoga_beastin.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'moatti jagi geahčen', 'errorinfo': 'num,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 381, 'error': 'moadde jagi geahčen', 'end': 400}
-~~~~~~
 	dc errors not found in correct
 		['Suomabeal', 338, 347, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
@@ -1842,11 +1529,6 @@ Dat lea stuorra imaš go Ohcejoga gielda ii oro nákcemin ráhkadit plánaid, ma
 
 ==========
 Máilmmi ekonomiija lea dál hui rášes dilis – vearrámus 1930-logu deprešuvnna rájes – eaige áššedovditge máhte albmaláhkai einnostit gosaguvlui dat allána. Dál lea ovdamearkka dihtii boahtán báifáhkka dat beaivi goas dábálaš amerihkalaš lea fáhkka beroštuvvan smávva ja hybridi biillain ja goas stuorra SUV:at báhcet gávpái go giige ii šat fuola daid, go golahit menddo olu bensiinna. (Soahtešiljuin riegádan Hummera ráhkadeami áigot oalát heaittihit – illubeaivi.) Mun vulgen Kanadas beannot jagi dassái iige dákkár ovdáneamis lean mangelágan mearkkat eai gostige. Jos dalle giinu livččii jearran mus goas boahtá dat beaivi ahte davvi-amerihkálaččat rievdadit iežaset doaladumiid biillaide ja biillavuodjimii, mun livččen vástidan ahte kánske 50 jagi geahčen. Dát beaivi bođii olu árat go livččen goassige sáhttán dahje duostan niegáditge.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-010_deanuleagi_goarideapmi_ja_ohcejoga_beastin.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'gosa guvlui dat állana', 'errorinfo': 'verb,mix', 'type': 'errorortreal', 'start': 132, 'error': 'gosa guvlui', 'end': 153}
-		{'correct': 'eaige dákkár ovdáneamis lean mangelágan mearkkat', 'errorinfo': 'verb,fin,sg3prs,pl3prs,kongr', 'type': 'errormorphsyn', 'start': 504, 'error': 'iige dákkár ovdáneamis lean mangelágan mearkkat', 'end': 551}
-		{'correct': 'dat beaivi go', 'errorinfo': 'cs,w', 'type': 'errorlex', 'start': 613, 'error': 'dat beaivi ahte', 'end': 628}
 ~~~~~~
 	dc errors not found in correct
 		['SUV:at', 302, 308, 'typo', 'Ii leat sátnelisttus', ['SUV:t'], 'Čállinmeattáhusat']
@@ -1917,9 +1599,6 @@ Vaikko dáppe Torontos eai lean mangelágan doalut sámi álbmotbeaivvi gudnin, 
 ==========
 Jurddašallen ahte nie dáppe stuorra miljongávpogis olbmot ellet iežaset kultuvrra vaikko ii leange miige erenoamáš ávvubeivviid sidjiide. Sidjiide dat leat oassin árgabeaivvis dađe stuorat doaluid dahje meanuid haga. Sámis mii dušše lávllestit Sámi soga lávlaga oktii jagis almma mangelágan vieruid haga ja dasto guldalit daid agálaš sártniid…      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-015_albmotbeaivvedoalut.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'stuorát doaluid', 'errorinfo': 'adj,attr,attr,nomsg,infl', 'type': 'errormorphsyn', 'start': 181, 'error': 'stuorat doaluid', 'end': 196}
-~~~~~~
 	dc errors not found in correct
 		['miljongávpogis', 36, 50, 'typo', 'Ii leat sátnelisttus', ['giljongávpogis', 'gilljongávpogis'], 'Čállinmeattáhusat']
 		['Sámi soga lávlaga', 244, 261, 'msyn-compound', '"Sámi soga lávlaga" orru leamen goallossátni', ['Sámisoga lávlaga'], 'Goallosteapmi']
@@ -1947,9 +1626,7 @@ Dábalaččat in gal ane vuogasin go guokte áidna fálaldaga dáinna lágin ovt
 ~~~~~~
 	correct errors not found in dc
 		{'correct': 'dáinna lágiin', 'errorinfo': 'adv,fin', 'type': 'errorort', 'start': 57, 'error': 'dáinna lágin', 'end': 69}
-		{'correct': 'gilvu dalle dábálaččat unnu', 'errorinfo': 'verb,fin,sg3prs,conneg,infl', 'type': 'errormorphsyn', 'start': 101, 'error': 'gilvu dalle dábálaččat', 'end': 128}
 		{'correct': 'makkárge', 'errorinfo': 'indef,á', 'type': 'errorort', 'start': 203, 'error': 'makkarge', 'end': 211}
-		{'correct': 'seamma áššiid', 'errorinfo': 'indef,attr,attr,nomsg,infl', 'type': 'errormorphsyn', 'start': 475, 'error': 'seammá áššiid', 'end': 488}
 ~~~~~~
 	dc errors not found in correct
 		['lágin', 64, 69, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -1974,10 +1651,6 @@ Dábalaččat in gal ane vuogasin go guokte áidna fálaldaga dáinna lágin ovt
 ==========
 Dasa lassin maid sávan ahte dál šadda duođaleabbo gilvu sámi mediaid gaskas, ja ahte sámi aviissat viimmat nagodit gilvališgoahtit Sámi Radioin. Sámi Radios lea dán rádjai leamaš njulgestaga monopolafápmu sámi mediamárkanis, go nagodit stuorat ruhtafámuin háhkat čeahpimus journalisttaid ja miha beaktileabbo ságaid muitalit. Dálá aviissat leat ráhččan unnan návccaiguin, dan botta go Sámi Radio ráfis lea beassan buoidut. In heađisge ane bahan go Sámi Radio lea sturron, muhto anan váidalahttin go das eai gávdno duohta gilvaleaddjit.      <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-018_min_aigi_ja_assu.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'stuorát ruhtafámuin', 'errorinfo': 'adj,attr,attr,nomsg,infl', 'type': 'errormorphsyn', 'start': 236, 'error': 'stuorat ruhtafámuin', 'end': 255}
-		{'correct': 'aviissat leat rahčan unnán návccaiguin', 'errorinfo': 'verb,mix', 'type': 'errorortreal', 'start': 331, 'error': 'aviissat leat ráhččan unnán', 'end': 370}
-~~~~~~
 	correct and dc align, and correction found in dc
 		šadda -> šaddá, position 0
 		miha -> mihá, position 0
@@ -2001,10 +1674,6 @@ Muhto ii leat beare ovttastahttit guokte aviissa ja doaivut ahte buot čoavdašu
 ==========
 Dasa lassin lea eahpečielggas moht sámi preassadoarjja juogaduvvo ovttastahttima maŋŋel. In leat sihkar ahte ođđa aviisii juolluduvvo seammá olu doarjja go Min Áigái ja Áššui dán radjái lea dahkkon. Dát lea goitge politihkkalaš ášši, ja ávččuhan ahte politihkkarat dál fuomašit liibba njulget sámegielat mediamárkana bonjuvuođa. Muđui lea baha ahte dárogielat aviisa Ságát dat báhca vuoitin, jus sidjiide lasihuvvo ruhta dan geažil go okta aviisa jávka.    <- /home/boerre/repos/freecorpus.svn/correct-no-gs/converted/sme/ficti/blog/nps-018_min_aigi_ja_assu.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'dárogielat aviisa Ságat', 'errorinfo': 'prop,a', 'type': 'errorortreal', 'start': 349, 'error': 'dárogielat aviisa Ságát', 'end': 372}
-		{'correct': 'báhcá vuoitin', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 377, 'error': 'báhca vuoitin', 'end': 390}
-~~~~~~
 	dc errors not found in correct
 		['aviisa', 360, 366, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 		['aviisa', 440, 446, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -2019,11 +1688,11 @@ Dasa lassin lea eahpečielggas moht sámi preassadoarjja juogaduvvo ovttastahtti
 		jávka -> jávká, position 0
 
 Paragraphs 215
-Paragraphs with errors 163
+Paragraphs with errors 151
 
-Manually marked errors: 719
-Manually marked errors found by the grammarchecker: 527
-Manually marked errors not found by the grammarchecker: 192 == False negatives
+Manually marked errors: 570
+Manually marked errors found by the grammarchecker: 520
+Manually marked errors not found by the grammarchecker: 50 == False negatives
 By type
 manually_marked_errors_errorformat: 16
 manually_marked_errors_errorformat_not_reported: 3
@@ -2031,27 +1700,15 @@ manually_marked_errors_errorformat_found: 13
 manually_marked_errors_errorsyn: 10
 manually_marked_errors_errorsyn_not_reported: 5
 manually_marked_errors_errorsyn_found: 5
-manually_marked_errors_errormorphsyn: 80
-manually_marked_errors_errormorphsyn_not_reported: 79
-manually_marked_errors_errormorphsyn_found: 1
-manually_marked_errors_errorortreal: 61
-manually_marked_errors_errorortreal_not_reported: 56
-manually_marked_errors_errorortreal_found: 5
-manually_marked_errors_errorlex: 6
-manually_marked_errors_errorlex_not_reported: 5
-manually_marked_errors_errorlex_found: 1
 manually_marked_errors_errorort: 544
 manually_marked_errors_errorort_not_reported: 42
 manually_marked_errors_errorort_found: 502
-manually_marked_errors_errorlang: 2
-manually_marked_errors_errorlang_not_reported: 2
-manually_marked_errors_errorlang_found: 0
 
 
 
 Errors reported by grammarchecker: 629
-Grammar checker errors that align with manually marked up errors: 528 == True positives
-Grammar checker errors that don't align with manually marked up errors: 101 == False positives
+Grammar checker errors that align with manually marked up errors: 521 == True positives
+Grammar checker errors that don't align with manually marked up errors: 108 == False positives
 By type
 grammarchecker_errors_double-space-before: 8
 grammarchecker_errors_double-space-before_not_markedup: 2
@@ -2060,8 +1717,8 @@ grammarchecker_errors_msyn-compound: 7
 grammarchecker_errors_msyn-compound_not_markedup: 1
 grammarchecker_errors_msyn-compound_found: 6
 grammarchecker_errors_typo: 587
-grammarchecker_errors_typo_not_markedup: 83
-grammarchecker_errors_typo_found: 504
+grammarchecker_errors_typo_not_markedup: 90
+grammarchecker_errors_typo_found: 497
 grammarchecker_errors_space-before-punct-mark: 6
 grammarchecker_errors_space-before-punct-mark_not_markedup: 5
 grammarchecker_errors_space-before-punct-mark_found: 1
@@ -2086,19 +1743,17 @@ grammarchecker_errors_space-before-paren-end_found: 0
 
 
 
-Manually marked errors and reported errors that align: 528
+Manually marked errors and reported errors that align: 521
 
-Reported errors where correction is among suggestions 461
+Reported errors where correction is among suggestions 455
 By manual error and grammarchecker error pairs
 correction_in_suggestion_errorformat_double-space-before: 3
 correction_in_suggestion_errorort_typo: 435
 correction_in_suggestion_errorsyn_msyn-compound: 3
 correction_in_suggestion_errorformat_typo: 1
-correction_in_suggestion_errorortreal_typo: 5
 correction_in_suggestion_errorformat_space-before-punct-mark: 1
 correction_in_suggestion_errorort_msyn-compound: 1
 correction_in_suggestion_errorformat_punct-aistton-left: 5
-correction_in_suggestion_errormorphsyn_typo: 1
 correction_in_suggestion_errorort_msyn-unspace-compound: 6
 
 Reported errors where correction is not among suggestions 54
@@ -2108,13 +1763,12 @@ correction_not_in_suggestion_errorsyn_msyn-compound: 2
 correction_not_in_suggestion_errorort_typo: 48
 correction_not_in_suggestion_errorformat_typo: 1
 
-Reported errors without suggestions 13
+Reported errors without suggestions 12
 By manual error and grammarchecker error pairs
 correction_no_suggestion_errorort_typo: 12
-correction_no_suggestion_errorlex_typo: 1
 
-Overall precision: 0.84 (528/629)
-Overall recall: 1.21 (528/438)
+Overall precision: 0.83 (521/629)
+Overall recall: 0.90 (521/580)
 
 
 
@@ -2122,12 +1776,7 @@ not used
 
 
 dc_dupes: 4
-markup_dupes: 14
 Errortags
 errorformat
-errorlang
-errorsyn
-errormorphsyn
-errorortreal
 errorort
-errorlex
+errorsyn

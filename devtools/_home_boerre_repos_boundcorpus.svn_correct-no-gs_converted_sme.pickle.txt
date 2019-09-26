@@ -1,4 +1,4 @@
-filters: [], file: _home_boerre_repos_boundcorpus.svn_correct-no-gs_converted_sme.pickle
+filters: ['errorlang', 'errormorphsyn', 'errorlex', 'errorortreal'], file: _home_boerre_repos_boundcorpus.svn_correct-no-gs_converted_sme.pickle
 ==========
 Forside:      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
@@ -59,14 +59,14 @@ Doaimmaheaddji: Marianne Haanæs Olggoš: Øyvind Tingleff Govvadusat: Øyvind T
 ==========
 Doaibma → Ánne galgá goarrut veastta skuvllas. Son lea gávdnan dakkár veastta minstara maid háliida goarrut. Dá bajábealde oainnát ovddabeali.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct and dc align, and correction found in dc
-		ovddabeali -> ovdabeali, position 0
+	dc errors not found in correct
+		['ovddabeali', 131, 141, 'typo', 'Ii leat sátnelisttus', ['ovdabeali'], 'Čállinmeattáhusat']
 
 ==========
 Ánne ferte stuoridit gova nu ahte ovddabealli šaddá 48 cm govddu.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct and dc align, and correction found in dc
-		ovddabealli -> ovdabealli, position 0
+	dc errors not found in correct
+		['ovddabealli', 34, 45, 'typo', 'Ii leat sátnelisttus', ['ovdabealli'], 'Čállinmeattáhusat']
 
 ==========
 Doaresbárttas Dálošvistái lea 6 cm kárttas. Man guhkki lea duohtailmmis?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -87,30 +87,6 @@ Go čállit ”duohtailmmis”, de sáhttá dávjá addit boasttu ipmárdusa. K�
 		boasttu ipmárdusa -> boasttuipmárdusa, position 0
 
 ==========
-a) Man guhkki lea Čuolbmačielggis Ruktobuvdii áibmolinjá mielde?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 46, 'error': 'áibmolinjá mielde', 'end': 63}
-
-==========
-á) Ánne váccii čuovvovaš mátkki muhtun beaivvi: Ruktobuvda – Dálošvisti – Čuolbmačielgi – Doaresbarta – Ruktobuvda. Man guhkki lei mátki áibmolinjá mielde?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 137, 'error': 'áibmolinjá mielde', 'end': 154}
-
-==========
-č) Man guhkki lea olles mátki áibmolinjá mielde?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 30, 'error': 'áibmolinjá mielde', 'end': 47}
-
-==========
-b) Man guhkki lea olles mátki áibmolinjá mielde?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 30, 'error': 'áibmolinjá mielde', 'end': 47}
-
-==========
 a) Ráhkat dákkár govvosa gierdodaganiin. Gierdduid radius galgá leat 2 cm.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	correct and dc align, and correction found in dc
@@ -126,17 +102,8 @@ a) Ráhkat dákkár govvosa gierdodaganiin. Gierdduid radius galgá leat 2 cm.  
 ==========
 b) Sárggo iešguđetlágán gierdduid main gierdduid radius stuorru 1 cm ain hávális. Divtte guovddážiid leat buohtalaga linjá mielde. Geahččalatta ieš gierdduid gaskkain.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 117, 'error': 'linjá mielde', 'end': 129}
-~~~~~~
 	correct and dc align, and correction found in dc
 		radius -> rádius, position 0
-
-==========
-5.5	Ráhkat duhka dahje buserminstara gierdodaganiin. Gurut bealde oainnát evttohusa movt sáhtát dahkat.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'duvka-', 'errorinfo': 'noun,mix', 'type': 'errorortreal', 'start': 11, 'error': 'duhka', 'end': 16}
 
 ==========
 Muhtun beaivvi dadjá Niillas-eanu Birehii: ”Dát lea Čiehkásullo kárta. Dohko lean čiehkan 100 ruvnno. Čuđeš lea muhtun báikkis mii kárttas lea 5 km Giehmán-Juhána njunis ja 4 km Áslat-gáttis eret. Jus gávnnat dán báikki dušše gierdodagana vehkiin, de oaččut čuđeža.”      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -259,9 +226,6 @@ c) Merke čuoggá Q gierdoravdii. Bija gierdodagansákki Q-čuoggái ja geahča 
 ==========
 2	Mii bidjat gierdodagansákki P-čuoggái ja dahkat dávggi. Mii mearridit ieža radiusa. Dávgi russe l-linjá A-čuoggás.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'russe l-linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errorortreal', 'start': 92, 'error': 'russe l-linjá', 'end': 105}
-~~~~~~
 	correct and dc align, and correction found in dc
 		radiusa -> rádiusa, position 0
 
@@ -324,12 +288,6 @@ Mihtit dán guovtti golmmačiegaga čiegaid. Rehkenastte: < A + < B + < C ja < C
 		['< F', 86, 89, 'space-after-paren-beg', 'Lea gaska vuosttaš paragráfa "<" ovddas', ['<F'], 'Sátnegaskameattáhusat']
 
 ==========
-a) Sárggo guokte golmmačiegaga iežat čállingirjái. Mihtit goappáge golmmačiegaga giegaid ja rehkenastte daid supmi. Maid gávnnahat? Buohtastahte iežat bohtosiid muhtun luohkkáustiba bohtosiiguin.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'čiegaid', 'errorinfo': 'nom,init', 'type': 'errorortreal', 'start': 81, 'error': 'giegaid', 'end': 88}
-
-==========
 Ovdamearka Rehkenastte < C.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
@@ -381,12 +339,6 @@ dc duplicates of (80, 89)
 		['< PQR  ja', 80, 89, 'double-space-before', 'Leat guokte gaskka ovdal "ja"', ['< PQR ja'], 'Sátnegaskameattáhusat']
 
 ==========
-a) Sárggo linjá l. Merke guokte čuoggá A ja B linjái nu ahte AB lea 6 cm.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo linjá', 'end': 15}
-
-==========
 b) Merke golbma čuoggá C, D ja E guovdonormálai. Sázo AC ja BC. Mihtit AC guhkkodaga. Mihtit BC guhkkodaga. Mihtit < A ja < B.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
@@ -395,13 +347,6 @@ b) Merke golbma čuoggá C, D ja E guovdonormálai. Sázo AC ja BC. Mihtit AC gu
 ~~~~~~
 	correct and dc align, and correction found in dc
 		guovdonormálai -> guovdonormálii, position 3
-
-==========
-Dássejuolggat golmmačiegagis leat vuođđolinjá čiegat ovtta stuorrát. Normála čiehkačohkas vuođđolinjái juohká vuođđolinjá guovtti ovtta stuoru oassái.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'vuođđolinjjá čiegat', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 34, 'error': 'vuođđolinjá čiegat', 'end': 52}
-		{'correct': 'vuođđolinjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 110, 'error': 'vuođđolinjá', 'end': 121}
 
 ==========
 a) ∆ ABC mas AB = 8 cm, < A = 90º ja < B = 45º.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -461,18 +406,6 @@ Muhtun beaivvi váccá Máret ádjá mielde Jeaggegáttis Dáktemarrasii ja ruov
 ~~~~~~
 	dc errors not found in correct
 		['golbma čiega', 27, 39, 'msyn-compound', '"golbma čiega" orru leamen goallossátni', ['golbmačiega'], 'Goallosteapmi']
-
-==========
-5.31	Konstruere daid čiegaid maid dál máhtát. Berret máhttit dáid: Siđa oahpaheaddji iskat leat go bargat buot riekta.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Siđa oahpaheaddji iskat leat go bargan buot riekta', 'errorinfo': 'verb,infin,prfprc,inf,infl', 'type': 'errormorphsyn', 'start': 67, 'error': 'Siđa oahpaheaddji iskat leat go bargat buot riekta', 'end': 117}
-
-==========
-đ) Man stuoris lea guđege golmmačiegaga čiehkasubmi? Geavat čiehkamihttu jus it muitte.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Geavat čiehkamihtu', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 53, 'error': 'Geavat čiehkamihttu', 'end': 72}
 
 ==========
 Konstruere < B = 45º. Ráhkat sázu B rájes.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -535,12 +468,6 @@ Biilabisananbáiki	Olgohivsset		Jenseniid barta      <- /home/boerre/repos/bound
 		Biilabisananbáiki -> Biilabisánanbáiki, position 0
 
 ==========
-5.46	Nilseniin, Hanseniin ja Jenseniin leat barttat oalle lahkalaga. Muhtun beassášlávvordaga ožžo mánát váttis bargobihtá. Sii galge gávdnat njálggatčiegá. Dat galggai leat 50 m Nilseniid barttas ja seammás 40 m Jenseniid barttas. Veahkkin ožžo bátti mii lei juste 60 m guhku.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'váttes bargobihtá', 'errorinfo': 'adj,attr,attr,nomsg,infl', 'type': 'errormorphsyn', 'start': 105, 'error': 'váttis bargobihtá', 'end': 122}
-
-==========
 á) Normála muhtun čuoggás linjás      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	correct and dc align, and correction found in dc
@@ -559,23 +486,7 @@ P-normála l-linjái.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/c
 		['P-normála', 0, 9, 'typo', 'Ii leat sátnelisttus', ['Normála', 'Binormála'], 'Čállinmeattáhusat']
 
 ==========
-5.47	Sárggo linjá AB = 6,0 cm. Konstruere AB guovdonormála.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 12, 'error': 'linjá', 'end': 17}
-
-==========
-5.48	Sárggo linjá l. Merke čuoggá S linjá bajábeallái. Konstruere normála S rájes l rádjái.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 12, 'error': 'linjá', 'end': 17}
-		{'correct': 'linjjá', 'errorinfo': 'noun,obj,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 36, 'error': 'linjá', 'end': 41}
-
-==========
 5.49	Sárggo linjá m. Merke čuoggá T sullii 4 cm m-linjás. Konstruere normála T rájes m rádjái.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 12, 'error': 'linjá', 'end': 17}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		m-linjás -> m-linjjás, position 0
@@ -594,34 +505,10 @@ b) Čiehká lea dan normálas maid sáhttá sáhcut stuora beazis dan guovdonorm
 		konstuerejit -> konstruerejit, position 0
 
 ==========
-b) Fuomášat go njuolggadusa das galle linjá sáhttá sáhcut čuoggáid gaskka guđege govvosis?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'galle linjjá', 'errorinfo': 'noun,numph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 32, 'error': 'galle linjá', 'end': 43}
-
-==========
 c) Ráhkat bargobihtá kártta vuođul. Bargobihtás galget leat mielde sánit fanas ja čuovgavisti. Ráhkat čovdosa ja siđa muhtun luohkkáustiba čoavdit bargobihtá.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
 		['fanas', 73, 78, 'msyn-addhyphen', 'Dákkár goallossániin lea sáhcu ', [], 'Sáhcu']
-
-==========
-á) Man guhkki lea vuolggabáikkis 1. postii áibmolinjá mielde? Vástit mehteriidda.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 43, 'error': 'áibmolinjá mielde', 'end': 60}
-
-==========
-b) Man guhkki lea olles mátki áibmolinjá mielde? Vástit kilomehteriidda.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 30, 'error': 'áibmolinjá mielde', 'end': 47}
-
-==========
-č) Máhtte viehká olles mátkki ja orru iežas mielas hui johtilit viehkan dan ektui man guhkki mátki lea, muhto de oažžu dieđu ahte kártta mihttolávva lea boastut. Dat ii leat 1:10 000, muhto 1:7 500. Man guhkki lei mátki duođas áibmolinjá mielde?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 227, 'error': 'áibmolinjá mielde', 'end': 244}
 
 ==========
 Man stuoris lea < C? Man stuorrát leat < A + < B + < C oktiibuot?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -723,9 +610,6 @@ dc duplicates of (7, 19)
 ==========
 Bargobihtát lei dákkár: Árka lea 3 cm skuvlaverrahis ja seammás 4 cm leavgastákkus. Guđiin báikkiin galge oahppit ohcat árkka mii čovddii sin leavssuin?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Bargobihttá lei dákkár', 'errorinfo': 'noun,subj,nomsg,nompl,kongr', 'type': 'errormorphsyn', 'start': 0, 'error': 'Bargobihtát lei dákkár', 'end': 22}
-~~~~~~
 	correct and dc align, and correction found in dc
 		skuvlaverrahis -> skuvlaverráhis, position 0
 
@@ -738,9 +622,6 @@ Bargobihtát lei dákkár: Árka lea 3 cm skuvlaverrahis ja seammás 4 cm leavga
 ==========
 5.74 Sárggo linjá l. Konstruere paralleallaid l-linjái 4,0 cm l-linjás eret.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 5, 'error': 'Sárggo linjá', 'end': 17}
-~~~~~~
 	dc errors not found in correct
 		['5.74', 0, 4, 'typo', 'Ii leat sátnelisttus', ['5,74'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -749,10 +630,6 @@ Bargobihtát lei dákkár: Árka lea 3 cm skuvlaverrahis ja seammás 4 cm leavga
 
 ==========
 5.75 Sárggo linjá m. Merke čuoggá S sullii 5 cm m-linjás eret. Konstruere m-linjá parallealla S bokte.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 5, 'error': 'Sárggo linjá', 'end': 17}
-		{'correct': 'm-linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 74, 'error': 'm-linjá', 'end': 81}
 ~~~~~~
 	dc errors not found in correct
 		['5.75', 0, 4, 'typo', 'Ii leat sátnelisttus', ['5,75'], 'Čállinmeattáhusat']
@@ -765,18 +642,6 @@ Bargobihtát lei dákkár: Árka lea 3 cm skuvlaverrahis ja seammás 4 cm leavga
 ~~~~~~
 	dc errors not found in correct
 		['< A', 26, 29, 'space-after-paren-beg', 'Lea gaska vuosttaš paragráfa "<" ovddas', ['<A'], 'Sátnegaskameattáhusat']
-
-==========
-Konstrueret parallealla l-linjái P-čuoggá bokte olggobeale linjá.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'olggobeale linjjá', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 48, 'error': 'olggobeale linjá', 'end': 64}
-
-==========
-Konstruere normála P-čuoggás l-linjái. Merke čuoggá linjái ja ráhkat normála. Mihtit gaskka P rájes l rádjái ja merke gaskka nuppi normálas. Sázo l-linjá parallealla P bokte.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'l-linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 146, 'error': 'l-linjá', 'end': 153}
 
 ==========
 5.77	Konstruere ∆ ABC mas AB = 7,2 cm, < B = 45º ja C lea 4,5 cm AB:s eret.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -820,12 +685,8 @@ a) Konstruere njealječiegaga ABCD mas AB = BC = 6,3 cm. < ABC = 120º, < BCD = 
 
 ==========
 a) Galle njuolggo linjá) sáhtát sáhcut guđege govvosa čuoggáid gaskka?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(3, 23): 2})
-	{'correct': 'Galle njuolggo linjjá', 'errorinfo': 'noun,numph,gensg,nomsg,case', 'type': 'errorortreal', 'start': 3, 'error': 'Galle njuolggo linjá', 'end': 23}
-	{'correct': 'njuolggolinjjá', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 3, 'error': 'Galle njuolggo linjjá', 'end': 23}
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'Galle njuolggo linjjá', 'errorinfo': 'noun,numph,gensg,nomsg,case', 'type': 'errorortreal', 'start': 3, 'error': 'Galle njuolggo linjá', 'end': 23}
 		{'correct': 'njuolggolinjjá', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 3, 'error': 'Galle njuolggo linjjá', 'end': 23}
 ~~~~~~
 	dc errors not found in correct
@@ -834,17 +695,8 @@ Markup duplicates of defaultdict(<class 'int'>, {(3, 23): 2})
 ==========
 á) Fuomášat go movt galgá rehkenastit galle linjášaddet guđege govvosis?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'galle linjjá', 'errorinfo': 'noun,numph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 38, 'error': 'galle linjá', 'end': 49}
-~~~~~~
 	dc errors not found in correct
 		['linjášaddet', 44, 55, 'typo', 'Ii leat sátnelisttus', ['linjádaddet', 'linjášaddit', 'linnjádaddet'], 'Čállinmeattáhusat']
-
-==========
-b) Galle linjá sáhttá sáhcut dakkár govvosis mas leat logi čuoggá?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Galle linjjá', 'errorinfo': 'noun,numph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 9, 'error': 'linjá', 'end': 14}
 
 ==========
 a) Konstruere dahje sárggo dássesiiddot golmmačiegaga, kvadráhta, regulára viđačiegaga, guđačiegaga ja gávccečiegaga.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -857,18 +709,6 @@ a) Konstruere dahje sárggo dássesiiddot golmmačiegaga, kvadráhta, regulára 
 ~~~~~~
 	dc errors not found in correct
 		['5.89', 0, 4, 'typo', 'Ii leat sátnelisttus', ['5,89'], 'Čállinmeattáhusat']
-
-==========
-4. ja 5. poasttaid gaskka lea 300 m áibmolinjá mielde.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 36, 'error': 'áibmolinjá mielde', 'end': 53}
-
-==========
-a) Man guhkki lea mátki áibmolinjá mielde?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 24, 'error': 'áibmolinjá mielde', 'end': 41}
 
 ==========
 5.92	Konstruere čuovvovaš čiegaid:      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -942,17 +782,7 @@ a) Konstruere dássejuolggat ∆ ABC. AB = 7,2 cm, ja < A = < B = 75º.      <- 
 		['< C', 19, 22, 'space-after-paren-beg', 'Lea gaska vuosttaš paragráfa "<" ovddas', ['<C'], 'Sátnegaskameattáhusat']
 
 ==========
-5.101	Sárggo linjá l ja merke guokte čuoggá R ja S 5,0 cm gaskkain l-linjái. Konstruere l-linjá normálaid R ja S bokte.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 6, 'error': 'Sárggo linjá', 'end': 18}
-		{'correct': 'Konstruere l-linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 77, 'error': 'Konstruere l-linjá', 'end': 95}
-
-==========
 5.102	Sárggo linjá m ja merke čuoggá P sullii 5 cm m-linjás eret. Konstruere P normála m bokte.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errorortreal', 'start': 6, 'error': 'Sárggo linjá', 'end': 18}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		m-linjás -> m-linjjás, position 0
@@ -960,18 +790,11 @@ a) Konstruere dássejuolggat ∆ ABC. AB = 7,2 cm, ja < A = < B = 75º.      <- 
 ==========
 5.103	Sárggo linjá l. Konstruere paralleallaid mat leat 5,2 cm l-linjás eret.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 6, 'error': 'Sárggo linjá', 'end': 18}
-~~~~~~
 	correct and dc align, correction not among suggestions
 		l-linjás -> linjjás -> [l-linjjás]
 
 ==========
 5.104	Sárggo linjá O. Merke čuoggá S sullii 4 cm O-linjás eret. Konstruere O-linjá parallealla S bokte.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 6, 'error': 'Sárggo linjá', 'end': 18}
-		{'correct': 'Konstruere O-linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 64, 'error': 'Konstruere O-linjá', 'end': 82}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		O-linjás -> O-linjjás, position 0
@@ -1132,9 +955,6 @@ a) Konstruere njealječiegaga ABCD mas AB = 5,4 cm ja < ABC = 112 ½º. Diagoná
 ==========
 5.127	Njealječiegagis ABCD lea < BAD = 60º, ja AD = 4,8 cm. Normála D rájes AB rádjái deaivái AB E-čuoggás. EB = 4,2 cm, ja BC = 5,2 cm. AB ║ CD. Konstruere njealječiegaga.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'deaivá', 'errorinfo': 'noun,typo', 'type': 'errorortreal', 'start': 86, 'error': 'deaivái', 'end': 93}
-~~~~~~
 	dc errors not found in correct
 		['< BAD', 31, 36, 'space-after-paren-beg', 'Lea gaska vuosttaš paragráfa "<" ovddas', ['<BAD'], 'Sátnegaskameattáhusat']
 
@@ -1150,12 +970,6 @@ a) Vuosttaš čuokkis gos galggat ohcat čiegá, lea russenčuoggás mii lea Mih
 	correct and dc align, and correction found in dc
 		kájja -> káija, position 0
 		kájjas -> káijas, position 0
-
-==========
-b) Man guhkki lea olles mátki áibmolinjá mielde?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'áibmolinjjá mielde', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 30, 'error': 'áibmolinjá mielde', 'end': 47}
 
 ==========
 G 5.4	Konstruere ∆ ABC mas < A = 60º, < B = 45º ja AB = 7,0 cm.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -1255,9 +1069,6 @@ F 5.3 Sátnevájas “nie ii leat geavvan dan rájes go Ålesund bulii” vuolg�
 
 ==========
 b) Geahča gova dás gurut bealde. Mii du mielas orro leame mihtilmas jugend-vugiin?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'orru leame mihtilmas', 'errorinfo': 'noun,pph,sg3prs,pl3prt,case', 'type': 'errormorphsyn', 'start': 47, 'error': 'orro leame mihtilmas', 'end': 67}
 ~~~~~~
 	dc errors not found in correct
 		['jugend-vugiin', 68, 81, 'typo', 'Ii leat sátnelisttus', ['ájugendávugiin'], 'Čállinmeattáhusat']
@@ -1360,12 +1171,6 @@ Galle čiekčan	Galle vuoitán	Galle dássálaga	Galle vuoittahallan	Čuoggát	S
 		vuoittahallan -> vuoittáhallan, position 0
 
 ==========
-á) Čiekčamat Molde ja Volda gaskka eai lean dássálaga. Dan guovtti čiekčamis Volda ja Ålesundda gaskkas ii báhčán Ålesunda ovttage moala. Mii šattai dáid čiekčamiid boađus? Čilge iežat vástádusa.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Ålesund', 'errorinfo': 'prop,subj,nomsg,gensg,case', 'type': 'errormorphsyn', 'start': 114, 'error': 'Ålesunda', 'end': 122}
-
-==========
 Jus mun oasttán burgera...      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
@@ -1384,16 +1189,7 @@ Markup duplicates of defaultdict(<class 'int'>, {(7, 17): 2})
 		galleládje -> galle ládje -> [galleledje, gálleledje, galli ládje, oalle ládje]
 
 ==========
-6.3	Gokko leat riekta geavahit ovttamađodatmearkka:      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Gokko lea riekta geavahit ovttamađodatmearkka', 'errorinfo': 'verb,fin,sg3prs,pl3prs,kongr', 'type': 'errormorphsyn', 'start': 4, 'error': 'Gokko leat riekta geavahit ovttamađodatmearkka', 'end': 50}
-
-==========
 Doaibma → Dus lea mielde čuđeš gávppis. Don oasttát bláđii 30 ruvdnui ja golbma šukkoláda 5 ruvdnui bihttá. Man olu oaččut ruovttoluotta čuđežis? Dás vuolábealde oainnát iešguđetge vugiid movt sáhtát rehkenastit dán. Geavat kalkulatora ja geahča oaččut go seamma vástádusa buot vugiin.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'bláđiid', 'errorinfo': 'noun,fin', 'type': 'errorortreal', 'start': 52, 'error': 'bláđii', 'end': 58}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		kalkulatora -> kalkuláhtora, position 0
@@ -1507,29 +1303,10 @@ b) Jurddaš ahte dan sadjái go dadjat ahte nealjis oste lottaid 8 ruvnno ovddas
 		nealjis -> njealjis, position 0
 
 ==========
-Doaibma → Dát speallu heive guoktásii. Doai dárbbašeahppi moadde báberlippu. Lippuin galgá čuožžut:      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'báberlihpu', 'errorinfo': 'noun,conc', 'type': 'errorortreal', 'start': 65, 'error': 'báberlippu', 'end': 75}
-		{'correct': 'Lihpuin', 'errorinfo': 'noun,conc', 'type': 'errorortreal', 'start': 77, 'error': 'Lippuin', 'end': 84}
-
-==========
 Jna 15x rádjái.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
 		['15x', 4, 7, 'typo', 'Ii leat sátnelisttus', ['fax'], 'Čállinmeattáhusat']
-
-==========
-Guđege lippus lea nappo muhtun logu ja variábela buvtta.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'lihpus', 'errorinfo': 'noun,conc', 'type': 'errorortreal', 'start': 7, 'error': 'lippus', 'end': 13}
-
-==========
-a) Gease lippu.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'lihpu', 'errorinfo': 'noun,conc', 'type': 'errorortreal', 'start': 9, 'error': 'lippu', 'end': 14}
 
 ==========
 á) Goabbáge čállá buktaga maid lea geassán nu máŋggaládje go lea vejolaš.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -1637,9 +1414,6 @@ a) Soai máksiba 200 ruvdnosaččain. Man olu oažžuba ruovttoluotta?      <- /
 ==========
 6.35 Sire galgá áhku ovddas fitnat gávppis ja váldá mielde guokte busse dievva guorosbohttaliid. Bussiin leat gávcci bohttala maid ovddas oažžu 1 ruvnno, ja čieža bohttala maid ovddas oažžu 2,50 ruvnno. Gávppis oastá son njeallji doasa bussabiepmu 8,50 ruvdnui doasas ja guokte lihttara mielkki 9,00 ruvdnui lihttaris. Son addá máksolippu bohttaliid ovddas ovdal go máksá. Man olu oažžu son ruovttoluotta jus máksá 50-ruvdnosaččain?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'máksolihpu', 'errorinfo': 'noun,conc', 'type': 'errorortreal', 'start': 328, 'error': 'máksolippu', 'end': 338}
-~~~~~~
 	dc errors not found in correct
 		['50-ruvdnosaččain', 415, 431, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
@@ -1688,10 +1462,8 @@ c) Geavat b-bihtá rehkenastincealkaga ja rehkenastte man olu šaddá máksit ju
 6.38	Iŋgá čuvvoda busse ja toga bargui vihtta beaivvi. Gohčot bussehatti x ruvnno ja togahatti y ruvnno, ja ráhkat rehkenastincealkaga das man olu Iŋgá šaddá máksit oktiibuot.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
+		['čuvvoda', 10, 17, 'typo', 'Ii leat sátnelisttus', ['čuvoda'], 'Čállinmeattáhusat']
 		['ruvnno', 75, 81, 'msyn-addhyphen', 'Dákkár goallossániin lea sáhcu ', [], 'Sáhcu']
-~~~~~~
-	correct and dc align, and correction found in dc
-		čuvvoda -> čuvoda, position 0
 
 ==========
 6.39	Niillas fitná báhkáris ja oastá marsipangáhku mii máksá 78 ruvnno ja moadde láibbáža mat mákset 7,50 ruvnno bihttá.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -1905,12 +1677,6 @@ Njuolggadus Mii sáhttit geassit čoahkkái (álkidahttit, rehkenastit) bustávv
 		guovtteládje -> guovtti ládje, position 0
 
 ==========
-Nu guhká go rehkenastit loguiguin, de soaitá dát orrot dárbbašmeahttun lossat du mielas. Muhto go rehkenastit bustávaiguin, de lea áibbas dárbbašlaš oahppat njuolggadusaid dan birra movt ruođuid galgá čoavdit.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'soaitá dát orrut', 'errorinfo': 'verb,infin,inf,pl3prs,der', 'type': 'errormorphsyn', 'start': 38, 'error': 'soaitá dát orrot', 'end': 54}
-
-==========
 6.69 Muhtun oapmedálus ledje 8 spiinni ja 40 gusa. Muhtun beaivvi bođii njuovahatbiila ja vieččai 3 spiinni ja 2 gusa.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
@@ -2083,12 +1849,6 @@ dc duplicates of (78, 83)
 		guovtteládje -> guovtti ládje, position 0
 
 ==========
-Nu guhká go rehkenastit loguiguin, de soaitá dát orrot dárbbašmeahttun lossat du mielas. Muhto go rehkenastit bustávaiguin, de lea áibbas dárbbašlaš oahppat njuolggadusaid dan birra movt ruođuid galgá čoavdit.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'soaitá dát orrut', 'errorinfo': 'verb,infin,inf,pl3prs,der', 'type': 'errormorphsyn', 'start': 38, 'error': 'soaitá dát orrot', 'end': 54}
-
-==========
 6.85 Muhtun oapmedálus ledje 8 spiinni ja 40 gusa. Muhtun beaivvi bođii njuovahatbiila ja vieččai 3 spiinni ja 2 gusa.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
@@ -2235,13 +1995,11 @@ Ovdamearka Rehkenastte Dalle oažžut:      <- /home/boerre/repos/boundcorpus.sv
 
 ==========
 6.99 Sárá ja Ánne leaba ožžot juovlabarggu. Son páhkkeba juovlaskeaŋkkaid muhtun fitnodaga ovddas. Soai páhkkeba”Premium”-doasaid, maid siste leat x suovasluossadoasa, y njuokčama ja z reahkkádoasa. Soai páhkkeba maiddái muhtun ”Nr. 1”-doasaid maid siste leat a páhka spihkemárffi, b makrealladoasa ja c vuoivvasmeastodoasa.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(18, 29): 1, (44, 56): 1, (104, 129): 2, (268, 280): 1})
+Markup duplicates of defaultdict(<class 'int'>, {(104, 129): 2, (268, 280): 1})
 	{'correct': 'páhkkeba ”Premium”-doasaid', 'errorinfo': 'space', 'type': 'errorort', 'start': 104, 'error': 'páhkkeba”Premium”-doasaid', 'end': 129}
 	{'correct': '"Premium"-doasaid', 'errorinfo': 'cit', 'type': 'errorort', 'start': 104, 'error': 'páhkkeba ”Premium”-doasaid', 'end': 129}
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'leaba ožžon', 'errorinfo': 'noun,infin,prfprc,pl3prt,infl', 'type': 'errormorphsyn', 'start': 18, 'error': 'leaba ožžot', 'end': 29}
-		{'correct': 'Soai páhkkeba', 'errorinfo': 'pers,subj,du3,sg3,kongr', 'type': 'errormorphsyn', 'start': 44, 'error': 'Son páhkkeba', 'end': 56}
 		{'correct': 'páhkkeba ”Premium”-doasaid', 'errorinfo': 'space', 'type': 'errorort', 'start': 104, 'error': 'páhkkeba”Premium”-doasaid', 'end': 129}
 		{'correct': '"Premium"-doasaid', 'errorinfo': 'cit', 'type': 'errorort', 'start': 104, 'error': 'páhkkeba ”Premium”-doasaid', 'end': 129}
 ~~~~~~
@@ -2326,12 +2084,6 @@ F 6.1 Vest-Agderis leat oktiibuot njeallje gávpoga. 1.1.94 lei gávpogiid olmmo
 ~~~~~~
 	correct and dc align, correction not among suggestions
 		Gallo -> Galle -> [Oallu, Vallu]
-
-==========
-F 6.2 Olsen-bearrašis leat Torbjørn (30-jahkásaš), Frida (29-jahkásaš, Asbjørn (7-jahkásaš) ja Hilde (3-jahkásaš).      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Olsen-bearrašis lea Torbjørn', 'errorinfo': 'verb,fin,sg3prs,pl3prs,kongr', 'type': 'errormorphsyn', 'start': 6, 'error': 'Olsen-bearrašis leat Torbjørn', 'end': 35}
 
 ==========
 Muhtun geasi ledje fitnan Hirtshalsas muhtun oahppásiid guossis, ja gaskavahkku 7.7 galge váldit fatnasa Hirtshalsas Kristiansandii. Kristiansanddas galge váldit busse Kvinesdalii. Sii válde idjafatnasa Hirtshalsas. Kristiansandda ruktobiilastašuvdna lea hui lahka feargabáikki.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -2783,9 +2535,6 @@ c) Man olu šaddá máksit sofa ovddas jus oastá oassemáksimiin?      <- /home
 ==========
 7.13 Arnes lea 2 500 ruvnno báŋkkus ovtta jagi. Báŋkku addá 2 % reanttuid p.a. Ninas lea 2 300 ruvnno muhtun eará báŋkkus. Dát báŋku addá 4 % reanttuid p.a. Man olu ruhta lea Arnes, ja man olu lea Ninas maŋŋel go jahki lea gollan?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Báŋku addá', 'errorinfo': 'noun,subj,nom,gen,case', 'type': 'errormorphsyn', 'start': 48, 'error': 'Báŋkku addá', 'end': 59}
-~~~~~~
 	dc errors not found in correct
 		['p.a', 74, 77, 'no-space-after-punct-mark', 'Ii leat gaska "p." maŋis', ['p. a'], 'Sátnegaskameattáhusat']
 
@@ -2795,13 +2544,6 @@ c) Man olu šaddá máksit sofa ovddas jus oastá oassemáksimiin?      <- /home
 	correct and dc align, and correction found in dc
 		“ -> ”, position 0
 		“ -> ”, position 0
-
-==========
-Muhtun oktavuođain muitalit oasi promilla mielde eat ge proseantta mielde. Go silbasuorbmasis čuožžu 830, de mearkkaša ahte 830 / 1000 suorbmasa deattus lea čielga silba. Dávjá dadjat ahte silbasuorbmasa fiinnodat lea 830. Don muittát sihkkarit ahte proseanta mearkkaša čuođádasoasi. Promilla mearkkaša duhádasoasi.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'čuođátoasi', 'errorinfo': 'noun,cmp', 'type': 'errorortreal', 'start': 270, 'error': 'čuođádasoasi', 'end': 282}
-		{'correct': 'duháhatoasi', 'errorinfo': 'noun,cmp', 'type': 'errorortreal', 'start': 303, 'error': 'duhádasoasi', 'end': 314}
 
 ==========
 (Her har jeg endret promillegrensen fra 0,5 til 0,2)      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -2818,12 +2560,6 @@ dc duplicates of (0, 4)
 		['promillegrensen', 20, 35, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 		['fra', 36, 39, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 		['til', 44, 47, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
-
-==========
-Biera lea rávis dievdoolmmoš ja su gorudis lea sullii 6 kg varra. Son lea juhkan moadde vuollaga ja válddahallá politiija-iskkadeamis. Čájehuvvo ahte sus lea 0,6 promilla. Galle grámma promilla lea Biera varas?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'ráves dievdoolmmoš', 'errorinfo': 'adj,attr,attr,nom,infl', 'type': 'errormorphsyn', 'start': 10, 'error': 'rávis dievdoolmmoš', 'end': 28}
 
 ==========
 7.16 Iŋgá lihkai muhtun iđida dii. 06.35. Go son nohkai eahkes, de lei diibmu 22.12. Man guhká lei Iŋgá gohcan dan beaivvi?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -3182,12 +2918,6 @@ Turnsuohkut			tennissuohkut		spábbačiekčansuohkut      <- /home/boerre/repos/
 		['Turnsuohkut', 0, 11, 'typo', 'Ii leat sátnelisttus', ['Durasuohkut', 'Gurasuohkut', 'Čurosuohkut', 'Juránsuohkut', 'Eurosuohkut', 'Jurysuohkut'], 'Čállinmeattáhusat']
 
 ==========
-a) Ánne oastá shortsat ja T-báiddi. Man olu šaddá máksit?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Ánne oastá shortsaid', 'errorinfo': 'noun,obj,accpl,nompl,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Ánne oastá shortsat', 'end': 22}
-
-==========
 b) Iŋgá oastá turnbiktasa ja turnsuohkuid. Man olu šaddá máksit?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
@@ -3419,12 +3149,6 @@ Go biegga čavgá, de lassána buolašbeaktu. Tabeallas oainnát man olu. - 10º
 		['olles', 92, 97, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 
 ==========
-7.81 Muhtun tihppenlippus mas leat 12 čiekčama, deaivvai Joavnna tihppet 9 riekta. Galle proseantta lei riekta?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'tihppenlihpus', 'errorinfo': 'noun,conc', 'type': 'errorortreal', 'start': 12, 'error': 'tihppenlippus', 'end': 25}
-
-==========
 (Følgende oppgave (oppgave 7.85) er helt lik oppgave 7.49. Hva er poenget med det?)      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 dc duplicates of (0, 9)
 	['(Følgende', 0, 9, 'no-space-before-parent-start', '[SE] There is no space before or after the parenthesis "("', [], '[SE] Parenthesis missing space']
@@ -3544,9 +3268,6 @@ b) McCall      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme
 
 ==========
 7.90 Rehkenastte čuovvovaš supmiid reantu ovtta jagis. Reantojuolgi lea 3.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Rehkenastte čuovvovaš supmiid reanttu', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 5, 'error': 'Rehkenastte čuovvovaš supmiid reantu', 'end': 41}
 ~~~~~~
 	dc errors not found in correct
 		['Rehkenastte', 5, 16, 'typo', 'Ii leat sátnelisttus', ['Rehkenaste'], 'Čállinmeattáhusat']
@@ -3759,9 +3480,6 @@ dc duplicates of (192, 217)
 
 ==========
 7.123 Juelsen-bearrašis leat eadni, áhčči, nieida Julia ja bárdni Joavnna. Bearaš galgá plánet juovlaskeaŋka-gávppašeami. Áhčči lea gearggus ohcat seastinruđaid.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Juelsen-bearrašis lea eadni', 'errorinfo': 'verb,fin,sg3prs,pl3prs,kongr', 'type': 'errormorphsyn', 'start': 6, 'error': 'Juelsen-bearrašis leat eadni', 'end': 34}
 ~~~~~~
 	dc errors not found in correct
 		['Juelsen-bearrašis', 6, 23, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
@@ -4166,25 +3884,10 @@ dc duplicates of (4, 22)
 		biilabisanansajis -> biilabisánansajis, position 0
 
 ==========
-a) Ráhkat formela mii čájeha man olu šattat máksit, P ruvnno, go divttat biilla doppe x jándora.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'divttát', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 65, 'error': 'divttat', 'end': 72}
-
-==========
 á) Man olu šattat máksit jus divttat biilla doppe 6 jándora?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'divttát', 'errorinfo': 'verb,á', 'type': 'errorortreal', 'start': 29, 'error': 'divttat', 'end': 36}
 ~~~~~~
 	dc errors not found in correct
 		['jus', 25, 28, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
-
-==========
-Koordináhttavuogádagas leat guokte lohkolinjá mat leat normálan nubbi nuppi nalde.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'lohkolinjjá', 'errorinfo': 'noun,conc,gensg,nomsg', 'type': 'errorortreal', 'start': 35, 'error': 'lohkolinjá', 'end': 45}
 
 ==========
 Nubbeávssis      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -4378,34 +4081,10 @@ Mis eai leat árvvut vuollel 100 ruvnno y dáfus. Danne mii ”unnidit” nubbe�
 		nubbeáksása -> nubbeáksá -> [gubbeáksás, gubbeákseása, gubbeáksásba, gubbeáksába]
 
 ==========
-a) Merke čuoggá P iežat čállingirjái. Sázo linjá P čađa.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sázo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 38, 'error': 'Sázo linjá', 'end': 48}
-
-==========
 á) Sáhtát go sáhcut eambbo linjáid P čađa?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	correct and dc align, and correction found in dc
 		linjáid -> linjjáid, position 0
-
-==========
-b) Galle linjá sáhtát sáhcut P čađa?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Galle linjjá', 'errorinfo': 'noun,numph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Galle linjá', 'end': 14}
-
-==========
-c) Merke guokte čuoggá A ja B sullii 8 cm gaskkain. Galle linjá sáhtát sáhcut mat mannet sihke A ja B čađa?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Galle linjjá', 'errorinfo': 'noun,numph,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 52, 'error': 'Galle linjá', 'end': 63}
-
-==========
-č) Galle čuoggá dárbbašat go galggat sáhcut dihto linjá? s. 175      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'sáhcut dihto linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 37, 'error': 'sáhcut dihto linjá', 'end': 55}
 
 ==========
 á) Makkár koordináhtát leat origos?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -4428,17 +4107,11 @@ Nubbeávssis 			Vuosttašávssis      <- /home/boerre/repos/boundcorpus.svn/corr
 ==========
 a) Sárggo koordináhttavuogádaga iežat čállingirjái. Merke čuoggáid ja sázo linjá A-čuoggás B-čuoggái, B-čuoggás C-čuoggái nja.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'sázo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 70, 'error': 'sázo linjá', 'end': 80}
-~~~~~~
 	dc errors not found in correct
 		['nja', 122, 125, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 
 ==========
 Sázo linjá A:s B:ii, B:s C:ii ja C:s A:ii.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sázo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sázo linjá', 'end': 10}
 ~~~~~~
 	dc errors not found in correct
 		['B:s', 21, 24, 'typo', 'Ii leat sátnelisttus', ['Buš'], 'Čállinmeattáhusat']
@@ -4459,9 +4132,6 @@ b) Čále makkár koordináhtat siidduid russenčuoggás leat x- ja y-áksásiin
 ==========
 Sázo linjá A:s B:ii, B:s C:ii, C:s D:ii ja D:s A:ii.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sázo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sázo linjá', 'end': 10}
-~~~~~~
 	dc errors not found in correct
 		['B:s', 21, 24, 'typo', 'Ii leat sátnelisttus', ['Buš'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -4476,9 +4146,6 @@ Sázo linjá A:s B:ii, B:s C:ii, C:s D:ii ja D:s A:ii.      <- /home/boerre/repo
 ==========
 Sázo linjá A:s B:ii, B:s C:ii jna, ja loahpas H:s A:ii.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sázo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sázo linjá', 'end': 10}
-~~~~~~
 	dc errors not found in correct
 		['B:s', 21, 24, 'typo', 'Ii leat sátnelisttus', ['Buš'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -4492,20 +4159,13 @@ Sázo linjá A:s B:ii, B:s C:ii jna, ja loahpas H:s A:ii.      <- /home/boerre/r
 ==========
 8.21 Muhtun kvadráhtas leat golbma čiega čuoggáin (1,-1), (1,3) ja (-3,3). Mat lea tnjealját čiega koordináhtat?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Mat leat', 'errorinfo': 'verb,fin,sg3prs,pl3prs,kongr', 'type': 'errormorphsyn', 'start': 75, 'error': 'Mat lea', 'end': 82}
-~~~~~~
 	correct and dc align, and correction found in dc
 		tnjealját -> njealját, position 0
 
 ==========
 8.23 Ráhkat koordináhttavuogádaga ja merke čuoggáid (-2,-5) ja (6,3). Sárggo njuolggo linjá) dán guovtti čuoggá gaskka. Makkár koordináhtat leat      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(70, 91): 2})
-	{'correct': 'Sárggo njuolggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 70, 'error': 'Sárggo njuolggo linjá', 'end': 91}
-	{'correct': 'njuolggolinjjá', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 70, 'error': 'Sárggo njuolggo linjjá', 'end': 91}
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'Sárggo njuolggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 70, 'error': 'Sárggo njuolggo linjá', 'end': 91}
 		{'correct': 'njuolggolinjjá', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 70, 'error': 'Sárggo njuolggo linjjá', 'end': 91}
 ~~~~~~
 	dc errors not found in correct
@@ -4539,8 +4199,8 @@ vuosttšaávssis      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/conver
 ==========
 Tabeallas oainnát viđa čuoggá x-koordináhtaid linjás. Sárggo tabealla ja deavdde y-koordináhtaid.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct and dc align, and correction found in dc
-		linjás -> linjjás, position 0
+	dc errors not found in correct
+		['linjás', 46, 52, 'typo', 'Ii leat sátnelisttus', ['linjjás'], 'Čállinmeattáhusat']
 
 ==========
 a) Makkár koordináhtat leat dan čuoggás gokko a-linjá russe vuosttašáksása?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -4555,12 +4215,6 @@ a) Makkár koordináhtat leat dan čuoggás gokko a-linjá russe vuosttašáksá
 		nubbeáksása -> nubbeáksá -> [gubbeáksás, gubbeákseása, gubbeáksásba, gubbeáksába]
 
 ==========
-b) Makkár koordináhtat leat dán guovtti linjá russenčuoggás?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá russenčuoggás', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 40, 'error': 'linjá russenčuoggás', 'end': 59}
-
-==========
 nubbeávssis      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
@@ -4571,26 +4225,6 @@ vuosttšaávssis s. 179      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs
 ~~~~~~
 	correct and dc align, correction not among suggestions
 		vuosttšaávssis -> vuosttašávssis -> [vuostaávssis, guosttaávssis, vuosttiávssis, vuottaávssis, vuosttutávssis, vuosttuhaávssis, vuosttoávssis, vuosttovávssis, vuosttivávssis, vuosttotávssis]
-
-==========
-a) Sárggo linjá mas buot linjá čuoggáin lea x-koordináhtta 4.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo linjá', 'end': 15}
-		{'correct': 'linjjá čuoggáin', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 25, 'error': 'linjá čuoggáin', 'end': 39}
-
-==========
-á) Sárggo ođđa linjá seamma koordináhttavuogádahkii mas buot linjá čuoggáin lea y-koordináhtta –3.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo ođđa linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo ođđa linjá', 'end': 20}
-		{'correct': 'linjjá čuoggáin', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 61, 'error': 'linjá čuoggáin', 'end': 75}
-
-==========
-b) Makkár koordináhtat leat dán guovtti linjá russenčuoggás?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá russenčuoggás', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 40, 'error': 'linjá russenčuoggás', 'end': 59}
 
 ==========
 8.28 nubbeávssis      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -4659,9 +4293,6 @@ Vuosttašávssis 			Nubbeávssis      <- /home/boerre/repos/boundcorpus.svn/corr
 ==========
 Sárggo linjá A:s B:ii, B:s C:ii, C:s D:ii ja D:s A:ii.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sárggo linjá', 'end': 12}
-~~~~~~
 	dc errors not found in correct
 		['B:s', 23, 26, 'typo', 'Ii leat sátnelisttus', ['Buš'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -4674,45 +4305,18 @@ Sárggo linjá A:s B:ii, B:s C:ii, C:s D:ii ja D:s A:ii.      <- /home/boerre/re
 		B:ii -> B:i -> [Mii, Ii, Sii, Gii, Anii, Dii, Elii, Iđii, R:i, Ođii]
 
 ==========
-a) Sárggo koordináhttavuogádaga mas guđege logu gaskka goappáge áksásis lea 1 cm. Sárggo goappašat govvosiid koordináhttavuogádahkii.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'goappašiid govvosiid', 'errorinfo': 'indef,nph,accpl,nompl,agr', 'type': 'errormorphsyn', 'start': 89, 'error': 'goappašat govvosiid', 'end': 108}
-
-==========
-á) Rehkenastte goappašat govvosa) areála.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(15, 32): 2})
-	{'correct': 'goappašiid govvosa', 'errorinfo': 'indef,nph,accpl,nompl,agr', 'type': 'errormorphsyn', 'start': 15, 'error': 'goappašat govvosa', 'end': 32}
-	{'correct': 'goappašiid govvosiid', 'errorinfo': 'indef,nph,accsg,accpl,number', 'type': 'errormorphsyn', 'start': 15, 'error': 'goappašiid govvosa', 'end': 32}
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'goappašiid govvosa', 'errorinfo': 'indef,nph,accpl,nompl,agr', 'type': 'errormorphsyn', 'start': 15, 'error': 'goappašat govvosa', 'end': 32}
-		{'correct': 'goappašiid govvosiid', 'errorinfo': 'indef,nph,accsg,accpl,number', 'type': 'errormorphsyn', 'start': 15, 'error': 'goappašiid govvosa', 'end': 32}
-
-==========
 a) Sárggo njuolggo linjá)   A mii manná čuoggáid (-4,-2) ja (2,6) čađa. Sárggo nuppi linjá B seamma koordináhttavuogádahkii mii manná čuoggáid (-3,7) ja (2,-5) čađa.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(3, 24): 2, (72, 90): 1})
-	{'correct': 'Sárggo njuolggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo njuolggo linjá', 'end': 24}
-	{'correct': 'njuolggolinjjá', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 3, 'error': 'Sárggo njuolggo linjjá', 'end': 24}
 dc duplicates of (10, 29)
 	['njuolggo linjá)   A', 10, 29, 'msyn-compound', '"njuolggo linjá" orru leamen goallossátni', ['njuolggolinjá)   A'], 'Goallosteapmi']
 	['njuolggo linjá)   A', 10, 29, 'double-space-before', 'Leat guokte gaskka ovdal "A"', ['njuolggo linjá) A'], 'Sátnegaskameattáhusat']
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'Sárggo njuolggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo njuolggo linjá', 'end': 24}
 		{'correct': 'njuolggolinjjá', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 3, 'error': 'Sárggo njuolggo linjjá', 'end': 24}
-		{'correct': 'Sárggo nuppi linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 72, 'error': 'Sárggo nuppi linjá', 'end': 90}
 ~~~~~~
 	dc errors not found in correct
 		['njuolggo linjá)   A', 10, 29, 'msyn-compound', '"njuolggo linjá" orru leamen goallossátni', ['njuolggolinjá)   A'], 'Goallosteapmi']
 		['njuolggo linjá)   A', 10, 29, 'double-space-before', 'Leat guokte gaskka ovdal "A"', ['njuolggo linjá) A'], 'Sátnegaskameattáhusat']
 		['manná', 128, 133, 'typo', 'Ii leat sátnelisttus', ['mánná'], 'Čállinmeattáhusat']
-
-==========
-á) Mat leat dán guovtti linjá russenčuoggá koordináhtat?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá russenčuoggá koordináhtat', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 24, 'error': 'linjá russenčuoggá koordináhtat', 'end': 55}
 
 ==========
 b) Guđe čuoggás russe B-linjá x- ja y-áksása?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -4729,9 +4333,6 @@ b) Guđe čuoggás russe B-linjá x- ja y-áksása?      <- /home/boerre/repos/b
 ==========
 á) Sárggo linjá A:s B:ii jna., ja loahpas G:s A:ii. Maid govus sulastahttá du mielas?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo linjá', 'end': 15}
-~~~~~~
 	dc errors not found in correct
 		['jna.,', 25, 30, 'no-space-after-punct-mark', 'Ii leat gaska "jna." maŋis', ['jna. ,'], 'Sátnegaskameattáhusat']
 ~~~~~~
@@ -4746,12 +4347,6 @@ Vuosttašávssis 			Nubbeávssis      <- /home/boerre/repos/boundcorpus.svn/corr
 ~~~~~~
 	dc errors not found in correct
 		['Nubbeávssis', 18, 29, 'typo', 'Ii leat sátnelisttus', ['Gubbeávssis'], 'Čállinmeattáhusat']
-
-==========
-a) Makkár koordináhtat leat guđege linjá guovddážis? Sárggo ja deavdde tabealla.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'guđege linjjá guovddážis', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 28, 'error': 'guđege linjá guovddážis', 'end': 51}
 
 ==========
        Jánddur           <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -4855,9 +4450,6 @@ c) Muhtun beaivvi lei –35 ºC Alaskas. Makkár temperatuvrra dat vástida fahr
 ==========
 á) Sárggo linjá A:s B:ii, B:s C:ii jna. Manin gohčoduvvo dát govus?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo linjá', 'end': 15}
-~~~~~~
 	dc errors not found in correct
 		['B:s', 26, 29, 'typo', 'Ii leat sátnelisttus', ['Buš'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -4870,38 +4462,20 @@ c) Muhtun beaivvi lei –35 ºC Alaskas. Makkár temperatuvrra dat vástida fahr
 ==========
 a) Makkár koordináhtat leat rukses linjá russenčuoggás vuosttašáksásiin?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá russenčuoggás', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 35, 'error': 'linjá russenčuoggás', 'end': 54}
-~~~~~~
 	correct and dc align, correction not among suggestions
 		vuosttašáksásiin -> vuosttašáksáin -> [vuosttašmáksiásiin, vuosttašássuásiin]
 
 ==========
 á) Makkár koordináhtat leat ruoná linjá russenčuoggás nubbeáksásiin?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá russenčuoggás', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 34, 'error': 'linjá russenčuoggás', 'end': 53}
-~~~~~~
 	correct and dc align, correction not among suggestions
 		nubbeáksásiin -> nubbeáksáin -> [gubbeákseásiin]
-
-==========
-b) Makkár koordináhtat leat dán guovtti linjá russenčuoggás?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'linjjá russenčuoggás', 'errorinfo': 'noun,det,gensg,nomsg,case', 'type': 'errormorphsyn', 'start': 40, 'error': 'linjá russenčuoggás', 'end': 59}
 
 ==========
 Nubbeávssis      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
 	dc errors not found in correct
 		['Nubbeávssis', 0, 11, 'typo', 'Ii leat sátnelisttus', ['Gubbeávssis'], 'Čállinmeattáhusat']
-
-==========
-a) Sárggo dán guokte linjá.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo dán guokte linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Sárggo dán guokte linjá', 'end': 26}
 
 ==========
 á) Makkár koordináhtat leat linjáid russenčuoggás?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
@@ -4911,9 +4485,6 @@ a) Sárggo dán guokte linjá.      <- /home/boerre/repos/boundcorpus.svn/correc
 
 ==========
 Sárggo linjá A:s B:ii jna., ja loahpas A:s J:ii.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Sárggo linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Sárggo linjá', 'end': 12}
 ~~~~~~
 	dc errors not found in correct
 		['jna.,', 22, 27, 'no-space-after-punct-mark', 'Ii leat gaska "jna." maŋis', ['jna. ,'], 'Sátnegaskameattáhusat']
@@ -5019,9 +4590,6 @@ Islánddas leat olu vulkánat ja báhkka ájačázit. Dovdoseamos lea vulkána H
 ==========
 c) Galli islándalačča liggejit ruovttuideaset báhcca ájačáziin?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'Galle islándalačča liggejit', 'errorinfo': 'num,det,nomsg,gensg,case', 'type': 'errormorphsyn', 'start': 3, 'error': 'Galli islándalačča liggejit', 'end': 30}
-~~~~~~
 	correct and dc align, correction not among suggestions
 		báhcca -> báhkka -> [báhccá, báhca]
 
@@ -5094,9 +4662,6 @@ Finn bážii, ja njuolla bođii njuolga Einara dávgái. Einar čavgii dávggi g
 ==========
 Loga galle sáni leat guđege linjás gaskamearálaččat. Guđege siiddus leat 46 linjá. Rehkenastte sullii galle sáni gonagasságáin leat guđege siiddus, ja galle sáni olles čállosis leat oktiibuot.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': '46 linjjá', 'errorinfo': 'noun,numph,gensg,nonsg,case', 'type': 'errormorphsyn', 'start': 73, 'error': '46 linjá', 'end': 81}
-~~~~~~
 	correct and dc align, and correction found in dc
 		linjás -> linjjás, position 0
 
@@ -5134,9 +4699,6 @@ Islánda viiddidii iežas guolástusráji 200 nauhtalaš miilii, sihkkarastin di
 ==========
 Leat erenoamážit dorski, sallit ja šákša maid bivdet, muhto maiddái lággu lea deaŧalaš ekonomalaččat. Njiŋŋelas lággu sáhttá šaddat 15 jagi boaris ja deaddet arvat badjel 20 kg. Muhtun 150 cm guhkes njiŋŋelas mii dettii 24 kg, lea maiddái bidjan oalle erenoamáš máilmmeolahusa. Das ledje sullii 28 400 000 moni monnerávssáin. Dát lea stuorámus monnelohku mii goassege lea gávdnon ráhteselliin, dahje riggeelliin.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'sáhttá šaddat 15 jagi boaris ja deaddit', 'errorinfo': 'verb,infin,infinite,imprt,infl', 'type': 'errormorphsyn', 'start': 118, 'error': 'sáhttá šaddat 15 jagi boaris ja deaddet', 'end': 157}
-~~~~~~
 	dc errors not found in correct
 		['Njiŋŋelas', 102, 111, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 ~~~~~~
@@ -5151,15 +4713,11 @@ F 8.7 Islánddaheasta lea unni ja gievra, ja heive buorebut mátkeheastan go gil
 
 ==========
 Máŋggačiegagat Oktilasgovus ovtta dásis mas leat njuolggo linját), gohčoduvvo máŋggačiegagin. Máŋggačiegagat ožžot namaideaset das galle siiddu govvosis leat. Dát govus gohčoduvvo guđačiegagin danne go das leat guhtta siiddu.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-Markup duplicates of defaultdict(<class 'int'>, {(15, 27): 1, (40, 64): 2})
-	{'correct': 'mas leat njuolggo linjját', 'errorinfo': 'noun,spred,nomsg,px,X', 'type': 'errormorphsyn', 'start': 40, 'error': 'mas leat njuolggo linját', 'end': 64}
-	{'correct': 'njuolggolinjját', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 40, 'error': 'mas leat njuolggo linjját', 'end': 64}
 dc duplicates of (49, 64)
 	['njuolggo linját', 49, 64, 'typo', 'Ii leat sátnelisttus', ['njuolgga linját'], 'Čállinmeattáhusat']
 	['njuolggo linját', 49, 64, 'typo', 'Ii leat sátnelisttus', ['njuolggolinjját'], 'Čállinmeattáhusat']
 ~~~~~~
 	correct errors not found in dc
-		{'correct': 'mas leat njuolggo linjját', 'errorinfo': 'noun,spred,nomsg,px,X', 'type': 'errormorphsyn', 'start': 40, 'error': 'mas leat njuolggo linját', 'end': 64}
 		{'correct': 'njuolggolinjját', 'errorinfo': 'noun,cmp', 'type': 'errorsyn', 'start': 40, 'error': 'mas leat njuolggo linjját', 'end': 64}
 ~~~~~~
 	dc errors not found in correct
@@ -5254,9 +4812,6 @@ Areála lea olggoža sturrodat. Sáhttá leat láhtti, seaidni, spábbačiekčan
 
 ==========
 A Ráhkat kvadráhta man areála lea 1 dm2. Čuohpa. Ráhkat ja čuohpa kvadráhtaid maid areála lea 1 cm2. liibme dan kvadráhta nala man areála lea 1 dm2.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Liibme', 'errorinfo': 'verb,cap', 'type': 'errorortreal', 'start': 101, 'error': 'liibme', 'end': 107}
 ~~~~~~
 	dc errors not found in correct
 		['cm2', 96, 99, 'typo', 'Ii leat sátnelisttus', ['cm', 'mo', 'omd', 'mu', 'cup', 'cáme', 'omo', 'lm', 'cis'], 'Čállinmeattáhusat']
@@ -5437,12 +4992,6 @@ a) Galle fliissa fertet oastit?      <- /home/boerre/repos/boundcorpus.svn/corre
 		['fliissa', 96, 103, 'typo', 'Ii leat sátnelisttus', ['aviissa', 'áviissa', 'kriissa', 'linssa', 'boliissa', 'riissa', 'poliissa', 'niissa', 'viissa', 'buliissa'], 'Čállinmeattáhusat']
 
 ==========
-Golmmačiegaga allodat lea dat gaska mii vuolgá čiegas mii lea bajábealde vuođđolinjá ja mii manná vuođđolinjái.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'bajábealde vuođđolinjjá', 'errorinfo': 'noun,pph,gensg,nomsg,cg', 'type': 'errormorphsyn', 'start': 62, 'error': 'bajábealde vuođđolinjá', 'end': 84}
-
-==========
 A = v · a          2 (eller skal det være  g h  som i den norske versjonen?) 			2      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 dc duplicates of (45, 51)
 	['h  som', 45, 51, 'double-space-before', 'Leat guokte gaskka ovdal "som"', ['h som'], 'Sátnegaskameattáhusat']
@@ -5514,9 +5063,6 @@ a) Ráhkat gierddu man radius lea 5 cm. Man guhkki lea diamehter?      <- /home/
 
 ==========
 Geahččal sáhcut linjá nu lahka dávggiid go sáhtát, nu ahte oaččut njealječiegaga osiid birra. Makkár njealječiegat šaddá? Mii dáhpáhuvvá jus čuohpat gierddu máŋgga ovtta stuoru bihttái, ovdamearkka dihte 64? Leat go ovttaoaivilis das ahte bihtáid sáhttá bidjat oktii nu go vuolábealde oainnát?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'Geahččal sáhcut linjjá', 'errorinfo': 'noun,obj,accsg,nomsg,case', 'type': 'errormorphsyn', 'start': 0, 'error': 'Geahččal sáhcut linjá', 'end': 21}
 ~~~~~~
 	dc errors not found in correct
 		['ovttaoaivilis', 216, 229, 'msyn-unspace-compound', ' "ovttaoaivilis" ii oro leamen goallossátni', ['ovtta oaivilis'], 'Goallosteapmi']
@@ -5763,9 +5309,6 @@ c) Čilge iežat sániiguin mat radius ja diamehter leat.      <- /home/boerre/r
 
 ==========
 a) Sárggo njeallje gierddu iežat čállingirjái. Guđege gierddus galgá leat dat radius maid mii lea skovvái čállin dás vuolábealde. Mihtit guđege gierddu birramihtu. Dasa sáhtát ovdamearkka dihte geavahit njuoska báddebihtáža maid bijat gierdolinjá birra. Leage nu dárkil go sáhtát, ja deavdde tabealla iežat čállingirjái.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
-~~~~~~
-	correct errors not found in dc
-		{'correct': 'gierdolinjjá birra', 'errorinfo': 'noun,pph,gensg,nomsg,case', 'type': 'errorortreal', 'start': 235, 'error': 'gierdolinjá birra', 'end': 252}
 ~~~~~~
 	correct and dc align, and correction found in dc
 		radius -> rádius, position 0
@@ -6206,9 +5749,6 @@ a) Muhtun gierddu birramihttu lea 120 cm. Man stuora radius lea gierddus?      <
 ==========
 c) Dábálaččat berret rehkenastit ahte 10 % manná duššái. Galle kvadráhttamehtera berreba oastit vai ollá goappašat lanjaide ja tráhppái?      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'goappašiid lanjaide', 'errorinfo': 'indef,nph,illpl,nompl,agr', 'type': 'errormorphsyn', 'start': 105, 'error': 'goappašat lanjaide', 'end': 123}
-~~~~~~
 	dc errors not found in correct
 		['manná', 43, 48, 'typo', 'Ii leat sátnelisttus', ['mánná'], 'Čállinmeattáhusat']
 
@@ -6421,9 +5961,6 @@ Heddála stáhpegirku Heddála stáhpegirku lea min stuorámus stáhpegirku, ja 
 ==========
 Dálá koarra lea girku boarraseamos oassi ja dáidá leat huksejuvvon 1147:s. Loahppa lea huksejuvvon 1242:s. Girku lea viháhuvvon nieida Márjjá nammii ja lea huksejuvvon stáhpebasilikan mas leat guoktenuppelohkái stuora ja guhtta unnit guoddi bielkka. Lea oktilas váccáhat olles girku birra. 1952:s loahpahuvvojedje viiddis ođasmahttindoaimmat. Girkus leat neallje čábbát hervejuvvon olgouvssa, ja viessobiergasat leat hervejuvvon hirbmat dološ seaidegovaiguin ja ruvsonjuhtosiiguin 1600-logu áiggis. Girkus lea bismastuollu mii lea huskejuvvon gaskaáiggis ja álttar 1667:s.      <- /home/boerre/repos/boundcorpus.svn/correct-no-gs/converted/sme/facta/other_files/mega-8b.correct.txt.xml
 ~~~~~~
-	correct errors not found in dc
-		{'correct': 'viiddes ođasmahttindoaimmat', 'errorinfo': 'adj,attr,attr,nom,infl', 'type': 'errormorphsyn', 'start': 314, 'error': 'viiddis ođasmahttindoaimmat', 'end': 341}
-~~~~~~
 	dc errors not found in correct
 		['stáhpebasilikan', 168, 183, 'typo', 'Ii leat sátnelisttus', ['stáhpebasillan', 'stáhpebasiloikan', 'stáhpebasilikšan', 'stáhpebassiliktan', 'stáhpebassiliŋkan', 'stáhpebassiliikan', 'stáhpebassiáikan', 'stáhpebasiiskan', 'stáhpebastiliskan', 'stáhpebaseliŋkan'], 'Čállinmeattáhusat']
 ~~~~~~
@@ -6619,21 +6156,15 @@ c) Ráhkat unnimusat guokte teakstabihtá main anát haddelisttu hattiid. Nuppi 
 		['beltestakk', 149, 159, 'typo', 'Ii leat sátnelisttus', [], 'Čállinmeattáhusat']
 
 Paragraphs 2514
-Paragraphs with errors 860
+Paragraphs with errors 807
 
-Manually marked errors: 633
-Manually marked errors found by the grammarchecker: 463
-Manually marked errors not found by the grammarchecker: 170 == False negatives
+Manually marked errors: 522
+Manually marked errors found by the grammarchecker: 459
+Manually marked errors not found by the grammarchecker: 63 == False negatives
 By type
 manually_marked_errors_errorort: 462
 manually_marked_errors_errorort_not_reported: 40
 manually_marked_errors_errorort_found: 422
-manually_marked_errors_errorortreal: 24
-manually_marked_errors_errorortreal_not_reported: 20
-manually_marked_errors_errorortreal_found: 4
-manually_marked_errors_errormorphsyn: 87
-manually_marked_errors_errormorphsyn_not_reported: 87
-manually_marked_errors_errormorphsyn_found: 0
 manually_marked_errors_errorformat: 43
 manually_marked_errors_errorformat_not_reported: 8
 manually_marked_errors_errorformat_found: 35
@@ -6647,12 +6178,12 @@ manually_marked_errors_error_found: 1
 
 
 Errors reported by grammarchecker: 1508
-Grammar checker errors that align with manually marked up errors: 472 == True positives
-Grammar checker errors that don't align with manually marked up errors: 1036 == False positives
+Grammar checker errors that align with manually marked up errors: 468 == True positives
+Grammar checker errors that don't align with manually marked up errors: 1040 == False positives
 By type
 grammarchecker_errors_typo: 1179
-grammarchecker_errors_typo_not_markedup: 771
-grammarchecker_errors_typo_found: 408
+grammarchecker_errors_typo_not_markedup: 775
+grammarchecker_errors_typo_found: 404
 grammarchecker_errors_no-space-after-punct-mark: 47
 grammarchecker_errors_no-space-after-punct-mark_not_markedup: 46
 grammarchecker_errors_no-space-after-punct-mark_found: 1
@@ -6686,12 +6217,11 @@ grammarchecker_errors_space-before-punct-mark_found: 0
 
 
 
-Manually marked errors and reported errors that align: 472
+Manually marked errors and reported errors that align: 468
 
-Reported errors where correction is among suggestions 358
+Reported errors where correction is among suggestions 354
 By manual error and grammarchecker error pairs
 correction_in_suggestion_errorort_typo: 293
-correction_in_suggestion_errorortreal_typo: 4
 correction_in_suggestion_errorort_msyn-compound: 1
 correction_in_suggestion_errorformat_punct-aistton-left: 27
 correction_in_suggestion_errorort_msyn-unspace-compound: 21
@@ -6710,20 +6240,18 @@ correction_no_suggestion_errorort_typo: 35
 correction_no_suggestion_errorort_double-space-before: 5
 correction_no_suggestion_error_typo: 1
 
-Overall precision: 0.31 (472/1508)
-Overall recall: 0.35 (472/1347)
+Overall precision: 0.31 (468/1508)
+Overall recall: 0.32 (468/1454)
 
 
 
 not used
 
 
+markup_dupes: 6
 dc_dupes: 157
-markup_dupes: 16
 Errortags
+errorformat
+error
 errorsyn
 errorort
-error
-errormorphsyn
-errorortreal
-errorformat

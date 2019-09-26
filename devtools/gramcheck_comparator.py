@@ -173,9 +173,32 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
             del d_errors[position - 1]
 
 
+def fix_double_space(d_errors, zcheck_file, runner):
+    """Fix double space errors reported by divvun-checker."""
+    typos = [d_error
+             for d_error in d_errors
+             if d_error[3] == 'typo' and '  ' in d_error[0]]
+    for typo in typos:
+        error = typo[0]
+        min = 0
+        max = len(error)
+        position = d_errors.index(typo)
+        for new_position, part in enumerate([part for part in typo[0].split() if part], start=position):
+            part_errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
+            print(part_errors)
+            min = error[min:max].find(part)
+            for p_error in part_errors['errs']:
+                p_error[1] = min + typo[1]
+                p_error[2] = min + typo[1] + len(part)
+                d_errors.insert(new_position, p_error)
+        del d_errors[position]
+
+
 def filter_dc(d_result, zcheck_file, runner):
     """Remove errors that cover the same area of the typo and msyn types."""
     d_errors = d_result['errs']
+
+    fix_double_space(d_errors, zcheck_file, runner)
 
     for d_error in d_errors:
         fix_aistton(d_errors, d_errors.index(d_error), zcheck_file, runner)
@@ -199,6 +222,7 @@ def is_wanted_error(c_error, filters):
         return is_wanted_errorsyn(c_error)
     else:
         return c_error['type'] not in filters
+
 
 def is_wanted_errorsyn(c_error):
     return c_error.get('errorinfo') is not None and ('space' in c_error['errorinfo'] or 'cmp' in c_error['errorinfo'])

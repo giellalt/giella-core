@@ -306,8 +306,17 @@ def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
     counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(
         reported_errors_not_marked)
     for reported_error_not_marked in reported_errors_not_marked:
-        counter[
-            f'grammarchecker_errors_{reported_error_not_marked[3]}_not_markedup'] += 1
+        if reported_error_not_marked[3] == 'typo':
+            counter[
+            f'grammarchecker_errors_errorort_not_markedup'] += 1
+        elif reported_error_not_marked[3] in []:
+            counter[
+            f'grammarchecker_errors_errorformat_not_markedup'] += 1
+        elif reported_error_not_marked[3] in []:
+            counter[
+            f'grammarchecker_errors_errorsyn_not_markedup'] += 1
+        else:
+            print(f'no hit for {reported_error_not_marked[3]}')
 
 
 def report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter,

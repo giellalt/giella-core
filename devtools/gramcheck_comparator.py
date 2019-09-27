@@ -6,6 +6,7 @@ import pickle
 from collections import defaultdict
 import gramcheck_tester2
 from corpustools import util
+from pathlib import Path
 
 
 def correct_no_suggestion_in_dc(correct, dc):
@@ -21,9 +22,13 @@ def correct_not_in_dc(correct, dc):
 def corrections_not_in_suggestion_per_sentence(nices, outfile):
     if nices:
         print('~~~~~~', file=outfile)
-        print('\tcorrect and dc align, correction not among suggestions', file=outfile)
+        print(
+            '\tcorrect and dc align, correction not among suggestions',
+            file=outfile)
         for nice in nices:
-            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]} -> [{", ".join(nice[1][5])}]', file=outfile)
+            print(
+                f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]} -> [{", ".join(nice[1][5])}]',
+                file=outfile)
 
 
 def corrections_no_suggestion_per_sentence(nices, outfile):
@@ -31,7 +36,9 @@ def corrections_no_suggestion_per_sentence(nices, outfile):
         print('~~~~~~', file=outfile)
         print('\tcorrect and dc align, no suggestions', file=outfile)
         for nice in nices:
-            print(f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}', file=outfile)
+            print(
+                f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}',
+                file=outfile)
 
 
 def correct_in_dc(correct, dc):
@@ -42,11 +49,12 @@ def correct_in_dc(correct, dc):
 def correction_in_suggestion_per_sentence(nices, outfile):
     if nices:
         print('~~~~~~', file=outfile)
-        print('\tcorrect and dc align, and correction found in dc', file=outfile)
+        print(
+            '\tcorrect and dc align, and correction found in dc', file=outfile)
         for nice in nices:
             print(
-                f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, position {nice[1][5].index(nice[0]["correct"])}', file=outfile
-            )
+                f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, position {nice[1][5].index(nice[0]["correct"])}',
+                file=outfile)
 
 
 def corrects_not_in_dc(c_errors, d_errors):
@@ -93,7 +101,8 @@ def has_same_range_and_error(c_error, d_error):
     if d_error[3] == 'double-space-before':
         return c_error['start'] == d_error[1] and c_error['end'] == d_error[2]
     else:
-        return c_error['start'] == d_error[1] and c_error['end'] == d_error[2] and c_error['error'] == d_error[0]
+        return c_error['start'] == d_error[1] and c_error['end'] == d_error[
+            2] and c_error['error'] == d_error[0]
 
 
 def has_suggestions_with_hit(c_error, d_error):
@@ -114,7 +123,7 @@ def has_no_suggestions(c_error, d_error):
 def new_errors(sentence, zcheck_file, runner):
     new_d_errors = gramcheck_tester2.gramcheck(sentence, zcheck_file, runner)
     #if len(new_d_errors['errs']) > 1:
-        #raise SystemExit('errs too long', new_d_errors['errs'])
+    #raise SystemExit('errs too long', new_d_errors['errs'])
 
     return new_d_errors['errs']
 
@@ -147,7 +156,8 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
 
     if d_error[3] == 'punct-aistton-both':
         previous_error = d_errors[position - 1]
-        remove_previous = previous_error[1] == d_error[1] and previous_error[2] == d_error[2] and previous_error[3] == 'typo'
+        remove_previous = previous_error[1] == d_error[1] and previous_error[
+            2] == d_error[2] and previous_error[3] == 'typo'
 
         sentence = d_error[0][1:-1]
 
@@ -175,16 +185,19 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
 
 def fix_double_space(d_errors, zcheck_file, runner):
     """Fix double space errors reported by divvun-checker."""
-    typos = [d_error
-             for d_error in d_errors
-             if d_error[3] == 'typo' and '  ' in d_error[0]]
+    typos = [
+        d_error for d_error in d_errors
+        if d_error[3] == 'typo' and '  ' in d_error[0]
+    ]
     for typo in typos:
         error = typo[0]
         min = 0
         max = len(error)
         position = d_errors.index(typo)
-        for new_position, part in enumerate([part for part in typo[0].split() if part], start=position):
-            part_errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
+        for new_position, part in enumerate(
+            [part for part in typo[0].split() if part], start=position):
+            part_errors = gramcheck_tester2.gramcheck(part, zcheck_file,
+                                                      runner)
             print(part_errors)
             min = error[min:max].find(part)
             for p_error in part_errors['errs']:
@@ -225,13 +238,13 @@ def is_wanted_error(c_error, filters):
 
 
 def is_wanted_errorsyn(c_error):
-    return c_error.get('errorinfo') is not None and ('space' in c_error['errorinfo'] or 'cmp' in c_error['errorinfo'])
+    return c_error.get('errorinfo') is not None and (
+        'space' in c_error['errorinfo'] or 'cmp' in c_error['errorinfo'])
 
 
 def filter_markup(filters, c_errors):
     return [
-        c_error for c_error in c_errors
-        if is_wanted_error(c_error, filters)
+        c_error for c_error in c_errors if is_wanted_error(c_error, filters)
     ]
 
 
@@ -254,8 +267,7 @@ def report_markup_dupes(c_errors, errortags, counter, outfile):
         if indexes[index] > 1:
             print(f'Markup duplicates of {indexes}', file=outfile)
             for c_error in c_errors:
-                if c_error['start'] == index[0] and c_error[
-                        'end'] == index[1]:
+                if c_error['start'] == index[0] and c_error['end'] == index[1]:
                     counter['markup_dupes'] += 1
                     print(f'\t{c_error}', file=outfile)
 
@@ -277,7 +289,8 @@ def report_dc_dupes(d_errors, counter, outfile):
 def report_markup_without_dc_hits(c_errors, d_errors, counter, outfile):
     # oppmerkede feil som ikke blir rapportert
     marked_errors_not_reported = corrects_not_in_dc(c_errors, d_errors)
-    marked_errors_not_reported_per_sentence(marked_errors_not_reported, outfile)
+    marked_errors_not_reported_per_sentence(marked_errors_not_reported,
+                                            outfile)
     counter['total_manual_errors_not_found_by_grammarchecker'] += len(
         marked_errors_not_reported)
     for marked_error_not_reported in marked_errors_not_reported:
@@ -288,7 +301,8 @@ def report_markup_without_dc_hits(c_errors, d_errors, counter, outfile):
 def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
     # rapporterte feil som ikke er oppmerket
     reported_errors_not_marked = dcs_not_in_correct(c_errors, d_errors)
-    reported_errors_not_marked_per_sentence(reported_errors_not_marked, outfile)
+    reported_errors_not_marked_per_sentence(reported_errors_not_marked,
+                                            outfile)
     counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(
         reported_errors_not_marked)
     for reported_error_not_marked in reported_errors_not_marked:
@@ -296,7 +310,8 @@ def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
             f'grammarchecker_errors_{reported_error_not_marked[3]}_not_markedup'] += 1
 
 
-def report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter, outfile):
+def report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter,
+                                                 outfile):
     # Oppmerket feil blir rapportert, rapporterte feil har forslag, og manuell retting er blant disse
     corrections_in_suggestion = correct_in_dc(c_errors, d_errors)
     correction_in_suggestion_per_sentence(corrections_in_suggestion, outfile)
@@ -310,7 +325,8 @@ def report_markup_dc_align_correct_not_in_suggestion(c_errors, d_errors,
                                                      counter, outfile):
     # Oppmerket feil blir rapportert, rapporterte feil har forslag, og manuell retting er *ikke* blant disse
     corrections_not_in_suggestion = correct_not_in_dc(c_errors, d_errors)
-    corrections_not_in_suggestion_per_sentence(corrections_not_in_suggestion, outfile)
+    corrections_not_in_suggestion_per_sentence(corrections_not_in_suggestion,
+                                               outfile)
     counter['correction_not_in_suggestion'] += len(
         corrections_not_in_suggestion)
     for correction_not_in_suggestion in corrections_not_in_suggestion:
@@ -328,47 +344,49 @@ def report_markup_dc_align_no_suggestion(c_errors, d_errors, counter, outfile):
             f'correction_no_suggestion_{correction_no_suggestion[0]["type"]}_{correction_no_suggestion[1][3]}'] += 1
 
 
-def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags, outfile):
+def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags,
+                 outfile):
     counter['paragraphs_with_errors'] += 1
     counter['total_manually_marked_errors'] += len(c_errors)
     for manual in c_errors:
         counter[f'manually_marked_errors_{manual["type"]}'] += 1
     counter['total_grammarchecker_errors'] += len(d_errors)
     for dc_error in d_errors:
-        counter[
-            f'grammarchecker_errors_{dc_error[3].replace(" ", "_")}'] += 1
+        counter[f'grammarchecker_errors_{dc_error[3].replace(" ", "_")}'] += 1
     print('==========', file=outfile)
     print(sentence, '<-', filename, file=outfile)
 
     report_markup_dupes(c_errors, errortags, counter, outfile)
     report_dc_dupes(d_errors, counter, outfile)
-    report_markup_without_dc_hits(c_errors, d_errors,
-                                    counter, outfile)
+    report_markup_without_dc_hits(c_errors, d_errors, counter, outfile)
     report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile)
-    report_markup_dc_align_correct_in_suggestion(
-        c_errors, d_errors, counter, outfile)
-    report_markup_dc_align_correct_not_in_suggestion(
-        c_errors, d_errors, counter, outfile)
-    report_markup_dc_align_no_suggestion(c_errors, d_errors,
-                                            counter, outfile)
+    report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter,
+                                                 outfile)
+    report_markup_dc_align_correct_not_in_suggestion(c_errors, d_errors,
+                                                     counter, outfile)
+    report_markup_dc_align_no_suggestion(c_errors, d_errors, counter, outfile)
     print(file=outfile)
 
 
 def overview_header(results, counter, used_categories, outfile):
     print(f'Paragraphs {len(results)}', file=outfile)
-    print(f'Paragraphs with errors {counter["paragraphs_with_errors"]}\n', file=outfile)
+    print(
+        f'Paragraphs with errors {counter["paragraphs_with_errors"]}\n',
+        file=outfile)
     used_categories.add("paragraphs_with_errors")
 
 
 def overview_markup(counter, used_categories, outfile):
-    print(f'Manually marked errors: {counter["total_manually_marked_errors"]}', file=outfile)
+    print(
+        f'Manually marked errors: {counter["total_manually_marked_errors"]}',
+        file=outfile)
     used_categories.add("total_manually_marked_errors")
     print(
-        f'Manually marked errors found by the grammarchecker: {counter["total_manually_marked_errors"] - counter["total_manual_errors_not_found_by_grammarchecker"]}', file=outfile
-    )
+        f'Manually marked errors found by the grammarchecker: {counter["total_manually_marked_errors"] - counter["total_manual_errors_not_found_by_grammarchecker"]}',
+        file=outfile)
     print(
-        f'Manually marked errors not found by the grammarchecker: {counter["total_manual_errors_not_found_by_grammarchecker"]} == False negatives', file=outfile
-    )
+        f'Manually marked errors not found by the grammarchecker: {counter["total_manual_errors_not_found_by_grammarchecker"]} == False negatives',
+        file=outfile)
     used_categories.add("total_manual_errors_not_found_by_grammarchecker")
     print('By type', file=outfile)
     for label in [
@@ -377,10 +395,12 @@ def overview_markup(counter, used_categories, outfile):
             and not label.endswith('not_reported')
     ]:
         print(f'{label}: {counter[label]}', file=outfile)
-        print(f'{label + "_not_reported"}: {counter[label + "_not_reported"]}', file=outfile)
         print(
-            f'{label + "_found"}: {counter[label] - counter[label + "_not_reported"]}', file=outfile
-        )
+            f'{label + "_not_reported"}: {counter[label + "_not_reported"]}',
+            file=outfile)
+        print(
+            f'{label + "_found"}: {counter[label] - counter[label + "_not_reported"]}',
+            file=outfile)
         used_categories.add(label)
         used_categories.add(label + "_not_reported")
 
@@ -389,15 +409,15 @@ def overview_markup(counter, used_categories, outfile):
 
 def overview_grammarchecker(counter, used_categories, outfile):
     print(
-        f'Errors reported by grammarchecker: {counter["total_grammarchecker_errors"]}', file=outfile
-    )
+        f'Errors reported by grammarchecker: {counter["total_grammarchecker_errors"]}',
+        file=outfile)
     used_categories.add("total_grammarchecker_errors")
     print(
-        f'Grammar checker errors that align with manually marked up errors: {counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]} == True positives', file=outfile
-    )
+        f'Grammar checker errors that align with manually marked up errors: {counter["total_grammarchecker_errors"] - counter["total_grammarchecker_errors_not_found_in_manual_markup"]} == True positives',
+        file=outfile)
     print(
-        f'Grammar checker errors that don\'t align with manually marked up errors: {counter["total_grammarchecker_errors_not_found_in_manual_markup"]} == False positives', file=outfile
-    )
+        f'Grammar checker errors that don\'t align with manually marked up errors: {counter["total_grammarchecker_errors_not_found_in_manual_markup"]} == False positives',
+        file=outfile)
 
     used_categories.add(
         "total_grammarchecker_errors_not_found_in_manual_markup")
@@ -408,10 +428,12 @@ def overview_grammarchecker(counter, used_categories, outfile):
             and not label.endswith('not_markedup')
     ]:
         print(f'{label}: {counter[label]}', file=outfile)
-        print(f'{label + "_not_markedup"}: {counter[label + "_not_markedup"]}', file=outfile)
         print(
-            f'{label + "_found"}: {counter[label] - counter[label + "_not_markedup"]}', file=outfile
-        )
+            f'{label + "_not_markedup"}: {counter[label + "_not_markedup"]}',
+            file=outfile)
+        print(
+            f'{label + "_found"}: {counter[label] - counter[label + "_not_markedup"]}',
+            file=outfile)
         used_categories.add(label)
         used_categories.add(label + "_not_markedup")
 
@@ -420,11 +442,11 @@ def overview_grammarchecker(counter, used_categories, outfile):
 
 def overview_hits_with_hit_in_suggestions(counter, used_categories, outfile):
     print(
-        f'Manually marked errors and reported errors that align: {counter["correction_in_suggestion"] + counter["correction_not_in_suggestion"] + counter["correction_no_suggestion"]}\n', file=outfile
-    )
+        f'Manually marked errors and reported errors that align: {counter["correction_in_suggestion"] + counter["correction_not_in_suggestion"] + counter["correction_no_suggestion"]}\n',
+        file=outfile)
     print(
-        f'Reported errors where correction is among suggestions {counter["correction_in_suggestion"]}', file=outfile
-    )
+        f'Reported errors where correction is among suggestions {counter["correction_in_suggestion"]}',
+        file=outfile)
     used_categories.add("correction_in_suggestion")
     print('By manual error and grammarchecker error pairs', file=outfile)
     for label in [
@@ -437,10 +459,11 @@ def overview_hits_with_hit_in_suggestions(counter, used_categories, outfile):
     print(file=outfile)
 
 
-def overview_hits_without_hit_in_suggestions(counter, used_categories, outfile):
+def overview_hits_without_hit_in_suggestions(counter, used_categories,
+                                             outfile):
     print(
-        f'Reported errors where correction is not among suggestions {counter["correction_not_in_suggestion"]}', file=outfile
-    )
+        f'Reported errors where correction is not among suggestions {counter["correction_not_in_suggestion"]}',
+        file=outfile)
     used_categories.add("correction_not_in_suggestion")
     print('By manual error and grammarchecker error pairs', file=outfile)
     for label in [
@@ -455,8 +478,8 @@ def overview_hits_without_hit_in_suggestions(counter, used_categories, outfile):
 
 def overview_hits_no_suggestions(counter, used_categories, outfile):
     print(
-        f'Reported errors without suggestions {counter["correction_no_suggestion"]}', file=outfile
-    )
+        f'Reported errors without suggestions {counter["correction_no_suggestion"]}',
+        file=outfile)
     used_categories.add("correction_no_suggestion")
     print('By manual error and grammarchecker error pairs', file=outfile)
     for label in [
@@ -487,11 +510,11 @@ def overview_precision_recall(counter, outfile):
     false_negatives = counter["total_grammarchecker_errors"] - counter[
         "total_manually_marked_errors"]
     print(
-        f'\nOverall precision: {true_positives/counter["total_grammarchecker_errors"]:.2f} ({true_positives}/{counter["total_grammarchecker_errors"]})', file=outfile
-    )
+        f'\nOverall precision: {true_positives/counter["total_grammarchecker_errors"]:.2f} ({true_positives}/{counter["total_grammarchecker_errors"]})',
+        file=outfile)
     print(
-        f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n', file=outfile
-    )
+        f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
+        file=outfile)
 
 
 def overview(results, counter, used_categories, outfile):
@@ -507,9 +530,19 @@ def parse_options():
     parser = argparse.ArgumentParser(
         description='Report on manual markup versus grammarchecker.')
 
-    parser.add_argument('--filtererror', help='Remove named errortags')
+    parser.add_argument(
+        '--filtererror',
+        help='Remove named errortags',
+        nargs='+',
+        choices=[
+            'error', 'errorortreal', 'errormorphsyn', 'errorsyn', 'errorlex',
+            'errorformat', 'errorlang'
+        ])
     parser.add_argument('zcheck_file', help='The grammarchecker archive')
-    parser.add_argument('pickle_file', help='The pickle file')
+    parser.add_argument(
+        'wops',
+        help='either goldstandard or correct-no-gs',
+        choices=['goldstandard', 'correct-no-gs'])
 
     args = parser.parse_args()
     return args
@@ -520,15 +553,18 @@ def main():
     counter = defaultdict(int)
     errortags = set()
 
-    outfile_name = f'{args.pickle_file.replace("/", "_")}.pickle.txt'
-
-    with open(outfile_name, 'w') as outfile:
-        results = get_results(
-            args.filtererror.split(',') if args.filtererror else [],
-            f'{args.pickle_file.replace("/", "_")}.pickle', args.zcheck_file, outfile)
+    with open(f'report.{args.wops}.txt', 'w') as outfile:
+        results = []
+        for pickle_file in Path.cwd().glob(f'*{args.wops}*.pickle'):
+            print(f'Reading {pickle_file}')
+            results.extend(
+                get_results(
+                    args.filtererror,
+                    pickle_file, args.zcheck_file, outfile))
         for result in results:
             if result[1] or result[3]['errs']:
-                per_sentence(result[0], result[2], result[1], result[3]['errs'], counter, errortags, outfile)
+                per_sentence(result[0], result[2], result[1],
+                             result[3]['errs'], counter, errortags, outfile)
         used_categories = set()
         overview(results, counter, used_categories, outfile)
 

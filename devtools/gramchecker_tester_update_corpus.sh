@@ -18,12 +18,13 @@ svn log -v -r5037:HEAD | awk -v username="thomas" '{print username} /^r[0-9]+ / 
 echo "Finished with conversion"
 
 cd $GTHOME/langs/sme/devtools/
-for i in $2 $3
+for j in goldstandard correct-no-gs
 do
-    for j in correct-no-gs goldstandard
+    for i in $2 $3
     do
         echo "Gramchecking in $i/$j/converted/sme"
         time $GTHOME/giella-core/devtools/gramcheck_tester2.py $1 $i/$j/converted/sme
-        time $GTHOME/giella-core/devtools/gramcheck_comparator.py --filtererror=errorlang,errorlex,errormorphsyn,errorortreal $1 $i/$j/converted/sme
     done
+    echo "Report on $j"
+    time $GTHOME/giella-core/devtools/gramcheck_comparator.py $1 $j --filtererror=errorlang errorlex errormorphsyn errorortreal
 done

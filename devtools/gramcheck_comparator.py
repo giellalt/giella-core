@@ -298,25 +298,29 @@ def report_markup_without_dc_hits(c_errors, d_errors, counter, outfile):
             f'manually_marked_errors_{marked_error_not_reported["type"]}_not_reported'] += 1
 
 
+def grammar_to_manual(grammartype):
+    if grammartype == 'typo':
+        return 'errorort'
+    elif grammartype in ['double-space-before', 'punct-aistton-left', 'punct-aistton-right', 'no-space-after-punct-mark', 'space-before-punct-mark', 'no-space-before-parent-start', 'no-space-after-parent-end', 'space-after-paren-beg', 'space-before-paren-end']:
+        return 'errorformat'
+    elif grammartype in ['msyn-compound', 'msyn-unspace-compound', 'msyn-addhyphen']:
+        return 'errorsyn'
+    else:
+        return 'bingo'
+
+
 def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
     # rapporterte feil som ikke er oppmerket
     reported_errors_not_marked = dcs_not_in_correct(c_errors, d_errors)
     reported_errors_not_marked_per_sentence(reported_errors_not_marked,
                                             outfile)
-    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(
-        reported_errors_not_marked)
+    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += (len(
+        reported_errors_not_marked) - len(
+        [d_error for d_error in reported_errors_not_marked
+         if d_error[0][0].upper() == d_error[0][0]]))
     for reported_error_not_marked in reported_errors_not_marked:
-        if reported_error_not_marked[3] == 'typo':
-            counter[
-            f'grammarchecker_errors_errorort_not_markedup'] += 1
-        elif reported_error_not_marked[3] in []:
-            counter[
-            f'grammarchecker_errors_errorformat_not_markedup'] += 1
-        elif reported_error_not_marked[3] in []:
-            counter[
-            f'grammarchecker_errors_errorsyn_not_markedup'] += 1
-        else:
-            print(f'no hit for {reported_error_not_marked[3]}')
+        counter[
+            f'grammarchecker_errors_{grammar_to_manual(reported_error_not_marked[3])}_not_markedup'] += 1
 
 
 def report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter,
@@ -327,7 +331,7 @@ def report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter,
     counter['correction_in_suggestion'] += len(corrections_in_suggestion)
     for correction_in_suggestion in corrections_in_suggestion:
         counter[
-            f'correction_in_suggestion_{correction_in_suggestion[0]["type"]}_{correction_in_suggestion[1][3]}'] += 1
+            f'correction_in_suggestion_{correction_in_suggestion[0]["type"]}_{grammar_to_manual(correction_in_suggestion[1][3])}'] += 1
 
 
 def report_markup_dc_align_correct_not_in_suggestion(c_errors, d_errors,
@@ -340,7 +344,7 @@ def report_markup_dc_align_correct_not_in_suggestion(c_errors, d_errors,
         corrections_not_in_suggestion)
     for correction_not_in_suggestion in corrections_not_in_suggestion:
         counter[
-            f'correction_not_in_suggestion_{correction_not_in_suggestion[0]["type"]}_{correction_not_in_suggestion[1][3]}'] += 1
+            f'correction_not_in_suggestion_{correction_not_in_suggestion[0]["type"]}_{grammar_to_manual(correction_not_in_suggestion[1][3])}'] += 1
 
 
 def report_markup_dc_align_no_suggestion(c_errors, d_errors, counter, outfile):
@@ -350,7 +354,7 @@ def report_markup_dc_align_no_suggestion(c_errors, d_errors, counter, outfile):
     counter['correction_no_suggestion'] += len(corrections_no_suggestion)
     for correction_no_suggestion in corrections_no_suggestion:
         counter[
-            f'correction_no_suggestion_{correction_no_suggestion[0]["type"]}_{correction_no_suggestion[1][3]}'] += 1
+            f'correction_no_suggestion_{correction_no_suggestion[0]["type"]}_{grammar_to_manual(correction_no_suggestion[1][3])}'] += 1
 
 
 def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags,
@@ -361,7 +365,7 @@ def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags,
         counter[f'manually_marked_errors_{manual["type"]}'] += 1
     counter['total_grammarchecker_errors'] += len(d_errors)
     for dc_error in d_errors:
-        counter[f'grammarchecker_errors_{dc_error[3].replace(" ", "_")}'] += 1
+        counter[f'grammarchecker_errors_{grammar_to_manual(dc_error[3])}'] += 1
     print('==========', file=outfile)
     print(sentence, '<-', filename, file=outfile)
 
@@ -427,7 +431,7 @@ def overview_grammarchecker(counter, used_categories, outfile):
     print(
         f'Grammar checker errors that don\'t align with manually marked up errors: {counter["total_grammarchecker_errors_not_found_in_manual_markup"]} == False positives',
         file=outfile)
-
+    overview_precision_recall(counter, outfile)
     used_categories.add(
         "total_grammarchecker_errors_not_found_in_manual_markup")
     print('By type', file=outfile)
@@ -443,6 +447,7 @@ def overview_grammarchecker(counter, used_categories, outfile):
         print(
             f'{label + "_found"}: {counter[label] - counter[label + "_not_markedup"]}',
             file=outfile)
+        precision(label, counter[label] - counter[label + "_not_markedup"], counter[label + "_not_markedup"], counter[label.replace('grammarchecker', 'manually_marked') + "_not_reported"], outfile)
         used_categories.add(label)
         used_categories.add(label + "_not_markedup")
 
@@ -505,12 +510,23 @@ def overview_hits(counter, used_categories, outfile):
     overview_hits_no_suggestions(counter, used_categories, outfile)
 
 
-def overview_precision_recall(counter, outfile):
+def precision(category, true_positives, false_positives, false_negatives, outfile):
     """
     precision: TP / TP + FP =
     Recall: TP / TP + FN =
-    Accuracty = TP + TN / TP + TN + FP + FN
     """
+    print('tp', true_positives)
+    print('fp', false_positives)
+    print('fn', false_negatives)
+    print(
+        f'\n{category} precision: {true_positives/(true_positives + false_positives):.2f} ({true_positives}/{true_positives + false_positives})',
+        file=outfile)
+    print(
+        f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
+        file=outfile)
+
+
+def overview_precision_recall(counter, outfile):
     true_positives = counter["total_grammarchecker_errors"] - counter[
         "total_grammarchecker_errors_not_found_in_manual_markup"]
     false_positives = counter[
@@ -518,12 +534,7 @@ def overview_precision_recall(counter, outfile):
     # TP + FP = all errors found by grammarchecker
     false_negatives = counter["total_grammarchecker_errors"] - counter[
         "total_manually_marked_errors"]
-    print(
-        f'\nOverall precision: {true_positives/counter["total_grammarchecker_errors"]:.2f} ({true_positives}/{counter["total_grammarchecker_errors"]})',
-        file=outfile)
-    print(
-        f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
-        file=outfile)
+    precision('Overall', true_positives, false_positives, false_negatives, outfile)
 
 
 def overview(results, counter, used_categories, outfile):
@@ -531,7 +542,7 @@ def overview(results, counter, used_categories, outfile):
     overview_markup(counter, used_categories, outfile)
     overview_grammarchecker(counter, used_categories, outfile)
     overview_hits(counter, used_categories, outfile)
-    overview_precision_recall(counter, outfile)
+
 
 
 def parse_options():

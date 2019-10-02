@@ -60,6 +60,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/merge-templates.sh \
    scripts/morph-test.py \
    scripts/new-language.sh \
+   scripts/patgen.exp \
    scripts/preprocess \
    scripts/replace-dummy-langcode.sh \
    scripts/run_voikko_speller.sh \

@@ -44,7 +44,8 @@ fstfiles="*fst
 *.hfstol
 *.foma
 *.bin
-*.bcg3"
+*.bcg3
+*.fomabin"
 
 # Get the list of dirs to work on:
 dirlist=$(find $1 \

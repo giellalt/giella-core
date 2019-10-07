@@ -93,7 +93,8 @@ check_analysis_regressions.sh
 *suggestions.sh
 *.hfstol.txt
 *.hfsttok.txt
-*.xfst.txt" $1/devtools
+*.xfst.txt
+*.htokoldcomp.txt" $1/devtools
 
 # Set the svn:ignore prop on the doc dir:
 $svnignore "$mkfiles

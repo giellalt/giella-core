@@ -183,49 +183,130 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
             del d_errors[position - 1]
 
 
-def fix_double_space(d_errors, zcheck_file, runner):
-    """Fix double space errors reported by divvun-checker."""
-    typos = [
-        d_error for d_error in d_errors
-        if d_error[3] == 'typo' and '  ' in d_error[0]
+def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
+                                     runner):
+    dupes = [
+        d_error for d_error in d_errors if d_error[1:2] == space_error[1:2]
     ]
-    for typo in typos:
-        error = typo[0]
-        min = 0
-        max = len(error)
-        position = d_errors.index(typo)
-        for new_position, part in enumerate(
-            [part for part in typo[0].split() if part], start=position):
-            part_errors = gramcheck_tester2.gramcheck(part, zcheck_file,
-                                                      runner)
-            print(part_errors)
-            min = error[min:max].find(part)
-            for p_error in part_errors['errs']:
-                p_error[1] = min + typo[1]
-                p_error[2] = min + typo[1] + len(part)
-                d_errors.insert(new_position, p_error)
+    parenthesis = space_error[0].find('(')
+    for dupe in dupes:
+        position = d_errors.index(dupe)
         del d_errors[position]
+        if dupe[3] == 'no-space-before-parent-start':
+            dupe[0] = dupe[0][parenthesis:]
+            dupe[1] = parenthesis
+            dupe[5] = [' (']
+            d_errors.insert(position, dupe)
+        else:
+            errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
+                                                 zcheck_file, runner)
+            for new_position, error in enumerate(
+                    errors['errs'], start=position):
+                error[1] = dupe[1] + error[1]
+                error[2] = dupe[1] + error[1] + len(error[0])
+                d_errors.insert(new_position, error)
+
+
+def find_first_double_space(grouped_d_error):
+    for d_error in grouped_d_error:
+        if d_error[3] == 'double-space-before':
+            return d_error
+
+
+def sortByRange(error):
+    return error[1:2]
+
+
+def make_new_double_space_errors(double_space, d_result):
+    d_errors = d_result['errs']
+    parts = double_space[0].split('  ')
+
+    for position, part in enumerate(parts[1:], start=1):
+        error = f'{parts[position - 1]}  {part}'
+        start = d_result['text'].find(error)
+        end = start + len(error)
+        candidate = [
+            error, start, end, 'double-space-before',
+            f'Leat guokte gaskka ovdal "{part}"',
+            [f'{parts[position - 1]} {part}'], 'Sátnegaskameattáhusat'
+        ]
+        if candidate not in d_errors:
+            d_errors.append(candidate)
+
+
+def get_unique_double_spaces(d_errors):
+    double_spaces = []
+    indexes = set()
+    for d_error in d_errors:
+        if d_error[3] == 'double-space-before' and (d_error[1],
+                                                    d_error[2]) not in indexes:
+            double_spaces.append(d_error)
+            indexes.add((d_error[1], d_error[2]))
+
+    return double_spaces
+
+
+def remove_dupes(double_spaces, d_errors):
+    for removable_error in [
+            d_error for double_space in double_spaces for d_error in d_errors
+            if double_space[1:2] == d_error[1:2]
+    ]:
+        d_errors.remove(removable_error)
+
+
+def make_new_errors(double_space, d_result, zcheck_file, runner):
+    print('making new errors', double_space)
+    d_errors = d_result['errs']
+    parts = double_space[0].split('  ')
+
+    error = double_space[0]
+    min = 0
+    max = len(error)
+    position = d_errors.index(double_space)
+    for new_position, part in enumerate(
+        [part for part in double_space[0].split() if part], start=position):
+        part_errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
+        min = error[min:max].find(part)
+        for p_error in part_errors['errs']:
+            p_error[1] = min + double_space[1]
+            p_error[2] = min + double_space[1] + len(part)
+            d_errors.insert(new_position, p_error)
+
+
+def fix_double_space(d_result, zcheck_file, runner):
+    print('start fix_double_space')
+    d_errors = d_result['errs']
+
+    double_spaces = get_unique_double_spaces(d_errors)
+    remove_dupes(double_spaces, d_errors)
+
+    for double_space in double_spaces:
+        make_new_double_space_errors(double_space, d_result)
+
+    new_double_spaces = get_unique_double_spaces(d_errors)
+
+    for new_double_space in new_double_spaces:
+        make_new_errors(new_double_space, d_result, zcheck_file, runner)
+
+    d_errors.sort(key=sortByRange)
+    print('end fix_double_space')
+    print()
 
 
 def filter_dc(d_result, zcheck_file, runner):
     """Remove errors that cover the same area of the typo and msyn types."""
     d_errors = d_result['errs']
 
-    fix_double_space(d_errors, zcheck_file, runner)
+    fix_double_space(d_result, zcheck_file, runner)
+
+    if any([d_error[3].startswith('punct-aistton') for d_error in d_errors]):
+        for d_error in d_errors:
+            fix_aistton(d_errors, d_errors.index(d_error), zcheck_file, runner)
 
     for d_error in d_errors:
-        fix_aistton(d_errors, d_errors.index(d_error), zcheck_file, runner)
-
-    indexes = defaultdict(list)
-    for d_error in d_errors:
-        indexes[(d_error[1], d_error[2])].append(d_error)
-
-    for index in indexes:
-        dupelist = indexes[index]
-        if len(dupelist) > 1 and 'typo' in [dupe[3] for dupe in dupelist]:
-            for dupe in dupelist:
-                if dupe[3] != 'typo' and 'msyn' in dupe[3]:
-                    d_errors.remove(dupe)
+        if d_error[3] == 'no-space-before-parent-start':
+            fix_no_space_before_parent_start(d_error, d_errors, zcheck_file,
+                                             runner)
 
     return d_result
 

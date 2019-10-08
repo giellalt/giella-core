@@ -95,7 +95,8 @@ check_analysis_regressions.sh
 *.hfstol.txt
 *.hfsttok.txt
 *.xfst.txt
-*.htokoldcomp.txt" $1/devtools
+*.htokoldcomp.txt
+test_grammar_checker.sh" $1/devtools
 
 # Set the svn:ignore prop on the doc dir:
 $svnignore "$mkfiles

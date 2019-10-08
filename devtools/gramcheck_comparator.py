@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
+import json
 import argparse
 import pickle
 from collections import defaultdict
@@ -208,6 +209,36 @@ def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
                 d_errors.insert(new_position, error)
 
 
+def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
+                                  runner):
+    error_message = punct_error[4]
+    current_punct = error_message[error_message.find('"') + 1:error_message.rfind('"')]
+
+    dupes = [
+        d_error for d_error in d_errors if d_error[1:2] == punct_error[1:2]
+    ]
+    parenthesis = punct_error[0].find(current_punct)
+    for dupe in dupes:
+        position = d_errors.index(dupe)
+        del d_errors[position]
+        if dupe[3] == 'no-space-after-punct-mark':
+            dupe[5] = [f'{current_punct} {dupe[0][parenthesis + 1:]}']
+            dupe[0] = dupe[0][parenthesis:]
+            dupe[1] = parenthesis
+            d_errors.insert(position, dupe)
+        else:
+            try:
+                errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
+                                                    zcheck_file, runner)
+                for new_position, error in enumerate(
+                        errors['errs'], start=position):
+                    error[1] = dupe[1] + error[1]
+                    error[2] = dupe[1] + error[1] + len(error[0])
+                    d_errors.insert(new_position, error)
+            except json.decoder.JSONDecodeError:
+                print(f'gramchecker failed in analysing «{dupe[0][:parenthesis]}»')
+
+
 def find_first_double_space(grouped_d_error):
     for d_error in grouped_d_error:
         if d_error[3] == 'double-space-before':
@@ -256,7 +287,6 @@ def remove_dupes(double_spaces, d_errors):
 
 
 def make_new_errors(double_space, d_result, zcheck_file, runner):
-    print('making new errors', double_space)
     d_errors = d_result['errs']
     parts = double_space[0].split('  ')
 
@@ -275,7 +305,6 @@ def make_new_errors(double_space, d_result, zcheck_file, runner):
 
 
 def fix_double_space(d_result, zcheck_file, runner):
-    print('start fix_double_space')
     d_errors = d_result['errs']
 
     double_spaces = get_unique_double_spaces(d_errors)
@@ -290,8 +319,6 @@ def fix_double_space(d_result, zcheck_file, runner):
         make_new_errors(new_double_space, d_result, zcheck_file, runner)
 
     d_errors.sort(key=sortByRange)
-    print('end fix_double_space')
-    print()
 
 
 def filter_dc(d_result, zcheck_file, runner):
@@ -308,6 +335,9 @@ def filter_dc(d_result, zcheck_file, runner):
         if d_error[3] == 'no-space-before-parent-start':
             fix_no_space_before_parent_start(d_error, d_errors, zcheck_file,
                                              runner)
+        if d_error[3] == 'no-space-after-punct-mark':
+            fix_no_space_after_punct_mark(d_error, d_errors, zcheck_file,
+                                          runner)
 
     return d_result
 

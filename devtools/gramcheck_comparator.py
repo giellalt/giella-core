@@ -4,9 +4,10 @@
 import argparse
 import pickle
 from collections import defaultdict
+from pathlib import Path
+
 import gramcheck_tester2
 from corpustools import util
-from pathlib import Path
 
 
 def correct_no_suggestion_in_dc(correct, dc):
@@ -353,10 +354,17 @@ def report_markup_dupes(c_errors, errortags, counter, outfile):
                     print(f'\t{c_error}', file=outfile)
 
 
-def report_dc_dupes(d_errors, counter, outfile):
+def find_dc_dupes(d_errors):
     indexes = defaultdict(int)
     for d_error in d_errors:
         indexes[(d_error[1], d_error[2])] += 1
+
+    return indexes
+
+
+def report_dc_dupes(d_errors, counter, outfile, dupesets):
+    these_dupes = set()
+    indexes = find_dc_dupes(d_errors)
 
     for index in indexes:
         if indexes[index] > 1:
@@ -364,7 +372,13 @@ def report_dc_dupes(d_errors, counter, outfile):
             for d_error in d_errors:
                 if d_error[1] == index[0] and d_error[2] == index[1]:
                     counter['dc_dupes'] += 1
+                    counter[f'dc_dupes_{d_error[3]}'] += 1
+                    these_dupes.add(d_error[3])
                     print(f'\t{d_error}', file=outfile)
+
+    counter[str(these_dupes)] += 1
+    if len(these_dupes) and these_dupes not in dupesets:
+        dupesets.append(these_dupes)
 
 
 def report_markup_without_dc_hits(c_errors, d_errors, counter, outfile):
@@ -382,9 +396,16 @@ def report_markup_without_dc_hits(c_errors, d_errors, counter, outfile):
 def grammar_to_manual(grammartype):
     if grammartype == 'typo':
         return 'errorort'
-    elif grammartype in ['double-space-before', 'punct-aistton-left', 'punct-aistton-right', 'no-space-after-punct-mark', 'space-before-punct-mark', 'no-space-before-parent-start', 'no-space-after-parent-end', 'space-after-paren-beg', 'space-before-paren-end']:
+    elif grammartype in [
+            'double-space-before', 'punct-aistton-left', 'punct-aistton-right',
+            'no-space-after-punct-mark', 'space-before-punct-mark',
+            'no-space-before-parent-start', 'no-space-after-parent-end',
+            'space-after-paren-beg', 'space-before-paren-end'
+    ]:
         return 'errorformat'
-    elif grammartype in ['msyn-compound', 'msyn-unspace-compound', 'msyn-addhyphen']:
+    elif grammartype in [
+            'msyn-compound', 'msyn-unspace-compound', 'msyn-addhyphen'
+    ]:
         return 'errorsyn'
     else:
         return 'bingo'
@@ -395,10 +416,11 @@ def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
     reported_errors_not_marked = dcs_not_in_correct(c_errors, d_errors)
     reported_errors_not_marked_per_sentence(reported_errors_not_marked,
                                             outfile)
-    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += (len(
-        reported_errors_not_marked) - len(
-        [d_error for d_error in reported_errors_not_marked
-         if d_error[0][0].upper() == d_error[0][0]]))
+    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += (
+        len(reported_errors_not_marked) - len([
+            d_error for d_error in reported_errors_not_marked
+            if d_error[0][0].upper() == d_error[0][0]
+        ]))
     for reported_error_not_marked in reported_errors_not_marked:
         counter[
             f'grammarchecker_errors_{grammar_to_manual(reported_error_not_marked[3])}_not_markedup'] += 1
@@ -439,7 +461,7 @@ def report_markup_dc_align_no_suggestion(c_errors, d_errors, counter, outfile):
 
 
 def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags,
-                 outfile):
+                 outfile, dupesets):
     counter['paragraphs_with_errors'] += 1
     counter['total_manually_marked_errors'] += len(c_errors)
     for manual in c_errors:
@@ -451,7 +473,7 @@ def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags,
     print(sentence, '<-', filename, file=outfile)
 
     report_markup_dupes(c_errors, errortags, counter, outfile)
-    report_dc_dupes(d_errors, counter, outfile)
+    report_dc_dupes(d_errors, counter, outfile, dupesets)
     report_markup_without_dc_hits(c_errors, d_errors, counter, outfile)
     report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile)
     report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter,
@@ -528,7 +550,11 @@ def overview_grammarchecker(counter, used_categories, outfile):
         print(
             f'{label + "_found"}: {counter[label] - counter[label + "_not_markedup"]}',
             file=outfile)
-        precision(label, counter[label] - counter[label + "_not_markedup"], counter[label + "_not_markedup"], counter[label.replace('grammarchecker', 'manually_marked') + "_not_reported"], outfile)
+        precision(
+            label, counter[label] - counter[label + "_not_markedup"],
+            counter[label + "_not_markedup"],
+            counter[label.replace('grammarchecker', 'manually_marked') +
+                    "_not_reported"], outfile)
         used_categories.add(label)
         used_categories.add(label + "_not_markedup")
 
@@ -591,7 +617,8 @@ def overview_hits(counter, used_categories, outfile):
     overview_hits_no_suggestions(counter, used_categories, outfile)
 
 
-def precision(category, true_positives, false_positives, false_negatives, outfile):
+def precision(category, true_positives, false_positives, false_negatives,
+              outfile):
     """
     precision: TP / TP + FP =
     Recall: TP / TP + FN =
@@ -602,9 +629,10 @@ def precision(category, true_positives, false_positives, false_negatives, outfil
     print(
         f'\n{category} precision: {true_positives/(true_positives + false_positives):.2f} ({true_positives}/{true_positives + false_positives})',
         file=outfile)
-    print(
-        f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
-        file=outfile)
+    if false_negatives:
+        print(
+            f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
+            file=outfile)
 
 
 def overview_precision_recall(counter, outfile):
@@ -615,7 +643,8 @@ def overview_precision_recall(counter, outfile):
     # TP + FP = all errors found by grammarchecker
     false_negatives = counter["total_grammarchecker_errors"] - counter[
         "total_manually_marked_errors"]
-    precision('Overall', true_positives, false_positives, false_negatives, outfile)
+    precision('Overall', true_positives, false_positives, false_negatives,
+              outfile)
 
 
 def overview(results, counter, used_categories, outfile):
@@ -623,7 +652,6 @@ def overview(results, counter, used_categories, outfile):
     overview_markup(counter, used_categories, outfile)
     overview_grammarchecker(counter, used_categories, outfile)
     overview_hits(counter, used_categories, outfile)
-
 
 
 def parse_options():
@@ -653,19 +681,20 @@ def main():
     args = parse_options()
     counter = defaultdict(int)
     errortags = set()
+    dupesets = []
 
     with open(f'report.{args.wops}.txt', 'w') as outfile:
         results = []
         for pickle_file in Path.cwd().glob(f'*{args.wops}*.pickle'):
             print(f'Reading {pickle_file}')
             results.extend(
-                get_results(
-                    args.filtererror,
-                    pickle_file, args.zcheck_file, outfile))
+                get_results(args.filtererror, pickle_file, args.zcheck_file,
+                            outfile))
         for result in results:
             if result[1] or result[3]['errs']:
                 per_sentence(result[0], result[2], result[1],
-                             result[3]['errs'], counter, errortags, outfile)
+                             result[3]['errs'], counter, errortags, outfile,
+                             dupesets)
         used_categories = set()
         overview(results, counter, used_categories, outfile)
 
@@ -679,6 +708,9 @@ def main():
         print('Errortags', file=outfile)
         for errortag in errortags:
             print(errortag, file=outfile)
+
+    for dupeset in sorted(dupesets):
+        print(dupeset)
 
 
 if __name__ == '__main__':

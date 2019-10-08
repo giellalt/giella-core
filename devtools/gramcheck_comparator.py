@@ -200,13 +200,14 @@ def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
             dupe[5] = [' (']
             d_errors.insert(position, dupe)
         else:
-            errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
-                                                 zcheck_file, runner)
-            for new_position, error in enumerate(
-                    errors['errs'], start=position):
-                error[1] = dupe[1] + error[1]
-                error[2] = dupe[1] + error[1] + len(error[0])
-                d_errors.insert(new_position, error)
+            if dupe[0][:parenthesis]:
+                errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
+                                                    zcheck_file, runner)
+                for new_position, error in enumerate(
+                        errors['errs'], start=position):
+                    error[1] = dupe[1] + error[1]
+                    error[2] = dupe[1] + error[1] + len(dupe[0][:parenthesis])
+                    d_errors.insert(new_position, error)
 
 
 def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
@@ -234,7 +235,7 @@ def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
             if candidate not in d_errors:
                 d_errors.insert(position, candidate)
         else:
-            try:
+            if dupe[0][:parenthesis]:
                 errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
                                                      zcheck_file, runner)
                 for new_position, error in enumerate(
@@ -242,7 +243,7 @@ def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
                     candidate = [
                         error[0],
                         dupe[1] + error[1],
-                        dupe[1] + error[1] + len(error[0]),
+                        dupe[1] + error[1] + len(dupe[0][:parenthesis]),
                         dupe[3],
                         dupe[4],
                         dupe[5],
@@ -250,8 +251,6 @@ def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
                     ]
                     if candidate not in d_errors:
                         d_errors.insert(new_position, candidate)
-            except json.decoder.JSONDecodeError:
-                print(f'gramchecker failed in analysing «{dupe[0][:parenthesis]}»')
 
 
 def find_first_double_space(grouped_d_error):

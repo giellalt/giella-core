@@ -222,19 +222,34 @@ def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
         position = d_errors.index(dupe)
         del d_errors[position]
         if dupe[3] == 'no-space-after-punct-mark':
-            dupe[5] = [f'{current_punct} {dupe[0][parenthesis + 1:]}']
-            dupe[0] = dupe[0][parenthesis:]
-            dupe[1] = parenthesis
-            d_errors.insert(position, dupe)
+            candidate = [
+                dupe[0][parenthesis:],
+                parenthesis,
+                dupe[2],
+                dupe[3],
+                dupe[4],
+                [f'{current_punct} {dupe[0][parenthesis + 1:]}'],
+                dupe[6]
+            ]
+            if candidate not in d_errors:
+                d_errors.insert(position, candidate)
         else:
             try:
                 errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
-                                                    zcheck_file, runner)
+                                                     zcheck_file, runner)
                 for new_position, error in enumerate(
                         errors['errs'], start=position):
-                    error[1] = dupe[1] + error[1]
-                    error[2] = dupe[1] + error[1] + len(error[0])
-                    d_errors.insert(new_position, error)
+                    candidate = [
+                        error[0],
+                        dupe[1] + error[1],
+                        dupe[1] + error[1] + len(error[0]),
+                        dupe[3],
+                        dupe[4],
+                        dupe[5],
+                        dupe[6]
+                    ]
+                    if candidate not in d_errors:
+                        d_errors.insert(new_position, candidate)
             except json.decoder.JSONDecodeError:
                 print(f'gramchecker failed in analysing «{dupe[0][:parenthesis]}»')
 

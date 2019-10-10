@@ -185,6 +185,32 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
             del d_errors[position - 1]
 
 
+def fix_space_after_paren(paren_error, d_errors, zcheck_file, runner):
+    dupes = [
+        d_error for d_error in d_errors if d_error[1:2] == paren_error[1:2]
+    ]
+
+    for dupe in dupes:
+        if dupe[3] == 'space-after-paren-beg':
+            dupe[0] = dupe[0][:2]
+            dupe[2] = dupe[1] + 2
+            dupe[5] = [dupe[0][0]]
+        if dupe[3] == 'space-before-paren-end':
+            dupe[0] = dupe[0][-2:]
+            dupe[1] = dupe[2] - 2
+            dupe[5] = [dupe[0][-1]]
+        if dupe[3] == 'typo':
+            if dupe[0][1] == ' ':
+                dupe[0] = dupe[0][2:]
+                dupe[1] = dupe[1] + 2
+            if dupe[0][-2] == ' ':
+                dupe[0] = dupe[0][:-2]
+                dupe[2] = dupe[2] - 2
+            errors = gramcheck_tester2.gramcheck(dupe[0],
+                                                    zcheck_file, runner)
+            dupe[5] = errors['errs'][0][5]
+
+
 def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
                                      runner):
     dupes = [

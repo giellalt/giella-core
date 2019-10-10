@@ -222,7 +222,7 @@ def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
         del d_errors[position]
         if dupe[3] == 'no-space-before-parent-start':
             dupe[0] = dupe[0][parenthesis:]
-            dupe[1] = parenthesis
+            dupe[1] = dupe[1] + parenthesis
             dupe[5] = [' (']
             d_errors.insert(position, dupe)
         else:
@@ -232,7 +232,7 @@ def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
                 for new_position, error in enumerate(
                         errors['errs'], start=position):
                     error[1] = dupe[1] + error[1]
-                    error[2] = dupe[1] + error[1] + len(dupe[0][:parenthesis])
+                    error[2] = dupe[1] + len(dupe[0][:parenthesis])
                     d_errors.insert(new_position, error)
 
 

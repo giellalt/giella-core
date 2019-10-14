@@ -211,72 +211,88 @@ def fix_space_after_paren(paren_error, d_errors, zcheck_file, runner):
             dupe[5] = errors['errs'][0][5]
 
 
+def add_part(part, start, end, d_errors, zcheck_file, runner):
+    errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
+    for error in [error for error in errors['errs'] if error]:
+        candidate = [
+            error[0],
+            start,
+            end,
+            error[3],
+            error[4],
+            error[5],
+            error[6]
+        ]
+        if candidate not in d_errors:
+            d_errors.append(candidate)
+
+
 def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
                                      runner):
-    dupes = [
+    for dupe in [
         d_error for d_error in d_errors if d_error[1:2] == space_error[1:2]
-    ]
+    ]:
+        d_errors.remove(dupe)
+
     parenthesis = space_error[0].find('(')
-    for dupe in dupes:
-        position = d_errors.index(dupe)
-        del d_errors[position]
-        if dupe[3] == 'no-space-before-parent-start':
-            dupe[0] = dupe[0][parenthesis:]
-            dupe[1] = dupe[1] + parenthesis
-            dupe[5] = [' (']
-            d_errors.insert(position, dupe)
-        else:
-            if dupe[0][:parenthesis]:
-                errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
-                                                    zcheck_file, runner)
-                for new_position, error in enumerate(
-                        errors['errs'], start=position):
-                    error[1] = dupe[1] + error[1]
-                    error[2] = dupe[1] + len(dupe[0][:parenthesis])
-                    d_errors.insert(new_position, error)
+    d_errors.append([
+            space_error[0][parenthesis:],
+            space_error[1] + parenthesis,
+            space_error[2],
+            space_error[3],
+            space_error[4],
+            [' ('],
+            space_error[6]
+    ])
+    part1 = space_error[0][:parenthesis]
+    start = space_error[1]
+    end = space_error[1] + len(part1)
+    if part1:
+        add_part(part1, start, end, d_errors, zcheck_file, runner)
+
+    part2 = space_error[0][parenthesis + 1:]
+    start = space_error[1] + parenthesis + 1
+    end = space_error[1] + parenthesis + 1 + len(part2)
+    if part2:
+        add_part(part2, start, end, d_errors, zcheck_file, runner)
+
+    d_errors.sort(key=sortByRange)
 
 
 def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
                                   runner):
     error_message = punct_error[4]
     current_punct = error_message[error_message.find('"') + 1:error_message.rfind('"')]
-
-    dupes = [
-        d_error for d_error in d_errors if d_error[1:2] == punct_error[1:2]
-    ]
     parenthesis = punct_error[0].find(current_punct)
-    for dupe in dupes:
-        position = d_errors.index(dupe)
-        del d_errors[position]
-        if dupe[3] == 'no-space-after-punct-mark':
-            candidate = [
-                dupe[0][parenthesis:],
-                parenthesis,
-                dupe[2],
-                dupe[3],
-                dupe[4],
-                [f'{current_punct} {dupe[0][parenthesis + 1:]}'],
-                dupe[6]
-            ]
-            if candidate not in d_errors:
-                d_errors.insert(position, candidate)
-        else:
-            if dupe[0][:parenthesis]:
-                errors = gramcheck_tester2.gramcheck(dupe[0][:parenthesis],
-                                                     zcheck_file, runner)
-                for new_position, error in enumerate(
-                        errors['errs'], start=position):
-                    candidate = [
-                        error[0],
-                        dupe[1] + error[1],
-                        dupe[1] + error[1] + len(dupe[0][:parenthesis]),
-                        dupe[3],
-                        dupe[4],
-                        dupe[5],
-                        dupe[6]
-                    ]
-                    if candidate not in d_errors:
-                        d_errors.insert(new_position, candidate)
+
+    d_errors.append([
+            punct_error[0][parenthesis],
+            punct_error[1] + parenthesis,
+            punct_error[1] + parenthesis + 1,
+            punct_error[3],
+            punct_error[4],
+            [f'{current_punct} '],
+            punct_error[6]
+    ])
+
+    part1 = punct_error[0][:parenthesis]
+    start = punct_error[1]
+    end = punct_error[1] + len(part1)
+    if part1:
+        add_part(part1, start, end, d_errors, zcheck_file, runner)
+
+    part2 = punct_error[0][parenthesis + 1:]
+    start = punct_error[1] + parenthesis + 1
+    end = punct_error[1] + parenthesis + 1 + len(part2)
+    if part2:
+        add_part(part2, start, end, d_errors, zcheck_file, runner)
+
+    d_errors.sort(key=sortByRange)
+    print('at last')
+    for d_error in d_errors:
+        print(d_error)
+    print()
+
 
 
 def sortByRange(error):

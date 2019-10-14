@@ -279,12 +279,6 @@ def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
                         d_errors.insert(new_position, candidate)
 
 
-def find_first_double_space(grouped_d_error):
-    for d_error in grouped_d_error:
-        if d_error[3] == 'double-space-before':
-            return d_error
-
-
 def sortByRange(error):
     return error[1:2]
 

@@ -261,17 +261,18 @@ def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
 
 def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
                                   runner):
+    remove_dupes([punct_error], d_errors)
     error_message = punct_error[4]
     current_punct = error_message[error_message.find('"') + 1:error_message.rfind('"')]
     parenthesis = punct_error[0].find(current_punct)
 
     d_errors.append([
-            punct_error[0][parenthesis],
+            punct_error[0][parenthesis:],
             punct_error[1] + parenthesis,
-            punct_error[1] + parenthesis + 1,
+            punct_error[1] + parenthesis + len(punct_error[0][parenthesis:]),
             punct_error[3],
             punct_error[4],
-            [f'{current_punct} '],
+            [f'{current_punct} {punct_error[0][parenthesis + 1:]}'],
             punct_error[6]
     ])
 

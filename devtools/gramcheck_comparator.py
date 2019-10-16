@@ -715,7 +715,7 @@ def precision(category, true_positives, false_positives, false_negatives,
         file=outfile)
     if false_negatives:
         print(
-            f'Overall recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
+            f'{category} recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
             file=outfile)
 
 

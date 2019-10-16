@@ -725,8 +725,7 @@ def overview_precision_recall(counter, outfile):
     false_positives = counter[
         "total_grammarchecker_errors_not_found_in_manual_markup"]
     # TP + FP = all errors found by grammarchecker
-    false_negatives = counter["total_grammarchecker_errors"] - counter[
-        "total_manually_marked_errors"]
+    false_negatives = counter["total_manual_errors_not_found_by_grammarchecker"]
     precision('Overall', true_positives, false_positives, false_negatives,
               outfile)
 

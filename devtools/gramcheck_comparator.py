@@ -704,9 +704,12 @@ def precision(category, true_positives, false_positives, false_negatives,
     precision: TP / TP + FP =
     Recall: TP / TP + FN =
     """
-    print('tp', true_positives)
-    print('fp', false_positives)
-    print('fn', false_negatives)
+    print('tp', true_positives,
+        file=outfile)
+    print('fp', false_positives,
+        file=outfile)
+    print('fn', false_negatives,
+        file=outfile)
     print(
         f'\n{category} precision: {true_positives/(true_positives + false_positives):.2f} ({true_positives}/{true_positives + false_positives})',
         file=outfile)

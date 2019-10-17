@@ -541,7 +541,7 @@ def remove_unknown_propers(c_errors, d_errors):
     """Pretend that we have a proper noun detector.
 
     All grammarchecker errors that do have no manually marked counterpart
-    and where the error start with an uppercase letter are simply
+    and where the error string starts with an uppercase letter are simply
     removed from the errors that the divvun-checker report.
 
     This lifts the overall precision.

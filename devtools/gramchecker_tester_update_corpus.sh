@@ -3,15 +3,15 @@
 
 cd $2
 echo "Updating $2"
-rm -rf correct-no-gs
-rm -rf goldstandard
+rm -rf correct-no-gs/converted
+rm -rf goldstandard/converted
 svn up
 svn log -v -r7534:HEAD | awk -v username="thomas" '{print username} /^r[0-9]+ / {user=$3} /./ {if (user==username) {print}}'| grep -E "^   M|^   G|^   A|^   D|^   C|^   U" | awk '{print $2}'|sort|uniq|fgrep /orig/sme | sed 's_/orig/_orig/_' | xargs convert2xml --goldstandard
 
 cd $3
 echo "Updating $3"
-rm -rf correct-no-gs
-rm -rf goldstandard
+rm -rf correct-no-gs/converted
+rm -rf goldstandard/converted
 svn up
 svn log -v -r5037:HEAD | awk -v username="thomas" '{print username} /^r[0-9]+ / {user=$3} /./ {if (user==username) {print}}'| grep -E "^   M|^   G|^   A|^   D|^   C|^   U" | awk '{print $2}'|sort|uniq|fgrep /orig/sme | sed 's_/orig/_orig/_' | xargs convert2xml --goldstandard
 

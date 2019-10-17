@@ -497,11 +497,7 @@ def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
     reported_errors_not_marked = dcs_not_in_correct(c_errors, d_errors)
     reported_errors_not_marked_per_sentence(reported_errors_not_marked,
                                             outfile)
-    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += (
-        len(reported_errors_not_marked) - len([
-            d_error for d_error in reported_errors_not_marked
-            if d_error[0][0].upper() == d_error[0][0]
-        ]))
+    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(reported_errors_not_marked)
     for reported_error_not_marked in reported_errors_not_marked:
         counter[
             f'grammarchecker_errors_{grammar_to_manual(reported_error_not_marked[3])}_not_markedup'] += 1

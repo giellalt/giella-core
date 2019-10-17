@@ -537,8 +537,28 @@ def report_markup_dc_align_no_suggestion(c_errors, d_errors, counter, outfile):
             f'correction_no_suggestion_{correction_no_suggestion[0]["type"]}_{grammar_to_manual(correction_no_suggestion[1][3])}'] += 1
 
 
+def remove_unknown_propers(c_errors, d_errors):
+    """Pretend that we have a proper noun detector.
+
+    All grammarchecker errors that do have no manually marked counterpart
+    and where the error start with an uppercase letter are simply
+    removed from the errors that the divvun-checker report.
+
+    This lifts the overall precision.
+    """
+    with_propers = dcs_not_in_correct(c_errors, d_errors)
+    propers = [
+            d_error for d_error in with_propers
+            if d_error[0][0].upper() == d_error[0][0] and d_error[3] == 'typo'
+    ]
+    for proper in propers:
+        d_errors.remove(proper)
+
+
 def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags,
                  outfile, dupesets):
+    remove_unknown_propers(c_errors, d_errors)
+
     counter['paragraphs_with_errors'] += 1
     counter['total_manually_marked_errors'] += len(c_errors)
     for manual in c_errors:

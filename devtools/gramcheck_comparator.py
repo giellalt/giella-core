@@ -734,7 +734,7 @@ def precision(category, true_positives, false_positives, false_negatives,
     print(
         f'{category} recall: {recall:.2f} ({true_positives}/{(true_positives + false_negatives)})',
         file=outfile)
-    print(f'{category} F₁ score: {f1score:.2f} ({2 * prec * recall}/{prec + recall})',
+    print(f'{category} F₁ score: {f1score:.2f} ({2 * prec * recall:.2f}/{prec + recall:.2f})',
         file=outfile)
 
 

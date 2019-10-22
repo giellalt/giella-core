@@ -717,22 +717,25 @@ def overview_hits(counter, used_categories, outfile):
 def precision(category, true_positives, false_positives, false_negatives,
               outfile):
     """
-    precision: TP / TP + FP =
-    Recall: TP / TP + FN =
+    precision: TP / TP + FP
+    recall: TP / TP + FN
+    F₁ score: 2 * precision * recall / (precision + recall)
     """
-    print('tp', true_positives,
-        file=outfile)
-    print('fp', false_positives,
-        file=outfile)
-    print('fn', false_negatives,
+    print('tp', true_positives, file=outfile)
+    print('fp', false_positives, file=outfile)
+    print('fn', false_negatives, file=outfile)
+    prec = true_positives/(true_positives + false_positives)
+    recall = true_positives/(true_positives + false_negatives)
+    f1score = 2 * prec * recall / (prec + recall)
+
+    print(
+        f'\n{category} precision: {prec:.2f} ({true_positives}/{true_positives + false_positives})',
         file=outfile)
     print(
-        f'\n{category} precision: {true_positives/(true_positives + false_positives):.2f} ({true_positives}/{true_positives + false_positives})',
+        f'{category} recall: {recall:.2f} ({true_positives}/{(true_positives + false_negatives)})',
         file=outfile)
-    if false_negatives:
-        print(
-            f'{category} recall: {true_positives/(true_positives + false_negatives):.2f} ({true_positives}/{(true_positives + false_negatives)})\n',
-            file=outfile)
+    print(f'{category} F₁ score: {f1score:.2f} ({2 * prec * recall}/{prec + recall})',
+        file=outfile)
 
 
 def overview_precision_recall(counter, outfile):

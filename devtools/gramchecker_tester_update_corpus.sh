@@ -26,5 +26,5 @@ do
         time $GTHOME/giella-core/devtools/gramcheck_tester2.py $1 $i/$j/converted/sme
     done
     echo "Report on $j"
-    time $GTHOME/giella-core/devtools/gramcheck_comparator.py $1 $j --filtererror errorlang errorlex errormorphsyn errorortreal
+    time $GTHOME/giella-core/devtools/gramcheck_comparator.py $1 $j --filtererror errorlex errormorphsyn errorortreal
 done

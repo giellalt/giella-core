@@ -289,11 +289,6 @@ def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
         add_part(part2, start, end, d_errors, zcheck_file, runner)
 
     d_errors.sort(key=sortByRange)
-    print('at last')
-    for d_error in d_errors:
-        print(d_error)
-    print()
-
 
 
 def sortByRange(error):

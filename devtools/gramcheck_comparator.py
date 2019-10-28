@@ -724,12 +724,12 @@ def precision(category, true_positives, false_positives, false_negatives,
     f1score = 2 * prec * recall / (prec + recall)
 
     print(
-        f'\n{category} precision: {prec:.2f} ({true_positives}/{true_positives + false_positives})',
+        f'\n{category} precision: {100 * prec:.1f}% (100 * {true_positives}/{true_positives + false_positives})',
         file=outfile)
     print(
-        f'{category} recall: {recall:.2f} ({true_positives}/{(true_positives + false_negatives)})',
+        f'{category} recall: {100 * recall:.1f}% (100 * {true_positives}/{(true_positives + false_negatives)})',
         file=outfile)
-    print(f'{category} F₁ score: {f1score:.2f} ({2 * prec * recall:.2f}/{prec + recall:.2f})',
+    print(f'{category} F₁ score: {100 * f1score:.1f}% (100* {2 * prec * recall:.2f}/{prec + recall:.2f})',
         file=outfile)
 
 

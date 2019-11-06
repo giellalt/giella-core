@@ -77,7 +77,7 @@ parser.add_option("-d", "--distance", type = "int", dest = "distance",
                   help = "specify edit depth, default is 1",
                   metavar = "DIST")
 parser.add_option("-w", "--default-weight", type = "float", dest = "default_weight",
-                  help = "weight per correction when nothing else is specified (the default default is 1.0)",
+                  help = "weight per correction when nothing else is specified (the default weigiht is 1.0)",
                   metavar = "DIST")
 parser.add_option("-s", "--swap", action = "store_true", dest="swap",
                   help = "generate swaps (as well as insertions and deletions)")
@@ -330,7 +330,7 @@ if options.inputfile != None:
                 weight = float(line.split('\t')[1])
                 symbol = line.split('\t')[0]
             else:
-                weight = 0.0
+                weight = options.default_weight # should be default_weight
                 symbol = line.strip("\n")
             alphabet[symbol] = weight
     while True:
@@ -385,8 +385,8 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
     # first, the empty string may become the empty string anywhere
     corrections += '"" -> \t[ "" |\n'
     for a in alphabet:
-        this_weight = weight
-    # insertions
+        this_weight = alphabet[a]
+        # insertions
         if ('', a) in pair_info["edits"]:
             this_weight = pair_info["edits"][('', a)] + alphabet[a]
         corrections += '\t[ "' + a + '" ' + corr + ' ]::' + str(this_weight) + ' |\n'
@@ -394,23 +394,23 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
     corrections = corrections[:-3]
     corrections += ' ] ,,\n'
     for a in alphabet:
-        this_weight = weight
-    # the left-hand side of the rule
+        this_weight = alphabet[a]
+        # the left-hand side of the rule
         corrections += '"' + a + '" ->\t[ '
-    # identity
+        # identity
         corrections += '"' + a + '" |\n'
-    # deletion
+        # deletion
         if (a, '') in pair_info["edits"]:
             this_weight = pair_info["edits"][(a, '')]
-        corrections += '\t[ ""' + corr + ']::' + str(this_weight) + ' |\n'
+        corrections += '\t[ ""' + corr + ']::' + str(weight) + ' |\n' # the actual deletion expression
+        # substitutions
         for b in alphabet:
-            this_weight = weight + alphabet[b]
-        #substitutions
+            this_weight = alphabet[b] # old: weight + alphabet[b]
             if a == b:
                 # we don't handle identities here
                 continue
             if (a, b) in pair_info["edits"]:
-                this_weight = pair_info["edits"][(a, b)] + alphabet[b]
+                this_weight = pair_info["edits"][(a, b)] # + alphabet[b] # xxx
             corrections += '\t[ "' + b + '"' + corr + ']::' + str(this_weight) + ' |\n'
         corrections = corrections[:-3]
         corrections += ' ] ,,\n'

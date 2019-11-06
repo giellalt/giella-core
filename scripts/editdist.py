@@ -415,12 +415,30 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
         corrections = corrections[:-3]
         corrections += ' ] ,,\n'
     # now the unknown symbol
-    corrections += '"' + unk + '" -> [\n\t[""' + corr + ']::' + str(weight) + ' |\n'
-    for a in alphabet:
-        corrections += '\t[ "' + a + '"' + corr + ']::' + str(weight) + ' |\n'
+    corrections += '"' + unk + '" -> [\n\t[""' + corr + ']::' + str(weight) + ' |\n' # Initial line unk regex
+    for a in alphabet: # unk -> the whole alphabet:
+        this_weight = alphabet[a]
+        corrections += '\t[ "' + a + '"' + corr + ']::' + str(this_weight) + ' |\n' # for each target symbol, use the weight of that symbol
     # trim the end again
     corrections = corrections[:-3]
     corrections += ' ]]'
+    # and finally swaps, if enabled:
+    if options.swap:
+        corrections += '\n.o.\n[\n'
+        for a in alphabet:
+            for b in alphabet:
+                if a == b:
+                    # we don't handle identities here
+                    continue
+                frompair = (a,b)
+                topair = (b,a)
+                if (frompair, topair) in pair_info["swaps"]:
+                    this_weight = pair_info["swaps"][(frompair, topair)]
+                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(this_weight) + ' ,\n'
+                else:
+                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(weight) + ' ,\n'
+        corrections = corrections[:-3]
+        corrections += ' ]'
     return corrections
         
 

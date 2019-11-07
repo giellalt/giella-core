@@ -424,7 +424,7 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
     corrections += ' ]]'
     # and finally swaps, if enabled:
     if options.swap:
-        corrections += '\n.o.\n[\n'
+        corrections += '\n | \n[\n'
         for a in alphabet:
             for b in alphabet:
                 if a == b:

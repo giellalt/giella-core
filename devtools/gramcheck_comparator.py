@@ -479,10 +479,10 @@ def grammar_to_manual(grammartype):
             'space-after-paren-beg', 'space-before-paren-end'
     ]:
         return 'errorformat'
-    elif grammartype in [
-            'msyn-compound', 'msyn-unspace-compound', 'msyn-addhyphen'
-    ]:
+    elif grammartype.startswith('msyn-'):
         return 'errorsyn'
+    elif grammartype.startswith('real-'):
+        return 'errorortreal'
     else:
         return 'bingo'
 

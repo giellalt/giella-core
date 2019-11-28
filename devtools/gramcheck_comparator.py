@@ -28,6 +28,7 @@ def corrections_not_in_suggestion_per_sentence(nices, outfile):
             '\tcorrect and dc align, correction not among suggestions',
             file=outfile)
         for nice in nices:
+            print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
             print(
                 f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]} -> [{", ".join(nice[1][5])}]',
                 file=outfile)
@@ -38,6 +39,7 @@ def corrections_no_suggestion_per_sentence(nices, outfile):
         print('~~~~~~', file=outfile)
         print('\tcorrect and dc align, no suggestions', file=outfile)
         for nice in nices:
+            print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
             print(
                 f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}',
                 file=outfile)
@@ -54,6 +56,7 @@ def correction_in_suggestion_per_sentence(nices, outfile):
         print(
             '\tcorrect and dc align, and correction found in dc', file=outfile)
         for nice in nices:
+            print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
             print(
                 f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, position {nice[1][5].index(nice[0]["correct"])}',
                 file=outfile)
@@ -716,21 +719,26 @@ def precision(category, true_positives, false_positives, false_negatives,
     recall: TP / TP + FN
     F₁ score: 2 * precision * recall / (precision + recall)
     """
-    print('tp', true_positives, file=outfile)
-    print('fp', false_positives, file=outfile)
-    print('fn', false_negatives, file=outfile)
-    prec = true_positives/(true_positives + false_positives)
-    recall = true_positives/(true_positives + false_negatives)
-    f1score = 2 * prec * recall / (prec + recall)
+    print(file=outfile)
+    try:
+        prec = true_positives/(true_positives + false_positives)
+        recall = true_positives/(true_positives + false_negatives)
+        f1score = 2 * prec * recall / (prec + recall)
 
-    print(
-        f'\n{category} precision: {100 * prec:.1f}% (100 * {true_positives}/{true_positives + false_positives})',
-        file=outfile)
-    print(
-        f'{category} recall: {100 * recall:.1f}% (100 * {true_positives}/{(true_positives + false_negatives)})',
-        file=outfile)
-    print(f'{category} F₁ score: {100 * f1score:.1f}% (100* {2 * prec * recall:.2f}/{prec + recall:.2f})',
-        file=outfile)
+        print(
+            f'\n{category} precision: {100 * prec:.1f}% (100 * {true_positives}/{true_positives + false_positives})',
+            file=outfile)
+        print(
+            f'{category} recall: {100 * recall:.1f}% (100 * {true_positives}/{(true_positives + false_negatives)})',
+            file=outfile)
+        print(f'{category} F₁ score: {100 * f1score:.1f}% (100* {2 * prec * recall:.2f}/{prec + recall:.2f})',
+            file=outfile)
+        print('tp', true_positives, file=outfile)
+        print('fp', false_positives, file=outfile)
+        print('fn', false_negatives, file=outfile)
+    except ZeroDivisionError:
+        print(f'{category}: true_positives + false_positives is zero for this category',
+              file=outfile)
 
 
 def overview_precision_recall(counter, outfile):

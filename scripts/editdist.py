@@ -399,94 +399,6 @@ class Transducer:
             str(options.distance + options.no_initial) + "\t0.0")
 
 
-alphabet = {}
-exclusions = set()
-pair_info = {"edits": {}, "swaps": {}}
-
-if options.inputfile == None and options.alphabetfile == None \
-        and len(args) == 0:
-    print("Specify at least one of INPUT, ALPHABET or alphabet string")
-    sys.exit()
-if len(args) > 1:
-    print("Too many options!")
-    sys.exit()
-
-if options.outputfile == None:
-    outputfile = sys.stdout
-else:
-    outputfile = open(options.outputfile, 'w')
-
-if options.inputfile != None:
-    try:
-        inputfile = open(options.inputfile)
-    except IOError:
-        print("Couldn't open " + options.inputfile)
-        sys.exit()
-    while True:
-        # first the single-symbol info
-        line = inputfile.readline()
-        if line in ("@@\n", ""):
-            break
-        if line.strip() != "":
-            if line.startswith('##'):
-                continue
-            if len(line) > 1 and line.startswith('~'):
-                exclusions.add(line[1:].strip())
-                continue
-            if '\t' in line:
-                weight = float(line.split('\t')[1])
-                symbol = line.split('\t')[0]
-            else:
-                weight = options.default_weight  # should be default_weight
-                symbol = line.strip("\n")
-            alphabet[symbol] = weight
-    while True:
-        # then pairs
-        line = inputfile.readline()
-        if line.startswith('##'):
-            continue
-        if line == "\n":
-            continue
-        if line == "":
-            break
-        parts = line.split('\t')
-        if len(parts) != 3:
-            raise ValueError("Got specification with " + str(len(parts)) +\
-                                 " parts, expected 3:\n" + specification)
-        weight = float(parts[2])
-        if ',' in parts[0]:
-            frompair = tuple(parts[0].split(','))
-            topair = tuple(parts[1].split(','))
-            if not (len(frompair) == len(topair) == 2):
-                raise ValueError(
-                    "Got swap-specification with incorrect number "
-                    "of comma separators:\n" + specification)
-            if (frompair, topair) not in pair_info["swaps"]:
-                pair_info["swaps"][(frompair, topair)] = weight
-            for sym in [frompair[0], frompair[1], topair[0], topair[1]]:
-                if sym != '' and sym not in alphabet:
-                    alphabet[sym] = weight
-        else:
-            if not (parts[0], parts[1]) in pair_info["edits"]:
-                pair_info["edits"][(parts[0], parts[1])] = weight
-            for sym in [parts[0], parts[1]]:
-                if sym != '' and sym not in alphabet:
-                    alphabet[sym] = weight
-
-if len(args) == 1:
-    for c in str(args[0], 'utf-8'):
-        if c not in list(alphabet.keys()) and c not in exclusions:
-            alphabet[c] = 0.0
-if options.alphabetfile != None:
-    afile = open(options.alphabetfile, "rb")
-    ol_header = Header(afile)
-    ol_alphabet = Alphabet(afile, ol_header.number_of_symbols)
-    for c in [x for x in ol_alphabet.keyTable[:] if x.strip() != '']:
-        if c not in list(alphabet.keys()) and c not in exclusions:
-            alphabet[c] = 0.0
-epsilon = options.epsilon
-
-
 def replace_rules(alphabet, pair_info, weight=options.default_weight):
     corr = ' "<CORR>" '
     unk = OTHER
@@ -559,38 +471,135 @@ def replace_rules(alphabet, pair_info, weight=options.default_weight):
     return corrections
 
 
-if options.make_regex:
-    corrections = replace_rules(alphabet, pair_info)
-    corr_counter = '[[ [? - "<CORR>"]* ( "<CORR>":0 ) [? - "<CORR>"]* ]^' + str(
-        options.distance) + ']'
-    corr_eater = '[[? - "<CORR>"]*]'
-    full_regex = corr_eater + '\n.o.\n' + corrections + '\n.o.\n' + corr_counter + ";\n"
-    outputfile.write(full_regex)
-else:
-    transducer = Transducer(alphabet)
-    transducer.process_pair_info(pair_info)
-    transducer.generate()
-    transducer.make_transitions()
-    for transition in transducer.transitions:
-        outputfile.write(transition.decode('utf-8'))
-        outputfile.write('\n')
 
-    stderr_u8 = sys.stderr
 
-    if options.verbose:
-        stderr_u8.write("\n" + str(transducer.state_clock) + " states and " +
-                        str(len(transducer.transitions)) +
-                        " transitions written for " + "distance " +
-                        str(options.distance) + " and base alphabet size " +
-                        str(len(transducer.alphabet)) + "\n\n")
-        stderr_u8.write("The alphabet was:\n")
-        for symbol, weight in alphabet.items():
-            stderr_u8.write(symbol + "\t" + str(weight) + "\n")
-        if len(exclusions) != 0:
-            stderr_u8.write("The exclusions were:\n")
-            for symbol in exclusions:
-                stderr_u8.write(symbol + "\n")
-        print()
-        if debug:
-            for message in transducer.debug_messages:
-                print(message)
+def main():
+    (options, args) = parse_options()
+    alphabet = {}
+    exclusions = set()
+    pair_info = {"edits": {}, "swaps": {}}
+
+    if options.inputfile == None and options.alphabetfile == None \
+            and len(args) == 0:
+        print("Specify at least one of INPUT, ALPHABET or alphabet string")
+        sys.exit()
+    if len(args) > 1:
+        print("Too many options!")
+        sys.exit()
+
+    if options.outputfile == None:
+        outputfile = sys.stdout
+    else:
+        outputfile = open(options.outputfile, 'w')
+
+    if options.inputfile != None:
+        try:
+            inputfile = open(options.inputfile)
+        except IOError:
+            print("Couldn't open " + options.inputfile)
+            sys.exit()
+        while True:
+            # first the single-symbol info
+            line = inputfile.readline()
+            if line in ("@@\n", ""):
+                break
+            if line.strip() != "":
+                if line.startswith('##'):
+                    continue
+                if len(line) > 1 and line.startswith('~'):
+                    exclusions.add(line[1:].strip())
+                    continue
+                if '\t' in line:
+                    weight = float(line.split('\t')[1])
+                    symbol = line.split('\t')[0]
+                else:
+                    weight = options.default_weight  # should be default_weight
+                    symbol = line.strip("\n")
+                alphabet[symbol] = weight
+        while True:
+            # then pairs
+            line = inputfile.readline()
+            if line.startswith('##'):
+                continue
+            if line == "\n":
+                continue
+            if line == "":
+                break
+            parts = line.split('\t')
+            if len(parts) != 3:
+                raise ValueError("Got specification with " + str(len(parts)) +\
+                                    " parts, expected 3:\n" + specification)
+            weight = float(parts[2])
+            if ',' in parts[0]:
+                frompair = tuple(parts[0].split(','))
+                topair = tuple(parts[1].split(','))
+                if not (len(frompair) == len(topair) == 2):
+                    raise ValueError(
+                        "Got swap-specification with incorrect number "
+                        "of comma separators:\n" + specification)
+                if (frompair, topair) not in pair_info["swaps"]:
+                    pair_info["swaps"][(frompair, topair)] = weight
+                for sym in [frompair[0], frompair[1], topair[0], topair[1]]:
+                    if sym != '' and sym not in alphabet:
+                        alphabet[sym] = weight
+            else:
+                if not (parts[0], parts[1]) in pair_info["edits"]:
+                    pair_info["edits"][(parts[0], parts[1])] = weight
+                for sym in [parts[0], parts[1]]:
+                    if sym != '' and sym not in alphabet:
+                        alphabet[sym] = weight
+
+    if len(args) == 1:
+        for c in str(args[0], 'utf-8'):
+            if c not in list(alphabet.keys()) and c not in exclusions:
+                alphabet[c] = 0.0
+    if options.alphabetfile != None:
+        afile = open(options.alphabetfile, "rb")
+        ol_header = Header(afile)
+        ol_alphabet = Alphabet(afile, ol_header.number_of_symbols)
+        for c in [x for x in ol_alphabet.keyTable[:] if x.strip() != '']:
+            if c not in list(alphabet.keys()) and c not in exclusions:
+                alphabet[c] = 0.0
+    epsilon = options.epsilon
+
+    if options.make_regex:
+        corrections = replace_rules(alphabet, pair_info,
+                                    options.default_weight, options.swap)
+        corr_counter = '[[ [? - "<CORR>"]* ( "<CORR>":0 ) [? - "<CORR>"]* ]^' + str(
+            options.distance) + ']'
+        corr_eater = '[[? - "<CORR>"]*]'
+        full_regex = corr_eater + '\n.o.\n' + corrections + '\n.o.\n' + corr_counter + ";\n"
+        outputfile.write(full_regex)
+    else:
+        transducer = Transducer(alphabet, options)
+        transducer.process_pair_info(pair_info)
+        transducer.generate()
+        transducer.make_transitions()
+        for transition in transducer.transitions:
+            outputfile.write(transition.decode('utf-8'))
+            outputfile.write('\n')
+
+        stderr_u8 = sys.stderr
+
+        if options.verbose:
+            stderr_u8.write("\n" + str(transducer.state_clock) +
+                            " states and " + str(len(transducer.transitions)) +
+                            " transitions written for " + "distance " +
+                            str(options.distance) +
+                            " and base alphabet size " +
+                            str(len(transducer.alphabet)) + "\n\n")
+            stderr_u8.write("The alphabet was:\n")
+            for symbol, weight in alphabet.items():
+                stderr_u8.write(symbol + "\t" + str(weight) + "\n")
+            if len(exclusions) != 0:
+                stderr_u8.write("The exclusions were:\n")
+                for symbol in exclusions:
+                    stderr_u8.write(symbol + "\n")
+            print()
+            if debug:
+                for message in transducer.debug_messages:
+                    print(message)
+
+
+if __name__ == "__main__":
+    main()

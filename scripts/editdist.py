@@ -69,94 +69,6 @@ class MyOptionParser(OptionParser):
         return self.epilog
 
 
-parser = MyOptionParser(usage=usage_string, epilog=info_string)
-parser.add_option(
-    "-r",
-    "--regex",
-    action="store_true",
-    dest="make_regex",
-    help="write a regular expression")
-parser.add_option(
-    "-e",
-    "--epsilon",
-    dest="epsilon",
-    help="specify symbol to use as epsilon, default is @0@",
-    metavar="EPS")
-parser.add_option(
-    "-d",
-    "--distance",
-    type="int",
-    dest="distance",
-    help="specify edit depth, default is 1",
-    metavar="DIST")
-parser.add_option(
-    "-w",
-    "--default-weight",
-    type="float",
-    dest="default_weight",
-    help=
-    "weight per correction when nothing else is specified (the default weigiht is 1.0)",
-    metavar="DIST")
-parser.add_option(
-    "-s",
-    "--swap",
-    action="store_true",
-    dest="swap",
-    help="generate swaps (as well as insertions and deletions)")
-parser.add_option(
-    "",
-    "--no-elim",
-    action="store_true",
-    dest="no_elim",
-    help="don't do redundancy elimination")
-parser.add_option(
-    "-m",
-    "--minimum-edit",
-    type="int",
-    dest="minimum_edit",
-    help="minimum accepting edit (default is 1)")
-parser.add_option(
-    "",
-    "--no-string-initial-correction",
-    action="store_true",
-    dest="no_initial",
-    help="don't make corrections at the beginning of the string")
-parser.add_option(
-    "-i",
-    "--input",
-    dest="inputfile",
-    help="optional file with special edit-distance syntax",
-    metavar="INPUT")
-parser.add_option(
-    "-o",
-    "--output-file",
-    dest="outputfile",
-    help="output file (default is stdout)",
-    metavar="OUTPUT")
-parser.add_option(
-    "-a",
-    "--alphabet",
-    dest="alphabetfile",
-    help=
-    "read the alphabet from an existing optimized-lookup format transducer",
-    metavar="ALPHABET")
-parser.add_option(
-    "-v",
-    "--verbose",
-    action="store_true",
-    dest="verbose",
-    help="print some diagnostics to standard error")
-parser.set_defaults(make_regex=False)
-parser.set_defaults(epsilon='@0@')
-parser.set_defaults(distance=1)
-parser.set_defaults(default_weight=1.0)
-parser.set_defaults(swap=False)
-parser.set_defaults(no_elim=False)
-parser.set_defaults(no_initial=False)
-parser.set_defaults(minimum_edit=0)
-parser.set_defaults(verbose=False)
-(options, args) = parser.parse_args()
-
 # Some utility classes
 
 
@@ -471,6 +383,95 @@ def replace_rules(alphabet, pair_info, weight=options.default_weight):
     return corrections
 
 
+def parse_options():
+    parser = MyOptionParser(usage=usage_string, epilog=info_string)
+    parser.add_option(
+        "-r",
+        "--regex",
+        action="store_true",
+        dest="make_regex",
+        help="write a regular expression")
+    parser.add_option(
+        "-e",
+        "--epsilon",
+        dest="epsilon",
+        help="specify symbol to use as epsilon, default is @0@",
+        metavar="EPS")
+    parser.add_option(
+        "-d",
+        "--distance",
+        type="int",
+        dest="distance",
+        help="specify edit depth, default is 1",
+        metavar="DIST")
+    parser.add_option(
+        "-w",
+        "--default-weight",
+        type="float",
+        dest="default_weight",
+        help=
+        "weight per correction when nothing else is specified (the default weigiht is 1.0)",
+        metavar="DIST")
+    parser.add_option(
+        "-s",
+        "--swap",
+        action="store_true",
+        dest="swap",
+        help="generate swaps (as well as insertions and deletions)")
+    parser.add_option(
+        "",
+        "--no-elim",
+        action="store_true",
+        dest="no_elim",
+        help="don't do redundancy elimination")
+    parser.add_option(
+        "-m",
+        "--minimum-edit",
+        type="int",
+        dest="minimum_edit",
+        help="minimum accepting edit (default is 1)")
+    parser.add_option(
+        "",
+        "--no-string-initial-correction",
+        action="store_true",
+        dest="no_initial",
+        help="don't make corrections at the beginning of the string")
+    parser.add_option(
+        "-i",
+        "--input",
+        dest="inputfile",
+        help="optional file with special edit-distance syntax",
+        metavar="INPUT")
+    parser.add_option(
+        "-o",
+        "--output-file",
+        dest="outputfile",
+        help="output file (default is stdout)",
+        metavar="OUTPUT")
+    parser.add_option(
+        "-a",
+        "--alphabet",
+        dest="alphabetfile",
+        help=
+        "read the alphabet from an existing optimized-lookup format transducer",
+        metavar="ALPHABET")
+    parser.add_option(
+        "-v",
+        "--verbose",
+        action="store_true",
+        dest="verbose",
+        help="print some diagnostics to standard error")
+    parser.set_defaults(make_regex=False)
+    parser.set_defaults(epsilon='@0@')
+    parser.set_defaults(distance=1)
+    parser.set_defaults(default_weight=1.0)
+    parser.set_defaults(swap=False)
+    parser.set_defaults(no_elim=False)
+    parser.set_defaults(no_initial=False)
+    parser.set_defaults(minimum_edit=0)
+    parser.set_defaults(verbose=False)
+
+    return parser.parse_args()
 
 
 def main():

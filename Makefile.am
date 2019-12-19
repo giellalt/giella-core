@@ -48,13 +48,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/iso3-to-2.sh \
    scripts/iso639-to-name.sh \
    scripts/iso-639-3.txt \
-   scripts/keyboards/android-glyphs-api16.bin \
-   scripts/keyboards/android-glyphs-api19.bin \
-   scripts/keyboards/android-glyphs-api21.bin \
-   scripts/keyboards/boolmap.py \
-   scripts/keyboards/gen.py \
-   scripts/keyboards/global.yaml \
-   scripts/keyboards/softkbdgen.py \
    scripts/lookup2cg \
    scripts/make-hfstspeller-version-easter-egg.sh \
    scripts/merge-templates.sh \

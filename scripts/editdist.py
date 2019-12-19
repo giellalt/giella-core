@@ -144,21 +144,16 @@ def maketrans(from_st, to_st, from_sy, to_sy, weight):
 
 
 class Transducer:
-    def __init__(self,
-                 alphabet,
-                 _other=OTHER,
-                 _epsilon=options.epsilon,
-                 _distance=options.distance):
+    def __init__(self, alphabet, options, _other=OTHER):
         self.alphabet = alphabet
         self.substitutions = {}
         self.swaps = {}
+        self.options = options
         self.other = _other
-        self.epsilon = _epsilon
-        self.distance = _distance
         self.transitions = []
         # the first self.distance states are always used, for others we
         # grab state numbers from this counter
-        self.state_clock = self.distance + 1
+        self.state_clock = self.options.distance + 1
         self.debug_messages = []
 
     def process_pair_info(self, specification):
@@ -170,22 +165,23 @@ class Transducer:
     def generate(self):
         # for substitutions and swaps that weren't defined by the user,
         # generate standard subs and swaps
-        if (self.other, self.epsilon) not in self.substitutions:
-            self.substitutions[(self.other,
-                                self.epsilon)] = options.default_weight
+        if (self.other, self.options.epsilon) not in self.substitutions:
+            self.substitutions[(
+                self.other,
+                self.options.epsilon)] = self.options.default_weight
         for symbol in list(self.alphabet.keys()):
             if (self.other, symbol) not in self.substitutions:
                 self.substitutions[(
-                    self.other,
-                    symbol)] = options.default_weight + alphabet[symbol]
-            if (self.epsilon, symbol) not in self.substitutions:
+                    self.other, symbol
+                )] = self.options.default_weight + self.alphabet[symbol]
+            if (self.options.epsilon, symbol) not in self.substitutions:
                 self.substitutions[(
-                    self.epsilon,
-                    symbol)] = options.default_weight + alphabet[symbol]
-            if (symbol, self.epsilon) not in self.substitutions:
+                    self.options.epsilon, symbol
+                )] = self.options.default_weight + self.alphabet[symbol]
+            if (symbol, self.options.epsilon) not in self.substitutions:
                 self.substitutions[(
-                    symbol,
-                    self.epsilon)] = options.default_weight + alphabet[symbol]
+                    symbol, self.options.epsilon
+                )] = self.options.default_weight + self.alphabet[symbol]
             for symbol2 in list(self.alphabet.keys()):
                 if symbol == symbol2: continue
                 if ((symbol, symbol2), (symbol2, symbol)) not in self.swaps:
@@ -197,9 +193,9 @@ class Transducer:
                                                               symbol2))]
                     else:
                         self.swaps[((symbol, symbol2), (
-                            symbol2,
-                            symbol))] = options.default_weight + alphabet[
-                                symbol] + alphabet[symbol2]
+                            symbol2, symbol
+                        ))] = self.options.default_weight + self.alphabet[
+                            symbol] + self.alphabet[symbol2]
                 if (symbol, symbol2) not in self.substitutions:
                     if (symbol2, symbol) in self.substitutions:
                         self.substitutions[(
@@ -207,16 +203,16 @@ class Transducer:
                                                                     symbol)]
                     else:
                         self.substitutions[(
-                            symbol,
-                            symbol2)] = options.default_weight + alphabet[
-                                symbol] + alphabet[symbol2]
+                            symbol, symbol2
+                        )] = self.options.default_weight + self.alphabet[
+                            symbol] + self.alphabet[symbol2]
 
     def make_identities(self, state, nextstate=None):
         if nextstate is None:
             nextstate = state
         ret = []
         for symbol in list(self.alphabet.keys()):
-            if symbol not in (self.epsilon, self.other):
+            if symbol not in (self.options.epsilon, self.other):
                 ret.append(maketrans(state, nextstate, symbol, symbol, 0.0))
         return ret
 
@@ -224,7 +220,7 @@ class Transducer:
         if nextstate is None:
             nextstate = state + 1
         ret = []
-        if options.swap:
+        if self.options.swap:
             for swap in self.swaps:
                 swapstate = self.state_clock
                 self.state_clock += 1
@@ -248,7 +244,7 @@ class Transducer:
         eliminate = False
         # unless we're about to hit the maximum edit or we're not eliminating
         # redundancies, make skip states for delete and insert
-        if (nextstate < options.distance) and not options.no_elim:
+        if (nextstate < self.options.distance) and not self.options.no_elim:
             eliminate = True
             delete_skip = self.state_clock
             self.state_clock += 1
@@ -264,23 +260,23 @@ class Transducer:
                 ret.append(
                     maketrans(state, nextstate, sub[0], sub[1],
                               self.substitutions[sub]))
-            elif sub[1] is self.epsilon:  # (eliminating) deletion
+            elif sub[1] is self.options.epsilon:  # (eliminating) deletion
                 ret.append(
                     maketrans(state, delete_skip, sub[0], sub[1],
                               self.substitutions[sub]))
                 for sub2 in self.substitutions:
                     # after deletion, refuse to do insertion
-                    if sub2[0] != self.epsilon:
+                    if sub2[0] != self.options.epsilon:
                         ret.append(
                             maketrans(delete_skip, nextstate + 1, sub2[0],
                                       sub2[1], self.substitutions[sub2]))
-            elif sub[0] is self.epsilon:  # (eliminating) insertion
+            elif sub[0] is self.options.epsilon:  # (eliminating) insertion
                 ret.append(
                     maketrans(state, insert_skip, sub[0], sub[1],
                               self.substitutions[sub]))
                 for sub2 in self.substitutions:
                     # after insertion, refuse to do deletion
-                    if sub2[1] != self.epsilon:
+                    if sub2[1] != self.options.epsilon:
                         ret.append(
                             maketrans(insert_skip, nextstate + 1, sub2[0],
                                       sub2[1], self.substitutions[sub2]))
@@ -293,25 +289,25 @@ class Transducer:
     def make_transitions(self):
         # If we're not editing in the initial state, there's an extra state
         # where we just want identities
-        for state in range(options.distance + options.no_initial):
-            if options.minimum_edit != 0:
-                options.minimum_edit -= 1
+        for state in range(self.options.distance + self.options.no_initial):
+            if self.options.minimum_edit != 0:
+                self.options.minimum_edit -= 1
             else:
                 self.transitions.append(str(state) + "\t0.0")  # final states
-            if state == 0 and options.no_initial:
+            if state == 0 and self.options.no_initial:
                 self.transitions += self.make_identities(state, state + 1)
                 continue  # Don't do initial corrections
             else:
                 self.transitions += self.make_identities(state)
             self.transitions += self.make_substitutions(state)
             self.transitions += self.make_swaps(state)
-        self.transitions += self.make_identities(options.distance +
-                                                 options.no_initial)
+        self.transitions += self.make_identities(self.options.distance +
+                                                 self.options.no_initial)
         self.transitions.append(
-            str(options.distance + options.no_initial) + "\t0.0")
+            str(self.options.distance + self.options.no_initial) + "\t0.0")
 
 
-def replace_rules(alphabet, pair_info, weight=options.default_weight):
+def replace_rules(alphabet, pair_info, weight, swap):
     corr = ' "<CORR>" '
     unk = OTHER
     corrections = "["
@@ -362,7 +358,7 @@ def replace_rules(alphabet, pair_info, weight=options.default_weight):
     corrections = corrections[:-3]
     corrections += ' ]]'
     # and finally swaps, if enabled:
-    if options.swap:
+    if swap:
         corrections += '\n | \n[\n'
         for a in alphabet:
             for b in alphabet:

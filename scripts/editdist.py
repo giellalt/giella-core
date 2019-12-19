@@ -62,98 +62,157 @@ with d for distance and S for size of alphabet plus one
 
 OTHER = '@_UNKNOWN_SYMBOL_@'
 
+
 class MyOptionParser(OptionParser):
     # This is needed to override the formatting of the help string
     def format_epilog(self, formatter):
         return self.epilog
 
+
 parser = MyOptionParser(usage=usage_string, epilog=info_string)
-parser.add_option("-r", "--regex", action = "store_true", dest = "make_regex",
-                  help = "write a regular expression")
-parser.add_option("-e", "--epsilon", dest = "epsilon",
-                  help = "specify symbol to use as epsilon, default is @0@",
-                  metavar = "EPS")
-parser.add_option("-d", "--distance", type = "int", dest = "distance",
-                  help = "specify edit depth, default is 1",
-                  metavar = "DIST")
-parser.add_option("-w", "--default-weight", type = "float", dest = "default_weight",
-                  help = "weight per correction when nothing else is specified (the default weigiht is 1.0)",
-                  metavar = "DIST")
-parser.add_option("-s", "--swap", action = "store_true", dest="swap",
-                  help = "generate swaps (as well as insertions and deletions)")
-parser.add_option("", "--no-elim", action = "store_true", dest="no_elim",
-                  help = "don't do redundancy elimination")
-parser.add_option("-m", "--minimum-edit", type = "int", dest = "minimum_edit",
-                  help = "minimum accepting edit (default is 1)")
-parser.add_option("", "--no-string-initial-correction", action = "store_true",
-                  dest = "no_initial",
-                  help = "don't make corrections at the beginning of the string")
-parser.add_option("-i", "--input", dest = "inputfile",
-                  help = "optional file with special edit-distance syntax",
-                  metavar = "INPUT")
-parser.add_option("-o", "--output-file", dest = "outputfile", help = "output file (default is stdout)", metavar = "OUTPUT")
-parser.add_option("-a", "--alphabet", dest = "alphabetfile",
-                  help = "read the alphabet from an existing optimized-lookup format transducer",
-                  metavar = "ALPHABET")
-parser.add_option("-v", "--verbose", action = "store_true", dest="verbose",
-                  help = "print some diagnostics to standard error")
-parser.set_defaults(make_regex = False)
-parser.set_defaults(epsilon = '@0@')
-parser.set_defaults(distance = 1)
-parser.set_defaults(default_weight = 1.0)
-parser.set_defaults(swap = False)
-parser.set_defaults(no_elim = False)
-parser.set_defaults(no_initial = False)
-parser.set_defaults(minimum_edit = 0)
-parser.set_defaults(verbose = False)
+parser.add_option(
+    "-r",
+    "--regex",
+    action="store_true",
+    dest="make_regex",
+    help="write a regular expression")
+parser.add_option(
+    "-e",
+    "--epsilon",
+    dest="epsilon",
+    help="specify symbol to use as epsilon, default is @0@",
+    metavar="EPS")
+parser.add_option(
+    "-d",
+    "--distance",
+    type="int",
+    dest="distance",
+    help="specify edit depth, default is 1",
+    metavar="DIST")
+parser.add_option(
+    "-w",
+    "--default-weight",
+    type="float",
+    dest="default_weight",
+    help=
+    "weight per correction when nothing else is specified (the default weigiht is 1.0)",
+    metavar="DIST")
+parser.add_option(
+    "-s",
+    "--swap",
+    action="store_true",
+    dest="swap",
+    help="generate swaps (as well as insertions and deletions)")
+parser.add_option(
+    "",
+    "--no-elim",
+    action="store_true",
+    dest="no_elim",
+    help="don't do redundancy elimination")
+parser.add_option(
+    "-m",
+    "--minimum-edit",
+    type="int",
+    dest="minimum_edit",
+    help="minimum accepting edit (default is 1)")
+parser.add_option(
+    "",
+    "--no-string-initial-correction",
+    action="store_true",
+    dest="no_initial",
+    help="don't make corrections at the beginning of the string")
+parser.add_option(
+    "-i",
+    "--input",
+    dest="inputfile",
+    help="optional file with special edit-distance syntax",
+    metavar="INPUT")
+parser.add_option(
+    "-o",
+    "--output-file",
+    dest="outputfile",
+    help="output file (default is stdout)",
+    metavar="OUTPUT")
+parser.add_option(
+    "-a",
+    "--alphabet",
+    dest="alphabetfile",
+    help=
+    "read the alphabet from an existing optimized-lookup format transducer",
+    metavar="ALPHABET")
+parser.add_option(
+    "-v",
+    "--verbose",
+    action="store_true",
+    dest="verbose",
+    help="print some diagnostics to standard error")
+parser.set_defaults(make_regex=False)
+parser.set_defaults(epsilon='@0@')
+parser.set_defaults(distance=1)
+parser.set_defaults(default_weight=1.0)
+parser.set_defaults(swap=False)
+parser.set_defaults(no_elim=False)
+parser.set_defaults(no_initial=False)
+parser.set_defaults(minimum_edit=0)
+parser.set_defaults(verbose=False)
 (options, args) = parser.parse_args()
 
 # Some utility classes
+
 
 class Header(object):
     """Read and provide interface to header"""
 
     def __init__(self, file):
-        bytes = file.read(5) # "HFST\0"
+        bytes = file.read(5)  # "HFST\0"
         if str(struct.unpack_from("<5s", bytes, 0)) == "('HFST\\x00',)":
             # just ignore any hfst3 header
             remaining = struct.unpack_from("<H", file.read(3), 0)[0]
             self.handle_hfst3_header(file, remaining)
-            bytes = file.read(56) # 2 unsigned shorts, 4 unsigned ints and 9 uint-bools
+            bytes = file.read(
+                56)  # 2 unsigned shorts, 4 unsigned ints and 9 uint-bools
         else:
             bytes = bytes + file.read(56 - 5)
-        self.number_of_input_symbols             = struct.unpack_from("<H", bytes, 0)[0]
-        self.number_of_symbols                   = struct.unpack_from("<H", bytes, 2)[0]
-        self.size_of_transition_index_table      = struct.unpack_from("<I", bytes, 4)[0]
-        self.size_of_transition_target_table     = struct.unpack_from("<I", bytes, 8)[0]
-        self.number_of_states                    = struct.unpack_from("<I", bytes, 12)[0]
-        self.number_of_transitions               = struct.unpack_from("<I", bytes, 16)[0]
-        self.weighted                            = struct.unpack_from("<I", bytes, 20)[0] != 0
-        self.deterministic                       = struct.unpack_from("<I", bytes, 24)[0] != 0
-        self.input_deterministic                 = struct.unpack_from("<I", bytes, 28)[0] != 0
-        self.minimized                           = struct.unpack_from("<I", bytes, 32)[0] != 0
-        self.cyclic                              = struct.unpack_from("<I", bytes, 36)[0] != 0
-        self.has_epsilon_epsilon_transitions     = struct.unpack_from("<I", bytes, 40)[0] != 0
-        self.has_input_epsilon_transitions       = struct.unpack_from("<I", bytes, 44)[0] != 0
-        self.has_input_epsilon_cycles            = struct.unpack_from("<I", bytes, 48)[0] != 0
-        self.has_unweighted_input_epsilon_cycles = struct.unpack_from("<I", bytes, 52)[0] != 0
+        self.number_of_input_symbols = struct.unpack_from("<H", bytes, 0)[0]
+        self.number_of_symbols = struct.unpack_from("<H", bytes, 2)[0]
+        self.size_of_transition_index_table = struct.unpack_from(
+            "<I", bytes, 4)[0]
+        self.size_of_transition_target_table = struct.unpack_from(
+            "<I", bytes, 8)[0]
+        self.number_of_states = struct.unpack_from("<I", bytes, 12)[0]
+        self.number_of_transitions = struct.unpack_from("<I", bytes, 16)[0]
+        self.weighted = struct.unpack_from("<I", bytes, 20)[0] != 0
+        self.deterministic = struct.unpack_from("<I", bytes, 24)[0] != 0
+        self.input_deterministic = struct.unpack_from("<I", bytes, 28)[0] != 0
+        self.minimized = struct.unpack_from("<I", bytes, 32)[0] != 0
+        self.cyclic = struct.unpack_from("<I", bytes, 36)[0] != 0
+        self.has_epsilon_epsilon_transitions = struct.unpack_from(
+            "<I", bytes, 40)[0] != 0
+        self.has_input_epsilon_transitions = struct.unpack_from(
+            "<I", bytes, 44)[0] != 0
+        self.has_input_epsilon_cycles = struct.unpack_from("<I", bytes,
+                                                           48)[0] != 0
+        self.has_unweighted_input_epsilon_cycles = struct.unpack_from(
+            "<I", bytes, 52)[0] != 0
 
     def handle_hfst3_header(self, file, remaining):
         chars = struct.unpack_from("<" + str(remaining) + "c",
                                    file.read(remaining), 0)
         # assume the h3-header doesn't say anything surprising for now
 
+
 class Alphabet:
     """Read and provide interface to alphabet"""
 
     def __init__(self, file, number_of_symbols):
         stderr_u8 = sys.stderr
-        self.keyTable = [] # list of unicode objects, use foo.encode("utf-8") to print
+        self.keyTable = [
+        ]  # list of unicode objects, use foo.encode("utf-8") to print
         for x in range(number_of_symbols):
             symbol = ""
             while True:
                 byte = file.read(1)
-                if byte == '\0': # a symbol has ended
+                if byte == '\0':  # a symbol has ended
                     symbol = str(symbol, "utf-8")
                     if len(symbol) != 1:
                         stderr_u8.write("Ignored symbol " + symbol + "\n")
@@ -162,14 +221,22 @@ class Alphabet:
                     break
                 symbol += byte
 
-def p(string): # stupid python, or possibly stupid me
+
+def p(string):  # stupid python, or possibly stupid me
     return string.encode('utf-8')
 
+
 def maketrans(from_st, to_st, from_sy, to_sy, weight):
-    return str(from_st) + "\t" + str(to_st) + "\t" + p(from_sy) + "\t" + p(to_sy) + "\t" + str(weight)
+    return str(from_st) + "\t" + str(to_st) + "\t" + p(from_sy) + "\t" + p(
+        to_sy) + "\t" + str(weight)
+
 
 class Transducer:
-    def __init__(self, alphabet, _other = OTHER, _epsilon = options.epsilon, _distance = options.distance):
+    def __init__(self,
+                 alphabet,
+                 _other=OTHER,
+                 _epsilon=options.epsilon,
+                 _distance=options.distance):
         self.alphabet = alphabet
         self.substitutions = {}
         self.swaps = {}
@@ -192,28 +259,47 @@ class Transducer:
         # for substitutions and swaps that weren't defined by the user,
         # generate standard subs and swaps
         if (self.other, self.epsilon) not in self.substitutions:
-            self.substitutions[(self.other, self.epsilon)] = options.default_weight
+            self.substitutions[(self.other,
+                                self.epsilon)] = options.default_weight
         for symbol in list(self.alphabet.keys()):
             if (self.other, symbol) not in self.substitutions:
-                self.substitutions[(self.other, symbol)] = options.default_weight + alphabet[symbol]
+                self.substitutions[(
+                    self.other,
+                    symbol)] = options.default_weight + alphabet[symbol]
             if (self.epsilon, symbol) not in self.substitutions:
-                self.substitutions[(self.epsilon, symbol)] = options.default_weight + alphabet[symbol]
+                self.substitutions[(
+                    self.epsilon,
+                    symbol)] = options.default_weight + alphabet[symbol]
             if (symbol, self.epsilon) not in self.substitutions:
-                self.substitutions[(symbol, self.epsilon)] = options.default_weight + alphabet[symbol]
+                self.substitutions[(
+                    symbol,
+                    self.epsilon)] = options.default_weight + alphabet[symbol]
             for symbol2 in list(self.alphabet.keys()):
                 if symbol == symbol2: continue
                 if ((symbol, symbol2), (symbol2, symbol)) not in self.swaps:
                     if ((symbol2, symbol), (symbol, symbol2)) in self.swaps:
-                        self.swaps[((symbol, symbol2), (symbol2, symbol))] = self.swaps[((symbol2, symbol), (symbol, symbol2))]
+                        self.swaps[((symbol, symbol2),
+                                    (symbol2,
+                                     symbol))] = self.swaps[((symbol2, symbol),
+                                                             (symbol,
+                                                              symbol2))]
                     else:
-                        self.swaps[((symbol, symbol2), (symbol2, symbol))] = options.default_weight + alphabet[symbol] + alphabet[symbol2]
+                        self.swaps[((symbol, symbol2), (
+                            symbol2,
+                            symbol))] = options.default_weight + alphabet[
+                                symbol] + alphabet[symbol2]
                 if (symbol, symbol2) not in self.substitutions:
                     if (symbol2, symbol) in self.substitutions:
-                        self.substitutions[(symbol, symbol2)] = self.substitutions[(symbol2, symbol)]
+                        self.substitutions[(
+                            symbol, symbol2)] = self.substitutions[(symbol2,
+                                                                    symbol)]
                     else:
-                        self.substitutions[(symbol, symbol2)] = options.default_weight + alphabet[symbol] + alphabet[symbol2]
+                        self.substitutions[(
+                            symbol,
+                            symbol2)] = options.default_weight + alphabet[
+                                symbol] + alphabet[symbol2]
 
-    def make_identities(self, state, nextstate = None):
+    def make_identities(self, state, nextstate=None):
         if nextstate is None:
             nextstate = state
         ret = []
@@ -222,7 +308,7 @@ class Transducer:
                 ret.append(maketrans(state, nextstate, symbol, symbol, 0.0))
         return ret
 
-    def make_swaps(self, state, nextstate = None):
+    def make_swaps(self, state, nextstate=None):
         if nextstate is None:
             nextstate = state + 1
         ret = []
@@ -230,14 +316,20 @@ class Transducer:
             for swap in self.swaps:
                 swapstate = self.state_clock
                 self.state_clock += 1
-                self.debug_messages.append(str(swapstate) + " is a swap state for " + swap[0][0] + " and " + swap[0][1])
-                ret.append(maketrans(state, swapstate, swap[0][0], swap[0][1], self.swaps[swap]))
-                ret.append(maketrans(swapstate, nextstate, swap[1][0], swap[1][1], 0.0))
+                self.debug_messages.append(
+                    str(swapstate) + " is a swap state for " + swap[0][0] +
+                    " and " + swap[0][1])
+                ret.append(
+                    maketrans(state, swapstate, swap[0][0], swap[0][1],
+                              self.swaps[swap]))
+                ret.append(
+                    maketrans(swapstate, nextstate, swap[1][0], swap[1][1],
+                              0.0))
         return ret
 
     # for substitutions, we try to eliminate redundancies by refusing to do
     # deletion right after insertion and insertion right after deletion
-    def make_substitutions(self, state, nextstate = None):
+    def make_substitutions(self, state, nextstate=None):
         if nextstate is None:
             nextstate = state + 1
         ret = []
@@ -257,21 +349,33 @@ class Transducer:
 
         for sub in self.substitutions:
             if not eliminate:
-                ret.append(maketrans(state, nextstate, sub[0], sub[1], self.substitutions[sub]))
-            elif sub[1] is self.epsilon: # (eliminating) deletion
-                ret.append(maketrans(state, delete_skip, sub[0], sub[1], self.substitutions[sub]))
+                ret.append(
+                    maketrans(state, nextstate, sub[0], sub[1],
+                              self.substitutions[sub]))
+            elif sub[1] is self.epsilon:  # (eliminating) deletion
+                ret.append(
+                    maketrans(state, delete_skip, sub[0], sub[1],
+                              self.substitutions[sub]))
                 for sub2 in self.substitutions:
                     # after deletion, refuse to do insertion
                     if sub2[0] != self.epsilon:
-                        ret.append(maketrans(delete_skip, nextstate + 1, sub2[0], sub2[1], self.substitutions[sub2]))
-            elif sub[0] is self.epsilon: # (eliminating) insertion
-                ret.append(maketrans(state, insert_skip, sub[0], sub[1], self.substitutions[sub]))
+                        ret.append(
+                            maketrans(delete_skip, nextstate + 1, sub2[0],
+                                      sub2[1], self.substitutions[sub2]))
+            elif sub[0] is self.epsilon:  # (eliminating) insertion
+                ret.append(
+                    maketrans(state, insert_skip, sub[0], sub[1],
+                              self.substitutions[sub]))
                 for sub2 in self.substitutions:
                     # after insertion, refuse to do deletion
                     if sub2[1] != self.epsilon:
-                        ret.append(maketrans(insert_skip, nextstate + 1, sub2[0], sub2[1], self.substitutions[sub2]))
+                        ret.append(
+                            maketrans(insert_skip, nextstate + 1, sub2[0],
+                                      sub2[1], self.substitutions[sub2]))
             else:
-                ret.append(maketrans(state, nextstate, sub[0], sub[1], self.substitutions[sub]))
+                ret.append(
+                    maketrans(state, nextstate, sub[0], sub[1],
+                              self.substitutions[sub]))
         return ret
 
     def make_transitions(self):
@@ -281,16 +385,19 @@ class Transducer:
             if options.minimum_edit != 0:
                 options.minimum_edit -= 1
             else:
-                self.transitions.append(str(state) + "\t0.0") # final states
+                self.transitions.append(str(state) + "\t0.0")  # final states
             if state == 0 and options.no_initial:
                 self.transitions += self.make_identities(state, state + 1)
-                continue # Don't do initial corrections
+                continue  # Don't do initial corrections
             else:
                 self.transitions += self.make_identities(state)
             self.transitions += self.make_substitutions(state)
             self.transitions += self.make_swaps(state)
-        self.transitions += self.make_identities(options.distance + options.no_initial)
-        self.transitions.append(str(options.distance + options.no_initial) + "\t0.0")
+        self.transitions += self.make_identities(options.distance +
+                                                 options.no_initial)
+        self.transitions.append(
+            str(options.distance + options.no_initial) + "\t0.0")
+
 
 alphabet = {}
 exclusions = set()
@@ -330,7 +437,7 @@ if options.inputfile != None:
                 weight = float(line.split('\t')[1])
                 symbol = line.split('\t')[0]
             else:
-                weight = options.default_weight # should be default_weight
+                weight = options.default_weight  # should be default_weight
                 symbol = line.strip("\n")
             alphabet[symbol] = weight
     while True:
@@ -351,8 +458,9 @@ if options.inputfile != None:
             frompair = tuple(parts[0].split(','))
             topair = tuple(parts[1].split(','))
             if not (len(frompair) == len(topair) == 2):
-                raise ValueError("Got swap-specification with incorrect number "
-                                 "of comma separators:\n" + specification)
+                raise ValueError(
+                    "Got swap-specification with incorrect number "
+                    "of comma separators:\n" + specification)
             if (frompair, topair) not in pair_info["swaps"]:
                 pair_info["swaps"][(frompair, topair)] = weight
             for sym in [frompair[0], frompair[1], topair[0], topair[1]]:
@@ -378,7 +486,8 @@ if options.alphabetfile != None:
             alphabet[c] = 0.0
 epsilon = options.epsilon
 
-def replace_rules(alphabet, pair_info, weight = options.default_weight):
+
+def replace_rules(alphabet, pair_info, weight=options.default_weight):
     corr = ' "<CORR>" '
     unk = OTHER
     corrections = "["
@@ -389,7 +498,8 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
         # insertions
         if ('', a) in pair_info["edits"]:
             this_weight = pair_info["edits"][('', a)] + alphabet[a]
-        corrections += '\t[ "' + a + '" ' + corr + ' ]::' + str(this_weight) + ' |\n'
+        corrections += '\t[ "' + a + '" ' + corr + ' ]::' + str(
+            this_weight) + ' |\n'
     # trim the extra left by the last pass
     corrections = corrections[:-3]
     corrections += ' ] ,,\n'
@@ -402,23 +512,28 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
         # deletion
         if (a, '') in pair_info["edits"]:
             this_weight = pair_info["edits"][(a, '')]
-        corrections += '\t[ ""' + corr + ']::' + str(weight) + ' |\n' # the actual deletion expression
+        corrections += '\t[ ""' + corr + ']::' + str(
+            weight) + ' |\n'  # the actual deletion expression
         # substitutions
         for b in alphabet:
-            this_weight = alphabet[b] # old: weight + alphabet[b]
+            this_weight = alphabet[b]  # old: weight + alphabet[b]
             if a == b:
                 # we don't handle identities here
                 continue
             if (a, b) in pair_info["edits"]:
-                this_weight = pair_info["edits"][(a, b)] # + alphabet[b] # xxx
-            corrections += '\t[ "' + b + '"' + corr + ']::' + str(this_weight) + ' |\n'
+                this_weight = pair_info["edits"][(a, b)]  # + alphabet[b] # xxx
+            corrections += '\t[ "' + b + '"' + corr + ']::' + str(
+                this_weight) + ' |\n'
         corrections = corrections[:-3]
         corrections += ' ] ,,\n'
     # now the unknown symbol
-    corrections += '"' + unk + '" -> [\n\t[""' + corr + ']::' + str(weight) + ' |\n' # Initial line unk regex
-    for a in alphabet: # unk -> the whole alphabet:
+    corrections += '"' + unk + '" -> [\n\t[""' + corr + ']::' + str(
+        weight) + ' |\n'  # Initial line unk regex
+    for a in alphabet:  # unk -> the whole alphabet:
         this_weight = alphabet[a]
-        corrections += '\t[ "' + a + '"' + corr + ']::' + str(this_weight) + ' |\n' # for each target symbol, use the weight of that symbol
+        corrections += '\t[ "' + a + '"' + corr + ']::' + str(
+            this_weight
+        ) + ' |\n'  # for each target symbol, use the weight of that symbol
     # trim the end again
     corrections = corrections[:-3]
     corrections += ' ]]'
@@ -430,13 +545,15 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
                 if a == b:
                     # we don't handle identities here
                     continue
-                frompair = (a,b)
-                topair = (b,a)
+                frompair = (a, b)
+                topair = (b, a)
                 if (frompair, topair) in pair_info["swaps"]:
                     this_weight = pair_info["swaps"][(frompair, topair)]
-                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(this_weight) + ' ,\n'
+                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(
+                        this_weight) + ' ,\n'
                 else:
-                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(weight) + ' ,\n'
+                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(
+                        weight) + ' ,\n'
         corrections = corrections[:-3]
         corrections += ' ]'
     return corrections
@@ -444,7 +561,8 @@ def replace_rules(alphabet, pair_info, weight = options.default_weight):
 
 if options.make_regex:
     corrections = replace_rules(alphabet, pair_info)
-    corr_counter = '[[ [? - "<CORR>"]* ( "<CORR>":0 ) [? - "<CORR>"]* ]^' + str(options.distance) + ']'
+    corr_counter = '[[ [? - "<CORR>"]* ( "<CORR>":0 ) [? - "<CORR>"]* ]^' + str(
+        options.distance) + ']'
     corr_eater = '[[? - "<CORR>"]*]'
     full_regex = corr_eater + '\n.o.\n' + corrections + '\n.o.\n' + corr_counter + ";\n"
     outputfile.write(full_regex)
@@ -460,8 +578,11 @@ else:
     stderr_u8 = sys.stderr
 
     if options.verbose:
-        stderr_u8.write("\n" + str(transducer.state_clock) + " states and " + str(len(transducer.transitions)) + " transitions written for "+
-                        "distance " + str(options.distance) + " and base alphabet size " + str(len(transducer.alphabet)) +"\n\n")
+        stderr_u8.write("\n" + str(transducer.state_clock) + " states and " +
+                        str(len(transducer.transitions)) +
+                        " transitions written for " + "distance " +
+                        str(options.distance) + " and base alphabet size " +
+                        str(len(transducer.alphabet)) + "\n\n")
         stderr_u8.write("The alphabet was:\n")
         for symbol, weight in alphabet.items():
             stderr_u8.write(symbol + "\t" + str(weight) + "\n")

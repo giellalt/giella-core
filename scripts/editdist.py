@@ -524,8 +524,8 @@ def main():
                 break
             parts = line.split('\t')
             if len(parts) != 3:
-                raise ValueError("Got specification with " + str(len(parts)) +\
-                                    " parts, expected 3:\n" + specification)
+                raise ValueError("Got specification with " + str(len(parts)) +
+                                 " parts, expected 3:\n" + specification)
             weight = float(parts[2])
             if ',' in parts[0]:
                 frompair = tuple(parts[0].split(','))

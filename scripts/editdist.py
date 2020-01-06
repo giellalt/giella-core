@@ -476,7 +476,7 @@ def main():
     exclusions = set()
     pair_info = {"edits": {}, "swaps": {}}
 
-    if options.inputfile == None and options.alphabetfile == None \
+    if options.inputfile is None and options.alphabetfile is None \
             and len(args) == 0:
         print("Specify at least one of INPUT, ALPHABET or alphabet string")
         sys.exit()
@@ -484,12 +484,12 @@ def main():
         print("Too many options!")
         sys.exit()
 
-    if options.outputfile == None:
+    if options.outputfile is None:
         outputfile = sys.stdout
     else:
         outputfile = open(options.outputfile, 'w')
 
-    if options.inputfile != None:
+    if options.inputfile is not None:
         try:
             inputfile = open(options.inputfile)
         except IOError:
@@ -550,7 +550,7 @@ def main():
         for c in str(args[0], 'utf-8'):
             if c not in list(alphabet.keys()) and c not in exclusions:
                 alphabet[c] = 0.0
-    if options.alphabetfile != None:
+    if options.alphabetfile is not None:
         afile = open(options.alphabetfile, "rb")
         ol_header = Header(afile)
         ol_alphabet = Alphabet(afile, ol_header.number_of_symbols)

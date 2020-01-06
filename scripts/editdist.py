@@ -318,22 +318,21 @@ def replace_rules(alphabet, pair_info, weight, swap):
         # insertions
         if ('', a) in pair_info["edits"]:
             this_weight = pair_info["edits"][('', a)] + alphabet[a]
-        corrections += '\t[ "' + a + '" ' + corr + ' ]::' + str(
-            this_weight) + ' |\n'
+        corrections += '\t[ "{}" {} ]::{} |\n'.format(a, corr, this_weight)
     # trim the extra left by the last pass
     corrections = corrections[:-3]
     corrections += ' ] ,,\n'
     for a in alphabet:
         this_weight = alphabet[a]
         # the left-hand side of the rule
-        corrections += '"' + a + '" ->\t[ '
+        corrections += '"{}" ->\t[ '.format(a)
         # identity
-        corrections += '"' + a + '" |\n'
+        corrections += '"{}" |\n'.format(a)
         # deletion
         if (a, '') in pair_info["edits"]:
             this_weight = pair_info["edits"][(a, '')]
-        corrections += '\t[ ""' + corr + ']::' + str(
-            weight) + ' |\n'  # the actual deletion expression
+        corrections += '\t[ ""{}]::{} |\n'.format(
+            corr, weight)  # the actual deletion expression
         # substitutions
         for b in alphabet:
             this_weight = alphabet[b]  # old: weight + alphabet[b]
@@ -342,18 +341,19 @@ def replace_rules(alphabet, pair_info, weight, swap):
                 continue
             if (a, b) in pair_info["edits"]:
                 this_weight = pair_info["edits"][(a, b)]  # + alphabet[b] # xxx
-            corrections += '\t[ "' + b + '"' + corr + ']::' + str(
-                this_weight) + ' |\n'
+            corrections += '\t[ "{}"{}]::{} |\n'.format(b, corr, this_weight)
+
         corrections = corrections[:-3]
         corrections += ' ] ,,\n'
     # now the unknown symbol
-    corrections += '"' + unk + '" -> [\n\t[""' + corr + ']::' + str(
-        weight) + ' |\n'  # Initial line unk regex
+    corrections += '"{}" -> [\n\t[""{}]::{} |\n'.format(
+        unk, corr, weight)  # Initial line unk regex
     for a in alphabet:  # unk -> the whole alphabet:
         this_weight = alphabet[a]
-        corrections += '\t[ "' + a + '"' + corr + ']::' + str(
-            this_weight
-        ) + ' |\n'  # for each target symbol, use the weight of that symbol
+        corrections += '\t[ "{}"{}]::{} |\n'.format(
+            a, corr, this_weight
+        )  # for each target symbol, use the weight of that symbol
+
     # trim the end again
     corrections = corrections[:-3]
     corrections += ' ]]'
@@ -369,11 +369,11 @@ def replace_rules(alphabet, pair_info, weight, swap):
                 topair = (b, a)
                 if (frompair, topair) in pair_info["swaps"]:
                     this_weight = pair_info["swaps"][(frompair, topair)]
-                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(
-                        this_weight) + ' ,\n'
+                    corrections += '["{}" "{}"] -> [ "{}" "{}"{}]::{} ,\n'.format(
+                        a, b, b, a, corr, this_weight)
                 else:
-                    corrections += '["' + a + '" "' + b + '"] -> [ "' + b + '" "' + a + '"' + corr + ']::' + str(
-                        weight) + ' ,\n'
+                    corrections += '["{}" "{}"] -> [ "{}" "{}"{}]::{} ,\n'.format(
+                        a, b, b, a, corr, weight)
         corrections = corrections[:-3]
         corrections += ' ]'
     return corrections

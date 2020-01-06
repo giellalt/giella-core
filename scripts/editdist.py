@@ -183,7 +183,8 @@ class Transducer:
                     symbol, self.options.epsilon
                 )] = self.options.default_weight + self.alphabet[symbol]
             for symbol2 in list(self.alphabet.keys()):
-                if symbol == symbol2: continue
+                if symbol == symbol2:
+                    continue
                 if ((symbol, symbol2), (symbol2, symbol)) not in self.swaps:
                     if ((symbol2, symbol), (symbol, symbol2)) in self.swaps:
                         self.swaps[((symbol, symbol2),

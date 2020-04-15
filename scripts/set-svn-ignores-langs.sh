@@ -141,6 +141,11 @@ $fstfiles
 *.hfstscript
 downcase-derived_proper-strings.xfscript" $1/src/orthography
 
+# Ignore all temporary and generated files in the src/phonetics/test/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.sh" $1/src/phonetics/test/
+
 # Ignore all temporary and generated files in the src/tagsets/ dir:
 $svnignore "$mkfiles
 $fstfiles
@@ -332,23 +337,6 @@ $svnignore "$mkfiles
 *.trs
 *.txt
 *.sh" $1/test/tools/spellcheckers/fstbased/desktop/hfst
-
-# Set the svn:ignore prop on the src/morphologyext-Apertium dir:
-$svnignore "$mkfiles
-INSTALL
-Makefile
-Makefile.in
-aclocal.m4
-ap_include.am
-*.pc
-*.cache
-*.log
-*.status
-configure
-install-sh
-missing
-*.gz
-*.bin" $1/src/morphology/ext-Apertium-*/
 
 
 # Remove the svn:ignore prop on some subdirs:

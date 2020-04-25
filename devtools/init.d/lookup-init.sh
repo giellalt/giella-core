@@ -781,17 +781,17 @@ alias ugeo='$LOOKUP $GTHOME/words/dicts/smi/geo/bin/geo.fst'
 alias kpvtoka="hfst-tokenise --giella-cg $GTHOME/langs/kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \
                sed 's/ <W:0.0000000000>//g;'"
 alias kpvtoks="hfst-tokenise --giella-cg $GTHOME/langs/kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \
-               vislcg3 -g $GTHOME/langs/kpv/src/syntax/disambiguator.cg3 | \
+               vislcg3 -g $GTHOME/langs/kpv/src/cg3/disambiguator.cg3 | \
                sed 's/ <W:0.0000000000>//g;'"
 alias kpvtokst="hfst-tokenise --giella-cg $GTHOME/langs/kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \
-               vislcg3 -g $GTHOME/langs/kpv/src/syntax/disambiguator.cg3 -t | \
+               vislcg3 -g $GTHOME/langs/kpv/src/cg3/disambiguator.cg3 -t | \
                sed 's/ <W:0.0000000000>//g;'"
 
 alias myvtoka="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | \  
                sed 's/ <W:0.0000000000>//g;'"
-alias myvtoks="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst |  vislcg3 -g $GTHOME/langs/myv/src/syntax/disambiguator.cg3 | \  
+alias myvtoks="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst |  vislcg3 -g $GTHOME/langs/myv/src/cg3/disambiguator.cg3 | \  
                sed 's/ <W:0.0000000000>//g;'"
-alias myvtokst="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g $GTHOME/langs/myv/src/syntax/disambiguator.cg3 -t | \  
+alias myvtokst="hfst-tokenise --giella-cg $GTHOME/langs/myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g $GTHOME/langs/myv/src/cg3/disambiguator.cg3 -t | \  
                sed 's/ <W:0.0000000000>//g;'"
 
 

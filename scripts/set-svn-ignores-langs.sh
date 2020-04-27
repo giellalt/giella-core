@@ -123,16 +123,16 @@ $svnignore "$mkfiles
 $fstfiles
 hyphenation.xfscript" $1/src/hyphenation
 
-# Ignore all temporary and generated files in the src/morphology/ dir:
+# Ignore all temporary and generated files in the src/fst/ dir:
 $svnignore "$mkfiles
 $fstfiles
 url.lexc
 *.tmp.*
 lexicon*
-root.lexc" $1/src/morphology
+root.lexc" $1/src/fst
 
-# Ignore all files in the src/morphology/generated_files dir:
-$svnignore "*" $1/src/morphology/generated_files
+# Ignore all files in the src/fst/generated_files dir:
+$svnignore "*" $1/src/fst/generated_files
 
 # Ignore all temporary and generated files in the src/orthography/ dir:
 $svnignore "$mkfiles
@@ -152,13 +152,13 @@ $fstfiles
 *.relabel
 *.txt" $1/src/tagsets
 
-# Ignore all temporary and generated files in the src/syntax/ dir:
+# Ignore all temporary and generated files in the src/cg3/ dir:
 $svnignore "$mkfiles
 $fstfiles
 dependency.cg3
 disambiguator.cg3
 functions.cg3
-korp.cg3" $1/src/syntax
+korp.cg3" $1/src/cg3
 
 # Set the svn:ignore prop on the test/data/ dir:
 $svnignore "$mkfiles
@@ -192,10 +192,10 @@ $fstfiles
 *.regex
 *.txt" $1/tools/grammarcheckers/filters
 
-# Set the svn:ignore prop on the tools/hyphenators/fstbased/ dir:
+# Set the svn:ignore prop on the tools/hyphenators/ dir:
 $svnignore "$mkfiles
 $fstfiles
-all_tags.txt" $1/tools/hyphenators/fstbased
+all_tags.txt" $1/tools/hyphenators
 
 # Set the svn:ignore prop on the tools/mt/apertium/ dir:
 $svnignore "$mkfiles
@@ -340,7 +340,7 @@ $svnignore "$mkfiles
 
 
 # Remove the svn:ignore prop on some subdirs:
-svn -q propdel svn:ignore $1/src/morphology/affixes
+svn -q propdel svn:ignore $1/src/fst/affixes
 svn -q propdel svn:ignore $1/am-shared
 svn -q propdel svn:ignore $1/m4
 svn -q propdel svn:ignore $1/doc/resources

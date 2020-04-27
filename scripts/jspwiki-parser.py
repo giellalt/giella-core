@@ -899,40 +899,40 @@ def compute_lexc_name(jspwiki):
     """Map filename back to a source file."""
     if 'langs/' in jspwiki and '/doc/' in jspwiki:
         if jspwiki.endswith('-syntax.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/syntax')
-            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/cg3')
+            basename = os.path.basename(jspwiki).replace('-cg3.jspwiki',
                                                          '.cg3')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-phonology.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc',
-                                                       '/src/phonology')
-            basename = os.path.basename(jspwiki).replace('-phonology.jspwiki',
+                                                       '/src/fst')
+            basename = os.path.basename(jspwiki).replace('-fst.jspwiki',
                                                          '.twolc')
             if os.path.exists(os.path.join(dirname, basename)):
                 return os.path.join(dirname, basename)
             else:
-                basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+                basename = os.path.basename(jspwiki).replace('-cg3.jspwiki',
                                                              '.xfscript')
                 return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-morphology.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc',
-                                                       '/src/morphology')
-            basename = os.path.basename(jspwiki).replace('-morphology.jspwiki',
+                                                       '/src/fst')
+            basename = os.path.basename(jspwiki).replace('-fst.jspwiki',
                                                          '.lexc')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-stems.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc',
-                                                       '/src/morphology/stems')
+                                                       '/src/fst/stems')
             basename = os.path.basename(jspwiki).replace('-stems.jspwiki',
                                                          '.lexc')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-affixes.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace(
-                '/doc', '/src/morphology/affixes')
+            dirname = os.path.dirname(jspwiki).replace('/doc',
+                                                       '/src/fst/affixes')
             basename = os.path.basename(jspwiki).replace('-affixes.jspwiki',
                                                          '.lexc')
             return os.path.join(dirname, basename)

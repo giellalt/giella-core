@@ -1,0 +1,116 @@
+## Process this file with automake to produce Makefile.in
+
+## Copyright (C) 2011 Samediggi
+
+## This program is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+
+## You should have received a copy of the GNU General Public License
+## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Hfst fst variables:
+GT_COMMON_SPELLER_HFST=
+
+# Xerox fst variables - Xerox can be used for building the list-based spellers:
+GT_COMMON_SPELLER_XFST=
+
+GT_COMMON_SPELLER_NAME=speller-gt-norm
+
+####### Automake targets: ########
+if WANT_SPELLERS
+
+if CAN_HFST
+GT_COMMON_SPELLER_HFST+=analyser-$(GT_COMMON_SPELLER_NAME).hfst
+GT_COMMON_SPELLER_HFST+=generator-$(GT_COMMON_SPELLER_NAME).hfst
+endif # CAN_HFST
+
+if CAN_XFST
+GT_COMMON_SPELLER_XFST+=analyser-$(GT_COMMON_SPELLER_NAME).xfst
+GT_COMMON_SPELLER_XFST+=generator-$(GT_COMMON_SPELLER_NAME).xfst
+endif # CAN_XFST
+
+#if CAN_FOMA
+#GT_COMMON_SPELLER_XFST+=analyser-$(GT_COMMON_SPELLER_NAME).foma
+#GT_COMMON_SPELLER_XFST+=generator-$(GT_COMMON_SPELLER_NAME).foma
+#endif # CAN_FOMA
+
+endif # WANT_SPELLERS
+
+noinst_DATA=$(GT_COMMON_SPELLER_HFST) $(GT_COMMON_SPELLER_XFST)
+
+# Build the common speller transducer by removing everything we don't want in
+# any of the spellers:
+analyser-$(GT_COMMON_SPELLER_NAME).tmp.%: \
+			$(top_builddir)/src/analyser-raw-gt-desc.%                     \
+			$(top_builddir)/src/filters/remove-CLB-strings.%               \
+			$(top_builddir)/src/filters/remove-error-strings.%             \
+			$(top_builddir)/src/filters/remove-MinusSpell-strings.%        \
+			$(top_builddir)/src/filters/remove-PUNCT-strings.%             \
+			$(top_builddir)/src/filters/remove-use_marg-strings.%          \
+			$(top_builddir)/src/filters/remove-orig_lang-tags.%            \
+			$(top_builddir)/src/filters/remove-usage_except_speller-tags.% \
+			$(top_builddir)/src/filters/remove-Use_GC-strings.%            \
+			$(top_builddir)/src/filters/remove-Use_minusGC-tags.%          \
+			$(top_builddir)/src/filters/remove-Use_minus_PMatch-tags.%     \
+			$(top_builddir)/src/filters/remove-Use_PMatch-strings.%        \
+			$(top_builddir)/src/filters/remove-mwe-tags.%                  \
+			$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.%
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+		    @\"$(top_builddir)/src/filters/remove-usage_except_speller-tags.$*\" \
+		.o. @\"$(top_builddir)/src/filters/remove-orig_lang-tags.$*\"        \
+		.o. @\"$(top_builddir)/src/filters/remove-CLB-strings.$*\"           \
+		.o. @\"$(top_builddir)/src/filters/remove-error-strings.$*\"         \
+		.o. @\"$(top_builddir)/src/filters/remove-MinusSpell-strings.$*\"    \
+		.o. @\"$(top_builddir)/src/filters/remove-PUNCT-strings.$*\"         \
+		.o. @\"$(top_builddir)/src/filters/remove-use_marg-strings.$*\"      \
+		.o. @\"$(top_builddir)/src/filters/remove-Use_minus_PMatch-tags.$*\" \
+		.o. @\"$(top_builddir)/src/filters/remove-Use_minusGC-tags.$*\"      \
+    	.o. @\"$(top_builddir)/src/filters/remove-Use_GC-strings.$*\"        \
+    	.o. @\"$(top_builddir)/src/filters/remove-Use_PMatch-strings.$*\"    \
+		.o. @\"$(top_builddir)/src/filters/remove-mwe-tags.$*\"              \
+		.o. @\"$<\" \
+		.o. @\"$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.$*\" \
+		;\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
+#### Transducer fallback targets:
+#### - inversion is needed FOR THE HFST ANALYSER because the hfst model is upside
+#### down compared to Xerox/Foma AT LOOKUP TIME.
+define giella_speller_analysers
+analyser%.$(1): analyser%.tmp.$(1)
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex                                 \
+			@\"$$<\"                                                         \
+		; \n\
+		$$(INVERT_HFST)\
+		save stack $$@\n\
+		quit\n" | $$(XFST_TOOL)
+endef
+$(foreach fst,hfst xfst foma,$(eval $(call giella_speller_analysers,$(fst))))
+
+# Default fallback processing for the generators:
+#### - inversion is needed in the final step for the Xerox/Foma GENERATOR.
+define giella_speller_generators
+generator%.$(1): analyser%.tmp.$(1)
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "\
+		 load stack $$<\n\
+		 $$(INVERT_XFST)$$(INVERT_FOMA)\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+endef
+$(foreach fst,hfst xfst foma,$(eval $(call giella_speller_generators,$(fst))))
+
+####### Other targets: ###########
+clean-local:
+	-rm -f *.hfst *.xfst
+
+include $(top_srcdir)/am-shared/xfscript-include.am
+include $(top_srcdir)/am-shared/hfst-format-include.am
+include $(top_srcdir)/am-shared/silent_build-include.am

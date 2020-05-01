@@ -48,6 +48,7 @@ fstfiles="*fst
 
 # Get the list of dirs to work on:
 dirlist=$(find $1 \
+			-not -iwholename '*.svn*' \
 			-not -iwholename '*.cache*' \
 			-not -iwholename '*/dev' \
 			-not -iwholename '*inc/*' \

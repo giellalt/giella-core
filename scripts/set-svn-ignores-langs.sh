@@ -166,7 +166,7 @@ $svnignore "$mkfiles
 $fstfiles
 missing_*" $1/test/data
 
-# Set the svn:ignore prop on the test/tools/grammarcheckers/ dir:
+# Set the svn:ignore prop on the tools/grammarcheckers/ dir:
 $svnignore "$mkfiles
 $fstfiles
 *.pmhfst
@@ -178,7 +178,7 @@ errors.xml
 schemas.xml
 pipespec.xml" $1/tools/grammarcheckers
 
-# Set the svn:ignore prop on the test/tools/analysers/ dir:
+# Set the svn:ignore prop on the tools/analysers/ dir:
 $svnignore "$mkfiles
 $fstfiles
 *.pmhfst
@@ -187,7 +187,7 @@ $fstfiles
 modes
 pipespec.xml" $1/tools/analysers
 
-# Set the svn:ignore prop on the test/tools/grammarcheckers/filters/ dir:
+# Set the svn:ignore prop on the tools/grammarcheckers/filters/ dir:
 $svnignore "$mkfiles
 $fstfiles
 *.regex

@@ -115,7 +115,7 @@ while line:
     l = line.strip()
     l_split = l.split(" ")
     stem = ""
-    if len(l_split)>1:
+    if len(l_split)>1 and not 'Err/' in l_split[0]:
         if l_split[1] in list_2syll:
             stem = "2syll"
         else:
@@ -124,9 +124,16 @@ while line:
             else:
                 if l_split[1] in list_Csyll:
                     stem = "Csyll"
-        if not 'Err/Orth' in l_split[0]:
-            str = l_split[0].split("+")[0] + " " + stem + "\n"
+        if '%' in l_split[0]:
+            lemma_p = l.split("+")[0]
+            lemma = ''
+            for word in lemma_p.split("%"):
+                lemma += word
+            dict_lex_stem.update({lemma: stem})
+        elif '+' in l_split[0]:
             dict_lex_stem.update({l_split[0].split("+")[0]: stem})
+        else:
+            dict_lex_stem.update({l_split[0].split(":")[0]: stem})
     line = lf.readline()
 
 lf.close()

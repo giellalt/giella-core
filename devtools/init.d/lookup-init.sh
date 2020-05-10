@@ -19,6 +19,7 @@ alias deng='$LOOKUP $GTHOME/experiment-langs/eng/src/generator-gt-desc.xfst'
 alias dest2='$LOOKUP $GTHOME/experiment-langs/est/src/generator-gt-desc.xfst'
 
 
+alias dapu='$LOOKUP $GTHOME/startup-langs/apu/src/generator-gt-desc.xfst'
 alias dkhk='$LOOKUP $GTHOME/startup-langs/khk/src/generator-gt-desc.xfst'
 alias dkjh='$LOOKUP $GTHOME/startup-langs/kjh/src/generator-gt-desc.xfst'
 alias dtyv='$LOOKUP $GTHOME/startup-langs/tyv/src/generator-gt-desc.xfst'
@@ -92,6 +93,7 @@ alias ueng='$LOOKUP $GTHOME/experiment-langs/eng/src/analyser-gt-desc.xfst'
 alias uest2='$LOOKUP $GTHOME/experiment-langs/est/src/analyser-gt-desc.xfst'
 
 
+alias uapu='$LOOKUP $GTHOME/startup-langs/apu/src/analyser-gt-desc.xfst'
 alias ukhk='$LOOKUP $GTHOME/startup-langs/khk/src/analyser-gt-desc.xfst'
 alias ukjh='$LOOKUP $GTHOME/startup-langs/kjh/src/analyser-gt-desc.xfst'
 alias utyv='$LOOKUP $GTHOME/startup-langs/tyv/src/analyser-gt-desc.xfst'
@@ -202,6 +204,7 @@ alias друс='$LOOKUP $GTHOME/langs/rus/src/generator-gt-desc.xfst'
 
 # Languages in newinfra, Normative variants:
 
+alias dapuNorm='$LOOKUP $GTHOME/startup-langs/apu/src/generator-gt-norm.xfst'
 alias dkhkNorm='$LOOKUP $GTHOME/startup-langs/khk/src/generator-gt-norm.xfst'
 alias dkjhNorm='$LOOKUP $GTHOME/startup-langs/kjh/src/generator-gt-norm.xfst'
 alias dtyvNorm='$LOOKUP $GTHOME/startup-langs/tyv/src/generator-gt-norm.xfst'
@@ -268,6 +271,7 @@ alias dvroNorm='$LOOKUP $GTHOME/langs/vro/src/generator-gt-norm.xfst'
 alias dyrkNorm='$LOOKUP $GTHOME/langs/yrk/src/generator-gt-norm.xfst'
 
 
+alias uapuNorm='$LOOKUP $GTHOME/startup-langs/apu/src/analyser-gt-norm.xfst'
 alias ukhkNorm='$LOOKUP $GTHOME/startup-langs/khk/src/analyser-gt-norm.xfst'
 alias ukjhNorm='$LOOKUP $GTHOME/startup-langs/kjh/src/analyser-gt-norm.xfst'
 alias utyvNorm='$LOOKUP $GTHOME/startup-langs/tyv/src/analyser-gt-norm.xfst'
@@ -415,6 +419,7 @@ alias kaldic='$LOOKUP $GTHOME/words/dicts/kaldan/bin/kaldic.fst'
 
 # HFST aliases
 
+alias hdapu='$HLOOKUP $GTHOME/startup-langs/apu/src/generator-gt-desc.hfstol'
 alias hdkhk='$HLOOKUP $GTHOME/startup-langs/khk/src/generator-gt-desc.hfstol'
 alias hdkjh='$HLOOKUP $GTHOME/startup-langs/kjh/src/generator-gt-desc.hfstol'
 alias hdtyv='$HLOOKUP $GTHOME/startup-langs/tyv/src/generator-gt-desc.hfstol'
@@ -484,6 +489,7 @@ alias hdvro='$HLOOKUP $GTHOME/langs/vro/src/generator-gt-desc.hfstol'
 alias hdyrk='$HLOOKUP $GTHOME/langs/yrk/src/generator-gt-desc.hfstol'
 
 
+alias huapu='$HLOOKUP $GTHOME/startup-langs/apu/src/analyser-gt-desc.hfstol'
 alias hukhk='$HLOOKUP $GTHOME/startup-langs/khk/src/analyser-gt-desc.hfstol'
 alias hukjh='$HLOOKUP $GTHOME/startup-langs/kjh/src/analyser-gt-desc.hfstol'
 alias hutyv='$HLOOKUP $GTHOME/startup-langs/tyv/src/analyser-gt-desc.hfstol'
@@ -559,6 +565,7 @@ alias huyrk='$HLOOKUP $GTHOME/langs/yrk/src/analyser-gt-desc.hfstol'
 
 # Normative variants:
 alias hdamhNorm='$HLOOKUP $GTHOME/startup-langs/amh/src/generator-gt-norm.hfstol'
+alias hdapuNorm='$HLOOKUP $GTHOME/startup-langs/apu/src/generator-gt-norm.hfstol'
 alias hdbakNorm='$HLOOKUP $GTHOME/langs/bak/src/generator-gt-norm.hfstol'
 alias hdblaNorm='$HLOOKUP $GTHOME/startup-langs/bla/src/generator-gt-norm.hfstol'
 alias hdevnNorm='$HLOOKUP $GTHOME/langs/evn/src/generator-gt-norm.hfstol'
@@ -621,6 +628,7 @@ alias hdyrkNorm='$HLOOKUP $GTHOME/langs/yrk/src/generator-gt-norm.hfstol'
 
 
 alias huamhNorm='$HLOOKUP $GTHOME/startup-langs/amh/src/analyser-gt-norm.hfstol'
+alias huapuNorm='$HLOOKUP $GTHOME/startup-langs/apu/src/analyser-gt-norm.hfstol'
 alias hubakNorm='$HLOOKUP $GTHOME/langs/bak/src/analyser-gt-norm.hfstol'
 alias hublaNorm='$HLOOKUP $GTHOME/startup-langs/bla/src/analyser-gt-norm.hfstol'
 alias huevnNorm='$HLOOKUP $GTHOME/langs/evn/src/analyser-gt-norm.hfstol'

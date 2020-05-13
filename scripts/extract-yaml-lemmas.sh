@@ -110,6 +110,7 @@ grep ";" $inputfile \
    | sed 's/%:/¢/g' \
    | sed 's/%#/¥/g' \
    | sed 's/%@/£/g' \
+   | perl -pe 's/\+(?![A-Z])(?!v[0-9])/xxplussxx/g' \
    | sed 's/%\(.\)/\1/g' \
    | tr -s ' ' \
    | sed 's/:/XXXXX/' \
@@ -125,4 +126,5 @@ grep ";" $inputfile \
    | sed 's/¥/#/g' \
    | egrep -v "(^$|^;|^[0-9]$|^\!)" \
    | perl -pe 's/__(Hom[0-9]+)__/\+\1/' \
+   | sed 's/xxplussxx/\+/g' \
    | sort -u

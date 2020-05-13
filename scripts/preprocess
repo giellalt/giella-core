@@ -22,7 +22,7 @@ binmode( STDERR, ':utf8' );
 # An abbreviation file may be given as input parameter --abbr,
 # the file has special syntax and the usage is connected
 # to other sámi tools. See documentation in
-# http://giellatekno.uit.no/doc/ling/preprocessor.html
+# https://giellalt.uit.no/ling/preprocessor.html
 #
 # $Id$
 
@@ -88,7 +88,7 @@ if ($connect) {
 
 # my $quotations = quotemeta("«»‹›“”„‘’‚´`'\""); # original
 my $quotations = quotemeta("«»‹›“”„‘’‚`'\"");   # Skolt Sami fix without ACUTE ACCENT as delimiter
-my $other = quotemeta("…•¶½¾¼°◊√∆"); # dash to be added
+my $other = quotemeta("…•¶½¾¼°º◊√∆⁰¹²³⁴⁵⁶⁷⁸⁹₀₁₂₃₄₅₆₇₈₉℠™"); # dash to be added
 my $parentheses = quotemeta("|{}[]()<>");
 if ($xml) { $parentheses = quotemeta("|{}[]()"); }
 my $general_punct = quotemeta("\$.*?!,;:.%");
@@ -222,6 +222,8 @@ sub process_line
 sub line2words
 {
     my ($this_line) = @_;
+
+    $this_line =~ s/(\w)(\()/$1 $2/g;
 
     verbose("line2words", $this_line, __LINE__);
     while($this_line =~ s/^(\s*)([^\s]+)//) {
@@ -492,7 +494,7 @@ sub test_punctuation {
             # e.g. gielddat/guovllut
             # Check for expressions in $CONTAIN_PUNCT -variable.
             verbose ("process_word/not_abbr", "$word", __LINE__);
-            if (($word =~ /^(\pL+\.)([\p{pD}\pL]+.*)$/ || $word =~ /([\pL\p{Pd}]+)([^\pL0-9\. \:\-\`]+[\p{pD}\pL]+.*)$/) && $word !~ /$CONTAIN_PUNCT/o) {
+            if (($word =~ /^(\pL+\.)([\p{pD}\pL]+.*)$/ || $word =~ /([\pL\p{Pd}]+)([^\pL0-9\. \:\-\`\̄]+[\p{pD}\pL]+.*)$/) && $word !~ /$CONTAIN_PUNCT/o) {
                     $word = $1;
                     my %w = ('word' => $2 . $end_punct);
                     $end_punct = "";

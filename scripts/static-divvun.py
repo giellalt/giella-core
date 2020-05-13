@@ -49,8 +49,6 @@ class StaticSiteBuilder(object):
 
             builddir = builddir[:-1]
         self.builddir = builddir
-        self.clean()
-
         if not destination.endswith('/'):
             destination = destination + '/'
         self.destination = destination
@@ -59,6 +57,29 @@ class StaticSiteBuilder(object):
             shutil.rmtree(os.path.join(self.builddir, 'built'))
 
         os.mkdir(os.path.join(self.builddir, 'built'))
+
+    def __enter__(self):
+        """Open a lock file."""
+        lockname = os.path.join(self.builddir, '.lock')
+
+        if os.path.exists(lockname):
+            with open(lockname) as lock:
+                logger.warn('Another build with PID {} has been running '
+                            'since {}'.format(
+                                lock.read(), datetime.datetime.fromtimestamp(
+                                    os.path.getmtime(lockname))))
+                raise SystemExit(5)
+
+        self.lockfile = open(lockname, 'w')
+        self.lockfile.write(str(os.getpid()))
+        self.lockfile.flush()
+
+        return self
+
+    def __exit__(self, *args):
+        """Close the lockfile and remove the lockfile."""
+        self.lockfile.close()
+        os.remove(os.path.join(self.builddir, '.lock'))
 
     def clean(self):
         """Run forrest clean."""
@@ -82,8 +103,7 @@ class StaticSiteBuilder(object):
         """
         logger.debug('Setting language {}'.format(lang))
         for line in fileinput.FileInput(
-            os.path.join(self.builddir, 'forrest.properties'),
-                inplace=1):
+                os.path.join(self.builddir, 'forrest.properties'), inplace=1):
             if 'forrest.jvmargs' in line:
                 line = (
                     'forrest.jvmargs=-Djava.awt.headless=true '
@@ -98,8 +118,6 @@ class StaticSiteBuilder(object):
 
         Since the xml file is not valid xml, do plain text parsing
         """
-        logger.error('Broken links:')
-
         counter = collections.Counter()
         for line in fileinput.FileInput(os.path.join(self.builddir, 'build',
                                                      'tmp',
@@ -157,11 +175,18 @@ class StaticSiteBuilder(object):
         info = collections.namedtuple('info', ['link', 'size'])
 
         for line in log.split('\n'):
-            if buildline.match(line):
-                parts = line.split()
-                seconds = int(parts[-3].split('.')[0])
-                buildtimes[seconds].append(info(link=parts[-1],
-                                                size=parts[-2]))
+            try:
+                if buildline.match(line):
+                    parts = line.split()
+                    seconds = int(parts[-3].split('.')[0])
+                    buildtimes[seconds].append(info(link=parts[-1],
+                                                    size=parts[-2]))
+            except ValueError as error:
+                logger.info(
+                    'Error parsing buildtimes.\n'
+                    'Line: {}\n'
+                    'Error: {}\n'.format(line, str(error)))
+
         print_buildtime_distribution(buildtimes)
 
     def buildsite(self, lang):
@@ -190,6 +215,21 @@ class StaticSiteBuilder(object):
         self.parse_buildtimes(output)
         self.parse_broken_links()
 
+    def files_to_collect(self, builddir, extension):
+        """Search for files with extension in builddir.
+
+        Args:
+            builddir (str): the directory where interesting files are.
+            extension (str): interesting files has this extension.
+
+        Yields:
+            str: path to the interesting file
+        """
+        for root, _, files in os.walk(builddir):
+            for f in files:
+                if f.endswith(extension):
+                    yield os.path.join(root, f)
+
     def add_language_changer(self, this_lang):
         """Add a language changer in all .html files for one language.
 
@@ -198,12 +238,9 @@ class StaticSiteBuilder(object):
         """
         builddir = os.path.join(self.builddir, 'build/site/en')
 
-        for root, dirs, files in os.walk(builddir):
-            for f in files:
-                if f.endswith('.html'):
-                    f2b = LanguageAdder(os.path.join(root, f), this_lang,
-                                        self.langs, builddir)
-                    f2b.add_lang_info()
+        for path in self.files_to_collect(builddir, '.html'):
+            f2b = LanguageAdder(path, this_lang, self.langs, builddir)
+            f2b.add_lang_info()
 
     def rename_site_files(self, lang):
         """Search for files ending with html and pdf in the build site.
@@ -219,6 +256,7 @@ class StaticSiteBuilder(object):
 
         if len(self.langs) == 1:
             for item in glob.glob(builddir + '/*'):
+                self.copy_ckeditor()
                 shutil.move(item, builtdir)
         else:
             for root, dirs, files in os.walk(builddir):
@@ -236,6 +274,7 @@ class StaticSiteBuilder(object):
                         os.path.join(root, file_),
                         os.path.join(goal_dir, newname))
 
+            self.copy_ckeditor()
             shutil.move(builddir, os.path.join(builtdir, lang))
 
     def build_all_langs(self):
@@ -277,21 +316,27 @@ class StaticSiteBuilder(object):
 
         return (subp.returncode, output)
 
+    def copy_ckeditor(self):
+        """Copy the ckeditor to the built version of the site."""
+        ckdir = os.path.join(self.builddir,
+                             'src/documentation/resources/ckeditor')
+        if os.path.exists(ckdir):
+            returncode, _ = self.run_command('rsync -av {src} {dst}'.format(
+                src=ckdir, dst=os.path.join(self.builddir, 'build/site/en/')))
+            if returncode != 0:
+                raise SystemExit(returncode)
+
     def copy_to_site(self):
         """Copy the entire site to self.destination."""
+        if 'techdoc' in self.builddir and 'commontec' not in self.builddir:
+            offending_file = os.path.join(self.builddir, 'built', 'index.html')
+            if os.path.exists(offending_file):
+                os.remove(offending_file)
         (returncode, _) = self.run_command(
             'rsync -avz -e ssh {src} {dst}'.format(src=os.path.join(
                 self.builddir, 'built/'), dst=self.destination))
         if returncode != 0:
             raise SystemExit(returncode)
-
-        ckdir = os.path.join(self.builddir,
-                             'src/documentation/resources/ckeditor')
-        if os.path.exists(ckdir):
-            self.run_command('rsync -avz -e ssh {src} {dst}'.format(
-                src=ckdir, dst=self.destination + 'skin/'))
-            if returncode != 0:
-                raise SystemExit(returncode)
 
 
 class LanguageAdder(object):
@@ -306,6 +351,8 @@ class LanguageAdder(object):
         namespace (dict):   the namespace used in the html document
         tree (lxml etree):  an lxml etree of the parsed file
     """
+
+    namespace = {'html': 'http://www.w3.org/1999/xhtml'}
 
     def __init__(self, filename, this_lang, langs, builddir):
         """Init the LanguageAdder.
@@ -322,7 +369,6 @@ class LanguageAdder(object):
         self.langs = langs
         self.builddir = builddir
 
-        self.namespace = {'html': 'http://www.w3.org/1999/xhtml'}
         self.tree = etree.parse(filename, etree.HTMLParser())
 
     def __del__(self):
@@ -333,8 +379,9 @@ class LanguageAdder(object):
 
     def add_lang_info(self):
         """Create the language navigation element and add it to self.tree."""
-        my_nav_bar = self.tree.getroot().find('.//div[@id="myNavbar"]',
-                                              namespaces=self.namespace)
+        my_nav_bar = self.tree.getroot().find(
+            './/ul[@class="navbar-nav"]',
+            namespaces=self.namespace)
         my_nav_bar.append(self.make_lang_menu())
 
     def make_lang_menu(self):
@@ -344,38 +391,29 @@ class LanguageAdder(object):
                    u'smj': u'Julevsábmáj', u'sv': u'På svenska',
                    u'en': u'In English'}
 
-        right_menu = etree.Element('ul')
-        right_menu.set('class', 'nav navbar-nav navbar-right')
+        right_menu = etree.Element('li')
+        right_menu.set('class', 'nav-item dropdown')
 
-        dropdown = etree.Element('li')
-        dropdown.set('class', 'dropdown')
-        right_menu.append(dropdown)
+        dropdown = etree.SubElement(right_menu, 'a')
+        dropdown.set('aria-expanded', 'false')
+        dropdown.set('aria-haspopup', 'true')
+        dropdown.set('data-toggle', 'dropdown')
+        dropdown.set('class', 'nav-link dropdown-toggle')
+        dropdown.set('href', '#')
+        dropdown.text = u'Change language'
 
-        dropdown_toggle = etree.Element('a')
-        dropdown_toggle.set('class', 'dropdown-toggle')
-        dropdown_toggle.set('data-toggle', 'dropdown')
-        dropdown_toggle.set('href', '#')
-        dropdown_toggle.text = u'Change language'
-        dropdown.append(dropdown_toggle)
-
-        span = etree.Element('span')
-        span.set('class', 'caret')
-        dropdown_toggle.append(span)
-
-        dropdown_menu = etree.Element('ul')
-        dropdown_menu.set('class', 'dropdown-menu')
-        dropdown.append(dropdown_menu)
+        dropdown_toggle = etree.SubElement(right_menu, 'div')
+        dropdown_toggle.set('aria-labelledby', 'navbarDropdownMenuLink')
+        dropdown_toggle.set('class', 'dropdown-menu')
 
         for lang in self.langs:
             if lang != self.this_lang:
-                li = etree.Element('li')
-                a = etree.Element('a')
+                a = etree.SubElement(dropdown_toggle, 'a')
+                a.set('class', 'dropdown-item')
                 filename = '/' + lang + self.filename.replace(self.builddir,
                                                               '')
                 a.set('href', filename)
                 a.text = trlangs[lang]
-                li.append(a)
-                dropdown_menu.append(li)
 
         return right_menu
 
@@ -419,24 +457,11 @@ def main():
             '-V|--verbosity must be one of: {}\n{} was given.'.format(
                 '|'.join(logging_dict.keys()), args.verbosity))
 
-    lockname = os.path.join(args.sitehome, '.lock')
-    if not os.path.exists(lockname):
-        with open(lockname, 'w') as lockfile:
-            print(datetime.datetime.now(), file=lockfile)
-
-        builder = StaticSiteBuilder(args.sitehome, args.destination,
-                                    args.langs)
+    with StaticSiteBuilder(args.sitehome, args.destination,
+                           args.langs) as builder:
+        builder.clean()
         builder.build_all_langs()
         builder.copy_to_site()
-        os.remove(lockname)
-    else:
-        with open(lockname) as lockfile:
-            dateformat = "%Y-%m-%d %H:%M:%S.%f"
-            datestring = lockfile.read().strip()
-            starttime = datetime.datetime.strptime(datestring, dateformat)
-            delta = datetime.datetime.now() - starttime
-            logger.error('A build of this site is still running and was '
-                         'started {} ago'.format(delta))
 
 
 if __name__ == '__main__':

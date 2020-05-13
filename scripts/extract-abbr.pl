@@ -211,7 +211,7 @@ for my $file (@lex_file_names) {
                         }
                         $total_generated += $generated;
                     }
-                    print STDERR __LINE__ . "\t$pos $generated of $to_generate potential forms for $this_abbr were generated\n"; # DEBUG
+                    print STDERR __LINE__ . "\t$this_abbr: $to_generate generators -> $generated word forms\n"; # DEBUG
                 }
             }
         }
@@ -256,15 +256,7 @@ if( ! $noparadigm) {
     }
 }
 
-conclusion();
 close ABB;
-
-sub conclusion {
-    print STDERR "\nThis program sent $total_to_generate strings to $gen_lookup\n";
-    if ( $total_to_generate > 0 ) {
-        print STDERR sprintf("lookup recognised %d (%.2f percent) of these\n", $total_generated, $total_generated/$total_to_generate*100);
-    }
-}
 
 # Call generator for all word forms.
 sub call_gen {

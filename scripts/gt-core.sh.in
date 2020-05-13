@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Returns the location of the gtcore directory
+# Returns the location of the giella-core directory
 prefix=@prefix@
 datarootdir=@datarootdir@
 datadir=@datadir@

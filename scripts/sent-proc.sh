@@ -13,8 +13,35 @@
 
 # change to 'true' to debug paths of analysis tools
 debug='false'
-LOOKUP=`which lookup`
-HLOOKUP='/opt/local/bin/hfst-optimized-lookup'
+#HLOOKUP=`which hfst-optimized-lookup`
+HLOOKUP=`which hfst-lookup`
+# HLOOKUP=`which hfst-lookup` # TODO: use this one instead
+
+
+if [ -n "$HLOOKUP" ]; then
+  echo "using hfst-optimized-lookup"
+else
+  echo "no hfst-lookup found: please install it!"
+  echo "See you later!"
+  exit 0
+fi
+
+# Plan for revision of this script:
+# Use both analysers (hfst-tokenize / xfst+lookup2cg) for all lgs
+# Have two pipelines and a parameter for choosing, for all lgs, according to list.
+# List of language catalogues:
+# langs
+# bak bxr chp chr ciw cor crk deu est evn fao fin fit fkv hdn hun ipk izh kal kca koi kpv lav liv lut mdf mhr mns mrj myv nds nio nob oji olo otw ron rus sjd sje sma sme smj smn sms som tat tku udm vep vot vro yrk
+# startup_langs:
+# aka amh bla chr crj crl dgr epo eus gle grn hin iku khk kio kjh kmr krl luo mhr moe moh ndl nno non nso rup sel srs sto swe tau tel tgl tir tlh tuv tyv xal xwo zul
+# experiment_langs:
+# ara bul ces eng est fin sms sqi
+# closed_lags (ignore)
+# dan isl
+# closedSA-langs (ignore)
+# zul
+
+
 
 # -l sme|sma|fao|etc. => default: sme
 l='sme'
@@ -30,7 +57,7 @@ lg='langs'
 abbr='$GTHOME/$lg/$l/bin/abbr.txt'
 
 #long_lang_list
-long_lang_list=(bxr chp ciw cor crk est fao fin fkv
+long_lang_list=(bxr chp ciw cor crk fao fin fkv
                 hdn ipk izh kal kca kpv liv mdf
                 mhr mrj myv ndl nio nob olo ron rus
                 sjd sje sma sme smj smn sms som tat tku
@@ -40,7 +67,7 @@ long_lang_list=(bxr chp ciw cor crk est fao fin fkv
 startup_lang_list=(amh bla evn sel sto tlh zul)
 
 #experiment_lang_list
-experiment_lang_list=(deu eng)
+experiment_lang_list=(deu eng est)
 
 if [[ "$debug" == "true" ]] ; then
     echo "_pre l  ${l}"
@@ -88,35 +115,16 @@ shift $((OPTIND-1))
 # language parameter test and abbr file assignment
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
     lg='langs'
-    if [  -f $GTHOME/$lg/$l/tools/preprocess/abbr.txt ]; then
-       abbr="--abbr=$GTHOME/$lg/$l/tools/preprocess/abbr.txt"  # <--- new infra
+#    if [[ "${experiment_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
+#    lg='experiment-langs'
+    if [  -f $GTHOME/$lg/$l/tools/tokenisers/abbr.txt ]; then
+       abbr="--abbr=$GTHOME/$lg/$l/tools/tokenisers/abbr.txt"  # <--- new infra
     else
        abbr=''
        echo "Warning: no abbr file found" 1>&2;
-       echo "  $GTHOME/$lg/$l/tools/preprocess/abbr.txt" 1>&2;
+       echo "  $GTHOME/$lg/$l/tools/tokenisers/abbr.txt" 1>&2;
        echo "............. preprocessing without it!" 1>&2;
     fi 
-# commented this branch due to the sme moved to the langs in newinfra
-# elif [[ "$l" == "sme" ]]; then
-#     lg='gt'
-#     if [  -f $GTHOME/$lg/$l/bin/abbr.txt ]; then
-#        abbr="--abbr=$GTHOME/$lg/$l/bin/abbr.txt"  # <--- sme exception
-#     else
-#        echo "Error: no abbr file found" 1>&2; 
-#        echo "  $GTHOME/$lg/$l/bin/abbr.txt" 1>&2;
-#        echo "............. please generate it!" 1>&2;
-#        exit 1;
-#     fi 
-else
-    lg='st'
-    if [  -f $GTHOME/$lg/$l/bin/abbr.txt ]; then
-       abbr="--abbr=$GTHOME/$lg/$l/bin/abbr.txt"  # <--- leftovers in the old infra (st)
-    else
-       abbr=''
-       echo "Warning: no abbr file found" 1>&2; 
-       echo "  $GTHOME/$lg/$l/bin/abbr.txt" 1>&2; 
-       echo "............. preprocessing without it!" 1>&2; 
-    fi
 fi
 
 current_path="$GTHOME/$lg/$l"
@@ -132,10 +140,16 @@ fi
 
 
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
-    MORPH="$LOOKUP $current_path/src/analyser-disamb-gt-desc.xfst"
-    DIS="$current_path/src/syntax/disambiguation.cg3"
+    MORPH="$HLOOKUP $current_path/src/analyser-disamb-gt-desc.hfstol -q"
+    DIS="$current_path/src/cg3/disambiguator.cg3"
+    if [ ! -f "$current_path/src/analyser-disamb-gt-desc.hfstol" ]; then
+        echo "no hfst file found: please compile the language tools for $l"
+        echo "See you later!"
+        exit 0
+    fi
+
 else
-    MORPH="$LOOKUP -q -flags mbTT -utf8 $current_path/bin/$l.fst"
+    MORPH="$HLOOKUP -flags mbTT -utf8 $current_path/bin/$l.fst"
     DIS="$current_path/src/$l-dis.rle"
 fi
 
@@ -153,19 +167,19 @@ sentence="${sentence//(/\(}"
 sentence="${sentence//)/\)}"
 
 # path to the shared syntax
-SD_PATH='$GTHOME/giella-shared/smi/src/syntax'
+SD_PATH='$GTHOME/giella-shared/smi/src/cg3'
 
 # define commands
 # common pos_cmd
 #pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTHOME/gt/script/lookup2cg"
-pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTCORE/scripts/lookup2cg"
+pos_cmd="echo $sentence | preprocess $abbr | $MORPH |cut -f1,2| $GTCORE/scripts/lookup2cg"
 
 if [ $l == fao ] || [ $l == crk ]; then
-    dis_cmd=$pos_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/disambiguation.cg3 $t"
-    syn_cmd=$dis_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/syntax/functions.cg3 $t"
+    dis_cmd=$pos_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/cg3/disambiguator.cg3 $t"
+    syn_cmd=$dis_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/cg3/functions.cg3 $t"
 else
     dis_cmd=$pos_cmd" | vislcg3 -g $DIS $t"
-    syn_cmd=$dis_cmd" | vislcg3 -g $SD_PATH/korp.cg3 $t"
+    syn_cmd=$dis_cmd" | vislcg3 -g $SD_PATH/functions.cg3 $t"
 fi
 
 # common dep_cmd

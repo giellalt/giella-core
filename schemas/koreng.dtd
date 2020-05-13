@@ -1,0 +1,22 @@
+<!ELEMENT rootdict (entry+) >
+<!ELEMENT entry (lgr, ipa, mgr+) >
+<!ELEMENT lgr (lemma, ipa) >
+<!ELEMENT lemma (#PCDATA) >
+<!ATTLIST lemma 
+      POS ( m | f | m/f | vb | adj | coll | adv | pl | prp | place | suff 
+          | phr | prn | int | num | persn | dl | cnj | prp.prn | prf
+          | pref | prep | pfx | pers | ptl ) #IMPLIED
+>
+<!ELEMENT ipa (#PCDATA)>
+
+<!ELEMENT mgr (restrict?, trgr+)>
+<!ELEMENT restrict (#PCDATA)>
+<!ELEMENT trgr (trans+, exgr*, syngr*)>
+<!ELEMENT trans (#PCDATA)>
+<!ATTLIST trans 
+      POS ( adj | subst | verb | adv | po | pr | x ) #IMPLIED
+ >
+<!ELEMENT exgr (ex, extr)>
+<!ELEMENT ex (#PCDATA)>
+<!ELEMENT extr (#PCDATA)>
+

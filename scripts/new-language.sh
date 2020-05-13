@@ -17,9 +17,12 @@ fi
 if ! test $# -eq 1 -o $# -eq 2 ; then
     echo "Usage: $0 NEW_LANGUAGE_ISOCODE [TEMPLATECOLLECTION]"
     echo
-    echo "e.g.:"
-    echo "$0 sme"
+    echo "Examples:"
+    echo "$0 sme # Implicit template collection, derived from the name"
+    echo "         of the current working dir"
     echo "$0 kal langs"
+    echo "$0 hdn keyboards"
+    echo "$0 fao prooftesting"
     echo
     exit 1
 fi
@@ -59,7 +62,7 @@ fi
 if ! [ -f Makefile.am ]
 then
     echo "No Makefile.am file in this directory. It seems this is not a proper"
-    echo "Giellatekno/Divvun infrastructure directory holding template-based"
+    echo "Giella infrastructure directory holding template-based"
     echo "language directories."
     exit 1
 fi
@@ -67,7 +70,7 @@ fi
 if ! [ -f configure.ac ]
 then
     echo "No configure.ac file in this directory. It seems this is not a proper"
-    echo "Giellatekno/Divvun infrastructure directory holding template-based"
+    echo "Giella infrastructure directory holding template-based"
     echo "language directories."
     exit 1
 fi
@@ -114,18 +117,6 @@ touch $1/und.timestamp
 # Add the new language to svn:
 svn add --force $1
 
-# Revert the addition of the source files to make the transition from old to
-# new easier - we want to svn move the old files, so no new source files in
-# svn (remove these commands when all languages have been moved from the old to
-# the new infra - the svn revert commands do not make sense outside the langs
-# template collection):
-if [[ x$TEMPLATECOLL = "xlangs" ]]; then
-    svn revert $1/src/morphology/affixes/*
-    svn revert $1/src/morphology/stems/*
-    svn revert $1/src/morphology/root.lexc
-    svn revert $1/src/phonology/*phon.*
-fi
-
 # Now that the files are known to svn, add svn:ignore properties:
 ${GTCORE}/scripts/set-svn-ignores-$TEMPLATECOLL.sh $1
 
@@ -138,6 +129,6 @@ cat<<EOF
     ./configure.ac, to ensure that automatic processes are aware
     of the new language.
     To start working on the new language, fill in license and copyright
-    info in the $1/LICENCE file, and then start filling the files in
-    $1/src/ with linguistic content.
+    info in the $1/LICENCE file, and start the real work. See
+    https://giellalt.uit.no/GettingStarted.html for details.
 EOF

@@ -1,13 +1,8 @@
-# A tailored & stand-alone copy of the morph-test.py module of Apertium Quality
-# (http://wiki.apertium.org/wiki/Apertium-quality). Requires at least python3.1
-# but autconf should check that for you. Also requires that you have a proper
-# installation of py-yaml, but that as well should be handled by autoconf/
-# configure.ac.
-#
 # This script is used to run the yaml test cases for morphology & morphophonology
 # tests.
+#
+# License: CC0 (see LICENSE)
 
-from multiprocessing import Process, Manager
 from subprocess import Popen, PIPE
 from argparse import ArgumentParser
 from io import StringIO
@@ -345,8 +340,7 @@ class MorphTest:
 
     def parse_fsts(self, key=None):
         args = self.args
-        manager = Manager()
-        self.results = manager.dict({"gen": {}, "morph": {}})
+        self.results = {"gen": {}, "morph": {}}
 
         def parser(self, d, f, tests):
             # TODO: handle ~ in file parser
@@ -369,21 +363,14 @@ class MorphTest:
                 self.results[d] = self.parse_fst_output(res)
 
         if args.lexical:
-            gen = Process(target=parser, args=(self, "gen", self.gen, self.config.surface_tests))
-            gen.start()
+            parser(self, "gen", self.gen, self.config.surface_tests)
             if self.args.verbose:
                 self.out.info("Generating...\n")
 
         if args.surface:
-            morph = Process(target=parser, args=(self, "morph", self.morph, self.config.lexical_tests))
-            morph.start()
+            parser(self, "morph", self.morph, self.config.lexical_tests)
             if self.args.verbose:
                 self.out.info("Morphing...\n")
-
-        if args.lexical:
-            gen.join()
-        if args.surface:
-            morph.join()
 
         if self.args.verbose:
             self.out.info("Done!\n")

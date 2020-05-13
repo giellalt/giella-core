@@ -10,7 +10,7 @@ if test ! -r $1/und.timestamp ; then
     echo "This script must have a top-level language directory as its only"
     echo "argument, e.g."
     echo
-    echo "${GTHOME}/keyboards/smi/"
+    echo "${GTHOME}/keyboards/sme/"
     echo
     echo and not:
     echo "$1"
@@ -34,11 +34,20 @@ aclocal.m4"
 
 # Set svn:ignore props on all dirs:
 for f in $(find $1/ \
-			-not -iwholename '*.svn*' \
-			-not -iwholename '*autom4te.cache*' \
-			-not -iwholename '*build-aux*' \
-			-not -iwholename '*build*' \
-			-not -iwholename '*deps*' \
+				-not -wholename '*.svn*' \
+				-not -wholename '*.git*' \
+				-not -wholename '*autom4te.cache*' \
+				-not -wholename '*build*' \
+				-not -wholename '*deps*' \
+				-not -wholename '*.bundle*' \
+				-not -wholename '*.xcodeproj*' \
+				-not -wholename '*.xcassets*' \
+				-not -wholename '*Generated*' \
+				-not -wholename '*HostingApp*' \
+				-not -wholename '*Keyboard*' \
+				-not -wholename '*hfst-ospell*' \
+				-not -wholename '*libarchive*' \
+				-not -wholename '*/xz/*' \
 			-type d) ; do
 	$svnignore "$mkfiles" $f
 done
@@ -47,4 +56,22 @@ done
 $svnignore "$autofiles
 $mkfiles
 build
-deps" $1
+deps
+*.zhfst" $1
+
+# Set the svn:ignore prop on the macos dir:
+$svnignore "*.unsigned.pkg" $1/macos
+
+# Set the svn:ignore prop on the android dir:
+$svnignore "deps
+*.apk" $1/android
+
+# Set the svn:ignore prop on the ios dir:
+$svnignore "*build" $1/ios
+
+# Set the svn:ignore prop on the win dir:
+$svnignore "amd64
+i386
+*.iss
+kbdi.exe
+wow64" $1/win

@@ -3,15 +3,12 @@
 # Replace placeholder language code with real language code
 
 # Wrong usage - short instruction:
-if ! test $# -eq 2 -o $# -eq 3 -o $# -eq 4 ; then
+if ! test $# -eq 2 -o $# -eq 3 ; then
     echo
-    echo "Usage: $0 DIR iso3code [COLLSTRING [FILNAME] ]"
+    echo "Usage: $0 DIR ISO3CODE [FILNAME]"
     echo
     echo "Replaces all occurrences of dummy language codes in files and"
     echo "filenames within DIR with real language codes and name."
-    echo "Optionally specify a collection name (only used"
-    echo "when working with keyboards). Specify as anything if you want"
-    echo "to specify a file when not working with keyboard layouts."
     echo "Optionally specify a filename to do the replacements in."
     echo
     exit 1
@@ -38,22 +35,20 @@ if test "x${hyphenedcode}" != "x" ; then
 fi
 
 # Get the 2-char language code from the 3-char code:
-iso2code=`${GTCORE}/scripts/iso3-to-2.sh $langcode`
+iso2code=$(${GTCORE}/scripts/iso3-to-2.sh $langcode)
 if [[ $? -gt 0 ]] ; then
 	echo "ISO 639 3-to-2 char conversion had an error!" 1>&2
 	exit 2
 fi
 
 # Get the language name from the 3-char code:
-isoName=`${GTCORE}/scripts/iso639-to-name.sh $langcode`
+isoName=$(${GTCORE}/scripts/iso639-to-name.sh $langcode)
 if [[ $? -gt 0 ]] ; then
 	echo "ISO 639 language name identification had an error!" 1>&2
 	exit 3
 fi
 
-collection=$3
-
-file=$4
+file=$3
 
 # Replace placeholder language code with real language code
 # In either a single file:
@@ -61,9 +56,8 @@ if test "x$file" != "x"; then
 	if test -e $file -a ! -d $file ; then
 	    cp $file $file~
 	    $SED -e "s/__UND__/$2/g" \
-	    	-e "s/__UND2C__/$iso2code/g" \
-	    	-e "s/__UNDEFINED__/$isoName/g" \
-	    	-e "s/__COLLECTION__/$collection/g" \
+	    	 -e "s/__UND2C__/$iso2code/g" \
+	    	 -e "s/__UNDEFINED__/$isoName/g" \
 	    	< $file~ > $file
 	    rm -f $file~
 	else
@@ -73,33 +67,58 @@ if test "x$file" != "x"; then
 else
 # ... or in all files in a given dir
 # (but don't touch .svn files and the und.timestamp file):
-	for f in $(find $1/ \
-				-not -iwholename '*.svn*' \
+	for f in $(find $1 \
+				-not -wholename '*.svn*' \
+				-not -wholename '*.git*' \
+				-not -wholename '*autom4te.cache*' \
+				-not -wholename '*build*' \
+				-not -wholename '*deps*' \
+				-not -wholename '*.bundle*' \
+				-not -wholename '*.xcodeproj*' \
+				-not -wholename '*.xcassets*' \
+				-not -wholename '*Generated*' \
+				-not -wholename '*HostingApp*' \
+				-not -wholename '*Keyboard*' \
+				-not -wholename '*hfst-ospell*' \
+				-not -wholename '*libarchive*' \
+				-not -wholename '*/xz/*' \
+				-not -name '.DS_Store' \
 				-not -name 'und.timestamp' \
+				-not -name 'aclocal.m4' \
+				-not -name 'autogen.sh' \
+				-not -name 'configure' \
+				-not -name 'Makefile.in' \
+				-not -name 'Makefile' \
 				-not -name '*~' \
 				-not -name '*.xfst' \
 				-not -name '*.hfst' \
 				-not -name '*.hfstol' \
 				-not -name '*.png' \
+				-not -name '*.pdf' \
+				-not -name '*.swift' \
+				-not -name '*.h' \
+				-not -name '*.xib' \
+				-not -name '*.plist' \
+				-not -name '*.cpp' \
+				-not -name '*.m' \
 				-type f) ; do
 	    # In file content:
 	    cp $f $f~
 	    $SED -e "s/__UND__/$2/g" \
-	    	-e "s/__UND2C__/$iso2code/g" \
-	    	-e "s/__UNDEFINED__/$isoName/g" \
-	    	-e "s/__COLLECTION__/$collection/g" \
+	    	 -e "s/__UND2C__/$iso2code/g" \
+	    	 -e "s/__UNDEFINED__/$isoName/g" \
 	    	< $f~ > $f
 	    rm -f $f~
 	    # And do the same with filenames:
-	    dir=`dirname $f`
-	    undfilename=`basename $f`
-	    newfilename=`echo $undfilename | $SED -e "s/und/$2/"`
-	    newfile=`echo $dir/$newfilename`
+	    dir=$(dirname $f)
+	    undfilename=$(basename $f)
+	    newfilename=$(echo $undfilename | $SED -e "s/und/$2/")
+	    newfile=$(echo $dir/$newfilename)
 	    if test ! $f = $newfile ; then
 	        # Only process files starting with 'und' followed by punctuation:
-	        if [ `echo $f | grep -c '^und[.-]'` -ne 0 ] ; then
+	        if [ $(echo $f | grep -c '^und[.-]') -ne 0 ] ; then
 	            # Check whether the file is already known to svn:
-	            if [ `svn st $f | grep -c '^\?'` -eq 0 ] ; then
+	            if [ $(svn st $f | grep -c '^\?') -eq 0 ] ; then
 	                svn mv $f $newfile
 	            else
 	                mv $f $newfile

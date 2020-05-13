@@ -1,0 +1,45 @@
+<!-- bible.dtd -->
+<!-- $Id$ -->
+
+<!--+ Common attributes
+    |    Every element has an xml:lang attribute.
+    +-->
+<!ENTITY % common.att '
+  xml:lang NMTOKEN #IMPLIED'>
+
+<!-- =============================================================== -->
+<!-- Document -->
+<!-- =============================================================== -->
+<!ELEMENT document (header, body)>
+<!ATTLIST document 
+  %common.att; >
+
+<!ELEMENT header (title)?>
+<!ELEMENT title (#PCDATA)>
+
+<!ELEMENT body (book|chapter)*>
+
+<!ELEMENT book (chapter)*>
+<!ATTLIST book
+          number CDATA #IMPLIED
+          title CDATA #IMPLIED
+          %common.att; >
+
+<!ELEMENT chapter (section|verse)*>
+<!ATTLIST chapter
+          number CDATA #IMPLIED
+          title CDATA #IMPLIED
+          %common.att; >
+
+<!ELEMENT section (p|verse)*>
+<!ATTLIST section
+          number CDATA #IMPLIED
+          title CDATA #IMPLIED
+          %common.att; >
+
+<!ELEMENT p (verse)*>
+
+<!ELEMENT verse (#PCDATA) >
+<!ATTLIST verse
+          number CDATA #REQUIRED
+          %common.att; >

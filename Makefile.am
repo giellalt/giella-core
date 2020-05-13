@@ -22,10 +22,6 @@ EXTRA_DIST = $(PACKAGE).pc.in
 pkgconfigdir = $(prefix)/share/pkgconfig
 pkgconfig_DATA = $(PACKAGE).pc
 
-include $(srcdir)/subfiles.mk
-
-nobase_dist_pkgdata_DATA = $(subdir_files)
-
 nobase_dist_pkgdata_SCRIPTS = \
    scripts/clean_weight_corpus.sh \
    scripts/data/cohort_to_table_footer.html \
@@ -52,19 +48,12 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/iso3-to-2.sh \
    scripts/iso639-to-name.sh \
    scripts/iso-639-3.txt \
-   scripts/keyboards/android-glyphs-api16.bin \
-   scripts/keyboards/android-glyphs-api19.bin \
-   scripts/keyboards/android-glyphs-api21.bin \
-   scripts/keyboards/boolmap.py \
-   scripts/keyboards/gen.py \
-   scripts/keyboards/global.yaml \
-   scripts/keyboards/softkbdgen.py \
    scripts/lookup2cg \
    scripts/make-hfstspeller-version-easter-egg.sh \
    scripts/merge-templates.sh \
    scripts/morph-test.py \
-   scripts/new-keyboards.sh \
    scripts/new-language.sh \
+   scripts/patgen.exp \
    scripts/preprocess \
    scripts/replace-dummy-langcode.sh \
    scripts/run_voikko_speller.sh \
@@ -72,12 +61,16 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/set-svn-ignores-keyboards.sh \
    scripts/set-svn-ignores-langs.sh \
    scripts/set-svn-ignores-prooftesting.sh \
-   scripts/smx-smi.py \
    scripts/spell-preprocess.pl \
    scripts/style/speller_xml.css \
+   scripts/flaglist2make_flag_regex.sh \
+   scripts/taglist2insert_semantic_tags_after_pos_regex.sh \
+   scripts/taglist2make_CG_tags_regex.sh \
    scripts/taglist2make_optional_tags_regex.sh \
    scripts/taglist2remove_semantic_tags_regex.sh \
    scripts/taglist2remove_strings_regex.sh \
+   scripts/taglist2remove_semantic_tags_before_pos_regex.sh \
+   scripts/taglist2remove_semantic_tags_before_derivations_regex.sh \
    scripts/taglist2remove_tags_regex.sh \
    scripts/taglist2reorder_semantic_tags_regex.sh \
    scripts/uniq_count2tropical_weight.awk \

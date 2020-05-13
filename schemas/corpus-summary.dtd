@@ -1,0 +1,26 @@
+<!-- corpus-summary.dtd -->
+<!--+ Common attributes
+    +-->
+<!ENTITY % common.att '
+  xml:lang NMTOKEN #IMPLIED'>
+
+<!-- =============================================================== -->
+<!-- -->
+<!-- Corpus summary, total count -->
+<!-- =============================================================== -->
+<!-- -->
+
+<!ELEMENT count (total, language+)>
+<!ELEMENT total EMPTY>
+<!ATTLIST total
+          count CDATA #REQUIRED
+>
+<!ELEMENT language (genre+)>
+<!ATTLIST language
+          count CDATA #REQUIRED
+          %common.att; >
+<!ELEMENT genre EMPTY>
+<!ATTLIST genre
+          count CDATA #REQUIRED
+          name CDATA #REQUIRED
+          %common.att; >

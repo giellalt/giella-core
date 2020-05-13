@@ -233,17 +233,10 @@ class PropertiesParser(object):
 
     def parse_line(self, line):
         """Parse a line in the file."""
-        parts = line.split('=')
-        if len(parts) == 2:
-            key = parts[0].strip()
-            value = parts[1].strip()
-
-            if value.startswith('$'):
-                self.properties[key] = self.properties[value[2:-1].strip()]
-            else:
-                self.properties[key] = value
-        else:
-            raise ValueError('Error in line: '.format(line))
+        equal_pos = line.find('=')
+        key = line[:equal_pos].strip()
+        value = line[equal_pos + 1:].strip()
+        self.properties[key] = value
 
 
 class DocMaker(object):
@@ -761,6 +754,11 @@ class DocMaker(object):
         elif not self.inside_pre:
             self.check_inline(b)
             self.handle_line(b.content)
+        if b.content.strip().endswith('-__'):
+            raise ValueError(
+                'Error!\n'
+                'Add a space between - and __ at the line ending.\n'
+                'Erroneous line is {}\n'.format(b))
 
     def jspwiki_blocks(self):
         """Parse a jspwiki file."""
@@ -892,52 +890,49 @@ def handle_file(path, xdocs_dir):
             dm = DocMaker(uff, xdocs_dir)
             try:
                 dm.parse_blocks()
-            except OutlineError as e:
+            except (OutlineError, ValueError) as error:
                 util.print_frame(path)
-                util.print_frame(str(e))
-            except ValueError as e:
-                util.print_frame(path)
-                util.print_frame(str(e))
+                util.print_frame(str(error))
 
 
 def compute_lexc_name(jspwiki):
     """Map filename back to a source file."""
     if 'langs/' in jspwiki and '/doc/' in jspwiki:
         if jspwiki.endswith('-syntax.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/syntax')
-            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+            dirname = os.path.dirname(jspwiki).replace('/doc', '/src/cg3')
+            basename = os.path.basename(jspwiki).replace('-cg3.jspwiki',
                                                          '.cg3')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-phonology.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc',
-                                                       '/src/phonology')
-            basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+                                                       '/src/fst')
+            basename = os.path.basename(jspwiki).replace('-fst.jspwiki',
                                                          '.twolc')
             if os.path.exists(os.path.join(dirname, basename)):
                 return os.path.join(dirname, basename)
             else:
-                basename = os.path.basename(jspwiki).replace('-syntax.jspwiki',
+                basename = os.path.basename(jspwiki).replace('-cg3.jspwiki',
                                                              '.xfscript')
                 return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-morphology.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc',
-                                                       '/src/morphology')
-            basename = os.path.basename(jspwiki).replace('-morphology.jspwiki',
+                                                       '/src/fst')
+            basename = os.path.basename(jspwiki).replace('-fst.jspwiki',
                                                          '.lexc')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-stems.jspwiki'):
             dirname = os.path.dirname(jspwiki).replace('/doc',
-                                                       '/src/morphology/stems')
+                                                       '/src/fst/stems')
             basename = os.path.basename(jspwiki).replace('-stems.jspwiki',
                                                          '.lexc')
             return os.path.join(dirname, basename)
 
         if jspwiki.endswith('-affixes.jspwiki'):
-            dirname = os.path.dirname(jspwiki).replace(
-                '/doc', '/src/morphology/affixes')
+            dirname = os.path.dirname(jspwiki).replace('/doc',
+                                                       '/src/fst/affixes')
             basename = os.path.basename(jspwiki).replace('-affixes.jspwiki',
                                                          '.lexc')
             return os.path.join(dirname, basename)
@@ -965,7 +960,6 @@ def main():
                 handle_file(uff, None)
         elif os.path.exists(uff):
             xdocs_dir = check_forrest_properties(uff)
-            util.print_frame(xdocs_dir)
             for root, dirs, files in os.walk(uff, followlinks=True):
                 for f in files:
                     # if f.endswith('.lexc') or f.endswith('.twolc') or

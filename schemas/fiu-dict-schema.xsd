@@ -2,11 +2,14 @@
 <xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	   xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:hfp="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty">
-   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="https://www.w3.org/2001/03/xml.xsd"/>
+<!--   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+This has been changed 2019-05-13 -->
 <!--<xs:include schemaLocation="semanticSetFor-dict-schema.xsd"/> This has been brought back into the schema 2013-11-11 -->
-<xs:include schemaLocation="kpv-dict-schema.xsd"/>
+<!--<xs:include schemaLocation="kpv-dict-schema.xsd"/>
 <xs:include schemaLocation="mrj-dict-schema.xsd"/>
 <xs:include schemaLocation="myv-dict-schema.xsd"/>
+-->
    <xs:element name="r">
       <xs:complexType>
          <xs:sequence>
@@ -61,7 +64,6 @@
             <xs:element minOccurs="0" ref="map"/>
             <xs:element minOccurs="0" name="rev-sort_key" type="xs:string"/>
             <xs:element ref="lg"/>
-            <xs:element minOccurs="0" ref="posDescr"/>
             <xs:element minOccurs="0" ref="semRole"/>
             <xs:element minOccurs="0" ref="phonet"/>
             <xs:element minOccurs="0" ref="morphg"/>
@@ -98,21 +100,28 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="lg">
+<!-- lemma group -->
       <xs:complexType>
          <xs:sequence>
             <xs:element ref="l"/>
+<!-- lemma -->
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_ref"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_drv"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_cogn"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="lsub"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="variants"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="l_sci"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="inc-sampling"/>
             <xs:element ref="stg"/>
+<!-- stem group -->
             <xs:element minOccurs="0" ref="audio"/>
+<!-- audio: has link reference to audio, e.g. at MPI in Nijmegen -->
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="inc-audio"/>
             <xs:element minOccurs="0" ref="mini_paradigm"/>
             <xs:element minOccurs="0" ref="etymology"/>
+<!-- etymology: contains etymons and cognates -->
             <xs:element minOccurs="0" ref="compg"/>
+<!-- composition group: contains compounding, derivation -->
             <xs:element ref="stress" maxOccurs="unbounded" minOccurs="0"/>
          </xs:sequence>
       </xs:complexType>
@@ -126,6 +135,7 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="stg">
+<!-- stem group -->
       <xs:complexType>
          <xs:choice maxOccurs="unbounded">
             <xs:element ref="st"/>
@@ -134,12 +144,16 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="l">
+<!-- lemma -->
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
                <xs:attribute ref="gen"/>
                <xs:attribute ref="hid"/>
+<!-- homonym id -->
                <xs:attribute ref="pos" use="required"/>
+<!-- part of speech -->
+               <xs:attribute name="sem_type" type="xs:string"/>
                <xs:attribute ref="src"/>
                <xs:attribute name="type" type="PosType"/>
                <xs:attribute ref="val"/>
@@ -199,7 +213,6 @@
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
-               <xs:attribute ref="myvSrc"/>
                <xs:attribute ref="orthType"/>
             </xs:extension>
          </xs:simpleContent>
@@ -234,6 +247,7 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="st">
+<!-- stem  -->
       <xs:complexType mixed="true">
          <xs:sequence/>
          <xs:attribute ref="exclude"/>
@@ -242,8 +256,12 @@
          <xs:attribute name="NumContlex" type="xs:string"/>
          <xs:attribute ref="orthType"/>
          <xs:attribute ref="status"/>
+<!-- status: contains indication of +Err/... -->
+	 <xs:attribute name="varid" type="xs:string"/>
+<!-- varid: variation contains indication of +v1, +v2 -->
       </xs:complexType>
    </xs:element>
+
    <xs:element name="mini_paradigm">
       <xs:complexType>
          <xs:sequence>
@@ -253,6 +271,7 @@
       </xs:complexType>
    </xs:element>
    <xs:element name="stress">
+<!-- stress element: contains phonetic or other representation of lemma, which might contain pedagogically informative information on stress, vowel or consonant quality or quantity -->
       <xs:complexType>
          <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -262,20 +281,38 @@
    </xs:element>
    <xs:attribute name="pl" type="xs:string"/>
    <xs:simpleType name="PosType">
+<!-- part of speech type: contains subtypes of various parts of speech -->
      <xs:restriction base="xs:string">
+       <xs:enumeration value="Ad-A"/>
+<!-- ad-adjective or ad-adverb -->
        <xs:enumeration value="Card"/>
+<!-- cardinal -->
        <xs:enumeration value="Coll"/>
+<!-- collective -->
        <xs:enumeration value="Dem"/>
+<!-- demonstrative -->
        <xs:enumeration value="Distr"/>
+<!-- distributive -->
+       <xs:enumeration value="Ger"/>
+<!-- gerund -->
        <xs:enumeration value="Indef"/>
+<!-- indefinite -->
        <xs:enumeration value="Interr"/>
+<!-- interrogative -->
        <xs:enumeration value="Iter"/>
+<!-- iterative -->
        <xs:enumeration value="Ord"/>
+<!-- ordinal -->
        <xs:enumeration value="Pers"/>
+<!-- personal -->
        <xs:enumeration value="Prop"/>
+<!-- proper -->
        <xs:enumeration value="Recip"/>
+<!-- reciprocal -->
        <xs:enumeration value="Refl"/>
+<!-- reflexive -->
        <xs:enumeration value="Rel"/>
+<!-- relative -->
      </xs:restriction>
    </xs:simpleType>
 
@@ -284,12 +321,17 @@
    <xs:simpleType name="posCategory">
       <xs:restriction base="xs:string">
          <xs:enumeration value="A"/>
-         <xs:enumeration value="Ad-A"/>
+<!-- adjective  -->
+         <xs:enumeration value="Adp"/>
+<!-- adposition most languages use Po and Pr for orientation -->
          <xs:enumeration value="Adv"/>
+<!-- adverb -->
          <xs:enumeration value="Art"/>
+<!-- article -->
          <xs:enumeration value="Clt"/>
+<!-- clitic -->
          <xs:enumeration value="Conj">
-            <!--Conjunction that still needs to classified as either coordinator or subordinator-->
+            <!--Conjunction that still needs to be classified as either coordinator or subordinator. It will be removed -->
          </xs:enumeration>
          <xs:enumeration value="CC">
             <!--COORD "coordinator"-->
@@ -298,28 +340,42 @@
             <!--SUBORD "subordinator"-->
          </xs:enumeration>
          <xs:enumeration value="Descr"/>
+<!-- descriptive this is problematic -->
          <xs:enumeration value="Det"/>
-         <xs:enumeration value="Ger"/>
+<!-- determinative -->
          <xs:enumeration value="Interj"/>
+<!-- interjection -->
          <xs:enumeration value="Ideoph"/>
+<!-- ideophone !NB should this be dealt with? -->
          <xs:enumeration value="N"/>
+<!-- noun -->
          <xs:enumeration value="NN"/>
          <xs:enumeration value="Num"/>
+<!-- numeral -->
          <xs:enumeration value="Pcle"/>
+<!-- particle -->
          <xs:enumeration value="Suf"/>
+<!-- suffix: A problem -->
          <xs:enumeration value="Prefix"/>
+<!-- prefix: A problem -->
          <xs:enumeration value="Po"/>
+<!-- postposition, which should be a subtype, i.e. orientation -->
          <xs:enumeration value="Pr"/>
+<!-- preposition, which should be a subtype, i.e. orientation -->
          <xs:enumeration value="Prc"/>
+<!-- participle -->
          <xs:enumeration value="Pred2">
             <!--secondary predication: чавонь кедть, ласте, озадо-->
          </xs:enumeration>
          <xs:enumeration value="Pron"/>
-
+<!-- pronoun  -->
          <xs:enumeration value="Qnt"/>
+<!-- quantifier !NB THIS IS A PROBLEM  -->
          <xs:enumeration value="V"/>
+<!-- verb -->
       </xs:restriction>
    </xs:simpleType>
+<!-- For deprication begin -->
    <xs:element name="posDescr" type="posDescrType"/>
    <xs:attribute name="posDescr" type="posDescrType"/>
    <xs:simpleType name="posDescrType">
@@ -361,10 +417,10 @@
          <xs:enumeration value="ADV-MANNER"/>
          <xs:enumeration value="ADV-SPAT"/>
          <xs:enumeration value="ADV-TEMP"/>
-<!-- "CEK" indicates the form of the adverb "Erzya" -->
          <xs:enumeration value="CEK_ADV"/>
-<!-- "NEK" indicates the form of the adverb "Erzya" -->
+<!-- "CEK" indicates the form of the adverb "Erzya" -->
          <xs:enumeration value="NEK_ADV"/>
+<!-- "NEK" indicates the form of the adverb "Erzya" -->
          <xs:enumeration value="PRON_ADV"/>
          <xs:enumeration value="ADV-GEN"/>
          <xs:enumeration value="ADV-TRA"/>
@@ -573,31 +629,16 @@
          <xs:enumeration value="Spat-DEM"/>
          <xs:enumeration value="Spat-DISTR"/>
          <xs:enumeration value="ADV-Spat-GEN"/>
-         <xs:enumeration value="Spat-DEICT"/>
-         <xs:enumeration value="Spat-INDEP"/>
-         <xs:enumeration value="Spat-DEPEND"/>
-         <xs:enumeration value="Spat-GOAL"/>
-         <xs:enumeration value="Spat-SOURCE"/>
-         <xs:enumeration value="Spat-LOC"/>
-         <xs:enumeration value="Spat-MULTIPOINT"/>
          <xs:enumeration value="STATE"/>
          <xs:enumeration value="SUMMON"/>
          <xs:enumeration value="TEMP"/>
-         <xs:enumeration value="TEMP-Spat"/>
-         <xs:enumeration value="TEMP-DISTR"/>
          <xs:enumeration value="TERMINATIVE">
             <!--Adverb indicating temporal terminative limit. Erzya: -->
          </xs:enumeration>
          <xs:enumeration value="QNT"/>
-         <xs:enumeration value="QNT-ADN"/>
-         <xs:enumeration value="QNT-ADV"/>
          <xs:enumeration value="QNT-PRON"/>
-         <xs:enumeration value="QNT-INDEF"/>
-         <xs:enumeration value="QNT-COLL"/>
-         <xs:enumeration value="QNT-COLL-UNIV"/>
          <xs:enumeration value="QNT-DISTR"/>
          <xs:enumeration value="QNT-GEN"/>
-         <xs:enumeration value="QNT-ITER"/>
          <xs:enumeration value="QNT-UNIV"/>
          <xs:enumeration value="QNT-UNIV-ADN"/>
          <xs:enumeration value="QNT-UNIV-PRON"/>
@@ -614,23 +655,6 @@
          <xs:enumeration value="V-REFL"/><!-- change V-REFL to VR -->
          <xs:enumeration value="VR"/>
          <xs:enumeration value="V-INST"/>
-         <xs:enumeration value="PRON-INTERR"/>
-         <xs:enumeration value="Q_A"/>
-         <xs:enumeration value="Q_ADV"/>
-         <xs:enumeration value="Q_DET"/>
-         <xs:enumeration value="Q_ITER"/>
-         <xs:enumeration value="Q_MANNER"/>
-         <xs:enumeration value="Q_N"/>
-         <xs:enumeration value="Q_ORD"/>
-         <xs:enumeration value="Q_ORD-ITER"/>
-         <xs:enumeration value="Q_PCLE"/>
-         <xs:enumeration value="Q_PRON"/>
-         <xs:enumeration value="Q_PERS"/>
-         <xs:enumeration value="Q_QNT"/>
-         <xs:enumeration value="Q_REASON"/>
-         <xs:enumeration value="Q_Spat"/>
-         <xs:enumeration value="Q_TEMP"/>
-         <xs:enumeration value="R_ORD"/>
          <xs:enumeration value="R_QNT"/>
          <xs:enumeration value="R_Spat"/>
          <xs:enumeration value="R_TEMP"/>
@@ -644,15 +668,7 @@
          <xs:enumeration value="Pcle"/>
       </xs:restriction>
    </xs:simpleType>
-   <xs:element name="src">
-      <xs:complexType>
-         <xs:simpleContent>
-            <xs:extension base="xs:string">
-               <xs:attribute ref="kpvSrc"/>
-            </xs:extension>
-         </xs:simpleContent>
-      </xs:complexType>
-   </xs:element>
+<!-- for deprication END -->
    <xs:attribute name="orthType">
       <xs:simpleType>
          <xs:restriction base="xs:string">
@@ -709,8 +725,6 @@
                <xs:attribute ref="dx"/>
                <xs:attribute ref="lemmaID"/>
                <xs:attribute ref="stemID"/>
-               <xs:attribute ref="kpvMorph"/>
-               <xs:attribute ref="myvMorph"/>
                <xs:attribute ref="mx"/>
                <xs:attribute ref="nx"/>
                <xs:attribute ref="px"/>
@@ -795,6 +809,7 @@
 	      </xs:complexType>
 	    </xs:element>
          </xs:choice>
+	 <xs:attribute name="varid" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="etymology">
@@ -865,6 +880,9 @@
          <xs:attribute ref="lemmaID"/>
 	 <xs:attribute ref="stemID"/>
          <xs:attribute ref="nx"/>
+         <xs:attribute ref="pos"/>
+         <xs:attribute name="modality" type="xs:string"/>
+         <xs:attribute ref="src"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="comp">
@@ -882,6 +900,7 @@
             </xs:simpleType>
          </xs:attribute>
          <xs:attribute name="drv" type="xs:string"/>
+         <xs:attribute name="fin" type="xs:string"/>
          <xs:attribute ref="ms"/>
          <xs:attribute ref="pos"/>
          <xs:attribute ref="xml:lang"/>
@@ -931,6 +950,8 @@
          <xs:attribute ref="lemmaID"/>
 	 <xs:attribute ref="stemID"/>
          <xs:attribute ref="nx"/>
+         <xs:attribute name="algu_lekseemi_id" type="xs:string"/>
+         <xs:attribute name="id" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="etym">
@@ -988,9 +1009,10 @@
    <xs:element name="semantics">
       <xs:complexType>
          <xs:sequence>
-            <xs:element ref="sem" maxOccurs="unbounded"/>
+            <xs:element ref="sem" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="semRel"/>
          </xs:sequence>
+         <xs:attribute name="sem_type" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="sem">
@@ -1010,6 +1032,7 @@
             <xs:element ref="tCtn"/>
          </xs:choice>
          <xs:attribute ref="xml:lang"/>
+         <xs:attribute name="descr_trans" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="tCtn">
@@ -1132,6 +1155,8 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="xg"/>
          </xs:sequence>
          <xs:attribute name="id" type="xs:string"/>
+         <xs:attribute name="relId" type="xs:string"/>
+         <xs:attribute ref="domain"/>
          <xs:attribute ref="No"/>
          <xs:attribute ref="src"/>
       </xs:complexType>
@@ -1262,6 +1287,8 @@
 	   <xs:attribute name="lesson" type="xs:string"/>
 	   <xs:attribute name="mgs" type="xs:string"/>
 	   <xs:attribute name="name" type="xs:string"/>
+	   <xs:attribute name="page" type="xs:string"/>
+	   <xs:attribute name="type" type="xs:string"/>
 	 </xs:extension>
        </xs:simpleContent>
      </xs:complexType>
@@ -1408,6 +1435,7 @@
          <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" ref="c"/>
 	 </xs:sequence>
+	 <xs:attribute name="varid" type="xs:string"/>
       </xs:complexType>
    </xs:element>
    <xs:element name="c">
@@ -1489,6 +1517,7 @@
                <xs:restriction base="xs:string">
                   <xs:enumeration value="antonym"/>
                   <xs:enumeration value="confer"/>
+                  <xs:enumeration value="holonym"/>
                   <xs:enumeration value="hyponym"/>
                   <xs:enumeration value="hypernym"/>
                   <xs:enumeration value="meronym"/>
@@ -1532,6 +1561,42 @@
        <xs:restriction base="xs:string">
 	 <xs:enumeration value="equivalent"/>
 	 <xs:enumeration value="literal"/>
+       </xs:restriction>
+     </xs:simpleType>
+   </xs:attribute>
+   <xs:attribute name="domain">
+     <xs:simpleType>
+       <xs:restriction base="xs:string">
+         <xs:enumeration value="anatomy"/>
+         <xs:enumeration value="archeology"/>
+         <xs:enumeration value="astronomy"/>
+         <xs:enumeration value="biology"/>
+         <xs:enumeration value="botany"/>
+         <xs:enumeration value="chemistry"/>
+         <xs:enumeration value="economics"/>
+         <xs:enumeration value="ethnography"/>
+         <xs:enumeration value="finance"/>
+         <xs:enumeration value="fishery"/>
+         <xs:enumeration value="geography"/>
+         <xs:enumeration value="geology"/>
+         <xs:enumeration value="grammar"/>
+         <xs:enumeration value="hunting"/>
+         <xs:enumeration value="linguistics"/>
+         <xs:enumeration value="literature"/>
+         <xs:enumeration value="mathematics"/>
+         <xs:enumeration value="medicine"/>
+         <xs:enumeration value="military"/>
+         <xs:enumeration value="mineralology"/>
+         <xs:enumeration value="music"/>
+         <xs:enumeration value="mythology"/>
+         <xs:enumeration value="physics"/>
+         <xs:enumeration value="politics"/>
+         <xs:enumeration value="religion"/>
+         <xs:enumeration value="sports"/>
+         <xs:enumeration value="technology"/>
+         <xs:enumeration value="theater"/>
+         <xs:enumeration value="veterinary"/>
+         <xs:enumeration value="zoology"/>
        </xs:restriction>
      </xs:simpleType>
    </xs:attribute>

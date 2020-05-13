@@ -1,0 +1,18 @@
+#!/usr/bin/env expect
+
+set patgen      [lindex $argv 0];
+set gltlang2    [lindex $argv 1];
+set srcdir      [lindex $argv 2];
+set hypstrtend  [lindex $argv 3];
+set ptrnstrtend [lindex $argv 4];
+set gdbadthresh [lindex $argv 5];
+set indata      [lindex $argv 6];
+set outdata     [lindex $argv 7];
+
+spawn -noecho $patgen $indata $gltlang2.pat $outdata $srcdir/$gltlang2.tra
+
+expect "hyph_start, hyph_finish: "            { send -- "$hypstrtend\r"  }
+expect "pat_start, pat_finish: "              { send -- "$ptrnstrtend\r" }
+expect "good weight, bad weight, threshold: " { send -- "$gdbadthresh\r" }
+
+interact

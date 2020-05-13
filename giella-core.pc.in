@@ -7,5 +7,5 @@ srcdir=${datadir}/${packagename}
 
 Name: @PACKAGE@
 Description: Required scripts and tools for the Giella language technology infrastructure
-URL: http://divvun.no/doc/index.html
+URL: https://giellalt.uit.no/index.html
 Version: @VERSION@

@@ -8,7 +8,7 @@
 # word forms for each continuation lexicon used in a given lexc lexicon source
 # file. The options are:
 #
-# $1    - path to gtcore (we don't use Autotools for this script)
+# $1    - path to giella-core (we don't use Autotools for this script)
 # $2    - the set of morphosyntactic tags used for word form generation
 # $3    - the source lexc file
 # $4    - the generator file (without suffix)
@@ -16,8 +16,8 @@
 # $6    - [OPTIONAL] list of lexicons NOT to include in the table
 
 #### User variables from the calling shell script: ####
-# Location of gtcore:
-gtcore="$1"
+# Location of giella-core:
+giella_core="$1"
 
 # Codes for the word forms to be generated:
 morf_codes="$2"
@@ -37,14 +37,14 @@ exception_lexicons="$6"
 #### Script-internal variables: ####
 lexicon_filename=$(basename $source_file .lexc)
 generator_filename=$(basename $generator_file)
-fst_types="hfst hfstol xfst"
+fst_types="hfst hfstol xfst foma"
 
 #Filenames:
 lemma_lexicon_list=lemma_lexicon_list_${lexicon_filename}.txt
 generated_word_forms=word_form_list_${lexicon_filename}.txt
 generated_table=word_form_${lexicon_filename}_${generator_filename}_table.html
-html_header=$gtcore/scripts/data/cohort_to_table_header.html
-html_footer=$gtcore/scripts/data/cohort_to_table_footer.html
+html_header=$giella_core/scripts/data/cohort_to_table_header.html
+html_footer=$giella_core/scripts/data/cohort_to_table_footer.html
 
 ######## Check that the source lexicon file exists:
 if ! test -e "$source_file" ; then
@@ -91,6 +91,8 @@ elif test "$suffix" = "hfst" ; then
     lookuptool=hfst-lookup
 elif test "$suffix" = "hfstol" ; then
     lookuptool=hfst-optimized-lookup
+elif test "$suffix" = "foma" ; then
+    lookuptool=flookup
 else
     echo "ERROR: No lookup tool found!"
     exit 1
@@ -122,10 +124,10 @@ grep ";" $@ \
    | sort -u
 }
 
-######## For each lexicon found, extract the 10 first entries:
+######## For each lexicon found, extract the N(=$lemmacount) first entries:
 lemma_extraction () {
 for lexicon in $@; do
-    ${GTCORE}/scripts/extract-lemmas.sh \
+    ${giella_core}/scripts/extract-lemmas.sh \
         --include "($lexicon)" \
         --keep-contlex \
         --keep-homonyms \
@@ -176,7 +178,7 @@ lemma_code_list=$(add_morf_codes "$lemma_list" | sed 's/__XXYYZZ__/ /g')
 find_generator
 generate_word_forms "$lemma_code_list" > $generated_word_forms
 
-$GTCORE/scripts/word_form_cohorts-to-table.pl   \
+$giella_core/scripts/word_form_cohorts-to-table.pl   \
             --input    "$generated_word_forms"  \
             --output   "${generated_table}.tmp" \
             --lemlex   "$lemma_lexicon_list"    \

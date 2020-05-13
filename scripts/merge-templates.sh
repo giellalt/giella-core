@@ -136,7 +136,7 @@ if test ! -r und.timestamp ; then
 fi
 
 # Identify language:
-CURLANG=$(fgrep 'AC_SUBST([GTLANG]' configure.ac \
+CURLANG=$(fgrep 'AC_SUBST([GLANG]' configure.ac \
 		  | cut -d',' -f2 | cut -d'[' -f2 | cut -d']' -f1)
 CUR2LANG=$( ${GTCORE}/scripts/iso3-to-2.sh $CURLANG )
 
@@ -184,13 +184,12 @@ for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
     fi
     if test -z ${forcerev} ; then
         # assume we are merging from the revision of timestamp to today
-        macrolangrev=$(LC_ALL=C svn info ${macrolang}.timestamp \
-            | fgrep 'Last Changed Rev' | $SED -e 's/Last Changed Rev: //')
+        macrolangrev=$(head -n1 ${macrolang}.timestamp | cut -d' ' -f2)
         if test -z $macrolangrev ; then
-            echo could not find revision of ${macrolang}.timestamp
+            echo "Could not find revision of ${macrolang}.timestamp"
             continue
         fi
-        echo "Revision of ${macrolang}.timestamp is: $macrolangrev (merging all newer revisions)"
+        echo "${macrolang}.timestamp was last merged at: $macrolangrev (merging all newer revisions)"
     else
         macrolangrev=${forcerev}
         echo "Merging from explicit version: $macrolangrev to HEAD"
@@ -243,7 +242,7 @@ for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
 
         # Replace placeholder language code with real language code in newly
         # added files:
-        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG langs ${localf}
+        ${GTCORE}/scripts/replace-dummy-langcode.sh . $CURLANG ${localf}
 
     done
 
@@ -252,18 +251,18 @@ for macrolangdir in ${GTHOME}/giella-templates/${TEMPLATEDIR}/${tpl} ; do
     cp -v -f ${GTHOME}/giella-templates/${TEMPLATEDIR}/${macrolang}/${macrolang}.timestamp \
     		 ${macrolang}.timestamp
     if test -s ${unmerged} ; then
-        echo There were files that are not safe to merge:
+        echo "There were files that are not safe to merge:"
         cat ${unmerged}
-        echo To merge above files as well, do:
+        echo "To merge above files as well, do:"
         echo "  (svn revert --depth infinity *)"
-        echo   $0 --unsafe
+        echo "  $0 --unsafe"
         echo
-        echo The timestamp file ${macrolang}.timestamp has been updated as well.
+        echo "The timestamp file ${macrolang}.timestamp was updated as well."
         echo
-        echo If you commit the merge, the unsafe changes will be discarded.
-        echo Review the local changes, and do 'svn revert' on the files you
-        echo want to restore to the previous state, or 'svn revert .' to
-        echo undo the whole merge.
+        echo "If you commit the merge, the unsafe changes will be discarded."
+        echo "Review the local changes, and do 'svn revert' on the files you"
+        echo "want to restore to the previous state, or 'svn revert .' to"
+        echo "undo the whole merge."
     else
         cat<<EOF
 

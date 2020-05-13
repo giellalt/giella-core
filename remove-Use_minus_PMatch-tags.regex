@@ -1,0 +1,5 @@
+# This regex removes the +Use/-PMatch tag, as we do not want it in the ordinary
+# output from analysis
+
+# delete some tags from sme
+0 <- "+Use/-PMatch" ;

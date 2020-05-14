@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if test -z "${GTCORE}" ; then
+    echo "Unable to determine GTCORE, re-run gtsetup.sh and re-try"
+    exit 1
+fi
+
+# Wrong usage - short instruction:
+if ! test $# -eq 1 ; then
+    echo
+    echo "Usage: $0 LANGUAGE_CODE (ISO 639 code, all variants, all codes)"
+    echo
+    exit 1
+fi
+
+Language=$(${GTCORE}/scripts/iso639-to-name.sh $1)
+
+if [ ! -z "$Language" ]; then
+   echo
+   echo The ISO 639 code \"$1\" is used for $Language
+   echo
+fi

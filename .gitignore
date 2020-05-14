@@ -1,0 +1,9 @@
+/aclocal.m4
+/giella-core.pc
+/configure
+/config.status
+/config.log
+/autom4te.cache
+/build-aux
+Makefile.in
+Makefile

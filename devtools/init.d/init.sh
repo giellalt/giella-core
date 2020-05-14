@@ -37,13 +37,12 @@
 # Define GTCORE as relative to GTHOME for now. The use of GTHOME should be
 # discouraged, and be replaced with GTCORE. Only GTCORE should be needed,
 # everything else should be optional, but presently that is not the case.
-export GTCORE=$GTHOME/giella-core
 
 # Add predefined lookup aliases for all languages:
-. $GTHOME/giella-core/devtools/init.d/lookup-init.sh
+. $GTCORE/devtools/init.d/lookup-init.sh
 
 # Alias for svn update
-alias svnup="svn up $GTHOME $GTBIG $GTFREE $GTPRIV $GTHOME/art"
+alias svnup="svn up $GTLANGS/* $GTBIG $GTFREE $GTPRIV $GTHOME/art"
 
 # Sorting Cyrillic lists
 

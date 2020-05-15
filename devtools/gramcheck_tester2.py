@@ -20,6 +20,7 @@ def make_gramcheck_runs(text, error, filename, zcheck_file, runner):
 def gramcheck(sentence: str, zcheck_file: str,
               runner: util.ExternalCommandRunner) -> dict:
     """Run the gramchecker on the error_sentence."""
+    print(f'Checking «{sentence}»')
     runner.run(
         f'divvun-checker -a {zcheck_file} '.split(),
         to_stdin=sentence.encode('utf-8'))

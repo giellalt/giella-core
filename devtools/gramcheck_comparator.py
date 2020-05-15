@@ -413,9 +413,23 @@ def get_results(filters, pickle_file, zcheck_file, outfile):
     runner = util.ExternalCommandRunner()
     with open(pickle_file, 'rb') as pickle_stream:
         print(f'filters: {filters}, file: {pickle_file}', file=outfile)
-        return [(result[0], filter_markup(filters, result[1]), result[2],
-                 filter_dc(result[3], zcheck_file, runner))
-                for x, result in enumerate(pickle.load(pickle_stream))]
+
+        results = []
+
+        try:
+            for x, result in enumerate(pickle.load(pickle_stream)):
+                results.append((
+                    result[0],
+                    filter_markup(
+                        filters,
+                        result[1]),
+                    result[2],
+                    filter_dc(result[3], zcheck_file, runner)
+            ))
+        except EOFError as err:
+            print(f'Error reading pickle: {err}')
+
+        return results
 
 
 def report_markup_dupes(c_errors, errortags, counter, outfile):

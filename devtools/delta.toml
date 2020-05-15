@@ -6,9 +6,9 @@
 # - replacements: list of string replacements: placeholder -> real string
 template = "https://github.com/giellalt/template-lang-und"
 rev_id = 1
-template_sha = "c7155fb1-f0a7-4240-a2fc-2600b6f42f90"
+template_sha = "cc09eb0168024b3d0fee9e69e98b78d579f96ce9"
 
 [replacements]
-__UND__ = "fra"
-__UND2C__ = "fr"
-__UNDEFINED__ = "French"
+__UND__ = 
+__UND2C__ = 
+__UNDEFINED__ = 

@@ -1,6 +1,0 @@
-# This file makes comparation tags in adverbials optional.
-# This is to ensure that it is ok to input such tags in the generators, but
-# not required.
-
-0 (<-) %+Comp, 
-0 (<-) %+Superl || %+Adv ( ? ) _ ;

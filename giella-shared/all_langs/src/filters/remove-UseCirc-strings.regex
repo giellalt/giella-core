@@ -1,4 +1,0 @@
-! Remove strings containing +Use/Circ, that is, all (or most) circular
-! constructions. Used to construct non-circular/recursive transducers.
-
-~$[ %+Use%/Circ ] ;

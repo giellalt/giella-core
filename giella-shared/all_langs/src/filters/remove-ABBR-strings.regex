@@ -1,4 +1,0 @@
-! Remove strings containing +ABBR, that is, all acronyms. Used for building 
-! certain tts transducers.
-
-~$[ %+ABBR ] ;

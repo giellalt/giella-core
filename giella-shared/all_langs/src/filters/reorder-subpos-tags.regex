@@ -1,5 +1,0 @@
-# This script reshuffles sub-POS tags to follow the main POS.
-# Language independent tags only.
-
-# Prop:
-%+N %+Prop <- %+Prop %+N ;

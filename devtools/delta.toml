@@ -9,6 +9,6 @@ rev_id = 1
 template_sha = "cc09eb0168024b3d0fee9e69e98b78d579f96ce9"
 
 [replacements]
-__UND__ = "fra"
-__UND2C__ = "fr"
-__UNDEFINED__ = "French"
+__UND__ = 
+__UND2C__ = 
+__UNDEFINED__ = 

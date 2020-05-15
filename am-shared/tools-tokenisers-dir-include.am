@@ -155,6 +155,6 @@ relabeller.hfst:
 	$(AM_V_CP)cp -f $< $@
 
 ####### Includes: ###########
-include $(top_srcdir)/am-shared/vislcg3-include.am
-include $(top_srcdir)/am-shared/hfst-format-include.am
-include $(top_srcdir)/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/vislcg3-include.am
+include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
+include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am

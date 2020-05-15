@@ -70,10 +70,10 @@ clean-local:
 
 ##########################################
 # General build rules included from here:#
-include $(top_srcdir)/am-shared/regex-include.am
-include $(top_srcdir)/am-shared/xfscript-include.am
-include $(top_srcdir)/am-shared/lookup-include.am
-include $(top_srcdir)/am-shared/hfst-format-include.am
-include $(top_srcdir)/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/regex-include.am
+include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
+include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
+include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
+include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 
 # vim: set ft=automake:

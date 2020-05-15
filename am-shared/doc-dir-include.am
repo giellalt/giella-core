@@ -76,4 +76,4 @@ $(LINKS): $(VPATH_JSP_PAGES)
 clean-local:
 	-rm -rf build
 
-include $(top_srcdir)/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am

@@ -52,7 +52,7 @@ Review the merge results, if ok then commit (preferably all languages at once).
 We want to avoid merge conflicts at any costs since this merge scheme is the
 core of the scaleability of the infrastructure, so:
 
-KEEPING THE am-shared DIR FREE OF LOCAL MODIFICATIONS IS IMPERATIVE FOR THE
+KEEPING THE ../giella-core/am-shared DIR FREE OF LOCAL MODIFICATIONS IS IMPERATIVE FOR THE
 MERGE SCHEME TO FUNCTION!
 
 

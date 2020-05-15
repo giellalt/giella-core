@@ -429,11 +429,11 @@ clean-local:
 	-rm -f *.hfst *.xfst *.foma *.txt $(GIELLA_FILTER_CORE_REGEX_SRCS)
 
 # Include files for the actual build instructions and for verbosity control:
-include $(top_srcdir)/am-shared/lexc-include.am
-include $(top_srcdir)/am-shared/regex-include.am
-include $(top_srcdir)/am-shared/xfscript-include.am
-include $(top_srcdir)/am-shared/hfst-format-include.am
-include $(top_srcdir)/am-shared/silent_build-include.am
-include $(top_srcdir)/am-shared/tag-extraction-include.am
+include $(top_srcdir)/../giella-core/am-shared/lexc-include.am
+include $(top_srcdir)/../giella-core/am-shared/regex-include.am
+include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
+include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
+include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/tag-extraction-include.am
 
 # vim: set ft=automake:

@@ -59,7 +59,7 @@ noinst_DATA=$(GT_CG_LOCAL_NOINST_TARGETS)
 
 ####### Build rules via include: ########
 
-include $(top_srcdir)/am-shared/vislcg3-include.am
-include $(top_srcdir)/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/vislcg3-include.am
+include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 
 # vim: set ft=automake:

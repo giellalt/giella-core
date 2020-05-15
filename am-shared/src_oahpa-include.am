@@ -2,7 +2,7 @@
 ## Copyright: Sámediggi/Divvun/UiT
 ## Licence: GPL v3+
 
-# This file is included by $GTLANG/am-shared/src-dir-include.am, which is
+# This file is included by $GTLANG/../giella-core/am-shared/src-dir-include.am, which is
 # included by $GTLANG/src/Makefile.am. All file references are relative to
 # that Makefile.am.
 

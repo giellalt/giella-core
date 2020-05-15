@@ -95,12 +95,12 @@ clean-local:
             initial_letters.all.default.hfst \
             final_strings.default.hfst
 
-include $(top_srcdir)/am-shared/tools-spellcheckers-fstbased-dir-include.am 
-include $(top_srcdir)/am-shared/tools-spellcheckers-fstbased-desktop-dir-include.am 
-include $(top_srcdir)/am-shared/tools-spellcheckers-fstbased-desktop-hfst-dir-include.am
-include $(top_srcdir)/am-shared/tools-spellcheckers-fstbased-mobile-dir-include.am
-include $(top_srcdir)/am-shared/tools-spellcheckers-fstbased-mobile-hfst-dir-include.am
-include $(top_srcdir)/am-shared/regex-include.am
-include $(top_srcdir)/am-shared/xfscript-include.am
-include $(top_srcdir)/am-shared/hfst-format-include.am
-include $(top_srcdir)/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-dir-include.am 
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-dir-include.am 
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile-hfst-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/regex-include.am
+include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
+include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
+include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am

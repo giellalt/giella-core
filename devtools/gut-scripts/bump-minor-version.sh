@@ -3,9 +3,44 @@
 # test script for gut apply script
 
 # Variables:
-LANGDIR=$1
+LANGDIR=$(pwd)
 
-present_version=$(grep 'AC_INIT' $LANGDIR/configure.ac | tr '\n' ' ' \
-        | cut -d',' -f2 | tr -d ' ' | cut -d'[' -f2 | cut -d']' -f1)
+if test ! -f $LANGDIR/configure.ac ; then
+#    echo no such file
+    exit
+fi
 
-echo $present_version
+init_string=$(grep '^AC_INIT' $LANGDIR/configure.ac )
+pre_version=$( echo $init_string | cut -d'[' -f-2)
+present_version=$( echo $init_string | cut -d'[' -f3 | cut -d']' -f1)
+post_version=$( echo $init_string | cut -d']' -f3-)
+
+#echo "orig: $init_string"
+
+#echo $present_version
+
+maj_version=$(echo $present_version | cut -d'.' -f1 )
+min_version=$(echo $present_version | cut -d'.' -f2 )
+patch_version=$(echo $present_version | cut -d'.' -f3 )
+
+#echo "orig maj_version: $maj_version"
+#echo "orig min_version: $min_version"
+#echo "orig patch_version: $patch_version"
+
+maj_version=$maj_version
+let min_version++
+patch_version=0
+
+#echo "new maj_version: $maj_version"
+#echo "new min_version: $min_version"
+#echo "new patch_version: $patch_version"
+
+new_init_string=${pre_version}[${maj_version}.$min_version.$patch_version]$post_version
+
+#echo "new_init_string: $new_init_string"
+
+awk '/^AC_INIT/ {exit} {print}' $LANGDIR/configure.ac > $LANGDIR/configure.ac.tmp
+echo $new_init_string                                >> $LANGDIR/configure.ac.tmp
+sed -e "1,/^AC_INIT/d" $LANGDIR/configure.ac         >> $LANGDIR/configure.ac.tmp
+
+mv -f $LANGDIR/configure.ac.tmp $LANGDIR/configure.ac

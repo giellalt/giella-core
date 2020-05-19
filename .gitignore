@@ -10,3 +10,4 @@ Makefile
 /scripts/gt-version.sh
 /scripts/gt-core.sh
 .DS_Store
+__pycache__/

@@ -7,7 +7,7 @@ reponame=$1
 orgname=$2
 langcode=$(echo $reponame | cut -d'-' -f2)
 url=https://giella.zulipchat.com/api/v1/external/github
-api_key="api_key=NEbDQEHRPlGcOe3Mg2YDk7m9xf6cLVqG"
+api_key=""
 stream="stream=$langcode"
 
 printf "${url}?${api_key}&${stream}"

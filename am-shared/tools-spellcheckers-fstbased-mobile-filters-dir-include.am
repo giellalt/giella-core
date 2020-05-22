@@ -54,6 +54,8 @@ GIELLA_MOBILESPELLER_FILTER_TARGETS+=\
 endif # CAN_FOMA
 endif # WANT_SPELLERS
 
+OFST_REGEX_TARGETS+=$(GIELLA_MOBILESPELLER_FILTER_TARGETS)
+
 ####### Copy regex files from the Giella core if not found locally: ########
 %.regex: $(GIELLA_SHARED)/all_langs/tools/spellcheckers/fstbased/mobile/filters/%.regex
 	$(AM_V_CP)cp -f $< $@

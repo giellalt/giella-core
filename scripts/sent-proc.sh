@@ -13,22 +13,16 @@
 
 # change to 'true' to debug paths of analysis tools
 debug='false'
-#HLOOKUP=`which hfst-optimized-lookup`
-HLOOKUP=`which hfst-lookup`
-# HLOOKUP=`which hfst-lookup` # TODO: use this one instead
-
+HLOOKUP=`which hfst-tokenize`
 
 if [ -n "$HLOOKUP" ]; then
-  echo "using hfst-optimized-lookup"
+  echo "using hfst-tokenize"
 else
   echo "no hfst-lookup found: please install it!"
   echo "See you later!"
   exit 0
 fi
 
-# Plan for revision of this script:
-# Use both analysers (hfst-tokenize / xfst+lookup2cg) for all lgs
-# Have two pipelines and a parameter for choosing, for all lgs, according to list.
 # List of language catalogues:
 # langs
 # bak bxr chp chr ciw cor crk deu est evn fao fin fit fkv hdn hun ipk izh kal kca koi kpv lav liv lut mdf mhr mns mrj myv nds nio nob oji olo otw ron rus sjd sje sma sme smj smn sms som tat tku udm vep vot vro yrk
@@ -50,11 +44,11 @@ s='pos'
 # -t => default: no trace
 t=''
 
-# lang group => default: langs (because of default sme, which is now in the infrastructure)
-lg='langs'
+# lang group => default: lang- (because of default sme, which is now in the infrastructure)
+lg='lang-'
 
 #abbr file => default: sme-path (because of default: sme)
-abbr='$GTHOME/$lg/$l/bin/abbr.txt'
+abbr='$GTLANGS/$lg$l/tools/tokenisers/abbr.txt'
 
 #long_lang_list
 long_lang_list=(bxr chp ciw cor crk fao fin fkv
@@ -89,7 +83,7 @@ usage() {
     echo "-t print traces of the disambiguation or parsing step"  1>&2;
     echo "-h print this text"  1>&2;
     exit 1;
-} 
+}
 
 while getopts ":l:s:h:t" o; do
     case "${o}" in
@@ -114,20 +108,20 @@ shift $((OPTIND-1))
 
 # language parameter test and abbr file assignment
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
-    lg='langs'
+    lg='lang-'
 #    if [[ "${experiment_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
 #    lg='experiment-langs'
-    if [  -f $GTHOME/$lg/$l/tools/tokenisers/abbr.txt ]; then
-       abbr="--abbr=$GTHOME/$lg/$l/tools/tokenisers/abbr.txt"  # <--- new infra
+    if [  -f $GTLANGS/lang-$l/tools/tokenisers/abbr.txt ]; then
+       abbr="--abbr=$GTLANGS/$lg$l/tools/tokenisers/abbr.txt"  # <--- new infra
     else
        abbr=''
        echo "Warning: no abbr file found" 1>&2;
-       echo "  $GTHOME/$lg/$l/tools/tokenisers/abbr.txt" 1>&2;
+       echo "  $GTLANGS/$lg$l/tools/tokenisers/abbr.txt" 1>&2;
        echo "............. preprocessing without it!" 1>&2;
-    fi 
+    fi
 fi
 
-current_path="$GTHOME/$lg/$l"
+current_path="$GTLANGS/$lg$l"
 
 if [[ "$debug" == "true" ]] ; then
     echo "post_ l  ${l}"
@@ -138,16 +132,14 @@ if [[ "$debug" == "true" ]] ; then
     echo "current_path  $current_path"
 fi
 
-
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
-    MORPH="$HLOOKUP $current_path/src/analyser-disamb-gt-desc.hfstol -q"
+    MORPH="$HLOOKUP --giella-cg --weight-classes=1 $current_path/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst "
     DIS="$current_path/src/cg3/disambiguator.cg3"
-    if [ ! -f "$current_path/src/analyser-disamb-gt-desc.hfstol" ]; then
+    if [ ! -f "$current_path/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" ]; then
         echo "no hfst file found: please compile the language tools for $l"
         echo "See you later!"
         exit 0
     fi
-
 else
     MORPH="$HLOOKUP -flags mbTT -utf8 $current_path/bin/$l.fst"
     DIS="$current_path/src/$l-dis.rle"
@@ -167,16 +159,16 @@ sentence="${sentence//(/\(}"
 sentence="${sentence//)/\)}"
 
 # path to the shared syntax
-SD_PATH='$GTHOME/giella-shared/smi/src/cg3'
+SD_PATH='$GTLANGS/giella-shared/smi/src/cg3'
 
 # define commands
 # common pos_cmd
 #pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTHOME/gt/script/lookup2cg"
-pos_cmd="echo $sentence | preprocess $abbr | $MORPH |cut -f1,2| $GTCORE/scripts/lookup2cg"
+pos_cmd="echo $sentence | $MORPH |cut -f1,2"
 
 if [ $l == fao ] || [ $l == crk ]; then
-    dis_cmd=$pos_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/cg3/disambiguator.cg3 $t"
-    syn_cmd=$dis_cmd" | vislcg3 -g $GTHOME/$lg/$l/src/cg3/functions.cg3 $t"
+    dis_cmd=$pos_cmd" | vislcg3 -g $GTLANGS/$lg$l/src/cg3/disambiguator.cg3 $t"
+    syn_cmd=$dis_cmd" | vislcg3 -g $GTLANGS/$lg$l/src/cg3/functions.cg3 $t"
 else
     dis_cmd=$pos_cmd" | vislcg3 -g $DIS $t"
     syn_cmd=$dis_cmd" | vislcg3 -g $SD_PATH/functions.cg3 $t"
@@ -188,27 +180,27 @@ dep_cmd=$syn_cmd" | vislcg3 -g $SD_PATH/dependency.cg3 $t"
 
 # processing step
 case $s in
-    pos) 
+    pos)
 	echo "... pos tagging ..."
 	echo $(echo $pos_cmd) | sh
 	;;
     dis)
 	if [[ "$debug" == "true" ]] ; then
-	    echo "$dis_cmd" 
+	    echo "$dis_cmd"
 	fi
 	echo "... pos disambiguating ..."
 	echo $(echo $dis_cmd) | sh
 	;;
     syn)
 	if [[ "$debug" == "true" ]] ; then
-	    echo "$syn_cmd" 
+	    echo "$syn_cmd"
 	fi
 	echo "... syntax analysis ..."
 	echo $(echo $syn_cmd) | sh
 	;;
     dep)
 	if [[ "$debug" == "true" ]] ; then
-	    echo "$dep_cmd" 
+	    echo "$dep_cmd"
 	fi
 	echo "... inserting dependency relations ..."
 	echo $(echo $dep_cmd) | sh
@@ -227,7 +219,7 @@ esac
 
 # What we want:
 # One script, with parametrised options along several paths:
-# What language, 
+# What language,
 # What kind of input (plain text, xml text, evt. other text formats as well)
 # What kind of output (disambiguated text with and without rule numbers, non-disambiguated text with and without syntactic tags
 # What kind of morphological transducers (standard (tolerant) or normative (restricted))
@@ -236,8 +228,8 @@ esac
 # If given as
 # dis.sh filename
 # the script expects a text
-# If given as 
-# dis.sh 
+# If given as
+# dis.sh
 # (i.e., without file name), the script expects a sentence, and answers:
 # "Write a sentence and press ENTER. Terminate by pressing ctrl-C."
 

@@ -329,7 +329,7 @@ editdist.all.%.hfst: $(strings_deps) editdist.%.hfst
 # Error model building - list of words known to be misspelled:
 words.%.hfst: $(words_deps) easteregg.%.suggtxt
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
-		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j
+		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		   --format=openfst-tropical \
 		-o $@
 

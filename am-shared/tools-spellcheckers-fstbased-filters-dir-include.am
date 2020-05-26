@@ -25,8 +25,8 @@ EXTRA_DIST+=$(GT_FSTSPELLER_FILTER_SRCS) \
 GT_FSTSPELLER_FILTER_ALL_SRCS=\
         $(GT_FSTSPELLER_FILTER_SRCS) \
         $(GT_LOCAL_FSTSPELLER_FILTER_SRCS) \
-        $(GIELLA_LOCAL_COPY_FILTER_SRCS) \
-        $(GENERATED_REGEXES)
+        $(GIELLA_LOCAL_COPY_FSTBASED_FILTER_SRCS) \
+        $(GENERATED_FSTBASED_REGEXES)
 
 # This is what we build:
 noinst_DATA+=$(GT_FSTSPELLER_FILTER_TARGETS)
@@ -50,6 +50,8 @@ GT_FSTSPELLER_FILTER_TARGETS+=\
         $(patsubst %.regex,%.foma,$(GT_FSTSPELLER_FILTER_ALL_SRCS))
 endif # CAN_FOMA
 endif # WANT_SPELLERS
+
+SELECTED_FORMAT_REGEX_TARGETS+=$(GT_FSTSPELLER_FILTER_TARGETS)
 
 ####### Copy regex files from the Giella core if not found locally: ########
 %.regex: $(GIELLA_SHARED)/all_langs/tools/spellcheckers/fstbased/filters/%.regex

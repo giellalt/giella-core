@@ -24,7 +24,7 @@ Version=$3
 Platform=$4
 Variant=$5
 
-Date=$(date +%d.%m.%Y-%H:%M)
+Date=$(date +%d.%m.%Y-%H%M)
 HfstVersion=$(hfst-info | grep 'HFST version' | grep -Eo '[0-9.]+')
 
 if test $Variant == 'default' -o "x$Variant" == 'x'; then

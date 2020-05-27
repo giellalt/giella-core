@@ -195,19 +195,14 @@ GT_ERRMODELS+=errmodel.default.hfst
 # errmodel.ocr.hfst
 
 GT_SPELLING_HFST=$(GTLANG2).zhfst
-GT_SPELLING_NOCOMP_HFST=$(GTLANG2)-nocomp.zhfst
 
 voikkosharedir=$(datadir)/voikko/3/
 #! @param GT_VOIKKO optional, set to spell checker automata names if
 #!					installable
 voikkoshare_DATA=$(GT_SPELLING_HFST) \
-				 $(GT_SPELLING_NOCOMP_HFST) \
 				 $(ALT_WS_ZHFST_FILES) \
-				 $(ALT_WS_NOCOMP_ZHFST_FILES) \
 				 $(ALT_ORTH_ZHFST_FILES) \
-				 $(ALT_ORTH_NOCOMP_ZHFST_FILES) \
-				 $(AREA_ZHFST_FILES) \
-				 $(AREA_NOCOMP_ZHFST_FILES)
+				 $(AREA_ZHFST_FILES)
 
 endif # CAN_HFST
 endif # WANT_SPELLERS
@@ -226,7 +221,7 @@ easteregg.%.txt: $(GT_SPELLER_HFST)
 		$(GTLANG2) \
 		$(top_srcdir) \
 		$(SPELLERVERSION) \
-		"$(basename $( dirname $(pwd)))" \
+		"desktop" \
 		$* \
 		> $@
 
@@ -256,6 +251,11 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps)
 		--output-file=$@ \
 		$(initial_letter_error_model_option)
 
+editdist.%.hfst: editdist.%.regex
+	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
+	   --format=openfst-tropical \
+		-o $@
+
 # Initial string edits, if enabled:
 initial_letters.txt.%.hfst: initial_letters.%.txt
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
@@ -264,6 +264,7 @@ initial_letters.txt.%.hfst: initial_letters.%.txt
 
 initial_letters.regex.%.hfst: initial_letters.%.regex
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
+	   --format=openfst-tropical \
 		-o $@
 
 initial_letters.all.%.hfst: $(initial_letter_all_deps)
@@ -273,10 +274,12 @@ initial_letters.all.%.hfst: $(initial_letter_all_deps)
 final_strings.txt.%.hfst: final_strings.%.txt
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
+	   --format=openfst-tropical \
 		-o $@
 
 final_strings.regex.%.hfst: final_strings.%.regex
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
+	   --format=openfst-tropical \
 		-o $@
 
 final_strings.all.%.hfst: $(final_strings_all_deps)
@@ -321,7 +324,9 @@ editdist.all.%.hfst: $(strings_deps) editdist.%.hfst
 # Error model building - list of words known to be misspelled:
 words.%.hfst: $(words_deps) easteregg.%.suggtxt
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
-		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j -o $@
+		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
+		   --format=openfst-tropical \
+		-o $@
 
 # The final error model is assembled here:
 errmodel.%.hfst: words.%.hfst \
@@ -385,8 +390,6 @@ $(GT_SPELLING_HFST): $(srcdir)/index.xml \
 	$(AM_V_at)cp $(GT_SPELLER_ACCEPTOR) build/$@/$(GT_SPELLER_ACCEPTOR)
 	$(AM_V_at)cp $(GT_ERRMODELS) build/$@/$(GT_ERRMODELS)
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
-	$(AM_V_ZIP)cd build/$@/ && $(ZIP) -0 $(VERBOSITY) \
-				../../$(basename $@)-nocomp.zhfst *
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/
 

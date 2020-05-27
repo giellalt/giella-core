@@ -225,7 +225,7 @@ easteregg.%.mobile.txt: $(MOB_GT_SPELLER_HFST)
 		$(GTLANG2) \
 		$(top_srcdir) \
 		$(SPELLERVERSION) \
-		"$(basename $( dirname $(pwd)))" \
+		"mobile" \
 		$* \
 		> $@
 
@@ -263,6 +263,7 @@ initial_letters.txt.%.mobile.hfst: initial_letters.%.txt
 
 initial_letters.regex.%.mobile.hfst: initial_letters.%.regex
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
+	   --format=openfst-tropical \
 		-o $@
 
 #initial_letters.all.%.hfst: $(mob_initial_letter_all_deps)
@@ -272,10 +273,12 @@ initial_letters.regex.%.mobile.hfst: initial_letters.%.regex
 final_strings.txt.%.mobile.hfst: final_strings.%.txt
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
+	   --format=openfst-tropical \
 		-o $@
 
 final_strings.regex.%.mobile.hfst: final_strings.%.regex
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
+	   --format=openfst-tropical \
 		-o $@
 
 final_strings.all.%.hfst: $(mob_final_strings_all_deps)
@@ -325,6 +328,7 @@ editdist.all.%.hfst: editdist.all.%.hfst.tmp keyboardlayout.hfst
 words.%.mobile.hfst: $(mob_words_deps) easteregg.%.mobile.suggtxt
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
+		   --format=openfst-tropical \
 		-o $@
 
 # Error model building - list of words known to be misspelled, mobile

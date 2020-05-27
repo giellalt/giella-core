@@ -200,6 +200,9 @@ if CAN_HFST
 if WANT_HFST_MOBILE_SPELLER
 MOB_GIELLA_ERRMODELS+=errmodel.default.mobile.hfst
 
+# Change errmodel.*.hfst -> easteregg.*.desktop.txt
+GIELLA_MOBILE_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .mobile.hfst,.mobile.txt,$(MOB_GIELLA_ERRMODELS)))
+
 MOB_GIELLA_SPELLING_HFST=$(GTLANG2)-mobile.zhfst
 
 mobilespellerdir=$(datadir)/giella/mobilespellers/
@@ -220,6 +223,7 @@ noinst_DATA+=$(MOB_GIELLA_ERRMODELS) \
 ####### Easter egg version info: #######
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
+$(GIELLA_MOBILE_EASTEREGGS): \
 easteregg.%.mobile.txt: $(MOB_GT_SPELLER_HFST)
 	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \

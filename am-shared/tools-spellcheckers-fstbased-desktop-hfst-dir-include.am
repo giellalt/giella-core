@@ -194,6 +194,9 @@ GT_ERRMODELS+=errmodel.default.hfst
 # libvoikko can't yet handle multiple error models - do NOT include this line:
 # errmodel.ocr.hfst
 
+# Change errmodel.*.hfst -> easteregg.*.desktop.txt
+GIELLA_DESKTOP_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .hfst,.desktop.txt,$(GT_ERRMODELS)))
+
 GT_SPELLING_HFST=$(GTLANG2).zhfst
 
 voikkosharedir=$(datadir)/voikko/3/
@@ -216,7 +219,8 @@ noinst_DATA+=$(GT_ERRMODELS) \
 ####### Easter egg version info: #######
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
-easteregg.%.txt: $(GT_SPELLER_HFST)
+$(GIELLA_DESKTOP_EASTEREGGS): \
+easteregg.%.desktop.txt: $(GT_SPELLER_HFST)
 	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \
@@ -226,7 +230,7 @@ easteregg.%.txt: $(GT_SPELLER_HFST)
 		> $@
 
 # Easter egg suggestions:
-easteregg.%.suggtxt: easteregg.%.txt
+easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
 	$(AM_V_GEN)sed -e 's/^/nuvviDspeller:/' < $< \
 		| sed = \
 		| sed 'N;s/\n/	/' \
@@ -234,7 +238,7 @@ easteregg.%.suggtxt: easteregg.%.txt
 		> $@
 
 # Easter egg string acceptor:
-easteregg.%.hfst: easteregg.%.txt
+easteregg.%.desktop.hfst: easteregg.%.desktop.txt
 	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower > $@
 
@@ -322,7 +326,7 @@ editdist.all.%.hfst: $(strings_deps) editdist.%.hfst
 		-o $@
 
 # Error model building - list of words known to be misspelled:
-words.%.hfst: $(words_deps) easteregg.%.suggtxt
+words.%.hfst: $(words_deps) easteregg.%.desktop.suggtxt
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		   --format=openfst-tropical \
@@ -368,11 +372,11 @@ errmodel.%.hfst: errmodel.%.xfscript easteregg.%.hfst
 ####### Speller acceptor: #######
 # Build the automaton used for the speller
 $(GT_SPELLER_ACCEPTOR): \
-acceptor.%.hfst: $(GT_SPELLER_HFST) easteregg.%.hfst
+acceptor.%.hfst: $(GT_SPELLER_HFST) easteregg.%.desktop.hfst
 	$(AM_V_PROJECT)cat $< \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER)                      \
-		| $(HFST_DISJUNCT) - easteregg.$*.hfst          \
+		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst          \
 		| $(HFST_PUSH_WEIGHTS) --push=initial           \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
 		-o $@

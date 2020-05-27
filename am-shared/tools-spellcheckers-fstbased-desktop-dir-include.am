@@ -97,8 +97,10 @@ generator-desktopspeller-gt-norm.tmp.hfst: \
 	$(AM_V_CP)cp -f $< $@
 
 # Invert the final fst, to enable symmetric yaml tests and easy manual testing:
-analyser-%.hfst: generator-%.hfst
-	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< -o $@
+analyser-desktopspeller-gt-norm.hfst: generator-desktopspeller-gt-norm.hfst
+	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< \
+	| $(HFST_PRUNE_ALPHABET) $(MORE_VERBOSITY) \
+	| $(HFST_REMOVE_EPSILONS) $(MORE_VERBOSITY) -o $@
 
 ####### Other targets: ###########
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop_weights-dir-include.am

@@ -101,15 +101,12 @@ mwe-dis.cg3: \
 $(GIELLA_GC_ANAL_SPELLER): \
 		../spellcheckers/analyser-desktopspeller-gt-norm.hfst \
 		filters/make-desktopspeller-CG-tags.hfst
-	$(AM_V_HXFST)$(PRINTF) "read regex \
-				@\"$<\" \
-			.o. @\"filters/make-desktopspeller-CG-tags.hfst\".i   \
-			;\n\
-		 save stack $@.tmp\n\
-		 quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
-	$(AM_V_FST2FST)$(HFST_PUSH_WEIGHTS) --push=initial -i $@.tmp \
+	$(AM_V_FST2FST)$(HFST_INVERT) $(MORE_VERBOSITY) $< \
+	| $(HFST_COMPOSE) $(MORE_VERBOSITY) -F \
+		-1 filters/make-desktopspeller-CG-tags.hfst \
+	| $(HFST_INVERT) $(MORE_VERBOSITY) \
+	| $(HFST_PUSH_WEIGHTS) --push=initial \
 	| $(HFST_FST2FST) $(HFST_FLAGS) -f olw -o $@
-	$(AM_V_at)rm -f $@.tmp
 
 # Copy speller-errormodel:
 $(GIELLA_GC_SPELLER_ERRMOD): \

@@ -1,10 +1,14 @@
 #!/bin/bash
 
 repodir=$(pwd)
-iso3code=$(fgrep '[GLANG]' $repodir/configure.ac | cut -d'[' -f3 | cut -d']' -f1)
-iso2code=$(fgrep '[GLANG2]' $repodir/configure.ac | cut -d'[' -f3 | cut -d']' -f1)
-langname=$(fgrep '[GLANGUAGE]' $repodir/configure.ac | cut -d'[' -f3 | cut -d']' -f1 | tr -d '"')
-deltatemplate=/Users/smo036/langtech/gut/giellalt/giella-core/devtools/delta.toml
+langcode=$(basename $repodir | cut -d'-' -f2)
+giella_core="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/../.."
+
+iso3code=$langcode
+iso2code=$($giella_core/scripts/iso3-to-2.sh $langcode)
+langname=$($giella_core/scripts/iso639-to-name.sh $langcode)
+
+deltatemplate=$giella_core/devtools/delta.toml
 
 echo $iso3code and $iso2code and $langname
 

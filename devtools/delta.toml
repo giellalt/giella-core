@@ -4,9 +4,9 @@
 # - rev_id: automatically maintained
 # - template_sha: sha of last known version merged with this language
 # - replacements: list of string replacements: placeholder -> real string
-template = "https://github.com/giellalt/template-lang-und"
+template = "https://github.com/giellalt/template-keyboard-und"
 rev_id = 1
-template_sha = "cc09eb0168024b3d0fee9e69e98b78d579f96ce9"
+template_sha = "ddbc686883b2f2ed66bf312a52fd109cc8144450"
 
 [replacements]
 __UND__ = 

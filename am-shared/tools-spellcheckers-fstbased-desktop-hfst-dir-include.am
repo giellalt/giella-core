@@ -407,7 +407,7 @@ $(GT_SPELLING_HFST): $(srcdir)/index.xml \
 # create a *-desktop.zhfst file by hard-linking to *.zhfst:
 $(ALL_DESKTOP_ZHFST_FILES): \
 %-desktop.zhfst: %.zhfst
-	$(AM_V_GEN)ln $< $@
+	$(AM_V_GEN)ln -f $< $@
 
 ####### Other targets: ###########
 

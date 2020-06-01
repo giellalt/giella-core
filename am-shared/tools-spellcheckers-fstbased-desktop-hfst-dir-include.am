@@ -198,14 +198,19 @@ GT_ERRMODELS+=errmodel.default.hfst
 GIELLA_DESKTOP_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .hfst,.desktop.txt,$(GT_ERRMODELS)))
 
 GT_SPELLING_HFST=$(GTLANG2).zhfst
+ALL_ZHFST_FILES=$(GT_SPELLING_HFST) \
+				 $(ALT_WS_ZHFST_FILES) \
+				 $(ALT_ORTH_ZHFST_FILES) \
+				 $(AREA_ZHFST_FILES)
+
+# Suffix substitution to get *-desktop.zhfst for all desktop zhfst files:
+ALL_DESKTOP_ZHFST_FILES=$(ALL_ZHFST_FILES:.zhfst=-desktop.zhfst)
 
 voikkosharedir=$(datadir)/voikko/3/
 #! @param GT_VOIKKO optional, set to spell checker automata names if
 #!					installable
-voikkoshare_DATA=$(GT_SPELLING_HFST) \
-				 $(ALT_WS_ZHFST_FILES) \
-				 $(ALT_ORTH_ZHFST_FILES) \
-				 $(AREA_ZHFST_FILES)
+voikkoshare_DATA=$(ALL_ZHFST_FILES) \
+				 $(ALL_DESKTOP_ZHFST_FILES)
 
 endif # CAN_HFST
 endif # WANT_SPELLERS
@@ -396,6 +401,13 @@ $(GT_SPELLING_HFST): $(srcdir)/index.xml \
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/
+
+####### *-desktop.zhfst file: #######
+# To make life easier for CI (and possibly the build flie maintainters later),
+# create a *-desktop.zhfst file by hard-linking to *.zhfst:
+$(ALL_DESKTOP_ZHFST_FILES): \
+%-desktop.zhfst: %.zhfst
+	$(AM_V_GEN)ln $< $@
 
 ####### Other targets: ###########
 

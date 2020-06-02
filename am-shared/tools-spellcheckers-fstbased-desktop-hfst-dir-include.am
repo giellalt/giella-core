@@ -194,8 +194,13 @@ GT_ERRMODELS+=errmodel.default.hfst
 # libvoikko can't yet handle multiple error models - do NOT include this line:
 # errmodel.ocr.hfst
 
+ALL_ERRMODELS=$(GT_ERRMODELS) \
+              $(GT_ALT_ORTH_ERRMODELS) \
+			  $(GT_ALT_WS_ERRMODELS) \
+			  $(GT_AREA_ERRMODELS)
+
 # Change errmodel.*.hfst -> easteregg.*.desktop.txt
-GIELLA_DESKTOP_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .hfst,.desktop.txt,$(GT_ERRMODELS)))
+GIELLA_DESKTOP_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .hfst,.desktop.txt,$(ALL_ERRMODELS)))
 
 GT_SPELLING_HFST=$(GTLANG2).zhfst
 ALL_ZHFST_FILES=$(GT_SPELLING_HFST) \

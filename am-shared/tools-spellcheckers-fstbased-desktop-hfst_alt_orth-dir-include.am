@@ -74,27 +74,29 @@ endif # HAVE_ALT_ORTHS
 
 # Alternative based on the raw fst instead of the standard orthography:
 acceptor.%.hfst: \
-		$(GT_SPELLER_HFST) easteregg.%.hfst \
+		$(GT_SPELLER_HFST) \
+		easteregg.%.desktop.hfst \
 		$(top_builddir)/src/orthography/raw-to-%.compose.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 		  -2 $(top_builddir)/src/orthography/raw-to-$*.compose.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER) $(HFST_FLAGS)        \
-		| $(HFST_DISJUNCT) - easteregg.$*.hfst             \
+		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst             \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
 		-o $@
 
 # Build rule for acceptors for alternate writing systems:
 acceptor.%.hfst: \
-		$(GT_SPELLER_HFST) easteregg.%.hfst \
+		$(GT_SPELLER_HFST) \
+		easteregg.%.desktop.hfst \
 		$(top_builddir)/src/orthography/$(DEFAULT_ORTH)-to-%.compose.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 		  -2 $(top_builddir)/src/orthography/$(DEFAULT_ORTH)-to-$*.compose.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER) $(HFST_FLAGS)        \
-		| $(HFST_DISJUNCT) - easteregg.$*.hfst             \
+		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst             \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
 		-o $@
 

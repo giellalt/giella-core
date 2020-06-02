@@ -71,14 +71,14 @@ endif # HAVE_AREAS
 
 # Build rule for acceptors for specific areas/countries:
 acceptor.%.hfst: \
-		$(GT_SPELLER_HFST) easteregg.%.hfst \
+		$(GT_SPELLER_HFST) easteregg.%.desktop.hfst \
 		$(top_builddir)/src/filters/remove-all_areas_but_%-strings.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 		  -1 $(top_builddir)/src/filters/remove-all_areas_but_$*-strings.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER) $(HFST_FLAGS)        \
-		| $(HFST_DISJUNCT) - easteregg.$*.hfst             \
+		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst             \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
 		-o $@
 

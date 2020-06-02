@@ -288,6 +288,7 @@ maintainer-clean-local:
 # General build rules included from here:#
 include $(top_srcdir)/../giella-core/am-shared/lexc-include.am
 include $(top_srcdir)/../giella-core/am-shared/twolc-include.am
+include $(top_srcdir)/../giella-core/am-shared/tag-extraction-include.am
 include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am

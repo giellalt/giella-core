@@ -25,7 +25,7 @@ def corrections_not_in_suggestion_per_sentence(nices, outfile):
     if nices:
         print('~~~~~~', file=outfile)
         print(
-            '\tcorrect and dc align, correction not among suggestions',
+            '\tcorrect detection, wrong correction',
             file=outfile)
         for nice in nices:
             print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
@@ -37,7 +37,7 @@ def corrections_not_in_suggestion_per_sentence(nices, outfile):
 def corrections_no_suggestion_per_sentence(nices, outfile):
     if nices:
         print('~~~~~~', file=outfile)
-        print('\tcorrect and dc align, no suggestions', file=outfile)
+        print('\tcorrect detection, no correction', file=outfile)
         for nice in nices:
             print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
             print(
@@ -54,7 +54,7 @@ def correction_in_suggestion_per_sentence(nices, outfile):
     if nices:
         print('~~~~~~', file=outfile)
         print(
-            '\tcorrect and dc align, and correction found in dc', file=outfile)
+            '\tcorrect detection, correct correction', file=outfile)
         for nice in nices:
             print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
             print(
@@ -77,7 +77,7 @@ def corrects_not_in_dc(c_errors, d_errors):
 def marked_errors_not_reported_per_sentence(corrects, outfile):
     if corrects:
         print('~~~~~~', file=outfile)
-        print('\tcorrect errors not found in dc', file=outfile)
+        print('\tcorrect errors not found in dc (false negatives)', file=outfile)
         for c_error in corrects:
             print(f'\t\t{c_error}', file=outfile)
 
@@ -97,7 +97,7 @@ def dcs_not_in_correct(correct, dc):
 def reported_errors_not_marked_per_sentence(corrects, outfile):
     if corrects:
         print('~~~~~~', file=outfile)
-        print('\tdc errors not found in correct', file=outfile)
+        print('\tdc errors not found in correct (false positive or annotation error)', file=outfile)
         for c_error in corrects:
             print(f'\t\t{c_error}', file=outfile)
 
@@ -729,10 +729,11 @@ def overview_hits(counter, used_categories, outfile):
 def precision(category, true_positives, false_positives, false_negatives,
               outfile):
     """
-    precision: TP / TP + FP
-    recall: TP / TP + FN
-    F₁ score: 2 * precision * recall / (precision + recall)
+        precision: TP / (TP + FP)
+        recall: TP / (TP + FN)
+        F₁ score: 2 * precision * recall / (precision + recall)
     """
+
     print(file=outfile)
     try:
         prec = true_positives/(true_positives + false_positives)

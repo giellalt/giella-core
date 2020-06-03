@@ -22,27 +22,34 @@ def correct_not_in_dc(correct, dc):
 
 
 def corrections_not_in_suggestion_per_sentence(nices, outfile):
-    if nices:
-        print('~~~~~~', file=outfile)
+    def report_output(nice):
+        return (f'{initial_nice(nice)}' f' -> [{", ".join(nice[1][5])}]')
+
+    report_outputs = [report_output(nice) for nice in nices]
+    if report_outputs:
         print(
-            '\tcorrect detection, wrong correction',
+            f'{initial_report("correct detection, wrong correction")}',
             file=outfile)
-        for nice in nices:
-            print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
-            print(
-                f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]} -> [{", ".join(nice[1][5])}]',
-                file=outfile)
+        print('\n'.join(report_outputs), file=outfile)
+
+
+def initial_report(theme):
+    return (f'~~~~~~\n\t{theme}')
+
+
+def initial_nice(nice):
+    return (f'\t\t{nice[0]["type"]} -> {nice[1][3]}\n'
+            f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}')
 
 
 def corrections_no_suggestion_per_sentence(nices, outfile):
-    if nices:
-        print('~~~~~~', file=outfile)
-        print('\tcorrect detection, no correction', file=outfile)
-        for nice in nices:
-            print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
-            print(
-                f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}',
-                file=outfile)
+    report_outputs = [initial_nice(nice) for nice in nices]
+
+    if report_outputs:
+        print(
+            f'{initial_report("correct detection, no correction")}',
+            file=outfile)
+        print('\n'.join(report_outputs), file=outfile)
 
 
 def correct_in_dc(correct, dc):
@@ -51,15 +58,16 @@ def correct_in_dc(correct, dc):
 
 
 def correction_in_suggestion_per_sentence(nices, outfile):
-    if nices:
-        print('~~~~~~', file=outfile)
+    def report_output(nice):
+        return (f'{initial_nice(nice)}'
+                f', position {nice[1][5].index(nice[0]["correct"])}')
+
+    report_outputs = [report_output(nice) for nice in nices]
+    if report_outputs:
         print(
-            '\tcorrect detection, correct correction', file=outfile)
-        for nice in nices:
-            print(f'\t\t{nice[0]["type"]} -> {nice[1][3]}', file=outfile)
-            print(
-                f'\t\t{nice[0]["error"]} -> {nice[0]["correct"]}, position {nice[1][5].index(nice[0]["correct"])}',
-                file=outfile)
+            f'{initial_report("correct detection, correct correction")}',
+            file=outfile)
+        print('\n'.join(report_outputs), file=outfile)
 
 
 def corrects_not_in_dc(c_errors, d_errors):
@@ -76,10 +84,12 @@ def corrects_not_in_dc(c_errors, d_errors):
 
 def marked_errors_not_reported_per_sentence(corrects, outfile):
     if corrects:
-        print('~~~~~~', file=outfile)
-        print('\tcorrect errors not found in dc (false negatives)', file=outfile)
-        for c_error in corrects:
-            print(f'\t\t{c_error}', file=outfile)
+        print(
+            f'{initial_report("correct errors not found in dc (false negatives)")}',
+            file=outfile)
+        print(
+            '\n'.join([f'\t\t{c_error}' for c_error in corrects]),
+            file=outfile)
 
 
 def dcs_not_in_correct(correct, dc):
@@ -96,10 +106,12 @@ def dcs_not_in_correct(correct, dc):
 
 def reported_errors_not_marked_per_sentence(corrects, outfile):
     if corrects:
-        print('~~~~~~', file=outfile)
-        print('\tdc errors not found in correct (false positive or annotation error)', file=outfile)
-        for c_error in corrects:
-            print(f'\t\t{c_error}', file=outfile)
+        print(
+            f'{initial_report("dc errors not found in correct (false positive or annotation error)")}',
+            file=outfile)
+        print(
+            '\n'.join([f'\t\t{c_error}' for c_error in corrects]),
+            file=outfile)
 
 
 def has_same_range_and_error(c_error, d_error):
@@ -209,8 +221,7 @@ def fix_space_after_paren(paren_error, d_errors, zcheck_file, runner):
             if dupe[0][-2] == ' ':
                 dupe[0] = dupe[0][:-2]
                 dupe[2] = dupe[2] - 2
-            errors = gramcheck_tester2.gramcheck(dupe[0],
-                                                    zcheck_file, runner)
+            errors = gramcheck_tester2.gramcheck(dupe[0], zcheck_file, runner)
             dupe[5] = errors['errs'][0][5]
 
 
@@ -218,13 +229,7 @@ def add_part(part, start, end, d_errors, zcheck_file, runner):
     errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
     for error in [error for error in errors['errs'] if error]:
         candidate = [
-            error[0],
-            start,
-            end,
-            error[3],
-            error[4],
-            error[5],
-            error[6]
+            error[0], start, end, error[3], error[4], error[5], error[6]
         ]
         if candidate not in d_errors:
             d_errors.append(candidate)
@@ -233,19 +238,14 @@ def add_part(part, start, end, d_errors, zcheck_file, runner):
 def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
                                      runner):
     for dupe in [
-        d_error for d_error in d_errors if d_error[1:2] == space_error[1:2]
+            d_error for d_error in d_errors if d_error[1:2] == space_error[1:2]
     ]:
         d_errors.remove(dupe)
 
     parenthesis = space_error[0].find('(')
     d_errors.append([
-            space_error[0][parenthesis:],
-            space_error[1] + parenthesis,
-            space_error[2],
-            space_error[3],
-            space_error[4],
-            [' ('],
-            space_error[6]
+        space_error[0][parenthesis:], space_error[1] + parenthesis,
+        space_error[2], space_error[3], space_error[4], [' ('], space_error[6]
     ])
     part1 = space_error[0][:parenthesis]
     start = space_error[1]
@@ -262,21 +262,18 @@ def fix_no_space_before_parent_start(space_error, d_errors, zcheck_file,
     d_errors.sort(key=sortByRange)
 
 
-def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file,
-                                  runner):
+def fix_no_space_after_punct_mark(punct_error, d_errors, zcheck_file, runner):
     remove_dupes([punct_error], d_errors)
     error_message = punct_error[4]
-    current_punct = error_message[error_message.find('"') + 1:error_message.rfind('"')]
+    current_punct = error_message[error_message.find('"') +
+                                  1:error_message.rfind('"')]
     parenthesis = punct_error[0].find(current_punct)
 
     d_errors.append([
-            punct_error[0][parenthesis:],
-            punct_error[1] + parenthesis,
-            punct_error[1] + parenthesis + len(punct_error[0][parenthesis:]),
-            punct_error[3],
-            punct_error[4],
-            [f'{current_punct} {punct_error[0][parenthesis + 1:]}'],
-            punct_error[6]
+        punct_error[0][parenthesis:], punct_error[1] + parenthesis,
+        punct_error[1] + parenthesis + len(punct_error[0][parenthesis:]),
+        punct_error[3], punct_error[4],
+        [f'{current_punct} {punct_error[0][parenthesis + 1:]}'], punct_error[6]
     ])
 
     part1 = punct_error[0][:parenthesis]
@@ -418,14 +415,9 @@ def get_results(filters, pickle_file, zcheck_file, outfile):
 
         try:
             for x, result in enumerate(pickle.load(pickle_stream)):
-                results.append((
-                    result[0],
-                    filter_markup(
-                        filters,
-                        result[1]),
-                    result[2],
-                    filter_dc(result[3], zcheck_file, runner)
-            ))
+                results.append((result[0], filter_markup(filters, result[1]),
+                                result[2],
+                                filter_dc(result[3], zcheck_file, runner)))
         except EOFError as err:
             print(f'Error reading pickle: {err}')
 
@@ -509,7 +501,8 @@ def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
     reported_errors_not_marked = dcs_not_in_correct(c_errors, d_errors)
     reported_errors_not_marked_per_sentence(reported_errors_not_marked,
                                             outfile)
-    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(reported_errors_not_marked)
+    counter['total_grammarchecker_errors_not_found_in_manual_markup'] += len(
+        reported_errors_not_marked)
     for reported_error_not_marked in reported_errors_not_marked:
         counter[
             f'grammarchecker_errors_{grammar_to_manual(reported_error_not_marked[3])}_not_markedup'] += 1
@@ -560,8 +553,8 @@ def remove_unknown_propers(c_errors, d_errors):
     """
     with_propers = dcs_not_in_correct(c_errors, d_errors)
     propers = [
-            d_error for d_error in with_propers
-            if d_error[0][0].upper() == d_error[0][0] and d_error[3] == 'typo'
+        d_error for d_error in with_propers
+        if d_error[0][0].upper() == d_error[0][0] and d_error[3] == 'typo'
     ]
     for proper in propers:
         d_errors.remove(proper)
@@ -736,8 +729,8 @@ def precision(category, true_positives, false_positives, false_negatives,
 
     print(file=outfile)
     try:
-        prec = true_positives/(true_positives + false_positives)
-        recall = true_positives/(true_positives + false_negatives)
+        prec = true_positives / (true_positives + false_positives)
+        recall = true_positives / (true_positives + false_negatives)
         f1score = 2 * prec * recall / (prec + recall)
 
         print(
@@ -746,14 +739,16 @@ def precision(category, true_positives, false_positives, false_negatives,
         print(
             f'{category} recall: {100 * recall:.1f}% (100 * {true_positives}/{(true_positives + false_negatives)})',
             file=outfile)
-        print(f'{category} F₁ score: {100 * f1score:.1f}% (100* {2 * prec * recall:.2f}/{prec + recall:.2f})',
+        print(
+            f'{category} F₁ score: {100 * f1score:.1f}% (100* {2 * prec * recall:.2f}/{prec + recall:.2f})',
             file=outfile)
         print('tp', true_positives, file=outfile)
         print('fp', false_positives, file=outfile)
         print('fn', false_negatives, file=outfile)
     except ZeroDivisionError:
-        print(f'{category}: true_positives + false_positives is zero for this category',
-              file=outfile)
+        print(
+            f'{category}: true_positives + false_positives is zero for this category',
+            file=outfile)
 
 
 def overview_precision_recall(counter, outfile):
@@ -762,7 +757,8 @@ def overview_precision_recall(counter, outfile):
     false_positives = counter[
         "total_grammarchecker_errors_not_found_in_manual_markup"]
     # TP + FP = all errors found by grammarchecker
-    false_negatives = counter["total_manual_errors_not_found_by_grammarchecker"]
+    false_negatives = counter[
+        "total_manual_errors_not_found_by_grammarchecker"]
     precision('Overall', true_positives, false_positives, false_negatives,
               outfile)
 

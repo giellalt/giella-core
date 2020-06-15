@@ -1,6 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+"""Write report on differences on manual markup and gramdivvun markup
 
+We have three categories:
+* [label]_errors -- false positives + true positives
+* [label]_errors_not_found_in_manual_markup -- false positives
+* [label]_errors_not_found_by_grammarchecker -- false negatives
+
+Correction evaluation numbers could be calculated using these definitions:
+GramDivvun found, not in markup or in markup but wrongly corrected by GramDivvun --- false positive
+   * correct detection, wrong correction
+   * not in markup
+GramDivvun did not find or found but did not correct -- false negative
+   * correct detection, no correction
+   * in markup, not found by grammarchecker
+GramDivvun found and corrected as in markup --- true positive
+   * correct detection, correct correction
+"""
 import json
 import argparse
 import pickle
@@ -28,7 +44,7 @@ def corrections_not_in_suggestion_per_sentence(nices, outfile):
     report_outputs = [report_output(nice) for nice in nices]
     if report_outputs:
         print(
-            f'{initial_report("correct detection, wrong correction")}',
+            f'{initial_report("correct detection, wrong correction")}', # false positive
             file=outfile)
         print('\n'.join(report_outputs), file=outfile)
 
@@ -47,7 +63,7 @@ def corrections_no_suggestion_per_sentence(nices, outfile):
 
     if report_outputs:
         print(
-            f'{initial_report("correct detection, no correction")}',
+            f'{initial_report("correct detection, no correction")}', # false negative
             file=outfile)
         print('\n'.join(report_outputs), file=outfile)
 
@@ -65,7 +81,7 @@ def correction_in_suggestion_per_sentence(nices, outfile):
     report_outputs = [report_output(nice) for nice in nices]
     if report_outputs:
         print(
-            f'{initial_report("correct detection, correct correction")}',
+            f'{initial_report("correct detection, correct correction")}', # --- true positive
             file=outfile)
         print('\n'.join(report_outputs), file=outfile)
 
@@ -600,7 +616,7 @@ def overview_markup(counter, used_categories, outfile):
         file=outfile)
     used_categories.add("total_manually_marked_errors")
     print(
-        f'Manually marked errors found by the grammarchecker: {counter["total_manually_marked_errors"] - counter["total_manual_errors_not_found_by_grammarchecker"]}',
+        f'Correct detection: {counter["total_manually_marked_errors"] - counter["total_manual_errors_not_found_by_grammarchecker"]}',
         file=outfile)
     print(
         f'Manually marked errors not found by the grammarchecker: {counter["total_manual_errors_not_found_by_grammarchecker"]} == False negatives',
@@ -667,10 +683,10 @@ def overview_grammarchecker(counter, used_categories, outfile):
 
 def overview_hits_with_hit_in_suggestions(counter, used_categories, outfile):
     print(
-        f'Manually marked errors and reported errors that align: {counter["correction_in_suggestion"] + counter["correction_not_in_suggestion"] + counter["correction_no_suggestion"]}\n',
+        f'Correct detection that has: correct correction, no correction and wrong correction: {counter["correction_in_suggestion"] + counter["correction_not_in_suggestion"] + counter["correction_no_suggestion"]}\n',
         file=outfile)
     print(
-        f'Reported errors where correction is among suggestions {counter["correction_in_suggestion"]}',
+        f'Correct detection, correct correction {counter["correction_in_suggestion"]}',
         file=outfile)
     used_categories.add("correction_in_suggestion")
     print('By manual error and grammarchecker error pairs', file=outfile)
@@ -687,7 +703,7 @@ def overview_hits_with_hit_in_suggestions(counter, used_categories, outfile):
 def overview_hits_without_hit_in_suggestions(counter, used_categories,
                                              outfile):
     print(
-        f'Reported errors where correction is not among suggestions {counter["correction_not_in_suggestion"]}',
+        f'Correct detection, wrong correction {counter["correction_not_in_suggestion"]}',
         file=outfile)
     used_categories.add("correction_not_in_suggestion")
     print('By manual error and grammarchecker error pairs', file=outfile)
@@ -703,7 +719,7 @@ def overview_hits_without_hit_in_suggestions(counter, used_categories,
 
 def overview_hits_no_suggestions(counter, used_categories, outfile):
     print(
-        f'Reported errors without suggestions {counter["correction_no_suggestion"]}',
+        f'Correct detection, no correction {counter["correction_no_suggestion"]}',
         file=outfile)
     used_categories.add("correction_no_suggestion")
     print('By manual error and grammarchecker error pairs', file=outfile)

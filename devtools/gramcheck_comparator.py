@@ -653,10 +653,12 @@ def overview_grammarchecker(counter, used_categories, outfile):
             f'{label + "_found"}: {counter[label] - counter[label + "_not_markedup"]}',
             file=outfile)
         precision(
-            label, counter[label] - counter[label + "_not_markedup"],
-            counter[label + "_not_markedup"],
-            counter[label.replace('grammarchecker', 'manually_marked') +
-                    "_not_reported"], outfile)
+            label,
+            true_positives=counter[label] - counter[label + "_not_markedup"],
+            false_positives=counter[label + "_not_markedup"],
+            false_negatives=counter[label.replace(
+                'grammarchecker', 'manually_marked') + "_not_reported"],
+            outfile=outfile)
         used_categories.add(label)
         used_categories.add(label + "_not_markedup")
 

@@ -82,7 +82,7 @@ def corrects_not_in_dc(c_errors, d_errors):
     return corrects
 
 
-def marked_errors_not_reported_per_sentence(corrects, outfile):
+def marked_errors_not_found_by_grammarchecker_per_sentence(corrects, outfile):
     if corrects:
         print(
             f'{initial_report("correct errors not found in dc (false negatives)")}',
@@ -468,14 +468,14 @@ def report_dc_dupes(d_errors, counter, outfile, dupesets):
 
 def report_markup_without_dc_hits(c_errors, d_errors, counter, outfile):
     # oppmerkede feil som ikke blir rapportert
-    marked_errors_not_reported = corrects_not_in_dc(c_errors, d_errors)
-    marked_errors_not_reported_per_sentence(marked_errors_not_reported,
+    marked_errors_not_found_by_grammarchecker = corrects_not_in_dc(c_errors, d_errors)
+    marked_errors_not_found_by_grammarchecker_per_sentence(marked_errors_not_found_by_grammarchecker,
                                             outfile)
     counter['total_manual_errors_not_found_by_grammarchecker'] += len(
-        marked_errors_not_reported)
-    for marked_error_not_reported in marked_errors_not_reported:
+        marked_errors_not_found_by_grammarchecker)
+    for marked_error_not_found_by_grammarchecker in marked_errors_not_found_by_grammarchecker:
         counter[
-            f'manually_marked_errors_{marked_error_not_reported["type"]}_not_reported'] += 1
+            f'manually_marked_errors_{marked_error_not_found_by_grammarchecker["type"]}_not_found_by_grammarchecker'] += 1
 
 
 def grammar_to_manual(grammartype):
@@ -505,7 +505,7 @@ def report_dc_not_hitting_markup(c_errors, d_errors, counter, outfile):
         reported_errors_not_marked)
     for reported_error_not_marked in reported_errors_not_marked:
         counter[
-            f'grammarchecker_errors_{grammar_to_manual(reported_error_not_marked[3])}_not_markedup'] += 1
+            f'grammarchecker_errors_{grammar_to_manual(reported_error_not_marked[3])}_not_found_in_manual_markup'] += 1
 
 
 def report_markup_dc_align_correct_in_suggestion(c_errors, d_errors, counter,
@@ -614,13 +614,13 @@ def overview_markup(counter, used_categories, outfile):
     ]:
         print(f'{label}: {counter[label]}', file=outfile)
         print(
-            f'{label + "_not_reported"}: {counter[label + "_not_reported"]}',
+            f'{label + "_not_found_by_grammarchecker"}: {counter[label + "_not_found_by_grammarchecker"]}',
             file=outfile)
         print(
-            f'{label + "_found"}: {counter[label] - counter[label + "_not_reported"]}',
+            f'{label + "_found"}: {counter[label] - counter[label + "_not_found_by_grammarchecker"]}',
             file=outfile)
         used_categories.add(label)
-        used_categories.add(label + "_not_reported")
+        used_categories.add(label + "_not_found_by_grammarchecker")
 
     print('\n\n', file=outfile)
 
@@ -647,20 +647,20 @@ def overview_grammarchecker(counter, used_categories, outfile):
     ]:
         print(f'{label}: {counter[label]}', file=outfile)
         print(
-            f'{label + "_not_markedup"}: {counter[label + "_not_markedup"]}',
+            f'{label + "_not_found_in_manual_markup"}: {counter[label + "_not_found_in_manual_markup"]}',
             file=outfile)
         print(
-            f'{label + "_found"}: {counter[label] - counter[label + "_not_markedup"]}',
+            f'{label + "_found"}: {counter[label] - counter[label + "_not_found_in_manual_markup"]}',
             file=outfile)
         precision(
             label,
-            true_positives=counter[label] - counter[label + "_not_markedup"],
-            false_positives=counter[label + "_not_markedup"],
+            true_positives=counter[label] - counter[label + "_not_found_in_manual_markup"],
+            false_positives=counter[label + "_not_found_in_manual_markup"],
             false_negatives=counter[label.replace(
-                'grammarchecker', 'manually_marked') + "_not_reported"],
+                'grammarchecker', 'manually_marked') + "_not_found_by_grammarchecker"],
             outfile=outfile)
         used_categories.add(label)
-        used_categories.add(label + "_not_markedup")
+        used_categories.add(label + "_not_found_in_manual_markup")
 
     print('\n\n', file=outfile)
 

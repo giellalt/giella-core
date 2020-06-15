@@ -766,10 +766,13 @@ def overview_precision_recall(counter, outfile):
 
 
 def overview(results, counter, used_categories, outfile):
+    used_categories = set()
     overview_header(results, counter, used_categories, outfile)
     overview_markup(counter, used_categories, outfile)
     overview_grammarchecker(counter, used_categories, outfile)
     overview_hits(counter, used_categories, outfile)
+
+    return used_categories
 
 
 def parse_options():
@@ -795,40 +798,52 @@ def parse_options():
     return args
 
 
-def main():
-    args = parse_options()
+def results_from_raw_data(args, outfile):
+    results = []
+    for pickle_file in Path.cwd().glob(f'*{args.wops}*.pickle'):
+        print(f'Reading {pickle_file}')
+        results.extend(
+            get_results(args.filtererror, pickle_file, args.zcheck_file,
+                        outfile))
+    return results
+
+
+def per_sentence_report(args, outfile, results):
     counter = defaultdict(int)
     errortags = set()
     dupesets = []
 
+    for result in results:
+        if result[1] or result[3]['errs']:
+            per_sentence(result[0], result[2], result[1], result[3]['errs'],
+                         counter, errortags, outfile, dupesets)
+
+    return counter, errortags, dupesets
+
+
+def category_usage(used_categories, counter, outfile, errortags):
+    all_categories = {label for label in counter}
+    not_used = all_categories - used_categories
+    if not_used:
+        print('\n\nnot used\n\n', file=outfile)
+        for label in not_used:
+            print(f'{label}: {counter[label]}', file=outfile)
+
+    print('Errortags', file=outfile)
+    for errortag in errortags:
+        print(errortag, file=outfile)
+
+
+def main():
+    args = parse_options()
     with open(f'report.{args.wops}.txt', 'w') as outfile:
-        results = []
-        for pickle_file in Path.cwd().glob(f'*{args.wops}*.pickle'):
-            print(f'Reading {pickle_file}')
-            results.extend(
-                get_results(args.filtererror, pickle_file, args.zcheck_file,
-                            outfile))
-        for result in results:
-            if result[1] or result[3]['errs']:
-                per_sentence(result[0], result[2], result[1],
-                             result[3]['errs'], counter, errortags, outfile,
-                             dupesets)
-        used_categories = set()
-        overview(results, counter, used_categories, outfile)
+        results = results_from_raw_data(args, outfile)
+        counter, errortags, dupesets = per_sentence_report(args, outfile)
+        used_categories = overview(results, counter, used_categories, outfile)
+        category_usage(used_categories, counter, outfile, errortags)
 
-        all_categories = {label for label in counter}
-        not_used = all_categories - used_categories
-        if not_used:
-            print('\n\nnot used\n\n', file=outfile)
-            for label in not_used:
-                print(f'{label}: {counter[label]}', file=outfile)
-
-        print('Errortags', file=outfile)
-        for errortag in errortags:
-            print(errortag, file=outfile)
-
-    for dupeset in sorted(dupesets):
-        print(dupeset)
+        for dupeset in sorted(dupesets):
+            print(dupeset)
 
 
 if __name__ == '__main__':

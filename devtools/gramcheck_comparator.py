@@ -390,12 +390,13 @@ def filter_dc(d_result, zcheck_file, runner):
 
 
 def is_wanted_error(c_error, filters):
+    if not filters:
+        return True
+
     if c_error['type'] == 'errorsyn':
         return is_wanted_errorsyn(c_error)
-    elif filters:
-        return c_error['type'] not in filters
     else:
-        return True
+        return c_error['type'] not in filters
 
 
 def is_wanted_errorsyn(c_error):

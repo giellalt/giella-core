@@ -390,12 +390,13 @@ def filter_dc(d_result, zcheck_file, runner):
 
 
 def is_wanted_error(c_error, filters):
+    if not filters:
+        return True
+
     if c_error['type'] == 'errorsyn':
         return is_wanted_errorsyn(c_error)
-    elif filters:
-        return c_error['type'] not in filters
     else:
-        return True
+        return c_error['type'] not in filters
 
 
 def is_wanted_errorsyn(c_error):
@@ -573,6 +574,23 @@ def per_sentence(sentence, filename, c_errors, d_errors, counter, errortags,
     print(file=outfile)
 
 
+def templates(counter, category):
+    for template in [
+        ('* True positives: {} (GramDivvun found manually marked up error '
+         'and has the suggested correction)', f'{category}_true_positive'),
+        ('* False positives, type 1: {} (GramDivvun found manually marked '
+         'up error, but gave only wrong suggestions)',
+         f'{category}_false_positive_1'),
+        ('* False positives, type 2: {} (GramDivvun found error which is not '
+         'manually marked up)', f'{category}_false_positive_2'),
+        ('* False negatives, type 1: {} (GramDivvun found manually marked up '
+         'error, but has no correction)', f'{category}_false_negative_1'),
+        ('* False negatives, type 2: {} (GramDivvun did not find manually '
+         'marked up error)', f'{category}_false_negative_2')
+    ]:
+        yield template[0].format(counter[template[1]])
+
+
 def overview_markup(counter, used_categories, outfile):
     print(
         f'Paragraphs with errors {counter["paragraphs_with_errors"]}',
@@ -583,72 +601,48 @@ def overview_markup(counter, used_categories, outfile):
     print(
         f'Errors reported by grammarchecker: {counter["total_grammarchecker_errors"]}',
         file=outfile)
-    print(
-        f'* True positives: {counter["total_true_positive"]}'
-        ' (GramDivvun found manually marked up error and has the suggested correction)',
-        file=outfile)
-    print(
-        f'* False positives, type 1: {counter["total_false_positive_1"]}'
-        ' (GramDivvun found manually marked up error, but gave only wrong suggestions)',
-        file=outfile)
-    print(
-        f'* False positives, type 2: {counter["total_false_positive_2"]}'
-        ' (GramDivvun found error which is not manually marked up)',
-        file=outfile)
-    print(
-        f'* False negatives, type 1: {counter["total_false_negative_1"]}'
-        ' (GramDivvun found manually marked up error, but has no correction)',
-        file=outfile)
-    print(
-        f'* False negatives, type 2: {counter["total_false_negative_2"]}'
-        ' (GramDivvun did not find manually marked up error)',
-        file=outfile)
 
-    print('\nTotal statistics', file=outfile)
-    label = 'total'
-    precision(
-        label,
-        true_positives=counter[f'{label}_true_positive'],
-        false_positives=counter[f'{label}_false_positive_1'] +
-        counter[f'{label}_false_positive_2'],
-        false_negatives=counter[f'{label}_false_negative_1'] +
-        counter[f'{label}_false_negative_2'],
-        outfile=outfile)
     print('Statistics by type', file=outfile)
-    for label in {
+    precision('total', counter, outfile=outfile)
+    for label in sorted({
             label.split('_')[0]
             for label in counter if label.startswith('error') and '_' in label
-    }:
-        precision(
-            label,
-            true_positives=counter[f'{label}_true_positive'],
-            false_positives=counter[f'{label}_false_positive_1'] +
-            counter[f'{label}_false_positive_2'],
-            false_negatives=counter[f'{label}_false_negative_1'] +
-            counter[f'{label}_false_negative_2'],
-            outfile=outfile)
+    }):
+        precision(label, counter, outfile=outfile)
 
 
-def precision(category, true_positives, false_positives, false_negatives,
-              outfile):
+def precision(category, counter, outfile):
     """
         precision: TP / (TP + FP)
         recall: TP / (TP + FN)
         F₁ score: 2 * precision * recall / (precision + recall)
     """
     try:
+        print(f'\n{category} statistics', file=outfile)
+        for template in templates(counter, category):
+            print(template, file=outfile)
+
+        true_positives = counter[f'{category}_true_positive']
+        false_positives = counter[f'{category}_false_positive_1'] + counter[
+            f'{category}_false_positive_2']
+        false_negatives = counter[f'{category}_false_negative_1'] + counter[
+            f'{category}_false_negative_2']
+
         prec = true_positives / (true_positives + false_positives)
         recall = true_positives / (true_positives + false_negatives)
         f1score = 2 * prec * recall / (prec + recall)
 
         print(
-            f'{category} precision: {100 * prec:.1f}% (100 * {true_positives}/{true_positives + false_positives})',
+            f'{category} precision: {100 * prec:.1f}% '
+            f'(100 * {true_positives}/{true_positives + false_positives})',
             file=outfile)
         print(
-            f'{category} recall: {100 * recall:.1f}% (100 * {true_positives}/{(true_positives + false_negatives)})',
+            f'{category} recall: {100 * recall:.1f}% '
+            f'(100 * {true_positives}/{(true_positives + false_negatives)})',
             file=outfile)
         print(
-            f'{category} F₁ score: {100 * f1score:.1f}% (100* {2 * prec * recall:.2f}/{prec + recall:.2f})\n',
+            f'{category} F₁ score: {100 * f1score:.1f}% '
+            f'(100* {2 * prec * recall:.2f}/{prec + recall:.2f})\n',
             file=outfile)
     except ZeroDivisionError:
         pass

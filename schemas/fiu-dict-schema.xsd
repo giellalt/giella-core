@@ -903,6 +903,7 @@ This has been changed 2019-05-13 -->
          <xs:attribute name="fin" type="xs:string"/>
          <xs:attribute ref="ms"/>
          <xs:attribute ref="pos"/>
+         <xs:attribute name="type" type="xs:string"/>
          <xs:attribute ref="xml:lang"/>
          <xs:attribute ref="lemmaID"/>
 	 <xs:attribute ref="stemID"/>

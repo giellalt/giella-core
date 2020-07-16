@@ -108,6 +108,7 @@ $(GTLANG2)-%_LO-voikko-5.0.oxt: $(ALT_WS_ZHFST_FILES)
 			cd build/$(LOVOIKKO_VERSION) && \
 			$(GET_LIBS_COMMAND) \
 					 $(OXT_ROOT_DIR)/$(LOVOIKKO_VERSION)/ $(TARGET_DIR)/ && \
+			rm -f voikko/3/*.zhfst && \
 			cp ../../$(GTLANG2)-$*.zhfst voikko/3/ && \
 			$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ * ; \
 		else \
@@ -115,16 +116,33 @@ $(GTLANG2)-%_LO-voikko-5.0.oxt: $(ALT_WS_ZHFST_FILES)
 		fi
 
 # Build rule for 4.x oxt files for alternate writing systems:
-$(GTLANG2)-%.oxt: $(ALT_WS_ZHFST_FILES)
+$(GTLANG2)-%_LO-voikko-4.0-mac.oxt: $(ALT_WS_ZHFST_FILES)
 	$(AM_V_GEN)rm -f $@; \
-		ws="$$(echo $* | cut -d'_' -f1)"; \
-		version="$$(echo $* | cut -d'_' -f2 | sed 's/LO-voikko-//')"; \
+		ws="$*"; \
+		version="4.0-mac"; \
 		if [ -d "$(OXT_ROOT_DIR)/$$version" ]; then \
 			$(MKDIR_P) build/$$version/ && \
 			cd build/$$version && \
 			$(GET_LIBS_COMMAND) \
 					 $(OXT_ROOT_DIR)/$$version/ $(TARGET_DIR)/ && \
-			cp ../../$(GTLANG2)-$$ws.zhfst 3/ && \
+			rm -f 3/*.zhfst && \
+			cp ../../$< 3/ && \
+			$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ * ; \
+		else \
+			echo "  SKIP     $@: Not yet supported." ; \
+		fi
+
+$(GTLANG2)-%_LO-voikko-4.0-win.oxt: $(ALT_WS_ZHFST_FILES)
+	$(AM_V_GEN)rm -f $@; \
+		ws="$*"; \
+		version="4.0-win"; \
+		if [ -d "$(OXT_ROOT_DIR)/$$version" ]; then \
+			$(MKDIR_P) build/$$version/ && \
+			cd build/$$version && \
+			$(GET_LIBS_COMMAND) \
+					 $(OXT_ROOT_DIR)/$$version/ $(TARGET_DIR)/ && \
+			rm -f 3/*.zhfst && \
+			cp ../../$< 3/ && \
 			$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ * ; \
 		else \
 			echo "  SKIP     $@: Not yet supported." ; \

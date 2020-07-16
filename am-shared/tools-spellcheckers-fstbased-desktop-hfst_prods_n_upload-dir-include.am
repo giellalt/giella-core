@@ -153,7 +153,7 @@ $(GTLANG2)_LO-voikko-4%.oxt: $(GT_SPELLING_HFST)
 		cp ../../$< 3/ && \
 		$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ *
 
-$(GTLANG2)_LO-voikko-5%.oxt: $(GT_SPELLING_HFST)
+$(GTLANG2)_LO-voikko-5%.oxt: $(GT_SPELLING_HFST) $(ALT_ORTH_ZHFST_FILES) $(ALT_WS_ZHFST_FILES)
 	$(AM_V_GEN)rm -f $@ && \
 		$(MKDIR_P) build/5$*/ ; \
 		if test "x$(SKIP_DIR_NUM)" != "x" ; then \
@@ -164,7 +164,10 @@ $(GTLANG2)_LO-voikko-5%.oxt: $(GT_SPELLING_HFST)
 		cd build/5$* && \
 		$(GET_LIBS_COMMAND) $(OXT_ROOT_DIR)/5$*/ $(TARGET_DIR)/ \
 			$(SKIP_DIR_NUM)$$remdirnum && \
-		cp ../../$< voikko/3/ && \
+		rm -f voikko/3/*.zhfst && \
+		cd ../../ && \
+		cp $^ build/5$*/voikko/3/ && \
+		cd build/5$* && \
 		$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ *
 
 #### MacVoikko: ####

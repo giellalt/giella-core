@@ -1,6 +1,6 @@
 <!ELEMENT r (lics?, e+, xhtml:script?) >
 <!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml"
-	  xml:lang ( nob | sme | sma | swe | eng | deu | smn | fin | sms | myv | mhr | sjd | rus | smj ) #IMPLIED
+    xml:lang ( nob | sme | sma | swe | eng | deu | smn | fin | sms | myv | mhr | sjd | rus | smj ) #IMPLIED
 >
 <!ATTLIST r
       id ( smenob | nobsme | smnfin | finsmn | finsme | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin | swesma | smeeng |
@@ -29,6 +29,7 @@
       illpl ( yes | no ) #IMPLIED
       id CDATA #IMPLIED
       xpos CDATA #IMPLIED
+      mc CDATA #IMPLIED
 >
 <!ATTLIST e r ( LR | RL ) #IMPLIED > <!-- found in all_smnsme.xml -->
 <!ATTLIST e note CDATA #IMPLIED >
@@ -44,11 +45,22 @@
 <!ELEMENT mini_paradigm (analysis+) >
 <!ELEMENT l (#PCDATA) >
 <!ATTLIST l
+      g_stem ( Sg | Pl ) #IMPLIED
+      sg_gen CDATA #IMPLIED
+      sg_ill CDATA #IMPLIED
+      pl_gen CDATA #IMPLIED
+      pl_ill CDATA #IMPLIED
+      pl3 CDATA #IMPLIED
+      sg1 CDATA #IMPLIED
+      sg3 CDATA #IMPLIED
+      gen CDATA #IMPLIED
+      ill CDATA #IMPLIED
+      v_type ( rv ) #IMPLIED
       pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |
-            Num | CC | CS | Prop | Proppl | G3 | Actor | Npl |
+            Num | CC | CS | Prop | Proppl | G3 | Actor | Npl | Adp |
             Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | mwe | X | Xxx | Qu | Abbr | Clt |
             Phrase_N | Phrase_A | Phrase_V | Phrase_Adv ) #REQUIRED
-      attr ( ok | no ) #IMPLIED
+      attr CDATA #IMPLIED
       decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED
       nr ( Sg | Du | Pl ) #IMPLIED
       gen_only CDATA #IMPLIED
@@ -63,7 +75,7 @@
       p3p CDATA #IMPLIED
       minip ( notSg1 | onlyPl ) #IMPLIED
       illpl ( ok | no ) #IMPLIED
-      status ( sjekk | ok ) #IMPLIED
+      status ( sjekk | ok | _unknown_N ) #IMPLIED
       grad ( pos | comp | sup ) #IMPLIED
       vmax ( 2 | 3 | 4) #IMPLIED
       base CDATA #IMPLIED
@@ -123,10 +135,10 @@
 <!ELEMENT lc (#PCDATA) >
 <!ELEMENT source (book) >
 <!ATTLIST book
-	  name CDATA #IMPLIED >
+    name CDATA #IMPLIED >
 <!ELEMENT semantics (sem | sem* ) >
 <!ATTLIST sem
-	  name CDATA #IMPLIED >
+    name CDATA #IMPLIED >
 
 
 
@@ -158,6 +170,7 @@
 <!ELEMENT mg (semantics?, l_ref?, tg+, xg* ) >
 <!ATTLIST mg
       xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
+      rest CDATA #IMPLIED
 >
 <!ATTLIST mg id CDATA #IMPLIED >
 <!ATTLIST mg src CDATA #IMPLIED >
@@ -171,7 +184,7 @@
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ATTLIST re
-	  xml:lang ( nob | sme | sma | smn | swe | eng | deu | lat) #IMPLIED
+    xml:lang ( nob | sme | sma | smn | swe | eng | deu | lat) #IMPLIED
 >
 <!ATTLIST re x ( fad ) #IMPLIED >
 <!ATTLIST re comment CDATA #IMPLIED >
@@ -182,22 +195,23 @@
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
 <!ATTLIST t t_type ( Pers | expl ) #IMPLIED  >
 <!ATTLIST t nr ( Sg | Pl ) #IMPLIED  >
-<!ATTLIST t pos ( A | S  | N  | V |
+<!ATTLIST t pos ( A | S  | N  | V | Adp | Clt |
             Adv | P | Pr | Po | Det |
             Pron | Prop | I | Interj | CC | CS | Im | Npl | Num |
             Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
-	    phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp
-	        | Abbr | Foc_ba
-	        | Adv-N | N-Pron | Adv-CC | Adv-Pron | Adv-CS | CC-CS | A-N | Adv-Po | CMP | A-Adv | Adv-Po-Pron | A-Adv-Pron | A-Adv-N | Adv-N-Po | N-Po | Po-Pron | A-Pron | Foc_gis | Foc_han ) #IMPLIED >
+      phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp
+          | Abbr | Foc_ba
+          | Adv-N | N-Pron | Adv-CC | Adv-Pron | Adv-CS | CC-CS | A-N | Adv-Po | CMP | A-Adv | Adv-Po-Pron | A-Adv-Pron | A-Adv-N | Adv-N-Po | N-Po | Po-Pron | A-Pron | Foc_gis | Foc_han ) #IMPLIED >
 <!ATTLIST t reg CDATA #IMPLIED >
 <!ATTLIST t country CDATA #IMPLIED >
+<!ATTLIST t tt_auto CDATA #IMPLIED >
 
 <!--
 <!ATTLIST t pos ( a | S  | n  | v |
             adv | p | pr | po | det |
             pron | prop | i | interj | cc | cs | im | npl | num |
             pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | cmp | x  | xxx |
-	    phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED >
+      phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED >
 -->
 <!ATTLIST t type ( expl
                   | Prop | Indef | G3 | NomAg | Coll | Recipr | Pers
@@ -246,6 +260,7 @@
 <!ATTLIST t diph CDATA #IMPLIED >
 <!ATTLIST t mod CDATA #IMPLIED >
 <!ATTLIST t xxx CDATA #IMPLIED >
+<!ATTLIST t rest CDATA #IMPLIED >
 
 <!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
 

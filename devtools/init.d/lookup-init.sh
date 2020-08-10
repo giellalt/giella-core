@@ -1050,3 +1050,51 @@ alias zuldept="sent-proc.sh -l zul -s dep -t"
 alias zuldis="sent-proc.sh -l zul -s dis"
 alias zuldist="sent-proc.sh -l zul -s dis -t"
 
+
+
+
+
+alias   damh='$LOOKUP $GTLANGS/lang-amh/src/generator-gt-desc.xfst'
+alias   dces='$LOOKUP $GTLANGS/lang-ces/src/generator-gt-desc.xfst'
+alias   deus='$LOOKUP $GTLANGS/lang-eus/src/generator-gt-desc.xfst'
+alias   diku='$LOOKUP $GTLANGS/lang-iku/src/generator-gt-desc.xfst'
+alias   dnno='$LOOKUP $GTLANGS/lang-nno/src/generator-gt-desc.xfst'
+alias   dnon='$LOOKUP $GTLANGS/lang-non/src/generator-gt-desc.xfst'
+
+alias   uamh='$LOOKUP $GTLANGS/lang-amh/src/analyser-gt-desc.xfst'
+alias   uces='$LOOKUP $GTLANGS/lang-ces/src/analyser-gt-desc.xfst'
+alias   ueus='$LOOKUP $GTLANGS/lang-eus/src/analyser-gt-desc.xfst'
+alias   uiku='$LOOKUP $GTLANGS/lang-iku/src/analyser-gt-desc.xfst'
+alias   unno='$LOOKUP $GTLANGS/lang-nno/src/analyser-gt-desc.xfst'
+alias   убхр='$LOOKUP $GTLANGS/lang-bxr/src/analyser-gt-desc.xfst'
+alias   дбхр='$LOOKUP $GTLANGS/lang-bxr/src/generator-gt-desc.xfst'
+
+alias dfit='$LOOKUP $GTLANGS/lang-fit/src/generator-gt-desc.xfst'
+alias dfitNorm='$LOOKUP $GTLANGS/lang-fit/src/generator-gt-norm.xfst'
+alias finkpv='$LOOKUP $GTHOME/words/dicts/finkpv/bin/finkpv-all.fst'
+alias finnob='$LOOKUP $GTHOME/words/dicts/finnob/bin/finnob-all.fst'
+alias finsms='$LOOKUP $GTHOME/words/dicts/finsms/bin/finsms-all.fst'
+
+alias fitdep="sent-proc.sh -l fit -s dep"
+alias fitdept="sent-proc.sh -l fit -s dep -t"
+alias fitdis="sent-proc.sh -l fit -s dis"
+alias fitdist="sent-proc.sh -l fit -s dis -t"
+
+alias hdfit='$HLOOKUP $GTLANGS/lang-fit/src/generator-gt-desc.hfstol'
+alias hdfitNorm='$HLOOKUP $GTLANGS/lang-fit/src/generator-gt-norm.hfstol'
+alias hdspa='$HLOOKUP $GTLANGS/lang-spa/src/generator-gt-desc.hfstol'
+alias hufit='$HLOOKUP $GTLANGS/lang-fit/src/analyser-gt-desc.hfstol'
+alias hufitNorm='$HLOOKUP $GTLANGS/lang-fit/src/analyser-gt-norm.hfstol'
+alias huspa='$HLOOKUP $GTLANGS/lang-spa/src/analyser-gt-desc.hfstol'
+alias kpvfin='$LOOKUP $GTHOME/words/dicts/kpv2X/bin/kpvfin-all.fst'
+alias mhreng='$LOOKUP $GTHOME/words/dicts/mhreng/bin/mhreng-all.fst'
+alias mhrmrj='$LOOKUP $GTHOME/words/dicts/mhrmrj/bin/mhrmrj-all.fst'
+alias mhrrus='$LOOKUP $GTHOME/words/dicts/mhrrus/bin/mhrrus-all.fst'
+
+alias nobfin='$LOOKUP $GTHOME/words/dicts/nobfin/bin/nobfin-all.fst'
+alias smespa='$LOOKUP $GTHOME/words/dicts/smespa/bin/smespa-all.fst'
+alias spasme='$LOOKUP $GTHOME/words/dicts/spasme/bin/spasme-all.fst'
+alias ufit='$LOOKUP $GTLANGS/lang-fit/src/analyser-gt-desc.xfst'
+alias ufitNorm='$LOOKUP $GTLANGS/lang-fit/src/analyser-gt-norm.xfst'
+
+

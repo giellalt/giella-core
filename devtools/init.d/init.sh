@@ -56,7 +56,7 @@ alias    gtsvn='ssh    gtsvn.uit.no'
 alias    gtweb='ssh    gtweb.uit.no'
 alias  gtoahpa='ssh  gtoahpa.uit.no'
 
-# forrest run port 8 og 9
+# forrest run port 888-7, -8 og -9
 alias fo="forrest     -Dforrest.jvmargs=\"-Dfile.encoding=utf-8 -Djava.awt.headless=true\""
 alias f8="forrest run -Dforrest.jvmargs=\"-Dfile.encoding=utf-8 -Djava.awt.headless=true\""
 alias f9="forrest run -Dforrest.jvmargs=\"-Dfile.encoding=utf-8 -Djava.awt.headless=true -Djetty.port=8889\""

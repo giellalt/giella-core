@@ -206,3 +206,5 @@ echo "\nHentar frå giella-core"
 cd ~/git/giellalt/giella-core &&   git config pull.rebase false  && git pull
 echo "\nHentar frå giella-shared"
 cd ~/git/giellalt/giella-shared &&   git config pull.rebase false  && git pull
+echo "\nHentar frå template-lang-und""
+cd ~/git/giellalt/template-lang-und &&   git config pull.rebase false  && git pull

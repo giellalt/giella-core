@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# test script for gut apply script
+# gut apply script to revert last commit:
 
-# Variables:
+# git command:
 git reset --hard HEAD^

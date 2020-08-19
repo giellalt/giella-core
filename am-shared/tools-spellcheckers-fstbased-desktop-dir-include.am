@@ -25,9 +25,9 @@ UW_SPELLER_SRC=generator-desktopspeller-gt-norm-base.hfst
 tag_weighted_dep=$(shell \
 	if [[ $(ENABLE_CORPUS_WEIGHTS) == 'yes' ]] ; \
 	then \
-		echo "%-unit_weighted.hfst"; \
+		echo "generator-desktopspeller-gt-norm-unit_weighted.hfst"; \
 	else \
-		echo "%-base.hfst"; \
+		echo "generator-desktopspeller-gt-norm-base.hfst"; \
 	fi)
 
 ####### Automake targets: ########
@@ -45,8 +45,8 @@ generator-desktopspeller-gt-norm-base.hfst: generator-fstspeller-gt-norm.hfst
 
 #### 2. Add corpus-based frequency weights (all non-hits will disappear from
 ####    the fst):
-%-freq_weighted.hfst: \
-				 %-base.hfst \
+generator-desktopspeller-gt-norm-freq_weighted.hfst: \
+				 generator-desktopspeller-gt-norm-base.hfst \
 				 $(SURFWEIGHTS)
 	$(AM_V_COMPOSE)$(HFST_COMPOSE) $(HFST_FLAGS) -F \
 			$< $(SURFWEIGHTS) \
@@ -57,7 +57,8 @@ generator-desktopspeller-gt-norm-base.hfst: generator-fstspeller-gt-norm.hfst
 ####    lexical fst) with the frequency/corpus-based fst - use priority
 ####    union to avoid duplication of paths and thus make a mutch smaller
 ####    (and hence faster) fst:
-%-unit_weighted.hfst: %-freq_weighted.hfst \
+generator-desktopspeller-gt-norm-unit_weighted.hfst: \
+				 generator-desktopspeller-gt-norm-freq_weighted.hfst \
 				 unitweighted.hfst
 	$(AM_V_HXFST)$(PRINTF) "\
 	set encode-weights ON \n\
@@ -70,7 +71,7 @@ generator-desktopspeller-gt-norm-base.hfst: generator-fstspeller-gt-norm.hfst
 
 #### 4. Add tag-based weights, for adjusting weights according to morphology
 ####    and other tag-based penalties like words that should not be suggested:
-%-tag_weighted.hfst: $(tag_weighted_dep)  \
+generator-desktopspeller-gt-norm-tag_weighted.hfst: $(tag_weighted_dep)  \
 				 	 $(srcdir)/weights/$(TAGWEIGHTS)
 	$(AM_V_REWEIGHT)$(HFST_REWEIGHT) $(MORE_VERBOSITY) $(HFST_FLAGS) \
 			-T $(srcdir)/weights/$(TAGWEIGHTS) --arcs-only -i $< \

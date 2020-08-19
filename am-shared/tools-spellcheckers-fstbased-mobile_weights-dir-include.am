@@ -65,22 +65,22 @@ mob_%.typecount.txt: mob_%.uniq.txt
 #	$(AM_V_GEN)echo "$$(cut -f2 < $^ | sort -nru | head -n1) + $(ALPHA)" \
 #		| $(BC) -l > $@
 #
-## add tropical weights to the corpus:
-#%.tropical.txt: %.uniq.txt %.wordcount.txt %.typecount.txt
-#	$(AM_V_GEN)cat $< |\
-#		$(GAWK) -v CS="$$(cat $*.wordcount.txt)" \
-#				-v DS="$$(cat $*.typecount.txt)" \
-#				-v ALPHA=$(ALPHA)                \
-#				-f $(GTCORE)/scripts/uniq_count2tropical_weight.awk \
-#				> $@
+# add tropical weights to the corpus:
+mob_%.tropical.txt: mob_%.uniq.txt %.wordcount.txt mob_%.typecount.txt
+	$(AM_V_GEN)cat $< |\
+		$(GAWK) -v CS="$$(cat $*.wordcount.txt)" \
+				-v DS="$$(cat $*.typecount.txt)" \
+				-v ALPHA=$(ALPHA)                \
+				-f $(GTCORE)/scripts/uniq_count2tropical_weight.awk \
+				> $@
 
-## build an fst of surface forms with tropical weights for each word form:
-#%.surfs.hfst: %.tropical.txt
-#	$(AM_V_STR2FST)cat $< |\
-#		$(HFST_STRINGS2FST) -j $(HFST_FLAGS) -f openfst-tropical -o $@
+# build an fst of surface forms with tropical weights for each word form:
+mob_%.surfs.hfst: mob_%.tropical.txt
+	$(AM_V_STR2FST)cat $< |\
+		$(HFST_STRINGS2FST) -j $(HFST_FLAGS) -f openfst-tropical -o $@
 
 # Build an fst with surface form weights that also handles compounds:
-%.surfweights.hfst: %.surfs.hfst \
+mob_%.surfweights.hfst: mob_%.surfs.hfst \
                     word-boundary.hfst
 	$(AM_V_HCONCAT)$(HFST_CONCATENATE) $(HFST_FLAGS) word-boundary.hfst $< \
 		| $(HFST_REPEAT) $(HFST_FLAGS) -f 0 -t inf \

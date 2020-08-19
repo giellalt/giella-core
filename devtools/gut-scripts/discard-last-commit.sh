@@ -3,4 +3,4 @@
 # test script for gut apply script
 
 # Variables:
-git push
+git reset --hard HEAD^

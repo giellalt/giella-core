@@ -69,7 +69,7 @@ mob_%.typecount.txt: mob_%.uniq.txt
 mob_%.tropical.txt: mob_%.uniq.txt %.wordcount.txt mob_%.typecount.txt
 	$(AM_V_GEN)cat $< |\
 		$(GAWK) -v CS="$$(cat $*.wordcount.txt)" \
-				-v DS="$$(cat $*.typecount.txt)" \
+				-v DS="$$(cat mob_$*.typecount.txt)" \
 				-v ALPHA=$(ALPHA)                \
 				-f $(GTCORE)/scripts/uniq_count2tropical_weight.awk \
 				> $@

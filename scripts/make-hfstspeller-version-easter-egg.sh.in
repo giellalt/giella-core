@@ -3,12 +3,12 @@
 # Wrong usage - short instruction:
 if ! test $# -eq 4 -o $# -eq 5 ; then
     echo
-    echo "Usage: $0 LANGUAGE_CODE REVISION VERSION_FILE PLATFORM [VARIANT]"
+    echo "Usage: $0 LANGUAGE_CODE TOPSRCDIR VERSION PLATFORM [VARIANT]"
     echo
     echo "where:"
     echo "   LANGUAGE_CODE=iso639 code of the wanted language"
-    echo "   REVISION=latest known vcs revision as recorded in configure.ac"
-    echo "   VERSION_FILE=file containing the speller version info"
+    echo "   TOPSRCDIR=Obsolete"
+    echo "   VERSION=speller version info"
     echo "   PLATFORM=target platform, one of 'mobile' or 'desktop'"
     echo "   VARIANT=variant tag (script code, country code, alt. spelling)"
     echo
@@ -24,16 +24,8 @@ Version=$3
 Platform=$4
 Variant=$5
 
-if hash svn 2>/dev/null; then
-    Revision=$(svn info --xml $RevisionPath | grep -A 4 '<entry' \
-    | grep revision | grep -Eo '[0-9]+')
-    RevisionText=", rev$Revision"
-else
-    RevisionText=""
-fi
-
-Date=$(date +%d.%m.%Y)
-HfstVersion=$(hfst-info | grep 'HFST version' | grep -Eo '[0-9.]+')
+Date=$(date +%d.%m.%Y-%H%M)
+HfstVersion=$( $(HFST_INFO) | grep 'HFST version' | grep -Eo '[0-9.]+')
 
 if test $Variant == 'default' -o "x$Variant" == 'x'; then
     VariantText=""
@@ -44,5 +36,5 @@ else
 fi
 
 echo "Divvun speller for $Language$VariantText"
-echo "$1$Variant $Platform version $Version, ${Date}${RevisionText}"
+echo "$1$Variant, $Platform, version $Version, ${Date}"
 echo "Built using HFST $HfstVersion"

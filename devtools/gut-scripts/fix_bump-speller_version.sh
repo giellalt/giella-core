@@ -37,8 +37,8 @@ new_init_string=${pre_version}[${maj_version}.$min_version.$patch_version]$post_
 
 #echo "new_init_string: $new_init_string"
 
-awk '/^SPELLERVERSION/ {exit} {print}' $LANGDIR/configure.ac > $LANGDIR/configure.ac.tmp
+awk '/SPELLERVERSION/ {exit} {print}' $LANGDIR/configure.ac > $LANGDIR/configure.ac.tmp
 echo $new_init_string                                       >> $LANGDIR/configure.ac.tmp
-sed -e "1,/^SPELLERVERSION/d" $LANGDIR/configure.ac         >> $LANGDIR/configure.ac.tmp
+sed -e "1,/SPELLERVERSION/d" $LANGDIR/configure.ac         >> $LANGDIR/configure.ac.tmp
 
 mv -f $LANGDIR/configure.ac.tmp $LANGDIR/configure.ac

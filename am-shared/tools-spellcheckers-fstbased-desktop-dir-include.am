@@ -57,6 +57,9 @@ generator-desktopspeller-gt-norm-freq_weighted.hfst: \
 ####    lexical fst) with the frequency/corpus-based fst - use priority
 ####    union to avoid duplication of paths and thus make a mutch smaller
 ####    (and hence faster) fst:
+####
+#### Future plan: replace standard union | with priority union .P., when it
+#### works properly for weighted fst's.
 generator-desktopspeller-gt-norm-unit_weighted.hfst: \
 				 generator-desktopspeller-gt-norm-freq_weighted.hfst \
 				 unitweighted.hfst

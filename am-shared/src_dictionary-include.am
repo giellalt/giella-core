@@ -107,6 +107,7 @@ generator-dict-gt-norm.tmp.%: analyser-raw-gt-desc.%           \
 					filters/make-optional-semantic-tags.%      \
 					filters/make-optional-v1-tags.%            \
 					filters/make-optional-adv_comp-tags.%      \
+					filters/make-optional-grammatical-tags.%   \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
 					filters/remove-usage_except_NGminip-tags.% \
@@ -128,6 +129,7 @@ generator-dict-gt-norm.tmp.%: analyser-raw-gt-desc.%           \
 			.o. @\"filters/make-optional-semantic-tags.$*\"      \
 			.o. @\"filters/make-optional-v1-tags.$*\"            \
 			.o. @\"filters/make-optional-adv_comp-tags.$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$*\"   \
 			.o. @\"filters/remove-area-tags.$*\"                 \
 			.o. @\"filters/remove-dialect-tags.$*\"              \
 			.o. @\"filters/remove-orig_lang-tags.$*\"            \
@@ -201,6 +203,7 @@ generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-semantic-tags.%      \
 					filters/make-optional-v1-tags.%            \
 					filters/make-optional-adv_comp-tags.%      \
+					filters/make-optional-grammatical-tags.%   \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -223,6 +226,7 @@ generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 			.o. @\"filters/make-optional-semantic-tags.$$*\"      \
 			.o. @\"filters/make-optional-v1-tags.$$*\"            \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"   \
 			.o. @\"filters/remove-area-tags.$$*\"                 \
 			.o. @\"filters/remove-dialect-tags.$$*\"              \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"            \
@@ -342,6 +346,7 @@ generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-semantic-tags.%      \
 					filters/make-optional-v1-tags.%            \
 					filters/make-optional-adv_comp-tags.%      \
+					filters/make-optional-grammatical-tags.%   \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -365,6 +370,7 @@ generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 			.o. @\"filters/make-optional-semantic-tags.$$*\"      \
 			.o. @\"filters/make-optional-v1-tags.$$*\"            \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"   \
 			.o. @\"filters/remove-area-tags.$$*\"                 \
 			.o. @\"filters/remove-dialect-tags.$$*\"              \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"            \
@@ -392,6 +398,7 @@ generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-semantic-tags.%      \
 					filters/make-optional-v1-tags.%            \
 					filters/make-optional-adv_comp-tags.%      \
+					filters/make-optional-grammatical-tags.%   \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -415,6 +422,7 @@ generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 			.o. @\"filters/make-optional-semantic-tags.$$*\"      \
 			.o. @\"filters/make-optional-v1-tags.$$*\"            \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"   \
 			.o. @\"filters/remove-area-tags.$$*\"                 \
 			.o. @\"filters/remove-dialect-tags.$$*\"              \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"            \
@@ -456,6 +464,7 @@ generator-dict-gt-norm_$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-semantic-tags.%      \
 					filters/make-optional-v1-tags.%            \
 					filters/make-optional-adv_comp-tags.%      \
+					filters/make-optional-grammatical-tags.%   \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -478,6 +487,7 @@ generator-dict-gt-norm_$(1).tmp.%: analyser-raw-gt-desc.%      \
 			.o. @\"filters/make-optional-semantic-tags.$$*\"      \
 			.o. @\"filters/make-optional-v1-tags.$$*\"            \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"   \
 			.o. @\"filters/remove-area-tags.$$*\"                 \
 			.o. @\"filters/remove-dialect-tags.$$*\"              \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"            \

@@ -70,6 +70,7 @@ generator-gramcheck-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 					filters/make-optional-adv_comp-tags.%     \
 					filters/make-optional-area-tags.%         \
 					filters/make-optional-dialect-tags.%      \
+					filters/make-optional-grammatical-tags.%  \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -93,6 +94,7 @@ generator-gramcheck-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 			.o. @\"filters/make-optional-adv_comp-tags.$*\"     \
 			.o. @\"filters/make-optional-area-tags.$*\"         \
 			.o. @\"filters/make-optional-dialect-tags.$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$*\"  \
 			.o. @\"filters/remove-orig_lang-tags.$*\"           \
 			.o. @\"filters/remove-number-string-tags.$*\"       \
 			.o. @\"filters/remove-usage-tags.$*\"               \
@@ -165,6 +167,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/make-optional-adv_comp-tags.%     \
 					filters/make-optional-area-tags.%         \
 					filters/make-optional-dialect-tags.%      \
+					filters/make-optional-grammatical-tags.%  \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -189,6 +192,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"     \
 			.o. @\"filters/make-optional-area-tags.$$*\"         \
 			.o. @\"filters/make-optional-dialect-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"  \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"           \
 			.o. @\"filters/remove-number-string-tags.$$*\"       \
 			.o. @\"filters/remove-usage-tags.$$*\"               \
@@ -316,6 +320,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/make-optional-adv_comp-tags.%     \
 					filters/make-optional-area-tags.%         \
 					filters/make-optional-dialect-tags.%      \
+					filters/make-optional-grammatical-tags.%  \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -340,6 +345,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"     \
 			.o. @\"filters/make-optional-area-tags.$$*\"         \
 			.o. @\"filters/make-optional-dialect-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"  \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"           \
 			.o. @\"filters/remove-number-string-tags.$$*\"       \
 			.o. @\"filters/remove-usage-tags.$$*\"               \
@@ -374,6 +380,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/make-optional-adv_comp-tags.%     \
 					filters/make-optional-area-tags.%         \
 					filters/make-optional-dialect-tags.%      \
+					filters/make-optional-grammatical-tags.%  \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -398,6 +405,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"     \
 			.o. @\"filters/make-optional-area-tags.$$*\"         \
 			.o. @\"filters/make-optional-dialect-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"  \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"           \
 			.o. @\"filters/remove-number-string-tags.$$*\"       \
 			.o. @\"filters/remove-usage-tags.$$*\"               \
@@ -438,6 +446,7 @@ generator-gramcheck-gt-norm_$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/make-optional-adv_comp-tags.%     \
 					filters/make-optional-area-tags.%         \
 					filters/make-optional-dialect-tags.%      \
+					filters/make-optional-grammatical-tags.%  \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -462,6 +471,7 @@ generator-gramcheck-gt-norm_$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/make-optional-adv_comp-tags.$$*\"     \
 			.o. @\"filters/make-optional-area-tags.$$*\"         \
 			.o. @\"filters/make-optional-dialect-tags.$$*\"      \
+			.o. @\"filters/make-optional-grammatical-tags.$$*\"  \
 			.o. @\"filters/remove-orig_lang-tags.$$*\"           \
 			.o. @\"filters/remove-number-string-tags.$$*\"       \
 			.o. @\"filters/remove-usage-tags.$$*\"               \

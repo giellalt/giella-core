@@ -71,9 +71,9 @@ GIELLA_FILTER_CORE_REGEX_SRCS=\
 				remove-Use_minus_PMatch-strings.regex     \
 				remove-Use_minus_PMatch-tags.regex        \
 				remove-Use_GC-strings.regex               \
-    			remove-Use_GC-tags.regex                  \
-    			remove-Use_minusGC-strings.regex          \
-    			remove-Use_minusGC-tags.regex             \
+				remove-Use_GC-tags.regex                  \
+				remove-Use_minusGC-strings.regex          \
+				remove-Use_minusGC-tags.regex             \
 				remove-UseCirc-strings.regex              \
 				remove-use_marg-strings.regex             \
 				remove-variant-strings.regex              \
@@ -97,26 +97,26 @@ GIELLA_FILTER_CORE_REGEX_SRCS=\
 
 # 2) GiellaLT Core **generated** regex files:
 GIELLA_FILTER_CORE_GENERATED_REGEX_SRCS=\
-                  make-optional-area-tags.regex         \
-                  make-optional-derivation-tags.regex   \
-                  make-optional-dialect-tags.regex      \
-                  make-optional-error-tags.regex        \
-                  make-optional-grammatical-tags.regex  \
-                  make-optional-orig_lang-tags.regex    \
-                  make-optional-semantic-tags.regex     \
-                  remove-derivation-strings.regex       \
-                  remove-error-strings.regex            \
-                  remove-area-tags.regex                \
-                  remove-derivation-tags.regex          \
-                  remove-dialect-tags.regex             \
-                  remove-error-tags.regex               \
-                  remove-grammatical-tags.regex         \
-                  remove-orig_lang-tags.regex           \
-                  remove-semantic-tags.regex            \
-                  remove-semantic-tags-before-derivations.regex \
-                  reorder-semantic-tags.regex           \
-                  $(DIALECT_REGEXES)                    \
-                  $(AREA_REGEXES)
+				make-optional-area-tags.regex                 \
+				make-optional-derivation-tags.regex           \
+				make-optional-dialect-tags.regex              \
+				make-optional-error-tags.regex                \
+				make-optional-grammatical-tags.regex          \
+				make-optional-orig_lang-tags.regex            \
+				make-optional-semantic-tags.regex             \
+				remove-derivation-strings.regex               \
+				remove-error-strings.regex                    \
+				remove-area-tags.regex                        \
+				remove-derivation-tags.regex                  \
+				remove-dialect-tags.regex                     \
+				remove-error-tags.regex                       \
+				remove-grammatical-tags.regex                 \
+				remove-orig_lang-tags.regex                   \
+				remove-semantic-tags.regex                    \
+				remove-semantic-tags-before-derivations.regex \
+				reorder-semantic-tags.regex                   \
+				$(DIALECT_REGEXES)                            \
+				$(AREA_REGEXES)
 
 # 3) GTD Core xfscript filter files:
 GIELLA_FILTER_CORE_XFSCRIPT_SRCS=

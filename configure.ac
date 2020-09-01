@@ -30,6 +30,8 @@ SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
 
 AC_SUBST([GIELLA_CORE_VERSION], [$VERSION-${SVNREVNUM}])
 
+AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
+
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \
                  scripts/Makefile])

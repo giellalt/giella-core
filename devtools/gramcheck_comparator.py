@@ -393,15 +393,7 @@ def is_wanted_error(c_error, filters):
     if not filters:
         return True
 
-    if c_error['type'] == 'errorsyn':
-        return is_wanted_errorsyn(c_error)
-    else:
-        return c_error['type'] not in filters
-
-
-def is_wanted_errorsyn(c_error):
-    return c_error.get('errorinfo') is not None and (
-        'space' in c_error['errorinfo'] or 'cmp' in c_error['errorinfo'])
+    return c_error['type'] not in filters
 
 
 def filter_markup(filters, c_errors):

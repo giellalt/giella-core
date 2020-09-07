@@ -32,6 +32,12 @@
 # specifying the non-hfstol intermediate files as non-intalling targets.
 GT_RAW=
 
+# Define ALT variables before adding values, which can happen in several include
+# files:
+ALT_ORTH_ANALYSERS=
+ALT_ORTH_GENERATORS=
+
+
 # Variable to hold intermediate *.hfst targets to force make to go via them
 # before building *.hfstol target.
 GT_FSTs_NO_INSTALL=$(subst hfstol,hfst,$(filter %.hfstol, \

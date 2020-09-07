@@ -9,6 +9,18 @@ if WANT_MORPHOLOGY
 GT_ANALYSERS+=analyser-disamb-gt-desc.hfstol
 if WANT_TOKENISERS
 GT_ANALYSERS+=analyser-pmatchdisamb-gt-desc.hfst
+
+# IFF alternative orthographies are defined:
+if HAVE_ALT_ORTHS
+
+# Define temporary variables to build final target filenames from:
+BASENAME_SRC_TOKENISERS=analyser-pmatchdisamb-gt-desc
+SRC_TOKENISERS_TMP=$(shell for ld in $(ALT_ORTHS); do\
+		echo "$(BASENAME_SRC_TOKENISERS).$$ld" ; done)
+SRC_TOKENISERS=$(addsuffix .hfst,$(SRC_TOKENISERS_TMP))
+ALT_ORTH_ANALYSERS+=$(SRC_TOKENISERS)
+endif # HAVE_ALT_ORTHS
+
 endif # WANT_TOKENISERS
 endif # WANT_MORPHOLOGY
 

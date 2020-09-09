@@ -35,6 +35,7 @@ if WANT_TOKENISERS
 GT_TOKENISERS_FILTER_SRCS+=make-disamb-CG-tags.regex \
 						   disamb-tokeniser-flags.regex
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
+
 endif # WANT_TOKENISERS
 
 if WANT_GRAMCHECK
@@ -43,11 +44,32 @@ GT_TOKENISERS_FILTER_SRCS+=make-gramcheck-CG-tags.regex \
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
 endif # WANT_GRAMCHECK
 
+
+if HAVE_ALT_ORTHS
+BASENAME_TOKEN_FILTERS_ORTH=$(sort $(basename $(GT_TOKENISERS_FILTER_SRCS)))
+
+ALT_ORTH_TOKENISER_FILTER_SRCS=$(shell for ll in $(BASENAME_TOKEN_FILTERS_ORTH); do\
+    for ld in $(ALT_ORTHS); do\
+        echo "$$ll.$$ld.regex" ;\
+    done ;\
+done)
+endif # HAVE_ALT_ORTHS
+
+
+test:
+	@echo
+	@echo Alt-orth filter: $(GT_TOKENISERS_FILTER_ALL_SRCS)
+	@echo
+
+
+
+
 # The second variable is sorted to get rid of duplicates:
 GT_TOKENISERS_FILTER_ALL_SRCS=\
         $(GT_TOKENISERS_FILTER_SRCS) \
         $(sort $(GT_TOKENISER_URLFILTER_SRC) ) \
         $(GT_LOCAL_TOKENISERS_FILTER_SRCS) \
+        $(ALT_ORTH_TOKENISER_FILTER_SRCS) \
         $(GT_LOCAL_COPY_FILTER_SRCS) \
         $(GENERATED_REGEXES)
 
@@ -83,6 +105,20 @@ make-%-CG-tags.regex: %-$(TAG_FILE)
 
 %-tokeniser-flags.regex: %-$(FLAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/flaglist2make_flag_regex.sh $< > $@
+
+
+# Alt-orth variant of the above
+define alt_orth_token_filters
+make-%-CG-tags.$(1).regex: %-$(1)-$(TAG_FILE)
+	$$(AM_V_GEN)$(GTCORE)/scripts/taglist2make_CG_tags_regex.sh $$< > $$@
+
+%-tokeniser-flags.$(1).regex: %-$(1)-$(FLAG_FILE)
+	$$(AM_V_GEN)$(GTCORE)/scripts/flaglist2make_flag_regex.sh $$< > $$@
+
+endef
+$(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_token_filters,$(alt_orth))))
+
+
 
 ####### Copy regex files from the Giella core if not found locally: ########
 %.regex: $(GIELLA_SHARED)/all_langs/src/filters/%.regex

@@ -73,10 +73,62 @@ if CAN_XFST
 else
 # If neither Hfst nor Xfst is enabled, create an empty file:
 %-sigma.txt:
-	touch $@
+	$(AM_V_GEN)touch $@
 
 endif # CAN_XFST
 endif # CAN_HFST
+
+
+# Alt-orth variant of the above
+define alt_orth_token_tags
+if CAN_HFST
+# Hfst: break on comma + space in three steps, to preserve space as a symbol.
+%-$(1)-sigma.txt: $$(TAG_EXTRACTION_FST).$(1).hfstol
+	$$(AM_V_GEN)$$(HFST_SUMMARIZE) -v 2>/dev/null $$< \
+		| grep -A1 '^sigma set' \
+		| grep -v '^sigma set' \
+		| sed 's/, /\\\\\\/g' \
+		| perl -pe 's/\\\\\\/\n/g' \
+		| grep -v '^$$$$' \
+		| egrep -v '(@_EPSILON_SYMBOL_@|@_IDENTITY_SYMBOL_@|@_UNKNOWN_SYMBOL_@)' \
+		> $$@
+
+else
+
+if CAN_XFST
+# Special treatment of space (" "), break on space, special treatment of
+# reserved symbols ("X") and double quote. The Xfst file needs to be sorted.
+%-$(1)-sigma.txt: $$(TAG_EXTRACTION_FST).$(1).xfst
+	$$(AM_V_GEN)$$(XFST) -q \
+			-e "load stack $$<" \
+			-e "print sigma" \
+			-stop \
+		| grep -v '^Size' \
+		| sed 's/^Sigma: //' \
+		| sed 's/       //' \
+		| sed 's/" "/XXXXX/g' \
+		| tr ' ' '\n' \
+		| sed 's/XXXXX/ /g' \
+		| grep -v '^$$$$' \
+		| sed 's/^"\(.\)"$$$$/\1/' \
+		| sed 's/%\"/"/' \
+		| LCALL=C sort \
+		> $$@
+
+else
+# If neither Hfst nor Xfst is enabled, create an empty file:
+%-$(1)-sigma.txt:
+	$(AM_V_GEN)touch $@
+
+endif # CAN_XFST
+endif # CAN_HFST
+
+endef
+$(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_token_tags,$(alt_orth))))
+
+
+
+
 
 %-$(TAG_FILE): %-sigma.txt
 	$(AM_V_GEN)$(GREP_TAGS_COMMAND) < $< > $@	

@@ -63,17 +63,6 @@ GT_TOKENISERS_FILTER_TARGETS+=\
         $(patsubst %.regex,%.hfst,$(GT_TOKENISERS_FILTER_ALL_SRCS))
 endif # CAN_HFST
 
-# Hfst tokenisers are specific to Hfst, so skip the rest.
-#if CAN_XFST
-#GT_TOKENISERS_FILTER_TARGETS+=\
-#        $(patsubst %.regex,%.xfst,$(GT_TOKENISERS_FILTER_ALL_SRCS))
-#endif # CAN_XFST
-#
-#if CAN_FOMA
-#GT_TOKENISERS_FILTER_TARGETS+=\
-#        $(patsubst %.regex,%.foma,$(GT_TOKENISERS_FILTER_ALL_SRCS))
-#endif # CAN_FOMA
-
 # If tokenisers are turned off:
 else !WANT_TOKENISERS
 

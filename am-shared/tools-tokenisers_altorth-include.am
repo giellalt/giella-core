@@ -1,0 +1,69 @@
+## Include this file in top-level srcdir to compile FSTs
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+# Include file for building tokenisers for alternative orthographies
+
+####### Automake targets: ########
+# IFF alternative orthographies are defined:
+if HAVE_ALT_ORTHS
+
+# Define temporary variables to build final target filenames from:
+BASENAME_TOKENISERS_ORTH=$(sort $(basename $(GIELLA_PMHFSTS)))
+
+ALT_ORTH_TOKENISERS_TMP=$(shell for ll in $(BASENAME_TOKENISERS_ORTH); do\
+    for ld in $(ALT_ORTHS); do\
+        echo "$$ll.$$ld" ;\
+    done ;\
+done)
+
+# Define variables before adding value:
+ALT_ORTH_TOKENISERS=
+
+##### BEGIN Hfst target list #####
+if CAN_HFST
+ALT_ORTH_TOKENISERS+=$(addsuffix .pmhfst,$(ALT_ORTH_TOKENISERS_TMP))
+endif # CAN_HFST
+##### END Hfst target list #####
+
+endif # HAVE_ALT_ORTHS
+
+####### Build rules for the default set of fst's for ########
+####### alternate orthographies:                     ########
+
+define alt_orth_tokenisers
+
+# Take the analyser file from src/*.hfst, and replace the Giella tags with
+# CG compatible ones:
+# a) for pmatchdisamb:
+analyser-%-gt-desc.$(1).hfst: $(top_builddir)/src/analyser-pmatch%-gt-desc.$(1).hfst \
+						 filters/make-%-CG-tags.$(1).hfst
+	$$(AM_V_HXFST)$$(PRINTF) "read regex \
+				@\"$$<\" \
+			.o. @\"filters/make-$$*-CG-tags.$(1).hfst\".i   \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(HFST_XFST) -p $$(MORE_VERBOSITY)
+
+# b. for (regular disamb &) and gramcheck:
+analyser-%-gt-desc.$(1).hfst: $(top_builddir)/src/analyser-%-gt-desc.$(1).hfst \
+						 filters/make-%-CG-tags.$(1).hfst
+	$$(AM_V_HXFST)$$(PRINTF) "read regex \
+				@\"$$<\" \
+			.o. @\"filters/make-$$*-CG-tags.$(1).hfst\".i   \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(HFST_XFST) -p $$(MORE_VERBOSITY)
+
+# Prepare analysers used for building the tokenisers:
+analyser_relabelled-%-gt-desc.$(1).hfst: analyser-%-gt-desc.$(1).hfst \
+						 btrelabeller.hfst \
+						 relabeller.hfst
+	$$(AM_V_HSUBST)$$(HFST_SUBSTITUTE) $$(MORE_VERBOSITY) \
+		-f '@P.Pmatch.Backtrack@' -T btrelabeller.hfst $$< \
+		| $$(HFST_SUBSTITUTE) $$(MORE_VERBOSITY) \
+		-f '@P.Pmatch.Loc@'       -T   relabeller.hfst \
+		-o $$@
+
+endef
+$(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_tokenisers,$(alt_orth))))

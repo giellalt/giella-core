@@ -52,7 +52,7 @@ GIELLA_PMHFSTS+=tokeniser-gramcheck-gt-desc.pmhfst
 endif # WANT_GRAMCHECK
 endif # WANT_MORPHOLOGY
 
-hfstdata_DATA+=$(GIELLA_PMHFSTS) $(GIELLA_TOKEN_DIS)
+hfstdata_DATA+=$(GIELLA_PMHFSTS) $(GIELLA_TOKEN_DIS) $(ALT_ORTH_TOKENISERS)
 endif # CAN_HFST
 
 ###########################################################################
@@ -131,8 +131,8 @@ analyser_relabelled-%-gt-desc.hfst: analyser-%-gt-desc.hfst \
 
 # This is the real tokeniser build target:
 tokeniser-%.pmhfst: tokeniser-%.pmscript \
-                    analyser_relabelled-%.hfst \
-                    analyser-url-gt-desc.hfst
+					analyser_relabelled-%.hfst \
+					analyser-url-gt-desc.hfst
 	$(AM_V_PM2FST)$(HFST_PMATCH2FST) < $< > $@.tmp
 	$(AM_V_at)mv -f $@.tmp $@
 
@@ -155,6 +155,7 @@ relabeller.hfst:
 	$(AM_V_CP)cp -f $< $@
 
 ####### Includes: ###########
+include $(top_srcdir)/../giella-core/am-shared/tools-tokenisers_altorth-include.am
 include $(top_srcdir)/../giella-core/am-shared/vislcg3-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am

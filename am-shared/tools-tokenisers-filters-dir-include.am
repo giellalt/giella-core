@@ -28,25 +28,32 @@ FLAG_FILE=flags.txt
 TAG_EXTRACTION_FST=$(top_builddir)/src/analyser-%-gt-desc
 
 ####### Source file and target defs: ########
-GT_TOKENISERS_FILTER_SRCS=
+GT_DISAMB_TOKENISERS_FILTER_SRCS=
+GT_GRAMCHECK_TOKENISERS_FILTER_SRCS=
 GT_TOKENISER_URLFILTER_SRC=
 
 if WANT_TOKENISERS
-GT_TOKENISERS_FILTER_SRCS+=make-disamb-CG-tags.regex \
+GT_DISAMB_TOKENISERS_FILTER_SRCS+=make-disamb-CG-tags.regex \
 						   disamb-tokeniser-flags.regex
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
 
 endif # WANT_TOKENISERS
 
 if WANT_GRAMCHECK
-GT_TOKENISERS_FILTER_SRCS+=make-gramcheck-CG-tags.regex \
+GT_GRAMCHECK_TOKENISERS_FILTER_SRCS+=make-gramcheck-CG-tags.regex \
 						   gramcheck-tokeniser-flags.regex
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
 endif # WANT_GRAMCHECK
 
 
 if HAVE_ALT_ORTHS
-BASENAME_TOKEN_FILTERS_ORTH=$(sort $(basename $(GT_TOKENISERS_FILTER_SRCS)))
+BASENAME_TOKEN_FILTERS_ORTH=
+BASENAME_TOKEN_FILTERS_ORTH+=$(sort $(basename $(GT_DISAMB_TOKENISERS_FILTER_SRCS)))
+
+# Only build grammar checker filters for alt orths if we really need them:
+if WANT_ALT_ORTH_PROOFTOOLS
+BASENAME_TOKEN_FILTERS_ORTH+=$(sort $(basename $(GT_GRAMCHECK_TOKENISERS_FILTER_SRCS)))
+endif # WANT_ALT_ORTH_PROOFTOOLS
 
 ALT_ORTH_TOKENISER_FILTER_SRCS=$(shell for ll in $(BASENAME_TOKEN_FILTERS_ORTH); do\
     for ld in $(ALT_ORTHS); do\
@@ -66,7 +73,8 @@ test:
 
 # The second variable is sorted to get rid of duplicates:
 GT_TOKENISERS_FILTER_ALL_SRCS=\
-        $(GT_TOKENISERS_FILTER_SRCS) \
+        $(GT_DISAMB_TOKENISERS_FILTER_SRCS) \
+        $(GT_GRAMCHECK_TOKENISERS_FILTER_SRCS) \
         $(sort $(GT_TOKENISER_URLFILTER_SRC) ) \
         $(GT_LOCAL_TOKENISERS_FILTER_SRCS) \
         $(ALT_ORTH_TOKENISER_FILTER_SRCS) \

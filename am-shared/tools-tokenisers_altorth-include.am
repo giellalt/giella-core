@@ -8,8 +8,15 @@
 # IFF alternative orthographies are defined:
 if HAVE_ALT_ORTHS
 
+# Define variable before use:
+BASENAME_TOKENISERS_ORTH=
+
 # Define temporary variables to build final target filenames from:
-BASENAME_TOKENISERS_ORTH=$(sort $(basename $(GIELLA_PMHFSTS)))
+BASENAME_TOKENISERS_ORTH+=$(sort $(basename $(GIELLA_DISAMB_PMHFSTS)))
+
+if WANT_ALT_ORTH_PROOFTOOLS
+BASENAME_TOKENISERS_ORTH+=$(sort $(basename $(GIELLA_GRAMCHECK_PMHFSTS)))
+endif # WANT_ALT_ORTH_PROOFTOOLS
 
 ALT_ORTH_TOKENISERS_TMP=$(shell for ll in $(BASENAME_TOKENISERS_ORTH); do\
     for ld in $(ALT_ORTHS); do\

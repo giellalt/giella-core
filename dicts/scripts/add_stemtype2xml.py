@@ -29,10 +29,10 @@
     python add_stemtype2xml <PATH_TO_LEXC_FILE> <PATH_TO_STEMTYPE_FILE> <PATH_TO_DICT>
 
         Ex.
-        python add_stemtype2xml.py ~/main/langs/sme/src/morphology/stems/nouns.lexc ~/main/words/dicts/smenob/scripts/nouns_stemtypes.txt ~/main/apps/dicts/nds/src/neahtta/dicts/sme-nob.all.xml
+        python add_stemtype2xml.py ~/main/words/dicts/smenob/scripts/nouns_stemtypes.txt ~/main/apps/dicts/nds/src/neahtta/dicts/sme-nob.all.xml ~/all-gut/giellalt/lang-sme/src/fst/stems/nouns.lexc
 
         Ex. (gtdict)
-        python add_stemtype2xml.py $GTHOME/langs/sme/src/morphology/stems/nouns.lexc $GTHOME/words/dicts/smenob/scripts/nouns_stemtypes.txt /home/neahtta/neahtta/dicts/sme-nob.all.xml
+        python add_stemtype2xml.py $GTHOME/words/dicts/smenob/scripts/nouns_stemtypes.txt /home/neahtta/neahtta/dicts/sme-nob.all.xml $HOME/giellalt/lang-sme/src/fst/stems/nouns.lexc
 
     The output file is created as <PATH_TO_DICT>.stem.xml
 
@@ -42,21 +42,39 @@
 
 import sys
 from fabric.colors import cyan, green, red
+from subprocess import Popen, PIPE
 
 try:
-    lexc_file = sys.argv[1]
-    stem_file = sys.argv[2]
-    dict_file_in = sys.argv[3]
+    stem_file = sys.argv[1]
+    dict_file_in = sys.argv[2]
+    if len(sys.argv) == 4:
+        lexc_file = sys.argv[3]
+    else:
+        lexc_file = sys.argv[3:]
+
 except IndexError:
     print(red('** You forgot one of the input parameters!'))
     print(red('** You need to pass paths for the lexc file, the stemtype file and the dict file.'))
     quit()
 
-try:
-    lf = open(lexc_file, "r")
-except IOError:
-    print(red('** The path/name you entered for the lexc file is wrong!'))
-    quit()
+
+if type(lexc_file) is not list:
+    try:
+        lf = open(lexc_file, "r")
+    except IOError:
+        print(red('** The path/name you entered for the lexc file is wrong!'))
+        quit()
+else:
+    all_lexc = " ".join(lexc_file)
+    cmd = "cat " + all_lexc + "> all_lexc.lexc"
+    p = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
+    out, err = p.communicate()
+    try:
+        lf = open("all_lexc.lexc", "r")
+    except IOError:
+        print(red('** The path/name you entered for the lexc file is wrong!'))
+        quit()
+
 
 try:
     sf = open(stem_file, "r")
@@ -70,7 +88,7 @@ except IOError:
     print(red('** The path/name you entered for the dict file is wrong!'))
     quit()
 
-dict_file_out = sys.argv[3] + ".stem.xml"
+dict_file_out = sys.argv[2] + ".stem.xml"
 dfo = open(dict_file_out, "w+")
 
 stem_2syll = False
@@ -113,29 +131,36 @@ dict_lex_stem = {}
 line = lf.readline()
 while line:
     l = line.strip()
-    l_split = l.split(" ")
-    stem = ""
-    if len(l_split)>1 and not 'Err/' in l_split[0]:
-        if l_split[1] in list_2syll:
-            stem = "2syll"
-        else:
-            if l_split[1] in list_3syll:
-                stem = "3syll"
+    if not "verb" in stem_file:
+        l_split_right = l.split("+")
+    else:
+        l_split_right = l.split(":")
+    if len(l_split_right)>1:
+        l_split = l.split(" ")
+        stem = ""
+        if len(l_split)>1 and not 'Err/' in l_split[0]:
+            if "-" in l_split[1] and 'prop' in stem_file:
+                idx = l_split[1].index("-")
+                l_split[1] = l_split[1][0:idx]
+            if l_split[1] in list_2syll:
+                stem = "2syll"
             else:
-                if l_split[1] in list_Csyll:
-                    stem = "Csyll"
-        if '%' in l_split[0]:
-            lemma_p = l.split("+")[0]
-            lemma = ''
-            for word in lemma_p.split("%"):
-                lemma += word
-            dict_lex_stem.update({lemma: stem})
-        elif '+' in l_split[0]:
-            dict_lex_stem.update({l_split[0].split("+")[0]: stem})
-        else:
-            dict_lex_stem.update({l_split[0].split(":")[0]: stem})
+                if l_split[1] in list_3syll:
+                    stem = "3syll"
+                else:
+                    if l_split[1] in list_Csyll:
+                        stem = "Csyll"
+            if '%' in l_split[0]:
+                lemma_p = l.split("+")[0]
+                lemma = ''
+                for word in lemma_p.split("%"):
+                    lemma += word
+                dict_lex_stem.update({lemma: stem})
+            elif '+' in l_split[0]:
+                dict_lex_stem.update({l_split[0].split("+")[0]: stem})
+            else:
+                dict_lex_stem.update({l_split[0].split(":")[0]: stem})
     line = lf.readline()
-
 lf.close()
 sf.close()
 print(green('** Done'))

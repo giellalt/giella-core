@@ -131,11 +131,9 @@ dict_lex_stem = {}
 line = lf.readline()
 while line:
     l = line.strip()
-    if not "verb" in stem_file:
-        l_split_right = l.split("+")
-    else:
-        l_split_right = l.split(":")
-    if len(l_split_right)>1:
+    l_split_right_p = l.split("+")
+    l_split_right_c = l.split(":")
+    if len(l_split_right_p)>1 or len(l_split_right_c)>1:
         l_split = l.split(" ")
         stem = ""
         if len(l_split)>1 and not 'Err/' in l_split[0]:

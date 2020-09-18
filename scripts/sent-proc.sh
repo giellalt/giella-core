@@ -135,6 +135,7 @@ fi
 if [[ "${long_lang_list[*]}" =~ (^|[^[:alpha:]])$l([^[:alpha:]]|$) ]]; then
     MORPH="$HLOOKUP --giella-cg --weight-classes=1 $current_path/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst "
     DIS="$current_path/src/cg3/disambiguator.cg3"
+    MWE_DIS="$current_path/tools/tokenisers/mwe-dis.cg3"
     if [ ! -f "$current_path/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" ]; then
         echo "no hfst file found: please compile the language tools for $l"
         echo "See you later!"
@@ -167,10 +168,10 @@ SD_PATH='$GTLANGS/giella-shared/smi/src/cg3'
 pos_cmd="echo $sentence | $MORPH"
 
 if [ $l == fao ] || [ $l == crk ]; then
-    dis_cmd=$pos_cmd" | vislcg3 -g $GTLANGS/$lg$l/src/cg3/disambiguator.cg3 $t"
+    dis_cmd=$pos_cmd" | vislcg3 -g $GTLANGS/tools/tokenisers/mwe-dis.cg3 | vislcg3 -g $GTLANGS/$lg$l/src/cg3/disambiguator.cg3 $t"
     syn_cmd=$dis_cmd" | vislcg3 -g $GTLANGS/$lg$l/src/cg3/functions.cg3 $t"
 else
-    dis_cmd=$pos_cmd" | vislcg3 -g $DIS $t"
+    dis_cmd=$pos_cmd" | vislcg3 -g $MWE_DIS | vislcg3 -g $DIS $t"
     syn_cmd=$dis_cmd" | vislcg3 -g $SD_PATH/functions.cg3 $t"
 fi
 

@@ -164,7 +164,7 @@ SD_PATH='$GTLANGS/giella-shared/smi/src/cg3'
 # define commands
 # common pos_cmd
 #pos_cmd="echo $sentence | preprocess $abbr | $MORPH | $GTHOME/gt/script/lookup2cg"
-pos_cmd="echo $sentence | $MORPH |cut -f1,2"
+pos_cmd="echo $sentence | $MORPH"
 
 if [ $l == fao ] || [ $l == crk ]; then
     dis_cmd=$pos_cmd" | vislcg3 -g $GTLANGS/$lg$l/src/cg3/disambiguator.cg3 $t"

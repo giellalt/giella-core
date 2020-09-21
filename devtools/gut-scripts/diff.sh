@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# test script for gut apply script
+# git diff for gut apply script, to get diff for a specific file for all repos.
+# Change the filename as needed.
 
 # Variables:
-git commit -a -m "[Template upd] Fix deps location searching."
+git diff src/orthography/Makefile.am 

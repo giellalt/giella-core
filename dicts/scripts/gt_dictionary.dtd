@@ -23,7 +23,7 @@
 <!ATTLIST e
       usage ( mt | vd | dict | other | nds | fad ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK |
-            PS_SA | KAL | nou94 | PS | husbykuhmunen | lmm )  #IMPLIED
+            PS_SA | KAL | nou94 | PS | husbykuhmunen | lmm | sammallahti )  #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED

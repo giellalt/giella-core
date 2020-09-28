@@ -20,12 +20,11 @@ def make_gramcheck_runs(text, error, filename, zcheck_file, runner):
 def gramcheck(sentence: str, zcheck_file: str,
               runner: util.ExternalCommandRunner) -> dict:
     """Run the gramchecker on the error_sentence."""
-    print(f'Checking «{sentence}»')
     runner.run(
         f'divvun-checker -a {zcheck_file} '.split(),
         to_stdin=sentence.encode('utf-8'))
 
-    return json.loads(runner.stdout)
+    return runner.stdout
 
 
 def parse_options():
@@ -133,14 +132,17 @@ def fix_double_space_d_error(d_error, zcheck_file, runner):
 
 if __name__ == '__main__':
     ARGS = parse_options()
-    RUNNER = util.ExternalCommandRunner()
-    POOL = multiprocessing.Pool(multiprocessing.cpu_count() * 2)
-    RESULTS = [
-        POOL.apply_async(
-            make_gramcheck_runs,
-            args=(text, errors, filename, ARGS.zcheck_file, RUNNER))
+    TEXT = {
+        text: {'error': errors, 'filename': filename}
         for text, errors, filename in get_all([ARGS.target])
-    ]
+    }
+    RUNNER = util.ExternalCommandRunner()
+    gramcheck_output = gramcheck('\n'.join(TEXT), ARGS.zcheck_file, RUNNER)
+    for line in gramcheck_output.decode('utf-8').split('\n'):
+        if line:
+            gram_error = json.loads(line.encode('utf-8'))
+            TEXT[gram_error['text']]['gram_error'] = gram_error
+
 
     with open(f'{ARGS.target.replace("/", "_")}.pickle', 'wb') as pickle_stream:
-        pickle.dump([result.get() for result in RESULTS], pickle_stream)
+        pickle.dump([(text, TEXT[text]['error'], TEXT[text]['filename'], TEXT[text]['gram_error']) for text in TEXT], pickle_stream)

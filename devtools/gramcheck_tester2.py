@@ -20,9 +20,8 @@ def make_gramcheck_runs(text, error, filename, zcheck_file, runner):
 def gramcheck(sentence: str, zcheck_file: str,
               runner: util.ExternalCommandRunner) -> dict:
     """Run the gramchecker on the error_sentence."""
-    runner.run(
-        f'divvun-checker -a {zcheck_file} '.split(),
-        to_stdin=sentence.encode('utf-8'))
+    runner.run(f'divvun-checker -a {zcheck_file} '.split(),
+               to_stdin=sentence.encode('utf-8'))
 
     return runner.stdout
 
@@ -34,9 +33,8 @@ def parse_options():
         The default is to print paragraphs with no type (=text type).')
 
     parser.add_argument('zcheck_file', help='The grammarchecker archive')
-    parser.add_argument(
-        'target',
-        help='Name of the file or directorie to process. \
+    parser.add_argument('target',
+                        help='Name of the file or directorie to process. \
                         If a directory is given, all files in this directory \
                         and its subdirectories will be listed.')
 
@@ -53,7 +51,9 @@ def get_all(targets):
             print_orig(parts, errors, para)
             text = ''.join(parts)
             if not text.startswith('#'):
-                yield text.replace('\n', ' '), [error for error in errors if error], filename
+                yield text.replace('\n',
+                                   ' '), [error for error in errors
+                                          if error], filename
 
 
 def get_error_corrections(para):
@@ -133,7 +133,10 @@ def fix_double_space_d_error(d_error, zcheck_file, runner):
 if __name__ == '__main__':
     ARGS = parse_options()
     TEXT = {
-        text: {'error': errors, 'filename': filename}
+        text: {
+            'error': errors,
+            'filename': filename
+        }
         for text, errors, filename in get_all([ARGS.target])
     }
     RUNNER = util.ExternalCommandRunner()
@@ -143,6 +146,8 @@ if __name__ == '__main__':
             gram_error = json.loads(line.encode('utf-8'))
             TEXT[gram_error['text']]['gram_error'] = gram_error
 
-
-    with open(f'{ARGS.target.replace("/", "_")}.pickle', 'wb') as pickle_stream:
-        pickle.dump([(text, TEXT[text]['error'], TEXT[text]['filename'], TEXT[text]['gram_error']) for text in TEXT], pickle_stream)
+    with open(f'{ARGS.target.replace("/", "_")}.pickle',
+              'wb') as pickle_stream:
+        pickle.dump([(text, TEXT[text]['error'], TEXT[text]['filename'],
+                      TEXT[text]['gram_error'])
+                     for text in TEXT], pickle_stream)

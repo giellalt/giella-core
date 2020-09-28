@@ -11,6 +11,17 @@ from corpustools import util
 
 import gramcheck_tester2
 
+REPORTS = {
+    'tp': 'GramDivvun found marked up error and has the suggested correction '
+    '(tp)',
+    'fp1': 'GramDivvun found manually marked up error, but corrected wrongly '
+    '(fp1)',
+    'fp2': 'GramDivvun found error which is not manually marked up (fp2)',
+    'fn1': 'GramDivvun found manually marked up error, but has no correction '
+    '(fn1)',
+    'fn2': 'GramDivvun did not find manually marked up error (fn2)'
+}
+
 
 def correct_no_suggestion_in_dc(correct, dc):
     return [(c_error, d_error) for c_error in correct for d_error in dc
@@ -28,14 +39,8 @@ def false_positives_1_per_sentence(nices, outfile):
 
     report_outputs = [report_output(nice) for nice in nices]
     if report_outputs:
-        print(
-            f'{initial_report("GramDivvun found manually marked up error, but corrected wrongly (fp1)")}',
-            file=outfile)
+        print(f'~~~~~~\n\t{REPORTS["fp1"]}', file=outfile)
         print('\n'.join(report_outputs), file=outfile)
-
-
-def initial_report(theme):
-    return (f'~~~~~~\n\t{theme}')
 
 
 def initial_nice(nice):
@@ -47,9 +52,7 @@ def false_negatives_1_per_sentence(nices, outfile):
     report_outputs = [initial_nice(nice) for nice in nices]
 
     if report_outputs:
-        print(
-            f'{initial_report("GramDivvun found manually marked up error, but has no correction (fn1)")}',
-            file=outfile)
+        print(f'~~~~~~\n\t{REPORTS["fn1"]}', file=outfile)
         print('\n'.join(report_outputs), file=outfile)
 
 
@@ -65,9 +68,7 @@ def true_positive_per_sentence(nices, outfile):
 
     report_outputs = [report_output(nice) for nice in nices]
     if report_outputs:
-        print(
-            f'{initial_report("GramDivvun found marked up error and has the suggested correction (tp)")}',
-            file=outfile)
+        print(f'~~~~~~\n\t{REPORTS["tp"]}', file=outfile)
         print('\n'.join(report_outputs), file=outfile)
 
 
@@ -85,12 +86,9 @@ def corrects_not_in_dc(c_errors, d_errors):
 
 def false_negatives_2_per_sentence(corrects, outfile):
     if corrects:
-        print(
-            f'{initial_report("GramDivvun did not find manually marked up error (fn2)")}',
-            file=outfile)
-        print(
-            '\n'.join([f'\t\t{c_error}' for c_error in corrects]),
-            file=outfile)
+        print(f'~~~~~~\n\t{REPORTS["fn2"]}', file=outfile)
+        print('\n'.join([f'\t\t{c_error}' for c_error in corrects]),
+              file=outfile)
 
 
 def dcs_not_in_correct(correct, dc):
@@ -107,12 +105,9 @@ def dcs_not_in_correct(correct, dc):
 
 def false_positives_2_per_sentence(corrects, outfile):
     if corrects:
-        print(
-            f'{initial_report("GramDivvun found error which is not manually marked up (fp2)")}',
-            file=outfile)
-        print(
-            '\n'.join([f'\t\t{c_error}' for c_error in corrects]),
-            file=outfile)
+        print(f'~~~~~~\n\t{REPORTS["fp2"]}', file=outfile)
+        print('\n'.join([f'\t\t{c_error}' for c_error in corrects]),
+              file=outfile)
 
 
 def has_same_range_and_error(c_error, d_error):

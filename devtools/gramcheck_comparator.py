@@ -3,7 +3,6 @@
 """Write report on differences on manual markup and gramdivvun markup"""
 import argparse
 import json
-import pickle
 from collections import defaultdict
 from pathlib import Path
 from lxml import etree
@@ -84,14 +83,14 @@ def print_orig(parts, errors, para):
     return info
 
 
-def produce_grammarchecker_results(target, zcheck_file):
+def produce_grammarchecker_results(targets, zcheck_file):
     print('Getting all sentences that should be checked …')
     paragraphs = {
         paragraph: {
             'error': errors,
             'filename': filename
         }
-        for paragraph, errors, filename in get_all([target])
+        for paragraph, errors, filename in get_all(targets)
     }
     runner = util.ExternalCommandRunner()
     print('Running grammar checker …')
@@ -103,16 +102,14 @@ def produce_grammarchecker_results(target, zcheck_file):
             paragraphs[gram_error['text']]['gram_error'] = filter_dc(
                 gram_error, zcheck_file, runner)
 
-    with open(f'{target.replace("/", "_")}.pickle', 'wb') as pickle_stream:
-        pickle.dump(
-            [(text, paragraphs[text]['error'], paragraphs[text]['filename'],
-              paragraphs[text]['gram_error'])
-             for text in paragraphs], pickle_stream)
+    return [(text, paragraphs[text]['error'], paragraphs[text]['filename'],
+             paragraphs[text]['gram_error']) for text in paragraphs]
 
 
 #
 # Post process gramchecker results
 #
+
 
 def filter_dc(d_result, zcheck_file, runner):
     """Remove errors that cover the same area of the typo and msyn types."""
@@ -477,24 +474,6 @@ def filter_markup(filters, c_errors):
     ]
 
 
-def get_results(filters, pickle_file, outfile):
-    runner = util.ExternalCommandRunner()
-    with open(pickle_file, 'rb') as pickle_stream:
-        print(f'filters: {filters}, file: {pickle_file}', file=outfile)
-
-        results = []
-
-        try:
-            for x, result in enumerate(pickle.load(pickle_stream)):
-                results.append((result[0], filter_markup(filters,
-                                                         result[1]), result[2],
-                                result[3]))
-        except EOFError as err:
-            print(f'Error reading pickle: {err}')
-
-        return results
-
-
 def report_markup_dupes(c_errors, errortags, counter, outfile):
     indexes = defaultdict(int)
     for c_error in c_errors:
@@ -740,15 +719,6 @@ def overview(results, counter, outfile):
     return used_categories
 
 
-def results_from_raw_data(filtererror, wops, outfile):
-    results = []
-    for pickle_file in Path.cwd().glob(f'*{wops}*.pickle'):
-        print(f'Reading {pickle_file}')
-        results.extend(
-            get_results(filtererror, pickle_file, outfile))
-    return results
-
-
 def per_sentence_report(args, outfile, results):
     counter = defaultdict(int)
     errortags = set()
@@ -788,8 +758,9 @@ def parse_options():
                             'errorsyn', 'errorlex', 'errorformat', 'errorlang'
                         ])
     parser.add_argument('zcheck_file', help='The grammarchecker archive')
-    parser.add_argument('target',
-                        help='Name of the file or directorie to process. \
+    parser.add_argument('targets',
+                        nargs='+',
+                        help='Name of the file or directories to process. \
                         If a directory is given, all files in this directory \
                         and its subdirectories will be listed.')
 
@@ -798,12 +769,19 @@ def parse_options():
 
 def main():
     args = parse_options()
-    produce_grammarchecker_results(args.target, args.zcheck_file)
 
-    wops = 'goldstandard' if 'goldstandard' in args.target else 'correct-no-gs'
+    wops = 'goldstandard' if 'goldstandard' in args.targets[
+        0] else 'correct-no-gs'
 
     with open(f'report.{wops}.txt', 'w') as outfile:
-        results = results_from_raw_data(args.filtererror, wops, outfile)
+        print(f'filters: {args.filtererror}, file: {wops}', file=outfile)
+
+        results = [(old_result[0],
+                    filter_markup(args.filtererror,
+                                  old_result[1]), old_result[2], old_result[3])
+                   for old_result in produce_grammarchecker_results(
+                       args.targets, args.zcheck_file)]
+
         counter, errortags, dupesets = per_sentence_report(
             args, outfile, results)
         used_categories = overview(results, counter, outfile)

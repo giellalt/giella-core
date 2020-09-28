@@ -135,8 +135,8 @@ def has_no_suggestions(c_error, d_error):
 
 def new_errors(sentence, zcheck_file, runner):
     new_d_errors = gramcheck_tester2.gramcheck(sentence, zcheck_file, runner)
-    #if len(new_d_errors['errs']) > 1:
-    #raise SystemExit('errs too long', new_d_errors['errs'])
+    # if len(new_d_errors['errs']) > 1:
+    # raise SystemExit('errs too long', new_d_errors['errs'])
 
     return new_d_errors['errs']
 
@@ -337,7 +337,7 @@ def make_new_errors(double_space, d_result, zcheck_file, runner):
     max = len(error)
     position = d_errors.index(double_space)
     for new_position, part in enumerate(
-        [part for part in double_space[0].split() if part], start=position):
+            [part for part in double_space[0].split() if part], start=position):
         part_errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
         min = error[min:max].find(part)
         for p_error in part_errors['errs']:
@@ -406,8 +406,8 @@ def get_results(filters, pickle_file, zcheck_file, outfile):
 
         try:
             for x, result in enumerate(pickle.load(pickle_stream)):
-                results.append((result[0], filter_markup(filters, result[1]),
-                                result[2],
+                results.append((result[0], filter_markup(filters,
+                                                         result[1]), result[2],
                                 filter_dc(result[3], zcheck_file, runner)))
         except EOFError as err:
             print(f'Error reading pickle: {err}')
@@ -579,14 +579,13 @@ def templates(counter, category):
 
 
 def overview_markup(counter, used_categories, outfile):
+    print(f'Paragraphs with errors {counter["paragraphs_with_errors"]}',
+          file=outfile)
+    print(f'Manually marked errors: {counter["total_manually_marked_errors"]}',
+          file=outfile)
     print(
-        f'Paragraphs with errors {counter["paragraphs_with_errors"]}',
-        file=outfile)
-    print(
-        f'Manually marked errors: {counter["total_manually_marked_errors"]}',
-        file=outfile)
-    print(
-        f'Errors reported by grammarchecker: {counter["total_grammarchecker_errors"]}',
+        'Errors reported by grammarchecker: '
+        f'{counter["total_grammarchecker_errors"]}',
         file=outfile)
 
     print('Statistics by type', file=outfile)
@@ -658,19 +657,17 @@ def parse_options():
     parser = argparse.ArgumentParser(
         description='Report on manual markup versus grammarchecker.')
 
-    parser.add_argument(
-        '--filtererror',
-        help='Remove named errortags',
-        nargs='+',
-        choices=[
-            'error', 'errorortreal', 'errormorphsyn', 'errorsyn', 'errorlex',
-            'errorformat', 'errorlang'
-        ])
+    parser.add_argument('--filtererror',
+                        help='Remove named errortags',
+                        nargs='+',
+                        choices=[
+                            'error', 'errorortreal', 'errormorphsyn',
+                            'errorsyn', 'errorlex', 'errorformat', 'errorlang'
+                        ])
     parser.add_argument('zcheck_file', help='The grammarchecker archive')
-    parser.add_argument(
-        'wops',
-        help='either goldstandard or correct-no-gs',
-        choices=['goldstandard', 'correct-no-gs'])
+    parser.add_argument('wops',
+                        help='either goldstandard or correct-no-gs',
+                        choices=['goldstandard', 'correct-no-gs'])
 
     args = parser.parse_args()
     return args

@@ -116,6 +116,7 @@ GIELLA_FILTER_CORE_GENERATED_REGEX_SRCS=\
 				remove-semantic-tags-before-derivations.regex \
 				reorder-semantic-tags.regex                   \
 				$(DIALECT_REGEXES)                            \
+				$(AREA_INCONSISTENT_REGEX)                    \
 				$(AREA_REGEXES)
 
 # 3) GTD Core xfscript filter files:
@@ -215,6 +216,8 @@ if HAVE_AREAS
 AREA_PREFIXES=$(addprefix remove-all_areas_but_,$(AREAS))
 AREA_SUFFIXES=$(addsuffix  -strings,$(AREA_PREFIXES))
 AREA_REGEXES=$(addsuffix     .regex,$(AREA_SUFFIXES))
+
+AREA_INCONSISTENT_REGEX=remove-mixed_area-strings.regex
 
 endif # HAVE_AREAS
 
@@ -375,6 +378,11 @@ remove-all_dialects_but_%-strings.regex:
 remove-all_areas_but_%-strings.regex:
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-area-filter-regex.sh \
 		$@ $* "$(AREAS)"
+
+# Remove strings with mixed area orthografies:
+remove-mixed_area-strings.regex:
+	$(AM_V_GEN)$(GTCORE)/scripts/generate-mixed_area-filter-regex.sh \
+		$@ "$(AREAS)"
 
 ### Remove strings with tags as specified:
 # Specific variant - take into account an exception file:

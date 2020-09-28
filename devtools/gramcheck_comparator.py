@@ -9,8 +9,6 @@ from pathlib import Path
 
 from corpustools import util
 
-import gramcheck_tester2
-
 REPORTS = {
     'tp': 'GramDivvun found marked up error and has the suggested correction '
     '(tp)',
@@ -134,11 +132,10 @@ def has_no_suggestions(c_error, d_error):
 
 
 def new_errors(sentence, zcheck_file, runner):
-    new_d_errors = gramcheck_tester2.gramcheck(sentence, zcheck_file, runner)
-    # if len(new_d_errors['errs']) > 1:
-    # raise SystemExit('errs too long', new_d_errors['errs'])
+    runner.run(f'divvun-checker -a {zcheck_file} '.split(),
+               to_stdin=sentence.encode('utf-8'))
 
-    return new_d_errors['errs']
+    return json.loads(runner.stdout)
 
 
 def fix_aistton(d_errors, position, zcheck_file, runner):
@@ -149,7 +146,7 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
         d_error[5] = ['”']
         d_error[2] = d_error[1] + 1
 
-        new_d_error = new_errors(sentence, zcheck_file, runner)
+        new_d_error = new_errors(sentence, zcheck_file, runner)['errs']
         if new_d_error:
             new_d_error[0][1] = d_error[1] + 1
             new_d_error[0][2] = d_error[1] + 1 + len(sentence)
@@ -161,7 +158,7 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
         d_error[5] = ['”']
         d_error[1] = d_error[2] - 1
 
-        new_d_error = new_errors(sentence, zcheck_file, runner)
+        new_d_error = new_errors(sentence, zcheck_file, runner)['errs']
         if new_d_error:
             new_d_error[0][1] = d_error[1] - len(sentence)
             new_d_error[0][2] = d_error[1]
@@ -186,7 +183,7 @@ def fix_aistton(d_errors, position, zcheck_file, runner):
         d_error[2] = d_error[1] + 1
         d_error[3] = 'punct-aistton-left'
 
-        new_d_error = new_errors(sentence, zcheck_file, runner)
+        new_d_error = new_errors(sentence, zcheck_file, runner)['errs']
         if new_d_error:
             new_d_error[0][1] = d_error[1] + 1
             new_d_error[0][2] = d_error[1] + 1 + len(sentence)
@@ -217,12 +214,12 @@ def fix_space_after_paren(paren_error, d_errors, zcheck_file, runner):
             if dupe[0][-2] == ' ':
                 dupe[0] = dupe[0][:-2]
                 dupe[2] = dupe[2] - 2
-            errors = gramcheck_tester2.gramcheck(dupe[0], zcheck_file, runner)
+            errors = new_errors(dupe[0], zcheck_file, runner)
             dupe[5] = errors['errs'][0][5]
 
 
 def add_part(part, start, end, d_errors, zcheck_file, runner):
-    errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
+    errors = new_errors(part, zcheck_file, runner)
     for error in [error for error in errors['errs'] if error]:
         candidate = [
             error[0], start, end, error[3], error[4], error[5], error[6]
@@ -338,7 +335,7 @@ def make_new_errors(double_space, d_result, zcheck_file, runner):
     position = d_errors.index(double_space)
     for new_position, part in enumerate(
             [part for part in double_space[0].split() if part], start=position):
-        part_errors = gramcheck_tester2.gramcheck(part, zcheck_file, runner)
+        part_errors = new_errors(part, zcheck_file, runner)
         min = error[min:max].find(part)
         for p_error in part_errors['errs']:
             p_error[1] = min + double_space[1]

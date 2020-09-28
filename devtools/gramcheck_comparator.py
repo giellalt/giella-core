@@ -485,7 +485,7 @@ def grammar_to_manual(grammartype):
 
 
 def report_false_positive_2(c_errors, d_errors, counter, outfile):
-    # rapporterte feil som ikke er oppmerket
+    """Grammatikkontrollen har funnet feil som ikke er oppmerket"""
     false_positives_2 = dcs_not_in_correct(c_errors, d_errors)
     false_positives_2_per_sentence(false_positives_2, outfile)
     counter['total_false_positive_2'] += len(false_positives_2)
@@ -495,7 +495,10 @@ def report_false_positive_2(c_errors, d_errors, counter, outfile):
 
 
 def report_true_positive(c_errors, d_errors, counter, outfile):
-    # Oppmerket feil blir rapportert, rapporterte feil har forslag, og manuell retting er blant disse
+    """Oppmerket feil blir oppdaget av grammatikkontrollen
+    * Grammatikkontrollen har forslag
+    * Manuell retting er blant disse
+    """
     true_positives = correct_in_dc(c_errors, d_errors)
     true_positive_per_sentence(true_positives, outfile)
     counter['total_true_positive'] += len(true_positives)
@@ -504,7 +507,10 @@ def report_true_positive(c_errors, d_errors, counter, outfile):
 
 
 def report_false_positive_1(c_errors, d_errors, counter, outfile):
-    # Oppmerket feil blir rapportert, rapporterte feil har forslag, og manuell retting er *ikke* blant disse
+    """Oppmerket feil blir oppdaget av grammatikkontrollen
+    * Grammatikkontrollen har forslag
+    * Manuell retting er *ikke* blant disse
+    """
     false_positives_1 = correct_not_in_dc(c_errors, d_errors)
     false_positives_1_per_sentence(false_positives_1, outfile)
     counter['total_false_positive_1'] += len(false_positives_1)
@@ -514,7 +520,9 @@ def report_false_positive_1(c_errors, d_errors, counter, outfile):
 
 
 def report_false_negative_1(c_errors, d_errors, counter, outfile):
-    # Oppmerket feil blir rapportert, rapporterte feil har ingen forslag
+    """Oppmerket feil blir oppdaget av grammatikkontrollen
+    * Grammatikkontrollen har ingen forslag
+    """
     false_negatives_1 = correct_no_suggestion_in_dc(c_errors, d_errors)
     false_negatives_1_per_sentence(false_negatives_1, outfile)
     counter['total_false_negative_1'] += len(false_negatives_1)

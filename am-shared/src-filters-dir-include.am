@@ -203,9 +203,6 @@ if HAVE_DIALECTS
 DIALECT_PREFIXES=$(addprefix remove-all_dialects_but_,$(DIALECTS))
 DIALECT_SUFFIXES=$(addsuffix -strings,$(DIALECT_PREFIXES))
 DIALECT_REGEXES=$(addsuffix .regex,$(DIALECT_SUFFIXES))
-DIALECT_TARGETS_XFST=$(addsuffix .xfst,$(DIALECT_SUFFIXES))
-DIALECT_TARGETS_HFST=$(addsuffix .hfst,$(DIALECT_SUFFIXES))
-DIALECT_TARGETS_FOMA=$(addsuffix .foma,$(DIALECT_SUFFIXES))
 
 endif # HAVE_DIALECTS
 
@@ -218,9 +215,6 @@ if HAVE_AREAS
 AREA_PREFIXES=$(addprefix remove-all_areas_but_,$(AREAS))
 AREA_SUFFIXES=$(addsuffix  -strings,$(AREA_PREFIXES))
 AREA_REGEXES=$(addsuffix     .regex,$(AREA_SUFFIXES))
-AREA_TARGETS_XFST=$(addsuffix .xfst,$(AREA_SUFFIXES))
-AREA_TARGETS_HFST=$(addsuffix .hfst,$(AREA_SUFFIXES))
-AREA_TARGETS_FOMA=$(addsuffix .foma,$(AREA_SUFFIXES))
 
 endif # HAVE_AREAS
 

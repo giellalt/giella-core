@@ -131,26 +131,6 @@ def fix_double_space_d_error(d_error, zcheck_file, runner):
     return new_errors
 
 
-def fix_double_space(d_error):
-    """d_error has at least one double-space-before"""
-    positions_to_remove = [
-        x for x, err in enumerate(d_error)
-        if err[3] == 'typo' and '  ' in err[0]
-    ]
-    for x in positions_to_remove:
-        del d_error[x]
-
-    double_space_positions = [
-        x for x, err in enumerate(d_error)
-        if err[3] == 'double-space-before'
-    ]
-    for x in reversed(double_space_positions):
-        new_errors = fix_double_space_d_error(d_error.pop(x),
-                                              ARGS.zcheck_file, RUNNER)
-        for y, new_error in enumerate(new_errors, start=x):
-            d_error.insert(y, new_error)
-
-
 if __name__ == '__main__':
     ARGS = parse_options()
     RUNNER = util.ExternalCommandRunner()

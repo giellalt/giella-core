@@ -15,6 +15,16 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+### BEGIN: AREA filter conditional:
+if HAVE_AREAS
+GIELLA_MIXED_AREA_FILTER=$(top_builddir)/src/filters/remove-mixed_area-strings.%
+GIELLA_MIXED_AREA_COMPOSE=.o. @\"$(top_builddir)/src/filters/remove-mixed_area-strings.$*\"
+else
+GIELLA_MIXED_AREA_FILTER=
+GIELLA_MIXED_AREA_COMPOSE=
+endif # " HAVE_AREAS
+### END: AREA filter conditional:
+
 ####### Automake targets: ########
 
 if WANT_SPELLERS
@@ -27,9 +37,11 @@ endif # WANT_SPELLERS
 #### Build the speller transducer with compound filtering:
 generator-fstspeller-gt-norm.tmp.hfst: \
 			generator-speller-gt-norm.hfst \
-			$(top_builddir)/src/filters/remove-hyphenation-marks.hfst    \
-			$(top_builddir)/src/filters/remove-infl_deriv-borders.hfst
+			$(top_builddir)/src/filters/remove-hyphenation-marks.hfst  \
+			$(top_builddir)/src/filters/remove-infl_deriv-borders.hfst \
+			$(GIELLA_MIXED_AREA_FILTER)
 	$(AM_V_HXFST)$(PRINTF) "read regex                                        \
+			$(GIELLA_MIXED_AREA_COMPOSE)                                      \
 			@\"$<\"                                                           \
 		.o. @\"$(top_builddir)/src/filters/remove-hyphenation-marks.hfst\"    \
 		.o. @\"$(top_builddir)/src/filters/remove-infl_deriv-borders.hfst\"   \

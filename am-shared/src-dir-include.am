@@ -147,7 +147,7 @@ endif # WANT_MORPHER
 endif # CAN_FOMA
 ##### END Foma target list #####
 
-### BEGIN: Case handlign conditional:
+### BEGIN: Case handling conditional:
 if DEFAULT_CASE_HANDLING
 GLT_DOWNCASE_FILTER=orthography/downcase-derived_proper-strings.compose.%
 GLT_DOWNCASE_COMPOSE=.o. @\"orthography/downcase-derived_proper-strings.compose.$*\"
@@ -157,7 +157,20 @@ GLT_DOWNCASE_FILTER=
 GLT_DOWNCASE_COMPOSE=
 GLT_DOWNCASE_COMPOSE_DEF=
 endif # " DEFAULT_CASE_HANDLING
-### END: Case handlign conditional:
+### END: Case handling conditional:
+
+### BEGIN: AREA filter conditional:
+if HAVE_AREAS
+GIELLA_MIXED_AREA_FILTER=filters/remove-mixed_area-strings.%
+GIELLA_MIXED_AREA_COMPOSE=.o. @\"filters/remove-mixed_area-strings.$*\"
+GIELLA_MIXED_AREA_COMPOSE_DEF=.o. @\"filters/remove-mixed_area-strings.$$*\"
+else
+GIELLA_MIXED_AREA_FILTER=
+GIELLA_MIXED_AREA_COMPOSE=
+GIELLA_MIXED_AREA_COMPOSE_DEF=
+endif # " HAVE_AREAS
+### END: AREA filter conditional:
+
 
 hfstdatadir=$(datadir)/giella/$(GTLANG)
 hfstdata_DATA=$(GT_ANALYSERS)       \
@@ -592,6 +605,7 @@ analyser-gt-norm.tmp.%: analyser-raw-gt-desc.%                \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
 					orthography/inituppercase.compose.%       \
+					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.$*\"                \
@@ -609,8 +623,9 @@ analyser-gt-norm.tmp.%: analyser-raw-gt-desc.%                \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
+				$(GIELLA_MIXED_AREA_COMPOSE)                    \
 			.o. @\"$<\" \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE)                         \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
 			.o. @\"filters/remove-word-boundary.$*\"            \
@@ -620,6 +635,7 @@ analyser-gt-norm.tmp.%: analyser-raw-gt-desc.%                \
 			read regex fst \
 			.o. @\"orthography/inituppercase.compose.$*\"       \
 			;\n\
+		 twosided flag-diacritics\n\
 		 save stack $@\n\
 		 quit\n" | $(XFST_TOOL)
 
@@ -648,6 +664,7 @@ generator-gt-norm.tmp.%: analyser-raw-gt-desc.%            \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$*\" \
@@ -670,11 +687,121 @@ generator-gt-norm.tmp.%: analyser-raw-gt-desc.%            \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
+				$(GIELLA_MIXED_AREA_COMPOSE)                    \
 			.o. @\"$<\" \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE)                         \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
 			.o. @\"filters/remove-word-boundary.$*\"            \
+			;\n\
+		 twosided flag-diacritics\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
+# Special variant for XFST target, due to crashing twosided flag-diacritics:
+analyser-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst                \
+					filters/remove-area-tags.xfst                \
+					filters/remove-dialect-tags.xfst             \
+					filters/remove-variant-tags.xfst             \
+					filters/remove-number-string-tags.xfst       \
+					filters/remove-usage-tags.xfst               \
+					filters/remove-error-strings.xfst            \
+					filters/remove-semantic-tags.xfst            \
+					filters/remove-hyphenation-marks.xfst        \
+					filters/remove-infl_deriv-borders.xfst       \
+					filters/remove-word-boundary.xfst            \
+					filters/remove-orthography-tags.xfst         \
+					filters/remove-Orth_IPA-strings.xfst         \
+					filters/remove-orig_lang-tags.xfst           \
+					filters/remove-Use_GC-strings.xfst           \
+					filters/remove-Use_minusGC-tags.xfst         \
+					filters/remove-Use_minus_PMatch-tags.xfst    \
+					filters/remove-Use_PMatch-strings.xfst       \
+					filters/remove-mwe-tags.xfst                 \
+					orthography/inituppercase.compose.xfst       \
+					$(GLT_DOWNCASE_FILTER)
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+				@\"filters/remove-area-tags.xfst\"                \
+			.o. @\"filters/remove-dialect-tags.xfst\"             \
+			.o. @\"filters/remove-variant-tags.xfst\"             \
+			.o. @\"filters/remove-number-string-tags.xfst\"       \
+			.o. @\"filters/remove-usage-tags.xfst\"               \
+			.o. @\"filters/remove-semantic-tags.xfst\"            \
+			.o. @\"filters/remove-error-strings.xfst\"            \
+			.o. @\"filters/remove-orig_lang-tags.xfst\"           \
+			.o. @\"filters/remove-orthography-tags.xfst\"         \
+			.o. @\"filters/remove-Orth_IPA-strings.xfst\"         \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.xfst\"    \
+			.o. @\"filters/remove-Use_GC-strings.xfst\"           \
+			.o. @\"filters/remove-Use_minusGC-tags.xfst\"         \
+			.o. @\"filters/remove-Use_PMatch-strings.xfst\"       \
+			.o. @\"filters/remove-mwe-tags.xfst\"                 \
+			.o. @\"$<\" \
+			    $(GLT_DOWNCASE_COMPOSE) \
+			.o. @\"filters/remove-hyphenation-marks.xfst\"        \
+			.o. @\"filters/remove-infl_deriv-borders.xfst\"       \
+			.o. @\"filters/remove-word-boundary.xfst\"            \
+			; \n\
+			define fst \n\
+			set flag-is-epsilon ON\n\
+			read regex fst \
+			.o. @\"orthography/inituppercase.compose.xfst\"       \
+			;\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
+# This is the normative generating transducer.
+generator-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst            \
+					filters/make-optional-transitivity-tags.xfst \
+					filters/make-optional-homonymy-tags.xfst     \
+					filters/make-optional-hyph-tags.xfst         \
+					filters/make-optional-variant-tags.xfst      \
+					filters/make-optional-semantic-tags.xfst     \
+					filters/make-optional-adv_comp-tags.xfst     \
+					filters/make-optional-orig_lang-tags.xfst    \
+					filters/make-optional-grammatical-tags.xfst  \
+					filters/remove-area-tags.xfst                \
+					filters/remove-dialect-tags.xfst             \
+					filters/remove-hyphenation-marks.xfst        \
+					filters/remove-infl_deriv-borders.xfst       \
+					filters/remove-word-boundary.xfst            \
+					filters/remove-number-string-tags.xfst       \
+					filters/remove-usage-tags.xfst               \
+					filters/remove-orthography-tags.xfst         \
+					filters/remove-Orth_IPA-strings.xfst         \
+					filters/remove-error-strings.xfst            \
+					filters/remove-Use_GC-strings.xfst           \
+					filters/remove-Use_minusGC-tags.xfst         \
+					filters/remove-Use_minus_PMatch-tags.xfst    \
+					filters/remove-Use_PMatch-strings.xfst       \
+					filters/remove-mwe-tags.xfst                 \
+					$(GLT_DOWNCASE_FILTER)
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+				@\"filters/make-optional-transitivity-tags.xfst\" \
+			.o. @\"filters/make-optional-homonymy-tags.xfst\"     \
+			.o. @\"filters/make-optional-hyph-tags.xfst\"         \
+			.o. @\"filters/make-optional-variant-tags.xfst\"      \
+			.o. @\"filters/make-optional-semantic-tags.xfst\"     \
+			.o. @\"filters/make-optional-adv_comp-tags.xfst\"     \
+			.o. @\"filters/make-optional-orig_lang-tags.xfst\"    \
+			.o. @\"filters/make-optional-grammatical-tags.xfst\"  \
+			.o. @\"filters/remove-area-tags.xfst\"                \
+			.o. @\"filters/remove-dialect-tags.xfst\"             \
+			.o. @\"filters/remove-number-string-tags.xfst\"       \
+			.o. @\"filters/remove-usage-tags.xfst\"               \
+			.o. @\"filters/remove-error-strings.xfst\"            \
+			.o. @\"filters/remove-orthography-tags.xfst\"         \
+			.o. @\"filters/remove-Orth_IPA-strings.xfst\"         \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.xfst\"    \
+			.o. @\"filters/remove-Use_GC-strings.xfst\"           \
+			.o. @\"filters/remove-Use_minusGC-tags.xfst\"         \
+			.o. @\"filters/remove-Use_PMatch-strings.xfst\"       \
+			.o. @\"filters/remove-mwe-tags.xfst\"                 \
+			.o. @\"$<\" \
+			    $(GLT_DOWNCASE_COMPOSE) \
+			.o. @\"filters/remove-hyphenation-marks.xfst\"        \
+			.o. @\"filters/remove-infl_deriv-borders.xfst\"       \
+			.o. @\"filters/remove-word-boundary.xfst\"            \
 			;\n\
 		 save stack $@\n\
 		 quit\n" | $(XFST_TOOL)

@@ -38,7 +38,7 @@ def get_all(targets):
             errors = []
             print_orig(parts, errors, para)
             text = ''.join(parts)
-            if not text.startswith('#'):
+            if not text.startswith('#') and text.strip():
                 yield text.replace('\n',
                                    ' '), [error for error in errors
                                           if error], filename
@@ -84,26 +84,32 @@ def print_orig(parts, errors, para):
 
 
 def produce_grammarchecker_results(targets, zcheck_file):
-    print('Getting all sentences that should be checked …')
+    print('Getting all paragraphs that should be checked …')
     paragraphs = {
         paragraph: {
             'error': errors,
             'filename': filename
         }
-        for paragraph, errors, filename in get_all(targets)
+        for paragraph, errors, filename in get_all(targets) if paragraph
     }
     runner = util.ExternalCommandRunner()
     print('Running grammar checker …')
     gramcheck_output = gramcheck('\n'.join(paragraphs), zcheck_file, runner)
     print('Post processing grammar checker output …')
-    for line in gramcheck_output.decode('utf-8').split('\n'):
-        if line:
-            gram_error = json.loads(line.encode('utf-8'))
+    for line in gramcheck_output.decode('utf-8').strip().split('\n'):
+        gram_error = json.loads(line.encode('utf-8'))
+        if gram_error['text'] in paragraphs:
             paragraphs[gram_error['text']]['gram_error'] = filter_dc(
                 gram_error, zcheck_file, runner)
+        else:
+            print(f'{gram_error["text"]} from {line} not in paragraphs')
 
-    return [(text, paragraphs[text]['error'], paragraphs[text]['filename'],
-             paragraphs[text]['gram_error']) for text in paragraphs]
+    results = [(text, paragraphs[text]['error'], paragraphs[text]['filename'],
+                paragraphs[text]['gram_error']) for text in paragraphs
+               if paragraphs[text].get('gram_error')]
+
+    print(f'{len(results)} of {len(paragraphs)} survived')
+    return results
 
 
 #

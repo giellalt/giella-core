@@ -154,6 +154,12 @@ modes/%.mode: pipespec.xml
 schemas.xml:
 	divvun-gen-xmlschemas >$@
 
+# test targets
+
+# minimal check that it works at all
+check-local:
+	echo | $(DIVVUN_CHECKER) -a $(GIELLA_GC_ZDISTRO)
+
 ### Clean target:
 clean-local:
 	-rm -f *.bin schemas.xml *.zcheck *.hfst *.hfstol *.zip *.zhfst

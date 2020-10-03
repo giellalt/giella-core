@@ -18,7 +18,7 @@
 ### BEGIN: AREA filter conditional:
 if HAVE_AREAS
 GIELLA_MIXED_AREA_FILTER=$(top_builddir)/src/filters/remove-mixed_area-strings.hfst
-GIELLA_MIXED_AREA_COMPOSE=.o. @\"$(top_builddir)/src/filters/remove-mixed_area-strings.hfst\"
+GIELLA_MIXED_AREA_COMPOSE=@\"$(top_builddir)/src/filters/remove-mixed_area-strings.hfst\" .o.
 else
 GIELLA_MIXED_AREA_FILTER=
 GIELLA_MIXED_AREA_COMPOSE=

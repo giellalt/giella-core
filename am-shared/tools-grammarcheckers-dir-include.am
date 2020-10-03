@@ -156,9 +156,11 @@ schemas.xml:
 
 # test targets
 
-# minimal check that it works at all
+# minimal check that it works at all, as long as the grammar checker is enabled:
+if WANT_GRAMCHECK
 check-local:
 	echo | $(DIVVUN_CHECKER) -a $(GIELLA_GC_ZDISTRO)
+endif # WANT_GRAMCHECK
 
 ### Clean target:
 clean-local:

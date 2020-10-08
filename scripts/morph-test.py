@@ -610,7 +610,7 @@ class UI(ArgumentParser):
             action="store_true", help="Colours the output")
         self.add_argument("-o", "--output",
             dest="output", default="normal",
-            help="Desired output style: compact, terse, final, normal (Default: normal)")
+            help="Desired output style: normal, compact, terse, final (Default: normal)")
         self.add_argument("-q", "--silent",
             dest="silent", action="store_true",
             help="Hide all output; exit code only")
@@ -626,10 +626,10 @@ class UI(ArgumentParser):
             help="Lexical input/generation tests only")
         self.add_argument("-f", "--hide-fails",
             dest="hide_fail", action="store_true",
-            help="Suppresses passes to make finding failures easier")
+            help="Suppresses fails to make finding passes easier")
         self.add_argument("-p", "--hide-passes",
             dest="hide_pass", action="store_true",
-            help="Suppresses failures to make finding passes easier")
+            help="Suppresses passes to make finding fails easier")
         self.add_argument("-S", "--section", default="hfst",
             dest="section", nargs='?', required=False,
             help="The section to be used for testing (default is `hfst`)")
@@ -639,7 +639,7 @@ class UI(ArgumentParser):
             'Noun - g\u00E5etie' (remember quotes if the ID contains spaces)""")
         self.add_argument("-F", "--fallback",
             dest="transducer", nargs='?', required=False,
-            help="""Which fallback transducer to use.""")
+            help="""Which fallback transducer to use (ignored, use --gen and --morph).""")
         self.add_argument("-v", "--verbose",
             dest="verbose", action="store_true",
             help="More verbose output.")

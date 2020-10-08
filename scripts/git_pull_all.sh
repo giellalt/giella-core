@@ -4,6 +4,8 @@ echo "\nHentar frå amh (Amharic)"
 cd ~/git/giellalt/lang-amh &&   git config pull.rebase false  && git pull
 echo "\nHentar frå apu (Apurinã)"
 cd ~/git/giellalt/lang-apu &&   git config pull.rebase false  && git pull
+echo "\nHentar frå ara (asdf)"
+cd ~/git/giellalt/lang-ara &&   git config pull.rebase false  && git pull
 echo "\nHentar frå aym (Aymara)"
 cd ~/git/giellalt/lang-aym &&   git config pull.rebase false  && git pull
 echo "\nHentar frå bak (Bashkir)"
@@ -206,5 +208,5 @@ echo "\nHentar frå giella-core"
 cd ~/git/giellalt/giella-core &&   git config pull.rebase false  && git pull
 echo "\nHentar frå giella-shared"
 cd ~/git/giellalt/giella-shared &&   git config pull.rebase false  && git pull
-echo "\nHentar frå template-lang-und""
+echo "\nHentar frå template-lang-und"
 cd ~/git/giellalt/template-lang-und &&   git config pull.rebase false  && git pull

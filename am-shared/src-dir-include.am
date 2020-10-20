@@ -205,12 +205,12 @@ noinst_DATA=$(GT_RAW)              \
 # morphological boundaries and hyphenation symbols. As such, this transducer
 # can NOT be used for morphological analysis, and hardly for generation.
 
-# if SKIP_PHONOLOGY is defined, the following block will be commented out:
+# if SKIP_PHONOLOGY is defined, just copy the lexical fst to raw-*.tmp1.*:
 if SKIP_PHONOLOGY
-generator-raw-gt-desc.tmp.hfst: fst/lexicon.hfst
+generator-raw-gt-desc.tmp1.hfst: fst/lexicon.hfst
 	$(AM_V_CP)cp -f $< $@
 
-analyser-raw-gt-desc.tmp.%: fst/lexicon.%
+analyser-raw-gt-desc.tmp1.%: fst/lexicon.%
 	$(AM_V_CP)cp -f $< $@
 else !SKIP_PHONOLOGY
 
@@ -351,7 +351,7 @@ endif !SKIP_PHONOLOGY
 # Target to build glossing raw analysers, ie one where all tags are in the
 # position specified in lexc:
 # Hfst:
-generator-raw-gt-glossing.tmp.%: generator-raw-gt-desc.tmp1.%
+generator-raw-gt-glossing.tmp.hfst: generator-raw-gt-desc.tmp1.hfst
 	$(AM_V_CP)cp $< $@
 
 # Xerox/Foma:

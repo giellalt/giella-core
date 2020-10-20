@@ -287,6 +287,7 @@ analyser-raw-gt-desc.tmp1.foma: fst/lexicon.foma \
 		 quit\n" \
 		| $(FOMA) $(VERBOSITY)
 endif !LEXREF_IN_PHONOLOGY
+endif !SKIP_PHONOLOGY
 
 # ... then apply tag reordering to tmp1 to ensure the same tag order in all
 # subsequent processing; this creates the regular tmp file, which can further
@@ -345,8 +346,6 @@ analyser-raw-gt-desc.tmp.%: analyser-raw-gt-desc.tmp1.%       \
 			;\n\
 		 save stack $@\n\
 		 quit\n" | $(XFST_TOOL)
-
-endif !SKIP_PHONOLOGY
 
 # Target to build glossing raw analysers, ie one where all tags are in the
 # position specified in lexc:

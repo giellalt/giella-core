@@ -151,7 +151,9 @@ endif # CAN_FOMA
 ### BEGIN: Case handling conditional:
 if DEFAULT_CASE_HANDLING
 GLT_DOWNCASE_FILTER=orthography/downcase-derived_proper-strings.compose.%
+GLT_DOWNCASE_FILTER_XFST=orthography/downcase-derived_proper-strings.compose.xfst
 GLT_DOWNCASE_COMPOSE=.o. @\"orthography/downcase-derived_proper-strings.compose.$*\"
+GLT_DOWNCASE_COMPOSE_XFST=.o. @\"orthography/downcase-derived_proper-strings.compose.xfst\"
 GLT_DOWNCASE_COMPOSE_DEF=.o. @\"orthography/downcase-derived_proper-strings.compose.$$*\"
 else
 GLT_DOWNCASE_FILTER=
@@ -699,7 +701,7 @@ generator-gt-norm.tmp.%: analyser-raw-gt-desc.%            \
 		 quit\n" | $(XFST_TOOL)
 
 # Special variant for XFST target, due to crashing twosided flag-diacritics:
-analyser-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst                \
+analyser-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst             \
 					filters/remove-area-tags.xfst                \
 					filters/remove-dialect-tags.xfst             \
 					filters/remove-variant-tags.xfst             \
@@ -719,7 +721,7 @@ analyser-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst                \
 					filters/remove-Use_PMatch-strings.xfst       \
 					filters/remove-mwe-tags.xfst                 \
 					orthography/inituppercase.compose.xfst       \
-					$(GLT_DOWNCASE_FILTER)
+					$(GLT_DOWNCASE_FILTER_XFST)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.xfst\"                \
 			.o. @\"filters/remove-dialect-tags.xfst\"             \
@@ -737,7 +739,7 @@ analyser-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst                \
 			.o. @\"filters/remove-Use_PMatch-strings.xfst\"       \
 			.o. @\"filters/remove-mwe-tags.xfst\"                 \
 			.o. @\"$<\" \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE_XFST)                      \
 			.o. @\"filters/remove-hyphenation-marks.xfst\"        \
 			.o. @\"filters/remove-infl_deriv-borders.xfst\"       \
 			.o. @\"filters/remove-word-boundary.xfst\"            \
@@ -775,7 +777,7 @@ generator-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst            \
 					filters/remove-Use_minus_PMatch-tags.xfst    \
 					filters/remove-Use_PMatch-strings.xfst       \
 					filters/remove-mwe-tags.xfst                 \
-					$(GLT_DOWNCASE_FILTER)
+					$(GLT_DOWNCASE_FILTER_XFST)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.xfst\" \
 			.o. @\"filters/make-optional-homonymy-tags.xfst\"     \
@@ -798,7 +800,7 @@ generator-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst            \
 			.o. @\"filters/remove-Use_PMatch-strings.xfst\"       \
 			.o. @\"filters/remove-mwe-tags.xfst\"                 \
 			.o. @\"$<\" \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE_XFST)                      \
 			.o. @\"filters/remove-hyphenation-marks.xfst\"        \
 			.o. @\"filters/remove-infl_deriv-borders.xfst\"       \
 			.o. @\"filters/remove-word-boundary.xfst\"            \

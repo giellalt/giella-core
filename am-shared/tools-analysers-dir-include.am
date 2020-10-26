@@ -88,7 +88,8 @@ $(GIELLA_ANL_DEPENDENCY_SRC): \
 %.cg3: $(top_builddir)/src/cg3/%.cg3
 	$(AM_V_CP)cp -f $< $@
 
-# Other cg3 files:
+# Disambiguator:
+$(GIELLA_ANL_DISAMBIGUATOR_SRC): \
 %.cg3: $(top_srcdir)/src/cg3/%.cg3
 	$(AM_V_CP)cp -f $< $@
 

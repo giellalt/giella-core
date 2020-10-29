@@ -63,7 +63,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/set-svn-ignores-langs.sh \
    scripts/set-svn-ignores-prooftesting.sh \
    scripts/spell-preprocess.pl \
-   scripts/style/speller_xml.css \
    scripts/flaglist2make_flag_regex.sh \
    scripts/taglist2insert_semantic_tags_after_pos_regex.sh \
    scripts/taglist2make_CG_tags_regex.sh \

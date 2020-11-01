@@ -14,11 +14,11 @@ if ! test $# -eq 1 ; then
     exit 1
 fi
 
-if test ! -r $1/und.timestamp ; then
+if test ! -r $1/.gut/delta.toml ; then
     echo "This script must have a top-level language directory as its only"
-    echo "argument, e.g."
+    echo "argument, and that dir must contain a .gut/delta.toml file. E.g."
     echo
-    echo "${GTHOME}/langs/fao/"
+    echo "/some/path/to/lang-fao/"
     echo
     echo and not:
     echo "$1"

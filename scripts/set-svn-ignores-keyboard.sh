@@ -2,15 +2,15 @@
 
 # Wrong usage - short instruction:
 if ! test $# -eq 1 ; then
-    echo "Usage: $0 LANGUAGE_DIR"
+    echo "Usage: $0 KEYBOARD_DIR"
     exit 1
 fi
 
-if test ! -r $1/und.timestamp ; then
-    echo "This script must have a top-level language directory as its only"
-    echo "argument, e.g."
+if test ! -d $1/*.kbdgen ; then
+    echo "This script must have a top-level keyboard directory as its only"
+    echo "argument, and that dir must contain a kbdgen bundle. E.g."
     echo
-    echo "${GTHOME}/keyboards/sme/"
+    echo "/some/path/to/keyboard-sme/"
     echo
     echo and not:
     echo "$1"

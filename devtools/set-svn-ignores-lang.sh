@@ -217,23 +217,7 @@ $fstfiles
 apertium.relabel
 *tags.txt" $1/tools/mt/apertium/tagsets
 
-# Set the svn:ignore prop on the tools/spellcheckers/fstbased/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.att
-*.txt" $1/tools/spellcheckers/fstbased/
-
-# Set the svn:ignore prop on the tools/spellcheckers/fstbased/desktop/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.txt" $1/tools/spellcheckers/fstbased/desktop/
-
-# Set the svn:ignore prop on the tools/spellcheckers/fstbased/mobile/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.txt" $1/tools/spellcheckers/fstbased/mobile/
-
-# Set the svn:ignore prop on the hfst speller dir:
+# Set the svn:ignore prop on the spellcheckers/ dir:
 $svnignore "$mkfiles
 $fstfiles
 easteregg.*
@@ -244,28 +228,13 @@ easteregg.*
 *.zip
 test.*
 build
-editdist.default.regex
-3" $1/tools/spellcheckers/fstbased/desktop/hfst
-
-# Set svn:ignore on the tools/spellcheckers/fstbased/desktop/weighting/ dir:
-$svnignore "$mkfiles
-$fstfiles
-spellercorpus.clean.txt" $1/tools/spellcheckers/fstbased/desktop/weighting
-
-# Set the svn:ignore prop on the mobile hfst speller dir:
-$svnignore "$mkfiles
-$fstfiles
-easteregg.*
-*.zhfst
-test.*
-build
-editdist.default.regex
-3" $1/tools/spellcheckers/fstbased/mobile/hfst
+editdist.*.regex
+3" $1/tools/spellcheckers
 
 # Set svn:ignore on the tools/spellcheckers/fstbased/mobile/weighting/ dir:
 $svnignore "$mkfiles
 $fstfiles
-spellercorpus.clean.txt" $1/tools/spellcheckers/fstbased/mobile/weighting
+spellercorpus.clean.txt" $1/tools/spellcheckers/weights
 
 # Set the svn:ignore prop on the shellscripts dir:
 $svnignore "$mkfiles

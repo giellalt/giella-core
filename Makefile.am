@@ -59,9 +59,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/replace-dummy-langcode.sh \
    scripts/run_voikko_speller.sh \
    scripts/scripted-memusg.sh \
-   scripts/set-svn-ignores-keyboards.sh \
-   scripts/set-svn-ignores-langs.sh \
-   scripts/set-svn-ignores-prooftesting.sh \
    scripts/spell-preprocess.pl \
    scripts/flaglist2make_flag_regex.sh \
    scripts/taglist2insert_semantic_tags_after_pos_regex.sh \

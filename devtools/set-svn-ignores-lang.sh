@@ -142,11 +142,6 @@ $fstfiles
 *.hfstscript
 downcase-derived_proper-strings.xfscript" $1/src/orthography
 
-# Ignore all temporary and generated files in the src/phonetics/test/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.sh" $1/src/phonetics/test/
-
 # Ignore all temporary and generated files in the src/tagsets/ dir:
 $svnignore "$mkfiles
 $fstfiles
@@ -311,7 +306,6 @@ $svnignore "$mkfiles
 
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/src/fst/affixes
-svn -q propdel svn:ignore $1/am-shared
 svn -q propdel svn:ignore $1/m4
 svn -q propdel svn:ignore $1/doc/resources
 svn -q propdel svn:ignore $1/doc/resources/images

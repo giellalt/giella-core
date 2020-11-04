@@ -9,8 +9,6 @@ LINKS=$(srcdir)/Links.md
 
 doc_DATA=$(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 
-EXTRA_DIST=preamble.md link-header.md
-
 DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2gfm.awk
 
 
@@ -32,7 +30,7 @@ $(srcdir)/%-stems.md: $(top_srcdir)/src/fst/stems/%.lexc
 $(srcdir)/%-affixes.md: $(top_srcdir)/src/fst/affixes/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(ALLINONE_MD_PAGE): $(srcdir)/preamble.md $(VPATH_MD_PAGES)
+$(ALLINONE_MD_PAGE): $(VPATH_MD_PAGES)
 	$(AM_V_at)-rm -rf build
 	$(AM_V_at)-rm -rf $(srcdir)/build
 	$(AM_V_at)-rm -f $@
@@ -42,7 +40,8 @@ $(LINKS): $(VPATH_MD_PAGES)
 	$(AM_V_GEN)echo $$(for file in $^; do basename $$file; done) \
 			| tr ' ' '\n' \
 			| LC_COLLATE=C sed 's/[a-z0-9.-]*/* [&]\(&\)/g' \
-			| cat $(srcdir)/link-header.md - \
+			| sed 's/\.md/\.html/g' \
+			| tr ' ' '\n'  \
 			> $@
 
 #$(GTLANG).tex: $(srcdir)/preamble.tex $(srcdir)/doc-comments.conf

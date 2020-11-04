@@ -40,10 +40,10 @@ $(ALLINONE_MD_PAGE): $(srcdir)/preamble.md $(VPATH_MD_PAGES)
 
 $(LINKS): $(VPATH_MD_PAGES)
 	$(AM_V_GEN)echo $$(for file in $^; do basename $$file; done) \
-			| sed 's/\.md/\.html/g' \
-			| LC_COLLATE=C sed 's/[a-z0-9.-]*/*[&]/g' \
-			| tr ' ' '\n'  \
-			| cat $(srcdir)/link-header.md - > $@
+			| tr ' ' '\n' \
+			| LC_COLLATE=C sed 's/[a-z0-9.-]*/* [&]\(&\)/g' \
+			| cat $(srcdir)/link-header.md - \
+			> $@
 
 #$(GTLANG).tex: $(srcdir)/preamble.tex $(srcdir)/doc-comments.conf
 #	-rm -f $@

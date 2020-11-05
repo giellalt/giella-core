@@ -29,7 +29,8 @@ function expand_variables(s) {
 }
 function jsp2gfm(s) {
     return gensub(/\[(.*)\|(.*)\]/, "[\\1](\\2)", "g", 
-           gensub("__", "*", "g",
+           gensub("__([^_]*[^_ ]+) *__", "**\\1**", "g",
+           gensub("''", "*", "g",
            gensub("^ *!", "### ", "1",
            gensub("^ *!!", "## ", "1", 
            gensub("^ *!!!", "# ", "1",

@@ -33,8 +33,12 @@ function jsp2gfm(s) {
            gensub("^ *!", "### ", "1",
            gensub("^ *!!", "## ", "1", 
            gensub("^ *!!!", "# ", "1",
-                  gensub("{{", "`", "g", 
-                      gensub("}}", "`", "g", s)))))));
+           gensub("{{", "`", "g",
+           gensub("}}", "`", "g",
+           gensub("{{{", "```", "g",
+           gensub("}}}", "```", "g", 
+           gensub(/^ *;(.*):(.*)$/, "* **\\1**: \\2", "g",
+           gensub(/^ *\|+(.*)$/, "| \\1 |", "g", s)))))))))));
 }
 /^[[:space:]]*$/ {
     # retaining empty lines of code will greatly help excessive squeezing

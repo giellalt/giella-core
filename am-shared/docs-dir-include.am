@@ -40,8 +40,6 @@ $(LINKS): $(VPATH_MD_PAGES)
 	$(AM_V_GEN)echo $$(for file in $^; do basename $$file; done) \
 			| tr ' ' '\n' \
 			| LC_COLLATE=C sed 's/[a-z0-9.-]*/* [&]\(&\)/g' \
-			| sed 's/\.md/\.html/g' \
-			| tr ' ' '\n'  \
 			> $@
 
 #$(GTLANG).tex: $(srcdir)/preamble.tex $(srcdir)/doc-comments.conf

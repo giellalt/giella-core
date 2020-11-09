@@ -52,8 +52,9 @@ def yaml_reader(test_file):
 
 
 class GramChecker(object):
-    def __init__(self, config):
+    def __init__(self, config, yaml_parent):
         self.config = config
+        self.yaml_parent = yaml_parent
 
     @staticmethod
     def get_unique_double_spaces(d_errors):
@@ -344,10 +345,10 @@ class GramChecker(object):
 
         if config.get('Archive'):
             return (f'{config.get("App")} '
-                    f'--archive {config.get("Archive")}')
+                    f'--archive {self.yaml_parent}/{config.get("Archive")}')
 
         return (f'{config.get("App")} '
-                f'--spec {config.get("SpecFile")} '
+                f'--spec {self.yaml_parent}/{config.get("Spec")} '
                 f'--variant {config.get("Variant")}')
 
     def check_grammar(self, sentence):
@@ -514,7 +515,7 @@ class GramTest(object):
     def tests(self):
         yaml = yaml_reader(self.config.get('test_file'))
 
-        grammarchecker = GramChecker(yaml.get('Config'))
+        grammarchecker = GramChecker(yaml.get('Config'), self.config['test_file'].parent)
         return {test: grammarchecker.get_data(test) for test in yaml['Tests']}
 
     def run_tests(self):

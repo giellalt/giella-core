@@ -442,8 +442,8 @@ class GramTest(object):
         def success(self, case, total, error, correction, gramerr, errlist):
             x = colourise(
                 ("[{light_blue}{case:>%d}/{total}{reset}][{green}PASS tp{reset}] "
-                 + "{error} {blue}=>{reset} {correction} : "
-                 + "{gramerr} {blue}=>{reset} {errlist}\n") %
+                 + "{error}:{correction} {blue}=>{reset} "
+                 + "{gramerr}:{errlist}\n") %
                 len(str(total)),
                 error=error,
                 correction=correction,
@@ -457,8 +457,8 @@ class GramTest(object):
                     errlist):
             x = colourise(
                 ("[{light_blue}{case:>%d}/{total}{reset}][{red}FAIL " +
-                 "{errtype}{reset}] {error} {blue}=>{reset} {correction} : " +
-                 "{gramerr} {blue}=>{reset} {errlist}\n") % len(str(total)),
+                 "{errtype}{reset}] {error}:{correction} {blue}=>{reset} " +
+                 "{gramerr}:{errlist}\n") % len(str(total)),
                 errtype=errtype,
                 error=error,
                 correction=correction,

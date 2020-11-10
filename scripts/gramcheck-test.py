@@ -493,6 +493,22 @@ class GramTest(object):
             else:
                 self.write(colourise("[{green}PASS{reset}] {}\n", out))
 
+    class TerseOutput(AllOutput):
+        def success(self, *args):
+            self.write(colourise("{green}.{reset}"))
+
+        def failure(self, *args):
+            self.write(colourise("{red}!{reset}"))
+
+        def result(self, *args):
+            self.write('\n')
+
+        def final_result(self, passes, fails):
+            if fails:
+                self.write(colourise("{red}FAIL{reset}\n"))
+            else:
+                self.write(colourise("{green}PASS{reset}\n"))
+
     def __init__(self, args):
         self.args = args
         self.config = self.load_config()
@@ -508,7 +524,7 @@ class GramTest(object):
         else:
             config['out'] = {
                 "normal": GramTest.NormalOutput,
-                # "terse": MorphTest.TerseOutput,
+                "terse": GramTest.TerseOutput,
                 "compact": GramTest.CompactOutput,
                 # "silent": MorphTest.NoOutput,
                 # "final": MorphTest.FinalOutput

@@ -509,6 +509,14 @@ class GramTest(object):
             else:
                 self.write(colourise("{green}PASS{reset}\n"))
 
+    class FinalOutput(AllOutput):
+        def final_result(self, passes, fails):
+            self.write(f'{passes}/{fails}/{passes+fails}')
+
+    class NoOutput(AllOutput):
+        def final_result(self, *args):
+            pass
+
     def __init__(self, args):
         self.args = args
         self.config = self.load_config()
@@ -526,8 +534,8 @@ class GramTest(object):
                 "normal": GramTest.NormalOutput,
                 "terse": GramTest.TerseOutput,
                 "compact": GramTest.CompactOutput,
-                # "silent": MorphTest.NoOutput,
-                # "final": MorphTest.FinalOutput
+                "silent": GramTest.NoOutput,
+                "final": GramTest.FinalOutput
             }.get(args.output, lambda x: None)(args)
 
         test_file = Path(args.test_file)

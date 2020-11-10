@@ -486,8 +486,12 @@ class GramTest(object):
             self.write(text)
 
     class CompactOutput(AllOutput):
-        def result(self, number, passes, fails):
-            pass
+        def result(self, number, passes, fails, test_case):
+            out = f'{test_case} {passes}/{fails}/{passes + fails}'
+            if fails:
+                self.write(colourise("[{red}FAIL{reset}] {}\n", out))
+            else:
+                self.write(colourise("[{green}PASS{reset}] {}\n", out))
 
     def __init__(self, args):
         self.args = args

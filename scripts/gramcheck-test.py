@@ -497,19 +497,20 @@ class GramTest(object):
             self.write(x)
 
         def failure(self, case, total, type, expected_error, gramcheck_error):
-            x = colourise((
-                "[{light_blue}{case:>%d}/{total}{reset}][{red}FAIL {type}{reset}] "
-                + "{error}:{correction} ({expectected_type}) {blue}=>{reset} "
-                + "{gramerr}:{errlist} ({gram_type})\n") % len(str(total)),
-                          type=type,
-                          error=expected_error['error'],
-                          correction=expected_error['correct'],
-                          expectected_type=expected_error['type'],
-                          case=case,
-                          total=total,
-                          gramerr=gramcheck_error[0],
-                          errlist=f'[{", ".join(gramcheck_error[5])}]',
-                          gram_type=gramcheck_error[3])
+            x = colourise(
+                ("[{light_blue}{case:>%d}/{total}{reset}][{red}FAIL {type}"
+                 "{reset}] {error}:{correction} ({expectected_type}) " +
+                 "{blue}=>{reset} {gramerr}:{errlist} ({gram_type})\n") %
+                len(str(total)),
+                type=type,
+                error=expected_error['error'],
+                correction=expected_error['correct'],
+                expectected_type=expected_error['type'],
+                case=case,
+                total=total,
+                gramerr=gramcheck_error[0],
+                errlist=f'[{", ".join(gramcheck_error[5])}]',
+                gram_type=gramcheck_error[3])
             self.write(x)
 
         def result(self, number, passes, fails, test_case):

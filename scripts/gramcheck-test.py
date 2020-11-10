@@ -29,6 +29,15 @@ COLORS = {
 }
 
 
+def spec_file_has_variant(spec_file, variant):
+    spec_file = etree.parse(str(spec_file))
+    return spec_file.xpath(f".//pipeline[@name='{variant}']")
+
+
+def print_error(string):
+    print(string, file=sys.stderr)
+
+
 def colourise(string, *args, **kwargs):
     kwargs.update(COLORS)
     return string.format(*args, **kwargs)
@@ -104,7 +113,7 @@ class GramChecker(object):
         for new_position, part in enumerate(
             [part for part in double_space[0].split() if part],
                 start=position):
-            res, _, _ = self.check_grammar(part)
+            res = self.check_grammar(part)
             part_errors = json.loads(res)['errs']
             min = error[min:max].find(part)
             for p_error in part_errors:
@@ -153,7 +162,7 @@ class GramChecker(object):
         d_errors.sort(key=sortByRange)
 
     def add_part(self, part, start, end, d_errors):
-        res, _, _ = self.check_grammar(part)
+        res = self.check_grammar(part)
         errors = json.loads(res)['errs']
         for error in [error for error in errors if error]:
             candidate = [
@@ -197,7 +206,7 @@ class GramChecker(object):
             d_error[5] = ['”']
             d_error[2] = d_error[1] + 1
 
-            res, _, _ = self.check_grammar(sentence)
+            res = self.check_grammar(sentence)
             new_d_error = json.loads(res)['errs']
             if new_d_error:
                 new_d_error[0][1] = d_error[1] + 1
@@ -210,7 +219,7 @@ class GramChecker(object):
             d_error[5] = ['”']
             d_error[1] = d_error[2] - 1
 
-            res, _, _ = self.check_grammar(sentence)
+            res = self.check_grammar(sentence)
             new_d_error = json.loads(res)['errs']
             if new_d_error:
                 new_d_error[0][1] = d_error[1] - len(sentence)
@@ -237,7 +246,7 @@ class GramChecker(object):
             d_error[2] = d_error[1] + 1
             d_error[3] = 'punct-aistton-left'
 
-            res, _, _ = self.check_grammar(sentence)
+            res = self.check_grammar(sentence)
             new_d_error = json.loads(res)['errs']
             if new_d_error:
                 new_d_error[0][1] = d_error[1] + 1
@@ -321,7 +330,7 @@ class GramChecker(object):
         return d_result
 
     def check_sentence(self, sentence):
-        res, err, returncode = self.check_grammar(sentence)
+        res = self.check_grammar(sentence)
 
         try:
             return self.fix_all_errors(json.loads(res))['errs']
@@ -344,27 +353,47 @@ class GramChecker(object):
         config = self.config
 
         if config.get('Archive'):
-            return (f'{config.get("App")} '
-                    f'--archive {self.yaml_parent}/{config.get("Archive")}')
+            archive_file = Path(f'{self.yaml_parent}/{config.get("Archive")}')
+            if archive_file.is_file():
+                return (f'{config.get("App")} --archive {archive_file}')
+            else:
+                print_error('Error in section Archive of the yaml file.\n' +
+                            f'The file {archive_file} does not exist')
+                sys.exit(2)
 
-        return (f'{config.get("App")} '
-                f'--spec {self.yaml_parent}/{config.get("Spec")} '
-                f'--variant {config.get("Variant")}')
+        if {config.get("Spec")}:
+            spec_file = Path(f'{self.yaml_parent}/{config.get("Spec")}')
+            if spec_file.is_file():
+                if spec_file_has_variant(spec_file, config.get("Variant")):
+                    return (f'{config.get("App")} '
+                            f'--spec {spec_file} '
+                            f'--variant {config.get("Variant")}')
+                else:
+                    print_error(
+                        'Error in section Variant of the yaml file.\n' +
+                        'There is no pipeline named '
+                        f'"{config.get("Variant")}" in {spec_file}')
+                    sys.exit(3)
+            else:
+                print_error('Error in section Spec of the yaml file.\n' +
+                            f'The file {spec_file} does not exist')
+                sys.exit(4)
+
+        print_error('Error in Config section of yaml file. '
+                    'Neither Archive nor Spec exists')
+        sys.exit(5)
 
     def check_grammar(self, sentence):
         runner = util.ExternalCommandRunner()
         runner.run(self.app.split(), to_stdin=sentence.encode('utf-8'))
 
         if runner.returncode:
-            print(f'Error in {self.app.split()[0]}, cannot do checks',
-                  file=sys.stderr)
-            print('The call:', self.app, file=sys.stderr)
-            print('Failed with:',
-                  runner.stderr.decode('utf8'),
-                  file=sys.stderr)
+            print_error(f'Error in {self.app.split()[0]}, cannot do checks\n' +
+                        f'The call: {self.app}\n' +
+                        f'Failed with: {runner.stderr.decode("utf8")}')
             sys.exit(runner.returncode)
 
-        return runner.stdout, runner.stderr, runner.returncode
+        return runner.stdout
 
 
 class GramTest(object):

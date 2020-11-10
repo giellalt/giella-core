@@ -355,6 +355,15 @@ class GramChecker(object):
         runner = util.ExternalCommandRunner()
         runner.run(self.app.split(), to_stdin=sentence.encode('utf-8'))
 
+        if runner.returncode:
+            print(f'Error in {self.app.split()[0]}, cannot do checks',
+                  file=sys.stderr)
+            print('The call:', self.app, file=sys.stderr)
+            print('Failed with:',
+                  runner.stderr.decode('utf8'),
+                  file=sys.stderr)
+            sys.exit(runner.returncode)
+
         return runner.stdout, runner.stderr, runner.returncode
 
 

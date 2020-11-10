@@ -506,7 +506,7 @@ class GramTest(object):
             config['out'] = {
                 "normal": GramTest.NormalOutput,
                 # "terse": MorphTest.TerseOutput,
-                "compact": MorphTest.CompactOutput,
+                "compact": GramTest.CompactOutput,
                 # "silent": MorphTest.NoOutput,
                 # "final": MorphTest.FinalOutput
             }.get(args.output, lambda x: None)(args)

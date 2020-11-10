@@ -439,33 +439,41 @@ class GramTest(object):
             self.write(f'{text}' + '\n')
             self.write(colourise("-" * longest + '{reset}\n'))
 
-        def success(self, case, total, error, correction, gramerr, errlist):
+        def success(self, case, total, expected_error, gramcheck_error):
+            print('exp', expected_error)
+            print('grm', gramcheck_error)
+
             x = colourise(
-                ("[{light_blue}{case:>%d}/{total}{reset}][{green}PASS tp{reset}] "
-                 + "{error}:{correction} {blue}=>{reset} "
-                 + "{gramerr}:{errlist}\n") %
+                ("[{light_blue}{case:>%d}/{total}{reset}]"
+                 + "[{green}PASS tp{reset}] "
+                 + "{error}:{correction} ({expectected_type}) {blue}=>{reset} "
+                 + "{gramerr}:{errlist} ({gram_type})\n") %
                 len(str(total)),
-                error=error,
-                correction=correction,
+                error=expected_error['error'],
+                correction=expected_error['correct'],
+                expectected_type=expected_error['type'],
                 case=case,
                 total=total,
-                gramerr=gramerr,
-                errlist=f'[{", ".join(errlist)}]')
+                gramerr=gramcheck_error[0],
+                errlist=f'[{", ".join(gramcheck_error[5])}]',
+                gram_type=gramcheck_error[3])
             self.write(x)
 
-        def failure(self, case, total, errtype, error, correction, gramerr,
-                    errlist):
+        def failure(self, case, total, type, expected_error, gramcheck_error):
             x = colourise(
-                ("[{light_blue}{case:>%d}/{total}{reset}][{red}FAIL " +
-                 "{errtype}{reset}] {error}:{correction} {blue}=>{reset} " +
-                 "{gramerr}:{errlist}\n") % len(str(total)),
-                errtype=errtype,
-                error=error,
-                correction=correction,
+                ("[{light_blue}{case:>%d}/{total}{reset}][{red}FAIL {type}{reset}] "
+                 + "{error}:{correction} ({expectected_type}) {blue}=>{reset} "
+                 + "{gramerr}:{errlist} ({gram_type})\n") %
+                len(str(total)),
+                type=type,
+                error=expected_error['error'],
+                correction=expected_error['correct'],
+                expectected_type=expected_error['type'],
                 case=case,
                 total=total,
-                gramerr=gramerr,
-                errlist=f'[{", ".join(errlist)}]')
+                gramerr=gramcheck_error[0],
+                errlist=f'[{", ".join(gramcheck_error[5])}]',
+                gram_type=gramcheck_error[3])
             self.write(x)
 
         def result(self, number, passes, fails):
@@ -477,6 +485,10 @@ class GramTest(object):
                              fails=fails,
                              total=passes + fails)
             self.write(text)
+
+    class CompactOutput(AllOutput):
+        def result(self, number, passes, fails):
+            pass
 
     def __init__(self, args):
         self.args = args
@@ -494,7 +506,7 @@ class GramTest(object):
             config['out'] = {
                 "normal": GramTest.NormalOutput,
                 # "terse": MorphTest.TerseOutput,
-                # "compact": MorphTest.CompactOutput,
+                "compact": MorphTest.CompactOutput,
                 # "silent": MorphTest.NoOutput,
                 # "final": MorphTest.FinalOutput
             }.get(args.output, lambda x: None)(args)
@@ -538,8 +550,7 @@ class GramTest(object):
         if corrects:
             for correct in corrects:
                 count['Pass'] += 1
-                out.success(item[0], length, correct[0]["error"],
-                            correct[0]["correct"], correct[1][0], correct[1][5])
+                out.success(item[0], length, correct[0], correct[1])
 
         false_positives_1 = self.correct_not_in_dc(expected_errors,
                                                    gramcheck_errors)
@@ -547,33 +558,33 @@ class GramTest(object):
             for false_positive_1 in false_positives_1:
                 count['Fail'] += 1
                 out.failure(item[0], length, 'fp1',
-                            false_positive_1[0]["error"],
-                            false_positive_1[0]["correct"],
-                            false_positive_1[1][0],
-                            false_positive_1[1][5])
+                            false_positive_1[0],
+                            false_positive_1[1])
 
         false_positives_2 = self.dcs_not_in_correct(expected_errors,
                                                     gramcheck_errors)
         if false_positives_2:
+            expected_error = {
+                'correct': '',
+                'error': '',
+                'type': ''
+            }
             for false_positive_2 in false_positives_2:
                 count['Fail'] += 1
-                out.failure(item[0], length, 'fp2', '', '', false_positive_2[0],
-                            false_positive_2[5])
+                out.failure(item[0], length, 'fp2', expected_error, false_positive_2)
 
         false_negatives_1 = self.correct_no_suggestion_in_dc(
             expected_errors, gramcheck_errors)
         for false_negative_1 in false_negatives_1:
             count['Fail'] += 1
-            out.failure(item[0], length, 'fn1', false_negative_1[0]["error"],
-                        false_negative_1[0]["correct"], false_negative_1[1][0],
-                        false_negative_1[1][5])
+            out.failure(item[0], length, 'fn1', false_negative_1[0], false_negative_1[1])
 
         false_negatives_2 = self.corrects_not_in_dc(expected_errors,
                                                     gramcheck_errors)
         for false_negative_2 in false_negatives_2:
+            gramcheck_error = ['', '', '', '', '', []]
             count['Fail'] += 1
-            out.failure(item[0], length, 'fn2', false_negative_2["error"],
-                        false_negative_2["correct"], '', [])
+            out.failure(item[0], length, 'fn2', false_negative_2, gramcheck_error)
 
         out.result(item[0], count['Pass'], count['Fail'])
 

@@ -670,6 +670,13 @@ class GramTest(object):
             d_error) and d_error[5] and c_error['correct'] in d_error[5]
 
     def correct_in_dc(self, correct, dc):
+        if not correct and not dc:
+            return [({
+                'error': '',
+                'correct': '',
+                'type': ''
+            }, ['', '', '', '', '', ''])]
+
         return [(c_error, d_error) for c_error in correct for d_error in dc
                 if self.has_suggestions_with_hit(c_error, d_error)]
 

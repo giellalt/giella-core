@@ -577,11 +577,7 @@ class GramTest(object):
                 "final": GramTest.FinalOutput
             }.get(args.output, lambda x: None)(args)
 
-        test_file = Path(args.test_file)
-        if test_file.is_file():
-            config['test_file'] = test_file
-        else:
-            raise IOError(f'Test file {args.testfile} does not exist:')
+        config['test_file'] = Path(args.test_file)
 
         if not args.colour:
             for key in list(COLORS.keys()):
@@ -788,4 +784,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (FileNotFoundError, util.ExecutableMissingError) as error:
+        raise SystemExit(error)

@@ -1031,6 +1031,7 @@ This has been changed 2019-05-13 -->
             <xs:element ref="te"/>
             <xs:element ref="tf"/>
             <xs:element ref="tCtn"/>
+            <xs:element ref="xg"/>
          </xs:choice>
          <xs:attribute ref="xml:lang"/>
          <xs:attribute name="descr_trans" type="xs:string"/>

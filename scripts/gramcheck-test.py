@@ -478,9 +478,6 @@ class GramTest(object):
             self.write(colourise("-" * longest + '{reset}\n'))
 
         def success(self, case, total, expected_error, gramcheck_error):
-            print('exp', expected_error)
-            print('grm', gramcheck_error)
-
             x = colourise(
                 ("[{light_blue}{case:>%d}/{total}{reset}]" +
                  "[{green}PASS tp{reset}] " +

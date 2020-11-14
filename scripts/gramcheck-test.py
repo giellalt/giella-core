@@ -6,13 +6,12 @@
 # Author: Børre Gaup <borre.gaup@uit.no>
 """Check if grammarchecker tests pass."""
 
-import json
 import sys
 from argparse import ArgumentParser
 from io import StringIO
 from pathlib import Path
-from subprocess import PIPE, Popen
 
+import libdivvun
 import yaml
 from lxml import etree
 
@@ -64,6 +63,7 @@ class GramChecker(object):
     def __init__(self, config, yaml_parent):
         self.config = config
         self.yaml_parent = yaml_parent
+        self.checker = self.app()
 
     @staticmethod
     def get_unique_double_spaces(d_errors):
@@ -114,7 +114,7 @@ class GramChecker(object):
             [part for part in double_space[0].split() if part],
                 start=position):
             res = self.check_grammar(part)
-            part_errors = json.loads(res)['errs']
+            part_errors = res['errs']
             min = error[min:max].find(part)
             for p_error in part_errors:
                 p_error[1] = min + double_space[1]
@@ -163,7 +163,7 @@ class GramChecker(object):
 
     def add_part(self, part, start, end, d_errors):
         res = self.check_grammar(part)
-        errors = json.loads(res)['errs']
+        errors = res['errs']
         for error in [error for error in errors if error]:
             candidate = [
                 error[0], start, end, error[3], error[4], error[5], error[6]
@@ -207,7 +207,7 @@ class GramChecker(object):
             d_error[2] = d_error[1] + 1
 
             res = self.check_grammar(sentence)
-            new_d_error = json.loads(res)['errs']
+            new_d_error = res['errs']
             if new_d_error:
                 new_d_error[0][1] = d_error[1] + 1
                 new_d_error[0][2] = d_error[1] + 1 + len(sentence)
@@ -220,7 +220,7 @@ class GramChecker(object):
             d_error[1] = d_error[2] - 1
 
             res = self.check_grammar(sentence)
-            new_d_error = json.loads(res)['errs']
+            new_d_error = res['errs']
             if new_d_error:
                 new_d_error[0][1] = d_error[1] - len(sentence)
                 new_d_error[0][2] = d_error[1]
@@ -247,7 +247,7 @@ class GramChecker(object):
             d_error[3] = 'punct-aistton-left'
 
             res = self.check_grammar(sentence)
-            new_d_error = json.loads(res)['errs']
+            new_d_error = res['errs']
             if new_d_error:
                 new_d_error[0][1] = d_error[1] + 1
                 new_d_error[0][2] = d_error[1] + 1 + len(sentence)
@@ -333,7 +333,7 @@ class GramChecker(object):
         res = self.check_grammar(sentence)
 
         try:
-            return self.fix_all_errors(json.loads(res))['errs']
+            return self.fix_all_errors(res)['errs']
         except json.decoder.JSONDecodeError:
             return f'ERROR: {sentence} {err.decode("utf8")}'
 
@@ -348,14 +348,16 @@ class GramChecker(object):
             'gramcheck_errors': self.check_sentence(''.join(parts))
         }
 
-    @property
     def app(self):
         config = self.config
 
         if config.get('Archive'):
             archive_file = Path(f'{self.yaml_parent}/{config.get("Archive")}')
             if archive_file.is_file():
-                return (f'{config.get("App")} --archive {archive_file}')
+                spec = libdivvun.ArCheckerSpec(str(archive_file))
+                pipename = spec.defaultPipe()
+                verbose = False
+                return spec.getChecker(pipename, verbose)
             else:
                 print_error('Error in section Archive of the yaml file.\n' +
                             f'The file {archive_file} does not exist')
@@ -364,10 +366,10 @@ class GramChecker(object):
         if {config.get("Spec")}:
             spec_file = Path(f'{self.yaml_parent}/{config.get("Spec")}')
             if spec_file.is_file():
-                if spec_file_has_variant(spec_file, config.get("Variant")):
-                    return (f'{config.get("App")} '
-                            f'--spec {spec_file} '
-                            f'--variant {config.get("Variant")}')
+                spec = libdivvun.CheckerSpec(str(spec_file))
+                if spec.hasPipe(config.get("Variant")):
+                    verbose = False
+                    return spec.getChecker(config.get("Variant"), verbose)
                 else:
                     print_error(
                         'Error in section Variant of the yaml file.\n' +
@@ -384,16 +386,13 @@ class GramChecker(object):
         sys.exit(5)
 
     def check_grammar(self, sentence):
-        runner = util.ExternalCommandRunner()
-        runner.run(self.app.split(), to_stdin=sentence.encode('utf-8'))
+        d_errors = libdivvun.proc_errs_bytes(self.checker, sentence)
+        errs = [[
+            d_error.form, d_error.beg, d_error.end, d_error.err, d_error.dsc,
+            list(d_error.rep), d_error.msg
+        ] for d_error in d_errors]
 
-        if runner.returncode:
-            print_error(f'Error in {self.app.split()[0]}, cannot do checks\n' +
-                        f'The call: {self.app}\n' +
-                        f'Failed with: {runner.stderr.decode("utf8")}')
-            sys.exit(runner.returncode)
-
-        return runner.stdout
+        return {'text': sentence, 'errs': errs}
 
 
 class GramTest(object):

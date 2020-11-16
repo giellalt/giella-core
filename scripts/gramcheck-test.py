@@ -6,6 +6,7 @@
 # Author: Børre Gaup <borre.gaup@uit.no>
 """Check if grammarchecker tests pass."""
 
+import os
 import sys
 from argparse import ArgumentParser
 from io import StringIO
@@ -366,7 +367,8 @@ class GramChecker(object):
         if {config.get("Spec")}:
             spec_file = Path(f'{self.yaml_parent}/{config.get("Spec")}')
             if spec_file.is_file():
-                spec = libdivvun.CheckerSpec(str(spec_file))
+                os.chdir(spec_file.parent)
+                spec = libdivvun.CheckerSpec(spec_file.name)
                 if spec.hasPipe(config.get("Variant")):
                     verbose = False
                     return spec.getChecker(config.get("Variant"), verbose)

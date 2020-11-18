@@ -21,7 +21,7 @@ BEGIN {
     CODE="@NO CODE@";
     SOMETHING_WRONG="TRUE";
     TABLESIZE=0;
-    THEAD="|--"
+    THEAD="|:--"
 }
 function expand_variables(s) {
     # expand all our doc comment variables

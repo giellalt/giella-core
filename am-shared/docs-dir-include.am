@@ -42,25 +42,4 @@ $(LINKS): $(VPATH_MD_PAGES)
 			| LC_COLLATE=C sed 's/[a-z0-9.-]*/* [&]\(&\)/g' \
 			> $@
 
-#$(GTLANG).tex: $(srcdir)/preamble.tex $(srcdir)/doc-comments.conf
-#	-rm -f $@
-#	cat $(srcdir)/preamble.tex > $@
-#
-#
-#$(GTLANG).rst: $(srcdir)/preamble.rst $(srcdir)/doc-comments.conf
-#	-rm -f $@
-#	cat $(srcdir)/preamble.rst > $@
-#
-#%.html: %.rst
-#	$(RST2HTML) < $< > $@
-#
-#%.pdf: %.tex
-#	$(LATEX) $<
-#	$(LATEX) $<
-#	$(LATEX) $<
-
-####### Other targets: ###########
-clean-local:
-	-rm -rf build
-
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am

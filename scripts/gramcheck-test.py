@@ -9,6 +9,7 @@
 import os
 import sys
 from argparse import ArgumentParser
+from collections import Counter
 from io import StringIO
 from pathlib import Path
 
@@ -438,7 +439,9 @@ class GramTest(object):
         def result(self, *args):
             pass
 
-        def final_result(self, passes, fails):
+        def final_result(self, count):
+            passes = count['tp']
+            fails = sum([count[key] for key in count if key != 'tp'])
             self.write(
                 colourise("Total passes: {green}{passes}{reset}, " +
                           "Total fails: {red}{fails}{reset}, " +
@@ -511,7 +514,9 @@ class GramTest(object):
                 gram_type=gramcheck_error[3])
             self.write(x)
 
-        def result(self, number, passes, fails, test_case):
+        def result(self, number, count, test_case):
+            passes = count['tp']
+            fails = sum([count[key] for key in count if key != 'tp'])
             text = colourise(
                 "Test {number} - Passes: {green}{passes}{reset}, " +
                 "Fails: {red}{fails}{reset}, " +
@@ -522,8 +527,20 @@ class GramTest(object):
                 total=passes + fails)
             self.write(text)
 
+        def final_result(self, count):
+            passes = count['tp']
+            fails = sum([count[key] for key in count if key != 'tp'])
+            self.write(
+                colourise("Total passes: {green}{passes}{reset}, " +
+                          "Total fails: {red}{fails}{reset}, " +
+                          "Total: {light_blue}{total}{reset}\n",
+                          passes=passes,
+                          fails=fails,
+                          total=fails + passes))
     class CompactOutput(AllOutput):
-        def result(self, number, passes, fails, test_case):
+        def result(self, number, count, test_case):
+            passes = count['tp']
+            fails = sum([count[key] for key in count if key != 'tp'])
             out = f'{test_case} {passes}/{fails}/{passes + fails}'
             if fails:
                 self.write(colourise("[{red}FAIL{reset}] {}\n", out))
@@ -540,14 +557,18 @@ class GramTest(object):
         def result(self, *args):
             self.write('\n')
 
-        def final_result(self, passes, fails):
+        def final_result(self, count):
+            passes = count['tp']
+            fails = sum([count[key] for key in count if key != 'tp'])
             if fails:
                 self.write(colourise("{red}FAIL{reset}\n"))
             else:
                 self.write(colourise("{green}PASS{reset}\n"))
 
     class FinalOutput(AllOutput):
-        def final_result(self, passes, fails):
+        def final_result(self, count):
+            passes = count['tp']
+            fails = sum([count[key] for key in count if key != 'tp'])
             self.write(f'{passes}/{fails}/{passes+fails}')
 
     class NoOutput(AllOutput):
@@ -557,8 +578,7 @@ class GramTest(object):
     def __init__(self, args):
         self.args = args
         self.config = self.load_config()
-        self.fails = 0
-        self.passes = 0
+        self.count = Counter()
 
     def load_config(self):
         args = self.args
@@ -596,10 +616,10 @@ class GramTest(object):
         for item in enumerate(tests.items(), start=1):
             self.run_test(item, len(tests))
 
-        self.config.get('out').final_result(self.passes, self.fails)
+        self.config.get('out').final_result(self.count)
 
     def run_test(self, item, length):
-        count = {'Pass': 0, 'Fail': 0}
+        count = Counter()
 
         out = self.config.get('out')
         out.title(item[0], length, item[1][0])
@@ -610,14 +630,14 @@ class GramTest(object):
         corrects = self.correct_in_dc(expected_errors, gramcheck_errors)
         if corrects:
             for correct in corrects:
-                count['Pass'] += 1
+                count['tp'] += 1
                 out.success(item[0], length, correct[0], correct[1])
 
         false_positives_1 = self.correct_not_in_dc(expected_errors,
                                                    gramcheck_errors)
         if false_positives_1:
             for false_positive_1 in false_positives_1:
-                count['Fail'] += 1
+                count['fp1'] += 1
                 out.failure(item[0], length, 'fp1', false_positive_1[0],
                             false_positive_1[1])
 
@@ -626,14 +646,14 @@ class GramTest(object):
         if false_positives_2:
             expected_error = {'correct': '', 'error': '', 'type': ''}
             for false_positive_2 in false_positives_2:
-                count['Fail'] += 1
+                count['fp2'] += 1
                 out.failure(item[0], length, 'fp2', expected_error,
                             false_positive_2)
 
         false_negatives_1 = self.correct_no_suggestion_in_dc(
             expected_errors, gramcheck_errors)
         for false_negative_1 in false_negatives_1:
-            count['Fail'] += 1
+            count['fn1'] += 1
             out.failure(item[0], length, 'fn1', false_negative_1[0],
                         false_negative_1[1])
 
@@ -641,14 +661,14 @@ class GramTest(object):
                                                     gramcheck_errors)
         for false_negative_2 in false_negatives_2:
             gramcheck_error = ['', '', '', '', '', []]
-            count['Fail'] += 1
+            count['fn2'] += 1
             out.failure(item[0], length, 'fn2', false_negative_2,
                         gramcheck_error)
 
-        out.result(item[0], count['Pass'], count['Fail'], item[1][0])
+        out.result(item[0], count, item[1][0])
 
-        self.passes += count['Pass']
-        self.fails += count['Fail']
+        for key in count:
+            self.count[key] += count[key]
 
     def has_same_range_and_error(self, c_error, d_error):
         if d_error[3] == 'double-space-before':
@@ -715,8 +735,9 @@ class GramTest(object):
 
     def run(self):
         self.run_tests()
+        fails = sum([self.count[key] for key in self.count if key != 'tp'])
 
-        return 1 if self.fails else 0
+        return 1 if fails else 0
 
     def __str__(self):
         return str(self.config.get('out'))

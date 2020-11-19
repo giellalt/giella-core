@@ -784,5 +784,6 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except (FileNotFoundError, util.ExecutableMissingError) as error:
+    except (FileNotFoundError, yaml.scanner.ScannerError,
+            yaml.parser.ParserError) as error:
         raise SystemExit(error)

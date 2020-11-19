@@ -537,6 +537,39 @@ class GramTest(object):
                           passes=passes,
                           fails=fails,
                           total=fails + passes))
+            self.precision(count)
+
+        def precision(self, count):
+            try:
+                true_positives = count['tp']
+                false_positives = count['fp1'] + count['fp2']
+                false_negatives = count['fn1'] + count['fn2']
+                total = true_positives + false_negatives + false_positives
+
+                prec = true_positives / (true_positives + false_positives)
+                recall = true_positives / (true_positives + false_negatives)
+                f1score = 2 * prec * recall / (prec + recall)
+
+                self.write(
+                    colourise(
+                        "True positive: {green}{true_positive:.2f}{reset}\n" +
+                        "False positive 1: {red}{fp1:.2f}{reset}\n" +
+                        "False positive 2: {red}{fp2:.2f}{reset}\n" +
+                        "False negative 1: {red}{fn1:.2f}{reset}\n" +
+                        "False negative 2: {red}{fn1:.2f}{reset}\n" +
+                        "Precision: {prec:.2f}\n" + "Recall: {recall:.2f}\n" +
+                        "F₁ score: {f1score:.2f}\n",
+                        true_positive=count['tp'] / total,
+                        fp1=count['fp1'] / total,
+                        fp2=count['fp2'] / total,
+                        fn1=count['fn1'] / total,
+                        fn2=count['fn2'] / total,
+                        prec=prec,
+                        recall=recall,
+                        f1score=f1score))
+            except ZeroDivisionError:
+                pass
+
     class CompactOutput(AllOutput):
         def result(self, number, count, test_case):
             passes = count['tp']

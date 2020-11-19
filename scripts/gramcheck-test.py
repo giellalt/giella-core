@@ -16,7 +16,7 @@ import libdivvun
 import yaml
 from lxml import etree
 
-from corpustools import errormarkup, util
+from corpustools import errormarkup
 
 COLORS = {
     "red": "\033[1;31m",

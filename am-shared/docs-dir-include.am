@@ -19,18 +19,18 @@ speller-report.svg: speller-report.tsv $(GRAPHPLOTTER)
 
 # FIXME: use configure to find accuracy
 speller-report.tsv: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
-	$(AM_V_GEN)accuracy $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -t $@
+	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -t $@
 
 # FIXME: use configure to find accuracy
 report.json: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
-	$(AM_V_GEN)accuracy $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -o $@
+	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -o $@
 
-ACCURACY_VIEWER_DIR=${HOME}/github/divvun/divvunspell/support/accuracy-viewer/public/
+ACCURACY_VIEWER_DIR=$(with_divvunspell)/support/accuracy-viewer/public/
 
 # FIXME:
 speller-report.html: report.json
 	cp report.json $(ACCURACY_VIEWER_DIR)/public
-	cd $(ACCURACY_VIEWER_DIR) && npm run build
+	cd $(ACCURACY_VIEWER_DIR) && $(NPM) run build
 	cp $(ACCURACY_VIEWER_DIR)/index.html speller-report.html
 	cp $(ACCURACY_VIEWER_DIR)/*.js $(ACCURACY_VIEWER_DIR)/*.css .
 

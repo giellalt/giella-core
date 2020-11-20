@@ -314,6 +314,21 @@ class GramChecker(object):
 
     def fix_all_errors(self, d_result):
         """Remove errors that cover the same area of the typo and msyn types."""
+        def report_dupes(errors):
+            found_errors = set()
+            index_set = set()
+            for error1 in errors:
+                for error2 in errors:
+                    if error1[:3] == error2[:3] and error1 != error2:
+                        if str(error1) not in found_errors and str(
+                                error2) not in found_errors:
+                            found_errors.add(str(error1))
+                            found_errors.add(str(error2))
+                            index_set.add(errors.index(error1))
+
+            for pos in sorted(index_set, reverse=True):
+                del errors[pos]
+
         d_errors = d_result['errs']
 
         self.fix_double_space(d_result)
@@ -328,6 +343,8 @@ class GramChecker(object):
                 self.fix_no_space_before_parent_start(d_error, d_errors)
             if d_error[3] == 'no-space-after-punct-mark':
                 self.fix_no_space_after_punct_mark(d_error, d_errors)
+
+        report_dupes(d_errors)
 
         return d_result
 

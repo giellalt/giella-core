@@ -839,5 +839,5 @@ if __name__ == "__main__":
     try:
         main()
     except (FileNotFoundError, yaml.scanner.ScannerError,
-            yaml.parser.ParserError) as error:
+            yaml.parser.ParserError, errormarkup.ErrorMarkupError) as error:
         raise SystemExit(error)

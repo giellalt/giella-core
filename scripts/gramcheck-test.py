@@ -270,7 +270,7 @@ class GramChecker(object):
         new_double_spaces = self.get_unique_double_spaces(d_errors)
 
         for new_double_space in new_double_spaces:
-            self.make_new_errors(new_double_space)
+            self.make_new_errors(new_double_space, d_result)
 
         d_errors.sort(key=sortByRange)
 

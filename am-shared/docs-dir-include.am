@@ -11,6 +11,34 @@ doc_DATA=$(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 
 DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2gfm.awk
 
+GRAPHPLOTTER=$(GTCORE)/scripts/plot-speller-progress.R
+
+if WANT_SPELLERS
+speller-report.svg: speller-report.tsv $(GRAPHPLOTTER)
+	$(AM_V_GEN)"$(R)" --no-save < $(GRAPHPLOTTER)
+
+# FIXME: use configure to find accuracy
+speller-report.tsv: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
+	$(AM_V_GEN)accuracy $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -t $@
+
+# FIXME: use configure to find accuracy
+report.json: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
+	$(AM_V_GEN)accuracy $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -o $@
+
+ACCURACY_VIEWER_DIR=${HOME}/github/divvun/divvunspell/support/accuracy-viewer/public/
+
+# FIXME:
+speller-report.html: report.json
+	cp report.json $(ACCURACY_VIEWER_DIR)/public
+	cd $(ACCURACY_VIEWER_DIR) && npm run build
+	cp $(ACCURACY_VIEWER_DIR)/index.html speller-report.html
+	cp $(ACCURACY_VIEWER_DIR)/*.js $(ACCURACY_VIEWER_DIR)/*.css .
+
+spell-tests.tsv:
+	$(AM_V_GEN)cut -f 1,2 `find $(top_srcdir) -name typos.txt` |\
+		egrep -v '^#' > $@
+
+endif
 
 $(srcdir)/%-syntax.md: $(top_srcdir)/src/cg3/%.cg3
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
@@ -43,3 +71,4 @@ $(LINKS): $(VPATH_MD_PAGES)
 			> $@
 
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+# vim: set ft=automake:

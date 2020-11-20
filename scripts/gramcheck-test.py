@@ -334,10 +334,7 @@ class GramChecker(object):
     def check_sentence(self, sentence):
         res = self.check_grammar(sentence)
 
-        try:
-            return self.fix_all_errors(res)['errs']
-        except json.decoder.JSONDecodeError:
-            return f'ERROR: {sentence} {err.decode("utf8")}'
+        return self.fix_all_errors(res)['errs']
 
     def get_data(self, sentence):
         parts = []

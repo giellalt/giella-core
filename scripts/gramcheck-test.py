@@ -30,30 +30,9 @@ COLORS = {
 }
 
 
-def print_error(string):
-    print(string, file=sys.stderr)
-
-
 def colourise(string, *args, **kwargs):
     kwargs.update(COLORS)
     return string.format(*args, **kwargs)
-
-
-def sortByRange(error):
-    return error[1:2]
-
-
-def make_errormarkup(sentence):
-    para = etree.Element('p')
-    para.text = sentence
-    errormarkup.add_error_markup(para)
-
-    return para
-
-
-def yaml_reader(test_file):
-    with test_file.open() as test_file:
-        return yaml.load(test_file, Loader=yaml.FullLoader)
 
 
 class GramChecker(object):
@@ -129,6 +108,10 @@ class GramChecker(object):
 
         return double_spaces
 
+    @staticmethod
+    def sortByRange(error):
+        return error[1:2]
+
     def fix_no_space_after_punct_mark(self, punct_error, d_errors):
         self.remove_dupes([punct_error], d_errors)
         error_message = punct_error[4]
@@ -156,7 +139,7 @@ class GramChecker(object):
         if part2:
             self.add_part(part2, start, end, d_errors)
 
-        d_errors.sort(key=sortByRange)
+        d_errors.sort(key=self.sortByRange)
 
     def add_part(self, part, start, end, d_errors):
         res = self.check_grammar(part)
@@ -193,7 +176,7 @@ class GramChecker(object):
         if part2:
             self.add_part(part2, start, end, d_errors)
 
-        d_errors.sort(key=sortByRange)
+        d_errors.sort(key=self.sortByRange)
 
     def fix_aistton(self, d_errors, position):
         d_error = d_errors[position]
@@ -267,7 +250,7 @@ class GramChecker(object):
         for new_double_space in new_double_spaces:
             self.make_new_errors(new_double_space, d_result)
 
-        d_errors.sort(key=sortByRange)
+        d_errors.sort(key=self.sortByRange)
 
     def get_error_corrections(self, para):
         parts = []
@@ -349,6 +332,13 @@ class GramChecker(object):
         return self.fix_all_errors(res)['errs']
 
     def get_data(self, sentence):
+        def make_errormarkup(sentence):
+            para = etree.Element('p')
+            para.text = sentence
+            errormarkup.add_error_markup(para)
+
+            return para
+
         parts = []
         errors = []
         self.extract_error_info(parts, errors, make_errormarkup(sentence))
@@ -360,6 +350,9 @@ class GramChecker(object):
         }
 
     def app(self):
+        def print_error(string):
+            print(string, file=sys.stderr)
+
         config = self.config
 
         if config.get('Archive'):
@@ -645,12 +638,17 @@ class GramTest(object):
 
         return config
 
+    def yaml_reader(self):
+        test_file = self.config.get('test_file')
+        with test_file.open() as test_file:
+            return yaml.load(test_file, Loader=yaml.FullLoader)
+
     @property
     def tests(self):
-        yaml = yaml_reader(self.config.get('test_file'))
-
+        yaml = self.yaml_reader()
         grammarchecker = GramChecker(yaml.get('Config'),
                                      self.config['test_file'].parent)
+
         return {test: grammarchecker.get_data(test) for test in yaml['Tests']}
 
     def run_tests(self):

@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 """Write report on differences on manual markup and gramdivvun markup"""
 import json
+import sys
 from argparse import ArgumentParser
 from collections import Counter, defaultdict
 from io import StringIO

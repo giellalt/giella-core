@@ -163,11 +163,6 @@ class YamlUI(UI):
 
         self.test = YamlGramTest(self.parse_args())
 
-    def start(self):
-        ret = self.test.run()
-        sys.stdout.write(str(self.test))
-        sys.exit(ret)
-
 
 def main():
     try:

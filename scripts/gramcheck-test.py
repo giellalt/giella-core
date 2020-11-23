@@ -30,11 +30,6 @@ COLORS = {
 }
 
 
-def spec_file_has_variant(spec_file, variant):
-    spec_file = etree.parse(str(spec_file))
-    return spec_file.xpath(f".//pipeline[@name='{variant}']")
-
-
 def print_error(string):
     print(string, file=sys.stderr)
 

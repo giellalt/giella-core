@@ -36,10 +36,14 @@ def colourise(string, *args, **kwargs):
 
 
 class GramChecker(object):
-    def __init__(self, config, yaml_parent):
-        self.config = config
-        self.yaml_parent = yaml_parent
-        self.checker = self.app()
+    def check_grammar(self, sentence):
+        d_errors = libdivvun.proc_errs_bytes(self.checker, sentence)
+        errs = [[
+            d_error.form, d_error.beg, d_error.end, d_error.err, d_error.dsc,
+            list(d_error.rep), d_error.msg
+        ] for d_error in d_errors]
+
+        return {'text': sentence, 'errs': errs}
 
     @staticmethod
     def get_unique_double_spaces(d_errors):
@@ -349,6 +353,13 @@ class GramChecker(object):
             'gramcheck_errors': self.check_sentence(''.join(parts))
         }
 
+
+class YamlGramChecker(GramChecker):
+    def __init__(self, config, yaml_parent):
+        self.config = config
+        self.yaml_parent = yaml_parent
+        self.checker = self.app()
+
     def app(self):
         def print_error(string):
             print(string, file=sys.stderr)
@@ -390,28 +401,8 @@ class GramChecker(object):
                     'Neither Archive nor Spec exists')
         sys.exit(5)
 
-    def check_grammar(self, sentence):
-        d_errors = libdivvun.proc_errs_bytes(self.checker, sentence)
-        errs = [[
-            d_error.form, d_error.beg, d_error.end, d_error.err, d_error.dsc,
-            list(d_error.rep), d_error.msg
-        ] for d_error in d_errors]
-
-        return {'text': sentence, 'errs': errs}
-
 
 class GramTest(object):
-    explanations = {
-        'tp':
-        'GramDivvun found marked up error and has the suggested correction',
-        'fp1':
-        'GramDivvun found manually marked up error, but corrected wrongly',
-        'fp2': 'GramDivvun found error which is not manually marked up',
-        'fn1':
-        'GramDivvun found manually marked up error, but has no correction',
-        'fn2': 'GramDivvun did not find manually marked up error'
-    }
-
     class AllOutput():
         def __init__(self, args):
             self._io = StringIO()
@@ -610,47 +601,6 @@ class GramTest(object):
         def final_result(self, *args):
             pass
 
-    def __init__(self, args):
-        self.args = args
-        self.config = self.load_config()
-        self.count = Counter()
-
-    def load_config(self):
-        args = self.args
-        config = {}
-
-        if args.silent:
-            config['out'] = GramTest.NoOutput(args)
-        else:
-            config['out'] = {
-                "normal": GramTest.NormalOutput,
-                "terse": GramTest.TerseOutput,
-                "compact": GramTest.CompactOutput,
-                "silent": GramTest.NoOutput,
-                "final": GramTest.FinalOutput
-            }.get(args.output, lambda x: None)(args)
-
-        config['test_file'] = Path(args.test_file)
-
-        if not args.colour:
-            for key in list(COLORS.keys()):
-                COLORS[key] = ""
-
-        return config
-
-    def yaml_reader(self):
-        test_file = self.config.get('test_file')
-        with test_file.open() as test_file:
-            return yaml.load(test_file, Loader=yaml.FullLoader)
-
-    @property
-    def tests(self):
-        yaml = self.yaml_reader()
-        grammarchecker = GramChecker(yaml.get('Config'),
-                                     self.config['test_file'].parent)
-
-        return {test: grammarchecker.get_data(test) for test in yaml['Tests']}
-
     def run_tests(self):
         tests = self.tests
         for item in enumerate(tests.items(), start=1):
@@ -783,16 +733,80 @@ class GramTest(object):
         return str(self.config.get('out'))
 
 
+class YamlGramTest(GramTest):
+    explanations = {
+        'tp':
+        'GramDivvun found marked up error and has the suggested correction',
+        'fp1':
+        'GramDivvun found manually marked up error, but corrected wrongly',
+        'fp2': 'GramDivvun found error which is not manually marked up',
+        'fn1':
+        'GramDivvun found manually marked up error, but has no correction',
+        'fn2': 'GramDivvun did not find manually marked up error'
+    }
+
+    def __init__(self, args):
+        self.args = args
+        self.config = self.load_config()
+        self.count = Counter()
+
+    def load_config(self):
+        args = self.args
+        config = {}
+
+        if args.silent:
+            config['out'] = GramTest.NoOutput(args)
+        else:
+            config['out'] = {
+                "normal": GramTest.NormalOutput,
+                "terse": GramTest.TerseOutput,
+                "compact": GramTest.CompactOutput,
+                "silent": GramTest.NoOutput,
+                "final": GramTest.FinalOutput
+            }.get(args.output, lambda x: None)(args)
+
+        config['test_file'] = Path(args.test_file)
+
+        if not args.colour:
+            for key in list(COLORS.keys()):
+                COLORS[key] = ""
+
+        return config
+
+    def yaml_reader(self):
+        test_file = self.config.get('test_file')
+        with test_file.open() as test_file:
+            return yaml.load(test_file, Loader=yaml.FullLoader)
+
+    @property
+    def tests(self):
+        yaml = self.yaml_reader()
+        grammarchecker = YamlGramChecker(yaml.get('Config'),
+                                           self.config['test_file'].parent)
+
+        return {test: grammarchecker.get_data(test) for test in yaml['Tests']}
+
+
 class UI(ArgumentParser):
     def __init__(self):
-        ArgumentParser.__init__(self)
-
-        self.description = "Test errormarkuped up sentences"
+        super().__init__(self)
         self.add_argument("-c",
                           "--colour",
                           dest="colour",
                           action="store_true",
                           help="Colours the output")
+
+    def start(self):
+        ret = self.test.run()
+        sys.stdout.write(str(self.test))
+        sys.exit(ret)
+
+
+class YamlUI(UI):
+    def __init__(self):
+        super().__init__()
+
+        self.description = "Test errormarkuped up sentences"
         self.add_argument("-o",
                           "--output",
                           choices=['normal', 'compact', 'terse', 'final'],
@@ -826,7 +840,7 @@ class UI(ArgumentParser):
                           help="More verbose output.")
         self.add_argument("test_file", help="YAML file with test rules")
 
-        self.test = GramTest(self.parse_args())
+        self.test = YamlGramTest(self.parse_args())
 
     def start(self):
         ret = self.test.run()
@@ -836,7 +850,7 @@ class UI(ArgumentParser):
 
 def main():
     try:
-        ui = UI()
+        ui = YamlUI()
         ui.start()
     except KeyboardInterrupt:
         sys.exit(130)

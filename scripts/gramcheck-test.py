@@ -8,7 +8,6 @@
 
 import os
 import sys
-from collections import Counter
 from pathlib import Path
 
 import libdivvun
@@ -79,9 +78,9 @@ class YamlGramTest(GramTest):
     }
 
     def __init__(self, args):
+        super().__init__()
         self.args = args
         self.config = self.load_config()
-        self.count = Counter()
 
     def load_config(self):
         args = self.args

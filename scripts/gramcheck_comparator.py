@@ -546,6 +546,9 @@ class GramTest(object):
         def final_result(self, *args):
             pass
 
+    def __init__(self):
+        self.count = Counter()
+
     def run_tests(self):
         tests = self.tests
         for item in enumerate(tests.items(), start=1):

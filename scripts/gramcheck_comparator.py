@@ -511,21 +511,21 @@ class GramTest:
 
                 self.write(
                     colourise(
-                        "True positive: {green}{true_positive:.2f}{reset}\n" +
-                        "False positive 1: {red}{fp1:.2f}{reset}\n" +
-                        "False positive 2: {red}{fp2:.2f}{reset}\n" +
-                        "False negative 1: {red}{fn1:.2f}{reset}\n" +
-                        "False negative 2: {red}{fn1:.2f}{reset}\n" +
-                        "Precision: {prec:.2f}\n" + "Recall: {recall:.2f}\n" +
-                        "F₁ score: {f1score:.2f}\n",
-                        true_positive=count['tp'] / total,
-                        fp1=count['fp1'] / total,
-                        fp2=count['fp2'] / total,
-                        fn1=count['fn1'] / total,
-                        fn2=count['fn2'] / total,
-                        prec=prec,
-                        recall=recall,
-                        f1score=f1score))
+                        "True positive: {green}{true_positive}{reset}\n" +
+                        "False positive 1: {red}{fp1}{reset}\n" +
+                        "False positive 2: {red}{fp2}{reset}\n" +
+                        "False negative 1: {red}{fn1}{reset}\n" +
+                        "False negative 2: {red}{fn1}{reset}\n" +
+                        "Precision: {prec:.1f}%\n" + "Recall: {recall:.1f}%\n" +
+                        "F₁ score: {f1score:.1f}%\n",
+                        true_positive=count['tp'],
+                        fp1=count['fp1'],
+                        fp2=count['fp2'],
+                        fn1=count['fn1'],
+                        fn2=count['fn2'],
+                        prec=prec * 100,
+                        recall=recall * 100,
+                        f1score=f1score * 100))
             except ZeroDivisionError:
                 pass
 

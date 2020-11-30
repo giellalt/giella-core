@@ -398,12 +398,12 @@ errmodel.%.hfst: words.%.hfst \
 # Build the automaton used for the speller
 $(MOB_GT_SPELLER_ACCEPTOR): \
 acceptor.%.hfst: $(MOB_GT_SPELLER_HFST) easteregg.%.hfst
-	$(AM_V_PROJECT)cat $< \
-		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
+	$(AM_V_PROJECT)$(HFST_PROJECT) $(HFST_FLAGS) \
+			$(MORE_VERBOSITY) --project=lower < $< \
 		| $(HFST_MINIMIZE_SPELLER)                      \
-		| $(HFST_DISJUNCT) - easteregg.$*.hfst          \
-		| $(HFST_PUSH_WEIGHTS) --push=initial           \
-		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
+		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) - easteregg.$*.hfst          \
+		| $(HFST_PUSH_WEIGHTS) $(MORE_VERBOSITY) --push=initial           \
+		| $(HFST_FST2FST) $(MORE_VERBOSITY) $(HFST_FLAGS) -f olw          \
 		-o $@
 
 ####### *.zhfst file: #######

@@ -586,7 +586,8 @@ class GramTest:
         expected_errors = item[1][1]['expected_errors']
         gramcheck_errors = item[1][1]['gramcheck_errors']
 
-        true_positives = self.correct_in_dc(expected_errors, gramcheck_errors)
+        true_positives = self.has_true_positives(expected_errors,
+                                                 gramcheck_errors)
         for true_positive in true_positives:
             count['tp'] += 1
             out.success(item[0], length, true_positive[0], true_positive[1])
@@ -597,30 +598,30 @@ class GramTest:
             count['tn'] += 1
             out.success(item[0], length, true_negative[0], true_negative[1])
 
-        false_positives_1 = self.correct_not_in_dc(expected_errors,
-                                                   gramcheck_errors)
+        false_positives_1 = self.has_false_positives_1(expected_errors,
+                                                       gramcheck_errors)
         for false_positive_1 in false_positives_1:
             count['fp1'] += 1
             out.failure(item[0], length, 'fp1', false_positive_1[0],
                         false_positive_1[1])
 
-        false_positives_2 = self.dcs_not_in_correct(expected_errors,
-                                                    gramcheck_errors)
+        false_positives_2 = self.has_false_positives_2(expected_errors,
+                                                       gramcheck_errors)
         expected_error = {'correct': '', 'error': '', 'type': ''}
         for false_positive_2 in false_positives_2:
             count['fp2'] += 1
             out.failure(item[0], length, 'fp2', expected_error,
                         false_positive_2)
 
-        false_negatives_1 = self.correct_no_suggestion_in_dc(
-            expected_errors, gramcheck_errors)
+        false_negatives_1 = self.has_false_negatives_1(expected_errors,
+                                                       gramcheck_errors)
         for false_negative_1 in false_negatives_1:
             count['fn1'] += 1
             out.failure(item[0], length, 'fn1', false_negative_1[0],
                         false_negative_1[1])
 
-        false_negatives_2 = self.corrects_not_in_dc(expected_errors,
-                                                    gramcheck_errors)
+        false_negatives_2 = self.has_false_negatives_2(expected_errors,
+                                                       gramcheck_errors)
         for false_negative_2 in false_negatives_2:
             gramcheck_error = ['', '', '', '', '', []]
             count['fn2'] += 1
@@ -653,11 +654,11 @@ class GramTest:
                 'type': ''
             }, ['', '', '', '', '', ''])]
 
-    def correct_in_dc(self, correct, dc):
+    def has_true_positives(self, correct, dc):
         return [(c_error, d_error) for c_error in correct for d_error in dc
                 if self.has_suggestions_with_hit(c_error, d_error)]
 
-    def correct_not_in_dc(self, correct, dc):
+    def has_false_positives_1(self, correct, dc):
         return [(c_error, d_error) for c_error in correct for d_error in dc
                 if self.has_suggestions_without_hit(c_error, d_error)]
 
@@ -666,7 +667,7 @@ class GramTest:
             c_error,
             d_error) and d_error[5] and c_error['correct'] not in d_error[5]
 
-    def dcs_not_in_correct(self, correct, dc):
+    def has_false_positives_2(self, correct, dc):
         corrects = []
         for d_error in dc:
             for c_error in correct:
@@ -677,7 +678,7 @@ class GramTest:
 
         return corrects
 
-    def corrects_not_in_dc(self, c_errors, d_errors):
+    def has_false_negatives_2(self, c_errors, d_errors):
         corrects = []
         for c_error in c_errors:
             for d_error in d_errors:
@@ -688,7 +689,7 @@ class GramTest:
 
         return corrects
 
-    def correct_no_suggestion_in_dc(self, correct, dc):
+    def has_false_negatives_1(self, correct, dc):
         return [(c_error, d_error) for c_error in correct for d_error in dc
                 if self.has_no_suggestions(c_error, d_error)]
 

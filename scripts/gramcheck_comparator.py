@@ -586,10 +586,10 @@ class GramTest:
         expected_errors = item[1][1]['expected_errors']
         gramcheck_errors = item[1][1]['gramcheck_errors']
 
-        corrects = self.correct_in_dc(expected_errors, gramcheck_errors)
-        for correct in corrects:
+        true_positives = self.correct_in_dc(expected_errors, gramcheck_errors)
+        for true_positive in true_positives:
             count['tp'] += 1
-            out.success(item[0], length, correct[0], correct[1])
+            out.success(item[0], length, true_positive[0], true_positive[1])
 
         true_negatives = self.has_true_negatives(expected_errors,
                                                  gramcheck_errors)

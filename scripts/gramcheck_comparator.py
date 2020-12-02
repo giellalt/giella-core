@@ -517,7 +517,7 @@ class GramTest:
                         "False positive 1: {red}{fp1}{reset}\n" +
                         "False positive 2: {red}{fp2}{reset}\n" +
                         "False negative 1: {red}{fn1}{reset}\n" +
-                        "False negative 2: {red}{fn1}{reset}\n" +
+                        "False negative 2: {red}{fn2}{reset}\n" +
                         "Precision: {prec:.1f}%\n" +
                         "Recall: {recall:.1f}%\n" +
                         "F₁ score: {f1score:.1f}%\n",

@@ -474,8 +474,8 @@ class GramTest:
             self.write(x)
 
         def result(self, number, count, test_case):
-            passes = count['tp']
-            fails = sum([count[key] for key in count if key != 'tp'])
+            passes = sum([count[key] for key in count if key.startswith('t')])
+            fails = sum([count[key] for key in count if key.startswith('f')])
             text = colourise(
                 "Test {number} - Passes: {green}{passes}{reset}, " +
                 "Fails: {red}{fails}{reset}, " +
@@ -487,8 +487,8 @@ class GramTest:
             self.write(text)
 
         def final_result(self, count):
-            passes = count['tp']
-            fails = sum([count[key] for key in count if key != 'tp'])
+            passes = sum([count[key] for key in count if key.startswith('t')])
+            fails = sum([count[key] for key in count if key.startswith('f')])
             self.write(
                 colourise("Total passes: {green}{passes}{reset}, " +
                           "Total fails: {red}{fails}{reset}, " +
@@ -532,8 +532,8 @@ class GramTest:
 
     class CompactOutput(AllOutput):
         def result(self, number, count, test_case):
-            passes = count['tp']
-            fails = sum([count[key] for key in count if key != 'tp'])
+            passes = sum([count[key] for key in count if key.startswith('t')])
+            fails = sum([count[key] for key in count if key.startswith('f')])
             out = f'{test_case} {passes}/{fails}/{passes + fails}'
             if fails:
                 self.write(colourise("[{red}FAIL{reset}] {}\n", out))
@@ -559,8 +559,8 @@ class GramTest:
 
     class FinalOutput(AllOutput):
         def final_result(self, count):
-            passes = count['tp']
-            fails = sum([count[key] for key in count if key != 'tp'])
+            passes = sum([count[key] for key in count if key.startswith('t')])
+            fails = sum([count[key] for key in count if key.startswith('f')])
             self.write(f'{passes}/{fails}/{passes+fails}')
 
     class NoOutput(AllOutput):

@@ -654,6 +654,8 @@ class GramTest:
                 'type': ''
             }, ['', '', '', '', '', ''])]
 
+        return []
+
     def has_true_positives(self, correct, dc):
         return [(c_error, d_error) for c_error in correct for d_error in dc
                 if self.has_suggestions_with_hit(c_error, d_error)]

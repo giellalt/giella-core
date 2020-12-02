@@ -591,6 +591,12 @@ class GramTest:
                 count['tp'] += 1
                 out.success(item[0], length, correct[0], correct[1])
 
+        true_negatives = self.has_true_negatives(expected_errors, gramcheck_errors)
+        if true_negatives:
+            for true_negative in true_negatives:
+                count['tn'] += 1
+                out.success(item[0], length, correct[0], correct[1])
+
         false_positives_1 = self.correct_not_in_dc(expected_errors,
                                                    gramcheck_errors)
         if false_positives_1:
@@ -641,7 +647,7 @@ class GramTest:
             c_error,
             d_error) and d_error[5] and c_error['correct'] in d_error[5]
 
-    def correct_in_dc(self, correct, dc):
+    def has_true_negatives(self, correct, dc):
         if not correct and not dc:
             return [({
                 'error': '',
@@ -649,6 +655,7 @@ class GramTest:
                 'type': ''
             }, ['', '', '', '', '', ''])]
 
+    def correct_in_dc(self, correct, dc):
         return [(c_error, d_error) for c_error in correct for d_error in dc
                 if self.has_suggestions_with_hit(c_error, d_error)]
 

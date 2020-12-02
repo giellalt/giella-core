@@ -516,7 +516,8 @@ class GramTest:
                         "False positive 2: {red}{fp2}{reset}\n" +
                         "False negative 1: {red}{fn1}{reset}\n" +
                         "False negative 2: {red}{fn1}{reset}\n" +
-                        "Precision: {prec:.1f}%\n" + "Recall: {recall:.1f}%\n" +
+                        "Precision: {prec:.1f}%\n" +
+                        "Recall: {recall:.1f}%\n" +
                         "F₁ score: {f1score:.1f}%\n",
                         true_positive=count['tp'],
                         fp1=count['fp1'],
@@ -590,7 +591,8 @@ class GramTest:
             count['tp'] += 1
             out.success(item[0], length, correct[0], correct[1])
 
-        true_negatives = self.has_true_negatives(expected_errors, gramcheck_errors)
+        true_negatives = self.has_true_negatives(expected_errors,
+                                                 gramcheck_errors)
         for true_negative in true_negatives:
             count['tn'] += 1
             out.success(item[0], length, correct[0], correct[1])
@@ -748,7 +750,6 @@ class UI(ArgumentParser):
         ret = self.test.run()
         sys.stdout.write(str(self.test))
         sys.exit(ret)
-
 
 
 class CorpusUI(UI):

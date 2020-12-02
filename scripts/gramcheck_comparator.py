@@ -440,12 +440,13 @@ class GramTest:
             self.write(f'{text}' + '\n')
             self.write(colourise("-" * longest + '{reset}\n'))
 
-        def success(self, case, total, expected_error, gramcheck_error):
+        def success(self, case, total, type, expected_error, gramcheck_error):
             x = colourise(
                 ("[{light_blue}{case:>%d}/{total}{reset}]" +
-                 "[{green}PASS tp{reset}] " +
+                 "[{green}PASS {type}{reset}] " +
                  "{error}:{correction} ({expectected_type}) {blue}=>{reset} " +
                  "{gramerr}:{errlist} ({gram_type})\n") % len(str(total)),
+                type=type,
                 error=expected_error['error'],
                 correction=expected_error['correct'],
                 expectected_type=expected_error['type'],
@@ -512,6 +513,7 @@ class GramTest:
                 self.write(
                     colourise(
                         "True positive: {green}{true_positive}{reset}\n" +
+                        "True negative: {green}{true_negative}{reset}\n" +
                         "False positive 1: {red}{fp1}{reset}\n" +
                         "False positive 2: {red}{fp2}{reset}\n" +
                         "False negative 1: {red}{fn1}{reset}\n" +
@@ -520,6 +522,7 @@ class GramTest:
                         "Recall: {recall:.1f}%\n" +
                         "F₁ score: {f1score:.1f}%\n",
                         true_positive=count['tp'],
+                        true_negative=count['tn'],
                         fp1=count['fp1'],
                         fp2=count['fp2'],
                         fn1=count['fn1'],
@@ -590,13 +593,13 @@ class GramTest:
                                                  gramcheck_errors)
         for true_positive in true_positives:
             count['tp'] += 1
-            out.success(item[0], length, true_positive[0], true_positive[1])
+            out.success(item[0], length, 'tp', true_positive[0], true_positive[1])
 
         true_negatives = self.has_true_negatives(expected_errors,
                                                  gramcheck_errors)
         for true_negative in true_negatives:
             count['tn'] += 1
-            out.success(item[0], length, true_negative[0], true_negative[1])
+            out.success(item[0], length, 'tn', true_negative[0], true_negative[1])
 
         false_positives_1 = self.has_false_positives_1(expected_errors,
                                                        gramcheck_errors)

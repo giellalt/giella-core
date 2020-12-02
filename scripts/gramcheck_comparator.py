@@ -410,35 +410,12 @@ class GramTest:
                           total=fails + passes))
 
     class NormalOutput(AllOutput):
-        def max80(self, header, test_case):
-            all = f'{header} {test_case}'
-            if len(all) < 80:
-                return all, len(all)
-
-            parts = []
-            x = all[:80].rfind(' ')
-            parts.append(all[:x])
-            longest = len(parts[-1])
-            all = f'{" " * len(header)}{all[x:]}'
-            while len(all) > 80:
-                x = all[:80].rfind(' ')
-                parts.append(all[:x])
-                if longest < len(parts[-1]):
-                    longest = len(parts[-1])
-                all = f'{" " * len(header)}{all[x:]}'
-
-            parts.append(all)
-            if longest < len(parts[-1]):
-                longest = len(parts[-1])
-
-            return '\n'.join(parts), longest
-
         def title(self, index, length, test_case):
-            text, longest = self.max80(f'Test {index}/{length}:', test_case)
-
-            self.write(colourise("{light_blue}-" * longest + '\n'))
-            self.write(f'{text}' + '\n')
-            self.write(colourise("-" * longest + '{reset}\n'))
+            self.write(f'{colourise("{light_blue}")}')
+            self.write('-' * 10)
+            self.write(f'\nTest {index}/{length}: {test_case}\n')
+            self.write('-' * 10)
+            self.write(f'{colourise("{reset}")}\n')
 
         def success(self, case, total, type, expected_error, gramcheck_error):
             x = colourise(

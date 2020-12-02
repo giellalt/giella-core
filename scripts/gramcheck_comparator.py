@@ -586,33 +586,29 @@ class GramTest:
         gramcheck_errors = item[1][1]['gramcheck_errors']
 
         corrects = self.correct_in_dc(expected_errors, gramcheck_errors)
-        if corrects:
-            for correct in corrects:
-                count['tp'] += 1
-                out.success(item[0], length, correct[0], correct[1])
+        for correct in corrects:
+            count['tp'] += 1
+            out.success(item[0], length, correct[0], correct[1])
 
         true_negatives = self.has_true_negatives(expected_errors, gramcheck_errors)
-        if true_negatives:
-            for true_negative in true_negatives:
-                count['tn'] += 1
-                out.success(item[0], length, correct[0], correct[1])
+        for true_negative in true_negatives:
+            count['tn'] += 1
+            out.success(item[0], length, correct[0], correct[1])
 
         false_positives_1 = self.correct_not_in_dc(expected_errors,
                                                    gramcheck_errors)
-        if false_positives_1:
-            for false_positive_1 in false_positives_1:
-                count['fp1'] += 1
-                out.failure(item[0], length, 'fp1', false_positive_1[0],
-                            false_positive_1[1])
+        for false_positive_1 in false_positives_1:
+            count['fp1'] += 1
+            out.failure(item[0], length, 'fp1', false_positive_1[0],
+                        false_positive_1[1])
 
         false_positives_2 = self.dcs_not_in_correct(expected_errors,
                                                     gramcheck_errors)
-        if false_positives_2:
-            expected_error = {'correct': '', 'error': '', 'type': ''}
-            for false_positive_2 in false_positives_2:
-                count['fp2'] += 1
-                out.failure(item[0], length, 'fp2', expected_error,
-                            false_positive_2)
+        expected_error = {'correct': '', 'error': '', 'type': ''}
+        for false_positive_2 in false_positives_2:
+            count['fp2'] += 1
+            out.failure(item[0], length, 'fp2', expected_error,
+                        false_positive_2)
 
         false_negatives_1 = self.correct_no_suggestion_in_dc(
             expected_errors, gramcheck_errors)

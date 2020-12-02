@@ -595,7 +595,7 @@ class GramTest:
                                                  gramcheck_errors)
         for true_negative in true_negatives:
             count['tn'] += 1
-            out.success(item[0], length, correct[0], correct[1])
+            out.success(item[0], length, true_negative[0], true_negative[1])
 
         false_positives_1 = self.correct_not_in_dc(expected_errors,
                                                    gramcheck_errors)

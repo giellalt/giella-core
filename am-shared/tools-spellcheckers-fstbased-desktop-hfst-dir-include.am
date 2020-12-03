@@ -272,6 +272,7 @@ easteregg.%.desktop.hfst: easteregg.%.desktop.temp.hfst \
 		| @\"easteregg.$*.desktop.errorth.hfst\" \
 		];" \
 		| $(HFST_REGEXP2FST) -S -E $(HFST_FLAGS) \
+		| $(HFST_INVERT) $(HFST_FLAGS) \
 		  -o $@
 
 ####### Error model: #######

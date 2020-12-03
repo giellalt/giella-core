@@ -405,9 +405,10 @@ errmodel.%.hfst: errmodel.%.xfscript easteregg.%.hfst
 ####### Speller acceptor: #######
 # Build the automaton used for the speller
 $(GT_SPELLER_ACCEPTOR): \
-acceptor.%.hfst: $(GT_SPELLER_HFST) easteregg.%.desktop.hfst
-	$(AM_V_PROJECT)$(HFST_PROJECT) $(HFST_FLAGS) \
-			$(MORE_VERBOSITY) --project=lower < $< \
+acceptor.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst
+	$(AM_V_PROJECT)$(HFST_COMPOSE) -1 filters/remove-error-strings.hfst -2 $< \
+		| $(HFST_PROJECT) $(HFST_FLAGS) \
+			$(MORE_VERBOSITY) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER)                      \
 		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) - easteregg.$*.desktop.hfst  \
 		| $(HFST_PUSH_WEIGHTS) $(MORE_VERBOSITY) --push=initial           \

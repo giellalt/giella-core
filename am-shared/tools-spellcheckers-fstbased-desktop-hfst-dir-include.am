@@ -257,13 +257,11 @@ easteregg.%.desktop.analyser.hfst:
 	$(AM_V_GEN)echo \
 		'D i v v u n s p e l l e r +N' \
 		| $(HFST_STRINGS2FST) -S $(HFST_FLAGS) \
-		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		> $@
 
 # Easter egg string acceptor:
 easteregg.%.desktop.temp.hfst: easteregg.%.desktop.txt
 	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
-		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		> $@
 
 easteregg.%.desktop.hfst: easteregg.%.desktop.temp.hfst \

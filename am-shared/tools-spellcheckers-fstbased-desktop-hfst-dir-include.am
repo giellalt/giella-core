@@ -230,7 +230,7 @@ noinst_DATA+=$(GT_ERRMODELS) \
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
 $(GIELLA_DESKTOP_EASTEREGGS): \
-easteregg.%.desktop.txt: $(GT_SPELLER_HFST)
+easteregg.%.desktop.txt:
 	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \

@@ -38,6 +38,18 @@ spell-tests.tsv:
 	$(AM_V_GEN)cut -f 1,2 `find $(top_srcdir) -name typos.txt` |\
 		egrep -v '^#' > $@
 
+else
+speller-report.html: 
+	@echo need to configure --enable-spellers to generate statistics
+	touch $@
+
+speller-report.svg: 
+	@echo need to configure --enable-spellers to generate statistics
+	touch $@
+
+report.json: 
+	@echo need to configure --enable-spellers to generate statistics
+	touch $@
 endif
 
 $(srcdir)/%-syntax.md: $(top_srcdir)/src/cg3/%.cg3

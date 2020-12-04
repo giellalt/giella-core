@@ -6,8 +6,9 @@
 VPATH_MD_PAGES=$(addprefix $(srcdir)/,$(MD_PAGES))
 ALLINONE_MD_PAGE=$(srcdir)/$(GTLANG).md
 LINKS=$(srcdir)/Links.md
+INDEX=$(srcdir)/index.md
 
-doc_DATA=$(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
+doc_DATA=$(INDEX) $(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 
 DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2gfm.awk
 
@@ -81,6 +82,11 @@ $(LINKS): $(VPATH_MD_PAGES)
 			| tr ' ' '\n' \
 			| LC_COLLATE=C sed 's/[a-z0-9.-]*/* [&]\(&\)/g' \
 			> $@
+
+# FIXME: some temporary stuff to have index page
+$(INDEX): $(LINKS) $(ALLINONE_MD_PAGE)
+	head -n 3 $(ALLINONE_MD_PAGE) > $@
+	cat $(LINKS) >> $@
 
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 # vim: set ft=automake:

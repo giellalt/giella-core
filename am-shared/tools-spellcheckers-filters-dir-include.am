@@ -74,9 +74,18 @@ endif # WANT_SPELLERS
 %.regex: $(top_builddir)/src/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
+####### Other targets: ###########
+clean-local:
+	-rm -f *.hfst *.xfst *.foma
+	-rm -f $(GIELLA_SRC_DESKTOP_FILTERS) \
+			$(GIELLA_SRC_MOBILE_FILTERS) \
+			$(GT_FSTSPELLER_FILTER_SRCS) \
+			$(GIELLA_LOCAL_COPY_FSTBASED_FILTER_SRCS) \
+			$(GIELLA_LOCAL_COPY_DESKTOP_FILTER_SRCS) \
+			$(GIELLA_LOCAL_COPY_MOBILE_FILTER_SRCS)
+
 ##########################################
 # General build rules included from here:#
-
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-filters-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-filters-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile-filters-dir-include.am

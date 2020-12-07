@@ -59,14 +59,3 @@ GIELLA_MOBILESPELLER_FILTER_TARGETS+=\
 	$(GIELLA_MOBILESPELLER_FILTER_FOMA_TARGETS)
 
 OFST_REGEX_TARGETS+=$(GIELLA_MOBILESPELLER_FILTER_HFST_TARGETS)
-
-####### Copy regex files from the Giella core if not found locally: ########
-%.regex: $(GIELLA_SHARED)/all_langs/tools/spellcheckers/fstbased/mobile/filters/%.regex
-	$(AM_V_CP)cp -f $< $@
-
-%.regex: $(GIELLA_SHARED)/all_langs/src/filters/%.regex
-	$(AM_V_CP)cp -f $< $@
-
-####### ... OR from the src/filters/ dir
-%.regex: $(top_srcdir)/src/filters/%.regex
-	$(AM_V_CP)cp -f $< $@

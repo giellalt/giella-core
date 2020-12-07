@@ -70,6 +70,10 @@ endif # WANT_SPELLERS
 %.regex: $(top_srcdir)/src/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
+####### Remember also from the top_builddir/src/filters/ dir for generated regexes:
+%.regex: $(top_builddir)/src/filters/%.regex
+	$(AM_V_CP)cp -f $< $@
+
 ##########################################
 # General build rules included from here:#
 

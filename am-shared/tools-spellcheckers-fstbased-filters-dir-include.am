@@ -52,14 +52,3 @@ endif # CAN_HFST
 endif # WANT_SPELLERS
 
 SELECTED_FORMAT_REGEX_TARGETS+=$(GT_FSTSPELLER_FILTER_TARGETS)
-
-####### Copy regex files from the Giella core if not found locally: ########
-%.regex: $(GIELLA_SHARED)/all_langs/tools/spellcheckers/fstbased/filters/%.regex
-	$(AM_V_CP)cp -f $< $@
-
-%.regex: $(GIELLA_SHARED)/all_langs/src/filters/%.regex
-	$(AM_V_CP)cp -f $< $@
-
-####### ... OR from the src/filters/ dir
-%.regex: $(top_srcdir)/src/filters/%.regex
-	$(AM_V_CP)cp -f $< $@

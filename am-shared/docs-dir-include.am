@@ -9,7 +9,7 @@ LINKS=$(srcdir)/Links.md
 INDEX=$(srcdir)/index.md
 
 # no regenerations while debugging
-#doc_DATA=$(INDEX) $(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
+doc_DATA=$(INDEX) $(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 
 .PHONY: gh-pages
 

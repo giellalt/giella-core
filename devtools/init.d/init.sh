@@ -48,13 +48,13 @@ alias svnup="svn up $GTLANGS/* $GTBIG $GTFREE $GTPRIV $GTHOME/art"
 
 
 # Standardised aliases for Giellatekno work:
-alias       xs='ssh       divvun.no'
 alias victorio='ssh    gtsvn.uit.no'
 alias      vic='ssh    gtsvn.uit.no'
+alias       xs='ssh    divvun.no'
 alias    gtlab='ssh    gtlab.uit.no'
 alias    gtsvn='ssh    gtsvn.uit.no'
 alias    gtweb='ssh    gtweb.uit.no'
-alias  gtoahpa='ssh  gtoahpa.uit.no'
+alias  gtoahpa='ssh    gtoahpa.uit.no'
 
 # forrest run port 888-7, -8 og -9
 alias fo="forrest     -Dforrest.jvmargs=\"-Dfile.encoding=utf-8 -Djava.awt.headless=true\""

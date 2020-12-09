@@ -17,7 +17,7 @@
 #               from the Fink project (http://www.finkproject.org/).
 # Copyright (c) 2001 Christoph Pfisterer
 # Copyright (c) 2001-2004 The Fink Team
-# Copyright (c) 2009 The Divvun and Giellatekno teams
+# Copyright (c) 2009-2020 The Divvun and Giellatekno teams
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -48,13 +48,13 @@ alias svnup="svn up $GTLANGS/* $GTBIG $GTFREE $GTPRIV $GTHOME/art"
 
 
 # Standardised aliases for Giellatekno work:
-alias victorio='ssh victorio.uit.no'
-alias      vic='ssh victorio.uit.no'
-alias       xs='ssh       divvun.no'
+alias victorio='ssh    gtsvn.uit.no'
+alias      vic='ssh    gtsvn.uit.no'
+alias       xs='ssh    divvun.no'
 alias    gtlab='ssh    gtlab.uit.no'
 alias    gtsvn='ssh    gtsvn.uit.no'
 alias    gtweb='ssh    gtweb.uit.no'
-alias  gtoahpa='ssh  gtoahpa.uit.no'
+alias  gtoahpa='ssh    gtoahpa.uit.no'
 
 # forrest run port 888-7, -8 og -9
 alias fo="forrest     -Dforrest.jvmargs=\"-Dfile.encoding=utf-8 -Djava.awt.headless=true\""
@@ -102,10 +102,12 @@ else
   if [ -d /opt/local ]; then
     prepend_path PATH /opt/local/sbin
     prepend_path PATH /opt/local/bin
-    prepend_path PATH /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin
+    /opt/local/bin/python3 -c "" 2>/dev/null && prepend_path PATH $(/opt/local/bin/python3 -c "import site;print(site.USER_SITE.replace('lib/python/site-packages', 'bin'))")
     export MANPATH=/opt/local/share/man:${MANPATH}
     export INFOPATH=/opt/local/share/info:${INFOPATH}
     export CPATH=/opt/local/include:/usr/local/include:/usr/include:${CPATH}
+  else
+    python3 -c "" 2>/dev/null && prepend_path PATH $(python3 -c "import site;print(site.USER_SITE.replace('lib/python/site-packages', 'bin'))")
   fi
 
   # Make sure these paths are inserted before any "system" paths
@@ -113,7 +115,6 @@ else
 
   PATH=/usr/local/bin:$PATH
   prepend_path PATH $HOME/.local/bin
-  prepend_path PATH $HOME/Library/Python/2.7/bin
   prepend_path PATH $HOME/bin
   prepend_path PATH $GTHOME/gt/script
   prepend_path PATH $GTHOME/gt/script/corpus
@@ -161,3 +162,6 @@ elif [ "$HOSTN" = "gtsvn.uit.no" ] ; then
     export GTBOUND=/home/apache_corpus/boundcorpus
 fi
 
+# To get libdivvun from macOS nightly
+PYTHONPATH=/usr/local/lib/python3.9/site-packages
+export PYTHONPATH

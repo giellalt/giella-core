@@ -112,7 +112,8 @@ else
 
   PATH=/usr/local/bin:$PATH
   prepend_path PATH $HOME/.local/bin
-  prepend_path PATH $HOME/Library/Python/2.7/bin
+  python -c "" 2>/dev/null && prepend_path PATH $(python -c "import site;print site.USER_SITE.replace('site-packages', 'bin')")
+  python3 -c "" 2>/dev/null && prepend_path PATH $(python3 -c "import site;print(site.USER_SITE.replace('site-packages', 'bin'))")
   prepend_path PATH $HOME/bin
   prepend_path PATH $GTHOME/gt/script
   prepend_path PATH $GTHOME/gt/script/corpus
@@ -160,3 +161,6 @@ elif [ "$HOSTN" = "gtsvn.uit.no" ] ; then
     export GTBOUND=/home/apache_corpus/boundcorpus
 fi
 
+# To get libdivvun from macOS nightly
+PYTHONPATH=/usr/local/lib/python3.9/site-packages
+export PYTHONPATH

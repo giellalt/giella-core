@@ -48,9 +48,9 @@ alias svnup="svn up $GTLANGS/* $GTBIG $GTFREE $GTPRIV $GTHOME/art"
 
 
 # Standardised aliases for Giellatekno work:
-alias victorio='ssh victorio.uit.no'
-alias      vic='ssh victorio.uit.no'
 alias       xs='ssh       divvun.no'
+alias victorio='ssh    gtsvn.uit.no'
+alias      vic='ssh    gtsvn.uit.no'
 alias    gtlab='ssh    gtlab.uit.no'
 alias    gtsvn='ssh    gtsvn.uit.no'
 alias    gtweb='ssh    gtweb.uit.no'

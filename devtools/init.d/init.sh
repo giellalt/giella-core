@@ -102,9 +102,12 @@ else
   if [ -d /opt/local ]; then
     prepend_path PATH /opt/local/sbin
     prepend_path PATH /opt/local/bin
+    /opt/local/bin/python3 -c "" 2>/dev/null && prepend_path PATH $(/opt/local/bin/python3 -c "import site;print(site.USER_SITE.replace('lib/python/site-packages', 'bin'))")
     export MANPATH=/opt/local/share/man:${MANPATH}
     export INFOPATH=/opt/local/share/info:${INFOPATH}
     export CPATH=/opt/local/include:/usr/local/include:/usr/include:${CPATH}
+  else
+    python3 -c "" 2>/dev/null && prepend_path PATH $(python3 -c "import site;print(site.USER_SITE.replace('lib/python/site-packages', 'bin'))")
   fi
 
   # Make sure these paths are inserted before any "system" paths
@@ -112,8 +115,6 @@ else
 
   PATH=/usr/local/bin:$PATH
   prepend_path PATH $HOME/.local/bin
-  python -c "" 2>/dev/null && prepend_path PATH $(python -c "import site;print site.USER_SITE.replace('site-packages', 'bin')")
-  python3 -c "" 2>/dev/null && prepend_path PATH $(python3 -c "import site;print(site.USER_SITE.replace('site-packages', 'bin'))")
   prepend_path PATH $HOME/bin
   prepend_path PATH $GTHOME/gt/script
   prepend_path PATH $GTHOME/gt/script/corpus

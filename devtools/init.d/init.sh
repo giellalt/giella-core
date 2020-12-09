@@ -17,7 +17,7 @@
 #               from the Fink project (http://www.finkproject.org/).
 # Copyright (c) 2001 Christoph Pfisterer
 # Copyright (c) 2001-2004 The Fink Team
-# Copyright (c) 2009 The Divvun and Giellatekno teams
+# Copyright (c) 2009-2020 The Divvun and Giellatekno teams
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License

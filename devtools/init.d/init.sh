@@ -93,7 +93,7 @@ prepend_path()
   fi
 }
 
-# setup the Giellatekno path. We assume that the Giellatekno directory exists.
+# setup the GiellaLT path. We assume that the GiellaLT gt/ directory exists.
 if [ -z "$PATH" ]; then
   PATH=$GTHOME/gt/script:/bin:/sbin:/usr/bin:/usr/sbin
 else

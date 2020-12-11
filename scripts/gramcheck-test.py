@@ -23,46 +23,64 @@ class YamlGramChecker(GramChecker):
         self.yaml_parent = yaml_parent
         self.checker = self.app()
 
-    def app(self):
-        def print_error(string):
-            print(string, file=sys.stderr)
+    @staticmethod
+    def print_error(string):
+        print(string, file=sys.stderr)
 
-        config = self.config
-
-        if config.get('Archive'):
-            archive_file = Path(f'{self.yaml_parent}/{config.get("Archive")}')
+    @property
+    def archive_path(self):
+        if self.config.get('spec'):
+            archive_file = Path(self.config.get('spec'))
             if archive_file.is_file():
-                spec = libdivvun.ArCheckerSpec(str(archive_file))
-                pipename = spec.defaultPipe()
-                verbose = False
-                return spec.getChecker(pipename, verbose)
+                return archive_file
             else:
-                print_error('Error in section Archive of the yaml file.\n' +
-                            f'The file {archive_file} does not exist')
+                self.print_error(
+                    f'The file {self.config.get("spec")} does not exist')
                 sys.exit(2)
 
-        if {config.get("Spec")}:
-            spec_file = Path(f'{self.yaml_parent}/{config.get("Spec")}')
-            if spec_file.is_file():
-                os.chdir(spec_file.parent)
-                spec = libdivvun.CheckerSpec(spec_file.name)
-                if spec.hasPipe(config.get("Variant")):
-                    verbose = False
-                    return spec.getChecker(config.get("Variant"), verbose)
-                else:
-                    print_error(
-                        'Error in section Variant of the yaml file.\n' +
-                        'There is no pipeline named '
-                        f'"{config.get("Variant")}" in {spec_file}')
-                    sys.exit(3)
+        if self.config.get('Config').get('Archive'):
+            archive_file = Path(
+                f'{self.yaml_parent}/{self.config.get("Config").get("Archive")}'
+            )
+            if archive_file.is_file():
+                return str(archive_file)
             else:
-                print_error('Error in section Spec of the yaml file.\n' +
-                            f'The file {spec_file} does not exist')
-                sys.exit(4)
+                self.print_error(
+                    'Error in section Archive of the yaml file.\n' +
+                    f'The file {archive_file} does not exist')
+                sys.exit(3)
 
-        print_error('Error in Config section of yaml file. '
-                    'Neither Archive nor Spec exists')
-        sys.exit(5)
+        spec_file = Path(
+            f'{self.yaml_parent}/{self.config.get("Config").get("Spec")}')
+        if spec_file.is_file():
+            return spec_file
+        else:
+            self.print_error('Error in section Spec of the yaml file.\n' +
+                             f'The file {spec_file} does not exist')
+            sys.exit(4)
+
+    def app(self):
+        config = self.config
+        spec_file = self.archive_path
+
+        if spec_file.suffix == '.zcheck':
+            spec = libdivvun.ArCheckerSpec(str(spec_file))
+            return spec.getChecker(pipename=spec.defaultPipe(), verbose=False)
+
+        spec = libdivvun.CheckerSpec(str(spec_file))
+        if spec.hasPipe(config.get("Config").get("Variant")):
+            return spec.getChecker(
+                pipename=config.get("Config").get("Variant"), verbose=False)
+        else:
+            self.print_error(
+                'Error in section Variant of the yaml file.\n' +
+                'There is no pipeline named '
+                f'"{config.get("Config").get("Variant")}" in {spec_file}')
+            sys.exit(5)
+
+        self.print_error('Error in Config section of yaml file. '
+                         'Neither Archive nor Spec exists')
+        sys.exit(6)
 
 
 class YamlGramTest(GramTest):
@@ -103,22 +121,24 @@ class YamlGramTest(GramTest):
             for key in list(COLORS.keys()):
                 COLORS[key] = ""
 
+        config['spec'] = args.spec
+        config.update(self.yaml_reader(config['test_file']))
+
         return config
 
-    def yaml_reader(self):
-        test_file = self.config.get('test_file')
+    @staticmethod
+    def yaml_reader(test_file):
         with test_file.open() as test_file:
             return yaml.load(test_file, Loader=yaml.FullLoader)
 
     @property
     def tests(self):
-        yaml_stream = self.yaml_reader()
-        grammarchecker = YamlGramChecker(yaml_stream.get('Config'),
+        grammarchecker = YamlGramChecker(self.config,
                                          self.config['test_file'].parent)
 
         return {
             test: grammarchecker.get_data(test)
-            for test in yaml_stream['Tests']
+            for test in self.config['Tests']
         }
 
 
@@ -145,14 +165,12 @@ class YamlUI(UI):
             action="store_true",
             help="Suppresses passes to make finding fails easier")
         self.add_argument(
-            "-t",
-            "--test",
-            dest="test",
-            nargs='?',
+            "-s",
+            "--spec",
+            dest="spec",
             required=False,
-            help="""Which test to run (Default: all). TEST = test ID, e.g.
-            'Noun - g\u00E5etie' (remember quotes if the ID contains spaces)"""
-        )
+            help="""Path to the pipeline.xml spec file. Usefull when doing out of
+            tree builds.""")
         self.add_argument("-v",
                           "--verbose",
                           dest="verbose",

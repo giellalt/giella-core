@@ -124,6 +124,12 @@ class YamlGramTest(GramTest):
         config['spec'] = args.spec
         config.update(self.yaml_reader(config['test_file']))
 
+        if args.total:
+            notfixed = (config['test_file'].parent /
+                        f"{config['test_file'].stem}.notfixed.yaml")
+            if notfixed.is_file():
+                config['Tests'].extend(self.yaml_reader(notfixed).get('Tests'))
+
         return config
 
     @staticmethod
@@ -169,8 +175,15 @@ class YamlUI(UI):
             "--spec",
             dest="spec",
             required=False,
-            help="""Path to the pipeline.xml spec file. Usefull when doing out of
-            tree builds.""")
+            help="""Path to the pipeline.xml spec file. Usefull when doing out
+            of tree builds""")
+        self.add_argument(
+            "-t",
+            "--total",
+            dest="total",
+            action='store_true',
+            required=False,
+            help="""Merge tests from x.yaml and x.notfixed.yaml""")
         self.add_argument("-v",
                           "--verbose",
                           dest="verbose",

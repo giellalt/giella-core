@@ -1,0 +1,12 @@
+## Process this file with automake to produce Makefile.in
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+######## Test targets: ###########
+
+if WANT_GRAMCHECK
+
+# Default variable for all languages
+TESTS_ENVIRONMENT = gramcheck-test.py -q -s ../$(GTLANG2).zcheck 2>/dev/null
+
+endif # WANT_GRAMCHECK

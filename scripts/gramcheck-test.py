@@ -12,6 +12,7 @@ from pathlib import Path
 
 import libdivvun
 import yaml
+from lxml import etree
 
 from corpustools import errormarkup
 from gramcheck_comparator import COLORS, UI, GramChecker, GramTest
@@ -59,6 +60,27 @@ class YamlGramChecker(GramChecker):
                              f'The file {spec_file} does not exist')
             sys.exit(4)
 
+    @staticmethod
+    def check_spec(spec_file, variant):
+        xml_spec = etree.parse(str(spec_file))
+        tags = xml_spec.xpath(f'.//pipeline[@name="{variant}"]//*[@n]')
+        for tag in tags:
+            name = Path(tag.get('n'))
+            this_path = spec_file.parent / name
+            if not this_path.is_file():
+                raise SystemExit(f'''
+    ERROR: Cannot run this this test!
+    {this_path.resolve()}
+    is listed as a dependency in
+    {spec_file.resolve()}
+    but does not exist.\n
+    Run:
+    ./configure --without-forrest \\
+    --enable-grammarchecker --enable-tokenisers \\
+    --disable-hfst-desktop-spellers\n
+    Then:
+    make''')
+
     def app(self):
         config = self.config
         spec_file = self.archive_path
@@ -69,6 +91,7 @@ class YamlGramChecker(GramChecker):
 
         spec = libdivvun.CheckerSpec(str(spec_file))
         if spec.hasPipe(config.get("Config").get("Variant")):
+            self.check_spec(spec_file, config.get("Config").get("Variant"))
             return spec.getChecker(
                 pipename=config.get("Config").get("Variant"), verbose=False)
         else:

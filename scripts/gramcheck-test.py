@@ -76,7 +76,7 @@ class YamlGramChecker(GramChecker):
     but does not exist.\n
     Run:
     ./configure --without-forrest \\
-    --enable-grammarchecker --enable-tokenisers \\
+    --enable-grammarchecker \\
     --disable-hfst-desktop-spellers\n
     Then:
     make''')

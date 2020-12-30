@@ -150,7 +150,7 @@ class YamlGramTest(GramTest):
         if args.total:
             notfixed = (config['test_file'].parent /
                         f"{config['test_file'].stem}.notfixed.yaml")
-            if notfixed.is_file():
+            if notfixed.is_file() and self.yaml_reader(notfixed).get('Tests'):
                 config['Tests'].extend(self.yaml_reader(notfixed).get('Tests'))
 
         return config

@@ -1,12 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 """This script builds a multilingual forrest site.
 
 --destination (-d) an ssh destination
 --sitehome (-s) where sd and techdoc lives
 """
-from __future__ import absolute_import, print_function
 
 import argparse
 import collections
@@ -21,7 +19,6 @@ import subprocess
 
 import lxml.etree as etree
 
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -35,7 +32,6 @@ class StaticSiteBuilder(object):
         langs (list): list of langs to be built
         logfile (file handle)
     """
-
     def __init__(self, builddir, destination, langs):
         """Init StaticSiteBuilder with builddir, destination and langs.
 
@@ -66,7 +62,8 @@ class StaticSiteBuilder(object):
             with open(lockname) as lock:
                 logger.warn('Another build with PID {} has been running '
                             'since {}'.format(
-                                lock.read(), datetime.datetime.fromtimestamp(
+                                lock.read(),
+                                datetime.datetime.fromtimestamp(
                                     os.path.getmtime(lockname))))
                 raise SystemExit(5)
 
@@ -102,13 +99,13 @@ class StaticSiteBuilder(object):
             lang (str): a two or three character long string
         """
         logger.debug('Setting language {}'.format(lang))
-        for line in fileinput.FileInput(
-                os.path.join(self.builddir, 'forrest.properties'), inplace=1):
+        for line in fileinput.FileInput(os.path.join(self.builddir,
+                                                     'forrest.properties'),
+                                        inplace=1):
             if 'forrest.jvmargs' in line:
                 line = (
                     'forrest.jvmargs=-Djava.awt.headless=true '
-                    '-Dfile.encoding=utf-8 -Duser.language={}'.format(lang)
-                )
+                    '-Dfile.encoding=utf-8 -Duser.language={}'.format(lang))
             if 'project.i18n' in line:
                 line = 'project.i18n=true'
             print(line.rstrip())
@@ -119,9 +116,9 @@ class StaticSiteBuilder(object):
         Since the xml file is not valid xml, do plain text parsing
         """
         counter = collections.Counter()
-        for line in fileinput.FileInput(os.path.join(self.builddir, 'build',
-                                                     'tmp',
-                                                     'brokenlinks.xml')):
+        for line in fileinput.FileInput(
+                os.path.join(self.builddir, 'build', 'tmp',
+                             'brokenlinks.xml')):
             if '<link' in line and '</link>' in line:
                 if 'tca2testing' in line:
                     counter['tca2testing'] += 1
@@ -132,8 +129,8 @@ class StaticSiteBuilder(object):
 
                     message = line[:line.rfind('"')]
                     text = line[line.rfind('>') + 1:]
-                    logger.error('{message}: {text}\n'.format(
-                        message=message, text=text))
+                    logger.error('{message}: {text}\n'.format(message=message,
+                                                              text=text))
             elif '<link' in line:
                 line = line.strip().replace('<link message="', '')
                 logger.error('{message}'.format(message=line))
@@ -146,7 +143,7 @@ class StaticSiteBuilder(object):
                 logger.error('{message}: {text}\n'.format(message=message,
                                                           text=text))
 
-        for name, number in counter.items():
+        for name, number in list(counter.items()):
             if 'tca2' in name:
                 logger.error(name)
             logger.error('{} broken links'.format(number))
@@ -167,8 +164,8 @@ class StaticSiteBuilder(object):
                 if len(buildtimes[build_time]) < 10:
                     logger.info(make_info(build_time, buildtimes))
                 else:
-                    logger.info('{}s: {}'.format(
-                        build_time, len(buildtimes[build_time])))
+                    logger.info('{}s: {}'.format(build_time,
+                                                 len(buildtimes[build_time])))
 
         buildline = re.compile('^\* \[\d+/\d+\].+Kb.+/.+')
         buildtimes = collections.defaultdict(list)
@@ -179,13 +176,12 @@ class StaticSiteBuilder(object):
                 if buildline.match(line):
                     parts = line.split()
                     seconds = int(parts[-3].split('.')[0])
-                    buildtimes[seconds].append(info(link=parts[-1],
-                                                    size=parts[-2]))
+                    buildtimes[seconds].append(
+                        info(link=parts[-1], size=parts[-2]))
             except ValueError as error:
-                logger.info(
-                    'Error parsing buildtimes.\n'
-                    'Line: {}\n'
-                    'Error: {}\n'.format(line, str(error)))
+                logger.info('Error parsing buildtimes.\n'
+                            'Line: {}\n'
+                            'Error: {}\n'.format(line, str(error)))
 
         print_buildtime_distribution(buildtimes)
 
@@ -210,7 +206,8 @@ class StaticSiteBuilder(object):
         before = datetime.datetime.now()
         (_, output) = self.run_command('forrest site')
         logger.info('Building {} lasted {}'.format(
-            lang, datetime.datetime.now() - before))
+            lang,
+            datetime.datetime.now() - before))
 
         self.parse_buildtimes(output)
         self.parse_broken_links()
@@ -270,9 +267,8 @@ class StaticSiteBuilder(object):
                     if file_.endswith('.html') or file_.endswith('.pdf'):
                         newname = file_ + '.' + lang
 
-                    shutil.copy(
-                        os.path.join(root, file_),
-                        os.path.join(goal_dir, newname))
+                    shutil.copy(os.path.join(root, file_),
+                                os.path.join(goal_dir, newname))
 
             self.copy_ckeditor()
             shutil.move(builddir, os.path.join(builtdir, lang))
@@ -293,12 +289,15 @@ class StaticSiteBuilder(object):
             command: string containing the shell command
         """
         logger.info('Running {}'.format(command))
-        subp = subprocess.Popen(
-            command.split(),
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=self.builddir)
+        subp = subprocess.Popen(command.split(),
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                cwd=self.builddir)
 
         (output, error) = subp.communicate()
 
+        output = output.decode('utf8')
+        error = error.decode('utf8')
         if subp.returncode != 0:
             logger.error('{} finished with errors'.format(command))
             logger.error('stdout')
@@ -332,9 +331,9 @@ class StaticSiteBuilder(object):
             offending_file = os.path.join(self.builddir, 'built', 'index.html')
             if os.path.exists(offending_file):
                 os.remove(offending_file)
-        (returncode, _) = self.run_command(
-            'rsync -avz -e ssh {src} {dst}'.format(src=os.path.join(
-                self.builddir, 'built/'), dst=self.destination))
+        (returncode,
+         _) = self.run_command('rsync -avz -e ssh {src} {dst}'.format(
+             src=os.path.join(self.builddir, 'built/'), dst=self.destination))
         if returncode != 0:
             raise SystemExit(returncode)
 
@@ -374,22 +373,29 @@ class LanguageAdder(object):
     def __del__(self):
         """Write self.tree to self.filename."""
         with open(self.filename, 'w') as outhtml:
-            outhtml.write(etree.tostring(self.tree, encoding='utf8',
-                                         pretty_print=True, method='html'))
+            outhtml.write(
+                etree.tostring(self.tree,
+                               encoding='unicode',
+                               pretty_print=True,
+                               method='html'))
 
     def add_lang_info(self):
         """Create the language navigation element and add it to self.tree."""
-        my_nav_bar = self.tree.getroot().find(
-            './/ul[@class="navbar-nav"]',
-            namespaces=self.namespace)
+        my_nav_bar = self.tree.getroot().find('.//ul[@class="navbar-nav"]',
+                                              namespaces=self.namespace)
         my_nav_bar.append(self.make_lang_menu())
 
     def make_lang_menu(self):
         """Make the language menu for self.this_lang."""
-        trlangs = {u'fi': u'Suomeksi', u'no': u'På norsk',
-                   u'sma': u'Åarjelsaemien', u'se': u'Davvisámegillii',
-                   u'smj': u'Julevsábmáj', u'sv': u'På svenska',
-                   u'en': u'In English'}
+        trlangs = {
+            'fi': 'Suomeksi',
+            'no': 'På norsk',
+            'sma': 'Åarjelsaemien',
+            'se': 'Davvisámegillii',
+            'smj': 'Julevsábmáj',
+            'sv': 'På svenska',
+            'en': 'In English'
+        }
 
         right_menu = etree.Element('li')
         right_menu.set('class', 'nav-item dropdown')
@@ -400,7 +406,7 @@ class LanguageAdder(object):
         dropdown.set('data-toggle', 'dropdown')
         dropdown.set('class', 'nav-link dropdown-toggle')
         dropdown.set('href', '#')
-        dropdown.text = u'Change language'
+        dropdown.text = 'Change language'
 
         dropdown_toggle = etree.SubElement(right_menu, 'div')
         dropdown_toggle.set('aria-labelledby', 'navbarDropdownMenuLink')
@@ -410,8 +416,8 @@ class LanguageAdder(object):
             if lang != self.this_lang:
                 a = etree.SubElement(dropdown_toggle, 'a')
                 a.set('class', 'dropdown-item')
-                filename = '/' + lang + self.filename.replace(self.builddir,
-                                                              '')
+                filename = '/' + lang + self.filename.replace(
+                    self.builddir, '')
                 a.set('href', filename)
                 a.text = trlangs[lang]
 
@@ -422,19 +428,21 @@ def parse_options():
     """Parse command line options."""
     parser = argparse.ArgumentParser(
         description='This script builds a multilingual forrest site.')
-    parser.add_argument('--destination', '-d',
+    parser.add_argument('--destination',
+                        '-d',
                         help='an ssh destination',
                         required=True)
-    parser.add_argument('--sitehome', '-s',
+    parser.add_argument('--sitehome',
+                        '-s',
                         help='where the forrest site lives',
                         required=True)
-    parser.add_argument('--verbosity', '-V',
+    parser.add_argument('--verbosity',
+                        '-V',
                         help='Set the logger level, default is warning\n'
                         'The allowed values are: warning, info, debug\n'
                         'Default is info.',
                         default='info')
-    parser.add_argument('langs', help='list of languages',
-                        nargs='+')
+    parser.add_argument('langs', help='list of languages', nargs='+')
 
     args = parser.parse_args()
     return args
@@ -442,12 +450,14 @@ def parse_options():
 
 def main():
     """Build a forrest site, copy the static site to its destination."""
-    logging_dict = {'info': logging.INFO,
-                    'warning': logging.WARNING,
-                    'debug': logging.DEBUG}
+    logging_dict = {
+        'info': logging.INFO,
+        'warning': logging.WARNING,
+        'debug': logging.DEBUG
+    }
     args = parse_options()
 
-    if args.verbosity in logging_dict.keys():
+    if args.verbosity in list(logging_dict.keys()):
         if args.verbosity == 'debug':
             logging.info(
                 'Logging level is set to debug. Output will very verbose')
@@ -455,7 +465,7 @@ def main():
     else:
         raise SystemExit(
             '-V|--verbosity must be one of: {}\n{} was given.'.format(
-                '|'.join(logging_dict.keys()), args.verbosity))
+                '|'.join(list(logging_dict.keys())), args.verbosity))
 
     with StaticSiteBuilder(args.sitehome, args.destination,
                            args.langs) as builder:

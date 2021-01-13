@@ -6,6 +6,7 @@
 VPATH_MD_PAGES=$(addprefix $(srcdir)/,$(MD_PAGES))
 ALLINONE_MD_PAGE=$(srcdir)/$(GTLANG).md
 LINKS=$(srcdir)/Links.md
+HEADER=$(srcdir)/link-header.md
 INDEX=$(srcdir)/index.md
 
 # no regenerations while debugging
@@ -89,8 +90,9 @@ $(LINKS): $(VPATH_MD_PAGES)
 			> $@
 
 # FIXME: some temporary stuff to have index page
-$(INDEX): $(LINKS) $(ALLINONE_MD_PAGE)
+$(INDEX): $(LINKS) $(ALLINONE_MD_PAGE) $(HEADER)
 	head -n 3 $(ALLINONE_MD_PAGE) > $@
+	cat $(HEADER) >> $@
 	cat $(LINKS) >> $@
 
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am

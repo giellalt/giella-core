@@ -64,6 +64,21 @@
     <xsl:text>&#xa;</xsl:text>
   </xsl:template>
 
+  <xsl:template match="dl">
+    <ul>
+      <xsl:apply-templates select="dt"/>
+    </ul>
+  </xsl:template>
+
+  <xsl:template match="dt">
+    <li>
+     <strong>
+      <xsl:apply-templates select="@*|node()"/>:
+     </strong><br/>
+      <xsl:apply-templates select="following-sibling::dd[1]/node()"/>
+    </li>
+  </xsl:template>
+
   <xsl:template match="p[@class='last_modified']"/>
 
   <xsl:template match="@*|node()">

@@ -17,6 +17,7 @@ doc_DATA=$(INDEX) $(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 gh-pages: $(INDEX) $(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 
 DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2gfm.awk
+JSPWIKI2MD=$(GTCORE)/scripts/jspwiki2md.awk
 
 GRAPHPLOTTER=$(GTCORE)/scripts/plot-speller-progress.R
 
@@ -94,6 +95,10 @@ $(INDEX): $(LINKS) $(ALLINONE_MD_PAGE) $(HEADER)
 	head -n 3 $(ALLINONE_MD_PAGE) > $@
 	cat $(HEADER) >> $@
 	cat $(LINKS) >> $@
+
+
+%.md: %.jspwiki
+	$(AM_V_AWK)"$(GAWK)" -f $(JSPWIKI2MD) < $< > $@
 
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 # vim: set ft=automake:

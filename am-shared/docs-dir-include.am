@@ -78,6 +78,9 @@ $(srcdir)/%-stems.md: $(top_srcdir)/src/fst/stems/%.lexc
 $(srcdir)/%-affixes.md: $(top_srcdir)/src/fst/affixes/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
+$(srcdir)/%.md: $(top_srcdir)/src/transcriptions/%.lexc
+	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
+
 $(ALLINONE_MD_PAGE): $(VPATH_MD_PAGES)
 	$(AM_V_at)-rm -rf build
 	$(AM_V_at)-rm -rf $(srcdir)/build

@@ -165,15 +165,21 @@ class YamlGramTest(GramTest):
         with test_file.open() as test_file:
             return yaml.load(test_file, Loader=yaml.FullLoader)
 
+    @staticmethod
+    def make_error_markup(text):
+        para = etree.Element('p')
+        para.text = text
+        errormarkup.add_error_markup(para)
+
+        return para
+
     @property
-    def tests(self):
+    def paragraphs(self):
         grammarchecker = YamlGramChecker(self.config,
                                          self.config['test_file'].parent)
 
-        return {
-            test: grammarchecker.get_data(test)
-            for test in self.config['Tests']
-        }
+        return (grammarchecker.get_data(self.make_error_markup(text))
+                for text in self.config['Tests'])
 
 
 class YamlUI(UI):

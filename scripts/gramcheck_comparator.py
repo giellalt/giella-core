@@ -328,17 +328,10 @@ class GramChecker:
 
         return self.fix_all_errors(res)['errs']
 
-    def get_data(self, sentence):
-        def make_errormarkup(sentence):
-            para = etree.Element('p')
-            para.text = sentence
-            errormarkup.add_error_markup(para)
-
-            return para
-
+    def get_data(self, para):
         parts = []
         errors = []
-        self.extract_error_info(parts, errors, make_errormarkup(sentence))
+        self.extract_error_info(parts, errors, para)
 
         return {
             'uncorrected': ''.join(parts),
@@ -570,13 +563,15 @@ class GramTest:
                                                  gramcheck_errors)
         for true_positive in true_positives:
             count['tp'] += 1
-            out.success(item[0], length, 'tp', true_positive[0], true_positive[1])
+            out.success(item[0], length, 'tp', true_positive[0],
+                        true_positive[1])
 
         true_negatives = self.has_true_negatives(expected_errors,
                                                  gramcheck_errors)
         for true_negative in true_negatives:
             count['tn'] += 1
-            out.success(item[0], length, 'tn', true_negative[0], true_negative[1])
+            out.success(item[0], length, 'tn', true_negative[0],
+                        true_negative[1])
 
         false_positives_1 = self.has_false_positives_1(expected_errors,
                                                        gramcheck_errors)
@@ -688,6 +683,10 @@ class GramTest:
     def __str__(self):
         return str(self.config.get('out'))
 
+    @property
+    def tests(self):
+        return {test['uncorrected']: test for test in self.paragraphs}
+
 
 class CorpusGramTest(GramTest):
     def __init__(self, args):
@@ -701,22 +700,12 @@ class CorpusGramTest(GramTest):
 
     @property
     def paragraphs(self):
+        grammarchecker = CorpusGramChecker(self.archive)
+
         for filename in ccat.find_files(self.targets, '.xml'):
             root = etree.parse(filename)
             for para in root.iter('p'):
-                if para.text:
-                    text = para.text
-                    if not text.startswith('#'):
-                        yield para.text
-
-    @property
-    def tests(self):
-        grammarchecker = CorpusGramChecker(self.archive)
-
-        return {
-            test: grammarchecker.get_data(test)
-            for test in self.paragraphs
-        }
+                yield grammarchecker.get_data(para)
 
 
 class UI(ArgumentParser):

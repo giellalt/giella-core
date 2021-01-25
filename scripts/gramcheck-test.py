@@ -138,7 +138,7 @@ class YamlGramTest(GramTest):
                 "final": GramTest.FinalOutput
             }.get(args.output, lambda x: None)(args)
 
-        config['test_file'] = Path(args.test_file)
+        config['test_file'] = Path(args.test_files[0])
 
         if not args.colour:
             for key in list(COLORS.keys()):
@@ -147,11 +147,16 @@ class YamlGramTest(GramTest):
         config['spec'] = args.spec
         config.update(self.yaml_reader(config['test_file']))
 
-        if args.total:
+        if args.total and len(args.test_files) == 1:
             notfixed = (config['test_file'].parent /
                         f"{config['test_file'].stem}.notfixed.yaml")
             if notfixed.is_file() and self.yaml_reader(notfixed).get('Tests'):
                 config['Tests'].extend(self.yaml_reader(notfixed).get('Tests'))
+
+        if len(args.test_files) > 1:
+            for test_file in args.test_files[1:]:
+                config['Tests'].extend(
+                    self.yaml_reader(Path(test_file)).get('Tests'))
 
         return config
 
@@ -212,7 +217,9 @@ class YamlUI(UI):
                           dest="verbose",
                           action="store_true",
                           help="More verbose output.")
-        self.add_argument("test_file", help="YAML file with test rules")
+        self.add_argument("test_files",
+                          nargs="+",
+                          help="YAML files with test rules")
 
         self.test = YamlGramTest(self.parse_args())
 

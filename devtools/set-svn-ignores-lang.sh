@@ -59,6 +59,7 @@ dirlist=$(find $1 \
 			-not -iwholename '*grammarcheckers/4*' \
 			-not -iwholename '*grammarcheckers/modes*' \
 			-not -iwholename '*grammarcheckers/*-x-standard*' \
+			-not -iwholename '*phonetics/test*' \
 			-type d)
 
 # Remove intermediate ../../:

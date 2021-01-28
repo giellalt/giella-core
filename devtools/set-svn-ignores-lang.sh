@@ -119,11 +119,6 @@ $fstfiles
 *.lexc
 *.regex" $1/src/filters
 
-# Ignore all temporary and generated files in the src/hyphenation/ dir:
-$svnignore "$mkfiles
-$fstfiles
-hyphenation.xfscript" $1/src/hyphenation
-
 # Ignore all temporary and generated files in the src/fst/ dir:
 $svnignore "$mkfiles
 $fstfiles
@@ -134,6 +129,11 @@ root.lexc" $1/src/fst
 
 # Ignore all files in the src/fst/generated_files dir:
 $svnignore "*" $1/src/fst/generated_files
+
+# Ignore all temporary and generated files in the src/hyphenation/ dir:
+$svnignore "$mkfiles
+$fstfiles
+hyphenation.xfscript" $1/src/hyphenation
 
 # Ignore all temporary and generated files in the src/orthography/ dir:
 $svnignore "$mkfiles

@@ -185,7 +185,8 @@ hfstdata_DATA=$(GT_ANALYSERS)       \
 			  $(ALT_WS_ANALYSERS)   \
 			  $(ALT_WS_GENERATORS)  \
 			  $(ALT_ORTH_ANALYSERS) \
-			  $(ALT_ORTH_GENERATORS)
+			  $(ALT_ORTH_GENERATORS)\
+			  $(CUSTOM_FSTS)
 
 noinst_DATA=$(GT_RAW)              \
 			$(GT_FSTs_NO_INSTALL)

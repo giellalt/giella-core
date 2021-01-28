@@ -154,7 +154,8 @@ $fstfiles
 dependency.cg3
 disambiguator.cg3
 functions.cg3
-korp.cg3" $1/src/cg3
+korp.cg3
+valency-postspell.cg3" $1/src/cg3
 
 # Set the svn:ignore prop on the test/data/ dir:
 $svnignore "$mkfiles

@@ -157,104 +157,15 @@ functions.cg3
 korp.cg3
 valency-postspell.cg3" $1/src/cg3
 
-# Set the svn:ignore prop on the test/data/ dir:
-$svnignore "$mkfiles
-$fstfiles
-missing_*" $1/test/data
-
-# Set the svn:ignore prop on the tools/grammarcheckers/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.pmhfst
-*.cg3
-*.zhfst
-*.zcheck
-modes
-errors.xml
-schemas.xml
-pipespec.xml" $1/tools/grammarcheckers
-
-# Set the svn:ignore prop on the tools/analysers/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.pmhfst
-*.cg3
-*.zcheck
-modes
-pipespec.xml" $1/tools/analysers
-
-# Set the svn:ignore prop on the tools/grammarcheckers/filters/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.regex
-*.txt" $1/tools/grammarcheckers/filters
-
-# Set the svn:ignore prop on the tools/hyphenators/ dir:
-$svnignore "$mkfiles
-$fstfiles
-all_tags.txt" $1/tools/hyphenators
-
-# Set the svn:ignore prop on the tools/mt/apertium/ dir:
-$svnignore "$mkfiles
-$fstfiles
-sigma.txt
-*.cg3
-*.att.gz" $1/tools/mt/apertium
-
-# Set the svn:ignore prop on the tools/mt/apertium/filters/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*txt
-*.regex" $1/tools/mt/apertium/filters
-
-# Set the svn:ignore prop on the tools/mt/apertium/tagsets/ dir:
-$svnignore "$mkfiles
-$fstfiles
-apertium.relabel
-*tags.txt" $1/tools/mt/apertium/tagsets
-
-# Set the svn:ignore prop on the spellcheckers/ dir:
-$svnignore "$mkfiles
-$fstfiles
-easteregg.*
-*.service
-*.zhfst
-*.oxt
-*.xpi
-*.zip
-test.*
-build
-editdist.*.regex
-3" $1/tools/spellcheckers
-
-# Set svn:ignore on the tools/spellcheckers/fstbased/mobile/weighting/ dir:
-$svnignore "$mkfiles
-$fstfiles
-spellercorpus.clean.txt" $1/tools/spellcheckers/weights
-
-# Set the svn:ignore prop on the shellscripts dir:
-$svnignore "$mkfiles
-*.sh
-*.txt" $1/tools/shellscripts
-
-# Set the svn:ignore prop on the test/tools/tokenisers/ dir:
-$svnignore "$mkfiles
-*.hfst
-*.pmhfst
-*.tmp
-*.bin
-abbr.txt" $1/tools/tokenisers
-
-# Set the svn:ignore prop on the test/tools/tokenisers/filters/ dir:
-$svnignore "$mkfiles
-$fstfiles
-*.regex
-*.txt" $1/tools/tokenisers/filters
-
 # Set the svn:ignore prop on the test/ dir:
 $svnignore "$mkfiles
 run-yaml-testcases.sh
 run-morph-tester.sh" $1/test
+
+# Set the svn:ignore prop on the test/data/ dir:
+$svnignore "$mkfiles
+$fstfiles
+missing_*" $1/test/data
 
 # Set the svn:ignore prop on the test/src/ dir:
 $svnignore "$mkfiles
@@ -304,6 +215,100 @@ $svnignore "$mkfiles
 *.txt
 *.sh" $1/test/tools/spellcheckers/fstbased/desktop/hfst
 
+
+# Set the svn:ignore prop on the tools/analysers/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.pmhfst
+*.cg3
+*.zcheck
+modes
+pipespec.xml" $1/tools/analysers
+
+# Set the svn:ignore prop on the tools/grammarcheckers/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.pmhfst
+*.cg3
+*.zhfst
+*.zcheck
+modes
+errors.xml
+schemas.xml
+pipespec.xml" $1/tools/grammarcheckers
+
+# Set the svn:ignore prop on the tools/grammarcheckers/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.regex
+*.txt" $1/tools/grammarcheckers/filters
+
+# Set the svn:ignore prop on the tools/hyphenators/ dir:
+$svnignore "$mkfiles
+$fstfiles
+all_tags.txt" $1/tools/hyphenators
+
+# Set the svn:ignore prop on the tools/mt/apertium/ dir:
+$svnignore "$mkfiles
+$fstfiles
+sigma.txt
+*.cg3
+*.att.gz" $1/tools/mt/apertium
+
+# Set the svn:ignore prop on the tools/mt/apertium/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*txt
+*.regex" $1/tools/mt/apertium/filters
+
+# Set the svn:ignore prop on the tools/mt/apertium/tagsets/ dir:
+$svnignore "$mkfiles
+$fstfiles
+apertium.relabel
+*tags.txt" $1/tools/mt/apertium/tagsets
+
+# Set the svn:ignore prop on the spellcheckers/ dir:
+$svnignore "$mkfiles
+$fstfiles
+easteregg.*
+*.service
+*.zhfst
+*.oxt
+*.xpi
+*.zip
+test.*
+build
+editdist.*.regex
+3" $1/tools/spellcheckers
+
+# Set svn:ignore on the tools/spellcheckers/fstbased/mobile/weighting/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.regex" $1/tools/spellcheckers/filters
+
+# Set svn:ignore on the tools/spellcheckers/fstbased/mobile/weighting/ dir:
+$svnignore "$mkfiles
+$fstfiles
+spellercorpus.clean.txt" $1/tools/spellcheckers/weights
+
+# Set the svn:ignore prop on the shellscripts dir:
+$svnignore "$mkfiles
+*.sh
+*.txt" $1/tools/shellscripts
+
+# Set the svn:ignore prop on the test/tools/tokenisers/ dir:
+$svnignore "$mkfiles
+*.hfst
+*.pmhfst
+*.tmp
+*.bin
+abbr.txt" $1/tools/tokenisers
+
+# Set the svn:ignore prop on the test/tools/tokenisers/filters/ dir:
+$svnignore "$mkfiles
+$fstfiles
+*.regex
+*.txt" $1/tools/tokenisers/filters
 
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/src/fst/affixes

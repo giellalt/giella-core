@@ -98,9 +98,9 @@ check_analysis_regressions.sh
 *.htokoldcomp.txt
 test_grammar_checker.sh" $1/devtools
 
-# Set the svn:ignore prop on the doc dir:
+# Set the svn:ignore prop on the docs dir:
 $svnignore "$mkfiles
-build" $1/doc
+build" $1/docs
 
 # Set the svn:ignore prop on the misc dir:
 $svnignore "*" $1/misc

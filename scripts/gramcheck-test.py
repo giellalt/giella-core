@@ -155,8 +155,9 @@ class YamlGramTest(GramTest):
 
         if len(args.test_files) > 1:
             for test_file in args.test_files[1:]:
-                config['Tests'].extend(
-                    self.yaml_reader(Path(test_file)).get('Tests'))
+                tests = self.yaml_reader(Path(test_file)).get('Tests')
+                if tests:
+                    config['Tests'].extend(tests)
 
         return config
 

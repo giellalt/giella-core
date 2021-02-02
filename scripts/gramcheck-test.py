@@ -147,11 +147,15 @@ class YamlGramTest(GramTest):
         config['spec'] = args.spec
         config.update(self.yaml_reader(config['test_file']))
 
+        if not config.get('Tests'):
+            config['Tests'] = []
+
         if args.total and len(args.test_files) == 1:
             notfixed = (config['test_file'].parent /
                         f"{config['test_file'].stem}.notfixed.yaml")
-            if notfixed.is_file() and self.yaml_reader(notfixed).get('Tests'):
-                config['Tests'].extend(self.yaml_reader(notfixed).get('Tests'))
+            tests = self.yaml_reader(notfixed).get('Tests')
+            if notfixed.is_file() and tests:
+                config['Tests'].extend(tests)
 
         if len(args.test_files) > 1:
             for test_file in args.test_files[1:]:

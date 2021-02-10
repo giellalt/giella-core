@@ -1,0 +1,6 @@
+# Core tools and resources for the GiellaLT infra
+
+- shared build resources
+- other tools used during building
+- core/shared components of developer tools
+- stylesheets and other shared resources

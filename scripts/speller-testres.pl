@@ -957,7 +957,7 @@ sub print_xml_output {
 
     $link = $doc->createElement('link');
     $link->setAttribute('rel' => "stylesheet");
-    $link->setAttribute('href' => "https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/style/speller_xml.css");
+    $link->setAttribute('href' => "https://giellalt.github.io/giella-core/assets/css/speller_xml.css");
     $head->appendChild($link);
 
     $spelltestresult->appendChild($head);

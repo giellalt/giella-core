@@ -973,7 +973,7 @@ sub print_xml_output {
     $spelltestbody->insertBefore(make_header(\@originals, $results, $doc), $results);
 
     $script = $doc->createElement('script');
-    $script->setAttribute('src' => 'https://gtsvn.uit.no/langtech/trunk/giella-core/scripts/javascript/tablesorter.js');
+    $script->setAttribute('src' => 'https://giellalt.github.io/giella-core/assets/js/tablesorter.js');
     $script->appendTextNode(' ');
     $spelltestbody->appendChild($script);
 

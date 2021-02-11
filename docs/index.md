@@ -4,3 +4,5 @@
 - other tools used during building
 - core/shared components of developer tools
 - stylesheets and other shared resources
+
+<script src="assets/js/tablesorter.js"> </script>

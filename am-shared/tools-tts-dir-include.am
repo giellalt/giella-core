@@ -17,105 +17,49 @@
 
 ####### Intermediate target file names: ########
 
-# set this to the filename of the analyser archive:
-GIELLA_ANL_ZDISTRO=$(GLANG2).zpipe
+GIELLA_ANL_IPA=text2ipa-$(GLANG).lookup.hfst
+GIELLA_XSC_CLOCK=transcriptor-clock-digit2text.filtered.lookup.hfst
+GIELLA_XSC_DATE=transcriptor-date-digit2text.filtered.lookup.hfst
+GIELLA_XSC_ABBREV=transcriptor-abbrevs2text.filtered.lookup.hfst
+GIELLA_XSC_NUMBER=transcriptor-numbers-digit2text.filtered.lookup.hfst
+GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfst
 
-GIELLA_ANL_VALENCY=$(GIELLA_ANL_VALENCY_SRC:.cg3=.bin)
-GIELLA_ANL_WHSPACE_ANAL=$(GIELLA_ANL_WHSPACE_ANAL_SRC:.regex=.hfst)
-GIELLA_ANL_MWEDIS=$(GIELLA_ANL_MWEDIS_SRC:.cg3=.bin)
-GIELLA_ANL_DISAMBIGUATOR=$(GIELLA_ANL_DISAMBIGUATOR_SRC:.cg3=.bin)
-GIELLA_ANL_FUNCTIONS=$(GIELLA_ANL_FUNCTIONS_SRC:.cg3=.bin)
-GIELLA_ANL_DEPENDENCY=$(GIELLA_ANL_DEPENDENCY_SRC:.cg3=.bin)
-
-GIELLA_ANL_TOKENISER=tokeniser-disamb-gt-desc.pmhfst
-GIELLA_ANL_PIPESPEC=pipespec.xml
-
-#! @var GIELLA_ANL_GRAMCHECKER_SRC source for rules of vislcg3 analyser
-GC_SRC_FILES=$(GIELLA_ANL_MWEDIS_SRC) \
-			 $(GIELLA_ANL_DISAMBIGUATOR_SRC) \
-			 $(GIELLA_ANL_WHSPACE_ANAL_SRC) \
-			 $(GIELLA_ANL_VALENCY)
-
-EXTRA_DIST=$(GC_SRC_FILES) \
-		   $(GIELLA_ANL_ERRORS) \
-		   $(GIELLA_ANL_PIPESPEC)
 
 ####### Automake targets: ########
 
-if WANT_ANL_TOOL
-if CAN_VISLCG
-
-GIELLA_ANL_ZIPFILES=$(GIELLA_ANL_TOKENISER)     \
-				   $(GIELLA_ANL_VALENCY)        \
-				   $(GIELLA_ANL_WHSPACE_ANAL)   \
-				   $(GIELLA_ANL_MWEDIS)         \
-				   $(GIELLA_ANL_DISAMBIGUATOR)  \
-				   $(GIELLA_ANL_FUNCTIONS)      \
-				   $(GIELLA_ANL_DEPENDENCY)     \
-				   $(GIELLA_ANL_PIPESPEC)       \
-				   $(LOCAL_ANL_ZIP_FILES)
-
-noinst_DATA=$(GIELLA_ANL_SPELLER)
-
-voikkosharedir=$(datadir)/giella/$(GLANG)/
-voikkoshare_DATA=$(GIELLA_ANL_ZDISTRO)
-
-endif # CAN_VISLCG
-endif # WANT_ANL_TOOL
 
 ####### Build rules - locally and via include: ########
-
-ZIPFLAGS=-j
 
 # Copy tokeniser:
 $(GIELLA_ANL_TOKENISER): \
 			$(top_builddir)/tools/tokenisers/$(GIELLA_ANL_TOKENISER)
 	$(AM_V_CP)cp -f $< $@
 
-# Compile the whitespace analyser:
-$(GIELLA_ANL_WHSPACE_ANAL): $(GIELLA_ANL_WHSPACE_ANAL_SRC)
-	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) --disjunct -i $< \
-		| $(HFST_FST2FST) -O -o $@
-
-# Copy mwe-dis:
-$(GIELLA_ANL_MWEDIS_SRC): \
-		$(top_srcdir)/tools/tokenisers/$(GIELLA_ANL_MWEDIS_SRC)
+$(GIELLA_ANL_IPA): \
+			$(top_builddir)/src/phonetics/$(GIELLA_ANL_IPA)
 	$(AM_V_CP)cp -f $< $@
 
-# cg3 files from common sources:
-$(GIELLA_ANL_FUNCTIONS_SRC) \
-$(GIELLA_ANL_DEPENDENCY_SRC): \
-%.cg3: $(top_builddir)/src/cg3/%.cg3
-	$(AM_V_CP)cp -f $< $@
+transcriptor-%.hfst: \
+			$(top_builddir)/src/transcriptions/transcriptor-%.hfstol
+	$(AM_V_FST2FST)$(HFST_FST2FST) $(HFST_FORMAT) -i $< -o $@
 
-# Disambiguator:
-$(GIELLA_ANL_DISAMBIGUATOR_SRC): \
-%.cg3: $(top_srcdir)/src/cg3/%.cg3
-	$(AM_V_CP)cp -f $< $@
 
-# Finally build the .zglt file:
-$(GIELLA_ANL_ZDISTRO): $(GIELLA_ANL_ZIPFILES)
-	$(AM_V_at)rm -f $@
-	$(AM_V_ZIP)$(ZIP) $(ZIPFLAGS) $(MORE_VERBOSITY) $@ $^
+$(GIELLA_XSC_NORMALISER): $(GIELLA_XSC_DATE) $(GIELLA_XSC_CLOCK) \
+		$(GIELLA_XSC_NUMBER) $(GIELLA_XSC_ABBREV)
+	$(AM_V_UNION)$(HFST_DISJUNCT) -1 $(GIELLA_XSC_DATE) -2 $(GIELLA_XSC_CLOCK) |\
+		$(HFST_DISJUNCT) -1 - -2 $(GIELLA_XSC_NUMBER) |\
+		$(HFST_DISJUNCT) -1 - -2 $(GIELLA_XSC_ABBREV) |\
+		$(HFST_MINIMIZE) -o $@
 
 # Additional developer tools:
-dev: modes/$(GLANG)gram.mode schemas.xml
-
-modes/%.mode: pipespec.xml
-	$(AM_V_at)$(MKDIR_P) modes
-	$(AM_V_GEN)divvun-gen-sh -d modes $<
-
-schemas.xml:
-	divvun-gen-xmlschemas >$@
 
 ### Clean target:
 clean-local:
-	-rm -f *.bin schemas.xml *.zcheck *.hfst *.hfstol *.zip *.zhfst *.cg3
-	-rm -f $(GIELLA_ANL_ZIPFILES)
-	-rm -rf modes
+	-rm -f *.hfst *.hfstol
 
 ### Include the following
 
+include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/vislcg3-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 

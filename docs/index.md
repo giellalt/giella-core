@@ -6,3 +6,4 @@
 - stylesheets and other shared resources
 
 <script src="assets/js/tablesorter.js"> </script>
+<script src="assets/js/bundle.js"> </script>

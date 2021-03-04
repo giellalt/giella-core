@@ -27,9 +27,11 @@ GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfst
 
 ####### Automake targets: ########
 
+if WANT_TTS
 noinst_DATA=$(GIELLA_ANL_IPA) \
 			$(GIELLA_ANL_TOKENISER) \
 			$(GIELLA_XSC_NORMALISER)
+endif
 
 ####### Build rules - locally and via include: ########
 

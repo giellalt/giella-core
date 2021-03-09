@@ -170,12 +170,14 @@ class YamlGramTest(GramTest):
         with test_file.open() as test_file:
             return yaml.load(test_file, Loader=yaml.FullLoader)
 
-    @staticmethod
-    def make_error_markup(text):
+    def make_error_markup(self, text):
         para = etree.Element('p')
-        para.text = text
-        errormarkup.add_error_markup(para)
-
+        try:
+            para.text = text
+            errormarkup.add_error_markup(para)
+        except TypeError:
+            print(f'Error in {self.config["test_file"]}')
+            print(text, 'is not a string')
         return para
 
     @property

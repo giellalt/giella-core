@@ -17,12 +17,13 @@
 
 ####### Intermediate target file names: ########
 
-GIELLA_ANL_IPA=text2ipa-$(GLANG).lookup.hfst
+GIELLA_ANL_IPA=text2ipa-$(GLANG).lookup.hfstol
+GIELLA_ANL_IPA_RAW=text2ipa-$(GLANG).lookup.hfst
 GIELLA_XSC_CLOCK=transcriptor-clock-digit2text.filtered.lookup.hfst
 GIELLA_XSC_DATE=transcriptor-date-digit2text.filtered.lookup.hfst
 GIELLA_XSC_ABBREV=transcriptor-abbrevs2text.filtered.lookup.hfst
 GIELLA_XSC_NUMBER=transcriptor-numbers-digit2text.filtered.lookup.hfst
-GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfst
+GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfstol
 
 
 ####### Automake targets: ########
@@ -41,8 +42,8 @@ $(GIELLA_ANL_TOKENISER): \
 	$(AM_V_CP)cp -f $< $@
 
 $(GIELLA_ANL_IPA): \
-			$(top_builddir)/src/phonetics/$(GIELLA_ANL_IPA)
-	$(AM_V_CP)cp -f $< $@
+			$(top_builddir)/src/phonetics/$(GIELLA_ANL_IPA_RAW)
+	$(AM_V_FST2FST)$(HFST_FST2FST) -f olw -i $< -o $@
 
 transcriptor-%.hfst: \
 			$(top_builddir)/src/transcriptions/transcriptor-%.hfstol

@@ -32,23 +32,31 @@ GT_TRANSCRIPTORS=
 if WANT_TRANSCRIPTORS
 # Replace .lexc with .filtered.lookup:
 DIGIT2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_TRANSCRIPTIONS_SRCS))
+ABBREV2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_ABBREV_SRCS))
 # Replace digit2text with text2digit to get the inverse fst's:
 TXT2DIGIT=$(subst digit2text,text2digit,$(DIGIT2TXT))
+TXT2ABBREV=$(subst abbrevs2text,text2abbrevs,$(ABBREV2TXT))
 
 # Add the proper suffix for each compiler:
 if CAN_HFST
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(DIGIT2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2DIGIT))
+GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2ABBREV))
+GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(ABBREV2TXT))
 endif # CAN_HFST
 
 if CAN_XFST
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(DIGIT2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2DIGIT))
+GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(ABBREV2TXT))
+GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2ABBREV))
 endif # CAN_XFST
 
 if CAN_FOMA
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(DIGIT2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2DIGIT))
+GT_TRANSCRIPTORS+=$(addsuffix .foma,$(ABBREV2TXT))
+GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2ABBREV))
 endif # CAN_FOMA
 endif # WANT_TRANSCRIPTORS
 
@@ -95,6 +103,46 @@ transcriptor-%-text2digit.filtered.$(1): \
 		quit\n" | $$(XFST_TOOL)
 endef
 $(foreach fst,hfst xfst foma,$(eval $(call txt2digit_transcriptors,$(fst))))
+
+# The abbrevs-to-text transducers are built here:
+define abbrevs2txt_transcriptors
+transcriptor-abbrevs2text.filtered.$(1): \
+					transcriptor-abbrevs2text.$(1) \
+					../filters/remove-NA-strings.$(1) \
+					../filters/remove-NG-strings.$(1) \
+					../filters/remove-usage-tags.$(1)
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+			    @\"../filters/remove-usage-tags.$(1)\" \
+			.o. @\"../filters/remove-NA-strings.$(1)\" \
+			.o. @\"../filters/remove-NG-strings.$(1)\" \
+			.o. @\"$$<\" \
+			.o. @\"../filters/remove-NG-strings.$(1)\".i \
+			.o. @\"../filters/remove-usage-tags.$(1)\".i \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+endef
+$(foreach fst,hfst xfst foma,$(eval $(call abbrevs2txt_transcriptors,$(fst))))
+
+# The text-to-abbrevs transducers are built here:
+define txt2abbrevs_transcriptors
+transcriptor-text2abbrevs.filtered.$(1): \
+					transcriptor-abbrevs2text.$(1) \
+					../filters/remove-usage-tags.$(1) \
+					../orthography/spellrelax-tags.compose.$(1) \
+					../orthography/spellrelax-with-tags.compose.$(1)
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "define Lex \
+			[   @\"../filters/remove-usage-tags.$(1)\" \
+			.o. @\"$$<\" \
+			.o. @\"../filters/remove-usage-tags.$(1)\".i \
+			] @\"../orthography/spellrelax-tags.compose.$(1)\" ;\n\
+		define spellrelax @\"../orthography/spellrelax-with-tags.compose.$(1)\" ;\n\
+		read regex Lex .o. spellrelax ;\n\
+		invert net\n\
+		save stack $$@\n\
+		quit\n" | $$(XFST_TOOL)
+endef
+$(foreach fst,hfst xfst foma,$(eval $(call txt2abbrevs_transcriptors,$(fst))))
 
 ####### Other targets: ###########
 clean-local:

@@ -699,7 +699,7 @@ class CorpusGramTest(GramTest):
                 COLORS[key] = ""
 
     def flatten_para(self, para):
-        if not para.tag == 'p' or not para.tag.startswith('error'):
+        if not para.tag.startswith('error'):
             text = para.text if para.text else ''
 
             if para.tail:

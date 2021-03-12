@@ -698,6 +698,24 @@ class CorpusGramTest(GramTest):
             for key in list(COLORS.keys()):
                 COLORS[key] = ""
 
+    def flatten_para(self, para):
+        if not para.tag == 'p' or not para.tag.startswith('error'):
+            text = para.text if para.text else ''
+
+            if para.tail:
+                text += para.tail
+
+            parent = para.getparent()
+            parent.remove(para)
+
+            if parent.text:
+                parent.text = parent.text + text
+            else:
+                parent.text = text
+
+        for child in para:
+            self.flatten_para(child)
+
     @property
     def paragraphs(self):
         grammarchecker = CorpusGramChecker(self.archive)
@@ -705,6 +723,7 @@ class CorpusGramTest(GramTest):
         for filename in ccat.find_files(self.targets, '.xml'):
             root = etree.parse(filename)
             for para in root.iter('p'):
+                self.flatten_para(para)
                 yield grammarchecker.get_data(para)
 
 

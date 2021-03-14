@@ -411,6 +411,8 @@ class GramTest:
             self.write(f'{colourise("{reset}")}\n')
 
         def success(self, case, total, type, expected_error, gramcheck_error):
+            errorinfo = f", ({expected_error.get('errorinfo')})" \
+                if expected_error.get('errorinfo') else ''
             x = colourise(
                 ("[{light_blue}{case:>%d}/{total}{reset}]" +
                  "[{green}PASS {type}{reset}] " +
@@ -419,7 +421,7 @@ class GramTest:
                 type=type,
                 error=expected_error['error'],
                 correction=expected_error['correct'],
-                expectected_type=expected_error['type'],
+                expectected_type=f"{expected_error['type']}{errorinfo}",
                 case=case,
                 total=total,
                 gramerr=gramcheck_error[0],

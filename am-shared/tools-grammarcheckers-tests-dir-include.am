@@ -7,6 +7,6 @@
 if WANT_GRAMCHECK
 
 # Default variable for all languages
-TESTS_ENVIRONMENT = $(gt-core.sh)/gramcheck-test.py -q -s ../$(GTLANG2).zcheck 2>/dev/null
+TESTS_ENVIRONMENT = $(gt-core.sh)/scripts/gramcheck-test.py -q -s ../$(GTLANG2).zcheck 2>/dev/null
 
 endif # WANT_GRAMCHECK

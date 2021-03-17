@@ -30,6 +30,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/doccomments2rst.awk \
    scripts/doccomments2tex.awk \
    scripts/doccomments2gfm.awk \
+   scripts/jspwiki2md.awk \
    scripts/edit-distance.bash \
    scripts/editdist.py \
    scripts/extract-abbr.pl \

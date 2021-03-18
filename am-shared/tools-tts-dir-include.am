@@ -106,7 +106,8 @@ $(GIELLA_XSC_NORMALISER): $(GIELLA_XSC_DATE) \
 		  -1 $(GIELLA_XSC_DATE) -2 $(GIELLA_XSC_CLOCK) \
 		| $(HFST_DISJUNCT) -1 - -2 $(GIELLA_XSC_NUMBER) \
 		| $(HFST_DISJUNCT) -1 - -2 $(GIELLA_XSC_ABBREV) \
-		| $(HFST_MINIMIZE) -o $@
+		| $(HFST_MINIMIZE) \
+		| $(HFST_FST2FST) -f olw -o $@
 
 # Copy analyser and generator for divvun-normaliser:
 # Copy mwe-dis:

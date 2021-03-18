@@ -28,6 +28,8 @@ GIELLA_XSC_DATE=transcriptor-date-digit2text.filtered.lookup.hfst
 GIELLA_XSC_ABBREV=transcriptor-abbrevs2text.filtered.lookup.hfst
 GIELLA_XSC_NUMBER=transcriptor-numbers-digit2text.filtered.lookup.hfst
 GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfstol
+GIELLA_XSC_ANALYSER=analyser-gt-desc.hfstol
+GIELLA_XSC_GENERATOR=generator-gt-norm.hfstol
 
 # Disamb and syntax analysis files, including whitespace analysis:
 GIELLA_ANL_VALENCY=$(GIELLA_ANL_VALENCY_SRC:.cg3=.bin)
@@ -56,6 +58,8 @@ if WANT_TTS
 if CAN_VISLCG
 GIELLA_ANL_ZIPFILES=$(GIELLA_ANL_IPA)            \
 					$(GIELLA_XSC_NORMALISER)     \
+					$(GIELLA_XSC_ANALYSER)       \
+					$(GIELLA_XSC_GENERATOR)      \
 					$(GIELLA_ANL_TOKENISER)      \
 					$(GIELLA_ANL_VALENCY)        \
 					$(GIELLA_ANL_WHSPACE_ANAL)   \
@@ -103,6 +107,14 @@ $(GIELLA_XSC_NORMALISER): $(GIELLA_XSC_DATE) \
 		| $(HFST_DISJUNCT) -1 - -2 $(GIELLA_XSC_NUMBER) \
 		| $(HFST_DISJUNCT) -1 - -2 $(GIELLA_XSC_ABBREV) \
 		| $(HFST_MINIMIZE) -o $@
+
+# Copy analyser and generator for divvun-normaliser:
+# Copy mwe-dis:
+$(GIELLA_XSC_ANALYSER) \
+$(GIELLA_XSC_GENERATOR): \
+%.hfstol: $(top_builddir)/src/%.hfstol
+	$(AM_V_CP)cp -f $< $@
+
 
 # Compile the whitespace analyser:
 $(GIELLA_ANL_WHSPACE_ANAL): $(GIELLA_ANL_WHSPACE_ANAL_SRC)

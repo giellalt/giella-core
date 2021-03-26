@@ -145,7 +145,7 @@ $(GIELLA_TTS_ZDISTRO): $(GIELLA_ANL_ZIPFILES)
 	$(AM_V_ZIP)$(ZIP) $(ZIPFLAGS) $(MORE_VERBOSITY) $@ $^
 
 # Additional developer tools:
-dev: modes/$(GLANG)gram.mode schemas.xml
+dev: modes/$(GLANG)normalise.mode schemas.xml
 
 modes/%.mode: pipespec.xml
 	$(AM_V_at)$(MKDIR_P) modes

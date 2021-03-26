@@ -168,6 +168,7 @@ $(GTLANG2)_LO-voikko-5%.oxt: $(GT_SPELLING_HFST) $(ALT_ORTH_ZHFST_FILES) $(ALT_W
 		$(GET_LIBS_COMMAND) $(OXT_ROOT_DIR)/5$*/ $(TARGET_DIR)/ \
 			$(SKIP_DIR_NUM)$$remdirnum && \
 		rm -f voikko/3/*.zhfst && \
+		rm -f index.html && \
 		cd ../../ && \
 		cp $^ build/5$*/voikko/3/ && \
 		cd build/5$* && \

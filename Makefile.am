@@ -84,3 +84,6 @@ nobase_dist_pkgdata_SCRIPTS = \
 #   scripts/speller-testres.pl
 
 # templates
+
+distclean-local:
+	-rm -f $(pkgconfig_DATA)

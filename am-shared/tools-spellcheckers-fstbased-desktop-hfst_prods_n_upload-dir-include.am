@@ -39,9 +39,6 @@ SCP=scp -q
 LOVOIKKO_VERSION=5.0
 
 OXT_FILES=
-MACVOIKKOFILE=
-MACVOIKKOZIPFILE=
-MOZVOIKKO_FILE=
 
 # Variable to collect all final targets - needs to be conditional on whether
 # we are able to actually build the targets
@@ -65,14 +62,6 @@ OXT_FILES+=$(GTLANG2)_LO-voikko-$(LOVOIKKO_VERSION).oxt
 OXT_FILES+=$(addsuffix .oxt, \
               $(addprefix $(GTLANG2)_LO-voikko-,$(VOIKKO_VERS_PLATFORMS)))
 
-# Generate target filename as follows:
-#
-# MacVoikko-North_Sami-se.service
-LANGSTRING=$(shell echo "${GTLANGUAGE}" | sed -e 's/ /_/g')
-MACVOIKKO_STEM=$(addsuffix $(LANGSTRING),MacVoikko-)
-MACVOIKKOFILE+=$(addsuffix .service,$(addsuffix -$(GTLANG2),$(MACVOIKKO_STEM)))
-MACVOIKKOZIPFILE+=$(addsuffix .zip,$(MACVOIKKOFILE))
-MOZVOIKKO_FILE+=Mozvoikko2-$(GTLANG2).xpi
 
 if CAN_LOCALSYNC
 
@@ -83,9 +72,6 @@ TARGET_DIR=.
 SKIP_DIR_NUM=
 
 INST_FILES+=$(OXT_FILES) \
-            $(MOZVOIKKO_FILE) \
-            $(MACVOIKKOFILE) \
-            $(MACVOIKKOZIPFILE) \
 			$(ALT_WS_OXT_FILES) \
 			$(ALT_ORTH_OXT_FILES)
 
@@ -101,9 +87,6 @@ TARGET_DIR=--directory-prefix=.
 SKIP_DIR_NUM= --cut-dirs=
 
 INST_FILES+=$(OXT_FILES) \
-            $(MOZVOIKKO_FILE) \
-            $(MACVOIKKOFILE) \
-            $(MACVOIKKOZIPFILE) \
 			$(ALT_WS_OXT_FILES) \
 			$(ALT_ORTH_OXT_FILES)
 
@@ -130,8 +113,6 @@ VOIKKO_VERS_PLATFORMS=$(foreach version,$(VK_VERSIONS), \
                     $(addprefix $(version)-,$(VK_PLATFORMS)))
 
 OXT_ROOT_DIR=$(TOOLLIBS_DIR)/LibreOffice-voikko
-MACVKO_ROOT_DIR=$(TOOLLIBS_DIR)/mac/MacVoikko
-MOZVOIKKO_DIR=$(TOOLLIBS_DIR)/Mozvoikko
 
 #### OXT file: ####
 # - mkdir build dir
@@ -176,53 +157,6 @@ $(GTLANG2)_LO-voikko-5%.oxt: $(GT_SPELLING_HFST) $(ALT_ORTH_ZHFST_FILES) $(ALT_W
 		cd build/5$* && \
 		$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ *
 
-#### MacVoikko: ####
-# - create package dir
-# - rsynk package content from template
-# - cp zhfst file
-# - replace und language code with correct language code
-%.service: %.zhfst
-	$(AM_V_GEN)rm -rf $@ && \
-		$(MKDIR_P) $@
-	$(AM_V_GEN)if test "x$(SKIP_DIR_NUM)" != "x" ; then \
-			remdirnum=$$(echo $(MACVKO_ROOT_DIR)/MacVoikko.service/ \
-			| sed 's|https://gtsvn.uit.no/langtech/||' | tr '/' '\n' \
-			| wc -l | tr -d ' ') ; \
-		fi ; \
-    	$(GET_LIBS_COMMAND) $(SKIP_DIR_NUM)$$remdirnum \
-    		$(MACVKO_ROOT_DIR)/MacVoikko.service/ $(TARGET_DIR)/$@/
-	$(AM_V_at)sed "s/<string>und<\/string>/<string>$*<\/string>/" \
-		< ./$@/Contents/Info.plist > ./$@/Contents/Info.plist.tmp
-	$(AM_V_at)mv -f ./$@/Contents/Info.plist.tmp ./$@/Contents/Info.plist
-	$(AM_V_at)cp $< $@/Contents/Resources/Dictionaries/3/$<
-
-# Rename service dir:
-$(MACVOIKKO_STEM)-%.service: %.service
-	$(AM_V_at)rm -rf $@/
-	$(AM_V_MV)mv $< $@
-
-# Zip service dir for distro (for now):
-%.service.zip: %.service
-	$(AM_V_GEN)$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) $@ $<
-
-#### Mozvoikko: ####
-# - create package build dir
-# - rsynk package content from template
-# - cp zhfst file
-# - zip to target file
-Mozvoikko2-%.xpi: %.zhfst
-	$(AM_V_at)$(MKDIR_P) build/$@
-	$(AM_V_GEN)cd build/$@ ; \
-		if test "x$(SKIP_DIR_NUM)" != "x" ; then \
-			remdirnum=$$(echo $(MOZVOIKKO_DIR)/ \
-			| sed 's|https://gtsvn.uit.no/langtech/||' | tr '/' '\n' \
-			| wc -l | tr -d ' ') ; \
-		fi ; \
-		$(GET_LIBS_COMMAND) $(SKIP_DIR_NUM)$$remdirnum \
-			$(MOZVOIKKO_DIR)/ $(TARGET_DIR)/ && \
-		cp ../../$< voikko/3/ && \
-		$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ *
-
 #### Upload for distro: ####
 ####
 #### Variable defs:
@@ -238,7 +172,7 @@ UPLOADSITE=$(UPLOADUSR)@$(UPLOADSRV):$(UPLOADDIR)
 ####
 
 # Upload everything:
-upload: uploadoxt uploadxpi uploadzip uploadzhfst
+upload: uploadoxt uploadzhfst
 
 # Upload OXT only:
 uploadoxt: $(OXT_FILES) $(ALT_WS_OXT_FILES)
@@ -251,34 +185,6 @@ uploadoxt: $(OXT_FILES) $(ALT_WS_OXT_FILES)
 			echo "  SYMLINK  $$file" ; \
 			echo "  DWNLOAD LINK this version:   http://$(UPLOADSRV)/$(UPLOADDIR)/oxts/$$stem-$(DATE).oxt" ; \
 			echo "  DWNLOAD LINK newest version: http://$(UPLOADSRV)/$(UPLOADDIR)/oxts/$$file" ; \
-		fi \
-	done
-
-# Upload XPI only:
-uploadxpi: $(MOZVOIKKO_FILE)
-	$(AM_V_GEN)for file in $^ ; do \
-		if [ -e $$file ]; then \
-			stem=$$(basename $$file .xpi) ; \
-			$(SCP) $$file $(UPLOADSITE)/xpis/$$stem-$(DATE).xpi ; \
-			ssh $(UPLOADUSR)@$(UPLOADSRV) "cd $(UPLOADDIR)/xpis/ && \
-			ln -sf $$stem-$(DATE).xpi $$file" ; \
-			echo "  SYMLINK  $$file" ; \
-			echo "  DWNLOAD LINK this version:   http://$(UPLOADSRV)/$(UPLOADDIR)/xpis/$$stem-$(DATE).xpi" ; \
-			echo "  DWNLOAD LINK newest version: http://$(UPLOADSRV)/$(UPLOADDIR)/xpis/$$file" ; \
-		fi \
-	done
-
-# Upload ZIP only:
-uploadzip: $(MACVOIKKOZIPFILE)
-	$(AM_V_GEN)for file in $^ ; do \
-		if [ -e $$file ]; then \
-			stem=$$(basename $$file .zip) ; \
-			$(SCP) $$file $(UPLOADSITE)/zips/$$stem-$(DATE).zip ; \
-			ssh $(UPLOADUSR)@$(UPLOADSRV) "cd $(UPLOADDIR)/zips/ && \
-			ln -sf $$stem-$(DATE).zip $$file" ; \
-			echo "  SYMLINK  $$file" ; \
-			echo "  DWNLOAD LINK this version:   http://$(UPLOADSRV)/$(UPLOADDIR)/zips/$$stem-$(DATE).zip" ; \
-			echo "  DWNLOAD LINK newest version: http://$(UPLOADSRV)/$(UPLOADDIR)/zips/$$file" ; \
 		fi \
 	done
 

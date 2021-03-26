@@ -62,6 +62,9 @@ OXT_FILES+=$(GTLANG2)_LO-voikko-$(LOVOIKKO_VERSION).oxt
 OXT_FILES+=$(addsuffix .oxt, \
               $(addprefix $(GTLANG2)_LO-voikko-,$(VOIKKO_VERS_PLATFORMS)))
 
+INST_FILES+=$(OXT_FILES) \
+			$(ALT_WS_OXT_FILES) \
+			$(ALT_ORTH_OXT_FILES)
 
 if CAN_LOCALSYNC
 
@@ -70,10 +73,6 @@ GET_LIBS_COMMAND=$(RSYNC) $(RSYNC_OPTIONS) $(VERBOSITY)
 TARGET_DIR=.
 # The following variable only makes sense for wget:
 SKIP_DIR_NUM=
-
-INST_FILES+=$(OXT_FILES) \
-			$(ALT_WS_OXT_FILES) \
-			$(ALT_ORTH_OXT_FILES)
 
 else
 
@@ -85,10 +84,6 @@ TARGET_DIR=--directory-prefix=.
 # The following variable is required to remove intermediate dirs that clutter
 # the dir structure when building the final speller packages:
 SKIP_DIR_NUM= --cut-dirs=
-
-INST_FILES+=$(OXT_FILES) \
-			$(ALT_WS_OXT_FILES) \
-			$(ALT_ORTH_OXT_FILES)
 
 endif # CAN_REMOTE_SYNC
 

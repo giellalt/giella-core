@@ -53,14 +53,6 @@ ALT_ORTH_OXT_FILES=$(addsuffix .oxt, $(ALT_ORTH_OXT_FILES_TMP))
 ALT_ORTH_OXT_FILES+=$(addsuffix _LO-voikko-$(LOVOIKKO_VERSION).oxt, \
 			$(ALT_ORTH_ZHFST_BASENAMES))
 
-# Generate target filename as follows:
-#
-# MacVoikko-Plains_Cree-crk-Cans.service
-ALT_ORTH_MACVOIKKO_STEM=$(shell for ld in $(ALT_ORTHS); do\
-    echo "$(MACVOIKKO_STEM)-$(GTLANG2)-x-$$ld.service" ; \
-done)
-MACVOIKKOFILE+=$(ALT_ORTH_MACVOIKKO_STEM)
-
 endif # CAN_LOCALSYNC
 
 endif # WANT_HFST_DESKTOP_SPELLER

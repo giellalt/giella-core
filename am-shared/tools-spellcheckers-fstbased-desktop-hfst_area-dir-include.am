@@ -52,14 +52,6 @@ AREA_OXT_FILES=$(addsuffix .oxt, $(AREA_OXT_FILES_TMP))
 AREA_OXT_FILES+=$(addsuffix _LO-voikko-$(LOVOIKKO_VERSION).oxt, \
 			$(AREA_ZHFST_BASENAMES))
 
-# Generate target filename as follows:
-#
-# MacVoikko-Lule_Sami-smj-NO.service
-AREA_MACVOIKKO_STEM=$(shell for ld in $(AREAS); do\
-    echo "$(MACVOIKKO_STEM)-$(GTLANG2)_$$ld.service" ; \
-done)
-MACVOIKKOFILE+=$(AREA_MACVOIKKO_STEM)
-
 endif # CAN_LOCALSYNC
 
 endif # WANT_HFST_DESKTOP_SPELLER

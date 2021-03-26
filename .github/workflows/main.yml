@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: build
       - name: Setup Autotools & configure
         run: ./autogen.sh && configure
       - name: Build everything

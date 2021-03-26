@@ -13,3 +13,5 @@ jobs:
         run: ./autogen.sh && ./configure
       - name: Build everything
         run: make -j4
+      - name: Check tarball integrity
+        run: make distcheck

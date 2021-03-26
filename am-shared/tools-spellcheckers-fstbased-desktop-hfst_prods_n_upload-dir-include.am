@@ -29,7 +29,7 @@ RSYNC_OPTIONS=-rlpgoD
 # dir, --cut-dirs=2 to ???, --no-parent to avoid wget going upwards in the dir
 # hierarchy, and finally -e robots=off to actually traverse the dir tree (we
 # have a robot.txt file to avoid Google etc to constantly index our svn tree).
-WGET_OPTIONS=-r -nH --no-parent -e robots=off --reject "index.html*"
+WGET_OPTIONS=-r -nH --no-parent -e robots=off
 
 SCP=scp -q
 

@@ -28,7 +28,7 @@ GIELLA_XSC_DATE=transcriptor-date-digit2text.filtered.lookup.hfst
 GIELLA_XSC_ABBREV=transcriptor-abbrevs2text.filtered.lookup.hfst
 GIELLA_XSC_NUMBER=transcriptor-numbers-digit2text.filtered.lookup.hfst
 GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfstol
-GIELLA_XSC_ANALYSER=analyser-gt-desc.hfstol
+GIELLA_XSC_ANALYSER=analyser-gt-norm.hfstol
 GIELLA_XSC_GENERATOR=generator-gt-norm.hfstol
 
 # Disamb and syntax analysis files, including whitespace analysis:

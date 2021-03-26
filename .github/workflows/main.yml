@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Autotools & configure
-        run: ./autogen.sh && configure
+        run: ./autogen.sh && ./configure
       - name: Build everything
         run: make -j4

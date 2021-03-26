@@ -160,11 +160,8 @@ $(GTLANG2)_LO-voikko-5%.oxt: $(GT_SPELLING_HFST) $(ALT_ORTH_ZHFST_FILES) $(ALT_W
 			remdirnum=$$(echo $(OXT_ROOT_DIR)/5$*/ \
 			| sed 's|https://gtsvn.uit.no/langtech/||' | tr '/' '\n' \
 			| wc -l | tr -d ' ') ; \
-			echo "remdirnum = $$remdirnum"; \
 		fi ; \
 		cd build/5$* && \
-		echo "PWD = $$(pwd)" && \
-		echo "2. remdirnum = $$remdirnum" && \
 		$(GET_LIBS_COMMAND) \
 			$(TARGET_DIR) \
 			$(SKIP_DIR_NUM)$$remdirnum \

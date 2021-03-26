@@ -163,7 +163,7 @@ UPLOADDIR=static_files
 UPLOADSITE=$(UPLOADUSR)@$(UPLOADSRV):$(UPLOADDIR)
 
 ####
-#### Targets:
+#### Upload targets:
 ####
 
 # Upload everything:

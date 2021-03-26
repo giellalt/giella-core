@@ -148,8 +148,11 @@ $(GTLANG2)_LO-voikko-4%.oxt: $(GT_SPELLING_HFST)
 			| wc -l | tr -d ' ') ; \
 		fi ; \
 		cd build/4$* && \
-		$(GET_LIBS_COMMAND) $(OXT_ROOT_DIR)/4$*/ $(TARGET_DIR)/ \
-			$(SKIP_DIR_NUM)$$remdirnum && \
+		$(GET_LIBS_COMMAND) \
+			$(TARGET_DIR) \
+			$(SKIP_DIR_NUM)$$remdirnum \
+			$(OXT_ROOT_DIR)/4$*/ \
+			&& \
 		cp ../../$< 3/ && \
 		$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ *
 

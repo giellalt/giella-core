@@ -726,12 +726,31 @@ class CorpusGramTest(GramTest):
         for child in para:
             self.flatten_para(child)
 
+    def remove_foreign(self, root):
+        for foreign in root.xpath('.//errorlex[@errorinfo="foreign"]'):
+            parent = foreign.getparent()
+            if foreign.tail is not None:
+                previous = foreign.getprevious()
+                if previous is not None:
+                    if previous.tail is not None:
+                        previous.tail += foreign.tail
+                    else:
+                        previous.tail = foreign.tail
+                else:
+                    if parent.text is not None:
+                        parent.text += foreign.tail
+                    else:
+                        parent.text = foreign.tail
+
+            parent.remove(foreign)
+
     @property
     def paragraphs(self):
         grammarchecker = CorpusGramChecker(self.archive)
 
         for filename in ccat.find_files(self.targets, '.xml'):
             root = etree.parse(filename)
+            self.remove_foreign(root)
             for para in root.iter('p'):
                 self.flatten_para(para)
                 yield grammarchecker.get_data(filename, para)

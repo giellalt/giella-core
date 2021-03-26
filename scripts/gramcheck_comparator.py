@@ -328,7 +328,7 @@ class GramChecker:
 
         return self.fix_all_errors(res)['errs']
 
-    def get_data(self, para):
+    def get_data(self, filename, para):
         parts = []
         errors = []
         self.extract_error_info(parts, errors, para)
@@ -336,7 +336,8 @@ class GramChecker:
         return {
             'uncorrected': ''.join(parts),
             'expected_errors': errors,
-            'gramcheck_errors': self.check_sentence(''.join(parts))
+            'gramcheck_errors': self.check_sentence(''.join(parts)),
+            'filename': filename
         }
 
 
@@ -410,7 +411,9 @@ class GramTest:
             self.write('-' * 10)
             self.write(f'{colourise("{reset}")}\n')
 
-        def success(self, case, total, type, expected_error, gramcheck_error):
+        def success(self, case, total, type, expected_error, gramcheck_error,
+                    filename):
+            self.write(filename + '\n')
             errorinfo = f", ({expected_error.get('errorinfo')})" \
                 if expected_error.get('errorinfo') else ''
             x = colourise(
@@ -429,7 +432,9 @@ class GramTest:
                 gram_type=gramcheck_error[3])
             self.write(x)
 
-        def failure(self, case, total, type, expected_error, gramcheck_error):
+        def failure(self, case, total, type, expected_error, gramcheck_error,
+                    filename):
+            self.write(filename + '\n')
             errorinfo = f", ({expected_error.get('errorinfo')})" \
                 if expected_error.get('errorinfo') else ''
             x = colourise(
@@ -562,27 +567,28 @@ class GramTest:
 
         expected_errors = item[1][1]['expected_errors']
         gramcheck_errors = item[1][1]['gramcheck_errors']
+        filename = item[1][1]['filename']
 
         true_positives = self.has_true_positives(expected_errors,
                                                  gramcheck_errors)
         for true_positive in true_positives:
             count['tp'] += 1
             out.success(item[0], length, 'tp', true_positive[0],
-                        true_positive[1])
+                        true_positive[1], filename)
 
         true_negatives = self.has_true_negatives(expected_errors,
                                                  gramcheck_errors)
         for true_negative in true_negatives:
             count['tn'] += 1
             out.success(item[0], length, 'tn', true_negative[0],
-                        true_negative[1])
+                        true_negative[1], filename)
 
         false_positives_1 = self.has_false_positives_1(expected_errors,
                                                        gramcheck_errors)
         for false_positive_1 in false_positives_1:
             count['fp1'] += 1
             out.failure(item[0], length, 'fp1', false_positive_1[0],
-                        false_positive_1[1])
+                        false_positive_1[1], filename)
 
         false_positives_2 = self.has_false_positives_2(expected_errors,
                                                        gramcheck_errors)
@@ -590,14 +596,14 @@ class GramTest:
         for false_positive_2 in false_positives_2:
             count['fp2'] += 1
             out.failure(item[0], length, 'fp2', expected_error,
-                        false_positive_2)
+                        false_positive_2, filename)
 
         false_negatives_1 = self.has_false_negatives_1(expected_errors,
                                                        gramcheck_errors)
         for false_negative_1 in false_negatives_1:
             count['fn1'] += 1
             out.failure(item[0], length, 'fn1', false_negative_1[0],
-                        false_negative_1[1])
+                        false_negative_1[1], filename)
 
         false_negatives_2 = self.has_false_negatives_2(expected_errors,
                                                        gramcheck_errors)
@@ -605,7 +611,7 @@ class GramTest:
             gramcheck_error = ['', '', '', '', '', []]
             count['fn2'] += 1
             out.failure(item[0], length, 'fn2', false_negative_2,
-                        gramcheck_error)
+                        gramcheck_error, filename)
 
         out.result(item[0], count, item[1][0])
 
@@ -728,7 +734,7 @@ class CorpusGramTest(GramTest):
             root = etree.parse(filename)
             for para in root.iter('p'):
                 self.flatten_para(para)
-                yield grammarchecker.get_data(para)
+                yield grammarchecker.get_data(filename, para)
 
 
 class UI(ArgumentParser):

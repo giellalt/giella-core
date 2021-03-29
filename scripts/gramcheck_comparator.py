@@ -744,6 +744,35 @@ class CorpusGramTest(GramTest):
 
             parent.remove(foreign)
 
+    def keep_url(self, root):
+        for url in root.xpath('.//errorlang[@correct="url"]'):
+            parent = url.getparent()
+            previous = url.getprevious()
+            if previous is not None:
+                if url.text is not None:
+                    if previous.tail is not None:
+                        previous.tail += url.text
+                    else:
+                        previous.tail = url.text
+                if url.tail is not None:
+                    if previous.tail is not None:
+                        previous.tail += url.tail
+                    else:
+                        previous.tail = url.tail
+            else:
+                if url.text is not None:
+                    if parent.text is not None:
+                        parent.text += url.text
+                    else:
+                        parent.text = url.text
+                if url.tail is not None:
+                    if parent.text is not None:
+                        parent.text += url.tail
+                    else:
+                        parent.text = url.tail
+
+            parent.remove(url)
+
     @property
     def paragraphs(self):
         grammarchecker = CorpusGramChecker(self.archive)
@@ -751,6 +780,7 @@ class CorpusGramTest(GramTest):
         for filename in ccat.find_files(self.targets, '.xml'):
             root = etree.parse(filename)
             self.remove_foreign(root)
+            self.keep_url(root)
             for para in root.iter('p'):
                 self.flatten_para(para)
                 yield grammarchecker.get_data(filename, para)

@@ -328,15 +328,33 @@ class GramChecker:
 
         return self.fix_all_errors(res)['errs']
 
+    def normalise_error_markup(self, errors):
+        for error in errors:
+            if error['type'] == 'errorformat' and error.get('errorinfo') and error.get('errorinfo') == 'notspace' and '  ' in error['error']:
+                d_pos = error['error'].find('  ')
+                error['start'] = error['start'] + d_pos
+                error['end'] = error['start'] + 3
+                error['error'] = error['error'][error['start']:error['end']]
+
+    def normalise_grammar_markup(self, errors):
+        for error in errors:
+            if error[3] == 'double-space-before':
+                d_pos = error[0].find('  ')
+                error[1] = error[1] + d_pos
+                error[2] = error[1] + 3
+                error[0] = error[0][error[1]:error[2]]
+
     def get_data(self, filename, para):
         parts = []
         errors = []
         self.extract_error_info(parts, errors, para)
-
+        self.normalise_error_markup(errors)
+        d_errors = self.check_sentence(''.join(parts))
+        self.normalise_grammar_markup(d_errors)
         return {
             'uncorrected': ''.join(parts),
             'expected_errors': errors,
-            'gramcheck_errors': self.check_sentence(''.join(parts)),
+            'gramcheck_errors': d_errors,
             'filename': filename
         }
 

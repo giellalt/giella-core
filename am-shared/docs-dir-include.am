@@ -80,7 +80,7 @@ $(LINKS): $(VPATH_MD_PAGES)
 
 # FIXME: some temporary stuff to have index page
 $(INDEX): $(HEADER) $(LINKS)
-	cat $^ > $@
+	$(AM_V_GEN)cat $^ > $@
 
 %.md: %.jspwiki
 	$(AM_V_AWK)"$(GAWK)" -f $(JSPWIKI2MD) < $< > $@

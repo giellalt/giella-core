@@ -6,7 +6,7 @@
 VPATH_MD_PAGES=$(addprefix $(srcdir)/,$(MD_PAGES))
 ALLINONE_MD_PAGE=$(srcdir)/$(GTLANG).md
 LINKS=$(srcdir)/Links.md
-HEADER=$(srcdir)/link-header.md
+HEADER=$(srcdir)/index-header.md
 INDEX=$(srcdir)/index.md
 
 # no regenerations while debugging

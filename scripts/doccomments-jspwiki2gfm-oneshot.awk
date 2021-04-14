@@ -34,6 +34,11 @@ function jsp2gfm(s) {
         THEAD=THEAD "| --- ";
     }
 } 
-/^!! / {$0=("!! " jsp2gfm(gensub(".*!! ", "", 1))); }
-/^([^!]+!![ \t])/ {$0=("\1" jsp2gfm(gensub(".*!! ", "", 1))); }
-{print;}
+match($0, /^(!![ \t=])/, a) {$0=(a[1] jsp2gfm(gensub(".*!![ \t=]", "", 1))); }
+match($0, /^([^!]+!![ \t=])/, a) {$0=(a[1] jsp2gfm(gensub(".*!![ \t=]", "", 1))); }
+{print;
+    if (TABLESIZE>0) {
+        print("!! " THEAD);
+        TABLESIZE=0;
+    }
+}

@@ -34,6 +34,6 @@ function jsp2gfm(s) {
         THEAD=THEAD "| --- ";
     }
 } 
-/^!!/ {$0=("!! " jsp2gfm(gensub(".*!! ", "", 1))); }
+/^!! / {$0=("!! " jsp2gfm(gensub(".*!! ", "", 1))); }
 /^([^!]+!![ \t])/ {$0=("\1" jsp2gfm(gensub(".*!! ", "", 1))); }
 {print;}

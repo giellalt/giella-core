@@ -16,7 +16,7 @@ doc_DATA=$(INDEX) $(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 
 gh-pages: $(INDEX) $(LINKS) $(VPATH_MD_PAGES) $(ALLINONE_MD_PAGE)
 
-DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2gfm.awk
+DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2ghpages.awk
 JSPWIKI2MD=$(GTCORE)/scripts/jspwiki2md.awk
 
 GRAPHPLOTTER=$(GTCORE)/scripts/plot-speller-progress.R

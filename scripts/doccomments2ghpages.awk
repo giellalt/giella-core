@@ -20,8 +20,6 @@ BEGIN {
     RULENAME="@OUTSIDE RULES@";
     CODE="@NO CODE@";
     SOMETHING_WRONG="TRUE";
-    TABLESIZE=0;
-    THEAD="|:--"
 }
 function expand_variables(s) {
     # expand all our doc comment variables
@@ -38,13 +36,6 @@ function expand_variables(s) {
     printf("\n*%s examples:*\n", 
            gensub("!![€$][^ ]* *", "", 1));
 }
-/\|\|/ { 
-    TABLESIZE = gsub(/\|\|/, "||");
-    THEAD="";
-    for (i = 0; i < TABLESIZE; i++) {
-        THEAD=THEAD "| --- ";
-    }
-} 
 /^!!€ / {
     if (NF >= 4) {
         printf("* *%s* `%s` (Eng.", $2, $3);

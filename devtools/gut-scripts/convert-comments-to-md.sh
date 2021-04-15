@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Run this from `gut` like this:
+#
+# gut apply -o giellalt -r lang-smn --script giella-core/devtools/gut-scripts/convert-comments-to-md.sh
+
 path=$(pwd)
 
 for f in $(find . -name '*.lexc' -o -name '*.twolc' -o -name '*.cg3') ; do

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-# Copyright © 2020 UiT The Arctic University of Norway
+# Copyright © 2020-2021 UiT The Arctic University of Norway
 # License: GPL3
 # Author: Børre Gaup <borre.gaup@uit.no>
 """Check if grammarchecker tests pass."""

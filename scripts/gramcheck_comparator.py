@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+
+# Copyright © 2020-2021 UiT The Arctic University of Norway
+# License: GPL3
+# Author: Børre Gaup <borre.gaup@uit.no>
 """Write report on differences on manual markup and gramdivvun markup"""
 import sys
 from argparse import ArgumentParser
@@ -21,6 +25,39 @@ COLORS = {
     "light_blue": "\033[0;36m",
     "reset": "\033[m"
 }
+
+
+def correct_lowest_level(para):
+    """Replace error markup of zero length with correction."""
+    new_para = etree.Element(para.tag)
+    for key, value in para.attrib.items():
+        new_para.set(key, value)
+    new_para.text = para.text if para.text else ''
+
+    for child in para:
+        if child.tag.startswith('error'):
+            if len(child) == 0:
+                if len(new_para):
+                    new_para[-1].tail += extract_correction(child)
+                else:
+                    new_para.text += extract_correction(child)
+            else:
+                new_para.append(correct_lowest_level(child))
+        else:
+            new_para.append(child)
+
+    new_para.tail = para.tail if para.tail else ''
+
+    return new_para
+
+
+def extract_correction(child):
+    """Replace error element with correction attribute."""
+    parts = [child.get('correct') if child.get('correct') else '']
+    if child.tail:
+        parts.append(child.tail)
+
+    return ''.join(parts)
 
 
 def colourise(string, *args, **kwargs):
@@ -264,6 +301,7 @@ class GramChecker:
         return ''.join(parts)
 
     def extract_error_info(self, parts, errors, para):
+        """Only collect unnested errors."""
         info = {}
         if para.tag.startswith('error'):
             for name, value in para.items():
@@ -277,7 +315,10 @@ class GramChecker:
             parts.append(para.text)
 
         for child in para:
-            errors.append(self.extract_error_info(parts, errors, child))
+            if len(child) == 0:
+                errors.append(self.extract_error_info(parts, errors, child))
+            else:
+                self.extract_error_info(parts, errors, child)
 
         if para.tag.startswith('error'):
             info['end'] = len("".join(parts))
@@ -330,7 +371,9 @@ class GramChecker:
 
     def normalise_error_markup(self, errors):
         for error in errors:
-            if error['type'] == 'errorformat' and error.get('errorinfo') and error.get('errorinfo') == 'notspace' and '  ' in error['error']:
+            if error['type'] == 'errorformat' and error.get(
+                    'errorinfo') and error.get(
+                        'errorinfo') == 'notspace' and '  ' in error['error']:
                 d_pos = error['error'].find('  ')
                 error['start'] = error['start'] + d_pos
                 error['end'] = error['start'] + 3
@@ -344,15 +387,45 @@ class GramChecker:
                 error[2] = error[1] + 3
                 error[0] = error[0][error[1]:error[2]]
 
-    def get_data(self, filename, para):
+    def remove_non_hits(self, errors, d_errors):
+        """Find the d_errors that correspond with errors."""
+        return [
+            d_error for error in errors for d_error in d_errors
+            if d_error[1] == error['start'] and d_error[2] == error['end']
+        ]
+
+    def nested_errors(self, para):
+        """Grammarcheck a level at a time."""
+        while True:
+            para = correct_lowest_level(para)
+            if len(para) == 0:
+                break
+            _, errors, d_errors = self.error_extractor(para)
+            yield errors, self.remove_non_hits(errors, d_errors)
+
+    def error_extractor(self, para):
+        """Extract sentence, markup errors and grammarchecker errors."""
         parts = []
         errors = []
         self.extract_error_info(parts, errors, para)
         self.normalise_error_markup(errors)
-        d_errors = self.check_sentence(''.join(parts))
+
+        sentence = ''.join(parts)
+        d_errors = self.check_sentence(sentence)
         self.normalise_grammar_markup(d_errors)
+
+        return sentence, errors, d_errors
+
+    def get_data(self, filename, para):
+        """Extract data for reporting from a paragraph."""
+        sentence, errors, d_errors = self.error_extractor(para)
+
+        for next_errors, next_d_errors in self.nested_errors(para):
+            errors.extend(next_errors)
+            d_errors.extend(next_d_errors)
+
         return {
-            'uncorrected': ''.join(parts),
+            'uncorrected': sentence,
             'expected_errors': errors,
             'gramcheck_errors': d_errors,
             'filename': filename
@@ -360,6 +433,7 @@ class GramChecker:
 
 
 class CorpusGramChecker(GramChecker):
+    """Check for grammarerrors in errormarkup files from a Giella corpus."""
     def __init__(self, archive):
         self.archive = archive
         self.checker = self.app()

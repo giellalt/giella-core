@@ -2,7 +2,7 @@
 
 # Run this from `gut` like this:
 #
-# gut apply -o giellalt -r lang-smn --script giella-core/devtools/gut-scripts/convert-comments-to-md.sh
+# gut apply -o giellalt -r lang- --script giella-core/devtools/gut-scripts/convert-comments-to-md.sh
 
 path=$(pwd)
 

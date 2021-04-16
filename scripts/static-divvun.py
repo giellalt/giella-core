@@ -48,7 +48,8 @@ class StaticSiteBuilder(object):
         if not destination.endswith('/'):
             destination = destination + '/'
         self.destination = destination
-        self.langs = langs
+        self.mainlang = langs[0]
+        self.langs = langs[1:]
         if os.path.isdir(os.path.join(self.builddir, 'built')):
             shutil.rmtree(os.path.join(self.builddir, 'built'))
 
@@ -236,7 +237,8 @@ class StaticSiteBuilder(object):
         builddir = os.path.join(self.builddir, 'build/site/en')
 
         for path in self.files_to_collect(builddir, '.html'):
-            f2b = LanguageAdder(path, this_lang, self.langs, builddir)
+            f2b = LanguageAdder(path, this_lang, self.mainlang, self.langs,
+                                builddir)
             f2b.add_lang_info()
 
     def rename_site_files(self, lang):
@@ -251,34 +253,19 @@ class StaticSiteBuilder(object):
         builddir = os.path.join(self.builddir, 'build/site/en')
         builtdir = os.path.join(self.builddir, 'built')
 
-        if len(self.langs) == 1:
+        self.copy_ckeditor()
+        if lang == self.mainlang:
             for item in glob.glob(builddir + '/*'):
-                self.copy_ckeditor()
                 shutil.move(item, builtdir)
         else:
-            for root, dirs, files in os.walk(builddir):
-                goal_dir = root.replace('build/site/en', 'built')
-
-                if not os.path.exists(goal_dir):
-                    os.mkdir(goal_dir)
-
-                for file_ in files:
-                    newname = file_
-                    if file_.endswith('.html') or file_.endswith('.pdf'):
-                        newname = file_ + '.' + lang
-
-                    shutil.copy(os.path.join(root, file_),
-                                os.path.join(goal_dir, newname))
-
-            self.copy_ckeditor()
             shutil.move(builddir, os.path.join(builtdir, lang))
 
     def build_all_langs(self):
         """Build all the langs."""
         logger.info('Building all langs')
-        for lang in self.langs:
+        for lang in self.langs + [self.mainlang]:
             self.buildsite(lang)
-            if len(self.langs) > 1:
+            if self.langs:
                 self.add_language_changer(lang)
             self.rename_site_files(lang)
 
@@ -353,7 +340,7 @@ class LanguageAdder(object):
 
     namespace = {'html': 'http://www.w3.org/1999/xhtml'}
 
-    def __init__(self, filename, this_lang, langs, builddir):
+    def __init__(self, filename, this_lang, mainlang, langs, builddir):
         """Init the LanguageAdder.
 
         Args:
@@ -365,6 +352,7 @@ class LanguageAdder(object):
         """
         self.filename = filename
         self.this_lang = this_lang
+        self.mainlang = mainlang
         self.langs = langs
         self.builddir = builddir
 
@@ -412,12 +400,15 @@ class LanguageAdder(object):
         dropdown_toggle.set('aria-labelledby', 'navbarDropdownMenuLink')
         dropdown_toggle.set('class', 'dropdown-menu')
 
-        for lang in self.langs:
+        for lang in self.langs + [self.mainlang]:
             if lang != self.this_lang:
                 a = etree.SubElement(dropdown_toggle, 'a')
                 a.set('class', 'dropdown-item')
-                filename = '/' + lang + self.filename.replace(
-                    self.builddir, '')
+                if lang != self.mainlang:
+                    filename = '/' + lang + self.filename.replace(
+                        self.builddir, '')
+                else:
+                    filename = '/' + self.filename.replace(self.builddir, '')
                 a.set('href', filename)
                 a.text = trlangs[lang]
 

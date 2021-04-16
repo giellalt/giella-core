@@ -408,7 +408,7 @@ class LanguageAdder(object):
                     filename = '/' + lang + self.filename.replace(
                         self.builddir, '')
                 else:
-                    filename = '/' + self.filename.replace(self.builddir, '')
+                    filename = self.filename.replace(self.builddir, '')
                 a.set('href', filename)
                 a.text = trlangs[lang]
 

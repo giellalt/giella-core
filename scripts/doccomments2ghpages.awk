@@ -87,9 +87,9 @@ function expand_variables(s) {
     }
 }
 /^[^!].*!!≈ / {
-    CODE=gensub("[ \t][ \t]*", " ", "g",
-           gensub("^[ \t]*", "", 1,
-           gensub("[ \t]*!!≈.*", "", 1)));
+    CODE=gensub("\s\s*", " ", "g",
+           gensub("^\s*", "", 1,
+           gensub("\s*!!≈.*", "", 1)));
     if ($0 ~ /@CODE@/)
     {
         print(expand_variables(gensub(".*!!≈", "", 1)));

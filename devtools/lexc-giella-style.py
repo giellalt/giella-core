@@ -15,10 +15,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this file. If not, see <http://www.gnu.org/licenses/>.
 #
-#   Copyright © 2016-2017 The University of Tromsø &
+#   Copyright © 2016-2021 The University of Tromsø &
 #                         the Norwegian Sámi Parliament
 #   http://giellatekno.uit.no & http://divvun.no
-#
+#   Author: Børre Gaup <borre.gaup@uit.no>
 """Script to sort and align lexc entries."""
 
 from __future__ import absolute_import, print_function
@@ -690,6 +690,20 @@ class TestSorting(unittest.TestCase):
             u'robot+N+Sem/Dummytag:robot N_ODD_C ;', u''
         ], sort_lexicon(self.sorting_lines, mode='revstem'))
 
+    def test_revlemma(self):
+        """Test sorting by reverted lemma."""
+        self.assertListEqual([
+            u'aabbesegærja+N+Sem/Txt:aabbese#gærj MAANA ;',
+            u'faadta+N+Sem/Dummytag:faadt MAANA ;',
+            u'avteld+N+Sem/Dummytag+Cmp/SgNom:avteld R ;',
+            u'göölen-åejjie+N+Sem/Dummytag:göölen-åejj N_IE ;',
+            u'juveele+v1+N+Use/DNorm+Sem/Dummytag:juveel NIEJTE ;',
+            u'juveele+v2+N+Use/NotDNorm+Sem/Dummytag:juvel NIEJTE ;',
+            u'göölenåajjaråantjoe+N+Sem/Dummytag:göölenåajja#råantj N_OE_UML ;',
+            u'jielemes-åssjeles+N+Sem/Dummytag:jielemes-åssjeles N-TODO ;',
+            u'robot+N+Sem/Dummytag:robot N_ODD_C ;', u''
+        ], sort_lexicon(self.sorting_lines, mode='revlemma'))
+
 
 class LexcAligner(object):
     """Class to align lexc elements inside a lexicon."""
@@ -817,6 +831,9 @@ class LexcSorter(object):
         """
         if self.mode == 'alpha':
             return line_tuple['upper']
+
+        if self.mode == 'revlemma':
+            return line_tuple['upper'].partition('+')[0][::-1]
 
         if self.mode == 'revstem':
             # nopep8 https://stackoverflow.com/questions/931092/reverse-a-string-in-python
@@ -955,7 +972,7 @@ def parse_options():
                        action=u'store_true',
                        help=u'Align lexicon entries')
     group.add_argument(u'--sort',
-                       choices=['alpha', 'revstem', 'contlex'],
+                       choices=['alpha', 'revstem', 'revlemma', 'contlex'],
                        help=u'Sort lexicon entries')
     parser.add_argument(u'lexcfile',
                         help=u'Lexc file where lexicon entries should '

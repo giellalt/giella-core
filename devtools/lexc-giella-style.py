@@ -19,9 +19,7 @@
 #                         the Norwegian Sámi Parliament
 #   http://giellatekno.uit.no & http://divvun.no
 #
-
 """Script to sort and align lexc entries."""
-
 
 from __future__ import absolute_import, print_function
 
@@ -33,8 +31,8 @@ import sys
 import unittest
 from collections import defaultdict
 
-
-LEXC_LINE_RE = re.compile(r'''
+LEXC_LINE_RE = re.compile(
+    r'''
     (?P<contlex>\S+)            #  any nonspace
     (?P<translation>\s+".*")?   #  optional translation, might be empty
     \s*;\s*                     #  skip space and semicolon
@@ -42,8 +40,8 @@ LEXC_LINE_RE = re.compile(r'''
     $
 ''', re.VERBOSE | re.UNICODE)
 
-
-LEXC_CONTENT_RE = re.compile(r'''
+LEXC_CONTENT_RE = re.compile(
+    r'''
     (?P<exclam>^\s*!\s*)?          #  optional comment
     (?P<content>(<.+>)|(.+))?      #  optional content
 ''', re.VERBOSE | re.UNICODE)
@@ -51,7 +49,6 @@ LEXC_CONTENT_RE = re.compile(r'''
 
 class TestLexcAligner(unittest.TestCase):
     """Test that lexc alignment works as supposed to."""
-
     def test_non_lexc_line(self):
         """Test how non lexc line is handled."""
         content = u'''
@@ -300,13 +297,12 @@ LEXICON nouns
 
 class TestLineParser(unittest.TestCase):
     """Test how individual lines are parsed."""
-
     def test_line_parser_upper_lower(self):
         """Check that lines with upper and lower defined are handled."""
         line = u'        +N+SgNomCmp:e%^DISIMP    R              ;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'+N+SgNomCmp',
             u'lower': u'e%^DISIMP',
@@ -318,11 +314,10 @@ class TestLineParser(unittest.TestCase):
 
     def test_line_parser_no_lower(self):
         """Check how lines with empty lower are handled."""
-        line = (
-            u'               +N+Sg:             N_ODD_SG   ;')
+        line = (u'               +N+Sg:             N_ODD_SG   ;')
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'+N+Sg',
             u'lower': u'',
@@ -336,8 +331,8 @@ class TestLineParser(unittest.TestCase):
         """Check how lines without upper and lower parts are handled."""
         line = u' N_ODD_ESS;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
             u'contlex': u'N_ODD_ESS',
         }
@@ -348,10 +343,11 @@ class TestLineParser(unittest.TestCase):
         """Check how empty upper/lower combo is handled."""
         line = u' : N_ODD_E;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
-            u'upper': u'', u'lower': u'',
+            u'upper': u'',
+            u'lower': u'',
             u'contlex': u'N_ODD_E',
             u'divisor': u':'
         }
@@ -360,12 +356,11 @@ class TestLineParser(unittest.TestCase):
 
     def test_comment(self):
         """Check how commented lines are handled."""
-        line = (
-            u'+A+Comp+Attr:%>abpa ATTRCONT; '
-            u'! båajasabpa, *båajoesabpa')
+        line = (u'+A+Comp+Attr:%>abpa ATTRCONT; '
+                u'! båajasabpa, *båajoesabpa')
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'+A+Comp+Attr',
             u'lower': u'%>abpa',
@@ -380,10 +375,11 @@ class TestLineParser(unittest.TestCase):
         """Check how lines containing translations are handled."""
         line = u'  +A:%>X7 NomVadj "good A" ;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
-            u'upper': u'+A', u'lower': u'%>X7',
+            u'upper': u'+A',
+            u'lower': u'%>X7',
             u'contlex': u'NomVadj',
             u'translation': u'"good A"',
             u'divisor': u':'
@@ -395,8 +391,8 @@ class TestLineParser(unittest.TestCase):
         """Check how entries with only upper and contlex are handled."""
         line = u'jïh Cc ;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
             u'upper': u'jïh',
             u'contlex': u'Cc',
@@ -408,8 +404,8 @@ class TestLineParser(unittest.TestCase):
         """Check how entries with a leading exclam are handled."""
         line = u'!dovne Cc ; ! dovne A jïh B'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {
             u'comment': u'! dovne A jïh B',
             u'upper': u'dovne',
@@ -421,16 +417,18 @@ class TestLineParser(unittest.TestCase):
 
     def test_less_great(self):
         """Check that entries within <> are correctly handled."""
-        line = (
-            u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» '
-            u'"+Der/NomAct":m > ContLex ;')
+        line = (u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» '
+                u'"+Der/NomAct":m > ContLex ;')
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
-        expected_result = {u'contlex': u'ContLex',
-                           u'upper':
-                               u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> '
-                               u'"+Der4":» "+Der/NomAct":m >'}
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
+        expected_result = {
+            u'contlex':
+            u'ContLex',
+            u'upper':
+            u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> '
+            u'"+Der4":» "+Der/NomAct":m >'
+        }
 
         self.assertDictEqual(parse_line(content), expected_result)
 
@@ -438,12 +436,14 @@ class TestLineParser(unittest.TestCase):
         """Check that entries containing percent are correctly handled."""
         line = u'abb:babb%¥ ContLex ;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
-        expected_result = {u'contlex': u'ContLex',
-                           u'upper': u'abb',
-                           u'lower': u'babb% ',
-                           u'divisor': u':', }
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
+        expected_result = {
+            u'contlex': u'ContLex',
+            u'upper': u'abb',
+            u'lower': u'babb% ',
+            u'divisor': u':',
+        }
 
         self.assertDictEqual(parse_line(content), expected_result)
 
@@ -451,12 +451,14 @@ class TestLineParser(unittest.TestCase):
         """Check how entries with multiple percent signs are handled."""
         line = u'+N+Der+Der/viđá+Adv+Use/-PLX:»X7%¥viđá%¥ K ;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
-        expected_result = {u'contlex': u'K',
-                           u'upper': u'+N+Der+Der/viđá+Adv+Use/-PLX',
-                           u'lower': u'»X7% viđá% ',
-                           u'divisor': u':', }
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
+        expected_result = {
+            u'contlex': u'K',
+            u'upper': u'+N+Der+Der/viđá+Adv+Use/-PLX',
+            u'lower': u'»X7% viđá% ',
+            u'divisor': u':',
+        }
 
         self.assertDictEqual(parse_line(content), expected_result)
 
@@ -464,8 +466,8 @@ class TestLineParser(unittest.TestCase):
         """Check how contlex only lines are handled."""
         line = u'N_NEWWORDS ;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
         expected_result = {u'contlex': u'N_NEWWORDS'}
 
         self.assertDictEqual(parse_line(content), expected_result)
@@ -474,20 +476,21 @@ class TestLineParser(unittest.TestCase):
         """Check lines with empty translation."""
         line = u'tsollegidh:tsolleg GOLTELIDH_IV "" ;'
         content = LEXC_LINE_RE.search(line).groupdict()
-        content.update(LEXC_CONTENT_RE.match(
-            LEXC_LINE_RE.sub('', line)).groupdict())
-        expected_result = {u'contlex': u'GOLTELIDH_IV',
-                           u'upper': u'tsollegidh',
-                           u'lower': u'tsolleg',
-                           u'translation': u'""',
-                           u'divisor': u':'}
+        content.update(
+            LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('', line)).groupdict())
+        expected_result = {
+            u'contlex': u'GOLTELIDH_IV',
+            u'upper': u'tsollegidh',
+            u'lower': u'tsolleg',
+            u'translation': u'""',
+            u'divisor': u':'
+        }
 
         self.assertDictEqual(parse_line(content), expected_result)
 
 
 class TestLineCompactor(unittest.TestCase):
     """Test how individual lines are compacted."""
-
     def test_line_parser_upper_lower(self):
         """Check that lines with upper and lower defined are handled."""
         content = {
@@ -524,7 +527,8 @@ class TestLineCompactor(unittest.TestCase):
     def test_empty_upper_lower(self):
         """Check how empty upper/lower combo is handled."""
         content = {
-            u'upper': u'', u'lower': u'',
+            u'upper': u'',
+            u'lower': u'',
             u'contlex': u'N_ODD_E',
             u'divisor': u':'
         }
@@ -541,16 +545,16 @@ class TestLineCompactor(unittest.TestCase):
             u'comment': u'! båajasabpa, *båajoesabpa',
             u'divisor': u':'
         }
-        expected_result = (
-            u'+A+Comp+Attr:%>abpa ATTRCONT ; '
-            u'! båajasabpa, *båajoesabpa')
+        expected_result = (u'+A+Comp+Attr:%>abpa ATTRCONT ; '
+                           u'! båajasabpa, *båajoesabpa')
 
         self.assertEqual(compact_line(content), expected_result)
 
     def test_translation(self):
         """Check how lines containing translations are handled."""
         content = {
-            u'upper': u'+A', u'lower': u'%>X7',
+            u'upper': u'+A',
+            u'lower': u'%>X7',
             u'contlex': u'NomVadj',
             u'translation': u'"good A"',
             u'divisor': u':'
@@ -583,10 +587,13 @@ class TestLineCompactor(unittest.TestCase):
 
     def test_less_great(self):
         """Check that entries within <> are correctly handled."""
-        content = {u'contlex': u'ContLex',
-                   u'upper':
-                       u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> '
-                       u'"+Der4":» "+Der/NomAct":m >'}
+        content = {
+            u'contlex':
+            u'ContLex',
+            u'upper':
+            u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> '
+            u'"+Der4":» "+Der/NomAct":m >'
+        }
         expected_result = (
             u'< "@P.Px.add@" 0:u 0:v 0:v "+V":a "+IV":%> "+Der4":» '
             u'"+Der/NomAct":m > ContLex ;')
@@ -595,20 +602,24 @@ class TestLineCompactor(unittest.TestCase):
 
     def test_ends_with_percent(self):
         """Check that entries containing percent are correctly handled."""
-        content = {u'contlex': u'ContLex',
-                   u'upper': u'abb',
-                   u'lower': u'babb% ',
-                   u'divisor': u':', }
+        content = {
+            u'contlex': u'ContLex',
+            u'upper': u'abb',
+            u'lower': u'babb% ',
+            u'divisor': u':',
+        }
         expected_result = u'abb:babb%  ContLex ;'
 
         self.assertEqual(compact_line(content), expected_result)
 
     def test_multiple_percent(self):
         """Check how entries with multiple percent signs are handled."""
-        content = {u'contlex': u'K',
-                   u'upper': u'+N+Der+Der/vida+Adv+Use/-PLX',
-                   u'lower': u'»X7% vida% ',
-                   u'divisor': u':', }
+        content = {
+            u'contlex': u'K',
+            u'upper': u'+N+Der+Der/vida+Adv+Use/-PLX',
+            u'lower': u'»X7% vida% ',
+            u'divisor': u':',
+        }
         expected_result = u'+N+Der+Der/vida+Adv+Use/-PLX:»X7% vida%  K ;'
 
         self.assertEqual(compact_line(content), expected_result)
@@ -623,7 +634,6 @@ class TestLineCompactor(unittest.TestCase):
 
 class TestSorting(unittest.TestCase):
     """Test how individual lines are parsed."""
-
     def setUp(self):
         """Set up common resources."""
         self.sorting_lines = [
@@ -634,29 +644,28 @@ class TestSorting(unittest.TestCase):
 
     def test_alpha(self):
         """Test sorting by lemma."""
-        self.assertListEqual(
-            [u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;',
-             u'ábčđ:cdef ABBR ;', u''],
-            sort_lexicon(self.sorting_lines, mode='alpha'))
+        self.assertListEqual([
+            u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;', u'ábčđ:cdef ABBR ;',
+            u''
+        ], sort_lexicon(self.sorting_lines, mode='alpha'))
 
     def test_contlex(self):
         """Test sorting by continuation lexicon."""
-        self.assertListEqual(
-            [u'ábčđ:cdef ABBR ;', u'bžčŋ:bcde BABBR ;',
-             u'aŋđŧá:abcd CABBR ;', u''],
-            sort_lexicon(self.sorting_lines, mode='contlex'))
+        self.assertListEqual([
+            u'ábčđ:cdef ABBR ;', u'bžčŋ:bcde BABBR ;', u'aŋđŧá:abcd CABBR ;',
+            u''
+        ], sort_lexicon(self.sorting_lines, mode='contlex'))
 
     def test_revstem(self):
         """Test sorting by reverted stem."""
-        self.assertListEqual(
-            [u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;',
-             u'ábčđ:cdef ABBR ;', u''],
-            sort_lexicon(self.sorting_lines, mode='revstem'))
+        self.assertListEqual([
+            u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;', u'ábčđ:cdef ABBR ;',
+            u''
+        ], sort_lexicon(self.sorting_lines, mode='revstem'))
 
 
 class LexcAligner(object):
     """Class to align lexc elements inside a lexicon."""
-
     def __init__(self):
         """Initialise the LexcAligner class."""
         self.longest = defaultdict(int)
@@ -673,8 +682,9 @@ class LexcAligner(object):
             lexc_line_match = LEXC_LINE_RE.search(line)
             if lexc_line_match and not line.startswith('LEXICON '):
                 content = lexc_line_match.groupdict()
-                content.update(LEXC_CONTENT_RE.match(
-                    LEXC_LINE_RE.sub('', line)).groupdict())
+                content.update(
+                    LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('',
+                                                           line)).groupdict())
                 line_dict = parse_line(content)
                 self.lines.append(line_dict)
                 self.set_longest(line_dict)
@@ -700,9 +710,8 @@ class LexcAligner(object):
                     else:
                         string_buffer.append(u' ')
 
-                string_buffer.append(u' ' *
-                                     (self.longest[u'upper'] -
-                                      len(line[u'upper']) + 1))
+                string_buffer.append(
+                    u' ' * (self.longest[u'upper'] - len(line[u'upper']) + 1))
                 string_buffer.append(line[u'upper'])
 
                 if line[u'divisor']:
@@ -712,15 +721,14 @@ class LexcAligner(object):
 
                 string_buffer.append(line[u'lower'])
 
-                string_buffer.append(u' ' *
-                                     (self.longest[u'lower'] -
-                                      len(line[u'lower']) + 1))
+                string_buffer.append(
+                    u' ' * (self.longest[u'lower'] - len(line[u'lower']) + 1))
 
                 string_buffer.append(line[u'contlex'])
 
-                string_buffer.append(u' ' *
-                                     (self.longest[u'contlex'] -
-                                      len(line[u'contlex']) + 1))
+                string_buffer.append(
+                    u' ' *
+                    (self.longest[u'contlex'] - len(line[u'contlex']) + 1))
 
                 string_buffer.append(line[u'translation'])
 
@@ -744,7 +752,6 @@ class LexcAligner(object):
 
 class LexcSorter(object):
     """Sort entries in a lexc lexicon."""
-
     def __init__(self, mode):
         """Initialise the LexcSorter class."""
         self.lines = []
@@ -761,11 +768,12 @@ class LexcSorter(object):
             lexc_line_match = LEXC_LINE_RE.search(line)
             if lexc_line_match and not line.startswith('LEXICON '):
                 content = lexc_line_match.groupdict()
-                content.update(LEXC_CONTENT_RE.match(
-                    LEXC_LINE_RE.sub('', line)).groupdict())
+                content.update(
+                    LEXC_CONTENT_RE.match(LEXC_LINE_RE.sub('',
+                                                           line)).groupdict())
                 line_dict = parse_line(content)
-                self.lexc_lines.append((self.sorting_key(line_dict),
-                                        compact_line(line_dict)))
+                self.lexc_lines.append(
+                    (self.sorting_key(line_dict), compact_line(line_dict)))
             else:
                 if line.strip():
                     self.lines.append(line)
@@ -793,8 +801,8 @@ class LexcSorter(object):
 
     def adjust_lines(self):
         """Sort the lines."""
-        self.lines.extend([line_tuple[1]
-                           for line_tuple in sorted(self.lexc_lines)])
+        self.lines.extend(
+            [line_tuple[1] for line_tuple in sorted(self.lexc_lines)])
         self.lines.append('')
 
 
@@ -853,8 +861,8 @@ def parse_line(old_match):
             u'translation').strip().replace(u'%¥', u'% ')
 
     if old_match.get(u'comment'):
-        line_dict[u'comment'] = old_match.get(
-            u'comment').strip().replace(u'%¥', u'% ')
+        line_dict[u'comment'] = old_match.get(u'comment').strip().replace(
+            u'%¥', u'% ')
 
     line = old_match.get('content')
     if line:

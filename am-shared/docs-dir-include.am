@@ -3,10 +3,10 @@
 ## Licence: GPL v3+
 
 # Variables:
-ALLINONE_MD_PAGE=$(GTLANG).md
-LINKS=Links.md
-HEADER=index-header.md
-INDEX=index.md
+ALLINONE_MD_PAGE=$(srcdir)/$(GTLANG).md
+LINKS=$(srcdir)/Links.md
+HEADER=$(srcdir)/index-header.md
+INDEX=$(srcdir)/index.md
 
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
@@ -44,28 +44,28 @@ report.json:
 	touch $@
 endif
 
-%-syntax.md: $(top_srcdir)/src/cg3/%.cg3
+$(srcdir)/%-syntax.md: $(top_srcdir)/src/cg3/%.cg3
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-%-morphology.md: $(top_srcdir)/src/fst/%.lexc
+$(srcdir)/%-morphology.md: $(top_srcdir)/src/fst/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-%-morphology.md: $(top_srcdir)/src/fst/%.twolc
+$(srcdir)/%-morphology.md: $(top_srcdir)/src/fst/%.twolc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-%-generated.md: $(top_srcdir)/src/fst/generated_files/%.lexc
+$(srcdir)/%-generated.md: $(top_srcdir)/src/fst/generated_files/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-%-stems.md: $(top_srcdir)/src/fst/stems/%.lexc
+$(srcdir)/%-stems.md: $(top_srcdir)/src/fst/stems/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-%-affixes.md: $(top_srcdir)/src/fst/affixes/%.lexc
+$(srcdir)/%-affixes.md: $(top_srcdir)/src/fst/affixes/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-%.md: $(top_srcdir)/src/transcriptions/%.lexc
+$(srcdir)/%.md: $(top_srcdir)/src/transcriptions/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-%.md: $(top_srcdir)/tools/grammarcheckers/%.cg3
+$(srcdir)/%.md: $(top_srcdir)/tools/grammarcheckers/%.cg3
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
 generated-markdowns.sources:
@@ -92,7 +92,7 @@ generated-markdowns.targets: generated-markdowns.sources
 
 generate-markdown: generated-markdowns.targets
 	$(AM_V_at)for f in `cat $<` ; do \
-		$(MAKE) $$f;\
+		$(MAKE) $(srcdir)/$$f;\
 	done
 
 $(ALL_IN_ONE): generate-markdown generated-markdowns.targets

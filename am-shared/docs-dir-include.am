@@ -95,7 +95,7 @@ generate-markdown: generated-markdowns.targets
 		$(MAKE) $(srcdir)/$$f;\
 	done
 
-$(ALL_IN_ONE): generate-markdown generated-markdowns.targets
+$(ALLINONE_MD_PAGE): generate-markdown generated-markdowns.targets
 	$(AM_V_GEN)cat `cat generated-markdowns.targets` > $@
 
 $(LINKS): generate-markdown generated-markdowns.targets

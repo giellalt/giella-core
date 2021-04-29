@@ -637,30 +637,57 @@ class TestSorting(unittest.TestCase):
     def setUp(self):
         """Set up common resources."""
         self.sorting_lines = [
-            u'ábčđ:cdef ABBR;',
-            u'aŋđŧá:abcd CABBR;',
-            u'bžčŋ:bcde BABBR;',
+            u'aabbesegærja+N+Sem/Txt:aabbese#gærj MAANA ;',
+            u'faadta+N+Sem/Dummytag:faadt MAANA ;',
+            u'göölen-åejjie+N+Sem/Dummytag:göölen-åejj N_IE ;',
+            u'göölenåajjaråantjoe+N+Sem/Dummytag:göölenåajja#råantj N_OE_UML ;',
+            u'juveele+v1+N+Use/DNorm+Sem/Dummytag:juveel NIEJTE ;',
+            u'juveele+v2+N+Use/NotDNorm+Sem/Dummytag:juvel NIEJTE ;',
+            u'jielemes-åssjeles+N+Sem/Dummytag:jielemes-åssjeles N-TODO ;',
+            u'robot+N+Sem/Dummytag:robot N_ODD_C ;',
+            u'avteld+N+Sem/Dummytag+Cmp/SgNom:avteld R ;',
         ]
 
     def test_alpha(self):
         """Test sorting by lemma."""
         self.assertListEqual([
-            u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;', u'ábčđ:cdef ABBR ;',
-            u''
+            u'aabbesegærja+N+Sem/Txt:aabbese#gærj MAANA ;',
+            u'avteld+N+Sem/Dummytag+Cmp/SgNom:avteld R ;',
+            u'faadta+N+Sem/Dummytag:faadt MAANA ;',
+            u'göölen-åejjie+N+Sem/Dummytag:göölen-åejj N_IE ;',
+            u'göölenåajjaråantjoe+N+Sem/Dummytag:göölenåajja#råantj N_OE_UML ;',
+            u'jielemes-åssjeles+N+Sem/Dummytag:jielemes-åssjeles N-TODO ;',
+            u'juveele+v1+N+Use/DNorm+Sem/Dummytag:juveel NIEJTE ;',
+            u'juveele+v2+N+Use/NotDNorm+Sem/Dummytag:juvel NIEJTE ;',
+            u'robot+N+Sem/Dummytag:robot N_ODD_C ;', u''
         ], sort_lexicon(self.sorting_lines, mode='alpha'))
 
     def test_contlex(self):
         """Test sorting by continuation lexicon."""
         self.assertListEqual([
-            u'ábčđ:cdef ABBR ;', u'bžčŋ:bcde BABBR ;', u'aŋđŧá:abcd CABBR ;',
-            u''
+            u'aabbesegærja+N+Sem/Txt:aabbese#gærj MAANA ;',
+            u'faadta+N+Sem/Dummytag:faadt MAANA ;',
+            u'jielemes-åssjeles+N+Sem/Dummytag:jielemes-åssjeles N-TODO ;',
+            u'juveele+v1+N+Use/DNorm+Sem/Dummytag:juveel NIEJTE ;',
+            u'juveele+v2+N+Use/NotDNorm+Sem/Dummytag:juvel NIEJTE ;',
+            u'göölen-åejjie+N+Sem/Dummytag:göölen-åejj N_IE ;',
+            u'robot+N+Sem/Dummytag:robot N_ODD_C ;',
+            u'göölenåajjaråantjoe+N+Sem/Dummytag:göölenåajja#råantj N_OE_UML ;',
+            u'avteld+N+Sem/Dummytag+Cmp/SgNom:avteld R ;', u''
         ], sort_lexicon(self.sorting_lines, mode='contlex'))
 
     def test_revstem(self):
         """Test sorting by reverted stem."""
         self.assertListEqual([
-            u'aŋđŧá:abcd CABBR ;', u'bžčŋ:bcde BABBR ;', u'ábčđ:cdef ABBR ;',
-            u''
+            u'avteld+N+Sem/Dummytag+Cmp/SgNom:avteld R ;',
+            u'göölen-åejjie+N+Sem/Dummytag:göölen-åejj N_IE ;',
+            u'aabbesegærja+N+Sem/Txt:aabbese#gærj MAANA ;',
+            u'göölenåajjaråantjoe+N+Sem/Dummytag:göölenåajja#råantj N_OE_UML ;',
+            u'juveele+v1+N+Use/DNorm+Sem/Dummytag:juveel NIEJTE ;',
+            u'juveele+v2+N+Use/NotDNorm+Sem/Dummytag:juvel NIEJTE ;',
+            u'jielemes-åssjeles+N+Sem/Dummytag:jielemes-åssjeles N-TODO ;',
+            u'faadta+N+Sem/Dummytag:faadt MAANA ;',
+            u'robot+N+Sem/Dummytag:robot N_ODD_C ;', u''
         ], sort_lexicon(self.sorting_lines, mode='revstem'))
 
 

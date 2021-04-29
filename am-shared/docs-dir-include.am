@@ -3,10 +3,10 @@
 ## Licence: GPL v3+
 
 # Variables:
-ALLINONE_MD_PAGE=$(srcdir)/$(GTLANG).md
-LINKS=$(srcdir)/Links.md
-HEADER=$(srcdir)/index-header.md
-INDEX=$(srcdir)/index.md
+ALLINONE_MD_PAGE=$(GTLANG).md
+LINKS=Links.md
+HEADER=index-header.md
+INDEX=index.md
 
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
@@ -44,28 +44,28 @@ report.json:
 	touch $@
 endif
 
-$(srcdir)/%-syntax.md: $(top_srcdir)/src/cg3/%.cg3
+%-syntax.md: $(top_srcdir)/src/cg3/%.cg3
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(srcdir)/%-morphology.md: $(top_srcdir)/src/fst/%.lexc
+%-morphology.md: $(top_srcdir)/src/fst/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(srcdir)/%-morphology.md: $(top_srcdir)/src/fst/%.twolc
+%-morphology.md: $(top_srcdir)/src/fst/%.twolc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(srcdir)/%-generated.md: $(top_srcdir)/src/fst/generated_files/%.lexc
+%-generated.md: $(top_srcdir)/src/fst/generated_files/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(srcdir)/%-stems.md: $(top_srcdir)/src/fst/stems/%.lexc
+%-stems.md: $(top_srcdir)/src/fst/stems/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(srcdir)/%-affixes.md: $(top_srcdir)/src/fst/affixes/%.lexc
+%-affixes.md: $(top_srcdir)/src/fst/affixes/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(srcdir)/%.md: $(top_srcdir)/src/transcriptions/%.lexc
+%.md: $(top_srcdir)/src/transcriptions/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
-$(srcdir)/%.md: $(top_srcdir)/tools/grammarcheckers/%.cg3
+%.md: $(top_srcdir)/tools/grammarcheckers/%.cg3
 	$(AM_V_AWK)"$(GAWK)" -f $(DOCC2MDWIKI) < $< > $@
 
 generated-markdowns.sources:
@@ -82,6 +82,9 @@ generated-markdowns.targets: generated-markdowns.sources
 		*fst/affixes*) echo $$x-affixes.md;;\
 		*fst/generated*) echo $$x-generated.md;;\
 		*fst/root*) echo root-morphology.md;;\
+		*fst/compounding*) echo compounding-morphology.md;;\
+		*fst/clitics*) echo clitics-morphology.md;;\
+		*fst/phonology*) echo phonology-morphology.md;;\
 		*) echo $$x.md;;\
 		esac;\
 	done > $@

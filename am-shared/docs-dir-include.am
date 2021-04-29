@@ -76,7 +76,7 @@ generated-markdowns.sources:
 
 generated-markdowns.targets: generated-markdowns.sources
 	$(AM_V_GEN)for f in `cat $<` ; do \
-		x=`basename $$f | sed -e 's/\.\(lexc\|twolc\|cg3\)$$//'` ; \
+		x=`basename $$f | sed -e 's/\.\(lexc|twolc|cg3\)$$//'` ; \
 		case $$f in \
 		*fst/stems*) echo $$x-stems.md;;\
 		*fst/affixes*) echo $$x-affixes.md;;\

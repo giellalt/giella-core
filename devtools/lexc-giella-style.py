@@ -817,14 +817,16 @@ class LexcSorter(object):
         """
         if self.mode == 'alpha':
             return line_tuple['upper']
-        elif self.mode == 'revstem':
+
+        if self.mode == 'revstem':
             # nopep8 https://stackoverflow.com/questions/931092/reverse-a-string-in-python
             return line_tuple['lower'][::-1] if line_tuple.get('lower') \
                 else line_tuple['upper'][::-1]
-        elif self.mode == 'contlex':
+
+        if self.mode == 'contlex':
             return line_tuple['contlex']
-        else:
-            raise KeyError('No sorting mode given')
+
+        raise KeyError('No sorting mode given')
 
     def adjust_lines(self):
         """Sort the lines."""

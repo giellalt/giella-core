@@ -96,7 +96,7 @@ generate-markdown: generated-markdowns.targets
 	done
 
 $(ALLINONE_MD_PAGE): generate-markdown generated-markdowns.targets
-	$(AM_V_GEN)cat `cat generated-markdowns.targets` > $@
+	$(AM_V_GEN)cat `cat generated-markdowns.targets | sed -e 's@^@$(srcdir)/@'` > $@
 
 $(LINKS): generate-markdown generated-markdowns.targets
 	$(AM_V_GEN)cat generated-markdowns.targets |\

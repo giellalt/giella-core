@@ -26,7 +26,7 @@
         </e>
 
     How to use the script:
-    python add_stemtype2xml <PATH_TO_LEXC_FILE> <PATH_TO_STEMTYPE_FILE> <PATH_TO_DICT>
+    python add_stemtype2xml <PoS> <PATH_TO_STEMTYPE_FILE> <PATH_TO_DICT> <PATH_TO_LEXC_FILE>
 
         Ex.
         python add_stemtype2xml.py ~/main/words/dicts/smenob/scripts/nouns_stemtypes.txt ~/main/apps/dicts/nds/src/neahtta/dicts/sme-nob.all.xml ~/all-gut/giellalt/lang-sme/src/fst/stems/nouns.lexc
@@ -45,13 +45,21 @@ from fabric.colors import cyan, green, red
 from subprocess import Popen, PIPE
 
 try:
-    stem_file = sys.argv[1]
-    dict_file_in = sys.argv[2]
-    if len(sys.argv) == 4:
-        lexc_file = sys.argv[3]
+    pos_name = sys.argv[1]
+    stem_file = sys.argv[2]
+    dict_file_in = sys.argv[3]
+    if len(sys.argv) == 5:
+        lexc_file = sys.argv[4]
     else:
-        lexc_file = sys.argv[3:]
-
+        lexc_file = sys.argv[4:]
+    if pos_name == 'nouns':
+        pos = "N"
+    if pos_name == 'adjectives':
+        pos = "A"
+    if pos_name == 'verbs':
+        pos = "V"
+    if pos_name == 'prop':
+        pos = "Prop"
 except IndexError:
     print(red('** You forgot one of the input parameters!'))
     print(red('** You need to pass paths for the lexc file, the stemtype file and the dict file.'))
@@ -171,7 +179,11 @@ import re
 while line_dd:
     if "<l" in line_dd and not 'stem=' in line_dd:
         match = re.search('>.+<', line_dd)
-        if match:
+        match_pos = re.search('pos=".+" ', line_dd)
+        pos_dict = ''
+        if match_pos:
+            pos_dict = match_pos.group(0).replace('pos="', '').replace('" ','')
+        if match and pos_dict == pos:
             lemma = match.group(0).replace('>', '').replace('<', '')
             if lemma in dict_lex_stem:
                 line_dd = line_dd.replace(match.group(0), ' stem="' + dict_lex_stem[lemma] + '"' + match.group(0))

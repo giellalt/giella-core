@@ -96,7 +96,7 @@ except IOError:
     print(red('** The path/name you entered for the dict file is wrong!'))
     quit()
 
-dict_file_out = sys.argv[2] + ".stem.xml"
+dict_file_out = sys.argv[3] + ".stem.xml"
 dfo = open(dict_file_out, "w+")
 
 stem_2syll = False
@@ -179,15 +179,18 @@ import re
 while line_dd:
     if "<l" in line_dd and not 'stem=' in line_dd:
         match = re.search('>.+<', line_dd)
-        match_pos = re.search('pos=".+" ', line_dd)
+        match_pos = re.search('pos="[a-zA-Z]"', line_dd)
         pos_dict = ''
         if match_pos:
-            pos_dict = match_pos.group(0).replace('pos="', '').replace('" ','')
-        if match and pos_dict == pos:
-            lemma = match.group(0).replace('>', '').replace('<', '')
-            if lemma in dict_lex_stem:
-                line_dd = line_dd.replace(match.group(0), ' stem="' + dict_lex_stem[lemma] + '"' + match.group(0))
-                dfo.write(line_dd)
+            pos_dict = match_pos.group(0).replace('pos="', '').replace('"','')
+        if match:
+            if pos_dict == pos:
+                lemma = match.group(0).replace('>', '').replace('<', '')
+                if lemma in dict_lex_stem:
+                    line_dd = line_dd.replace(match.group(0), ' stem="' + dict_lex_stem[lemma] + '"' + match.group(0))
+                    dfo.write(line_dd)
+                else:
+                    dfo.write(line_dd)
             else:
                 dfo.write(line_dd)
         else:

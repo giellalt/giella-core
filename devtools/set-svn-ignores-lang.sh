@@ -326,3 +326,7 @@ $fstfiles
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/src/fst/affixes
 svn -q propdel svn:ignore $1/m4
+svn -q propdel svn:ignore $1/docs/_includes
+svn -q propdel svn:ignore $1/docs/_layouts
+svn -q propdel svn:ignore $1/docs/assets
+svn -q propdel svn:ignore $1/docs/assets/css

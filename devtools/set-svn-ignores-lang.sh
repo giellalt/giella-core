@@ -101,7 +101,19 @@ test_grammar_checker.sh" $1/devtools
 
 # Set the svn:ignore prop on the docs dir:
 $svnignore "$mkfiles
-build" $1/docs
+build
+*-affixes.md
+*-generated.md
+*-morphology.md
+*-src.md
+*-stems.md
+*-syntax.md
+*-tools.md
+???.md
+Links.md
+generated-markdowns.*
+index.md
+transcriptor-*.md" $1/docs
 
 # Set the svn:ignore prop on the misc dir:
 $svnignore "*" $1/misc

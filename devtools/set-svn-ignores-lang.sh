@@ -323,6 +323,15 @@ $fstfiles
 *.regex
 *.txt" $1/tools/tokenisers/filters
 
+# Set the svn:ignore prop on the test/tools/tts/ dir:
+$svnignore "$mkfiles
+*.hfst
+*.pmhfst
+*.tmp
+*.bin
+*.cg3
+*.xml" $1/tools/tts
+
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/.github
 svn -q propdel svn:ignore $1/.github/workflows

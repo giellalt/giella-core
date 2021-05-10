@@ -144,6 +144,7 @@ clean-local:
 	$(AM_V_at)-rm -f $(doc_DATA)
 	$(AM_V_at)-rm -f *-src.md
 	$(AM_V_at)-rm -f *-tools.md
+	$(AM_V_at)-rm -f generated-markdowns.*
 
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 # vim: set ft=automake:

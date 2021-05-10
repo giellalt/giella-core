@@ -324,6 +324,9 @@ $fstfiles
 *.txt" $1/tools/tokenisers/filters
 
 # Remove the svn:ignore prop on some subdirs:
+svn -q propdel svn:ignore $1/.github
+svn -q propdel svn:ignore $1/.github/workflows
+svn -q propdel svn:ignore $1/.gut
 svn -q propdel svn:ignore $1/src/fst/affixes
 svn -q propdel svn:ignore $1/m4
 svn -q propdel svn:ignore $1/docs/_includes

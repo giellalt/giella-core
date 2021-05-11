@@ -35,7 +35,7 @@ def main():
             surf = line.strip()[2:-2]
         elif line.startswith('\t'):
             fields = line.split()
-            stuff = '?'
+            stuff = fields[0][1:-1]
             if options.target == 'lemma':
                 stuff = fields[0][1:-1]
             elif options.target == 'phon':

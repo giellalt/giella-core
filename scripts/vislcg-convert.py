@@ -23,6 +23,9 @@ def main():
     a.add_argument('-F', '--format', metavar='OFORMAT',
                    help='output in OFORMAT',
                    default='tsv', choices=['tsv'])
+    a.add_argument('-1', '--1-best', action='store_true', dest='onebest',
+                   help='print 1-best of ambiguous cohort')
+
     options = a.parse_args()
     if not options.infile:
         options.infile = sys.stdin
@@ -33,7 +36,11 @@ def main():
             print(file=options.outfile)
         elif line.startswith('"<') and line.strip().endswith('>"'):
             surf = line.strip()[2:-2]
+            nth = 0
         elif line.startswith('\t'):
+            nth += 1
+            if options.onebest and nth > 1:
+                continue
             fields = line.split()
             stuff = fields[0][1:-1]
             if options.target == 'lemma':
@@ -45,6 +52,10 @@ def main():
                         break
             print(surf, stuff, '# ' + line.strip(), sep='\t',
                   file=options.outfile)
+        elif line.startswith(';'):
+            pass
+        else:
+            print(line.strip(), file=options.outfile)
     sys.exit(0)
 
 

@@ -42,7 +42,7 @@ def main():
             if options.onebest and nth > 1:
                 continue
             fields = line.split()
-            stuff = fields[0][1:-1]
+            stuff = None
             if options.target == 'lemma':
                 stuff = fields[0][1:-1]
             elif options.target == 'phon':
@@ -50,6 +50,8 @@ def main():
                     if 'phon' in tag:
                         stuff = tag[1:-5]
                         break
+                if not stuff:
+                    stuff = surf
             print(surf, stuff, '# ' + line.strip(), sep='\t',
                   file=options.outfile)
         elif line.startswith(';'):

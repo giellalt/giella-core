@@ -57,7 +57,7 @@ def main():
         elif line.startswith(';'):
             pass
         else:
-            print(line.strip(), file=options.outfile)
+            print(line.strip('\n'), file=options.outfile)
     sys.exit(0)
 
 

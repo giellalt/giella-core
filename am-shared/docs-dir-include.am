@@ -128,7 +128,7 @@ $(ALLINONE_MD_PAGE): generate-markdown generated-markdowns.targets
 
 $(LINKS): generate-markdown generated-markdowns.targets
 	$(AM_V_GEN)cat generated-markdowns.targets |\
-				LC_COLLATE=C sed 's/[a-z0-9._-]*/* [&]\(&\)/g' \
+				LC_COLLATE=C sed 's/[a-zA-Z0-9._-]*/* [&]\(&\)/g' \
 				> $@
 
 # FIXME: some temporary stuff to have index page

@@ -6,7 +6,7 @@
 
 from argparse import ArgumentParser, FileType
 import sys
-
+from math import inf
 
 def main():
     '''CLI for VISL CG conversion script.'''
@@ -44,13 +44,31 @@ def main():
             fields = line.split()
             stuff = None
             if options.target == 'lemma':
-                stuff = fields[0][1:-1]
-            elif options.target == 'phon':
-                for tag in fields:
-                    if 'phon' in tag:
-                        stuff = tag[1:-5]
+                mwestart = inf
+                mweend = inf
+                for i, tag in enumerate(fields):
+                    if i < mwestart and tag.startswith('"'):
+                        mwestart = i
+                    if i < mweend and tag.endswith('"'):
+                        mweend = i
+                    if mweend < inf and mwestart < inf:
                         break
-                if not stuff:
+                    # XXX: all mwe's are joined with simple space
+                stuff = ' '.join(fields[mwestart:mweend+1])[1:-1]
+            elif options.target == 'phon':
+                phonstart = inf
+                phonend = inf
+                for i, tag in enumerate(fields):
+                    if phonend == inf and tag.endswith('"phon'):
+                        phonend = i
+                    if phonend == inf and tag.startswith('"'):
+                        phonstart = i
+                    if phonend < inf and phonstart < inf:
+                        break
+                if phonend < inf and phonstart < inf:
+                    stuff = ' '.join(fields[phonstart:phonend+1])[1:-5]
+                else:
+                    # phonetics is surface when not given
                     stuff = surf
             print(surf, stuff, '# ' + line.strip(), sep='\t',
                   file=options.outfile)

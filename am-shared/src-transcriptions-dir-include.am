@@ -20,7 +20,7 @@
 #! @param GT_TRANSCRIPTIONS_SRCS required, the source files for orthographic
 #!        transcriptions.
 
-EXTRA_DIST=$(GT_TRANSCRIPTIONS_SRCS)
+EXTRA_DIST=$(GT_TRANSCRIPTIONS_SRCS) $(GT_TRANSCRIPTIONS_REGEX_SRCS)
 
 ####### Automake targets: ########
 # Make sure that targets are deleted when something breaks:
@@ -32,6 +32,7 @@ GT_TRANSCRIPTORS=
 if WANT_TRANSCRIPTORS
 # Replace .lexc with .filtered.lookup:
 DIGIT2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_TRANSCRIPTIONS_SRCS))
+REGEX2TXT=$(patsubst %.regex,%.filtered.lookup,$(GT_TRANSCRIPTIONS_REGEX_SRCS))
 ABBREV2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_ABBREV_SRCS))
 # Replace digit2text with text2digit to get the inverse fst's:
 TXT2DIGIT=$(subst digit2text,text2digit,$(DIGIT2TXT))
@@ -41,6 +42,7 @@ TXT2ABBREV=$(subst abbrevs2text,text2abbrevs,$(ABBREV2TXT))
 if CAN_HFST
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(DIGIT2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2DIGIT))
+GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(REGEX2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2ABBREV))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(ABBREV2TXT))
 endif # CAN_HFST
@@ -48,6 +50,7 @@ endif # CAN_HFST
 if CAN_XFST
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(DIGIT2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2DIGIT))
+GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(REGEX2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(ABBREV2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2ABBREV))
 endif # CAN_XFST
@@ -55,12 +58,13 @@ endif # CAN_XFST
 if CAN_FOMA
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(DIGIT2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2DIGIT))
+GT_TRANSCRIPTORS+=$(addsuffix .foma,$(REGEX2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(ABBREV2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2ABBREV))
 endif # CAN_FOMA
 endif # WANT_TRANSCRIPTORS
 
-noinst_DATA=$(GT_TRANSCRIPTORS)
+noinst_DATA=$(GT_TRANSCRIPTORS) $(GT_CUSTOM_TARGETS)
 
 # The number-clock-date2text & inverse conversion transducers:
 
@@ -149,6 +153,7 @@ clean-local:
 	-rm -f *.hfstol *.xfst *.foma *.hfst
 
 include $(top_srcdir)/../giella-core/am-shared/lexc-include.am
+include $(top_srcdir)/../giella-core/am-shared/regex-include.am
 include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
 include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am

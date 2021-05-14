@@ -59,10 +59,10 @@ def main():
                 phonstart = inf
                 phonend = inf
                 for i, tag in enumerate(fields):
-                    if phonend == inf and tag.endswith('"phon'):
-                        phonend = i
                     if phonend == inf and tag.startswith('"'):
                         phonstart = i
+                    if phonend == inf and tag.endswith('"phon'):
+                        phonend = i
                     if phonend < inf and phonstart < inf:
                         break
                 if phonend < inf and phonstart < inf:

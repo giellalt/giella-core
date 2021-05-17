@@ -112,6 +112,7 @@ GIELLA_FILTER_CORE_GENERATED_REGEX_SRCS=\
 				remove-error-tags.regex                       \
 				remove-grammatical-tags.regex                 \
 				remove-orig_lang-tags.regex                   \
+				remove-usage-tags.regex                       \
 				remove-semantic-tags.regex                    \
 				remove-semantic-tags-before-derivations.regex \
 				reorder-semantic-tags.regex                   \
@@ -324,6 +325,18 @@ orig_lang-tags.txt: $(LEX_TAG_FILE)
 
 semantic-tags.txt: $(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Sem/
+	$(AM_V_GEN)if test -f $@ ; then \
+		if ! diff -q $@ $@.tmp ; then \
+			mv -f $@.tmp $@ ; \
+		else \
+			rm -f $@.tmp ; \
+		fi ;\
+	else \
+		mv -f $@.tmp $@ ; \
+	fi
+
+usage-tags.txt: $(LEX_TAG_FILE)
+	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Use/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
 			mv -f $@.tmp $@ ; \

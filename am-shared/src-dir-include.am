@@ -380,7 +380,6 @@ analyser-gt-desc.tmp.%: analyser-raw-gt-desc.%                \
 					filters/remove-area-tags.%                \
 					filters/remove-dialect-tags.%             \
 					filters/remove-number-string-tags.%       \
-					filters/remove-usage-tags.%               \
 					filters/remove-semantic-tags.%            \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -400,7 +399,6 @@ analyser-gt-desc.tmp.%: analyser-raw-gt-desc.%                \
 				@\"filters/remove-area-tags.$*\"                \
 			.o. @\"filters/remove-dialect-tags.$*\"             \
 			.o. @\"filters/remove-number-string-tags.$*\"       \
-			.o. @\"filters/remove-usage-tags.$*\"               \
 			.o. @\"filters/remove-semantic-tags.$*\"            \
 			.o. @\"filters/remove-orig_lang-tags.$*\"           \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
@@ -444,7 +442,6 @@ generator-gt-desc.tmp.%: analyser-raw-gt-desc.%            \
 					filters/remove-number-string-tags.%       \
 					filters/remove-orthography-tags.%         \
 					filters/remove-Orth_IPA-strings.%         \
-					filters/remove-usage-tags.%               \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
@@ -464,7 +461,6 @@ generator-gt-desc.tmp.%: analyser-raw-gt-desc.%            \
 			.o. @\"filters/remove-area-tags.$*\"                \
 			.o. @\"filters/remove-dialect-tags.$*\"             \
 			.o. @\"filters/remove-number-string-tags.$*\"       \
-			.o. @\"filters/remove-usage-tags.$*\"               \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
@@ -485,7 +481,6 @@ analyser-gt-glossing.tmp.%: analyser-raw-gt-glossing.%        \
 					filters/remove-area-tags.%                \
 					filters/remove-dialect-tags.%             \
 					filters/remove-number-string-tags.%       \
-					filters/remove-usage-tags.%               \
 					filters/remove-semantic-tags.%            \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -505,7 +500,6 @@ analyser-gt-glossing.tmp.%: analyser-raw-gt-glossing.%        \
 				@\"filters/remove-area-tags.$*\"                \
 			.o. @\"filters/remove-dialect-tags.$*\"             \
 			.o. @\"filters/remove-number-string-tags.$*\"       \
-			.o. @\"filters/remove-usage-tags.$*\"               \
 			.o. @\"filters/remove-semantic-tags.$*\"            \
 			.o. @\"filters/remove-orig_lang-tags.$*\"           \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
@@ -549,7 +543,6 @@ generator-gt-glossing.tmp.%: analyser-raw-gt-glossing.%       \
 					filters/remove-number-string-tags.%       \
 					filters/remove-orthography-tags.%         \
 					filters/remove-Orth_IPA-strings.%         \
-					filters/remove-usage-tags.%               \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
@@ -569,7 +562,6 @@ generator-gt-glossing.tmp.%: analyser-raw-gt-glossing.%       \
 			.o. @\"filters/remove-area-tags.$*\"                \
 			.o. @\"filters/remove-dialect-tags.$*\"             \
 			.o. @\"filters/remove-number-string-tags.$*\"       \
-			.o. @\"filters/remove-usage-tags.$*\"               \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
@@ -593,7 +585,6 @@ analyser-gt-norm.tmp.%: analyser-raw-gt-desc.%                \
 					filters/remove-dialect-tags.%             \
 					filters/remove-variant-tags.%             \
 					filters/remove-number-string-tags.%       \
-					filters/remove-usage-tags.%               \
 					filters/remove-error-strings.%            \
 					filters/remove-semantic-tags.%            \
 					filters/remove-hyphenation-marks.%        \
@@ -615,7 +606,6 @@ analyser-gt-norm.tmp.%: analyser-raw-gt-desc.%                \
 			.o. @\"filters/remove-dialect-tags.$*\"             \
 			.o. @\"filters/remove-variant-tags.$*\"             \
 			.o. @\"filters/remove-number-string-tags.$*\"       \
-			.o. @\"filters/remove-usage-tags.$*\"               \
 			.o. @\"filters/remove-semantic-tags.$*\"            \
 			.o. @\"filters/remove-error-strings.$*\"            \
 			.o. @\"filters/remove-orig_lang-tags.$*\"           \
@@ -658,7 +648,6 @@ generator-gt-norm.tmp.%: analyser-raw-gt-desc.%            \
 					filters/remove-infl_deriv-borders.%       \
 					filters/remove-word-boundary.%            \
 					filters/remove-number-string-tags.%       \
-					filters/remove-usage-tags.%               \
 					filters/remove-orthography-tags.%         \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-error-strings.%            \
@@ -681,7 +670,6 @@ generator-gt-norm.tmp.%: analyser-raw-gt-desc.%            \
 			.o. @\"filters/remove-area-tags.$*\"                \
 			.o. @\"filters/remove-dialect-tags.$*\"             \
 			.o. @\"filters/remove-number-string-tags.$*\"       \
-			.o. @\"filters/remove-usage-tags.$*\"               \
 			.o. @\"filters/remove-error-strings.$*\"            \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
@@ -707,7 +695,6 @@ analyser-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst             \
 					filters/remove-dialect-tags.xfst             \
 					filters/remove-variant-tags.xfst             \
 					filters/remove-number-string-tags.xfst       \
-					filters/remove-usage-tags.xfst               \
 					filters/remove-error-strings.xfst            \
 					filters/remove-semantic-tags.xfst            \
 					filters/remove-hyphenation-marks.xfst        \
@@ -728,7 +715,6 @@ analyser-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst             \
 			.o. @\"filters/remove-dialect-tags.xfst\"             \
 			.o. @\"filters/remove-variant-tags.xfst\"             \
 			.o. @\"filters/remove-number-string-tags.xfst\"       \
-			.o. @\"filters/remove-usage-tags.xfst\"               \
 			.o. @\"filters/remove-semantic-tags.xfst\"            \
 			.o. @\"filters/remove-error-strings.xfst\"            \
 			.o. @\"filters/remove-orig_lang-tags.xfst\"           \
@@ -769,7 +755,6 @@ generator-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst            \
 					filters/remove-infl_deriv-borders.xfst       \
 					filters/remove-word-boundary.xfst            \
 					filters/remove-number-string-tags.xfst       \
-					filters/remove-usage-tags.xfst               \
 					filters/remove-orthography-tags.xfst         \
 					filters/remove-Orth_IPA-strings.xfst         \
 					filters/remove-error-strings.xfst            \
@@ -791,7 +776,6 @@ generator-gt-norm.tmp.xfst: analyser-raw-gt-desc.xfst            \
 			.o. @\"filters/remove-area-tags.xfst\"                \
 			.o. @\"filters/remove-dialect-tags.xfst\"             \
 			.o. @\"filters/remove-number-string-tags.xfst\"       \
-			.o. @\"filters/remove-usage-tags.xfst\"               \
 			.o. @\"filters/remove-error-strings.xfst\"            \
 			.o. @\"filters/remove-orthography-tags.xfst\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.xfst\"         \
@@ -966,9 +950,12 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_raw_fsts,$(fst))))
 
 # Default fallback processing for the analysers:
 define giella_default_analysers
-analyser%.$(1): analyser%.tmp.$(1)
-	$$(AM_V_XFST_TOOL)$$(PRINTF) "\
-		 load stack $$<\n\
+analyser%.$(1): analyser%.tmp.$(1) \
+				filters/remove-usage-tags.$(1)
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+				@\"filters/remove-usage-tags.$(1)\"  \
+			.o. @\"$<\" \
+			;\n\
 		 $$(INVERT_HFST)\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
@@ -977,9 +964,12 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_default_analysers,$(fst))))
 
 # Default fallback processing for the generators:
 define giella_default_generators
-generator%.$(1): generator%.tmp.$(1)
-	$$(AM_V_XFST_TOOL)$$(PRINTF) "\
-		 load stack $$<\n\
+generator%.$(1): generator%.tmp.$(1) \
+				filters/remove-usage-tags.$(1)
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+				@\"filters/remove-usage-tags.$(1)\"  \
+			.o. @\"$<\" \
+			;\n\
 		 $$(INVERT_XFST)$$(INVERT_FOMA)\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)

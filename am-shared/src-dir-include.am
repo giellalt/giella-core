@@ -952,9 +952,9 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_raw_fsts,$(fst))))
 define giella_default_analysers
 analyser%.$(1): analyser%.tmp.$(1) \
 				filters/remove-usage-tags.$(1)
-	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-usage-tags.$(1)\"  \
-			.o. @\"$<\" \
+			.o. @\"$$<\" \
 			;\n\
 		 $$(INVERT_HFST)\
 		 save stack $$@\n\
@@ -966,9 +966,9 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_default_analysers,$(fst))))
 define giella_default_generators
 generator%.$(1): generator%.tmp.$(1) \
 				filters/remove-usage-tags.$(1)
-	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-usage-tags.$(1)\"  \
-			.o. @\"$<\" \
+			.o. @\"$$<\" \
 			;\n\
 		 $$(INVERT_XFST)$$(INVERT_FOMA)\
 		 save stack $$@\n\

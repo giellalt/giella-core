@@ -808,12 +808,12 @@ class CorpusGramTest(GramTest):
                 text += para.tail
 
             parent = para.getparent()
-            parent.remove(para)
-
-            if parent.text:
-                parent.text = parent.text + text
-            else:
-                parent.text = text
+            if parent:
+                parent.remove(para)
+                if parent.text:
+                    parent.text = parent.text + text
+                else:
+                    parent.text = text
 
         for child in para:
             self.flatten_para(child)

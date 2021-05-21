@@ -103,6 +103,7 @@ def main():
           file=options.outfile)
     output = ''
     groups = list()
+    first = True
     for line in options.infile:
         line = line.strip()
         if not line or line == '':
@@ -113,6 +114,7 @@ def main():
             groupname = line[1:].replace(' ', '')
             output = 'define ' + groupname + ' = '
             groups += [groupname]
+            first = True
         elif line.startswith('//'):
             print(line.replace('//', '!'), file=options.outfile)
         elif line.startswith('.L'):
@@ -176,13 +178,16 @@ def main():
                 else:
                     print('logic error')
                     sys.exit(1)
+            if not first:
+                output += '.o.\n'
             if left or right:
                 output += '[ ' + center + ' -> ' + repl \
                     + ' || ' + left + ' _ ' + right + \
-                    ' ],  ' + comment + '\n'
+                    ' ]  ' + comment + '\n'
             else:
                 output += '[ ' + center + ' -> ' + repl \
-                    + ' ],  ' + comment + '\n'
+                    + ' ]  ' + comment + '\n'
+            first = False
         else:
             print('unexpected:', line.strip())
             sys.exit(1)

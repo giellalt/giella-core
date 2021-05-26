@@ -35,7 +35,7 @@ def parse_repl(s):
     xre = xre.replace(' I ', ' ɪ ')
     xre = xre.replace(' E ', ' ɛ ')
     xre = xre.replace(' A ', ' ɑ ')
-    xre = xre.replace(' J \ ', ' ɟ ')
+    xre = xre.replace(' J \\ ', ' ɟ ')
     return xre
 
 

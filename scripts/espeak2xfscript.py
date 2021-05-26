@@ -85,21 +85,21 @@ def main():
         options.outfile = sys.stdout
     print('! automatically converted espeak -> xfscript: ',
           options.infile.name, file=options.outfile)
-    print('define toLower = [ A -> a,  B -> b, C -> c ] ;',
+    print('define toLower  [ A -> a,  B -> b, C -> c ] ;',
           file=options.outfile)
-    print('define CONS = [b | c | d | f | g | h | j | k | l | m ' +
+    print('define CONS  [b | c | d | f | g | h | j | k | l | m ' +
           '| n | p | q | r | s | t | v | w | x | z ] ; ! C in espeak',
           file=options.outfile)
-    print('define VOW = [ a | e | i | o | u | y ] ; ! A in espeak',
+    print('define VOW  [ a | e | i | o | u | y ] ; ! A in espeak',
           file=options.outfile)
-    print('define SYLL = CONS* VOW+ CONS* ; ! @ in espeak',
+    print('define SYLL  CONS* VOW+ CONS* ; ! @ in espeak',
           file=options.outfile)
-    print('define USYLL = CONS* VOW+ CONS* ; ! & in espeak',
+    print('define USYLL  CONS* VOW+ CONS* ; ! & in espeak',
           file=options.outfile)
-    print('define NVOW = \\VOW ; ! K in espeak', file=options.outfile)
-    print('define DIGIT = [ %0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ] ; ' +
+    print('define NVOW  \\VOW ; ! K in espeak', file=options.outfile)
+    print('define DIGIT  [ %0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ] ; ' +
           '! D in espeak', file=options.outfile)
-    print('define CGROUP = [ .#. CONS* | CONS* .#. ] ; ! X in espeak',
+    print('define CGROUP  [ .#. CONS* | CONS* .#. ] ; ! X in espeak',
           file=options.outfile)
     output = ''
     groups = list()
@@ -112,7 +112,7 @@ def main():
             if output:
                 print(output, ';', file=options.outfile)
             groupname = line[1:].replace(' ', '')
-            output = 'define ' + groupname + ' = '
+            output = 'define ' + groupname + ' '
             groups += [groupname]
             first = True
         elif line.startswith('//'):

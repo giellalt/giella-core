@@ -86,6 +86,15 @@ analyser-disamb-gt-desc.tmp1.%: analyser-raw-gt-desc.%        \
 
 # Additional target to support languages with alternative writing systems:
 define alt_ws_disamb_analysers
+
+# Fallback spellrelax for alt WS:
+orthography/spellrelax.$(1).%: orthography/spellrelax.%
+	$$(AM_V_at)echo
+	$$(AM_V_at)echo "*** WARNING: *** No $$@ found, copying from $$< instead."
+	$$(AM_V_at)echo "*** WARNING: *** Please manually create $$(basename $$(basename $$@)).regex for best results."
+	$$(AM_V_at)echo
+	$$(AM_V_CP)cp -f $$< $$@
+
 analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%     \
 					filters/remove-Orth_IPA-strings.%           \
 					filters/remove-hyphenation-marks.%          \

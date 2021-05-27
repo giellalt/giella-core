@@ -121,6 +121,15 @@ $(foreach alt_ws,$(ALT_WSS),$(eval $(call alt_ws_disamb_analysers,$(alt_ws))))
 
 # Additional target to support languages with alternative orthographies:
 define alt_orth_disamb_fst
+
+# Fallback spellrelax for alt orth:
+orthography/spellrelax.$(1).%: orthography/spellrelax.%
+	$$(AM_V_at)echo
+	$$(AM_V_at)echo "*** WARNING: *** No $$@ found, copying from $$< instead."
+	$$(AM_V_at)echo "*** WARNING: *** Please manually create $$(basename $$(basename $$@)).regex for best results."
+	$$(AM_V_at)echo
+	$$(AM_V_CP)cp -f $$< $$@
+
 analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%      \
 					filters/remove-hyphenation-marks.%           \
 					filters/remove-infl_deriv-borders.%          \

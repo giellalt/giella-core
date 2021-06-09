@@ -28,7 +28,12 @@ GIELLA_ANL_IPA_RAW=text2ipa-$(GLANG).lookup.hfst
 # pattern:
 # *2text.filtered.lookup.hfstol
 # Makes it flexible and easily adaptable to the needs of each language.
-GIELLA_XSC_TRANSCIPTORS=$(addsuffix .hfst, $(basename $(notdir $(wildcard $(top_builddir)/src/transcriptions/*2text.filtered.lookup.hfstol))))
+# For additional flexibility, one can filter out files that should not be
+# included, by specifying them in tools/tts/Makefile.am (without suffix).
+FILTER_OUT_FILES=$(addsuffix %, $(GIELLA_ANL_REMOVE_TRANSCRIPTORS))
+GIELLA_XSC_TRANSCIPTOR_LIST=$(basename $(notdir $(wildcard $(top_builddir)/src/transcriptions/*2text.filtered.lookup.hfstol)))
+GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST=$(filter-out $(FILTER_OUT_FILES), $(GIELLA_XSC_TRANSCIPTOR_LIST))
+GIELLA_XSC_TRANSCIPTORS=$(addsuffix .hfst, $(GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST))
 
 GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfstol
 GIELLA_XSC_ANALYSER=analyser-gt-norm.hfstol

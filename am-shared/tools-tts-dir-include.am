@@ -21,8 +21,8 @@
 GIELLA_TTS_ZDISTRO=$(GLANG2)-tts.zpipe
 
 # Various text conversion fst's - normalisers/expanders and IPA:
-GIELLA_ANL_IPA=text2ipa.lookup.hfstol
-GIELLA_ANL_IPA_RAW=text2ipa.lookup.hfst
+GIELLA_ANL_IPA=txt2ipa.lookup.hfstol
+GIELLA_ANL_IPA_RAW=txt2ipa.lookup.hfst
 
 # List of transcriptors: all files in src/transcriptions/ matching the file name
 # pattern:

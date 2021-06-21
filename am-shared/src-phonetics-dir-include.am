@@ -41,6 +41,11 @@ if CAN_XFST
 GT_PHONETICS+=$(patsubst %.xfscript,%.lookup.xfst,$(GT_PHONETICS_SRCS))
 GT_PHONETICS+=$(patsubst %.xfscript,%.compose.xfst,$(GT_PHONETICS_SRCS))
 endif # CAN_XFST
+
+if CAN_FOMA
+GT_PHONETICS+=$(patsubst %.xfscript,%.lookup.foma,$(GT_PHONETICS_SRCS))
+GT_PHONETICS+=$(patsubst %.xfscript,%.compose.foma,$(GT_PHONETICS_SRCS))
+endif # CAN_FOMA
 endif # WANT_PHONETIC
 
 noinst_DATA=$(GT_PHONETICS)

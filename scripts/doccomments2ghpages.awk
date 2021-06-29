@@ -99,11 +99,18 @@ function expand_variables(s) {
         print(expand_variables(gensub("!!≈", " ", 1)));
     }
 }
-/^!! / {print(expand_variables(gensub(".*!! ", "", 1))); }
-/^[^!]+!! / {print(expand_variables(gensub(".*!! ", "", 1))); }
-/!!/ {SOMETHING_WRONG="FALSE";}
+/^!! / {print(expand_variables(gensub(".*!! *", "", 1))); }
+/^[^!]+!! / {print(expand_variables(gensub(".*!! *", "", 1))); }
 /^Multichar_Symbols/ {LEXNAME=$1;}
 /^LEXICON / {LEXNAME=$2;}
 /^"[^"]*"/ {
     RULENAME=gensub("!.*", "", 1, gensub("\"", "", "g"));
+}
+function docupath(s) {
+    return gensub("\\.\\./", "", 1, s);
+}
+END {
+    printf("* * *\n<small>This (part of) documentation was generated from " \
+           "[%s](http://github.com/giellalt/lang-%s/blob/main/%s)" \
+           "</small>", docupath(FILENAME), GLANG, docupath(FILENAME));
 }

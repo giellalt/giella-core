@@ -57,7 +57,10 @@ endif # WANT_MORPHOLOGY
 
 GIELLA_PMHFSTS+=$(GIELLA_DISAMB_PMHFSTS) $(GIELLA_GRAMCHECK_PMHFSTS)
 
-hfstdata_DATA+=$(GIELLA_PMHFSTS) $(sort $(GIELLA_TOKEN_DIS)) $(ALT_ORTH_TOKENISERS)
+hfstdata_DATA+=$(GIELLA_PMHFSTS) \
+				$(sort $(GIELLA_TOKEN_DIS)) \
+				$(ALT_ORTH_TOKENISERS) \
+				$(GIELLA_CUSTOM_PMHFSTS)
 endif # CAN_HFST
 
 ###########################################################################
@@ -114,7 +117,7 @@ CMD=$(AM_V_HXFST)$(PRINTF) "read regex \
 
 # Take the analyser file from src/*.hfst, and replace the Giella tags with
 # CG compatible ones:
-# a) for pmatchdisamb:
+# a. for pmatchdisamb:
 analyser-%-gt-desc.hfst: $(top_builddir)/src/analyser-pmatch%-gt-desc.hfst \
 						 filters/make-%-CG-tags.hfst
 	$(CMD)

@@ -117,7 +117,7 @@ OXT_ROOT_DIR=$(TOOLLIBS_DIR)/LibreOffice-voikko
 # - zip build/subdir to ./
 $(GTLANG2)_LO-voikko-4%.oxt: $(GT_SPELLING_HFST)
 	$(AM_V_GEN)rm -f $@ && \
-		$(MKDIR_P) build/4$*/ ; \
+		$(MKDIR_P) build/4$*/3/ ; \
 		if test "x$(SKIP_DIR_NUM)" != "x" ; then \
 			remdirnum=$$(echo $(OXT_ROOT_DIR)/4$*/ \
 			| sed 's|https://gtsvn.uit.no/langtech/||' | tr '/' '\n' \
@@ -134,7 +134,7 @@ $(GTLANG2)_LO-voikko-4%.oxt: $(GT_SPELLING_HFST)
 
 $(GTLANG2)_LO-voikko-5%.oxt: $(GT_SPELLING_HFST) $(ALT_ORTH_ZHFST_FILES) $(ALT_WS_ZHFST_FILES)
 	$(AM_V_GEN)rm -f $@ && \
-		$(MKDIR_P) build/5$*/ ; \
+		$(MKDIR_P) build/5$*/voikko/3/ ; \
 		if test "x$(SKIP_DIR_NUM)" != "x" ; then \
 			remdirnum=$$(echo $(OXT_ROOT_DIR)/5$*/ \
 			| sed 's|https://gtsvn.uit.no/langtech/||' | tr '/' '\n' \

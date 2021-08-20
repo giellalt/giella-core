@@ -45,6 +45,7 @@ generator-$(GT_COMMON_SPELLER_NAME).tmp.hfst: \
 			$(top_builddir)/src/filters/remove-Use_minusGC-tags.hfst          \
 			$(top_builddir)/src/filters/remove-Use_minus_PMatch-tags.hfst     \
 			$(top_builddir)/src/filters/remove-Use_PMatch-strings.hfst        \
+			$(top_builddir)/src/filters/remove-use_mt-strings.hfst            \
 			$(top_builddir)/src/filters/remove-mwe-tags.hfst                  \
 			$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.hfst
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
@@ -60,6 +61,7 @@ generator-$(GT_COMMON_SPELLER_NAME).tmp.hfst: \
 		.o. @\"$(top_builddir)/src/filters/remove-Use_GC-strings.hfst\"        \
 		.o. @\"$(top_builddir)/src/filters/remove-Use_PMatch-strings.hfst\"    \
 		.o. @\"$(top_builddir)/src/filters/remove-mwe-tags.hfst\"              \
+		.o. @\"$(top_builddir)/src/filters/remove-use_mt-strings.hfst\"        \
 		.o. @\"$<\" \
 		.o. @\"$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.hfst\" \
 		;\n\

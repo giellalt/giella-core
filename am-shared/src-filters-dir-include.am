@@ -75,6 +75,7 @@ GIELLA_FILTER_CORE_REGEX_SRCS=\
 				remove-Use_minusGC-tags.regex             \
 				remove-UseCirc-strings.regex              \
 				remove-use_marg-strings.regex             \
+				remove-use_mt-strings.regex               \
 				remove-variant-strings.regex              \
 				reorder-subpos-tags.regex                 \
 				replace-hyphenation-chars.regex           \

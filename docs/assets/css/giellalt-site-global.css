@@ -36,11 +36,20 @@ header #left_toc {
   text-align: left;
   background: #fff;
   border-style: none;
+  padding-left: 0;
 
   /* Attempt at creating a scrolling text box with dynamic height relative to viewport size: */
   margin-bottom: 153px;
   height: calc(100% - (10em + 14em)); /* 10em: ≈footer height, 14em: ≈top header height */
   overflow: auto;
+}
+
+header #left_toc li::before {
+  content: "- ";
+}
+
+header #left_toc li {
+  margin-left: 1em;
 }
 
 header #left_toc > li {
@@ -51,7 +60,7 @@ header #left_toc > li {
   height: auto;
   display: block;
   font-weight: bold;
-  font-size: 16px;
+  /* font-size: 16px; */
   background: #fff;
 }
 
@@ -61,7 +70,6 @@ header #left_toc li > ul {
   height: auto;
   /* top | left and right | bottom */
   border-style: none;
-  margin-left: 1em;
   margin-bottom: 0px;
   background: #fff;
 }

@@ -48,6 +48,11 @@ header #left_toc li::before {
   content: "- ";
 }
 
+header #left_toc li {
+  padding-left: 1em ;
+  text-indent: -1em ;
+}
+
 header #left_toc > li {
   width: auto;
   float: none;

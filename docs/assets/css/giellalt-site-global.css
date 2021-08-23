@@ -48,10 +48,6 @@ header #left_toc li::before {
   content: "- ";
 }
 
-header #left_toc li {
-  margin-left: 1em;
-}
-
 header #left_toc > li {
   width: auto;
   float: none;
@@ -72,6 +68,7 @@ header #left_toc li > ul {
   border-style: none;
   margin-bottom: 0px;
   background: #fff;
+  padding-left: 0;
 }
 
 #left_toc > li > ul {
@@ -93,6 +90,7 @@ header #left_toc li > ul > li {
   border-style: none;
   height: auto;
   display: block;
+  margin-left: 1em;
 }
 
 header #left_toc a {

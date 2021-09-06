@@ -72,7 +72,7 @@ class MyOptionParser(OptionParser):
 # Some utility classes
 
 
-class Header(object):
+class Header:
     """Read and provide interface to header"""
 
     def __init__(self, file):

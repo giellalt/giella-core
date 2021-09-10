@@ -319,16 +319,16 @@ def replace_rules(alphabet, pair_info, weight, swap):
         # insertions
         if ('', a) in pair_info["edits"]:
             this_weight = pair_info["edits"][('', a)] + alphabet[a]
-        corrections += '\t[ {{{}}} {} ]::{} |\n'.format(a, corr, this_weight)
+        corrections += '\t[ "{}" {} ]::{} |\n'.format(a, corr, this_weight)
     # trim the extra left by the last pass
     corrections = corrections[:-3]
     corrections += ' ] ,,\n'
     for a in alphabet:
         this_weight = alphabet[a]
         # the left-hand side of the rule
-        corrections += f'{{{a}}} ->\t[ '
+        corrections += '"{}" ->\t[ '.format(a)
         # identity
-        corrections += f'{{{a}}} |\n'
+        corrections += '"{}" |\n'.format(a)
         # deletion
         if (a, '') in pair_info["edits"]:
             this_weight = pair_info["edits"][(a, '')]
@@ -342,7 +342,7 @@ def replace_rules(alphabet, pair_info, weight, swap):
                 continue
             if (a, b) in pair_info["edits"]:
                 this_weight = pair_info["edits"][(a, b)]  # + alphabet[b] # xxx
-            corrections += '\t[ {{{}}}{}]::{} |\n'.format(b, corr, this_weight)
+            corrections += '\t[ "{}"{}]::{} |\n'.format(b, corr, this_weight)
 
         corrections = corrections[:-3]
         corrections += ' ] ,,\n'
@@ -351,7 +351,7 @@ def replace_rules(alphabet, pair_info, weight, swap):
         unk, corr, weight)  # Initial line unk regex
     for a in alphabet:  # unk -> the whole alphabet:
         this_weight = alphabet[a]
-        corrections += '\t[ {{{}}}{}]::{} |\n'.format(
+        corrections += '\t[ "{}"{}]::{} |\n'.format(
             a, corr, this_weight
         )  # for each target symbol, use the weight of that symbol
 
@@ -370,10 +370,10 @@ def replace_rules(alphabet, pair_info, weight, swap):
                 topair = (b, a)
                 if (frompair, topair) in pair_info["swaps"]:
                     this_weight = pair_info["swaps"][(frompair, topair)]
-                    corrections += '[{{{}}} {{{}}}] -> [ {{{}}} {{{}}}{}]::{} ,\n'.format(
+                    corrections += '["{}" "{}"] -> [ "{}" "{}"{}]::{} ,\n'.format(
                         a, b, b, a, corr, this_weight)
                 else:
-                    corrections += '[{{{}}} {{{}}}] -> [ {{{}}} {{{}}}{}]::{} ,\n'.format(
+                    corrections += '["{}" "{}"] -> [ "{}" "{}"{}]::{} ,\n'.format(
                         a, b, b, a, corr, weight)
         corrections = corrections[:-3]
         corrections += ' ]'

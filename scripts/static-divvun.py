@@ -397,7 +397,7 @@ class LanguageAdder(object):
             "smj": "Julevsábmáj",
             "sv": "På svenska",
             "en": "In English",
-            "ru": "Русский",
+            "ru": "на русском",
         }
 
         right_menu = etree.Element("li")

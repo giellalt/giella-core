@@ -32,6 +32,7 @@ class StaticSiteBuilder(object):
         langs (list): list of langs to be built
         logfile (file handle)
     """
+
     def __init__(self, builddir, destination, langs):
         """Init StaticSiteBuilder with builddir, destination and langs.
 
@@ -41,34 +42,36 @@ class StaticSiteBuilder(object):
             langs (list):       List of langs to be built
 
         """
-        if builddir.endswith('/'):
+        if builddir.endswith("/"):
 
             builddir = builddir[:-1]
         self.builddir = builddir
-        if not destination.endswith('/'):
-            destination = destination + '/'
+        if not destination.endswith("/"):
+            destination = destination + "/"
         self.destination = destination
         self.mainlang = langs[0]
         self.langs = langs[1:]
-        if os.path.isdir(os.path.join(self.builddir, 'built')):
-            shutil.rmtree(os.path.join(self.builddir, 'built'))
+        if os.path.isdir(os.path.join(self.builddir, "built")):
+            shutil.rmtree(os.path.join(self.builddir, "built"))
 
-        os.mkdir(os.path.join(self.builddir, 'built'))
+        os.mkdir(os.path.join(self.builddir, "built"))
 
     def __enter__(self):
         """Open a lock file."""
-        lockname = os.path.join(self.builddir, '.lock')
+        lockname = os.path.join(self.builddir, ".lock")
 
         if os.path.exists(lockname):
             with open(lockname) as lock:
-                logger.warn('Another build with PID {} has been running '
-                            'since {}'.format(
-                                lock.read(),
-                                datetime.datetime.fromtimestamp(
-                                    os.path.getmtime(lockname))))
+                logger.warn(
+                    "Another build with PID {} has been running "
+                    "since {}".format(
+                        lock.read(),
+                        datetime.datetime.fromtimestamp(os.path.getmtime(lockname)),
+                    )
+                )
                 raise SystemExit(5)
 
-        self.lockfile = open(lockname, 'w')
+        self.lockfile = open(lockname, "w")
         self.lockfile.write(str(os.getpid()))
         self.lockfile.flush()
 
@@ -77,20 +80,20 @@ class StaticSiteBuilder(object):
     def __exit__(self, *args):
         """Close the lockfile and remove the lockfile."""
         self.lockfile.close()
-        os.remove(os.path.join(self.builddir, '.lock'))
+        os.remove(os.path.join(self.builddir, ".lock"))
 
     def clean(self):
         """Run forrest clean."""
-        (returncode, _) = self.run_command('forrest validate')
+        (returncode, _) = self.run_command("forrest validate")
         if returncode != 0:
-            logger.warn('forrest clean failed in {}'.format(self.builddir))
+            logger.warn("forrest clean failed in {}".format(self.builddir))
             raise SystemExit(returncode)
 
     def validate(self):
         """Run forrest validate."""
-        (returncode, _) = self.run_command('forrest validate')
+        (returncode, _) = self.run_command("forrest validate")
         if returncode != 0:
-            logger.warn('Invalid xml files found, site was not built')
+            logger.warn("Invalid xml files found, site was not built")
             raise SystemExit(returncode)
 
     def set_forrest_lang(self, lang):
@@ -99,16 +102,17 @@ class StaticSiteBuilder(object):
         Args:
             lang (str): a two or three character long string
         """
-        logger.debug('Setting language {}'.format(lang))
-        for line in fileinput.FileInput(os.path.join(self.builddir,
-                                                     'forrest.properties'),
-                                        inplace=1):
-            if 'forrest.jvmargs' in line:
+        logger.debug("Setting language {}".format(lang))
+        for line in fileinput.FileInput(
+            os.path.join(self.builddir, "forrest.properties"), inplace=1
+        ):
+            if "forrest.jvmargs" in line:
                 line = (
-                    'forrest.jvmargs=-Djava.awt.headless=true '
-                    '-Dfile.encoding=utf-8 -Duser.language={}'.format(lang))
-            if 'project.i18n' in line:
-                line = 'project.i18n=true'
+                    "forrest.jvmargs=-Djava.awt.headless=true "
+                    "-Dfile.encoding=utf-8 -Duser.language={}".format(lang)
+                )
+            if "project.i18n" in line:
+                line = "project.i18n=true"
             print(line.rstrip())
 
     def parse_broken_links(self):
@@ -118,71 +122,75 @@ class StaticSiteBuilder(object):
         """
         counter = collections.Counter()
         for line in fileinput.FileInput(
-                os.path.join(self.builddir, 'build', 'tmp',
-                             'brokenlinks.xml')):
-            if '<link' in line and '</link>' in line:
-                if 'tca2testing' in line:
-                    counter['tca2testing'] += 1
+            os.path.join(self.builddir, "build", "tmp", "brokenlinks.xml")
+        ):
+            if "<link" in line and "</link>" in line:
+                if "tca2testing" in line:
+                    counter["tca2testing"] += 1
                 else:
-                    counter['broken'] += 1
-                    line = line.strip().replace('<link message="', '')
-                    line = line.replace('</link>', '')
+                    counter["broken"] += 1
+                    line = line.strip().replace('<link message="', "")
+                    line = line.replace("</link>", "")
 
-                    message = line[:line.rfind('"')]
-                    text = line[line.rfind('>') + 1:]
-                    logger.error('{message}: {text}\n'.format(message=message,
-                                                              text=text))
-            elif '<link' in line:
-                line = line.strip().replace('<link message="', '')
-                logger.error('{message}'.format(message=line))
-            elif '</link>' in line:
-                counter['broken'] += 1
-                line = line.strip().replace('</link>', '')
+                    message = line[: line.rfind('"')]
+                    text = line[line.rfind(">") + 1 :]
+                    logger.error(
+                        "{message}: {text}\n".format(message=message, text=text)
+                    )
+            elif "<link" in line:
+                line = line.strip().replace('<link message="', "")
+                logger.error("{message}".format(message=line))
+            elif "</link>" in line:
+                counter["broken"] += 1
+                line = line.strip().replace("</link>", "")
 
-                message = line[:line.rfind('"')]
-                text = line[line.rfind('>') + 1:]
-                logger.error('{message}: {text}\n'.format(message=message,
-                                                          text=text))
+                message = line[: line.rfind('"')]
+                text = line[line.rfind(">") + 1 :]
+                logger.error("{message}: {text}\n".format(message=message, text=text))
 
         for name, number in list(counter.items()):
-            if 'tca2' in name:
+            if "tca2" in name:
                 logger.error(name)
-            logger.error('{} broken links'.format(number))
+            logger.error("{} broken links".format(number))
 
     def parse_buildtimes(self, log):
         """Parse the buildtimes found in the logfile."""
+
         def print_buildtime_distribution(buildtimes):
             def make_info(build_time, buildtimes):
-                return '{time}: {infolist}'.format(
+                return "{time}: {infolist}".format(
                     time=datetime.timedelta(seconds=build_time),
-                    infolist=', '.join(
-                        ' '.join(info_item)
-                        for info_item in buildtimes[build_time]))
+                    infolist=", ".join(
+                        " ".join(info_item) for info_item in buildtimes[build_time]
+                    ),
+                )
 
-            logger.info('\nDistribution of build times')
-            logger.info('approx seconds: number of links')
+            logger.info("\nDistribution of build times")
+            logger.info("approx seconds: number of links")
             for build_time in sorted(buildtimes, reverse=True):
                 if len(buildtimes[build_time]) < 10:
                     logger.info(make_info(build_time, buildtimes))
                 else:
-                    logger.info('{}s: {}'.format(build_time,
-                                                 len(buildtimes[build_time])))
+                    logger.info(
+                        "{}s: {}".format(build_time, len(buildtimes[build_time]))
+                    )
 
-        buildline = re.compile('^\* \[\d+/\d+\].+Kb.+/.+')
+        buildline = re.compile("^\* \[\d+/\d+\].+Kb.+/.+")
         buildtimes = collections.defaultdict(list)
-        info = collections.namedtuple('info', ['link', 'size'])
+        info = collections.namedtuple("info", ["link", "size"])
 
-        for line in log.split('\n'):
+        for line in log.split("\n"):
             try:
                 if buildline.match(line):
                     parts = line.split()
-                    seconds = int(parts[-3].split('.')[0])
-                    buildtimes[seconds].append(
-                        info(link=parts[-1], size=parts[-2]))
+                    seconds = int(parts[-3].split(".")[0])
+                    buildtimes[seconds].append(info(link=parts[-1], size=parts[-2]))
             except ValueError as error:
-                logger.info('Error parsing buildtimes.\n'
-                            'Line: {}\n'
-                            'Error: {}\n'.format(line, str(error)))
+                logger.info(
+                    "Error parsing buildtimes.\n"
+                    "Line: {}\n"
+                    "Error: {}\n".format(line, str(error))
+                )
 
         print_buildtime_distribution(buildtimes)
 
@@ -199,16 +207,16 @@ class StaticSiteBuilder(object):
             lang (str): a two or three character long string
         """
         # This ensures that the build directory is build/site/en
-        logger.debug('Building {}'.format(lang))
-        os.environ['LC_ALL'] = 'C'
+        logger.debug("Building {}".format(lang))
+        os.environ["LC_ALL"] = "C"
 
         self.set_forrest_lang(lang)
 
         before = datetime.datetime.now()
-        (_, output) = self.run_command('forrest site')
-        logger.info('Building {} lasted {}'.format(
-            lang,
-            datetime.datetime.now() - before))
+        (_, output) = self.run_command("forrest site")
+        logger.info(
+            "Building {} lasted {}".format(lang, datetime.datetime.now() - before)
+        )
 
         self.parse_buildtimes(output)
         self.parse_broken_links()
@@ -234,11 +242,10 @@ class StaticSiteBuilder(object):
         Args:
             this_lang (str): a two or three character long string
         """
-        builddir = os.path.join(self.builddir, 'build/site/en')
+        builddir = os.path.join(self.builddir, "build/site/en")
 
-        for path in self.files_to_collect(builddir, '.html'):
-            f2b = LanguageAdder(path, this_lang, self.mainlang, self.langs,
-                                builddir)
+        for path in self.files_to_collect(builddir, ".html"):
+            f2b = LanguageAdder(path, this_lang, self.mainlang, self.langs, builddir)
             f2b.add_lang_info()
 
     def rename_site_files(self, lang):
@@ -250,19 +257,19 @@ class StaticSiteBuilder(object):
         Args:
             lang (str): a two or three character long string
         """
-        builddir = os.path.join(self.builddir, 'build/site/en')
-        builtdir = os.path.join(self.builddir, 'built')
+        builddir = os.path.join(self.builddir, "build/site/en")
+        builtdir = os.path.join(self.builddir, "built")
 
         self.copy_ckeditor()
         if lang == self.mainlang:
-            for item in glob.glob(builddir + '/*'):
+            for item in glob.glob(builddir + "/*"):
                 shutil.move(item, builtdir)
         else:
             shutil.move(builddir, os.path.join(builtdir, lang))
 
     def build_all_langs(self):
         """Build all the langs."""
-        logger.info('Building all langs')
+        logger.info("Building all langs")
         for lang in self.langs + [self.mainlang]:
             self.buildsite(lang)
             if self.langs:
@@ -275,52 +282,58 @@ class StaticSiteBuilder(object):
         Arguments:
             command: string containing the shell command
         """
-        logger.info('Running {}'.format(command))
-        subp = subprocess.Popen(command.split(),
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE,
-                                cwd=self.builddir)
+        logger.info("Running {}".format(command))
+        subp = subprocess.Popen(
+            command.split(),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            cwd=self.builddir,
+        )
 
         (output, error) = subp.communicate()
 
-        output = output.decode('utf8')
-        error = error.decode('utf8')
+        output = output.decode("utf8")
+        error = error.decode("utf8")
         if subp.returncode != 0:
-            logger.error('{} finished with errors'.format(command))
-            logger.error('stdout')
-            for line in output.split('\n'):
+            logger.error("{} finished with errors".format(command))
+            logger.error("stdout")
+            for line in output.split("\n"):
                 logger.error(line)
-            logger.error('stderr')
-            for line in error.split('\n'):
+            logger.error("stderr")
+            for line in error.split("\n"):
                 logger.error(line)
         else:
-            logger.info('{} finished without errors'.format(command))
-            logger.debug('stdout')
+            logger.info("{} finished without errors".format(command))
+            logger.debug("stdout")
             logger.debug(output)
-            logger.debug('stderr')
+            logger.debug("stderr")
             logger.debug(error)
 
         return (subp.returncode, output)
 
     def copy_ckeditor(self):
         """Copy the ckeditor to the built version of the site."""
-        ckdir = os.path.join(self.builddir,
-                             'src/documentation/resources/ckeditor')
+        ckdir = os.path.join(self.builddir, "src/documentation/resources/ckeditor")
         if os.path.exists(ckdir):
-            returncode, _ = self.run_command('rsync -av {src} {dst}'.format(
-                src=ckdir, dst=os.path.join(self.builddir, 'build/site/en/')))
+            returncode, _ = self.run_command(
+                "rsync -av {src} {dst}".format(
+                    src=ckdir, dst=os.path.join(self.builddir, "build/site/en/")
+                )
+            )
             if returncode != 0:
                 raise SystemExit(returncode)
 
     def copy_to_site(self):
         """Copy the entire site to self.destination."""
-        if 'techdoc' in self.builddir and 'commontec' not in self.builddir:
-            offending_file = os.path.join(self.builddir, 'built', 'index.html')
+        if "techdoc" in self.builddir and "commontec" not in self.builddir:
+            offending_file = os.path.join(self.builddir, "built", "index.html")
             if os.path.exists(offending_file):
                 os.remove(offending_file)
-        (returncode,
-         _) = self.run_command('rsync -avz -e ssh {src} {dst}'.format(
-             src=os.path.join(self.builddir, 'built/'), dst=self.destination))
+        (returncode, _) = self.run_command(
+            "rsync -avz -e ssh {src} {dst}".format(
+                src=os.path.join(self.builddir, "built/"), dst=self.destination
+            )
+        )
         if returncode != 0:
             raise SystemExit(returncode)
 
@@ -338,7 +351,7 @@ class LanguageAdder(object):
         tree (lxml etree):  an lxml etree of the parsed file
     """
 
-    namespace = {'html': 'http://www.w3.org/1999/xhtml'}
+    namespace = {"html": "http://www.w3.org/1999/xhtml"}
 
     def __init__(self, filename, this_lang, mainlang, langs, builddir):
         """Init the LanguageAdder.
@@ -360,56 +373,56 @@ class LanguageAdder(object):
 
     def __del__(self):
         """Write self.tree to self.filename."""
-        with open(self.filename, 'w') as outhtml:
+        with open(self.filename, "w") as outhtml:
             outhtml.write(
-                etree.tostring(self.tree,
-                               encoding='unicode',
-                               pretty_print=True,
-                               method='html'))
+                etree.tostring(
+                    self.tree, encoding="unicode", pretty_print=True, method="html"
+                )
+            )
 
     def add_lang_info(self):
         """Create the language navigation element and add it to self.tree."""
-        my_nav_bar = self.tree.getroot().find('.//ul[@class="navbar-nav"]',
-                                              namespaces=self.namespace)
+        my_nav_bar = self.tree.getroot().find(
+            './/ul[@class="navbar-nav"]', namespaces=self.namespace
+        )
         my_nav_bar.append(self.make_lang_menu())
 
     def make_lang_menu(self):
         """Make the language menu for self.this_lang."""
         trlangs = {
-            'fi': 'Suomeksi',
-            'no': 'På norsk',
-            'sma': 'Åarjelsaemien',
-            'se': 'Davvisámegillii',
-            'smj': 'Julevsábmáj',
-            'sv': 'På svenska',
-            'en': 'In English'
+            "fi": "Suomeksi",
+            "no": "På norsk",
+            "sma": "Åarjelsaemien",
+            "se": "Davvisámegillii",
+            "smj": "Julevsábmáj",
+            "sv": "På svenska",
+            "en": "In English",
         }
 
-        right_menu = etree.Element('li')
-        right_menu.set('class', 'nav-item dropdown')
+        right_menu = etree.Element("li")
+        right_menu.set("class", "nav-item dropdown")
 
-        dropdown = etree.SubElement(right_menu, 'a')
-        dropdown.set('aria-expanded', 'false')
-        dropdown.set('aria-haspopup', 'true')
-        dropdown.set('data-toggle', 'dropdown')
-        dropdown.set('class', 'nav-link dropdown-toggle')
-        dropdown.set('href', '#')
-        dropdown.text = 'Change language'
+        dropdown = etree.SubElement(right_menu, "a")
+        dropdown.set("aria-expanded", "false")
+        dropdown.set("aria-haspopup", "true")
+        dropdown.set("data-toggle", "dropdown")
+        dropdown.set("class", "nav-link dropdown-toggle")
+        dropdown.set("href", "#")
+        dropdown.text = "Change language"
 
-        dropdown_toggle = etree.SubElement(right_menu, 'div')
-        dropdown_toggle.set('aria-labelledby', 'navbarDropdownMenuLink')
-        dropdown_toggle.set('class', 'dropdown-menu')
+        dropdown_toggle = etree.SubElement(right_menu, "div")
+        dropdown_toggle.set("aria-labelledby", "navbarDropdownMenuLink")
+        dropdown_toggle.set("class", "dropdown-menu")
 
         for lang in self.langs + [self.mainlang]:
             if lang != self.this_lang:
-                a = etree.SubElement(dropdown_toggle, 'a')
-                a.set('class', 'dropdown-item')
+                a = etree.SubElement(dropdown_toggle, "a")
+                a.set("class", "dropdown-item")
                 if lang != self.mainlang:
-                    filename = '/' + lang + self.filename.replace(
-                        self.builddir, '')
+                    filename = "/" + lang + self.filename.replace(self.builddir, "")
                 else:
-                    filename = self.filename.replace(self.builddir, '')
-                a.set('href', filename)
+                    filename = self.filename.replace(self.builddir, "")
+                a.set("href", filename)
                 a.text = trlangs[lang]
 
         return right_menu
@@ -418,22 +431,21 @@ class LanguageAdder(object):
 def parse_options():
     """Parse command line options."""
     parser = argparse.ArgumentParser(
-        description='This script builds a multilingual forrest site.')
-    parser.add_argument('--destination',
-                        '-d',
-                        help='an ssh destination',
-                        required=True)
-    parser.add_argument('--sitehome',
-                        '-s',
-                        help='where the forrest site lives',
-                        required=True)
-    parser.add_argument('--verbosity',
-                        '-V',
-                        help='Set the logger level, default is warning\n'
-                        'The allowed values are: warning, info, debug\n'
-                        'Default is info.',
-                        default='info')
-    parser.add_argument('langs', help='list of languages', nargs='+')
+        description="This script builds a multilingual forrest site."
+    )
+    parser.add_argument("--destination", "-d", help="an ssh destination", required=True)
+    parser.add_argument(
+        "--sitehome", "-s", help="where the forrest site lives", required=True
+    )
+    parser.add_argument(
+        "--verbosity",
+        "-V",
+        help="Set the logger level, default is warning\n"
+        "The allowed values are: warning, info, debug\n"
+        "Default is info.",
+        default="info",
+    )
+    parser.add_argument("langs", help="list of languages", nargs="+")
 
     args = parser.parse_args()
     return args
@@ -442,28 +454,28 @@ def parse_options():
 def main():
     """Build a forrest site, copy the static site to its destination."""
     logging_dict = {
-        'info': logging.INFO,
-        'warning': logging.WARNING,
-        'debug': logging.DEBUG
+        "info": logging.INFO,
+        "warning": logging.WARNING,
+        "debug": logging.DEBUG,
     }
     args = parse_options()
 
     if args.verbosity in list(logging_dict.keys()):
-        if args.verbosity == 'debug':
-            logging.info(
-                'Logging level is set to debug. Output will very verbose')
+        if args.verbosity == "debug":
+            logging.info("Logging level is set to debug. Output will very verbose")
         logger.setLevel(logging_dict[args.verbosity])
     else:
         raise SystemExit(
-            '-V|--verbosity must be one of: {}\n{} was given.'.format(
-                '|'.join(list(logging_dict.keys())), args.verbosity))
+            "-V|--verbosity must be one of: {}\n{} was given.".format(
+                "|".join(list(logging_dict.keys())), args.verbosity
+            )
+        )
 
-    with StaticSiteBuilder(args.sitehome, args.destination,
-                           args.langs) as builder:
+    with StaticSiteBuilder(args.sitehome, args.destination, args.langs) as builder:
         builder.clean()
         builder.build_all_langs()
         builder.copy_to_site()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

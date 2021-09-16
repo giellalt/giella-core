@@ -446,7 +446,11 @@ def parse_options():
         "Default is info.",
         default="info",
     )
-    parser.add_argument("langs", help="list of languages", nargs="+")
+    parser.add_argument(
+        "langs",
+        help="list of languages, the first one becomes the default language",
+        nargs="+",
+    )
 
     args = parser.parse_args()
     return args

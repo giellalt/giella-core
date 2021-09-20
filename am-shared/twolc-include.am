@@ -18,14 +18,26 @@
 ########################################
 ########## Twolc build rules. ##########
 ########################################
+# We need to enforce bash when compiling twolc files, to be able to capture
+# stderr on both screen and to a file:
+SHELL:=/bin/bash
 
 ####### HFST build rules: ########
 # hfst-twolc should resolve by default (just like the Xerox tool):
 HFSTTWOLFLAGS=--resolve
+ERROR_LOG_FILE=hfst-twolc-error-log.txt
 
+# We want to capture stderr to a file. for later testing of left-arrow
+# conflicts, both in verbose and silent mode.
+# If silent, run as verbose, but redirect stderr to file. If verbose,
+# tee stderr to file.
 .twolc.hfst:
-	$(AM_V_HTWOLC)"$(HFST_TWOLC)" $(MORE_VERBOSITY) \
-			$(HFSTFLAGS) $(HFSTTWOLCFLAGS) $(HFST_FORMAT) -i $< -o $@
+	@rm -f $(ERROR_LOG_FILE)
+	$(AM_V_HTWOLC) if test "x$(AM_V_P)" == "xfalse"; then \
+		"$(HFST_TWOLC)" -v $(HFSTFLAGS) $(HFSTTWOLCFLAGS) $(HFST_FORMAT) \
+			-i $< -o $@ 2>$(ERROR_LOG_FILE); else \
+		"$(HFST_TWOLC)" -v $(HFSTFLAGS) $(HFSTTWOLCFLAGS) $(HFST_FORMAT) \
+			-i $< -o $@ 2> >(tee -a $(ERROR_LOG_FILE) >&2) ; fi
 
 ####### Xerox build rules: #######
 .twolc.xfst:

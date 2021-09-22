@@ -92,6 +92,11 @@ class TestErrorMarkup(unittest.TestCase):
                     ]
                 ],
             ),
+            (
+                '<p>a <errorformat correct="b c" errorinfo="notspace">b  c</errorformat> d.</p>',
+                ["a ", "b  c", " d."],
+                [["b  c", 2, 6, "errorformat", "notspace", ["b c"]]],
+            ),
         ]
     )
     def test_extract_error_info(self, paragraph, want_parts, want_errors):
@@ -104,3 +109,15 @@ class TestErrorMarkup(unittest.TestCase):
             errors,
             want_errors,
         )
+
+    @parameterized.expand(
+        [
+            (
+                [["b  c", 2, 6, "errorformat", "notspace", ["b c"]]],
+                [["c", 3, 6, "errorformat", "notspace", ["b c"]]],
+            )
+        ]
+    )
+    def test_normalise_error_markup(self, errors, wanted_errors):
+        self.gram_checker.normalise_error_markup(errors)
+        self.assertListEqual(errors, wanted_errors)

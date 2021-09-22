@@ -401,15 +401,14 @@ class GramChecker:
     def normalise_error_markup(self, errors):
         for error in errors:
             if (
-                error["type"] == "errorformat"
-                and error.get("errorinfo")
-                and error.get("errorinfo") == "notspace"
-                and "  " in error["error"]
+                error[3] == "errorformat"
+                and error[4] == "notspace"
+                and "  " in error[0]
             ):
-                d_pos = error["error"].find("  ")
-                error["start"] = error["start"] + d_pos
-                error["end"] = error["start"] + 3
-                error["error"] = error["error"][error["start"] : error["end"]]
+                d_pos = error[0].find("  ")
+                error[1] = error[1] + d_pos
+                error[2] = error[1] + 3
+                error[0] = error[0][error[1] : error[2]]
 
     def normalise_grammar_markup(self, errors):
         for error in errors:

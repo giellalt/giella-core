@@ -18,14 +18,14 @@ class TestErrorMarkup(unittest.TestCase):
                 '<p>Mun lean <errorort correct="sjievnnijis" errorinfo="conc,vnn-vnnj">sjievnnjis</errorort></p>',
                 ["Mun lean ", "sjievnnjis"],
                 [
-                    {
-                        "correct": "sjievnnijis",
-                        "end": 19,
-                        "error": "sjievnnjis",
-                        "errorinfo": "conc,vnn-vnnj",
-                        "start": 9,
-                        "type": "errorort",
-                    }
+                    [
+                        "sjievnnjis",
+                        9,
+                        19,
+                        "errorort",
+                        "conc,vnn-vnnj",
+                        ["sjievnnijis"],
+                    ]
                 ],
             ),
             (
@@ -34,14 +34,14 @@ class TestErrorMarkup(unittest.TestCase):
                 "</errormorphsyn></p>",
                 ["Nieiddat leat nuorra"],
                 [
-                    {
-                        "correct": "Nieiddat leat nuorat",
-                        "end": 20,
-                        "error": "Nieiddat leat nuorra",
-                        "errorinfo": "a,spred,nompl,nomsg,agr",
-                        "start": 0,
-                        "type": "errormorphsyn",
-                    }
+                    [
+                        "Nieiddat leat nuorra",
+                        0,
+                        20,
+                        "errormorphsyn",
+                        "a,spred,nompl,nomsg,agr",
+                        ["Nieiddat leat nuorat"],
+                    ]
                 ],
             ),
             (
@@ -58,20 +58,22 @@ class TestErrorMarkup(unittest.TestCase):
                     " sámegillii? Muhtin, veahket mu!) gos",
                 ],
                 [
-                    {
-                        "correct": "Nordkjosbotnii",
-                        "end": 21,
-                        "error": "Nordkjosbotn ii",
-                        "start": 6,
-                        "type": "errorort",
-                    },
-                    {
-                        "correct": "Nordkjosbotn",
-                        "end": 46,
-                        "error": "nordkjosbotn",
-                        "start": 34,
-                        "type": "errorort",
-                    },
+                    [
+                        "Nordkjosbotn ii",
+                        21,
+                        6,
+                        "errorort",
+                        "",
+                        ["Nordkjosbotnii"],
+                    ],
+                    [
+                        "nordkjosbotn",
+                        34,
+                        46,
+                        "errorort",
+                        "",
+                        ["Nordkjosbotn"],
+                    ],
                 ],
             ),
             (
@@ -80,14 +82,14 @@ class TestErrorMarkup(unittest.TestCase):
                 "šaddai</errorort> ollu áššit</errormorphsyn></p>",
                 ["šaddai", " ollu áššit"],
                 [
-                    {
-                        "correct": "šattai",
-                        "end": 6,
-                        "error": "šaddai",
-                        "errorinfo": "verb,conc",
-                        "start": 0,
-                        "type": "errorort",
-                    }
+                    [
+                        "šaddai",
+                        0,
+                        6,
+                        "errorort",
+                        "verb,conc",
+                        ["šattai"],
+                    ]
                 ],
             ),
         ]

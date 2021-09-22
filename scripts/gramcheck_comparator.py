@@ -891,6 +891,7 @@ class CorpusGramTest(GramTest):
                 COLORS[key] = ""
 
     def flatten_para(self, para):
+        """Convert non-error xml elements into plain text."""
         if not para.tag.startswith("error"):
             text = para.text if para.text else ""
 
@@ -909,6 +910,7 @@ class CorpusGramTest(GramTest):
             self.flatten_para(child)
 
     def remove_foreign(self, root):
+        """Remove foreign language error elements."""
         for foreign in root.xpath('.//errorlex[@errorinfo="foreign"]'):
             parent = foreign.getparent()
             if foreign.tail is not None:
@@ -927,6 +929,7 @@ class CorpusGramTest(GramTest):
             parent.remove(foreign)
 
     def keep_url(self, root):
+        """Keep url as plain text."""
         for url in root.xpath('.//errorlang[@correct="url"]'):
             parent = url.getparent()
             previous = url.getprevious()

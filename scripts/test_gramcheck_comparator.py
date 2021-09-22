@@ -60,8 +60,8 @@ class TestErrorMarkup(unittest.TestCase):
                 [
                     [
                         "Nordkjosbotn ii",
-                        21,
                         6,
+                        21,
                         "errorort",
                         "",
                         ["Nordkjosbotnii"],

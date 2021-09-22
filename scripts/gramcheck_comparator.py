@@ -330,13 +330,13 @@ class GramChecker:
 
     def extract_error_info(self, parts, errors, para):
         """Only collect unnested errors."""
-        info = {}
+        info = ["", "", "", "", "", ""]
         if para.tag.startswith("error"):
-            for name, value in para.items():
-                info[name] = value
-            info["type"] = para.tag
-            info["start"] = len("".join(parts))
-            info["error"] = self.get_error_corrections(para) if len(para) else para.text
+            info[0] = self.get_error_corrections(para) if len(para) else para.text
+            info[1] = len("".join(parts))
+            info[3] = para.tag
+            info[4] = para.attrib.get("errorinfo", default="")
+            info[5] = [para.attrib.get("correct")]
 
         if para.text:
             parts.append(para.text)
@@ -348,7 +348,7 @@ class GramChecker:
                 self.extract_error_info(parts, errors, child)
 
         if para.tag.startswith("error"):
-            info["end"] = len("".join(parts))
+            info[2] = len("".join(parts))
 
         if para.tail:
             parts.append(para.tail)

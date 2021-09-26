@@ -27,33 +27,10 @@ COLORS = {
 }
 
 
-def correct_lowest_level(para):
-    """Replace error markup of zero length with correction."""
-    new_para = etree.Element(para.tag)
-    for key, value in para.attrib.items():
-        new_para.set(key, value)
-    new_para.text = para.text if para.text else ""
-
-    for child in para:
-        if child.tag.startswith("error"):
-            if len(child) == 0:
-                if len(new_para):
-                    new_para[-1].tail += extract_correction(child)
-                else:
-                    new_para.text += extract_correction(child)
-            else:
-                new_para.append(correct_lowest_level(child))
-        else:
-            new_para.append(child)
-
-    new_para.tail = para.tail if para.tail else ""
-
-    return new_para
-
-
 def extract_correction(child):
     """Replace error element with correction attribute."""
-    parts = [child.get("correct") if child.get("correct") else ""]
+    correct = child.find("./correct")
+    parts = [correct.text if correct is not None else ""]
     if child.tail:
         parts.append(child.tail)
 
@@ -437,11 +414,32 @@ class GramChecker:
             if d_error[1] == error["start"] and d_error[2] == error["end"]
         ]
 
+    def correct_lowest_level(self, para):
+        """Replace error markup of zero length with correction."""
+        new_para = etree.Element(para.tag)
+        new_para.text = para.text if para.text else ""
+
+        for child in para:
+            if child.tag.startswith("error"):
+                if self.is_non_nested_error(child):
+                    if len(new_para):
+                        new_para[-1].tail += extract_correction(child)
+                    else:
+                        new_para.text += extract_correction(child)
+                else:
+                    new_para.append(self.correct_lowest_level(child))
+            else:
+                new_para.append(child)
+
+        new_para.tail = para.tail if para.tail else ""
+
+        return new_para
+
     def nested_errors(self, para):
         """Grammarcheck a level at a time."""
         while True:
-            para = correct_lowest_level(para)
-            if len(para) == 0:
+            para = self.correct_lowest_level(para)
+            if self.is_non_nested_error(para):
                 break
             _, errors, d_errors = self.error_extractor(para)
             yield errors, self.remove_non_hits(errors, d_errors)

@@ -154,3 +154,59 @@ class TestGramChecker(unittest.TestCase):
     def test_normalise_error_markup(self, errors, wanted_errors):
         self.gram_checker.normalise_error_markup(errors)
         self.assertListEqual(errors, wanted_errors)
+
+
+class TestGramTester(unittest.TestCase):
+    """Test grammarcheck tester"""
+
+    def setUp(self) -> None:
+        self.gram_test = gramcheck_comparator.GramTest()
+        return super().setUp()
+
+    @parameterized.expand(
+        [
+            (["c", 3, 6, "", "", []], ["", 3, 6, "double-space-before", "", []], True),
+            (["c", 3, 6, "", "", []], ["", 2, 5, "double-space-before", "", []], False),
+            (["c", 3, 6, "errorsyn", "", []], ["d", 3, 6, "msyn", "", []], False),
+            (["c", 3, 6, "errorsyn", "", []], ["c", 2, 6, "msyn", "", []], False),
+            (["c", 3, 6, "errorsyn", "", []], ["c", 3, 5, "msyn", "", []], False),
+            (["c", 3, 6, "errorsyn", "", []], ["c", 3, 6, "msyn", "", []], True),
+        ]
+    )
+    def test_same_range_and_error(self, c_error, d_error, expected_boolean):
+        self.assertTrue(
+            self.gram_test.has_same_range_and_error(c_error, d_error)
+            == expected_boolean,
+        )
+
+    @parameterized.expand(
+        [
+            (["c", 3, 6, "", "", []], ["", 3, 6, "double-space-before", "", []], False),
+            (
+                ["c", 3, 6, "", "", ["b"]],
+                ["c", 3, 6, "double-space-before", "", ["a"]],
+                False,
+            ),
+            (["c", 3, 6, "errorsyn", "", []], ["c", 3, 6, "msyn", "", []], False),
+            (
+                ["c", 3, 6, "errorsyn", "", ["a"]],
+                ["c", 3, 6, "msyn", "", ["a", "b"]],
+                True,
+            ),
+        ]
+    )
+    def test_suggestion_with_hits(self, c_error, d_error, expected_boolean):
+        self.assertEqual(
+            self.gram_test.has_suggestions_with_hit(c_error, d_error), expected_boolean
+        )
+
+    @parameterized.expand(
+        [
+            (["c", 3, 6, "", "", ["b"]], ["c", 3, 6, "", "", ["b"]], False),
+            (["c", 3, 6, "", "", ["b"]], ["c", 3, 6, "", "", []], True),
+        ]
+    )
+    def test_has_no_suggesions(self, c_error, d_error, expected_boolean):
+        self.assertEqual(
+            self.gram_test.has_no_suggestions(c_error, d_error), expected_boolean
+        )

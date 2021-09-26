@@ -411,7 +411,7 @@ class GramChecker:
             d_error
             for error in errors
             for d_error in d_errors
-            if d_error[1] == error["start"] and d_error[2] == error["end"]
+            if d_error[1:2] == error[1:2]
         ]
 
     def correct_lowest_level(self, para):
@@ -552,11 +552,7 @@ class GramTest:
 
         def success(self, case, total, type, expected_error, gramcheck_error, filename):
             self.write(filename + "\n")
-            errorinfo = (
-                f", ({expected_error.get('errorinfo')})"
-                if expected_error.get("errorinfo")
-                else ""
-            )
+            errorinfo = f", ({expected_error[4]})"
             x = colourise(
                 (
                     "[{light_blue}{case:>%d}/{total}{reset}]"
@@ -566,9 +562,9 @@ class GramTest:
                 )
                 % len(str(total)),
                 type=type,
-                error=expected_error["error"],
-                correction=expected_error["correct"],
-                expectected_type=f"{expected_error['type']}{errorinfo}",
+                error=expected_error[0],
+                correction=", ".join(expected_error[5]),
+                expectected_type=f"{expected_error[4]}{errorinfo}",
                 case=case,
                 total=total,
                 gramerr=gramcheck_error[0],
@@ -579,11 +575,7 @@ class GramTest:
 
         def failure(self, case, total, type, expected_error, gramcheck_error, filename):
             self.write(filename + "\n")
-            errorinfo = (
-                f", ({expected_error.get('errorinfo')})"
-                if expected_error.get("errorinfo")
-                else ""
-            )
+            errorinfo = f", ({expected_error[4]})"
             x = colourise(
                 (
                     "[{light_blue}{case:>%d}/{total}{reset}][{red}FAIL {type}"
@@ -592,9 +584,9 @@ class GramTest:
                 )
                 % len(str(total)),
                 type=type,
-                error=expected_error["error"],
-                correction=expected_error["correct"],
-                expectected_type=f"{expected_error['type']}{errorinfo}",
+                error=expected_error[0],
+                correction=", ".join(expected_error[5]),
+                expectected_type=f"{expected_error[4]}{errorinfo}",
                 case=case,
                 total=total,
                 gramerr=gramcheck_error[0],
@@ -725,24 +717,21 @@ class GramTest:
         gramcheck_errors = item[1][1]["gramcheck_errors"]
         filename = item[1][1]["filename"]
 
-        true_positives = self.has_true_positives(expected_errors, gramcheck_errors)
-        for true_positive in true_positives:
+        for true_positive in self.has_true_positives(expected_errors, gramcheck_errors):
             count["tp"] += 1
             out.success(
                 item[0], length, "tp", true_positive[0], true_positive[1], filename
             )
 
-        true_negatives = self.has_true_negatives(expected_errors, gramcheck_errors)
-        for true_negative in true_negatives:
+        for true_negative in self.has_true_negatives(expected_errors, gramcheck_errors):
             count["tn"] += 1
             out.success(
                 item[0], length, "tn", true_negative[0], true_negative[1], filename
             )
 
-        false_positives_1 = self.has_false_positives_1(
+        for false_positive_1 in self.has_false_positives_1(
             expected_errors, gramcheck_errors
-        )
-        for false_positive_1 in false_positives_1:
+        ):
             count["fp1"] += 1
             out.failure(
                 item[0],
@@ -753,20 +742,18 @@ class GramTest:
                 filename,
             )
 
-        false_positives_2 = self.has_false_positives_2(
+        expected_error = ["", "", "", "", "", ""]
+        for false_positive_2 in self.has_false_positives_2(
             expected_errors, gramcheck_errors
-        )
-        expected_error = {"correct": "", "error": "", "type": ""}
-        for false_positive_2 in false_positives_2:
+        ):
             count["fp2"] += 1
             out.failure(
                 item[0], length, "fp2", expected_error, false_positive_2, filename
             )
 
-        false_negatives_1 = self.has_false_negatives_1(
+        for false_negative_1 in self.has_false_negatives_1(
             expected_errors, gramcheck_errors
-        )
-        for false_negative_1 in false_negatives_1:
+        ):
             count["fn1"] += 1
             out.failure(
                 item[0],
@@ -777,10 +764,9 @@ class GramTest:
                 filename,
             )
 
-        false_negatives_2 = self.has_false_negatives_2(
+        for false_negative_2 in self.has_false_negatives_2(
             expected_errors, gramcheck_errors
-        )
-        for false_negative_2 in false_negatives_2:
+        ):
             gramcheck_error = ["", "", "", "", "", []]
             count["fn2"] += 1
             out.failure(
@@ -793,27 +779,23 @@ class GramTest:
             self.count[key] += count[key]
 
     def has_same_range_and_error(self, c_error, d_error):
+        """Check if the errors have the same range and error"""
         if d_error[3] == "double-space-before":
-            return c_error["start"] == d_error[1] and c_error["end"] == d_error[2]
+            return c_error[1:2] == d_error[1:2]
         else:
-            return (
-                c_error["start"] == d_error[1]
-                and c_error["end"] == d_error[2]
-                and c_error["error"] == d_error[0]
-            )
+            return c_error[:3] == d_error[:3]
 
     def has_suggestions_with_hit(self, c_error, d_error):
+        """Check if markup error correction exists in grammarchecker error."""
         return (
-            self.has_same_range_and_error(c_error, d_error)
-            and d_error[5]
-            and c_error["correct"] in d_error[5]
+            len(d_error[5]) > 0
+            and self.has_same_range_and_error(c_error, d_error)
+            and any([correct in d_error[5] for correct in c_error[5]])
         )
 
     def has_true_negatives(self, correct, dc):
         if not correct and not dc:
-            return [
-                ({"error": "", "correct": "", "type": ""}, ["", "", "", "", "", ""])
-            ]
+            return [(["", "", "", "", "", ""], ["", "", "", "", "", ""])]
 
         return []
 
@@ -837,19 +819,17 @@ class GramTest:
         return (
             self.has_same_range_and_error(c_error, d_error)
             and d_error[5]
-            and c_error["correct"] not in d_error[5]
+            and not any([correct in d_error[5] for correct in c_error[5]])
         )
 
     def has_false_positives_2(self, correct, dc):
-        corrects = []
-        for d_error in dc:
-            for c_error in correct:
-                if self.has_same_range_and_error(c_error, d_error):
-                    break
-            else:
-                corrects.append(d_error)
-
-        return corrects
+        return [
+            d_error
+            for d_error in dc
+            if not any(
+                self.has_same_range_and_error(c_error, d_error) for c_error in correct
+            )
+        ]
 
     def has_false_negatives_2(self, c_errors, d_errors):
         corrects = []

@@ -319,14 +319,22 @@ class GramChecker:
         if para.text is not None:
             parts.append(para.text)
         for child in para:
-            parts.append(child.get("correct"))
-            for grandchild in child:
-                parts.append(self.get_error_corrections(grandchild))
+            if child.tag != "correct":
+                correct = child.find("./correct")
+                parts.append(correct.text)
+                for grandchild in child:
+                    if grandchild.tag != "correct":
+                        parts.append(self.get_error_corrections(grandchild))
 
         if not len(para) and para.tail:
             parts.append(para.tail)
 
         return "".join(parts)
+
+    @staticmethod
+    def is_non_nested_error(para):
+        """Check if the only children are correct elements."""
+        return all(child.tag == "correct" for child in para)
 
     def extract_error_info(self, parts, errors, para):
         """Only collect unnested errors."""
@@ -335,17 +343,19 @@ class GramChecker:
             info[0] = self.get_error_corrections(para) if len(para) else para.text
             info[1] = len("".join(parts))
             info[3] = para.tag
-            info[4] = para.attrib.get("errorinfo", default="")
-            info[5] = [para.attrib.get("correct")]
+            correct = para.find("./correct")
+            info[4] = correct.attrib.get("errorinfo", default="")
+            info[5] = [correct.text]
 
         if para.text:
             parts.append(para.text)
 
         for child in para:
-            if len(child) == 0:
-                errors.append(self.extract_error_info(parts, errors, child))
-            else:
-                self.extract_error_info(parts, errors, child)
+            if child.tag != "correct":
+                if self.is_non_nested_error(child):
+                    errors.append(self.extract_error_info(parts, errors, child))
+                else:
+                    self.extract_error_info(parts, errors, child)
 
         if para.tag.startswith("error"):
             info[2] = len("".join(parts))

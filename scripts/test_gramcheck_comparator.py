@@ -15,7 +15,7 @@ class TestErrorMarkup(unittest.TestCase):
     @parameterized.expand(
         [
             (
-                '<p>Mun lean <errorort correct="sjievnnijis" errorinfo="conc,vnn-vnnj">sjievnnjis</errorort></p>',
+                '<p>Mun lean <errorort>sjievnnjis<correct errorinfo="conc,vnn-vnnj">sjievnnijis</correct></errorort></p>',
                 ["Mun lean ", "sjievnnjis"],
                 [
                     [
@@ -29,8 +29,8 @@ class TestErrorMarkup(unittest.TestCase):
                 ],
             ),
             (
-                '<p><errormorphsyn correct="Nieiddat leat nuorat" '
-                'errorinfo="a,spred,nompl,nomsg,agr">Nieiddat leat nuorra'
+                "<p><errormorphsyn>Nieiddat leat nuorra"
+                '<correct errorinfo="a,spred,nompl,nomsg,agr">Nieiddat leat nuorat</correct>'
                 "</errormorphsyn></p>",
                 ["Nieiddat leat nuorra"],
                 [
@@ -46,9 +46,9 @@ class TestErrorMarkup(unittest.TestCase):
             ),
             (
                 "<p>gitta "
-                '<errorort correct="Nordkjosbotnii">Nordkjosbotn ii</errorort> '
+                "<errorort>Nordkjosbotn ii<correct>Nordkjosbotnii</correct></errorort> "
                 "(mii lea ge "
-                '<errorort correct="Nordkjosbotn">nordkjosbotn</errorort> '
+                "<errorort>nordkjosbotn<correct>Nordkjosbotn</correct></errorort> "
                 "sámegillii? Muhtin, veahket mu!) gos</p>",
                 [
                     "gitta ",
@@ -77,9 +77,14 @@ class TestErrorMarkup(unittest.TestCase):
                 ],
             ),
             (
-                '<p><errormorphsyn correct="šadde ollu áššit" '
-                'errorinfo="verb,fin,pl3prs,sg3prs,tense"><errorort correct="šattai" errorinfo="verb,conc">'
-                "šaddai</errorort> ollu áššit</errormorphsyn></p>",
+                "<p>"
+                "<errormorphsyn>"
+                "<errorort>"
+                "šaddai"
+                '<correct errorinfo="verb,conc">šattai</correct>'
+                "</errorort> ollu áššit"
+                '<correct errorinfo="verb,fin,pl3prs,sg3prs,tense">šadde ollu áššit</correct>'
+                "</errormorphsyn></p>",
                 ["šaddai", " ollu áššit"],
                 [
                     [
@@ -93,7 +98,12 @@ class TestErrorMarkup(unittest.TestCase):
                 ],
             ),
             (
-                '<p>a <errorformat correct="b c" errorinfo="notspace">b  c</errorformat> d.</p>',
+                "<p>a "
+                "<errorformat>"
+                "b  c"
+                '<correct errorinfo="notspace">b c</correct>'
+                "</errorformat>"
+                " d.</p>",
                 ["a ", "b  c", " d."],
                 [["b  c", 2, 6, "errorformat", "notspace", ["b c"]]],
             ),

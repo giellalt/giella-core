@@ -322,7 +322,7 @@ class GramChecker:
             info[3] = para.tag
             correct = para.find("./correct")
             info[4] = correct.attrib.get("errorinfo", default="")
-            info[5] = [correct.text]
+            info[5] = [correct.text for correct in para.xpath("./correct")]
 
         if para.text:
             parts.append(para.text)

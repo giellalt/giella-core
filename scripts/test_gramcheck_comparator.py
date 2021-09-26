@@ -107,6 +107,34 @@ class TestGramChecker(unittest.TestCase):
                 ["a ", "b  c", " d."],
                 [["b  c", 2, 6, "errorformat", "notspace", ["b c"]]],
             ),
+            (
+                "<p>Kondomat <errormorphsyn>juhkkojuvvo<correct>juhkkojuvvojedje</correct><correct>juhkkojuvvojit</correct></errormorphsyn> dehe <errormorphsyn>vuvdojuvvo<correct>vuvdojuvvojedje</correct><correct>vuvdojuvvojit</correct></errormorphsyn> nuoraidvuostáváldimis.</p>",
+                [
+                    "Kondomat ",
+                    "juhkkojuvvo",
+                    " dehe ",
+                    "vuvdojuvvo",
+                    " nuoraidvuostáváldimis.",
+                ],
+                [
+                    [
+                        "juhkkojuvvo",
+                        9,
+                        20,
+                        "errormorphsyn",
+                        "",
+                        ["juhkkojuvvojedje", "juhkkojuvvojit"],
+                    ],
+                    [
+                        "vuvdojuvvo",
+                        26,
+                        36,
+                        "errormorphsyn",
+                        "",
+                        ["vuvdojuvvojedje", "vuvdojuvvojit"],
+                    ],
+                ],
+            ),
         ]
     )
     def test_extract_error_info(self, paragraph, want_parts, want_errors):

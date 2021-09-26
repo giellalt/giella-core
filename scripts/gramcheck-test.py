@@ -178,7 +178,7 @@ class YamlGramTest(GramTest):
         para = etree.Element("p")
         try:
             para.text = text
-            errormarkup.add_error_markup(para)
+            errormarkup.convert_to_errormarkupxml(para)
         except TypeError:
             print(f'Error in {self.config["test_file"]}')
             print(text, "is not a string")

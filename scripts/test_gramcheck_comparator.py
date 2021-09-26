@@ -5,7 +5,7 @@ from parameterized import parameterized
 from lxml import etree
 
 
-class TestErrorMarkup(unittest.TestCase):
+class TestGramChecker(unittest.TestCase):
     """Test grammarcheck tester"""
 
     def setUp(self) -> None:
@@ -119,6 +119,29 @@ class TestErrorMarkup(unittest.TestCase):
             errors,
             want_errors,
         )
+
+    @parameterized.expand(
+        [
+            (
+                "<p>"
+                "<errormorphsyn>"
+                "<errorort>"
+                "šaddai"
+                '<correct errorinfo="verb,conc">šattai</correct>'
+                "</errorort> ollu áššit"
+                '<correct errorinfo="verb,fin,pl3prs,sg3prs,tense">šadde ollu áššit</correct>'
+                "</errormorphsyn></p>",
+                "<p>"
+                "<errormorphsyn>"
+                "šattai ollu áššit"
+                '<correct errorinfo="verb,fin,pl3prs,sg3prs,tense">šadde ollu áššit</correct>'
+                "</errormorphsyn></p>",
+            )
+        ]
+    )
+    def test_correct_lowest_level(self, para, wanted):
+        corrected = self.gram_checker.correct_lowest_level(etree.fromstring(para))
+        self.assertEqual(etree.tostring(corrected, encoding="unicode"), wanted)
 
     @parameterized.expand(
         [

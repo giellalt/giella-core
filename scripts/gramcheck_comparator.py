@@ -215,65 +215,74 @@ class GramChecker:
 
         d_errors.sort(key=self.sortByRange)
 
+    def fix_aistton_left(self, d_error, d_errors, position):
+        sentence = d_error[0][1:]
+        d_error[0] = d_error[0][0]
+        d_error[5] = ["”"]
+        d_error[2] = d_error[1] + 1
+
+        res = self.check_grammar(sentence)
+        new_d_error = res["errs"]
+        if new_d_error:
+            new_d_error[0][1] = d_error[1] + 1
+            new_d_error[0][2] = d_error[1] + 1 + len(sentence)
+            d_errors.insert(position + 1, new_d_error[0])
+
+    def fix_aistton_right(self, d_error, d_errors, position):
+        sentence = d_error[0][:-1]
+        d_error[0] = d_error[0][-1]
+        d_error[5] = ["”"]
+        d_error[1] = d_error[2] - 1
+
+        res = self.check_grammar(sentence)
+        new_d_error = res["errs"]
+        if new_d_error:
+            new_d_error[0][1] = d_error[1] - len(sentence)
+            new_d_error[0][2] = d_error[1]
+            d_errors.insert(position, new_d_error[0])
+
+    def fix_aistton_both(self, d_error, d_errors, position):
+        previous_error = d_errors[position - 1]
+        remove_previous = (
+            previous_error[1] == d_error[1]
+            and previous_error[2] == d_error[2]
+            and previous_error[3] == "typo"
+        )
+
+        sentence = d_error[0][1:-1]
+
+        if d_error[0][-1] != "”":
+            right_error = [part for part in d_error]
+            right_error[0] = right_error[0][-1]
+            right_error[5] = ["”"]
+            right_error[1] = right_error[2] - 1
+            right_error[3] = "punct-aistton-both"
+            d_errors.insert(position + 1, right_error)
+
+        d_error[0] = d_error[0][0]
+        d_error[5] = ["”"]
+        d_error[2] = d_error[1] + 1
+
+        res = self.check_grammar(sentence)
+        new_d_error = res["errs"]
+        if new_d_error:
+            new_d_error[0][1] = d_error[1] + 1
+            new_d_error[0][2] = d_error[1] + 1 + len(sentence)
+            d_errors.insert(position + 1, new_d_error[0])
+
+        if remove_previous:
+            del d_errors[position - 1]
+
     def fix_aistton(self, d_errors, position):
         d_error = d_errors[position]
         if d_error[3] == "punct-aistton-left" and len(d_error[0]) > 1:
-            sentence = d_error[0][1:]
-            d_error[0] = d_error[0][0]
-            d_error[5] = ["”"]
-            d_error[2] = d_error[1] + 1
-
-            res = self.check_grammar(sentence)
-            new_d_error = res["errs"]
-            if new_d_error:
-                new_d_error[0][1] = d_error[1] + 1
-                new_d_error[0][2] = d_error[1] + 1 + len(sentence)
-                d_errors.insert(position + 1, new_d_error[0])
+            self.fix_aistton_left(d_error, d_errors, position)
 
         if d_error[3] == "punct-aistton-right" and len(d_error[0]) > 1:
-            sentence = d_error[0][:-1]
-            d_error[0] = d_error[0][-1]
-            d_error[5] = ["”"]
-            d_error[1] = d_error[2] - 1
-
-            res = self.check_grammar(sentence)
-            new_d_error = res["errs"]
-            if new_d_error:
-                new_d_error[0][1] = d_error[1] - len(sentence)
-                new_d_error[0][2] = d_error[1]
-                d_errors.insert(position, new_d_error[0])
+            self.fix_aistton_right(d_error, d_errors, position)
 
         if d_error[3] == "punct-aistton-both" and len(d_error[0]) > 1:
-            previous_error = d_errors[position - 1]
-            remove_previous = (
-                previous_error[1] == d_error[1]
-                and previous_error[2] == d_error[2]
-                and previous_error[3] == "typo"
-            )
-
-            sentence = d_error[0][1:-1]
-
-            if d_error[0][-1] != "”":
-                right_error = [part for part in d_error]
-                right_error[0] = right_error[0][-1]
-                right_error[5] = ["”"]
-                right_error[1] = right_error[2] - 1
-                right_error[3] = "punct-aistton-both"
-                d_errors.insert(position + 1, right_error)
-
-            d_error[0] = d_error[0][0]
-            d_error[5] = ["”"]
-            d_error[2] = d_error[1] + 1
-
-            res = self.check_grammar(sentence)
-            new_d_error = res["errs"]
-            if new_d_error:
-                new_d_error[0][1] = d_error[1] + 1
-                new_d_error[0][2] = d_error[1] + 1 + len(sentence)
-                d_errors.insert(position + 1, new_d_error[0])
-
-            if remove_previous:
-                del d_errors[position - 1]
+            self.fix_aistton_both(d_error, d_errors, position)
 
     def fix_double_space(self, d_result):
         d_errors = d_result["errs"]

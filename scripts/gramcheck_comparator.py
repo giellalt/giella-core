@@ -243,7 +243,7 @@ class GramChecker:
                 new_d_error[0][2] = d_error[1]
                 d_errors.insert(position, new_d_error[0])
 
-        if d_error[3] == "punct-aistton-both":
+        if d_error[3] == "punct-aistton-both" and len(d_error[0]) > 1:
             previous_error = d_errors[position - 1]
             remove_previous = (
                 previous_error[1] == d_error[1]

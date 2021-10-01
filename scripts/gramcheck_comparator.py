@@ -253,12 +253,13 @@ class GramChecker:
 
             sentence = d_error[0][1:-1]
 
-            right_error = [part for part in d_error]
-            right_error[0] = right_error[0][-1]
-            right_error[5] = ["”"]
-            right_error[1] = right_error[2] - 1
-            right_error[3] = "punct-aistton-both"
-            d_errors.insert(position + 1, right_error)
+            if d_error[0][-1] != "”":
+                right_error = [part for part in d_error]
+                right_error[0] = right_error[0][-1]
+                right_error[5] = ["”"]
+                right_error[1] = right_error[2] - 1
+                right_error[3] = "punct-aistton-both"
+                d_errors.insert(position + 1, right_error)
 
             d_error[0] = d_error[0][0]
             d_error[5] = ["”"]

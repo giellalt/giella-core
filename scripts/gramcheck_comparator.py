@@ -257,13 +257,12 @@ class GramChecker:
             right_error[0] = right_error[0][-1]
             right_error[5] = ["”"]
             right_error[1] = right_error[2] - 1
-            right_error[3] = "punct-aistton-right"
+            right_error[3] = "punct-aistton-both"
             d_errors.insert(position + 1, right_error)
 
             d_error[0] = d_error[0][0]
             d_error[5] = ["”"]
             d_error[2] = d_error[1] + 1
-            d_error[3] = "punct-aistton-left"
 
             res = self.check_grammar(sentence)
             new_d_error = res["errs"]

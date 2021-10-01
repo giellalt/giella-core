@@ -61,20 +61,6 @@ class GramChecker:
         return {"text": sentence, "errs": errs}
 
     @staticmethod
-    def get_unique_double_spaces(d_errors):
-        double_spaces = []
-        indexes = set()
-        for d_error in d_errors:
-            if (
-                d_error[3] == "double-space-before"
-                and (d_error[1], d_error[2]) not in indexes
-            ):
-                double_spaces.append(d_error)
-                indexes.add((d_error[1], d_error[2]))
-
-        return double_spaces
-
-    @staticmethod
     def remove_dupes(double_spaces, d_errors):
         for removable_error in [
             d_error
@@ -83,59 +69,6 @@ class GramChecker:
             if double_space[1:2] == d_error[1:2]
         ]:
             d_errors.remove(removable_error)
-
-    @staticmethod
-    def make_new_double_space_errors(double_space, d_result):
-        d_errors = d_result["errs"]
-        parts = double_space[0].split("  ")
-
-        for position, part in enumerate(parts[1:], start=1):
-            error = f"{parts[position - 1]}  {part}"
-            start = d_result["text"].find(error)
-            end = start + len(error)
-            candidate = [
-                error,
-                start,
-                end,
-                "double-space-before",
-                f'Leat guokte gaskka ovdal "{part}"',
-                [f"{parts[position - 1]} {part}"],
-                "Sátnegaskameattáhusat",
-            ]
-            if candidate not in d_errors:
-                d_errors.append(candidate)
-
-    def make_new_errors(self, double_space, d_result):
-        d_errors = d_result["errs"]
-        parts = double_space[0].split("  ")
-
-        error = double_space[0]
-        min = 0
-        max = len(error)
-        position = d_errors.index(double_space)
-        for new_position, part in enumerate(
-            [part for part in double_space[0].split() if part], start=position
-        ):
-            res = self.check_grammar(part)
-            part_errors = res["errs"]
-            min = error[min:max].find(part)
-            for p_error in part_errors:
-                p_error[1] = min + double_space[1]
-                p_error[2] = min + double_space[1] + len(part)
-                d_errors.insert(new_position, p_error)
-
-    def get_unique_double_spaces(self, d_errors):
-        double_spaces = []
-        indexes = set()
-        for d_error in d_errors:
-            if (
-                d_error[3] == "double-space-before"
-                and (d_error[1], d_error[2]) not in indexes
-            ):
-                double_spaces.append(d_error)
-                indexes.add((d_error[1], d_error[2]))
-
-        return double_spaces
 
     @staticmethod
     def sortByRange(error):
@@ -288,22 +221,6 @@ class GramChecker:
             ):
                 aistton_fixers[d_error[3]](d_error, d_errors, position)
 
-    def fix_double_space(self, d_result):
-        d_errors = d_result["errs"]
-
-        double_spaces = self.get_unique_double_spaces(d_errors)
-        self.remove_dupes(double_spaces, d_errors)
-
-        for double_space in double_spaces:
-            self.make_new_double_space_errors(double_space, d_result)
-
-        new_double_spaces = self.get_unique_double_spaces(d_errors)
-
-        for new_double_space in new_double_spaces:
-            self.make_new_errors(new_double_space, d_result)
-
-        d_errors.sort(key=self.sortByRange)
-
     def get_error_corrections(self, para):
         parts = []
         if para.text is not None:
@@ -377,7 +294,6 @@ class GramChecker:
 
         d_errors = d_result["errs"]
 
-        self.fix_double_space(d_result)
         self.fix_aistton(d_errors)
 
         for d_error in d_errors:

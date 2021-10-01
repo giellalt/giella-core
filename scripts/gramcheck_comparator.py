@@ -275,14 +275,14 @@ class GramChecker:
 
     def fix_aistton(self, d_errors, position):
         d_error = d_errors[position]
-        if d_error[3] == "punct-aistton-left" and len(d_error[0]) > 1:
-            self.fix_aistton_left(d_error, d_errors, position)
+        aistton_fixers = {
+            "punct-aistton-left": self.fix_aistton_left,
+            "punct-aistton-right": self.fix_aistton_right,
+            "punct-aistton-both": self.fix_aistton_both,
+        }
 
-        if d_error[3] == "punct-aistton-right" and len(d_error[0]) > 1:
-            self.fix_aistton_right(d_error, d_errors, position)
-
-        if d_error[3] == "punct-aistton-both" and len(d_error[0]) > 1:
-            self.fix_aistton_both(d_error, d_errors, position)
+        if len(d_error[0]) > 1:
+            aistton_fixers[d_error[3]](d_error, d_errors, position)
 
     def fix_double_space(self, d_result):
         d_errors = d_result["errs"]

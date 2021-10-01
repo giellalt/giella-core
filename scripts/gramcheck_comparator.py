@@ -273,16 +273,20 @@ class GramChecker:
         if remove_previous:
             del d_errors[position - 1]
 
-    def fix_aistton(self, d_errors, position):
-        d_error = d_errors[position]
+    def fix_aistton(self, d_errors):
         aistton_fixers = {
             "punct-aistton-left": self.fix_aistton_left,
             "punct-aistton-right": self.fix_aistton_right,
             "punct-aistton-both": self.fix_aistton_both,
         }
 
-        if len(d_error[0]) > 1 and len(d_error[5]) == 1:
-            aistton_fixers[d_error[3]](d_error, d_errors, position)
+        for (position, d_error) in enumerate(d_errors):
+            if (
+                d_error[3] in aistton_fixers
+                and len(d_error[0]) > 1
+                and len(d_error[5]) == 1
+            ):
+                aistton_fixers[d_error[3]](d_error, d_errors, position)
 
     def fix_double_space(self, d_result):
         d_errors = d_result["errs"]
@@ -374,10 +378,7 @@ class GramChecker:
         d_errors = d_result["errs"]
 
         self.fix_double_space(d_result)
-
-        if any([d_error[3].startswith("punct-aistton") for d_error in d_errors]):
-            for d_error in d_errors:
-                self.fix_aistton(d_errors, d_errors.index(d_error))
+        self.fix_aistton(d_errors)
 
         for d_error in d_errors:
             if d_error[3] == "no-space-before-parent-start":

@@ -281,7 +281,7 @@ class GramChecker:
             "punct-aistton-both": self.fix_aistton_both,
         }
 
-        if len(d_error[0]) > 1:
+        if len(d_error[0]) > 1 and len(d_error[5]) == 1:
             aistton_fixers[d_error[3]](d_error, d_errors, position)
 
     def fix_double_space(self, d_result):

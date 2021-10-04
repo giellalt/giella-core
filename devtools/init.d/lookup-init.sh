@@ -11,7 +11,7 @@ then export LOOKUP='/opt/sami/xerox/c-fsm/ix86-linux2.6-gcc3.4/bin/lookup -flags
 else export LOOKUP='lookup -q -flags mbTT'
 fi
 
-export HLOOKUP='hfst-lookup -q'
+export HLOOKUP='hfst-lookup -q --time-cutoff=10'
 
 # Languages in github.com/giellalt
 

@@ -30,7 +30,7 @@ COLORS = {
 def extract_correction(child):
     """Replace error element with correction attribute."""
     correct = child.find("./correct")
-    parts = [correct.text if correct is not None else ""]
+    parts = [correct.text if correct is not None and correct.text is not None else ""]
     if child.tail:
         parts.append(child.tail)
 
@@ -228,7 +228,7 @@ class GramChecker:
         for child in para:
             if child.tag != "correct":
                 correct = child.find("./correct")
-                parts.append(correct.text)
+                parts.append(correct.text if correct.text is not None else "")
                 for grandchild in child:
                     if grandchild.tag != "correct":
                         parts.append(self.get_error_corrections(grandchild))
@@ -252,7 +252,10 @@ class GramChecker:
             info[3] = para.tag
             correct = para.find("./correct")
             info[4] = correct.attrib.get("errorinfo", default="")
-            info[5] = [correct.text for correct in para.xpath("./correct")]
+            info[5] = [
+                correct.text if correct.text is not None else ""
+                for correct in para.xpath("./correct")
+            ]
 
         if para.text:
             parts.append(para.text)
@@ -812,7 +815,7 @@ class CorpusGramTest(GramTest):
                 text += para.tail
 
             parent = para.getparent()
-            if parent:
+            if parent is not None:
                 parent.remove(para)
                 if parent.text:
                     parent.text = parent.text + text

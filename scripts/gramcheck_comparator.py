@@ -805,7 +805,7 @@ class CorpusGramTest(GramTest):
 
     def flatten_para(self, para):
         """Convert non-error xml elements into plain text."""
-        if not para.tag.startswith("error"):
+        if not (para.tag.startswith("error") or para.tag == "correct"):
             text = para.text if para.text else ""
 
             if para.tail:

@@ -668,6 +668,7 @@ alias smesma='$LOOKUP $GTHOME/words/dicts/smesma/bin/smesma-all.fst'
 alias smesmj='$LOOKUP $GTHOME/words/dicts/smesmj/bin/smesmj-all.fst'
 alias smesmn='$LOOKUP $GTHOME/words/dicts/smesmn/bin/smesmn-all.fst'
 alias smespa='$LOOKUP $GTHOME/words/dicts/smespa/bin/smespa-all.fst'
+alias mnshun='$LOOKUP $GTHOME/words/dicts/mnshun/bin/mnshun-all.fst'
 alias smesyn="sent-proc.sh -s syn"
 alias smesynt="sent-proc.sh -s syn -t"
 alias smjdep="sent-proc.sh -l smj -s dep"

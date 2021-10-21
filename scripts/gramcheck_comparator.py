@@ -174,16 +174,35 @@ class GramChecker:
             new_d_error[0][2] = d_error[1]
             d_errors.insert(position, new_d_error[0])
 
+    def fix_hidden_by_aistton_both(self, d_errors):
+        """Make the index, error and suggestions match the manual errormarkup."""
+
+        def is_hidden_error(error):
+            return (error[1], error[2]) in aistton_both_ranges and error[
+                3
+            ] != "punct-aistton-both"
+
+        def fix_hidden_error(error):
+            return [
+                error[0][1:-1],
+                error[1] + 1,
+                error[2] - 1,
+                error[3],
+                error[4],
+                [suggestion[1:-1] for suggestion in error[5]],
+            ]
+
+        aistton_both_ranges = [
+            (error[1], error[2])
+            for error in d_errors
+            if error[3] == "punct-aistton-both"
+        ]
+        return [
+            fix_hidden_error(error) if is_hidden_error(error) else error
+            for error in d_errors
+        ]
+
     def fix_aistton_both(self, d_error, d_errors, position):
-        previous_error = d_errors[position - 1]
-        remove_previous = (
-            previous_error[1] == d_error[1]
-            and previous_error[2] == d_error[2]
-            and previous_error[3] == "typo"
-        )
-
-        sentence = d_error[0][1:-1]
-
         if d_error[0][-1] != "”":
             right_error = [part for part in d_error]
             right_error[0] = right_error[0][-1]
@@ -195,16 +214,6 @@ class GramChecker:
         d_error[0] = d_error[0][0]
         d_error[5] = ["”"]
         d_error[2] = d_error[1] + 1
-
-        res = self.check_grammar(sentence)
-        new_d_error = res["errs"]
-        if new_d_error:
-            new_d_error[0][1] = d_error[1] + 1
-            new_d_error[0][2] = d_error[1] + 1 + len(sentence)
-            d_errors.insert(position + 1, new_d_error[0])
-
-        if remove_previous:
-            del d_errors[position - 1]
 
     def fix_aistton(self, d_errors):
         aistton_fixers = {

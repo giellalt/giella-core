@@ -9,7 +9,9 @@ class TestGramChecker(unittest.TestCase):
     """Test grammarcheck tester"""
 
     def setUp(self) -> None:
-        self.gram_checker = gramcheck_comparator.GramChecker()
+        self.gram_checker = gramcheck_comparator.CorpusGramChecker(
+            "/usr/share/voikko/4/se.zcheck"
+        )
         return super().setUp()
 
     @parameterized.expand(
@@ -17,16 +19,7 @@ class TestGramChecker(unittest.TestCase):
             (
                 '<p>Mun lean <errorort>sjievnnjis<correct errorinfo="conc,vnn-vnnj">sjievnnijis</correct></errorort></p>',
                 ["Mun lean ", "sjievnnjis"],
-                [
-                    [
-                        "sjievnnjis",
-                        9,
-                        19,
-                        "errorort",
-                        "conc,vnn-vnnj",
-                        ["sjievnnijis"],
-                    ]
-                ],
+                [["sjievnnjis", 9, 19, "errorort", "conc,vnn-vnnj", ["sjievnnijis"]]],
             ),
             (
                 "<p><errormorphsyn>Nieiddat leat nuorra"
@@ -58,22 +51,8 @@ class TestGramChecker(unittest.TestCase):
                     " sámegillii? Muhtin, veahket mu!) gos",
                 ],
                 [
-                    [
-                        "Nordkjosbotn ii",
-                        6,
-                        21,
-                        "errorort",
-                        "",
-                        ["Nordkjosbotnii"],
-                    ],
-                    [
-                        "nordkjosbotn",
-                        34,
-                        46,
-                        "errorort",
-                        "",
-                        ["Nordkjosbotn"],
-                    ],
+                    ["Nordkjosbotn ii", 6, 21, "errorort", "", ["Nordkjosbotnii"]],
+                    ["nordkjosbotn", 34, 46, "errorort", "", ["Nordkjosbotn"]],
                 ],
             ),
             (
@@ -86,16 +65,7 @@ class TestGramChecker(unittest.TestCase):
                 '<correct errorinfo="verb,fin,pl3prs,sg3prs,tense">šadde ollu áššit</correct>'
                 "</errormorphsyn></p>",
                 ["šaddai", " ollu áššit"],
-                [
-                    [
-                        "šaddai",
-                        0,
-                        6,
-                        "errorort",
-                        "verb,conc",
-                        ["šattai"],
-                    ]
-                ],
+                [["šaddai", 0, 6, "errorort", "verb,conc", ["šattai"]]],
             ),
             (
                 "<p>a "
@@ -143,10 +113,7 @@ class TestGramChecker(unittest.TestCase):
         self.gram_checker.extract_error_info(parts, errors, etree.fromstring(paragraph))
 
         self.assertListEqual(parts, want_parts)
-        self.assertListEqual(
-            errors,
-            want_errors,
-        )
+        self.assertListEqual(errors, want_errors)
 
     @parameterized.expand(
         [
@@ -183,6 +150,56 @@ class TestGramChecker(unittest.TestCase):
         self.gram_checker.normalise_error_markup(errors)
         self.assertListEqual(errors, wanted_errors)
 
+    @parameterized.expand(
+        [
+            (
+                [
+                    [
+                        '"Goaskin viellja"',
+                        15,
+                        32,
+                        "msyn-compound",
+                        '"Goaskin viellja" orru leamen goallossátni',
+                        ['"Goaskinviellja"'],
+                        "Goallosteapmi",
+                    ],
+                    [
+                        '"Goaskin viellja"',
+                        15,
+                        32,
+                        "punct-aistton-both",
+                        "Boasttuaisttonmearkkat",
+                        ["”Goaskin viellja”"],
+                        "Aisttonmearkkat",
+                    ],
+                ],
+                [
+                    [
+                        "Goaskin viellja",
+                        16,
+                        31,
+                        "msyn-compound",
+                        '"Goaskin viellja" orru leamen goallossátni',
+                        ["Goaskinviellja"],
+                    ],
+                    [
+                        '"Goaskin viellja"',
+                        15,
+                        32,
+                        "punct-aistton-both",
+                        "Boasttuaisttonmearkkat",
+                        ["”Goaskin viellja”"],
+                        "Aisttonmearkkat",
+                    ],
+                ],
+            )
+        ]
+    )
+    def test_fix_hidden_by_aistton_both(self, errors, wanted_errors):
+        self.assertListEqual(
+            self.gram_checker.fix_hidden_by_aistton_both(errors), wanted_errors
+        )
+
 
 class TestGramTester(unittest.TestCase):
     """Test grammarcheck tester"""
@@ -204,7 +221,7 @@ class TestGramTester(unittest.TestCase):
     def test_same_range_and_error(self, c_error, d_error, expected_boolean):
         self.assertTrue(
             self.gram_test.has_same_range_and_error(c_error, d_error)
-            == expected_boolean,
+            == expected_boolean
         )
 
     @parameterized.expand(

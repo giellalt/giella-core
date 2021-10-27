@@ -1547,7 +1547,7 @@ sub make_truefalsesummary {
 sub make_averageposition {
     my ($results, $doc) = @_;
 
-    my @positions = $results->findnodes('.//td[@class="position"]');
+    my @positions = $results->findnodes('.//td[@class="position"][text() > 0]');
     my $total = 0;
     for my $position (@positions) {
         $total += int($position->textContent);
@@ -1674,7 +1674,7 @@ sub make_averagesuggs_with_correct {
     my $top5pos_percent = $doc->createElement('div');
     $top5pos_percent->setAttribute('id' => 'averagesuggs_with_correct');
 
-    my $nodes = $results->findnodes('.//tr[@class="word"][td[@class="position"] and td[@class="suggestions"]]');
+    my $nodes = $results->findnodes('.//tr[@class="word"][td[@class="position"][text() > 0]]');
 
     my $total = 0;
     for my $node ($nodes->get_nodelist) {

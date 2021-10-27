@@ -101,7 +101,7 @@ grep ";" $inputfile \
    | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
    | keep_hom_tags \
    | egrep -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" \
-   | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex)" \
+   | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex|DerSub)" \
    | exclgrep "$excludepattern" \
    | egrep    "$includepattern" \
    | sed 's/^[ 	]*//' \

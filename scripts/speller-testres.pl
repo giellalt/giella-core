@@ -1575,7 +1575,7 @@ sub make_suggx {
         @editdistx = $results->findnodes($haff);
         $sugg->setAttribute("editdist$y" => scalar(@editdistx));
     }
-    my $haff = './/tr[@class="word"][' . $queryx . ' and td[@class="edit_dist"]/text() = ' . $y . ']';
+    my $haff = './/tr[@class="word"][' . $queryx . ' and td[@class="edit_dist"]/text() >= ' . $y . ']';
     @editdistx = $results->findnodes($haff);
     $sugg->setAttribute("editdist$y" . "plus" => scalar(@editdistx));
     $sugg->appendTextNode(' ');

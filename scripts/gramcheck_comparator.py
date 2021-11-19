@@ -52,7 +52,12 @@ class GramChecker:
                 d_error.end,
                 d_error.err,
                 d_error.dsc,
-                list(d_error.rep),
+                [
+                    rep
+                    if d_error.form != d_error.form.capitalize()
+                    else rep.capitalize()
+                    for rep in d_error.rep
+                ],
                 d_error.msg,
             ]
             for d_error in d_errors

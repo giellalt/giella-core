@@ -1,0 +1,12 @@
+## Process this file with automake to produce Makefile.in
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+######## Test targets: ###########
+
+if WANT_PHONETIC
+
+# Default variable for all languages
+TESTS_ENVIRONMENT = $(builddir)/run_tests.sh
+
+endif # WANT_PHONETIC

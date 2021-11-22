@@ -262,4 +262,5 @@ if __name__ == "__main__":
         yaml.parser.ParserError,
         errormarkup.ErrorMarkupError,
     ) as error:
-        raise SystemExit(error)
+        print(str(error), file=sys.stderr)
+        raise SystemExit(1)

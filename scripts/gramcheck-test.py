@@ -106,11 +106,6 @@ class YamlGramChecker(GramChecker):
             )
             sys.exit(5)
 
-        self.print_error(
-            "Error in Config section of yaml file. " "Neither Archive nor Spec exists"
-        )
-        sys.exit(6)
-
 
 class YamlGramTest(GramTest):
     explanations = {

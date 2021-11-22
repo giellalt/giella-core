@@ -149,7 +149,7 @@ generator-mt-apertium-norm.tmp1.hfst: \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
 		-o $@
 
-# Relabel Giella tags to Apertium tags - generator, step 2a:
+# Relabel Giella tags to Apertium tags - generator, step 2a: tmp1 -> tmp
 # * relabel file
 #   AND
 # * general tag change regex file
@@ -186,6 +186,12 @@ generator-mt-apertium-norm.%.hfst: \
     	;" \
 		| $(HFST_REGEXP2FST) $(HFST_FLAGS) -S --xerox-composition=ON \
 		-o $@
+
+# Relabel Giella tags to Apertium tags - generator, step 2d:
+# * NO general tag change beyond the automatic one - just copy tmp1 -> tmp
+generator-mt-apertium-norm.%.hfst: \
+			generator-mt-apertium-norm.%1.hfst
+	$(AM_V_CP)cp -f $< $@
 
 # Relabel Giella tags to Apertium tags - analyser:
 # % = TARGETLANG
@@ -236,6 +242,12 @@ analyser-mt-apertium-desc.%.tmp.hfst: \
     	;" \
 		| $(HFST_REGEXP2FST) $(HFST_FLAGS) -S --xerox-composition=ON \
 		-o $@
+
+# Step 1b.d - apertium.tmp1 -> apertium.tmp
+# * no manual tag changes required at all - just copy (fallback):
+analyser-mt-apertium-desc.%.tmp.hfst: \
+			analyser-mt-apertium-desc.%.tmp1.hfst
+	$(AM_V_CP)cp -f $< $@
 
 # Relabel Giella tags to Apertium tags - analyser:
 # % = TARGETLANG

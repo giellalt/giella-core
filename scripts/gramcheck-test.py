@@ -6,7 +6,6 @@
 # Author: Børre Gaup <borre.gaup@uit.no>
 """Check if grammarchecker tests pass."""
 
-import os
 import sys
 from pathlib import Path
 

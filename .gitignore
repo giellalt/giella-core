@@ -12,3 +12,4 @@ Makefile
 .DS_Store
 __pycache__/
 /scripts/make-hfstspeller-version-easter-egg.sh
+/configure~

@@ -79,40 +79,6 @@ class GramChecker:
     def sortByRange(error):
         return error[1:2]
 
-    def fix_no_space_after_punct_mark(self, punct_error, d_errors):
-        self.remove_dupes([punct_error], d_errors)
-        error_message = punct_error[4]
-        current_punct = error_message[
-            error_message.find('"') + 1 : error_message.rfind('"')
-        ]
-        parenthesis = punct_error[0].find(current_punct)
-
-        d_errors.append(
-            [
-                punct_error[0][parenthesis:],
-                punct_error[1] + parenthesis,
-                punct_error[1] + parenthesis + len(punct_error[0][parenthesis:]),
-                punct_error[3],
-                punct_error[4],
-                [f"{current_punct} {punct_error[0][parenthesis + 1:]}"],
-                punct_error[6],
-            ]
-        )
-
-        part1 = punct_error[0][:parenthesis]
-        start = punct_error[1]
-        end = punct_error[1] + len(part1)
-        if part1:
-            self.add_part(part1, start, end, d_errors)
-
-        part2 = punct_error[0][parenthesis + 1 :]
-        start = punct_error[1] + parenthesis + 1
-        end = punct_error[1] + parenthesis + 1 + len(part2)
-        if part2:
-            self.add_part(part2, start, end, d_errors)
-
-        d_errors.sort(key=self.sortByRange)
-
     def add_part(self, part, start, end, d_errors):
         res = self.check_grammar(part)
         errors = res["errs"]
@@ -312,12 +278,9 @@ class GramChecker:
         d_errors = d_result["errs"]
 
         self.fix_aistton(d_errors)
-
         for d_error in d_errors:
             if d_error[3] == "no-space-before-parent-start":
                 self.fix_no_space_before_parent_start(d_error, d_errors)
-            if d_error[3] == "no-space-after-punct-mark":
-                self.fix_no_space_after_punct_mark(d_error, d_errors)
 
         report_dupes(d_errors)
 

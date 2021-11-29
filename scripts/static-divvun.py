@@ -231,9 +231,10 @@ class StaticSiteBuilder(object):
             str: path to the interesting file
         """
         for root, _, files in os.walk(builddir):
-            for f in files:
-                if f.endswith(extension):
-                    yield os.path.join(root, f)
+            if "ckeditor" not in root:
+                for f in files:
+                    if f.endswith(extension):
+                        yield os.path.join(root, f)
 
     def add_language_changer(self, this_lang):
         """Add a language changer in all .html files for one language.

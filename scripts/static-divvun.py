@@ -315,7 +315,7 @@ class StaticSiteBuilder(object):
             logger.info("stdout")
             for line in output.split("\n"):
                 logger.info(line)
-            logger.error("stderr")
+            logger.info("stderr")
             for line in error.split("\n"):
                 logger.info(line)
         else:

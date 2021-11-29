@@ -266,14 +266,16 @@ class StaticSiteBuilder(object):
         Args:
             lang (str): a two or three character long string
         """
-        builtdir = os.path.join(self.sitehome, "built")
+        builtdir = (
+            os.path.join(self.sitehome, "built")
+            if lang == self.mainlang
+            else os.path.join(self.sitehome, "built", lang)
+        )
 
         self.copy_ckeditor()
-        if lang == self.mainlang:
-            for item in glob.glob(self.builddir + "/*"):
-                shutil.move(item, builtdir)
-        else:
-            shutil.move(self.builddir, os.path.join(builtdir, lang))
+        for item in glob.glob(self.builddir + "/*"):
+            shutil.copytree(item, builtdir)
+            shutil.rmtree(item)
 
     def build_all_langs(self):
         """Build all the langs."""

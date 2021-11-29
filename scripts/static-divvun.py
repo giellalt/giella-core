@@ -278,9 +278,9 @@ class StaticSiteBuilder(object):
         )
 
         self.copy_ckeditor()
-        for item in glob.glob(self.builddir + "/*"):
-            shutil.copytree(item, builtdir)
-            shutil.rmtree(item)
+        returncode, _ = self.run_command(f"rsync -av {self.builddir}/ {builtdir}")
+        if returncode != 0:
+            raise SystemExit(returncode)
 
     def build_all_langs(self):
         """Build all the langs."""
@@ -290,6 +290,7 @@ class StaticSiteBuilder(object):
             if self.langs:
                 self.add_language_changer(lang)
             self.rename_site_files(lang)
+            shutil.rmtree(self.builddir)
 
     def run_command(self, command):
         """Run a shell command.

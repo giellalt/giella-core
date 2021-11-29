@@ -311,13 +311,13 @@ class StaticSiteBuilder(object):
         output = output.decode("utf8")
         error = error.decode("utf8")
         if subp.returncode != 0:
-            logger.error("{} finished with errors".format(command))
-            logger.error("stdout")
+            logger.warning("{} finished with errors".format(command))
+            logger.info("stdout")
             for line in output.split("\n"):
-                logger.error(line)
+                logger.info(line)
             logger.error("stderr")
             for line in error.split("\n"):
-                logger.error(line)
+                logger.info(line)
         else:
             logger.info("{} finished without errors".format(command))
             logger.debug("stdout")

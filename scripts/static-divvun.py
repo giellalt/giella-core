@@ -27,38 +27,38 @@ class StaticSiteBuilder(object):
     """Class to build a multilingual static version of the divvun site.
 
     Attributes:
-        builddir (str): The directory where the forrest site is
+        sitehome (str): The directory where the forrest site is
         destination (str): where the built site is copied (using rsync)
         langs (list): list of langs to be built
         logfile (file handle)
     """
 
-    def __init__(self, builddir, destination, langs):
-        """Init StaticSiteBuilder with builddir, destination and langs.
+    def __init__(self, sitehome, destination, langs):
+        """Init StaticSiteBuilder with sitehome, destination and langs.
 
         Args:
-            builddir (str):     The directory where the forrest site is
+            sitehome (str):     The directory where the forrest site is
             destination (str):  Where the built site is copied (using rsync)
             langs (list):       List of langs to be built
 
         """
-        if builddir.endswith("/"):
+        if sitehome.endswith("/"):
 
-            builddir = builddir[:-1]
-        self.builddir = builddir
+            sitehome = sitehome[:-1]
+        self.sitehome = sitehome
         if not destination.endswith("/"):
             destination = destination + "/"
         self.destination = destination
         self.mainlang = langs[0]
         self.langs = langs[1:]
-        if os.path.isdir(os.path.join(self.builddir, "built")):
-            shutil.rmtree(os.path.join(self.builddir, "built"))
+        if os.path.isdir(os.path.join(self.sitehome, "built")):
+            shutil.rmtree(os.path.join(self.sitehome, "built"))
 
-        os.mkdir(os.path.join(self.builddir, "built"))
+        os.mkdir(os.path.join(self.sitehome, "built"))
 
     def __enter__(self):
         """Open a lock file."""
-        lockname = os.path.join(self.builddir, ".lock")
+        lockname = os.path.join(self.sitehome, ".lock")
 
         if os.path.exists(lockname):
             with open(lockname) as lock:
@@ -80,13 +80,13 @@ class StaticSiteBuilder(object):
     def __exit__(self, *args):
         """Close the lockfile and remove the lockfile."""
         self.lockfile.close()
-        os.remove(os.path.join(self.builddir, ".lock"))
+        os.remove(os.path.join(self.sitehome, ".lock"))
 
     def clean(self):
         """Run forrest clean."""
         (returncode, _) = self.run_command("forrest validate")
         if returncode != 0:
-            logger.warn("forrest clean failed in {}".format(self.builddir))
+            logger.warn("forrest clean failed in {}".format(self.sitehome))
             raise SystemExit(returncode)
 
     def validate(self):
@@ -104,7 +104,7 @@ class StaticSiteBuilder(object):
         """
         logger.debug("Setting language {}".format(lang))
         for line in fileinput.FileInput(
-            os.path.join(self.builddir, "forrest.properties"), inplace=1
+            os.path.join(self.sitehome, "forrest.properties"), inplace=1
         ):
             if "forrest.jvmargs" in line:
                 line = (
@@ -122,7 +122,7 @@ class StaticSiteBuilder(object):
         """
         counter = collections.Counter()
         for line in fileinput.FileInput(
-            os.path.join(self.builddir, "build", "tmp", "brokenlinks.xml")
+            os.path.join(self.sitehome, "build", "tmp", "brokenlinks.xml")
         ):
             if "<link" in line and "</link>" in line:
                 if "tca2testing" in line:
@@ -241,7 +241,7 @@ class StaticSiteBuilder(object):
         Args:
             this_lang (str): a two or three character long string
         """
-        builddir = os.path.join(self.builddir, "build/site/en")
+        builddir = os.path.join(self.sitehome, "build/site/en")
 
         for path in self.files_to_collect(builddir, ".html"):
             f2b = LanguageAdder(path, this_lang, self.mainlang, self.langs, builddir)
@@ -256,8 +256,8 @@ class StaticSiteBuilder(object):
         Args:
             lang (str): a two or three character long string
         """
-        builddir = os.path.join(self.builddir, "build/site/en")
-        builtdir = os.path.join(self.builddir, "built")
+        builddir = os.path.join(self.sitehome, "build/site/en")
+        builtdir = os.path.join(self.sitehome, "built")
 
         self.copy_ckeditor()
         if lang == self.mainlang:
@@ -286,7 +286,7 @@ class StaticSiteBuilder(object):
             command.split(),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            cwd=self.builddir,
+            cwd=self.sitehome,
         )
 
         (output, error) = subp.communicate()
@@ -312,11 +312,11 @@ class StaticSiteBuilder(object):
 
     def copy_ckeditor(self):
         """Copy the ckeditor to the built version of the site."""
-        ckdir = os.path.join(self.builddir, "src/documentation/resources/ckeditor")
+        ckdir = os.path.join(self.sitehome, "src/documentation/resources/ckeditor")
         if os.path.exists(ckdir):
             returncode, _ = self.run_command(
                 "rsync -av {src} {dst}".format(
-                    src=ckdir, dst=os.path.join(self.builddir, "build/site/en/")
+                    src=ckdir, dst=os.path.join(self.sitehome, "build/site/en/")
                 )
             )
             if returncode != 0:
@@ -324,13 +324,13 @@ class StaticSiteBuilder(object):
 
     def copy_to_site(self):
         """Copy the entire site to self.destination."""
-        if "techdoc" in self.builddir and "commontec" not in self.builddir:
-            offending_file = os.path.join(self.builddir, "built", "index.html")
+        if "techdoc" in self.sitehome and "commontec" not in self.sitehome:
+            offending_file = os.path.join(self.sitehome, "built", "index.html")
             if os.path.exists(offending_file):
                 os.remove(offending_file)
         (returncode, _) = self.run_command(
             "rsync -avz -e ssh {src} {dst}".format(
-                src=os.path.join(self.builddir, "built/"), dst=self.destination
+                src=os.path.join(self.sitehome, "built/"), dst=self.destination
             )
         )
         if returncode != 0:

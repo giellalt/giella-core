@@ -206,9 +206,8 @@ class StaticSiteBuilder(object):
         Args:
             lang (str): a two or three character long string
         """
-        # This ensures that the build directory is build/site/en
         logger.debug("Building {}".format(lang))
-        os.environ["LC_ALL"] = "C"
+        os.environ["LC_ALL"] = "en_US.UTF-8"
 
         self.set_forrest_lang(lang)
 

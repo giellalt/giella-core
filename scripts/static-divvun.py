@@ -241,11 +241,21 @@ class StaticSiteBuilder(object):
         Args:
             this_lang (str): a two or three character long string
         """
-        builddir = os.path.join(self.sitehome, "build/site/en")
+        builddir = self.builddir
 
         for path in self.files_to_collect(builddir, ".html"):
             f2b = LanguageAdder(path, this_lang, self.mainlang, self.langs, builddir)
             f2b.add_lang_info()
+
+    @property
+    def builddir(self):
+        site = os.path.join(self.sitehome, "build/site")
+        builddir = (
+            site
+            if os.path.isfile(os.path.join(site, "index.html"))
+            else os.path.join(site, "en")
+        )
+        return builddir
 
     def rename_site_files(self, lang):
         """Search for files ending with html and pdf in the build site.
@@ -256,15 +266,14 @@ class StaticSiteBuilder(object):
         Args:
             lang (str): a two or three character long string
         """
-        builddir = os.path.join(self.sitehome, "build/site/en")
         builtdir = os.path.join(self.sitehome, "built")
 
         self.copy_ckeditor()
         if lang == self.mainlang:
-            for item in glob.glob(builddir + "/*"):
+            for item in glob.glob(self.builddir + "/*"):
                 shutil.move(item, builtdir)
         else:
-            shutil.move(builddir, os.path.join(builtdir, lang))
+            shutil.move(self.builddir, os.path.join(builtdir, lang))
 
     def build_all_langs(self):
         """Build all the langs."""

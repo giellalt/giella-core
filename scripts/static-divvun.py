@@ -222,7 +222,7 @@ class StaticSiteBuilder(object):
         )
 
         self.parse_buildtimes(output)
-        self.parse_broken_links()
+        # self.parse_broken_links()
 
     def files_to_collect(self, builddir, extension):
         """Search for files with extension in builddir.

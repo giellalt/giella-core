@@ -325,7 +325,7 @@ class StaticSiteBuilder(object):
         if os.path.exists(ckdir):
             returncode, _ = self.run_command(
                 "rsync -av {src} {dst}".format(
-                    src=ckdir, dst=os.path.join(self.sitehome, "build/site/en/")
+                    src=ckdir, dst=os.path.join(self.sitehome, self.builddir)
                 )
             )
             if returncode != 0:

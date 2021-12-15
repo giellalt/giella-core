@@ -154,6 +154,57 @@ class TestGramChecker(unittest.TestCase):
         [
             (
                 [
+                    "“Dálveleaikkat“",
+                    7,
+                    22,
+                    "punct-aistton-both",
+                    "Boasttuaisttonmearkkat",
+                    ["”Dálveleaikkat”"],
+                    "Aisttonmearkkat",
+                ],
+                [
+                    [
+                        "“Dálveleaikkat“",
+                        7,
+                        22,
+                        "punct-aistton-both",
+                        "Boasttuaisttonmearkkat",
+                        ["”Dálveleaikkat”"],
+                        "Aisttonmearkkat",
+                    ]
+                ],
+                0,
+                [
+                    [
+                        "“",
+                        7,
+                        8,
+                        "punct-aistton-both",
+                        "Boasttuaisttonmearkkat",
+                        ["”"],
+                        "Aisttonmearkkat",
+                    ],
+                    [
+                        "“",
+                        21,
+                        22,
+                        "punct-aistton-both",
+                        "Boasttuaisttonmearkkat",
+                        ["”"],
+                        "Aisttonmearkkat",
+                    ],
+                ],
+            )
+        ]
+    )
+    def test_fix_aistton_both(self, error, errors, position, wanted_errors):
+        self.gram_checker.fix_aistton_both(error, errors, position)
+        self.assertListEqual(errors, wanted_errors)
+
+    @parameterized.expand(
+        [
+            (
+                [
                     [
                         '"Goaskin viellja"',
                         15,
@@ -192,7 +243,85 @@ class TestGramChecker(unittest.TestCase):
                         "Aisttonmearkkat",
                     ],
                 ],
-            )
+            ),
+            (
+                [
+                    [
+                        "dálve olympiijagilvvuid",
+                        22,
+                        45,
+                        "msyn-compound",
+                        '"dálve olympiijagilvvuid" orru leamen goallossátni',
+                        ["dálveolympiagilvvuid"],
+                        "Goallosteapmi",
+                    ],
+                    [
+                        "CDa",
+                        53,
+                        56,
+                        "typo",
+                        "Ii leat sátnelisttus",
+                        ["CD"],
+                        "Čállinmeattáhus",
+                    ],
+                    [
+                        "“Dálveleaikat“",
+                        78,
+                        92,
+                        "real-PlNomPxSg2-PlNom",
+                        "Sátni šaddá eará go oaivvilduvvo",
+                        ["“Dálveleaikkat“"],
+                        "Čállinmeattáhus dán oktavuođas",
+                    ],
+                    [
+                        "“Dálveleaikat“",
+                        78,
+                        92,
+                        "punct-aistton-both",
+                        "Boasttuaisttonmearkkat",
+                        ["”Dálveleaikat”"],
+                        "Aisttonmearkkat",
+                    ],
+                ],
+                [
+                    [
+                        "dálve olympiijagilvvuid",
+                        22,
+                        45,
+                        "msyn-compound",
+                        '"dálve olympiijagilvvuid" orru leamen goallossátni',
+                        ["dálveolympiagilvvuid"],
+                        "Goallosteapmi",
+                    ],
+                    [
+                        "CDa",
+                        53,
+                        56,
+                        "typo",
+                        "Ii leat sátnelisttus",
+                        ["CD"],
+                        "Čállinmeattáhus",
+                    ],
+                    [
+                        "Dálveleaikat",
+                        79,
+                        91,
+                        "real-PlNomPxSg2-PlNom",
+                        "Sátni šaddá eará go oaivvilduvvo",
+                        ["Dálveleaikkat"],
+                        "Čállinmeattáhus dán oktavuođas",
+                    ],
+                    [
+                        "“Dálveleaikat“",
+                        78,
+                        92,
+                        "punct-aistton-both",
+                        "Boasttuaisttonmearkkat",
+                        ["”Dálveleaikat”"],
+                        "Aisttonmearkkat",
+                    ],
+                ],
+            ),
         ]
     )
     def test_fix_hidden_by_aistton_both(self, errors, wanted_errors):

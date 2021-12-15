@@ -255,7 +255,7 @@ class GramChecker:
 
         return info
 
-    def fix_all_errors(self, d_result):
+    def fix_all_errors(self, d_errors):
         """Remove errors that cover the same area of the typo and msyn types."""
 
         def report_dupes(errors):
@@ -275,8 +275,7 @@ class GramChecker:
             for pos in sorted(index_set, reverse=True):
                 del errors[pos]
 
-        d_errors = d_result["errs"]
-
+        d_errors = self.fix_hidden_by_aistton_both(d_errors)
         self.fix_aistton(d_errors)
         for d_error in d_errors:
             if d_error[3] == "no-space-before-parent-start":
@@ -284,12 +283,12 @@ class GramChecker:
 
         report_dupes(d_errors)
 
-        return d_result
+        return d_errors
 
     def check_sentence(self, sentence):
         res = self.check_grammar(sentence)
 
-        return self.fix_all_errors(res)["errs"]
+        return self.fix_all_errors(res["errs"])
 
     def normalise_error_markup(self, errors):
         for error in errors:

@@ -1,3 +1,18 @@
+echo "\nHentar frå CorpusTools"
+cd ~/git/giellalt/Corpustools &&   git config pull.rebase false  && git pull
+
+echo "\nHentar frå giellalt.github.io"
+cd ~/git/giellalt/giellalt.github.io &&   git config pull.rebase false  && git pull
+echo "\nHentar frå CorpusTools"
+cd ~/git/giellalt/Corpustools &&   git config pull.rebase false  && git pull
+echo "\nHentar frå CorpusTools"
+cd ~/git/giellalt/Corpustools &&   git config pull.rebase false  && git pull
+echo "\nHentar frå CorpusTools"
+cd ~/git/giellalt/Corpustools &&   git config pull.rebase false  && git pull
+
+
+
+
 echo "\nHentar frå aka (Akan)"
 cd ~/git/giellalt/lang-aka &&   git config pull.rebase false  && git pull
 echo "\nHentar frå amh (Amharic)"
@@ -198,12 +213,6 @@ echo "\nHentar frå xwo (Written Oirat)"
 cd ~/git/giellalt/lang-xwo &&   git config pull.rebase false  && git pull
 echo "\nHentar frå yrk (Nenets)"
 cd ~/git/giellalt/lang-yrk &&   git config pull.rebase false  && git pull
-#echo "\nHentar frå otw (Ottawa)"
-#cd ~/git/giellalt/lang-otw &&   git config pull.rebase false  && git pull
-#echo "\nHentar frå crl (Northern East Cree)"
-#cd ~/git/giellalt/lang-crl &&   git config pull.rebase false  && git pull
-#echo "\nHentar frå moe (Montagnais)"
-#cd ~/git/giellalt/lang-moe &&   git config pull.rebase false  && git pull
 echo "\nHentar frå giella-core"
 cd ~/git/giellalt/giella-core &&   git config pull.rebase false  && git pull
 echo "\nHentar frå giella-shared"

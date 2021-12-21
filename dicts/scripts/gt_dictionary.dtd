@@ -21,10 +21,10 @@
 
 <!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+) >
 <!ATTLIST e
-      usage ( mt | vd | dict | other | nds | fad ) #IMPLIED
+      usage ( mt | vd | dict | other | nds | fad | KB ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK |
             PS_SA | KAL | nou94 | PS | husbykuhmunen | lmm | sammallahti |
-            BergslandMagga | Lagercrantz)  #IMPLIED
+            BergslandMagga | Lagercrantz | nsr )  #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED

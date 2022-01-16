@@ -26,7 +26,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/clean_weight_corpus.sh \
    scripts/data/cohort_to_table_footer.html \
    scripts/data/cohort_to_table_header.html \
-   scripts/doccomments2jspwiki.awk \
    scripts/doccomments2ghpages.awk \
    scripts/doccomments2rst.awk \
    scripts/doccomments2tex.awk \

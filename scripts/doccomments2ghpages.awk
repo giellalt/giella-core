@@ -4,8 +4,8 @@
 # The doc comments are recognised by sequence of /^!! /, that is, two comment
 # signs at the beginning of a line.
 #
-# The doc comments are assumed to be already in jspwiki markup with
-# following special additions:
+# The doc comments are assumed to be already in Markdown syntax with
+# the following special additions:
 # - Multichar_Symbols block is handled specially and its contents are used in
 #   output as lists
 # - LEXICONs and Rules blocks are handled specially and their names are saved
@@ -88,15 +88,15 @@ function expand_variables(s) {
 /^[^!].*!!≈ / {
     CODE=gensub("[ \t][ \t]*", " ", "g",
            gensub("^[ \t]*", "", 1,
-           gensub("[ \t]*!!≈.*", "", 1)));
+           gensub("[ \t]*!!≈.* ", "", 1)));
     if ($0 ~ /@CODE@/)
     {
-        print(expand_variables(gensub(".*!!≈", "", 1)));
+        print(expand_variables(gensub(".*!!≈ ", "", 1)));
     }
     else
     {
         printf("%s ", CODE);
-        print(expand_variables(gensub("!!≈", " ", 1)));
+        print(expand_variables(gensub("!!≈ ", " ", 1)));
     }
 }
 /^!! / {print(expand_variables(gensub(".*!! *", "", 1))); }

@@ -78,11 +78,11 @@ function expand_variables(s) {
     CODE=gensub("!!=.*", "", 1);
     if ($0 ~ /@CODE@/)
     {
-        print(expand_variables(gensub(".*!!=", "", 1)));
+        print(expand_variables(gensub(".*!!= ", "", 1)));
     }
     else
     {
-        print(expand_variables(gensub("!!=", " ", 1)));
+        print(expand_variables(gensub("!!= ", " ", 1)));
     }
 }
 /^[^!].*!!≈ / {
@@ -91,12 +91,12 @@ function expand_variables(s) {
            gensub("[ \t]*!!≈.*", "", 1)));
     if ($0 ~ /@CODE@/)
     {
-        print(expand_variables(gensub(".*!!≈", "", 1)));
+        print(expand_variables(gensub(".*!!≈ ", "", 1)));
     }
     else
     {
         printf("%s ", CODE);
-        print(expand_variables(gensub("!!≈", " ", 1)));
+        print(expand_variables(gensub("!!≈ ", " ", 1)));
     }
 }
 /^!! / {print(expand_variables(gensub(".*!! *", "", 1))); }

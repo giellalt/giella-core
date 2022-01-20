@@ -1,0 +1,3 @@
+! File for making +Hyph tags optional. Used for generating transducers.
+
+0 (<-) %+Hyph ;

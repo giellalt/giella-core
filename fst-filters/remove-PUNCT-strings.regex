@@ -1,0 +1,4 @@
+! Remove strings containing +PUNCT, that is, all acronyms. Used for building 
+! certain tts transducers.
+
+~$[ %+PUNCT | %+CLB ] ;

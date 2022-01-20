@@ -1,0 +1,4 @@
+!Remove inflection boundaries from the lower side of the transducer:
+
+%< -> 0,
+%> -> 0;

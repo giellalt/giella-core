@@ -1,0 +1,5 @@
+! This file removes orthography tags used to distinguish regular and phonetic
+! stems.
+
+0 <- %+Orth%/Strd,
+0 <- %+Orth%/IPA;

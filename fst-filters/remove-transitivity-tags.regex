@@ -1,0 +1,6 @@
+! File for removing transitivity tags. Used for speller transducers.
+
+0 <- "+TV",
+0 <- "+IV",
+0 <- "+Gram/TV",
+0 <- "+Gram/IV";

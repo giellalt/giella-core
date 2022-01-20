@@ -1,0 +1,23 @@
+# This regex removes tags we do not want in the ordinary $(GTLANG).fst,
+# except for +Use/NGminip. This filter is to be used when building dictionary
+# fst's, where this tag needds to be visible.
+
+# 0 <- %+Use%/NGminip <= This one removed from the filter because it must be
+#                        visible in dictionary fst's.
+
+0 <- "+Use/Circ",
+0 <- "+Use/CircN",
+0 <- "+Use/Marg",
+0 <- "+Use/MT",
+0 <- "+Use/Ped",
+0 <- "+Use/NG",
+0 <- "+Use/NA",
+0 <- "+Use/-Spell",
+0 <- "+Use/-PLX",
+0 <- "+Use/SpellNoSugg",
+0 <- "+Use/Derrog",
+0 <- "+Use/NotDNorm",
+0 <- "+Use/DNorm",
+
+# Also prefix tags:
+0 <- "Use/NG+";

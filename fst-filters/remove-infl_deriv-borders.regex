@@ -1,0 +1,22 @@
+!Remove morhpological boundaries from the lower side of the transducer:
+
+! Inflectional boundaries:
+%> -> 0,
+%< -> 0,
+
+! Derivational boundaries:
+%« -> 0,
+%» -> 0,
+
+! clitic boundaries, multichar symbols:
+"|»" -> 0,
+"«|" -> 0,
+
+! Also make sure that escaped literal quotes are unescaped on the surface:
+#7 -> %#,
+»7 -> »,
+«7 -> «,
+"_7" -> "_",
+%[%>%] -> ">",
+%[%<%] -> "<"
+;

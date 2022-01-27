@@ -292,6 +292,7 @@ easteregg.*
 test.*
 build
 editdist.*.regex
+spellercorpus.[stuw]*.txt
 3" $1/tools/spellcheckers
 
 # Set svn:ignore on the tools/spellcheckers/fstbased/mobile/weighting/ dir:
@@ -323,7 +324,7 @@ $fstfiles
 *.regex
 *.txt" $1/tools/tokenisers/filters
 
-# Set the svn:ignore prop on the test/tools/tts/ dir:
+# Set the svn:ignore prop on the tools/tts/ dir:
 $svnignore "$mkfiles
 *.hfst
 *.pmhfst
@@ -331,6 +332,10 @@ $svnignore "$mkfiles
 *.bin
 *.cg3
 *.xml" $1/tools/tts
+
+# Set the svn:ignore prop on the tools/tts/test/ dir:
+$svnignore "$mkfiles
+run_tests.sh" $1/tools/tts/test
 
 # Remove the svn:ignore prop on some subdirs:
 svn -q propdel svn:ignore $1/.github

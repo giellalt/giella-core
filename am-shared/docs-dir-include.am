@@ -97,8 +97,8 @@ generated-markdowns.sources:
 		--include '*.lexc' \
 		--include '*.twolc' \
 		--include '*.cg3' \
-		--include '*.pmscript' \
-		--include '*.xfscript'\
+		--exclude '*.pmscript' \
+		--exclude '*.xfscript'\
 		--exclude 'Makefile*' \
 		--exclude 'lexicon.tmp.lexc' \
 		--exclude-dir 'generated_files' \

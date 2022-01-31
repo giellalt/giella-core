@@ -88,7 +88,7 @@ $(srcdir)/%-apertium-mt-tools.md: $(top_srcdir)/tools/mt/apertium/%.cg3
 $(srcdir)/%-tts-tools.md: $(top_srcdir)/tools/tts/%.cg3
 	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
 
-$(srcdir)/%-tokenisers-tools.md: $(top_srcdir)/tools/grammarcheckers/%.cg3
+$(srcdir)/%-tokenisers-tools.md: $(top_srcdir)/tools/tokenisers/%.cg3
 	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
 
 

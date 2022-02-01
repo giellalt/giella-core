@@ -43,53 +43,100 @@ report.json:
 	touch $@
 endif
 
+define register_docsygenated_dir_2
+$(srcdir)/%-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/%.cg3
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
 
-$(srcdir)/%-cg3-src.md: $(top_srcdir)/src/cg3/%.cg3
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
+$(srcdir)/%-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/%.lexc
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
 
-$(srcdir)/%-fst-src.md: $(top_srcdir)/src/fst/%.lexc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
+$(srcdir)/%-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/%.xfscript
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
 
-# lang-smn
-$(srcdir)/%-oahpa-filer-fst-src.md: $(top_srcdir)/src/fst/oahpa-filer/%.lexc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
+$(srcdir)/%-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/%.pmscript
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
+
+$(srcdir)/%-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/%.twolc
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
+endef
+
+define register_docsygenated_dir_3
+$(srcdir)/%-$(3)-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/$(3)/%.cg3
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
+
+$(srcdir)/%-$(3)-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/$(3)/%.lexc
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
+
+$(srcdir)/%-$(3)-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/$(3)/%.xfscript
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
+
+$(srcdir)/%-$(3)-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/$(3)/%.pmscript
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
+
+$(srcdir)/%-$(3)-$(2)-$(1).md: $(top_srcdir)/$(1)/$(2)/$(3)/%.twolc
+	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $$< > $$@
+endef
+
+# tree
+# .
+# ├── src												 y
+# │   ├── cg3											 y
+# │   ├── filters										 n
+# │   ├── fst											 y
+# │   │   ├── affixes									 y
+# │   │   ├── generated_files							 n
+# │   │   ├── incoming									 n
+# │   │   └── stems										 y
+# │   ├── hyphenation									 ?
+# │   ├── orthography									 ?
+# │   ├── phonetics										 Y
+# │   │   └── tests										 N
+# │   ├── tagsets										 N?
+# │   └── transcriptions								 Y
+# ├── test												 N
+# └── tool												 Y
+#     ├── analysers										 ?
+#     ├── grammarcheckers								 Y
+#     │   ├── filters									 N
+#     │   └── tests										 N
+#     ├── hyphenators									 ?
+#     │   └── filters									 N
+#     ├── mt											 Y
+#     │   ├── apertium									 Y
+#     │   │   ├── filters								 N
+#     │   │   └── tagsets								 N
+#     │   ├── cgbased									 N
+#     │   └── filters									 N
+#     ├── shellscripts									 N
+#     ├── spellcheckers									 ?
+#     │   ├── filters									 N
+#     │   └── weights									 N
+#     ├── tokenisers									 Y
+#     │   ├── filters									 N
+#     │   └── tests										 N
+#     └── tts											 Y
+#         └── test										 N
+
+L3DIRS=fst cg3 transcriptions phonetics
+$(foreach L3D,$(L3DIRS),$(eval $(call register_docsygenated_dir_2,src,$(L3D))))
+L4DIRS=affixes stems
+$(foreach L4D,$(L4DIRS),$(eval $(call register_docsygenated_dir_3,src,fst,$(L4D))))
+L5DIRS=grammarcheckers tokenisers tts mt
+$(foreach L5D,$(L5DIRS),$(eval $(call register_docsygenated_dir_2,tools,$(L5D))))
+$(foreach L6D,apertium,$(eval $(call register_docsygenated_dir_3,tools,mt,$(L6D))))
+
+
 
 # lang-crk
 $(srcdir)/%-derivation-src.md: $(top_srcdir)/src/derivation/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
 
-$(srcdir)/%-fst-src.md: $(top_srcdir)/src/fst/%.lexc
+
+
+# lang-smn
+$(srcdir)/%-oahpa-filer-fst-src.md: $(top_srcdir)/src/fst/oahpa-filer/%.lexc
 	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
 
-$(srcdir)/%-fst-src.md: $(top_srcdir)/src/fst/%.twolc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-generated_files-fst-src.md: $(top_srcdir)/src/fst/generated_files/%.lexc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-stems-fst-src.md: $(top_srcdir)/src/fst/stems/%.lexc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-affixes-fst-src.md: $(top_srcdir)/src/fst/affixes/%.lexc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-transcriptions-src.md: $(top_srcdir)/src/transcriptions/%.lexc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-transcriptions-src.md: $(top_srcdir)/src/transcriptions/%.twolc
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-grammarcheckers-tools.md: $(top_srcdir)/tools/grammarcheckers/%.cg3
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-apertium-mt-tools.md: $(top_srcdir)/tools/mt/apertium/%.cg3
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-tts-tools.md: $(top_srcdir)/tools/tts/%.cg3
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
-
-$(srcdir)/%-tokenisers-tools.md: $(top_srcdir)/tools/tokenisers/%.cg3
-	$(AM_V_AWK)"$(GAWK)" -v GLANG=$(GLANG) -f $(DOCC2MDWIKI) $< > $@
 
 
 generated-markdowns.sources:
@@ -114,6 +161,9 @@ generated-markdowns.targets: generated-markdowns.sources
 		*.lexc) x=`basename $$f .lexc` ;; \
 		*.cg3) x=`basename $$f .cg3` ;; \
 		*.twolc) x=`basename $$f .twolc` ;; \
+		*.xfscript) x=`basename $$f .xfscript` ;; \
+		*.pmscript) x=`basename $$f .pmscript` ;; \
+		*) x=`basename $$f` ;; \
 		esac ;\
 		d=`dirname $$f` ;\
 		p=`basename $$d xxx` ;\
@@ -136,7 +186,7 @@ generated-markdowns.targets: generated-markdowns.sources
 
 
 generate-markdown: generated-markdowns.targets
-	$(AM_V_at)for f in `cat $<` ; do \
+	$(AM_V_GEN)for f in `cat $<` ; do \
 		$(MAKE) $(srcdir)/$$f;\
 	done
 

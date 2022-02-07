@@ -506,3 +506,5 @@ generator-gramcheck%.$(1): generator-gramcheck%.tmp.$(1) \
 		 quit\n" | $$(XFST_TOOL)
 endef
 $(foreach fst,hfst xfst foma,$(eval $(call giella_gramcheck_analysers,$(fst))))
+
+# vim: set ft=automake:

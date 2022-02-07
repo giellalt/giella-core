@@ -109,8 +109,8 @@ generated-markdowns.targets: $(VPATH_MDFILES)
 	$(AM_V_GEN)echo $(MDFILES) | tr ' ' '\n' > $@
 
 # Collect all target files into one big MD file:
-$(ALLINONE_MD_PAGE): generated-markdowns.targets
-	$(AM_V_GEN)cat `cat generated-markdowns.targets | sed -e 's@^@$(srcdir)/@'` > $@
+$(ALLINONE_MD_PAGE):
+	$(AM_V_GEN)cat $(MDFILES) > $@
 
 $(LINKS):
 	for doc2md in $(DOCSRC_MDFILES) ; do \

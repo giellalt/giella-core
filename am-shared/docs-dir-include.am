@@ -104,6 +104,21 @@ $(foreach f,$(DOCSRC),$(eval $(call make_md_files,$(f))))
 #
 # The resulting list should be the content in the $(LINKS) file.
 
+# src file links: target should be:
+#    https://github.com/giellalt/lang-sma/blob/main/src/fst/root.lexc
+# host:      --------^
+# owner/org: ------------^^^
+# repo:      ----------------------^^^
+# branch:    ----------------------------------^^^
+# filepath:  ---------------------------------------^^^^^^^^^^^^^^^^
+
+HOST=https://github.com
+ORG=giellalt
+# Query git or svn for repo name, fall back to dirname if none of them found
+REPO=$(shell cd $(top_srcdir); if test -d ./.git; then git config --get remote.origin.url | cut -d'/' -f2 | cut -d'.' -f1; elif test -d ./.svn; then svn info . | grep 'Repository Root' | rev | cut -d'/' -f1 | rev | cut -d'.' -f1; else pwd | rev | cut -d'/' -f1 | rev; fi )
+BRANCH=main
+REPOURL=$(HOST)/$(ORG)/$(REPO)/blob/$(BRANCH)
+
 # Collect all target files into one big MD file:
 $(ALLINONE_MD_PAGE): $(VPATH_MDFILES)
 	$(AM_V_GEN)cat $(VPATH_MDFILES) > $@
@@ -125,19 +140,19 @@ $(LINKS):
 			oldd1=$$d1 ;\
 		fi ; \
 		if test "x$$d2" = x ; then \
-			echo "    * [$$docname]($$html) ([src]($$doc))" ;\
+			echo "    * [$$docname]($$html) ([src]($(REPOURL)/$$doc))" ;\
 		elif test "x$$d2" != "x$$oldd2" ; then \
 			echo "    * \`$$d2/\`" ;\
 			oldd2=$$d2 ;\
 		fi ; \
 		if test "x$$d3" = x -a "x$$d2" != x; then \
-			echo "        * [$$docname]($$html) ([src]($$doc))" ;\
+			echo "        * [$$docname]($$html) ([src]($(REPOURL)/$$doc))" ;\
 		elif test "x$$d3" != "x$$oldd3" ; then \
 			echo "        * \`$$d3/\`" ;\
 			oldd3=$$d3 ;\
 		fi ; \
 		if test "x$$d4" = x -a "x$$d3" != x ; then \
-			echo "            * [$$docname]($$html) ([src]($$doc))" ;\
+			echo "            * [$$docname]($$html) ([src]($(REPOURL)/$$doc))" ;\
 		elif test "x$$d4" != "x$$oldd4" ; then \
 			echo "            * \`$$d4/\`" ;\
 			oldd4=$$d4 ;\

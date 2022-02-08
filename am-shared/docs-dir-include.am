@@ -43,7 +43,7 @@ report.json:
 	touch $@
 endif
 
-# Define all source files in a variable:
+# Define all doccomment source files in a variable:
 DOCSRC := $(shell fgrep -rl \
 		--include '*.lexc' \
 		--include '*.twolc' \

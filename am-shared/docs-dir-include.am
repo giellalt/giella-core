@@ -125,25 +125,25 @@ $(LINKS):
 		d3=`echo "$$d" | cut -d '/' -f 3` ;\
 		d4=`echo "$$d" | cut -d '/' -f 4` ;\
 		if test "x$$d1" != "x$$oldd1" ; then \
-			echo "* \`$$d1\`" ;\
+			echo "* \`$$d1/\`" ;\
 			oldd1=$$d1 ;\
 		fi ; \
 		if test "x$$d2" = x ; then \
 			echo "  * [$$docname]($$html)" ;\
 		elif test "x$$d2" != "x$$oldd2" ; then \
-			echo "  * \`$$d2\`" ;\
+			echo "  * \`$$d2/\`" ;\
 			oldd2=$$d2 ;\
 		fi ; \
 		if test "x$$d3" = x -a "x$$d2" != x; then \
 			echo "    * [$$docname]($$html)" ;\
 		elif test "x$$d3" != "x$$oldd3" ; then \
-			echo "    * \`$$d3\`" ;\
+			echo "    * \`$$d3/\`" ;\
 			oldd3=$$d3 ;\
 		fi ; \
 		if test "x$$d4" = x -a "x$$d3" != x ; then \
 			echo "      * [$$docname]($$html)" ;\
 		elif test "x$$d4" != "x$$oldd4" ; then \
-			echo "      * \`$$d4\`" ;\
+			echo "      * \`$$d4/\`" ;\
 			oldd4=$$d4 ;\
 		fi ; \
 	done > $@

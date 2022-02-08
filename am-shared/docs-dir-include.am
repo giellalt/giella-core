@@ -104,10 +104,6 @@ $(foreach f,$(DOCSRC),$(eval $(call make_md_files,$(f))))
 #
 # The resulting list should be the content in the $(LINKS) file.
 
-# Generate list of targets:
-generated-markdowns.targets: $(VPATH_MDFILES)
-	$(AM_V_GEN)echo $(MDFILES) | tr ' ' '\n' > $@
-
 # Collect all target files into one big MD file:
 $(ALLINONE_MD_PAGE): $(VPATH_MDFILES)
 	$(AM_V_GEN)cat $(VPATH_MDFILES) > $@

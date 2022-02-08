@@ -114,8 +114,11 @@ $(foreach f,$(DOCSRC),$(eval $(call make_md_files,$(f))))
 
 HOST=https://github.com
 ORG=giellalt
-# Query git or svn for repo name, fall back to dirname if none of them found
-REPO=$(shell cd $(top_srcdir); if test -d ./.git; then git config --get remote.origin.url | cut -d'/' -f2 | cut -d'.' -f1; elif test -d ./.svn; then svn info . | grep 'Repository Root' | rev | cut -d'/' -f1 | rev | cut -d'.' -f1; else pwd | rev | cut -d'/' -f1 | rev; fi )
+## Query git or svn for repo name, fall back to dirname if none of them found
+#REPO=$(shell cd $(top_srcdir); if test -d ./.git; then git config --get remote.origin.url | cut -d'/' -f2 | cut -d'.' -f1; elif test -d ./.svn; then svn info . | grep 'Repository Root' | rev | cut -d'/' -f1 | rev | cut -d'.' -f1; else pwd | rev | cut -d'/' -f1 | rev; fi )
+# The above does not work in the GitHub Actions environment, the following is a
+# hacky workaround - the language code is not the same as the repo name in several cases
+REPO=lang-$(GLANG)
 BRANCH=main
 REPOURL=$(HOST)/$(ORG)/$(REPO)/blob/$(BRANCH)
 

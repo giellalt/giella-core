@@ -129,21 +129,21 @@ $(LINKS):
 			oldd1=$$d1 ;\
 		fi ; \
 		if test "x$$d2" = x ; then \
-			echo "  * [$$docname]($$html) ([src]($$doc))" ;\
+			echo "    * [$$docname]($$html) ([src]($$doc))" ;\
 		elif test "x$$d2" != "x$$oldd2" ; then \
-			echo "  * \`$$d2/\`" ;\
+			echo "    * \`$$d2/\`" ;\
 			oldd2=$$d2 ;\
 		fi ; \
 		if test "x$$d3" = x -a "x$$d2" != x; then \
-			echo "    * [$$docname]($$html) ([src]($$doc))" ;\
+			echo "        * [$$docname]($$html) ([src]($$doc))" ;\
 		elif test "x$$d3" != "x$$oldd3" ; then \
-			echo "    * \`$$d3/\`" ;\
+			echo "        * \`$$d3/\`" ;\
 			oldd3=$$d3 ;\
 		fi ; \
 		if test "x$$d4" = x -a "x$$d3" != x ; then \
-			echo "      * [$$docname]($$html) ([src]($$doc))" ;\
+			echo "            * [$$docname]($$html) ([src]($$doc))" ;\
 		elif test "x$$d4" != "x$$oldd4" ; then \
-			echo "      * \`$$d4/\`" ;\
+			echo "            * \`$$d4/\`" ;\
 			oldd4=$$d4 ;\
 		fi ; \
 	done > $@

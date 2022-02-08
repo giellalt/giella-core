@@ -124,7 +124,7 @@ $(ALLINONE_MD_PAGE): $(VPATH_MDFILES)
 	$(AM_V_GEN)cat $(VPATH_MDFILES) > $@
 
 $(LINKS):
-	for doc2md in $(DOCSRC_MDFILES) ; do \
+	$(AM_V_GEN)for doc2md in $(DOCSRC_MDFILES) ; do \
 		doc=`echo "$$doc2md" | cut -d '@' -f 1` ;\
 		md=`echo "$$doc2md" | cut -d '@' -f 2` ;\
 		d=`dirname "$$doc"` ;\

@@ -136,7 +136,8 @@ REPOURL=$(shell if test "x$(GH_REPO)" != x ; then \
 
 # Collect all target files into one big MD file:
 $(ALLINONE_MD_PAGE): $(VPATH_MDFILES)
-	$(AM_V_GEN)cat $(VPATH_MDFILES) > $@
+	$(AM_V_GEN)echo "# $(GLANGUAGE) description \n\nAll documents in one file\n\n" \
+	| cat - $(VPATH_MDFILES) > $@
 
 $(LINKS):
 	$(AM_V_GEN)for doc2md in $(DOCSRC_MDFILES) ; do \

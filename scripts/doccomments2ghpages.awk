@@ -112,5 +112,5 @@ function docupath(s) {
 END {
     printf("\n* * *\n\n<small>This (part of) documentation was generated from " \
            "[%s](%s/%s)" \
-           "</small>\n\n---", docupath(FILENAME), REPOURL, docupath(FILENAME));
+           "</small>\n\n---\n\n", docupath(FILENAME), REPOURL, docupath(FILENAME));
 }

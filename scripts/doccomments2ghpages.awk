@@ -110,7 +110,7 @@ function docupath(s) {
     return gensub("\\.\\./", "", "g", s);
 }
 END {
-    printf("\n* * *\n<small>This (part of) documentation was generated from " \
+    printf("\n* * *\n\n<small>This (part of) documentation was generated from " \
            "[%s](%s/%s)" \
-           "</small>", docupath(FILENAME), REPOURL, docupath(FILENAME));
+           "</small>\n\n---", docupath(FILENAME), REPOURL, docupath(FILENAME));
 }

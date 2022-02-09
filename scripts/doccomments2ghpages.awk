@@ -107,10 +107,10 @@ function expand_variables(s) {
     RULENAME=gensub("!.*", "", 1, gensub("\"", "", "g"));
 }
 function docupath(s) {
-    return gensub("\\.\\./", "", 1, s);
+    return gensub("\\.\\./", "", "g", s);
 }
 END {
-    printf("* * *\n<small>This (part of) documentation was generated from " \
-           "[%s](http://github.com/giellalt/lang-%s/blob/main/%s)" \
-           "</small>", docupath(FILENAME), GLANG, docupath(FILENAME));
+    printf("\n* * *\n<small>This (part of) documentation was generated from " \
+           "[%s](%s/%s)" \
+           "</small>", docupath(FILENAME), REPOURL, docupath(FILENAME));
 }

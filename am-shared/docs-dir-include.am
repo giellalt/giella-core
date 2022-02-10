@@ -16,6 +16,7 @@ doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
 regenerate-markdown: generate-markdown
 
 DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2ghpages.awk
+DOCC2MDWIKI_CG3=$(GTCORE)/scripts/doccomments2ghpages-vislcg.awk
 
 GRAPHPLOTTER=$(GTCORE)/scripts/plot-speller-progress.R
 
@@ -44,10 +45,9 @@ report.json:
 endif
 
 # Define all doccomment source files in a variable:
-DOCSRC := $(shell fgrep -rl \
+DOCSRC_XEROX := $(shell fgrep -rl \
 		--include '*.lexc' \
 		--include '*.twolc' \
-		--include '*.cg3' \
 		--include '*.pmscript' \
 		--include '*.xfscript'\
 		--exclude 'Makefile*' \
@@ -57,6 +57,16 @@ DOCSRC := $(shell fgrep -rl \
 		--exclude-dir 'incoming' \
 		'!! ' $(top_srcdir)/src/* $(top_srcdir)/tools/* |\
 		fgrep -v incoming/ )
+DOCSRC_CG3 := $(shell fgrep -rl \
+		--include '*.cg3' \
+		--exclude 'Makefile*' \
+		--exclude 'lexicon.tmp.lexc' \
+		--exclude-dir 'generated_files' \
+		--exclude-dir 'orig' \
+		--exclude-dir 'incoming' \
+		'!! ' $(top_srcdir)/src/* $(top_srcdir)/tools/* |\
+		fgrep -v incoming/ )
+DOCSRC=$(DOCSRC_XEROX) $(DOCSRC_CG3)
 
 # Remove vpath prefix for nested list construction:
 BARE_DOCSRC := $(subst $(top_srcdir)/,,$(DOCSRC))
@@ -88,9 +98,19 @@ $$(top_srcdir)/docs/$$(call src2md,$(1)): $(1)
 		tr '@' '\n' |\
 		$(SED) -e 's/REALLY_AT/@/g' > $$@
 endef
+define make_md_files_cg3
+$$(top_srcdir)/docs/$$(call src2md,$(1)): $(1)
+	$$(AM_V_AWK)"$(GAWK)" -v REPOURL=$(REPOURL) -v GLANG=$(GLANG) -f $(DOCC2MDWIKI_CG3) $$< |\
+		$(SED) -e 's/@/REALLY_AT/g' |\
+		tr '\n' '@' |\
+		$(SED) -e 's/@@@*/@@/g' |\
+		tr '@' '\n' |\
+		$(SED) -e 's/REALLY_AT/@/g' > $$@
+endef
 
 # Build each MD file:
-$(foreach f,$(DOCSRC),$(eval $(call make_md_files,$(f))))
+$(foreach f,$(DOCSRC_XEROX),$(eval $(call make_md_files,$(f))))
+$(foreach f,$(DOCSRC_CG3),$(eval $(call make_md_files_cg3,$(f))))
 
 # The variable DOCSRC_MDFILES contains a list of all source files and the
 # corresponding md file in the following format:

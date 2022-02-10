@@ -84,6 +84,18 @@ VPATH_MDFILES=$(addprefix $(top_srcdir)/docs/,$(MDFILES))
 
 # Construct source file and md file pairs of the following format:
 # src/fst/root.lexc@src-fst-root.lexc.md
+
+# The variable DOCSRC_MDFILES contains a list of all source files and the
+# corresponding md file in the following format:
+#
+# src/fst/root.lexc@src-fst-root.lexc.md
+#
+# From this we want to construct a nested Markdown bullet list as follows
+# - src
+#     - fst
+#         - [root.lexc](src-fst-root.lexc.md)
+#
+# The resulting list should be the content in the $(LINKS) file.
 DOCSRC_MDFILES=$(shell echo $(BARE_DOCSRC) | tr ' ' '\n' > docsrc.tmp; \
 					   echo $(MDFILES) | tr ' ' '\n' > mdfiles.tmp; \
 					   paste -d '@' docsrc.tmp mdfiles.tmp; )
@@ -112,18 +124,6 @@ endef
 $(foreach f,$(DOCSRC_XEROX),$(eval $(call make_md_files,$(f))))
 $(foreach f,$(DOCSRC_CG3),$(eval $(call make_md_files_cg3,$(f))))
 
-# The variable DOCSRC_MDFILES contains a list of all source files and the
-# corresponding md file in the following format:
-#
-# src/fst/root.lexc@src-fst-root.lexc.md
-#
-# From this we want to construct a nested Markdown bullet list as follows
-# - src
-#     - fst
-#         - [root.lexc](src-fst-root.lexc.md)
-#
-# The resulting list should be the content in the $(LINKS) file.
-
 # src file links: target should be:
 #    https://github.com/giellalt/lang-sma/blob/main/src/fst/root.lexc
 # host:      --------^
@@ -131,7 +131,6 @@ $(foreach f,$(DOCSRC_CG3),$(eval $(call make_md_files_cg3,$(f))))
 # repo:      ----------------------^^^
 # branch:    ----------------------------------^^^
 # filepath:  ---------------------------------------^^^^^^^^^^^^^^^^
-
 HOST=https://github.com
 ORG=giellalt
 ## Query git or svn for repo name, fall back to dirname if none of them found

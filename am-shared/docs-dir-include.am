@@ -66,7 +66,7 @@ DOCSRC_CG3 := $(shell fgrep -rl \
 		--exclude-dir 'incoming' \
 		'!! ' $(top_srcdir)/src/* $(top_srcdir)/tools/* |\
 		fgrep -v incoming/ )
-DOCSRC=$(DOCSRC_XEROX) $(DOCSRC_CG3)
+DOCSRC=$(sort $(DOCSRC_XEROX) $(DOCSRC_CG3) )
 
 # Remove vpath prefix for nested list construction:
 BARE_DOCSRC := $(subst $(top_srcdir)/,,$(DOCSRC))

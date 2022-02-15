@@ -859,8 +859,11 @@ class CorpusGramTest(GramTest):
             self.remove_foreign(root)
             self.keep_url(root)
             for para in root.iter("p"):
-                self.flatten_para(para)
-                yield grammarchecker.get_data(filename, para)
+                # the xml:lang attribute indicates that the sentence is not the expected
+                # language. These paragraphs are not included in the test.
+                if not para.get("{http://www.w3.org/XML/1998/namespace}lang"):
+                    self.flatten_para(para)
+                    yield grammarchecker.get_data(filename, para)
 
 
 class UI(ArgumentParser):

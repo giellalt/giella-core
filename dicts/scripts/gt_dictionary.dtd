@@ -181,7 +181,6 @@
 <!ATTLIST tg
       xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus | smj | fra) #REQUIRED
       check CDATA #IMPLIED
-      tw_id CDATA #IMPLIED
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
 <!ATTLIST re
@@ -195,6 +194,8 @@
 <!ATTLIST t oa ( first | yes | no ) #IMPLIED  >
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
 <!ATTLIST t t_type ( Pers | expl ) #IMPLIED  >
+<!ATTLIST t type ( grammarexpl | Prop | Coll | Indef | expl | Pers | Recipr |
+                  grammar | Dem | Poss | Refl | NomAg | G3 | IV | TV | Logo | Interr | Rel ) #IMPLIED  >
 <!ATTLIST t nr ( Sg | Pl ) #IMPLIED  >
 <!ATTLIST t pos ( A | S  | N  | V | Adp | Clt |
             Adv | P | Pr | Po | Det |

@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-'''
+"""
     Add stem type to xml dict (nds).
         Ex.
         Entry in input dict:
@@ -8,7 +8,7 @@
                <l pos="A">sovkken</l>
             </lg>
             <mg>
-               <tg xml:lang="nob" tw_id="sovkken 3832f9af-5050-4d22-a0b1-c3c5c7175fce">
+               <tg xml:lang="nob">
                   <t pos="A">blind</t>
                </tg>
             </mg>
@@ -19,7 +19,7 @@
                <l pos="A" stem="3syll">sovkken</l>
             </lg>
             <mg>
-               <tg xml:lang="nob" tw_id="sovkken 3832f9af-5050-4d22-a0b1-c3c5c7175fce">
+               <tg xml:lang="nob">
                   <t pos="A">blind</t>
                </tg>
             </mg>
@@ -38,7 +38,7 @@
 
         Ex.
         ~/main/apps/dicts/nds/src/neahtta/dicts/sme-nob.all.xml.stem.xml
-'''
+"""
 
 import sys
 from fabric.colors import cyan, green, red
@@ -52,17 +52,21 @@ try:
         lexc_file = sys.argv[4]
     else:
         lexc_file = sys.argv[4:]
-    if pos_name == 'nouns':
+    if pos_name == "nouns":
         pos = "N"
-    if pos_name == 'adjectives':
+    if pos_name == "adjectives":
         pos = "A"
-    if pos_name == 'verbs':
+    if pos_name == "verbs":
         pos = "V"
-    if pos_name == 'prop':
+    if pos_name == "prop":
         pos = "Prop"
 except IndexError:
-    print(red('** You forgot one of the input parameters!'))
-    print(red('** You need to pass paths for the lexc file, the stemtype file and the dict file.'))
+    print(red("** You forgot one of the input parameters!"))
+    print(
+        red(
+            "** You need to pass paths for the lexc file, the stemtype file and the dict file."
+        )
+    )
     quit()
 
 
@@ -70,7 +74,7 @@ if type(lexc_file) is not list:
     try:
         lf = open(lexc_file, "r")
     except IOError:
-        print(red('** The path/name you entered for the lexc file is wrong!'))
+        print(red("** The path/name you entered for the lexc file is wrong!"))
         quit()
 else:
     all_lexc = " ".join(lexc_file)
@@ -80,20 +84,20 @@ else:
     try:
         lf = open("all_lexc.lexc", "r")
     except IOError:
-        print(red('** The path/name you entered for the lexc file is wrong!'))
+        print(red("** The path/name you entered for the lexc file is wrong!"))
         quit()
 
 
 try:
     sf = open(stem_file, "r")
 except IOError:
-    print(red('** The path/name you entered for the stemtype file is wrong!'))
+    print(red("** The path/name you entered for the stemtype file is wrong!"))
     quit()
 
 try:
     dfi = open(dict_file_in, "r")
 except IOError:
-    print(red('** The path/name you entered for the dict file is wrong!'))
+    print(red("** The path/name you entered for the dict file is wrong!"))
     quit()
 
 dict_file_out = sys.argv[3] + ".stem.xml"
@@ -107,13 +111,13 @@ list_3syll = []
 list_Csyll = []
 
 
-print(cyan('** Creating 2syll, 3syll, Csyll lists'))
+print(cyan("** Creating 2syll, 3syll, Csyll lists"))
 line = sf.readline()
 cnt = 0
 while line:
     cnt += 1
     l = line.strip()
-    if cnt > 16 and l != '':
+    if cnt > 16 and l != "":
         if 'stem="2syll"' in l:
             stem_2syll = True
         if 'stem="3syll"' in l:
@@ -123,17 +127,17 @@ while line:
             stem_Csyll = True
             stem_2syll = False
             stem_3syll = False
-        if stem_2syll and not stem_3syll and not 'stem=' in l:
+        if stem_2syll and not stem_3syll and not "stem=" in l:
             list_2syll.append(l)
-        if stem_3syll and not stem_Csyll and not 'stem=' in l:
+        if stem_3syll and not stem_Csyll and not "stem=" in l:
             list_3syll.append(l)
-        if stem_Csyll and not 'stem=' in l:
+        if stem_Csyll and not "stem=" in l:
             list_Csyll.append(l)
     line = sf.readline()
-print(green('** Done'))
+print(green("** Done"))
 
 
-print(cyan('** Creating python dict with lexc and stems'))
+print(cyan("** Creating python dict with lexc and stems"))
 dict_lex_stem = {}
 
 line = lf.readline()
@@ -141,11 +145,11 @@ while line:
     l = line.strip()
     l_split_right_p = l.split("+")
     l_split_right_c = l.split(":")
-    if len(l_split_right_p)>1 or len(l_split_right_c)>1:
+    if len(l_split_right_p) > 1 or len(l_split_right_c) > 1:
         l_split = l.split(" ")
         stem = ""
-        if len(l_split)>1 and not 'Err/' in l_split[0]:
-            if "-" in l_split[1] and 'prop' in stem_file:
+        if len(l_split) > 1 and not "Err/" in l_split[0]:
+            if "-" in l_split[1] and "prop" in stem_file:
                 idx = l_split[1].index("-")
                 l_split[1] = l_split[1][0:idx]
             if l_split[1] in list_2syll:
@@ -156,38 +160,42 @@ while line:
                 else:
                     if l_split[1] in list_Csyll:
                         stem = "Csyll"
-            if '%' in l_split[0]:
+            if "%" in l_split[0]:
                 lemma_p = l.split("+")[0]
-                lemma = ''
+                lemma = ""
                 for word in lemma_p.split("%"):
                     lemma += word
                 dict_lex_stem.update({lemma: stem})
-            elif '+' in l_split[0]:
+            elif "+" in l_split[0]:
                 dict_lex_stem.update({l_split[0].split("+")[0]: stem})
             else:
                 dict_lex_stem.update({l_split[0].split(":")[0]: stem})
     line = lf.readline()
 lf.close()
 sf.close()
-print(green('** Done'))
+print(green("** Done"))
 
 
-print(cyan('** Adding stem type to xml dict'))
+print(cyan("** Adding stem type to xml dict"))
 line_dd = dfi.readline()
 
 import re
+
 while line_dd:
-    if "<l" in line_dd and not 'stem=' in line_dd:
-        match = re.search('>.+<', line_dd)
+    if "<l" in line_dd and not "stem=" in line_dd:
+        match = re.search(">.+<", line_dd)
         match_pos = re.search('pos="[a-zA-Z]"', line_dd)
-        pos_dict = ''
+        pos_dict = ""
         if match_pos:
-            pos_dict = match_pos.group(0).replace('pos="', '').replace('"','')
+            pos_dict = match_pos.group(0).replace('pos="', "").replace('"', "")
         if match:
             if pos_dict == pos:
-                lemma = match.group(0).replace('>', '').replace('<', '')
+                lemma = match.group(0).replace(">", "").replace("<", "")
                 if lemma in dict_lex_stem:
-                    line_dd = line_dd.replace(match.group(0), ' stem="' + dict_lex_stem[lemma] + '"' + match.group(0))
+                    line_dd = line_dd.replace(
+                        match.group(0),
+                        ' stem="' + dict_lex_stem[lemma] + '"' + match.group(0),
+                    )
                     dfo.write(line_dd)
                 else:
                     dfo.write(line_dd)
@@ -202,4 +210,4 @@ while line_dd:
 
 dfi.close()
 dfo.close()
-print(green('** Done'))
+print(green("** Done"))

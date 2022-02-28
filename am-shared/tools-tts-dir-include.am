@@ -47,8 +47,7 @@ GIELLA_ANL_DISAMBIGUATOR=$(GIELLA_ANL_DISAMBIGUATOR_SRC:.cg3=.bin)
 GIELLA_ANL_FUNCTIONS=$(GIELLA_ANL_FUNCTIONS_SRC:.cg3=.bin)
 GIELLA_ANL_DEPENDENCY=$(GIELLA_ANL_DEPENDENCY_SRC:.cg3=.bin)
 
-# Tokeniser and pipeline:
-GIELLA_ANL_TOKENISER=tokeniser-disamb-gt-desc.pmhfst
+# Pipeline specification:
 GIELLA_ANL_PIPESPEC=pipespec.xml
 
 #! @var GIELLA_ANL_GRAMCHECKER_SRC source for rules of vislcg3 analyser

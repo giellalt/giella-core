@@ -38,6 +38,9 @@ GT_CG_SRCS=$(GT_DEPENDENCY) $(GT_DISAMBIGUATION) $(GT_FUNCTIONS)
 
 EXTRA_DIST=$(GT_CG_SRCS) $(GT_CG_LOCAL_SRCS)
 
+# Generated source file - contains LIST definitions of all tags in the lexicon:
+GENERATED_TAG_LIST=generated-tag-list.cg3
+
 ####### Automake targets: ########
 # Make sure that targets are deleted when something breaks:
 .DELETE_ON_ERROR:
@@ -46,6 +49,7 @@ EXTRA_DIST=$(GT_CG_SRCS) $(GT_CG_LOCAL_SRCS)
 GT_CG_TARGETS=
 if WANT_SYNTAX
 GT_CG_TARGETS+=$(patsubst %.cg3,%.bin,$(GT_CG_SRCS) $(GT_CG_LOCAL_SRCS))
+GT_CG_TARGETS+=$(GENERATED_TAG_LIST)
 endif # WANT_SYNTAX
 
 #! @var GT_CG_TARGETS the files that should be built and installed for cg
@@ -56,6 +60,13 @@ gielladatadir=$(datadir)/giella/$(GTLANG)
 gielladata_DATA=$(GT_CG_TARGETS) $(GT_CG_LOCAL_INST_TARGETS)
 
 noinst_DATA=$(GT_CG_LOCAL_NOINST_TARGETS)
+
+$(GENERATED_TAG_LIST): ../filters/lexicon-tags.txt
+	$(AM_V_at)echo "### THIS FILE IS GENERATED!!"                    > $@
+	$(AM_V_at)echo "### DO NOT EDIT!!"                              >> $@
+	$(AM_V_at)echo "### IT WILL BE OVERWRITTEN ON NEXT MAKE!!"      >> $@
+	$(AM_V_at)echo "###"                                            >> $@
+	$(AM_V_GEN)sed 's|^+||g' < $< | sed 's|^\(.*\)|LIST \1 = \1 ;|' >> $@
 
 ####### Build rules via include: ########
 

@@ -36,7 +36,7 @@
 <!ATTLIST e note CDATA #IMPLIED >
 <!ATTLIST e oa_unif ( done | s | N | E ) #IMPLIED >
 
-<!ELEMENT lg (l+, l_ref*, lemma_ref*, lsub*, lc*, stem*, analysis*, mini_paradigm*) >
+<!ELEMENT lg (l+, l_ref*, lemma_ref*, lsub*, lc*, stem*, analysis*, mini_paradigm*, algu?) >
 <!ELEMENT lemma_ref (#PCDATA) >
 <!ATTLIST lemma_ref lemmaID CDATA #IMPLIED >
 <!ATTLIST lg freq CDATA #IMPLIED >
@@ -141,8 +141,14 @@
 <!ATTLIST sem
     name CDATA #IMPLIED >
 
+<!-- algu = lemma IDs in the algu database -->
+<!ELEMENT algu EMPTY >
+<!ATTLIST algu
+      lekseemi_id CDATA #REQUIRED >
+<!ATTLIST algu
+      sanue_id CDATA #REQUIRED >
 
-
+      
 <!-- the real stem field -->
 <!ELEMENT stem (#PCDATA) >
 <!ATTLIST stem

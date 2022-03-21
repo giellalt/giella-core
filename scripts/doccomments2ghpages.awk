@@ -16,15 +16,21 @@
 #   settings
 BEGIN {
     # Initialise the referable variables
-    LEXNAME="@OUTSIDE_LEXICONS@";
-    RULENAME="@OUTSIDE RULES@";
-    CODE="@NO CODE@";
+    LEXNAME="`OUTSIDE_LEXICONS`";
+    RULENAME="`OUTSIDE RULES`";
+    CODE="`NO CODE`";
+    LEMMA="`NO LEMMA`";
+    STEM="`NO STEM'";
+    CONTLEX="`NO CONTLEX`";
 }
 function expand_variables(s) {
     # expand all our doc comment variables
     return gensub("@CODE@", CODE, "g", 
+              gensub("@LEMMA@", LEMMA, "g",
+              gensub("@STEM@", STEM, "g",
+              gensub("@CONTLEX@", CONTLEX, "g",
               gensub("@RULENAME@", RULENAME, "g",
-                     gensub("@LEXNAME@", LEXNAME, "g", s)));
+                 gensub("@LEXNAME@", LEXNAME, "g", s))))));
 }
 /^[[:space:]]*$/ {
     # retaining empty lines of code will greatly help excessive squeezing
@@ -74,6 +80,21 @@ function expand_variables(s) {
 /^!!¥ / {
     printf("This construct is not supported anymore:\n `{%s`} ", $0);
 }
+/^[^!]*;/ {
+    if ($1 ~ /:/) 
+    {
+        STEM=gensub(":.*", "", 1, $1);
+        LEMMA=gensub("^.*:", "", 1, $1);
+        CONTLEX=$2
+    }
+    else
+    {
+        STEM=$1;
+        LEMMA=$1;
+        CONTLEX=$2;
+    }
+}
+
 /^[^!].*!!= / {
     CODE=gensub("!!=.*", "", 1);
     if ($0 ~ /@CODE@/)

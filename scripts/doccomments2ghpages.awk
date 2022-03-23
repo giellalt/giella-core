@@ -19,6 +19,7 @@ BEGIN {
     LEXNAME="`OUTSIDE_LEXICONS`";
     RULENAME="`OUTSIDE RULES`";
     CODE="`NO CODE`";
+    LEXEME="`NO LEMMA`";
     LEMMA="`NO LEMMA`";
     STEM="`NO STEM'";
     CONTLEX="`NO CONTLEX`";
@@ -26,11 +27,12 @@ BEGIN {
 function expand_variables(s) {
     # expand all our doc comment variables
     return gensub("@CODE@", CODE, "g", 
+              gensub("@LEXEME@", LEXEME, "g",
               gensub("@LEMMA@", LEMMA, "g",
               gensub("@STEM@", STEM, "g",
               gensub("@CONTLEX@", CONTLEX, "g",
               gensub("@RULENAME@", RULENAME, "g",
-                 gensub("@LEXNAME@", LEXNAME, "g", s))))));
+                 gensub("@LEXNAME@", LEXNAME, "g", s)))))));
 }
 /^[[:space:]]*$/ {
     # retaining empty lines of code will greatly help excessive squeezing
@@ -83,13 +85,15 @@ function expand_variables(s) {
 /^[^!]*;/ {
     if ($1 ~ /:/) 
     {
-        LEMMA=gensub(":.*", "", 1, $1);
+        LEXEME=gensub(":.*", "", 1, $1);
+        LEMMA=gensub("^([^+]*).*", "\\1", 1, gensub(":.*", "", 1, $1));
         STEM=gensub("^.*:", "", 1, $1);
         CONTLEX=$2
     }
     else
     {
         STEM=$1;
+        LEXEME=$1;
         LEMMA=$1;
         CONTLEX=$2;
     }

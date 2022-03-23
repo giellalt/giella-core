@@ -83,8 +83,8 @@ function expand_variables(s) {
 /^[^!]*;/ {
     if ($1 ~ /:/) 
     {
-        STEM=gensub(":.*", "", 1, $1);
-        LEMMA=gensub("^.*:", "", 1, $1);
+        LEMMA=gensub(":.*", "", 1, $1);
+        STEM=gensub("^.*:", "", 1, $1);
         CONTLEX=$2
     }
     else

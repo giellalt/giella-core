@@ -435,7 +435,7 @@ reorder-semantic-tags.hfst: reorder-semantic-tags.regex
 		| $(HFST_FST2FST) $(MORE_VERBOSITY) $(HFST_FORMAT) \
 		-o $@
 
-####### Copy regex files from giella-shared if not found locally: ########
+####### Copy regex files from giella-core if not found locally: ########
 %.regex: $(GIELLA_CORE)/fst-filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 

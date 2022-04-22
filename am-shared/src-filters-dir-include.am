@@ -73,6 +73,10 @@ GIELLA_FILTER_CORE_REGEX_SRCS=\
 				remove-Use_GC-tags.regex                  \
 				remove-Use_minusGC-strings.regex          \
 				remove-Use_minusGC-tags.regex             \
+				remove-Use_TTS-strings.regex	          \
+				remove-Use_TTS-tags.regex		          \
+				remove-Use_minusTTS-strings.regex         \
+				remove-Use_minusTTS-tags.regex	          \
 				remove-UseCirc-strings.regex              \
 				remove-use_marg-strings.regex             \
 				remove-use_mt-strings.regex               \

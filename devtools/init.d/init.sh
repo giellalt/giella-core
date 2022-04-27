@@ -34,12 +34,19 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
 
-# Define GTCORE as relative to GTHOME for now. The use of GTHOME should be
-# discouraged, and be replaced with GTCORE. Only GTCORE should be needed,
-# everything else should be optional, but presently that is not the case.
+# If GIELLA_CORE is not defined, define it from GTCORE.
+# If none is defined, error out.
+if [ "x$GIELLA_CORE" = x ]; then
+    if [ "x$GTCORE" != x ]; then
+        GIELLA_CORE = $GTCORE
+    else
+        echo "ERROR: Either GIELLA_CORE or GTCORE must be defined in the environment"
+        exit 1
+    fi
+fi
 
 # Add predefined lookup aliases for all languages:
-. $GTCORE/devtools/init.d/lookup-init.sh
+. $GIELLA_CORE/devtools/init.d/lookup-init.sh
 
 # Alias for svn update
 alias svnup="svn up $GTLANGS/* $GTBIG $GTFREE $GTPRIV $GTHOME/art"
@@ -118,7 +125,7 @@ else
   prepend_path PATH $HOME/bin
   prepend_path PATH $GTHOME/gt/script
   prepend_path PATH $GTHOME/gt/script/corpus
-  prepend_path PATH $GTCORE/scripts
+  prepend_path PATH $GIELLA_CORE/scripts
 fi
 
 # setup the path to private bins if $GTPRIV is defined:

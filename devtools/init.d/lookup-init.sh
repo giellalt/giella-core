@@ -2,9 +2,9 @@
 
 # xerox aliases
 
-HOSTNAME=`hostname`
+HOSTNAME=$(hostname)
 
-if [ $HOSTNAME = 'victorio.uit.no' ]
+if [ "$HOSTNAME" = 'victorio.uit.no' ]
 then export LOOKUP='/opt/sami/xerox/c-fsm/ix86-linux2.6-gcc3.4/bin/lookup -flags mbTT -utf8'
 #then export LOOKUP='/opt/sami/xerox/c-fsm/ix86-linux2.6-gcc3.4/bin/lookup -q -flags mbTT -utf8'
 #else export LOOKUP='lookup -flags mbTT' # we try with quiet mode
@@ -564,9 +564,9 @@ alias kpvdept="sent-proc.sh -l kpv -s dep -t"
 alias kpvdis="sent-proc.sh -l kpv -s dis"
 alias kpvdist="sent-proc.sh -l kpv -s dis -t"
 alias kpvfin='$LOOKUP $GTHOME/words/dicts/kpv2X/bin/kpvfin-all.fst'
-alias kpvtoka="hfst-tokenise --giella-cg $GTLANGS/lang-kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | sed 's/ <W:0.0000000000>//g;'"
-alias kpvtoks="hfst-tokenise --giella-cg $GTLANGS/lang-kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g $GTLANGS/lang-kpv/src/syntax/disambiguator.cg3 | sed 's/ <W:0.0000000000>//g;'"
-alias kpvtokst="hfst-tokenise --giella-cg $GTLANGS/lang-kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g $GTLANGS/lang-kpv/src/syntax/disambiguator.cg3 -t | sed 's/ <W:0.0000000000>//g;'"
+alias kpvtoka="hfst-tokenise --giella-cg \$GTLANGS/lang-kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | sed 's/ <W:0.0000000000>//g;'"
+alias kpvtoks="hfst-tokenise --giella-cg \$GTLANGS/lang-kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g \$GTLANGS/lang-kpv/src/syntax/disambiguator.cg3 | sed 's/ <W:0.0000000000>//g;'"
+alias kpvtokst="hfst-tokenise --giella-cg \$GTLANGS/lang-kpv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g \$GTLANGS/lang-kpv/src/syntax/disambiguator.cg3 -t | sed 's/ <W:0.0000000000>//g;'"
 alias krldep="sent-proc.sh -l krl -s dep"
 alias krldept="sent-proc.sh -l krl -s dep -t"
 alias krldis="sent-proc.sh -l krl -s dis"
@@ -604,9 +604,9 @@ alias myvdis="sent-proc.sh -l myv -s dis"
 alias myvdist="sent-proc.sh -l myv -s dis -t"
 alias myvmdf='$LOOKUP $GTHOME/words/dicts/myvmdf/bin/myvmdf-all.fst'
 alias myvmdf='$LOOKUP $GTHOME/words/dicts/nobfkv/bin/myvmdf-all.fst'
-alias myvtoka="hfst-tokenise --giella-cg $GTLANGS/lang-myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | sed 's/ <W:0.0000000000>//g;'"
-alias myvtoks="hfst-tokenise --giella-cg $GTLANGS/lang-myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g $GTLANGS/lang-myv/src/syntax/disambiguator.cg3 | sed 's/ <W:0.0000000000>//g;'"
-alias myvtokst="hfst-tokenise --giella-cg $GTLANGS/lang-myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g $GTLANGS/lang-myv/src/syntax/disambiguator.cg3 -t | sed 's/ <W:0.0000000000>//g;'"
+alias myvtoka="hfst-tokenise --giella-cg \$GTLANGS/lang-myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | sed 's/ <W:0.0000000000>//g;'"
+alias myvtoks="hfst-tokenise --giella-cg \$GTLANGS/lang-myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g \$GTLANGS/lang-myv/src/syntax/disambiguator.cg3 | sed 's/ <W:0.0000000000>//g;'"
+alias myvtokst="hfst-tokenise --giella-cg \$GTLANGS/lang-myv/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst | vislcg3 -g \$GTLANGS/lang-myv/src/syntax/disambiguator.cg3 -t | sed 's/ <W:0.0000000000>//g;'"
 alias ndldep="sent-proc.sh -l ndl -s dep"
 alias ndldept="sent-proc.sh -l ndl -s dep -t"
 alias ndldis="sent-proc.sh -l ndl -s dis"

@@ -38,7 +38,7 @@
 # If none is defined, error out.
 if [ "x$GIELLA_CORE" = x ]; then
     if [ "x$GTCORE" != x ]; then
-        GIELLA_CORE = $GTCORE
+        GIELLA_CORE="$GTCORE"
     else
         echo "ERROR: Either GIELLA_CORE or GTCORE must be defined in the environment"
         exit 1
@@ -46,10 +46,10 @@ if [ "x$GIELLA_CORE" = x ]; then
 fi
 
 # Add predefined lookup aliases for all languages:
-. $GIELLA_CORE/devtools/init.d/lookup-init.sh
+. "$GIELLA_CORE"/devtools/init.d/lookup-init.sh
 
 # Alias for svn update
-alias svnup="svn up $GTLANGS/* $GTBIG $GTFREE $GTPRIV $GTHOME/art"
+alias svnup="svn up \$GTLANGS/* \$GTBIG \$GTFREE \$GTPRIV \$GTHOME/art"
 
 # Sorting Cyrillic lists
 
@@ -121,37 +121,37 @@ else
   # This way locally installed programs will appear before system instaled ones
 
   PATH=$PATH:/usr/local/bin
-  prepend_path PATH $HOME/.local/bin
-  prepend_path PATH $HOME/bin
-  prepend_path PATH $GTHOME/gt/script
-  prepend_path PATH $GTHOME/gt/script/corpus
-  prepend_path PATH $GIELLA_CORE/scripts
+  prepend_path PATH "$HOME"/.local/bin
+  prepend_path PATH "$HOME"/bin
+  prepend_path PATH "$GTHOME"/gt/script
+  prepend_path PATH "$GTHOME"/gt/script/corpus
+  prepend_path PATH "$GIELLA_CORE"/scripts
 fi
 
 # setup the path to private bins if $GTPRIV is defined:
 if [ -n "$GTPRIV" ]; then
-  prepend_path PATH $GTPRIV/polderland/bin
+  prepend_path PATH "$GTPRIV"/polderland/bin
 fi
 
 export PATH
 
-osMajorVer=`uname -r | cut -d. -f1`
-osMinorVer=`uname -r | cut -d. -f2`
+osMajorVer=$(uname -r | cut -d. -f1)
+osMinorVer=$(uname -r | cut -d. -f2)
 
 # add Saxon to the classpath looking for it in /opt/ and $HOME/lib/
 if [ -z "$CLASSPATH" ]; then
-  CLASSPATH=/opt/local/share/java/saxon9he.jar:$HOME/lib/saxon9he.jar:$HOME/lib/saxon9.jar
+  CLASSPATH=/opt/local/share/java/saxon9he.jar:"$HOME"/lib/saxon9he.jar:"$HOME"/lib/saxon9.jar
 else
-  CLASSPATH=/opt/local/share/java/saxon9he.jar:$HOME/lib/saxon9he.jar:$HOME/lib/saxon9.jar:${CLASSPATH}
+  CLASSPATH=/opt/local/share/java/saxon9he.jar:"$HOME"/lib/saxon9he.jar:"$HOME"/lib/saxon9.jar:${CLASSPATH}
 fi
 export CLASSPATH
 
 # Perl setup:
 export PERL_UNICODE=""
 if [ -z "$PERL5LIB" ]; then
-  PERL5LIB=$GTHOME/gt/script
+  PERL5LIB="$GTHOME"/gt/script
 else
-  prepend_path PERL5LIB $GTHOME/gt/script
+  prepend_path PERL5LIB "$GTHOME"/gt/script
 fi
 export PERL5LIB
 

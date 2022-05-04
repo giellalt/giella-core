@@ -153,12 +153,15 @@ generate_word_forms () {
 
 ######## Open in default browser if on Mac:
 macopen() {
-    if hash xdg-open 2> /dev/null; then
+    # If on WSL:
+    if hash explorer.exe 2>/dev/null; then
+        explorer.exe "$@"
+    # If on Linux, the real thing:
+    elif hash xdg-open 2> /dev/null; then
         xdg-open "$@"
+    # If on mac:
     elif hash open 2>/dev/null; then
         open "$@"
-    elif hash explorer.exe 2>/dev/null; then
-        explorer.exe "$@"
     fi
 }
 

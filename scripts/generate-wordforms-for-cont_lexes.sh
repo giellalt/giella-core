@@ -157,6 +157,8 @@ macopen() {
         xdg-open "$@"
     elif hash open 2>/dev/null; then
         open "$@"
+    elif hash explorer.exe 2>/dev/null; then
+        open "$@"
     fi
 }
 

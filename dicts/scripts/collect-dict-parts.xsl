@@ -19,6 +19,7 @@
 	      indent="yes"/>
 
   <xsl:param name="inDir" select="'.'"/>
+  <xsl:param name="outDir" select="'.'"/>
 
   <xsl:template match="/" name="main">
 

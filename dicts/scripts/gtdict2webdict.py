@@ -1,40 +1,48 @@
 #!/usr/bin/env python3
-import sys
+import os
 import subprocess
+import sys
 
-commands = """
-cd $GTHOME/words/dicts/scripts
-mkdir ../smenob/apertium1
-java -jar /usr/share/java/Saxon-HE.jar -it:mai/n collect-dict-parts.xsl inDir=../smenob/src > ../smenob/apertium1/apertium.xml
-java -jar /usr/share/java/Saxon-HE.jar -it:main gtdict2simple-apertiumdix.xsl inFile=../smenob/apertium1/apertium.xml outDir=../smenob/apertium2/
-~/repos/githubs/apertium-dixtools/apertium-dixtools dix2trie ../smenob/apertium2/apertium.xml lr aha.xml
-
-"""
 pair = sys.argv[1]
 lang1 = pair[:3]
 lang2 = pair[3:]
 commands = [
     (
-        f"java -jar /usr/share/java/Saxon-HE.jar "
-        "-it:main $GTHOME/words/dicts/scripts/collect-dict-parts.xsl "
-        "inDir=$GTHOME/words/dicts/{pair}/src > $GTHOME/words/dicts/{pair}/apertium1/apertium.xml"
+        f"java -cp /usr/share/java/Saxon-HE.jar "
+        f"-it:main {os.getenv('GTHOME')}/words/dicts/scripts/collect-dict-parts.xsl "
+        f"inDir={os.getenv('GTHOME')}/words/dicts/{pair}/src"
     ),
     (
         f"java -jar /usr/share/java/Saxon-HE.jar "
-        "-it:main $GTHOME/words/dicts/scripts/gtdict2simple-apertiumdix.xsl "
-        "inFile=$GTHOME/words/dicts/{pair}/apertium1/apertium.xml outDir=$GTHOME/words/dicts/{pair}/apertium2/"
+        f"-it:main {os.getenv('GTHOME')}/words/dicts/scripts/gtdict2simple-apertiumdix.xsl "
+        f"inFile={os.getenv('GTHOME')}/words/dicts/{pair}/apertium1/apertium.xml "
+        f"outDir={os.getenv('GTHOME')}/words/dicts/{pair}/apertium2/"
     ),
     (
         "apertium-dixtools dix2trie "
-        f"$GTHOME/words/dicts/{pair}/real/apertium.xml "
-        f"lr $GTHOME/apps/dicts/apertium_dict/dics/{lang1}-{lang2}-lr-trie.xml"
+        f"{os.getenv('GTHOME')}/words/dicts/{pair}/apertium2/apertium.xml "
+        f"lr {os.getenv('GTHOME')}/apps/dicts/apertium_dict/dics/{lang1}-{lang2}-lr-trie.xml"
     ),
 ]
 
-for command in commands:
-    print(command)
-    try:
-        subprocess.run(command.split())
-    except subprocess.CalledProcessError as error:
-        print(error)
-        sys.exit(1)
+print(commands[0])
+result = subprocess.run(commands[0].split(), capture_output=True)
+outdir1 = os.path.join(os.getenv("GTHOME"), "words/dicts", pair, "apertium1")
+os.mkdir(outdir1)
+outfile1 = os.path.join(outdir1, "apertium.xml")
+with open(outfile1, "wb") as outstream1:
+    outstream1.write(result.stdout)
+
+print(commands[1])
+try:
+    subprocess.run(commands[1].split(), capture_output=True)
+except subprocess.CalledProcessError as error:
+    print(error)
+    sys.exit(1)
+
+print(commands[2])
+try:
+    subprocess.run(commands[2].split(), capture_output=True)
+except subprocess.CalledProcessError as error:
+    print(error)
+    sys.exit(1)

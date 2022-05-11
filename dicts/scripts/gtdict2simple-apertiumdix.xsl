@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--+
-    | 
+    |
     | java net.sf.saxon.Transform -it:main THIS_SHEET.xsl inFile=FILE.xml outDir=OUT_DIR
     | You can change the parameter values in  this file so that you don't need any inFile/outDir specification in the command line but just
     | java net.sf.saxon.Transform -it:main THIS_SHEET.xsl
@@ -21,13 +21,13 @@
 	      omit-xml-declaration="no"
 	      indent="yes"/>
 
-  
+
   <!-- Input file: customize as you need it -->
   <xsl:param name="inFile" select="'tull/out_simple-apertium/tull.xml'"/>
 
   <!-- Output dir: customize as you need it -->
   <xsl:param name="outDir" select="'tull/ut'"/>
-  
+
   <!-- Patterns for the feature values -->
   <xsl:variable name="output_format" select="'xml'"/>
   <xsl:variable name="e" select="$output_format"/>
@@ -35,9 +35,9 @@
   <xsl:variable name="file_name" select="substring-before((tokenize($inFile, '/'))[last()], '.xml')"/>
   <xsl:variable name="debug" select="true()"/>
   <xsl:variable name="nl" select="'&#xa;'"/>
-  
+
   <xsl:template match="/" name="main">
-    
+
     <xsl:choose>
       <xsl:when test="doc-available($inFile)">
 	<xsl:variable name="out">
@@ -61,11 +61,11 @@
 	      <sdef n="subjunc."/>
 	      <sdef n="v."/>
 	    </sdefs>
-	    
+
 	    <section id="main" type="standard">
 	      <!-- constraint for smanob: this should be handled in the previous step! -->
 	      <xsl:for-each select="doc($inFile)/r/e[not(./lg/l/@pos = 'prop')][not(./lg/l/@pos = 'propPl')]">
-		
+
 		<xsl:if test="$debug">
 		  <xsl:message terminate="no">
 		    <xsl:value-of select="concat('-----------------------------------------', $nl)"/>
@@ -73,7 +73,7 @@
 		    <xsl:value-of select="'-----------------------------------------'"/>
 		  </xsl:message>
 		</xsl:if>
-		
+
 
 		<e>
 		  <p>
@@ -114,18 +114,17 @@
 	    </section>
 	  </dictionary>
 	</xsl:variable>
-	
+
 	<!-- Output -->
 	<xsl:result-document href="{$outDir}/{$file_name}.{$e}" format="{$output_format}">
 	  <xsl:copy-of select="$out"/>
 	</xsl:result-document>
-	
+
       </xsl:when>
       <xsl:otherwise>
 	<xsl:text>Cannot locate: </xsl:text><xsl:value-of select="$inFile"/><xsl:text>&#xa;</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
-</xsl:stylesheet>
 
+</xsl:stylesheet>

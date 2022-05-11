@@ -20,6 +20,7 @@
 
   <xsl:param name="inDir" select="'.'"/>
   <xsl:param name="outDir" select="'.'"/>
+  <xsl:param name="filename" select="'apertium.xsl'"/>
 
   <xsl:template match="/" name="main">
 

@@ -148,7 +148,7 @@
 <!ATTLIST algu
       sanue_id CDATA #REQUIRED >
 
-      
+
 <!-- the real stem field -->
 <!ELEMENT stem (#PCDATA) >
 <!ATTLIST stem
@@ -200,8 +200,6 @@
 <!ATTLIST t oa ( first | yes | no ) #IMPLIED  >
 <!ATTLIST t dict ( yes | no ) #IMPLIED  >
 <!ATTLIST t t_type ( Pers | expl ) #IMPLIED  >
-<!ATTLIST t type ( grammarexpl | Prop | Coll | Indef | expl | Pers | Recipr |
-                  grammar | Dem | Poss | Refl | NomAg | G3 | IV | TV | Logo | Interr | Rel ) #IMPLIED  >
 <!ATTLIST t nr ( Sg | Pl ) #IMPLIED  >
 <!ATTLIST t pos ( A | S  | N  | V | Adp | Clt |
             Adv | P | Pr | Po | Det |
@@ -222,7 +220,7 @@
       phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED >
 -->
 <!ATTLIST t type ( expl
-                  | Prop | Indef | G3 | NomAg | Coll | Recipr | Pers
+                  | grammarexpl |Prop | Indef | G3 | NomAg | Coll | Recipr | Pers
                   | grammar | Refl | Dem | Poss | Logo | Rel | Interr | TV | IV ) #IMPLIED >
 <!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i | yyy ) #IMPLIED> <!-- irr irregular -->
 <!ATTLIST t gen ( m | f | n | xxx ) #IMPLIED >

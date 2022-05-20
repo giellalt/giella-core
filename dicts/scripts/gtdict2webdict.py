@@ -41,7 +41,8 @@ def convert(pair, saxonlib, pairdir):
             f"inDir={pairdir}/src"
         ),
         (
-            f"java -jar /usr/share/java/Saxon-HE.jar "
+#            f"java -jar /usr/share/java/Saxon-HE.jar "
+            f"java -jar {saxonlib} "
             f"-it:main {os.getenv('GTHOME')}/words/dicts/scripts/gtdict2simple-apertiumdix.xsl "
             f"inFile={pairdir}/apertium1/apertium.xml "
             f"outDir={pairdir}/apertium2/"

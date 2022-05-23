@@ -22,8 +22,7 @@ HFST_FORMAT=--format=openfst-tropical
 ####### Source file and target defs: ########
 GIELLA_FSTHYPHENATOR_FILTER_SRCS=
 
-# Source files copied from src/filters/ OR from
-# $(GIELLA_SHARED)/all_langs/tools/spellcheckers/fstbased/filters:
+# Source files copied from src/filters/ OR from $(GIELLA_CORE)/fst-filters/
 GIELLA_SRC_FILTERS=remove-word-boundary.regex \
                    remove-hyphenation-marks.regex \
                    remove-infl_deriv-borders.regex \
@@ -68,10 +67,7 @@ endif # CAN_FOMA
 endif # WANT_FST_HYPHENATOR
 
 ####### Copy regex files from the Giella core if not found locally: ########
-%.regex: $(GIELLA_SHARED)/all_langs/tools/spellcheckers/fstbased/desktop/filters/%.regex
-	$(AM_V_CP)cp -f $< $@
-
-%.regex: $(GIELLA_SHARED)/all_langs/src/filters/%.regex
+%.regex: $(GIELLA_CORE)/fst-filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from the src/filters/ dir

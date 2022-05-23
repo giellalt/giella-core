@@ -129,14 +129,14 @@ $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_token_filters,$(alt_orth)
 
 
 ####### Copy regex files from the Giella core if not found locally: ########
-%.regex: $(GIELLA_SHARED)/all_langs/src/filters/%.regex
+%.regex: $(GIELLA_CORE)/fst-filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
-####### ... OR from $top_builddir/src/filters/
+####### ... OR from $top_builddir/src/filters/ (generated regex's)
 %.regex: $(top_builddir)/src/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
-####### ... OR from $top_srcdir/src/filters/
+####### ... OR from $top_srcdir/src/filters/ (language-specific regex's)
 %.regex: $(top_srcdir)/src/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 

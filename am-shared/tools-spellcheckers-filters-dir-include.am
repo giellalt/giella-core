@@ -59,11 +59,8 @@ endif # CAN_HFST
 # endif # CAN_FOMA
 endif # WANT_SPELLERS
 
-####### Copy regex files from $GIELLA_SHARED if not found locally: ########
-%.regex: $(GIELLA_SHARED)/all_langs/tools/spellcheckers/filters/%.regex
-	$(AM_V_CP)cp -f $< $@
-
-%.regex: $(GIELLA_SHARED)/all_langs/src/filters/%.regex
+####### Copy regex files from $GIELLA_CORE if not found locally: ########
+%.regex: $(GIELLA_CORE)/fst-filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from the src/filters/ dir:

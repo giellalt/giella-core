@@ -57,10 +57,10 @@ endif
 noinst_DATA=$(GIELLA_ORTH_TARGETS) $(GIELLA_ORTH_EXTRA_TARGETS)
 
 ####### Copy source files from common location if not found locally: #######
-%.regex: $(GIELLA_SHARED)/all_langs/src/orthography/%.regex
+%.regex: $(gt_SHARED_common)/src/orthography/%.regex
 	$(AM_V_CP)cp $< $@
 
-%.xfscript: $(GIELLA_SHARED)/all_langs/src/orthography/%.xfscript
+%.xfscript: $(gt_SHARED_common)/src/orthography/%.xfscript
 	$(AM_V_CP)cp $< $@
 
 ####### Other targets: ###########

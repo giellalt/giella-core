@@ -70,7 +70,7 @@ make-%-CG-tags.regex: %-$(TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2make_CG_tags_regex.sh $< > $@
 
 ####### Copy regex files from the Giella core if not found locally: ########
-%.regex: $(GIELLA_SHARED)/all_langs/src/filters/%.regex
+%.regex: $(GIELLA_CORE)/fst-filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from $top_builddir/src/filters/

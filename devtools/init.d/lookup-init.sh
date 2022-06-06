@@ -703,6 +703,7 @@ alias somdept="sent-proc.sh -l som -s dep -t"
 alias somdis="sent-proc.sh -l som -s dis"
 alias somdist="sent-proc.sh -l som -s dis -t"
 alias spasme='$LOOKUP $GTHOME/words/dicts/spasme/bin/spasme-all.fst'
+alias srseng='$LOOKUP $GTHOME/words/dicts/srseng/bin/srseng-all.fst'
 alias stodep="sent-proc.sh -l sto -s dep"
 alias stodept="sent-proc.sh -l sto -s dep -t"
 alias stodis="sent-proc.sh -l sto -s dis"

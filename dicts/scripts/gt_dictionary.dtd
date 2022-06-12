@@ -56,6 +56,7 @@
       sg3 CDATA #IMPLIED
       gen CDATA #IMPLIED
       ill CDATA #IMPLIED
+      ader CDATA #IMPLIED
       v_type ( rv ) #IMPLIED
       pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |
             Num | CC | CS | Prop | Proppl | G3 | Actor | Npl | Adp |

@@ -41,7 +41,7 @@
 """
 
 import sys
-from fabric.colors import cyan, green, red
+from termcolor import colored
 from subprocess import Popen, PIPE
 
 try:
@@ -61,10 +61,10 @@ try:
     if pos_name == "prop":
         pos = "Prop"
 except IndexError:
-    print(red("** You forgot one of the input parameters!"))
+    print(colored("** You forgot one of the input parameters!", "red"))
     print(
-        red(
-            "** You need to pass paths for the lexc file, the stemtype file and the dict file."
+        colored(
+            "** You need to pass paths for the lexc file, the stemtype file and the dict file.", "red"
         )
     )
     quit()
@@ -74,7 +74,7 @@ if type(lexc_file) is not list:
     try:
         lf = open(lexc_file, "r")
     except IOError:
-        print(red("** The path/name you entered for the lexc file is wrong!"))
+        print(colored("** The path/name you entered for the lexc file is wrong!", "red"))
         quit()
 else:
     all_lexc = " ".join(lexc_file)
@@ -84,20 +84,20 @@ else:
     try:
         lf = open("all_lexc.lexc", "r")
     except IOError:
-        print(red("** The path/name you entered for the lexc file is wrong!"))
+        print(colored("** The path/name you entered for the lexc file is wrong!", "red"))
         quit()
 
 
 try:
     sf = open(stem_file, "r")
 except IOError:
-    print(red("** The path/name you entered for the stemtype file is wrong!"))
+    print(colored("** The path/name you entered for the stemtype file is wrong!", "red"))
     quit()
 
 try:
     dfi = open(dict_file_in, "r")
 except IOError:
-    print(red("** The path/name you entered for the dict file is wrong!"))
+    print(colored("** The path/name you entered for the dict file is wrong!", "red"))
     quit()
 
 dict_file_out = sys.argv[3] + ".stem.xml"
@@ -111,7 +111,7 @@ list_3syll = []
 list_Csyll = []
 
 
-print(cyan("** Creating 2syll, 3syll, Csyll lists"))
+print(colored("** Creating 2syll, 3syll, Csyll lists", "cyan"))
 line = sf.readline()
 cnt = 0
 while line:
@@ -134,10 +134,10 @@ while line:
         if stem_Csyll and not "stem=" in l:
             list_Csyll.append(l)
     line = sf.readline()
-print(green("** Done"))
+print(colored("** Done", "green"))
 
 
-print(cyan("** Creating python dict with lexc and stems"))
+print(colored("** Creating python dict with lexc and stems", "cyan"))
 dict_lex_stem = {}
 
 line = lf.readline()
@@ -173,10 +173,10 @@ while line:
     line = lf.readline()
 lf.close()
 sf.close()
-print(green("** Done"))
+print(colored("** Done", "green"))
 
 
-print(cyan("** Adding stem type to xml dict"))
+print(colored("** Adding stem type to xml dict", "cyan"))
 line_dd = dfi.readline()
 
 import re
@@ -210,4 +210,4 @@ while line_dd:
 
 dfi.close()
 dfo.close()
-print(green("** Done"))
+print(colored("** Done", "green"))

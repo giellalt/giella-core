@@ -321,6 +321,10 @@ analyser-mt-apertium-desc.%.hfst: analyser-mt-apertium-desc.%.tmp.hfst \
 %.cg3: $(top_srcdir)/src/cg3/%.cg3
 	$(AM_V_GEN)grep -v '#RemoveFromApertium' < $< > $@
 
+# Copy generated CG3 files from the build dir tree:
+%.cg3: $(top_builddir)/src/cg3/%.cg3
+	$(AM_V_CP)cp -f $< $@
+
 # Make sure included files are copied in before starting to compile:
 $(APERTIUM_CG_SRC): $(APERTIUM_CG_INCLUDE_SRC)
 

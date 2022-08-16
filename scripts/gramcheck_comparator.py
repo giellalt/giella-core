@@ -760,7 +760,7 @@ class GramTest:
 
     def run(self):
         self.run_tests()
-        fails = sum([self.count[key] for key in self.count if key != "tp"])
+        fails = sum([self.count[key] for key in self.count if key not in ["tn", "tp"]])
 
         return 1 if fails else 0
 

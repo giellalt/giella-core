@@ -455,7 +455,7 @@ $(MOB_GIELLA_PREDICT_HFST): index.predict.xml \
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
-	$(AM_V_at)cp $(srcdir)/index.predict.xml build/$@/index.xml
+	$(AM_V_at)cp index.predict.xml build/$@/index.xml
 	$(AM_V_at)cp $(MOB_GT_PREDICT_ACCEPTOR) build/$@/acceptor.default.hfst
 	$(AM_V_at)cp $(MOB_GIELLA_PREDICTMODELS) build/$@/errmodel.default.hfst
 	$(AM_V_ZIP)cd build/$@/ && $(ZHFST_COMPRESSION)

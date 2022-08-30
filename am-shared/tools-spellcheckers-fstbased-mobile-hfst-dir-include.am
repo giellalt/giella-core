@@ -17,6 +17,7 @@
 
 MOB_GT_SPELLER_HFST=generator-mobilespeller-gt-norm.hfst
 MOB_GT_SPELLER_ACCEPTOR=acceptor.default.mobile.hfst
+MOB_GT_PREDICT_ACCEPTOR=acceptor.default.predict.hfst
 
 # Zero compression for mobile zhfst files:
 MOB_ZIPFLAGS=-0 $(VERBOSITY)
@@ -192,6 +193,7 @@ mob_words_deps=$(shell \
 ####### Automake targets: ########
 
 MOB_GIELLA_ERRMODELS=
+MOB_GIELLA_PREDICTMODELS=
 if WANT_SPELLERS
 if CAN_HFST
 #MOB_GIELLA_ERRMODELS+=errmodel.edit-distance-1.hfst
@@ -199,16 +201,19 @@ if CAN_HFST
 # Only build speller if it is enabled (default=yes)
 if WANT_HFST_MOBILE_SPELLER
 MOB_GIELLA_ERRMODELS+=errmodel.default.mobile.hfst
+MOB_GIELLA_PREDICTMODELS+=errmodel.default.predict.hfst
 
 # Change errmodel.*.hfst -> easteregg.*.desktop.txt
 GIELLA_MOBILE_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .mobile.hfst,.mobile.txt,$(MOB_GIELLA_ERRMODELS)))
 
 MOB_GIELLA_SPELLING_HFST=$(GTLANG2)-mobile.zhfst
+MOB_GIELLA_PREDICT_HFST=$(GTLANG2)-x-predict.zhfst
 
 mobilespellerdir=$(datadir)/giella/mobilespellers/
 #! @param GT_VOIKKO optional, set to spell checker automata names if
 #!					installable
-mobilespeller_DATA=$(MOB_GIELLA_SPELLING_HFST) $(ALT_WS_ZHFST_FILES) $(ALT_ORTH_ZHFST_FILES)
+mobilespeller_DATA=$(MOB_GIELLA_SPELLING_HFST) $(MOB_GIELLA_PREDICT_HFST) \
+				   $(ALT_WS_ZHFST_FILES) $(ALT_ORTH_ZHFST_FILES)
 
 endif # WANT_HFST_MOBILE_SPELLER
 endif # CAN_HFST
@@ -258,6 +263,15 @@ editdist.%.mobile.regex: editdist.%.txt $(mob_initial_letter_deps)
 		--input=$< \
 		--output-file=$@ \
 		$(mob_initial_letter_error_model_option)
+
+predict.%.regex: editdist.%.txt
+	$(AM_V_GEN)$(GTCORE)/scripts/predict.py \
+		--verbose \
+		--epsilon='@0@' \
+		--default-weight=$(DEFAULT_WEIGHT) \
+		--regex \
+		--input=$< \
+		--output=$@
 
 # Initial string edits, if enabled:
 initial_letters.txt.%.mobile.hfst: initial_letters.%.txt
@@ -376,6 +390,10 @@ errmodel.%.hfst: words.%.hfst \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw   \
 		  -o $@
 
+# with wordform prediction
+errmodel.%.predict.hfst: predict.%.hfst
+	hfst-fst2fst -f olw -v -i $< -o $@
+
 ######## Alternate error model: #######
 ## Alternatively, the error model can be constructed as a long list of regular
 ## expressions, semicolon separated:
@@ -406,6 +424,10 @@ acceptor.%.hfst: $(MOB_GT_SPELLER_HFST) easteregg.%.hfst
 		| $(HFST_FST2FST) $(MORE_VERBOSITY) $(HFST_FLAGS) -f olw          \
 		-o $@
 
+# predictor acceptor is slightly different TODO
+$(MOB_GT_PREDICT_ACCEPTOR): $(MOB_GT_SPELLER_ACCEPTOR)
+	hfst-fst2fst -f olw -i $< -o $@
+
 ####### *.zhfst file: #######
 # Finally build the zhfst file, and make a copy in a subdir named '3', so that
 # we can test it without installing it (the '3' dir is a voikko requirement):
@@ -418,6 +440,24 @@ $(MOB_GIELLA_SPELLING_HFST): $(srcdir)/index.mobile.xml \
 	$(AM_V_at)cp $(srcdir)/index.mobile.xml build/$@/index.xml
 	$(AM_V_at)cp $(MOB_GT_SPELLER_ACCEPTOR) build/$@/acceptor.default.hfst
 	$(AM_V_at)cp $(MOB_GIELLA_ERRMODELS) build/$@/errmodel.default.hfst
+	$(AM_V_ZIP)cd build/$@/ && $(ZHFST_COMPRESSION)
+	$(AM_V_at)$(MKDIR_P) 3
+	$(AM_V_at)cp -f $@ 3/
+
+index.predict.xml: index.mobile.xml
+	sed -e "s@$(MOB_GIELLA_ERRMODELS)@$(MOB_GIELLA_PREDICTMODELS)@g" \
+		-e "s@$(MOB_GT_SPELLER_ACCEPTOR)@$(MOB_GT_PREDICT_ACCEPTOR)@" \
+		< $< > $@
+
+$(MOB_GIELLA_PREDICT_HFST): index.predict.xml \
+					 $(MOB_GIELLA_PREDICTMODELS) \
+					 $(MOB_GT_PREDICT_ACCEPTOR)
+	$(AM_V_at)rm -f $@
+	$(AM_V_at)$(MKDIR_P) build/$@
+	$(AM_V_at)rm -f build/$@/*
+	$(AM_V_at)cp $(srcdir)/index.predict.xml build/$@/index.xml
+	$(AM_V_at)cp $(MOB_GT_PREDICT_ACCEPTOR) build/$@/acceptor.default.hfst
+	$(AM_V_at)cp $(MOB_GIELLA_PREDICTMODELS) build/$@/errmodel.default.hfst
 	$(AM_V_ZIP)cd build/$@/ && $(ZHFST_COMPRESSION)
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/

@@ -18,7 +18,8 @@ def main():
                    help="use EPS as epsilon symbol")
     a.add_argument("-w", "--default-weight", metavar="W", default=1.0,
                    type=float, help="use W prediction weight per character")
-    a.add_argument("-r", "--regex", default=True)
+    a.add_argument("-r", "--regex", default=True, action="store_true",
+                   help="compatibility option, not used")
     a.add_argument("-v", "--verbose", action="store_true",
                    help="print verbosely while processing")
     a.add_argument("-p", "--prefix-length", default=2, type=int,
@@ -40,6 +41,8 @@ def main():
         if not line or line.strip() == "":
             continue
         if line.startswith("#"):
+            continue
+        if line.startswith("~"):
             continue
         fields = line.strip().split()
         if fields[0] in [":", "-", "0", "."]:

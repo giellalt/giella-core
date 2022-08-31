@@ -207,7 +207,7 @@ MOB_GIELLA_PREDICTMODELS+=errmodel.default.predict.hfst
 GIELLA_MOBILE_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .mobile.hfst,.mobile.txt,$(MOB_GIELLA_ERRMODELS)))
 
 MOB_GIELLA_SPELLING_HFST=$(GTLANG2)-mobile.zhfst
-MOB_GIELLA_PREDICT_HFST=$(GTLANG2)-x-predict.zhfst
+MOB_GIELLA_PREDICT_HFST=$(GTLANG2)-x-predict-mobile.zhfst
 
 mobilespellerdir=$(datadir)/giella/mobilespellers/
 #! @param GT_VOIKKO optional, set to spell checker automata names if

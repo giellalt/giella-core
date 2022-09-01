@@ -24,7 +24,7 @@ def main():
                    help="print verbosely while processing")
     a.add_argument("-p", "--prefix-length", default=2, type=int,
                    help="how many characters to keep in beginning")
-    a.add_argument("-P", "--predict-length", default=4, type=int,
+    a.add_argument("-P", "--predict-length", default=7, type=int,
                    help="how many characters to predict in end")
     options = a.parse_args()
     if options.verbose:

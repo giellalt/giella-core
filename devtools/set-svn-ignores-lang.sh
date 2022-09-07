@@ -151,6 +151,10 @@ $fstfiles
 *.hfstscript
 downcase-derived_proper-strings.xfscript" $1/src/orthography
 
+# Ignore all temporary and generated files in the src/phonetics/tests/ dir:
+$svnignore "$mkfiles
+run_tests.sh" $1/src/phonetics/tests
+
 # Ignore all temporary and generated files in the src/tagsets/ dir:
 $svnignore "$mkfiles
 $fstfiles

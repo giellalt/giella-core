@@ -105,7 +105,7 @@ build
 *.tmp
 src-*.md
 tools-*.md
-empty.mp
+empty.md
 Links.md
 generated-markdowns.*
 index.md

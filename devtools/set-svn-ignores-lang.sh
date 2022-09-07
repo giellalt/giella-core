@@ -59,7 +59,6 @@ dirlist=$(find $1 \
 			-not -iwholename '*grammarcheckers/4*' \
 			-not -iwholename '*grammarcheckers/modes*' \
 			-not -iwholename '*grammarcheckers/*-x-standard*' \
-			-not -iwholename '*phonetics/test*' \
 			-type d)
 
 # Remove intermediate ../../:
@@ -102,14 +101,10 @@ test_grammar_checker.sh" $1/devtools
 # Set the svn:ignore prop on the docs dir:
 $svnignore "$mkfiles
 build
-*-affixes.md
-*-generated.md
-*-morphology.md
-*-src.md
-*-stems.md
-*-syntax.md
-*-tools.md
 ???.md
+*.tmp
+src-*.md
+tools-*.md
 Links.md
 generated-markdowns.*
 index.md
@@ -137,6 +132,7 @@ $svnignore "$mkfiles
 $fstfiles
 url.lexc
 *.tmp.*
+*-log.txt
 lexicon*
 root.lexc" $1/src/fst
 
@@ -167,6 +163,7 @@ $fstfiles
 dependency.cg3
 disambiguator.cg3
 functions.cg3
+generated-*
 korp.cg3
 valency-postspell.cg3" $1/src/cg3
 

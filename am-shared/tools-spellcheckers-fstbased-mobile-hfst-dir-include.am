@@ -425,11 +425,8 @@ acceptor.%.hfst: $(MOB_GT_SPELLER_HFST) easteregg.%.hfst
 		-o $@
 
 ## predictor acceptor is slightly different TODO
-##
-## Commented out because it blocked proper builds in CRK
-##
-#$(MOB_GT_PREDICT_ACCEPTOR): $(MOB_GT_SPELLER_ACCEPTOR)
-#	hfst-fst2fst -f olw -i $< -o $@
+$(MOB_GT_PREDICT_ACCEPTOR): $(MOB_GT_SPELLER_ACCEPTOR)
+	hfst-fst2fst -f olw -i $< -o $@
 
 ####### *.zhfst file: #######
 # Finally build the zhfst file, and make a copy in a subdir named '3', so that

@@ -444,10 +444,15 @@ $(MOB_GIELLA_SPELLING_HFST): $(srcdir)/index.mobile.xml \
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/
 
+if WANT_HFST_MOBILE_SPELLERS
 index.predict.xml: index.mobile.xml
 	sed -e "s@$(MOB_GIELLA_ERRMODELS)@$(MOB_GIELLA_PREDICTMODELS)@g" \
 		-e "s@$(MOB_GT_SPELLER_ACCEPTOR)@$(MOB_GT_PREDICT_ACCEPTOR)@" \
 		< $< > $@
+else
+index.predict.xml: index.mobile.xml
+	cp -v $< $@
+endif
 
 $(MOB_GIELLA_PREDICT_HFST): index.predict.xml \
 					 $(MOB_GIELLA_PREDICTMODELS) \

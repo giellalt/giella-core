@@ -22,9 +22,11 @@ def main():
                    help="compatibility option, not used")
     a.add_argument("-v", "--verbose", action="store_true",
                    help="print verbosely while processing")
-    a.add_argument("-p", "--prefix-length", default=2, type=int,
+    a.add_argument("-s", "--stem-length", default=2, type=int,
                    help="how many characters to keep in beginning")
-    a.add_argument("-P", "--predict-length", default=7, type=int,
+    a.add_argument("-P", "--predict-suffix", default=7, type=int,
+                   help="how many characters to predict in end")
+    a.add_argument("-Q", "--predict-prefix", default=0, type=int,
                    help="how many characters to predict in end")
     options = a.parse_args()
     if options.verbose:
@@ -56,9 +58,11 @@ def main():
         else:
             print(fields, "unrecognised", file=sys.stderr)
             sys.exit(1)
-    print(" ".join(["?"]*options.prefix_length) + " ?* " +
-          " ".join(["(" + "|".join(pairs) + ")"]*options.predict_length) +
-          " ;", file=options.outfile)
+
+    prefix = " ".join(["(" + "|".join(pairs) + ")"]*options.predict_prefix)
+    stem = " ".join(["?"]*options.stem_length) + " ?* "
+    suffix = " ".join(["(" + "|".join(pairs) + ")"]*options.predict_suffix)
+    print(prefix + stem + suffix + " ;", file=options.outfile)
 
 
 if __name__ == "__main__":

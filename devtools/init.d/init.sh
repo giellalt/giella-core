@@ -170,5 +170,5 @@ elif [ "$HOSTN" = "gtsvn.uit.no" ] ; then
 fi
 
 # To get libdivvun from macOS nightly
-PYTHONPATH=/usr/local/lib/python3.9/site-packages
+PYTHONPATH=/usr/local/lib/python3.9/site-packages:/usr/local/lib/python3.10/site-packages
 export PYTHONPATH

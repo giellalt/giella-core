@@ -47,7 +47,7 @@ def main():
         if line.startswith("~"):
             continue
         fields = line.strip().split()
-        if fields[0] in [":", "-", "0", ".", ","]:
+        if fields[0] in [":", "-", "0", ".", ",", ";", "@", "!"]:
             fields[0] = "%" + fields[0]
         if len(fields) == 1 and fields[0] == "@@":
             break

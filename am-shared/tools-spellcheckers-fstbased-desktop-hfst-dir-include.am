@@ -260,20 +260,21 @@ easteregg.%.desktop.analyser.hfst:
 		> $@
 
 # Easter egg string acceptor:
-easteregg.%.desktop.temp.hfst: easteregg.%.desktop.txt
+# easteregg.%.desktop.temp.hfst: easteregg.%.desktop.txt
+easteregg.%.desktop.hfst: easteregg.%.desktop.txt
 	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
 		> $@
 
-easteregg.%.desktop.hfst: easteregg.%.desktop.temp.hfst \
-				 easteregg.%.desktop.analyser.hfst \
-				 easteregg.%.desktop.errorth.hfst
-	$(AM_V_RGX2FST)printf "\
-		[ [ @\"$<\".u .x. @\"easteregg.$*.desktop.analyser.hfst\".u ] \
-		| @\"easteregg.$*.desktop.errorth.hfst\" \
-		];" \
-		| $(HFST_REGEXP2FST) -S -E $(HFST_FLAGS) \
-		| $(HFST_INVERT) $(HFST_FLAGS) \
-		  -o $@
+# easteregg.%.desktop.hfst: easteregg.%.desktop.temp.hfst \
+# 				 easteregg.%.desktop.analyser.hfst \
+# 				 easteregg.%.desktop.errorth.hfst
+# 	$(AM_V_RGX2FST)printf "\
+# 		[ [ @\"$<\".u .x. @\"easteregg.$*.desktop.analyser.hfst\".u ] \
+# 		| @\"easteregg.$*.desktop.errorth.hfst\" \
+# 		];" \
+# 		| $(HFST_REGEXP2FST) -S -E $(HFST_FLAGS) \
+# 		| $(HFST_INVERT) $(HFST_FLAGS) \
+# 		  -o $@
 
 ####### Error model: #######
 # Error model building - edit distance based on transducer alphabet:

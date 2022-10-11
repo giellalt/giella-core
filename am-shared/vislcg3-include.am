@@ -16,7 +16,7 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ####### Build rules: ########
-%.bin: %.cg3
-	$(AM_V_CGCOMP)"$(VISLCG3_COMP)" $< $@
+%.bin: %.cg3 $(GIELLA_CG_INCLUDES)
+	$(AM_V_CGCOMP)"$(VISLCG3_COMP)" $*.cg3 $*.bin
 
 # vim: set ft=automake:

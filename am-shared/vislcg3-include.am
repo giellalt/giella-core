@@ -17,6 +17,6 @@
 
 ####### Build rules: ########
 %.bin: %.cg3 $(GIELLA_CG_INCLUDES)
-	$(AM_V_CGCOMP)"$(VISLCG3_COMP)" $*.cg3 $*.bin
+	$(AM_V_CGCOMP)"$(VISLCG3_COMP)" $< $@
 
 # vim: set ft=automake:

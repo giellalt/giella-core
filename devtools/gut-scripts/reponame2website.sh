@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# test script for gut apply script
+# `gut set info` script to specify website for repositories
 
 # Input arguments:
 reponame=$1

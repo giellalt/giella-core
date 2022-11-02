@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# test script for gut apply script
+# `gut set info` script to set a description for multiple repos
 
 # Input arguments:
 reponame=$1

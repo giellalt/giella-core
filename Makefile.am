@@ -133,6 +133,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/gramcheck_comparator.py \
    scripts/new-language.sh \
    scripts/patgen.exp \
+   scripts/predict.py \
    scripts/preprocess \
    scripts/replace-dummy-langcode.sh \
    scripts/run_voikko_speller.sh \

@@ -8,5 +8,5 @@ convertordir=../../divvun/kbdgen/resources/scripts
 
 for layout in *.kbdgen/layouts/*.yaml; do
     echo $layout
-    # deno run --allow-read $convertordir/kbdgen2to3.js $layout
+    deno run --allow-read $convertordir/kbdgen2to3.js $layout > /dev/null
 done

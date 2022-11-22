@@ -1,5 +1,8 @@
 ! File for making transitivity tags optional. Used for generating transducers.
-! Coming from the old tag-not-save.regex file in gt/common/src/.
+! The +ExXXX variants are used in some languages for pre-derivational transitivity
+! tags, to ensure that only the last transitivity tag in a derivational row has
+! the standard tags. This way root lemma transitivity is preserved without
+! disturbing CG rules.
 
 0 (<-) "+TV",
 0 (<-) "+IV",

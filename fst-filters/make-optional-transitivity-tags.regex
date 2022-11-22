@@ -6,5 +6,9 @@
 
 0 (<-) "+TV",
 0 (<-) "+IV",
+0 (<-) "+Ex/TV",
+0 (<-) "+Ex/IV",
 0 (<-) "+Gram/TV",
-0 (<-) "+Gram/IV";
+0 (<-) "+Gram/IV",
+0 (<-) "+ExGram/TV",
+0 (<-) "+ExGram/IV";

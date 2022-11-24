@@ -4,7 +4,7 @@
 # SMJ following SE conventions = smj_NO => smj_SE.
 
 NF == 2 && $2 == "?" { print(gensub(/\+\?/, "", 1, $1)); } 
-NF == 2 && $2 ~ /,/ {
+NF == 2 && $2 ~ /.,./ {
     len = split($2, vars, /,/)
     for (i = 1; i <= len; i++) {
         if (vars[i] == $1) {
@@ -14,5 +14,7 @@ NF == 2 && $2 ~ /,/ {
     }
     print(vars[1]);
 }
-NF == 2 && $2 != "?" && $2 !~ /,/ && $1 !~ /^".*"$/ { print($2); }
-/^:/ {print;}
+NF == 2 && $2 != "?" && $2 !~ /.,./ && $1 !~ /^".*"$/ { 
+    print(gensub(/^:/, "@COLON@", 1, $2)); 
+}
+/^:/ && NF == 1 {print;}

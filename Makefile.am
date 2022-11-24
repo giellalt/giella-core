@@ -99,6 +99,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    fst-filters/split-CmpNP-tags.regex \
    fst-filters/tag-lowercase_error-strings.regex \
    scripts/clean_weight_corpus.sh \
+   scripts/convert-divvunsuggest-to-almostplain.awk \
    scripts/data/cohort_to_table_footer.html \
    scripts/data/cohort_to_table_header.html \
    scripts/doccomments2ghpages.awk \

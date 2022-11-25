@@ -2,10 +2,11 @@
 # text. Used with other tools to convert text in one variant of a language to
 # another variant of the same language, as in SMJ following NO conventions, to
 # SMJ following SE conventions = smj_NO => smj_SE.
-BEGIN { already_outputted = 0; }
+BEGIN { already_outputted = 0; surf = "@FAIL@"; }
 NF == 2 && $2 == "?" && $1 ~ /\+\?/ {
     if (already_outputted == 0) {
-        print(gensub(/\+\?/, "", 1, $1)); 
+        # print(gensub(/\+\?/, "", 1, $1)); 
+        print(surf);
         already_outputted = -1;
     }
 } 
@@ -13,7 +14,7 @@ NF == 2 && $2 ~ /.,./ {
     if (already_outputted == 0) {
         len = split($2, vars, /,/)
         for (i = 1; i <= len; i++) {
-            if (vars[i] == $1) {
+            if (vars[i] == surf) {
                 print($v);
                 already_outputted = -1;
                 break;
@@ -30,4 +31,4 @@ NF == 2 && $2 != "?" && $2 !~ /.,./ && $1 !~ /^".*"$/ {
     }
 }
 /^:/ && NF == 1 {print; already_outputted =  0; }
-/^"/ {already_outputted = 0;}
+/^"/ {already_outputted = 0; surf = substr($0, 2, length($0) - 4); }

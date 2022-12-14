@@ -27,7 +27,6 @@ rm -rf /tmp/test-$testlang
 mkdir -v /tmp/test-$testlang
 pushd /tmp/test-$testlang
 svn co https://github.com/giellalt/giella-core/trunk giella-core
-svn co https://github.com/giellalt/giella-shared/trunk giella-shared
 svn co https://github.com/giellalt/lang-$testlang/trunk lang-$testlang
 
 pushd giella-core
@@ -36,14 +35,7 @@ autoreconf -fvi
 make
 popd
 
-pushd giella-shared
-autoreconf -fvi
-./configure
-make
-popd
-
 export GIELLA_CORE=/tmp/test-$testlang/giella-core
-export GIELLA_SHARED=/tmp/test-$testlang/giella-shared
 
 pushd lang-$testlang
 autoreconf -fvi

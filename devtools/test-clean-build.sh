@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run this to test building a language in a reasonably clean environment. Set the
-# variable `testlang` to the language you want to test.
+# variable `testlang` on line 24 to the language you want to test.
 #
 # This is a slightly modified version of the following gist by Tino Didriksen:
 #

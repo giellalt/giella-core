@@ -21,7 +21,7 @@ echo "Only these envvars are set:"
 env
 echo ""
 
-testlang=crk
+testlang=sma
 
 rm -rf /tmp/test-$testlang
 mkdir -v /tmp/test-$testlang

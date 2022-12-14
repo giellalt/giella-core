@@ -38,6 +38,7 @@ popd
 export GIELLA_CORE=/tmp/test-$testlang/giella-core
 
 pushd lang-$testlang
+./autogen.sh
 autoreconf -fvi
 ./configure --without-forrest --with-hfst --enable-tokenisers --without-xfst --enable-reversed-intersect --enable-spellers --enable-hfst-mobile-speller --enable-hfst-desktop-spellers --enable-alignment --disable-minimised-spellers --enable-syntax --enable-analysers --enable-generators --enable-apertium --enable-grammarchecker --with-backend-format=foma --enable-dicts --enable-oahpa
 make -j4 V=1 VERBOSE=1 2>&1 | tee build.log

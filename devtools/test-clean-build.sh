@@ -26,8 +26,8 @@ testlang=sma
 rm -rf /tmp/test-$testlang
 mkdir -v /tmp/test-$testlang
 pushd /tmp/test-$testlang
-svn co https://github.com/giellalt/giella-core/trunk giella-core
-svn co https://github.com/giellalt/lang-$testlang/trunk lang-$testlang
+svn co https://github.com/giellalt/giella-core.git/trunk giella-core
+svn co https://github.com/giellalt/lang-${testlang}.git/trunk "lang-$testlang"
 
 pushd giella-core
 autoreconf -fvi

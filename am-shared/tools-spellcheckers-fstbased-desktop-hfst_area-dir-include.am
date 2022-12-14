@@ -33,28 +33,6 @@ AREA_ZHFST_FILES=$(shell for ld in $(AREAS); do\
 done)
 AREA_ZHFST_BASENAMES=$(basename $(AREA_ZHFST_FILES))
 
-# Only build final speller packages if is enabled (default=yes):
-if WANT_HFST_DESKTOP_SPELLER
-
-# Variables for the final installable packages:
-if CAN_LOCALSYNC
-# Generate target file names dynamically based on VOIKKO_VERS_PLATFORMS.
-# The resulting file names follow this pattern:
-#
-#$(GTLANG2)-NO_LO-voikko-3.4.1-win.oxt
-AREA_OXT_FILES_TMP=$(foreach \
-						version,$(VOIKKO_VERS_PLATFORMS), \
-							$(addsuffix $(version), \
-								$(addsuffix _LO-voikko-, \
-			                      $(AREA_ZHFST_BASENAMES))))
-AREA_OXT_FILES=$(addsuffix .oxt, $(AREA_OXT_FILES_TMP))
-# LO 5.x oxt's:
-AREA_OXT_FILES+=$(addsuffix _LO-voikko-$(LOVOIKKO_VERSION).oxt, \
-			$(AREA_ZHFST_BASENAMES))
-
-endif # CAN_LOCALSYNC
-
-endif # WANT_HFST_DESKTOP_SPELLER
 endif # WANT_SPELLERS
 endif # CAN_HFST
 endif # HAVE_AREAS

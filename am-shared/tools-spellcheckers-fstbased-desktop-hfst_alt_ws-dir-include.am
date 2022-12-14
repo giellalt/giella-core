@@ -33,28 +33,6 @@ ALT_WS_ZHFST_FILES=$(shell for ld in $(ALT_WSS); do\
 done)
 ALT_WS_ZHFST_BASENAMES=$(basename $(ALT_WS_ZHFST_FILES))
 
-# Only build final speller packages if is enabled (default=yes):
-if WANT_HFST_DESKTOP_SPELLER
-
-# Variables for the final installable packages:
-if CAN_LOCALSYNC
-# Generate target file names dynamically based on VOIKKO_VERS_PLATFORMS.
-# The resulting file names follow this pattern:
-#
-#$(GTLANG2)-Cans_LO-voikko-3.4.1-win.oxt
-ALT_WS_OXT_FILES_TMP=$(foreach \
-						version,$(VOIKKO_VERS_PLATFORMS), \
-							$(addsuffix $(version), \
-								$(addsuffix _LO-voikko-, \
-			                      $(ALT_WS_ZHFST_BASENAMES))))
-ALT_WS_OXT_FILES=$(addsuffix .oxt, $(ALT_WS_OXT_FILES_TMP))
-# LO 5.x oxt's:
-ALT_WS_OXT_FILES+=$(addsuffix _LO-voikko-$(LOVOIKKO_VERSION).oxt, \
-			$(ALT_WS_ZHFST_BASENAMES))
-
-endif # CAN_LOCALSYNC
-
-endif # WANT_HFST_DESKTOP_SPELLER
 endif # WANT_SPELLERS
 endif # CAN_HFST
 endif # HAVE_ALT_WSS

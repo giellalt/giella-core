@@ -441,7 +441,6 @@ $(ALL_DESKTOP_ZHFST_FILES): \
 
 ####### Other targets: ###########
 
-include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_prods_n_upload-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_orth-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_ws-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_area-dir-include.am

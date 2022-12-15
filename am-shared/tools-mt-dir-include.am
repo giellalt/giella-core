@@ -74,6 +74,7 @@ analyser-mt-gt-desc.tmp.hfst: $(top_builddir)/src/generator-raw-gt-desc.hfst \
 			$(top_builddir)/src/filters/remove-Use_minusGC-tags.hfst         \
 			$(top_builddir)/src/filters/remove-Use_minus_PMatch-tags.hfst    \
 			$(top_builddir)/src/filters/remove-Use_PMatch-strings.hfst       \
+			$(top_builddir)/src/filters/remove-use_mt-strings.hfst           \
 			$(top_builddir)/src/filters/remove-mwe-tags.hfst                 \
 			$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.hfst
 	$(AM_V_HXFST)$(PRINTF) "set xerox-composition ON \n\
@@ -89,6 +90,7 @@ analyser-mt-gt-desc.tmp.hfst: $(top_builddir)/src/generator-raw-gt-desc.hfst \
 	.o. @\"$(top_builddir)/src/filters/remove-Use_minusGC-tags.hfst\"         \
 	.o. @\"$(top_builddir)/src/filters/remove-Use_GC-strings.hfst\"           \
 	.o. @\"$(top_builddir)/src/filters/remove-Use_PMatch-strings.hfst\"       \
+	.o. @\"$(top_builddir)/src/filters/remove-use_mt-strings.hfst\"           \
 	.o. @\"$(top_builddir)/src/filters/remove-mwe-tags.hfst\"                 \
 	.o. @\"$<\" \
 	.o. @\"$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.hfst\" \

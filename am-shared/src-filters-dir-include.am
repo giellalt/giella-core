@@ -55,7 +55,6 @@ GIELLA_FILTER_CORE_REGEX_SRCS=\
 				remove-hyphenated-strings.regex           \
 				remove-non_hyphenated-strings.regex       \
 				remove-MinusSpell-strings.regex           \
-				remove-MT-strings.regex                   \
 				remove-mwe-strings.regex                  \
 				remove-NA-strings.regex                   \
 				remove-NG-strings.regex                   \

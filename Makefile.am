@@ -42,7 +42,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    fst-filters/remove-ABBR-strings.regex \
    fst-filters/remove-ACR-strings.regex \
    fst-filters/remove-CLB-strings.regex \
-   fst-filters/remove-MT-strings.regex \
    fst-filters/remove-MinusSpell-strings.regex \
    fst-filters/remove-NA-strings.regex \
    fst-filters/remove-NG-strings.regex \

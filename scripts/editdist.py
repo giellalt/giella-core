@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # see editdist.py --help for usage
 
-import codecs
 import struct
 import sys
 from optparse import OptionParser

@@ -214,11 +214,12 @@ class Transducer:
     def make_identities(self, state, nextstate=None):
         if nextstate is None:
             nextstate = state
-        ret = []
-        for symbol in list(self.alphabet.keys()):
-            if symbol not in (self.options.epsilon, self.other):
-                ret.append(maketrans(state, nextstate, symbol, symbol, 0.0))
-        return ret
+
+        return [
+            maketrans(state, nextstate, symbol, symbol, 0.0)
+            for symbol in list(self.alphabet.keys())
+            if symbol not in (self.options.epsilon, self.other)
+        ]
 
     def make_swaps(self, state, nextstate=None):
         if nextstate is None:

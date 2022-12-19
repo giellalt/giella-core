@@ -567,7 +567,6 @@ def main():
                     "Got specification with "
                     + str(len(parts))
                     + " parts, expected 3:\n"
-                    + specification
                 )
             weight = float(parts[2])
             if "," in parts[0]:
@@ -576,7 +575,7 @@ def main():
                 if not (len(frompair) == len(topair) == 2):
                     raise ValueError(
                         "Got swap-specification with incorrect number "
-                        "of comma separators:\n" + specification
+                        "of comma separators:\n"
                     )
                 if (frompair, topair) not in pair_info["swaps"]:
                     pair_info["swaps"][(frompair, topair)] = weight

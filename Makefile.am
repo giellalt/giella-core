@@ -112,6 +112,8 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/extract-lemmas.sh \
    scripts/extract-tags.sh \
    scripts/extract-yaml-lemmas.sh \
+   scripts/extract-used-tags.sh \
+   scripts/extract-defined-tags.sh \
    scripts/generate-area-filter-regex.sh \
    scripts/generate-dialect-filter-regex.sh \
    scripts/generate-mixed_area-filter-regex.sh \

@@ -245,7 +245,7 @@ hyphenator-gt-desc-output.hfst: hyphenator-raw-gt-desc.hfst \
 hyphenator-rules-desc-weighted.hfst: $(HYPH_RULES)
 	$(AM_V_FST2FST)$(HFST_FST2FST) --format=openfst-tropical -i $< \
 		| $(HFST_REWEIGHT) $(HFST_FLAGS) \
-		-e -a "5000" \
+		-e -a "50000" \
 		-o $@
 
 # 8. compose 5. and 6.:

@@ -141,10 +141,10 @@ lexicon-gt-desc-clean.hfst: lexicon-gt-desc.hfst           \
 		 save stack $@\n\
 		 quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
 
-# 1. get all Err-tags, add weight 1000, and cat to tagweight file
+# 1. get all Err-tags, add weight 15000, and cat to tagweight file
 all_tags.txt: $(TAGWEIGHTS)
 	$(AM_V_CP)cp -f $< $@
-	$(AM_V_GEN)sed $$'s/$$/\t1000/' $(top_builddir)/src/filters/error-tags.txt \
+	$(AM_V_GEN)sed $$'s/$$/\t15000/' $(top_builddir)/src/filters/error-tags.txt \
 		>> $@
 
 # 2. add tag weights:

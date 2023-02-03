@@ -15,7 +15,7 @@ FSAFILE="$2"
 
 # Print header text:
 echo "# This is a generated file - do not edit!"        > "$REGEXFILE"
-echo "# It recodes NFC coded symbols to NFD"           >> "$REGEXFILE"
+echo "# It recodes NFD coded symbols to NFC"           >> "$REGEXFILE"
 echo ""                                                >> "$REGEXFILE"
 
 hfst-summarize "$FSAFILE" -v |\
@@ -23,7 +23,7 @@ hfst-summarize "$FSAFILE" -v |\
     tail -n 1 |\
     tr , '\n' |\
     sed -e 's/^ //' > "$REGEXFILE".sigma
- uconv -x any-nfd "$REGEXFILE".sigma > "$REGEXFILE".sigma.nfd
- paste "$REGEXFILE".sigma "$REGEXFILE".sigma.nfd |\
+ uconv -x any-nfc "$REGEXFILE".sigma > "$REGEXFILE".sigma.nfc
+ paste "$REGEXFILE".sigma "$REGEXFILE".sigma.nfc |\
      awk '$1 != $2 {printf("%s (->) %s,\n", $1, $2);}' >> "$REGEXFILE"
 echo "X (->) X ;" >> "$REGEXFILE"

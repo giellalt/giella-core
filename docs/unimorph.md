@@ -1,5 +1,8 @@
 # GiellaLT unimorph support
 
+[Unimorph](https://unimorph.github.io) is a project for "universal" encoding of
+morphology and collection of full-form annotated inflection lists.
+
 There are several scripts in `giella-core/scripts/unimoprh` to support
 conversions to and from unimorph data for GiellaLT languages:
 

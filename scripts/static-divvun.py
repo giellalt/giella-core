@@ -346,7 +346,7 @@ class StaticSiteBuilder(object):
             if os.path.exists(offending_file):
                 os.remove(offending_file)
         (returncode, _) = self.run_command(
-            "rsync -avz -e ssh {src} {dst}".format(
+            "rsync -avz --delete -e ssh {src} {dst}".format(
                 src=os.path.join(self.sitehome, "built/"), dst=self.destination
             )
         )

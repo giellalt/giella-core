@@ -14,16 +14,24 @@ REGEXFILE="$1"
 FSAFILE="$2"
 
 # Print header text:
-echo "# This is a generated file - do not edit!"        > "$REGEXFILE"
-echo "# It recodes NFD coded symbols to NFC"           >> "$REGEXFILE"
-echo ""                                                >> "$REGEXFILE"
+echo "# This is a generated file - do not edit!"          > "$REGEXFILE"
+echo "# It recodes NFC coded symbols to NFD optionally"   >> "$REGEXFILE"
+echo "# (for NFD support for tools that don't handle it)" >> "$REGEXFILE"
+echo >> "$REGEXFILE"
 
 hfst-summarize "$FSAFILE" -v |\
     grep -F -A 1 "sigma set:" |\
     tail -n 1 |\
     tr , '\n' |\
-    sed -e 's/^ //' > "$REGEXFILE".sigma
- uconv -x any-nfc "$REGEXFILE".sigma > "$REGEXFILE".sigma.nfc
- paste "$REGEXFILE".sigma "$REGEXFILE".sigma.nfc |\
-     awk '$1 != $2 {printf("%s (->) %s,\n", $1, $2);}' >> "$REGEXFILE"
+    sed -e 's/^ //' |\
+    grep -E -v '^[+{}^]' > "$REGEXFILE".sigma.nfc
+uconv -x any-nfd "$REGEXFILE".sigma.nfc > "$REGEXFILE".sigma.nfd
+paste "$REGEXFILE".sigma.nfc "$REGEXFILE".sigma.nfd |\
+    awk '$1 != $2 {printf("%s (->) %s,\n", $1, $2);
+    printf("%s (->) ", $1);
+    for (i = 1; i <= length($2); i++) {
+        printf("%s ", substr($2, i, 1));
+    }
+    printf(",\n");
+ }' >> "$REGEXFILE"
 echo "X (->) X ;" >> "$REGEXFILE"

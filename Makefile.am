@@ -117,6 +117,8 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/generate-area-filter-regex.sh \
    scripts/generate-dialect-filter-regex.sh \
    scripts/generate-mixed_area-filter-regex.sh \
+   scripts/generate-nfc-nfd-regex.sh \
+   scripts/generate-nfd-nfc-regex.sh \
    scripts/generate-wordforms-for-cont_lexes.sh \
    scripts/grep_analysed_sentences.pl \
    scripts/gt-core.sh \

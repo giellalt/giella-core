@@ -14,7 +14,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [0.18.1], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
+AC_INIT([giella-core], [0.18.2], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
@@ -31,6 +31,12 @@ SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
 AC_SUBST([GIELLA_CORE_VERSION], [$VERSION-${SVNREVNUM}])
 
 AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
+AC_PATH_PROG([UCONV], [uconv], [false])
+AS_IF([test x$UCONV = xfalse], 
+      [AC_MSG_ERROR([needs uconv for unicode support
+       uconv is a part of ICU 
+       on debian/ubuntu: apt install icu-devtools
+       on macbrew: brew install icu4c])])
 
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \

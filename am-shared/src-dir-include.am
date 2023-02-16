@@ -162,6 +162,17 @@ GLT_DOWNCASE_COMPOSE_DEF=
 endif # " DEFAULT_CASE_HANDLING
 ### END: Case handling conditional:
 
+GLT_NFDNFC_FILTER=orthography/downcase-derived_proper-strings.compose.%
+GLT_NFDNFC_FILTER_XFST=orthography/downcase-derived_proper-strings.compose.xfst
+GLT_NFDNFC_COMPOSE=.o. @\"orthography/downcase-derived_proper-strings.compose.$*\"
+GLT_NFDNFC_COMPOSE_XFST=.o. @\"orthography/downcase-derived_proper-strings.compose.xfst\"
+GLT_NFDNFC_COMPOSE_DEF=.o. @\"orthography/downcase-derived_proper-strings.compose.$$*\"
+GLT_NFCNFD_FILTER=orthography/downcase-derived_proper-strings.compose.%
+GLT_NFCNFD_FILTER_XFST=orthography/downcase-derived_proper-strings.compose.xfst
+GLT_NFCNFD_COMPOSE=.o. @\"orthography/downcase-derived_proper-strings.compose.$*\"
+GLT_NFCNFD_COMPOSE_XFST=.o. @\"orthography/downcase-derived_proper-strings.compose.xfst\"
+GLT_NFCNFD_COMPOSE_DEF=.o. @\"orthography/downcase-derived_proper-strings.compose.$$*\"
+
 ### BEGIN: AREA filter conditional:
 if HAVE_AREAS
 GIELLA_MIXED_AREA_FILTER=filters/remove-mixed_area-strings.%
@@ -394,6 +405,7 @@ analyser-gt-desc.tmp.%: analyser-raw-gt-desc.%                \
 					filters/remove-mwe-tags.%                 \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
+					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.$*\"                \
@@ -409,6 +421,7 @@ analyser-gt-desc.tmp.%: analyser-raw-gt-desc.%                \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 			.o. @\"$<\" \
+			    $(GLT_NFCNFD_COMPOSE) \
 			    $(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
@@ -447,6 +460,7 @@ generator-gt-desc.tmp.%: analyser-raw-gt-desc.%            \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$*\" \
@@ -469,6 +483,7 @@ generator-gt-desc.tmp.%: analyser-raw-gt-desc.%            \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 			.o. @\"$<\" \
+			    $(GLT_NFCNFD_COMPOSE) \
 			    $(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
@@ -600,6 +615,7 @@ analyser-gt-norm.tmp.%: analyser-raw-gt-desc.%                \
 					filters/remove-mwe-tags.%                 \
 					orthography/inituppercase.compose.%       \
 					$(GIELLA_MIXED_AREA_FILTER)               \
+					$(GLT_NFDNFC_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.$*\"                \
@@ -618,6 +634,7 @@ analyser-gt-norm.tmp.%: analyser-raw-gt-desc.%                \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_MIXED_AREA_COMPOSE)                    \
 			.o. @\"$<\" \
+				$(GLT_NFDNFC_COMPOSE)                           \
 				$(GLT_DOWNCASE_COMPOSE)                         \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
@@ -657,6 +674,7 @@ generator-gt-norm.tmp.%: analyser-raw-gt-desc.%            \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
 					$(GIELLA_MIXED_AREA_FILTER)               \
+					$(GLT_NFDNFC_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$*\" \
@@ -680,6 +698,7 @@ generator-gt-norm.tmp.%: analyser-raw-gt-desc.%            \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_MIXED_AREA_COMPOSE)                    \
 			.o. @\"$<\" \
+				$(GLT_NFDNFC_COMPOSE)                           \
 				$(GLT_DOWNCASE_COMPOSE)                         \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \

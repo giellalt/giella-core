@@ -24,7 +24,7 @@ hfst-summarize "$FSAFILE" -v |\
     tail -n 1 |\
     tr , '\n' |\
     sed -e 's/^ //' |\
-    grep -E -v '^[+{}^]' > "$REGEXFILE".sigma.nfc
+    grep -E -v '^[+{@}^]' > "$REGEXFILE".sigma.nfc
 uconv -x any-nfd "$REGEXFILE".sigma.nfc > "$REGEXFILE".sigma.nfd
 paste "$REGEXFILE".sigma.nfc "$REGEXFILE".sigma.nfd |\
     awk '$1 != $2 {printf("%s (->) %s,\n", $1, $2);

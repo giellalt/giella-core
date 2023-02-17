@@ -24,10 +24,11 @@ hfst-summarize "$FSAFILE" -v |\
     grep -F -A 1 "sigma set:" |\
     tail -n 1 |\
     tr , '\n' |\
-    sed -e 's/^ //' > "$REGEXFILE".sigma.nfd
+    sed -e 's/^ //'  |\
+    grep -E -v '^[+{@}^]' > "$REGEXFILE".sigma.nfd
 uconv -x any-nfc "$REGEXFILE".sigma.nfd > "$REGEXFILE".sigma.nfc
 paste "$REGEXFILE".sigma.nfd "$REGEXFILE".sigma.nfc |\
-     awk '$1 != $2 {printf("%s -> %s,\n", $1, $2);
+    gawk '$1 != $2 {printf("%s -> %s,\n", $1, $2);
     printf("%s -> ", $1);
     for (i = 1; i <= length($2); i++) {
         printf("%s ", substr($2, i, 1));

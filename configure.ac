@@ -30,13 +30,33 @@ SVNREVNUM=$(echo ${SVNREVISION} | cut -d' ' -f2)
 
 AC_SUBST([GIELLA_CORE_VERSION], [$VERSION-${SVNREVNUM}])
 
+# Check for sed with required feature:
+AC_CACHE_CHECK([for sed that supports newlines and pipes], [ac_cv_path_SED],
+  [AC_PATH_PROGS_FEATURE_CHECK([SED], [gnused gsed sed],
+              [[m4out=`echo aaa | $ac_path_SED 's/a/\n/g' | wc -l | tr -d '[:space:] '`
+                test "x$m4out" = x4\
+      && ac_cv_path_SED=$ac_path_SED ac_path_SED_found=:]],
+    [AC_MSG_ERROR([could not find sed that supports newlines - please install GNU sed. Hint: sudo port install gsed./c])])])
+AC_SUBST([SED], [$ac_cv_path_SED])
+# Check for awk with required feature:
+AC_CACHE_CHECK([for awk that supports gensub], [ac_cv_path_GAWK],
+  [AC_PATH_PROGS_FEATURE_CHECK([GAWK], [awk mawk nawk gawk],
+    [[awkout=`$ac_path_GAWK 'BEGIN{gensub(/a/,"b","g");}'; exvalue=$?; echo $exvalue`
+      test "x$awkout" = x0 \
+      && ac_cv_path_GAWK=$ac_path_GAWK ac_path_GAWK_found=:]],
+    [AC_MSG_ERROR([could not find awk that supports gensub - please install GNU awk. hint: sudo port install gawk])])])
+AC_SUBST([GAWK], [$ac_cv_path_GAWK])
+
 AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
 AC_PATH_PROG([UCONV], [uconv], [false])
 AS_IF([test x$UCONV = xfalse], 
       [AC_MSG_ERROR([needs uconv for unicode support
        uconv is a part of ICU 
        on debian/ubuntu: apt install icu-devtools
-       on macbrew: brew install icu4c])])
+       on macports: port install icu
+       on macbrew: brew install icu4c (and follow instructions)
+       ])])
+
 
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \

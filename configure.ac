@@ -48,6 +48,7 @@ AC_CACHE_CHECK([for awk that supports gensub], [ac_cv_path_GAWK],
 AC_SUBST([GAWK], [$ac_cv_path_GAWK])
 
 AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
+AC_PATH_PROG([HFST_SUMMARISE], [hfst-summarize], [false], $PATH)
 AC_PATH_PROG([UCONV], [uconv], [false])
 AS_IF([test x$UCONV = xfalse], 
       [AC_MSG_ERROR([needs uconv for unicode support
@@ -63,6 +64,8 @@ AC_CONFIG_FILES([Makefile \
                  scripts/Makefile])
 AC_CONFIG_FILES([scripts/gt-version.sh], [chmod +x scripts/gt-version.sh])
 AC_CONFIG_FILES([scripts/gt-core.sh],    [chmod +x scripts/gt-core.sh])
+AC_CONFIG_FILES([scripts/generate-nfc-nfd-regex.bash],    [chmod +x scripts/generate-nfc-nfd-regex.bash])
+AC_CONFIG_FILES([scripts/generate-nfd-nfc-regex.bash],    [chmod +x scripts/generate-nfd-nfc-regex.bash])
 AC_CONFIG_FILES([scripts/make-hfstspeller-version-easter-egg.sh],
                 [chmod +x scripts/make-hfstspeller-version-easter-egg.sh])
 

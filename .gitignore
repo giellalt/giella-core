@@ -13,3 +13,5 @@ Makefile
 __pycache__/
 /scripts/make-hfstspeller-version-easter-egg.sh
 /configure~
+/scripts/generate-nfc-nfd-regex.bash
+/scripts/generate-nfd-nfc-regex.bash

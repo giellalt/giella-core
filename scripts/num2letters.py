@@ -31,6 +31,11 @@ def digit_as_text(number, lang):
         os.getenv("GTLANGS"),
         f"lang-{lang}/src/transcriptions/transcriptor-numbers-digit2text.filtered.lookup.hfstol",
     )
+    if not os.path.exists(digit_hfstol):
+        raise SystemExit(
+            f"{digit_hfstol} does not exist.\nPlease compile lang-{lang}"
+        )
+
     result = run(
         f"hfst-lookup -q {digit_hfstol}".split(),
         input=number,

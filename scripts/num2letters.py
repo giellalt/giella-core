@@ -27,12 +27,17 @@ NUMBER_RE = re.compile(f'"<(?P<number>\d+.*)>"')
 
 
 def digit_as_text(number, lang):
-    DIGIT_HFSTOL = os.path.join(
+    digit_hfstol = os.path.join(
         os.getenv("GTLANGS"),
         f"lang-{lang}/src/transcriptions/transcriptor-numbers-digit2text.filtered.lookup.hfstol",
     )
+    if not os.path.exists(digit_hfstol):
+        raise SystemExit(
+            f"{digit_hfstol} does not exist.\nPlease compile lang-{lang}"
+        )
+
     result = run(
-        f"hfst-lookup -q {DIGIT_HFSTOL}".split(),
+        f"hfst-lookup -q {digit_hfstol}".split(),
         input=number,
         encoding="utf8",
         capture_output=True,
@@ -42,9 +47,9 @@ def digit_as_text(number, lang):
 
 def generate_inflected_number(line, lang):
 
-    GENERATOR = f"/usr/share/giella/{lang}/generator-gt-norm.hfstol"
+    generator = f"/usr/share/giella/{lang}/generator-gt-norm.hfstol"
     result = run(
-        f"hfst-lookup -q {GENERATOR}".split(),
+        f"hfst-lookup -q {generator}".split(),
         input="+".join(make_generation_parts(line, lang)),
         encoding="utf8",
         capture_output=True,

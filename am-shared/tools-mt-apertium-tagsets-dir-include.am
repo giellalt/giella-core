@@ -28,6 +28,7 @@ GT_REGEX_TARGETS=
 
 if WANT_APERTIUM
 RELABEL_TARGETS=apertium.relabel
+CLEANFILES=apertium.relabel
 
 if CAN_HFST
 GT_REGEX_TARGETS+=$(patsubst %.regex,%.hfst,$(REGEX_SRCS))

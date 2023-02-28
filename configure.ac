@@ -55,7 +55,8 @@ AS_IF([test x$UCONV = xfalse],
        uconv is a part of ICU 
        on debian/ubuntu: apt install icu-devtools
        on macports: port install icu
-       on macbrew: brew install icu4c (and follow instructions)
+       on macbrew: brew install icu4c (and follow instructions:
+                                       i.e. set your PATH if necessary)
        ])])
 
 

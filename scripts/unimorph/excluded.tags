@@ -1,3 +1,6 @@
++Clt/Add
++Clt/Cop
++Clt/aram
 +Cmp
 +Cmp/Hyph-Serial
 +Cmp#
@@ -37,9 +40,15 @@
 +Der/viđá
 +Der/viđi
 +Der/vuota
++Der/f
++Der/OvOms
++Der/OkshnOms
++Der/Poss
 +Err/DerSub
 +Err/Orth
 +Err/Orth-a-á
 +Err/Orth-á-a
 +Err/Spellrelax
 +Use/Circ
++Use/NG
++Use/SpellNoSugg

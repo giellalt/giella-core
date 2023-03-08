@@ -34,5 +34,5 @@ for stems in "$1"/src/fst/stems/*lexc ; do
         echo "wiht +X and FooBar set to POS tag or end lexicon used"
         continue
     fi
-    "$(dirname "$0")/generate-from-lexc.bash" "$1" "$stems $gtpos" "$noposlex"
+    "$(dirname "$0")/generate-from-lexc.bash" "$1" "$stems" "$gtpos" "$noposlex"
 done

@@ -88,6 +88,8 @@ def giella2unimorph(tags):
             unimorphtags += ['TRANS']
         elif giella == 'Prl':
             unimorphtags += ['PROL']
+        elif giella == 'Cmt':
+            unimorphtags += ['COM']
         elif giella == 'Temp':
             unimorphtags += ['LGSPEC3']
         elif giella == 'Del':
@@ -146,6 +148,8 @@ def giella2unimorph(tags):
             unimorphtags += ['2', 'PL']
         elif giella == 'Pl3':
             unimorphtags += ['3', 'PL']
+        elif giella == 'Pe4':
+            unimorphtags += ['4']
         elif giella == 'ScSg1':
             unimorphtags += ['ARGNO1S']
         elif giella == 'ScSg2':
@@ -201,31 +205,53 @@ def giella2unimorph(tags):
                 unimorphtags += ['V.PTCP']
             elif '+PrfPrc' in tags:
                 unimorphtags += ['V.PTCP']
+            elif '+Prc' in tags:
+                unimorphtags += ['V.PTCP']
             else:
                 unimorphtags += ['V']
+        elif giella == 'Aux':
+            unimorphtags += ['AUX']
         elif giella == 'PrsPrc':
             unimorphtags += ['PRS']
         elif giella == 'PrtPrc':
             unimorphtags += ['PST']
         elif giella == 'PrfPrc':
             unimorphtags += ['PRFV']
+        elif giella == 'Prc':
+            continue  # V.PTCP before
         elif giella == 'Prc/Telic':
-            unimorphtags += ['LFSPEC4/telic']  # myv
+            unimorphtags += ['LGSPEC4/telic']  # myv
         elif giella == 'VGen':
-            unimorphtags += ['V.GEN']
+            unimorphtags += ['V.MSDR', 'GEN']
         elif giella == 'VAbess':
-            unimorphtags += ['V.ABE']
+            unimorphtags += ['V.CVB', 'ABE']
         elif giella == 'NomAg':
-            continue  # FIXME
+            unimorphtags += ['V.MSDR']
+        elif giella == 'AgPrc':
+            unimorphtags += ['V.MSDR']
+        elif giella == 'NegPrc':
+            unimorphtags += ['V.PTCP']
+        elif giella == 'NomAct':
+            unimorphtags += ['V.MSDR']
         elif giella == 'Inf':
             unimorphtags += ['NFIN']
         elif giella == 'Ger':
             unimorphtags += ['NFIN']  # XXX: GER?
         elif giella == 'Actio':
-            unimorphtags += ['GER']  # XXX: ???
+            unimorphtags += ['NFIN']  # XXX: ???
+        elif giella == 'InfA':
+            unimorphtags += ['NFIN']  # fin
+        elif giella == 'InfE':
+            unimorphtags += ['V.CVB']  # fin
+        elif giella == 'InfMa':
+            unimorphtags += ['V.CVB']  # fin
         elif giella == 'Actv':
             unimorphtags += ['ACT']
+        elif giella == 'Act':
+            unimorphtags += ['ACT']
         elif giella == 'Pasv':
+            unimorphtags += ['PASS']
+        elif giella == 'Pss':
             unimorphtags += ['PASS']
         elif giella == 'Cond':
             unimorphtags += ['COND']
@@ -233,6 +259,8 @@ def giella2unimorph(tags):
             unimorphtags += ['POT']
         elif giella == 'Imprt':
             unimorphtags += ['IMP']
+        elif giella == 'Cau':
+            unimorphtags += ['CAUS']
         elif giella == 'Subj':
             unimorphtags += ['SBJV']
         elif giella == 'Opt':
@@ -240,13 +268,15 @@ def giella2unimorph(tags):
         elif giella == 'Des':
             unimorphtags += ['OPT']  # Desiderative optative
         elif giella == 'Oblig':
-            unimorphtags += ['OBGLIG']  # Desiderative optative
+            unimorphtags += ['OBGLIG']
         elif giella == 'Interr':
             unimorphtags += ['INT']  # XXX: ABE?
         elif giella == 'Der/Comp':
             unimorphtags += ['CMPR']
         elif giella == 'Comp':
             unimorphtags += ['CMPR']
+        elif giella == 'Superl':
+            unimorphtags += ['SPRL']
         elif giella == 'Sup':
             unimorphtags += ['SPRL']
         elif giella == 'Der/Superl':
@@ -257,6 +287,10 @@ def giella2unimorph(tags):
             unimorphtags += ['ATTR']
         elif giella == 'Neg':
             unimorphtags += ['NEG']
+        elif giella == 'NegCnd':
+            unimorphtags += ['NEG', 'COND']
+        elif giella == 'NegCndSub':
+            unimorphtags += ['NEG', 'COND']
         elif giella == 'Pos':
             unimorphtags += ['POS']
         elif giella.startswith('Err/'):
@@ -293,6 +327,8 @@ def giella2unimorph(tags):
             unimorphtags += ['DIAL']
         elif giella == 'South':
             unimorphtags += ['DIAL?']
+        elif giella == 'Orth/Colloq':
+            unimorphtags += ['DIAL?']
         elif giella == 'ConNeg':
             unimorphtags += ['NEG']  # XXX
         elif giella == 'ConNegII':
@@ -306,6 +342,9 @@ def giella2unimorph(tags):
         elif giella == 'Recipr':
             unimorphtags += ['RECP']
         elif giella == 'Bahuvrihi':
+            # myv
+            continue
+        elif giella == 'AssocColl':
             # myv
             continue
         elif giella == 'Adn':
@@ -331,7 +370,11 @@ def giella2unimorph(tags):
             continue
         elif giella.startswith('Gram/Comp'):
             continue
+        elif giella.startswith('Pref-'):
+            unimorphtags += ['LGSPEC/prefix-']
         elif giella.startswith('Genmiessi'):
+            print("SOmething broken here½!")
+        elif "#222-5-19" in giella:
             print("SOmething broken here½!")
         else:
             print("missing giella mapping for", giella, "in tags")

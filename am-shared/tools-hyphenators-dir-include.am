@@ -48,8 +48,19 @@ hyphenated-fst-wordlist.txt: hyphenator-gt-desc-no_fallback.hfst   \
 		print random-lower $(PATTERN_WORD_LIST) > $@\n\
 		quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
 
+# Remove useless strings geneared by fst:
+cleaned-hyphenated-fst-wordlist.txt: hyphenated-fst-wordlist.txt
+	$(AM_V_GEN)grep -v '^[-]' $< |\
+		egrep -v '\.' |\
+		egrep -v ' ' |\
+		egrep -v '[0123456789]' |\
+		egrep -v '[_<>’³²&‒–—―+£§¢€*@()%$$]' |\
+		egrep -v ' ' |\
+		grep -x '.\{3,20\}' \
+		> $@
+
 # 1. build tex pattern file
-$(GT_TEX_HYPHENATOR): hyphenated-fst-wordlist.txt
+$(GT_TEX_HYPHENATOR): cleaned-hyphenated-fst-wordlist.txt
 	$(AM_V_at)touch $@
 	$(AM_V_CP)cp -f $@ $(GTLANG2).pat
 	$(AM_V_GEN)$(GIELLA_CORE)/scripts/patgen.exp \

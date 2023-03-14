@@ -48,7 +48,18 @@ hyphenated-fst-wordlist.txt: hyphenator-gt-desc-no_fallback.hfst   \
 		print random-lower $(PATTERN_WORD_LIST) > $@\n\
 		quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
 
-# Remove useless strings geneared by fst:
+# Remove useless strings geneared by fst as follows:
+# grep -v '^[-]' # remove anything starting with a hyphen
+# egrep -v '\.'  # remove anything containing a full stop
+# egrep -v ' '   # remove anything containing spaces
+# egrep -v '[0123456789]' # remove anything containing digits
+# egrep -v '[_<>’³²&‒–—―+£§¢€*@()%$$]' # remove anything containing these
+#           symbols - note that all the hyphens are _different_ hyphens
+#           and that the dollar has to be escaped due to make
+# egrep -v ' '   # remove anything containing a non-breaking space
+# grep -x '.\{3,25\}' # remove all strings shorter than three, longer than
+#                       25 symbols (patgen has an upper limit of 50 chars,
+#                       but everything beyond 25 should be useless)
 cleaned-hyphenated-fst-wordlist.txt: hyphenated-fst-wordlist.txt
 	$(AM_V_GEN)grep -v '^[-]' $< |\
 		egrep -v '\.' |\

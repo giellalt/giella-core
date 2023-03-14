@@ -14,5 +14,8 @@ spawn -noecho $patgen $indata $gltlang2.pat $outdata $srcdir/$gltlang2.tra
 expect "hyph_start, hyph_finish: "            { send -- "$hypstrtend\r"  }
 expect "pat_start, pat_finish: "              { send -- "$ptrnstrtend\r" }
 expect "good weight, bad weight, threshold: " { send -- "$gdbadthresh\r" }
+expect "pat_start, pat_finish: "              { send -- "$ptrnstrtend\r" }
+expect "good weight, bad weight, threshold: " { send -- "$gdbadthresh\r" }
+expect "hyphenate word list? " { send -- "yes\r" }
 
 interact

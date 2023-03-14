@@ -23,7 +23,8 @@
 
 GT_NFC2NFD=spellrelax-nfc2nfd.regex
 GT_NFD2NFC=spellrestrict-nfd2nfc.regex
-GT_ORTHOGRAPHIC_REGEX_SRCS+=$(GT_NFC2NFD) $(GT_NFD2NFC)
+GT_GENERATED_REGEX_SRCS=$(GT_NFC2NFD) $(GT_NFC2NFD)
+GT_ORTHOGRAPHIC_REGEX_SRCS+=$(GT_GENERATED_REGEX)
 #! @var GT_ORTHOGRAPHIC_SRCS names of orthographic rule source files, should
 #! be one of:
 #!		xfst, regex or twolc files
@@ -80,6 +81,8 @@ $(GT_NFD2NFC): $(top_builddir)/src/fst/lexicon.hfst \
 
 ####### Other targets: ###########
 # The "clean" target:
+CLEANFILES=$(GT_GENERATED_REGEX_SRCS)
+
 clean-local:
 	-rm -f *.hfst *.xfst *.foma *.hfstscript *.xeroxscript *.fomascript
 

@@ -26,7 +26,7 @@ echo ""                                                >> "$REGEXFILE"
     tr , '\n' |\
     @SED@ -e 's/^ //'  |\
     grep -E -v '^[+{@}^]' > "$REGEXFILE".sigma.nfd
-@UCONV@ -x any-nfc "$REGEXFILE".sigma.nfd > "$REGEXFILE".sigma.nfc
+@UCONV@ -f utf8 -x any-nfc "$REGEXFILE".sigma.nfd > "$REGEXFILE".sigma.nfc
 paste "$REGEXFILE".sigma.nfd "$REGEXFILE".sigma.nfc |\
     @AWK@ '$1 != $2 {printf("%s -> %s,\n", $1, $2);
     printf("%s -> ", $1);

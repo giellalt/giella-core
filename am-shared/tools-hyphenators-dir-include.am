@@ -56,7 +56,7 @@ cleaned-hyphenated-fst-wordlist.txt: hyphenated-fst-wordlist.txt
 		egrep -v '[0123456789]' |\
 		egrep -v '[_<>’³²&‒–—―+£§¢€*@()%$$]' |\
 		egrep -v ' ' |\
-		grep -x '.\{3,20\}' \
+		grep -x '.\{3,25\}' \
 		> $@
 
 # 1. build tex pattern file

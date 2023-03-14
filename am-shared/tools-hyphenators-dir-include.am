@@ -273,12 +273,8 @@ hyphenator-rules-desc-weighted.hfst: $(HYPH_RULES)
 # 8. compose 5. and 6.:
 hyphenator-gt-desc-no_fallback.hfst: hyphenator-gt-desc-input.hfst \
 				  hyphenator-gt-desc-output.hfst
-	$(AM_V_HXFST)$(PRINTF) "read regex \
-				@\"hyphenator-gt-desc-input.hfst\" \
-			.o. @\"hyphenator-gt-desc-output.hfst\" \
-			; \n\
-		 save stack $@\n\
-		 quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
+	$(AM_V_COMPOSE)$(HFST_COMPOSE) -F -1 hyphenator-gt-desc-input.hfst \
+		-2 hyphenator-gt-desc-output.hfst -o $@
 
 # 9. cat 7 and 8 to make final hyphenation fst archive
 hyphenator-gt-desc.hfst: hyphenator-gt-desc-no_fallback.hfst \

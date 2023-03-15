@@ -71,7 +71,7 @@ cleaned-hyphenated-fst-wordlist.txt: hyphenated-fst-wordlist.txt
 		> $@
 
 # 1. build tex pattern file
-$(GT_TEX_HYPHENATOR): cleaned-hyphenated-fst-wordlist.txt
+$(srcdir)/$(GT_TEX_HYPHENATOR): cleaned-hyphenated-fst-wordlist.txt FORCE
 	$(AM_V_at)touch $@
 	$(AM_V_CP)cp -f $@ $(GTLANG2).pat
 	$(AM_V_GEN)$(GIELLA_CORE)/scripts/patgen.exp \
@@ -82,9 +82,12 @@ $(GT_TEX_HYPHENATOR): cleaned-hyphenated-fst-wordlist.txt
 			$< $@
 
 # 2. convert tex pattern file to OOo pattern file
-$(GT_DIC_HYPHENATOR): $(GT_TEX_HYPHENATOR)
+$(srcdir)/$(GT_DIC_HYPHENATOR): $(srcdir)/$(GT_TEX_HYPHENATOR) FORCE
 	$(AM_V_GEN)$(PERL) $(GIELLA_CORE)/scripts/substrings.pl \
 		$(VERBOSITY) $< $@ UTF-8 2 2
+
+# To ensure that some targets are always built:
+FORCE:
 
 ####### FST-based source file defs: ########
 

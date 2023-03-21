@@ -362,6 +362,30 @@ class GramChecker:
 
         return sentence, errors, d_errors
 
+    def remove_foreign(self, marked_errors, found_errors):
+        """Remove foreign language error elements."""
+        foreign_ranges = [
+            (marked_error[1], marked_error[2])
+            for marked_error in marked_errors
+            if marked_error[3] == "errorlang"
+        ]
+        return (
+            [
+                marked_error
+                for marked_error in marked_errors
+                if marked_error[3] != "errorlang"
+            ],
+            [
+                found_error
+                for found_error in found_errors
+                if not any(
+                    foreign_range[0] <= found_error[1] < foreign_range[1]
+                    and found_error[2] <= foreign_range[1]
+                    for foreign_range in foreign_ranges
+                )
+            ],
+        )
+
     def get_data(self, filename, para):
         """Extract data for reporting from a paragraph."""
         sentence, errors, d_errors = self.error_extractor(para)
@@ -370,6 +394,7 @@ class GramChecker:
             errors.extend(next_errors)
             d_errors.extend(next_d_errors)
 
+        errors, d_errors = self.remove_foreign(errors, d_errors)
         return {
             "uncorrected": sentence,
             "expected_errors": errors,
@@ -801,25 +826,6 @@ class CorpusGramTest(GramTest):
         for child in para:
             self.flatten_para(child)
 
-    def remove_foreign(self, root):
-        """Remove foreign language error elements."""
-        for foreign in root.xpath('.//errorlex[@errorinfo="foreign"]'):
-            parent = foreign.getparent()
-            if foreign.tail is not None:
-                previous = foreign.getprevious()
-                if previous is not None:
-                    if previous.tail is not None:
-                        previous.tail += foreign.tail
-                    else:
-                        previous.tail = foreign.tail
-                else:
-                    if parent.text is not None:
-                        parent.text += foreign.tail
-                    else:
-                        parent.text = foreign.tail
-
-            parent.remove(foreign)
-
     def keep_url(self, root):
         """Keep url as plain text."""
         for url in root.xpath('.//errorlang[@correct="url"]'):
@@ -856,7 +862,6 @@ class CorpusGramTest(GramTest):
 
         for filename in ccat.find_files(self.targets, ".xml"):
             root = etree.parse(filename)
-            self.remove_foreign(root)
             self.keep_url(root)
             for para in root.iter("p"):
                 # the xml:lang attribute indicates that the sentence is not the expected

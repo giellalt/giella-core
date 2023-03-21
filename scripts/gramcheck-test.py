@@ -76,9 +76,7 @@ class YamlGramChecker(GramChecker):
     {spec_file.resolve()}
     but does not exist.\n
     Run:
-    ./configure --without-forrest \\
-    --enable-grammarchecker \\
-    --disable-hfst-desktop-spellers\n
+    ./configure --enable-grammarchecker\n
     Then:
     make"""
                 )

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-# Copyright © 2020-2021 UiT The Arctic University of Norway
+# Copyright © 2020-2023 UiT The Arctic University of Norway
 # License: GPL3
 # Author: Børre Gaup <borre.gaup@uit.no>
 """Check if grammarchecker tests pass."""
@@ -19,6 +19,7 @@ from gramcheck_comparator import COLORS, UI, GramChecker, GramTest
 
 class YamlGramChecker(GramChecker):
     def __init__(self, config, yaml_parent):
+        super().__init__()
         self.config = config
         self.yaml_parent = yaml_parent
         self.checker = self.app()

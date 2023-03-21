@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-# Copyright © 2020-2021 UiT The Arctic University of Norway
+# Copyright © 2020-2023 UiT The Arctic University of Norway
 # License: GPL3
 # Author: Børre Gaup <borre.gaup@uit.no>
 """Write report on differences on manual markup and gramdivvun markup"""
@@ -43,6 +43,9 @@ def colourise(string, *args, **kwargs):
 
 
 class GramChecker:
+    def __init__(self, ignore_typos=False):
+        self.ignore_typos = ignore_typos
+
     def check_grammar(self, sentence):
         d_errors = libdivvun.proc_errs_bytes(self.checker, sentence)
         errs = [
@@ -386,6 +389,17 @@ class GramChecker:
             ],
         )
 
+    def remove_typo(self, marked_errors, found_errors):
+        """Remove foreign language error elements."""
+        return (
+            [
+                marked_error
+                for marked_error in marked_errors
+                if marked_error[3] != "errorort"
+            ],
+            [found_error for found_error in found_errors if found_error[3] != "typo"],
+        )
+
     def get_data(self, filename, para):
         """Extract data for reporting from a paragraph."""
         sentence, errors, d_errors = self.error_extractor(para)
@@ -395,6 +409,9 @@ class GramChecker:
             d_errors.extend(next_d_errors)
 
         errors, d_errors = self.remove_foreign(errors, d_errors)
+        if self.ignore_typos:
+            errors, d_errors = self.remove_typo(errors, d_errors)
+
         return {
             "uncorrected": sentence,
             "expected_errors": errors,
@@ -406,7 +423,8 @@ class GramChecker:
 class CorpusGramChecker(GramChecker):
     """Check for grammarerrors in errormarkup files from a Giella corpus."""
 
-    def __init__(self, archive):
+    def __init__(self, archive, ignore_typos):
+        super().__init__(ignore_typos)
         self.archive = archive
         self.checker = self.app()
 
@@ -800,6 +818,7 @@ class GramTest:
 class CorpusGramTest(GramTest):
     def __init__(self, args):
         super().__init__()
+        self.ignore_typos = args.ignore_typos
         self.archive = args.archive
         self.targets = args.targets
         self.config = {"out": GramTest.NormalOutput(args)}
@@ -858,7 +877,7 @@ class CorpusGramTest(GramTest):
 
     @property
     def paragraphs(self):
-        grammarchecker = CorpusGramChecker(self.archive)
+        grammarchecker = CorpusGramChecker(self.archive, self.ignore_typos)
 
         for filename in ccat.find_files(self.targets, ".xml"):
             root = etree.parse(filename)
@@ -892,6 +911,12 @@ class UI(ArgumentParser):
 class CorpusUI(UI):
     def __init__(self):
         super().__init__()
+        self.add_argument(
+            "--ignore-typos",
+            dest="ignore_typos",
+            action="store_true",
+            help="Pretend as if typos are correct",
+        )
         self.add_argument("archive", help="The grammarchecker archive")
         self.add_argument(
             "targets",

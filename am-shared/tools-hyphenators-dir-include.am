@@ -80,11 +80,21 @@ $(srcdir)/$(GT_TEX_HYPHENATOR): cleaned-hyphenated-fst-wordlist.txt FORCE
 			$(PATR_START_FINISH) \
 			$(GOOD_BAD_THRESHLD) \
 			$< $@
+	$(AM_V_at)echo "*******************************************************************************"
+	$(AM_V_at)echo "*** Remember to add, commit and push $@                 ***"
+	$(AM_V_at)echo "***                                                                         ***"
+	$(AM_V_at)echo "*** https://giellalt.github.io/proof/hyph/TeX/HowToBuildTexHyphenators.html ***"
+	$(AM_V_at)echo "*******************************************************************************"
 
 # 2. convert tex pattern file to OOo pattern file
 $(srcdir)/$(GT_DIC_HYPHENATOR): $(srcdir)/$(GT_TEX_HYPHENATOR) FORCE
 	$(AM_V_GEN)$(PERL) $(GIELLA_CORE)/scripts/substrings.pl \
 		$(VERBOSITY) $< $@ UTF-8 2 2
+	$(AM_V_at)echo "*******************************************************************************"
+	$(AM_V_at)echo "*** Remember to add, commit and push $@                 ***"
+	$(AM_V_at)echo "***                                                                         ***"
+	$(AM_V_at)echo "*** https://giellalt.github.io/proof/hyph/TeX/HowToBuildTexHyphenators.html ***"
+	$(AM_V_at)echo "*******************************************************************************"
 
 # To ensure that some targets are always built:
 FORCE:

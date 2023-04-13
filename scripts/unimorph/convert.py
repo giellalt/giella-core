@@ -90,6 +90,8 @@ def giella2unimorph(tags):
             unimorphtags += ['PROL']
         elif giella == 'Cmt':
             unimorphtags += ['COM']
+        elif giella == 'Trm':
+            unimorphtags += ['TERM']
         elif giella == 'Temp':
             unimorphtags += ['LGSPEC3']
         elif giella == 'Del':
@@ -194,6 +196,8 @@ def giella2unimorph(tags):
             unimorphtags += ['PSS3P']
         elif giella == 'PxSP3':
             unimorphtags += ['PSS3']
+        elif giella == 'Px3':
+            unimorphtags += ['PSS3']
         elif giella == 'Def':
             unimorphtags += ['DEF']
         elif giella == 'Indef':
@@ -226,19 +230,21 @@ def giella2unimorph(tags):
         elif giella == 'VAbess':
             unimorphtags += ['V.CVB', 'ABE']
         elif giella == 'NomAg':
-            unimorphtags += ['V.MSDR']
+            unimorphtags += ['V.MSDR', 'LGSPEC/agent']
         elif giella == 'AgPrc':
-            unimorphtags += ['V.MSDR']
+            unimorphtags += ['V.PTCP', 'LGSPEC/agent']
         elif giella == 'NegPrc':
-            unimorphtags += ['V.PTCP']
+            unimorphtags += ['V.PTCP', 'NEG']
         elif giella == 'NomAct':
             unimorphtags += ['V.MSDR']
         elif giella == 'Inf':
             unimorphtags += ['NFIN']
         elif giella == 'Ger':
-            unimorphtags += ['NFIN']  # XXX: GER?
+            unimorphtags += ['V.CVB', 'LGSPEC/ger']  # XXX: GER?
         elif giella == 'Actio':
-            unimorphtags += ['NFIN']  # XXX: ???
+            unimorphtags += ['V.MSDR','LGSPEC/actio']  # XXX: ???
+        elif giella == 'Sup':
+            unimorphtags += ['V.CVB', 'LGSPEC/sup']  # Supine, not superlative or superessive
         elif giella == 'InfA':
             unimorphtags += ['NFIN']  # fin
         elif giella == 'InfE':
@@ -277,14 +283,14 @@ def giella2unimorph(tags):
             unimorphtags += ['CMPR']
         elif giella == 'Superl':
             unimorphtags += ['SPRL']
-        elif giella == 'Sup':
-            unimorphtags += ['SPRL']
         elif giella == 'Der/Superl':
             unimorphtags += ['SPRL']
         elif giella == 'Der/PassS':
             unimorphtags += ['PASS']
         elif giella == 'Attr':
             unimorphtags += ['ATTR']
+        elif giella == 'Aff':
+            unimorphtags += ['POS']
         elif giella == 'Neg':
             unimorphtags += ['NEG']
         elif giella == 'NegCnd':
@@ -310,6 +316,8 @@ def giella2unimorph(tags):
             continue
         elif giella == 'Rel':
             continue  # is not: Relative case or Relative comparator
+        elif giella == 'Dim/ke':
+            continue
         elif giella == 'Ord':
             continue
         elif giella in ['v1', 'v2', 'v3']:
@@ -334,11 +342,11 @@ def giella2unimorph(tags):
         elif giella == 'ConNegII':
             unimorphtags += ['NEG']  # XXX
         elif giella == 'IV':
-            # continue  # not marked in current unimorph
             unimorphtags += ['INTR']
         elif giella == 'TV':
-            # continue  # not marked in current unimorph
             unimorphtags += ['TR']
+        elif giella == 'Impers':
+            unimorphtags += ['IMPRS']
         elif giella == 'Recipr':
             unimorphtags += ['RECP']
         elif giella == 'Bahuvrihi':
@@ -355,6 +363,9 @@ def giella2unimorph(tags):
             continue
         elif giella == 'Prec':
             # myv
+            continue
+        elif giella == 'Quot':
+            # est
             continue
         elif giella == 'Dem':
             continue  #  FIXME
@@ -421,6 +432,7 @@ def main():
     skip_lgspec = True
     skip_typo = True
     skip_xxx = True
+    skip_dial = True
     for line in options.infile:
         fields = line.strip().split(':')
         if line.strip() == '':
@@ -443,6 +455,8 @@ def main():
         if skip_typo and 'TYPO' in unimorph:
             continue
         if skip_xxx and 'XXX' in unimorph:
+            continue
+        if skip_dial and 'DIAL' in unimorph:
             continue
         print(lemma, surf, unimorph, sep='\t', file=options.outfile)
     realend = perf_counter()

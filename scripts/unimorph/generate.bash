@@ -33,7 +33,7 @@ cat "$@" | while read -r l ; do
     gtpos="+?"
     if test x"$lemma" == x ; then
         continue
-    elif test "$prevlemmapos" == "$lemma$pos" ; then
+    elif test "$prevlemmapos" == "$lemma${pos%.*}" ; then
         continue
     else
         prevlemmapos=$lemma$pos
@@ -47,6 +47,9 @@ cat "$@" | while read -r l ; do
         CONJ) gtpos="+CS";;
         PRO) gtpos="+Pron";;
         V) gtpos="+V";;
+        V.PTCP) gtpos="+V";;
+        V.MSD) gtpos="+V";;
+        V.CVB) gtpos="+V";;
         N) gtpos="+N";;
         *) gtpos="+$pos?";;
     esac
@@ -55,10 +58,10 @@ cat "$@" | while read -r l ; do
     echo "$lemma" | sed -e 's/./ & /g' | sed -e "s/\$/ $gtpos /" |\
         sed -e "s:\$: [? - [ $cyclicRE  ] ]*:" |\
         sed -e "s:^:$cyclicRE +UglyHack | :" |\
-        sed -e 's/+/%+/g' -e 's:/:%/:g' > generative.regex
+        sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/#/%#/g' > generative.regex
     hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
     hfst-compose -F -1 generative.hfst -2 "$generator" -o generator.hfst
-    hfst-fst2strings generator.hfst > generated.strings
+    timeout 10s hfst-fst2strings generator.hfst > generated.strings
     if test -s generated.strings ; then
         uniq < generated.strings | "$(dirname "$0")"/convert.py
     else

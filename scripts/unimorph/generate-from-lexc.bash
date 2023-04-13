@@ -66,6 +66,7 @@ if test $noposlex != "#" ; then
             sed -e "s:\$: [? @MINUS@ [ $cyclicRE  ] ]*:" |\
             sed -e "s:^:$cyclicRE +UglyHack | :" |\
             sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/-/%-/g' \
+                -e 's/#/%#/g' -e 's/_/%_/g' \
                 -e 's/@MINUS@/-/g'  > generative.regex
         hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
         hfst-compose -F -1 generative.hfst -2 "$generator" -o generator.hfst
@@ -86,11 +87,12 @@ else
         echo "$lemma" | sed -e 's/./ & /g' | sed -e "s/\$/ $gtpos /" |\
             sed -e "s:\$: [? @MINUS@ [ $cyclicRE  ] ]*:" |\
             sed -e "s:^:$cyclicRE +UglyHack | :" |\
-            sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/-/%-/g' -e 's/@MINUS@/-/g'\
-            > generative.regex
+            sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/-/%-/g' \
+                -e 's/#/%#/g' -e 's/_/%_/g' \
+                -e 's/@MINUS@/-/g' > generative.regex
         hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
         hfst-compose -F -1 generative.hfst -2 "$generator" -o generator.hfst
-        hfst-fst2strings generator.hfst > generated.strings
+        timeout 10s hfst-fst2strings generator.hfst > generated.strings
         if test -s generated.strings ; then
             uniq < generated.strings | "$(dirname "$0")"/convert.py
         else

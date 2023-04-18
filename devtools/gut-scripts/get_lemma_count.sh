@@ -10,7 +10,7 @@
 lemmacount=$(grep ';' src/fst/stems/*.lexc | # get all entries in the stems dir
              cut -d':' -f2-            | # get rid of the filename part of the grep matches
              egrep -v '^\s*(:|\+|!|@)' | # remove lines starting :+!@
-             egrep -v '^\s*[^:]+\s+;'  | # remove lines with only contlex
+             egrep -v '^\s*[^\s:]+\s+;'| # remove lines with only contlex
              cut -d':' -f1             | # remove surface side
              cut -d'+' -f1             | # remove tags
              sort -u                   | # sort and unique - we only count unique lemmas 

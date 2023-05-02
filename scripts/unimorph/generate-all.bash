@@ -25,5 +25,5 @@ echo "$cyclicRE +UglyHack | [? - [ $cyclicRE ] ]* ;" |
 hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
 hfst-compose -F -1 generative.hfst -2 "$generator" -o generator.hfst
 hfst-fst2strings -c 0 generator.hfst > generated.all
-uniq < generated.strings | "$(dirname "$0")"/convert.py
+uniq < generated.all | "$(dirname "$0")"/convert.py
 

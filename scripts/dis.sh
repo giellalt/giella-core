@@ -46,10 +46,7 @@ else
   # Read from standard input
   sentence=$(cat)
 fi
-#if [ -z "$lang" ]; then
-#  echo "Error: language code is required (-l)" >&2
-#  exit 1
-#fi
+
 
 # Tokenize and disambiguate sentence
 if [ "$trace" = true ]; then

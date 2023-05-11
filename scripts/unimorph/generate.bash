@@ -60,7 +60,8 @@ cat "$@" | while read -r l ; do
         sed -e "s:^:$cyclicRE +UglyHack | :" |\
         sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/#/%#/g' > generative.regex
     hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
-    hfst-compose -F -1 generative.hfst -2 "$generator" -o generator.hfst
+    hfst-compose -F -1 generative.hfst -2 "$generator" |\
+        hfst-fst2fst -f olw -o generator.hfst
     timeout 10s hfst-fst2strings generator.hfst > generated.strings
     if test -s generated.strings ; then
         uniq < generated.strings | "$(dirname "$0")"/convert.py

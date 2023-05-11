@@ -23,7 +23,8 @@ fi
 echo "$cyclicRE +UglyHack | [? - [ $cyclicRE ] ]* ;" |
     sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/#/%#/g' -e 's/\^/%^/g' > generative.regex
 hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
-hfst-compose -F -1 generative.hfst -2 "$generator" -o generator.hfst
+hfst-compose -F -1 generative.hfst -2 "$generator" |\
+    hfst-fst2fst -f olw -o generator.hfst
 hfst-fst2strings -c 0 generator.hfst > generated.all
 uniq < generated.all | "$(dirname "$0")"/convert.py
 

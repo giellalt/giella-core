@@ -15,3 +15,4 @@
 Makefile
 Makefile.in
 __pycache__/
+.vscode

@@ -18,91 +18,44 @@ from gramcheck_comparator import COLORS, UI, GramChecker, GramTest
 
 
 class YamlGramChecker(GramChecker):
-    def __init__(self, config, yaml_parent):
+    def __init__(self, config):
         super().__init__()
         self.config = config
-        self.yaml_parent = yaml_parent
         self.checker = self.app()
 
     @staticmethod
     def print_error(string):
         print(string, file=sys.stderr)
 
-    @property
-    def archive_path(self):
-        if self.config.get("spec"):
-            archive_file = Path(self.config.get("spec"))
-            if archive_file.is_file():
-                return archive_file
-            else:
-                self.print_error(f'The file {self.config.get("spec")} does not exist')
-                sys.exit(2)
+    def app(self):
+        spec_file = self.config.get("spec")
 
-        if self.config.get("Config").get("Archive"):
-            archive_file = Path(
-                f'{self.yaml_parent}/{self.config.get("Config").get("Archive")}'
+        checker_spec = (
+            libdivvun.ArCheckerSpec(spec_file.as_posix())
+            if spec_file.suffix == ".zcheck"
+            else libdivvun.CheckerSpec(str(spec_file))
+        )
+
+        if self.config.get("variant") is None:
+            return checker_spec.getChecker(
+                pipename=checker_spec.defaultPipe(),
+                verbose=False,
             )
-            if archive_file.is_file():
-                return str(archive_file)
+        else:
+            if checker_spec.hasPipe(self.config.get("variant")):
+                return checker_spec.getChecker(
+                    pipename=self.config.get("variant"),
+                    verbose=False,
+                )
             else:
                 self.print_error(
-                    "Error in section Archive of the yaml file.\n"
-                    + f"The file {archive_file} does not exist"
+                    "Error in section Variant of the yaml file.\n"
+                    "There is no pipeline named "
+                    f"{self.config.get('variant')} in {spec_file}"
                 )
-                sys.exit(3)
-
-        spec_file = Path(f'{self.yaml_parent}/{self.config.get("Config").get("Spec")}')
-        if spec_file.is_file():
-            return spec_file
-        else:
-            self.print_error(
-                "Error in section Spec of the yaml file.\n"
-                + f"The file {spec_file} does not exist"
-            )
-            sys.exit(4)
-
-    @staticmethod
-    def check_spec(spec_file, variant):
-        xml_spec = etree.parse(str(spec_file))
-        tags = xml_spec.xpath(f'.//pipeline[@name="{variant}"]//*[@n]')
-        for tag in tags:
-            name = Path(tag.get("n"))
-            this_path = spec_file.parent / name
-            if not this_path.is_file():
-                raise SystemExit(
-                    f"""
-    ERROR: Cannot run this this test!
-    {this_path.resolve()}
-    is listed as a dependency in
-    {spec_file.resolve()}
-    but does not exist.\n
-    Run:
-    ./configure --enable-grammarchecker\n
-    Then:
-    make"""
-                )
-
-    def app(self):
-        config = self.config
-        spec_file = self.archive_path
-
-        if spec_file.suffix == ".zcheck":
-            spec = libdivvun.ArCheckerSpec(str(spec_file))
-            return spec.getChecker(pipename=spec.defaultPipe(), verbose=False)
-
-        spec = libdivvun.CheckerSpec(str(spec_file))
-        if spec.hasPipe(config.get("Config").get("Variant")):
-            self.check_spec(spec_file, config.get("Config").get("Variant"))
-            return spec.getChecker(
-                pipename=config.get("Config").get("Variant"), verbose=False
-            )
-        else:
-            self.print_error(
-                "Error in section Variant of the yaml file.\n"
-                + "There is no pipeline named "
-                f'"{config.get("Config").get("Variant")}" in {spec_file}'
-            )
-            sys.exit(5)
+                available_names = "\n".join(checker_spec.pipeNames())
+                self.print_error("Available pipelines are\n" f"{available_names}")
+                sys.exit(5)
 
 
 class YamlGramTest(GramTest):
@@ -140,11 +93,19 @@ class YamlGramTest(GramTest):
             for key in list(COLORS.keys()):
                 COLORS[key] = ""
 
-        config["spec"] = args.spec
-        config.update(self.yaml_reader(config["test_file"]))
+        yaml_settings = self.yaml_reader(config["test_file"])
 
-        if not config.get("Tests"):
-            config["Tests"] = []
+        config["spec"] = (
+            config["test_file"].parent / yaml_settings.get("Config").get("Spec")
+            if not args.spec
+            else Path(args.spec)
+        )
+        config["variant"] = (
+            yaml_settings.get("Config").get("Variant")
+            if not args.variant
+            else args.variant
+        )
+        config["tests"] = yaml_settings.get("Tests", [])
 
         if args.total and len(args.test_files) == 1:
             notfixed = (
@@ -152,13 +113,13 @@ class YamlGramTest(GramTest):
             )
             tests = self.yaml_reader(notfixed).get("Tests")
             if notfixed.is_file() and tests:
-                config["Tests"].extend(tests)
+                config["tests"].extend(tests)
 
         if len(args.test_files) > 1:
             for test_file in args.test_files[1:]:
                 tests = self.yaml_reader(Path(test_file)).get("Tests")
                 if tests:
-                    config["Tests"].extend(tests)
+                    config["tests"].extend(tests)
 
         return config
 
@@ -179,13 +140,13 @@ class YamlGramTest(GramTest):
 
     @property
     def paragraphs(self):
-        grammarchecker = YamlGramChecker(self.config, self.config["test_file"].parent)
+        grammarchecker = YamlGramChecker(self.config)
 
         return (
             grammarchecker.get_data(
                 str(self.config["test_file"]), self.make_error_markup(text)
             )
-            for text in self.config["Tests"]
+            for text in self.config["tests"]
         )
 
 
@@ -223,6 +184,13 @@ class YamlUI(UI):
             required=False,
             help="""Path to the pipeline.xml spec file. Usefull when doing out
             of tree builds""",
+        )
+        self.add_argument(
+            "-V",
+            "--variant",
+            dest="variant",
+            required=False,
+            help="""Which variant should be used.""",
         )
         self.add_argument(
             "-t",

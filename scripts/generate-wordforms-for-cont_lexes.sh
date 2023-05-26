@@ -121,8 +121,7 @@ grep ";" $@ \
    | cut -d' ' -f2 \
    | grep -v ';' \
    | exclgrep "$exception_lexicons" \
-   | sort -u \
-   | grep -v "#"
+   | sort -u
 }
 
 ######## For each lexicon found, extract the N(=$lemmacount) first entries:

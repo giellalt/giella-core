@@ -172,7 +172,7 @@ if [ $l == fao ] || [ $l == crk ]; then
     syn_cmd=$dis_cmd" | vislcg3 -g $GTLANGS/$lg$l/src/cg3/functions.cg3 $t"
 else
     dis_cmd=$pos_cmd" | vislcg3 -g $MWE_DIS | vislcg3 -g $DIS $t"
-    syn_cmd=$dis_cmd" | vislcg3 -g $SD_PATH/functions.cg3 $t"
+    syn_cmd=$dis_cmd" | vislcg3 -g $GTLANGS/$lg$l/src/cg3/functions.cg3 $t"
 fi
 
 # common dep_cmd

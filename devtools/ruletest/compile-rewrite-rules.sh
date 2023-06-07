@@ -3,7 +3,7 @@
 # compile-rewrite-rules.sh 1: XFSCRIPT (path to) 2: FSTTYPE
 
 # Usage:
-#   echo /Users/arppe/giella/langs/crk/src/fst/phonology.xfscript foma |
+#   ./compile-rewrite-rules.sh phonology.xfscript foma
 
 # Print empty line to get to the END statement in the GAWK script.
 
@@ -30,6 +30,7 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
         {
           # print "Aborting <- specify FST type for phonological rule(s) among the following: 1) foma; 2) hfst; or 3) hfstol";
           print "Aborting <- specify FST type for phonological rule(s) among the following: 1) foma; or 2) hfst";
+          abort=1;
           exit;
         }
     }
@@ -38,6 +39,21 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
 # Identify the final REGEX and the names of its constituent rewrite rules.
 # In the case of multiple REGEX statements, in effect only use the last one.
 # This presumes a GiellaLT approach to defining morphophonology.
+
+  if(xfscript=="")
+    {
+      print "Setting source rule file as \"phonology.xfscript\" by default" > "/dev/stderr/";
+      xfscript="phonology.xfscript"
+    }
+
+# Checking that XFSCRIPT file exists
+  "if [ -f \"" xfscript "\" ]\nthen\n echo 1\nelse\necho 0\nfi" | getline exit_status;
+  if(exit_status!=1)
+    {
+      print "Aborting - rule file \"" xfscript "\" not found" > "/dev/stderr/";
+      abort=1;
+      exit;
+    }
 
   while((getline < xfscript)!=0)
     { if(index($0,"regex")!=0)
@@ -50,6 +66,15 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
   sub("^[ ]*(read )regex.*\\[[ ]*","",regex);
   sub("[ ]*\\].*;.*$","",regex);
   n=split(regex,rule,"[ ]*\\.o\\.[ ]*");
+
+  if(n==0)
+    {
+      print "Aborting - no rewrite rules found/defined in \"" xfscript "\" as expected" > "/dev/stderr/";
+      abort=1;
+      exit;
+    }
+  else
+    print "Found n=" n " rewrite rules in \"" xfscript "\"" > "/dev/stderr/";
 
 # Create a new XFSCRIPT command sequence to compile and save all individual rewrite rule FSTs.
 # As first XFSCRIPT command, 1) read in (and compile) original XFSCRIPT file as is.
@@ -68,6 +93,7 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
 # First create a subdirectory named according to FSTTYPE.
 
 END {
+if(!abort) {
   if(fsttype=="foma")
     {
       system("mkdir foma");
@@ -90,6 +116,7 @@ END {
            system("hfst-fst2fst -O -i " hfst " -o " hfstol ";");
          }
     }
+  }
 }'
 
 # END #

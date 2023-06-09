@@ -42,18 +42,19 @@ GIELLA_GRAMCHECK_PMHFSTS=
 GIELLA_TOKEN_DIS=
 
 if CAN_HFST
-# Only build the pmatch/hfst-proc2 fst if analysers are enabled.
+# Only build the disamb tokeniser fst if analysers are enabled:
 if WANT_MORPHOLOGY
 if WANT_TOKENISERS
 GIELLA_DISAMB_PMHFSTS+=tokeniser-disamb-gt-desc.pmhfst
 GIELLA_TOKEN_DIS+=mwe-dis.bin
 endif # WANT_TOKENISERS
+endif # WANT_MORPHOLOGY
 
+# But build the grammarchecker tokeniser always when the grammar checker is enabled:
 if WANT_GRAMCHECK
 GIELLA_GRAMCHECK_PMHFSTS+=tokeniser-gramcheck-gt-desc.pmhfst
 GIELLA_TOKEN_DIS+=mwe-dis.bin
 endif # WANT_GRAMCHECK
-endif # WANT_MORPHOLOGY
 
 GIELLA_PMHFSTS+=$(GIELLA_DISAMB_PMHFSTS) $(GIELLA_GRAMCHECK_PMHFSTS)
 

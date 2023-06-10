@@ -55,7 +55,7 @@ class YamlGramChecker(GramChecker):
                 self.print_error(
                     "Error in section Variant of the yaml file.\n"
                     "There is no pipeline named "
-                    f"{self.config.get('variant')} in {spec_file}"
+                    f"{variant} in {spec_file}"
                 )
                 available_names = "\n".join(checker_spec.pipeNames())
                 self.print_error("Available pipelines are\n" f"{available_names}")

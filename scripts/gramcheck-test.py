@@ -35,16 +35,20 @@ class YamlGramChecker(GramChecker):
             if spec_file.suffix == ".zcheck"
             else libdivvun.CheckerSpec(str(spec_file))
         )
-
         if self.config.get("variant") is None:
             return checker_spec.getChecker(
                 pipename=checker_spec.defaultPipe(),
                 verbose=False,
             )
         else:
-            if checker_spec.hasPipe(self.config.get("variant")):
+            variant = (
+                self.config.get("variant").replace("-dev", "")
+                if spec_file.suffix == ".zcheck"
+                else self.config.get("variant")
+            )
+            if checker_spec.hasPipe(variant):
                 return checker_spec.getChecker(
-                    pipename=self.config.get("variant"),
+                    pipename=variant,
                     verbose=False,
                 )
             else:

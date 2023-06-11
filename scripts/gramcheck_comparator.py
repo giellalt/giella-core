@@ -577,7 +577,6 @@ class GramTest:
                 true_positives = count["tp"]
                 false_positives = count["fp1"] + count["fp2"]
                 false_negatives = count["fn1"] + count["fn2"]
-                total = true_positives + false_negatives + false_positives
 
                 prec = true_positives / (true_positives + false_positives)
                 recall = true_positives / (true_positives + false_negatives)

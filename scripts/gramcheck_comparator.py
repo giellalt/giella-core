@@ -196,7 +196,7 @@ class GramChecker:
             "punct-aistton-both": self.fix_aistton_both,
         }
 
-        for (position, d_error) in enumerate(d_errors):
+        for position, d_error in enumerate(d_errors):
             if (
                 d_error[3] in aistton_fixers
                 and len(d_error[0]) > 1
@@ -644,7 +644,8 @@ class GramTest:
         def final_result(self, *args):
             pass
 
-    def __init__(self):
+    def __init__(self, fail_on_passes=False):
+        self.fail_on_passes = fail_on_passes
         self.count = Counter()
 
     def run_tests(self):
@@ -803,8 +804,12 @@ class GramTest:
     def run(self):
         self.run_tests()
         fails = sum([self.count[key] for key in self.count if key not in ["tn", "tp"]])
+        passes = sum([self.count[key] for key in self.count if key in ["tn", "tp"]])
 
-        return 1 if fails else 0
+        if not self.fail_on_passes:
+            return 1 if fails else 0
+
+        return 1 if passes else 0
 
     def __str__(self):
         return str(self.config.get("out"))
@@ -816,7 +821,7 @@ class GramTest:
 
 class CorpusGramTest(GramTest):
     def __init__(self, args):
-        super().__init__()
+        super().__init__(fail_on_passes=args.fail_on_passes)
         self.ignore_typos = args.ignore_typos
         self.archive = args.archive
         self.targets = args.targets
@@ -898,6 +903,12 @@ class UI(ArgumentParser):
             dest="colour",
             action="store_true",
             help="Colours the output",
+        )
+        self.add_argument(
+            "--fail-on-passes",
+            dest="fail_on_passes",
+            action="store_true",
+            help="Signal fail if there are some passes in a test",
         )
         self.test = None
 

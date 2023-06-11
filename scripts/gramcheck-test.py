@@ -72,7 +72,7 @@ class YamlGramTest(GramTest):
     }
 
     def __init__(self, args):
-        super().__init__()
+        super().__init__(fail_on_passes=args.fail_on_passes)
         self.args = args
         self.config = self.load_config()
 

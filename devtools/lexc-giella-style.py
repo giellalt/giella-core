@@ -1014,7 +1014,7 @@ if __name__ == u"__main__":
 
     ARGS = parse_options()
 
-    with io.open(ARGS.lexcfile) if ARGS.lexcfile is not "-" else sys.stdin as file_:
+    with io.open(ARGS.lexcfile) if ARGS.lexcfile != "-" else sys.stdin as file_:
         NEWLINES = []
         READLINES = []
 
@@ -1041,6 +1041,6 @@ if __name__ == u"__main__":
 
     with io.open(
         ARGS.lexcfile, u"w"
-    ) if ARGS.lexcfile is not "-" else sys.stdout as file_:
+    ) if ARGS.lexcfile != "-" else sys.stdout as file_:
         file_.write(u"\n".join(NEWLINES))
         file_.write(u"\n")

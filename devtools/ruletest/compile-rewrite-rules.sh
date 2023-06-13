@@ -5,10 +5,6 @@
 # Usage:
 #   ./compile-rewrite-rules.sh phonology.xfscript foma
 
-# Print empty line to get to the END statement in the GAWK script.
-
-echo '' |
-
 # Actual GAWK script starts here.
 
 gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
@@ -87,23 +83,30 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
 
   for(i=1; i<=n; i++)
      cmd=cmd" -e \"clear stack\" -e \"push "rule[i]"\" -e \"save stack "fsttype"/"rule[i]"."fsttype"\"";
-}
 
 # Compile aforementioned XFSCRIPT command sequence, according to either FSTTYPE.
 # First create a subdirectory named according to FSTTYPE.
 
-END {
 if(!abort) {
+  "if [ -d \"" fsttype "\" ]\nthen\n echo 0\nelse\necho 1\nfi" | getline exit_status;
+   if(exit_status!=1)
+     {
+       printf "Directory \"" fsttype "\" already exists - Overwrite? [y/n]: " > "/dev/stderr/";
+       getline choice < "/dev/stdin/";
+       if(choice!="y" && choice!="yes")
+         {
+            printf "Aborting\n" > "/dev/stderr/";
+            exit;
+         }
+     }
+   else
+     system("mkdir "fsttype);
+
   if(fsttype=="foma")
-    {
-      system("mkdir foma");
-      system("foma "cmd" -e \"quit\"");
-    }
+    system("foma "cmd" -e \"quit\"");
+
   if(fsttype=="hfst" || fsttype=="hfstol")
-    {
-      system("mkdir hfst");
-      system("hfst-xfst "cmd" -e \"quit\"");
-    }
+    system("hfst-xfst "cmd" -E \"quit\"");
 
 # The following conversion works in principle, but the resultant HFSTOL FSTs do not work.
 

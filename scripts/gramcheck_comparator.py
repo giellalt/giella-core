@@ -821,7 +821,7 @@ class GramTest:
 
 class CorpusGramTest(GramTest):
     def __init__(self, args):
-        super().__init__(fail_on_passes=args.fail_on_passes)
+        super().__init__()
         self.ignore_typos = args.ignore_typos
         self.archive = args.archive
         self.targets = args.targets
@@ -903,12 +903,6 @@ class UI(ArgumentParser):
             dest="colour",
             action="store_true",
             help="Colours the output",
-        )
-        self.add_argument(
-            "--fail-on-passes",
-            dest="fail_on_passes",
-            action="store_true",
-            help="Signal fail if there are some passes in a test",
         )
         self.test = None
 

@@ -24,7 +24,6 @@
 
 
 import argparse
-import codecs
 import io
 import re
 import sys
@@ -538,9 +537,7 @@ class TestLineCompactor(unittest.TestCase):
             "comment": "! båajasabpa, *båajoesabpa",
             "divisor": ":",
         }
-        expected_result = (
-            "+A+Comp+Attr:%>abpa ATTRCONT ; " "! båajasabpa, *båajoesabpa"
-        )
+        expected_result = "+A+Comp+Attr:%>abpa ATTRCONT ; " "! båajasabpa, *båajoesabpa"
 
         self.assertEqual(compact_line(content), expected_result)
 
@@ -1006,12 +1003,6 @@ def parse_options():
 
 
 if __name__ == "__main__":
-    # nopep8  https://stackoverflow.com/questions/2737966/how-to-change-the-stdin-encoding-on-python
-    UTF8READER = codecs.getreader("utf8")
-    sys.stdin = UTF8READER(sys.stdin)
-    UTF8WRITER = codecs.getwriter("utf8")
-    sys.stdout = UTF8WRITER(sys.stdout)
-
     ARGS = parse_options()
 
     with io.open(ARGS.lexcfile) if ARGS.lexcfile != "-" else sys.stdin as file_:

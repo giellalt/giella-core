@@ -27,6 +27,11 @@ class YamlGramChecker(GramChecker):
     def print_error(string):
         print(string, file=sys.stderr)
 
+    def get_variant(self, checker_spec):
+        for variant in self.config.get("variants"):
+            if checker_spec.hasPipe(variant):
+                return variant
+
     def app(self):
         spec_file = self.config.get("spec")
 
@@ -35,18 +40,14 @@ class YamlGramChecker(GramChecker):
             if spec_file.suffix == ".zcheck"
             else libdivvun.CheckerSpec(str(spec_file))
         )
-        if self.config.get("variant") is None:
+        if self.config.get("variants") is None:
             return checker_spec.getChecker(
                 pipename=checker_spec.defaultPipe(),
                 verbose=False,
             )
         else:
-            variant = (
-                self.config.get("variant").replace("-dev", "")
-                if spec_file.suffix == ".zcheck"
-                else self.config.get("variant")
-            )
-            if checker_spec.hasPipe(variant):
+            variant = self.get_variant(checker_spec)
+            if variant is not None:
                 return checker_spec.getChecker(
                     pipename=variant,
                     verbose=False,
@@ -104,10 +105,10 @@ class YamlGramTest(GramTest):
             if not args.spec
             else Path(args.spec)
         )
-        config["variant"] = (
-            yaml_settings.get("Config").get("Variant")
+        config["variants"] = (
+            yaml_settings.get("Config").get("Variants")
             if not args.variant
-            else args.variant
+            else [args.variant]
         )
         config["tests"] = yaml_settings.get("Tests", [])
 

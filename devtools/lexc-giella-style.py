@@ -22,9 +22,7 @@
 """Script to sort and align lexc entries."""
 
 
-
 import argparse
-import io
 import re
 import sys
 import unittest
@@ -1005,7 +1003,7 @@ def parse_options():
 if __name__ == "__main__":
     ARGS = parse_options()
 
-    with io.open(ARGS.lexcfile) if ARGS.lexcfile != "-" else sys.stdin as file_:
+    with open(ARGS.lexcfile) if ARGS.lexcfile != "-" else sys.stdin as file_:
         NEWLINES = []
         READLINES = []
 
@@ -1030,8 +1028,6 @@ if __name__ == "__main__":
         if ARGS.sort:
             NEWLINES.extend(sort_lexicon(READLINES, ARGS.sort))
 
-    with io.open(
-        ARGS.lexcfile, "w"
-    ) if ARGS.lexcfile != "-" else sys.stdout as file_:
+    with open(ARGS.lexcfile, "w") if ARGS.lexcfile != "-" else sys.stdout as file_:
         file_.write("\n".join(NEWLINES))
         file_.write("\n")

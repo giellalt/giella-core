@@ -115,9 +115,10 @@ report=REPORT; fsttype=FSTTYPE; FS="\t";
   gsub("\\.o\\.","->",regex);
   if(report=="long" || report=="diff")
     {
-      print "REWRITE RULE SEQUENCE:";
-      print regex;
-      print "";
+# Commented out the duplicate printing of entire rule set, as that is anyhow shown in the rule-by-rule scrutiny
+#      print "REWRITE RULE SEQUENCE:";
+#      print regex;
+#      print "";
       printf "%"maxixlen"i: %-"maxrulelen"s    %s\n", 0, "LEXC", input;
       s=sprintf("%"maxixlen+maxrulelen+4"s|%"length(input)+2"s", "", ""); gsub(" ","-",s); printf "%s\n", s;
     }

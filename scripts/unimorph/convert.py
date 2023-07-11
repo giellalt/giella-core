@@ -287,6 +287,10 @@ def giella2unimorph(tags):
             unimorphtags += ['V.CVB']  # fkv
         elif giella == 'InfMa':
             unimorphtags += ['V.CVB']  # fin
+        elif giella == 'A_Hum':
+            unimorphtags += ['ADJ']  # fin?
+        elif giella == 'Adv-':
+            unimorphtags += ['ADV']
         elif giella == 'Actv':
             unimorphtags += ['ACT']
         elif giella == 'Act':
@@ -495,6 +499,10 @@ def giella2unimorph(tags):
             continue
         elif giella.startswith('Hom'):
             continue
+        elif giella == 'TruncPrefix':
+            unimorphtags += ['LGSPEC/prefix-']
+        elif giella == 'Pref':
+            unimorphtags += ['LGSPEC/prefix-']
         elif giella == 'Prefix':
             unimorphtags += ['LGSPEC/prefix-']
         elif giella.startswith('Pref-'):
@@ -508,6 +516,9 @@ def giella2unimorph(tags):
         elif '/-' in giella:
             print('SOmething broken here½!', tags)
         elif giella in ['a', 'b', 'i', 't', 'd', 's', 'n', 'ä']:
+            print('SOmething broken here½!', tags)
+        elif giella in ['Ne', 'Ni', 'Nte', 'Ntee', 'Nt', 'Nti', 'Na', 'No',
+                        'N-', 'c']:
             print('SOmething broken here½!', tags)
         elif 'elekriski' in giella:
             print('SOmething broken here½!', tags)

@@ -56,26 +56,32 @@ def main():
                    help="Some ccat and giellalt specific corpus hacks")
     options = a.parse_args()
     try:
+        if not options.outfile:
+            options.outfile = sys.stdout
+            if options.verbose:
+                print("writing output to stdout verbosely",
+                      file=options.outfile)
         if options.verbose:
-            print("reading analyser from", options.analyser)
+            print(f"reading analyser from {options.analyser}",
+                  file=options.outfile)
         fsa = load_hfst(options.analyser)
         if not options.infile:
             options.infile = sys.stdin
-            print("reading from <stdin>")
+            print("reading from <stdin>", file=options.outfile)
         else:
             if options.verbose:
-                print(f"reading corpus from {options.infile.name}")
+                print(f"reading corpus from {options.infile.name}",
+                      file=options.outfile)
         if not options.statfile:
             options.statfile = sys.stdout
         else:
             if options.verbose:
-                print(f"writing statistics to {options.statfile.name}")
-        if not options.outfile:
-            options.outfile = sys.stdout
+                print(f"writing statistics to {options.statfile.name}",
+                      file=options.outfile)
         if not options.missfile:
             options.missfile = sys.stdout
     except IOError:
-        print(f"Could not process file{options.analyser.name}",
+        print(f"Could not process file{options.analyser}",
               file=sys.stderr)
         sys.exit(2)
     # basic statistics

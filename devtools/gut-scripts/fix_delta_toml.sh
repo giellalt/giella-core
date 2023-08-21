@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# test script for gut apply script
+# gut apply script to fix sha and rev_id in cases where gut has lost it
+# Usage:
+# gut apply -r regex-for-repo-matches -s path/to/script.sh
 
 # Variables:
 LANGDIR=$(pwd)

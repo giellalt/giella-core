@@ -130,6 +130,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/iso639-to-name.sh \
    scripts/iso-639-3.txt \
    scripts/lookup2cg \
+   scripts/make_grammarchecker_zip.py \
    scripts/make-hfstspeller-version-easter-egg.sh \
    scripts/merge-templates.sh \
    scripts/morph-test.py \

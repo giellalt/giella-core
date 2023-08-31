@@ -33,6 +33,7 @@
 	$(AM_V_FOMA)"$(FOMA)" $(VERBOSITY) -l $< -e "save stack $@" -s
 
 # Pattern variables to choose tools depending on which toolset we build for:
+%.hfstol : XFST_TOOL    = false THIS IS A BUG IN MAKEFILE
 %.hfst : XFST_TOOL      = $(HFST_XFST) -p $(MORE_VERBOSITY) $(HFST_FORMAT)
 %.xfst : XFST_TOOL      = $(XFST) $(VERBOSITY)
 %.foma : XFST_TOOL      = $(FOMA) $(VERBOSITY)

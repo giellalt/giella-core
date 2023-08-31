@@ -32,9 +32,7 @@ def digit_as_text(number, lang):
         f"lang-{lang}/src/transcriptions/transcriptor-numbers-digit2text.filtered.lookup.hfstol",
     )
     if not os.path.exists(digit_hfstol):
-        raise SystemExit(
-            f"{digit_hfstol} does not exist.\nPlease compile lang-{lang}"
-        )
+        raise SystemExit(f"{digit_hfstol} does not exist.\nPlease compile lang-{lang}")
 
     result = run(
         f"hfst-lookup -q {digit_hfstol}".split(),
@@ -46,7 +44,6 @@ def digit_as_text(number, lang):
 
 
 def generate_inflected_number(line, lang):
-
     generator = f"/usr/share/giella/{lang}/generator-gt-norm.hfstol"
     result = run(
         f"hfst-lookup -q {generator}".split(),

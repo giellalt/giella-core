@@ -23,7 +23,7 @@ from subprocess import run
 
 from corpustools import analyser
 
-NUMBER_RE = re.compile(f'"<(?P<number>\d+.*)>"')
+NUMBER_RE = re.compile('"<(?P<number>\d+.*)>"')
 
 
 def digit_as_text(number, lang):

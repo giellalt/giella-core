@@ -26,10 +26,12 @@ FLAG_FILE=flags.txt
 # Variable to hold filename for fst used as source for extracting tags,
 # sans extension
 TAG_EXTRACTION_FST=$(top_builddir)/src/analyser-%-gt-desc
+TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/analyser-%-gt-output
 
 ####### Source file and target defs: ########
 GT_DISAMB_TOKENISERS_FILTER_SRCS=
 GT_GRAMCHECK_TOKENISERS_FILTER_SRCS=
+GT_TTS_TOKENISERS_FILTER_SRCS=
 GT_TOKENISER_URLFILTER_SRC=
 
 if WANT_TOKENISERS
@@ -45,6 +47,11 @@ GT_GRAMCHECK_TOKENISERS_FILTER_SRCS+=make-gramcheck-CG-tags.regex \
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
 endif # WANT_GRAMCHECK
 
+if WANT_TTS
+GT_TTS_TOKENISERS_FILTER_SRCS+=make-tts-CG-tags.regex \
+						   tts-tokeniser-flags.regex
+GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
+endif # WANT_TTS
 
 if HAVE_ALT_ORTHS
 BASENAME_TOKEN_FILTERS_ORTH=
@@ -70,15 +77,15 @@ test:
 
 
 
-
 # The second variable is sorted to get rid of duplicates:
 GT_TOKENISERS_FILTER_ALL_SRCS=\
-        $(GT_DISAMB_TOKENISERS_FILTER_SRCS) \
+        $(GT_DISAMB_TOKENISERS_FILTER_SRCS)    \
         $(GT_GRAMCHECK_TOKENISERS_FILTER_SRCS) \
+        $(GT_TTS_TOKENISERS_FILTER_SRCS)       \
         $(sort $(GT_TOKENISER_URLFILTER_SRC) ) \
-        $(GT_LOCAL_TOKENISERS_FILTER_SRCS) \
-        $(ALT_ORTH_TOKENISER_FILTER_SRCS) \
-        $(GT_LOCAL_COPY_FILTER_SRCS) \
+        $(GT_LOCAL_TOKENISERS_FILTER_SRCS)     \
+        $(ALT_ORTH_TOKENISER_FILTER_SRCS)      \
+        $(GT_LOCAL_COPY_FILTER_SRCS)           \
         $(GENERATED_REGEXES)
 
 # This is what we build:
@@ -103,6 +110,15 @@ GT_TOKENISERS_FILTER_TARGETS+=\
         $(patsubst %.regex,%.hfst,$(GT_TOKENISERS_FILTER_ALL_SRCS))
 endif # CAN_HFST
 endif # WANT_GRAMCHECK
+
+# And we also want to build filters for the TTS tokeniser if it is enabled:
+if WANT_TTS
+if CAN_HFST
+GT_TOKENISERS_FILTER_TARGETS+=\
+        $(patsubst %.regex,%.hfst,$(GT_TOKENISERS_FILTER_ALL_SRCS))
+endif # CAN_HFST
+endif # WANT_TTS
+
 endif # WANT_TOKENISERS
 
 ####### Build rules for creating regexes from tag list: #######

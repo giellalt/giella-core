@@ -37,26 +37,23 @@ endif # CAN_HFST
 endif # CAN_XFST
 
 GIELLA_PMHFSTS=
-GIELLA_DISAMB_PMHFSTS=
-GIELLA_GRAMCHECK_PMHFSTS=
 GIELLA_TOKEN_DIS=
 
 if CAN_HFST
 # Only build the disamb tokeniser fst if analysers are enabled:
 if WANT_MORPHOLOGY
 if WANT_TOKENISERS
-GIELLA_DISAMB_PMHFSTS+=tokeniser-disamb-gt-desc.pmhfst
+GIELLA_PMHFSTS+=tokeniser-disamb-gt-desc.pmhfst
 GIELLA_TOKEN_DIS+=mwe-dis.bin
 endif # WANT_TOKENISERS
 endif # WANT_MORPHOLOGY
 
 # But build the grammarchecker tokeniser always when the grammar checker is enabled:
 if WANT_GRAMCHECK
-GIELLA_GRAMCHECK_PMHFSTS+=tokeniser-gramcheck-gt-desc.pmhfst
+GIELLA_PMHFSTS+=tokeniser-gramcheck-gt-desc.pmhfst
 GIELLA_TOKEN_DIS+=mwe-dis.bin
 endif # WANT_GRAMCHECK
 
-GIELLA_PMHFSTS+=$(GIELLA_DISAMB_PMHFSTS) $(GIELLA_GRAMCHECK_PMHFSTS)
 # Build the 
 if WANT_TTS
 GIELLA_PMHFSTS+=tokeniser-tts-cggt-desc.pmhfst

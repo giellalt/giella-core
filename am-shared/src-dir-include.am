@@ -1018,6 +1018,7 @@ include $(top_srcdir)/../giella-core/am-shared/src_alt_ws-include.am
 include $(top_srcdir)/../giella-core/am-shared/src_alt_orth-include.am
 include $(top_srcdir)/../giella-core/am-shared/src_dialects-include.am
 include $(top_srcdir)/../giella-core/am-shared/src_gramcheck-include.am
+include $(top_srcdir)/../giella-core/am-shared/src_tts-include.am
 include $(top_srcdir)/../giella-core/am-shared/regex-include.am
 include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
 include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am

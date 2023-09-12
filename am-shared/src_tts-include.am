@@ -1,0 +1,178 @@
+## Include this file in top-level srcdir to compile FSTs
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+##### BEGIN Hfst target list #####
+if CAN_HFST
+
+if WANT_TTS
+GT_ANALYSERS+=analyser-tts-gt-output.hfstol analyser-tts-gt-input.hfstol
+endif # WANT_TTS
+
+endif # CAN_HFST
+##### END Hfst target list #####
+
+##### BEGIN Xerox target list #####
+if CAN_XFST
+
+if WANT_TTS
+GT_ANALYSERS+=analyser-tts-gt-output.xfst analyser-tts-gt-input.xfst
+endif # WANT_TTS
+
+endif # CAN_XFST
+##### END Xerox target list #####
+
+##### BEGIN Foma target list #####
+if CAN_FOMA
+
+if WANT_TTS
+GT_ANALYSERS+=analyser-tts-gt-output.foma analyser-tts-gt-input.foma
+endif # WANT_TTS
+
+endif # CAN_FOMA
+##### END Foma target list #####
+
+# For TTS processing, we want two cascaded transducers: a filtered lexicon,
+# and the lower/input side of the lexicon + twolc rules.
+#
+# The following is a list of filters we might want to consider in the general
+# processing of the lexicon, before creating the input/surface version of the
+# FST:
+#					filters/remove-area-tags.%                
+#					filters/remove-dialect-tags.%             
+#					filters/remove-number-string-tags.%       
+#					filters/remove-hyphenation-marks.%        
+#					filters/remove-orthography-tags.%         
+#					filters/remove-Use_GC-strings.%           
+#					filters/remove-Use_minusGC-tags.%         
+#					filters/remove-Use_minus_PMatch-tags.%    
+#					filters/remove-Use_PMatch-strings.%       
+#					filters/remove-mwe-tags.%                 
+
+# First we create the filtered lexicon, ie the analysis/output part of the cascade:
+analyser-tts-gt-output.tmp.%: fst/lexicon.% \
+					filters/remove-derivation-position-tags.% \
+					filters/rename-POS_before_Der-tags.%      \
+					filters/remove-norm-comp-tags.%           \
+					filters/remove-use_mt-strings.%           \
+					filters/remove-DNorm-tags.%               \
+					filters/remove-usage-tags.%               \
+					filters/remove-Use_minusTTS-strings.%
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+				@\"filters/remove-usage-tags.$*\"               \
+			.o. @\"filters/remove-derivation-position-tags.$*\" \
+			.o. @\"filters/rename-POS_before_Der-tags.$*\"      \
+			.o. @\"filters/remove-norm-comp-tags.$*\"           \
+			.o. @\"filters/remove-DNorm-tags.$*\"               \
+			.o. @\"filters/remove-use_mt-strings.$*\"           \
+			.o. @\"filters/remove-Use_minusTTS-strings.$*\"     \
+			.o. @\"$<\"                                         \
+			;\n\
+		 twosided flag-diacritics\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
+# Fallback target for going from *.tmp.hfst to *.hfst
+#
+# Override this if you need language specific processing,
+# But remember to inclue the INVERT step at the end.
+# Also remember to use more specific target patterns, to override
+# this one (more specific patterns always take precedence over
+# more general ones)
+%-output.hfst: %-output.tmp.hfst
+	$(AM_V_XFST_TOOL)$(PRINTF) "\
+		 load stack $<\n\
+		 $(INVERT_HFST)\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
+# Then we create the input side - lower side of lexicon + twolc/phonology:
+
+# First: fallback for language specific preprocessing:
+%-input.pretmp.hfst: %-output.hfst
+	$(AM_V_COMPOSE)\
+		  $(HFST_INVERT)      $(MORE_VERBOSITY) $(HFST_FLAGS) $< \
+		| $(HFST_PROJECT)     $(MORE_VERBOSITY) $(HFST_FLAGS) -p output \
+		| $(HFST_DETERMINIZE) $(MORE_VERBOSITY) $(HFST_FLAGS) \
+		| $(HFST_MINIMIZE)    $(MORE_VERBOSITY) $(HFST_FLAGS) \
+		-o $@
+
+# Then the actual composition with TWOLC rules:
+
+# HFST
+if WANT_REVERSED_INTERSECT
+# Do this if reversed intersect is enabled:
+analyser-tts-gt-input.midtmp.hfst: analyser-tts-gt-input.pretmp.hfst \
+					 fst/phonology.rev.hfst
+	$(AM_V_INTRSCT)\
+		  $(HFST_REVERSE)     $(MORE_VERBOSITY) $(HFST_FLAGS) $< \
+		| $(HFST_COMPOSE_INTERSECT) $(COMPOSE_INTERSECT_FLAG) \
+							  $(MORE_VERBOSITY) $(HFST_FLAGS) \
+			-2 fst/phonology.rev.hfst \
+		| $(HFST_REVERSE)     $(MORE_VERBOSITY) \
+		| $(HFST_MINIMIZE)    $(MORE_VERBOSITY) $(HFST_FLAGS) \
+		-o $@
+
+else
+# Otherwise do this:
+analyser-tts-gt-input.midtmp.hfst: analyser-tts-gt-input.pretmp.hfst \
+					 fst/phonology.compose.hfst
+	$(AM_V_INTRSCT)\
+		  $(HFST_COMPOSE_INTERSECT) $(COMPOSE_INTERSECT_FLAG) $< \
+							  $(MORE_VERBOSITY) $(HFST_FLAGS) \
+			-1 $<
+			-2 fst/phonology.compose.hfst \
+		| $(HFST_MINIMIZE)    $(MORE_VERBOSITY) $(HFST_FLAGS) \
+		-o $@
+endif # WANT_REVERSED_INTERSECT
+
+# XEROX
+analyser-tts-gt-output.tmp.xfst: fst/lexicon.xfst \
+			 fst/phonology.compose.xfst
+	$(AM_V_LEXC)$(PRINTF) \
+		"read-source fst/lexicon.xfst\nread-rules fst/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
+		| $(LEXC) $(VERBOSITY)
+
+# Language independent processing for TTS analyser, after
+# TWOLC rules have been applied:
+# Override locally if needed, but remember to copy all details from
+# this target, as needed in each case.
+analyser-tts-gt-input.tmp.hfst  \
+analyser-tts-gt-input.tmp.xfst  \
+analyser-tts-gt-input.tmp.foma: \
+analyser-tts-gt-input.tmp.%: analyser-tts-gt-input.midtmp.%          \
+					filters/remove-hyphenation-marks.%        \
+					filters/remove-infl_deriv-borders.%       \
+					filters/remove-word-boundary.%            \
+					orthography/inituppercase.compose.%       \
+					orthography/spellrelax.compose.%          \
+					$(GLT_DOWNCASE_FILTER)
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+				@\"$<\" \
+				$(GLT_DOWNCASE_COMPOSE) \
+			.o. @\"filters/remove-hyphenation-marks.$*\"        \
+			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
+			.o. @\"filters/remove-word-boundary.$*\"            \
+			; \n\
+			define fst \n\
+			set flag-is-epsilon ON\n\
+			read regex fst \
+			.o. @\"orthography/inituppercase.compose.$*\"       \
+			.o. @\"orthography/spellrelax.compose.$*\"          \
+			;\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
+# Override this if you need language specific processing,
+# BUT remember to inclue the INVERT step at the end.
+# Also remember to use more specific target patterns, to override
+# this one (more specific patterns always take precedence over
+# more general ones)
+%-input.hfst: %-input.tmp.hfst
+	$(AM_V_XFST_TOOL)$(PRINTF) "\
+		 load stack $<\n\
+		 $(INVERT_HFST)\
+		 determinize\n\
+		 minimize\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)

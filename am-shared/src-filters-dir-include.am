@@ -121,6 +121,7 @@ GIELLA_FILTER_CORE_GENERATED_REGEX_SRCS=\
 				reorder-semantic-tags.regex                   \
 				$(DIALECT_REGEXES)                            \
 				$(AREA_INCONSISTENT_REGEX)                    \
+				$(AREA_INSERT_TAGS_REGEX)                     \
 				$(AREA_REGEXES)
 
 # 3) GTD Core xfscript filter files:
@@ -222,7 +223,7 @@ AREA_SUFFIXES=$(addsuffix  -strings,$(AREA_PREFIXES))
 AREA_REGEXES=$(addsuffix     .regex,$(AREA_SUFFIXES))
 
 AREA_INCONSISTENT_REGEX=remove-mixed_area-strings.regex
-
+AREA_INSERT_TAGS_REGEX=insert-area-tags-before-pos.regex
 endif # HAVE_AREAS
 
 ######## Build rules for extracting tags: ########
@@ -430,6 +431,12 @@ reorder-%-tags.regex: %-tags.txt
 insert-%-tags-after-pos.regex: %-tags.txt
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2insert_$*_tags_after_pos_regex.sh \
 		$@ $^
+
+### Insert tags before POS:
+insert-%-tags-before-pos.regex: %-tags.txt \
+        $(GTCORE)/scripts/taglist2insert_%_tags_before_pos_regex.sh
+	$(AM_V_GEN)$(GTCORE)/scripts/taglist2insert_$*_tags_before_pos_regex.sh \
+		$@ $<
 
 # Workaround hack for bug in the Sfst and Foma backends due to the size of this
 # filter for some languages:

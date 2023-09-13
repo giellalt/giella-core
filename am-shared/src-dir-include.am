@@ -178,10 +178,20 @@ if HAVE_AREAS
 GIELLA_MIXED_AREA_FILTER=filters/remove-mixed_area-strings.%
 GIELLA_MIXED_AREA_COMPOSE=.o. @\"filters/remove-mixed_area-strings.$*\"
 GIELLA_MIXED_AREA_COMPOSE_DEF=.o. @\"filters/remove-mixed_area-strings.$$*\"
+
+GIELLA_INSERT_AREATAG_FILTER=filters/insert-area-tags-before-pos.%
+GIELLA_INSERT_AREATAG_COMPOSE=.o. @\"filters/insert-area-tags-before-pos.$*\"
+GIELLA_INSERT_AREATAG_COMPOSE_DEF=.o. @\"filters/insert-area-tags-before-pos.$$*\"
+
 else
+
 GIELLA_MIXED_AREA_FILTER=
 GIELLA_MIXED_AREA_COMPOSE=
 GIELLA_MIXED_AREA_COMPOSE_DEF=
+
+GIELLA_INSERT_AREATAG_FILTER=
+GIELLA_INSERT_AREATAG_COMPOSE=
+GIELLA_INSERT_AREATAG_COMPOSE_DEF=
 endif # " HAVE_AREAS
 ### END: AREA filter conditional:
 

@@ -81,6 +81,7 @@ generator-gramcheck-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
+					$(GIELLA_INSERT_AREATAG_FILTER)           \
 					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
@@ -103,6 +104,7 @@ generator-gramcheck-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
+				$(GIELLA_INSERT_AREATAG_COMPOSE)                \
 				$(GIELLA_MIXED_AREA_COMPOSE)                    \
 			.o. @\"$<\"                                         \
 				$(GLT_DOWNCASE_COMPOSE)                         \
@@ -177,6 +179,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/$(DEFAULT_WS)-to-$(1).compose.% \
+					$(GIELLA_INSERT_AREATAG_FILTER)           \
 					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
@@ -199,6 +202,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
+				$(GIELLA_INSERT_AREATAG_COMPOSE_DEF)             \
 				$(GIELLA_MIXED_AREA_COMPOSE_DEF)                 \
 			.o. @\"$$<\"                                         \
 				$(GLT_DOWNCASE_COMPOSE_DEF)                      \
@@ -326,6 +330,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.% \
+					$(GIELLA_INSERT_AREATAG_FILTER)           \
 					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
@@ -348,6 +353,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
+				$(GIELLA_INSERT_AREATAG_COMPOSE_DEF)             \
 				$(GIELLA_MIXED_AREA_COMPOSE_DEF)                 \
 			.o. @\"$$<\"                                         \
 				$(GLT_DOWNCASE_COMPOSE_DEF)                      \
@@ -386,6 +392,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/raw-to-$(1).compose.%         \
+					$(GIELLA_INSERT_AREATAG_FILTER)           \
 					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
@@ -408,6 +415,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
+				$(GIELLA_INSERT_AREATAG_COMPOSE_DEF)             \
 				$(GIELLA_MIXED_AREA_COMPOSE_DEF)                 \
 			.o. @\"$$<\"                                         \
 				$(GLT_DOWNCASE_COMPOSE_DEF)                      \

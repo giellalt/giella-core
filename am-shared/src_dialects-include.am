@@ -7,7 +7,7 @@
 ####### Automake targets: ########
 # IFF different dialects are defined and enabled, compute target file names for
 # dialect variants (normative fst's only):
-if WANT_DIALECTS
+if HAVE_DIALECTS
 
 # Define temporary variables to build final target filenames from:
 ALL_DIAL_BASENAME_ANALYSERS=$(sort $(basename $(GT_ANALYSERS)))
@@ -65,7 +65,7 @@ endif # WANT_GENERATION
 endif # CAN_XFST
 ##### END Foma target list #####
 
-endif # WANT_DIALECTS
+endif # HAVE_DIALECTS
 
 ####### Build rules for the default set of fst's for  ########
 ####### areal variation reflected in the orthography: ########

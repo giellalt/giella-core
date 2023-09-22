@@ -5,7 +5,7 @@ if ! test $# -eq 2 ; then
     echo "Usage: $0 OUTFILE FSAFILE"
     echo
     echo "OUTFILE is the regex file to be created"
-    echo "FSAFILE is the file with alphabet containing NFD coded unicode arcs"
+    echo "FSAFILE is the file with alphabet containing NFC coded unicode arcs"
     echo
     exit 1
 fi

@@ -29,10 +29,10 @@ echo ""                                                >> "$REGEXFILE"
 @UCONV@ -f utf8 -x any-nfc "$REGEXFILE".sigma.nfd > "$REGEXFILE".sigma.nfc
 paste "$REGEXFILE".sigma.nfd "$REGEXFILE".sigma.nfc |\
     @AWK@ '$1 != $2 {printf("%s -> %s,\n", $1, $2);
-    printf("%s -> ", $1);
-    for (i = 1; i <= length($2); i++) {
-        printf("%s ", substr($2, i, 1));
-    }
-    printf(",\n");
+#    printf("%s -> ", $1);
+#    for (i = 1; i <= length($2); i++) {
+#        printf("%s ", substr($2, i, 1));
+#    }
+#    printf(",\n");
 }' >> "$REGEXFILE"
 echo "X -> X ;" >> "$REGEXFILE"

@@ -415,6 +415,7 @@ analyser-gt-desc.tmp.%: analyser-raw-gt-desc.%                \
 					filters/remove-mwe-tags.%                 \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
+					orthography/spellrelax-nfc2nfd.lookup.%   \
 					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
@@ -441,6 +442,7 @@ analyser-gt-desc.tmp.%: analyser-raw-gt-desc.%                \
 			set flag-is-epsilon ON\n\
 			read regex fst \
 			.o. @\"orthography/inituppercase.compose.$*\"       \
+			.o. @\"orthography/spellrelax-nfc2nfd.lookup.$*\"   \
 			.o. @\"orthography/spellrelax.compose.$*\"          \
 			;\n\
 		 save stack $@\n\
@@ -519,6 +521,7 @@ analyser-gt-glossing.tmp.%: analyser-raw-gt-glossing.%        \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
 					orthography/inituppercase.compose.%       \
+					orthography/spellrelax-nfc2nfd.lookup.%   \
 					orthography/spellrelax.compose.%          \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
@@ -544,6 +547,7 @@ analyser-gt-glossing.tmp.%: analyser-raw-gt-glossing.%        \
 			set flag-is-epsilon ON\n\
 			read regex fst \
 			.o. @\"orthography/inituppercase.compose.$*\"       \
+			.o. @\"orthography/spellrelax-nfc2nfd.lookup.$*\"   \
 			.o. @\"orthography/spellrelax.compose.$*\"          \
 			;\n\
 		 save stack $@\n\
@@ -940,6 +944,7 @@ lemmatize.default.hfst: analyser-gt-desc.hfst tagsets/lemmatize.relabel
 # morpher is a morph segmenting variant: taloautoissani -> talo#auto>i>ssa>ni
 morpher-gt-desc.tmp.%: analyser-raw-gt-desc.% \
 					 orthography/inituppercase.compose.% \
+					 orthography/spellrelax-nfc2nfd.lookup.%  \
 					 orthography/spellrelax.compose.% \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -947,6 +952,7 @@ morpher-gt-desc.tmp.%: analyser-raw-gt-desc.% \
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 			 [ [@\"$<\" \
 				.o. @\"orthography/inituppercase.compose.$*\"         \
+				.o. @\"orthography/spellrelax-nfc2nfd.lookup.$*\"     \
 				.o. @\"orthography/spellrelax.compose.$*\"  ].l       \
 			.o. @\"filters/remove-hyphenation-marks.$*\"  \
 			.o. @\"filters/remove-infl_deriv-borders.$*\" \

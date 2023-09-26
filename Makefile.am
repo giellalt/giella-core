@@ -83,7 +83,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    fst-filters/remove-nonfirst_infl_boundary-marks.regex \
    fst-filters/remove-norm-comp-tags.regex \
    fst-filters/remove-number-string-tags.regex \
-   fst-filters/remove-orig_lang-tags.regex \
    fst-filters/remove-orthography-tags.regex \
    fst-filters/remove-transitivity-tags.regex \
    fst-filters/remove-usage_except_NGminip-tags.regex \

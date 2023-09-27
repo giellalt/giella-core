@@ -89,42 +89,36 @@ keep_hom_tags () {
     fi
 }
 
-# The first lines do:
-# 1. grep only lines containing ;
-# 2. do NOT grep lines beginning with (space +) !, @ or <
-# 3. do NOT grep lines containing ONLY a continuation lexicon ref
-# 4. do NOT grep lines containing a number of generally known wrong stuff
-# 5. do NOT grep things specified in each test script
-# The rest is general mangling, the XXXXX part is needed to take care of
-# "lemma:stem CONTLEX" vs "word CONTLEX" when retaining the CONTLEX.
-# The penultimate perl s/__Hom..// thing is to restore the homonymy tags if kept
-grep ";" $inputfile \
-   | egrep -v "^[[:space:]]*(\!|\@|<|\+)" \
-   | keep_hom_tags \
-   | egrep -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" \
-   | egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex|DerSub)" \
-   | exclgrep "$excludepattern" \
-   | egrep    "$includepattern" \
-   | sed 's/^[ 	]*//' \
-   | sed 's/% /€/g' \
-   | sed 's/%:/¢/g' \
-   | sed 's/%#/¥/g' \
-   | sed 's/%@/£/g' \
-   | perl -pe 's/\+(?![A-Z])(?!v[0-9])/xxplussxx/g' \
-   | sed 's/%\(.\)/\1/g' \
-   | tr -s ' ' \
-   | sed 's/:/XXXXX/' \
-   | cut_fields \
-   | sed 's/@.* / /' \
-   | sed 's/XXXXX.* / /' \
-   | sed 's/XXXXX.*//' \
-   | tr -d "#"  \
-   | tr " " "\t" \
-   | sed 's/€/ /g' \
-   | sed 's/¢/:/g' \
-   | sed 's/£/@/g' \
-   | sed 's/¥/#/g' \
-   | egrep -v "(^$|^;|^[0-9]$|^\!)" \
-   | perl -pe 's/__(Hom[0-9]+)__/\+\1/' \
-   | sed 's/xxplussxx/\+/g' \
-   | sort -u
+# The main lemma extraction thing:
+grep ";" $inputfile                                    | # grep only lines containing ;
+   egrep -v "^[[:space:]]*(\!|\@|<|\+)"                | # do NOT grep lines beginning with (space +) !, @ or <
+   keep_hom_tags                                       | # treat homonyms special
+   egrep -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" | # do NOT grep lines containing ONLY a continuation lexicon ref
+   egrep -v "(LEXICON| K |ENDLEX|\+Err\/Lex|DerSub)"   | # do NOT grep lines containing a number of generally known wrong stuff
+   exclgrep "$excludepattern"                          | # do NOT grep things specified in each test script
+   egrep    "$includepattern"                          | # DO grep things specified in each test script if specified
+   sed 's/^[ 	]*//'                             | # Remove initial whitespace
+   sed 's/% /€/g'                                 | # escape lexc escapes
+   sed 's/%:/¢/g'                                 | # escape lexc escapes
+   sed 's/%#/¥/g'                                 | # escape lexc escapes
+   sed 's/%@/£/g'                                 | # escape lexc escapes
+   perl -pe 's/\+(?![A-Z])(?!v[0-9])/xxplussxx/g' | # escape + when not being the first letter in a tag
+   sed 's/%\(.\)/\1/g'                | # simplify lexc escapes
+   tr '\t' ' '                        | # replate tabs with spaces
+   tr -s ' '                          | # squash spaces to one
+   sed 's/:/XXXXX/'                   | # escape upper-lower mark before next step
+   cut_fields                         | # extract lemma, possibly contlex if specified
+   sed 's/@.* / /'                    | # remove lemma final flag diacritics
+   sed 's/XXXXX.* / /'                | # remove lower part
+   sed 's/XXXXX.*//'                  | # remove lower part
+   tr -d "#"                          | # remove word boundaries in lemmas (should not exist, but just to be safe)
+   tr " " "\t"                        | # change space to tabs - why??
+   sed 's/€/ /g'                      | # restore lexc escapes to their lexical form
+   sed 's/¢/:/g'                      | # restore lexc escapes to their lexical form
+   sed 's/£/@/g'                      | # restore lexc escapes to their lexical form
+   sed 's/¥/#/g'                      | # restore lexc escapes to their lexical form
+   egrep -v "(^$|^;|^[0-9]$|^\!)"     | # remove useless lines
+   perl -pe 's/__(Hom[0-9]+)__/\+\1/' | # restore homonym tags if kept
+   perl -pe 's/__(G[37]+)__/\+\1/'    | # restore homonym tags if kept
+   sed 's/xxplussxx/\+/g'             | # restore literal, escaped + sign
+   sort -u

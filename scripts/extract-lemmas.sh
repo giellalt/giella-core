@@ -82,7 +82,8 @@ cut_fields () {
 # Use this function to keep homonymy tags depending on the option given:
 keep_hom_tags () {
     if test "$keep_homonyms" = "true" ; then
-        perl -pe 's/(\w)\+(Hom[0-9])/\1__\2__/'
+        perl -pe 's/(\w)\+(Hom[0-9])/\1__\2__/' ;
+        perl -pe 's/(\w)\+(G[37])/\1__\2__/'
     else
         cat
     fi

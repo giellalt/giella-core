@@ -1,4 +1,10 @@
 ﻿<?xml version="1.0"?>
+
+<!-- anders (2023-09-28):
+     Identical functionality exists in merge_giella_dicts.py
+     This file is also identical to collect-dict-parts.xsl,
+     and NDS no longer uses this file -->
+
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to compile

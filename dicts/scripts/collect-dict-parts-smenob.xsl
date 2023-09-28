@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+
+<!-- anders (2023-09-28):
+     Very similar functionality exists in merge_giella_dicts.py
+     This file is not referenced in NDS. -->
+
 <!--+
     | 
     | The parameter: the path to the collection of XML-files to compile

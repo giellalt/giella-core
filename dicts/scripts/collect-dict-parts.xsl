@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "dummy.dtd">
 
+<!-- anders (2023-09-28):
+     Identical functionality exists in merge_giella_dicts.py -->
+
 <!--+
     |
     | The parameter: the path to the collection of XML-files to compile

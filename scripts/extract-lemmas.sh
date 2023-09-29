@@ -89,6 +89,8 @@ keep_hom_tags () {
     fi
 }
 
+>&2 echo "Before lemma extraction"
+
 # The main lemma extraction thing:
 grep ";" $inputfile                                    | # grep only lines containing ;
    egrep -v "^[[:space:]]*(\!|\@|<|\+)"                | # do NOT grep lines beginning with (space +) !, @ or <
@@ -122,3 +124,5 @@ grep ";" $inputfile                                    | # grep only lines conta
    perl -pe 's/__(G[37]+)__/\+\1/'    | # restore homonym tags if kept
    sed 's/xxplussxx/\+/g'             | # restore literal, escaped + sign
    sort -u
+
+>&2 echo "After lemma extraction"

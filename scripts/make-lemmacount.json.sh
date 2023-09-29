@@ -65,8 +65,6 @@ message="N/A"
 
 lemmacount=$($GIELLA_CORE/scripts/count-all-lemmas.sh $inputdir)
 
-echo lemmacount = $lemmacount
-
 if (( $lemmacount == 0 )) ; then
     # Invalid = N/A
     colour=grey

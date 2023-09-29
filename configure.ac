@@ -38,6 +38,7 @@ AC_CACHE_CHECK([for sed that supports newlines and pipes], [ac_cv_path_SED],
       && ac_cv_path_SED=$ac_path_SED ac_path_SED_found=:]],
     [AC_MSG_ERROR([could not find sed that supports newlines - please install GNU sed. Hint: sudo port install gsed./c])])])
 AC_SUBST([SED], [$ac_cv_path_SED])
+
 # Check for awk with required feature:
 AC_CACHE_CHECK([for awk that supports gensub], [ac_cv_path_GAWK],
   [AC_PATH_PROGS_FEATURE_CHECK([GAWK], [awk mawk nawk gawk],
@@ -58,7 +59,6 @@ AS_IF([test x$UCONV = xfalse],
        on macbrew: brew install icu4c (and follow instructions:
                                        i.e. set your PATH if necessary)
        ])])
-
 
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \

@@ -61,4 +61,6 @@ lemmacount=$(for f in $inputdir/src/fst/stems/*.lexc ; do
     sed 's/\+$//' | # ... remove the final +, and summarise everything in the final command
     bc)
 
+>&2 echo "Lemmacount/count all lemmas: $lemmacount"
+
 echo $lemmacount

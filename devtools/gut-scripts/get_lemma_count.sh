@@ -5,7 +5,7 @@
 # Usage:
 #
 # gut apply -s giella-core/devtools/gut-scripts/get_lemma_count.sh \
-# -r '^lang-(mhr|myv|fao |fin|kal|izh|sjd|kpv|fkv|olo|mdf|sje|sm.|udm|vro|mrj)$'
+# -r '^lang-(mhr|myv|fao|fin|kal|izh|sjd|kpv|fkv|olo|mdf|sje|sm.|udm|vro|mrj)$'
 
 # Use common lemma extraction script for most robust and reliable count:
 lemmacount=$(for f in src/fst/stems/*.lexc ; do 

@@ -9,9 +9,9 @@ HEADER=$(srcdir)/index-header.md
 INDEX=$(srcdir)/index.md
 
 # no regenerations while debugging
-doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
+doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json
 
-.PHONY: generate-markdown regenerate-markdown
+.PHONY: generate-markdown regenerate-markdown lemmacount.json
 
 regenerate-markdown: generate-markdown
 
@@ -43,6 +43,11 @@ report.json:
 	@echo need to configure --enable-spellers to generate statistics
 	touch $@
 endif
+
+# Generate endpoint json file for shield.io lemma count badge.
+# Only to be stored in the gh-pages branch, ignored in main.
+lemmacount.json: $(top_srcdir)/src/fst/stems/*.lexc
+	$(AM_V_GEN)$(GTCORE)/scripts/make-lemmacount.json.sh $(top_srcdir) > $@
 
 # Define all doccomment source files in a variable:
 DOCSRC_XEROX := $(shell fgrep -rl \

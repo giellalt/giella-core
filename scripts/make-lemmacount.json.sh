@@ -63,11 +63,7 @@ label=Lemmas
 colour=grey
 message="N/A"
 
->&2 echo "Now counting lemmas/json:"
-
 lemmacount=$($GIELLA_CORE/scripts/count-all-lemmas.sh $inputdir)
-
->&2 echo "Lemmacount/json: $lemmacount"
 
 if test "$lemmacount" -eq 0 ; then
     # Invalid = N/A

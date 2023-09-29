@@ -132,6 +132,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/lookup2cg \
    scripts/make_grammarchecker_zip.py \
    scripts/make-hfstspeller-version-easter-egg.sh \
+   scripts/make-lemmacount.json.sh \
    scripts/merge-templates.sh \
    scripts/morph-test.py \
    scripts/gramcheck-test.py \

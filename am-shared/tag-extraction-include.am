@@ -39,13 +39,19 @@ GREP_FLAGS_COMMAND=( grep -E '(^@.+@$$)' || echo '@C.NOFLAG@' )
 if CAN_HFST
 # Hfst: break on comma + space in three steps, to preserve space as a symbol.
 
-if WANT_TTS
 # Special case for TTS, because the FST has a different name. TTS only
 # works with HFST, so we skip the other technologies.
 %-sigma.txt: $(TAG_EXTRACTION_TTS_FST).hfst
-else
+	$(AM_V_GEN)$(HFST_SUMMARIZE) -v 2>/dev/null $^ \
+		| grep -A1 '^sigma set' \
+		| grep -v '^sigma set' \
+		| sed 's/, /\\\\\\/g' \
+		| perl -pe 's/\\\\\\/\n/g' \
+		| grep -v '^$$' \
+		| egrep -v '(@_EPSILON_SYMBOL_@|@_IDENTITY_SYMBOL_@|@_UNKNOWN_SYMBOL_@)' \
+		> $@
+
 %-sigma.txt: $(TAG_EXTRACTION_FST).hfst
-endif # WANT_TTS
 	$(AM_V_GEN)$(HFST_SUMMARIZE) -v 2>/dev/null $^ \
 		| grep -A1 '^sigma set' \
 		| grep -v '^sigma set' \

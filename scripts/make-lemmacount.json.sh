@@ -65,25 +65,25 @@ message="N/A"
 
 lemmacount=$($GIELLA_CORE/scripts/count-all-lemmas.sh $inputdir)
 
-if (( $lemmacount == 0 )) ; then
+if test $lemmacount -eq 0 ; then
     # Invalid = N/A
     colour=grey
     message="N/A"
-elif (( $lemmacount > 0 && lemmacount < 1000 )) ; then
+elif test $lemmacount -gt 0 && test $lemmacount -lt 1000 ; then
     # Experiment
     colour=black
     message=$lemmacount
-elif (( $lemmacount > 1000 && lemmacount < 10000 )) ; then
+elif test $lemmacount -ge 1000 && test $lemmacount -lt 10000 ; then
     # Alpha
     colour=red
     newlemmacount=$(round100 $lemmacount)
     message="$newlemmacount K"
-elif (( $lemmacount > 10000 && lemmacount < 30000 )) ; then
+elif test $lemmacount -ge 10000 && test $lemmacount -lt 30000 ; then
     # Beta
     colour=yellow
     newlemmacount=$(round100 $lemmacount)
     message="$newlemmacount K"
-elif (( $lemmacount > 30000 )) ; then
+elif test $lemmacount -ge 30000 ; then
     # Production
     colour=green
     newlemmacount=$(round1000 $lemmacount)

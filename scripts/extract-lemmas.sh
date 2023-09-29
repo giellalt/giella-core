@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # For debugging, uncomment this command:
-# set -x
+set -x
 
 function print_usage() {
     echo "Usage: $0 [OPTIONS...] INPUTFILE"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # For debugging, uncomment this command:
-set -x
+# set -x
 
 function print_usage() {
     echo "Usage: $0 [OPTIONS...] INPUTDIR"
@@ -54,26 +54,10 @@ else
     homonyms="-H"
 fi
 
->&2 echo "Before lemma counting/debug:"
-
-for f in $inputdir/src/fst/stems/*.lexc ; do
-    echo F2a
-    echo F2 File to extrat from: $f
-    echo F2b
-    echo There are $($GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | wc -l) lemmas in $f
-    echo F2c
-done
-
->&2 echo "Before lemma counting/count-all:"
-
-lemmacount=$(for f in $inputdir/src/fst/stems/*.lexc ; do 
+lemmacounts=$(for f in $inputdir/src/fst/stems/*.lexc ; do 
     $GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | # extract all lemmas for each stem file
-    wc -l; done)
-#      | # ... and count them
-#    tr '\n' '+'   | # replace newline with +
-#    sed 's/\+$//' | # ... remove the final +, and summarise everything in the final command
-#    bc)
+    wc -l; done) # ... and count them
 
->&2 echo "Lemmacount/count all lemmas: $lemmacount"
+lemmacount=$(echo $lemmacounts | tr ' ' '+' | bc)
 
 echo $lemmacount

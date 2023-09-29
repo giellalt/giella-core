@@ -58,10 +58,11 @@ fi
 
 lemmacount=$(for f in $inputdir/src/fst/stems/*.lexc ; do 
     echo $($GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | # extract all lemmas for each stem file
-    wc -l); done  | # ... and count them
-    tr '\n' '+'   | # replace newline with +
-    sed 's/\+$//' | # ... remove the final +, and summarise everything in the final command
-    bc)
+    wc -l); done)
+#      | # ... and count them
+#    tr '\n' '+'   | # replace newline with +
+#    sed 's/\+$//' | # ... remove the final +, and summarise everything in the final command
+#    bc)
 
 >&2 echo "Lemmacount/count all lemmas: $lemmacount"
 

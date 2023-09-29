@@ -33,10 +33,18 @@
 	$(AM_V_FOMA)"$(FOMA)" $(VERBOSITY) -l $< -e "save stack $@" -s
 
 # Pattern variables to choose tools depending on which toolset we build for:
-%.hfstol : XFST_TOOL    = false THIS IS A BUG IN MAKEFILE
 %.hfst : XFST_TOOL      = $(HFST_XFST) -p $(MORE_VERBOSITY) $(HFST_FORMAT)
 %.xfst : XFST_TOOL      = $(XFST) $(VERBOSITY)
 %.foma : XFST_TOOL      = $(FOMA) $(VERBOSITY)
+# following is just more verbose error message when some rule tries to invoke
+# xfst-tool for %.hfstol pattern which won't work, solve it by static pattern
+# that bloxks the hfstol like:
+# foobar.hfst \
+# foobar.xfst \
+# foobar.foma: \
+# foobar.%: foobar.tmp.%
+%.hfstol : XFST_TOOL    = false THIS IS A BUG IN MAKEFILE see xfscript-include.am
+
 
 %.hfst : AM_V_XFST_TOOL = $(AM_V_HXFST)
 %.xfst : AM_V_XFST_TOOL = $(AM_V_XFST)

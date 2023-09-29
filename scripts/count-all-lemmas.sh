@@ -57,8 +57,11 @@ fi
 >&2 echo "Before lemma counting/debug:"
 
 for f in $inputdir/src/fst/stems/*.lexc ; do
-    echo $f
-    $GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | wc -l
+    echo F2a
+    echo F2 File to extrat from: $f
+    echo F2b
+    echo There are $($GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | wc -l) lemmas in $f
+    echo F2c
 done
 
 >&2 echo "Before lemma counting/count-all:"

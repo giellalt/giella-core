@@ -54,11 +54,18 @@ else
     homonyms="-H"
 fi
 
+>&2 echo "Before lemma counting/debug:"
+
+for f in $inputdir/src/fst/stems/*.lexc ; do
+    echo $f
+    $GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | wc -l
+done
+
 >&2 echo "Before lemma counting/count-all:"
 
 lemmacount=$(for f in $inputdir/src/fst/stems/*.lexc ; do 
-    echo $($GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | # extract all lemmas for each stem file
-    wc -l); done)
+    $GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | # extract all lemmas for each stem file
+    wc -l; done)
 #      | # ... and count them
 #    tr '\n' '+'   | # replace newline with +
 #    sed 's/\+$//' | # ... remove the final +, and summarise everything in the final command

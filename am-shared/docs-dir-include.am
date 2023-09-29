@@ -11,7 +11,7 @@ INDEX=$(srcdir)/index.md
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json
 
-.PHONY: generate-markdown regenerate-markdown lemmacount.json
+.PHONY: generate-markdown regenerate-markdown
 
 regenerate-markdown: generate-markdown
 

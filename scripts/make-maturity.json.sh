@@ -22,7 +22,7 @@ while test $# -ge 1 ; do
     if test x$1 = x--help -o x$1 = x-h ; then
         print_usage
         exit 0
-    elif test -d "$1"; then
+    elif test ! -z "$1"; then
         reponame="$1"
     else
         echo "$0: unknown option $1"

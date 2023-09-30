@@ -53,7 +53,7 @@ $(srcdir)/lemmacount.json: $(top_srcdir)/src/fst/stems/*.lexc
 	$(AM_V_GEN)$(GTCORE)/scripts/make-lemmacount.json.sh $(abs_top_srcdir) > $@
 
 # Generate a maturity.json file as endpoint for the maturity badge.
-$(srcdir)/maturity.json: FORCE
+$(srcdir)/maturity.json:
 	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
 
 # Define all doccomment source files in a variable:

@@ -12,7 +12,7 @@ function print_usage() {
 }
 
 # Wrong usage - short instruction:
-if (( $# < 1 || $# > 2)) ; then
+if (( $# < 1 || $# > 1)) ; then
     print_usage
     exit 1
 fi

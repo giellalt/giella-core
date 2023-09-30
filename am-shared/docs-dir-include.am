@@ -14,7 +14,7 @@ REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json maturity.json
 
-.PHONY: generate-markdown regenerate-markdown maturity.json
+.PHONY: generate-markdown regenerate-markdown
 
 regenerate-markdown: generate-markdown
 
@@ -52,7 +52,10 @@ endif
 $(srcdir)/lemmacount.json: $(top_srcdir)/src/fst/stems/*.lexc
 	$(AM_V_GEN)$(GTCORE)/scripts/make-lemmacount.json.sh $(abs_top_srcdir) > $@
 
-$(srcdir)/maturity.json:
+# Generate a maturity.json file as endpoint for the maturity badge.
+# Always build it.
+FORCE:
+$(srcdir)/maturity.json: FORCE
 	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
 
 # Define all doccomment source files in a variable:

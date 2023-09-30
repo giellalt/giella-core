@@ -8,10 +8,13 @@ LINKS=$(srcdir)/Links.md
 HEADER=$(srcdir)/index-header.md
 INDEX=$(srcdir)/index.md
 
-# no regenerations while debugging
-doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json
+REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
+# " reset syntax colouring - gets confused by the single double quote in the previous line
 
-.PHONY: generate-markdown regenerate-markdown
+# no regenerations while debugging
+doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json maturity.json
+
+.PHONY: generate-markdown regenerate-markdown maturity.json
 
 regenerate-markdown: generate-markdown
 
@@ -48,6 +51,9 @@ endif
 # Only to be stored in the gh-pages branch, ignored in main.
 $(srcdir)/lemmacount.json: $(top_srcdir)/src/fst/stems/*.lexc
 	$(AM_V_GEN)$(GTCORE)/scripts/make-lemmacount.json.sh $(abs_top_srcdir) > $@
+
+$(srcdir)/maturity.json:
+	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
 
 # Define all doccomment source files in a variable:
 DOCSRC_XEROX := $(shell fgrep -rl \

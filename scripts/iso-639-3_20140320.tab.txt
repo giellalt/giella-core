@@ -5457,6 +5457,7 @@ pyu				I	L	Puyuma
 pyx				I	A	Pyu (Myanmar)	
 pyy				I	L	Pyen	
 pzn				I	L	Para Naga	
+qda				I	L	Guazacapán	
 qua				I	L	Quapaw	
 qub				I	L	Huallaga Huánuco Quechua	
 quc				I	L	K'iche'	
@@ -5929,6 +5930,7 @@ sme	sme	sme	se	I	L	Northern Sami
 smf				I	L	Auwe	
 smg				I	L	Simbali	
 smh				I	L	Samei	
+smi				M	L	Sami languages
 smj	smj	smj		I	L	Lule Sami	
 smk				I	L	Bolinao	
 sml				I	L	Central Sama	
@@ -7163,6 +7165,7 @@ xag				I	E	Aghwan
 xai				I	E	Kaimbé	
 xaj				I	E	Ararandewára	
 xal	xal	xal		I	L	Kalmyk	
+xak				I	L	Máku
 xam				I	E	/Xam	
 xan				I	L	Xamtanga	
 xao				I	L	Khao	

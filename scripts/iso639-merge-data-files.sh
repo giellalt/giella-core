@@ -36,7 +36,8 @@ while test $# -ge 1 ; do
     shift
 done
 
-cp -f "$iso639_3" "$iso639_out"
+# Strip returns from source file when copying to our data file:
+tr -d '\r' < "$iso639_3" > "$iso639_out"
 
 echo "# Beginning of ISO 639-5 data:" >> $iso639_out
 

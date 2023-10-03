@@ -1,0 +1,4079 @@
+@prefix bf: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bflc: <http://id.loc.gov/ontologies/bflc/> .
+@prefix cs: <http://purl.org/vocab/changeset/schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix madsrdf: <http://www.loc.gov/mads/rdf/v1#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ri: <http://id.loc.gov/ontologies/RecordInfo#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+# BEGIN /vocabulary/iso639-5/aav
+
+<http://id.loc.gov/vocabulary/iso639-5/aav> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Austro-Asiatic languages"@en,
+"austro-asiatiques, langues"@fr ;
+madsrdf:code "aav"^^xsd:string ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/mkh>,
+<http://id.loc.gov/vocabulary/iso639-5/mun> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "austro-asiatiques, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Austro-Asiatic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/mkh> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Mon-Khmer languages"@en,
+"môn-khmer, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/mun> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Munda languages"@en,
+"mounda, langues"@fr .
+
+# END /vocabulary/iso639-5/aav
+
+# BEGIN /vocabulary/iso639-5/afa
+
+<http://id.loc.gov/vocabulary/iso639-5/afa> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Afro-Asiatic languages"@en,
+"afro-asiatiques, langues"@fr ;
+madsrdf:code "afa"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/afa>,
+<http://id.loc.gov/vocabulary/languages/afa> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/ber>,
+<http://id.loc.gov/vocabulary/iso639-5/cdc>,
+<http://id.loc.gov/vocabulary/iso639-5/cus>,
+<http://id.loc.gov/vocabulary/iso639-5/egx>,
+<http://id.loc.gov/vocabulary/iso639-5/omv>,
+<http://id.loc.gov/vocabulary/iso639-5/sem> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Afro-Asiatic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "afro-asiatiques, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ber> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Berber languages"@en,
+"berbères, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cdc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Chadic languages"@en,
+"tchadiques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cus> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Cushitic languages"@en,
+"couchitiques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/egx> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Egyptian languages"@en,
+"égyptiennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/omv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Omotic languages"@en,
+"omotiques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sem> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Semitic languages"@en,
+"sémitiques, langues"@fr .
+
+# END /vocabulary/iso639-5/afa
+
+# BEGIN /vocabulary/iso639-5/alg
+
+<http://id.loc.gov/vocabulary/iso639-5/alg> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Algonquian languages"@en,
+"algonquines, langues"@fr ;
+madsrdf:code "alg"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/aql> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/alg>,
+<http://id.loc.gov/vocabulary/languages/alg> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Algonquian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "algonquines, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/aql> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Algic languages"@en,
+"algiques, langues"@fr .
+
+# END /vocabulary/iso639-5/alg
+
+# BEGIN /vocabulary/iso639-5/alv
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr ;
+madsrdf:code "alv"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nic> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/bad>,
+<http://id.loc.gov/vocabulary/iso639-5/bai>,
+<http://id.loc.gov/vocabulary/iso639-5/bnt>,
+<http://id.loc.gov/vocabulary/iso639-5/ijo>,
+<http://id.loc.gov/vocabulary/iso639-5/kro>,
+<http://id.loc.gov/vocabulary/iso639-5/znd> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Atlantic-Congo languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "atlantique-congo, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/bad> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Banda languages"@en,
+"banda, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/bai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Bamileke languages"@en,
+"bamiléké, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/bnt> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Bantu languages"@en,
+"bantou, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ijo> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Ijo languages"@en,
+"ijo, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/kro> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Kru languages"@en,
+"krou, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nic> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Niger-Kordofanian languages"@en,
+"nigéro-kordofaniennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/znd> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Zande languages"@en,
+"zandé, langues"@fr .
+
+# END /vocabulary/iso639-5/alv
+
+# BEGIN /vocabulary/iso639-5/apa
+
+<http://id.loc.gov/vocabulary/iso639-5/apa> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from apache, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Apache languages"@en,
+"apaches, langues"@fr ;
+madsrdf:code "apa"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ath> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/apa>,
+<http://id.loc.gov/vocabulary/languages/apa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Apache languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "apaches, langues"@en ] ;
+madsrdf:historyNote "Name change, French only (from apache, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ath> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Athapascan languages"@en,
+"athapascanes, langues"@fr .
+
+# END /vocabulary/iso639-5/apa
+
+# BEGIN /vocabulary/iso639-5/aqa
+
+<http://id.loc.gov/vocabulary/iso639-5/aqa> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Alacalufan languages"@en,
+"alacalufanes, langues"@fr ;
+madsrdf:code "aqa"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sai> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Alacalufan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "alacalufanes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/sai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "South American Indian languages"@en,
+"sud-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/aqa
+
+# BEGIN /vocabulary/iso639-5/aql
+
+<http://id.loc.gov/vocabulary/iso639-5/aql> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Algic languages"@en,
+"algiques, langues"@fr ;
+madsrdf:code "aql"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/alg> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "algiques, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Algic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/alg> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Algonquian languages"@en,
+"algonquines, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/aql
+
+# BEGIN /vocabulary/iso639-5/art
+
+<http://id.loc.gov/vocabulary/iso639-5/art> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Artificial languages"@en,
+"artificielles, langues"@fr ;
+madsrdf:code "art"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/art>,
+<http://id.loc.gov/vocabulary/languages/art> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "artificielles, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Artificial languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+# END /vocabulary/iso639-5/art
+
+# BEGIN /vocabulary/iso639-5/ath
+
+<http://id.loc.gov/vocabulary/iso639-5/ath> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Athapascan languages"@en,
+"athapascanes, langues"@fr ;
+madsrdf:code "ath"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/xnd> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/ath>,
+<http://id.loc.gov/vocabulary/languages/ath> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/apa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Athapascan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "athapascanes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/apa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Apache languages"@en,
+"apaches, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/xnd> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Na-Dene languages"@en,
+"na-déné, langues"@fr .
+
+# END /vocabulary/iso639-5/ath
+
+# BEGIN /vocabulary/iso639-5/auf
+
+<http://id.loc.gov/vocabulary/iso639-5/auf> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Arauan languages"@en,
+"arauanes, langues"@fr ;
+madsrdf:code "auf"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/awd> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Arauan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "arauanes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/awd> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Arawakan languages"@en,
+"arawak, langues"@fr .
+
+# END /vocabulary/iso639-5/auf
+
+# BEGIN /vocabulary/iso639-5/aus
+
+<http://id.loc.gov/vocabulary/iso639-5/aus> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Australian languages"@en,
+"australiennes, langues"@fr ;
+madsrdf:code "aus"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/aus>,
+<http://id.loc.gov/vocabulary/languages/aus> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Australian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "australiennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+# END /vocabulary/iso639-5/aus
+
+# BEGIN /vocabulary/iso639-5/awd
+
+<http://id.loc.gov/vocabulary/iso639-5/awd> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Arawakan languages"@en,
+"arawak, langues"@fr ;
+madsrdf:code "awd"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/auf> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Arawakan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "arawak, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/auf> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Arauan languages"@en,
+"arauanes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "South American Indian languages"@en,
+"sud-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/awd
+
+# BEGIN /vocabulary/iso639-5/azc
+
+<http://id.loc.gov/vocabulary/iso639-5/azc> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Uto-Aztecan languages"@en,
+"uto-aztèques, langues"@fr ;
+madsrdf:code "azc"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/nah> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "uto-aztèques, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Uto-Aztecan languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/nah> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Nahuatl languages"@en,
+"nahuatl, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/azc
+
+# BEGIN /vocabulary/iso639-5/bad
+
+<http://id.loc.gov/vocabulary/iso639-5/bad> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Banda languages"@en,
+"banda, langues"@fr ;
+madsrdf:code "bad"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/alv> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/bad>,
+<http://id.loc.gov/vocabulary/languages/bad> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Banda languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "banda, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr .
+
+# END /vocabulary/iso639-5/bad
+
+# BEGIN /vocabulary/iso639-5/bai
+
+<http://id.loc.gov/vocabulary/iso639-5/bai> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Bamileke languages"@en,
+"bamiléké, langues"@fr ;
+madsrdf:code "bai"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/alv> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/bai>,
+<http://id.loc.gov/vocabulary/languages/bai> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Bamileke languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "bamiléké, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr .
+
+# END /vocabulary/iso639-5/bai
+
+# BEGIN /vocabulary/iso639-5/bat
+
+<http://id.loc.gov/vocabulary/iso639-5/bat> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from baltiques, autres langues and baltiques, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Baltic languages"@en,
+"baltes, langues"@fr ;
+madsrdf:code "bat"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/bat>,
+<http://id.loc.gov/vocabulary/languages/bat> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "baltes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Baltic languages"@en ] ;
+madsrdf:historyNote "Name change, French only (from baltiques, autres langues and baltiques, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+# END /vocabulary/iso639-5/bat
+
+# BEGIN /vocabulary/iso639-5/ber
+
+<http://id.loc.gov/vocabulary/iso639-5/ber> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Berber languages"@en,
+"berbères, langues"@fr ;
+madsrdf:code "ber"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/afa> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/ber>,
+<http://id.loc.gov/vocabulary/languages/ber> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "berbères, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Berber languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/afa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Afro-Asiatic languages"@en,
+"afro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/ber
+
+# BEGIN /vocabulary/iso639-5/bih
+
+<http://id.loc.gov/vocabulary/iso639-5/bih> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2013-02-11T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Update"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Bihari languages"@en,
+"langues biharis"@fr ;
+madsrdf:code "bih"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/iir> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/bih>,
+<http://id.loc.gov/vocabulary/languages/bih> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Bihari languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "langues biharis"@en ] ;
+madsrdf:historyNote "Update"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/iir> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-Iranian languages"@en,
+"indo-iraniennes, langues"@fr .
+
+# END /vocabulary/iso639-5/bih
+
+# BEGIN /vocabulary/iso639-5/bnt
+
+<http://id.loc.gov/vocabulary/iso639-5/bnt> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from bantoues, autres langues and bantoues, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Bantu languages"@en,
+"bantou, langues"@fr ;
+madsrdf:code "bnt"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/alv> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/bnt>,
+<http://id.loc.gov/vocabulary/languages/bnt> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Bantu languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "bantou, langues"@en ] ;
+madsrdf:historyNote "Name change, French only (from bantoues, autres langues and bantoues, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr .
+
+# END /vocabulary/iso639-5/bnt
+
+# BEGIN /vocabulary/iso639-5/btk
+
+<http://id.loc.gov/vocabulary/iso639-5/btk> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Batak languages"@en,
+"batak, langues"@fr ;
+madsrdf:code "btk"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/pqw> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/btk>,
+<http://id.loc.gov/vocabulary/languages/btk> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Batak languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "batak, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/pqw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Western Malayo-Polynesian languages"@en,
+"malayo-polynésiennes occidentales, langues"@fr .
+
+# END /vocabulary/iso639-5/btk
+
+# BEGIN /vocabulary/iso639-5/cai
+
+<http://id.loc.gov/vocabulary/iso639-5/cai> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from indiennes d'Amérique centrale, autres lang and indiennes d'Amérique centrale, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Central American Indian languages"@en,
+"amérindiennes de l'Amérique centrale, langues"@fr ;
+madsrdf:code "cai"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cai>,
+<http://id.loc.gov/vocabulary/languages/cai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/myn>,
+<http://id.loc.gov/vocabulary/iso639-5/omq> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "amérindiennes de l'Amérique centrale, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Central American Indian languages"@en ] ;
+madsrdf:historyNote "Name change, French only (from indiennes d'Amérique centrale, autres lang and indiennes d'Amérique centrale, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/myn> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Mayan languages"@en,
+"maya, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/omq> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Oto-Manguean languages"@en,
+"otomangue, langues"@fr .
+
+# END /vocabulary/iso639-5/cai
+
+# BEGIN /vocabulary/iso639-5/cau
+
+<http://id.loc.gov/vocabulary/iso639-5/cau> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Caucasian languages"@en,
+"caucasiennes, langues"@fr ;
+madsrdf:code "cau"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cau>,
+<http://id.loc.gov/vocabulary/languages/cau> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/ccn>,
+<http://id.loc.gov/vocabulary/iso639-5/ccs> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "caucasiennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Caucasian languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "In many classifications, Caucasian (encompassing North Caucasian and South Caucasian) is not considered to be a language family; rather, North Caucasian and South Caucasian are considered to be separate, unrelated language families."@en,
+"Dans de nombreuses classifications, les langues caucasiennes (comprenant les langues caucasiennes du Nord et les langues caucasiennes du Sud) ne sont pas considérées comme une famille de langues; les langues caucasiennes du Nord et les langues caucasiennes du Sud sont traitées comme des familles de langues distinctes."@fr ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ccn> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North Caucasian languages"@en,
+"caucasiennes du Nord, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ccs> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "South Caucasian languages"@en,
+"caucasiennes du Sud, langues"@fr .
+
+# END /vocabulary/iso639-5/cau
+
+# BEGIN /vocabulary/iso639-5/cba
+
+<http://id.loc.gov/vocabulary/iso639-5/cba> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Chibchan languages"@en,
+"chibcha, langues"@fr ;
+madsrdf:code "cba"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sai> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "chibcha, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Chibchan languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/sai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "South American Indian languages"@en,
+"sud-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/cba
+
+# BEGIN /vocabulary/iso639-5/ccn
+
+<http://id.loc.gov/vocabulary/iso639-5/ccn> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "North Caucasian languages"@en,
+"caucasiennes du Nord, langues"@fr ;
+madsrdf:code "ccn"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/cau> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "North Caucasian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "caucasiennes du Nord, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "Note D: In many classifications, Caucasian (encompassing North Caucasian and South Caucasian) is not considered to be a language family; rather, North Caucasian and South Caucasian are considered to be separate, unrelated language families."@en,
+"See note d relating to Caucasian."@en,
+"Note D: Dans de nombreuses classifications, les langues caucasiennes (comprenant les langues caucasiennes du Nord et les langues caucasiennes du Sud) ne sont pas considérées comme une famille de langues; les langues caucasiennes du Nord et les langues caucasiennes du Sud sont traitées comme des familles de langues distinctes."@fr,
+"Voir la note d relative aux langues caucasiennes."@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cau> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Caucasian languages"@en,
+"caucasiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/ccn
+
+# BEGIN /vocabulary/iso639-5/ccs
+
+<http://id.loc.gov/vocabulary/iso639-5/ccs> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "South Caucasian languages"@en,
+"caucasiennes du Sud, langues"@fr ;
+madsrdf:code "ccs"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/cau> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "South Caucasian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "caucasiennes du Sud, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "Note D: In many classifications, Caucasian (encompassing North Caucasian and South Caucasian) is not considered to be a language family; rather, North Caucasian and South Caucasian are considered to be separate, unrelated language families."@en,
+"See note d relating to Caucasian."@en,
+"Note D: Dans de nombreuses classifications, les langues caucasiennes (comprenant les langues caucasiennes du Nord et les langues caucasiennes du Sud) ne sont pas considérées comme une famille de langues; les langues caucasiennes du Nord et les langues caucasiennes du Sud sont traitées comme des familles de langues distinctes."@fr,
+"Voir la note d relative aux langues caucasiennes."@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cau> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Caucasian languages"@en,
+"caucasiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/ccs
+
+# BEGIN /vocabulary/iso639-5/cdc
+
+<http://id.loc.gov/vocabulary/iso639-5/cdc> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Chadic languages"@en,
+"tchadiques, langues"@fr ;
+madsrdf:code "cdc"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/afa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Chadic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "tchadiques, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/afa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Afro-Asiatic languages"@en,
+"afro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/cdc
+
+# BEGIN /vocabulary/iso639-5/cdd
+
+<http://id.loc.gov/vocabulary/iso639-5/cdd> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Caddoan languages"@en,
+"caddoanes, langues"@fr ;
+madsrdf:code "cdd"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Caddoan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "caddoanes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/cdd
+
+# BEGIN /vocabulary/iso639-5/cel
+
+<http://id.loc.gov/vocabulary/iso639-5/cel> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change and name addition, French only (from celtiques, autres langues and celtiques, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Celtic languages"@en,
+"celtiques, langues; celtes, langues"@fr ;
+madsrdf:code "cel"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cel>,
+<http://id.loc.gov/vocabulary/languages/cel> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "celtiques, langues; celtes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Celtic languages"@en ] ;
+madsrdf:historyNote "Name change and name addition, French only (from celtiques, autres langues and celtiques, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+# END /vocabulary/iso639-5/cel
+
+# BEGIN /vocabulary/iso639-5/cmc
+
+<http://id.loc.gov/vocabulary/iso639-5/cmc> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Chamic languages"@en,
+"chames, langues"@fr ;
+madsrdf:code "cmc"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/pqw> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cmc>,
+<http://id.loc.gov/vocabulary/languages/cmc> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "chames, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Chamic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/pqw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Western Malayo-Polynesian languages"@en,
+"malayo-polynésiennes occidentales, langues"@fr .
+
+# END /vocabulary/iso639-5/cmc
+
+# BEGIN /vocabulary/iso639-5/cpe
+
+<http://id.loc.gov/vocabulary/iso639-5/cpe> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from créoles et pidgins anglais, autres and créoles et pidgins anglais)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Creoles and pidgins, English‑based"@en,
+"créoles et pidgins basés sur l'anglais"@fr ;
+madsrdf:code "cpe"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/crp> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cpe>,
+<http://id.loc.gov/vocabulary/languages/cpe> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Creoles and pidgins, English‑based"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "créoles et pidgins basés sur l'anglais"@en ] ;
+madsrdf:historyNote "Name change, French only (from créoles et pidgins anglais, autres and créoles et pidgins anglais)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/crp> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Creoles and pidgins"@en,
+"créoles et pidgins"@fr .
+
+# END /vocabulary/iso639-5/cpe
+
+# BEGIN /vocabulary/iso639-5/cpf
+
+<http://id.loc.gov/vocabulary/iso639-5/cpf> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from créoles et pidgins français, autres and créoles et pidgins français)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Creoles and pidgins, French‑based"@en,
+"créoles et pidgins basés sur le français"@fr ;
+madsrdf:code "cpf"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/crp> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cpf>,
+<http://id.loc.gov/vocabulary/languages/cpf> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "créoles et pidgins basés sur le français"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Creoles and pidgins, French‑based"@en ] ;
+madsrdf:historyNote "Name change, French only (from créoles et pidgins français, autres and créoles et pidgins français)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/crp> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Creoles and pidgins"@en,
+"créoles et pidgins"@fr .
+
+# END /vocabulary/iso639-5/cpf
+
+# BEGIN /vocabulary/iso639-5/cpp
+
+<http://id.loc.gov/vocabulary/iso639-5/cpp> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from créoles et pidgins portugais autres and créoles et pidgins portugais)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Creoles and pidgins, Portuguese-based"@en,
+"créoles et pidgins basés sur le portugais"@fr ;
+madsrdf:code "cpp"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/crp> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cpp>,
+<http://id.loc.gov/vocabulary/languages/cpp> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Creoles and pidgins, Portuguese-based"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "créoles et pidgins basés sur le portugais"@en ] ;
+madsrdf:historyNote "Name change, French only (from créoles et pidgins portugais autres and créoles et pidgins portugais)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/crp> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Creoles and pidgins"@en,
+"créoles et pidgins"@fr .
+
+# END /vocabulary/iso639-5/cpp
+
+# BEGIN /vocabulary/iso639-5/crp
+
+<http://id.loc.gov/vocabulary/iso639-5/crp> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Creoles and pidgins"@en,
+"créoles et pidgins"@fr ;
+madsrdf:code "crp"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/crp>,
+<http://id.loc.gov/vocabulary/languages/crp> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/cpe>,
+<http://id.loc.gov/vocabulary/iso639-5/cpf>,
+<http://id.loc.gov/vocabulary/iso639-5/cpp> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Creoles and pidgins"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "créoles et pidgins"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cpe> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Creoles and pidgins, English‑based"@en,
+"créoles et pidgins basés sur l'anglais"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cpf> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Creoles and pidgins, French‑based"@en,
+"créoles et pidgins basés sur le français"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cpp> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Creoles and pidgins, Portuguese-based"@en,
+"créoles et pidgins basés sur le portugais"@fr .
+
+# END /vocabulary/iso639-5/crp
+
+# BEGIN /vocabulary/iso639-5/csu
+
+<http://id.loc.gov/vocabulary/iso639-5/csu> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Central Sudanic languages"@en,
+"soudaniques centrales, langues"@fr ;
+madsrdf:code "csu"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ssa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Central Sudanic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "soudaniques centrales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/ssa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Nilo-Saharan languages"@en,
+"nilo-sahariennes, langues"@fr .
+
+# END /vocabulary/iso639-5/csu
+
+# BEGIN /vocabulary/iso639-5/cus
+
+<http://id.loc.gov/vocabulary/iso639-5/cus> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Cushitic languages"@en,
+"couchitiques, langues"@fr ;
+madsrdf:code "cus"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/afa> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/cus>,
+<http://id.loc.gov/vocabulary/languages/cus> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Cushitic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "couchitiques, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/afa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Afro-Asiatic languages"@en,
+"afro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/cus
+
+# BEGIN /vocabulary/iso639-5/day
+
+<http://id.loc.gov/vocabulary/iso639-5/day> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-19T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Land Dayak languages"@en,
+"dayak, langues"@fr ;
+madsrdf:code "day"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/day>,
+<http://id.loc.gov/vocabulary/languages/day> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Land Dayak languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "dayak, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+# END /vocabulary/iso639-5/day
+
+# BEGIN /vocabulary/iso639-5/dmn
+
+<http://id.loc.gov/vocabulary/iso639-5/dmn> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Mande languages"@en,
+"mandé, langues"@fr ;
+madsrdf:code "dmn"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nic> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "mandé, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Mande languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/nic> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Niger-Kordofanian languages"@en,
+"nigéro-kordofaniennes, langues"@fr .
+
+# END /vocabulary/iso639-5/dmn
+
+# BEGIN /vocabulary/iso639-5/dra
+
+<http://id.loc.gov/vocabulary/iso639-5/dra> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Dravidian languages"@en,
+"dravidiennes, langues"@fr ;
+madsrdf:code "dra"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/dra>,
+<http://id.loc.gov/vocabulary/languages/dra> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "dravidiennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Dravidian languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+# END /vocabulary/iso639-5/dra
+
+# BEGIN /vocabulary/iso639-5/egx
+
+<http://id.loc.gov/vocabulary/iso639-5/egx> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Egyptian languages"@en,
+"égyptiennes, langues"@fr ;
+madsrdf:code "egx"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/afa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "égyptiennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Egyptian languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/afa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Afro-Asiatic languages"@en,
+"afro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/egx
+
+# BEGIN /vocabulary/iso639-5/esx
+
+<http://id.loc.gov/vocabulary/iso639-5/esx> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Eskimo-Aleut languages"@en,
+"esquimaudes-aléoutiennes, langues"@fr ;
+madsrdf:code "esx"^^xsd:string ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/ypk> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Eskimo-Aleut languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "esquimaudes-aléoutiennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/ypk> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Yupik languages"@en,
+"yupik, langues"@fr .
+
+# END /vocabulary/iso639-5/esx
+
+# BEGIN /vocabulary/iso639-5/euq
+
+<http://id.loc.gov/vocabulary/iso639-5/euq> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Basque (family)"@en,
+"basque (famille)"@fr ;
+madsrdf:code "euq"^^xsd:string ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Basque (family)"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "basque (famille)"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "Basque is included in ISO 639-1 and ISO 639-2 as an individual language (eu / eus / baq)."@en,
+"Le basque est inclus dans l'ISO 639 1 et l'ISO 639 2 comme langue individuelle (eu / eus / baq)."@fr .
+
+# END /vocabulary/iso639-5/euq
+
+# BEGIN /vocabulary/iso639-5/fiu
+
+<http://id.loc.gov/vocabulary/iso639-5/fiu> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Finno-Ugrian languages"@en,
+"finno-ougriennes, langues"@fr ;
+madsrdf:code "fiu"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/urj> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/fiu>,
+<http://id.loc.gov/vocabulary/languages/fiu> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/smi> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Finno-Ugrian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "finno-ougriennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/smi> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Sami languages"@en,
+"sames, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/urj> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Uralic languages"@en,
+"ouraliennes, langues"@fr .
+
+# END /vocabulary/iso639-5/fiu
+
+# BEGIN /vocabulary/iso639-5/fox
+
+<http://id.loc.gov/vocabulary/iso639-5/fox> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Formosan languages"@en,
+"formosanes, langues"@fr ;
+madsrdf:code "fox"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/map> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Formosan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "formosanes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/map> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Austronesian languages"@en,
+"austronésiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/fox
+
+# BEGIN /vocabulary/iso639-5/gem
+
+<http://id.loc.gov/vocabulary/iso639-5/gem> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Germanic languages"@en,
+"germaniques, langues"@fr ;
+madsrdf:code "gem"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/gem>,
+<http://id.loc.gov/vocabulary/languages/gem> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/gme>,
+<http://id.loc.gov/vocabulary/iso639-5/gmq>,
+<http://id.loc.gov/vocabulary/iso639-5/gmw> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "germaniques, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Germanic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/gme> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "East Germanic languages"@en,
+"germaniques orientales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/gmq> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North Germanic languages"@en,
+"germaniques septentrionales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/gmw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "West Germanic languages"@en,
+"germaniques occidentales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+# END /vocabulary/iso639-5/gem
+
+# BEGIN /vocabulary/iso639-5/gme
+
+<http://id.loc.gov/vocabulary/iso639-5/gme> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "East Germanic languages"@en,
+"germaniques orientales, langues"@fr ;
+madsrdf:code "gme"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/gem> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "East Germanic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "germaniques orientales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/gem> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Germanic languages"@en,
+"germaniques, langues"@fr .
+
+# END /vocabulary/iso639-5/gme
+
+# BEGIN /vocabulary/iso639-5/gmq
+
+<http://id.loc.gov/vocabulary/iso639-5/gmq> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "North Germanic languages"@en,
+"germaniques septentrionales, langues"@fr ;
+madsrdf:code "gmq"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/gem> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "North Germanic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "germaniques septentrionales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/gem> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Germanic languages"@en,
+"germaniques, langues"@fr .
+
+# END /vocabulary/iso639-5/gmq
+
+# BEGIN /vocabulary/iso639-5/gmw
+
+<http://id.loc.gov/vocabulary/iso639-5/gmw> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "West Germanic languages"@en,
+"germaniques occidentales, langues"@fr ;
+madsrdf:code "gmw"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/gem> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "West Germanic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "germaniques occidentales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/gem> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Germanic languages"@en,
+"germaniques, langues"@fr .
+
+# END /vocabulary/iso639-5/gmw
+
+# BEGIN /vocabulary/iso639-5/grk
+
+<http://id.loc.gov/vocabulary/iso639-5/grk> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Greek languages"@en,
+"grecques, langues"@fr ;
+madsrdf:code "grk"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Greek languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "grecques, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+# END /vocabulary/iso639-5/grk
+
+# BEGIN /vocabulary/iso639-5/hmx
+
+<http://id.loc.gov/vocabulary/iso639-5/hmx> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Hmong-Mien languages"@en,
+"hmong-mien, langues"@fr ;
+madsrdf:code "hmx"^^xsd:string ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "hmong-mien, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Hmong-Mien languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+# END /vocabulary/iso639-5/hmx
+
+# BEGIN /vocabulary/iso639-5/hok
+
+<http://id.loc.gov/vocabulary/iso639-5/hok> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Hokan languages"@en,
+"hoka, langues"@fr ;
+madsrdf:code "hok"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "hoka, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Hokan languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/hok
+
+# BEGIN /vocabulary/iso639-5/hyx
+
+<http://id.loc.gov/vocabulary/iso639-5/hyx> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Armenian (family)"@en,
+"arménien (famille)"@fr ;
+madsrdf:code "hyx"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "arménien (famille)"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Armenian (family)"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "Armenian is included in ISO 639-1 and ISO 639-2 as an individual language (hy / hye / arm)."@en,
+"L'arménien est inclus dans l'ISO 639 1 et l'ISO 639 2 comme langue individuelle (hy / hye / arm)."@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+# END /vocabulary/iso639-5/hyx
+
+# BEGIN /vocabulary/iso639-5/iir
+
+<http://id.loc.gov/vocabulary/iso639-5/iir> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Indo-Iranian languages"@en,
+"indo-iraniennes, langues"@fr ;
+madsrdf:code "iir"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/bih>,
+<http://id.loc.gov/vocabulary/iso639-5/inc>,
+<http://id.loc.gov/vocabulary/iso639-5/ira> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "indo-iraniennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Indo-Iranian languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/bih> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Bihari languages"@en,
+"langues biharis"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/inc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indic languages"@en,
+"indo-aryennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ira> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Iranian languages"@en,
+"iraniennes, langues"@fr .
+
+# END /vocabulary/iso639-5/iir
+
+# BEGIN /vocabulary/iso639-5/ijo
+
+<http://id.loc.gov/vocabulary/iso639-5/ijo> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Ijo languages"@en,
+"ijo, langues"@fr ;
+madsrdf:code "ijo"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/alv> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/ijo>,
+<http://id.loc.gov/vocabulary/languages/ijo> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Ijo languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "ijo, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr .
+
+# END /vocabulary/iso639-5/ijo
+
+# BEGIN /vocabulary/iso639-5/inc
+
+<http://id.loc.gov/vocabulary/iso639-5/inc> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Indic languages"@en,
+"indo-aryennes, langues"@fr ;
+madsrdf:code "inc"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/iir> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/inc>,
+<http://id.loc.gov/vocabulary/languages/inc> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/pra> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "indo-aryennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Indic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/iir> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-Iranian languages"@en,
+"indo-iraniennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/pra> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Prakrit languages"@en,
+"prâkrit, langues"@fr .
+
+# END /vocabulary/iso639-5/inc
+
+# BEGIN /vocabulary/iso639-5/ine
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr ;
+madsrdf:code "ine"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/ine>,
+<http://id.loc.gov/vocabulary/languages/ine> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/bat>,
+<http://id.loc.gov/vocabulary/iso639-5/cel>,
+<http://id.loc.gov/vocabulary/iso639-5/gem>,
+<http://id.loc.gov/vocabulary/iso639-5/grk>,
+<http://id.loc.gov/vocabulary/iso639-5/hyx>,
+<http://id.loc.gov/vocabulary/iso639-5/iir>,
+<http://id.loc.gov/vocabulary/iso639-5/itc>,
+<http://id.loc.gov/vocabulary/iso639-5/sla>,
+<http://id.loc.gov/vocabulary/iso639-5/sqj> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Indo-European languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "indo-européennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/bat> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Baltic languages"@en,
+"baltes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cel> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Celtic languages"@en,
+"celtiques, langues; celtes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/gem> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Germanic languages"@en,
+"germaniques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/grk> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Greek languages"@en,
+"grecques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/hyx> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Armenian (family)"@en,
+"arménien (famille)"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/iir> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-Iranian languages"@en,
+"indo-iraniennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/itc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Italic languages"@en,
+"italiques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sla> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Slavic languages"@en,
+"slaves, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sqj> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Albanian languages"@en,
+"albanaises, langues"@fr .
+
+# END /vocabulary/iso639-5/ine
+
+# BEGIN /vocabulary/iso639-5/ira
+
+<http://id.loc.gov/vocabulary/iso639-5/ira> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Iranian languages"@en,
+"iraniennes, langues"@fr ;
+madsrdf:code "ira"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/iir> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/ira>,
+<http://id.loc.gov/vocabulary/languages/ira> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Iranian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "iraniennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/iir> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-Iranian languages"@en,
+"indo-iraniennes, langues"@fr .
+
+# END /vocabulary/iso639-5/ira
+
+# BEGIN /vocabulary/iso639-5/iro
+
+<http://id.loc.gov/vocabulary/iso639-5/iro> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Iroquoian languages"@en,
+"iroquoises, langues"@fr ;
+madsrdf:code "iro"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/iro>,
+<http://id.loc.gov/vocabulary/languages/iro> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Iroquoian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "iroquoises, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/iro
+
+# BEGIN /vocabulary/iso639-5/iso639-5_Language
+
+<http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language> a owl:Class ;
+rdfs:label "ISO639-5 Language"@en ;
+rdfs:comment "An instance of an ISO639-5 Language. A finite set of individuals are instances of an ISO639-5 Language."^^rdf:XMLLiteral .
+
+# END /vocabulary/iso639-5/iso639-5_Language
+
+# BEGIN /vocabulary/iso639-5/itc
+
+<http://id.loc.gov/vocabulary/iso639-5/itc> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Italic languages"@en,
+"italiques, langues"@fr ;
+madsrdf:code "itc"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/roa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Italic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "italiques, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/roa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Romance languages"@en,
+"romanes, langues"@fr .
+
+# END /vocabulary/iso639-5/itc
+
+# BEGIN /vocabulary/iso639-5/jpx
+
+<http://id.loc.gov/vocabulary/iso639-5/jpx> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Japanese (family)"@en,
+"japonais (famille)"@fr ;
+madsrdf:code "jpx"^^xsd:string ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "japonais (famille)"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Japanese (family)"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "Japanese is included in ISO 639-1 and ISO 639-2 as an individual language (ja / jpn)."@en,
+"Le japonais est inclus dans l'ISO 639 1 et l'ISO 639 2 comme langue individuelle (ja / jpn)."@fr .
+
+# END /vocabulary/iso639-5/jpx
+
+# BEGIN /vocabulary/iso639-5/kar
+
+<http://id.loc.gov/vocabulary/iso639-5/kar> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Karen languages"@en,
+"karen, langues"@fr ;
+madsrdf:code "kar"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/tbq> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/kar>,
+<http://id.loc.gov/vocabulary/languages/kar> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Karen languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "karen, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/tbq> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Tibeto-Burman languages"@en,
+"tibéto-birmanes, langues"@fr .
+
+# END /vocabulary/iso639-5/kar
+
+# BEGIN /vocabulary/iso639-5/kdo
+
+<http://id.loc.gov/vocabulary/iso639-5/kdo> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Kordofanian languages"@en,
+"kordofaniennes, langues"@fr ;
+madsrdf:code "kdo"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nic> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Kordofanian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "kordofaniennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/nic> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Niger-Kordofanian languages"@en,
+"nigéro-kordofaniennes, langues"@fr .
+
+# END /vocabulary/iso639-5/kdo
+
+# BEGIN /vocabulary/iso639-5/khi
+
+<http://id.loc.gov/vocabulary/iso639-5/khi> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Khoisan languages"@en,
+"khoïsan, langues"@fr ;
+madsrdf:code "khi"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/khi>,
+<http://id.loc.gov/vocabulary/languages/khi> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "khoïsan, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Khoisan languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+# END /vocabulary/iso639-5/khi
+
+# BEGIN /vocabulary/iso639-5/kro
+
+<http://id.loc.gov/vocabulary/iso639-5/kro> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Kru languages"@en,
+"krou, langues"@fr ;
+madsrdf:code "kro"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/alv> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/kro>,
+<http://id.loc.gov/vocabulary/languages/kro> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Kru languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "krou, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr .
+
+# END /vocabulary/iso639-5/kro
+
+# BEGIN /vocabulary/iso639-5/map
+
+<http://id.loc.gov/vocabulary/iso639-5/map> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Austronesian languages"@en,
+"austronésiennes, langues"@fr ;
+madsrdf:code "map"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/map>,
+<http://id.loc.gov/vocabulary/languages/map> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/fox>,
+<http://id.loc.gov/vocabulary/iso639-5/poz> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Austronesian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "austronésiennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/fox> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Formosan languages"@en,
+"formosanes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/poz> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Malayo-Polynesian languages"@en,
+"malayo-polynésiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/map
+
+# BEGIN /vocabulary/iso639-5/mkh
+
+<http://id.loc.gov/vocabulary/iso639-5/mkh> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Mon-Khmer languages"@en,
+"môn-khmer, langues"@fr ;
+madsrdf:code "mkh"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/aav> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/mkh>,
+<http://id.loc.gov/vocabulary/languages/mkh> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Mon-Khmer languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "môn-khmer, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/aav> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Austro-Asiatic languages"@en,
+"austro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/mkh
+
+# BEGIN /vocabulary/iso639-5/mno
+
+<http://id.loc.gov/vocabulary/iso639-5/mno> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Manobo languages"@en,
+"manobo, langues"@fr ;
+madsrdf:code "mno"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/phi> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/mno>,
+<http://id.loc.gov/vocabulary/languages/mno> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "manobo, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Manobo languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/phi> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Philippine languages"@en,
+"philippines, langues"@fr .
+
+# END /vocabulary/iso639-5/mno
+
+# BEGIN /vocabulary/iso639-5/mun
+
+<http://id.loc.gov/vocabulary/iso639-5/mun> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Munda languages"@en,
+"mounda, langues"@fr ;
+madsrdf:code "mun"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/aav> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/mun>,
+<http://id.loc.gov/vocabulary/languages/mun> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Munda languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "mounda, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/aav> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Austro-Asiatic languages"@en,
+"austro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/mun
+
+# BEGIN /vocabulary/iso639-5/myn
+
+<http://id.loc.gov/vocabulary/iso639-5/myn> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from mayas, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Mayan languages"@en,
+"maya, langues"@fr ;
+madsrdf:code "myn"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/cai> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/myn>,
+<http://id.loc.gov/vocabulary/languages/myn> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "maya, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Mayan languages"@en ] ;
+madsrdf:historyNote "Name change, French only (from mayas, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Central American Indian languages"@en,
+"amérindiennes de l'Amérique centrale, langues"@fr .
+
+# END /vocabulary/iso639-5/myn
+
+# BEGIN /vocabulary/iso639-5/nah
+
+<http://id.loc.gov/vocabulary/iso639-5/nah> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Nahuatl languages"@en,
+"nahuatl, langues"@fr ;
+madsrdf:code "nah"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/azc> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/nah>,
+<http://id.loc.gov/vocabulary/languages/nah> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Nahuatl languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "nahuatl, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/azc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Uto-Aztecan languages"@en,
+"uto-aztèques, langues"@fr .
+
+# END /vocabulary/iso639-5/nah
+
+# BEGIN /vocabulary/iso639-5/nai
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from indiennes d'Amérique du Nord and autres langues indiennes d'Amérique du Nord, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr ;
+madsrdf:code "nai"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/nai>,
+<http://id.loc.gov/vocabulary/languages/nai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/aql>,
+<http://id.loc.gov/vocabulary/iso639-5/azc>,
+<http://id.loc.gov/vocabulary/iso639-5/cdd>,
+<http://id.loc.gov/vocabulary/iso639-5/hok>,
+<http://id.loc.gov/vocabulary/iso639-5/iro>,
+<http://id.loc.gov/vocabulary/iso639-5/sal>,
+<http://id.loc.gov/vocabulary/iso639-5/sio>,
+<http://id.loc.gov/vocabulary/iso639-5/wak>,
+<http://id.loc.gov/vocabulary/iso639-5/xnd> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "nord-amérindiennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "North American Indian languages"@en ] ;
+madsrdf:historyNote "Name change, French only (from indiennes d'Amérique du Nord and autres langues indiennes d'Amérique du Nord, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/aql> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Algic languages"@en,
+"algiques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/azc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Uto-Aztecan languages"@en,
+"uto-aztèques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cdd> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Caddoan languages"@en,
+"caddoanes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/hok> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Hokan languages"@en,
+"hoka, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/iro> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Iroquoian languages"@en,
+"iroquoises, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sal> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Salishan languages"@en,
+"salishennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sio> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Siouan languages"@en,
+"sioux, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/wak> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Wakashan languages"@en,
+"wakashanes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/xnd> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Na-Dene languages"@en,
+"na-déné, langues"@fr .
+
+# END /vocabulary/iso639-5/nai
+
+# BEGIN /vocabulary/iso639-5/ngf
+
+<http://id.loc.gov/vocabulary/iso639-5/ngf> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Hierarchy changes to paa : ngf from ngf : paa. Name change, English (from Trans New Guinea). Name change, French (from trans Nouvelle Guinée)."@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Trans-New Guinea languages"@en,
+"trans-nouvelle-guinée, langues"@fr ;
+madsrdf:code "ngf"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/paa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "trans-nouvelle-guinée, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Trans-New Guinea languages"@en ] ;
+madsrdf:historyNote "Hierarchy changes to paa : ngf from ngf : paa. Name change, English (from Trans New Guinea). Name change, French (from trans Nouvelle Guinée)."@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/paa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Papuan languages"@en,
+"papoues, langues"@fr .
+
+# END /vocabulary/iso639-5/ngf
+
+# BEGIN /vocabulary/iso639-5/nic
+
+<http://id.loc.gov/vocabulary/iso639-5/nic> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Niger-Kordofanian languages"@en,
+"nigéro-kordofaniennes, langues"@fr ;
+madsrdf:code "nic"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/nic>,
+<http://id.loc.gov/vocabulary/languages/nic> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/alv>,
+<http://id.loc.gov/vocabulary/iso639-5/dmn>,
+<http://id.loc.gov/vocabulary/iso639-5/kdo> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Niger-Kordofanian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "nigéro-kordofaniennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/dmn> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Mande languages"@en,
+"mandé, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/kdo> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Kordofanian languages"@en,
+"kordofaniennes, langues"@fr .
+
+# END /vocabulary/iso639-5/nic
+
+# BEGIN /vocabulary/iso639-5/nub
+
+<http://id.loc.gov/vocabulary/iso639-5/nub> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Nubian languages"@en,
+"nubiennes, langues"@fr ;
+madsrdf:code "nub"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sdv> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/nub>,
+<http://id.loc.gov/vocabulary/languages/nub> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Nubian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "nubiennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sdv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Eastern Sudanic languages"@en,
+"soudaniques orientales, langues"@fr .
+
+# END /vocabulary/iso639-5/nub
+
+# BEGIN /vocabulary/iso639-5/omq
+
+<http://id.loc.gov/vocabulary/iso639-5/omq> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Oto-Manguean languages"@en,
+"otomangue, langues"@fr ;
+madsrdf:code "omq"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/cai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/oto> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Oto-Manguean languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "otomangue, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/cai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Central American Indian languages"@en,
+"amérindiennes de l'Amérique centrale, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/oto> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Otomian languages"@en,
+"otomi, langues"@fr .
+
+# END /vocabulary/iso639-5/omq
+
+# BEGIN /vocabulary/iso639-5/omv
+
+<http://id.loc.gov/vocabulary/iso639-5/omv> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Omotic languages"@en,
+"omotiques, langues"@fr ;
+madsrdf:code "omv"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/afa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "omotiques, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Omotic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/afa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Afro-Asiatic languages"@en,
+"afro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/omv
+
+# BEGIN /vocabulary/iso639-5/oto
+
+<http://id.loc.gov/vocabulary/iso639-5/oto> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Otomian languages"@en,
+"otomi, langues"@fr ;
+madsrdf:code "oto"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/omq> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/oto>,
+<http://id.loc.gov/vocabulary/languages/oto> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Otomian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "otomi, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/omq> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Oto-Manguean languages"@en,
+"otomangue, langues"@fr .
+
+# END /vocabulary/iso639-5/oto
+
+# BEGIN /vocabulary/iso639-5/paa
+
+<http://id.loc.gov/vocabulary/iso639-5/paa> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Hierarchy changed to paa from ngf : paa"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Papuan languages"@en,
+"papoues, langues"@fr ;
+madsrdf:code "paa"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/paa>,
+<http://id.loc.gov/vocabulary/languages/paa> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/ngf> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "papoues, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Papuan languages"@en ] ;
+madsrdf:historyNote "Hierarchy changed to paa from ngf : paa"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ngf> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Trans-New Guinea languages"@en,
+"trans-nouvelle-guinée, langues"@fr .
+
+# END /vocabulary/iso639-5/paa
+
+# BEGIN /vocabulary/iso639-5/phi
+
+<http://id.loc.gov/vocabulary/iso639-5/phi> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Philippine languages"@en,
+"philippines, langues"@fr ;
+madsrdf:code "phi"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/pqw> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/phi>,
+<http://id.loc.gov/vocabulary/languages/phi> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/mno> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "philippines, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Philippine languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/mno> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Manobo languages"@en,
+"manobo, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/pqw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Western Malayo-Polynesian languages"@en,
+"malayo-polynésiennes occidentales, langues"@fr .
+
+# END /vocabulary/iso639-5/phi
+
+# BEGIN /vocabulary/iso639-5/plf
+
+<http://id.loc.gov/vocabulary/iso639-5/plf> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Central Malayo-Polynesian languages"@en,
+"malayo-polynésiennes centrales, langues"@fr ;
+madsrdf:code "plf"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/poz> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Central Malayo-Polynesian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "malayo-polynésiennes centrales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/poz> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Malayo-Polynesian languages"@en,
+"malayo-polynésiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/plf
+
+# BEGIN /vocabulary/iso639-5/poz
+
+<http://id.loc.gov/vocabulary/iso639-5/poz> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Malayo-Polynesian languages"@en,
+"malayo-polynésiennes, langues"@fr ;
+madsrdf:code "poz"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/map> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/plf>,
+<http://id.loc.gov/vocabulary/iso639-5/pqe>,
+<http://id.loc.gov/vocabulary/iso639-5/pqw> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Malayo-Polynesian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "malayo-polynésiennes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/map> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Austronesian languages"@en,
+"austronésiennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/plf> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Central Malayo-Polynesian languages"@en,
+"malayo-polynésiennes centrales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/pqe> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Eastern Malayo-Polynesian languages"@en,
+"malayo-polynésiennes orientales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/pqw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Western Malayo-Polynesian languages"@en,
+"malayo-polynésiennes occidentales, langues"@fr .
+
+# END /vocabulary/iso639-5/poz
+
+# BEGIN /vocabulary/iso639-5/pqe
+
+<http://id.loc.gov/vocabulary/iso639-5/pqe> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Eastern Malayo-Polynesian languages"@en,
+"malayo-polynésiennes orientales, langues"@fr ;
+madsrdf:code "pqe"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/poz> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Eastern Malayo-Polynesian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "malayo-polynésiennes orientales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/poz> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Malayo-Polynesian languages"@en,
+"malayo-polynésiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/pqe
+
+# BEGIN /vocabulary/iso639-5/pqw
+
+<http://id.loc.gov/vocabulary/iso639-5/pqw> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Western Malayo-Polynesian languages"@en,
+"malayo-polynésiennes occidentales, langues"@fr ;
+madsrdf:code "pqw"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/poz> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/btk>,
+<http://id.loc.gov/vocabulary/iso639-5/cmc>,
+<http://id.loc.gov/vocabulary/iso639-5/phi> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Western Malayo-Polynesian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "malayo-polynésiennes occidentales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/btk> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Batak languages"@en,
+"batak, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cmc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Chamic languages"@en,
+"chames, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/phi> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Philippine languages"@en,
+"philippines, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/poz> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Malayo-Polynesian languages"@en,
+"malayo-polynésiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/pqw
+
+# BEGIN /vocabulary/iso639-5/pra
+
+<http://id.loc.gov/vocabulary/iso639-5/pra> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from prâkrits, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Prakrit languages"@en,
+"prâkrit, langues"@fr ;
+madsrdf:code "pra"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/inc> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/pra>,
+<http://id.loc.gov/vocabulary/languages/pra> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Prakrit languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "prâkrit, langues"@en ] ;
+madsrdf:historyNote "Name change, French only (from prâkrits, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/inc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indic languages"@en,
+"indo-aryennes, langues"@fr .
+
+# END /vocabulary/iso639-5/pra
+
+# BEGIN /vocabulary/iso639-5/qwe
+
+<http://id.loc.gov/vocabulary/iso639-5/qwe> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Quechuan (family)"@en,
+"quechua (famille)"@fr ;
+madsrdf:code "qwe"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sai> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "quechua (famille)"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Quechuan (family)"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "ISO 639-1 and ISO 639-2 have the item “Quechua” (qu / que) as an individual language."@en,
+"L'ISO 639 1 et l'ISO 639 2 considèrent l'objet «quechua» (qu / que) comme une langue individuelle."@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "South American Indian languages"@en,
+"sud-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/qwe
+
+# BEGIN /vocabulary/iso639-5/roa
+
+<http://id.loc.gov/vocabulary/iso639-5/roa> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Romance languages"@en,
+"romanes, langues"@fr ;
+madsrdf:code "roa"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/itc> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/roa>,
+<http://id.loc.gov/vocabulary/languages/roa> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "romanes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Romance languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/itc> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Italic languages"@en,
+"italiques, langues"@fr .
+
+# END /vocabulary/iso639-5/roa
+
+# BEGIN /vocabulary/iso639-5/sai
+
+<http://id.loc.gov/vocabulary/iso639-5/sai> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from indiennes d'Amérique du Sud and autres langues indiennes d'Amérique du Sud, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "South American Indian languages"@en,
+"sud-amérindiennes, langues"@fr ;
+madsrdf:code "sai"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/sai>,
+<http://id.loc.gov/vocabulary/languages/sai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/aqa>,
+<http://id.loc.gov/vocabulary/iso639-5/awd>,
+<http://id.loc.gov/vocabulary/iso639-5/cba>,
+<http://id.loc.gov/vocabulary/iso639-5/qwe>,
+<http://id.loc.gov/vocabulary/iso639-5/tup> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "South American Indian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "sud-amérindiennes, langues"@en ] ;
+madsrdf:historyNote "Name change, French only (from indiennes d'Amérique du Sud and autres langues indiennes d'Amérique du Sud, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/aqa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Alacalufan languages"@en,
+"alacalufanes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/awd> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Arawakan languages"@en,
+"arawak, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/cba> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Chibchan languages"@en,
+"chibcha, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/qwe> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Quechuan (family)"@en,
+"quechua (famille)"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/tup> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Tupi languages"@en,
+"tupi, langues"@fr .
+
+# END /vocabulary/iso639-5/sai
+
+# BEGIN /vocabulary/iso639-5/sal
+
+<http://id.loc.gov/vocabulary/iso639-5/sal> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from salish, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Salishan languages"@en,
+"salishennes, langues"@fr ;
+madsrdf:code "sal"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/sal>,
+<http://id.loc.gov/vocabulary/languages/sal> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "salishennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Salishan languages"@en ] ;
+madsrdf:historyNote "Name change, French only (from salish, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/sal
+
+# BEGIN /vocabulary/iso639-5/sdv
+
+<http://id.loc.gov/vocabulary/iso639-5/sdv> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Eastern Sudanic languages"@en,
+"soudaniques orientales, langues"@fr ;
+madsrdf:code "sdv"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ssa> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/nub> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Eastern Sudanic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "soudaniques orientales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/nub> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Nubian languages"@en,
+"nubiennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ssa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Nilo-Saharan languages"@en,
+"nilo-sahariennes, langues"@fr .
+
+# END /vocabulary/iso639-5/sdv
+
+# BEGIN /vocabulary/iso639-5/sem
+
+<http://id.loc.gov/vocabulary/iso639-5/sem> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Semitic languages"@en,
+"sémitiques, langues"@fr ;
+madsrdf:code "sem"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/afa> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/sem>,
+<http://id.loc.gov/vocabulary/languages/sem> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Semitic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "sémitiques, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/afa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Afro-Asiatic languages"@en,
+"afro-asiatiques, langues"@fr .
+
+# END /vocabulary/iso639-5/sem
+
+# BEGIN /vocabulary/iso639-5/sgn
+
+<http://id.loc.gov/vocabulary/iso639-5/sgn> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "sign languages"@en,
+"langues des signes"@fr ;
+madsrdf:code "sgn"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/sgn>,
+<http://id.loc.gov/vocabulary/languages/sgn> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "sign languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "langues des signes"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+# END /vocabulary/iso639-5/sgn
+
+# BEGIN /vocabulary/iso639-5/sio
+
+<http://id.loc.gov/vocabulary/iso639-5/sio> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Siouan languages"@en,
+"sioux, langues"@fr ;
+madsrdf:code "sio"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/sio>,
+<http://id.loc.gov/vocabulary/languages/sio> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Siouan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "sioux, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/sio
+
+# BEGIN /vocabulary/iso639-5/sit
+
+<http://id.loc.gov/vocabulary/iso639-5/sit> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Sino-Tibetan languages"@en,
+"sino-tibétaines, langues"@fr ;
+madsrdf:code "sit"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/sit>,
+<http://id.loc.gov/vocabulary/languages/sit> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/tbq>,
+<http://id.loc.gov/vocabulary/iso639-5/zhx> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Sino-Tibetan languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "sino-tibétaines, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/tbq> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Tibeto-Burman languages"@en,
+"tibéto-birmanes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/zhx> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Chinese (family)"@en,
+"chinois (famille)"@fr .
+
+# END /vocabulary/iso639-5/sit
+
+# BEGIN /vocabulary/iso639-5/sla
+
+<http://id.loc.gov/vocabulary/iso639-5/sla> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Slavic languages"@en,
+"slaves, langues"@fr ;
+madsrdf:code "sla"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/sla>,
+<http://id.loc.gov/vocabulary/languages/sla> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/zle>,
+<http://id.loc.gov/vocabulary/iso639-5/zls>,
+<http://id.loc.gov/vocabulary/iso639-5/zlw> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "slaves, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Slavic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/zle> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "East Slavic languages"@en,
+"slaves orientales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/zls> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "South Slavic languages"@en,
+"slaves méridionales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/zlw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "West Slavic languages"@en,
+"slaves occidentales, langues"@fr .
+
+# END /vocabulary/iso639-5/sla
+
+# BEGIN /vocabulary/iso639-5/smi
+
+<http://id.loc.gov/vocabulary/iso639-5/smi> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Sami languages"@en,
+"sames, langues"@fr ;
+madsrdf:code "smi"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/fiu> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/smi>,
+<http://id.loc.gov/vocabulary/languages/smi> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Sami languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "sames, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/fiu> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Finno-Ugrian languages"@en,
+"finno-ougriennes, langues"@fr .
+
+# END /vocabulary/iso639-5/smi
+
+# BEGIN /vocabulary/iso639-5/son
+
+<http://id.loc.gov/vocabulary/iso639-5/son> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Songhai languages"@en,
+"songhai, langues"@fr ;
+madsrdf:code "son"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ssa> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/son>,
+<http://id.loc.gov/vocabulary/languages/son> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Songhai languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "songhai, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ssa> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Nilo-Saharan languages"@en,
+"nilo-sahariennes, langues"@fr .
+
+# END /vocabulary/iso639-5/son
+
+# BEGIN /vocabulary/iso639-5/sqj
+
+<http://id.loc.gov/vocabulary/iso639-5/sqj> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Albanian languages"@en,
+"albanaises, langues"@fr ;
+madsrdf:code "sqj"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/ine> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "albanaises, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Albanian languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "Albanian is included in ISO 639-1 and ISO 639-2 as an individual language (sq / sqi / alb)."@en,
+"L'albanais est inclus dans l'ISO 639 1 et l'ISO 639 2 comme langue individuelle (sq / sqi / alb)."@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/ine> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Indo-European languages"@en,
+"indo-européennes, langues"@fr .
+
+# END /vocabulary/iso639-5/sqj
+
+# BEGIN /vocabulary/iso639-5/ssa
+
+<http://id.loc.gov/vocabulary/iso639-5/ssa> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Nilo-Saharan languages"@en,
+"nilo-sahariennes, langues"@fr ;
+madsrdf:code "ssa"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/ssa>,
+<http://id.loc.gov/vocabulary/languages/ssa> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/csu>,
+<http://id.loc.gov/vocabulary/iso639-5/sdv>,
+<http://id.loc.gov/vocabulary/iso639-5/son> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "nilo-sahariennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Nilo-Saharan languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/csu> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Central Sudanic languages"@en,
+"soudaniques centrales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sdv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Eastern Sudanic languages"@en,
+"soudaniques orientales, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/son> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Songhai languages"@en,
+"songhai, langues"@fr .
+
+# END /vocabulary/iso639-5/ssa
+
+# BEGIN /vocabulary/iso639-5/syd
+
+<http://id.loc.gov/vocabulary/iso639-5/syd> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Samoyedic languages"@en,
+"samoyèdes, langues"@fr ;
+madsrdf:code "syd"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/urj> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Samoyedic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "samoyèdes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/urj> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Uralic languages"@en,
+"ouraliennes, langues"@fr .
+
+# END /vocabulary/iso639-5/syd
+
+# BEGIN /vocabulary/iso639-5/tai
+
+<http://id.loc.gov/vocabulary/iso639-5/tai> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Tai languages"@en,
+"tai, langues"@fr ;
+madsrdf:code "tai"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/tai>,
+<http://id.loc.gov/vocabulary/languages/tai> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "tai, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Tai languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+# END /vocabulary/iso639-5/tai
+
+# BEGIN /vocabulary/iso639-5/tbq
+
+<http://id.loc.gov/vocabulary/iso639-5/tbq> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Tibeto-Burman languages"@en,
+"tibéto-birmanes, langues"@fr ;
+madsrdf:code "tbq"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sit> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/kar> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Tibeto-Burman languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "tibéto-birmanes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/kar> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Karen languages"@en,
+"karen, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sit> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Sino-Tibetan languages"@en,
+"sino-tibétaines, langues"@fr .
+
+# END /vocabulary/iso639-5/tbq
+
+# BEGIN /vocabulary/iso639-5/trk
+
+<http://id.loc.gov/vocabulary/iso639-5/trk> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Turkic languages"@en,
+"turques, langues"@fr ;
+madsrdf:code "trk"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/tut> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "turques, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Turkic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/tut> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Altaic languages"@en,
+"altaïques, langues"@fr .
+
+# END /vocabulary/iso639-5/trk
+
+# BEGIN /vocabulary/iso639-5/tup
+
+<http://id.loc.gov/vocabulary/iso639-5/tup> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Tupi languages"@en,
+"tupi, langues"@fr ;
+madsrdf:code "tup"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sai> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/tup>,
+<http://id.loc.gov/vocabulary/languages/tup> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "tupi, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Tupi languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "South American Indian languages"@en,
+"sud-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/tup
+
+# BEGIN /vocabulary/iso639-5/tut
+
+<http://id.loc.gov/vocabulary/iso639-5/tut> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Altaic languages"@en,
+"altaïques, langues"@fr ;
+madsrdf:code "tut"^^xsd:string ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/tut>,
+<http://id.loc.gov/vocabulary/languages/tut> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/trk>,
+<http://id.loc.gov/vocabulary/iso639-5/tuw>,
+<http://id.loc.gov/vocabulary/iso639-5/xgn> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "altaïques, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Altaic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: remainder group"@en,
+"ISO-639-2 Type: groupe de langues restantes"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/trk> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Turkic languages"@en,
+"turques, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/tuw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Tungus languages"@en,
+"toungouses, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/xgn> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Mongolian languages"@en,
+"mongoles, langues"@fr .
+
+# END /vocabulary/iso639-5/tut
+
+# BEGIN /vocabulary/iso639-5/tuw
+
+<http://id.loc.gov/vocabulary/iso639-5/tuw> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Tungus languages"@en,
+"toungouses, langues"@fr ;
+madsrdf:code "tuw"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/tut> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Tungus languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "toungouses, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/tut> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Altaic languages"@en,
+"altaïques, langues"@fr .
+
+# END /vocabulary/iso639-5/tuw
+
+# BEGIN /vocabulary/iso639-5/urj
+
+<http://id.loc.gov/vocabulary/iso639-5/urj> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Uralic languages"@en,
+"ouraliennes, langues"@fr ;
+madsrdf:code "urj"^^xsd:string ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/fiu>,
+<http://id.loc.gov/vocabulary/iso639-5/syd> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "ouraliennes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Uralic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:isTopMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/fiu> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Finno-Ugrian languages"@en,
+"finno-ougriennes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/syd> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Samoyedic languages"@en,
+"samoyèdes, langues"@fr .
+
+# END /vocabulary/iso639-5/urj
+
+# BEGIN /vocabulary/iso639-5/wak
+
+<http://id.loc.gov/vocabulary/iso639-5/wak> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ],
+[ a ri:RecordInfo ;
+ri:recordChangeDate "2009-02-17T00:00:00"^^xsd:dateTime ;
+ri:recordChangeNote "Name change, French only (from wakashennes, langues)"@en ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "modified" ] ;
+madsrdf:authoritativeLabel "Wakashan languages"@en,
+"wakashanes, langues"@fr ;
+madsrdf:code "wak"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/wak>,
+<http://id.loc.gov/vocabulary/languages/wak> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "wakashanes, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Wakashan languages"@en ] ;
+madsrdf:historyNote "Name change, French only (from wakashennes, langues)"@en ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/wak
+
+# BEGIN /vocabulary/iso639-5/wen
+
+<http://id.loc.gov/vocabulary/iso639-5/wen> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Sorbian languages"@en,
+"sorabes, langues"@fr ;
+madsrdf:code "wen"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/zlw> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/wen>,
+<http://id.loc.gov/vocabulary/languages/wen> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Sorbian languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "sorabes, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/zlw> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "West Slavic languages"@en,
+"slaves occidentales, langues"@fr .
+
+# END /vocabulary/iso639-5/wen
+
+# BEGIN /vocabulary/iso639-5/xgn
+
+<http://id.loc.gov/vocabulary/iso639-5/xgn> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Mongolian languages"@en,
+"mongoles, langues"@fr ;
+madsrdf:code "xgn"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/tut> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "mongoles, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Mongolian languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/tut> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Altaic languages"@en,
+"altaïques, langues"@fr .
+
+# END /vocabulary/iso639-5/xgn
+
+# BEGIN /vocabulary/iso639-5/xnd
+
+<http://id.loc.gov/vocabulary/iso639-5/xnd> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Na-Dene languages"@en,
+"na-déné, langues"@fr ;
+madsrdf:code "xnd"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/nai> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/ath> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Na-Dene languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "na-déné, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/ath> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Athapascan languages"@en,
+"athapascanes, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/nai> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "North American Indian languages"@en,
+"nord-amérindiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/xnd
+
+# BEGIN /vocabulary/iso639-5/ypk
+
+<http://id.loc.gov/vocabulary/iso639-5/ypk> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Yupik languages"@en,
+"yupik, langues"@fr ;
+madsrdf:code "ypk"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/esx> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/ypk>,
+<http://id.loc.gov/vocabulary/languages/ypk> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Yupik languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "yupik, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/esx> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Eskimo-Aleut languages"@en,
+"esquimaudes-aléoutiennes, langues"@fr .
+
+# END /vocabulary/iso639-5/ypk
+
+# BEGIN /vocabulary/iso639-5/zhx
+
+<http://id.loc.gov/vocabulary/iso639-5/zhx> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Chinese (family)"@en,
+"chinois (famille)"@fr ;
+madsrdf:code "zhx"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sit> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Chinese (family)"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "chinois (famille)"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:note "ISO 639-1 and ISO 639-2 have “Chinese” as an individual language (zh / zho / chi)."@en,
+"L'ISO 639 1 et l'ISO 639 2 considèrent le «chinois» comme une langue individuelle (zh / zho / chi)."@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/sit> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Sino-Tibetan languages"@en,
+"sino-tibétaines, langues"@fr .
+
+# END /vocabulary/iso639-5/zhx
+
+# BEGIN /vocabulary/iso639-5/zle
+
+<http://id.loc.gov/vocabulary/iso639-5/zle> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "East Slavic languages"@en,
+"slaves orientales, langues"@fr ;
+madsrdf:code "zle"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sla> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "East Slavic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "slaves orientales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/sla> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Slavic languages"@en,
+"slaves, langues"@fr .
+
+# END /vocabulary/iso639-5/zle
+
+# BEGIN /vocabulary/iso639-5/zls
+
+<http://id.loc.gov/vocabulary/iso639-5/zls> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "South Slavic languages"@en,
+"slaves méridionales, langues"@fr ;
+madsrdf:code "zls"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sla> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "South Slavic languages"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "slaves méridionales, langues"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/sla> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Slavic languages"@en,
+"slaves, langues"@fr .
+
+# END /vocabulary/iso639-5/zls
+
+# BEGIN /vocabulary/iso639-5/zlw
+
+<http://id.loc.gov/vocabulary/iso639-5/zlw> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "West Slavic languages"@en,
+"slaves occidentales, langues"@fr ;
+madsrdf:code "zlw"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/sla> ;
+madsrdf:hasNarrowerAuthority <http://id.loc.gov/vocabulary/iso639-5/wen> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "slaves occidentales, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "West Slavic languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> .
+
+<http://id.loc.gov/vocabulary/iso639-5/sla> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Slavic languages"@en,
+"slaves, langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/wen> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Sorbian languages"@en,
+"sorabes, langues"@fr .
+
+# END /vocabulary/iso639-5/zlw
+
+# BEGIN /vocabulary/iso639-5/znd
+
+<http://id.loc.gov/vocabulary/iso639-5/znd> a <http://id.loc.gov/vocabulary/iso639-5/iso639-5_Language>,
+madsrdf:Authority,
+madsrdf:Language ;
+madsrdf:adminMetadata [ a ri:RecordInfo ;
+ri:recordChangeDate "1970-01-01T00:00:00"^^xsd:dateTime ;
+ri:recordContentSource <http://id.loc.gov/vocabulary/organizations/dlc> ;
+ri:recordStatus "new" ] ;
+madsrdf:authoritativeLabel "Zande languages"@en,
+"zandé, langues"@fr ;
+madsrdf:code "znd"^^xsd:string ;
+madsrdf:hasBroaderAuthority <http://id.loc.gov/vocabulary/iso639-5/alv> ;
+madsrdf:hasExactExternalAuthority <http://id.loc.gov/vocabulary/iso639-2/znd>,
+<http://id.loc.gov/vocabulary/languages/znd> ;
+madsrdf:hasVariant [ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "zandé, langues"@en ],
+[ a madsrdf:Topic,
+madsrdf:Variant ;
+madsrdf:variantLabel "Zande languages"@en ] ;
+madsrdf:isMemberOfMADSCollection <http://id.loc.gov/vocabulary/iso639-5/collection_PastPresentISO639-5Entries>,
+<http://id.loc.gov/vocabulary/iso639-5/collection_PresentISO639-5Entries> ;
+madsrdf:isMemberOfMADSScheme <http://id.loc.gov/vocabulary/iso639-5> ;
+madsrdf:scopeNote "ISO-639-2 Type: language group"@en,
+"ISO-639-2 Type: groupe de langues"@fr .
+
+<http://id.loc.gov/vocabulary/iso639-5/alv> a madsrdf:Authority ;
+madsrdf:authoritativeLabel "Atlantic-Congo languages"@en,
+"atlantique-congo, langues"@fr .
+
+# END /vocabulary/iso639-5/znd
+

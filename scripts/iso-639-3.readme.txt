@@ -6,6 +6,12 @@ http://www-01.sil.org/iso639%2D3/download.asp
 and the date in the filename of the target of the symbolic link corresponds to
 the date given on that page for the downloaded data.
 
+The download link is named:
+
+UTF-8: iso-639-3_Code_Tables_<DATE>.zip
+
+and is found under the heading "Complete Set of Tables".
+
 Attribution: www.sil.org/iso639-3/
 
 Copyright SIL. All feedback should be directed to SIL. See the above page for

@@ -39,7 +39,7 @@ done
 # Strip returns from source file when copying to our data file:
 tr -d '\r' < "$iso639_3" > "$iso639_out"
 
-echo "# Beginning of ISO 639-5 data:" >> $iso639_out
+# echo "# Beginning of ISO 639-5 data:" >> $iso639_out
 
 grep -v 'BEGIN /vocabulary/iso639-5/iso639-5_Language' "$iso639_5" | # Start by grepping away noise
     egrep '(^# BEGIN|^madsrdf:authoritativeLabel)' | # Then grep out the interesting lines

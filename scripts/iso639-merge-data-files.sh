@@ -36,11 +36,11 @@ while test $# -ge 1 ; do
     shift
 done
 
-cp -f $iso639_3 > $iso639_out
+cp -f "$iso639_3" "$iso639_out"
 
 echo "# Beginning of ISO 639-5 data:" >> $iso639_out
 
-grep -v 'BEGIN /vocabulary/iso639-5/iso639-5_Language' $iso639_5 | # Start by grepping away noise
+grep -v 'BEGIN /vocabulary/iso639-5/iso639-5_Language' "$iso639_5" | # Start by grepping away noise
     egrep '(^# BEGIN|^madsrdf:authoritativeLabel)' | # Then grep out the interesting lines
     grep -A 1 '# BEGIN' | # We only need the first language family name
     grep -v '^-' | # Remove record separator made by previous grep
@@ -50,4 +50,4 @@ grep -v 'BEGIN /vocabulary/iso639-5/iso639-5_Language' $iso639_5 | # Start by gr
     sed -e 's/"@en,/\n/g' | # Replace the end of data sequence with a newline
     sed -e 's/^\t//' | # Remove inital tabs, an artifact of previous steps, and then format the data
     sed -e 's/\t/\t\t\t\tM\tS\t/' \
-    >> $iso639_out
+    >> "$iso639_out"

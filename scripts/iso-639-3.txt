@@ -7914,8 +7914,7 @@ zyj				I	L	Youjiang Zhuang
 zyn				I	L	Yongnan Zhuang	
 zyp				I	L	Zyphe Chin	
 zza	zza	zza		M	L	Zaza	
-zzj				I	L	Zuojiang Zhuang	# Beginning of ISO 639-5 data:
-aav				M	S	Austro-Asiatic languages
+zzj				I	L	Zuojiang Zhuang	aav				M	S	Austro-Asiatic languages
 afa				M	S	Afro-Asiatic languages
 alg				M	S	Algonquian languages
 alv				M	S	Atlantic-Congo languages

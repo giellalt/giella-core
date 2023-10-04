@@ -124,8 +124,6 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/gt-core.sh \
    scripts/gt-version.sh \
    scripts/include-scripts/yaml-runner-include.sh \
-   scripts/iso-639-3.readme.txt \
-   scripts/iso-639-3_20140320.tab.txt \
    scripts/iso3-to-2.sh \
    scripts/iso639-to-name.sh \
    scripts/iso-639-3.txt \

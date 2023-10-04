@@ -50,9 +50,6 @@ endif # CAN_FOMA
 #					filters/remove-mwe-tags.%                 
 
 # First we create the filtered lexicon, ie the analysis/output part of the cascade:
-analyser-tts-gt-output.tmp.hfst \
-analyser-tts-gt-output.tmp.foma \
-analyser-tts-gt-output.tmp.xfst: \
 analyser-tts-gt-output.tmp.%: fst/lexicon.% \
 					filters/remove-derivation-position-tags.% \
 					filters/rename-POS_before_Der-tags.%      \

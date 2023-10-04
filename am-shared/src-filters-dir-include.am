@@ -44,10 +44,6 @@ GIELLA_FILTER_CORE_REGEX_SRCS=\
 				remove-usage_except_NGminip-tags.regex    \
 				remove-usage_except_speller-tags.regex    \
 				remove-variant-tags.regex                 \
-				remove-DNorm-tags.regex                   \
-				remove-norm-comp-tags.regex               \
-				rename-POS_before_Der-tags.regex          \
-				remove-derivation-position-tags.regex     \
 				remove-hyphenation-marks.regex            \
 				remove-infl_boundary-marks.regex          \
 				remove-infl_deriv-borders.regex           \
@@ -76,10 +72,10 @@ GIELLA_FILTER_CORE_REGEX_SRCS=\
 				remove-Use_GC-tags.regex                  \
 				remove-Use_minusGC-strings.regex          \
 				remove-Use_minusGC-tags.regex             \
-				remove-Use_TTS-strings.regex              \
-				remove-Use_TTS-tags.regex                 \
+				remove-Use_TTS-strings.regex	          \
+				remove-Use_TTS-tags.regex		          \
 				remove-Use_minusTTS-strings.regex         \
-				remove-Use_minusTTS-tags.regex            \
+				remove-Use_minusTTS-tags.regex	          \
 				remove-UseCirc-strings.regex              \
 				remove-use_marg-strings.regex             \
 				remove-use_mt-strings.regex               \

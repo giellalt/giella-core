@@ -1,0 +1,64 @@
+# -*- mode: Makefile -*-
+
+# Makefile to make SLANGTLANG-TNUM.fst
+
+# usage:
+# make -f make-bildict
+# ==> builds a bilingdict fst using the values for SLANG, TLANG and TNUM declared in the script itself
+# 
+# to overwrite the defaults 
+# make -f make-bildict SLANG=nob TLANG=sma TNUM=all
+#
+#
+#
+
+XFST = xfst
+
+JV   = java
+MF   = -Xmx2048m
+EF   = -it:main
+XSL  = net.sf.saxon.Transform
+
+SRC           = src
+SCRIPTS       = scripts
+L1_L2         = extract_l-t-lexc.xsl
+
+# target lang= ISO code
+SLANG       = sma
+TLANG       = nob
+LP          = $(SLANG)$(TLANG)
+#LP         = ../../langs/$(SLANG)/src/morphology/
+# translation number: values 'first' = use only the first t-element; 'all' = use all t-elements 
+TNUM        = all
+GOAL        = $(LP)-$(TNUM)
+BEGIN       = @echo "*** Generating $@-file ***"
+END         = @echo "Done."
+CLEAN       = @echo "Cleaning files."
+
+###############
+
+$(GOAL).fst: $(LP)/bin/$(GOAL).fst
+$(LP)/bin/$(GOAL).fst: $(LP)/bin/$(GOAL).lexc
+	@echo
+	@echo "*** Building $@ ***"
+	@echo
+	@printf "read lexc $<  \n\
+	invert net  \n\
+	save stack $@ \n\
+	quit \n" > tmp/$(GOAL)-fst-script
+	$(XFST)  < tmp/$(GOAL)-fst-script
+	@rm -f tmp/$(GOAL)-fst-script
+
+$(LP)/bin/$(GOAL).lexc: $(LP)/$(SRC) $(SCRIPTS)/$(L1_L2)
+	@echo 
+	$(BEGIN)
+	$(JV) $(MF) $(XSL) $(EF) $(SCRIPTS)/$(L1_L2) SLANG=$(SLANG) TLANG=$(TLANG) TNUM=$(TNUM)
+	@echo
+	$(END)
+	@echo
+
+###############
+
+clean:
+	@rm -vf $(LP)/bin/*.txt $(LP)/bin/*.lexc $(LP)/bin/*.fst	
+

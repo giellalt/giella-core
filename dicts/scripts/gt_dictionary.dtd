@@ -1,0 +1,356 @@
+<!ELEMENT r (lics?, e+, xhtml:script?) >
+<!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml"
+    xml:lang ( nob | sme | sma | swe | eng | deu | smn | fin | sms | myv | mhr | sjd | rus | smj ) #IMPLIED
+>
+<!ATTLIST r
+      id ( smenob | nobsme | smnfin | finsmn | finsme | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin | swesma | smeeng |
+      nobsmj ) #IMPLIED >
+
+
+<!-- the header -->
+<!ELEMENT lics (lic, ref*, sourcenote*) >
+<!ATTLIST lics xml:space (default|preserve) 'preserve'
+    xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml"
+>
+<!ELEMENT lic (#PCDATA|a)*>
+<!ATTLIST lic xml:lang ( en | nno ) #IMPLIED >
+<!ELEMENT ref (#PCDATA|a|i)*>
+<!ELEMENT sourcenote (#PCDATA|a)*>
+<!ELEMENT a (#PCDATA)>
+<!ELEMENT i (#PCDATA)>
+
+<!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+) >
+<!ATTLIST e
+      usage ( mt | vd | dict | other | nds | fad | KB ) #IMPLIED
+      src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK |
+            PS_SA | KAL | nou94 | PS | husbykuhmunen | lmm | sammallahti |
+            BergslandMagga | Lagercrantz | nsr )  #IMPLIED
+      exclude ( smanob | nobsma ) #IMPLIED
+      reverse ( yes | no ) #IMPLIED
+      illpl ( yes | no ) #IMPLIED
+      id CDATA #IMPLIED
+      xpos CDATA #IMPLIED
+      mc CDATA #IMPLIED
+>
+<!ATTLIST e r ( LR | RL ) #IMPLIED > <!-- found in all_smnsme.xml -->
+<!ATTLIST e note CDATA #IMPLIED >
+<!ATTLIST e oa_unif ( done | s | N | E ) #IMPLIED >
+
+<!ELEMENT lg (l+, l_ref*, lemma_ref*, lsub*, lc*, stem*, analysis*, mini_paradigm*, algu?) >
+<!ELEMENT lemma_ref (#PCDATA) >
+<!ATTLIST lemma_ref lemmaID CDATA #IMPLIED >
+<!ATTLIST lg freq CDATA #IMPLIED >
+<!ELEMENT analysis (#PCDATA|wordform)* >
+<!ATTLIST analysis ms CDATA #IMPLIED >
+<!ELEMENT wordform (#PCDATA) >
+<!ELEMENT mini_paradigm (analysis+) >
+<!ELEMENT l (#PCDATA) >
+<!ATTLIST l
+      g_stem ( Sg | Pl ) #IMPLIED
+      sg_gen CDATA #IMPLIED
+      sg_ill CDATA #IMPLIED
+      pl_gen CDATA #IMPLIED
+      pl_ill CDATA #IMPLIED
+      pl3 CDATA #IMPLIED
+      sg1 CDATA #IMPLIED
+      sg3 CDATA #IMPLIED
+      gen CDATA #IMPLIED
+      ill CDATA #IMPLIED
+      ader CDATA #IMPLIED
+      v_type ( rv ) #IMPLIED
+      pos ( A | N | V | Adv | Po | Pr | Pron | Rel | Pers | Det | I | Interj | Pcle |
+            Num | CC | CS | Prop | Proppl | G3 | Actor | Npl | Adp |
+            Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | mwe | X | Xxx | Qu | Abbr | Clt |
+            Phrase_N | Phrase_A | Phrase_V | Phrase_Adv ) #REQUIRED
+      attr CDATA #IMPLIED
+      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED
+      nr ( Sg | Du | Pl ) #IMPLIED
+      gen_only CDATA #IMPLIED
+      context CDATA #IMPLIED
+      type ( Rel | Pers | Indef | Refl | Dem | interr |
+      pre | post | ord | TV | IV | actor | G3 | G7 | NomAg | Ord
+      | Prop | Recipr | Coll | Interr | Logo ) #IMPLIED
+      spec ( ABBR | ACR | Attr | Cmpar.Comp | Cmp_SgNom.Cmpnd | Cmp_Sh.Cmpnd | Coll | Dem | G3 | Ind | Indef | Indef.Attr | Indef.Pl.Nom | Indef.Sg.Loc.Attr | Interr | IV | IV.VAbess | Logo.3p.Du | Logo.3p.Pl | Logo.3p.Sg | NomAg | Ord | Pers.1p.Du | Pers.1p.Pl | Pers.1p.Sg | Pers.2p.Du | Pers.2p.Pl | Pers.2p.pl | Pers.2p.Sg | Pers.3p.Du | Pers.3p.Pl | Pers.3p.Sg | Pl | PrfPrc | PrsPrc | Qst | Refl | Rel | Sem_Act | Sem_Ani | Sem_Ani_Group.Sg | Sem_Body.Pl | Sem_Build | Sem_Clth.Pl | Sem_Dummytag | Sem_Dummytag.Attr | Sem_Dummytag.Pl | Sem_Dummytag.Sg | Sem_Dummytag.Sg.Nom | Sem_Event.Pl | Sem_Feat-psych.Sg | Sem_Hum.Attr | Sem_Hum_Plc | Sem_Money.Sg | Sem_Org | Sem_Org.Sg | Sem_Plc | Sem_Plc.Pl | Sem_Process.Sg.Nom | Sem_Prod-cogn.Sg | Sem_Substnc.Pl | Sem_Substnc.Sg | Sem_Time | Sem_Time.Pl | Sem_Tool-catch.Sg | Sg | Sg.Ela | Sg.Gen | Sg.Ill | Sg.Ine | Sg.Nom | Superl | Superl.Attr | Superl.Sg.Nom | TV | TV.Der_PassL.V | TV.Der_PassL.V.IV | .V.IV ) #IMPLIED
+      class ( I | II | III | IV | V | VI | xxx ) #IMPLIED
+      stem ( even | odd | 2syll | 3syll | xsyll | weak ) #IMPLIED
+      pg ( yes | no ) #IMPLIED
+      p3p CDATA #IMPLIED
+      minip ( notSg1 | onlyPl ) #IMPLIED
+      illpl ( ok | no ) #IMPLIED
+      status ( sjekk | ok | _unknown_N ) #IMPLIED
+      grad ( pos | comp | sup ) #IMPLIED
+      vmax ( 2 | 3 | 4) #IMPLIED
+      base CDATA #IMPLIED
+      dialect CDATA #IMPLIED
+      soggi CDATA #IMPLIED
+      rime CDATA #IMPLIED
+      margo CDATA #IMPLIED
+      vow CDATA #IMPLIED
+      tt_auto CDATA #IMPLIED
+      diph ( yes ) #IMPLIED
+      umlaut ( full | A | C | B | D | E | F ) #IMPLIED
+      num ( pl ) #IMPLIED
+      val ( IV | TV ) #IMPLIED
+      r1_par CDATA #IMPLIED
+      r2_par CDATA #IMPLIED
+      par CDATA #IMPLIED
+      dera CDATA #IMPLIED
+
+>
+<!ATTLIST l mwe CDATA #IMPLIED >
+<!ATTLIST l comma CDATA #IMPLIED >
+<!ATTLIST l syn CDATA #IMPLIED >
+<!ATTLIST l sem_type ( Obj | Plc | Fem | Org | Mal | Txt ) #IMPLIED >
+<!ATTLIST l paradigme ( cases ) #IMPLIED >
+<!ATTLIST l comment CDATA #IMPLIED >
+<!ATTLIST l case CDATA #IMPLIED >
+<!ATTLIST l mod CDATA #IMPLIED >
+<!ATTLIST l hid CDATA #IMPLIED >
+<!ATTLIST l src CDATA #IMPLIED >
+<!ATTLIST l value CDATA #IMPLIED >
+<!ATTLIST l t_type ( Pers | expl ) #IMPLIED  >
+<!ATTLIST l re CDATA #IMPLIED >
+<!ATTLIST l tt CDATA #IMPLIED >
+<!ATTLIST l syn_or CDATA #IMPLIED >
+
+<!-- decl: i indeclineable -->
+
+<!-- lsub = frequent subform of lemma -->
+<!ELEMENT lsub (#PCDATA) >
+<!ATTLIST lsub
+      attr ( ok | no ) #IMPLIED
+      decl ( 1 | 2 | 3 | 4 | 5 | x | i ) #IMPLIED
+      nr ( sg | pl ) #IMPLIED
+      context CDATA #IMPLIED
+      type ( rel | pers | indef | refl | pre | post | ord ) #IMPLIED
+      class ( I | II | III | IV | V | VI ) #IMPLIED
+      stem ( even | odd | 2syll | 3syll | xsyll | weak ) #IMPLIED
+      p3p CDATA #IMPLIED
+      minip ( notSg1 | onlyPl ) #IMPLIED
+      illpl ( ok | no ) #IMPLIED
+      status ( sjekk | ok ) #IMPLIED
+      grad ( pos | comp | sup ) #IMPLIED
+      base CDATA #IMPLIED
+      dialect CDATA #IMPLIED
+>
+<!ATTLIST lsub src CDATA #IMPLIED >
+<!ATTLIST lsub x ( fad ) #IMPLIED >
+
+<!-- lc = lemma comment, misused as stem field -->
+<!ELEMENT lc (#PCDATA) >
+<!ELEMENT source (book) >
+<!ATTLIST book
+    name CDATA #IMPLIED >
+<!ELEMENT semantics (sem | sem* ) >
+<!ATTLIST sem
+    name CDATA #IMPLIED >
+
+<!-- algu = lemma IDs in the algu database -->
+<!ELEMENT algu EMPTY >
+<!ATTLIST algu
+      lekseemi_id CDATA #REQUIRED >
+<!ATTLIST algu
+      sanue_id CDATA #REQUIRED >
+
+
+<!-- the real stem field -->
+<!ELEMENT stem (#PCDATA) >
+<!ATTLIST stem
+      class ( bisyllabic | trisyllabic | contracted ) #IMPLIED
+>
+
+<!ELEMENT sources (book*, frequency?, geography*) >
+<!--<!ELEMENT book EMPTY >-->
+<!--      name ( a1 | dej | s1 | s2 | s3 | s4 | åa1 | åa2 | åa3 | åa4 | åa5 | åa6 | xxx ) #IMPLIED -->
+
+<!ELEMENT frequency EMPTY >
+<!ATTLIST frequency
+      class ( common | rare ) #IMPLIED
+>
+<!ELEMENT geography EMPTY >
+<!ATTLIST geography
+      class ( other | south | mid | north ) #IMPLIED
+>
+<!--      name CDATA #REQUIRED -->
+
+<!ELEMENT sem EMPTY >
+<!ATTLIST sem
+      class CDATA #IMPLIED
+>
+
+<!ELEMENT mg (semantics?, l_ref?, tg+, xg* ) >
+<!ATTLIST mg
+      xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
+      rest CDATA #IMPLIED
+>
+<!ATTLIST mg id CDATA #IMPLIED >
+<!ATTLIST mg src CDATA #IMPLIED >
+<!ATTLIST mg x ( fad ) #IMPLIED >
+
+<!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?, morph_expl?) | tf | te ))+, xg*, syng?) >
+<!ATTLIST tg
+      xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus | smj | fra) #REQUIRED
+      check CDATA #IMPLIED
+>
+<!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->
+<!ATTLIST re
+    xml:lang ( nob | sme | sma | smn | swe | eng | deu | lat) #IMPLIED
+>
+<!ATTLIST re x ( fad ) #IMPLIED >
+<!ATTLIST re comment CDATA #IMPLIED >
+
+<!ELEMENT t (#PCDATA) >
+<!ATTLIST t freq CDATA #IMPLIED >
+<!ATTLIST t oa ( first | yes | no ) #IMPLIED  >
+<!ATTLIST t dict ( yes | no ) #IMPLIED  >
+<!ATTLIST t t_type ( Pers | expl ) #IMPLIED  >
+<!ATTLIST t nr ( Sg | Pl ) #IMPLIED  >
+<!ATTLIST t pos ( A | S  | N  | V | Adp | Clt |
+            Adv | P | Pr | Po | Det |
+            Pron | Prop | I | Interj | CC | CS | Im | Npl | Num |
+            Pcle | Prsprc | Phrase | Fp-Cmp | Lp-Cmp | Cmp | X  | Xxx |
+      phrase_N | phrase_A | phrase_V | phrase_Adv | g3 | NomAg | mwe | fp-cmp
+          | Abbr | Foc_ba
+          | Adv-N | N-Pron | Adv-CC | Adv-Pron | Adv-CS | CC-CS | A-N | Adv-Po | CMP | A-Adv | Adv-Po-Pron | A-Adv-Pron | A-Adv-N | Adv-N-Po | N-Po | Po-Pron | A-Pron | Foc_gis | Foc_han ) #IMPLIED >
+<!ATTLIST t reg CDATA #IMPLIED >
+<!ATTLIST t country CDATA #IMPLIED >
+<!ATTLIST t tt_auto CDATA #IMPLIED >
+
+<!--
+<!ATTLIST t pos ( a | S  | n  | v |
+            adv | p | pr | po | det |
+            pron | prop | i | interj | cc | cs | im | npl | num |
+            pcle | s  | prsprc | phrase | fp-cmp | lp-cmp | cmp | x  | xxx |
+      phrase_n | phrase_a | phrase_v | phrase_adv | g3 | NomAg | mwe ) #IMPLIED >
+-->
+<!ATTLIST t type ( expl
+                  | grammarexpl |Prop | Indef | G3 | NomAg | Coll | Recipr | Pers
+                  | grammar | Refl | Dem | Poss | Logo | Rel | Interr | TV | IV ) #IMPLIED >
+<!ATTLIST t decl ( 1 | 2 | 3 | 4 | 5 | x | irr | i | yyy ) #IMPLIED> <!-- irr irregular -->
+<!ATTLIST t gen ( m | f | n | xxx ) #IMPLIED >
+<!ATTLIST t lang ( swe | nob ) #IMPLIED >
+<!ATTLIST t xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
+<!ATTLIST t dialect CDATA #IMPLIED >
+<!ATTLIST t var ( sw | no | fi )  #IMPLIED >
+<!ATTLIST t nob-stat CDATA #IMPLIED >
+<!ATTLIST t sem-cl CDATA #IMPLIED >
+<!ATTLIST t src CDATA #IMPLIED >
+<!ATTLIST t l_par CDATA #IMPLIED >
+<!ATTLIST t wf CDATA #IMPLIED >
+<!ATTLIST t t_tld CDATA #IMPLIED >
+<!ATTLIST t syn_dash CDATA #IMPLIED >
+<!ATTLIST t attr CDATA #IMPLIED >
+<!ATTLIST t r_par CDATA #IMPLIED >
+<!ATTLIST t mwe CDATA #IMPLIED >
+<!ATTLIST t syn CDATA #IMPLIED >
+<!ATTLIST t spec ( .A.Attr | ABBR | ACR | Attr | Cmpar | Cmpar.Comp | .Cmpnd | Cmp_SgNom.Cmpnd | Cmp_Sh.Cmpnd | Coll | Dem | Dem.Sg.Ela | Der_lasj.A | Der_NomAg.Sem_Hum.Pl | Der_t.A | G3 | Indef | Indef.Attr | Indef.Attr.Foc_Neg-ge | Indef.Pl.Acc | Indef.Pl.Nom | Indef.Sg.Acc.Foc_Neg-ge | Indef.Sg.Nom | Indef.Sg.Nom.Foc_Neg-ge | Inf | Interr | Interr.Pl.Acc | Interr.Sg.Acc. | Interr.Sg.Acc | Interr.Sg.Nom | IV | IV.Der_NomAct.N | IV.Inf | IV..V | IV.VAbess | Logo.3p.Pl | Logo.3p.Sg | NomAg | Ord | Pers.1p.Du | Pers.1p.Pl | Pers.1p.Sg | Pers.2p.Du | Pers.2p.Pl | Pers.2p.Sg | Pers.3p.Du | Pers.3p.Pl | Pers.3p.Sg | Pl | Pl.Gen | Pl.Nom | PrfPrc | PrsPrc | Qst | Recipr | Refl | Rel | Rel.Pl | Rel.Pl.Acc | Rel.Sg | Rel.Sg.Acc. | Rel.Sg.Acc | Sem_Act | Sem_Amount.Sg.Ill | Sem_Ani | Sem_Build | Sem_Clth.Pl | Sem_Dummytag | Sem_Dummytag.Attr | Sem_Dummytag.Cmpar.Comp | Sem_Dummytag.Pl | Sem_Event.Pl | Sem_Feat.Sg.Loc | Sem_Hum.Attr | Sem_Hum.Cmpar.Comp | Sem_Hum.Sg.Nom | Sem_Org | Sem_Plc | Sem_Plc.Foc_Neg-ge | Sem_Process.Sg.Nom | Sem_Time | Sem_Time.Pl | Sem_Time.Sg.Ill | Sg | Sg.Ela | Sg.Gen | Sg.Ill | Sg.Ine | Sg.Nom | Superl | Superl.Attr | Superl.Sg.Nom | TV | TV.Der_Caus.V.TV.Der_PassL.V.IV | TV.Der_PassL.V | TV.Der_PassL.V.IV | .V.IV ) #IMPLIED >  <!-- Is this perhaps the same as type in l? -->
+<!ATTLIST t alt_str CDATA #IMPLIED >
+<!ATTLIST t tcomm ( yes | no ) #IMPLIED  >
+<!ATTLIST t stat ( pref | notpref | perhaps ) #IMPLIED >
+<!ATTLIST t gen_only CDATA #IMPLIED > <!-- Fetched from l -->
+<!ATTLIST t sem_type ( Obj | Plc | Org | Mal ) #IMPLIED >
+<!ATTLIST t comment CDATA #IMPLIED >
+<!ATTLIST t hid CDATA #IMPLIED >
+<!ATTLIST t href CDATA #IMPLIED >
+<!ATTLIST t value CDATA #IMPLIED >
+<!ATTLIST t stem CDATA #IMPLIED >
+<!ATTLIST t pg (no) #IMPLIED >
+<!ATTLIST t class ( I | II | III | IV | V | VI ) #IMPLIED >
+<!ATTLIST t context CDATA #IMPLIED >
+<!ATTLIST t margo CDATA #IMPLIED >
+<!ATTLIST t minip CDATA #IMPLIED >
+<!ATTLIST t p3p CDATA #IMPLIED >
+<!ATTLIST t soggi CDATA #IMPLIED >
+<!ATTLIST t vow CDATA #IMPLIED >
+<!ATTLIST t num CDATA #IMPLIED >
+<!ATTLIST t illpl CDATA #IMPLIED >
+<!ATTLIST t case CDATA #IMPLIED >
+<!ATTLIST t x ( fad ) #IMPLIED >
+<!ATTLIST t umlaut ( full | A | C | B | D | E | F ) #IMPLIED >
+<!ATTLIST t diph CDATA #IMPLIED >
+<!ATTLIST t mod CDATA #IMPLIED >
+<!ATTLIST t xxx CDATA #IMPLIED >
+<!ATTLIST t rest CDATA #IMPLIED >
+
+<!-- perhaps not first for attlist oa, if reverse-leksa shall be taken from nobsma -->
+
+<!ELEMENT l_ref (#PCDATA) >
+
+<!-- translation_comment = for Oahpa use -->
+
+<!ELEMENT tf (#PCDATA) > <!-- Translation phrase -->
+<!ATTLIST tf oa ( first | yes | no ) #IMPLIED >
+<!ATTLIST tf dict (yes | no ) #IMPLIED >
+<!ATTLIST tf pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
+<!ATTLIST tf gen ( m | f | n ) #IMPLIED >
+<!ATTLIST tf lang ( swe | nob ) #IMPLIED >
+<!ATTLIST tf xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
+<!ATTLIST tf tcomm ( yes | no ) #IMPLIED >
+<!ATTLIST tf stat ( pref ) #IMPLIED >
+
+
+<!ELEMENT te (#PCDATA) > <!-- Translation explanation -->
+<!ATTLIST te lang ( swe | nob ) #IMPLIED >
+<!ATTLIST te xml:lang ( nob | sme | sma | swe | eng | deu ) #IMPLIED >
+<!ATTLIST te dict (yes | no ) #IMPLIED >
+<!ATTLIST te oa ( first | yes | no ) #IMPLIED >
+<!ATTLIST te stat ( pref ) #IMPLIED >
+<!ATTLIST te pos ( phrase  | phrase_n | phrase_a | phrase_v | phrase_adv ) #IMPLIED >
+
+<!ELEMENT morph_expl (#PCDATA) >
+
+
+<!ELEMENT xg ((x, xt+)+)>
+<!ATTLIST xg re CDATA #IMPLIED >
+<!ELEMENT x (#PCDATA)>
+<!ATTLIST x src CDATA #IMPLIED >
+<!ELEMENT xt (#PCDATA)>
+<!ATTLIST xt src CDATA #IMPLIED >
+
+<!ELEMENT syng (syn+)>
+<!ELEMENT syn (#PCDATA)>
+
+<!ELEMENT xhtml:script EMPTY >
+<!ATTLIST xhtml:script type CDATA #FIXED "text/javascript" >
+<!ATTLIST xhtml:script src  CDATA #IMPLIED >
+<!ATTLIST xhtml:script xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml" >
+
+
+
+<!--
+This document is not quite finished yet...
+
+Here are the pos tags:
+ a  = Adjective
+ m  = Masculine (nob)
+ f  = Feminine (nob)
+ n  = Neuter (nob), noun (sme)
+ S  = noun, still not given gender (nob)
+ v  = verb
+ adv  = adverb
+ num = numeral
+ pcle = particle
+ p  = preposition (nob)
+ pr = preposition (sme)
+ po = postposition (sme)
+ pron  = pronoun
+ i  = interjection
+ cc  = conjunction
+ cs  = subjunction
+ im = infinitive mark å (nob)
+ s  = sentence, or explanation
+ x  = still no pos
+
+Documenting
+(the tags are short due to a manual cleanup)
+r  root
+e  entry
+l  lemma
+lc lemma comment
+m  meaning
+re restriction (semantic restriction of the following t)
+t  translation
+x  example
+xt example translation
+.g group
+-->

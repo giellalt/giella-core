@@ -1,0 +1,6 @@
+java -Xmx2048m net.sf.saxon.Transform -it:main gt_sd2td.xsl inFile=all-merged-pos_sjdrus.xml
+(note: remember to check the path to the dtd file in the all-merged-pos_sjdrus.xml (or equivalent) file.
+
+java -Xmx2048m net.sf.saxon.Transform -it:main gt_mergeEntry_pos_uniq-mg_td.xsl inFile=outDir/all-merged-pos_sjdrus_rus.xml
+
+

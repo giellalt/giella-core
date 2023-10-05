@@ -1,0 +1,105 @@
+@charset "utf-8";
+@import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE.css";
+@import "gt_dictionary_shared.css";
+
+
+
+
+
+/* The following rules are not working in XML Editor (XXE), but
+   are working fine in modern browsers. We keep them here, and
+   make a separate configuration file for XXE, where these rules
+   are not included. The CSS in the configuration file is imported
+   above, and thus shared between the browsers and XXE.
+
+   That is: ONLY ADD HERE THINGS THAT ARE UNSUPPORTED IN XXE!
+   All other CSS styling should be added to the shared CSS file
+   in the XXE configuration. */
+
+
+r {
+#    column-count: 2;
+    column-rule-style: solid;
+    column-rule-width: 1px;
+    column-rule: 1px solid black;
+}
+
+<!--
+<style type="text/css">
+@media all {
+    .page-break{ display: none; }}
+@media print {
+    .page-break{ display: block; page-break-before: always; }}
+@page { size:8.5in 11in; margin: 2cm}
+</style>
+-->
+
+<r class="page-break"></r>
+
+e:nth-child(even) {background-color: #eee}
+e:nth-child(odd)  {border: none}
+
+l:after {
+    text-transform: capitalize;
+}
+
+/* The neg. margin is needed to cancel out whitespace (newlines,
+indents) that is collapsed to a single space character, even in
+cases like this where we don't want any space at all. */
+wordform + wordform:before {
+    margin-left: -.3em;
+}
+
+e > mg:only-of-type:before {content: none; content:''; }
+e > mg:only-of-type {
+    display: inline;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+e > lg + mg:only-of-type {
+    display: inline;
+}
+
+/* negative left marging to counter whitespace always found in
+   the xml data (lineshifts, indents): */
+tg + tg, t + t, tf + t, t + tf, tf + tf {
+    margin-left: -.3em;
+}
+
+re {
+    font-size: small;
+}
+
+t:after {
+    text-transform: capitalize;
+}
+
+/* xg, x, xt styling: */
+e > lg ~ mg xg {
+    display: block;
+    margin-bottom: 0.2ex;
+    margin-left: 1.33ex;
+}
+e > lg ~ mg xg:before {
+    display: block;
+    color: gray;
+    font-size: small;
+    content: "Usage example:";
+}
+
+/*e:after {
+    display: block;
+    content: "exclude: ";*/
+}
+exclude {
+    display: none;
+/*
+    display: inline;
+    font-style: italic;
+    content: attr(name);
+*/
+}
+
+xg + xg:before {
+    margin-left: -.3em;
+}

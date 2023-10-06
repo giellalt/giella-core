@@ -73,7 +73,9 @@ APERTIUM_GENERATED_TAGSET_RELABEL_SRCS+=tagsets/apertium.relabel
 
 if WANT_SYNTAX
 APERTIUM_CG_BIN+=$(GTLANG).mor.rlx.bin \
-				 $(GTLANG).syn.rlx.bin
+				 $(GTLANG).syn.rlx.bin \
+				 $(APERTIUM_MAYBE_DEPS) \
+				 $(APERTIUM_MAYBE_VALENCY)
 #				 $(GTLANG).dep.rlx.bin
 endif # WANT_SYNTAX
 
@@ -344,6 +346,12 @@ $(GTLANG).mor.rlx.bin: disambiguator-mt-apertium.bin
 	$(AM_V_CP)cp -f $< $@
 
 $(GTLANG).syn.rlx.bin: functions-mt-apertium.bin
+	$(AM_V_CP)cp -f $< $@
+
+$(GTLANG).dep.rlx.bin: dependency-mt-apertium.bin
+	$(AM_V_CP)cp -f $< $@
+
+$(GTLANG).val.rlx.bin: valency-mt-apertium.bin
 	$(AM_V_CP)cp -f $< $@
 
 #### HFST transducer fallback target:

@@ -104,6 +104,11 @@ $(GIELLA_ANL_DISAMBIGUATOR_SRC): \
 %.cg3: $(top_srcdir)/src/cg3/%.cg3
 	$(AM_V_CP)cp -f $< $@
 
+# Valencer:
+$(GIELLA_ANL_VALENCY_SRC): \
+%.cg3: $(top_srcdir)/src/cg3/%.cg3
+	$(AM_V_CP)cp -f $< $@
+
 # Finally build the .zglt file:
 $(GIELLA_ANL_ZDISTRO): $(GIELLA_ANL_ZIPFILES)
 	$(AM_V_at)rm -f $@

@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python3
 """Command-line tool to calculate errors per paragraph in giellalt corpus."""
 
 import os

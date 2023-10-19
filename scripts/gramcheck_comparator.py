@@ -17,9 +17,9 @@ from io import StringIO
 from pathlib import Path
 
 import libdivvun
+from corpustools import ccat, errormarkup
 from lxml import etree
 
-from corpustools import ccat, errormarkup
 
 @contextmanager
 def stderr_redirector(stream):

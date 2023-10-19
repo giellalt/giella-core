@@ -5,6 +5,7 @@
     - Xerox-style regexes for FST filtering
 - other tools and scripts
     - [unimorph conversion scripts](unimorph.html)
+    - [apertium conversion scripts](apertium.html)
     - [scripts for evals and statistics](stats.html)
 - core/shared components of developer tools
 - stylesheets, schemas and other shared resources

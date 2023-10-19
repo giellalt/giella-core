@@ -8,6 +8,7 @@
 
 import sys
 from pathlib import Path
+import io
 
 import libdivvun
 import yaml
@@ -157,6 +158,46 @@ class YamlGramTest(GramTest):
             if self.config["tests"]
             else []
         )
+
+    def move_passes_from_fail(self):
+        if "FAIL" in self.config["test_file"].name and any(self.test_results):
+            passing_tests = [
+                self.config["tests"][index]
+                for (index, test_result) in enumerate(self.test_results)
+                if test_result
+            ]
+
+            pass_path = Path(str(self.config["test_file"]).replace("FAIL", "PASS"))
+            with pass_path.open("a") as pass_stream:
+                print(
+                    "\n".join([f'  - "{this_test}"' for this_test in passing_tests]),
+                    file=pass_stream,
+                )
+
+            with io.StringIO() as temp_stream:
+                with self.config["test_file"].open("r") as input:
+                    temp_stream.write(
+                        "".join(
+                            [
+                                line
+                                for line in input
+                                if not any(
+                                    [
+                                        passing_test in line.strip()
+                                        for passing_test in passing_tests
+                                    ]
+                                )
+                            ]
+                        )
+                    )
+                self.config["test_file"].open("w").write(temp_stream.getvalue())
+
+    def run(self):
+        failed_or_not = super().run()
+
+        self.move_passes_from_fail()
+
+        return failed_or_not
 
 
 class YamlUI(UI):

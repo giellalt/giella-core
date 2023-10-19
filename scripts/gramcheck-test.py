@@ -148,10 +148,14 @@ class YamlGramTest(GramTest):
         grammarchecker = YamlGramChecker(self.config)
 
         return (
-            grammarchecker.get_data(
-                str(self.config["test_file"]), self.make_error_markup(text)
+            (
+                grammarchecker.get_data(
+                    str(self.config["test_file"]), self.make_error_markup(text)
+                )
+                for text in self.config["tests"]
             )
-            for text in self.config["tests"]
+            if self.config["tests"]
+            else []
         )
 
 

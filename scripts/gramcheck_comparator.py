@@ -701,8 +701,10 @@ class GramTest:
 
     def run_tests(self):
         tests = self.tests
-        for item in enumerate(tests.items(), start=1):
+        self.test_results = [
             self.run_test(item, len(tests))
+            for item in enumerate(tests.items(), start=1)
+        ]
 
         self.config.get("out").final_result(self.count)
 
@@ -776,6 +778,9 @@ class GramTest:
 
         for key in count:
             self.count[key] += count[key]
+
+        # Did this test pass or not
+        return all(key.startswith("t") for key in count.keys())
 
     def has_same_range_and_error(self, c_error, d_error):
         """Check if the errors have the same range and error"""
@@ -854,13 +859,11 @@ class GramTest:
 
     def run(self):
         self.run_tests()
-        fails = sum([self.count[key] for key in self.count if key not in ["tn", "tp"]])
-        passes = sum([self.count[key] for key in self.count if key in ["tn", "tp"]])
 
         if not self.fail_on_passes:
-            return 1 if fails else 0
+            return 0 if all(self.test_results) else 1
 
-        return 1 if passes else 0
+        return 1 if any(self.test_results) else 0
 
     def __str__(self):
         return str(self.config.get("out"))

@@ -5,9 +5,14 @@
 # License: GPL3
 # Author: Børre Gaup <borre.gaup@uit.no>
 """Write report on differences on manual markup and gramdivvun markup"""
+import ctypes
+import io
+import os
 import sys
+import tempfile
 from argparse import ArgumentParser
 from collections import Counter
+from contextlib import contextmanager
 from io import StringIO
 from pathlib import Path
 
@@ -15,6 +20,48 @@ import libdivvun
 from lxml import etree
 
 from corpustools import ccat, errormarkup
+
+@contextmanager
+def stderr_redirector(stream):
+    """Catch errors from libdivvun"""
+    libc = ctypes.CDLL(None)
+    c_stderr = (
+        ctypes.c_void_p.in_dll(libc, "__stderrp")
+        if sys.platform == "darwin"
+        else ctypes.c_void_p.in_dll(libc, "stderr")
+    )
+
+    # The original fd stdout points to. Usually 1 on POSIX systems.
+    original_stderr_fd = sys.stderr.fileno()
+
+    def _redirect_stderr(to_fd):
+        """Redirect stderr to the given file descriptor."""
+        # Flush the C-level buffer stderr
+        libc.fflush(c_stderr)
+        # Flush and close sys.stderr - also closes the file descriptor (fd)
+        sys.stderr.close()
+        # Make original_stderr_fd point to the same file as to_fd
+        os.dup2(to_fd, original_stderr_fd)
+        # Create a new sys.stderr that points to the redirected fd
+        sys.stderr = io.TextIOWrapper(os.fdopen(original_stderr_fd, "wb"))
+
+    # Save a copy of the original stderr fd in saved_stderr_fd
+    saved_stderr_fd = os.dup(original_stderr_fd)
+    try:
+        # Create a temporary file and redirect stderr to it
+        tfile = tempfile.TemporaryFile(mode="w+b")
+        _redirect_stderr(tfile.fileno())
+        # Yield to caller, then redirect stderr back to the saved fd
+        yield
+        _redirect_stderr(saved_stderr_fd)
+        # Copy contents of temporary file to the given stream
+        tfile.flush()
+        tfile.seek(0, io.SEEK_SET)
+        stream.write(tfile.read())
+    finally:
+        tfile.close()
+        os.close(saved_stderr_fd)
+
 
 COLORS = {
     "red": "\033[1;31m",
@@ -47,7 +94,11 @@ class GramChecker:
         self.ignore_typos = ignore_typos
 
     def check_grammar(self, sentence):
-        d_errors = libdivvun.proc_errs_bytes(self.checker, sentence)
+        f = io.BytesIO()
+
+        with stderr_redirector(f):  # catch stderr from libdivvun
+            d_errors = libdivvun.proc_errs_bytes(self.checker, sentence)
+
         errs = [
             [
                 d_error.form,

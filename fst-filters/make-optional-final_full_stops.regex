@@ -1,0 +1,3 @@
+! File for making final full stops optional. Used in TTS normalisation, since lemma forms of abbreviations are potentially without the final full stop (depending on the disambiguated tokenisation). To be able to match the input of the normaliser FST, forms both with and without final full stops need to be covered.
+
+0 (<-) "." || _ .#. ;

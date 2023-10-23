@@ -112,15 +112,20 @@ transcriptor-%.hfst: \
 
 # Compile the normaliser fst by looping over all individual transcriptors,
 # and unionise them one at a time with the result of the preceding step.
-# The first in the list is used as the base.
-$(GIELLA_XSC_NORMALISER): $(GIELLA_XSC_TRANSCIPTORS)
+# The first in the list is used as the base. Finally, make all final full
+# stops optional, so that both 'dr.' and 'dr' will return 'doktor'.
+$(GIELLA_XSC_NORMALISER).tmp: $(GIELLA_XSC_TRANSCIPTORS)
 	$(AM_V_GEN)cp -f $< $@
 	$(AM_V_UNION)for f in $(filter-out $<, $^); do \
 		$(HFST_DISJUNCT) -1 $@ -2 $$f -o $@.tmp; mv -f $@.tmp $@ ; \
 		done
-	$(AM_V_UNION)$(HFST_MINIMIZE) -i $@ \
-		| $(HFST_FST2FST) -f olw -o $@.tmp
-	$(AM_V_GEN)mv -f $@.tmp $@
+
+$(GIELLA_XSC_NORMALISER): $(top_builddir)/src/filters/make-optional-final_full_stops.hfst \
+                          $(GIELLA_XSC_NORMALISER).tmp
+	$(AM_V_FST2FST)$(HFST_COMPOSE) -1 $< -2 $@.tmp \
+		| $(HFST_MINIMIZE) \
+		| $(HFST_FST2FST) -f olw -o $@
+	$(AM_V_GEN)rm -f $@.tmp
 
 # Copy analyser and generator for divvun-normaliser:
 # Copy mwe-dis:

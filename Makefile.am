@@ -34,6 +34,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    fst-filters/extract-Sem_Plc-strings.regex \
    fst-filters/make-optional-NGminip-tags.regex \
    fst-filters/make-optional-adv_comp-tags.regex \
+   fst-filters/make-optional-final_full_stops.regex \
    fst-filters/make-optional-homonymy-tags.regex \
    fst-filters/make-optional-hyph-tags.regex \
    fst-filters/make-optional-transitivity-tags.regex \

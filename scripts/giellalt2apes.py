@@ -13,6 +13,12 @@ def giella2apes(giella: str) -> str:
         return "adv"
     elif giella == "A":
         return "adj"
+    elif giella == "A-Adv":
+        return "adj"
+    elif giella == "A-Adv-N":
+        return "adj"
+    elif giella == "CC-CS":
+        return "cnjcoo"
     elif giella == "CC":
         return "cnjcoo"
     elif giella == "CS":
@@ -21,11 +27,15 @@ def giella2apes(giella: str) -> str:
         return "ij"
     elif giella == "N":
         return "n"
+    elif giella == "N-Po":
+        return "n"
     elif giella == "Num":
         return "num"
     elif giella == "Pcle":
         return "pcle"
     elif giella == "Po":
+        return "post"
+    elif giella == "Po-Pron":
         return "post"
     elif giella == "Pr":
         return "pr"
@@ -37,6 +47,20 @@ def giella2apes(giella: str) -> str:
         return "np"
     elif giella == "V":
         return "vblex"
+    elif giella == "Adv-Po":
+        return "adv"
+    elif giella == "Adv-Pron":
+        return "adv"
+    elif giella == "Adv-N":
+        return "adv"
+    elif giella == "Adv-N-Po":
+        return "adv"
+    elif giella == "Adv-CC":
+        return "adv"
+    elif giella == "Adv-CS":
+        return "adv"
+    elif giella == "Adv-Po-Pron":
+        return "adv"
     else:
         print(f"missing giella tag conversion for {giella}!")
         return "x"
@@ -103,12 +127,7 @@ def handle_e(e: xml.etree.ElementTree.Element, apes: dict, output: TextIO):
     for i, trans in enumerate(translations):
         print(f"        {trans}.{transposes[i]}")
         default = "y"
-        if " " in trans:
-            print("      (lemmas with spaces get extra weight by default)")
-            default = "3"
-        elif "xxx" in trans:
-            print("     (lemmas with todo symbols get ignored")
-            default = "n"
+        # default weight suggestions in order of least to worst
         if src_in_bidix:
             if apes[lemma + "\t" + pos] == trans + "\t" + transposes[i]:
                 print("(already in bidix skipping...)")
@@ -117,6 +136,15 @@ def handle_e(e: xml.etree.ElementTree.Element, apes: dict, output: TextIO):
                 print("     (existing in bidix as: " +
                       apes[lemma + "\t" + pos] + "; adding default weight)")
                 default = "2"
+        if " " in trans:
+            print("      (lemmas with spaces get extra weight by default)")
+            default = "3"
+        elif "xxx" in trans:
+            print("     (lemmas with todo symbols get ignored")
+            default = "n"
+        elif pos != transposes[i]:
+            print("     (highly weighting against mismatching POS!)")
+            default = "5"
         if i in examples:
             print(f"\t\"{examples[i]}\" ~ \"{tranxamples[i]}\"")
         answer = input("yes, no, quit, or integer weight? default: " +

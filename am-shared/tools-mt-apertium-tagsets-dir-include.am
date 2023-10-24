@@ -43,6 +43,8 @@ TAG_FILE=tags.txt
 # Variable to hold filename for fst used as source for extracting tags,
 # sans extension
 TAG_EXTRACTION_FST=$(top_builddir)/tools/mt/analyser-%-gt-desc
+# needed to unconfuse Apple's make 3.81:
+TAG_EXTRACTION_TTS_FST=$(top_builddir)/tools/mt/analyser-%-gt-desc
 
 # Convert GT-tags to Apertium-tags:
 apertiumtags.txt: mt-tags.txt

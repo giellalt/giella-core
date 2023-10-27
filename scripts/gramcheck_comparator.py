@@ -861,9 +861,9 @@ class GramTest:
         self.run_tests()
 
         if not self.fail_on_passes:
-            return 0 if all(self.test_results) else 1
+            return 1 if any([key.startswith("f") for key in self.count]) else 0
 
-        return 1 if any(self.test_results) else 0
+        return 0 if any([key.startswith("f") for key in self.count]) else 1
 
     def __str__(self):
         return str(self.config.get("out"))

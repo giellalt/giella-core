@@ -13,7 +13,13 @@ def giella2apes(giella: str) -> str:
         return "adv"
     elif giella == "A":
         return "adj"
+    elif giella == "A-N":
+        return "adj"
     elif giella == "A-Adv":
+        return "adj"
+    elif giella == "A-Adv-Pron":
+        return "adj"
+    elif giella == "A-Pron":
         return "adj"
     elif giella == "A-Adv-N":
         return "adj"
@@ -68,8 +74,7 @@ def giella2apes(giella: str) -> str:
 
 
 def handle_mg(mg: xml.etree.ElementTree.Element, apes: dict,
-              translations: list, transposes: list, examples: list,
-              tranxamples: list):
+              translations: list, transposes: list, extras: list):
     """Convert mg."""
     for morph in mg:
         if morph.tag == "tg":
@@ -77,12 +82,20 @@ def handle_mg(mg: xml.etree.ElementTree.Element, apes: dict,
                 if trans.tag == "t":
                     translations.append(trans.text)
                     transposes.append(giella2apes(trans.attrib["pos"]))
+                    if "l_par" in trans.attrib:
+                        extras.append("@l_par: " + trans.attrib["l_par"])
+                    if "attr" in trans.attrib:
+                        extras.append("@attr: " + trans.attrib["attr"])
+                    if "wf" in trans.attrib:
+                        extras.append("@wf: " + trans.attrib["wf"])
+                    if "t_tld" in trans.attrib:
+                        extras.append("@t_tld: " + trans.attrib["t_tld"])
                 elif trans.tag == "xg":
                     for example in trans:
                         if example.tag == "x":
-                            examples.append(example.text)
+                            extras.append("x: " + example.text)
                         elif example.tag == "xt":
-                            tranxamples.append(example.text)
+                            extras.append("xt: " + example.text)
                         else:
                             print(f"Unrecognised {example.tag} under {trans.tag}")
                 elif trans.tag == "re":
@@ -99,8 +112,7 @@ def handle_e(e: xml.etree.ElementTree.Element, apes: dict, output: TextIO):
     pos = None
     translations = []
     transposes = []
-    examples = []
-    tranxamples = []
+    extras = []
     for child in e:
         if child.tag == "lg":
             for lex in child:
@@ -108,15 +120,17 @@ def handle_e(e: xml.etree.ElementTree.Element, apes: dict, output: TextIO):
                 pos = giella2apes(lex.attrib["pos"])
         elif child.tag == "mg":
             handle_mg(child, apes, translations, transposes,
-                      examples, tranxamples)
+                      extras)
         else:
             print(f"Unrecognised {child.tag} under {e.tag}")
             sys.exit(1)
     if not lemma:
-        print("Couldn't find source lemma in this <e>:", e)
+        print("Couldn't find source lemma in this <e>:", e.tag, e.attrib,
+              e.text)
         return
     if not pos:
-        print("Couldnt't  find source pos in this <e>:", e)
+        print("Couldnt't  find source pos in this <e>:", e.tag, e.attrib,
+              e.text)
         return
     src_in_bidix = False
     if lemma + "\t" + pos in apes:
@@ -124,6 +138,9 @@ def handle_e(e: xml.etree.ElementTree.Element, apes: dict, output: TextIO):
         print(f"    {lemma}.{pos} (already in dix)")
     else:
         print(f"    {lemma}.{pos}")
+    if extras:
+        print(f"      {extras}")
+    print("      [" + ",".join(x) for x in translations + "]")
     for i, trans in enumerate(translations):
         print(f"        {trans}.{transposes[i]}")
         default = "y"
@@ -136,17 +153,27 @@ def handle_e(e: xml.etree.ElementTree.Element, apes: dict, output: TextIO):
                 print("     (existing in bidix as: " +
                       apes[lemma + "\t" + pos] + "; adding default weight)")
                 default = "2"
-        if " " in trans:
-            print("      (lemmas with spaces get extra weight by default)")
-            default = "3"
-        elif "xxx" in trans:
+        if "xxx" in trans or "XXX" in trans:
             print("     (lemmas with todo symbols get ignored")
             default = "n"
         elif pos != transposes[i]:
-            print("     (highly weighting against mismatching POS!)")
-            default = "5"
-        if i in examples:
-            print(f"\t\"{examples[i]}\" ~ \"{tranxamples[i]}\"")
+            print("     (avoid mismatching poses in apertium)")
+            default = "n"
+        elif " " in trans:
+            print("      (lemmas with spaces get extra weight by default)")
+            default = "3"
+        elif trans.startswith("-") and not lemma.startswith("-"):
+            print("     (extra - in translation penalty)")
+            default = "2"
+        elif lemma.startswith("-") and not trans.startswith("-"):
+            print("     (missing - in translation penalty)")
+            default = "2"
+        elif trans.endswith("-") and not lemma.endswith("-"):
+            print("     (extra - in translation penalty)")
+            default = "2"
+        elif lemma.endswith("-") and not trans.endswith("-"):
+            print("     (missing - in translation penalty)")
+            default = "2"
         answer = input("yes, no, quit, or integer weight? default: " +
                        default + ". ")
         if answer == "":

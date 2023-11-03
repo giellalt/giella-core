@@ -133,25 +133,34 @@ def handle_e(e: xml.etree.ElementTree.Element, apes: dict, output: TextIO):
               e.text)
         return
     src_in_bidix = False
-    if lemma + "\t" + pos in apes:
+    srckey = lemma + "\t" + pos
+    if srckey in apes:
         src_in_bidix = True
-        print(f"    {lemma}.{pos} (already in dix)")
+        print(f"    {lemma}.{pos} (already in bidix)")
     else:
         print(f"    {lemma}.{pos}")
     if extras:
         print(f"      {extras}")
-    print("      [" + ",".join(x) for x in translations + "]")
+    print("      [", ", ".join(translations), "]")
     for i, trans in enumerate(translations):
         print(f"        {trans}.{transposes[i]}")
         default = "y"
         # default weight suggestions in order of least to worst
         if src_in_bidix:
-            if apes[lemma + "\t" + pos] == trans + "\t" + transposes[i]:
-                print("(already in bidix skipping...)")
+            trg_in_bidix = False
+            targets = ""
+            for trgkey in apes[srckey]:
+                if trgkey == trans + "\t" + transposes[i]:
+                    trg_in_bidix = True
+                    print(f"      {trgkey} (already in bidix skipping...)")
+                    break
+                else:
+                    targets += trgkey + " "
+            if trg_in_bidix:
                 continue
             else:
-                print("     (existing in bidix as: " +
-                      apes[lemma + "\t" + pos] + "; adding default weight)")
+                print(f"     (competing translations in bidix: {targets};"
+                      "adding default weight)")
                 default = "2"
         if "xxx" in trans or "XXX" in trans:
             print("     (lemmas with todo symbols get ignored")
@@ -245,7 +254,12 @@ def read_apes(apefile: TextIO):
                     if not trgpos:
                         print("missing target pos in: ", entry)
                         continue
-                    bidix[srclemma + "\t" + srcpos] = trglemma + "\t" + trgpos
+                    srckey = srclemma + "\t" + srcpos
+                    trgkey = trglemma + "\t" + trgpos
+                    if srckey in bidix:
+                        bidix[srckey].append(trgkey)
+                    else:
+                        bidix[srckey] = [trgkey]
     return bidix
 
 

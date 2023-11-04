@@ -142,7 +142,13 @@ $(GIELLA_GC_ERRORS): $(srcdir)/errors.source.xml
 # Finally build the zcheck file:
 $(GIELLA_GC_ZDISTRO): $(GIELLA_GC_ZIPFILES)
 	$(AM_V_at)rm -f $@
+if !CAN_LXML
+if CAN_PIP
 	$(AM_V_at)env python3 -m pip install -q lxml
+else !CAN_PIP
+	echo lxml and pip is missing so this may fail...:
+endif 
+endif
 	$(AM_V_GEN)$(GTCORE)/scripts/make_grammarchecker_zip.py pipespec.xml $@
 
 # Additional developer tools:

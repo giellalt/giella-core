@@ -90,6 +90,8 @@ def handle_mg(mg: xml.etree.ElementTree.Element, apes: dict,
                         extras.append("@wf: " + trans.attrib["wf"])
                     if "t_tld" in trans.attrib:
                         extras.append("@t_tld: " + trans.attrib["t_tld"])
+                    if "tt_auto" in trans.attrib:
+                        extras.append("@tt_auto: " + trans.attrib["tt_auto"])
                 elif trans.tag == "xg":
                     for example in trans:
                         if example.tag == "x":
@@ -99,7 +101,7 @@ def handle_mg(mg: xml.etree.ElementTree.Element, apes: dict,
                         else:
                             print(f"Unrecognised {example.tag} under {trans.tag}")
                 elif trans.tag == "re":
-                    print(f"  context restriction? {trans.text}")
+                    extras.append("<re>" + trans.text + "</re>")
                 else:
                     print(f"Unrecognised {trans.tag} under {morph.tag}")
         else:

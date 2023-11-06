@@ -1,5 +1,5 @@
 # An AWK preprocessor to pull doc comments out of VISL CG3 and similar
-# files. 
+# files.
 #
 # The doc comments are recognised by sequence of /^#!! /.
 #
@@ -17,7 +17,7 @@ BEGIN {
 }
 function expand_variables(s) {
     # expand all our doc comment variables
-    return gensub("@CODE@", CODE, "g", 
+    return gensub("@CODE@", CODE, "g",
               gensub("@RULENAME@", RULENAME, "g",
                      gensub("@LEXNAME@", LEXNAME, "g", s)));
 }
@@ -27,7 +27,7 @@ function expand_variables(s) {
     printf("\n");
 }
 /^#!![€$][^ ]/ {
-    printf("\n*%s examples:*\n", 
+    printf("\n*%s examples:*\n",
            gensub("#!![€$][^ ]* *", "", 1));
 }
 /^#!!€ / {
@@ -87,8 +87,8 @@ function expand_variables(s) {
 /^(LIST|SET) / {
     RULENAME=$2;
 }
-/^(REMOVE|SELECT|ADD|SUBSTITUTE|IFF):/ {
-    RULENAME=gensub(":.*", "", 1, $1);
+/^(REMOVE|SELECT|ADD|SUBSTITUTE|IFF|SETPARENT):/ {
+    RULENAME=$1;
 }
 function docupath(s) {
     return gensub("\\.\\./", "", "g", s);

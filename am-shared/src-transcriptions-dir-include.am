@@ -20,7 +20,7 @@
 #! @param GT_TRANSCRIPTIONS_SRCS required, the source files for orthographic
 #!        transcriptions.
 
-EXTRA_DIST=$(GT_TRANSCRIPTIONS_SRCS) $(GT_TRANSCRIPTIONS_REGEX_SRCS)
+EXTRA_DIST=$(GT_TRANSCRIPTIONS_SRCS) $(GT_TRANSCRIPTIONS_REGEX_SRCS) $(GT_ABBREV_SRCS)
 
 ####### Automake targets: ########
 # Make sure that targets are deleted when something breaks:
@@ -36,7 +36,10 @@ REGEX2TXT=$(patsubst %.regex,%.filtered.lookup,$(GT_TRANSCRIPTIONS_REGEX_SRCS))
 ABBREV2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_ABBREV_SRCS))
 # Replace digit2text with text2digit to get the inverse fst's:
 TXT2DIGIT=$(subst digit2text,text2digit,$(DIGIT2TXT))
-TXT2ABBREV=$(subst abbrevs2text,text2abbrevs,$(ABBREV2TXT))
+# Rename arbitrary files ending in -XXX2text to -text2XXX:
+TXT2ABBREV=$(shell for file in $(ABBREV2TXT) ; do basename $$file .filtered.lookup \
+| cut -d'-' -f2 | sed 's/2text//' | sed 's/^/transcriptor-text2/' \
+| sed 's/$$/.filtered.lookup/'; done )
 
 # Add the proper suffix for each compiler:
 if CAN_HFST
@@ -110,8 +113,8 @@ $(foreach fst,hfst xfst foma,$(eval $(call txt2digit_transcriptors,$(fst))))
 
 # The abbrevs-to-text transducers are built here:
 define abbrevs2txt_transcriptors
-transcriptor-abbrevs2text.filtered.$(1): \
-					transcriptor-abbrevs2text.$(1) \
+transcriptor-%2text.filtered.$(1): \
+					transcriptor-%2text.$(1) \
 					../filters/remove-NA-strings.$(1) \
 					../filters/remove-NG-strings.$(1) \
 					../filters/remove-usage-tags.$(1)
@@ -130,8 +133,8 @@ $(foreach fst,hfst xfst foma,$(eval $(call abbrevs2txt_transcriptors,$(fst))))
 
 # The text-to-abbrevs transducers are built here:
 define txt2abbrevs_transcriptors
-transcriptor-text2abbrevs.filtered.$(1): \
-					transcriptor-abbrevs2text.$(1) \
+transcriptor-text2%.filtered.$(1): \
+					transcriptor-%2text.$(1) \
 					../filters/remove-usage-tags.$(1) \
 					../orthography/spellrelax-tags.compose.$(1) \
 					../orthography/spellrelax-with-tags.compose.$(1)

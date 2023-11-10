@@ -67,6 +67,8 @@ def giella2apes(giella: str) -> str:
         return "adv"
     elif giella == "Adv-Po-Pron":
         return "adv"
+    elif giella == "Phrase":
+        return "x"
     else:
         print(f"missing giella tag conversion for {giella}!")
         return "x"

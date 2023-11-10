@@ -66,7 +66,7 @@ if test "$noposlex" != "#" ; then
             sed -e "s:\$: [? @MINUS@ [ $cyclicRE  ] ]*:" |\
             sed -e "s:^:$cyclicRE +UglyHack | :" |\
             sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/-/%-/g' \
-                -e 's/#/%#/g' -e 's/_/%_/g' \
+                -e 's/#/%#/g' -e 's/_/%_/g' -e 's/\^/%^/g' \
                 -e 's/@MINUS@/-/g'  > generative.regex
         hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
         hfst-compose -F -1 generative.hfst -2 "$generator" |\
@@ -89,7 +89,7 @@ else
             sed -e "s:\$: [? @MINUS@ [ $cyclicRE  ] ]*:" |\
             sed -e "s:^:$cyclicRE +UglyHack | :" |\
             sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/-/%-/g' \
-                -e 's/#/%#/g' -e 's/_/%_/g' \
+                -e 's/#/%#/g' -e 's/_/%_/g' -e 's/\^/%^/g' \
                 -e 's/@MINUS@/-/g' > generative.regex
         hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
         hfst-compose -F -1 generative.hfst -2 "$generator" |\

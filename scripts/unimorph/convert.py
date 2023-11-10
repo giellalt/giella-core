@@ -5,11 +5,10 @@ Test unimorph compatibility
 """
 
 
-from argparse import ArgumentParser, FileType
-from sys import stderr, stdout, stdin
-from time import perf_counter, process_time
-
 import sys
+from argparse import ArgumentParser, FileType
+from sys import stderr, stdin, stdout
+from time import perf_counter, process_time
 
 
 def giella2unimorph(tags):
@@ -102,6 +101,8 @@ def giella2unimorph(tags):
             unimorphtags += ['INST']
         elif giella == 'Tra':
             unimorphtags += ['TRANS']
+        elif giella == 'Exe':
+            unimorphtags += ['LGSPEC/EXE']
         elif giella == 'Prl':
             unimorphtags += ['PROL']
         elif giella == 'Cmt':
@@ -172,6 +173,8 @@ def giella2unimorph(tags):
             unimorphtags += ['3', 'PL']
         elif giella == 'Sg4':
             unimorphtags += ['4', 'SG']
+        elif giella == '4':
+            unimorphtags += ['4']
         elif giella == 'Pe4':
             unimorphtags += ['4']
         elif giella == 'Ips':
@@ -233,6 +236,8 @@ def giella2unimorph(tags):
                 unimorphtags += ['V.PTCP']
             elif '+PrfPrc' in tags:
                 unimorphtags += ['V.PTCP']
+            elif '+ActPrsPrc' in tags:
+                unimorphtags += ['V.PTCP']
             elif '+Prc' in tags:
                 unimorphtags += ['V.PTCP']
             elif '+Ptcp' in tags:
@@ -245,6 +250,8 @@ def giella2unimorph(tags):
             unimorphtags += ['AUX']
         elif giella == 'PrsPrc':
             unimorphtags += ['PRS']
+        elif giella == 'ActPrsPrc':
+            unimorphtags += ['ACT', 'PRS']
         elif giella == 'PrtPrc':
             unimorphtags += ['PST']
         elif giella == 'PrfPrc':
@@ -487,6 +494,8 @@ def giella2unimorph(tags):
             continue  # FIXME
         elif giella == 'Disc':
             continue
+        elif giella == 'Foc':
+            unimorphtags += ['LGSPEC1/UnnamedFoc']
         elif giella.startswith('Foc/'):
             unimorphtags += ['LGSPEC1/' + giella[5:]]
         elif giella == 'Clt':
@@ -509,6 +518,14 @@ def giella2unimorph(tags):
             unimorphtags += ['LGSPEC/prefix-']
         elif giella.startswith('Genmiessi'):
             print('SOmething broken here½!', tags)
+        elif '@' in giella:
+            print('SOmething broken here½!', tags)
+        elif giella.startswith('NErr/'):
+            print('SOmething broken here½!', tags)
+            unimorphtags += ['TYPO']
+        elif giella.startswith('AErr/'):
+            print('SOmething broken here½!', tags)
+            unimorphtags += ['TYPO']
         elif '<gen>' in giella:
             print('SOmething broken here½!', tags)
         elif '#222-5-19' in giella:

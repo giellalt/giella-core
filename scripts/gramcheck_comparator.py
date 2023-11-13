@@ -695,8 +695,7 @@ class GramTest:
         def final_result(self, *args):
             pass
 
-    def __init__(self, fail_on_passes=False):
-        self.fail_on_passes = fail_on_passes
+    def __init__(self):
         self.count = Counter()
 
     def run_tests(self):
@@ -860,10 +859,7 @@ class GramTest:
     def run(self):
         self.run_tests()
 
-        if not self.fail_on_passes:
-            return 1 if any([key.startswith("f") for key in self.count]) else 0
-
-        return 0 if any([key.startswith("f") for key in self.count]) else 1
+        return 1 if any([key.startswith("f") for key in self.count]) else 0
 
     def __str__(self):
         return str(self.config.get("out"))

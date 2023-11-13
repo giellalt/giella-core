@@ -74,9 +74,6 @@ class YamlGramTest(GramTest):
     }
 
     def __init__(self, args):
-        super().__init__(
-            fail_on_passes=args.test_files[0].lower().endswith("fail.yaml")
-        )
         self.config = self.load_config(args)
 
     def load_config(self, args):

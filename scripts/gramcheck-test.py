@@ -74,6 +74,7 @@ class YamlGramTest(GramTest):
     }
 
     def __init__(self, args):
+        super().__init__()
         self.config = self.load_config(args)
 
     def load_config(self, args):

@@ -779,7 +779,7 @@ class GramTest:
         for key in count:
             self.count[key] += count[key]
 
-        # Did this test pass or not
+        # Did this test sentence as a whole pass or not
         return all(key.startswith("t") for key in count.keys())
 
     def has_same_range_and_error(self, c_error, d_error):

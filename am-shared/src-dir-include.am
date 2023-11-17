@@ -173,6 +173,8 @@ GLT_NFCNFD_COMPOSE=.o. @\"orthography/downcase-derived_proper-strings.compose.$*
 GLT_NFCNFD_COMPOSE_XFST=.o. @\"orthography/downcase-derived_proper-strings.compose.xfst\"
 GLT_NFCNFD_COMPOSE_DEF=.o. @\"orthography/downcase-derived_proper-strings.compose.$$*\"
 
+# " Reset syntax colouring
+
 ### BEGIN: AREA filter conditional:
 if HAVE_AREAS
 GIELLA_MIXED_AREA_FILTER=filters/remove-mixed_area-strings.%

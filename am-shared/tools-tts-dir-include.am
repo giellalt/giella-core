@@ -37,7 +37,7 @@ GIELLA_XSC_TRANSCIPTORS=$(addsuffix .hfst, $(GIELLA_XSC_TRANSCIPTOR_FILTERED_LIS
 
 GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfstol
 GIELLA_XSC_ANALYSER=analyser-gt-norm.hfstol
-GIELLA_XSC_GENERATOR=generator-gt-norm.hfstol
+GIELLA_XSC_GENERATOR=generator-tts-gt-norm.hfstol
 
 # Disamb and syntax analysis files, including whitespace analysis:
 GIELLA_ANL_VALENCY=$(GIELLA_ANL_VALENCY_SRC:.cg3=.bin)

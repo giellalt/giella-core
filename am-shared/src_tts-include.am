@@ -205,6 +205,8 @@ generator-tts-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 					filters/remove-error-strings.%            \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_GC-strings.%           \
+					filters/remove-NG-strings.%               \
+					filters/remove-use_marg-strings.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					$(GIELLA_INSERT_AREATAG_FILTER)           \
@@ -225,6 +227,8 @@ generator-tts-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
 			.o. @\"filters/remove-error-strings.$*\"            \
+			.o. @\"filters/remove-use_marg-strings.$*\"         \
+			.o. @\"filters/remove-NG-strings.$*\"               \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
@@ -263,6 +267,8 @@ generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/remove-error-strings.%            \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_GC-strings.%           \
+					filters/remove-NG-strings.%               \
+					filters/remove-use_marg-strings.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/$(DEFAULT_WS)-to-$(1).compose.% \
@@ -284,6 +290,8 @@ generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/remove-orthography-tags.$$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
+			.o. @\"filters/remove-use_marg-strings.$$*\"         \
+			.o. @\"filters/remove-NG-strings.$$*\"               \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
@@ -329,6 +337,8 @@ generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/remove-error-strings.%            \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_GC-strings.%           \
+					filters/remove-NG-strings.%               \
+					filters/remove-use_marg-strings.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.% \
@@ -350,6 +360,8 @@ generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/remove-orthography-tags.$$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
+			.o. @\"filters/remove-use_marg-strings.$$*\"         \
+			.o. @\"filters/remove-NG-strings.$$*\"               \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
@@ -392,6 +404,8 @@ generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/remove-error-strings.%            \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_GC-strings.%           \
+					filters/remove-NG-strings.%               \
+					filters/remove-use_marg-strings.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/raw-to-$(1).compose.%         \
@@ -413,6 +427,8 @@ generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/remove-orthography-tags.$$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
+			.o. @\"filters/remove-use_marg-strings.$$*\"         \
+			.o. @\"filters/remove-NG-strings.$$*\"               \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
@@ -458,6 +474,8 @@ generator-tts-gt-norm_$(1).tmp.%: generator-raw-gt-desc.% \
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-orthography-tags.%         \
 					filters/remove-error-strings.%            \
+					filters/remove-NG-strings.%               \
+					filters/remove-use_marg-strings.%         \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minus_PMatch-tags.%    \
@@ -479,6 +497,8 @@ generator-tts-gt-norm_$(1).tmp.%: generator-raw-gt-desc.% \
 			.o. @\"filters/remove-orthography-tags.$$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
+			.o. @\"filters/remove-use_marg-strings.$$*\"         \
+			.o. @\"filters/remove-NG-strings.$$*\"               \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \

@@ -420,7 +420,6 @@ analyser-gt-desc.tmp.%: analyser-raw-gt-desc.%                \
 					filters/remove-mwe-tags.%                 \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
-					orthography/spellrelax-nfc2nfd.compose.%   \
 					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \

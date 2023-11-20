@@ -62,6 +62,7 @@ analyser-disamb-gt-desc.tmp1.%: analyser-raw-gt-desc.%        \
 					filters/block-mwe-compounds.%             \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
+					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/remove-variant-tags.$*\"             \
@@ -70,6 +71,7 @@ analyser-disamb-gt-desc.tmp1.%: analyser-raw-gt-desc.%        \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 			.o. @\"filters/block-mwe-compounds.$*\"             \
 			.o. @\"$<\"                                         \
+			    $(GLT_NFCNFD_COMPOSE) \
 				$(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
@@ -104,6 +106,7 @@ analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%     \
 					filters/remove-variant-tags.%               \
 					filters/remove-mwe-tags.%                   \
 					filters/block-mwe-compounds.%               \
+					$(GLT_NFCNFD_FILTER)                        \
 					orthography/spellrelax.$(1).compose.%       \
 					orthography/$(DEFAULT_WS)-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
@@ -113,6 +116,7 @@ analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%     \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"filters/block-mwe-compounds.$$*\"               \
 			.o. @\"$$<\"                                           \
+			    $(GLT_NFCNFD_COMPOSE_DEF) \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
 			.o. @\"filters/remove-infl_deriv-borders.$$*\"         \
 			.o. @\"filters/remove-word-boundary.$$*\"              \
@@ -151,6 +155,7 @@ analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%      \
 					orthography/spellrelax.$(1).compose.%        \
 					orthography/inituppercase.compose.%          \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.% \
+					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-orthography-tags.$$*\"             \
@@ -159,6 +164,7 @@ analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%      \
 			.o. @\"filters/remove-mwe-tags.$$*\"                     \
 			.o. @\"filters/block-mwe-compounds.$$*\"                 \
 			.o. @\"$$<\"                                             \
+			    $(GLT_NFCNFD_COMPOSE_DEF) \
 			    $(GLT_DOWNCASE_COMPOSE_DEF) \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"            \
 			.o. @\"filters/remove-infl_deriv-borders.$$*\"           \
@@ -186,6 +192,7 @@ analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%      \
 					orthography/spellrelax.$(1).compose.%        \
 					orthography/inituppercase.compose.%          \
 					orthography/raw-to-$(1).compose.%            \
+					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-orthography-tags.$$*\"             \
@@ -194,6 +201,7 @@ analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%      \
 			.o. @\"filters/remove-mwe-tags.$$*\"                     \
 			.o. @\"filters/block-mwe-compounds.$$*\"                 \
 			.o. @\"$$<\"                                             \
+			    $(GLT_NFCNFD_COMPOSE_DEF) \
 			    $(GLT_DOWNCASE_COMPOSE_DEF) \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"            \
 			.o. @\"filters/remove-infl_deriv-borders.$$*\"           \

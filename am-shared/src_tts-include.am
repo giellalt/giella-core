@@ -152,9 +152,11 @@ analyser-tts-gt-input.tmp.%: analyser-tts-gt-input.midtmp.%          \
 					filters/remove-word-boundary.%            \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
+					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"$<\" \
+			    $(GLT_NFCNFD_COMPOSE) \
 				$(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \

@@ -164,17 +164,17 @@ endif # " DEFAULT_CASE_HANDLING
 
 GLT_NFDNFC_FILTER=orthography/spellrelax-nfd2nfc.compose.%
 GLT_NFDNFC_FILTER_XFST=orthography/spellrelax-nfd2nfc.compose.xfst
-GLT_NFDNFC_COMPOSE=.o. @\"orthography/spellrelax-nfd2nfc.compose.compose.$*\"
-GLT_NFDNFC_COMPOSE_XFST=.o. @\"orthography/spellrelax-nfd2nfc.compose.compose.xfst\"
-GLT_NFDNFC_COMPOSE_DEF=.o. @\"orthography/spellrelax-nfd2nfc.compose.compose.$$*\"
+GLT_NFDNFC_COMPOSE=.o. @\"orthography/spellrelax-nfd2nfc.compose.$*\"
+GLT_NFDNFC_COMPOSE_XFST=.o. @\"orthography/spellrelax-nfd2nfc.compose.xfst\"
+GLT_NFDNFC_COMPOSE_DEF=.o. @\"orthography/spellrelax-nfd2nfc.compose.$$*\"
 
 # " Reset syntax colouring
 
 GLT_NFCNFD_FILTER=orthography/spellrelax-nfc2nfd.compose.%
-GLT_NFCNFD_FILTER_XFST=orthography/spellrelax-nfc2nfd.compose.compose.xfst
-GLT_NFCNFD_COMPOSE=.o. @\"orthography/spellrelax-nfc2nfd.compose.compose.$*\"
-GLT_NFCNFD_COMPOSE_XFST=.o. @\"orthography/spellrelax-nfc2nfd.compose.compose.xfst\"
-GLT_NFCNFD_COMPOSE_DEF=.o. @\"orthography/spellrelax-nfc2nfd.compose.compose.$$*\"
+GLT_NFCNFD_FILTER_XFST=orthography/spellrelax-nfc2nfd.compose.xfst
+GLT_NFCNFD_COMPOSE=.o. @\"orthography/spellrelax-nfc2nfd.compose.$*\"
+GLT_NFCNFD_COMPOSE_XFST=.o. @\"orthography/spellrelax-nfc2nfd.compose.xfst\"
+GLT_NFCNFD_COMPOSE_DEF=.o. @\"orthography/spellrelax-nfc2nfd.compose.$$*\"
 
 # " Reset syntax colouring
 

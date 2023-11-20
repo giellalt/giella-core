@@ -52,10 +52,6 @@ analyser-gramcheck-gt-desc.tmp.%: analyser-raw-gt-desc.%      \
 		 save stack $@\n\
 		 quit\n" | $(XFST_TOOL)
 
-# And the same for alternate writing systems etc:
-analyser-gramcheck-gt-desc.%.tmp.hfst: analyser-disamb-gt-desc.%.tmp.hfst
-	$(AM_V_CP)cp -f $< $@
-
 # The grammar checker generator is used to generate suggestions for the grammar
 # checker, and must match the grammar checker analyser tag-wise. It is of course
 # normative as opposed to the analysers.

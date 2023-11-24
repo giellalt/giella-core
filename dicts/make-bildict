@@ -26,7 +26,7 @@ L1_L2         = extract_l-t-lexc.xsl
 # target lang= ISO code
 SLANG       = sma
 TLANG       = nob
-LP          = ../../dict-$(SLANG)-$(TLANG)
+LP          = dict-$(SLANG)-$(TLANG)
 #LP         = ../../langs/$(SLANG)/src/morphology/
 # translation number: values 'first' = use only the first t-element; 'all' = use all t-elements 
 TNUM        = all
@@ -37,19 +37,19 @@ CLEAN       = @echo "Cleaning files."
 
 ###############
 
-$(GOAL).fst: $(LP)/bin/$(GOAL).fst
-$(LP)/bin/$(GOAL).fst: $(LP)/bin/$(GOAL).lexc
+../../$(GOAL).fst: ../../$(LP)/bin/$(GOAL).fst
+../../$(LP)/bin/$(GOAL).fst: ../../$(LP)/bin/$(GOAL).lexc
 	@echo
 	@echo "*** Building $@ ***"
 	@echo
-	@printf "read lexc $<  \n\
+	@printf "read lexc ../$<  \n\
 	invert net  \n\
 	save stack $@ \n\
 	quit \n" > $(GOAL)-fst-script
 	$(XFST)  < $(GOAL)-fst-script
 	@rm -f $(GOAL)-fst-script
 
-$(LP)/bin/$(GOAL).lexc: $(LP)/$(SRC) $(SCRIPTS)/$(L1_L2)
+../../$(LP)/bin/$(GOAL).lexc: ../../$(LP)/$(SRC) $(SCRIPTS)/$(L1_L2)
 	@echo 
 	$(BEGIN)
 	$(JV) $(MF) $(XSL) $(EF) $(SCRIPTS)/$(L1_L2) SLANG=$(SLANG) TLANG=$(TLANG) TNUM=$(TNUM)
@@ -60,5 +60,5 @@ $(LP)/bin/$(GOAL).lexc: $(LP)/$(SRC) $(SCRIPTS)/$(L1_L2)
 ###############
 
 clean:
-	@rm -vf $(LP)/bin/*.txt $(LP)/bin/*.lexc $(LP)/bin/*.fst	
+	@rm -vf ../../$(LP)/bin/*.txt $(LP)/bin/*.lexc $(LP)/bin/*.fst	
 

@@ -122,6 +122,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/generate-nfd-nfc-regex.bash \
    scripts/generate-wordforms-for-cont_lexes.sh \
    scripts/grep_analysed_sentences.pl \
+   scripts/gc-release.awk \
    scripts/gt-core.sh \
    scripts/gt-version.sh \
    scripts/include-scripts/yaml-runner-include.sh \

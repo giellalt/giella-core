@@ -44,6 +44,8 @@ def handle_mg(mg: xml.etree.ElementTree.Element,
                     extras.append("<l_ref>" + trans.text + "</l_ref>")
                 else:
                     print(f"Unrecognised {trans.tag} under {morph.tag}")
+        elif morph.tag == "re":
+            extras.append("<re>" + morph.text + "</re>")
         elif morph.tag == "l_ref":
             extras.append("<l_ref>" + morph.text + "</l_ref>")
         else:
@@ -77,21 +79,22 @@ def handle_e(e: xml.etree.ElementTree.Element, output: TextIO):
         return
     if len(translations) <= 1:
         return
-    print("  {", file=output)
-    print(f"    \"source\": \"{lemma}+{pos}\",", file=output)
-    if extras:
-        extras = [x.replace("\"", "”") for x in extras]
-        print(f"    \"__extracomments\": \"{extras}\",", file=output)
-    # print("      [", ", ".join(translations), "]")
-    print("    \"targets\": [", file=output)
     for i, trans in enumerate(translations):
-        print("     {", file=output)
-        print(f"      \"target\": \"{trans}+{transposes[i]}\"", file=output)
-        if i < len(translations) - 1:
-            print("     },", file=output)
+        if i == 0:
+            print("  {", file=output)
+            print(f"    \"source\": \"{trans}+{transposes[i]}\",", file=output)
+            print("    \"targets\": [", file=output)
         else:
-            print("     }", file=output)
-    print("    ] },", file=output)
+            print("     {", file=output)
+            print(f"      \"target\": \"{trans}+{transposes[i]}\"", file=output)
+            if i < len(translations)-1:
+                print("     },", file=output)
+            else:
+                print("     }", file=output)
+    print("    ],", file=output)
+    extras = [x.replace("\"", "”") for x in extras]
+    print(f"    \"__extracomments\": \"{extras}\"", file=output)
+    print("    },", file=output)
 
 
 def main():

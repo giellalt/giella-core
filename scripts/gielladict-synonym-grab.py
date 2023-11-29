@@ -15,7 +15,11 @@ def handle_mg(mg: xml.etree.ElementTree.Element,
             for trans in morph:
                 if trans.tag == "t":
                     translations.append(trans.text)
-                    transposes.append(trans.attrib["pos"])
+                    if "pos" not in trans.attrib:
+                        print(f"Missing POS in {trans.text}...")
+                        transposes.append("???")
+                    else:
+                        transposes.append(trans.attrib["pos"])
                     if "l_par" in trans.attrib:
                         extras.append("@l_par: " + trans.attrib["l_par"])
                     if "attr" in trans.attrib:
@@ -36,8 +40,12 @@ def handle_mg(mg: xml.etree.ElementTree.Element,
                             print(f"Unrecognised {example.tag} under {trans.tag}")
                 elif trans.tag == "re":
                     extras.append("<re>" + trans.text + "</re>")
+                elif trans.tag == "l_ref":
+                    extras.append("<l_ref>" + trans.text + "</l_ref>")
                 else:
                     print(f"Unrecognised {trans.tag} under {morph.tag}")
+        elif morph.tag == "l_ref":
+            extras.append("<l_ref>" + morph.text + "</l_ref>")
         else:
             print(f"Unrecognised {morph.tag} under {mg.tag}")
 

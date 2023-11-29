@@ -169,3 +169,9 @@ nobase_dist_pkgdata_SCRIPTS = \
 
 distclean-local:
 	-rm -f $(pkgconfig_DATA)
+
+# replace giella_core path where uninstalled uses absbuilddir pwd
+install-data-hook:
+	sed -i -e "s:^giella_core=.*:giella_core=$(DESTDIR)$(pkgdatadir):" \
+		"$(DESTDIR)$(pkgdatadir)/scripts/make-hfstspeller-version-easter-egg.sh"
+

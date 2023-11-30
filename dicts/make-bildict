@@ -30,7 +30,7 @@ LP          = ../../dict-$(SLANG)-$(TLANG)
 #LP         = ../../langs/$(SLANG)/src/morphology/
 # translation number: values 'first' = use only the first t-element; 'all' = use all t-elements 
 TNUM        = all
-GOAL        = $(LP)-$(TNUM)
+GOAL        = $(SLANG)$(TLANG)-$(TNUM)
 BEGIN       = @echo "*** Generating $@-file ***"
 END         = @echo "Done."
 CLEAN       = @echo "Cleaning files."
@@ -45,9 +45,9 @@ $(LP)/bin/$(GOAL).fst: $(LP)/bin/$(GOAL).lexc
 	@printf "read lexc $<  \n\
 	invert net  \n\
 	save stack $@ \n\
-	quit \n" > tmp/$(GOAL)-fst-script
-	$(XFST)  < tmp/$(GOAL)-fst-script
-	@rm -f tmp/$(GOAL)-fst-script
+	quit \n" > $(GOAL)-fst-script
+	$(XFST)  < $(GOAL)-fst-script
+	@rm -f $(GOAL)-fst-script
 
 $(LP)/bin/$(GOAL).lexc: $(LP)/$(SRC) $(SCRIPTS)/$(L1_L2)
 	@echo 

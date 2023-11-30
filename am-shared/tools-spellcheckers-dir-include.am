@@ -81,7 +81,7 @@ clean-local:
 	-rm -f *.hfst *.xfst
 	-rm -f  *.hfst *.xfst *.zhfst easteregg.* *.oxt *.xpi *.zip
 	-rm -rf 3 *.service build
-	-rm -f editdist.*.regex
+	-rm -f editdist.default.regex editdist.all.default.regex
 	if ! [ "x$(CORPUSNAME)" = "x" ] ; then \
 		rm -f $(CORPUSNAME).* ; \
 	fi

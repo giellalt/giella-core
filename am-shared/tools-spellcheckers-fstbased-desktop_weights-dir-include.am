@@ -37,7 +37,7 @@ corpus_size_limit_command=$(shell \
 
 # sort the clean corpus:
 %.sort.txt: weights/%.clean.txt
-	$(AM_V_GEN)sort < $< > $@
+	$(AM_V_GEN)LC_ALL=C.utf8 sort < $< > $@
 
 # token count:
 %.wordcount.txt: %.sort.txt
@@ -45,7 +45,8 @@ corpus_size_limit_command=$(shell \
 
 # Unique the sorted, clean corpus:
 %.uniq.txt: %.sort.txt
-	$(AM_V_GEN)uniq -c < $< | sort -nr $(corpus_size_limit_command) > $@
+	$(AM_V_GEN)LC_ALL=C.utf8 uniq -c < $< |\
+		LC_ALL=C.utf8 sort -nr $(corpus_size_limit_command) > $@
 
 # type count:
 %.typecount.txt: %.uniq.txt

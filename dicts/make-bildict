@@ -13,6 +13,7 @@
 #
 
 XFST = xfst
+HFST-LEXC = hfst-lexc
 
 JV   = java
 MF   = -Xmx2048m
@@ -27,7 +28,6 @@ L1_L2         = extract_l-t-lexc.xsl
 SLANG       = sma
 TLANG       = nob
 LP          = dict-$(SLANG)-$(TLANG)
-#LP         = ../../langs/$(SLANG)/src/morphology/
 # translation number: values 'first' = use only the first t-element; 'all' = use all t-elements 
 TNUM        = all
 GOAL        = $(SLANG)$(TLANG)-$(TNUM)
@@ -37,12 +37,22 @@ CLEAN       = @echo "Cleaning files."
 
 ###############
 
+# Todo: 
+
+../../$(GOAL).hfst: ../../$(LP)/bin/$(GOAL).hfst ../../$(GOAL).fst
+../../$(LP)/bin/$(GOAL).hfst: ../../$(LP)/bin/$(GOAL).lexc
+	@echo
+	@echo "*** Building $@ ***"
+	@echo
+	hfst-lexc  $< -o $@
+
+
 ../../$(GOAL).fst: ../../$(LP)/bin/$(GOAL).fst
 ../../$(LP)/bin/$(GOAL).fst: ../../$(LP)/bin/$(GOAL).lexc
 	@echo
 	@echo "*** Building $@ ***"
 	@echo
-	@printf "read lexc ../$<  \n\
+	@printf "read lexc $<  \n\
 	invert net  \n\
 	save stack $@ \n\
 	quit \n" > $(GOAL)-fst-script

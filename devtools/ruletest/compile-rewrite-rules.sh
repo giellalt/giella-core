@@ -38,7 +38,7 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
 
   if(xfscript=="")
     {
-      print "Setting source rule file as \"phonology.xfscript\" by default" > "/dev/stderr/";
+      print "Setting source rule file as \"phonology.xfscript\" by default" > "/dev/stderr";
       xfscript="phonology.xfscript"
     }
 
@@ -46,7 +46,7 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
   "if [ -f \"" xfscript "\" ]\nthen\n echo 1\nelse\necho 0\nfi" | getline exit_status;
   if(exit_status!=1)
     {
-      print "Aborting - rule file \"" xfscript "\" not found" > "/dev/stderr/";
+      print "Aborting - rule file \"" xfscript "\" not found" > "/dev/stderr";
       abort=1;
       exit;
     }
@@ -65,12 +65,12 @@ gawk -v XFSCRIPT=$1 -v FSTTYPE=$2 'BEGIN { xfscript=XFSCRIPT; fsttype=FSTTYPE;
 
   if(n==0)
     {
-      print "Aborting - no rewrite rules found/defined in \"" xfscript "\" as expected" > "/dev/stderr/";
+      print "Aborting - no rewrite rules found/defined in \"" xfscript "\" as expected" > "/dev/stderr";
       abort=1;
       exit;
     }
   else
-    print "Found n=" n " rewrite rules in \"" xfscript "\"" > "/dev/stderr/";
+    print "Found n=" n " rewrite rules in \"" xfscript "\"" > "/dev/stderr";
 
 # Create a new XFSCRIPT command sequence to compile and save all individual rewrite rule FSTs.
 # As first XFSCRIPT command, 1) read in (and compile) original XFSCRIPT file as is.
@@ -91,11 +91,11 @@ if(!abort) {
   "if [ -d \"" fsttype "\" ]\nthen\n echo 0\nelse\necho 1\nfi" | getline exit_status;
    if(exit_status!=1)
      {
-       printf "Directory \"" fsttype "\" already exists - Overwrite? [y/n]: " > "/dev/stderr/";
+       printf "Directory \"" fsttype "\" already exists - Overwrite? [y/n]: " > "/dev/stderr";
        getline choice < "/dev/stdin/";
        if(choice!="y" && choice!="yes")
          {
-            printf "Aborting\n" > "/dev/stderr/";
+            printf "Aborting\n" > "/dev/stderr";
             exit;
          }
      }

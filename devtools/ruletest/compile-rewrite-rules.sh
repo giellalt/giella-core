@@ -92,7 +92,7 @@ if(!abort) {
    if(exit_status!=1)
      {
        printf "Directory \"" fsttype "\" already exists - Overwrite? [y/n]: " > "/dev/stderr";
-       getline choice < "/dev/stdin/";
+       getline choice < "/dev/stdin";
        if(choice!="y" && choice!="yes")
          {
             printf "Aborting\n" > "/dev/stderr";

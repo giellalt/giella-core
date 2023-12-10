@@ -33,6 +33,30 @@ report=REPORT; fsttype=FSTTYPE; FS="\t";
       exit;
     }
 
+# Checking XFSCRIPT argument:
+# If empty XFSCRIPT argument is provided, revert to "phonology.xfscript" as used within the GiellaLT infrastructure
+
+  if(xfscript=="")
+    {
+      xfscript="phonology.xfscript";
+      print "Setting XFSCRIPT as \"phonology.xfscript\" by default" > "/dev/stderr";
+    }
+
+  if(match(xfscript, "\\.xfscript$")==0)
+    {
+      print "Exiting <- specify XFSCRIPT with the suffix: \".xfscript\".";
+      exit;
+    }
+
+# Checking that XFSCRIPT file exists
+  "if [ -f \"" xfscript "\" ]\nthen\n echo 1\nelse\necho 0\nfi" | getline exit_status;
+  if(exit_status!=1)
+    {
+      print "Aborting - rule file \"" xfscript "\" not found" > "/dev/stderr";
+      abort=1;
+      exit;
+    }
+
 # Checking FSTTYPE argument:
 # If no FSTTYPE argument provided, use "foma".
 # If argument provided but does not match supported ones ("foma" and "hfst"), exit.
@@ -76,6 +100,15 @@ report=REPORT; fsttype=FSTTYPE; FS="\t";
      if(length(rule[i])>maxrulelen)
        maxrulelen=length(rule[i]);
   maxixlen=length(n);
+
+  if(n==0)
+    {
+      print "Aborting - no rewrite rules found/defined in \"" xfscript "\" as expected" > "/dev/stderr";
+      abort=1;
+      exit;
+    }
+  else
+    print "Found n=" n " rewrite rules in \"" xfscript "\"" > "/dev/stderr";
 
 # Check that for each rule in XFSCRIPT a matching FST (according to FSTTYPE format) exists
 # in the appropriate subdirectory (foma/ or hfst/).

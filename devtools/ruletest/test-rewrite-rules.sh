@@ -126,6 +126,30 @@ report=REPORT; fsttype=FSTTYPE; FS="\t";
       printf "Aborting <- FST(s) (in %s format) for rules is/are missing in: %s/\n %s\n", toupper(fsttype), fsttype, missing_fst;
       exit;
     }
+
+# Check for FSTs not referred to in XFSCRIPT in the appropriate subdirectory (foma/ or hfst/).
+# If such FSTs exists, output a warning
+ 
+  fs=FS; rs=RS;
+  FS="\n"; RS="";
+  "ls "fsttype"/" | getline dir_list;
+  FS=fs; RS=rs;
+
+  n_files=split(dir_list, file_list, "\n");
+
+  for(i=1; i<=n; i++)
+     rule_list[rule[i]]=rule[i];
+
+  for(i=1; i<=n_files; i++)
+     {
+       sub("\\."fsttype"$", "", file_list[i]);
+       if(!(file_list[i] in rule_list))
+         extra_fst=extra_fst file_list[i] " ";
+     }
+  if(extra_fst!="")
+    {
+      printf "Warning -> Extra FSTs (in %s format) not referred to in \""xfscript"\" found in folder: %s/\n %s\n", toupper(fsttype), fsttype, extra_fst > "/dev/stderr";
+    }
 }
 
 # Go through input of underlying forms (from LEXC source) and associated one or more target forms.

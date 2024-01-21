@@ -15,7 +15,7 @@ endif # CAN_HFST
 
 # The grammar checker analyser is the same as the disambiguator analyser, but
 # potentially/most likely with language-specific adaptations:
-analyser-gramcheck-gt-desc.tmp.%: analyser-raw-gt-desc.%      \
+.generated/analyser-gramcheck-gt-desc.tmp.%: .generated/analyser-raw-gt-desc.%      \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -57,7 +57,7 @@ analyser-gramcheck-gt-desc.tmp.%: analyser-raw-gt-desc.%      \
 # The grammar checker generator is used to generate suggestions for the grammar
 # checker, and must match the grammar checker analyser tag-wise. It is of course
 # normative as opposed to the analysers.
-generator-gramcheck-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
+.generated/generator-gramcheck-gt-norm.tmp.%: .generated/analyser-raw-gt-desc.%    \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -115,7 +115,7 @@ generator-gramcheck-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 
 # Additional target to support languages with alternative writing systems:
 define alt_ws_gramchk_fsts
-analyser-gramcheck-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%   \
+.generated/analyser-gramcheck-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%   \
 					filters/remove-Orth_IPA-strings.%           \
 					filters/remove-hyphenation-marks.%          \
 					filters/remove-infl_deriv-borders.%         \
@@ -156,7 +156,7 @@ analyser-gramcheck-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%   \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-gramcheck-gt-norm.$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -222,7 +222,7 @@ $(foreach alt_ws,$(ALT_WSS),$(eval $(call alt_ws_gramchk_fsts,$(alt_ws))))
 
 # Additional target to support languages with alternative orthographies:
 define alt_orth_disamb_fst
-analyser-gramcheck-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%    \
+.generated/analyser-gramcheck-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%    \
 					filters/remove-hyphenation-marks.%           \
 					filters/remove-infl_deriv-borders.%          \
 					filters/remove-word-boundary.%               \
@@ -267,7 +267,7 @@ analyser-gramcheck-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%    \
 		 quit\n" | $$(XFST_TOOL)
 
 # ... alternatively using a filter from RAW to target:
-analyser-gramcheck-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%    \
+.generated/analyser-gramcheck-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%    \
 					filters/remove-hyphenation-marks.%           \
 					filters/remove-infl_deriv-borders.%          \
 					filters/remove-word-boundary.%               \
@@ -311,7 +311,7 @@ analyser-gramcheck-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%    \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-gramcheck-gt-norm.$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -373,7 +373,7 @@ generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-generator-gramcheck-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-gramcheck-gt-norm.$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -441,7 +441,7 @@ $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_disamb_fst,$(alt_orth))))
 # variation (Area tags); only the normative generator is needed, the descriptive
 # analyser will accept (and tag) all areas:
 define area_gramchk_fsts
-generator-gramcheck-gt-norm_$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-gramcheck-gt-norm_$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -499,7 +499,7 @@ $(foreach area,$(AREAS),$(eval $(call area_gramchk_fsts,$(area))))
 
 # Default fallback processing for the grammarchecker fst's:
 define giella_gramcheck_analysers
-analyser-gramcheck%.$(1): analyser-gramcheck%.tmp.$(1) \
+.generated/analyser-gramcheck%.$(1): .generated/analyser-gramcheck%.tmp.$(1) \
 						  filters/remove-word-boundary.$(1)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"$$<\"                                             \
@@ -509,7 +509,7 @@ analyser-gramcheck%.$(1): analyser-gramcheck%.tmp.$(1) \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-generator-gramcheck%.$(1): generator-gramcheck%.tmp.$(1) \
+.generated/generator-gramcheck%.$(1): .generated/generator-gramcheck%.tmp.$(1) \
 						  filters/remove-word-boundary.$(1)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "\
 		 load stack $$<\n\

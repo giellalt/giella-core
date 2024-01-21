@@ -32,44 +32,45 @@ noinst_DATA=$(GT_COMMON_SPELLER_HFST)
 
 # Build the common speller transducer by removing everything we don't want in
 # any of the spellers:
-generator-$(GT_COMMON_SPELLER_NAME).tmp.hfst: \
-			$(top_builddir)/src/analyser-raw-gt-desc.hfst                     \
-			$(top_builddir)/src/filters/remove-CLB-strings.hfst               \
-			$(top_builddir)/src/filters/remove-error-strings.hfst             \
-			$(top_builddir)/src/filters/remove-MinusSpell-strings.hfst        \
-			$(top_builddir)/src/filters/remove-PUNCT-strings.hfst             \
-			$(top_builddir)/src/filters/remove-use_marg-strings.hfst          \
-			$(top_builddir)/src/filters/remove-orig_lang-tags.hfst            \
-			$(top_builddir)/src/filters/remove-usage_except_speller-tags.hfst \
-			$(top_builddir)/src/filters/remove-Use_GC-strings.hfst            \
-			$(top_builddir)/src/filters/remove-Use_minusGC-tags.hfst          \
-			$(top_builddir)/src/filters/remove-Use_minus_PMatch-tags.hfst     \
-			$(top_builddir)/src/filters/remove-Use_PMatch-strings.hfst        \
-			$(top_builddir)/src/filters/remove-use_mt-strings.hfst            \
-			$(top_builddir)/src/filters/remove-mwe-tags.hfst                  \
-			$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.hfst
+.generated/generator-$(GT_COMMON_SPELLER_NAME).tmp.hfst: \
+			$(top_builddir)/src/fst/analyser-raw-gt-desc.hfst                     \
+			$(top_builddir)/src/fst/filters/remove-CLB-strings.hfst               \
+			$(top_builddir)/src/fst/filters/remove-error-strings.hfst             \
+			$(top_builddir)/src/fst/filters/remove-MinusSpell-strings.hfst        \
+			$(top_builddir)/src/fst/filters/remove-PUNCT-strings.hfst             \
+			$(top_builddir)/src/fst/filters/remove-use_marg-strings.hfst          \
+			$(top_builddir)/src/fst/filters/remove-orig_lang-tags.hfst            \
+			$(top_builddir)/src/fst/filters/remove-usage_except_speller-tags.hfst \
+			$(top_builddir)/src/fst/filters/remove-Use_GC-strings.hfst            \
+			$(top_builddir)/src/fst/filters/remove-Use_minusGC-tags.hfst          \
+			$(top_builddir)/src/fst/filters/remove-Use_minus_PMatch-tags.hfst     \
+			$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst        \
+			$(top_builddir)/src/fst/filters/remove-use_mt-strings.hfst            \
+			$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst                  \
+			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst
+	$(MAKE) $(GENDIR)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
-		    @\"$(top_builddir)/src/filters/remove-usage_except_speller-tags.hfst\" \
-		.o. @\"$(top_builddir)/src/filters/remove-orig_lang-tags.hfst\"        \
-		.o. @\"$(top_builddir)/src/filters/remove-CLB-strings.hfst\"           \
-		.o. @\"$(top_builddir)/src/filters/remove-error-strings.hfst\"         \
-		.o. @\"$(top_builddir)/src/filters/remove-MinusSpell-strings.hfst\"    \
-		.o. @\"$(top_builddir)/src/filters/remove-PUNCT-strings.hfst\"         \
-		.o. @\"$(top_builddir)/src/filters/remove-use_marg-strings.hfst\"      \
-		.o. @\"$(top_builddir)/src/filters/remove-Use_minus_PMatch-tags.hfst\" \
-		.o. @\"$(top_builddir)/src/filters/remove-Use_minusGC-tags.hfst\"      \
-		.o. @\"$(top_builddir)/src/filters/remove-Use_GC-strings.hfst\"        \
-		.o. @\"$(top_builddir)/src/filters/remove-Use_PMatch-strings.hfst\"    \
-		.o. @\"$(top_builddir)/src/filters/remove-mwe-tags.hfst\"              \
-		.o. @\"$(top_builddir)/src/filters/remove-use_mt-strings.hfst\"        \
+		    @\"$(top_builddir)/src/fst/filters/remove-usage_except_speller-tags.hfst\" \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-orig_lang-tags.hfst\"        \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-CLB-strings.hfst\"           \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-error-strings.hfst\"         \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-MinusSpell-strings.hfst\"    \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-PUNCT-strings.hfst\"         \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-use_marg-strings.hfst\"      \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-Use_minus_PMatch-tags.hfst\" \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-Use_minusGC-tags.hfst\"      \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-Use_GC-strings.hfst\"        \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst\"    \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst\"              \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-use_mt-strings.hfst\"        \
 		.o. @\"$<\" \
-		.o. @\"$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.hfst\" \
+		.o. @\"$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst\" \
 		;\n\
 		 save stack $@\n\
 		 quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY) $(HFST_FORMAT)
 
 # Copy the tmp transducer to the final one. This allows local overrides.
-%.hfst: %.tmp.hfst
+%.hfst: .generated/%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # Invert the final fst, to enable symmetric yaml tests and easy manual testing:
@@ -106,3 +107,4 @@ include $(top_srcdir)/../giella-core/am-shared/regex-include.am
 include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am

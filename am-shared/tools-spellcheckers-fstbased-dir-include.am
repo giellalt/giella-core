@@ -17,8 +17,8 @@
 
 ### BEGIN: AREA filter conditional:
 if HAVE_AREAS
-GIELLA_MIXED_AREA_FILTER=$(top_builddir)/src/filters/remove-mixed_area-strings.hfst
-GIELLA_MIXED_AREA_COMPOSE=@\"$(top_builddir)/src/filters/remove-mixed_area-strings.hfst\" .o.
+GIELLA_MIXED_AREA_FILTER=$(top_builddir)/src/fst/filters/remove-mixed_area-strings.hfst
+GIELLA_MIXED_AREA_COMPOSE=@\"$(top_builddir)/src/fst/filters/remove-mixed_area-strings.hfst\" .o.
 else
 GIELLA_MIXED_AREA_FILTER=
 GIELLA_MIXED_AREA_COMPOSE=
@@ -35,16 +35,17 @@ endif # CAN_HFST
 endif # WANT_SPELLERS
 
 #### Build the speller transducer with compound filtering:
-generator-fstspeller-gt-norm.tmp.hfst: \
+.generated/generator-fstspeller-gt-norm.tmp.hfst: \
 			generator-speller-gt-norm.hfst \
-			$(top_builddir)/src/filters/remove-hyphenation-marks.hfst  \
-			$(top_builddir)/src/filters/remove-infl_deriv-borders.hfst \
+			$(top_builddir)/src/fst/filters/remove-hyphenation-marks.hfst  \
+			$(top_builddir)/src/fst/filters/remove-infl_deriv-borders.hfst \
 			$(GIELLA_MIXED_AREA_FILTER)
+	$(MAKE) $(GENDIR)
 	$(AM_V_HXFST)$(PRINTF) "read regex                                        \
 			$(GIELLA_MIXED_AREA_COMPOSE)                                      \
 			@\"$<\"                                                           \
-		.o. @\"$(top_builddir)/src/filters/remove-hyphenation-marks.hfst\"    \
-		.o. @\"$(top_builddir)/src/filters/remove-infl_deriv-borders.hfst\"   \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-hyphenation-marks.hfst\"    \
+		.o. @\"$(top_builddir)/src/fst/filters/remove-infl_deriv-borders.hfst\"   \
 		; \n\
 		 twosided flag-diacritics\n\
 		 save stack $@\n\

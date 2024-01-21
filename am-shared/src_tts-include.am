@@ -56,7 +56,7 @@ endif # CAN_FOMA
 #					filters/remove-mwe-tags.%                 
 
 # First we create the filtered lexicon, ie the analysis/output part of the cascade:
-analyser-tts-gt-output.tmp.%: fst/lexicon.% \
+.generated/analyser-tts-gt-output.tmp.%: morphology/lexicon.% \
 					filters/remove-derivation-position-tags.% \
 					filters/rename-POS_before_Der-tags.%      \
 					filters/remove-norm-comp-tags.%           \
@@ -85,7 +85,7 @@ analyser-tts-gt-output.tmp.%: fst/lexicon.% \
 # Also remember to use more specific target patterns, to override
 # this one (more specific patterns always take precedence over
 # more general ones)
-%-output.hfst: %-output.tmp.hfst
+%-output.hfst: .generated/%-output.tmp.hfst
 	$(AM_V_XFST_TOOL)$(PRINTF) "\
 		 load stack $<\n\
 		 $(INVERT_HFST)\
@@ -95,7 +95,7 @@ analyser-tts-gt-output.tmp.%: fst/lexicon.% \
 # Then we create the input side - lower side of lexicon + twolc/phonology:
 
 # First: fallback for language specific preprocessing:
-%-input.pretmp.hfst: %-output.hfst
+.generated/%-input.pretmp.hfst: %-output.hfst
 	$(AM_V_COMPOSE)\
 		  $(HFST_INVERT)      $(MORE_VERBOSITY) $(HFST_FLAGS) $< \
 		| $(HFST_PROJECT)     $(MORE_VERBOSITY) $(HFST_FLAGS) -p output \
@@ -108,45 +108,42 @@ analyser-tts-gt-output.tmp.%: fst/lexicon.% \
 # HFST
 if WANT_REVERSED_INTERSECT
 # Do this if reversed intersect is enabled:
-analyser-tts-gt-input.midtmp.hfst: analyser-tts-gt-input.pretmp.hfst \
-					 fst/phonology.rev.hfst
+.generated/analyser-tts-gt-input.midtmp.hfst: .generated/analyser-tts-gt-input.pretmp.hfst \
+					 morphology/.generated/phonology.rev.hfst
 	$(AM_V_INTRSCT)\
 		  $(HFST_REVERSE)     $(MORE_VERBOSITY) $(HFST_FLAGS) $< \
 		| $(HFST_COMPOSE_INTERSECT) $(COMPOSE_INTERSECT_FLAG) \
 							  $(MORE_VERBOSITY) $(HFST_FLAGS) \
-			-2 fst/phonology.rev.hfst \
+			-2 morphology/.generated/phonology.rev.hfst \
 		| $(HFST_REVERSE)     $(MORE_VERBOSITY) \
 		| $(HFST_MINIMIZE)    $(MORE_VERBOSITY) $(HFST_FLAGS) \
 		-o $@
 
 else
 # Otherwise do this:
-analyser-tts-gt-input.midtmp.hfst: analyser-tts-gt-input.pretmp.hfst \
-					 fst/phonology.compose.hfst
+.generated/analyser-tts-gt-input.midtmp.hfst: .generated/analyser-tts-gt-input.pretmp.hfst \
+					 morphology/phonology.compose.hfst
 	$(AM_V_INTRSCT)\
 		  $(HFST_COMPOSE_INTERSECT) $(COMPOSE_INTERSECT_FLAG) $< \
 							  $(MORE_VERBOSITY) $(HFST_FLAGS) \
 			-1 $<
-			-2 fst/phonology.compose.hfst \
+			-2 morphology/phonology.compose.hfst \
 		| $(HFST_MINIMIZE)    $(MORE_VERBOSITY) $(HFST_FLAGS) \
 		-o $@
 endif # WANT_REVERSED_INTERSECT
 
 # XEROX
-analyser-tts-gt-output.tmp.xfst: fst/lexicon.xfst \
-			 fst/phonology.compose.xfst
+.generated/analyser-tts-gt-output.tmp.xfst: morphology/lexicon.xfst \
+			 morphology/phonology.compose.xfst
 	$(AM_V_LEXC)$(PRINTF) \
-		"read-source fst/lexicon.xfst\nread-rules fst/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
+		"read-source morphology/lexicon.xfst\nread-rules morphology/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
 		| $(LEXC) $(VERBOSITY)
 
 # Language independent processing for TTS analyser, after
 # TWOLC rules have been applied:
 # Override locally if needed, but remember to copy all details from
 # this target, as needed in each case.
-analyser-tts-gt-input.tmp.hfst  \
-analyser-tts-gt-input.tmp.xfst  \
-analyser-tts-gt-input.tmp.foma: \
-analyser-tts-gt-input.tmp.%: analyser-tts-gt-input.midtmp.%          \
+.generated/analyser-tts-gt-input.tmp.%: .generated/analyser-tts-gt-input.midtmp.%          \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
 					filters/remove-word-boundary.%            \
@@ -176,7 +173,7 @@ analyser-tts-gt-input.tmp.%: analyser-tts-gt-input.midtmp.%          \
 # Also remember to use more specific target patterns, to override
 # this one (more specific patterns always take precedence over
 # more general ones)
-%-input.hfst: %-input.tmp.hfst
+%-input.hfst: .generated/%-input.tmp.hfst
 	$(AM_V_XFST_TOOL)$(PRINTF) "\
 		 load stack $<\n\
 		 $(INVERT_HFST)\
@@ -187,7 +184,7 @@ analyser-tts-gt-input.tmp.%: analyser-tts-gt-input.midtmp.%          \
 
 # The TTS generator is used to generate normalised word forms after
 # lemma normalisation. It is of course normative as opposed to the analysers.
-generator-tts-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
+.generated/generator-tts-gt-norm.tmp.%: .generated/analyser-raw-gt-desc.%    \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -249,7 +246,7 @@ generator-tts-gt-norm.tmp.%: analyser-raw-gt-desc.%    \
 
 # Additional target to support languages with alternative writing systems:
 define alt_ws_tts_fsts
-generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-tts-gt-norm.$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -319,7 +316,7 @@ $(foreach alt_ws,$(ALT_WSS),$(eval $(call alt_ws_tts_fsts,$(alt_ws))))
 
 # Additional target to support languages with alternative orthographies:
 define alt_orth_tts_fst
-generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-tts-gt-norm.$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -386,7 +383,7 @@ generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
 		 quit\n" | $$(XFST_TOOL)
 
 # ... alternatively using a filter from RAW to target:
-generator-tts-gt-norm.$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-tts-gt-norm.$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \
@@ -458,7 +455,7 @@ $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_tts_fst,$(alt_orth))))
 # variation (Area tags); only the normative generator is needed, the descriptive
 # analyser will accept (and tag) all areas:
 define area_tts_fsts
-generator-tts-gt-norm_$(1).tmp.%: generator-raw-gt-desc.% \
+.generated/generator-tts-gt-norm_$(1).tmp.%: .generated/generator-raw-gt-desc.% \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-homonymy-tags.%     \
 					filters/make-optional-hyph-tags.%         \

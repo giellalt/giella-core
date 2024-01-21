@@ -62,15 +62,17 @@ noinst_DATA=$(GIELLA_ORTH_TARGETS) $(GIELLA_ORTH_EXTRA_TARGETS)
 
 ## Generated soruces
 
-$(GT_NFC2NFD): $(top_builddir)/src/fst/lexicon.hfst \
-			   $(GTCORE)/scripts/generate-nfc-nfd-regex.bash
+$(GT_NFC2NFD): $(top_builddir)/src/fst/morphology/lexicon.hfst \
+			   $(GTCORE)/scripts/generate-nfc-nfd-regex.bash \
+			   $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-nfc-nfd-regex.bash $@ \
-		$(top_builddir)/src/fst/lexicon.hfst
+		$(top_builddir)/src/fst/morphology/lexicon.hfst
 
-$(GT_NFD2NFC): $(top_builddir)/src/fst/lexicon.hfst \
-			   $(GTCORE)/scripts/generate-nfd-nfc-regex.bash
+$(GT_NFD2NFC): $(top_builddir)/src/fst/morphology/lexicon.hfst \
+			   $(GTCORE)/scripts/generate-nfd-nfc-regex.bash \
+			   $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-nfd-nfc-regex.bash $@ \
-		$(top_builddir)/src/fst/lexicon.hfst
+		$(top_builddir)/src/fst/morphology/lexicon.hfst
 
 ####### Copy source files from common location if not found locally: #######
 %.regex: $(gt_SHARED_common)/src/orthography/%.regex
@@ -79,12 +81,13 @@ $(GT_NFD2NFC): $(top_builddir)/src/fst/lexicon.hfst \
 %.xfscript: $(gt_SHARED_common)/src/orthography/%.xfscript
 	$(AM_V_CP)cp $< $@
 
+# XXX:
+%.hfst: .generated/%.hfst
+	$(AM_V_CP)cp $< $@
+
 ####### Other targets: ###########
 # The "clean" target:
-CLEANFILES=$(GT_GENERATED_REGEX_SRCS)
 
-clean-local:
-	-rm -f *.hfst *.xfst *.foma *.hfstscript *.xeroxscript *.fomascript
 
 ##########################################
 # General build rules included from here:#
@@ -93,5 +96,6 @@ include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

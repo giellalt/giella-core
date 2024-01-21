@@ -18,7 +18,7 @@
 ####### Source file and target defs: ########
 GIELLA_MOBILESPELLER_FILTER_SRCS=
 
-# Source files copied from src/filters/ OR from $(GIELLA_CORE)/fst-filters/
+# Source files copied from src/czf/filters/ OR from $(GIELLA_CORE)/fst-filters/
 GIELLA_SRC_FILTERS+=
 
 # These will be included in the distribution:

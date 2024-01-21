@@ -199,7 +199,6 @@ EXTRA_DIST=$(GIELLA_FILTER_LOCAL_REGEX_SRCS) \
 # @param GIELLA_FILTER_TARGETS required
 noinst_DATA=$(GIELLA_FILTER_TARGETS)
 BUILT_SOURCES=$(GENERATED_FILES)
-CLEANFILES=$(GENERATED_FILES)
 
 ####### Build rules for building dialect filters: #######
 # DIALECT_TARGETS_?FST is constructed dynamically based on the dialects
@@ -248,8 +247,8 @@ LEX_TAG_FILE=lexicon-$(TAG_FILE)
 
 # Variable to hold filename for fst used as source for extracting tags,
 # sans extension
-TAG_EXTRACTION_FST=$(top_builddir)/src/fst/%
-TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/fst/%
+TAG_EXTRACTION_FST=$(top_builddir)/src/fst/morphology/%
+TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/fst/morphology/%
 
 # Extract tags with specific prefixes, for automatic generation of regexes.
 # Only save the new tag list if there are real differences, otherwise just skip.
@@ -390,8 +389,9 @@ remove-%-tags-before-derivations.regex: %-tags.txt
 
 # Remove strings specific to other dialects than the requested one:
 remove-all_dialects_but_%-strings.regex:
+	$(MAKE) $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-dialect-filter-regex.sh \
-		$@ $* "$(DIALECTS)"
+		$@ `echo $* | sed -e 's:.generated/::'` "$(DIALECTS)"
 
 # Remove strings specific to other areas than the requested one:
 remove-all_areas_but_%-strings.regex:
@@ -452,8 +452,6 @@ reorder-semantic-tags.hfst: reorder-semantic-tags.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### Other targets: ###########
-clean-local:
-	-rm -f *.hfst *.xfst *.foma *.txt $(GIELLA_FILTER_CORE_REGEX_SRCS)
 
 # Include files for the actual build instructions and for verbosity control:
 include $(top_srcdir)/../giella-core/am-shared/lexc-include.am
@@ -462,5 +460,6 @@ include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 include $(top_srcdir)/../giella-core/am-shared/tag-extraction-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

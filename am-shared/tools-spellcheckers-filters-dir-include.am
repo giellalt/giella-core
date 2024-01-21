@@ -63,12 +63,12 @@ endif # WANT_SPELLERS
 %.regex: $(GIELLA_CORE)/fst-filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
-####### ... OR from the src/filters/ dir:
-%.regex: $(top_srcdir)/src/filters/%.regex
+####### ... OR from the src/fst/filters/ dir:
+%.regex: $(abs_top_srcdir)/src/fst/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
-####### Remember also from the top_builddir/src/filters/ dir for generated regexes:
-%.regex: $(top_builddir)/src/filters/%.regex
+####### Remember also from the top_builddir/src/fst/filters/ dir for generated regexes:
+%.regex: $(abs_top_builddir)/src/fst/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### Other targets: ###########

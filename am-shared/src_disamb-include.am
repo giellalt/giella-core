@@ -51,7 +51,7 @@ endif # CAN_FOMA
 # regular analyser by NEITHER removing variant and homonym tags, NOR removing
 # semantic tags or Err/Orth. The variant and homonym tags are there to help
 # choosing forms, as are Err/Orth and Sem-tags.
-.generated/analyser-disamb-gt-desc.tmp1.%: .generated/analyser-raw-gt-desc.%        \
+analyser-disamb-gt-desc.tmp1.%: analyser-raw-gt-desc.%        \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-hyphenation-marks.%        \
 					filters/remove-infl_deriv-borders.%       \
@@ -97,7 +97,7 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 	$$(AM_V_at)echo
 	$$(AM_V_CP)cp -f $$< $$@
 
-.generated/analyser-disamb-gt-desc.$(1).tmp1.%: .generated/analyser-raw-gt-desc.%     \
+analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%     \
 					filters/remove-Orth_IPA-strings.%           \
 					filters/remove-hyphenation-marks.%          \
 					filters/remove-infl_deriv-borders.%         \
@@ -143,7 +143,7 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 	$$(AM_V_at)echo
 	$$(AM_V_CP)cp -f $$< $$@
 
-.generated/analyser-disamb-gt-desc.$(1).tmp1.%: .generated/analyser-raw-gt-desc.%      \
+analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%      \
 					filters/remove-hyphenation-marks.%           \
 					filters/remove-infl_deriv-borders.%          \
 					filters/remove-word-boundary.%               \
@@ -180,7 +180,7 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 		 quit\n" | $$(XFST_TOOL)
 
 # ... alternatively using a filter from RAW to target:
-.generated/analyser-disamb-gt-desc.$(1).tmp1.%: .generated/analyser-raw-gt-desc.%      \
+analyser-disamb-gt-desc.$(1).tmp1.%: analyser-raw-gt-desc.%      \
 					filters/remove-hyphenation-marks.%           \
 					filters/remove-infl_deriv-borders.%          \
 					filters/remove-word-boundary.%               \
@@ -221,7 +221,7 @@ $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_disamb_fst,$(alt_orth))))
 # As a separate last step we remove everything that is related to pmatch, when
 # building the regular disamb analyser:
 define disambs
-.generated/analyser-disamb-gt-desc%tmp.$(1): .generated/analyser-disamb-gt-desc%tmp1.$(1) \
+analyser-disamb-gt-desc%tmp.$(1): analyser-disamb-gt-desc%tmp1.$(1) \
 					 filters/remove-Use_minusGC-tags.$(1)      \
 					 filters/remove-Use_GC-strings.$(1)        \
 					 filters/remove-Use_minus_PMatch-tags.$(1) \
@@ -242,7 +242,7 @@ $(foreach fst,hfst xfst foma,$(eval $(call disambs,$(fst))))
 # the only diff from regular disamb is that we have removed strings and tags
 # not relevant to the pmatch version (and kept the pmatch counterpart w/o tags):
 define pmatch_disambs
-.generated/analyser-pmatchdisamb-gt-desc%tmp.$(1): .generated/analyser-disamb-gt-desc%tmp1.$(1) \
+analyser-pmatchdisamb-gt-desc%tmp.$(1): analyser-disamb-gt-desc%tmp1.$(1) \
 					 filters/remove-Use_minusGC-tags.$(1)         \
 					 filters/remove-Use_GC-strings.$(1)           \
 					 filters/remove-Use_minus_PMatch-strings.$(1) \

@@ -51,11 +51,8 @@ endif # WANT_PHONETIC
 noinst_DATA=$(GT_PHONETICS)
 
 ####### Other targets: ###########
-%.lookup.hfst: .generated/%.lookup.hfst
-	$(AM_V_CP)cp $< $@
-
-%.compose.hfst: .generated/%.compose.hfst
-	$(AM_V_CP)cp $< $@
+clean-local:
+	-rm -f *.hfst *.xfst
 
 ##########################################
 # General build rules included from here:#
@@ -63,6 +60,5 @@ include $(top_srcdir)/../giella-core/am-shared/twolc-include.am
 include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
-include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

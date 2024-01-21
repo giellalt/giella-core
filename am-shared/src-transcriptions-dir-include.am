@@ -73,12 +73,11 @@ noinst_DATA=$(GT_TRANSCRIPTORS) $(GT_CUSTOM_TARGETS)
 
 # The digit-to-text transducers are built here:
 define digit2txt_transcriptors
-.generated/transcriptor-%-digit2text.filtered.$(1): \
-					.generated/transcriptor-%-digit2text.$(1) \
+transcriptor-%-digit2text.filtered.$(1): \
+					transcriptor-%-digit2text.$(1) \
 					../filters/remove-NA-strings.$(1) \
 					../filters/remove-NG-strings.$(1) \
 					../filters/remove-usage-tags.$(1)
-	$$(MAKE) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 			    @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"../filters/remove-NA-strings.$(1)\" \
@@ -94,12 +93,11 @@ $(foreach fst,hfst xfst foma,$(eval $(call digit2txt_transcriptors,$(fst))))
 
 # The text-to-digit transducers are built here:
 define txt2digit_transcriptors
-.generated/transcriptor-%-text2digit.filtered.$(1): \
-					.generated/transcriptor-%-digit2text.$(1) \
+transcriptor-%-text2digit.filtered.$(1): \
+					transcriptor-%-digit2text.$(1) \
 					../filters/remove-usage-tags.$(1) \
 					../orthography/spellrelax-tags.compose.$(1) \
 					../orthography/spellrelax-with-tags.compose.$(1)
-	$$(MAKE) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "define Lex \
 			[   @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"$$<\" \
@@ -115,12 +113,11 @@ $(foreach fst,hfst xfst foma,$(eval $(call txt2digit_transcriptors,$(fst))))
 
 # The abbrevs-to-text transducers are built here:
 define abbrevs2txt_transcriptors
-.generated/transcriptor-%2text.filtered.$(1): \
-					.generated/transcriptor-%2text.$(1) \
+transcriptor-%2text.filtered.$(1): \
+					transcriptor-%2text.$(1) \
 					../filters/remove-NA-strings.$(1) \
 					../filters/remove-NG-strings.$(1) \
 					../filters/remove-usage-tags.$(1)
-	$$(MAKE) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 			    @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"../filters/remove-NA-strings.$(1)\" \
@@ -136,12 +133,11 @@ $(foreach fst,hfst xfst foma,$(eval $(call abbrevs2txt_transcriptors,$(fst))))
 
 # The text-to-abbrevs transducers are built here:
 define txt2abbrevs_transcriptors
-.generated/transcriptor-text2%.filtered.$(1): \
-					.generated/transcriptor-%2text.$(1) \
+transcriptor-text2%.filtered.$(1): \
+					transcriptor-%2text.$(1) \
 					../filters/remove-usage-tags.$(1) \
 					../orthography/spellrelax-tags.compose.$(1) \
 					../orthography/spellrelax-with-tags.compose.$(1)
-	$$(MAKE) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "define Lex \
 			[   @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"$$<\" \
@@ -155,12 +151,9 @@ define txt2abbrevs_transcriptors
 endef
 $(foreach fst,hfst xfst foma,$(eval $(call txt2abbrevs_transcriptors,$(fst))))
 
-# just copy from hidden build dir to here for final prods
-
-transcriptor-%.hfstol: .generated/transcriptor-%.hfstol
-	$(AM_V_CP)cp $< $@
-
 ####### Other targets: ###########
+clean-local:
+	-rm -f *.hfstol *.xfst *.foma *.hfst
 
 include $(top_srcdir)/../giella-core/am-shared/lexc-include.am
 include $(top_srcdir)/../giella-core/am-shared/regex-include.am
@@ -168,6 +161,5 @@ include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
 include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
-include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

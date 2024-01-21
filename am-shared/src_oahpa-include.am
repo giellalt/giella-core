@@ -73,7 +73,7 @@ endif # WANT_DOWNCASEERROR
 # * generation restriction tags: Use/NGminip    - not implemented
 
 # Build the normative Oahpa analyser as a complement to the generator:
-.generated/analyser-oahpa-gt-norm.tmp.%: .generated/analyser-raw-gt-desc.%          \
+analyser-oahpa-gt-norm.tmp.%: analyser-raw-gt-desc.%          \
 					filters/remove-area-tags.%                \
 					filters/remove-dialect-tags.%             \
 					filters/remove-orig_lang-tags.%           \
@@ -130,7 +130,7 @@ endif # WANT_DOWNCASEERROR
 # * generation restriction tags: Use/NGminip    - not implemented
 
 # Build the general normative Oahpa generator:
-.generated/generator-oahpa-gt-norm.tmp.%: .generated/analyser-raw-gt-desc.%         \
+generator-oahpa-gt-norm.tmp.%: analyser-raw-gt-desc.%         \
 					filters/make-optional-hyph-tags.%         \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-variant-tags.%      \
@@ -187,7 +187,7 @@ endif # WANT_DOWNCASEERROR
 # Build the dialect-targeted normative Oahpa generator -
 # the dialects are defined in configure.ac:
 define dial_oahpa_generators
-.generated/generator-oahpa-gt-norm-dial_$(1).tmp.%: .generated/analyser-raw-gt-desc.%    \
+generator-oahpa-gt-norm-dial_$(1).tmp.%: analyser-raw-gt-desc.%    \
 					filters/remove-all_dialects_but_$(1)-strings.% \
 					filters/make-optional-hyph-tags.%              \
 					filters/make-optional-transitivity-tags.%      \
@@ -252,53 +252,53 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 
 # First build a tmp1 raw file as the intersection between lexicon and rules:
 # This raw error/L2 lexical transducer uses both L2 lexicon and L2 twolc:
-.generated/generator-raw-gt-%.tmp1.hfst: morphology/lexicon-%.hfst \
-					 morphology/phonology-%.compose.hfst
+generator-raw-gt-%.tmp1.hfst: fst/lexicon-%.hfst \
+					 fst/phonology-%.compose.hfst
 	$(AM_V_INTRSCT)$(HFST_COMPOSE_INTERSECT) $(MORE_VERBOSITY) $(HFST_FLAGS) \
-		-1 morphology/lexicon-$*.hfst \
-		-2 morphology/phonology-$*.compose.hfst |\
+		-1 fst/lexicon-$*.hfst \
+		-2 fst/phonology-$*.compose.hfst |\
 		$(HFST_MINIMIZE) $(HFST_FLAGS) -o $@
 
 # This is an alternative error fst for cases where the L2 phonology file is not
 # available (because of configuration or no source file):
-.generated/generator-raw-gt-%.tmp1.hfst: morphology/lexicon-%.hfst \
-					 morphology/phonology.compose.hfst
+generator-raw-gt-%.tmp1.hfst: fst/lexicon-%.hfst \
+					 fst/phonology.compose.hfst
 	$(AM_V_INTRSCT)$(HFST_COMPOSE_INTERSECT) $(MORE_VERBOSITY) $(HFST_FLAGS) \
-		-1 morphology/lexicon-$*.hfst \
-		-2 morphology/phonology.compose.hfst |\
+		-1 fst/lexicon-$*.hfst \
+		-2 fst/phonology.compose.hfst |\
 		$(HFST_MINIMIZE) $(HFST_FLAGS) -o $@
 
 # The same for Xerox:
-.generated/analyser-raw-gt-%.tmp1.xfst: morphology/lexicon-%.xfst \
-			 morphology/phonology-%.compose.xfst
+analyser-raw-gt-%.tmp1.xfst: fst/lexicon-%.xfst \
+			 fst/phonology-%.compose.xfst
 	$(AM_V_LEXC)$(PRINTF) \
-		"read-source morphology/lexicon-$*.xfst\nread-rules morphology/phonology-$*.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
+		"read-source fst/lexicon-$*.xfst\nread-rules fst/phonology-$*.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
 		| $(LEXC) $(VERBOSITY)
 
-.generated/analyser-raw-gt-%.tmp1.xfst: morphology/lexicon-%.xfst \
-			 morphology/phonology.compose.xfst
+analyser-raw-gt-%.tmp1.xfst: fst/lexicon-%.xfst \
+			 fst/phonology.compose.xfst
 	$(AM_V_LEXC)$(PRINTF) \
-		"read-source morphology/lexicon-$*.xfst\nread-rules morphology/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
+		"read-source fst/lexicon-$*.xfst\nread-rules fst/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
 		| $(LEXC) $(VERBOSITY)
 
 # FOMA
-.generated/analyser-raw-gt-%.tmp1.foma: morphology/lexicon-%.foma \
-			 morphology/phonology-%.compose.foma
+analyser-raw-gt-%.tmp1.foma: fst/lexicon-%.foma \
+			 fst/phonology-%.compose.foma
 	$(AM_V_FOMA)$(PRINTF) \
 		"read regex \
 				@\"$<\" \
-			.o. @\"morphology/phonology-$*.compose.foma\" \
+			.o. @\"fst/phonology-$*.compose.foma\" \
 			; \n\
 		 save stack $@\n\
 		 quit\n" \
 		| $(FOMA) $(VERBOSITY)
 
-.generated/analyser-raw-gt-%.tmp1.foma: morphology/lexicon-%.foma \
-			 morphology/phonology.compose.foma
+analyser-raw-gt-%.tmp1.foma: fst/lexicon-%.foma \
+			 fst/phonology.compose.foma
 	$(AM_V_FOMA)$(PRINTF) \
 		"read regex \
 				@\"$<\" \
-			.o. @\"morphology/phonology.compose.foma\" \
+			.o. @\"fst/phonology.compose.foma\" \
 			; \n\
 		 save stack $@\n\
 		 quit\n" \
@@ -308,7 +308,7 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 # subsequent processing; this creates the regular tmp file, which can further
 # get local processing to produce the final raw file:
 # Hfst makes a generator (wrt lookup):
-.generated/generator-raw-gt-error.tmp.%: .generated/generator-raw-gt-L2.tmp1.%  \
+generator-raw-gt-error.tmp.%: generator-raw-gt-L2.tmp1.%  \
 					filters/reorder-semantic-tags.%           \
 					filters/reorder-subpos-tags.%         \
 					filters/remove-mwe-tags.%
@@ -323,11 +323,11 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 
 # Just cp the generator-*.hfst to the corresponding analyser, to make it
 # possible to share build code between Hfst and Xerox/Foma:
-.generated/analyser-raw-gt-error.hfst: .generated/generator-raw-gt-error.hfst
+analyser-raw-gt-error.hfst: generator-raw-gt-error.hfst
 	$(AM_V_CP)cp $< $@
 
 # Xerox & Foma make analysers (wrt lookup):
-.generated/analyser-raw-gt-error.tmp.%: .generated/analyser-raw-gt-L2.tmp1.%  \
+analyser-raw-gt-error.tmp.%: analyser-raw-gt-L2.tmp1.%  \
 					filters/reorder-semantic-tags.%           \
 					filters/reorder-subpos-tags.%         \
 					filters/remove-mwe-tags.%
@@ -341,7 +341,7 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 		 quit\n" | $(XFST_TOOL)
 
 # Build the descriptive Oahpa analyser with extra error tags:
-.generated/analyser-oahpa-gt-error.tmp.%: .generated/analyser-raw-gt-error.%     \
+analyser-oahpa-gt-error.tmp.%: analyser-raw-gt-error.%     \
 					filters/remove-area-tags.%                \
 					filters/remove-dialect-tags.%             \
 					filters/remove-orig_lang-tags.%           \
@@ -387,7 +387,7 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 		 quit\n" | $(XFST_TOOL)
 
 # Build an error fst that also recognises initial case error for place names:
-.generated/analyser-oahpa-gt-downcaseerror.tmp.%: .generated/analyser-oahpa-gt-error.tmp.% \
+analyser-oahpa-gt-downcaseerror.tmp.%: analyser-oahpa-gt-error.tmp.% \
 					filters/downcase_UCletters.%      \
 					filters/extract-Sem_Plc-strings.% \
 					filters/tag-lowercase_error-strings.%
@@ -407,7 +407,7 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 # Additional targets to support multiple writing systems:
 
 define oahpa_alt_ws_fsts
-.generated/analyser-oahpa-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%  \
+analyser-oahpa-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%  \
 					filters/remove-area-tags.%             \
 					filters/remove-dialect-tags.%          \
 					filters/remove-orig_lang-tags.%        \
@@ -448,7 +448,7 @@ define oahpa_alt_ws_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-oahpa-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%    \
+generator-oahpa-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%    \
 					filters/make-optional-hyph-tags.%         \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-variant-tags.%      \
@@ -507,7 +507,7 @@ $(foreach altws,$(ALT_WSS),$(eval $(call oahpa_alt_ws_fsts,$(altws))))
 # Additional targets to support alternative orthographies:
 
 define oahpa_alt_orth_fsts
-.generated/analyser-oahpa-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%  \
+analyser-oahpa-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%  \
 					filters/remove-area-tags.%             \
 					filters/remove-dialect-tags.%          \
 					filters/remove-orig_lang-tags.%        \
@@ -548,7 +548,7 @@ define oahpa_alt_orth_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/analyser-oahpa-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%  \
+analyser-oahpa-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%  \
 					filters/remove-area-tags.%             \
 					filters/remove-dialect-tags.%          \
 					filters/remove-orig_lang-tags.%        \
@@ -589,7 +589,7 @@ define oahpa_alt_orth_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-oahpa-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%    \
+generator-oahpa-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%    \
 					filters/make-optional-hyph-tags.%         \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-variant-tags.%      \
@@ -642,7 +642,7 @@ define oahpa_alt_orth_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-oahpa-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%    \
+generator-oahpa-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%    \
 					filters/make-optional-hyph-tags.%         \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-variant-tags.%      \
@@ -701,7 +701,7 @@ $(foreach altorth,$(ALT_ORTHS),$(eval $(call oahpa_alt_orth_fsts,$(altorth))))
 # Additional targets to support area / country specific fst's:
 
 define oahpa_area_fsts
-.generated/analyser-oahpa-gt-norm_$(1).tmp.%: .generated/analyser-raw-gt-desc.%  \
+analyser-oahpa-gt-norm_$(1).tmp.%: analyser-raw-gt-desc.%  \
 					filters/remove-area-tags.%             \
 					filters/remove-dialect-tags.%          \
 					filters/remove-orig_lang-tags.%        \
@@ -740,7 +740,7 @@ define oahpa_area_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-oahpa-gt-norm_$(1).tmp.%: .generated/analyser-raw-gt-desc.%    \
+generator-oahpa-gt-norm_$(1).tmp.%: analyser-raw-gt-desc.%    \
 					filters/make-optional-hyph-tags.%         \
 					filters/make-optional-transitivity-tags.% \
 					filters/make-optional-variant-tags.%      \

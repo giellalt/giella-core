@@ -31,7 +31,7 @@ ERROR_LOG_FILE=hfst-twolc-error-log.txt
 # conflicts, both in verbose and silent mode.
 # If silent, run as verbose, but redirect stderr to file. If verbose,
 # tee stderr to file.
-.generated/%.hfst: %.twolc
+.twolc.hfst:
 	@rm -f $(ERROR_LOG_FILE)
 	$(AM_V_HTWOLC) if test "x$(AM_V_P)" == "xfalse"; then \
 		"$(HFST_TWOLC)" -v $(HFSTFLAGS) $(HFSTTWOLCFLAGS) $(HFST_FORMAT) \
@@ -40,7 +40,7 @@ ERROR_LOG_FILE=hfst-twolc-error-log.txt
 			-i $< -o $@ 2> >(tee -a $(ERROR_LOG_FILE) >&2) ; fi
 
 ####### Xerox build rules: #######
-.generated/%.xfst: %.twolc
+.twolc.xfst:
 	$(AM_V_TWOLC)$(PRINTF) "read-grammar $<\ncompile\nsave-binary $@\nquit\n" \
 		| "$(TWOLC)" $(VERBOSITY)
 

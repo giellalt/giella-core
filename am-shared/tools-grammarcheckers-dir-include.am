@@ -130,7 +130,7 @@ disambiguator.cg3: $(top_srcdir)/src/cg3/disambiguator.cg3
 # Copy grammarchecker: done by other build rules
 
 # Copy generator:
-$(GIELLA_GC_GENERATOR): $(top_builddir)/src/fst/$(GIELLA_GC_GENERATOR)
+$(GIELLA_GC_GENERATOR): $(top_builddir)/src/$(GIELLA_GC_GENERATOR)
 	$(AM_V_CP)cp -f $< $@
 
 # Validate and copy the error messages:

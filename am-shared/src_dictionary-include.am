@@ -34,7 +34,7 @@ endif # WANT_DICTIONARIES
 #   - Sem/-taggar
 #   - OLang/*
 #   - MWE
-.generated/analyser-dict-gt-desc.tmp.%: .generated/analyser-raw-gt-desc.%            \
+analyser-dict-gt-desc.tmp.%: analyser-raw-gt-desc.%            \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -85,7 +85,7 @@ endif # WANT_DICTIONARIES
 
 # The mobile analyser is just like the regular dictionary analyser,
 # except for one additional set of spellrelaxes:
-.generated/analyser-dict-gt-desc-mobile.tmp.%: .generated/analyser-dict-gt-desc.tmp.% \
+analyser-dict-gt-desc-mobile.tmp.%: analyser-dict-gt-desc.tmp.% \
 					orthography/spellrelax-mobile-keyboard.compose.%
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 			    @\"$<\" \
@@ -102,7 +102,7 @@ endif # WANT_DICTIONARIES
 #   - homonymy tags
 #   - variant tags
 #   - Use/NGminip ??? - check with Lene!
-.generated/generator-dict-gt-norm.tmp.%: .generated/analyser-raw-gt-desc.%           \
+generator-dict-gt-norm.tmp.%: analyser-raw-gt-desc.%           \
 					filters/remove-area-tags.%                 \
 					filters/make-optional-hyph-tags.%          \
 					filters/make-optional-transitivity-tags.%  \
@@ -158,7 +158,7 @@ endif # WANT_DICTIONARIES
 # Additional targets to support multiple writing systems:
 
 define giella_dict_alt_ws_fsts
-.generated/analyser-dict-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%       \
+analyser-dict-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%       \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -201,7 +201,7 @@ define giella_dict_alt_ws_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-dict-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%      \
+generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-hyph-tags.%          \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-semantic-tags.%      \
@@ -258,7 +258,7 @@ $(foreach altws,$(ALT_WSS),$(eval $(call giella_dict_alt_ws_fsts,$(altws))))
 # Additional targets to support alternative orthographies:
 
 define gla_dict_altorth_fsts
-.generated/analyser-dict-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%       \
+analyser-dict-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%       \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -303,7 +303,7 @@ define gla_dict_altorth_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/analyser-dict-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%       \
+analyser-dict-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%       \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-orig_lang-tags.%            \
@@ -348,7 +348,7 @@ define gla_dict_altorth_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-dict-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%      \
+generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-hyph-tags.%          \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-semantic-tags.%      \
@@ -400,7 +400,7 @@ define gla_dict_altorth_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-dict-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%      \
+generator-dict-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-hyph-tags.%          \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-semantic-tags.%      \
@@ -457,7 +457,7 @@ $(foreach altorth,$(ALT_ORTHS),$(eval $(call gla_dict_altorth_fsts,$(altorth))))
 ###############################################################
 # Fallback target for mobile variants of the alternating orth, ws analysers:
 define giella_dict_alt_ws_mobile_analysers
-.generated/analyser-dict-gt-desc-mobile.%.tmp.$(1): .generated/analyser-dict-gt-desc.%.$(1)
+analyser-dict-gt-desc-mobile.%.tmp.$(1): analyser-dict-gt-desc.%.$(1)
 	$$(AM_V_CP)cp -f $$< $$@
 endef
 $(foreach fst,hfst xfst foma,$(eval $(call giella_dict_alt_ws_mobile_analysers,$(fst))))
@@ -466,7 +466,7 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_dict_alt_ws_mobile_analysers,$
 # Additional targets to support area / country specific fst's:
 
 define giella_dict_area_fsts
-.generated/generator-dict-gt-norm_$(1).tmp.%: .generated/analyser-raw-gt-desc.%      \
+generator-dict-gt-norm_$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-hyph-tags.%          \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-semantic-tags.%      \
@@ -523,7 +523,7 @@ $(foreach area,$(AREAS),$(eval $(call giella_dict_area_fsts,$(area))))
 # Additional targets to support dialect specific fst's:
 
 define giella_dict_dialect_fsts
-.generated/generator-dict-gt-norm-dial_$(1).tmp.%: .generated/analyser-raw-gt-desc.%      \
+generator-dict-gt-norm-dial_$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-hyph-tags.%          \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-semantic-tags.%      \

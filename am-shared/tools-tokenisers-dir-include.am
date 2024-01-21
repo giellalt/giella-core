@@ -75,9 +75,9 @@ hfstdata_DATA+=$(ABBR)
 endif # WANT_ABBR
 
 STEMSRCS:=$(filter-out \
-    %propernouns.lexc,$(wildcard $(top_srcdir)/src/fst/morpholog/stems/*.lexc))
+    %propernouns.lexc,$(wildcard $(top_srcdir)/src/fst/stems/*.lexc))
 OTHRSRCS:=$(filter-out \
-    %lexicon.lexc,$(wildcard $(top_srcdir)/src/fst/morphology/*.lexc))
+    %lexicon.lexc,$(wildcard $(top_srcdir)/src/fst/*.lexc))
 
 # Convert source files to comma-separated list:
 empty:=
@@ -91,7 +91,7 @@ SCRIPTDIR=$(GTCORE)/scripts
 # Build the abbr.txt file:
 abbr: $(ABBR)
 $(ABBR): \
-		$(top_srcdir)/src/fst/morphology/stems/abbreviations.lexc \
+		$(top_srcdir)/src/fst/stems/abbreviations.lexc \
 		$(STEMSRCS) $(GENRSRCS) $(OTHRSRCS)            \
 		../../src/$(GENERATOR)                         \
 		paradigm.abbr.txt                              \
@@ -123,22 +123,22 @@ CMD=$(AM_V_HXFST)$(PRINTF) "read regex \
 # Take the analyser file from src/*.hfst, and replace the Giella tags with
 # CG compatible ones:
 # a. for pmatchdisamb:
-analyser-%-gt-desc.hfst: $(top_builddir)/src/fst/analyser-pmatch%-gt-desc.hfst \
+analyser-%-gt-desc.hfst: $(top_builddir)/src/analyser-pmatch%-gt-desc.hfst \
 						 filters/make-%-CG-tags.hfst
 	$(CMD)
 
 # b. for (regular disamb &) and gramcheck:
-analyser-%-gt-desc.hfst: $(top_builddir)/src/fst/analyser-%-gt-desc.hfst \
+analyser-%-gt-desc.hfst: $(top_builddir)/src/analyser-%-gt-desc.hfst \
 						 filters/make-%-CG-tags.hfst
 	$(CMD)
 
 ###########################################################################
 ### TTS processing:
-analyser-tts-cggt-input.hfst: $(top_builddir)/src/fst/analyser-tts-gt-input.hfst
+analyser-tts-cggt-input.hfst: $(top_builddir)/src/analyser-tts-gt-input.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # c. for tts analyser output (cf a. and b. above):
-analyser-%-cggt-output.hfst: $(top_builddir)/src/fst/analyser-%-gt-output.hfst \
+analyser-%-cggt-output.hfst: $(top_builddir)/src/analyser-%-gt-output.hfst \
 						 filters/make-%-CG-tags.hfst
 	$(CMD)
 
@@ -153,12 +153,12 @@ tokeniser-tts-cggt-desc.pmhfst: tokeniser-tts-cggt-desc.pmscript \
 ###########################################################################
 # Prepare analysers used for building the tokenisers:
 analyser_relabelled-%.hfst: analyser-%.hfst \
-						 .generated/btrelabeller.hfst \
-						 .generated/relabeller.hfst
+						 btrelabeller.hfst \
+						 relabeller.hfst
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) \
-		-f '@P.Pmatch.Backtrack@' -T .generated/btrelabeller.hfst $< \
+		-f '@P.Pmatch.Backtrack@' -T btrelabeller.hfst $< \
 		| $(HFST_SUBSTITUTE) \
-		-f '@P.Pmatch.Loc@'       -T .generated/relabeller.hfst \
+		-f '@P.Pmatch.Loc@'       -T   relabeller.hfst \
 		-o $@
 
 # This is the real tokeniser build target for all non-TTS tokenisers:
@@ -170,20 +170,20 @@ tokeniser-%.pmhfst: tokeniser-%.pmscript \
 
 
 # Helper fst one:
-.generated/btrelabeller.hfst: $(GENDIR)
+btrelabeller.hfst:
 	$(AM_V_TXT2FST)$(PRINTF) \
 		'0\t1\t@0@\t@PMATCH_BACKTRACK@\n1\t2\t@0@\t@PMATCH_INPUT_MARK@\n2\n' \
 		| $(HFST_TXT2FST) -e '@0@' $(HFST_FORMAT) \
 		-o $@
 
 # Helper fst two:
-.generated/relabeller.hfst: $(GENDIR)
+relabeller.hfst:
 	$(AM_V_TXT2FST)$(PRINTF) '0\t1\t@0@\t@PMATCH_INPUT_MARK@\n1\n' \
 		| $(HFST_TXT2FST) -e '@0@' $(HFST_FORMAT) \
 		-o $@
 
 # Fallback pattern target for no local processing cases:
-%.hfst: .genereated/%.tmp.hfst
+%.hfst: %.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
 ####### Includes: ###########
@@ -191,4 +191,3 @@ include $(top_srcdir)/../giella-core/am-shared/tools-tokenisers_altorth-include.
 include $(top_srcdir)/../giella-core/am-shared/vislcg3-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
-include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am

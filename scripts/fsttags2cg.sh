@@ -8,7 +8,7 @@ echo "processing..."
 
 i="LIST-TAGS += "
 
-cat src/fst/morphology/root.lexc |\
+cat src/fst/root.lexc |\
 cut -d '!' -f1 |\
 cut -d ':' -f1 |\
 sed 's/+/¢+/g' |\

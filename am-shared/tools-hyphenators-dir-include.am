@@ -104,22 +104,22 @@ FORCE:
 LEX_RAW=
 if WANT_REVERSED_INTERSECT
 # Do this if reversed intersect is enabled:
-LEX_RAW+=$(top_builddir)/src/fst/morphology/.generated/lexicon.rev.hfst
+LEX_RAW+=$(top_builddir)/src/fst/lexicon.rev.hfst
 else
 # Otherwise do this:
-LEX_RAW+=$(top_builddir)/src/fst/morphology/.generated/lexicon.hfst
+LEX_RAW+=$(top_builddir)/src/fst/lexicon.hfst
 endif # WANT_REVERSED_INTERSECT
 
 PHON_RULES=
 if WANT_REVERSED_INTERSECT
 # Do this if reversed intersect is enabled:
-PHON_RULES+=$(top_builddir)/src/fst/morphology/.generated/phonology.rev.hfst
+PHON_RULES+=$(top_builddir)/src/fst/phonology.rev.hfst
 else
 # Otherwise do this:
-PHON_RULES+=$(top_builddir)/src/fst/morphology/.generated/phonology.compose.hfst
+PHON_RULES+=$(top_builddir)/src/fst/phonology.compose.hfst
 endif # WANT_REVERSED_INTERSECT
 
-HYPH_RULES=$(top_builddir)/src/fst/syllabification/hyphenation.compose.hfst
+HYPH_RULES=$(top_builddir)/src/hyphenation/hyphenation.compose.hfst
 
 TAGWEIGHTS=tags.reweight
 
@@ -179,7 +179,7 @@ lexicon-gt-desc-clean.hfst: lexicon-gt-desc.hfst           \
 # 1. get all Err-tags, add weight 15000, and cat to tagweight file
 all_tags.txt: $(TAGWEIGHTS)
 	$(AM_V_CP)cp -f $< $@
-	$(AM_V_GEN)sed $$'s/$$/\t15000/' $(top_builddir)/src/fst/filters/error-tags.txt \
+	$(AM_V_GEN)sed $$'s/$$/\t15000/' $(top_builddir)/src/filters/error-tags.txt \
 		>> $@
 
 # 2. add tag weights:
@@ -238,7 +238,7 @@ endif !SKIP_PHONOLOGY
 
 # Convert this file to weighted format before using it in the hyphenators:
 downcase-derived_proper-strings.compose.hfst: \
-	$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst
+	$(top_builddir)/src/orthography/downcase-derived_proper-strings.compose.hfst
 	$(AM_V_FST2FST)$(HFST_FST2FST) -i $< --format=openfst-tropical -o $@
 
 # 5. remove hyph-points from 4, invert

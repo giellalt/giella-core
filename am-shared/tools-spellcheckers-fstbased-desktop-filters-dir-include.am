@@ -18,7 +18,7 @@
 ####### Source file and target defs: ########
 GIELLA_DESKTOPSPELLER_FILTER_SRCS=
 
-# Source files copied from src/fst&filters/ OR from $(GIELLA_CORE)/fst-filters/
+# Source files copied from src/filters/ OR from $(GIELLA_CORE)/fst-filters/
 GIELLA_SRC_DESKTOP_FILTERS=remove-word-boundary.regex \
                    remove-usage-tags.regex \
                    remove-error-strings.regex

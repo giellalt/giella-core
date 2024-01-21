@@ -70,7 +70,7 @@ endif # HAVE_DIALECTS
 ####### Build rules for the default set of fst's for  ########
 ####### areal variation reflected in the orthography: ########
 define dialect_fsts
-.generated/analyser-gt-norm-dial_$(1).tmp.%: .generated/analyser-raw-gt-desc.%       \
+analyser-gt-norm-dial_$(1).tmp.%: analyser-raw-gt-desc.%       \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-variant-tags.%              \
@@ -113,7 +113,7 @@ define dialect_fsts
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-.generated/generator-gt-norm-dial_$(1).tmp.%: .generated/analyser-raw-gt-desc.%      \
+generator-gt-norm-dial_$(1).tmp.%: analyser-raw-gt-desc.%      \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-homonymy-tags.%      \
 					filters/make-optional-hyph-tags.%          \

@@ -24,9 +24,8 @@ TAG_FILE=tags.txt
 
 # Variable to hold filename for fst used as source for extracting tags,
 # sans extension
-# XXX: tokenisers are built before othet tools...
 TAG_EXTRACTION_FST=$(top_builddir)/tools/spellcheckers/analyser-%-gt-norm
-TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/fst/analyser-%-gt-output
+TAG_EXTRACTION_TTS_FST=$(top_builddir)/tools/tts/analyser-%-gt-output
 
 ####### Source file and target defs: ########
 GT_TOKENISERS_FILTER_SRCS=make-desktopspeller-CG-tags.regex
@@ -76,11 +75,11 @@ make-%-CG-tags.regex: %-$(TAG_FILE)
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from $top_builddir/src/filters/
-%.regex: $(top_builddir)/src/fst/filters/%.regex
+%.regex: $(top_builddir)/src/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from $top_srcdir/src/filters/
-%.regex: $(top_srcdir)/src/fst/filters/%.regex
+%.regex: $(top_srcdir)/src/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### Build rule for compiling regexes - we want to override #######

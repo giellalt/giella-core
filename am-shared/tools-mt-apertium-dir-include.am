@@ -10,7 +10,7 @@ APERTIUM_ANALYSERS_GT_HFST+=\
 	$(addsuffix .hfstol,$(addprefix analyser-mt-gt-desc.,$(APERTIUM_TARGET_LANGS)))
 
 APERTIUM_ANALYSERS_TMP_HFST+=\
-	.generated/$(addsuffix .tmp.hfst,$(addprefix analyser-mt-gt-desc.,$(APERTIUM_TARGET_LANGS)))
+	$(addsuffix .tmp.hfst,$(addprefix analyser-mt-gt-desc.,$(APERTIUM_TARGET_LANGS)))
 
 # Build list of apertium tagged files by replacing -gt- with -apertium-:
 # analyser-mt-gt-desc.nob.hfst => analyser-mt-apertium-desc.nob.hfst etc.
@@ -105,7 +105,7 @@ endif # CAN_HFST
 
 # Convert the single tag of the URL analyser to Apertium format, and convert
 # it to the target fst format:
-analyser-url-apertium-desc.hfst: $(top_builddir)/src/fst/analyser-url-gt-desc.hfst
+analyser-url-apertium-desc.hfst: $(top_builddir)/src/analyser-url-gt-desc.hfst
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-f '+URL' -t '<url>' \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
@@ -119,9 +119,8 @@ analyser-mt-gt-desc.hfst: ../analyser-mt-gt-desc.hfst
 # of a filter file.
 # WITH filter file available (the source file is inverted with the .i modifier):
 $(APERTIUM_ANALYSERS_TMP_HFST):
-.generated/analyser-mt-gt-desc.%.tmp.hfst: analyser-mt-gt-desc.hfst \
+analyser-mt-gt-desc.%.tmp.hfst: analyser-mt-gt-desc.hfst \
 			filters/remove-derivation-strings.%.hfst
-	$(MAKE) $(GENDIR)
 	$(AM_V_RGX2FST)$(PRINTF) "\
 		@\"filters/remove-derivation-strings.$*.hfst\" \
    	.o. @\"$<\".i \
@@ -137,7 +136,6 @@ $(APERTIUM_ANALYSERS_TMP_HFST):
 # *.tmp.hfst -> invert -> *.hfst
 # to apply correctly:
 $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
-	$(MAKE) $(GENDIR)
 	$(AM_V_INVERT)$(HFST_INVERT) -i $< \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
 		| $(HFST_REWEIGHT) $(MORE_VERBOSITY) $(HFST_FLAGS) \
@@ -145,10 +143,9 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 		-o $@
 
 # Relabel Giella tags to Apertium tags - generator, step 1:
-.generated/generator-mt-apertium-norm.tmp1.hfst: \
+generator-mt-apertium-norm.tmp1.hfst: \
 			../generator-mt-gt-norm.hfst \
 			tagsets/apertium.relabel
-	$(MAKE) $(GENDIR)
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-F tagsets/apertium.relabel \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
@@ -158,8 +155,8 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 # * relabel file
 #   AND
 # * general tag change regex file
-.generated/generator-mt-apertium-norm.%.hfst: \
-			.generated/generator-mt-apertium-norm.%1.hfst \
+generator-mt-apertium-norm.%.hfst: \
+			generator-mt-apertium-norm.%1.hfst \
 			tagsets/modify-tags.hfst \
 			$(srcdir)/tagsets/apertium.postproc.relabel
 	$(AM_V_RGX2FST)$(PRINTF) "\
@@ -173,8 +170,8 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 
 # Relabel Giella tags to Apertium tags - generator, step 2b:
 # * relabel file ONLY
-.generated/generator-mt-apertium-norm.%.hfst: \
-			.generated/generator-mt-apertium-norm.%1.hfst \
+generator-mt-apertium-norm.%.hfst: \
+			generator-mt-apertium-norm.%1.hfst \
 			$(srcdir)/tagsets/apertium.postproc.relabel
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-F $(srcdir)/tagsets/apertium.postproc.relabel \
@@ -182,8 +179,8 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 
 # Relabel Giella tags to Apertium tags - generator, step 2c:
 # * general tag change regex file ONLY
-.generated/generator-mt-apertium-norm.%.hfst: \
-			.generated/generator-mt-apertium-norm.%1.hfst \
+generator-mt-apertium-norm.%.hfst: \
+			generator-mt-apertium-norm.%1.hfst \
 			tagsets/modify-tags.hfst
 	$(AM_V_RGX2FST)$(PRINTF) "\
 		@\"tagsets/modify-tags.hfst\".i \
@@ -194,15 +191,15 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 
 # Relabel Giella tags to Apertium tags - generator, step 2d:
 # * NO general tag change beyond the automatic one - just copy tmp1 -> tmp
-.generated/generator-mt-apertium-norm.%.hfst: \
-			.generated/generator-mt-apertium-norm.%1.hfst
+generator-mt-apertium-norm.%.hfst: \
+			generator-mt-apertium-norm.%1.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # Relabel Giella tags to Apertium tags - analyser:
 # % = TARGETLANG
 # Step 1a - gt -> apertium.tmp1
-.generated/analyser-mt-apertium-desc.%.tmp1.hfst: \
-			.generated/analyser-mt-gt-desc.%.hfst \
+analyser-mt-apertium-desc.%.tmp1.hfst: \
+			analyser-mt-gt-desc.%.hfst \
 			tagsets/apertium.relabel
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-F tagsets/apertium.relabel \
@@ -214,8 +211,8 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 # * relabel file
 #   AND
 # * general tag change regex file
-.generated/analyser-mt-apertium-desc.%.tmp.hfst: \
-			.generated/analyser-mt-apertium-desc.%.tmp1.hfst \
+analyser-mt-apertium-desc.%.tmp.hfst: \
+			analyser-mt-apertium-desc.%.tmp1.hfst \
 			tagsets/modify-tags.hfst \
 			$(srcdir)/tagsets/apertium.postproc.relabel
 	$(AM_V_RGX2FST)$(PRINTF) "\
@@ -229,8 +226,8 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 
 # Step 1b.b - apertium.tmp1 -> apertium.tmp
 # * relabel file ONLY
-.generated/analyser-mt-apertium-desc.%.tmp.hfst: \
-			.generated/analyser-mt-apertium-desc.%.tmp1.hfst \
+analyser-mt-apertium-desc.%.tmp.hfst: \
+			analyser-mt-apertium-desc.%.tmp1.hfst \
 			$(srcdir)/tagsets/apertium.postproc.relabel
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-F $(srcdir)/tagsets/apertium.postproc.relabel \
@@ -238,8 +235,8 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 
 # Step 1b.c - apertium.tmp1 -> apertium.tmp
 # * general tag change regex file ONLY
-.generated/analyser-mt-apertium-desc.%.tmp.hfst: \
-			.generated/analyser-mt-apertium-desc.%.tmp1.hfst \
+analyser-mt-apertium-desc.%.tmp.hfst: \
+			analyser-mt-apertium-desc.%.tmp1.hfst \
 			tagsets/modify-tags.hfst
 	$(AM_V_RGX2FST)$(PRINTF) "\
    		@\"$<\" \
@@ -250,15 +247,15 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 
 # Step 1b.d - apertium.tmp1 -> apertium.tmp
 # * no manual tag changes required at all - just copy (fallback):
-.generated/analyser-mt-apertium-desc.%.tmp.hfst: \
-			.generated/analyser-mt-apertium-desc.%.tmp1.hfst
+analyser-mt-apertium-desc.%.tmp.hfst: \
+			analyser-mt-apertium-desc.%.tmp1.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # Relabel Giella tags to Apertium tags - analyser:
 # % = TARGETLANG
 # Step 2a - apertium.tmp -> apertium
 #         - BOTH target language specific modifying AND relabeling
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+analyser-mt-apertium-desc.%.hfst: analyser-mt-apertium-desc.%.tmp.hfst \
 								  tagsets/modify-tags.%.hfst \
 								  $(srcdir)/tagsets/apertium.%.relabel \
 								  analyser-url-apertium-desc.hfst
@@ -277,7 +274,7 @@ analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfs
 # % = TARGETLANG
 # Step 2b - apertium.tmp -> apertium
 #         - ONLY target language specific relabeling
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+analyser-mt-apertium-desc.%.hfst: analyser-mt-apertium-desc.%.tmp.hfst \
 								  $(srcdir)/tagsets/apertium.%.relabel \
 								  analyser-url-apertium-desc.hfst
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
@@ -290,7 +287,7 @@ analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfs
 # % = TARGETLANG
 # Step 2c - apertium.tmp -> apertium
 #         - ONLY target language specific modifying
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+analyser-mt-apertium-desc.%.hfst: analyser-mt-apertium-desc.%.tmp.hfst \
 								  tagsets/modify-tags.%.hfst \
 								  analyser-url-apertium-desc.hfst
 	$(AM_V_RGX2FST)$(PRINTF) "\
@@ -306,7 +303,7 @@ analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfs
 # % = TARGETLANG
 # Step 2d - apertium.tmp -> apertium
 #         - NO target language specific processing - just copy
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+analyser-mt-apertium-desc.%.hfst: analyser-mt-apertium-desc.%.tmp.hfst \
 								  analyser-url-apertium-desc.hfst
 	$(AM_V_UNION)$(HFST_DISJUNCT) -1 $< -2 analyser-url-apertium-desc.hfst \
 		-o $@
@@ -361,11 +358,11 @@ $(GTLANG).val.rlx.bin: valency-mt-apertium.bin
 #### - inversion is needed FOR THE ANALYSER because the hfst model is upside
 #### down compared to Xerox AT APPLICATION TIME. The other command makes the
 #### final transducer ready for use.
-.generated/analyser%.hfst: .generated/analyser%.tmp.hfst
+analyser%.hfst: analyser%.tmp.hfst
 	$(AM_V_INVERT)$(HFST_INVERT) $< -o $@
 
 # If you override this goal, you have to remove dialect tags in the overriding goal!
-generator-mt-gt%.hfst: .generated/generator-mt-gt%.tmp.hfst \
+generator-mt-gt%.hfst: generator-mt-gt%.tmp.hfst \
 			$(top_builddir)/src/filters/remove-dialect-tags.hfst
 	$(AM_V_HXFST)$(PRINTF) "set xerox-composition ON \n\
 			read regex \
@@ -376,11 +373,7 @@ generator-mt-gt%.hfst: .generated/generator-mt-gt%.tmp.hfst \
         quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
 
 # General fallback target for generators:
-generator%.hfst: .generated/generator%.tmp.hfst
-	$(AM_V_CP)cp -f $< $@
-
-# XXX some backwards compatibility
-analyser%.hfst: .generated/analyser%.hfst
+generator%.hfst: generator%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # cleaning
@@ -392,4 +385,3 @@ include $(top_srcdir)/../giella-core/am-shared/lookup-include.am
 include $(top_srcdir)/../giella-core/am-shared/vislcg3-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
-include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am

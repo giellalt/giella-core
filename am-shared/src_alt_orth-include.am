@@ -62,7 +62,7 @@ endif # HAVE_ALT_ORTHS
 ####### Build rules for the default set of fst's for ########
 ####### alternate orthographies:                     ########
 define alt_orth_desc_analysers
-analyser-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%            \
+.generated/analyser-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-number-string-tags.%        \
@@ -105,7 +105,7 @@ analyser-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%            \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-analyser-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%            \
+.generated/analyser-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-number-string-tags.%        \
@@ -151,7 +151,7 @@ endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_desc_analysers,$(alt_orth))))
 
 define alt_orth_norm_analysers
-analyser-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%            \
+.generated/analyser-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-variant-tags.%              \
@@ -194,7 +194,7 @@ analyser-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%            \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-analyser-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%            \
+.generated/analyser-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
 					filters/remove-variant-tags.%              \
@@ -240,7 +240,7 @@ endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_norm_analysers,$(alt_orth))))
 
 define alt_orth_desc_generators
-generator-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%           \
+.generated/generator-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%           \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-homonymy-tags.%      \
 					filters/make-optional-hyph-tags.%          \
@@ -293,7 +293,7 @@ generator-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%           \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-generator-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%           \
+.generated/generator-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%           \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-homonymy-tags.%      \
 					filters/make-optional-hyph-tags.%          \
@@ -349,7 +349,7 @@ endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_desc_generators,$(alt_orth))))
 
 define alt_orth_norm_generators
-generator-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%           \
+.generated/generator-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%           \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-homonymy-tags.%      \
 					filters/make-optional-hyph-tags.%          \
@@ -402,7 +402,7 @@ generator-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%           \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-generator-gt-norm.$(1).tmp.%: analyser-raw-gt-desc.%           \
+.generated/generator-gt-norm.$(1).tmp.%: .generated/analyser-raw-gt-desc.%           \
 					filters/make-optional-transitivity-tags.%  \
 					filters/make-optional-homonymy-tags.%      \
 					filters/make-optional-hyph-tags.%          \
@@ -459,7 +459,7 @@ $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_norm_generators,$(alt_ort
 
 # morpher is a morph segmenting variant: taloautoissani -> talo#auto>i>ssa>ni
 define alt_orth_morphers
-morpher-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%         \
+.generated/morpher-gt-desc.$(1).tmp.%: a.generated/nalyser-raw-gt-desc.%         \
 					 orthography/inituppercase.compose.%   \
 					 orthography/spellrelax.compose.%      \
 					filters/remove-hyphenation-marks.%     \
@@ -478,7 +478,7 @@ morpher-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%         \
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
-morpher-gt-desc.$(1).tmp.%: analyser-raw-gt-desc.%         \
+.generated/morpher-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%         \
 					 orthography/inituppercase.compose.%   \
 					 orthography/spellrelax.compose.%      \
 					filters/remove-hyphenation-marks.%     \

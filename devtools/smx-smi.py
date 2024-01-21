@@ -23,9 +23,9 @@
 #   Copyright 2013 Børre Gaup <borre.gaup@uit.no>
 #
 
+import fileinput
 import os
 import re
-import fileinput
 import sys
 
 smiwords = []
@@ -53,7 +53,7 @@ def readSmi():
                 smiwords.append(line[:myre.search(line).start()])
 
 def readSmx(lang):
-    smxname = os.getenv("GTHOME") + "/langs/" + lang + "/src/morphology/stems/" + lang + "-propernouns.lexc"
+    smxname = os.getenv("GTHOME") + "/langs/" + lang + "/src/fst/morphology/stems/" + lang + "-propernouns.lexc"
 
     for line in fileinput.FileInput(smxname):
         addSmxLines(line)

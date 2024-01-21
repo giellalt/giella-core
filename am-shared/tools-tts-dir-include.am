@@ -31,7 +31,7 @@ GIELLA_ANL_IPA_RAW=txt2ipa.lookup.hfst
 # For additional flexibility, one can filter out files that should not be
 # included, by specifying them in tools/tts/Makefile.am (without suffix).
 FILTER_OUT_FILES=$(addsuffix %, $(GIELLA_ANL_REMOVE_TRANSCRIPTORS))
-GIELLA_XSC_TRANSCIPTOR_LIST=$(basename $(notdir $(wildcard $(top_builddir)/src/transcriptions/*2text.filtered.lookup.hfstol)))
+GIELLA_XSC_TRANSCIPTOR_LIST=$(basename $(notdir $(wildcard $(top_builddir)/src/fst/transcriptions/*2text.filtered.lookup.hfstol)))
 GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST=$(filter-out $(FILTER_OUT_FILES), $(GIELLA_XSC_TRANSCIPTOR_LIST))
 GIELLA_XSC_TRANSCIPTORS=$(addsuffix .hfst, $(GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST))
 
@@ -102,12 +102,12 @@ $(GIELLA_ANL_TOKENISER): \
 
 # Compile the IPA conversion fst:
 $(GIELLA_ANL_IPA): \
-			$(top_builddir)/src/phonetics/$(GIELLA_ANL_IPA_RAW)
+			$(top_builddir)/src/fst/phonetics/$(GIELLA_ANL_IPA_RAW)
 	$(AM_V_FST2FST)$(HFST_FST2FST) -f olw -i $< -o $@
 
 # Compile the various transcriptor fst's:
 transcriptor-%.hfst: \
-			$(top_builddir)/src/transcriptions/transcriptor-%.hfstol
+			$(top_builddir)/src/fst/transcriptions/transcriptor-%.hfstol
 	$(AM_V_FST2FST)$(HFST_FST2FST) $(HFST_FORMAT) -i $< -o $@
 
 # Compile the normaliser fst by looping over all individual transcriptors,
@@ -120,7 +120,7 @@ $(GIELLA_XSC_NORMALISER).tmp: $(GIELLA_XSC_TRANSCIPTORS)
 		$(HFST_DISJUNCT) -1 $@ -2 $$f -o $@.tmp; mv -f $@.tmp $@ ; \
 		done
 
-$(GIELLA_XSC_NORMALISER): $(top_builddir)/src/filters/make-optional-final_full_stops.hfst \
+$(GIELLA_XSC_NORMALISER): $(top_builddir)/src/fst/filters/make-optional-final_full_stops.hfst \
                           $(GIELLA_XSC_NORMALISER).tmp
 	$(AM_V_FST2FST)$(HFST_COMPOSE) -1 $< -2 $@.tmp \
 		| $(HFST_MINIMIZE) \
@@ -131,7 +131,7 @@ $(GIELLA_XSC_NORMALISER): $(top_builddir)/src/filters/make-optional-final_full_s
 # Copy mwe-dis:
 $(GIELLA_XSC_ANALYSER) \
 $(GIELLA_XSC_GENERATOR): \
-%.hfstol: $(top_builddir)/src/%.hfstol
+%.hfstol: $(top_builddir)/src/fst/%.hfstol
 	$(AM_V_CP)cp -f $< $@
 
 

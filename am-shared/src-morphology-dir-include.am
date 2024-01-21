@@ -58,17 +58,17 @@ EXTRA_DIST+=$(GT_LEXC_ALLSRC)
 # The transducers we build and don't distribute depend on the configuration:
 GT_LEXICAL=
 if CAN_HFST
-GT_LEXICAL+=lexicon.hfst
+GT_LEXICAL+=.generated/lexicon.hfst
 if WANT_REVERSED_INTERSECT
-GT_LEXICAL+=lexicon.rev.hfst
+GT_LEXICAL+=.generated/lexicon.rev.hfst
 endif # WANT_REVERSED_INTERSECT
 endif # CAN_HFST
 
 if CAN_XFST
-GT_LEXICAL+=lexicon.xfst
+GT_LEXICAL+=.generated/lexicon.xfst
 endif # CAN_XFST
 if CAN_FOMA
-GT_LEXICAL+=lexicon.foma
+GT_LEXICAL+=.generated/lexicon.foma
 endif # CAN_FOMA
 
 # Define variable before using it:
@@ -80,7 +80,7 @@ GIELLA_LOCAL_SRC_TARGETS+=\
 GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.hfst,$(GT_LOCAL_XFSCRIPT_SRCS))
 # We need to explicitly add url.?fst here, as the generated targets only cover
 # url.tmp.?fst
-GIELLA_LOCAL_SRC_TARGETS+=url.hfst
+GIELLA_LOCAL_SRC_TARGETS+=.generated/url.hfst
 endif # CAN_HFST
 
 if CAN_XFST
@@ -89,7 +89,7 @@ GIELLA_LOCAL_SRC_TARGETS+=\
 GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.xfst,$(GT_LOCAL_XFSCRIPT_SRCS))
 # We need to explicitly add url.?fst here, as the generated targets only cover
 # url.tmp.?fst
-GIELLA_LOCAL_SRC_TARGETS+=url.xfst
+GIELLA_LOCAL_SRC_TARGETS+=.generated/url.xfst
 endif # CAN_XFST
 
 if CAN_FOMA
@@ -98,22 +98,22 @@ GIELLA_LOCAL_SRC_TARGETS+=\
 GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.foma,$(GT_LOCAL_XFSCRIPT_SRCS))
 # We need to explicitly add url.?fst here, as the generated targets only cover
 # url.tmp.?fst
-GIELLA_LOCAL_SRC_TARGETS+=url.foma
+GIELLA_LOCAL_SRC_TARGETS+=.generated/url.foma
 endif # CAN_FOMA
 
 if WANT_L2
 if CAN_HFST
-GT_LEXICAL+=lexicon-L2.hfst
+GT_LEXICAL+=.generated/lexicon-L2.hfst
 endif # CAN_HFST
 if WANT_REVERSED_INTERSECT
-GT_LEXICAL+=lexicon-L2.rev.hfst
+GT_LEXICAL+=.generated/lexicon-L2.rev.hfst
 endif # WANT_REVERSED_INTERSECT
 
 if CAN_XFST
-GT_LEXICAL+=lexicon-L2.xfst
+GT_LEXICAL+=.generated/lexicon-L2.xfst
 endif # CAN_XFST
 if CAN_FOMA
-GT_LEXICAL+=lexicon-L2.foma
+GT_LEXICAL+=.generated/lexicon-L2.foma
 endif # CAN_FOMA
 endif # WANT_L2
 
@@ -146,21 +146,26 @@ endif
 ####### when something doesn't work); hfst does the concatenation automatically
 ####### but by doing it explicitly we have a source file to relate line numbers
 ####### in error messages to. Foma can only read a single lexc file.
-lexicon.tmp.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
-	$(AM_V_GEN)cat $^ > $@
+lexicon.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
+	$(AM_V_at)echo "! automatically generated combined lexc file!!!" > $@
+	$(AM_V_GEN)cat $^ >> $@
 
-lexicon-L2.tmp.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_L2_SRCS) $(GENERATED_LEXC_SRCS)
+lexicon-L2.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_L2_SRCS) $(GENERATED_LEXC_SRCS)
 	$(AM_V_GEN)cat $^ > $@
 
 # Copy shared url lexc file to local dir as tmp file before building. The tmp
 # file will cause the fst to also be tmp, and thus allow further local
 # processing if needed.
-%.tmp.lexc: $(gt_SHARED_common)/src/fst/%.lexc
+.generated/%.tmp.lexc: $(gt_SHARED_common)/src/fst/%.lexc
+	$(MAKE) $(GENDIR)
+	$(AM_V_CP)cp -f $< $@
+
+%.lexc: .generated/%.tmp.lexc
 	$(AM_V_CP)cp -f $< $@
 
 # Copy shared stems files to local dir before building:
-generated_files/%.lexc: $(gt_SHARED_common)/src/fst/stems/%.lexc
-	$(AM_V_at)$(MKDIR_P) $(dir $@)
+.generated/%.lexc: $(gt_SHARED_common)/src/fst/stems/%.lexc
+	$(MAKE) $(GENDIR)
 	$(AM_V_CP)cp -f $< $@
 
 ####### If reversed compose-intersect is enabled, reverse it here: #######
@@ -169,9 +174,9 @@ generated_files/%.lexc: $(gt_SHARED_common)/src/fst/stems/%.lexc
 
 ####### TMP files to allow local overrides - copy by default: #######
 DEPGEN=$(AM_V_CP)mv -f $< $@
-%.foma: %.tmp.foma ; $(DEPGEN)
-%.hfst: %.tmp.hfst ; $(DEPGEN)
-%.xfst: %.tmp.xfst ; $(DEPGEN)
+%.foma: .generated/%.tmp.foma ; $(DEPGEN)
+%.hfst: .generated/%.tmp.hfst ; $(DEPGEN)
+%.xfst: .generated/%.tmp.xfst ; $(DEPGEN)
 
 ####### Phonology source file defs: ########
 
@@ -194,10 +199,10 @@ if CAN_HFST
 if LEXREF_IN_PHONOLOGY
 GT_PHONOLOGY+=$(addsuffix .hfst.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
 else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=$(addsuffix .compose.hfst, $(basename $(GT_PHONOLOGY_SRCS)))
-GT_PHONOLOGY+=$(addsuffix .lookup.hfst,  $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=.generated/$(addsuffix .compose.hfst, $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=.generated/$(addsuffix .lookup.hfst,  $(basename $(GT_PHONOLOGY_SRCS)))
 if WANT_REVERSED_INTERSECT
-GT_PHONOLOGY+=$(addsuffix .rev.hfst, $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=.generated/$(addsuffix .rev.hfst, $(basename $(GT_PHONOLOGY_SRCS)))
 endif # WANT_REVERSED_INTERSECT
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_HFST
@@ -206,8 +211,8 @@ if CAN_XFST
 if LEXREF_IN_PHONOLOGY
 GT_PHONOLOGY+=$(addsuffix .xfst.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
 else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=$(addsuffix .compose.xfst, $(basename $(GT_PHONOLOGY_SRCS)))
-GT_PHONOLOGY+=$(addsuffix .lookup.xfst,  $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=.generated/$(addsuffix .compose.xfst, $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=.generated/$(addsuffix .lookup.xfst,  $(basename $(GT_PHONOLOGY_SRCS)))
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_XFST
 
@@ -215,8 +220,8 @@ if CAN_FOMA
 if LEXREF_IN_PHONOLOGY
 GT_PHONOLOGY+=$(addsuffix .foma.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
 else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=$(addsuffix .compose.foma, $(basename $(GT_PHONOLOGY_SRCS)))
-GT_PHONOLOGY+=$(addsuffix .lookup.foma,  $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=.generated/$(addsuffix .compose.foma, $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=.generated/$(addsuffix .lookup.foma,  $(basename $(GT_PHONOLOGY_SRCS)))
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_FOMA
 
@@ -280,6 +285,15 @@ define giella_phon_w_lex_ref
 endef
 $(foreach fst,hfst xfst foma,$(eval $(call giella_phon_w_lex_ref,$(fst))))
 
+## XXX for now
+noinst_DATA+=lexicon.hfst
+
+lexicon.hfst: .generated/lexicon.hfst
+	$(AM_CP)cp -v $< $@
+
+clean-local:
+	-rm -f lexicon.hfst .generated/lexicon.hfst
+
 ####### Other targets: ###########
 maintainer-clean-local:
 	-rm -f $(GENERATED_LEXC_SRCS) url.lexc
@@ -294,5 +308,6 @@ include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/tag-extraction-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake: 

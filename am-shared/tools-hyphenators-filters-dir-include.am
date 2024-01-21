@@ -71,7 +71,7 @@ endif # WANT_FST_HYPHENATOR
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from the src/filters/ dir
-%.regex: $(top_srcdir)/src/filters/%.regex
+%.regex: $(abs_top_srcdir)/src/fst/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ##########################################

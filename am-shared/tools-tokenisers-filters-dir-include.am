@@ -25,8 +25,8 @@ FLAG_FILE=flags.txt
 
 # Variable to hold filename for fst used as source for extracting tags,
 # sans extension
-TAG_EXTRACTION_FST=$(top_builddir)/src/analyser-%-gt-desc
-TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/analyser-%-gt-output
+TAG_EXTRACTION_FST=$(top_builddir)/src/fst/analyser-%-gt-desc
+TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/fst/analyser-%-gt-output
 
 ####### Source file and target defs: ########
 GT_DISAMB_TOKENISERS_FILTER_SRCS=
@@ -149,11 +149,11 @@ $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_token_filters,$(alt_orth)
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from $top_builddir/src/filters/ (generated regex's)
-%.regex: $(top_builddir)/src/filters/%.regex
+%.regex: $(top_builddir)/src/fst/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ####### ... OR from $top_srcdir/src/filters/ (language-specific regex's)
-%.regex: $(top_srcdir)/src/filters/%.regex
+%.regex: $(top_srcdir)/src/fst/filters/%.regex
 	$(AM_V_CP)cp -f $< $@
 
 ##########################################

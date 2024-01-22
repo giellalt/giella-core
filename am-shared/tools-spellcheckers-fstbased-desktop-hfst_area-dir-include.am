@@ -43,7 +43,7 @@ endif # HAVE_AREAS
 acceptor.%.hfst: \
 		$(GT_SPELLER_HFST) easteregg.%.desktop.hfst \
 		$(top_builddir)/src/fst/filters/remove-all_areas_but_%-strings.hfst
-	$(AM_V_GEN)cat $< \i
+	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 		  -1 $(top_builddir)/src/fst/filters/remove-all_areas_but_$*-strings.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \

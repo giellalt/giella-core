@@ -993,7 +993,7 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_raw_fsts,$(fst))))
 
 # Default fallback processing for the analysers:
 define giella_default_analysers
-analyser%.$(1): .generated/analyser%.tmp.$(1) \
+.generated/analyser%.$(1): .generated/analyser%.tmp.$(1) \
 				filters/remove-usage-tags.$(1)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-usage-tags.$(1)\"  \
@@ -1007,7 +1007,7 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_default_analysers,$(fst))))
 
 # Default fallback processing for the generators:
 define giella_default_generators
-generator%.$(1): .generated/generator%.tmp.$(1) \
+.generated/generator%.$(1): .generated/generator%.tmp.$(1) \
 				filters/remove-usage-tags.$(1)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-usage-tags.$(1)\"  \
@@ -1021,7 +1021,7 @@ $(foreach fst,hfst xfst foma,$(eval $(call giella_default_generators,$(fst))))
 
 # Default fallback processing for the morpher:
 define giella_default_morphers
-morpher%.$(1): .generated/morpher%.tmp.$(1)
+.generated/morpher%.$(1): .generated/morpher%.tmp.$(1)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "\
 		 load stack $$<\n\
 		 $$(INVERT_HFST)\

@@ -25,6 +25,11 @@
 	$(AM_V_HLEXC)"$(HFST_LEXC)" \
 		$(MORE_VERBOSITY) $(HFST_FORMAT) $(HFST_LEXC_FLAGS) -o $@ $<
 
+.generated/%.hfst: .generated/%.tmp.lexc
+	$(MAKE) $(GENDIR)
+	$(AM_V_HLEXC)"$(HFST_LEXC)" \
+		$(MORE_VERBOSITY) $(HFST_FORMAT) $(HFST_LEXC_FLAGS) -o $@ $<
+
 ####### Xerox build rules: #######
 .generated/%.xfst: %.lexc
 	$(MAKE) $(GENDIR)
@@ -33,8 +38,23 @@
 			-e "save stack $@ " \
 			-stop
 
+.generated/%.xfst: .generated/%.tmp.lexc
+	$(MAKE) $(GENDIR)
+	$(AM_V_XFST)"$(XFST)" $(VERBOSITY) \
+			-e "read lexc $<" \
+			-e "save stack $@ " \
+			-stop
+
 ####### Foma build rules: #######
 .generated/%.foma: %.lexc
+	$(MAKE) $(GENDIR)
+	$(AM_V_FOMA)"$(FOMA)" $(VERBOSITY) \
+			-e "set lexc-align ON" \
+			-e "read lexc $<" \
+			-e "save stack $@ " \
+			-s
+
+.generated/%.foma: .generated/%.tmp.lexc
 	$(MAKE) $(GENDIR)
 	$(AM_V_FOMA)"$(FOMA)" $(VERBOSITY) \
 			-e "set lexc-align ON" \

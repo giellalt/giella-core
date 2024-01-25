@@ -389,7 +389,7 @@ remove-%-tags-before-derivations.regex: %-tags.txt
 
 # Remove strings specific to other dialects than the requested one:
 remove-all_dialects_but_%-strings.regex:
-	$(MAKE) $(GENDIR)
+	$(MAKE) $(GENDIR)  # huh?
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-dialect-filter-regex.sh \
 		$@ `echo $* | sed -e 's:.generated/::'` "$(DIALECTS)"
 

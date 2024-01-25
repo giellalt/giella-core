@@ -236,12 +236,10 @@ noinst_DATA=$(GT_RAW)              \
 
 # if SKIP_PHONOLOGY is defined, just copy the lexical fst to raw-*.tmp1.*:
 if SKIP_PHONOLOGY
-.generated/generator-raw-gt-desc.tmp1.hfst: morphology/lexicon.hfst
-	$(MAKE) $(GENDIR)
+.generated/generator-raw-gt-desc.tmp1.hfst: morphology/lexicon.hfst $(GENDIR)
 	$(AM_V_CP)cp -f $< $@
 
-.generated/analyser-raw-gt-desc.tmp1.%: morphology/lexicon.%
-	$(MAKE) $(GENDIR)
+.generated/analyser-raw-gt-desc.tmp1.%: morphology/lexicon.% $(GENDIR)
 	$(AM_V_CP)cp -f $< $@
 else !SKIP_PHONOLOGY
 
@@ -253,21 +251,18 @@ if LEXREF_IN_PHONOLOGY
 
 # HFST
 .generated/generator-raw-gt-desc.tmp1.hfst: morphology/.generated/phonology.hfst.xfscript \
-					 morphology/.generated/lexicon.hfst
-	$(MAKE) $(GENDIR)
+					 morphology/.generated/lexicon.hfst $(GENDIR)
 	$(AM_V_HXFST)printf "save stack $@\nquit\n" | cat $< - \
 		| $(HFST_XFST) -p $(MORE_VERBOSITY) $(HFST_FORMAT)
 
 # XEROX
 .generated/analyser-raw-gt-desc.tmp1.xfst: morphology/.generated/phonology.xfst.xfscript \
-			 morphology/.generated/lexicon.xfst
-	$(MAKE) $(GENDIR)
+			 morphology/.generated/lexicon.xfst $(GENDIR)
 	$(AM_V_XFST)$(XFST) $(VERBOSITY) -l $< -e "save stack $@" -stop
 
 # FOMA
 .genereated/analyser-raw-gt-desc.tmp1.foma: morphology/phonology.foma.xfscript \
-			 fst/lexicon.foma
-	$(MAKE) $(GENDIR)
+			 fst/lexicon.foma $(GENDIR)
 	$(AM_V_FOMA)$(FOMA) $(VERBOSITY) -l $< -e "save stack $@" -s
 
 else !LEXREF_IN_PHONOLOGY
@@ -277,8 +272,7 @@ else !LEXREF_IN_PHONOLOGY
 if WANT_REVERSED_INTERSECT
 # Do this is reversed intersect is enabled:
 .generated/generator-raw-gt-desc.tmp1.hfst: morphology/.generated/lexicon.rev.hfst \
-					 morphology/.generated/phonology.rev.hfst
-	$(MAKE) $(GENDIR)
+					 morphology/.generated/phonology.rev.hfst $(GENDIR)
 	$(AM_V_INTRSCT)\
 		  $(HFST_DETERMINIZE) $(MORE_VERBOSITY) $(HFST_FLAGS) $< \
 		| $(HFST_MINIMIZE) $(MORE_VERBOSITY) $(HFST_FLAGS) \
@@ -292,8 +286,7 @@ if WANT_REVERSED_INTERSECT
 else
 # Otherwise do this:
 .generated/generator-raw-gt-desc.tmp1.hfst: morphology/.generated/lexicon.hfst \
-					 morphology/.generated/phonology.compose.hfst
-	$(MAKE) $(GENDIR)
+					 morphology/.generated/phonology.compose.hfst $(GENDIR)
 	$(AM_V_INTRSCT)\
 		  $(HFST_DETERMINIZE) $(MORE_VERBOSITY) $(HFST_FLAGS) $<\
 		| $(HFST_MINIMIZE) $(MORE_VERBOSITY) $(HFST_FLAGS) \
@@ -306,15 +299,14 @@ endif # WANT_REVERSED_INTERSECT
 
 # XEROX
 .generated/analyser-raw-gt-desc.tmp1.xfst: morphology/.generated/lexicon.xfst \
-			 morphology/.generated/phonology.compose.xfst
-	$(MAKE) $(GENDIR)
+			 morphology/.generated/phonology.compose.xfst $(GENDIR)
 	$(AM_V_LEXC)$(PRINTF) \
 		"read-source morphology/.generated/lexicon.xfst\nread-rules morphology/.generated/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
 		| $(LEXC) $(VERBOSITY)
 
 # FOMA
 .generated/analyser-raw-gt-desc.tmp1.foma: morphology/.generated/lexicon.foma \
-			 morphology/.generated/phonology.compose.foma
+			 morphology/.generated/phonology.compose.foma $(GENDIR)
 	$(AM_V_FOMA)$(PRINTF) \
 		"read regex \
 				@\"$<\" \

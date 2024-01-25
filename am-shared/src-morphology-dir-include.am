@@ -156,16 +156,14 @@ lexicon-L2.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_L2_SRCS) $(GENERATED_LEXC_SRCS)
 # Copy shared url lexc file to local dir as tmp file before building. The tmp
 # file will cause the fst to also be tmp, and thus allow further local
 # processing if needed.
-.generated/%.tmp.lexc: $(gt_SHARED_common)/src/fst/%.lexc
-	$(MAKE) $(GENDIR)
+.generated/%.tmp.lexc: $(gt_SHARED_common)/src/fst/%.lexc $(GENDIR)
 	$(AM_V_CP)cp -f $< $@
 
 %.lexc: .generated/%.tmp.lexc
 	$(AM_V_CP)cp -f $< $@
 
 # Copy shared stems files to local dir before building:
-.generated/%.lexc: $(gt_SHARED_common)/src/fst/stems/%.lexc
-	$(MAKE) $(GENDIR)
+.generated/%.lexc: $(gt_SHARED_common)/src/fst/stems/%.lexc $(GENDIR)
 	$(AM_V_CP)cp -f $< $@
 
 ####### If reversed compose-intersect is enabled, reverse it here: #######

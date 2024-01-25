@@ -29,8 +29,8 @@ endif # CAN_HFST
 			$(top_builddir)/src/fst/filters/remove-Use_minus_PMatch-tags.hfst     \
 			$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst        \
 			$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst                  \
-			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst
-	$(MAKE) $(GENDIR)
+			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst \
+			$(GENDIR)
 	$(AM_V_HXFST)$(PRINTF) "set xerox-composition ON \n\
 			read regex \
 		@\"$(top_builddir)/src/fst/filters/make-optional-semantic-tags.hfst\"     \
@@ -77,8 +77,8 @@ endif # CAN_HFST
 			$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst       \
 			$(top_builddir)/src/fst/filters/remove-use_mt-strings.hfst           \
 			$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst                 \
-			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst
-	$(MAKE) $(GENDIR)
+			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst \
+			$(GENDIR)
 	$(AM_V_HXFST)$(PRINTF) "set xerox-composition ON \n\
 	read regex \
 	    @\"$(top_builddir)/src/fst/filters/remove-dialect-tags.hfst\"             \

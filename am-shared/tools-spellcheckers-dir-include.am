@@ -47,8 +47,8 @@ noinst_DATA=$(GT_COMMON_SPELLER_HFST)
 			$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst        \
 			$(top_builddir)/src/fst/filters/remove-use_mt-strings.hfst            \
 			$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst                  \
-			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst
-	$(MAKE) $(GENDIR)
+			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst \
+			$(GENDIR)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 		    @\"$(top_builddir)/src/fst/filters/remove-usage_except_speller-tags.hfst\" \
 		.o. @\"$(top_builddir)/src/fst/filters/remove-orig_lang-tags.hfst\"        \

@@ -10,8 +10,6 @@ $(GENDIR):
 	$(AM_V_at)$(MKDIR_P) `dirname $@`
 	$(AM_V_GEN)touch $@
 
-CLEANFILES=$(GENDIR)
-
 # XXX while split between temporary and final targets isn't cleaned up
 %.hfst: .generated/%.hfst
 	$(AM_V_CP)cp $< $@
@@ -21,5 +19,9 @@ CLEANFILES=$(GENDIR)
 
 %.foma: .generated/%.foma
 	$(AM_V_CP)cp $< $@
+
+# maybe...
+clean-local:
+	@rm -rf .generated/*
 
 # vim: set ft=automake:

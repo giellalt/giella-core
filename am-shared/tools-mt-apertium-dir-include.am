@@ -120,8 +120,7 @@ analyser-mt-gt-desc.hfst: ../analyser-mt-gt-desc.hfst
 # WITH filter file available (the source file is inverted with the .i modifier):
 $(APERTIUM_ANALYSERS_TMP_HFST):
 .generated/analyser-mt-gt-desc.%.tmp.hfst: analyser-mt-gt-desc.hfst \
-			filters/remove-derivation-strings.%.hfst
-	$(MAKE) $(GENDIR)
+			filters/remove-derivation-strings.%.hfst $(GENDIR)
 	$(AM_V_RGX2FST)$(PRINTF) "\
 		@\"filters/remove-derivation-strings.$*.hfst\" \
    	.o. @\"$<\".i \
@@ -136,8 +135,7 @@ $(APERTIUM_ANALYSERS_TMP_HFST):
 # With NO filter file available, invert the file to allow the general pattern
 # *.tmp.hfst -> invert -> *.hfst
 # to apply correctly:
-$(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
-	$(MAKE) $(GENDIR)
+$(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst $(GENDIR)
 	$(AM_V_INVERT)$(HFST_INVERT) -i $< \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
 		| $(HFST_REWEIGHT) $(MORE_VERBOSITY) $(HFST_FLAGS) \
@@ -147,8 +145,7 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst
 # Relabel Giella tags to Apertium tags - generator, step 1:
 .generated/generator-mt-apertium-norm.tmp1.hfst: \
 			../generator-mt-gt-norm.hfst \
-			tagsets/apertium.relabel
-	$(MAKE) $(GENDIR)
+			tagsets/apertium.relabel $(GENDIR)
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-F tagsets/apertium.relabel \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \

@@ -39,8 +39,7 @@ endif # WANT_SPELLERS
 			generator-speller-gt-norm.hfst \
 			$(top_builddir)/src/fst/filters/remove-hyphenation-marks.hfst  \
 			$(top_builddir)/src/fst/filters/remove-infl_deriv-borders.hfst \
-			$(GIELLA_MIXED_AREA_FILTER)
-	$(MAKE) $(GENDIR)
+			$(GIELLA_MIXED_AREA_FILTER) $(GENDIR)
 	$(AM_V_HXFST)$(PRINTF) "read regex                                        \
 			$(GIELLA_MIXED_AREA_COMPOSE)                                      \
 			@\"$<\"                                                           \

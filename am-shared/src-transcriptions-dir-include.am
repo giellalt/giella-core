@@ -77,8 +77,7 @@ define digit2txt_transcriptors
 					.generated/transcriptor-%-digit2text.$(1) \
 					../filters/remove-NA-strings.$(1) \
 					../filters/remove-NG-strings.$(1) \
-					../filters/remove-usage-tags.$(1)
-	$$(MAKE) $$(GENDIR)
+					../filters/remove-usage-tags.$(1) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 			    @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"../filters/remove-NA-strings.$(1)\" \
@@ -98,8 +97,7 @@ define txt2digit_transcriptors
 					.generated/transcriptor-%-digit2text.$(1) \
 					../filters/remove-usage-tags.$(1) \
 					../orthography/spellrelax-tags.compose.$(1) \
-					../orthography/spellrelax-with-tags.compose.$(1)
-	$$(MAKE) $$(GENDIR)
+					../orthography/spellrelax-with-tags.compose.$(1) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "define Lex \
 			[   @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"$$<\" \
@@ -119,8 +117,7 @@ define abbrevs2txt_transcriptors
 					.generated/transcriptor-%2text.$(1) \
 					../filters/remove-NA-strings.$(1) \
 					../filters/remove-NG-strings.$(1) \
-					../filters/remove-usage-tags.$(1)
-	$$(MAKE) $$(GENDIR)
+					../filters/remove-usage-tags.$(1) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 			    @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"../filters/remove-NA-strings.$(1)\" \
@@ -140,8 +137,7 @@ define txt2abbrevs_transcriptors
 					.generated/transcriptor-%2text.$(1) \
 					../filters/remove-usage-tags.$(1) \
 					../orthography/spellrelax-tags.compose.$(1) \
-					../orthography/spellrelax-with-tags.compose.$(1)
-	$$(MAKE) $$(GENDIR)
+					../orthography/spellrelax-with-tags.compose.$(1) $$(GENDIR)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "define Lex \
 			[   @\"../filters/remove-usage-tags.$(1)\" \
 			.o. @\"$$<\" \

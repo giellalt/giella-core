@@ -63,8 +63,8 @@ endif # CAN_FOMA
 					filters/remove-use_mt-strings.%           \
 					filters/remove-DNorm-tags.%               \
 					filters/remove-usage-tags.%               \
-					filters/remove-Use_minusTTS-strings.%
-	$(MAKE) $(GENDIR)
+					filters/remove-Use_minusTTS-strings.%     \
+					$(GENDIR)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/remove-usage-tags.$*\"               \
 			.o. @\"filters/remove-derivation-position-tags.$*\" \
@@ -96,8 +96,7 @@ endif # CAN_FOMA
 # Then we create the input side - lower side of lexicon + twolc/phonology:
 
 # First: fallback for language specific preprocessing:
-.generated/%-input.pretmp.hfst: %-output.hfst
-	$(MAKE) $(GENDIR)
+.generated/%-input.pretmp.hfst: %-output.hfst $(GENDIR)
 	$(AM_V_COMPOSE)\
 		  $(HFST_INVERT)      $(MORE_VERBOSITY) $(HFST_FLAGS) $< \
 		| $(HFST_PROJECT)     $(MORE_VERBOSITY) $(HFST_FLAGS) -p output \
@@ -136,8 +135,7 @@ endif # WANT_REVERSED_INTERSECT
 
 # XEROX
 .generated/analyser-tts-gt-output.tmp.xfst: morphology/lexicon.xfst \
-			 morphology/phonology.compose.xfst
-	$(MAKE) $(GENDIR)
+			 morphology/phonology.compose.xfst $(GENDIR)
 	$(AM_V_LEXC)$(PRINTF) \
 		"read-source morphology/lexicon.xfst\nread-rules morphology/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
 		| $(LEXC) $(VERBOSITY)

@@ -86,7 +86,7 @@ endif # CAN_FOMA
 # Also remember to use more specific target patterns, to override
 # this one (more specific patterns always take precedence over
 # more general ones)
-%-output.hfst: .generated/%-output.tmp.hfst
+.generated/%-output.hfst: .generated/%-output.tmp.hfst
 	$(AM_V_XFST_TOOL)$(PRINTF) "\
 		 load stack $<\n\
 		 $(INVERT_HFST)\
@@ -96,7 +96,7 @@ endif # CAN_FOMA
 # Then we create the input side - lower side of lexicon + twolc/phonology:
 
 # First: fallback for language specific preprocessing:
-.generated/%-input.pretmp.hfst: %-output.hfst $(GENDIR)
+.generated/%-input.pretmp.hfst: .generated/%-output.hfst
 	$(AM_V_COMPOSE)\
 		  $(HFST_INVERT)      $(MORE_VERBOSITY) $(HFST_FLAGS) $< \
 		| $(HFST_PROJECT)     $(MORE_VERBOSITY) $(HFST_FLAGS) -p output \
@@ -174,7 +174,7 @@ endif # WANT_REVERSED_INTERSECT
 # Also remember to use more specific target patterns, to override
 # this one (more specific patterns always take precedence over
 # more general ones)
-%-input.hfst: .generated/%-input.tmp.hfst
+.generated/%-input.hfst: .generated/%-input.tmp.hfst
 	$(AM_V_XFST_TOOL)$(PRINTF) "\
 		 load stack $<\n\
 		 $(INVERT_HFST)\

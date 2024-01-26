@@ -32,7 +32,7 @@ corpus_size_limit_command=$(shell \
 		echo ""; \
 	fi)
 
-%.hfst: weights/%.att
+.genrated/%.hfst: weights/%.att $(GENDIR)
 	$(AM_V_GEN)$(HFST_TXT2FST) $(HFST_FLAGS) -f openfst-tropical $< -o $@
 
 # sort the clean corpus:
@@ -74,13 +74,13 @@ corpus_size_limit_command=$(shell \
 				> $@
 
 # build an fst of surface forms with tropical weights for each word form:
-%.surfs.hfst: %.tropical.txt
+.generated/%.surfs.hfst: %.tropical.txt $(GENDIR)
 	$(AM_V_STR2FST)cat $< |\
 		$(HFST_STRINGS2FST) -j $(HFST_FLAGS) -f openfst-tropical -o $@
 
 # Build an fst with surface form weights that also handles compounds:
-%.surfweights.hfst: %.surfs.hfst \
-                    word-boundary.hfst
+.generated/%.surfweights.hfst: .generated/%.surfs.hfst \
+                    .generated/word-boundary.hfst
 	$(AM_V_HMINIM)$(HFST_MINIMIZE) $(HFST_FLAGS) -i $< -o $@
 # Commented out the repetition build step - we only want to promote the compouns
 # actually found in the corpus.
@@ -90,7 +90,7 @@ corpus_size_limit_command=$(shell \
 #		| $(HFST_MINIMIZE) -o $@
 
 # Remove word forms covered by the corpus:
-unitweighted_limited.hfst: generator-%-gt-norm-freq_weighted.hfst \
+.generated/unitweighted_limited.hfst: .generated/generator-%-gt-norm-freq_weighted.hfst \
 							$(UW_SPELLER_SRC)
 	$(AM_V_FST2FST)$(HFST_FST2FST) --format=foma -i $(UW_SPELLER_SRC) -o $@.tmpfoma.hfst
 	$(AM_V_FST2FST)$(HFST_FST2FST) --format=foma -i $< -o $<.tmpfoma.hfst
@@ -103,8 +103,8 @@ unitweighted_limited.hfst: generator-%-gt-norm-freq_weighted.hfst \
 
 # Add the unit weight to each unit in compounds, both dynamic and lexical:
 #unitweighted.hfst: unitweighted_limited.hfst
-unitweighted.hfst: $(UW_SPELLER_SRC) \
-                   $(UNITWEIGHT)
+.generated/unitweighted.hfst: $(UW_SPELLER_SRC) \
+                   $(UNITWEIGHT) $(GENDIR)
 	$(AM_V_REWEIGHT)$(HFST_FST2FST) --format=openfst-tropical -i $< \
 		| $(HFST_REWEIGHT) $(HFST_FLAGS) \
 		-e -a $$(cat $(UNITWEIGHT)) \

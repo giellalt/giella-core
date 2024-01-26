@@ -247,13 +247,13 @@ easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
 		| perl -pe 's/(.)\t(.+)/\2\t\1/' \
 		> $@
 
-easteregg.%.desktop.errorth.hfst:
+.generated/easteregg.%.desktop.errorth.hfst: $(GENDIR)
 	$(AM_V_GEN)echo \
 		'n u v v i D s p e l l e r:D i v v u n s p e l l e r +N +Err/Orth' \
 		| $(HFST_STRINGS2FST) -S $(HFST_FLAGS) \
 		> $@
 
-easteregg.%.desktop.analyser.hfst:
+.generated/easteregg.%.desktop.analyser.hfst: $(GENDIR)
 	$(AM_V_GEN)echo \
 		'D i v v u n s p e l l e r +N' \
 		| $(HFST_STRINGS2FST) -S $(HFST_FLAGS) \
@@ -261,7 +261,7 @@ easteregg.%.desktop.analyser.hfst:
 
 # Easter egg string acceptor:
 # easteregg.%.desktop.temp.hfst: easteregg.%.desktop.txt
-easteregg.%.desktop.hfst: easteregg.%.desktop.txt
+.generated/easteregg.%.desktop.hfst: easteregg.%.desktop.txt $(GENDIR)
 	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
 		> $@
 
@@ -289,50 +289,50 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps)
 		--output-file=$@ \
 		$(initial_letter_error_model_option)
 
-editdist.%.hfst: editdist.%.regex
+.generated/editdist.%.hfst: editdist.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
 
 # Initial string edits, if enabled:
-initial_letters.txt.%.hfst: initial_letters.%.txt
+.generated/initial_letters.txt.%.hfst: initial_letters.%.txt $(GENDIR)
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j -p \
 		-o $@
 
-initial_letters.regex.%.hfst: initial_letters.%.regex
+.generated/initial_letters.regex.%.hfst: initial_letters.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
 
-initial_letters.all.%.hfst: $(initial_letter_all_deps)
+.generated/initial_letters.all.%.hfst: $(initial_letter_all_deps) $(GENDIR)
 	$(initial_letter_all_build)
 
 # Final string edits, if enabled:
-final_strings.txt.%.hfst: final_strings.%.txt
+.generated/final_strings.txt.%.hfst: final_strings.%.txt $(GENDIR)
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 	   --format=openfst-tropical \
 		-o $@
 
-final_strings.regex.%.hfst: final_strings.%.regex
+.generated/final_strings.regex.%.hfst: final_strings.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
 
-final_strings.all.%.hfst: $(final_strings_all_deps)
+.generated/final_strings.all.%.hfst: $(final_strings_all_deps) $(GENDIR)
 	$(final_strings_all_build)
 
 # Helper fst:
-anystar.hfst:
+.generated/anystar.hfst: $(GENDIR)
 	$(AM_V_RGX2FST)echo "?*" | $(HFST_REGEXP2FST) -o $@
 
 # In-word list of strings known to be misspelled:
-strings.txt.%.hfst: strings.%.txt anystar.hfst
+.generated/strings.txt.%.hfst: strings.%.txt .generated/anystar.hfst
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
-		| $(HFST_CONCATENATE)   anystar.hfst - \
-		| $(HFST_CONCATENATE) - anystar.hfst   \
+		| $(HFST_CONCATENATE)   .generated/anystar.hfst - \
+		| $(HFST_CONCATENATE) - .generated/anystar.hfst   \
 		-o $@
 
 # strings regex file:

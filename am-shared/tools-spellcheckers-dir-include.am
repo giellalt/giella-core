@@ -70,22 +70,14 @@ noinst_DATA=$(GT_COMMON_SPELLER_HFST)
 		 quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY) $(HFST_FORMAT)
 
 # Copy the tmp transducer to the final one. This allows local overrides.
-%.hfst: .generated/%.tmp.hfst
+.generated/%.hfst: .generated/%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # Invert the final fst, to enable symmetric yaml tests and easy manual testing:
-analyser-%.hfst: generator-%.hfst
+.generated/analyser-%.hfst: .generated/generator-%.hfst
 	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< -o $@
 
 ####### Other targets: ###########
-clean-local:
-	-rm -f *.hfst *.xfst
-	-rm -f  *.hfst *.xfst *.zhfst easteregg.* *.oxt *.xpi *.zip
-	-rm -rf 3 *.service build
-	-rm -f editdist.default.regex editdist.all.default.regex
-	if ! [ "x$(CORPUSNAME)" = "x" ] ; then \
-		rm -f $(CORPUSNAME).* ; \
-	fi
 
 # Keep these intermediate targets when building using --debug:
 .SECONDARY: editdist.all.default.hfst \

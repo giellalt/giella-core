@@ -7,10 +7,10 @@ if WANT_APERTIUM
 # Build list of target language transducers from the list of target languages:
 # => analyser-mt-gt-desc.nob.hfst etc.
 APERTIUM_ANALYSERS_GT_HFST+=\
-	$(addsuffix .hfstol,$(addprefix analyser-mt-gt-desc.,$(APERTIUM_TARGET_LANGS)))
+	$(addprefix .generated/,$(addsuffix .hfstol,$(addprefix analyser-mt-gt-desc.,$(APERTIUM_TARGET_LANGS))))
 
 APERTIUM_ANALYSERS_TMP_HFST+=\
-	.generated/$(addsuffix .tmp.hfst,$(addprefix analyser-mt-gt-desc.,$(APERTIUM_TARGET_LANGS)))
+	$(addprefix .generated/,$(addsuffix .tmp.hfst,$(addprefix analyser-mt-gt-desc.,$(APERTIUM_TARGET_LANGS))))
 
 # Build list of apertium tagged files by replacing -gt- with -apertium-:
 # analyser-mt-gt-desc.nob.hfst => analyser-mt-apertium-desc.nob.hfst etc.
@@ -105,21 +105,21 @@ endif # CAN_HFST
 
 # Convert the single tag of the URL analyser to Apertium format, and convert
 # it to the target fst format:
-analyser-url-apertium-desc.hfst: $(top_builddir)/src/fst/analyser-url-gt-desc.hfst
+.generated/analyser-url-apertium-desc.hfst: $(top_builddir)/src/fst/analyser-url-gt-desc.hfst $(GENDIR)
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-f '+URL' -t '<url>' \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
 	> "$@"
 
 # Copy analyser from dir above to this dir:
-analyser-mt-gt-desc.hfst: ../analyser-mt-gt-desc.hfst
+.generated/analyser-mt-gt-desc.hfst: ../analyser-mt-gt-desc.hfst $(GENDIR)
 	$(AM_V_CP)cp -f $< $@
 
 # Target language specific filtering - build depends on the availability
 # of a filter file.
 # WITH filter file available (the source file is inverted with the .i modifier):
 $(APERTIUM_ANALYSERS_TMP_HFST):
-.generated/analyser-mt-gt-desc.%.tmp.hfst: analyser-mt-gt-desc.hfst \
+.generated/analyser-mt-gt-desc.%.tmp.hfst: .generated/analyser-mt-gt-desc.hfst \
 			filters/remove-derivation-strings.%.hfst $(GENDIR)
 	$(AM_V_RGX2FST)$(PRINTF) "\
 		@\"filters/remove-derivation-strings.$*.hfst\" \
@@ -135,7 +135,7 @@ $(APERTIUM_ANALYSERS_TMP_HFST):
 # With NO filter file available, invert the file to allow the general pattern
 # *.tmp.hfst -> invert -> *.hfst
 # to apply correctly:
-$(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst $(GENDIR)
+$(APERTIUM_ANALYSERS_TMP_HFST): .generated/analyser-mt-gt-desc.hfst $(GENDIR)
 	$(AM_V_INVERT)$(HFST_INVERT) -i $< \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
 		| $(HFST_REWEIGHT) $(MORE_VERBOSITY) $(HFST_FLAGS) \
@@ -255,10 +255,10 @@ $(APERTIUM_ANALYSERS_TMP_HFST): analyser-mt-gt-desc.hfst $(GENDIR)
 # % = TARGETLANG
 # Step 2a - apertium.tmp -> apertium
 #         - BOTH target language specific modifying AND relabeling
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+.generated/analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
 								  tagsets/modify-tags.%.hfst \
 								  $(srcdir)/tagsets/apertium.%.relabel \
-								  analyser-url-apertium-desc.hfst
+								  .generated/analyser-url-apertium-desc.hfst
 	$(AM_V_RGX2FST)$(PRINTF) "\
    		@\"$<\" \
 	.o. @\"tagsets/modify-tags.$*.hfst\" \
@@ -267,16 +267,16 @@ analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfs
 		| $(HFST_SUBSTITUTE) $(HFSTFLAGS) \
 		-F $(srcdir)/tagsets/apertium.$*.relabel \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
-		| $(HFST_DISJUNCT) -1 - -2 analyser-url-apertium-desc.hfst \
+		| $(HFST_DISJUNCT) -1 - -2 .generated/analyser-url-apertium-desc.hfst \
 		-o $@
 
 # Relabel Giella tags to Apertium tags - analyser:
 # % = TARGETLANG
 # Step 2b - apertium.tmp -> apertium
 #         - ONLY target language specific relabeling
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+.generated/analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
 								  $(srcdir)/tagsets/apertium.%.relabel \
-								  analyser-url-apertium-desc.hfst
+								  .generated/analyser-url-apertium-desc.hfst
 	$(AM_V_HSUBST)$(HFST_SUBSTITUTE) $(HFSTFLAGS) -i $< \
 		-F $(srcdir)/tagsets/apertium.$*.relabel \
 		| $(HFST_FST2FST) $(HFSTFLAGS) -t \
@@ -287,9 +287,9 @@ analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfs
 # % = TARGETLANG
 # Step 2c - apertium.tmp -> apertium
 #         - ONLY target language specific modifying
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+.generated/analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
 								  tagsets/modify-tags.%.hfst \
-								  analyser-url-apertium-desc.hfst
+								  .generated/analyser-url-apertium-desc.hfst
 	$(AM_V_RGX2FST)$(PRINTF) "\
    		@\"$<\" \
 	.o. @\"tagsets/modify-tags.$*.hfst\" \
@@ -303,16 +303,16 @@ analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfs
 # % = TARGETLANG
 # Step 2d - apertium.tmp -> apertium
 #         - NO target language specific processing - just copy
-analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
-								  analyser-url-apertium-desc.hfst
-	$(AM_V_UNION)$(HFST_DISJUNCT) -1 $< -2 analyser-url-apertium-desc.hfst \
+.generated/analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfst \
+								  .generated/analyser-url-apertium-desc.hfst
+	$(AM_V_UNION)$(HFST_DISJUNCT) -1 $< -2 .generated/analyser-url-apertium-desc.hfst \
 		-o $@
 
-%.att: %.hfst
+.generated/%.att: .generated/%.hfst
 	$(AM_V_FST2TXT)$(HFST_FST2FST) $(HFSTFLAGS) -w -i $< \
 		| $(HFST_FST2TXT) -o $@
 
-%.att.gz: %.att
+.generated/%.att.gz: .generated/%.att
 	$(AM_V_GZIP)$(GZIP) -9 -c $< > $@
 
 ##### Disambiguation and syntactic parsing targets
@@ -331,27 +331,27 @@ analyser-mt-apertium-desc.%.hfst: .generated/analyser-mt-apertium-desc.%.tmp.hfs
 $(APERTIUM_CG_SRC): $(APERTIUM_CG_INCLUDE_SRC)
 
 # Change the tags from Giella format to Apertium format:
-%-apertium.bin: %-gt.bin $(srcdir)/tagsets/gt2apertium.cg3relabel
+.generated/%-apertium.bin: .generated/%-gt.bin $(srcdir)/tagsets/gt2apertium.cg3relabel
 	$(AM_V_GEN)$(CG_RELABEL) $< $(srcdir)/tagsets/gt2apertium.cg3relabel $@
 
 #### Copy to Apertium filenames
-$(APERTIUM_MORPH_PAIRS_V): \
-				analyser-mt-apertium-desc.%.att.gz
+.generated/$(APERTIUM_MORPH_PAIRS_V): \
+				.generated/analyser-mt-apertium-desc.%.att.gz
 	$(AM_V_CP)cp -f $< $@
 
-apertium-$(GTLANG).$(GTLANG).RL.att.gz: generator-mt-apertium-norm.att.gz
+.generated/apertium-$(GTLANG).$(GTLANG).RL.att.gz: .generated/generator-mt-apertium-norm.att.gz
 	$(AM_V_CP)cp -f $< $@
 
-$(GTLANG).mor.rlx.bin: disambiguator-mt-apertium.bin
+.generated/$(GTLANG).mor.rlx.bin: .generated/disambiguator-mt-apertium.bin
 	$(AM_V_CP)cp -f $< $@
 
-$(GTLANG).syn.rlx.bin: functions-mt-apertium.bin
+.generated/$(GTLANG).syn.rlx.bin: .generated/functions-mt-apertium.bin
 	$(AM_V_CP)cp -f $< $@
 
-$(GTLANG).dep.rlx.bin: dependency-mt-apertium.bin
+.generated/$(GTLANG).dep.rlx.bin: .generated/dependency-mt-apertium.bin
 	$(AM_V_CP)cp -f $< $@
 
-$(GTLANG).val.rlx.bin: valency-mt-apertium.bin
+.generated/$(GTLANG).val.rlx.bin: .generated/valency-mt-apertium.bin
 	$(AM_V_CP)cp -f $< $@
 
 #### HFST transducer fallback target:
@@ -362,7 +362,7 @@ $(GTLANG).val.rlx.bin: valency-mt-apertium.bin
 	$(AM_V_INVERT)$(HFST_INVERT) $< -o $@
 
 # If you override this goal, you have to remove dialect tags in the overriding goal!
-generator-mt-gt%.hfst: .generated/generator-mt-gt%.tmp.hfst \
+.generated/generator-mt-gt%.hfst: .generated/generator-mt-gt%.tmp.hfst \
 			$(top_builddir)/src/filters/remove-dialect-tags.hfst
 	$(AM_V_HXFST)$(PRINTF) "set xerox-composition ON \n\
 			read regex \
@@ -373,11 +373,17 @@ generator-mt-gt%.hfst: .generated/generator-mt-gt%.tmp.hfst \
         quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
 
 # General fallback target for generators:
-generator%.hfst: .generated/generator%.tmp.hfst
+.generated/generator%.hfst: .generated/generator%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
-# XXX some backwards compatibility
-analyser%.hfst: .generated/analyser%.hfst
+# general fallbacks for gendir stuff for now
+%.att: .generated/%.att
+	$(AM_V_CP)cp -f $< $@
+
+%.att.gz: .generated/%.att.gz
+	$(AM_V_CP)cp -f $< $@
+
+%.bin: .generated/%.bin
 	$(AM_V_CP)cp -f $< $@
 
 # cleaning

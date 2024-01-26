@@ -22,4 +22,7 @@
 %.bin: $(srcdir)/%.cg3 $(GIELLA_CG_INCLUDES)
 	$(AM_V_CGCOMP)"$(VISLCG3_COMP)" $< $@
 
+.generated/%.bin: %.cg3 $(GIELLA_CG_INCLUDES)
+	$(AM_V_CGCOMP)"$(VISLCG3_COMP)" $< $@
+
 # vim: set ft=automake:

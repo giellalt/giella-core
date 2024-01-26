@@ -32,7 +32,7 @@ corpus_size_limit_command=$(shell \
 		echo ""; \
 	fi)
 
-.genrated/%.hfst: weights/%.att $(GENDIR)
+.generated/%.hfst: weights/%.att $(GENDIR)
 	$(AM_V_GEN)$(HFST_TXT2FST) $(HFST_FLAGS) -f openfst-tropical $< -o $@
 
 # sort the clean corpus:
@@ -116,7 +116,7 @@ corpus_size_limit_command=$(shell \
             spellercorpus.surfs.hfst \
             spellercorpus.tropical.txt \
             spellercorpus.typecount.txt \
-            spellercorpus.wordcount.txt \
+            pellercorpus.wordcount.txt \
             word-boundary.hfst \
             generator-*-gt-norm-freq_weighted.hfst \
             generator-*-gt-norm-unit_weighted.hfst \

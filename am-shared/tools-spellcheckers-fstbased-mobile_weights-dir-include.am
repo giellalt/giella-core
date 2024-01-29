@@ -75,20 +75,20 @@ mob_%.tropical.txt: mob_%.uniq.txt %.wordcount.txt mob_%.typecount.txt
 				> $@
 
 # build an fst of surface forms with tropical weights for each word form:
-mob_%.surfs.hfst: mob_%.tropical.txt
+.generated/mob_%.surfs.hfst: mob_%.tropical.txt $(GENDIR)
 	$(AM_V_STR2FST)cat $< |\
 		$(HFST_STRINGS2FST) -j $(HFST_FLAGS) -f openfst-tropical -o $@
 
 # Build an fst with surface form weights that also handles compounds:
-mob_%.surfweights.hfst: mob_%.surfs.hfst \
-                    word-boundary.hfst
+.generated/mob_%.surfweights.hfst: .generated/mob_%.surfs.hfst \
+                    .generated/word-boundary.hfst
 	$(AM_V_HCONCAT)$(HFST_CONCATENATE) $(HFST_FLAGS) word-boundary.hfst $< \
 		| $(HFST_REPEAT) $(HFST_FLAGS) -f 0 -t inf \
 		| $(HFST_CONCATENATE) $< - \
 		| $(HFST_MINIMIZE) -o $@
 
 # Add the unit weight to each unit in compounds, both dynamic and lexical:
-mob_unitweighted.hfst: $(UW_SPELLER_SRC) \
+.generated/mob_unitweighted.hfst: $(UW_SPELLER_SRC) \
                    $(MOB_UNITWEIGHT)         \
                    $(srcdir)/weights/word-boundary.txt
 	$(AM_V_REWEIGHT)$(HFST_REWEIGHT) $(HFST_FLAGS) \

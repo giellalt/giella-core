@@ -56,13 +56,13 @@ $(GT_ALT_WS_SPELLER_ACCEPTORS): \
 # Build rule for zhfst files for alternate writing systems:
 $(ALT_WS_ZHFST_FILES): \
 	$(GTLANG2)-%.zhfst: \
-		$(srcdir)/index.%.xml \
+		index.%.xml \
 		acceptor.%.hfst \
 		errmodel.%.hfst
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
-	$(AM_V_at)cp $(srcdir)/index.$*.xml build/$@/index.xml
+	$(AM_V_at)cp index.$*.xml build/$@/index.xml
 	$(AM_V_at)cp acceptor.$*.hfst build/$@/acceptor.default.hfst
 	$(AM_V_at)cp errmodel.$*.hfst build/$@/errmodel.default.hfst
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *

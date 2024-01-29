@@ -82,7 +82,7 @@ mob_%.tropical.txt: mob_%.uniq.txt %.wordcount.txt mob_%.typecount.txt
 # Build an fst with surface form weights that also handles compounds:
 .generated/mob_%.surfweights.hfst: .generated/mob_%.surfs.hfst \
                     .generated/word-boundary.hfst
-	$(AM_V_HCONCAT)$(HFST_CONCATENATE) $(HFST_FLAGS) word-boundary.hfst $< \
+	$(AM_V_HCONCAT)$(HFST_CONCATENATE) $(HFST_FLAGS) .generated/word-boundary.hfst $< \
 		| $(HFST_REPEAT) $(HFST_FLAGS) -f 0 -t inf \
 		| $(HFST_CONCATENATE) $< - \
 		| $(HFST_MINIMIZE) -o $@

@@ -43,10 +43,10 @@ endif # HAVE_ALT_WSS
 $(GT_ALT_WS_SPELLER_ACCEPTORS): \
 	acceptor.%.hfst: \
 		$(GT_SPELLER_HFST) easteregg.%.desktop.hfst \
-		$(top_builddir)/src/orthography/$(DEFAULT_WS)-to-%.compose.hfst
+		$(top_builddir)/src/fst/orthography/$(DEFAULT_WS)-to-%.compose.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
-		  -2 $(top_builddir)/src/orthography/$(DEFAULT_WS)-to-$*.compose.hfst \
+		  -2 $(top_builddir)/src/fst/orthography/$(DEFAULT_WS)-to-$*.compose.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER) $(HFST_FLAGS)        \
 		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst             \

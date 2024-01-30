@@ -21,7 +21,9 @@ $(GENDIR):
 	$(AM_V_CP)cp $< $@
 
 # maybe...
-clean-local:
-	@rm -rf .generated/*
+clean-local: clean-local-gendir
+.PHONY: clean-local-gendir
+clean-local-gendir:
+	@rm -rf .generated
 
 # vim: set ft=automake:

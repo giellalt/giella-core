@@ -59,6 +59,8 @@ AS_IF([test x$UCONV = xfalse],
        on macbrew: brew install icu4c (and follow instructions:
                                        i.e. set your PATH if necessary)
        ])])
+AC_PATH_PROG([PRECOMMIT], [pre-commit], [false])
+
 
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \
@@ -77,4 +79,9 @@ cat<<EOF
 
 Running make here will compile all necessary scripts and auxiliary files.
 EOF
+AS_IF([test x$PRECOMMIT = xfalse], 
+      [AC_MSG_WARN([we recommend installing pre-commit for automatic checks and fixes
+
+       on mac: brew install pre-commit
+       others: python3 -m pip install pre-commit])])
 AC_MSG_WARN([January 2024: this version involves whole move of src/fst to src/fst/morphology])

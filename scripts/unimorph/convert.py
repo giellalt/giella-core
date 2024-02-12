@@ -371,6 +371,8 @@ def giella2unimorph(tags):
             continue
         elif giella == 'Largo':
             continue
+        elif giella == 'ABBR-':
+            continue
         elif giella == 'ABBR':
             continue
         elif giella == 'ACR':
@@ -403,6 +405,8 @@ def giella2unimorph(tags):
             continue
         elif giella == 'S':
             continue
+        elif giella == 'Quote':
+            continue
         elif giella == 'CLB':
             continue
         elif giella == 'Prop':
@@ -412,10 +416,16 @@ def giella2unimorph(tags):
             continue  # ?
         elif giella == 'Use/Rus':
             unimorphtags += ['DIAL']
+        elif giella == 'Use/Circ':
+            unimorphtags += ['XXXCIRC']
         elif giella == 'Use/Dial':
             unimorphtags += ['DIAL']
+        elif giella.startswith('Use/'):
+            unimorphtags += ['XXX' + giella[4:]]
         elif giella.startswith('Usage/'):
             unimorphtags += ['XXX' + giella[6:]]
+        elif giella == 'Guess':
+            unimorphtags += ['XXX']
         elif giella == '??':
             unimorphtags += ['XXX']
         elif giella == 'TODO':
@@ -497,11 +507,15 @@ def giella2unimorph(tags):
         elif giella == 'Foc':
             unimorphtags += ['LGSPEC1/UnnamedFoc']
         elif giella.startswith('Foc/'):
+            unimorphtags += ['LGSPEC1/' + giella[4:]]
+        elif giella == 'Clit':
+            unimorphtags += ['LGSPEC1/UnnamedClit']
+        elif giella.startswith('Clit/'):
             unimorphtags += ['LGSPEC1/' + giella[5:]]
         elif giella == 'Clt':
             unimorphtags += ['LGSPEC2']
         elif giella.startswith('Clt/'):
-            unimorphtags += ['LGSPEC2/' + giella[5:]]
+            unimorphtags += ['LGSPEC2/' + giella[4:]]
         elif giella.startswith('OLang/'):
             continue
         elif giella.startswith('Gram/'):
@@ -571,6 +585,9 @@ def main():
                    help='Do not try to recase input and output when matching')
     a.add_argument('-t', '--threshold', metavar='THOLD', default=99,
                    help='if coverage is less than THOLD exit with error')
+    a.add_argument('-I', '--include-specs', metavar='INCSPEC',
+                   help='include INCSPEC in generated data',
+                   action='append', choices=['lgspec', 'typo', 'xxx', 'dial'])
     options = a.parse_args()
     if not options.infile:
         options.infile = stdin
@@ -585,6 +602,16 @@ def main():
     skip_typo = True
     skip_xxx = True
     skip_dial = True
+    if options.include_specs:
+        for inclusive in options.include_specs:
+            if inclusive == 'lgspec':
+                skip_lgspec = False
+            elif inclusive == 'typo':
+                skip_typo = False
+            elif inclusive == 'xxx':
+                skip_xxx = False
+            elif inclusive == 'dial':
+                skip_dial = False
     for line in options.infile:
         fields = line.strip().split(':')
         if line.strip() == '':

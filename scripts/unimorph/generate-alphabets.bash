@@ -20,13 +20,14 @@ if test ! -f "$generator" ; then
     echo "Could not find generator automaton $generator"
     exit 1
 fi
-echo "$cyclicRE +UglyHack | [? - [ $cyclicRE ] ]* ;" |
-    sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/#/%#/g' -e 's/\^/%^/g' > generative.regex
-hfst-regexp2fst -i generative.regex -o generative.hfst -f foma
-hfst-compose -F -1 generative.hfst -2 "$generator" |\
-    hfst-fst2fst -f olw -o generator.hfst
 for c in a b c d e f g h i j k l m n o p q r s t u v x y z å ä ö š ž ; do
-    hfst-fst2strings -c 0 generator.hfst -p $c
-done > generated.alpha
-uniq < generated.alpha | "$(dirname "$0")"/convert.py
+    echo "$cyclicRE +UglyHack | $c [? - [ $cyclicRE ] ]* ;" |
+        sed -e 's/+/%+/g' -e 's:/:%/:g' -e 's/#/%#/g' -e 's/\^/%^/g' > generative.$c.regex
+    hfst-regexp2fst -i generative.$c.regex -o generative.$c.hfst -f foma
+    hfst-compose -F -1 generative.$c.hfst -2 "$generator" |\
+        hfst-fst2fst -f olw -o generator.$c.hfst
+        hfst-fst2strings -c 0 generator.$c.hfst > generated.$c
+    echo $c
+    uniq < generated.$c | "$(dirname "$0")"/convert.py
+done
 

@@ -40,6 +40,9 @@ def main():
     a.add_argument("-m", "--missing", metavar="MISSFILE",
                    type=FileType("w"),
                    dest="missfile", help="write missing list to MISSFILE")
+    a.add_argument("-n", "--near-misses", metavar="NMFILE",
+                   type=FileType("w"),
+                   dest="nearmissfile", help="write deriv comp only to NMFILE")
     a.add_argument("-o", "--output", metavar="OUTFILE",
                    type=FileType("w"),
                    dest="outfile", help="write output to OUTFILE")
@@ -121,6 +124,22 @@ def main():
         if analyses:
             covered += freq
             types_covered += 1
+            all_comps = True
+            all_derivs = True
+            all_comps_or_derivs = True
+            for analysis in analyses:
+                if "+Der" not in analysis[0]:
+                    all_derivs = False
+                if "+Cmp" not in analysis[0]:
+                    all_comps = False
+                if "+Cmp" not in analysis[0] and "+Der" not in analysis[0]:
+                    all_comps_or_derivs = False
+            if all_comps:
+                print("C", freq, surf, sep="\t", file=options.nearmissfile)
+            elif all_derivs:
+                print("D", freq, surf, sep="\t", file=options.nearmissfile)
+            elif all_comps_or_derivs:
+                print("CD", freq, surf, sep="\t", file=options.nearmissfile)
         else:
             no_results += freq
             types_no_results += 1

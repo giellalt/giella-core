@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Read a corrections file (path as first argument to the script)
 and then read line by line from standard input, and substitute each
 word with the correct one from the corrections file."""

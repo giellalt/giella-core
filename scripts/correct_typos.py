@@ -31,7 +31,7 @@ def main():
         line = line.strip()
         if not line:
             continue
-        print(corrections.get(line, line))
+        print(corrections.get(line, line), flush=True)
 
 
 if __name__ == "__main__":

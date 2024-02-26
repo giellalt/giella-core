@@ -111,6 +111,16 @@ class YamlGramTest(GramTest):
         )
         config["tests"] = yaml_settings.get("Tests", [])
 
+        dupes = "\n".join(
+            {f"\t{test}" for test in config["tests"] if config["tests"].count(test) > 1}
+        )
+        if dupes:  # check for duplicates
+            print(
+                f"ERROR: Remove the following dupes in {config['test_file']}\n{dupes}",
+                file=sys.stderr,
+            )
+            sys.exit(99)  # exit code 99 signals hard exit to Make
+
         if args.total and len(args.test_files) == 1:
             notfixed = (
                 config["test_file"].parent / f"{config['test_file'].stem}.notfixed.yaml"

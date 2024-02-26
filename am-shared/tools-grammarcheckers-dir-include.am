@@ -149,7 +149,7 @@ else !CAN_PIP
 	echo lxml and pip is missing so this may fail...:
 endif 
 endif
-	make_grammarchecker_zip pipespec.xml $@
+	$(AM_V_GEN)$(GTCORE)/scripts/make_grammarchecker_zip.py pipespec.xml $@
 
 # Additional developer tools:
 dev: modes/$(GTLANG)gram.mode schemas.xml

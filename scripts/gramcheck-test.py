@@ -111,6 +111,12 @@ class YamlGramTest(GramTest):
         )
         config["tests"] = yaml_settings.get("Tests", [])
 
+        if not config["tests"]:
+            print(
+                f"ERROR: No tests in {config['test_file']}",
+                file=sys.stderr,
+            )
+            sys.exit(99)  # exit code 99 signals hard exit to Make
         dupes = "\n".join(
             {f"\t{test}" for test in config["tests"] if config["tests"].count(test) > 1}
         )

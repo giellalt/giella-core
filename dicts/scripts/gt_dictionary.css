@@ -1,5 +1,6 @@
 @charset "utf-8";
-@import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE.css";
+#@import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE.css";
+@import "../../giella-core/dicts/scripts/gt_dictionary_XXE.css";
 @import "gt_dictionary_shared.css";
 
 

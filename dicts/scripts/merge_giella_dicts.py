@@ -55,7 +55,14 @@ def merge_giella_dicts(directory, out_file):
     for file in xml_files:
         with open(file) as f:
             text = f.read()
-        tree = ET.fromstring(text)
+        try:
+            tree = ET.fromstring(text)
+        except ET.ParseError as e:
+            print(f"Warning: XML error in file {file}", file=sys.stderr)
+            print("The process continues, but the contents of this file will "
+                  "not be included in the merged output")
+            print(e, file=sys.stderr)
+            continue
         if tree.tag != "r":
             # root node not <r>, not a giella xml dictionary
             # (this can be the meta.xml file, for example)

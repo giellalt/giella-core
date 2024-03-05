@@ -47,7 +47,7 @@ while test $# -ge 1 ; do
             shift
         fi
     elif test -f "$1"; then
-        inputfile="$1"
+        inputfiles="$inputfiles $1"
         shift
     else
         echo "$0: unknown option $1"
@@ -90,7 +90,7 @@ keep_hom_tags () {
 }
 
 # The main lemma extraction thing:
-grep ";" $inputfile                                    | # grep only lines containing ;
+cat $inputfiles | grep ";"                                     | # grep only lines containing ;
     egrep -v "^[[:space:]]*(\!|\@|<|\+)"                | # do NOT grep lines beginning with (space +) !, @ or <
     keep_hom_tags                                       | # treat homonyms special
     egrep -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" | # do NOT grep lines containing ONLY a continuation lexicon ref

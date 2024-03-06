@@ -4,8 +4,8 @@
 # set -x
 
 function print_usage() {
-    echo "Usage: $0 [OPTIONS...] INPUTFILE"
-    echo "Extract lemmas from INPUTFILE (lexc)"
+    echo "Usage: $0 [OPTIONS...] INPUTFILE [INPUTFILE ...]"
+    echo "Extract lemmas from INPUTFILE(S) (lexc). Avoid affix files in the input."
     echo
     echo "  -h, --help             Print this usage info"
     echo "  --exclude '(pattern)'  Exclude (egrep) patterns from the lemma list"

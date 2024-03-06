@@ -48,7 +48,6 @@ while test $# -ge 1 ; do
         fi
     elif test -f "$1"; then
         inputfiles="$inputfiles $1"
-        shift
     else
         echo "$0: unknown option $1"
         print_usage

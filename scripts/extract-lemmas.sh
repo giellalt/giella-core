@@ -89,7 +89,7 @@ keep_hom_tags () {
 }
 
 # The main lemma extraction thing:
-cat $inputfiles | grep ";"                                     | # grep only lines containing ;
+cat $inputfiles | grep ";"                              | # grep only lines containing ;
     egrep -v "^[[:space:]]*(\!|\@|<|\+)"                | # do NOT grep lines beginning with (space +) !, @ or <
     keep_hom_tags                                       | # treat homonyms special
     egrep -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" | # do NOT grep lines containing ONLY a continuation lexicon ref

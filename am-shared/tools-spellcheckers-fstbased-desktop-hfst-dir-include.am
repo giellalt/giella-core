@@ -278,7 +278,7 @@ easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
 
 ####### Error model: #######
 # Error model building - edit distance based on transducer alphabet:
-editdist.%.regex: editdist.%.txt $(initial_letter_deps)
+.generated/editdist.%.regex: editdist.%.txt $(initial_letter_deps) $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/editdist.py \
 		--verbose \
 		$(swaps) \
@@ -289,7 +289,7 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps)
 		--output-file=$@ \
 		$(initial_letter_error_model_option)
 
-.generated/editdist.%.hfst: editdist.%.regex $(GENDIR)
+.generated/editdist.%.hfst: .generated/editdist.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
@@ -354,7 +354,7 @@ strings.all.%.hfst: $(strings_all_deps)
 # Combine edit distance with string pattern edits, then multiply according to
 # the specified editing distance. The strings part is included depending on
 # variable setting in Makefile.am.
-editdist.all.%.hfst: $(strings_deps) editdist.%.hfst
+.generated/editdist.all.%.hfst: $(strings_deps) .generated/editdist.%.hfst
 	$(strings_fst_include) \
 		| $(HFST_REPEAT) -f 1 -t $(EDIT_DISTANCE) \
 		-o $@
@@ -369,14 +369,14 @@ words.%.hfst: $(words_deps) easteregg.%.desktop.suggtxt
 # The final error model is assembled here:
 errmodel.%.hfst: words.%.hfst \
 				 $(initial_letter_deps) \
-				 editdist.all.%.hfst \
+				 .generated/editdist.all.%.hfst \
 				 $(final_strings_deps)
 	$(AM_V_RGX2FST)printf "\
 		[ @\"words.$*.hfst\"    \
 		| \
 		  [ \
 		      $(initial_letter_fst_include) \
-		      @\"editdist.all.$*.hfst\"  \
+		      @\".generated/editdist.all.$*.hfst\"  \
 		      $(final_strings_fst_include) \
 		  ] \
 		];" \

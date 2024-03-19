@@ -21,11 +21,11 @@ if CAN_HFST
 if WANT_SPELLERS
 
 GT_AREA_ERRMODELS=$(shell for ld in $(AREAS); do\
-    echo "errmodel.$$ld.hfst" ; \
+    echo ".generated/errmodel.$$ld.hfst" ; \
 done)
 
 GT_AREA_SPELLER_ACCEPTORS=$(shell for ld in $(AREAS); do\
-    echo "acceptor.$$ld.hfst" ; \
+    echo ".generated/acceptor.$$ld.hfst" ; \
 done)
 
 AREA_ZHFST_FILES=$(shell for ld in $(AREAS); do\
@@ -40,8 +40,8 @@ endif # HAVE_AREAS
 #### Build rules: ####
 
 # Build rule for acceptors for specific areas/countries:
-acceptor.%.hfst: \
-		$(GT_SPELLER_HFST) easteregg.%.desktop.hfst \
+.generated/acceptor.%.hfst: \
+		$(GT_SPELLER_HFST) .generated/easteregg.%.desktop.hfst \
 		$(top_builddir)/src/fst/filters/remove-all_areas_but_%-strings.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
@@ -56,14 +56,14 @@ acceptor.%.hfst: \
 $(AREA_ZHFST_FILES): \
 	$(GTLANG2)_%.zhfst: \
 		index.%.xml \
-		acceptor.%.hfst \
-		errmodel.%.hfst
+		.generated/acceptor.%.hfst \
+		.generated/errmodel.%.hfst
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
 	$(AM_V_at)cp index.$*.xml build/$@/index.xml
-	$(AM_V_at)cp acceptor.$*.hfst build/$@/acceptor.default.hfst
-	$(AM_V_at)cp errmodel.$*.hfst build/$@/errmodel.default.hfst
+	$(AM_V_at)cp .generated/acceptor.$*.hfst build/$@/acceptor.default.hfst
+	$(AM_V_at)cp .generated/errmodel.$*.hfst build/$@/errmodel.default.hfst
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/

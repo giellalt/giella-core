@@ -22,11 +22,11 @@ if WANT_SPELLERS
 if WANT_ALT_ORTH_PROOFTOOLS
 
 GT_ALT_ORTH_ERRMODELS=$(shell for ld in $(ALT_ORTHS); do\
-    echo "errmodel.$$ld.hfst" ; \
+    echo ".generated/errmodel.$$ld.hfst" ; \
 done)
 
 GT_ALT_ORTH_SPELLER_ACCEPTORS=$(shell for ld in $(ALT_ORTHS); do\
-    echo "acceptor.$$ld.hfst" ; \
+    echo ".generated/acceptor.$$ld.hfst" ; \
 done)
 
 ALT_ORTH_ZHFST_FILES=$(shell for ld in $(ALT_ORTHS); do\
@@ -42,10 +42,10 @@ endif # HAVE_ALT_ORTHS
 #### Build rules: ####
 
 # Alternative based on the raw fst instead of the standard orthography:
-acceptor.%.hfst: \
+.generated/acceptor.%.hfst: \
 		$(GT_SPELLER_HFST) \
-		easteregg.%.desktop.hfst \
-		$(top_builddir)/src/fst/orthography/raw-to-%.compose.hfst
+		.generated/easteregg.%.desktop.hfst \
+		$(top_builddir)/src/fst/orthography/raw-to-%.compose.hfst $(GENDIR)
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
 		  -2 $(top_builddir)/src/fst/orthography/raw-to-$*.compose.hfst \
@@ -56,9 +56,9 @@ acceptor.%.hfst: \
 		-o $@
 
 # Build rule for acceptors for alternate writing systems:
-acceptor.%.hfst: \
+.generated/acceptor.%.hfst: \
 		$(GT_SPELLER_HFST) \
-		easteregg.%.desktop.hfst \
+		.generated/easteregg.%.desktop.hfst \
 		$(top_builddir)/src/fst/orthography/$(DEFAULT_ORTH)-to-%.compose.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \

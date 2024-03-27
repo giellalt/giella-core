@@ -144,7 +144,7 @@ mob_strings_all_build=$(shell \
 # Set file name to the empty string or final_strings.all depending on variable:
 mob_final_strings_deps=$(shell \
 	if [[ $(MOB_FINAL_STRING_EDITS) != 'no' ]] ; then \
-		echo "final_strings.all.%.hfst"; \
+		echo ".generated/final_strings.all.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -152,7 +152,7 @@ mob_final_strings_deps=$(shell \
 # Set build command for strings.all depending on variable value:
 mob_final_strings_fst_include=$(shell \
 	if [[ $(MOB_FINAL_STRING_EDITS) != 'no' ]] ; then \
-		echo "( @\\\"final_strings.all.$*.hfst\\\" )"; \
+		echo "( @\\\".generated/final_strings.all.$*.hfst\\\" )"; \
 	else \
 		echo ""; \
 	fi)
@@ -160,11 +160,11 @@ mob_final_strings_fst_include=$(shell \
 # Set dependency file name(s) depending on variable value:
 mob_final_strings_all_deps=$(shell \
 	if   [[ $(MOB_FINAL_STRING_EDITS) == 'regex' ]] ; then \
-		echo "final_strings.regex.%.hfst"; \
+		echo ".generated/final_strings.regex.%.hfst"; \
 	elif [[ $(MOB_FINAL_STRING_EDITS) == 'txt'   ]] ; then \
-		echo "final_strings.txt.%.hfst"; \
+		echo ".generated/final_strings.txt.%.hfst"; \
 	elif [[ $(MOB_FINAL_STRING_EDITS) == 'both'  ]] ; then \
-		echo "final_strings.regex.%.hfst final_strings.txt.%.hfst"; \
+		echo ".generated/final_strings.regex.%.hfst .generated/final_strings.txt.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -247,13 +247,13 @@ easteregg.%.mobile.suggtxt: easteregg.%.mobile.txt
 		> $@
 
 # Easter egg string acceptor:
-easteregg.%.mobile.hfst: easteregg.%.mobile.txt
+.generated/easteregg.%.mobile.hfst: easteregg.%.mobile.txt $(GENDIR)
 	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower > $@
 
 ####### Error model: #######
 # Error model building - edit distance based on transducer alphabet:
-editdist.%.mobile.regex: editdist.%.txt $(mob_initial_letter_deps)
+.generated/editdist.%.mobile.regex: editdist.%.txt $(mob_initial_letter_deps) $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/editdist.py \
 		--verbose \
 		$(mob_swaps) \
@@ -264,7 +264,7 @@ editdist.%.mobile.regex: editdist.%.txt $(mob_initial_letter_deps)
 		--output-file=$@ \
 		$(mob_initial_letter_error_model_option)
 
-predict.%.regex: editdist.%.txt
+.generated/predict.%.regex: editdist.%.txt $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/predict.py \
 		--verbose \
 		--epsilon='@0@' \
@@ -274,12 +274,12 @@ predict.%.regex: editdist.%.txt
 		--output=$@
 
 # Initial string edits, if enabled:
-initial_letters.txt.%.mobile.hfst: initial_letters.%.txt
+.generated/initial_letters.txt.%.mobile.hfst: initial_letters.%.txt $(GENDIR)
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j -p \
 		-o $@
 
-initial_letters.regex.%.mobile.hfst: initial_letters.%.regex
+.generated/initial_letters.regex.%.mobile.hfst: initial_letters.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
@@ -288,29 +288,29 @@ initial_letters.regex.%.mobile.hfst: initial_letters.%.regex
 #	$(mob_initial_letter_all_build)
 
 # Final string edits, if enabled:
-final_strings.txt.%.mobile.hfst: final_strings.%.txt
+.generated/final_strings.txt.%.mobile.hfst: final_strings.%.txt $(GENDIR)
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 	   --format=openfst-tropical \
 		-o $@
 
-final_strings.regex.%.mobile.hfst: final_strings.%.regex
+.generated/final_strings.regex.%.mobile.hfst: final_strings.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
 
-final_strings.all.%.hfst: $(mob_final_strings_all_deps)
+.generated/final_strings.all.%.hfst: $(mob_final_strings_all_deps) $(GENDIR)
 	$(mob_final_strings_all_build)
 
 # In-word list of strings known to be misspelled, fall back for mobile fst's:
 # if there is no mobile-specific txt file, it will fall back to the default error
 # model file. If there IS a mobile specific txt file, the default rule will apply
 # due to pattern matching rules.
-strings.txt.%.mobile.hfst: strings.%.txt anystar.hfst
+.generated/strings.txt.%.mobile.hfst: strings.%.txt .generated/anystar.hfst
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
-		| $(HFST_CONCATENATE)   anystar.hfst - \
-		| $(HFST_CONCATENATE) - anystar.hfst   \
+		| $(HFST_CONCATENATE)   .generated/anystar.hfst - \
+		| $(HFST_CONCATENATE) - .generated/anystar.hfst   \
 		-o $@
 
 # strings regex file:
@@ -319,31 +319,33 @@ strings.txt.%.mobile.hfst: strings.%.txt anystar.hfst
 # larger as the edit distance, since the file is multiplied again as part of
 # the editStrings build target. The idea is that the regex should contain a
 # highly targeted set of frequent spelling errors.
-strings.regex.%.mobile.hfst: strings.%.regex anystar.hfst
+.generated/strings.regex.%.mobile.hfst: strings.%.regex .generated/anystar.hfst
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
-		| $(HFST_CONCATENATE)   anystar.hfst - \
-		| $(HFST_CONCATENATE) - anystar.hfst   \
+		| $(HFST_CONCATENATE)   .generated/anystar.hfst - \
+		| $(HFST_CONCATENATE) - .generated/anystar.hfst   \
 		| $(HFST_REPEAT) -f 1 -t $(STRING_REGEX_EDIT_DISTANCE) \
 		-o $@
 
-strings.all.%.mobile.hfst: $(mob_strings_all_deps)
+.generated/strings.all.%.mobile.hfst: $(mob_strings_all_deps)
 	$(mob_strings_all_build)
 
 # Combine edit distance with string pattern edits, then multiply according to
 # the specified editing distance. The strings part is included depending on
 # variable setting in Makefile.am.
 # Then combine it with keyboard layout error model:
-editdist.all.%.hfst.tmp: $(strings_deps) editdist.%.hfst
+.generated/editdist.all.%.hfst.tmp: $(strings_deps) .generated/editdist.%.hfst
 	$(strings_fst_include) > $@
 
-editdist.all.%.hfst: editdist.all.%.hfst.tmp keyboardlayout.hfst
-	$(AM_V_UNION)$(HFST_DISJUNCT) $^ \
-		| $(HFST_REPEAT) -f 1 -t $(EDIT_DISTANCE) \
-		-o $@
+.generated/editdist.all.%.hfst: .generated/editdist.all.%.hfst.tmp
+	$(AM_V_CP)cp -f $< $@
+#.generated/editdist.all.%.hfst: .generated/editdist.all.%.hfst.tmp .generated/keyboardlayout.hfst
+#	$(AM_V_UNION)$(HFST_DISJUNCT) $^ \
+#		| $(HFST_REPEAT) -f 1 -t $(EDIT_DISTANCE) \
+#		-o $@
 
  
 # Error model building - list of words known to be misspelled, mobile version:
-words.%.mobile.hfst: $(mob_words_deps) easteregg.%.mobile.suggtxt
+.generated/words.%.mobile.hfst: $(mob_words_deps) easteregg.%.mobile.suggtxt $(GENDIR)
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		   --format=openfst-tropical \
@@ -351,37 +353,38 @@ words.%.mobile.hfst: $(mob_words_deps) easteregg.%.mobile.suggtxt
 
 # Error model building - list of words known to be misspelled, mobile
 # fallback version, using the default words.txt file as input instead:
-words.%.mobile.hfst: $(words_deps) easteregg.%.mobile.suggtxt
+.generated/words.%.mobile.hfst: $(words_deps) easteregg.%.mobile.suggtxt $(GENDIR)
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		-o $@
 
-.PHONY: att
-att: $(srcdir)/keyboardlayout.att
-$(srcdir)/keyboardlayout.att:
-	$(AM_V_GEN)$(KBDGEN) -t errormodel -l $(KEYBOARD_LAYOUT_ID) \
-		$(KEYBOARD_LAYOUT_DIR)/project.yaml \
-		> $@
-	$(AM_V_at)echo "ATT error model for keyboard layout has been made!"
-	$(AM_V_at)echo "Remember to add $@ to svn!"
+## XXX: temporarily disabled?
+##.PHONY: att
+##att: $(srcdir)/keyboardlayout.att
+##$(srcdir)/keyboardlayout.att:
+##	$(AM_V_GEN)$(KBDGEN) -t errormodel -l $(KEYBOARD_LAYOUT_ID) \
+##		$(KEYBOARD_LAYOUT_DIR)/project.yaml \
+##		> $@
+##	$(AM_V_at)echo "ATT error model for keyboard layout has been made!"
+##	$(AM_V_at)echo "Remember to add $@ to svn!"
 
-keyboardlayout.hfst: keyboardlayout.att anystar.hfst
+.generated/keyboardlayout.hfst: keyboardlayout.att .generated/anystar.hfst
 	$(AM_V_TXT2FST)$(HFST_TXT2FST) $< \
-		| $(HFST_CONCATENATE)   anystar.hfst - \
-		| $(HFST_CONCATENATE) - anystar.hfst   \
+		| $(HFST_CONCATENATE)   .generated/anystar.hfst - \
+		| $(HFST_CONCATENATE) - .generated/anystar.hfst   \
 		> $@
 
 # The final error model is assembled here:
-errmodel.%.hfst: words.%.hfst \
+.generated/errmodel.%.hfst: .generated/words.%.hfst \
 				 $(mob_initial_letter_deps) \
-				 editdist.all.%.hfst \
+				 .generated/editdist.all.%.hfst \
 				 $(mob_final_strings_deps)
 	$(AM_V_RGX2FST)printf "\
-		[ @\"words.$*.hfst\"    \
+		[ @\".generated/words.$*.hfst\"    \
 		| \
 		  [ \
 		      $(mob_initial_letter_fst_include) \
-		      @\"editdist.all.$*.hfst\"  \
+		      @\".generated/editdist.all.$*.hfst\"  \
 		      $(mob_final_strings_fst_include) \
 		  ] \
 		];" \
@@ -391,7 +394,7 @@ errmodel.%.hfst: words.%.hfst \
 		  -o $@
 
 # with wordform prediction
-errmodel.%.predict.hfst: predict.%.hfst
+.generated/errmodel.%.predict.hfst: .generated/predict.%.hfst
 	hfst-fst2fst -f olw -v -i $< -o $@
 
 ######## Alternate error model: #######
@@ -415,11 +418,11 @@ errmodel.%.predict.hfst: predict.%.hfst
 ####### Speller acceptor: #######
 # Build the automaton used for the speller
 $(MOB_GT_SPELLER_ACCEPTOR): \
-acceptor.%.hfst: $(MOB_GT_SPELLER_HFST) easteregg.%.hfst
+acceptor.%.hfst: $(MOB_GT_SPELLER_HFST) .generated/easteregg.%.hfst
 	$(AM_V_PROJECT)$(HFST_PROJECT) $(HFST_FLAGS) \
 			$(MORE_VERBOSITY) --project=lower < $< \
 		| $(HFST_MINIMIZE_SPELLER)                      \
-		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) - easteregg.$*.hfst          \
+		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) - .generated/easteregg.$*.hfst          \
 		| $(HFST_PUSH_WEIGHTS) $(MORE_VERBOSITY) --push=initial           \
 		| $(HFST_FST2FST) $(MORE_VERBOSITY) $(HFST_FLAGS) -f olw          \
 		-o $@

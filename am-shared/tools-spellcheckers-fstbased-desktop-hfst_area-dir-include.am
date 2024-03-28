@@ -48,7 +48,7 @@ endif # HAVE_AREAS
 		  -1 $(top_builddir)/src/fst/filters/remove-all_areas_but_$*-strings.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER) $(HFST_FLAGS)        \
-		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst             \
+		| $(HFST_DISJUNCT) - .generated/easteregg.$*.desktop.hfst             \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
 		-o $@
 

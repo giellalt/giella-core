@@ -84,4 +84,3 @@ AS_IF([test x$PRECOMMIT = xfalse],
 
        on mac: brew install pre-commit
        others: python3 -m pip install pre-commit])])
-AC_MSG_WARN([January 2024: this version involves whole move of src/fst to src/fst/morphology])

@@ -16,7 +16,7 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 GT_SPELLER_HFST=generator-desktopspeller-gt-norm.hfst
-GT_SPELLER_ACCEPTOR=acceptor.default.hfst
+GT_SPELLER_ACCEPTOR=.generated/acceptor.default.hfst
 
 # Max compression for zipped files:
 ZIPFLAGS=-9 $(VERBOSITY)
@@ -229,7 +229,6 @@ noinst_DATA+=$(GT_ERRMODELS) \
 ####### Easter egg version info: #######
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
-$(GIELLA_DESKTOP_EASTEREGGS): \
 .generated/easteregg.%.desktop.txt: $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
@@ -405,7 +404,6 @@ errmodel.%.hfst: .generated/words.%.hfst \
 
 ####### Speller acceptor: #######
 # Build the automaton used for the speller
-$(GT_SPELLER_ACCEPTOR): \
 .generated/acceptor.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst \
 				 .generated/easteregg.%.desktop.hfst
 	$(AM_V_PROJECT)$(HFST_COMPOSE) -1 filters/remove-error-strings.hfst -2 $< -F \
@@ -427,7 +425,7 @@ $(GT_SPELLING_HFST): index.xml \
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
 	$(AM_V_at)cp index.xml build/$@/index.xml
-	$(AM_V_at)cp $(GT_SPELLER_ACCEPTOR) build/$@/$(GT_SPELLER_ACCEPTOR)
+	$(AM_V_at)cp $(GT_SPELLER_ACCEPTOR) build/$@/
 	$(AM_V_at)cp $(GT_ERRMODELS) build/$@/$(GT_ERRMODELS)
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3

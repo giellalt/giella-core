@@ -230,7 +230,7 @@ noinst_DATA+=$(GT_ERRMODELS) \
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
 $(GIELLA_DESKTOP_EASTEREGGS): \
-easteregg.%.desktop.txt:
+.generated/easteregg.%.desktop.txt: $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \
@@ -240,7 +240,7 @@ easteregg.%.desktop.txt:
 		> $@
 
 # Easter egg suggestions:
-easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
+.generated/easteregg.%.desktop.suggtxt: .generated/easteregg.%.desktop.txt
 	$(AM_V_GEN)sed -e 's/^/nuvviDspeller:/' < $< \
 		| sed = \
 		| sed 'N;s/\n/	/' \
@@ -261,7 +261,7 @@ easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
 
 # Easter egg string acceptor:
 # easteregg.%.desktop.temp.hfst: easteregg.%.desktop.txt
-.generated/easteregg.%.desktop.hfst: easteregg.%.desktop.txt $(GENDIR)
+.generated/easteregg.%.desktop.hfst: .generated/easteregg.%.desktop.txt
 	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
 		> $@
 
@@ -360,7 +360,7 @@ easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
 		-o $@
 
 # Error model building - list of words known to be misspelled:
-.generated/words.%.hfst: $(words_deps) easteregg.%.desktop.suggtxt $(GENDIR)
+.generated/words.%.hfst: $(words_deps) .generated/easteregg.%.desktop.suggtxt $(GENDIR)
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		   --format=openfst-tropical \
@@ -388,7 +388,7 @@ errmodel.%.hfst: .generated/words.%.hfst \
 ####### Alternate error model: #######
 # Alternatively, the error model can be constructed as a long list of regular
 # expressions, semicolon separated:
-errmodel.%.hfst: errmodel.%.regex .generated/easteregg.%.hfst
+.generated/errmodel.%.hfst: errmodel.%.regex .generated/asteregg.%.hfst
 	$(AM_V_GEN)$(HFST_REGEXP2FST) $(HFSTFLAGS) -S -i $< \
 		| $(HFST_DISJUNCT) - .generated/easteregg.$*.hfst \
 		| $(HFST_PUSH_WEIGHTS) --push=initial  \
@@ -396,7 +396,7 @@ errmodel.%.hfst: errmodel.%.regex .generated/easteregg.%.hfst
 		-o $@
 
 # ... or as an xfscript file:
-errmodel.%.hfst: errmodel.%.xfscript .generated/easteregg.%.hfst
+.generated/errmodel.%.hfst: errmodel.%.xfscript .generated/easteregg.%.hfst
 	$(AM_V_GEN)$(HFST_REGEXP2FST) $(HFSTFLAGS) -S -i $< \
 		| $(HFST_DISJUNCT) - .generated/easteregg.$*.hfst \
 		| $(HFST_PUSH_WEIGHTS) --push=initial  \
@@ -406,7 +406,7 @@ errmodel.%.hfst: errmodel.%.xfscript .generated/easteregg.%.hfst
 ####### Speller acceptor: #######
 # Build the automaton used for the speller
 $(GT_SPELLER_ACCEPTOR): \
-acceptor.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst \
+.generated/acceptor.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst \
 				 .generated/easteregg.%.desktop.hfst
 	$(AM_V_PROJECT)$(HFST_COMPOSE) -1 filters/remove-error-strings.hfst -2 $< -F \
 		| $(HFST_PROJECT) $(HFST_FLAGS) \

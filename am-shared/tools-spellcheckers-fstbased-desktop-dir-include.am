@@ -34,8 +34,8 @@ tag_weighted_dep=$(shell \
 
 if WANT_SPELLERS
 if CAN_HFST
-GT_COMMON_SPELLER_HFST+=.generated/generator-desktopspeller-gt-norm.hfst
-GT_COMMON_SPELLER_HFST+=.generated/analyser-desktopspeller-gt-norm.hfst
+GT_COMMON_SPELLER_HFST+=generator-desktopspeller-gt-norm.hfst
+GT_COMMON_SPELLER_HFST+=analyser-desktopspeller-gt-norm.hfst
 endif # CAN_HFST
 endif # WANT_SPELLERS
 
@@ -99,11 +99,11 @@ endif # WANT_SPELLERS
 	quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
 
 # Copy the tmp transducer to the final one. This allows local overrides.
-.generated/%.hfst: .generated/%.tmp.hfst
+%.hfst: .generated/%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # Invert the final fst, to enable symmetric yaml tests and easy manual testing:
-.generated/analyser-desktopspeller-gt-norm.hfst: .generated/generator-desktopspeller-gt-norm.hfst
+analyser-desktopspeller-gt-norm.hfst: generator-desktopspeller-gt-norm.hfst
 	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< \
 	| $(HFST_PRUNE_ALPHABET) $(MORE_VERBOSITY) \
 	| $(HFST_REMOVE_EPSILONS) $(MORE_VERBOSITY) -o $@

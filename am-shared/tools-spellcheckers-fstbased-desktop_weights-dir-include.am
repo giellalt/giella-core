@@ -111,16 +111,16 @@ corpus_size_limit_command=$(shell \
 		-o $@
 
 # Keep these intermediate targets when building using --debug:
-.SECONDARY: spellercorpus.sort.txt \
-            spellercorpus.uniq.txt \
-            spellercorpus.surfs.hfst \
-            spellercorpus.tropical.txt \
-            spellercorpus.typecount.txt \
-            pellercorpus.wordcount.txt \
-            word-boundary.hfst \
-            generator-*-gt-norm-freq_weighted.hfst \
-            generator-*-gt-norm-unit_weighted.hfst \
-            generator-*-gt-norm-norm_weighted.hfst \
-            generator-*-gt-norm-tag_weighted.hfst  \
-            $(SURFWEIGHTS) \
-            $(UNITWEIGHT)
+.SECONDARY: .generated/spellercorpus.sort.txt \
+            .generated/spellercorpus.uniq.txt \
+            .generated/spellercorpus.surfs.hfst \
+            .generated/spellercorpus.tropical.txt \
+            .generated/spellercorpus.typecount.txt \
+            .generated/pellercorpus.wordcount.txt \
+            .generated/word-boundary.hfst \
+            .generated/generator-*-gt-norm-freq_weighted.hfst \
+            .generated/generator-*-gt-norm-unit_weighted.hfst \
+            .generated/generator-*-gt-norm-norm_weighted.hfst \
+            .generated/generator-*-gt-norm-tag_weighted.hfst  \
+            .generated/$(SURFWEIGHTS) \
+            .generated/$(UNITWEIGHT)

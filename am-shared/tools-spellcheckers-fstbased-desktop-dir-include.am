@@ -47,9 +47,9 @@ endif # WANT_SPELLERS
 ####    the fst):
 .generated/generator-desktopspeller-gt-norm-freq_weighted.hfst: \
 				 .generated/generator-desktopspeller-gt-norm-base.hfst \
-				 $(SURFWEIGHTS)
+				 .generated/$(SURFWEIGHTS)
 	$(AM_V_COMPOSE)$(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			$< $(SURFWEIGHTS) \
+			$< .generated/$(SURFWEIGHTS) \
 		-o $@
 
 #### 3. Add a default unit weight to anything not covered by the corpus

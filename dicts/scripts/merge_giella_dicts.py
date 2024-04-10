@@ -7,6 +7,7 @@ This does the same as (and hence replaces) collect-dict-parts.xsl
 
 This script can also be imported from python code, see the comment in the file.
 """
+import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 

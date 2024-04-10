@@ -459,7 +459,7 @@ $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_norm_generators,$(alt_ort
 
 # morpher is a morph segmenting variant: taloautoissani -> talo#auto>i>ssa>ni
 define alt_orth_morphers
-.generated/morpher-gt-desc.$(1).tmp.%: a.generated/nalyser-raw-gt-desc.%         \
+.generated/morpher-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%         \
 					 orthography/inituppercase.compose.%   \
 					 orthography/spellrelax.compose.%      \
 					filters/remove-hyphenation-marks.%     \

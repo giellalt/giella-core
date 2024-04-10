@@ -25,7 +25,7 @@ for ll in "$@" ; do
         printf "paragraphs tokens characters\n"
         wc "$ll$copyright.text"
         python "$GTHOME/scripts/freq-evals.py" -a "$ANALYSER" -i "$ll$copyright.freqs" \
-            -m "$ll$copyright.missinglist"
+            -m "$ll$copyright.missinglist" -n "$ll$copyright.prodlist"
     done
     for gecs in goldstandard correct-no-gs ; do
         CORPUS="$GTLANGS/corpus-$ll/$gecs/converted/"
@@ -44,7 +44,7 @@ for ll in "$@" ; do
         printf "paragraphs tokens characters\n"
         wc "$ll$gecs.text"
         python "$GTHOME/scripts/freq-evals.py" -a "$ANALYSER" -i "$ll$gecs.freqs" \
-            -m "$ll$gecs.missinglist"
+            -m "$ll$copyright.missinglist" -n "$ll$copyright.prodlist"
 
     done
 done

@@ -16,7 +16,7 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 GT_SPELLER_HFST=generator-desktopspeller-gt-norm.hfst
-GT_SPELLER_ACCEPTOR=acceptor.default.hfst
+GT_SPELLER_ACCEPTOR=.generated/acceptor.default.hfst
 
 # Max compression for zipped files:
 ZIPFLAGS=-9 $(VERBOSITY)
@@ -47,7 +47,7 @@ swaps=$(shell \
 # Set file name to the empty string or initial_letters.all depending on variable:
 initial_letter_deps=$(shell \
 	if [[ $(INITIAL_EDITS) != 'no' ]] ; then \
-		echo "initial_letters.all.%.hfst"; \
+		echo ".generated/initial_letters.all.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -55,7 +55,7 @@ initial_letter_deps=$(shell \
 # Set file name to the empty string or initial_letters.all depending on variable:
 initial_letter_fst_include=$(shell \
 	if [[ $(INITIAL_EDITS) != 'no' ]] ; then \
-		echo "( @\\\"initial_letters.all.$*.hfst\\\" )"; \
+		echo "( @\\\".generated/initial_letters.all.$*.hfst\\\" )"; \
 	else \
 		echo ""; \
 	fi)
@@ -71,11 +71,11 @@ initial_letter_error_model_option=$(shell \
 # Set dependency file name(s) depending on variable value:
 initial_letter_all_deps=$(shell \
 	if   [[ $(INITIAL_EDITS) == 'regex' ]] ; then \
-		echo "initial_letters.regex.%.hfst"; \
+		echo ".generated/initial_letters.regex.%.hfst"; \
 	elif [[ $(INITIAL_EDITS) == 'txt'   ]] ; then \
-		echo "initial_letters.txt.%.hfst"; \
+		echo ".generated/initial_letters.txt.%.hfst"; \
 	elif [[ $(INITIAL_EDITS) == 'both'  ]] ; then \
-		echo "initial_letters.regex.%.hfst initial_letters.txt.%.hfst"; \
+		echo ".generated/initial_letters.regex.%.hfst .generated/initial_letters.txt.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -96,7 +96,7 @@ initial_letter_all_build=$(shell \
 # Set file name to the empty string or strings.all depending on variable:
 strings_deps=$(shell \
 	if [[ $(STRING_EDITS) != 'no' ]] ; then \
-		echo "strings.all.%.hfst"; \
+		echo ".generated/strings.all.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -112,11 +112,11 @@ strings_fst_include=$(shell \
 # Set dependency file name(s) depending on variable value:
 strings_all_deps=$(shell \
 	if   [[ $(STRING_EDITS) == 'regex' ]] ; then \
-		echo "strings.regex.%.hfst"; \
+		echo ".generated/strings.regex.%.hfst"; \
 	elif [[ $(STRING_EDITS) == 'txt'   ]] ; then \
-		echo "strings.txt.%.hfst"; \
+		echo ".generated/strings.txt.%.hfst"; \
 	elif [[ $(STRING_EDITS) == 'both'  ]] ; then \
-		echo "strings.regex.%.hfst strings.txt.%.hfst"; \
+		echo ".generated/strings.regex.%.hfst .generated/strings.txt.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -137,7 +137,7 @@ strings_all_build=$(shell \
 # Set file name to the empty string or final_strings.all depending on variable:
 final_strings_deps=$(shell \
 	if [[ $(FINAL_STRING_EDITS) != 'no' ]] ; then \
-		echo "final_strings.all.%.hfst"; \
+		echo ".generated/final_strings.all.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -145,7 +145,7 @@ final_strings_deps=$(shell \
 # Set build command for strings.all depending on variable value:
 final_strings_fst_include=$(shell \
 	if [[ $(FINAL_STRING_EDITS) != 'no' ]] ; then \
-		echo "( @\\\"final_strings.all.$*.hfst\\\" )"; \
+		echo "( @\\\".generated/final_strings.all.$*.hfst\\\" )"; \
 	else \
 		echo ""; \
 	fi)
@@ -153,11 +153,11 @@ final_strings_fst_include=$(shell \
 # Set dependency file name(s) depending on variable value:
 final_strings_all_deps=$(shell \
 	if   [[ $(FINAL_STRING_EDITS) == 'regex' ]] ; then \
-		echo "final_strings.regex.%.hfst"; \
+		echo ".generated/final_strings.regex.%.hfst"; \
 	elif [[ $(FINAL_STRING_EDITS) == 'txt'   ]] ; then \
-		echo "final_strings.txt.%.hfst"; \
+		echo ".generated/final_strings.txt.%.hfst"; \
 	elif [[ $(FINAL_STRING_EDITS) == 'both'  ]] ; then \
-		echo "final_strings.regex.%.hfst final_strings.txt.%.hfst"; \
+		echo ".generated/final_strings.regex.%.hfst final_strings.txt.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -229,8 +229,7 @@ noinst_DATA+=$(GT_ERRMODELS) \
 ####### Easter egg version info: #######
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
-$(GIELLA_DESKTOP_EASTEREGGS): \
-easteregg.%.desktop.txt:
+.generated/easteregg.%.desktop.txt: $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \
@@ -240,7 +239,7 @@ easteregg.%.desktop.txt:
 		> $@
 
 # Easter egg suggestions:
-easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
+.generated/easteregg.%.desktop.suggtxt: .generated/easteregg.%.desktop.txt
 	$(AM_V_GEN)sed -e 's/^/nuvviDspeller:/' < $< \
 		| sed = \
 		| sed 'N;s/\n/	/' \
@@ -261,7 +260,7 @@ easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
 
 # Easter egg string acceptor:
 # easteregg.%.desktop.temp.hfst: easteregg.%.desktop.txt
-.generated/easteregg.%.desktop.hfst: easteregg.%.desktop.txt $(GENDIR)
+.generated/easteregg.%.desktop.hfst: .generated/easteregg.%.desktop.txt
 	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
 		> $@
 
@@ -278,7 +277,7 @@ easteregg.%.desktop.suggtxt: easteregg.%.desktop.txt
 
 ####### Error model: #######
 # Error model building - edit distance based on transducer alphabet:
-editdist.%.regex: editdist.%.txt $(initial_letter_deps)
+.generated/editdist.%.regex: editdist.%.txt $(initial_letter_deps) $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/editdist.py \
 		--verbose \
 		$(swaps) \
@@ -289,7 +288,7 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps)
 		--output-file=$@ \
 		$(initial_letter_error_model_option)
 
-.generated/editdist.%.hfst: editdist.%.regex $(GENDIR)
+.generated/editdist.%.hfst: .generated/editdist.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
@@ -341,42 +340,42 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps)
 # larger as the edit distance, since the file is multiplied again as part of
 # the editStrings build target. The idea is that the regex should contain a
 # highly targeted set of frequent spelling errors.
-strings.regex.%.hfst: strings.%.regex anystar.hfst
+.generated/strings.regex.%.hfst: strings.%.regex .generated/anystar.hfst
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
-		| $(HFST_CONCATENATE)   anystar.hfst - \
-		| $(HFST_CONCATENATE) - anystar.hfst   \
+		| $(HFST_CONCATENATE)   .generated/anystar.hfst - \
+		| $(HFST_CONCATENATE) - .generated/anystar.hfst   \
 		| $(HFST_REPEAT) -f 1 -t $(STRING_REGEX_EDIT_DISTANCE) \
 		-o $@
 
-strings.all.%.hfst: $(strings_all_deps)
+.generated/strings.all.%.hfst: $(strings_all_deps)
 	$(strings_all_build)
 
 # Combine edit distance with string pattern edits, then multiply according to
 # the specified editing distance. The strings part is included depending on
 # variable setting in Makefile.am.
-editdist.all.%.hfst: $(strings_deps) editdist.%.hfst
+.generated/editdist.all.%.hfst: $(strings_deps) .generated/editdist.%.hfst
 	$(strings_fst_include) \
 		| $(HFST_REPEAT) -f 1 -t $(EDIT_DISTANCE) \
 		-o $@
 
 # Error model building - list of words known to be misspelled:
-words.%.hfst: $(words_deps) easteregg.%.desktop.suggtxt
+.generated/words.%.hfst: $(words_deps) .generated/easteregg.%.desktop.suggtxt $(GENDIR)
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		   --format=openfst-tropical \
 		-o $@
 
 # The final error model is assembled here:
-errmodel.%.hfst: words.%.hfst \
+errmodel.%.hfst: .generated/words.%.hfst \
 				 $(initial_letter_deps) \
-				 editdist.all.%.hfst \
+				 .generated/editdist.all.%.hfst \
 				 $(final_strings_deps)
 	$(AM_V_RGX2FST)printf "\
-		[ @\"words.$*.hfst\"    \
+		[ @\".generated/words.$*.hfst\"    \
 		| \
 		  [ \
 		      $(initial_letter_fst_include) \
-		      @\"editdist.all.$*.hfst\"  \
+		      @\".generated/editdist.all.$*.hfst\"  \
 		      $(final_strings_fst_include) \
 		  ] \
 		];" \
@@ -388,25 +387,24 @@ errmodel.%.hfst: words.%.hfst \
 ####### Alternate error model: #######
 # Alternatively, the error model can be constructed as a long list of regular
 # expressions, semicolon separated:
-errmodel.%.hfst: errmodel.%.regex easteregg.%.hfst
+.generated/errmodel.%.hfst: errmodel.%.regex .generated/asteregg.%.hfst
 	$(AM_V_GEN)$(HFST_REGEXP2FST) $(HFSTFLAGS) -S -i $< \
-		| $(HFST_DISJUNCT) - easteregg.$*.hfst \
+		| $(HFST_DISJUNCT) - .generated/easteregg.$*.hfst \
 		| $(HFST_PUSH_WEIGHTS) --push=initial  \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw \
 		-o $@
 
 # ... or as an xfscript file:
-errmodel.%.hfst: errmodel.%.xfscript easteregg.%.hfst
+.generated/errmodel.%.hfst: errmodel.%.xfscript .generated/easteregg.%.hfst
 	$(AM_V_GEN)$(HFST_REGEXP2FST) $(HFSTFLAGS) -S -i $< \
-		| $(HFST_DISJUNCT) - easteregg.$*.hfst \
+		| $(HFST_DISJUNCT) - .generated/easteregg.$*.hfst \
 		| $(HFST_PUSH_WEIGHTS) --push=initial  \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw \
 		-o $@
 
 ####### Speller acceptor: #######
 # Build the automaton used for the speller
-$(GT_SPELLER_ACCEPTOR): \
-acceptor.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst \
+.generated/acceptor.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst \
 				 .generated/easteregg.%.desktop.hfst
 	$(AM_V_PROJECT)$(HFST_COMPOSE) -1 filters/remove-error-strings.hfst -2 $< -F \
 		| $(HFST_PROJECT) $(HFST_FLAGS) \
@@ -427,7 +425,7 @@ $(GT_SPELLING_HFST): index.xml \
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
 	$(AM_V_at)cp index.xml build/$@/index.xml
-	$(AM_V_at)cp $(GT_SPELLER_ACCEPTOR) build/$@/$(GT_SPELLER_ACCEPTOR)
+	$(AM_V_at)cp $(GT_SPELLER_ACCEPTOR) build/$@/
 	$(AM_V_at)cp $(GT_ERRMODELS) build/$@/$(GT_ERRMODELS)
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3

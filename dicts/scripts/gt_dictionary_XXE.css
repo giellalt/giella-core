@@ -1,0 +1,67 @@
+@charset "utf-8";
+@import "gt_dictionary_XXE_shared.css";
+
+r, rootdict {
+    background-color: #fff;
+}
+
+/* tg styling: */
+tg + tg:before {
+    content: "; ";
+}
+tg {
+    display: inline;
+}
+
+re {
+    display: inline;
+}
+
+/* t styling: */
+syn + syn:before,
+t  +  t:before,
+te +  t:before,
+tf +  t:before,
+t  + tf:before,
+te + tf:before,
+tf + tf:before {
+    content: ", ";
+}
+t, tf, te {
+    display: inline;
+}
+l + t {
+    margin-left: +.35em;
+}
+
+/* xg, x, xt styling: */
+te + xg:before, tf + xg:before {
+    margin-left: 0.5ex;
+    content: " ";
+}
+
+xg + xg:before {
+    display: inline;
+    content: "; ";
+}
+
+xg x {
+    font-style: italic;
+}
+
+/* syng, syn styling: */
+syng {
+    display: inline;
+}
+
+syn {
+    display: inline;
+}
+
+
+/* Her kjem tillegga for sme-oahpa: */
+
+tr + tr:before {
+    content: "; ";
+}
+

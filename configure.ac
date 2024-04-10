@@ -14,7 +14,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [1.0.0], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
+AC_INIT([giella-core], [0.23.0], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
@@ -59,6 +59,8 @@ AS_IF([test x$UCONV = xfalse],
        on macbrew: brew install icu4c (and follow instructions:
                                        i.e. set your PATH if necessary)
        ])])
+AC_PATH_PROG([PRECOMMIT], [pre-commit], [false])
+
 
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \
@@ -77,4 +79,8 @@ cat<<EOF
 
 Running make here will compile all necessary scripts and auxiliary files.
 EOF
-AC_MSG_WARN([January 2024: this version involves whole move of src/fst to src/fst/morphology])
+AS_IF([test x$PRECOMMIT = xfalse], 
+      [AC_MSG_WARN([we recommend installing pre-commit for automatic checks and fixes
+
+       on mac: brew install pre-commit
+       others: python3 -m pip install pre-commit])])

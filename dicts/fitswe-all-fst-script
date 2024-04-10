@@ -1,0 +1,4 @@
+read lexc ../../dict-fit-swe/bin/fitswe-all.lexc  
+invert net  
+save stack ../../dict-fit-swe/bin/fitswe-all.fst 
+quit 

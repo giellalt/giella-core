@@ -1,0 +1,362 @@
+@charset "utf-8";
+@namespace xml url('http://www.w3.org/XML/1998/namespace');
+
+r, rootdict, lexicon {
+    display: block;
+    margin: 1ex;
+}
+
+lics {
+    display: block;
+}
+
+lics:before {
+    content: "Copyright Notes";
+    display: block;
+    font-weight: bold;
+    margin-bottom: 21px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 21px;
+}
+
+lic {
+    display: block;
+    margin: 18px;
+}
+
+ref:before {
+    display: inline;
+    white-space: pre; /* required to save \A in the next rule*/
+    content: 'Please refer to this source code with the following attribution text:\A"';
+   	font-weight: bold;
+   	font-size: smaller;
+}
+ref {
+    display: block;
+    margin: 18px;
+}
+ref:after {
+    display: inline;
+    content: '"';
+}
+
+i {
+    display: inline;
+    font-style: italic;
+}
+
+sourcenote {
+    display: block;
+    font-weight: bold;
+    margin: 18px;
+    padding-bottom: 18px;
+}
+
+a {
+    display: inline;
+}
+
+/* e styling: */
+e, entry {
+    display: block;
+    margin-bottom: 0.3ex;
+    counter-reset: meaninggroups;
+    padding: 0.3ex;
+    border: 1px ridge #eee;
+}
+e:after, entry:after {
+    display: block ;
+    color: gray ;
+    margin-left: 2ex ;
+}
+e[usage]:after {
+    content: "Usage: " attr(usage) ;
+}
+
+/*
+e[src]:after {
+    content: "Source: " attr(src) ;
+}
+e[usage][src]:after {
+    content: "Usage: " attr(usage) ", source: " attr(src) ;
+}
+*/
+
+/* l styling: */
+l, lemma {
+    font-weight: bold;
+}
+l:after, lemma:after {
+    display: inline;
+    margin-left: 0.5ex;
+    content: attr(pos);
+    font-style: italic;
+    font-size: small;
+    vertical-align: super;
+    color: gray;
+}
+l[pos][type]:after {
+    content: attr(pos) ', ' attr(type);
+}
+l[pos][type][nr]:after {
+    content: attr(pos) ', ' attr(type) ', ' attr(nr);
+}
+l[pos][nr]:after {
+    content: attr(pos) ', ' attr(nr);
+}
+l[pos][illpl]:after {
+    content: attr(pos) ', illpl=' attr(illpl);
+}
+/*
+l[pos][context]:after {
+    content: attr(pos) ', ' attr(context);
+}
+*/
+/* lc styling: */
+
+lc {
+    display: none;
+    /* font-style: italic;
+    font-size: small; */
+}
+
+lc + lc:before {
+    display: none;
+    /* content: ", "; */
+}
+
+/* lsub styling: */
+lsub {
+    display: none;
+    /* font-style: normal; */
+}
+
+lsub + lsub:before {
+    display: none;
+    /* content: ", "; */
+}
+
+
+stem {
+    font-style: italic;
+    font-size: small;
+}
+
+stem + stem:before {
+    content: ", ";
+}
+*/
+lg > analysis:before {
+    content: " Analysis: " ;
+    font-size: small;
+    color: gray;
+}
+lg > analysis {
+    display: inline;
+}
+/*
+lemma_ref:before {
+    content: "▸ " ;
+}
+*/
+lemma_ref {
+    display: none;
+    /* display: inline; */
+}
+lemma_ref:after {
+    display: none;
+/*
+    display: inline;
+    content: " (" attr(lemmaID) ") ";
+    font-size: small;
+    color: gray;
+*/
+}
+/* mini paradigm styling: */
+mini_paradigm:before {
+    display: block ;
+    content: " Miniparadigm:" ;
+    font-size: small;
+    color: gray;
+}
+mini_paradigm {
+    display: block ;
+    margin-left: 5ex;
+}
+mini_paradigm > analysis:before {
+    display: inline ;
+    content: attr(ms) ' ' ;
+    color: gray;
+}
+mini_paradigm > analysis {
+    display: list-item ;
+}
+wordform {
+    display: inline ;
+}
+wordform + wordform:before {
+    display: inline ;
+    content: ', ' ;
+}
+
+/* mg styling: */
+e > mg:before {
+	display: inline;
+	counter-increment: meaninggroups;
+    content: counter(meaninggroups, decimal) ". ";
+}
+e > mg {
+    display: block;
+    margin-bottom: 0.2ex;
+    margin-left: 1.33ex;
+}
+
+re:before, te:before {
+	content: " (";
+    display: inline;
+}
+re {
+    color: gray;
+	font-style: italic;
+	font-size: small;
+}
+re:after, te:after {
+    content: ") ";
+    display: inline;
+}
+
+t:after {
+    display: inline;
+    font-style: italic;
+    color: gray;
+    font-size: small;
+    vertical-align: super;
+    margin-left: 0.5ex;
+}
+t[pos]:after {
+    content: attr(pos);
+}
+t[pos][type]:after {
+    content: attr(pos) ", " attr(type) ;
+}
+t[pos][decl]:after {
+    content: attr(pos) " - " attr(decl) ;
+}
+t[pos][decl][type]:after {
+    content: attr(pos) " - " attr(decl) ", " attr(type) ;
+}
+/*
+t:lang(nob):after {
+    content: " norsk";
+}
+t:lang(swe):after {
+    content: " svensk";
+}
+t:lang(sme):after {
+    content: " nordsamisk";
+}
+t:lang(fin):after {
+    content: " finsk";
+}
+*/
+
+/*
+l_ref:before {
+    display: inline;
+    color: red;
+    content: "[⇒ ";
+}
+*/
+
+l_ref {
+    display: none;
+/*
+    color: red;
+    font-style: italic;
+*/
+}
+
+/*
+l_ref:after {
+    display: inline;
+    color: red;
+    content: '] ';
+}
+*/
+
+
+xt:before {
+    display: inline;
+    color: gray;
+    content: "⇒ ";
+}
+
+syng:before {
+    display: inline;
+    color: gray;
+    content: " Synonyms ▶ ";
+}
+
+
+/* Her kjem tillegga for sme-oahpa: */
+
+translations {
+    display: block;
+    margin-left: 1.33ex;
+}
+
+
+tr:after {
+    display: inline;
+    content: attr(xml|lang);
+    font-style: italic;
+    color: gray;
+    vertical-align: super;
+}
+
+val {
+	font-style: italic;
+}
+
+valency:before {
+	content: " Val:";
+    font-size: smaller;
+	font-weight: bold;
+	}
+	
+val[class]:after {
+    display: inline;
+    content: " " attr(class) ', ' ;
+}
+
+semantics {
+    font-style: italic;
+}
+
+semantics:before {
+	content: " Sem:";
+	font-weight: bold;
+    font-size: smaller;
+	}
+
+sem[class]:after {
+	display: inline;
+	content: " " attr(class) ', ' ;
+}	
+
+stem
+ 	{
+	font-style: italic;
+}
+
+stem:before {
+	content: " Stem:";
+    font-size: smaller;
+	font-weight: bold;
+	}
+	
+stem[class]:after {
+    display: inline;
+    content: " " attr(class) ', ' ;
+}

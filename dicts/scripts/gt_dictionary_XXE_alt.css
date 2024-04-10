@@ -1,0 +1,171 @@
+@charset "utf-8";
+@import "gt_dictionary_XXE_shared.css";
+
+/* This is the css file for the dictionary tree view */
+
+r, rootdict, lexicon {
+    background-color: #bcd;
+}
+
+/* mg styling: */
+e > mg {
+    counter-reset: translationgroup;
+}
+
+apps:before {
+    display: block;
+    content: "Apps: ";
+}
+apps {
+    display: block;
+    margin-left: 3ex;
+}
+
+app {
+    display: inline;
+}
+app + app:before {
+    content: ", ";
+}
+app:before {
+    content: attr(name) ": ";
+}
+/* source styling: */
+
+sources:before {
+    display: inline;
+}
+sources {
+    display: block;
+}
+book {
+    display: inline;
+    content: "Books: ";
+
+}
+book + book:before {
+    content: ", ";
+}
+book:after {
+    content: attr(name);
+}
+
+book + frequency:before {
+    display: inline;
+    content: " Frequency: ";
+}
+
+frequency:before {
+    display: inline;
+    content: "Frequency: ";
+}
+frequency {
+    display: inline;
+}
+frequency:after {
+    content: attr(class);
+}
+
+geography:before {
+    display: inline;
+    content: "; Geography: ";
+}
+geography {
+    display: inline;
+}
+geography + geography:before {
+    content: ", ";
+}
+geography:after {
+    content: attr(class);
+}
+
+
+/* tg styling: */
+tg:before {
+	display: inline;
+	counter-increment: translationgroup;
+    content: counter(translationgroup, lower-alpha) ". ";
+}
+tg {
+    display: block;
+    margin-left: 1.33ex;
+}
+
+semantics:before {
+    display: inline;
+    content: "Sem ➩ ";
+}
+semantics {
+    display: block;
+}
+sem {
+    display: inline;
+}
+sem + sem:before {
+    content: ", ";
+}
+sem:after {
+    content: attr(class);
+}
+
+
+re {
+    display: block;
+    margin-left: 2ex;
+}
+
+/* t styling: */
+t, tf {
+    display: list-item;
+    margin-left: 2.33ex;
+}
+tf:after {
+    display: inline;
+    font-style: italic;
+    color: gray;
+    font-size: small;
+    vertical-align: super;
+    margin-left: 0.5ex;
+    content: "Phrase" ;
+}
+te {
+    display: block;
+    margin-left: 2.33ex;
+    color: #2f4f4f;
+}
+
+/* xg, x, xt styling: */
+xg {
+    display: block;
+    margin-left: 2.33ex;
+}
+
+xg x {
+    display: inline;
+    font-style: italic;
+}
+
+xt {
+    display: block;
+    margin-left: 1.33ex;
+}
+
+/* syng, syn styling: */
+syng {
+    display: block;
+    margin-left: 3ex;
+}
+
+syn {
+    display: list-item;
+    margin-left: 3ex;
+}
+
+
+/* Her kjem tillegga for sme-oahpa: */
+
+tr {
+    display: list-item;
+    margin-left: 2.33ex;
+}

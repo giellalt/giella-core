@@ -18,7 +18,7 @@
 # Use this as the source lexical fst for unit weighting, it contains correct
 # surface forms except for the word boundary #, which is still present, and
 # used in the weighting:
-UW_SPELLER_SRC=generator-desktopspeller-gt-norm-base.hfst
+UW_SPELLER_SRC=.generated/generator-desktopspeller-gt-norm-base.hfst
 
 ## Conditional string variables;
 # Set file name to the empty string or initial_letters_all depending on variable:
@@ -47,9 +47,9 @@ endif # WANT_SPELLERS
 ####    the fst):
 .generated/generator-desktopspeller-gt-norm-freq_weighted.hfst: \
 				 .generated/generator-desktopspeller-gt-norm-base.hfst \
-				 $(SURFWEIGHTS)
+				 .generated/$(SURFWEIGHTS)
 	$(AM_V_COMPOSE)$(HFST_COMPOSE) $(HFST_FLAGS) -F \
-			$< $(SURFWEIGHTS) \
+			$< .generated/$(SURFWEIGHTS) \
 		-o $@
 
 #### 3. Add a default unit weight to anything not covered by the corpus
@@ -99,11 +99,11 @@ endif # WANT_SPELLERS
 	quit\n" | $(HFST_XFST) -p $(MORE_VERBOSITY)
 
 # Copy the tmp transducer to the final one. This allows local overrides.
-.generated/%.hfst: .generated/%.tmp.hfst
+%.hfst: .generated/%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
 # Invert the final fst, to enable symmetric yaml tests and easy manual testing:
-.generated/analyser-desktopspeller-gt-norm.hfst: .generated/generator-desktopspeller-gt-norm.hfst
+analyser-desktopspeller-gt-norm.hfst: generator-desktopspeller-gt-norm.hfst
 	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< \
 	| $(HFST_PRUNE_ALPHABET) $(MORE_VERBOSITY) \
 	| $(HFST_REMOVE_EPSILONS) $(MORE_VERBOSITY) -o $@

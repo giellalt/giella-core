@@ -23,6 +23,8 @@ def giella2unimorph(tags):
                 unimorphtags += ['N']
         elif giella == 'Det':
             unimorphtags += ['DET']
+        elif giella == 'Part':
+            unimorphtags += ['PART']
         elif giella == 'Pcle':
             unimorphtags += ['PART']
         elif giella == 'Adv':
@@ -39,6 +41,8 @@ def giella2unimorph(tags):
             unimorphtags += ['ADJ']
         elif giella == 'Adj':
             unimorphtags += ['ADJ']
+        elif giella == 'Intj':
+            unimorphtags += ['INTJ']
         elif giella == 'Interj':
             unimorphtags += ['INTJ']
         elif giella == 'CC':
@@ -141,6 +145,8 @@ def giella2unimorph(tags):
             unimorphtags += ['IND']  # XXX: can sometimes be indef?
         elif giella == 'Prs':
             unimorphtags += ['PRS']
+        elif giella == 'Past':
+            unimorphtags += ['PST']
         elif giella == 'Prt':
             unimorphtags += ['PST']
         elif giella == 'Prt1':
@@ -330,6 +336,8 @@ def giella2unimorph(tags):
             unimorphtags += ['OBGLIG']
         elif giella == 'Interr':
             unimorphtags += ['INT']  # XXX: ABE?
+        elif giella in ['Der1', 'Der2']:
+            continue
         elif giella == 'Der/Comp':
             unimorphtags += ['CMPR']
         elif giella == 'Comp':
@@ -371,7 +379,11 @@ def giella2unimorph(tags):
             continue
         elif giella == 'Largo':
             continue
+        elif giella == 'ABBR-':
+            continue
         elif giella == 'ABBR':
+            continue
+        elif giella == 'ACRO':
             continue
         elif giella == 'ACR':
             continue
@@ -395,13 +407,17 @@ def giella2unimorph(tags):
             continue
         elif giella == 'Ord':
             continue
-        elif giella in ['v1', 'v2', 'v3', 'v4', 'v5']:
+        elif giella in ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']:
             continue
         elif giella in ['G3', 'G7']:
             continue
         elif giella.startswith('Sem'):
             continue
+        elif giella == 'Dummytag':
+            continue
         elif giella == 'S':
+            continue
+        elif giella == 'Quote':
             continue
         elif giella == 'CLB':
             continue
@@ -412,10 +428,16 @@ def giella2unimorph(tags):
             continue  # ?
         elif giella == 'Use/Rus':
             unimorphtags += ['DIAL']
+        elif giella == 'Use/Circ':
+            unimorphtags += ['XXXCIRC']
         elif giella == 'Use/Dial':
             unimorphtags += ['DIAL']
+        elif giella.startswith('Use/'):
+            unimorphtags += ['XXX' + giella[4:]]
         elif giella.startswith('Usage/'):
             unimorphtags += ['XXX' + giella[6:]]
+        elif giella == 'Guess':
+            unimorphtags += ['XXX']
         elif giella == '??':
             unimorphtags += ['XXX']
         elif giella == 'TODO':
@@ -438,10 +460,14 @@ def giella2unimorph(tags):
             unimorphtags += ['TR']
         elif giella == 'Impers':
             unimorphtags += ['IMPRS']
+        elif giella == 'Reflex':
+            unimorphtags += ['REFL']
         elif giella == 'Refl':
             unimorphtags += ['REFL']
         elif giella == 'Recipr':
             unimorphtags += ['RECP']
+        elif giella == 'Distr':
+            unimorphtags += ['REM']
         elif giella == 'Dist':
             unimorphtags += ['REM']
         elif giella == 'Prox':
@@ -451,6 +477,8 @@ def giella2unimorph(tags):
             continue
         elif giella == 'AssocColl':
             # myv
+            continue
+        elif giella in ['0,0', '0,1']:
             continue
         elif giella in ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9',
                         'F00', 'F01', 'F02', 'F03', 'F04', 'F05', 'F06', 'F07',
@@ -470,7 +498,7 @@ def giella2unimorph(tags):
                         'B', 'C', 'E', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
                         'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'X',
                         'Y', 'Z',
-                        'Š', 'Ž', 'Ä', 'Õ', 'Ö', 'Ü']:
+                        'Š', 'Ž', 'Ä', 'Õ', 'Ö', 'Ü', '0']:
             # est
             continue
         elif giella == 'Adn':
@@ -497,11 +525,15 @@ def giella2unimorph(tags):
         elif giella == 'Foc':
             unimorphtags += ['LGSPEC1/UnnamedFoc']
         elif giella.startswith('Foc/'):
+            unimorphtags += ['LGSPEC1/' + giella[4:]]
+        elif giella == 'Clit':
+            unimorphtags += ['LGSPEC1/UnnamedClit']
+        elif giella.startswith('Clit/'):
             unimorphtags += ['LGSPEC1/' + giella[5:]]
         elif giella == 'Clt':
             unimorphtags += ['LGSPEC2']
         elif giella.startswith('Clt/'):
-            unimorphtags += ['LGSPEC2/' + giella[5:]]
+            unimorphtags += ['LGSPEC2/' + giella[4:]]
         elif giella.startswith('OLang/'):
             continue
         elif giella.startswith('Gram/'):
@@ -526,13 +558,19 @@ def giella2unimorph(tags):
         elif giella.startswith('AErr/'):
             print('SOmething broken here½!', tags)
             unimorphtags += ['TYPO']
+        elif '<cnjcoo>' in giella:
+            print('SOmething broken here½!', tags)
+        elif '<actv>' in giella:
+            print('SOmething broken here½!', tags)
         elif '<gen>' in giella:
+            print('SOmething broken here½!', tags)
+        elif 'N224-1-9' in giella:
             print('SOmething broken here½!', tags)
         elif '#222-5-19' in giella:
             print('SOmething broken here½!', tags)
         elif '/-' in giella:
             print('SOmething broken here½!', tags)
-        elif giella in ['a', 'b', 'i', 't', 'd', 's', 'n', 'ä']:
+        elif giella in ['a', 'b', 'i', 't', 'd', 's', 'n', 'ä', 'ö']:
             print('SOmething broken here½!', tags)
         elif giella in ['Ne', 'Ni', 'Nte', 'Ntee', 'Nt', 'Nti', 'Na', 'No',
                         'N-', 'c']:
@@ -571,6 +609,9 @@ def main():
                    help='Do not try to recase input and output when matching')
     a.add_argument('-t', '--threshold', metavar='THOLD', default=99,
                    help='if coverage is less than THOLD exit with error')
+    a.add_argument('-I', '--include-specs', metavar='INCSPEC',
+                   help='include INCSPEC in generated data',
+                   action='append', choices=['lgspec', 'typo', 'xxx', 'dial'])
     options = a.parse_args()
     if not options.infile:
         options.infile = stdin
@@ -585,6 +626,16 @@ def main():
     skip_typo = True
     skip_xxx = True
     skip_dial = True
+    if options.include_specs:
+        for inclusive in options.include_specs:
+            if inclusive == 'lgspec':
+                skip_lgspec = False
+            elif inclusive == 'typo':
+                skip_typo = False
+            elif inclusive == 'xxx':
+                skip_xxx = False
+            elif inclusive == 'dial':
+                skip_dial = False
     for line in options.infile:
         fields = line.strip().split(':')
         if line.strip() == '':

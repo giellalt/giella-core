@@ -36,20 +36,20 @@ corpus_size_limit_command=$(shell \
 	$(AM_V_GEN)$(HFST_TXT2FST) $(HFST_FLAGS) -f openfst-tropical $< -o $@
 
 # sort the clean corpus:
-%.sort.txt: weights/%.clean.txt
+.generated/%.sort.txt: weights/%.clean.txt
 	$(AM_V_GEN)LC_ALL=C.utf8 sort < $< > $@
 
 # token count:
-%.wordcount.txt: %.sort.txt
+.generated/%.wordcount.txt: .generated/%.sort.txt
 	$(AM_V_GEN)wc -l < $< > $@
 
 # Unique the sorted, clean corpus:
-%.uniq.txt: %.sort.txt
+.generated/%.uniq.txt: .generated/%.sort.txt
 	$(AM_V_GEN)LC_ALL=C.utf8 uniq -c < $< |\
 		LC_ALL=C.utf8 sort -nr $(corpus_size_limit_command) > $@
 
 # type count:
-%.typecount.txt: %.uniq.txt
+.generated/%.typecount.txt: .generated/%.uniq.txt
 	$(AM_V_GEN)wc -l < $< > $@
 
 # calculate unit weight, smoothed using ALPHA:
@@ -60,21 +60,21 @@ corpus_size_limit_command=$(shell \
 #		| $(BC) -l > $@
 
 # Alternative unit weight: highest tropical weight + ALPHA:
-%.unitweight.txt: %.tropical.txt
+.generated/%.unitweight.txt: .generated/%.tropical.txt
 	$(AM_V_GEN)echo "$$(cut -f2 < $^ | sort -nru | head -n1) + $(ALPHA)" \
 		| $(BC) -l > $@
 
 # add tropical weights to the corpus:
-%.tropical.txt: %.uniq.txt %.wordcount.txt %.typecount.txt
+.generated/%.tropical.txt: .generated/%.uniq.txt .generated/%.wordcount.txt .generated/%.typecount.txt
 	$(AM_V_GEN)cat $< |\
-		$(GAWK) -v CS="$$(cat $*.wordcount.txt)" \
-				-v DS="$$(cat $*.typecount.txt)" \
+		$(GAWK) -v CS="$$(cat .generated/$*.wordcount.txt)" \
+				-v DS="$$(cat .generated/$*.typecount.txt)" \
 				-v ALPHA=$(ALPHA)                \
 				-f $(GTCORE)/scripts/uniq_count2tropical_weight.awk \
 				> $@
 
 # build an fst of surface forms with tropical weights for each word form:
-.generated/%.surfs.hfst: %.tropical.txt $(GENDIR)
+.generated/%.surfs.hfst: .generated/%.tropical.txt
 	$(AM_V_STR2FST)cat $< |\
 		$(HFST_STRINGS2FST) -j $(HFST_FLAGS) -f openfst-tropical -o $@
 
@@ -104,23 +104,23 @@ corpus_size_limit_command=$(shell \
 # Add the unit weight to each unit in compounds, both dynamic and lexical:
 #unitweighted.hfst: unitweighted_limited.hfst
 .generated/unitweighted.hfst: $(UW_SPELLER_SRC) \
-                   $(UNITWEIGHT) $(GENDIR)
+                   .generated/$(UNITWEIGHT)
 	$(AM_V_REWEIGHT)$(HFST_FST2FST) --format=openfst-tropical -i $< \
 		| $(HFST_REWEIGHT) $(HFST_FLAGS) \
-		-e -a $$(cat $(UNITWEIGHT)) \
+		-e -a $$(cat .generated/$(UNITWEIGHT)) \
 		-o $@
 
 # Keep these intermediate targets when building using --debug:
-.SECONDARY: spellercorpus.sort.txt \
-            spellercorpus.uniq.txt \
-            spellercorpus.surfs.hfst \
-            spellercorpus.tropical.txt \
-            spellercorpus.typecount.txt \
-            pellercorpus.wordcount.txt \
-            word-boundary.hfst \
-            generator-*-gt-norm-freq_weighted.hfst \
-            generator-*-gt-norm-unit_weighted.hfst \
-            generator-*-gt-norm-norm_weighted.hfst \
-            generator-*-gt-norm-tag_weighted.hfst  \
-            $(SURFWEIGHTS) \
-            $(UNITWEIGHT)
+.SECONDARY: .generated/spellercorpus.sort.txt \
+            .generated/spellercorpus.uniq.txt \
+            .generated/spellercorpus.surfs.hfst \
+            .generated/spellercorpus.tropical.txt \
+            .generated/spellercorpus.typecount.txt \
+            .generated/pellercorpus.wordcount.txt \
+            .generated/word-boundary.hfst \
+            .generated/generator-*-gt-norm-freq_weighted.hfst \
+            .generated/generator-*-gt-norm-unit_weighted.hfst \
+            .generated/generator-*-gt-norm-norm_weighted.hfst \
+            .generated/generator-*-gt-norm-tag_weighted.hfst  \
+            .generated/$(SURFWEIGHTS) \
+            .generated/$(UNITWEIGHT)

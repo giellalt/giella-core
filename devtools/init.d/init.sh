@@ -49,7 +49,7 @@ fi
 . "$GIELLA_CORE"/devtools/init.d/lookup-init.sh
 
 # Alias for svn update
-alias svnup="svn up \$GTLANGS/* \$GTBIG \$GTFREE \$GTPRIV \$GTHOME/art"
+alias svnup="svn up \$GTBIG \$GTFREE \$GTPRIV \$GTHOME/ \$GTHOME/art"
 
 # Sorting Cyrillic lists
 

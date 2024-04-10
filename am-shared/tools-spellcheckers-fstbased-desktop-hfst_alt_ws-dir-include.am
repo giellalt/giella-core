@@ -21,11 +21,11 @@ if CAN_HFST
 if WANT_SPELLERS
 
 GT_ALT_WS_ERRMODELS=$(shell for ld in $(ALT_WSS); do\
-    echo "errmodel.$$ld.hfst" ; \
+    echo ".generated/errmodel.$$ld.hfst" ; \
 done)
 
 GT_ALT_WS_SPELLER_ACCEPTORS=$(shell for ld in $(ALT_WSS); do\
-    echo "acceptor.$$ld.hfst" ; \
+    echo ".generated/acceptor.$$ld.hfst" ; \
 done)
 
 ALT_WS_ZHFST_FILES=$(shell for ld in $(ALT_WSS); do\
@@ -41,8 +41,8 @@ endif # HAVE_ALT_WSS
 
 # Build rule for acceptors for alternate writing systems:
 $(GT_ALT_WS_SPELLER_ACCEPTORS): \
-	acceptor.%.hfst: \
-		$(GT_SPELLER_HFST) easteregg.%.desktop.hfst \
+	.generated/acceptor.%.hfst: \
+		$(GT_SPELLER_HFST) .generated/easteregg.%.desktop.hfst \
 		$(top_builddir)/src/fst/orthography/$(DEFAULT_WS)-to-%.compose.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \
@@ -57,8 +57,8 @@ $(GT_ALT_WS_SPELLER_ACCEPTORS): \
 $(ALT_WS_ZHFST_FILES): \
 	$(GTLANG2)-%.zhfst: \
 		index.%.xml \
-		acceptor.%.hfst \
-		errmodel.%.hfst
+		.generated/acceptor.%.hfst \
+		.generated/errmodel.%.hfst
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*

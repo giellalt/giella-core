@@ -290,7 +290,7 @@ lexicon.hfst: .generated/lexicon.hfst
 	$(AM_CP)cp -v $< $@
 
 clean-local:
-	-rm -f lexicon.hfst .generated/lexicon.hfst
+	-rm -f lexicon.hfst .generated/lexicon.hfst $(GIELLA_LOCAL_TARGETS)
 
 ####### Other targets: ###########
 maintainer-clean-local:

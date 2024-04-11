@@ -73,7 +73,7 @@ noinst_DATA=$(GT_COMMON_SPELLER_HFST)
 .generated/%.hfst: .generated/%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
-# Invert the final fst, to enable symmetric yaml tests and easy manual testing:
+# Invert the final fst's, to enable symmetric yaml tests and easy manual testing:
 analyser-%.hfst: generator-%.hfst
 	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< -o $@
 

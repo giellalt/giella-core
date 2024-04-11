@@ -74,7 +74,7 @@ noinst_DATA=$(GT_COMMON_SPELLER_HFST)
 	$(AM_V_CP)cp -f $< $@
 
 # Invert the final fst, to enable symmetric yaml tests and easy manual testing:
-.generated/analyser-%.hfst: .generated/generator-%.hfst
+analyser-%.hfst: generator-%.hfst
 	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< -o $@
 
 ####### Other targets: ###########

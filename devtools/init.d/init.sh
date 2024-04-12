@@ -169,6 +169,3 @@ elif [ "$HOSTN" = "gtsvn.uit.no" ] ; then
     export GTBOUND=/home/apache_corpus/boundcorpus
 fi
 
-# To get libdivvun from macOS nightly
-PYTHONPATH=/usr/local/lib/python3.11/site-packages
-export PYTHONPATH

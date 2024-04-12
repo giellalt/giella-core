@@ -7,6 +7,6 @@
 if WANT_GRAMCHECK
 
 # Default variable for all languages
-TESTS_ENVIRONMENT = "$(GIELLA_CORE)/scripts/gramcheck-test.py" -q -s ../$(GTLANG2).zcheck 2>/dev/null
+TESTS_ENVIRONMENT = gtgramtool test -s ../$(GTLANG2).zcheck yaml -q 2>/dev/null
 
 endif # WANT_GRAMCHECK

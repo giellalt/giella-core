@@ -498,3 +498,114 @@ define alt_orth_morphers
 		 quit\n" | $$(XFST_TOOL)
 endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_morphers,$(alt_orth))))
+
+define alt_orth_tts_analysers
+.generated/analyser-tts-gt-input.$(1).tmp.%: .generated/analyser-tts-gt-input.%            \
+					orthography/spellrelax.$(1).compose.%      \
+					orthography/$(DEFAULT_ORTH)-to-$(1).compose.%
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+			@\"$$<\"                                           \
+			.o. @\"orthography/$(DEFAULT_ORTH)-to-$(1).compose.$$*\" \
+			.o. @\"orthography/spellrelax.$(1).compose.$$*\"       \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+
+.generated/analyser-tts-gt-input.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
+					filters/remove-area-tags.%                 \
+					filters/remove-dialect-tags.%              \
+					filters/remove-number-string-tags.%        \
+					filters/remove-semantic-tags.%             \
+					filters/remove-hyphenation-marks.%         \
+					filters/remove-infl_deriv-borders.%        \
+					filters/remove-word-boundary.%             \
+					filters/remove-orthography-tags.%          \
+					filters/remove-Orth_IPA-strings.%          \
+					filters/remove-orig_lang-tags.%            \
+					filters/remove-Use_minusGC-tags.%          \
+					filters/remove-Use_GC-strings.%            \
+					filters/remove-Use_minus_PMatch-tags.%     \
+					filters/remove-Use_PMatch-strings.%        \
+					filters/remove-mwe-tags.%                  \
+					$(GLT_NFCNFD_FILTER)                      \
+					orthography/spellrelax.$(1).compose.%      \
+					orthography/raw-to-$(1).compose.%
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+				@\"filters/remove-area-tags.$$*\"                  \
+			.o. @\"filters/remove-dialect-tags.$$*\"               \
+			.o. @\"filters/remove-number-string-tags.$$*\"         \
+			.o. @\"filters/remove-semantic-tags.$$*\"              \
+			.o. @\"filters/remove-orig_lang-tags.$$*\"             \
+			.o. @\"filters/remove-orthography-tags.$$*\"           \
+			.o. @\"filters/remove-Orth_IPA-strings.$$*\"           \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"      \
+			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
+			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
+			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-mwe-tags.$$*\"                   \
+			.o. @\"$$<\"                                           \
+			    $(GLT_NFCNFD_COMPOSE_DEF) \
+			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
+			.o. @\"orthography/raw-to-$(1).compose.$$*\"           \
+			.o. @\"filters/remove-infl_deriv-borders.$$*\"         \
+			.o. @\"filters/remove-word-boundary.$$*\"              \
+			.o. @\"orthography/spellrelax.$(1).compose.$$*\"       \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+
+.generated/analyser-tts-gt-output.$(1).tmp.%: .generated/analyser-tts-gt-output.%            \
+					orthography/spellrelax.$(1).compose.%      \
+					orthography/$(DEFAULT_ORTH)-to-$(1).compose.%
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+			@\"$$<\"                                           \
+			.o. @\"orthography/$(DEFAULT_ORTH)-to-$(1).compose.$$*\" \
+			.o. @\"orthography/spellrelax.$(1).compose.$$*\"       \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+
+.generated/analyser-tts-gt-output.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
+					filters/remove-area-tags.%                 \
+					filters/remove-dialect-tags.%              \
+					filters/remove-number-string-tags.%        \
+					filters/remove-semantic-tags.%             \
+					filters/remove-hyphenation-marks.%         \
+					filters/remove-infl_deriv-borders.%        \
+					filters/remove-word-boundary.%             \
+					filters/remove-orthography-tags.%          \
+					filters/remove-Orth_IPA-strings.%          \
+					filters/remove-orig_lang-tags.%            \
+					filters/remove-Use_minusGC-tags.%          \
+					filters/remove-Use_GC-strings.%            \
+					filters/remove-Use_minus_PMatch-tags.%     \
+					filters/remove-Use_PMatch-strings.%        \
+					filters/remove-mwe-tags.%                  \
+					$(GLT_NFCNFD_FILTER)                      \
+					orthography/spellrelax.$(1).compose.%      \
+					orthography/raw-to-$(1).compose.%
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+				@\"filters/remove-area-tags.$$*\"                  \
+			.o. @\"filters/remove-dialect-tags.$$*\"               \
+			.o. @\"filters/remove-number-string-tags.$$*\"         \
+			.o. @\"filters/remove-semantic-tags.$$*\"              \
+			.o. @\"filters/remove-orig_lang-tags.$$*\"             \
+			.o. @\"filters/remove-orthography-tags.$$*\"           \
+			.o. @\"filters/remove-Orth_IPA-strings.$$*\"           \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"      \
+			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
+			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
+			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-mwe-tags.$$*\"                   \
+			.o. @\"$$<\"                                           \
+			    $(GLT_NFCNFD_COMPOSE_DEF) \
+			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
+			.o. @\"orthography/raw-to-$(1).compose.$$*\"           \
+			.o. @\"filters/remove-infl_deriv-borders.$$*\"         \
+			.o. @\"filters/remove-word-boundary.$$*\"              \
+			.o. @\"orthography/spellrelax.$(1).compose.$$*\"       \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+endef
+$(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_tts_analysers,$(alt_orth))))

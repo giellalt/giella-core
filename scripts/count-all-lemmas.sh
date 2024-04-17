@@ -42,7 +42,7 @@ done
 if test "x${giella_core}" = "x" ; then
     # Find giella-core from self:
     SCRIPT=$(realpath "$0")
-    GIELLA_CORE=$(dirname $(dirname "$SCRIPT"))
+    GIELLA_CORE=$(dirname "$(dirname "$SCRIPT")")
 else
     GIELLA_CORE=${giella_core}
 fi
@@ -54,10 +54,17 @@ else
     homonyms="-H"
 fi
 
-lemmacounts=$(for f in $inputdir/src/fst/stems/*.lexc ; do 
-    $GIELLA_CORE/scripts/extract-lemmas.sh $homonyms $f | # extract all lemmas for each stem file
+lemmacount=0
+if compgen -G "$inputdir/src/fst/morphology/stems/*.lexc" > /dev/null; then
+    lemmacounts=$(for f in "$inputdir"/src/fst/morphology/stems/*.lexc ; do
+        "$GIELLA_CORE"/scripts/extract-lemmas.sh $homonyms "$f" | # extract all lemmas for each stem file
     wc -l; done) # ... and count them
-
-lemmacount=$(echo $lemmacounts | tr ' ' '+' | bc)
-
-echo $lemmacount
+    lemmacount=$(echo $lemmacounts | tr ' ' '+' | bc)
+elif compgen -G "$inputdir/src/fst/morphology/stems/*.lexd" > /dev/null; then
+    # approximate
+    lemmacount=$(cat "$inputdir"/src/fst/morphology/stems/*.lexd |\
+        grep -F -v LEXICON |\
+        grep -E -v "^[[:space:]]*\$" |
+        wc -l)
+fi
+echo "$lemmacount"

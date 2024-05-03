@@ -23,7 +23,7 @@
 
 GT_NFC2NFD=spellrelax-nfc2nfd.regex
 GT_NFD2NFC=spellrestrict-nfd2nfc.regex
-GT_GENERATED_REGEX_SRCS=$(GT_NFC2NFD) $(GT_NFC2NFD)
+GT_GENERATED_REGEX_SRCS=$(GT_NFC2NFD) $(GT_NFD2NFC)
 GT_ORTHOGRAPHIC_REGEX_SRCS+=$(GT_GENERATED_REGEX_SRCS)
 #! @var GT_ORTHOGRAPHIC_SRCS names of orthographic rule source files, should
 #! be one of:

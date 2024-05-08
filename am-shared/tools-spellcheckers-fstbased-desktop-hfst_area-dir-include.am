@@ -67,34 +67,3 @@ $(AREA_ZHFST_FILES): \
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/
-
-# Build rule for 5.0 oxt files for specific areas/countries:
-# The more specific pattern match first.
-$(GTLANG2)_%_LO-voikko-5.0.oxt: $(AREA_ZHFST_FILES)
-	$(AM_V_GEN)rm -f $@; \
-		if [ -d "$(OXT_ROOT_DIR)/$(LOVOIKKO_VERSION)" ]; then \
-			$(MKDIR_P) build/$(LOVOIKKO_VERSION)/ && \
-			cd build/$(LOVOIKKO_VERSION) && \
-			$(GET_LIBS_COMMAND) \
-					 $(OXT_ROOT_DIR)/$(LOVOIKKO_VERSION)/ $(TARGET_DIR)/ && \
-			cp ../../$(GTLANG2)_$*.zhfst voikko/3/ && \
-			$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ * ; \
-		else \
-			echo "  SKIP     $@: Not yet supported." ; \
-		fi
-
-# Build rule for 4.x oxt files for specific areas/countries:
-$(GTLANG2)_%.oxt: $(AREA_ZHFST_FILES)
-	$(AM_V_GEN)rm -f $@; \
-		area="$$(echo $* | cut -d'_' -f1)"; \
-		version="$$(echo $* | cut -d'_' -f2 | sed 's/LO-voikko-//')"; \
-		if [ -d "$(OXT_ROOT_DIR)/$$version" ]; then \
-			$(MKDIR_P) build/$$version/ && \
-			cd build/$$version && \
-			$(GET_LIBS_COMMAND) \
-					 $(OXT_ROOT_DIR)/$$version/ $(TARGET_DIR)/ && \
-			cp ../../$(GTLANG2)_$$area.zhfst 3/ && \
-			$(ZIP) -r $(VERBOSITY) $(ZIPFLAGS) ../../$@ * ; \
-		else \
-			echo "  SKIP     $@: Not yet supported." ; \
-		fi

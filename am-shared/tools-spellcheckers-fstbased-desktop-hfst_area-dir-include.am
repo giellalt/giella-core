@@ -41,7 +41,8 @@ endif # HAVE_AREAS
 
 # Build rule for acceptors for specific areas/countries:
 .generated/acceptor.%.hfst: \
-		$(GT_SPELLER_HFST) .generated/easteregg.%.desktop.hfst \
+		$(GT_SPELLER_HFST)  \
+		.generated/easteregg.%.desktop.hfst \
 		$(top_builddir)/src/fst/filters/remove-all_areas_but_%-strings.hfst
 	$(AM_V_GEN)cat $< \
 		| $(HFST_COMPOSE) $(HFST_FLAGS) -F \

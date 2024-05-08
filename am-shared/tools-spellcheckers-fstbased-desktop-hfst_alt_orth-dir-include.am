@@ -73,8 +73,8 @@ endif # HAVE_ALT_ORTHS
 $(ALT_ORTH_ZHFST_FILES): \
 	$(GTLANG2)-x-%.zhfst: \
 		index.%.xml \
-		acceptor.%.hfst \
-		errmodel.%.hfst
+		.generated/acceptor.%.hfst \
+		.generated/errmodel.%.hfst
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*

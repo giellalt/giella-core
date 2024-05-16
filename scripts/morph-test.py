@@ -3,19 +3,18 @@
 #
 # License: CC0 (see LICENSE)
 
-from subprocess import Popen, PIPE
-from argparse import ArgumentParser
-from io import StringIO
-from collections import OrderedDict, namedtuple
-
 import os
 import os.path
 import re
 import shlex
 import shutil
 import sys
-import yaml
+from argparse import ArgumentParser
+from collections import OrderedDict, namedtuple
+from io import StringIO
+from subprocess import PIPE, Popen
 
+import yaml
 
 TestCase = namedtuple("TestCase", ['input', 'outputs'])
 
@@ -571,9 +570,9 @@ def parse_lexc(f, fallback=None):
 def parse_lexc_trans(f, gen=None, morph=None, app=None, fallback=None, lookup="hfst"):
     trans = None
     if gen is not None:
-        trans = gen.rsplit('.', 1)[0].split('-', 1)[1]
+        trans = gen.split('/')[-1].rsplit('.', 1)[0].split('-', 1)[1]
     elif morph is not None:
-        trans = morph.rsplit('.', 1)[0].split('-', 1)[1]
+        trans = morph.split('/')[-1].rsplit('.', 1)[0].split('-', 1)[1]
     elif fallback is not None:
         trans = fallback
     if trans is None or trans == "":

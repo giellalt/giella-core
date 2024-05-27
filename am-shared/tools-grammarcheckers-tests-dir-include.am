@@ -7,6 +7,7 @@
 if WANT_GRAMCHECK
 
 # Default variable for all languages
-TESTS_ENVIRONMENT = gtgramtool test -s ../$(GTLANG2).zcheck yaml -q 2>/dev/null
+LOG_COMPILER=gtgramtool
+AM_LOG_FLAGS=test -s ../$(GTLANG2).zcheck yaml
 
 endif # WANT_GRAMCHECK

@@ -8,6 +8,6 @@ if WANT_GRAMCHECK
 
 # Default variable for all languages
 LOG_COMPILER=gtgramtool
-AM_LOG_FLAGS=test -s ../$(GTLANG2).zcheck yaml
+AM_LOG_FLAGS=test --spec ../$(GTLANG2).zcheck yaml
 
 endif # WANT_GRAMCHECK

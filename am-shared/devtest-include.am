@@ -27,5 +27,9 @@ devtest-recursive:
 
 devtest-local:
 	@for t in $(TESTS) ; do \
-		srcdir=$(srcdir) $(srcdir)/$$t ;\
+		if test -f "./$$t" ; then \
+			srcdir=$(srcdir) "./$$t" ;\
+		else \
+			srcdir=$(srcdir) "$(srcdir)/$$t" ;\
+		fi ;\
 	done

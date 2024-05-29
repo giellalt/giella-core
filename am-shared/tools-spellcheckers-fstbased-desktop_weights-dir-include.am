@@ -106,6 +106,8 @@ corpus_size_limit_command=$(shell \
 .generated/unitweighted.hfst: $(UW_SPELLER_SRC) \
                    .generated/$(UNITWEIGHT)
 	@echo ""
+	@echo "*** Weight for most frequent corpus wordform: $$(head -1 .generated/*.tropical.txt)"
+	@echo "*** Weight for least frequent corpus wordform: $$(tail -n -1 .generated/*.tropical.txt)"
 	@echo "*** Default weight for out-of-corpus wordforms: $$(cat .generated/$(UNITWEIGHT))"
 	@echo ""
 	$(AM_V_REWEIGHT)$(HFST_FST2FST) --format=openfst-tropical -i $< \

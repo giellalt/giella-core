@@ -14,7 +14,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [0.25.1], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
+AC_INIT([giella-core], [0.25.2], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])

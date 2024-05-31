@@ -28,6 +28,8 @@ endif # CAN_HFST
 			$(top_builddir)/src/fst/filters/remove-Use_minusGC-tags.hfst          \
 			$(top_builddir)/src/fst/filters/remove-Use_minus_PMatch-tags.hfst     \
 			$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst        \
+			$(top_builddir)/src/fst/filters/remove-Use_TTS-strings.hfst           \
+			$(top_builddir)/src/fst/filters/remove-Use_minusTTS-tags.hfst         \
 			$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst                  \
 			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst \
 			$(GENDIR)
@@ -46,6 +48,8 @@ endif # CAN_HFST
 	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_minus_PMatch-tags.hfst\"    \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_minusGC-tags.hfst\"         \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_GC-strings.hfst\"           \
+	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_minusTTS-tags.hfst\"        \
+	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_TTS-strings.hfst\"          \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst\"       \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst\"                 \
 	.o. @\"$<\" \
@@ -75,6 +79,8 @@ endif # CAN_HFST
 			$(top_builddir)/src/fst/filters/remove-Use_minusGC-tags.hfst         \
 			$(top_builddir)/src/fst/filters/remove-Use_minus_PMatch-tags.hfst    \
 			$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst       \
+			$(top_builddir)/src/fst/filters/remove-Use_TTS-strings.hfst          \
+			$(top_builddir)/src/fst/filters/remove-Use_minusTTS-tags.hfst        \
 			$(top_builddir)/src/fst/filters/remove-use_mt-strings.hfst           \
 			$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst                 \
 			$(top_builddir)/src/fst/orthography/downcase-derived_proper-strings.compose.hfst \
@@ -92,6 +98,8 @@ endif # CAN_HFST
 	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_minusGC-tags.hfst\"         \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_GC-strings.hfst\"           \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_PMatch-strings.hfst\"       \
+	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_minusTTS-tags.hfst\"        \
+	.o. @\"$(top_builddir)/src/fst/filters/remove-Use_TTS-strings.hfst\"          \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-use_mt-strings.hfst\"           \
 	.o. @\"$(top_builddir)/src/fst/filters/remove-mwe-tags.hfst\"                 \
 	.o. @\"$<\" \

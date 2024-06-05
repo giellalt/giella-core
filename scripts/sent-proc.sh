@@ -1,5 +1,11 @@
 #! /bin/bash
 
+# This script (and the nobdis, smedep etc. aliases) work, but are deprecated.
+# instead, do use scripts
+# dis.sh -h
+# dep.sh -h
+
+
 # sent-disamb.sh
 # This is a shell script for analysing sentences with the vislcg3 parser.
 # It gives the analysis, and optionally the number of the disambiguation rules.

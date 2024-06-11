@@ -146,7 +146,7 @@ stem {
 stem + stem:before {
     content: ", ";
 }
-*/
+
 lg > analysis:before {
     content: " Analysis: " ;
     font-size: small;

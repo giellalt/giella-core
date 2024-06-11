@@ -1,6 +1,5 @@
 @charset "utf-8";
-#@import "../../../tools/xxe/gtdict-config/gt_dictionary_XXE.css";
-@import "../../giella-core/dicts/scripts/gt_dictionary_XXE.css";
+@import "gt_dictionary_XXE.css";
 @import "gt_dictionary_shared.css";
 
 
@@ -19,23 +18,21 @@
 
 
 r {
-#    column-count: 2;
+    /* column-count: 2; */
     column-rule-style: solid;
     column-rule-width: 1px;
     column-rule: 1px solid black;
 }
 
-<!--
-<style type="text/css">
-@media all {
-    .page-break{ display: none; }}
-@media print {
-    .page-break{ display: block; page-break-before: always; }}
-@page { size:8.5in 11in; margin: 2cm}
-</style>
--->
+/* <style type="text/css"> */
+/* @media all { */
+/*     .page-break{ display: none; }} */
+/* @media print { */
+/*     .page-break{ display: block; page-break-before: always; }} */
+/* @page { size:8.5in 11in; margin: 2cm} */
+/* </style> */
 
-<r class="page-break"></r>
+/* <r class="page-break"></r> */
 
 e:nth-child(even) {background-color: #eee}
 e:nth-child(odd)  {border: none}
@@ -90,8 +87,10 @@ e > lg ~ mg xg:before {
 
 /*e:after {
     display: block;
-    content: "exclude: ";*/
+    content: "exclude: ";
 }
+*/
+
 exclude {
     display: none;
 /*

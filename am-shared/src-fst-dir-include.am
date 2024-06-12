@@ -970,6 +970,9 @@ analyser-url-gt-desc.%: morphology/.generated/url.%
 		 save stack $@\n\
 		 quit\n" | $(XFST_TOOL)
 
+
+CLEANFILES=$(GT_FSTs_NO_INSTALL) $(GT_RAW)
+
 ####### Other targets: ###########
 
 # Copy the raw transducer. This enables language-specific processing of the raw

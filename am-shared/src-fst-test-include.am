@@ -1,0 +1,45 @@
+## Include this file in top-level srcdir to compile FSTs
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+TOOLKITS=
+if CAN_HFST
+TOOLKITS+=hfst
+endif
+if CAN_FOMA
+TOOLKITS+=foma
+endif
+if CAN_XFST
+TOOLKITS+=xfst
+endif
+
+AM_TESTS_ENVIRONMENT= export GIELLA_CORE=$(GIELLA_CORE) ; export TOOLKITS=$(TOOLKITS) ;
+
+if CAN_YAML_TEST
+
+# This is for yaml tests requiring ONLY an analyser
+if WANT_MORPHOLOGY
+YAML_TEST_RUNNERS+=
+# This is for yaml tests requiring BOTH an analyser AND a generator:
+if WANT_GENERATION
+YAML_TEST_RUNNERS+=
+OTHER_TEST_RUNNERS+=
+endif # WANT_GENERATION
+endif # WANT_MORPHOLOGY
+
+# This is for yaml tests requiring ONLY a generator
+if WANT_GENERATION
+YAML_TEST_RUNNERS+=
+endif # WANT_GENERATION
+
+# This is for yaml tests to be run when building fst's tailored to the needs of
+# electronic dictionaries:
+if WANT_DICTIONARIES
+YAML_TEST_RUNNERS+=
+endif # WANT_DICTIONARIES
+
+endif # CAN_YAML_TEST
+
+TESTS+=$(YAML_TEST_RUNNERS) $(OTHER_TEST_RUNNERS)
+
+# vim: set ft=automake:

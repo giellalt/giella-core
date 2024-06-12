@@ -1,0 +1,24 @@
+## Include this file in top-level srcdir to compile FSTs
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+TOOLKITS=
+if CAN_HFST
+TOOLKITS+=hfst
+endif
+if CAN_FOMA
+TOOLKITS+=foma
+endif
+if CAN_XFST
+TOOLKITS+=xfst
+endif
+
+AM_TESTS_ENVIRONMENT= export GIELLA_CORE=$(GIELLA_CORE) ; export TOOLKITS=$(TOOLKITS) ;
+
+if CAN_YAML_TEST
+YAML_TEST_RUNNERS+=run-initcaps-genyaml-testcases.sh
+endif
+
+TESTS+=$(YAML_TEST_RUNNERS) $(OTHER_TEST_RUNNERS)
+
+# vim: set ft=automake:

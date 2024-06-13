@@ -1,4 +1,5 @@
 .DS_Store
+.vscode
 /aclocal.m4
 /autom4te.cache
 /build-aux
@@ -17,4 +18,3 @@
 Makefile
 Makefile.in
 __pycache__/
-.vscode

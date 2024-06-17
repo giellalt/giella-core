@@ -1,0 +1,146 @@
+#!/bin/bash
+# @configure_input@
+
+# Automake interprets the exit status as follows:
+# - an exit status of 0 will denote a success
+# - an exit status of 77 a skipped test
+# - an exit status of 99 a hard error
+# - any other exit status will denote a failure.
+
+# This script should be ran from make check with following arguments
+if ! test $# -ge 9 ; then
+    echo "Usage: $0 POS SRC GEN ANA FST TAGS XTAGS [CLUSIONS...]"
+    echo
+    echo "  POS   is the part-of-speech"
+    echo "  SRC   is the source lexc file"
+    echo "  GEN   is the name of generator FST"
+    echo "  ANA   is the name of analyser FST"
+    echo "  FST   is the fst type, xfst, hfst or such"
+    echo "  TAGS   is the tag string to generate for lemma"
+    echo "  XTAGS   is the tag string for alternate lemmas"
+    echo "  INCLUDE   is the list of include grep rules"
+    echo "  EXCLUDE   is the list of exclude grep rules"
+    exit 2
+fi
+
+###### Variables: #######
+POS=$1
+### in ###
+source_file=$2
+generator_file=$3
+analyser_file=$4
+fsttype=$5
+tags=$6
+xtags=$7
+inclusion=$8
+exclusion=$9
+
+### out ###
+# Temporary files:
+outdir=$(mktemp -d)
+lemmas=$outdir/filtered-${POS}.txt
+# Result files, will get filename suffix programmatically further down:
+generated_lemmas=$outdir/generated-${POS}
+result_file=$outdir/missing_${POS}_lemmas
+gen_result_file=$outdir/generated_missing_${POS}_lemmas
+ana_result_file=$outdir/analysed_missing_${POS}_lemmas
+
+# SKIP if source file does not exist (works with both single and
+# multiple files):
+for f in $source_file ; do
+    if ! test -f "$f" ; then
+        echo "*** Error: Source file $f not found."
+        exit 77
+    fi
+done
+
+# Get external Mac editor for viewing failed results from configure:
+EXTEDITOR=@SEE@
+
+##### Extract lemmas - add additional egrep pattern as parameters: #####
+##### --include "(pattern1|pattern2|...)"                          #####
+##### --exclude "(pattern1|pattern2|...)"                          #####
+@abs_builddir@/extract-lemmas.sh $inclusion $exclusion \
+    "$source_file" > "$lemmas"
+
+###### Start testing: #######
+transducer_found=0
+Fail=0
+
+# The script tests both Xerox and Hfst transducers if available:
+for f in $fsttype; do
+    if [ "$f" == "xfst" ]; then
+        lookup_tool="@LOOKUP@ -flags mbTT"
+        suffix="xfst"
+        # Does lookup support -q / quiet mode?
+        lookup_quiet=$($lookup_tool -q 2>&1 | grep USAGES)
+        if ! [[ $lookup_quiet == *"USAGES"* ]] ; then
+            # it does support quiet mode, add the -q flag:
+            lookup_tool="@LOOKUP@ -q -flags mbTT"
+        fi
+    elif [ "$f" == "hfst" ]; then
+        lookup_tool="@HFST_OPTIMIZED_LOOKUP@ -q"
+        suffix="hfstol"
+    else
+        Fail=1
+        printf "ERROR: Unknown fst type! "
+        echo "$f - FAIL"
+        continue
+    fi
+    if [ -f "$generator_file.$suffix" ]; then
+        (( transducer_found += 1 ))
+        # generate tags
+        sed -e "s/\$/$tags/" "$lemmas" |\
+                $lookup_tool "$generator_file.$suffix" \
+                | grep -F -v "+?" | grep -v "^$" | cut -f2 | sort -u \
+            > "$generated_lemmas.$f.txt" 
+        # Generate nouns, extract those that do not generate in singular,
+        # generate the rest in plural:
+        if ! test -z "$xtags" ; then
+            sed -e "s/\$/$tags/" "$lemmas" |\
+                $lookup_tool "$generator_file.$suffix" \
+                | grep -F "+?" | cut -d "+" -f1 | sed "s/\$/$xtags/" \
+            | $lookup_tool "$generator_file.$suffix" | cut -f2 \
+            | grep -v "^$" >> "$generated_lemmas.$f.txt"
+        fi
+        # Sort and compare original input with resulting output - the diff is
+        # used to generate lemmas which are opened in SEE:
+        sort -u -o "$generated_lemmas.$f.txt" "$generated_lemmas.$f.txt" 
+        comm -23 "$lemmas" "$generated_lemmas.$f.txt" > "$result_file.$f.txt"
+
+        # Open the diff file in SubEthaEdit (if there is a diff):
+        if [ -s "$result_file.$f.txt" ]; then
+            grep -v '^$' "$result_file.$f.txt" \
+              | sed "s/\$/$tags/" \
+              | $lookup_tool "$generator_file.$suffix" \
+              > "$gen_result_file.$f.txt"
+            # If we have an analyser, analyse the missing lemmas as well:
+            if test -f "$analyser_file.$suffix" ; then
+                grep -v '^$' "$result_file.$f.txt" \
+                  | $lookup_tool "$analyser_file.$suffix" \
+                  > "$ana_result_file.$f.txt"
+            fi
+            echo "There were problem lemmas. Details in:"
+            echo "* $result_file.$f.txt    "
+            echo "* $gen_result_file.$f.txt"
+            echo "* $ana_result_file.$f.txt"
+            $EXTEDITOR "$result_file.$f.txt" &
+            $EXTEDITOR "$gen_result_file.$f.txt" &
+            $EXTEDITOR "$ana_result_file.$f.txt" &
+            Fail=1
+            printf "%s - \033[1;31mFAIL\033[m\n" "$f"
+            continue
+        fi
+        printf "%s - \033[0;32mPASS\033[m\n" "$f"
+    fi
+done
+
+# At least one of the Xerox or HFST tests failed:
+if [ "$Fail" = "1" ]; then
+    exit 1
+fi
+
+if [ $transducer_found -eq 0 ]; then
+    echo "ERROR: No transducer found $analyser_file $generator_file"
+    exit 77
+fi

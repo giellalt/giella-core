@@ -14,7 +14,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [1.0.0], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
+AC_INIT([giella-core], [1.0.1], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
@@ -57,6 +57,7 @@ AC_PATH_PROG([HFST_OPTIMISED_LOOKUP], [hfst-optimised-lookup], [false], $PATH)
 AC_PATH_PROG([HFST_OPTIMIZED_LOOKUP], [hfst-optimized-lookup], [false], $PATH)
 AC_PATH_PROG([LOOKUP], [lookup], [false], $PATH)
 AC_PATH_PROG([FLOOKUP], [flookup], [false], $PATH)
+AC_PATH_PROG([SEE], [see], [head], $PATH)
 
 # easter eggs
 AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
@@ -90,6 +91,8 @@ AC_CONFIG_FILES([scripts/run-morph-tester.sh],
                 [chmod +x scripts/run-morph-tester.sh])
 AC_CONFIG_FILES([scripts/run-yaml-testcases.sh],
                 [chmod +x scripts/run-yaml-testcases.sh])
+AC_CONFIG_FILES([scripts/generate-lemmas.sh],
+                [chmod +x scripts/generate-lemmas.sh])
 
 AC_OUTPUT
 

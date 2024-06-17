@@ -1,0 +1,29 @@
+## Include this file in top-level srcdir to compile FSTs
+## Copyright: Sámediggi/Divvun/UiT
+## Licence: GPL v3+
+
+TOOLKITS=
+if CAN_HFST
+TOOLKITS+=hfst
+endif
+if CAN_FOMA
+TOOLKITS+=foma
+endif
+if CAN_XFST
+TOOLKITS+=xfst
+endif
+
+AM_TESTS_ENVIRONMENT= export GIELLA_CORE=$(GIELLA_CORE) ; export TOOLKITS=$(TOOLKITS) ;
+
+TESTS+=tag_test.sh
+
+if WANT_GENERATION
+GENERATION_TESTS+=generate-adjective-lemmas.sh \
+				  generate-noun-lemmas.sh \
+				  generate-propernoun-lemmas.sh \
+				  generate-verb-lemmas.sh
+endif
+
+TESTS+=$(GENERATION_TESTS)
+
+# vim: set ft=automake:

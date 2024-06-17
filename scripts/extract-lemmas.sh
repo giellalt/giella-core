@@ -4,15 +4,15 @@
 # set -x
 
 function print_usage() {
-    echo "Usage: $0 [OPTIONS...] INPUTFILE [INPUTFILE ...]"
-    echo "Extract lemmas from INPUTFILE(S) (lexc). Avoid affix files in the input."
-    echo
-    echo "  -h, --help             Print this usage info"
-    echo "  --exclude '(pattern)'  Exclude (egrep) patterns from the lemma list"
-    echo "  --include '(pattern)'  Include (egrep) patterns from the lemma list"
-    echo "  -k --keep-contlex      Keep the continuation lexicon in the output"
-    echo "  -H --keep-homonyms     Keep homonymy tags to separate such lemmas"
-    echo
+    echo "Usage: $0 [OPTIONS...] INPUTFILE [INPUTFILE ...]" >&2
+    echo "Extract lemmas from INPUTFILE(S) (lexc). Avoid affix files in the input." >&2
+    echo >&2
+    echo "  -h, --help             Print this usage info" >&2
+    echo "  --exclude '(pattern)'  Exclude (egrep) patterns from the lemma list" >&2
+    echo "  --include '(pattern)'  Include (egrep) patterns from the lemma list" >&2
+    echo "  -k --keep-contlex      Keep the continuation lexicon in the output" >&2
+    echo "  -H --keep-homonyms     Keep homonymy tags to separate such lemmas" >&2
+    echo >&2
 }
 
 # Wrong usage - short instruction:
@@ -23,14 +23,14 @@ fi
 
 # manual getopt loop... Mac OS X does not have good getopt
 while test $# -ge 1 ; do
-    if test x$1 = x--help -o x$1 = x-h ; then
+    if test "x$1" = x--help -o "x$1" = x-h ; then
         print_usage
         exit 0
-    elif test x$1 = x--keep-contlex -o x$1 = x-k ; then
+    elif test "x$1" = x--keep-contlex -o "x$1" = x-k ; then
         keep_contlex=true
-    elif test x$1 = x--keep-homonyms -o x$1 = x-H ; then
+    elif test "x$1" = x--keep-homonyms -o "x$1" = x-H ; then
         keep_homonyms=true
-    elif test x$1 = x--exclude ; then
+    elif test "x$1" = x--exclude ; then
         if test -z "$2" ; then
             print_usage
             exit 1
@@ -38,7 +38,7 @@ while test $# -ge 1 ; do
             excludepattern="$2"
             shift
         fi
-    elif test x$1 = x--include ; then
+    elif test "x$1" = x--include ; then
         if test -z "$2" ; then
             print_usage
             exit 1
@@ -48,8 +48,11 @@ while test $# -ge 1 ; do
         fi
     elif test -f "$1"; then
         inputfiles="$inputfiles $1"
+    elif test -z "$1" ; then
+        # apparently this is possible
+        shift
     else
-        echo "$0: unknown option $1"
+        echo "$0: unknown option $1" >&2
         print_usage
         exit 1
     fi
@@ -59,8 +62,8 @@ done
 # Only grep if there is a pattern to grep on, or everything will vanish:
 exclgrep () {
     # Check that the grep pattern isn't empty:
-    if test "x$@" != "x"; then
-        egrep -v "$@"
+    if test "x$*" != "x"; then
+        grep -E -v "$*"
     # If it is, just let everything pass through using cat:
     else
         cat
@@ -90,12 +93,12 @@ keep_hom_tags () {
 
 # The main lemma extraction thing:
 cat $inputfiles | grep ";"                              | # grep only lines containing ;
-    egrep -v "^[[:space:]]*(\!|\@|<|\+)"                | # do NOT grep lines beginning with (space +) !, @ or <
+    grep -E -v "^[[:space:]]*(!|@|<|\+)"                | # do NOT grep lines beginning with (space +) !, @ or <
     keep_hom_tags                                       | # treat homonyms special
-    egrep -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" | # do NOT grep lines containing ONLY a continuation lexicon ref
-    egrep -v "(LEXICON| K |ENDLEX|\+Err\/|DerSub)"      | # do NOT grep lines containing a number of generally known wrong stuff
+    grep -E -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" | # do NOT grep lines containing ONLY a continuation lexicon ref
+    grep -E -v "(LEXICON| K |ENDLEX|\+Err/|DerSub)"      | # do NOT grep lines containing a number of generally known wrong stuff
     exclgrep "$excludepattern"                          | # do NOT grep things specified in each test script
-    egrep    "$includepattern"                          | # DO grep things specified in each test script if specified
+    grep -E  "$includepattern"                          | # DO grep things specified in each test script if specified
     sed 's/^[ 	]*//'                             | # Remove initial whitespace
     sed 's/% /€/g'                                 | # escape lexc escapes
     sed 's/%:/¢/g'                                 | # escape lexc escapes
@@ -116,7 +119,7 @@ cat $inputfiles | grep ";"                              | # grep only lines cont
     sed 's/¢/:/g'                      | # restore lexc escapes to their lexical form
     sed 's/£/@/g'                      | # restore lexc escapes to their lexical form
     sed 's/¥/#/g'                      | # restore lexc escapes to their lexical form
-    egrep -v "(^$|^;|^[0-9]$|^\!)"     | # remove useless lines
+    grep -E -v "(^$|^;|^[0-9]$|^!)"     | # remove useless lines
     perl -pe 's/__(Hom[0-9]+)__/\+\1/' | # restore homonym tags if kept
     perl -pe 's/__(G[37]+)__/\+\1/'    | # restore homonym tags if kept
     sed 's/xxplussxx/\+/g'             | # restore literal, escaped + sign

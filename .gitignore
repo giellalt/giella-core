@@ -8,6 +8,7 @@
 /configure
 /configure~
 /giella-core.pc
+/scripts/generate-lemmas.sh
 /scripts/generate-nfc-nfd-regex.bash
 /scripts/generate-nfd-nfc-regex.bash
 /scripts/gt-core.sh

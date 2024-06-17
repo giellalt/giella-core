@@ -59,14 +59,11 @@ testfileshort=$(echo "$(basename \
 
 # getting the absolute path of the $srcdir of the test script:
 abs_srcdir=$(cd $srcdir && pwd)
-# subtracting the root test dir from the test script source dir - the
-# remaining intervening dirs equals the path to the fst dir as long as the
-# directory structure within $GTLANG/test/ mirrors the structure of the other
-# directories - this mirroring thus becomes imperative for the yaml testing:
-#fstdir=${abs_srcdir:${#roottestdir}:${#roottestdir}}/fst/
-fstdir=${abs_srcdir%/test}
+# at the moment relevant FST files should be above the nearest test/ directory,
+# i.e. we always yaml test the most local automata
+fstdir=${abs_srcdir%/test*}
 # temp hacks
-fstdir=${fstdir%/apertium}
+#fstdir=${fstdir%/apertium}
 
 # The analyser files are built $relpath relative to the test dir, one further
 # dir up, and then in the identified fst dir (see above):

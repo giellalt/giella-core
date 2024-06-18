@@ -9,6 +9,18 @@ r, rootdict {
 tg + tg:before {
     content: "; ";
 }
+dg {
+    display: inline;
+}
+
+dg d {
+    font-style: italic;
+}
+
+d:after {
+        content: "; ";
+}
+
 tg {
     display: inline;
 }
@@ -27,10 +39,10 @@ te + tf:before,
 tf + tf:before {
     content: ", ";
 }
-t, tf, te {
+d, t, tf, te {
     display: inline;
 }
-l + t {
+d + l + t {
     margin-left: +.35em;
 }
 

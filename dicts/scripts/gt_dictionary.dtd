@@ -1,9 +1,9 @@
 <!ELEMENT r (lics?, e+, xhtml:script?) >
 <!ATTLIST r xmlns:xhtml CDATA #FIXED "http://www.w3.org/1999/xhtml"
-    xml:lang ( nob | sme | sma | swe | eng | deu | smn | fin | sms | myv | mhr | sjd | rus | smj ) #IMPLIED
+    xml:lang ( nob | sme | sma | swe | eng | deu | smn | fin | fkv | sms | myv | mhr | sjd | rus | smj ) #IMPLIED
 >
 <!ATTLIST r
-      id ( smenob | nobsme | smnfin | finsmn | finsme | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin | swesma | smeeng |
+      id ( smenob | nobsme | smnfin | finsmn | finsme | fkvnob | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin | swesma | smeeng |
       nobsmj ) #IMPLIED >
 
 
@@ -24,7 +24,7 @@
       usage ( mt | vd | dict | other | nds | fad | KB ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK |
             PS_SA | KAL | nou94 | PS | husbykuhmunen | lmm | sammallahti |
-            BergslandMagga | Lagercrantz | nsr )  #IMPLIED
+            BergslandMagga | Lagercrantz | nsr | utsi )  #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED
@@ -178,7 +178,7 @@
       class CDATA #IMPLIED
 >
 
-<!ELEMENT mg (semantics?, l_ref?, tg+, xg* ) >
+<!ELEMENT mg (semantics?, l_ref?, dg?, tg+, xg* ) >
 <!ATTLIST mg
       xml:lang ( sme | nob | fin | swe | rus | smn ) #IMPLIED
       rest CDATA #IMPLIED
@@ -186,6 +186,9 @@
 <!ATTLIST mg id CDATA #IMPLIED >
 <!ATTLIST mg src CDATA #IMPLIED >
 <!ATTLIST mg x ( fad ) #IMPLIED >
+
+<!ELEMENT dg ( d ) >
+<!ELEMENT d (#PCDATA) >
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?, morph_expl?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg

@@ -70,14 +70,16 @@ function expand_variables(s) {
     printf("This construct is not supported anymore:\n `{%s`} ", $0);
 }
 /^[^#].*#!!= / {
-    CODE=gensub("#!!=.*", "", 1);
-    print(expand_variables(gensub(".*#!!= ", "", 1)));
+    CODE=gensub("&", "@AMP;", "g", gensub("#!!=.*", "", 1));
+    print(gensub("@AMP;", "\\&", "g",
+          expand_variables(gensub(".*#!!= ", "", 1))));
 }
 /^[^#].*#!!≈ / {
-    CODE=gensub("[ \t][ \t]*", " ", "g",
+    CODE=gensub("&", "@AMP;" ,"g", gensub("[ \t][ \t]*", " ", "g",
            gensub("^[ \t]*", "", 1,
-           gensub("[ \t]*#!!≈.*", "", 1)));
-    print(expand_variables(gensub(".*#!!≈ ", "", 1)));
+           gensub("[ \t]*#!!≈.*", "", 1))));
+    print(gensub("@AMP;", "\\&", "g",
+          expand_variables(gensub(".*#!!≈ ", "", 1))));
 }
 /^#!! / {print(expand_variables(gensub(".*#!! *", "", 1))); }
 /^[^#]+#!! / {print(expand_variables(gensub(".*#!! *", "", 1))); }

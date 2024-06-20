@@ -29,8 +29,8 @@ devtest-local:
 	@for t in $(TESTS) ; do \
 		echo "TEST: $$t" ;\
 		if test -f "./$$t" ; then \
-			srcdir=$(srcdir) "./$$t" ;\
+			srcdir=$(srcdir) GIELLA_CORE=$(GIELLA_CORE) "./$$t" ;\
 		else \
-			srcdir=$(srcdir) "$(srcdir)/$$t" ;\
+			srcdir=$(srcdir) GIELLA_CORE=$(GIELLA_CORE) "$(srcdir)/$$t" ;\
 		fi ;\
 	done

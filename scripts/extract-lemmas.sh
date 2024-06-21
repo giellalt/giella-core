@@ -63,7 +63,7 @@ done
 exclgrep () {
     # Check that the grep pattern isn't empty:
     if test "x$*" != "x"; then
-        grep -E -v "$*"
+        grep -E -v "$@"
     # If it is, just let everything pass through using cat:
     else
         cat

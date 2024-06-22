@@ -35,6 +35,7 @@ if ! test $# -ge 7 ; then
     echo "          tested. Possible values are 'all' and 'specified'."
     echo " SRCDIR   srcdir from automake"
     echo " TOOLKIT  hfst or xfst or such"
+    echo " TOTALFILE will contain test totals, if empty mktemp"
     echo " LEADTEXT is typically the number of the test in a test set loop."
     echo
     echo "LEADTEXT can contain spaces, it is effectively everything after the"
@@ -52,7 +53,11 @@ fsttest=$5
 srcdir=$6
 tk=$7
 shift 7
-leadtext="$@"
+if test -f $1 ; then
+    testtotalsfile=$1
+    shift
+fi
+leadtext="$*"
 
 testfileshort=$(echo "$(basename \
 	$(dirname $testfile))/$(basename $testfile)")
@@ -72,7 +77,9 @@ generatorfile=$fstdir/generator-$transducer
 bare_fst_file=$fstdir/$transducer
 pythonbin=@PYTHON@
 runtests="$pythonbin $relpath/morph-test.py"
-testtotalsfile=$(mktemp -t giella-yaml_test.XXXXXXXXXXX)
+if test -z "$testtotalsfile" ; then
+    testtotalsfile=$(mktemp -t giella-yaml_test.XXXXXXXXXXX)
+fi
 
 # Use autotools mechanisms to only run the configured fst types in the tests:
 fsttype=$tk

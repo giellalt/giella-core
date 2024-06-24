@@ -24,7 +24,7 @@
       usage ( mt | vd | dict | other | nds | fad | KB ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK |
             PS_SA | KAL | nou94 | PS | husbykuhmunen | lmm | sammallahti |
-            BergslandMagga | Lagercrantz | nsr | utsi )  #IMPLIED
+            BergslandMagga | Lagercrantz | nsr | utsi | aj )  #IMPLIED
       exclude ( smanob | nobsma ) #IMPLIED
       reverse ( yes | no ) #IMPLIED
       illpl ( yes | no ) #IMPLIED

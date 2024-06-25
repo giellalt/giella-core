@@ -157,7 +157,7 @@ $(GIELLA_ANL_SEMSETS_SRC): $(top_srcdir)/src/cg3/$(GIELLA_ANL_SEMSETS_SRC)
 
 # Disambiguator:
 $(GIELLA_ANL_DISAMBIGUATOR_SRC): \
-%.cg3: $(top_srcdir)/src/cg3/%.cg3
+%.cg3: $(top_srcdir)/src/cg3/%.cg3 $(GIELLA_ANL_SEMSETS_SRC)
 	$(AM_V_CP)cp -f $< $@
 
 # Finally build the .zglt file:

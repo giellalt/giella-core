@@ -14,6 +14,7 @@
 /scripts/gt-core.sh
 /scripts/gt-version.sh
 /scripts/make-hfstspeller-version-easter-egg.sh
+/scripts/accept-all-lemmas.sh
 /scripts/run-morph-tester.sh
 /scripts/run-yaml-testcases.sh
 Makefile

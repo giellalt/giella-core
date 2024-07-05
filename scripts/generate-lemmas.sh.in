@@ -60,9 +60,14 @@ EXTEDITOR=@SEE@
 ##### Extract lemmas - add additional egrep pattern as parameters: #####
 ##### --include "(pattern1|pattern2|...)"                          #####
 ##### --exclude "(pattern1|pattern2|...)"                          #####
-@abs_builddir@/extract-lemmas.sh $inclusion $exclusion \
+@abs_builddir@/extract-lemmas.sh \
+    --include "$inclusion" --exclude "$exclusion" \
     "$source_file" > "$lemmas"
-
+rv=$?
+if test $rv -ge 1 ; then
+    echo failed to extract lemmas
+    exit 1
+fi
 ###### Start testing: #######
 transducer_found=0
 Fail=0

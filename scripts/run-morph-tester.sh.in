@@ -53,17 +53,16 @@ fsttest=$5
 srcdir=$6
 tk=$7
 shift 7
-if test -f $1 ; then
+if test -f "$1" ; then
     testtotalsfile=$1
     shift
 fi
 leadtext="$*"
 
-testfileshort=$(echo "$(basename \
-	$(dirname $testfile))/$(basename $testfile)")
+testfileshort="$(basename \ "$(dirname "$testfile")")/$(basename "$testfile")"
 
 # getting the absolute path of the $srcdir of the test script:
-abs_srcdir=$(cd $srcdir && pwd)
+abs_srcdir=$(cd "$srcdir" && pwd)
 # at the moment relevant FST files should be above the nearest test/ directory,
 # i.e. we always yaml test the most local automata
 fstdir=${abs_srcdir%/test*}
@@ -105,11 +104,11 @@ fi
 if test "x$fsttest" == "xspecified"; then
     if test "$halftest" == "ana" \
          -o "$halftest" == "gen"; then
-        filebasename=$(basename -s .yaml $testfile)
+        filebasename=$(basename -s .yaml "$testfile")
         removed_halftestsuff=${filebasename%*.}
         testfst=${removed_halftestsuff#*.}
     else
-        filebasename=$(basename -s .yaml $testfile)
+        filebasename=$(basename -s .yaml "$testfile")
         testfst=${filebasename#*.}
     fi
 fi
@@ -230,7 +229,8 @@ for f in $fsttype; do
 		done
 		# Only start a test run if an analyser was found:
 		if test "x$analyser" != "x" ; then
-			printf "$leadtext $(basename $analyser) + $testfileshort - "
+			printf "%s %s + %s - " \
+                "$leadtext" "$(basename "$analyser")" "$testfileshort"
 			fstoptions="--morph $analyser"
 			if ! run_tests ; then
                 (( Fail += 1 ))
@@ -259,7 +259,8 @@ for f in $fsttype; do
 		done
 		# Only start a test run if a generator was found:
 		if test "x$generator" != "x" ; then
-			printf "$leadtext $(basename $generator) + $testfileshort - "
+			printf "%s %s + %s - " \
+                "$leadtext" "$(basename "$generator")" "$testfileshort"
 			fstoptions="--gen $generator"
 			if ! run_tests ; then
                 (( Fail += 1 ))
@@ -277,7 +278,8 @@ for f in $fsttype; do
 		done
 		# Only start a test run if an analyser was found:
 		if test "x$analyser" != "x" ; then
-			printf "$leadtext $(basename $analyser) + $testfileshort - "
+			printf "%s %s + %s -" \
+                "$leadtext" "$(basename "$analyser")"  "$testfileshort"
 			fstoptions="--morph $analyser"
 			if ! run_tests ; then
                 (( Fail += 1 ))
@@ -299,7 +301,8 @@ for f in $fsttype; do
 		done
 		# Only start a test run if an analyser and a generator was found:
 		if test "x$analyser" != "x" -a "x$generator" != "x" ; then
-			printf "$leadtext $(basename $analyser) + $testfileshort - "
+			printf "%s %s + %s - " \
+                "$leadtext" "$(basename "$analyser")"  "$testfileshort"
 			fstoptions="--morph $analyser --gen $generator"
 			if ! run_tests ; then
                 (( Fail += 1 ))
@@ -309,11 +312,11 @@ for f in $fsttype; do
 	else
         (( Fail += 1 ))
 		if test "$halftest" == "ana" -o "$halftest" == "full"; then
-			echo "FAIL: Analyser file not found! $(basename $analyser)"
+			echo "FAIL: Analyser file not found! $(basename "$analyser")"
 			echo "FAIL: $analyser"
 		fi
 		if test "$halftest" == "gen" -o "$halftest" == "full"; then
-			echo "FAIL: Generator file not found! $(basename $generator)"
+			echo "FAIL: Generator file not found! $(basename "$generator")"
 			echo "FAIL: full path: $generator"
 		fi
 		echo "FAIL: referenced by: $testfileshort"

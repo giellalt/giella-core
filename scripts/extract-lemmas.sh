@@ -31,21 +31,11 @@ while test $# -ge 1 ; do
     elif test "x$1" = x--keep-homonyms -o "x$1" = x-H ; then
         keep_homonyms=true
     elif test "x$1" = x--exclude ; then
-        if test -z "$2" ; then
-            print_usage
-            exit 1
-        else
-            excludepattern="$2"
-            shift
-        fi
+        excludepattern="$2"
+        shift
     elif test "x$1" = x--include ; then
-        if test -z "$2" ; then
-            print_usage
-            exit 1
-        else
-            includepattern="$2"
-            shift
-        fi
+        includepattern="$2"
+        shift
     elif test -f "$1"; then
         inputfiles="$inputfiles $1"
     elif test -z "$1" ; then

@@ -1,0 +1,49 @@
+#!/bin/bash
+# @configure_input@
+
+if ! test $# -ge 3 ; then
+    echo "Usage: $0 LANG FILES..."
+    echo
+    echo "  SPELLER    the speller archive i.e. LL.zhfst"
+    echo "  EXCLUDES   patterns of lines with excluded lemmas"
+    echo "  FILES...   lexc files with lemmas"
+    exit 2
+fi
+
+ospell=@HFST_OSPELL@
+
+speller_file=$1
+exclusion=$2
+source_files=$3
+
+if ! test -f "$speller_file" ; then
+    echo missing "$speller_file".zhfst
+    exit 1
+fi
+
+outdir=$(mktemp -d)
+lemmas=$outdir/filtered-lemmas.txt
+rejected_lemmas=$outdir/rejected_lemmas.txt
+checked_lemmas=$outdir/checked_lemmas.txt
+
+@abs_builddir@/extract-lemmas.sh \
+    --exclude "$exclusion" \
+    $source_files > "$lemmas"
+rv=$?
+if test $rv -ge 1 ; then
+    echo failed to extract lemmas
+    exit 1
+fi
+
+####### Start testing: #######
+
+"$ospell" "$speller_file" < "$lemmas" > "$checked_lemmas"
+
+grep -F 'is NOT in the lexicon' "$checked_lemmas" > "$rejected_lemmas"
+
+if [ -s "$rejected_lemmas" ] ; then
+    head "$rejected_lemmas"
+    echo see "$rejected_lemmas" for more
+    exit 1
+fi
+

@@ -23,7 +23,7 @@ fi
 ###### Variables: #######
 Fail=0
 Tests_found=no
-Skipped=no
+Skipped=yes
 testtype=full
 concat_lexc_file="lexicon.lexc"
 alt_concat_file="lexicon.tmp.lexc"
@@ -67,13 +67,12 @@ for file in ${source_files}; do
 #       echo "$file has tests, but no fst specified - defaulting to $transducer"
 #       source ./run-yaml-testcases.sh $transducer $file
         echo "* WARNING: $fileshort has tests, but no fst specified - SKIPPED"
-
+        Skipped=yes
     # For each specified fst in the lexc file, run those tests:
     else
 #       echo "TESTING: found tests in $fileshort" # debug
 
         Tests_found=yes
-        Skipped=no
 
         for fst in $fsts; do
             (( i += 1 ))
@@ -95,6 +94,16 @@ for file in ${source_files}; do
             for tk in $TESTKITS ; do
                 "$relpath"/run-morph-tester.sh \
                     "$fst" "$file" "$relpath" "$testtype" all "$srcdir" "$tk" "$leadtext"
+                rv=$?
+                if test $rv = 77 ; then
+                    echo skipped
+                    Skipped=yes
+                elif test $rv -ge 1 ; then
+                    (( Fail += 1 ))
+                    Skipped=no
+                else
+                    Skipped=no
+                fi
             done
 #           echo "The $fst testing is done using $testtype testing."    # debug
 

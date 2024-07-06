@@ -16,6 +16,8 @@ speller_file=$1
 exclusion=$2
 source_files=$3
 
+. "$GIELLA_CORE/scripts/termcolors.bash"
+
 if ! test -f "$speller_file" ; then
     echo missing "$speller_file".zhfst
     exit 1
@@ -31,19 +33,27 @@ checked_lemmas=$outdir/checked_lemmas.txt
     $source_files > "$lemmas"
 rv=$?
 if test $rv -ge 1 ; then
-    echo failed to extract lemmas
+    printf "%sfail%sed to extract lemmas" "$red" "$reset"
     exit 1
 fi
 
 ####### Start testing: #######
 
 "$ospell" "$speller_file" < "$lemmas" > "$checked_lemmas"
-
+rv=$?
+if test $rv -ge 1 ; then
+    printf "%sfail%sed to ospell" "$red" "$reset"
+    exit 1
+fi
 grep -F 'is NOT in the lexicon' "$checked_lemmas" > "$rejected_lemmas"
 
 if [ -s "$rejected_lemmas" ] ; then
+    printf "%sFAIL%s: " "$red" "$reset"
+    wc -l < "$rejected_lemmas" | sed 's/$/ words missing, here’s first ones:'
     head "$rejected_lemmas"
     echo see "$rejected_lemmas" for more
     exit 1
+else
+    printf "%sPASS%s\n" "$green" "$reset"
 fi
 

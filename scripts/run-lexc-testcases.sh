@@ -30,9 +30,11 @@ alt_concat_file="lexicon.tmp.lexc"
 
 relpath=$GIELLA_CORE/scripts/
 testrunner=run-morph-tester.sh
+. "$relpath/termcolors.bash"
 
 if ! test -x "$relpath/$testrunner" ; then
-    echo "$0: No test runner found in $relpath/$testrunner!"
+    printf "%s%s%s: No test runner found in %s/%s!\n" "$red" "$0" "$reset" \
+        "$relpath" "$testrunner"
     exit 77
 fi
 
@@ -59,14 +61,15 @@ for file in ${source_files}; do
         if test "$Tests_found" == "no" ; then
           Skipped=yes
         fi
-        echo "SKIPPED: no tests in $fileshort"
+        printf "%sSKIPPED%s: no tests in %s\n" "$light_blue" "$reset" "$fileshort"
 
     # If there are tests, but no specified fst, skip (future: run default fst)
     elif test "$fsts" == "" -a ! "$tests" == ""; then
 #           (( i += 1 ))
 #       echo "$file has tests, but no fst specified - defaulting to $transducer"
 #       source ./run-yaml-testcases.sh $transducer $file
-        echo "* WARNING: $fileshort has tests, but no fst specified - SKIPPED"
+        printf "* %sWARNING%s: %s has tests, but no fst specified - %sSKIPPED%s\n"\
+            "$red" "$reset" "$fileshort" "$light_blue" "$reset"
         Skipped=yes
     # For each specified fst in the lexc file, run those tests:
     else
@@ -96,7 +99,7 @@ for file in ${source_files}; do
                     "$fst" "$file" "$relpath" "$testtype" all "$srcdir" "$tk" "$leadtext"
                 rv=$?
                 if test $rv = 77 ; then
-                    echo skipped
+                    printf "%sskipped%s" "$light_blue" "$reset"
                     Skipped=yes
                 elif test $rv -ge 1 ; then
                     (( Fail += 1 ))

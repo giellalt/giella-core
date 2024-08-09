@@ -157,7 +157,7 @@ final_strings_all_deps=$(shell \
 	elif [[ $(FINAL_STRING_EDITS) == 'txt'   ]] ; then \
 		echo ".generated/final_strings.txt.%.hfst"; \
 	elif [[ $(FINAL_STRING_EDITS) == 'both'  ]] ; then \
-		echo ".generated/final_strings.regex.%.hfst final_strings.txt.%.hfst"; \
+		echo ".generated/final_strings.regex.%.hfst .generated/final_strings.txt.%.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -367,7 +367,7 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 		-o $@
 
 # The final error model is assembled here:
-errmodel.%.hfst: .generated/words.%.hfst \
+.generated/errmodel.%.hfst: .generated/words.%.hfst \
 				 $(initial_letter_deps) \
 				 .generated/editdist.all.%.hfst \
 				 $(final_strings_deps)
@@ -388,7 +388,7 @@ errmodel.%.hfst: .generated/words.%.hfst \
 ####### Alternate error model: #######
 # Alternatively, the error model can be constructed as a long list of regular
 # expressions, semicolon separated:
-.generated/errmodel.%.hfst: errmodel.%.regex .generated/asteregg.%.hfst
+.generated/errmodel.%.hfst: errmodel.%.regex .generated/easteregg.%.hfst
 	$(AM_V_GEN)$(HFST_REGEXP2FST) $(HFSTFLAGS) -S -i $< \
 		| $(HFST_DISJUNCT) - .generated/easteregg.$*.hfst \
 		| $(HFST_PUSH_WEIGHTS) --push=initial  \

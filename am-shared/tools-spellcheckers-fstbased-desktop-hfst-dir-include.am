@@ -289,10 +289,13 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 		--output-file=$@ \
 		$(initial_letter_error_model_option)
 
-.generated/editdist.%.hfst: .generated/editdist.%.regex $(GENDIR)
-	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
-	   --format=openfst-tropical \
-		-o $@
+.generated/editdist.%.hfst: .generated/editdist.%.regex $(GENDIR) \
+		.generated/sigmastar.hfst
+	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $< \
+		--format=openfst-tropical \
+		| $(HFST_DISJUNCT) - .generated/sigmastar.hfst \
+		| $(HFST_MINIMIZE) -o $@
+
 
 # Initial string edits, if enabled:
 .generated/initial_letters.txt.%.hfst: initial_letters.%.txt $(GENDIR)
@@ -326,6 +329,18 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 # Helper fst:
 .generated/anystar.hfst: $(GENDIR)
 	$(AM_V_RGX2FST)echo "?*" | $(HFST_REGEXP2FST) -o $@
+
+.generated/sigmastar.hfst: $(GT_SPELLER_ACCEPTOR) $(GENDIR)
+	$(AM_V_GEN)$(HFST_SUMMARIZE) -v $(GT_SPELLER_ACCEPTOR) 2> /dev/null \
+		| grep -A1 '^arc symbols actually seen' \
+		| grep -v '^arc symbols' \
+		| $(SED) 's/, /\n/g' \
+		| grep -v '^$$' \
+		| grep -v '@[^@]*@' \
+		| grep -v '^+.|.+$$' \
+		| hfst-strings2fst -S -j - \
+		| hfst-minimize - \
+		| hfst-repeat - -o $@
 
 # In-word list of strings known to be misspelled:
 .generated/strings.txt.%.hfst: strings.%.txt .generated/anystar.hfst

@@ -61,7 +61,7 @@ gielladata_DATA=$(GT_CG_TARGETS) $(GT_CG_LOCAL_INST_TARGETS)
 
 noinst_DATA=$(GT_CG_LOCAL_NOINST_TARGETS)
 
-$(GENERATED_TAG_LIST): ../fst/filters/lexicon-tags.txt
+$(GENERATED_TAG_LIST): ../fst/filters/.generated/lexicon-tags.txt
 	$(AM_V_at)echo "### THIS FILE IS GENERATED!!"                    > $@
 	$(AM_V_at)echo "### DO NOT EDIT!!"                              >> $@
 	$(AM_V_at)echo "### IT WILL BE OVERWRITTEN ON NEXT MAKE!!"      >> $@

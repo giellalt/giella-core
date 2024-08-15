@@ -257,7 +257,7 @@ TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/fst/morphology/%
 # changes in the tag list, and thus stop unnecessary recompilation of fst's.
 # Also first checks whether the target tag list file exists - if you try to diff
 # against a non-existing file diff will error out and stop the build.
-area-tags.txt: $(LEX_TAG_FILE)
+.generated/area-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Area/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -269,7 +269,7 @@ area-tags.txt: $(LEX_TAG_FILE)
 		mv -f $@.tmp $@ ; \
 	fi
 
-derivation-tags.txt: $(LEX_TAG_FILE)
+.generated/derivation-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Der/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -281,7 +281,7 @@ derivation-tags.txt: $(LEX_TAG_FILE)
 		mv -f $@.tmp $@ ; \
 	fi
 
-dialect-tags.txt: $(LEX_TAG_FILE)
+.generated/dialect-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Dial/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -293,7 +293,7 @@ dialect-tags.txt: $(LEX_TAG_FILE)
 		mv -f $@.tmp $@ ; \
 	fi
 
-grammatical-tags.txt: $(LEX_TAG_FILE)
+.generated/grammatical-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Gram/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -305,7 +305,7 @@ grammatical-tags.txt: $(LEX_TAG_FILE)
 		mv -f $@.tmp $@ ; \
 	fi
 
-error-tags.txt: $(LEX_TAG_FILE)
+.generated/error-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Err/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -317,7 +317,7 @@ error-tags.txt: $(LEX_TAG_FILE)
 		mv -f $@.tmp $@ ; \
 	fi
 
-orig_lang-tags.txt: $(LEX_TAG_FILE)
+.generated/orig_lang-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp OLang/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -329,7 +329,7 @@ orig_lang-tags.txt: $(LEX_TAG_FILE)
 		mv -f $@.tmp $@ ; \
 	fi
 
-semantic-tags.txt: $(LEX_TAG_FILE)
+.generated/semantic-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Sem/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -341,7 +341,7 @@ semantic-tags.txt: $(LEX_TAG_FILE)
 		mv -f $@.tmp $@ ; \
 	fi
 
-usage-tags.txt: $(LEX_TAG_FILE)
+.generated/usage-tags.txt: .generated/$(LEX_TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp Use/
 	$(AM_V_GEN)if test -f $@ ; then \
 		if ! diff -q $@ $@.tmp ; then \
@@ -359,7 +359,7 @@ usage-tags.txt: $(LEX_TAG_FILE)
 # The conditional is there to allow for tag list specific shell scripts, ie only
 # optional in certain contexts. If not found, it will fall back to a default
 # shell script.
-make-optional-%-tags.regex: %-tags.txt
+make-optional-%-tags.regex: .generated/%-tags.txt
 	$(AM_V_GEN)if \
 		test -e $(GTCORE)/scripts/taglist2make_optional_$*_tags_regex.sh ; \
 		then \
@@ -372,7 +372,7 @@ make-optional-%-tags.regex: %-tags.txt
 # The conditional is there to allow for tag list specific shell scripts, ie only
 # remove in certain contexts. If not found, it will fall back to a default
 # shell script.
-remove-%-tags.regex: %-tags.txt
+remove-%-tags.regex: .generated/%-tags.txt
 	$(AM_V_GEN)if test -e $(GTCORE)/scripts/taglist2remove_$*_tags_regex.sh ; \
 		then \
 			$(GTCORE)/scripts/taglist2remove_$*_tags_regex.sh $< > $@ ; \
@@ -380,17 +380,17 @@ remove-%-tags.regex: %-tags.txt
 			$(GTCORE)/scripts/taglist2remove_tags_regex.sh $< > $@ ; \
 		fi
 
-remove-%-tags-before-pos.regex: %-tags.txt
+remove-%-tags-before-pos.regex: .generated/%-tags.txt
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2remove_$*_tags_before_pos_regex.sh \
 		$< > $@
 
-remove-%-tags-before-derivations.regex: %-tags.txt
+remove-%-tags-before-derivations.regex: .generated/%-tags.txt
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2remove_$*_tags_before_derivations_regex.sh \
 		$< > $@
 
 # Remove strings specific to other dialects than the requested one:
 remove-all_dialects_but_%-strings.regex:
-	$(MAKE) $(GENDIR)  # huh?
+	$(MAKE) $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-dialect-filter-regex.sh \
 		$@ `echo $* | sed -e 's:.generated/::'` "$(DIALECTS)"
 
@@ -406,7 +406,7 @@ remove-mixed_area-strings.regex:
 
 ### Remove strings with tags as specified:
 # Specific variant - take into account an exception file:
-remove-%-strings.regex: %-tags.txt \
+remove-%-strings.regex: .generated/%-tags.txt \
 						remove-%-strings-modifications.regex
 	$(AM_V_GEN)if test -e $(GTCORE)/scripts/taglist2remove_$*_strings_regex.sh;\
 		then \
@@ -416,7 +416,7 @@ remove-%-strings.regex: %-tags.txt \
 		fi
 
 # General variant - remove all strings without exception:
-remove-%-strings.regex: %-tags.txt
+remove-%-strings.regex: .generated/%-tags.txt
 	$(AM_V_GEN)if test -e $(GTCORE)/scripts/taglist2remove_$*_strings_regex.sh;\
 		then \
 			$(GTCORE)/scripts/taglist2remove_$*_strings_regex.sh $@ $* $^ ; \
@@ -425,17 +425,17 @@ remove-%-strings.regex: %-tags.txt
 		fi
 
 ### Reorder tags:
-reorder-%-tags.regex: %-tags.txt
+reorder-%-tags.regex: .generated/%-tags.txt
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2reorder_$*_tags_regex.sh \
 		$@ $^
 
 ### Insert tags after POS:
-insert-%-tags-after-pos.regex: %-tags.txt
+insert-%-tags-after-pos.regex: .generated/%-tags.txt
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2insert_$*_tags_after_pos_regex.sh \
 		$@ $^
 
 ### Insert tags before POS:
-insert-%-tags-before-pos.regex: %-tags.txt \
+insert-%-tags-before-pos.regex: .generated/%-tags.txt \
         $(GTCORE)/scripts/taglist2insert_%_tags_before_pos_regex.sh
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2insert_$*_tags_before_pos_regex.sh \
 		$@ $<

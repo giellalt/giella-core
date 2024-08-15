@@ -47,14 +47,14 @@ TAG_EXTRACTION_FST=$(top_builddir)/tools/mt/analyser-%-gt-desc
 TAG_EXTRACTION_TTS_FST=$(top_builddir)/tools/mt/analyser-%-gt-desc
 
 # Convert GT-tags to Apertium-tags:
-apertiumtags.txt: mt-tags.txt
+.generated/apertiumtags.txt: .generated/mt-tags.txt
 	$(AM_V_GEN)tr -d '+' < $< \
 		| tr '/[:upper:]' '_[:lower:]' \
 		| awk '{print "%<"$$0"%>"}' > $@
 
 # Generate relabel file for replacing Giella tags with Apertium tags:
-apertium.relabel: mt-tags.txt \
-				  apertiumtags.txt
+apertium.relabel: .generated/mt-tags.txt \
+				  .generated/apertiumtags.txt
 	$(AM_V_GEN)paste $^ | tr -d '%' > $@
 
 
@@ -64,5 +64,5 @@ apertium.relabel: mt-tags.txt \
 include $(top_srcdir)/../giella-core/am-shared/regex-include.am
 include $(top_srcdir)/../giella-core/am-shared/tag-extraction-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
-
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 # vim: set ft=automake:

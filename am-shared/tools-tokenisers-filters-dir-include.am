@@ -124,19 +124,19 @@ endif # WANT_TOKENISERS
 ####### Build rules for creating regexes from tag list: #######
 
 ### Reformat tags:
-make-%-CG-tags.regex: %-$(TAG_FILE)
+make-%-CG-tags.regex: .generated/%-$(TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2make_CG_tags_regex.sh $< > $@
 
-%-tokeniser-flags.regex: %-$(FLAG_FILE)
+%-tokeniser-flags.regex: .generated/%-$(FLAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/flaglist2make_flag_regex.sh $< > $@
 
 
 # Alt-orth variant of the above
 define alt_orth_token_filters
-make-%-CG-tags.$(1).regex: %-$(1)-$(TAG_FILE)
+make-%-CG-tags.$(1).regex: .generated/%-$(1)-$(TAG_FILE)
 	$$(AM_V_GEN)$(GTCORE)/scripts/taglist2make_CG_tags_regex.sh $$< > $$@
 
-%-tokeniser-flags.$(1).regex: %-$(1)-$(FLAG_FILE)
+%-tokeniser-flags.$(1).regex: .generated/%-$(1)-$(FLAG_FILE)
 	$$(AM_V_GEN)$(GTCORE)/scripts/flaglist2make_flag_regex.sh $$< > $$@
 
 endef
@@ -163,5 +163,6 @@ include $(top_srcdir)/../giella-core/am-shared/regex-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/tag-extraction-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

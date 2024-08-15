@@ -68,7 +68,7 @@ endif # WANT_GRAMCHECK
 ####### Build rules for creating regexes from tag list: #######
 
 ### Reformat tags:
-make-%-CG-tags.regex: %-$(TAG_FILE)
+make-%-CG-tags.regex: .generated/%-$(TAG_FILE)
 	$(AM_V_GEN)$(GTCORE)/scripts/taglist2make_CG_tags_regex.sh $< > $@
 
 ####### Copy regex files from the Giella core if not found locally: ########
@@ -94,5 +94,6 @@ make-%-CG-tags.regex: %-$(TAG_FILE)
 
 include $(top_srcdir)/../giella-core/am-shared/tag-extraction-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

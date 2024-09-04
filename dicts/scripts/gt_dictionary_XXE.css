@@ -42,7 +42,7 @@ tf + tf:before {
 d, t, tf, te {
     display: inline;
 }
-d + l + t {
+d + l + t + i {
     margin-left: +.35em;
 }
 
@@ -63,11 +63,21 @@ xg x {
 
 ig + ig:before {
     display: inline;
+    content: "Dajaldagat: ";
     content: "; ";
 }
 
 ig i {
     font-style: italic;
+}
+
+i:after {
+        content: "; ";
+}
+
+id:after {
+    color: gray;
+    content: "; ";
 }
 
 /* syng, syn styling: */

@@ -1,0 +1,42 @@
+# Check if there are tags which are not declared in root.lexc or if
+# tags are misspelled.
+#
+# Exit with 0 if and only if all tests pass.
+
+if test $# != 1 ; then
+    echo "Usage: $0 lexicon.lexc"
+    exit 1
+fi
+if ! test -f "$1" ; then
+    echo "missing combined lexicon $1"
+    exit 2
+fi
+
+lexctags=$(mktemp -t giella-tag_test.lexc.XXXXXXXXXXX)
+roottags=$(mktemp -t giella-tag_test.root.XXXXXXXXXXX)
+
+# Get giella-core from the test environment:
+giella_core=$GIELLA_CORE
+
+# Extract USED tags:
+sed -e '1,/LEXICON Root/d' < "$1" | # Extract all lines after LEXICON Root
+    "${giella_core}"/scripts/extract-used-tags.sh |
+    LC_ALL=no_NO.UTF8 sort -u         \
+    > "${lexctags}"
+
+# Extract DEFINED tags:
+sed -n '/LEXICON Root/q;p' < "$1" | # Extract all lines before LEXICON Root
+    "${giella_core}"/scripts/extract-defined-tags.sh |
+    LC_ALL=no_NO.UTF8 sort -u         \
+    > "${roottags}"
+
+# Compare the two sets of tags, report and fail if there is a diff:
+check=$(LC_ALL=no_NO.UTF8 comm -23 "${lexctags}" "${roottags}")
+if [[ -n "${check}" ]]; then
+    echo "FAIL: Have a look at these:"
+    echo "${check}"
+    exit 1
+else
+    echo "PASS: No errors found."
+fi
+

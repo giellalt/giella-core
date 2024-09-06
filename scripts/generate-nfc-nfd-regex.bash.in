@@ -24,6 +24,7 @@ echo >> "$REGEXFILE"
     tail -n 1 |\
     tr , '\n' |\
     @SED@ -e 's/^ //' |\
+    @SED@ -e 's/ /@_SPACE_@/g' |\
     grep -E -v '^[+{@}^]' > "$REGEXFILE".sigma.nfc
 @UCONV@ -f utf8 -x any-nfd "$REGEXFILE".sigma.nfc > "$REGEXFILE".sigma.nfd
 paste "$REGEXFILE".sigma.nfc "$REGEXFILE".sigma.nfd |\

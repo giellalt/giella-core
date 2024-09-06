@@ -140,9 +140,6 @@ endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_token_tags,$(alt_orth))))
 
 
-
-
-
 .generated/%-$(TAG_FILE): .generated/%-sigma.txt
 	$(AM_V_GEN)$(GREP_TAGS_COMMAND) < $< > $@	
 

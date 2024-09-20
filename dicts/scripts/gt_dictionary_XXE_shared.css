@@ -137,16 +137,37 @@ lsub + lsub:before {
     /* content: ", "; */
 }
 
-
+/* stem styling: */
 stem {
     font-style: italic;
     font-size: small;
 }
 
+
 stem + stem:before {
     content: ", ";
 }
 
+/* orig styling: */
+orig {
+    display: inline ;
+    font-style: italic;
+    font-size: small;
+}
+
+
+orig:before {
+    color: gray;
+    content: " (";
+}
+
+orig:after {
+    color: gray;
+    content: ") ";
+}
+
+
+/* lg */
 lg > analysis:before {
     content: " Analysis: " ;
     font-size: small;
@@ -357,6 +378,23 @@ stem:before {
 	}
 	
 stem[class]:after {
+    display: inline;
+    content: " " attr(class) ', ' ;
+}
+
+
+orig
+ 	{
+	font-style: italic;
+}
+
+orig:before {
+	content: " Orig:";
+    font-size: smaller;
+	font-weight: bold;
+	}
+	
+orig[class]:after {
     display: inline;
     content: " " attr(class) ', ' ;
 }

@@ -39,7 +39,7 @@ te + tf:before,
 tf + tf:before {
     content: ", ";
 }
-d, t, tf, te {
+d, t, tf, te, orig {
     display: inline;
 }
 d + l + t + i {

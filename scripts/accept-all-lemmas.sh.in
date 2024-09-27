@@ -33,7 +33,7 @@ checked_lemmas=$outdir/checked_lemmas.txt
     $source_files > "$lemmas"
 rv=$?
 if test $rv -ge 1 ; then
-    printf "%sfail%sed to extract lemmas" "$red" "$reset"
+    printf "%sfail%sed to extract lemmas\n" "$red" "$reset"
     exit 1
 fi
 
@@ -42,7 +42,7 @@ fi
 "$ospell" "$speller_file" < "$lemmas" > "$checked_lemmas"
 rv=$?
 if test $rv -ge 1 ; then
-    printf "%sfail%sed to ospell" "$red" "$reset"
+    printf "%sfail%sed to ospell\n" "$red" "$reset"
     exit 1
 fi
 grep -F 'is NOT in the lexicon' "$checked_lemmas" > "$rejected_lemmas"

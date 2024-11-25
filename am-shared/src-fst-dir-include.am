@@ -476,7 +476,6 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
-					$(GLT_NFCNFD_FILTER)                      \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$*\" \
@@ -499,7 +498,6 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 			.o. @\"$<\" \
-			    $(GLT_NFCNFD_COMPOSE) \
 			    $(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \

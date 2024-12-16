@@ -76,6 +76,28 @@ AS_IF([test x$UCONV = xfalse],
        ])])
 AC_PATH_PROG([PRECOMMIT], [pre-commit], [false])
 
+# check for shared version (not fatal yet)
+#
+# c/p from giella-macros.m4:
+# Get the relative path from pwd to where src dir is:
+MYSRCDIR=$srcdir
+# Get the absolute path to the present dir:
+BUILD_DIR_PATH=$(pwd)
+# Combine to get the full path to the scrdir:
+THIS_TOP_SRC_DIR=$BUILD_DIR_PATH/$MYSRCDIR
+_gt_shared_mul_min_version=0.0.3
+AC_MSG_CHECKING([whether shared-mul is at least $_gt_shared_mul_min_version])
+AS_IF([test -d "$THIS_TOP_SRC_DIR"/../shared-mul],
+        [AS_IF([pkg-config --atleast-version=$_gt_shared_mul_min_version --with-path="$THIS_TOP_SRC_DIR"/../shared-mul giella-shared-mul],
+               [AC_MSG_RESULT([yes])],
+               [AC_MSG_RESULT([no])
+                AC_MSG_WARN([shared-mul is too old for this giella-core, please update])])],
+        [AS_IF([pkg-config --atleast-version=$_gt_shared_mul_min_version giella-shared-mul],
+               [AC_MSG_RESULT([yes])],
+               [AC_MSG_RESULT([no])
+                AC_MSG_WARN([shared-mul is too old for this giella-core, please update])])])
+
+
 
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \

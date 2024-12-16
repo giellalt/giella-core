@@ -164,7 +164,8 @@ analyser_relabelled-%.hfst: analyser-%.hfst \
 # This is the real tokeniser build target for all non-TTS tokenisers:
 tokeniser-%.pmhfst: tokeniser-%.pmscript \
 					analyser_relabelled-%.hfst \
-					analyser-url-gt-desc.hfst
+					analyser-url-gt-desc.hfst \
+					analyser-emojis-gt-desc.hfst
 	$(AM_V_PM2FST)$(HFST_PMATCH2FST) < $< > $@.tmp
 	$(AM_V_at)mv -f $@.tmp $@
 

@@ -33,11 +33,13 @@ GT_DISAMB_TOKENISERS_FILTER_SRCS=
 GT_GRAMCHECK_TOKENISERS_FILTER_SRCS=
 GT_TTS_TOKENISERS_FILTER_SRCS=
 GT_TOKENISER_URLFILTER_SRC=
+GT_TOKENISER_EMOFILTER_SRC=
 
 if WANT_TOKENISERS
 GT_DISAMB_TOKENISERS_FILTER_SRCS+=make-disamb-CG-tags.regex \
 						   disamb-tokeniser-flags.regex
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
+GT_TOKENISER_EMOFILTER_SRC+=make-emojis-CG-tags.regex
 
 endif # WANT_TOKENISERS
 
@@ -45,12 +47,14 @@ if WANT_GRAMCHECK
 GT_GRAMCHECK_TOKENISERS_FILTER_SRCS+=make-gramcheck-CG-tags.regex \
 						   gramcheck-tokeniser-flags.regex
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
+GT_TOKENISER_EMOFILTER_SRC+=make-emojis-CG-tags.regex
 endif # WANT_GRAMCHECK
 
 if WANT_TTS
 GT_TTS_TOKENISERS_FILTER_SRCS+=make-tts-CG-tags.regex \
 						   tts-tokeniser-flags.regex
 GT_TOKENISER_URLFILTER_SRC+=make-url-CG-tags.regex
+GT_TOKENISER_EMOFILTER_SRC+=make-emojis-CG-tags.regex
 endif # WANT_TTS
 
 if HAVE_ALT_ORTHS
@@ -83,6 +87,7 @@ GT_TOKENISERS_FILTER_ALL_SRCS=\
         $(GT_GRAMCHECK_TOKENISERS_FILTER_SRCS) \
         $(GT_TTS_TOKENISERS_FILTER_SRCS)       \
         $(sort $(GT_TOKENISER_URLFILTER_SRC) ) \
+        $(GT_TOKENISER_EMOFILTER_SRC) \
         $(GT_LOCAL_TOKENISERS_FILTER_SRCS)     \
         $(ALT_ORTH_TOKENISER_FILTER_SRCS)      \
         $(GT_LOCAL_COPY_FILTER_SRCS)           \

@@ -47,13 +47,16 @@ GT_FSTs_NO_INSTALL=$(subst hfstol,hfst,$(filter %.hfstol, \
 # Add other targets that should be built but not installed,
 # such as the URL analyser, to the GT_FSTs_NO_INSTALL variable:
 if CAN_HFST
-GT_FSTs_NO_INSTALL+=analyser-url-gt-desc.hfst
+GT_FSTs_NO_INSTALL+=analyser-url-gt-desc.hfst\
+					analyser-emojis-gt-desc.hfst
 endif # CAN_HFST
 if CAN_XFST
-GT_FSTs_NO_INSTALL+=analyser-url-gt-desc.xfst
+GT_FSTs_NO_INSTALL+=analyser-url-gt-desc.xfst\
+					analyser-emojis-gt-desc.xfst
 endif # CAN_XFST
 if CAN_FOMA
-GT_FSTs_NO_INSTALL+=analyser-url-gt-desc.foma
+GT_FSTs_NO_INSTALL+=analyser-url-gt-desc.foma\
+					analyser-emojis-gt-desc.foma
 endif # CAN_FOMA
 
 ##### BEGIN Hfst target list #####
@@ -967,6 +970,15 @@ analyser-url-gt-desc.%: morphology/.generated/url.%
 		 $(INVERT_HFST)\
 		 save stack $@\n\
 		 quit\n" | $(XFST_TOOL)
+
+# also emojis should be kept separate from main morphology for efficiency
+# (large alphabet slows everything down)
+analyser-emojis-gt-desc.%: morphology/.generated/emojis.%
+	$(AM_V_XFST_TOOL)$(PRINTF) "\
+		load stack $<\n\
+		$(INVERT_HFST)\
+		save stack $@\n\
+		quit\n" | $(XFST_TOOL)
 
 
 CLEANFILES=$(GT_FSTs_NO_INSTALL) $(GT_RAW)

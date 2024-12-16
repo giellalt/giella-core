@@ -80,7 +80,7 @@ GIELLA_LOCAL_SRC_TARGETS+=\
 GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.hfst,$(GT_LOCAL_XFSCRIPT_SRCS))
 # We need to explicitly add url.?fst here, as the generated targets only cover
 # url.tmp.?fst
-GIELLA_LOCAL_SRC_TARGETS+=.generated/url.hfst
+GIELLA_LOCAL_SRC_TARGETS+=.generated/url.hfst .generated/emojis.hfst
 endif # CAN_HFST
 
 if CAN_XFST
@@ -89,7 +89,7 @@ GIELLA_LOCAL_SRC_TARGETS+=\
 GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.xfst,$(GT_LOCAL_XFSCRIPT_SRCS))
 # We need to explicitly add url.?fst here, as the generated targets only cover
 # url.tmp.?fst
-GIELLA_LOCAL_SRC_TARGETS+=.generated/url.xfst
+GIELLA_LOCAL_SRC_TARGETS+=.generated/url.xfst .generated/emojis.xfst
 endif # CAN_XFST
 
 if CAN_FOMA
@@ -98,7 +98,7 @@ GIELLA_LOCAL_SRC_TARGETS+=\
 GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.foma,$(GT_LOCAL_XFSCRIPT_SRCS))
 # We need to explicitly add url.?fst here, as the generated targets only cover
 # url.tmp.?fst
-GIELLA_LOCAL_SRC_TARGETS+=.generated/url.foma
+GIELLA_LOCAL_SRC_TARGETS+=.generated/url.foma .generated/emojis.foma
 endif # CAN_FOMA
 
 if WANT_L2

@@ -293,7 +293,8 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 		.generated/sigmastar.hfst
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $< \
 		--format=openfst-tropical \
-		| $(HFST_DISJUNCT) - .generated/sigmastar.hfst \
+		| $(HFST_CONCATENATE) .generated/sigmastar.hfst - \
+		| $(HFST_CONCATENATE) - .generated/sigmastar.hfst \
 		| $(HFST_MINIMIZE) -o $@
 
 
@@ -340,7 +341,8 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 		| grep -v '^+.|.+$$' \
 		| hfst-strings2fst -S -j - \
 		| hfst-minimize - \
-		| hfst-repeat - -o $@
+		| hfst-repeat - \
+		| hfst-minimize -o $@
 
 # In-word list of strings known to be misspelled:
 .generated/strings.txt.%.hfst: strings.%.txt .generated/anystar.hfst

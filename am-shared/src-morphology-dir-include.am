@@ -146,11 +146,11 @@ endif
 ####### when something doesn't work); hfst does the concatenation automatically
 ####### but by doing it explicitly we have a source file to relate line numbers
 ####### in error messages to. Foma can only read a single lexc file.
-lexicon.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
+.generated/lexicon.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS) $(GENDIR)
 	$(AM_V_at)echo "! automatically generated combined lexc file!!!" > $@
 	$(AM_V_GEN)cat $^ >> $@
 
-lexicon-L2.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_L2_SRCS) $(GENERATED_LEXC_SRCS)
+.generated/lexicon-L2.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_L2_SRCS) $(GENERATED_LEXC_SRCS) $(GENDIR)
 	$(AM_V_GEN)cat $^ > $@
 
 # Copy shared url lexc file to local dir as tmp file before building. The tmp
@@ -173,9 +173,9 @@ lexicon-L2.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_L2_SRCS) $(GENERATED_LEXC_SRCS)
 
 ####### TMP files to allow local overrides - copy by default: #######
 DEPGEN=$(AM_V_CP)mv -f $< $@
-%.foma: .generated/%.tmp.foma ; $(DEPGEN)
-%.hfst: .generated/%.tmp.hfst ; $(DEPGEN)
-%.xfst: .generated/%.tmp.xfst ; $(DEPGEN)
+.generated/%.foma: .generated/%.tmp.foma ; $(DEPGEN)
+.generated/%.hfst: .generated/%.tmp.hfst ; $(DEPGEN)
+.generated/%.xfst: .generated/%.tmp.xfst ; $(DEPGEN)
 
 ####### Phonology source file defs: ########
 

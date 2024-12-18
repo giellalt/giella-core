@@ -56,4 +56,8 @@
 			-e "save stack $@ " \
 			-s
 
+# XXX 
+.generated/%.lexc: %.lexc $(GENDIR)
+	$(AM_V_CP)cp -v -f $< $@
+
 # vim: set ft=automake:

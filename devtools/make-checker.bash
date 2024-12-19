@@ -18,7 +18,7 @@ for f in lang-* ; do
     ./configure "$@" || exit 1
     if ! make ; then
         echo this needs to be fixed later...
-        echo "$f" >> broken-makes
+        echo "$f" >> ../broken-makes
         popd || exit 1
         continue
     fi
@@ -33,3 +33,7 @@ for f in lang-* ; do
     done
     popd || exit 1
 done
+if test -s broken-makes ; then
+    echo these need to be fixed:
+    cat broken-makes
+fi

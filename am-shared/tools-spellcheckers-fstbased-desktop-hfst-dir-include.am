@@ -47,7 +47,7 @@ swaps=$(shell \
 # Set file name to the empty string or initial_letters.all depending on variable:
 initial_letter_deps=$(shell \
 	if [[ $(INITIAL_EDITS) != 'no' ]] ; then \
-		echo ".generated/initial_letters.all.%.hfst"; \
+		echo ".generated/initial_letters.all.%.desktop.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -55,7 +55,7 @@ initial_letter_deps=$(shell \
 # Set file name to the empty string or initial_letters.all depending on variable:
 initial_letter_fst_include=$(shell \
 	if [[ $(INITIAL_EDITS) != 'no' ]] ; then \
-		echo "( @\\\".generated/initial_letters.all.$*.hfst\\\" )"; \
+		echo "( @\\\".generated/initial_letters.all.$*.desktop.hfst\\\" )"; \
 	else \
 		echo ""; \
 	fi)
@@ -71,11 +71,11 @@ initial_letter_error_model_option=$(shell \
 # Set dependency file name(s) depending on variable value:
 initial_letter_all_deps=$(shell \
 	if   [[ $(INITIAL_EDITS) == 'regex' ]] ; then \
-		echo ".generated/initial_letters.regex.%.hfst"; \
+		echo ".generated/initial_letters.regex.%.desktop.hfst"; \
 	elif [[ $(INITIAL_EDITS) == 'txt'   ]] ; then \
-		echo ".generated/initial_letters.txt.%.hfst"; \
+		echo ".generated/initial_letters.txt.%.desktop.hfst"; \
 	elif [[ $(INITIAL_EDITS) == 'both'  ]] ; then \
-		echo ".generated/initial_letters.regex.%.hfst .generated/initial_letters.txt.%.hfst"; \
+		echo ".generated/initial_letters.regex.%.desktop.hfst .generated/initial_letters.txt.%.desktop.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -96,7 +96,7 @@ initial_letter_all_build=$(shell \
 # Set file name to the empty string or strings.all depending on variable:
 strings_deps=$(shell \
 	if [[ $(STRING_EDITS) != 'no' ]] ; then \
-		echo ".generated/strings.all.%.hfst"; \
+		echo ".generated/strings.all.%.desktop.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -112,11 +112,11 @@ strings_fst_include=$(shell \
 # Set dependency file name(s) depending on variable value:
 strings_all_deps=$(shell \
 	if   [[ $(STRING_EDITS) == 'regex' ]] ; then \
-		echo ".generated/strings.regex.%.hfst"; \
+		echo ".generated/strings.regex.%.desktop.hfst"; \
 	elif [[ $(STRING_EDITS) == 'txt'   ]] ; then \
-		echo ".generated/strings.txt.%.hfst"; \
+		echo ".generated/strings.txt.%.desktop.hfst"; \
 	elif [[ $(STRING_EDITS) == 'both'  ]] ; then \
-		echo ".generated/strings.regex.%.hfst .generated/strings.txt.%.hfst"; \
+		echo ".generated/strings.regex.%.desktop.hfst .generated/strings.txt.%.desktop.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -137,7 +137,7 @@ strings_all_build=$(shell \
 # Set file name to the empty string or final_strings.all depending on variable:
 final_strings_deps=$(shell \
 	if [[ $(FINAL_STRING_EDITS) != 'no' ]] ; then \
-		echo ".generated/final_strings.all.%.hfst"; \
+		echo ".generated/final_strings.all.%.desktop.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -145,7 +145,7 @@ final_strings_deps=$(shell \
 # Set build command for strings.all depending on variable value:
 final_strings_fst_include=$(shell \
 	if [[ $(FINAL_STRING_EDITS) != 'no' ]] ; then \
-		echo "( @\\\".generated/final_strings.all.$*.hfst\\\" )"; \
+		echo "( @\\\".generated/final_strings.all.$*.desktop.hfst\\\" )"; \
 	else \
 		echo ""; \
 	fi)
@@ -153,11 +153,11 @@ final_strings_fst_include=$(shell \
 # Set dependency file name(s) depending on variable value:
 final_strings_all_deps=$(shell \
 	if   [[ $(FINAL_STRING_EDITS) == 'regex' ]] ; then \
-		echo ".generated/final_strings.regex.%.hfst"; \
+		echo ".generated/final_strings.regex.%.desktop.hfst"; \
 	elif [[ $(FINAL_STRING_EDITS) == 'txt'   ]] ; then \
-		echo ".generated/final_strings.txt.%.hfst"; \
+		echo ".generated/final_strings.txt.%.desktop.hfst"; \
 	elif [[ $(FINAL_STRING_EDITS) == 'both'  ]] ; then \
-		echo ".generated/final_strings.regex.%.hfst .generated/final_strings.txt.%.hfst"; \
+		echo ".generated/final_strings.regex.%.desktop.hfst .generated/final_strings.txt.%.desktop.hfst"; \
 	else \
 		echo ""; \
 	fi)
@@ -182,6 +182,19 @@ words_deps=$(shell \
 	else \
 		echo ""; \
 	fi)
+
+
+MAYBE_EMOJIS=
+MAYBE_WORDS2EMOJIS=
+if WANT_EMOJIS
+MAYBE_EMOJIS+=.generated/emojis.hfst
+MAYBE_WORDS2EMOJIS+=.generated/words2emojis.hfst
+words2emojis_fst_include="@\".generated/words2emojis.hfst\""
+else
+MAYBE_EMOJIS+=.generated/empty.hfst
+MAYBE_WORDS2EMOJIS+=.generated/empty.hfst
+words2emojis_fst_include="@\".generated/empty.hfst\""
+endif
 
 ####### Automake targets: ########
 
@@ -289,7 +302,7 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 		--output-file=$@ \
 		$(initial_letter_error_model_option)
 
-.generated/editdist.%.hfst: .generated/editdist.%.regex $(GENDIR) \
+.generated/editdist.%.hfst: .generated/editdist.%.regex \
 		.generated/sigmastar.hfst
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $< \
 		--format=openfst-tropical \
@@ -299,32 +312,32 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 
 
 # Initial string edits, if enabled:
-.generated/initial_letters.txt.%.hfst: initial_letters.%.txt $(GENDIR)
+.generated/initial_letters.txt.%.desktop.hfst: initial_letters.%.txt $(GENDIR)
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j -p \
 		-o $@
 
-.generated/initial_letters.regex.%.hfst: initial_letters.%.regex $(GENDIR)
+.generated/initial_letters.regex.%.desktop.hfst: initial_letters.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
 
-.generated/initial_letters.all.%.hfst: $(initial_letter_all_deps) $(GENDIR)
+.generated/initial_letters.all.%.desktop.hfst: $(initial_letter_all_deps) $(GENDIR)
 	$(initial_letter_all_build)
 
 # Final string edits, if enabled:
-.generated/final_strings.txt.%.hfst: final_strings.%.txt $(GENDIR)
+.generated/final_strings.txt.%.desktop.hfst: final_strings.%.txt $(GENDIR)
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 	   --format=openfst-tropical \
 		-o $@
 
-.generated/final_strings.regex.%.hfst: final_strings.%.regex $(GENDIR)
+.generated/final_strings.regex.%.desktop.hfst: final_strings.%.regex $(GENDIR)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 	   --format=openfst-tropical \
 		-o $@
 
-.generated/final_strings.all.%.hfst: $(final_strings_all_deps) $(GENDIR)
+.generated/final_strings.all.%.desktop.hfst: $(final_strings_all_deps) $(GENDIR)
 	$(final_strings_all_build)
 
 # Helper fst:
@@ -345,7 +358,7 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 		| hfst-minimize -o $@
 
 # In-word list of strings known to be misspelled:
-.generated/strings.txt.%.hfst: strings.%.txt .generated/anystar.hfst
+.generated/strings.txt.%.desktop.hfst: strings.%.txt .generated/anystar.hfst
 	$(AM_V_STR2FST)grep -v '^#' $< | grep -v '^$$' | cut -f1-2 \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		| $(HFST_CONCATENATE)   .generated/anystar.hfst - \
@@ -358,42 +371,48 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 # larger as the edit distance, since the file is multiplied again as part of
 # the editStrings build target. The idea is that the regex should contain a
 # highly targeted set of frequent spelling errors.
-.generated/strings.regex.%.hfst: strings.%.regex .generated/anystar.hfst
+.generated/strings.regex.%.desktop.hfst: strings.%.regex .generated/anystar.hfst
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S $(HFST_FLAGS) -i $<\
 		| $(HFST_CONCATENATE)   .generated/anystar.hfst - \
 		| $(HFST_CONCATENATE) - .generated/anystar.hfst   \
 		| $(HFST_REPEAT) -f 1 -t $(STRING_REGEX_EDIT_DISTANCE) \
 		-o $@
 
-.generated/strings.all.%.hfst: $(strings_all_deps)
+.generated/strings.all.%.desktop.hfst: $(strings_all_deps)
 	$(strings_all_build)
 
 # Combine edit distance with string pattern edits, then multiply according to
 # the specified editing distance. The strings part is included depending on
 # variable setting in Makefile.am.
-.generated/editdist.all.%.hfst: $(strings_deps) .generated/editdist.%.hfst
+.generated/editdist.all.%.desktop.hfst: $(strings_deps) .generated/editdist.%.hfst
 	$(strings_fst_include) \
 		| $(HFST_REPEAT) -f 1 -t $(EDIT_DISTANCE) \
 		-o $@
 
 # Error model building - list of words known to be misspelled:
-.generated/words.%.hfst: $(words_deps) .generated/easteregg.%.desktop.suggtxt $(GENDIR)
+.generated/words.%.desktop.hfst: $(words_deps) .generated/easteregg.%.desktop.suggtxt $(GENDIR)
 	$(AM_V_STR2FST)grep -h -v '^#' $^ | grep -v '^$$'   \
 		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		   --format=openfst-tropical \
 		-o $@
 
+.generated/words2emojis.hfst: $(top_builddir)/src/fst/transcriptions/transcriptor-text2emoji.filtered.lookup.hfstol
+	$(AM_V_REWEIGHT)$(HFST_FST2FST) -f openfst-tropical $< |\
+		$(HFST_REWEIGHT) -e -a 0.0001 -o $@
+
 # The final error model is assembled here:
-.generated/errmodel.%.hfst: .generated/words.%.hfst \
+.generated/errmodel.%.hfst: .generated/words.%.desktop.hfst \
+				 $(MAYBE_WORDS2EMOJIS) \
 				 $(initial_letter_deps) \
-				 .generated/editdist.all.%.hfst \
+				 .generated/editdist.all.%.desktop.hfst \
 				 $(final_strings_deps)
 	$(AM_V_RGX2FST)printf "\
-		[ @\".generated/words.$*.hfst\"    \
+		[ @\".generated/words.$*.desktop.hfst\"    \
+		| $(words2emojis_fst_include) \
 		| \
 		  [ \
 		      $(initial_letter_fst_include) \
-		      @\".generated/editdist.all.$*.hfst\"  \
+		      @\".generated/editdist.all.$*.desktop.hfst\"  \
 		      $(final_strings_fst_include) \
 		  ] \
 		];" \
@@ -423,15 +442,26 @@ CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 ####### Speller acceptor: #######
 # Build the automaton used for the speller
 .generated/acceptor.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst \
+				 $(MAYBE_EMOJIS) \
 				 .generated/easteregg.%.desktop.hfst
 	$(AM_V_PROJECT)$(HFST_COMPOSE) -1 filters/remove-error-strings.hfst -2 $< -F \
 		| $(HFST_PROJECT) $(HFST_FLAGS) \
 			$(MORE_VERBOSITY) --project=lower \
+		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) $(MAYBE_EMOJIS) \
 		| $(HFST_MINIMIZE_SPELLER)                      \
 		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) - .generated/easteregg.$*.desktop.hfst  \
 		| $(HFST_PUSH_WEIGHTS) $(MORE_VERBOSITY) --push=initial           \
 		| $(HFST_FST2FST) $(MORE_VERBOSITY) $(HFST_FLAGS) -f olw          \
 		-o $@
+
+.generated/emojis.hfst: $(top_builddir)/src/fst/analyser-emojis-gt-desc.hfst
+	$(AM_V_PROJECT)$(HFST_PROJECT) $(HFST_FLAGS) -i $< --project=input \
+		| $(HFST_MINIMIZE) \
+		| $(HFST_FST2FST) -f openfst-tropical -o $@
+
+.generated/empty.hfst:
+	$(AM_V_GEN)echo a - a | $(HFST_REGEXP2FST) -o $@
+
 
 ####### *.zhfst file: #######
 # Finally build the zhfst file, and make a copy in a subdir named '3', so that

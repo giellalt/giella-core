@@ -34,10 +34,14 @@ if WANT_TRANSCRIPTORS
 DIGIT2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_TRANSCRIPTIONS_SRCS))
 REGEX2TXT=$(patsubst %.regex,%.filtered.lookup,$(GT_TRANSCRIPTIONS_REGEX_SRCS))
 ABBREV2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_ABBREV_SRCS))
+EMOJIS2TXT=$(patsubst %.lexc,%.filtered.lookup,$(GT_EMOJIS_SRCS))
 # Replace digit2text with text2digit to get the inverse fst's:
 TXT2DIGIT=$(subst digit2text,text2digit,$(DIGIT2TXT))
 # Rename arbitrary files ending in -XXX2text to -text2XXX:
 TXT2ABBREV=$(shell for file in $(ABBREV2TXT) ; do basename $$file .filtered.lookup \
+| cut -d'-' -f2 | sed 's/2text//' | sed 's/^/transcriptor-text2/' \
+| sed 's/$$/.filtered.lookup/'; done )
+TXT2EMOJIS=$(shell for file in $(EMOJIS2TXT) ; do basename $$file .filtered.lookup \
 | cut -d'-' -f2 | sed 's/2text//' | sed 's/^/transcriptor-text2/' \
 | sed 's/$$/.filtered.lookup/'; done )
 
@@ -48,6 +52,8 @@ GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2DIGIT))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(REGEX2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2ABBREV))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(ABBREV2TXT))
+GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2EMOJIS))
+GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(EMOJIS2TXT))
 endif # CAN_HFST
 
 if CAN_XFST
@@ -56,6 +62,8 @@ GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2DIGIT))
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(REGEX2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(ABBREV2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2ABBREV))
+GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(EMOJIS2TXT))
+GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2EMOJIS))
 endif # CAN_XFST
 
 if CAN_FOMA
@@ -64,6 +72,8 @@ GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2DIGIT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(REGEX2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(ABBREV2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2ABBREV))
+GT_TRANSCRIPTORS+=$(addsuffix .foma,$(EMOJIS2TXT))
+GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2EMOJIS))
 endif # CAN_FOMA
 endif # WANT_TRANSCRIPTORS
 

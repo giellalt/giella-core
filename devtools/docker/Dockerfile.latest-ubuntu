@@ -1,6 +1,6 @@
 # Minimal dockerfile to test giellalt stuffs fast
 
-FROM ubuntu:20.04
+FROM ubuntu:latest
 MAINTAINER Flammie A Pirinen <flammie@iki.fi>
 
 RUN apt-get update && \

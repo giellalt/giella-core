@@ -475,6 +475,8 @@ $(MOB_GIELLA_PREDICT_HFST): index.predict.xml \
 
 ####### Other targets: ###########
 
+CLEANFILES+=$(MOB_GT_SPELLER_ACCEPTOR) $(MOB_GT_PREDICT_ACCEPTOR)
+
 # Keep these intermediate targets when building using --debug:
 .SECONDARY: editdist.all.default.hfst \
             strings.default.hfst     \

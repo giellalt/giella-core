@@ -236,7 +236,8 @@ endif # WANT_SPELLERS
 noinst_DATA+=$(GT_ERRMODELS) \
 			$(INST_FILES)
 
-CLEANFILES=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
+CLEANFILES+=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
+
 ###################################
 ####### HFST build rules: #########
 

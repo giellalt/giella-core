@@ -91,7 +91,7 @@ AS_IF([test -d "$THIS_TOP_SRC_DIR"/../shared-mul],
        export PKG_CONFIG_PATH=$THIS_TOP_SRC_DIR/../shared-mul:$PKG_CONFIG_PATH
        PKG_CHECK_MODULES([SHARED_MUL], [giella-shared-mul >= $_gt_shared_mul_min_version],
              [AC_MSG_NOTICE([NB using shared-mul in $THIS_TOP_SRC_DIR/../shared-mul])],
-             [AC_MSG_ERROR([shared-mul needs to be updated, cd ../shared-mul and git pull and build])])
+             [AC_MSG_WARN([shared-mul needs to be updated, cd ../shared-mul and git pull and build])])
        export PKG_CONFIG_PATH=$flub],
       [PKG_CHECK_MODULES([SHARED_MUL], [giella-shared-mul >= $_gt_shared_mul_min_version],
              [AC_MSG_RESULT([NB using system shared-mul])],

@@ -10,7 +10,7 @@ if ! test -f configure.ac ; then
     exit 1
 fi
 
-git pull || exit 1
+git pull --rebase || exit 1
 
 function clone_or_pull_and_make_local() {
     if test -z "$1" ; then
@@ -27,7 +27,7 @@ function clone_or_pull_and_make_local() {
         popd || return 1
     else
         pushd "../$1" || return 1
-        git pull -q || return 1
+        git pull --rebase -q || return 1
         ./autogen.sh || return 1
         if test -x config.status ; then
             ./config.status || return 1
@@ -55,7 +55,7 @@ do
     clone_or_pull_and_make_local "$ll" || didnt_work "$ll"
 done
 
-git pull -q || didnt_work "git pull"
+git pull --rebase -q || didnt_work "git pull"
 ./autogen.sh || didnt_work "autogen.sh"
 if test -x config.status ; then
     ./config.status || didnt_work "config.status"

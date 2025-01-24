@@ -48,7 +48,7 @@
 
   <xsl:param name="inDir" select="concat('../../../','dict-',$SLANG,'-mul/src')"/>
 
-  <xsl:param name="inFile" select="concat('*_',$SLANG,$TLANG,'.xml')"/>
+  <xsl:param name="inFile" select="concat('*_',$SLANG,'mul.xml')"/>
   <xsl:param name="outDir" select="concat('../../','dict-',$SLANG,'-mul/bin')"/>
   <xsl:param name="outFile" select="concat($SLANG,$TLANG,'-',$TNUM)"/>
   <xsl:param name="SLANG" select="'ggg'"/>

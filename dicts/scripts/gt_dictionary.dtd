@@ -3,7 +3,7 @@
     xml:lang ( nob | sme | sma | swe | eng | deu | smn | fin | fkv | sms | myv | mhr | sjd | rus | smj ) #IMPLIED
 >
 <!ATTLIST r
-      id ( smenob | nobsme | smnfin | finsmn | finsme | fkvnob | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | nobsma | smafin | swesma | smeeng |
+      id ( smenob | nobsme | smnfin | finsmn | finsme | fkvnob | smnsme | smjsme | smesmn | smesmj | smesma | smefin | smasme | smanob | smamul | nobsma | smafin | swesma | smeeng |
       nobsmj ) #IMPLIED >
 
 

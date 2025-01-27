@@ -192,7 +192,7 @@
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?, morph_expl?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg
-      xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus | smj | fra) #REQUIRED
+      xml:lang ( sme | sma | smn | nob | swe | eng | deu | fin | rus | smj | fra | lat) #REQUIRED
       check CDATA #IMPLIED
 >
 <!ELEMENT re (#PCDATA) > <!-- Domain restriction: bot, phys, ... -->

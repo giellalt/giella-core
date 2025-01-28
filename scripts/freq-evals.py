@@ -53,7 +53,7 @@ def main():
                    help="Print verbosely while processing")
     a.add_argument("-c", "--count", metavar="FREQ", default=0,
                    help="test only word-forms with frequency higher than FREQ")
-    a.add_argument("-t", "--threshold", metavar="THOLD", default=99,
+    a.add_argument("-t", "--threshold", metavar="THOLD", default=99, type=int,
                    help="if coverage is less than THOLD exit with error")
     a.add_argument("-Q", "--no-hacks", action="store_true", default=False,
                    help="Some ccat and giellalt specific corpus hacks")

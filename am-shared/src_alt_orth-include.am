@@ -62,6 +62,8 @@ endif # HAVE_ALT_ORTHS
 ####### Build rules for the default set of fst's for ########
 ####### alternate orthographies:                     ########
 define alt_orth_desc_analysers
+
+# CASE 1: go from default to alt orth by rules for simple surface form mapping
 .generated/analyser-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
@@ -105,6 +107,8 @@ define alt_orth_desc_analysers
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
+# CASE 2: go from raw (=default + morph borders) to alt orth by rules for surface form
+# mapping, but with help from morphological borders
 .generated/analyser-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.%            \
 					filters/remove-area-tags.%                 \
 					filters/remove-dialect-tags.%              \
@@ -147,6 +151,142 @@ define alt_orth_desc_analysers
 			;\n\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
+
+# CASE 3: go from lexical form to alt orth by twolc/rewrite rules:
+# We build a tailored raw file using a special twolc/xfscript file,
+# then we build the analyser in the regular way.
+
+# First build a tmp1 raw file as the intersection between lexicon and rules:
+if LEXREF_IN_PHONOLOGY
+
+# HFST
+.generated/generator-raw-gt-desc.$(1).tmp1.hfst: morphology/.generated/phonology.$(1).hfst.xfscript \
+					 morphology/.generated/lexicon.hfst $$(GENDIR)
+	$$(AM_V_HXFST)printf "save stack $$@\nquit\n" | cat $$< - \
+		| $$(HFST_XFST) -p $$(MORE_VERBOSITY) $$(HFST_FORMAT)
+
+# XEROX
+.generated/analyser-raw-gt-desc.$(1).tmp1.xfst: morphology/.generated/phonology.$(1).xfst.xfscript \
+			 morphology/.generated/lexicon.xfst $$(GENDIR)
+	$$(AM_V_XFST)$$(XFST) $$(VERBOSITY) -l $$< -e "save stack $$@" -stop
+
+# FOMA
+.genereated/analyser-raw-gt-desc.$(1).tmp1.foma: morphology/phonology.$(1).foma.xfscript \
+			 morphology/.generated/lexicon.foma $$(GENDIR)
+	$$(AM_V_FOMA)$$(FOMA) $$(VERBOSITY) -l $$< -e "save stack $$@" -s
+
+else !LEXREF_IN_PHONOLOGY
+
+# 1.b: Using either twolc or xfst script files without a lexicon reference:
+# HFST
+if WANT_REVERSED_INTERSECT
+# Do this is reversed intersect is enabled:
+.generated/generator-raw-gt-desc.$(1).tmp1.hfst: morphology/.generated/lexicon.rev.hfst \
+					 morphology/.generated/phonology.$(1).rev.hfst $$(GENDIR)
+	$$(AM_V_INTRSCT)\
+		  $$(HFST_DETERMINIZE) $$(MORE_VERBOSITY) $$(HFST_FLAGS) $$< \
+		| $$(HFST_MINIMIZE) $$(MORE_VERBOSITY) $$(HFST_FLAGS) \
+		| $$(HFST_COMPOSE_INTERSECT) $$(COMPOSE_INTERSECT_FLAG) \
+			$$(MORE_VERBOSITY) $$(HFST_FLAGS) \
+			-2 morphology/.generated/phonology.$(1).rev.hfst \
+		| $$(HFST_REVERSE) \
+		| $$(HFST_MINIMIZE) $$(MORE_VERBOSITY) $$(HFST_FLAGS) \
+		-o $$@
+
+else
+# Otherwise do this:
+.generated/generator-raw-gt-desc.$(1).tmp1.hfst: morphology/.generated/lexicon.hfst \
+					 morphology/.generated/phonology.$(1).compose.hfst $$(GENDIR)
+	$$(AM_V_INTRSCT)\
+		  $$(HFST_DETERMINIZE) $$(MORE_VERBOSITY) $$(HFST_FLAGS) $$<\
+		| $$(HFST_MINIMIZE) $$(MORE_VERBOSITY) $$(HFST_FLAGS) \
+		| $$(HFST_COMPOSE_INTERSECT) $$(COMPOSE_INTERSECT_FLAG) \
+			$$(MORE_VERBOSITY) $$(HFST_FLAGS) \
+			-2 morphology/.generated/phonology.$(1).compose.hfst \
+		| $$(HFST_MINIMIZE) $$(MORE_VERBOSITY) $$(HFST_FLAGS) \
+		-o $$@
+endif # WANT_REVERSED_INTERSECT
+
+# XEROX
+.generated/analyser-raw-gt-desc.$(1).tmp1.xfst: morphology/.generated/lexicon.xfst \
+			 morphology/.generated/phonology.$(1).compose.xfst $$(GENDIR)
+	$$(AM_V_LEXC)$$(PRINTF) \
+		"read-source morphology/.generated/lexicon.xfst\nread-rules morphology/.generated/phonology.$(1).compose.xfst\ncompose-result\nsave-result $$@\nquit\n" \
+		| $$(LEXC) $$(VERBOSITY)
+
+# FOMA
+.generated/analyser-raw-gt-desc.$(1).tmp1.foma: morphology/.generated/lexicon.foma \
+			 morphology/.generated/phonology.$(1).compose.foma $$(GENDIR)
+	$$(AM_V_FOMA)$$(PRINTF) \
+		"read regex \
+				@\"$$<\" \
+			.o. @\"morphology/.generated/phonology.$(1).compose.foma\" \
+			; \n\
+		 save stack $$@\n\
+		 quit\n" \
+		| $$(FOMA) $$(VERBOSITY)
+endif !LEXREF_IN_PHONOLOGY
+
+
+# ... then apply tag reordering to tmp1 to ensure the same tag order in all
+# subsequent processing; this creates the regular tmp file, which can further
+# get local processing to produce the final raw file:
+### HFST - the raw files are generators, thus we need a special target (but
+###        we try to keep the code as identical as possible, thus pattern rule):
+# Variant a) - with a language-specific tag reordering script applied:
+.generated/generator-raw-gt-desc.$(1).tmp.%: .generated/generator-raw-gt-desc.$(1).tmp1.%     \
+					filters/reorder-tags.$$(GTLANG).%          \
+					filters/reorder-semantic-tags.%           \
+					filters/reorder-subpos-tags.%
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+				@\"filters/reorder-tags.$$(GTLANG).$$*\"          \
+			.o. @\"filters/reorder-subpos-tags.$$*\"             \
+			.o. @\"filters/reorder-semantic-tags.$$*\"           \
+			.o. @\"$$<\" \
+			;\n\
+		 save stack $@\n\
+		 quit\n" | $$(XFST_TOOL)
+
+# Variant b) - without a language-specific tag reordering script:
+.generated/generator-raw-gt-desc.$(1).tmp.%: .generated/generator-raw-gt-desc.$(1).tmp1.%     \
+					filters/reorder-semantic-tags.%           \
+					filters/reorder-subpos-tags.%
+	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
+				@\"filters/reorder-subpos-tags.$$*\"             \
+			.o. @\"filters/reorder-semantic-tags.$$*\"           \
+			.o. @\"$$<\" \
+			;\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
+#### Xerox & FOMA - no special treatment:
+# Variant a) - with a language-specific tag reordering script applied:
+.generated/analyser-raw-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.$(1).tmp1.%       \
+					filters/reorder-tags.$$(GTLANG).%          \
+					filters/reorder-semantic-tags.%           \
+					filters/reorder-subpos-tags.%
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+				@\"filters/reorder-tags.$$(GTLANG).$$*\"          \
+			.o. @\"filters/reorder-subpos-tags.$$*\"             \
+			.o. @\"filters/reorder-semantic-tags.$$*\"           \
+			.o. @\"$$<\" \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+
+# Variant b) - without a language-specific tag reordering script:
+.generated/analyser-raw-gt-desc.$(1).tmp.%: .generated/analyser-raw-gt-desc.$(1).tmp1.%       \
+					filters/reorder-semantic-tags.%           \
+					filters/reorder-subpos-tags.%
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+				@\"filters/reorder-subpos-tags.$$*\"             \
+			.o. @\"filters/reorder-semantic-tags.$$*\"           \
+			.o. @\"$$<\" \
+			;\n\
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
+
+
 endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_desc_analysers,$(alt_orth))))
 

@@ -16,7 +16,7 @@ endif
 AM_TESTS_ENVIRONMENT= export GIELLA_CORE=$(GIELLA_CORE) ; export TOOLKITS=$(TOOLKITS) ;
 
 if WANT_SPELLERS
-OTHER_TEST_RUNNERS+=test-zhfst-file.sh
+OTHER_TEST_RUNNERS+=test-zhfst-file.sh suggestion-quality.sh
 endif
 if CAN_YAML_TEST
 YAML_TEST_RUNNERS+=run-spellers-gt-norm-yaml-testcases.sh

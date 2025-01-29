@@ -198,10 +198,10 @@ if CAN_HFST
 if LEXREF_IN_PHONOLOGY
 GT_PHONOLOGY+=$(addsuffix .hfst.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
 else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=.generated/$(addsuffix .compose.hfst, $(basename $(GT_PHONOLOGY_SRCS)))
-GT_PHONOLOGY+=.generated/$(addsuffix .lookup.hfst,  $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .compose.hfst, $(basename $(GT_PHONOLOGY_SRCS))))
+GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .lookup.hfst,  $(basename $(GT_PHONOLOGY_SRCS))))
 if WANT_REVERSED_INTERSECT
-GT_PHONOLOGY+=.generated/$(addsuffix .rev.hfst, $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .rev.hfst,     $(basename $(GT_PHONOLOGY_SRCS))))
 endif # WANT_REVERSED_INTERSECT
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_HFST
@@ -210,8 +210,8 @@ if CAN_XFST
 if LEXREF_IN_PHONOLOGY
 GT_PHONOLOGY+=$(addsuffix .xfst.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
 else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=.generated/$(addsuffix .compose.xfst, $(basename $(GT_PHONOLOGY_SRCS)))
-GT_PHONOLOGY+=.generated/$(addsuffix .lookup.xfst,  $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .compose.xfst, $(basename $(GT_PHONOLOGY_SRCS))))
+GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .lookup.xfst,  $(basename $(GT_PHONOLOGY_SRCS))))
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_XFST
 
@@ -219,8 +219,8 @@ if CAN_FOMA
 if LEXREF_IN_PHONOLOGY
 GT_PHONOLOGY+=$(addsuffix .foma.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
 else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=.generated/$(addsuffix .compose.foma, $(basename $(GT_PHONOLOGY_SRCS)))
-GT_PHONOLOGY+=.generated/$(addsuffix .lookup.foma,  $(basename $(GT_PHONOLOGY_SRCS)))
+GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .compose.foma, $(basename $(GT_PHONOLOGY_SRCS))))
+GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .lookup.foma,  $(basename $(GT_PHONOLOGY_SRCS))))
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_FOMA
 

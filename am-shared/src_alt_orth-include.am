@@ -80,7 +80,7 @@ define alt_orth_desc_analysers
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
-					$(GLT_NFCNFD_FILTER)                      \
+					$(GLT_NFCNFD_FILTER)                       \
 					orthography/spellrelax.$(1).compose.%      \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \

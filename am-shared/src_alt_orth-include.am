@@ -304,8 +304,8 @@ endif !LEXREF_IN_PHONOLOGY
 					filters/remove-mwe-tags.%                 \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
-					$$(GLT_NFCNFD_FILTER)                      \
-					$$(GLT_DOWNCASE_FILTER)
+					$(GLT_NFCNFD_FILTER)                      \
+					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.$$*\"                \
 			.o. @\"filters/remove-dialect-tags.$$*\"             \
@@ -320,8 +320,8 @@ endif !LEXREF_IN_PHONOLOGY
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 			.o. @\"$$<\" \
-			    $$(GLT_NFCNFD_COMPOSE) \
-			    $$(GLT_DOWNCASE_COMPOSE) \
+			    $(GLT_NFCNFD_COMPOSE) \
+			    $(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$$*\"       \
 			.o. @\"filters/remove-word-boundary.$$*\"            \

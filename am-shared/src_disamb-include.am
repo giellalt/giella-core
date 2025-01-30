@@ -215,6 +215,43 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 			;\n\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
+
+# ... and finally using an alternative raw file:
+.generated/analyser-disamb-gt-desc.$(1).tmp1.%: .generated/analyser-raw-gt-desc.$(1).%        \
+					filters/remove-Orth_IPA-strings.%         \
+					filters/remove-hyphenation-marks.%        \
+					filters/remove-infl_deriv-borders.%       \
+					filters/remove-word-boundary.%            \
+					filters/remove-orthography-tags.%         \
+					filters/remove-variant-tags.%             \
+					filters/remove-mwe-tags.%                 \
+					filters/block-mwe-compounds.%             \
+					orthography/inituppercase.compose.%       \
+					orthography/spellrelax.compose.%          \
+					$(GLT_NFCNFD_FILTER)                      \
+					$(GLT_DOWNCASE_FILTER)
+	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
+				@\"filters/remove-orthography-tags.$$*\"             \
+			.o. @\"filters/remove-variant-tags.$$*\"                 \
+			.o. @\"filters/remove-Orth_IPA-strings.$$*\"             \
+			.o. @\"filters/remove-mwe-tags.$$*\"                     \
+			.o. @\"filters/block-mwe-compounds.$$*\"                 \
+			.o. @\"$$<\"                                             \
+			    $$(GLT_NFCNFD_COMPOSE_DEF) \
+			    $$(GLT_DOWNCASE_COMPOSE_DEF) \
+			.o. @\"filters/remove-hyphenation-marks.$$*\"            \
+			.o. @\"filters/remove-infl_deriv-borders.$$*\"           \
+			.o. @\"filters/remove-word-boundary.$$*\"                \
+			; \n\
+			define fst \n\
+			set flag-is-epsilon ON\n\
+			read regex fst \
+			.o. @\"orthography/inituppercase.compose.$*\"       \
+			.o. @\"orthography/spellrelax.compose.$*\"          \
+			;\n\
+		 save stack $@\n\
+		 quit\n" | $(XFST_TOOL)
+
 endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_disamb_fst,$(alt_orth))))
 

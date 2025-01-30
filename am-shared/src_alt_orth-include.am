@@ -244,7 +244,7 @@ endif !LEXREF_IN_PHONOLOGY
 			.o. @\"filters/reorder-semantic-tags.$$*\"           \
 			.o. @\"$$<\" \
 			;\n\
-		 save stack $@\n\
+		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
 # Variant b) - without a language-specific tag reordering script:
@@ -256,7 +256,7 @@ endif !LEXREF_IN_PHONOLOGY
 			.o. @\"filters/reorder-semantic-tags.$$*\"           \
 			.o. @\"$$<\" \
 			;\n\
-		 save stack $@\n\
+		 save stack $$@\n\
 		 quit\n" | $(XFST_TOOL)
 
 #### Xerox & FOMA - no special treatment:

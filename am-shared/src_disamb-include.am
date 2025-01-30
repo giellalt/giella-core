@@ -228,8 +228,8 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 					filters/block-mwe-compounds.%             \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
-					$(GLT_NFCNFD_FILTER)                      \
-					$(GLT_DOWNCASE_FILTER)
+					$$(GLT_NFCNFD_FILTER)                     \
+					$$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-orthography-tags.$$*\"             \
 			.o. @\"filters/remove-variant-tags.$$*\"                 \
@@ -246,11 +246,11 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 			define fst \n\
 			set flag-is-epsilon ON\n\
 			read regex fst \
-			.o. @\"orthography/inituppercase.compose.$*\"       \
-			.o. @\"orthography/spellrelax.compose.$*\"          \
+			.o. @\"orthography/inituppercase.compose.$$*\"       \
+			.o. @\"orthography/spellrelax.compose.$$*\"          \
 			;\n\
-		 save stack $@\n\
-		 quit\n" | $(XFST_TOOL)
+		 save stack $$@\n\
+		 quit\n" | $$(XFST_TOOL)
 
 endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_disamb_fst,$(alt_orth))))

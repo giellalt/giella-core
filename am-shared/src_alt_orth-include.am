@@ -8,15 +8,20 @@
 # IFF alternative orthographies are defined:
 if HAVE_ALT_ORTHS
 
+if WANT_ALT_ORTH_PROOFTOOLS
+ALT_ORTH_PROOF_ANALYSERS=$(GT_PROOF_ANALYSERS)
+ALT_ORTH_PROOF_GENERATORS=$(GT_PROOF_GENERATORS)
+endif # WANT_ALT_ORTH_PROOFTOOLS
+
 # Define temporary variables to build final target filenames from:
-BASENAME_ANALYSERS_ORTH=$(sort $(basename $(GT_ANALYSERS)))
+BASENAME_ANALYSERS_ORTH=$(sort $(basename $(GT_ANALYSERS) $(ALT_ORTH_PROOF_ANALYSERS)))
 ALT_ORTH_ANALYSERS_TMP=$(shell for ll in $(BASENAME_ANALYSERS_ORTH); do\
     for ld in $(ALT_ORTHS); do\
         echo "$$ll.$$ld" ;\
     done ;\
 done)
 
-BASENAME_GENERATORS_ORTH=$(sort $(basename $(GT_GENERATORS)))
+BASENAME_GENERATORS_ORTH=$(sort $(basename $(GT_GENERATORS) $(ALT_ORTH_PROOF_GENERATORS)))
 ALT_ORTH_GENERATORS_TMP=$(shell for ll in $(BASENAME_GENERATORS_ORTH); do\
     for ld in $(ALT_ORTHS); do\
         echo "$$ll.$$ld" ;\

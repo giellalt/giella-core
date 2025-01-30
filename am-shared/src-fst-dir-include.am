@@ -217,8 +217,10 @@ hfstdata_DATA=$(GT_ANALYSERS)       \
 			  $(ALT_ORTH_GENERATORS)\
 			  $(CUSTOM_FSTS)
 
-noinst_DATA=$(GT_RAW)              \
-			$(GT_FSTs_NO_INSTALL)
+noinst_DATA=$(GT_RAW)               \
+			  $(GT_PROOF_ANALYSERS) \
+			  $(GT_PROOF_GENERATORS)\
+			  $(GT_FSTs_NO_INSTALL)
 
 ##################################################
 ######## Build rules for Xerox and HFST: #########

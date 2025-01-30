@@ -201,8 +201,8 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 			.o. @\"filters/remove-mwe-tags.$$*\"                     \
 			.o. @\"filters/block-mwe-compounds.$$*\"                 \
 			.o. @\"$$<\"                                             \
-			    $$(GLT_NFCNFD_COMPOSE_DEF) \
-			    $$(GLT_DOWNCASE_COMPOSE_DEF) \
+			    $(GLT_NFCNFD_COMPOSE_DEF) \
+			    $(GLT_DOWNCASE_COMPOSE_DEF) \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"            \
 			.o. @\"filters/remove-infl_deriv-borders.$$*\"           \
 			.o. @\"filters/remove-word-boundary.$$*\"                \
@@ -237,8 +237,8 @@ orthography/spellrelax.$(1).%: orthography/spellrelax.%
 			.o. @\"filters/remove-mwe-tags.$$*\"                     \
 			.o. @\"filters/block-mwe-compounds.$$*\"                 \
 			.o. @\"$$<\"                                             \
-			    $$(GLT_NFCNFD_COMPOSE_DEF) \
-			    $$(GLT_DOWNCASE_COMPOSE_DEF) \
+			    $(GLT_NFCNFD_COMPOSE_DEF) \
+			    $(GLT_DOWNCASE_COMPOSE_DEF) \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"            \
 			.o. @\"filters/remove-infl_deriv-borders.$$*\"           \
 			.o. @\"filters/remove-word-boundary.$$*\"                \

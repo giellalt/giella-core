@@ -432,7 +432,7 @@ remove-mixed_area-strings.regex:
 # Remove strings specific to other orthographies than the requested one:
 remove-all_orths_but_%-strings.regex:
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-altorth-filter-regex.sh \
-		$@ $* "$(AREAS)"
+		$@ $* "$(DEFAULT_ORTH) $(ALT_ORTHS)"
 
 ### Remove strings with tags as specified:
 # Specific variant - take into account an exception file:

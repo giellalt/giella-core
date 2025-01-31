@@ -85,6 +85,7 @@ define alt_orth_desc_analysers
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					$(GLT_NFCNFD_FILTER)                       \
 					orthography/spellrelax.$(1).compose.%      \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.%
@@ -100,6 +101,7 @@ define alt_orth_desc_analysers
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			    $(GLT_NFCNFD_COMPOSE_DEF) \
@@ -130,6 +132,7 @@ define alt_orth_desc_analysers
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					$(GLT_NFCNFD_FILTER)                      \
 					orthography/spellrelax.$(1).compose.%      \
 					orthography/raw-to-$(1).compose.%
@@ -145,6 +148,7 @@ define alt_orth_desc_analysers
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			    $(GLT_NFCNFD_COMPOSE_DEF) \
@@ -307,6 +311,7 @@ endif !LEXREF_IN_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
 					$(GLT_NFCNFD_FILTER)                      \
@@ -323,6 +328,7 @@ endif !LEXREF_IN_PHONOLOGY
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 			.o. @\"$$<\" \
 			    $(GLT_NFCNFD_COMPOSE_DEF) \
@@ -364,6 +370,7 @@ define alt_orth_norm_analysers
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.$$*\"                  \
@@ -379,6 +386,7 @@ define alt_orth_norm_analysers
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
@@ -408,6 +416,7 @@ define alt_orth_norm_analysers
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/raw-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.$$*\"                  \
@@ -423,6 +432,7 @@ define alt_orth_norm_analysers
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
@@ -452,6 +462,7 @@ define alt_orth_norm_analysers
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/inituppercase.compose.%       \
 					$$(GIELLA_MIXED_AREA_FILTER)               \
 					$$(GLT_DOWNCASE_FILTER)
@@ -469,6 +480,7 @@ define alt_orth_norm_analysers
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 				$$(GIELLA_MIXED_AREA_COMPOSE)                    \
 			.o. @\"$$<\" \
@@ -514,6 +526,7 @@ define alt_orth_desc_generators
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$$*\"   \
@@ -534,6 +547,7 @@ define alt_orth_desc_generators
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
@@ -568,6 +582,7 @@ define alt_orth_desc_generators
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/raw-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$$*\"   \
@@ -588,6 +603,7 @@ define alt_orth_desc_generators
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
@@ -622,6 +638,7 @@ define alt_orth_desc_generators
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$$*\" \
@@ -642,6 +659,7 @@ define alt_orth_desc_generators
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 			.o. @\"$$<\" \
 			    $(GLT_DOWNCASE_COMPOSE_DEF) \
@@ -680,6 +698,7 @@ define alt_orth_norm_generators
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$$*\"   \
@@ -700,6 +719,7 @@ define alt_orth_norm_generators
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
@@ -734,6 +754,7 @@ define alt_orth_norm_generators
 					filters/remove-Use_minus_PMatch-tags.%     \
 					filters/remove-Use_PMatch-strings.%        \
 					filters/remove-mwe-tags.%                  \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					orthography/raw-to-$(1).compose.%
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$$*\"   \
@@ -754,6 +775,7 @@ define alt_orth_norm_generators
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"           \
 			.o. @\"filters/remove-Use_GC-strings.$$*\"             \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"         \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                   \
 			.o. @\"$$<\"                                           \
 			.o. @\"filters/remove-hyphenation-marks.$$*\"          \
@@ -788,6 +810,7 @@ define alt_orth_norm_generators
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					filters/remove-all_orths_but_$(1)-strings.% \
 					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$$(AM_V_XFST_TOOL)$$(PRINTF) "read regex \
@@ -809,6 +832,7 @@ define alt_orth_norm_generators
 			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
+			.o. @\"filters/remove-all_orths_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 				$(GIELLA_MIXED_AREA_COMPOSE_DEF)                 \
 			.o. @\"$$<\" \

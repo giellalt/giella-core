@@ -121,6 +121,7 @@ GIELLA_FILTER_CORE_GENERATED_REGEX_SRCS=\
 				remove-semantic-tags-before-derivations.regex \
 				reorder-semantic-tags.regex                   \
 				$(DIALECT_REGEXES)                            \
+				$(ALTORTH_REGEXES)                            \
 				$(AREA_INCONSISTENT_REGEX)                    \
 				$(AREA_INSERT_TAGS_REGEX)                     \
 				$(AREA_REGEXES)
@@ -226,6 +227,18 @@ AREA_REGEXES=$(addsuffix     .regex,$(AREA_SUFFIXES))
 AREA_INCONSISTENT_REGEX=remove-mixed_area-strings.regex
 AREA_INSERT_TAGS_REGEX=insert-area-tags-before-pos.regex
 endif # HAVE_AREAS
+
+####### Build rules for building alt-orth filters: #######
+# ALTORTH_TARGETS_?FST is constructed dynamically based on the
+# alternative orthographies specified in configure.ac.
+
+if HAVE_ALT_ORTHS
+
+ALTORTH_PREFIXES=$(addprefix remove-all_orths_but_,$(DEFAULT_ORTH) $(ALT_ORTHS))
+ALTORTH_SUFFIXES=$(addsuffix -strings,$(ALTORTH_PREFIXES))
+ALTORTH_REGEXES=$(addsuffix .regex,$(ALTORTH_SUFFIXES))
+
+endif # HAVE_ALT_ORTHS
 
 ######## Build rules for extracting tags: ########
 ##
@@ -353,6 +366,18 @@ TAG_EXTRACTION_TTS_FST=$(top_builddir)/src/fst/morphology/%
 		mv -f $@.tmp $@ ; \
 	fi
 
+.generated/altorth-tags.txt: .generated/$(LEX_TAG_FILE)
+	$(AM_V_GEN)$(GTCORE)/scripts/extract-tags.sh $< $@.tmp AltOrth/
+	$(AM_V_GEN)if test -f $@ ; then \
+		if ! diff -q $@ $@.tmp ; then \
+			mv -f $@.tmp $@ ; \
+		else \
+			rm -f $@.tmp ; \
+		fi ;\
+	else \
+		mv -f $@.tmp $@ ; \
+	fi
+
 ####### Build rules for creating regexes from tag list: #######
 
 # Create regex from tag list for making that tag list optional.
@@ -403,6 +428,11 @@ remove-all_areas_but_%-strings.regex:
 remove-mixed_area-strings.regex:
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-mixed_area-filter-regex.sh \
 		$@ "$(AREAS)"
+
+# Remove strings specific to other orthographies than the requested one:
+remove-all_orths_but_%-strings.regex:
+	$(AM_V_GEN)$(GTCORE)/scripts/generate-altorth-filter-regex.sh \
+		$@ $* "$(AREAS)"
 
 ### Remove strings with tags as specified:
 # Specific variant - take into account an exception file:

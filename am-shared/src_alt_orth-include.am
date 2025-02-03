@@ -8,6 +8,9 @@
 # IFF alternative orthographies are defined:
 if HAVE_ALT_ORTHS
 
+# AND IFF alternative orthographies are ENABLED:
+if WANT_ALT_ORTHS
+
 if WANT_ALT_ORTH_PROOFTOOLS
 ALT_ORTH_PROOF_ANALYSERS=$(GT_PROOF_ANALYSERS)
 ALT_ORTH_PROOF_GENERATORS=$(GT_PROOF_GENERATORS)
@@ -61,6 +64,7 @@ endif # WANT_GENERATION
 endif # CAN_FOMA
 ##### END Foma target list #####
 
+endif # WANT_ALT_ORTHS
 endif # HAVE_ALT_ORTHS
 
 

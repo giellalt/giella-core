@@ -238,6 +238,9 @@ ALTORTH_PREFIXES=$(addprefix remove-all_orths_but_,$(DEFAULT_ORTH) $(ALT_ORTHS))
 ALTORTH_SUFFIXES=$(addsuffix -strings,$(ALTORTH_PREFIXES))
 ALTORTH_REGEXES=$(addsuffix .regex,$(ALTORTH_SUFFIXES))
 
+# Additional regex filters for alt-orth setups:
+ALTORTH_REGEXES+=remove-altorth-tags.regex
+
 endif # HAVE_ALT_ORTHS
 
 ######## Build rules for extracting tags: ########

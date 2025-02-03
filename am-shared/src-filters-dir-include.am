@@ -200,7 +200,7 @@ EXTRA_DIST=$(GIELLA_FILTER_LOCAL_REGEX_SRCS) \
 # @param GIELLA_FILTER_TARGETS required
 noinst_DATA=$(GIELLA_FILTER_TARGETS)
 BUILT_SOURCES=$(GENERATED_FILES)
-CLEANFILES=$(GIELLA_FILTER_TARGETS)
+CLEANFILES=$(GIELLA_FILTER_TARGETS) $(GENERATED_FILES)
 
 ####### Build rules for building dialect filters: #######
 # DIALECT_TARGETS_?FST is constructed dynamically based on the dialects

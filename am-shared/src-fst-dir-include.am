@@ -158,12 +158,15 @@ GLT_DOWNCASE_FILTER_XFST=orthography/downcase-derived_proper-strings.compose.xfs
 GLT_DOWNCASE_COMPOSE=.o. @\"orthography/downcase-derived_proper-strings.compose.$*\"
 GLT_DOWNCASE_COMPOSE_XFST=.o. @\"orthography/downcase-derived_proper-strings.compose.xfst\"
 GLT_DOWNCASE_COMPOSE_DEF=.o. @\"orthography/downcase-derived_proper-strings.compose.$$*\"
+
+# " Reset syntax colouring
 else
+
 GLT_DOWNCASE_FILTER=
 GLT_DOWNCASE_COMPOSE=
 GLT_DOWNCASE_COMPOSE_DEF=
 endif # " DEFAULT_CASE_HANDLING
-### END: Case handling conditional:
+### END: Case handling conditional
 
 GLT_NFDNFC_FILTER=orthography/spellrelax-nfd2nfc.compose.%
 GLT_NFDNFC_FILTER_XFST=orthography/spellrelax-nfd2nfc.compose.xfst
@@ -191,6 +194,7 @@ GIELLA_INSERT_AREATAG_FILTER=filters/insert-area-tags-before-pos.%
 GIELLA_INSERT_AREATAG_COMPOSE=.o. @\"filters/insert-area-tags-before-pos.$*\"
 GIELLA_INSERT_AREATAG_COMPOSE_DEF=.o. @\"filters/insert-area-tags-before-pos.$$*\"
 
+# " Reset syntax colouring
 else
 
 GIELLA_MIXED_AREA_FILTER=
@@ -201,7 +205,30 @@ GIELLA_INSERT_AREATAG_FILTER=
 GIELLA_INSERT_AREATAG_COMPOSE=
 GIELLA_INSERT_AREATAG_COMPOSE_DEF=
 endif # " HAVE_AREAS
-### END: AREA filter conditional:
+### END: AREA filter conditional
+
+### BEGIN: ALT ORTH filter conditional:
+if HAVE_ALT_ORTHS
+GIELLA_ALTORTH_DEFAULT_FILTER=filters/remove-all_orths_but_$(DEFAULT_ORTH)-strings.%
+GIELLA_ALTORTH_DEFAULT_COMPOSE=.o. @\"filters/remove-all_orths_but_$(DEFAULT_ORTH)-strings.$*\"
+GIELLA_ALTORTH_DEFAULT_COMPOSE_DEF=.o. @\"filters/remove-all_orths_but_$(DEFAULT_ORTH)-strings.$$*\"
+
+GIELLA_ALTORTH_TAG_FILTER=filters/remove-altorth-tags.%
+GIELLA_ALTORTH_TAG_COMPOSE=.o. @\"filters/remove-altorth-tags.$*\"
+GIELLA_ALTORTH_TAG_COMPOSE_DEF=.o. @\"filters/remove-altorth-tags.$$*\"
+
+# " Reset syntax colouring
+else
+
+GIELLA_ALTORTH_DEFAULT_FILTER=
+GIELLA_ALTORTH_DEFAULT_COMPOSE=
+GIELLA_ALTORTH_DEFAULT_COMPOSE_DEF=
+
+GIELLA_ALTORTH_TAG_FILTER=
+GIELLA_ALTORTH_TAG_COMPOSE=
+GIELLA_ALTORTH_TAG_COMPOSE_DEF=
+endif # " HAVE_ALT_ORTHS
+### END: ALT ORTH filter conditional
 
 
 hfstdatadir=$(datadir)/giella/$(GTLANG)
@@ -407,7 +434,7 @@ endif !SKIP_PHONOLOGY
 # Invisible tags (ie to be removed):
 #   - semantic tags
 #   - homonymy tags
-.generated/analyser-gt-desc.tmp.%: .generated/analyser-raw-gt-desc.%                \
+.generated/analyser-gt-desc.tmp.%: .generated/analyser-raw-gt-desc.% \
 					filters/remove-area-tags.%                \
 					filters/remove-dialect-tags.%             \
 					filters/remove-number-string-tags.%       \
@@ -423,6 +450,8 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
+					$(GIELLA_ALTORTH_TAG_FILTER)              \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax.compose.%          \
 					$(GLT_NFCNFD_FILTER)                      \
@@ -440,9 +469,11 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
+				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
+				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
 			.o. @\"$<\" \
-			    $(GLT_NFCNFD_COMPOSE) \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_NFCNFD_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
 			.o. @\"filters/remove-word-boundary.$*\"            \
@@ -481,6 +512,8 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
+					$(GIELLA_ALTORTH_TAG_FILTER)              \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$*\" \
@@ -502,8 +535,10 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
+				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
+				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
 			.o. @\"$<\" \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
 			.o. @\"filters/remove-word-boundary.$*\"            \
@@ -527,6 +562,8 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
+					$(GIELLA_ALTORTH_TAG_FILTER)              \
 					orthography/inituppercase.compose.%       \
 					orthography/spellrelax-nfc2nfd.compose.%   \
 					orthography/spellrelax.compose.%          \
@@ -544,8 +581,10 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
+				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
+				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
 			.o. @\"$<\" \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
 			.o. @\"filters/remove-word-boundary.$*\"            \
@@ -584,6 +623,8 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
+					$(GIELLA_ALTORTH_TAG_FILTER)              \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/make-optional-transitivity-tags.$*\" \
@@ -605,8 +646,10 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
+				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
+				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
 			.o. @\"$<\" \
-			    $(GLT_DOWNCASE_COMPOSE) \
+				$(GLT_DOWNCASE_COMPOSE) \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
 			.o. @\"filters/remove-word-boundary.$*\"            \
@@ -634,8 +677,10 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
-					orthography/inituppercase.compose.%       \
+					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
+					$(GIELLA_ALTORTH_TAG_FILTER)              \
 					$(GIELLA_MIXED_AREA_FILTER)               \
+					orthography/inituppercase.compose.%       \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
 				@\"filters/remove-area-tags.$*\"                \
@@ -653,6 +698,8 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_MIXED_AREA_COMPOSE)                    \
+				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
+				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
 			.o. @\"$<\" \
 				$(GLT_DOWNCASE_COMPOSE)                         \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \
@@ -692,6 +739,8 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-mwe-tags.%                 \
+					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
+					$(GIELLA_ALTORTH_TAG_FILTER)              \
 					$(GIELLA_MIXED_AREA_FILTER)               \
 					$(GLT_DOWNCASE_FILTER)
 	$(AM_V_XFST_TOOL)$(PRINTF) "read regex \
@@ -715,6 +764,8 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_MIXED_AREA_COMPOSE)                    \
+				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
+				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
 			.o. @\"$<\" \
 				$(GLT_DOWNCASE_COMPOSE)                         \
 			.o. @\"filters/remove-hyphenation-marks.$*\"        \

@@ -514,6 +514,20 @@ def parse_args():
         action="store_false",
         help="Do not print typos",
     )
+    parser.add_argument(
+        "-n",
+        "--normative-fst",
+        help="The path to the normative FST",
+        default=None,
+        type=Path,
+    )
+    parser.add_argument(
+        "-d",
+        "--descriptive-fst",
+        help="The path to the descriptive FST",
+        default=None,
+        type=Path,
+    )
 
     return parser.parse_args()
 
@@ -526,8 +540,16 @@ def main():
     if not lang_parent:
         raise SystemExit("GTLANGS environment variable not set")
     lang_directory = Path(lang_parent) / f"lang-{args.language}"
-    normative_analyser = lang_directory / "src/fst/analyser-gt-norm.hfstol"
-    descriptive_analyser = lang_directory / "src/fst/analyser-gt-desc.hfstol"
+    normative_analyser = (
+        lang_directory / "src/fst/analyser-gt-norm.hfstol"
+        if args.normative_fst is None
+        else args.normative_fst
+    )
+    descriptive_analyser = (
+        lang_directory / "src/fst/analyser-gt-desc.hfstol"
+        if args.descriptive_fst is None
+        else args.descriptive_fst
+    )
 
     # Read lexc files
     lexc_dict = read_lexc_files(lang_directory)

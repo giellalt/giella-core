@@ -425,6 +425,7 @@ def print_typos(descriptive_typos: dict[str, list[str]]) -> None:
 def print_lexicalised_compounds(
     lexc_dict: dict[str, list[LexcEntry]],
     compounds_and_derivations_only: dict[str, list[str]],
+    comment_string: str,
 ) -> None:
     """Lexicalise compounds and derivations
 
@@ -440,7 +441,7 @@ def print_lexicalised_compounds(
         print(
             "\n".join(
                 [
-                    str(lexc_entry)
+                    str(lexc_entry) + comment_string
                     for hfst_stem, analyses in compounds_and_derivations_only.items()
                     for lexc_entry in lexicalise_compound(
                         hfst_stem, analyses, lexc_dict
@@ -451,7 +452,9 @@ def print_lexicalised_compounds(
 
 
 def print_missing_suggestions(
-    lexc_dict: dict[str, list[LexcEntry]], missing_desc_words: set[str]
+    lexc_dict: dict[str, list[LexcEntry]],
+    missing_desc_words: set[str],
+    comment_string: str,
 ) -> None:
     """Print suggestions for missing words in the descriptive analyser.
 
@@ -481,6 +484,7 @@ def print_missing_suggestions(
                         desc_missing_word, common_ending, matching_entry
                     )
                 )
+                + comment_string
                 for matching_entry in matching_entries
             )
         )
@@ -528,6 +532,9 @@ def parse_args():
         default=None,
         type=Path,
     )
+    parser.add_argument(
+        "-c", "--comment", help="A freestyle comment to add to the output", default=""
+    )
 
     return parser.parse_args()
 
@@ -555,8 +562,9 @@ def main():
     lexc_dict = read_lexc_files(lang_directory)
 
     # Save output from the normative analyser.
+    input_stream = sys.stdin if args.infile == sys.stdin else args.infile.open()
     norm_output = analyse_expressions(
-        fst=normative_analyser, lines={line for line in args.infile if line.strip()}
+        fst=normative_analyser, lines={line for line in input_stream if line.strip()}
     )
 
     # Save the words unknown to the normative analyser.
@@ -571,10 +579,13 @@ def main():
         fst=descriptive_analyser, lines=missing_norm_words
     )
 
-    # Save the words unknown to both the normative and the descriptive analyser.
-    missing_desc_words = {
-        line.split("\t")[0] for line in descriptive_output if line.endswith("inf")
-    }
+    input_filename = (
+        f" Inputfile: {str(args.infile.absolute()).replace(lang_parent, '$GTLANGS')}"
+        if args.infile != sys.stdin
+        else ""
+    )
+
+    comment = f" Comment: {args.comment}" if args.comment else ""
 
     # Present the result of the analysis to the linguist.
     # The categories are:
@@ -582,7 +593,15 @@ def main():
     # 2. Suggestions for unlexicalised compounds and derivations
     # 3. Optionally, typos
 
-    print_missing_suggestions(lexc_dict, missing_desc_words)
+    # The words unknown to both the normative and the descriptive analyser
+    # are given as the second argument.
+    print_missing_suggestions(
+        lexc_dict=lexc_dict,
+        missing_desc_words={
+            line.split("\t")[0] for line in descriptive_output if line.endswith("inf")
+        },
+        comment_string=comment + input_filename,
+    )
     print_lexicalised_compounds(
         lexc_dict,
         compounds_and_derivations_only=filter_derivations_and_compounds(
@@ -590,6 +609,7 @@ def main():
                 {line for line in norm_output if not line.endswith("inf")}
             )
         ),
+        comment_string=comment + input_filename,
     )
     if not args.no_typos:
         print_typos(

@@ -25,7 +25,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
-from typing import Iterable, Iterator, Optional, Union
+from typing import Iterable, Iterator, Optional
 
 
 @dataclass
@@ -66,9 +66,7 @@ LEXC_CONTENT_RE = re.compile(
 )
 
 
-def parse_line(
-    old_match, lexc_filename: str, lexicon_name: str
-) -> Union[LexcEntry, None]:
+def parse_line(old_match, lexc_filename: str, lexicon_name: str) -> Optional[LexcEntry]:
     """Parse a lexc line.
 
     Arguments:
@@ -102,7 +100,7 @@ def parse_line(
 
 def make_lexc_entry(
     line: str, lexc_filename: str, lexicon_name: str
-) -> Union[dict[str, str], None]:
+) -> Optional[dict[str, str]]:
     """Turn line into a dict using regexes.
 
     Args:

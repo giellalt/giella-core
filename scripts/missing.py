@@ -25,7 +25,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
-from typing import Iterable, Iterator, Union
+from typing import Iterable, Iterator, Optional, Union
 
 
 @dataclass
@@ -537,18 +537,39 @@ def parse_args():
     parser.add_argument(
         "-c", "--comment", help="A freestyle comment to add to the output", default=""
     )
+    parser.add_argument(
+        "-r",
+        "--lang-root",
+        help="The root of the language directory",
+        default=None,
+        type=Path,
+    )
 
     return parser.parse_args()
+
+
+def get_language_parent(lang_root: Optional[str]) -> Optional[Path]:
+    if lang_root is None:
+        lang_parent = os.getenv("GTLANGS")
+        if not lang_parent:
+            raise SystemExit("GTLANGS environment variable not set")
+    else:
+        lang_parent = lang_root
+
+    lang_path = Path(lang_parent)
+    if not lang_path.exists():
+        raise SystemExit(f"Could not find the language directory {lang_path}")
+
+    return lang_path
 
 
 def main():
     # Setup
     args = parse_args()
 
-    lang_parent = os.getenv("GTLANGS")
-    if not lang_parent:
-        raise SystemExit("GTLANGS environment variable not set")
-    lang_directory = Path(lang_parent) / f"lang-{args.language}"
+    lang_parent = get_language_parent(args.lang_root)
+    lang_directory = lang_parent / f"lang-{args.language}"
+
     normative_analyser = (
         lang_directory / "src/fst/analyser-gt-norm.hfstol"
         if args.normative_fst is None

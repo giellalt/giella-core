@@ -563,6 +563,29 @@ def get_language_parent(lang_root: Optional[str]) -> Optional[Path]:
     return lang_path
 
 
+def get_analysers(
+    normative_analyser: Optional[str],
+    descriptive_analyser: Optional[str],
+    lang_directory: Path,
+    language: str,
+) -> tuple[Path, Path]:
+    if normative_analyser is not None and descriptive_analyser is not None:
+        return Path(normative_analyser), Path(descriptive_analyser)
+
+    for prefix in [
+        lang_directory / "src/fst/",
+        Path("/usr/local/share/giella/") / language,
+        Path("/usr/share/giella/") / language,
+    ]:
+        normative_path = prefix / "analyser-gt-norm.hfstol"
+        descriptive_path = prefix / "analyser-gt-desc.hfstol"
+
+        if normative_path.exists() and descriptive_path.exists():
+            return normative_path, descriptive_path
+
+    raise SystemExit("Could not find the normative and descriptive analyser.")
+
+
 def main():
     # Setup
     args = parse_args()
@@ -570,15 +593,8 @@ def main():
     lang_parent = get_language_parent(args.lang_root)
     lang_directory = lang_parent / f"lang-{args.language}"
 
-    normative_analyser = (
-        lang_directory / "src/fst/analyser-gt-norm.hfstol"
-        if args.normative_fst is None
-        else args.normative_fst
-    )
-    descriptive_analyser = (
-        lang_directory / "src/fst/analyser-gt-desc.hfstol"
-        if args.descriptive_fst is None
-        else args.descriptive_fst
+    normative_analyser, descriptive_analyser = get_analysers(
+        args.normative_fst, args.descriptive_fst, lang_directory, args.language
     )
 
     # Read lexc files

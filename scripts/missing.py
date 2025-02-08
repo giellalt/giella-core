@@ -364,12 +364,24 @@ def make_missing_lexc_entry(
         A modified version of the incoming lexc entry for the missing stem.
     """
     hfst_prefix = hfst_stem[: hfst_stem.find(common_ending)]
-    lower_prefix = lexc_entry.stem[: lexc_entry.stem.find(common_ending)]
+    old_prefix = lexc_entry.stem[: lexc_entry.stem.find(common_ending)]
+    old_lower = lexc_entry.lower
 
+    # Skip matching chars in old_prefix vs old_lower
+    i, j = 0, 0
+    while i < len(old_prefix) and j < len(old_lower):
+        if old_prefix[i] == old_lower[j]:
+            i += 1
+            j += 1
+        else:
+            j += 1
+
+    new_lower = hfst_prefix + old_lower[j:]
+    logger.debug(f"{hfst_stem=} {common_ending=} {lexc_entry.stem=} {new_lower=}")
     return LexcEntry(
         stem=hfst_stem,
         tags=lexc_entry.tags,
-        lower=f"{hfst_prefix}{lexc_entry.lower[len(lower_prefix) :]}",
+        lower=new_lower,
         contlex=lexc_entry.contlex,
         filename=lexc_entry.filename,
         parent_lexicon=lexc_entry.parent_lexicon,

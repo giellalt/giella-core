@@ -283,10 +283,16 @@ def analyse_expressions(fst: Path, lines: Iterable[str]) -> list[str]:
     ]
 
 
-def get_longest_cmp_stem(analyses: list[str]) -> str:
+def get_longest_cmp_stem(suffix: str, analyses: list[str]) -> str:
     """Get the longest last compound stem from a list of analyses."""
+    for analysis in analyses:
+        logging.debug(f"{analysis=}")
     return max(
-        [analysis.split("#")[-1].split("+")[0] for analysis in analyses],
+        [
+            analysis.split("#")[-1].split("+")[0]
+            for analysis in analyses
+            if analysis.split("#")[-1].split("+")[0].endswith(suffix)
+        ],
         key=len,
     )
 
@@ -306,7 +312,9 @@ def lexicalise_compound(
     Returns:
         An iterator of lexicalised lexc entries.
     """
-    longest_last_stem = get_longest_cmp_stem(analyses)
+    longest_last_stem = get_longest_cmp_stem(
+        suffix=unlexicalised_compound_stem[-1], analyses=analyses
+    )
 
     if longest_last_stem not in lexc_dict:
         raise ValueError(f"Longest stem {longest_last_stem} not found in lexc")
@@ -316,6 +324,7 @@ def lexicalise_compound(
     ]
     matching_lexc_entries = lexc_dict.get(longest_last_stem, [])
 
+    logging.debug(f"{prefix=} {unlexicalised_compound_stem=} {longest_last_stem=}")
     return (
         LexcEntry(
             stem=f"{prefix}{longest_last_stem}",

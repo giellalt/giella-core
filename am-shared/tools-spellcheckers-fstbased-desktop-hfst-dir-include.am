@@ -244,7 +244,7 @@ CLEANFILES+=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 ####### Easter egg version info: #######
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
-.generated/easteregg.%.desktop.txt: $(GENDIR)
+.generated/easteregg.%.desktop.txt: $(GT_COMMON_SPELLER_ANALYSER) $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \

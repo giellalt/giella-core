@@ -79,5 +79,6 @@ endif # WANT_FST_HYPHENATOR
 
 include $(top_srcdir)/../giella-core/am-shared/regex-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

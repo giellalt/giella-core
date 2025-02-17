@@ -143,7 +143,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/run_voikko_speller.sh \
    scripts/scripted-memusg.sh \
    scripts/spell-preprocess.pl \
-   scripts/tag_test.sh \
+   scripts/missing-multichars.sh \
    scripts/flaglist2make_flag_regex.sh \
    scripts/taglist2insert_semantic_tags_after_pos_regex.sh \
    scripts/taglist2make_CG_tags_regex.sh \

@@ -25,6 +25,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import logging
 from typing import Iterable, Iterator, Optional
 
 

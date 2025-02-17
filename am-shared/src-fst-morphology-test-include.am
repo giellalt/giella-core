@@ -15,7 +15,7 @@ endif
 
 AM_TESTS_ENVIRONMENT= export GIELLA_CORE=$(GIELLA_CORE) ; export TOOLKITS=$(TOOLKITS) ;
 
-TESTS+=tag_test.sh
+TESTS+=missing-multichars.sh
 
 if WANT_GENERATION
 GENERATION_TESTS+=generate-adjective-lemmas.sh \

@@ -17,7 +17,7 @@
 /scripts/accept-all-lemmas.sh
 /scripts/run-morph-tester.sh
 /scripts/run-yaml-testcases.sh
-/scripts/tag_test.sh
+/scripts/missing-multichars.sh
 Makefile
 Makefile.in
 __pycache__/

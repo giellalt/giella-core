@@ -387,7 +387,7 @@ def make_missing_lexc_entry(
             j += 1
 
     new_lower = hfst_prefix + old_lower[j:]
-    logger.debug(f"{hfst_stem=} {common_ending=} {lexc_entry.stem=} {new_lower=}")
+    logging.debug(f"{hfst_stem=} {common_ending=} {lexc_entry.stem=} {new_lower=}")
     return LexcEntry(
         stem=hfst_stem,
         tags=lexc_entry.tags,

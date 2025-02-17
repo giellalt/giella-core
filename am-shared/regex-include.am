@@ -36,7 +36,7 @@ $(OFST_REGEX_TARGETS): \
 
 # By default, and for Xerox compatibility, all regexes are semicolon separated
 # (that is the '-S' flag):
-.regex.hfst:
+.generated/%.hfst: %.regex $(GENDIR)
 	$(AM_V_RGX2FST)"$(HFST_REGEXP2FST)" $(HFST_FLAGS) $(HFST_FORMAT) \
 		$(HFST_REGEXP2FST_FLAGS) $(MORE_VERBOSITY) -S $< -o $@
 

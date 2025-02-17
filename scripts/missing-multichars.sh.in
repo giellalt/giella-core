@@ -19,13 +19,13 @@ roottags=$(mktemp -t giella-tag_test.root.XXXXXXXXXXX)
 giella_core=$GIELLA_CORE
 
 # Extract USED tags:
-sed -e '1,/LEXICON Root/d' < "$1" | # Extract all lines after LEXICON Root
+sed -e '1,/^LEXICON Root/d' < "$1" | # Extract all lines after LEXICON Root
     "${giella_core}"/scripts/extract-used-tags.sh |
     LC_ALL=no_NO.UTF8 sort -u         \
     > "${lexctags}"
 
 # Extract DEFINED tags:
-sed -n '/LEXICON Root/q;p' < "$1" | # Extract all lines before LEXICON Root
+sed -n '/^LEXICON Root/q;p' < "$1" | # Extract all lines before LEXICON Root
     "${giella_core}"/scripts/extract-defined-tags.sh |
     LC_ALL=no_NO.UTF8 sort -u         \
     > "${roottags}"

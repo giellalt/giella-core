@@ -292,7 +292,7 @@ CLEANFILES+=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 
 ####### Error model: #######
 # Error model building - edit distance based on transducer alphabet:
-.generated/editdist.%.regex: editdist.%.txt $(initial_letter_deps) $(GENDIR)
+editdist.%.regex: editdist.%.txt $(initial_letter_deps) $(GENDIR)
 	$(AM_V_GEN)$(GTCORE)/scripts/editdist.py \
 		--verbose \
 		$(swaps) \

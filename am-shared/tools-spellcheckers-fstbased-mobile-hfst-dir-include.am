@@ -256,7 +256,7 @@ $(GIELLA_MOBILE_EASTEREGGS): \
 
 ####### Error model: #######
 # Error model building - edit distance based on transducer alphabet:
-.generated/editdist.%.mobile.regex: editdist.%.txt $(mob_initial_letter_deps) $(GENDIR)
+editdist.%.mobile.regex: editdist.%.txt $(mob_initial_letter_deps)
 	$(AM_V_GEN)$(GTCORE)/scripts/editdist.py \
 		--verbose \
 		$(mob_swaps) \
@@ -267,7 +267,7 @@ $(GIELLA_MOBILE_EASTEREGGS): \
 		--output-file=$@ \
 		$(mob_initial_letter_error_model_option)
 
-.generated/predict.%.regex: editdist.%.txt $(GENDIR)
+predict.%.regex: editdist.%.txt
 	$(AM_V_GEN)$(GTCORE)/scripts/predict.py \
 		--verbose \
 		--epsilon='@0@' \

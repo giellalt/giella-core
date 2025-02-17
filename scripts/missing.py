@@ -638,11 +638,11 @@ def main():
         fst=descriptive_analyser, lines=missing_norm_words
     )
 
-    input_filename = (
-        f" Inputfile: {str(args.infile.absolute()).replace(lang_parent, '$GTLANGS')}"
-        if args.infile != sys.stdin
-        else ""
-    )
+    if args.infile == sys.stdin:
+        input_filename = ""
+    else:
+        f = str(args.infile.absolute()).replace(str(lang_parent), '$GTLANGS')
+        input_filename = f" Inputfile: {f}"
 
     comment = f" Comment: {args.comment}" if args.comment else ""
 

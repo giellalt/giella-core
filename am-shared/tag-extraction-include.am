@@ -61,6 +61,25 @@ if CAN_HFST
 		| egrep -v '(@_EPSILON_SYMBOL_@|@_IDENTITY_SYMBOL_@|@_UNKNOWN_SYMBOL_@)' \
 		> $@
 
+.generated/%-sigma.txt: $(TAG_EXTRACTION_TTS_FST).hfstol $(GENDIR)
+	$(AM_V_GEN)$(HFST_SUMMARIZE) -v 2>/dev/null $< \
+		| grep -A1 '^sigma set' \
+		| grep -v '^sigma set' \
+		| sed 's/, /\\\\\\/g' \
+		| perl -pe 's/\\\\\\/\n/g' \
+		| grep -v '^$$' \
+		| egrep -v '(@_EPSILON_SYMBOL_@|@_IDENTITY_SYMBOL_@|@_UNKNOWN_SYMBOL_@)' \
+		> $@
+
+.generated/%-sigma.txt: $(TAG_EXTRACTION_FST).hfstol $(GENDIR)
+	$(AM_V_GEN)$(HFST_SUMMARIZE) -v 2>/dev/null $< \
+		| grep -A1 '^sigma set' \
+		| grep -v '^sigma set' \
+		| sed 's/, /\\\\\\/g' \
+		| perl -pe 's/\\\\\\/\n/g' \
+		| grep -v '^$$' \
+		| egrep -v '(@_EPSILON_SYMBOL_@|@_IDENTITY_SYMBOL_@|@_UNKNOWN_SYMBOL_@)' \
+		> $@
 else
 
 if CAN_XFST

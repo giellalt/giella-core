@@ -184,7 +184,7 @@ tokeniser-%.pmhfst: tokeniser-%.pmscript \
 		-o $@
 
 # Fallback pattern target for no local processing cases:
-%.hfst: .genereated/%.tmp.hfst
+%.hfst: .generated/%.tmp.hfst
 	$(AM_V_CP)cp -f $< $@
 
 ####### Includes: ###########

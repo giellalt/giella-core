@@ -185,7 +185,7 @@ mob_final_strings_all_build=$(shell \
 # Set file name to the empty string or words.%.txt depending on variable:
 mob_words_deps=$(shell \
 	if [[ $(MOB_WORD_REPLACEMENTS) != 'no' ]] ; then \
-		echo "words.%.mobile.txt"; \
+		echo ".generated/words.%.mobile.txt"; \
 	else \
 		echo ""; \
 	fi)
@@ -205,6 +205,7 @@ MOB_GIELLA_PREDICTMODELS+=.generated/errmodel.default.predict.hfst
 
 # Change errmodel.*.hfst -> easteregg.*.desktop.txt
 GIELLA_MOBILE_EASTEREGGS=$(subst errmodel.,easteregg.,$(subst .mobile.hfst,.mobile.txt,$(MOB_GIELLA_ERRMODELS)))
+GIELLA_PREDICT_EASTEREGGS=$(subst errmodel,easteregg.,$(subst .default.predict.hfst,.predict.mobile.txt,$(MOB_GIELLA_PREDICTMODELS)))
 
 MOB_GIELLA_SPELLING_HFST=$(GTLANG2)-mobile.zhfst
 MOB_GIELLA_PREDICT_HFST=$(GTLANG2)-x-predict-mobile.zhfst
@@ -238,6 +239,15 @@ $(GIELLA_MOBILE_EASTEREGGS): \
 		$(top_srcdir) \
 		$(SPELLERVERSION) \
 		"mobile" \
+		$* \
+		> $@
+
+.generated/easteregg.predict.mobile.txt: $(MOB_GT_SPELLER_HFST) $(GENDIR)
+	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
+		$(GTLANG2) \
+		$(top_srcdir) \
+		$(SPELLERVERSION) \
+		"mobilepredict" \
 		$* \
 		> $@
 

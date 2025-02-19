@@ -34,7 +34,8 @@ EXTRA_DIST+=$(GIELLA_SPELLER_FILTER_SRCS)
 GIELLA_SPELLER_FILTER_ALL_SRCS=\
         $(GIELLA_SPELLER_FILTER_SRCS) \
         $(GIELLA_LOCAL_SPELLER_FILTER_SRCS) \
-        $(GENERATED_REGEXES)
+        $(GENERATED_REGEXES) \
+		$(GIELLA_SRC_FILTERS)
 
 # This is what we build:
 noinst_DATA+=$(GIELLA_SPELLER_FILTER_TARGETS)
@@ -91,5 +92,6 @@ include $(top_srcdir)/../giella-core/am-shared/regex-include.am
 include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
+include $(top_srcdir)/../giella-core/am-shared/dot-generated-dir.am
 
 # vim: set ft=automake:

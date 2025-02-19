@@ -19,7 +19,7 @@
 GIELLA_MOBILESPELLER_FILTER_SRCS=
 
 # Source files copied from src/czf/filters/ OR from $(GIELLA_CORE)/fst-filters/
-GIELLA_SRC_FILTERS+=
+GIELLA_SRC_FILTERS+=remove-word-boundary.regex
 
 # These will be included in the distribution:
 EXTRA_DIST+=$(GIELLA_MOBILESPELLER_FILTER_SRCS) \

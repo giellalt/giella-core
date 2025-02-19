@@ -66,11 +66,13 @@ if WANT_ALT_ORTH_PROOFTOOLS
 BASENAME_TOKEN_FILTERS_ORTH+=$(sort $(basename $(GT_GRAMCHECK_TOKENISERS_FILTER_SRCS)))
 endif # WANT_ALT_ORTH_PROOFTOOLS
 
+if WANT_ALT_ORTHS
 ALT_ORTH_TOKENISER_FILTER_SRCS=$(shell for ll in $(BASENAME_TOKEN_FILTERS_ORTH); do\
     for ld in $(ALT_ORTHS); do\
         echo "$$ll.$$ld.regex" ;\
     done ;\
 done)
+endif # WANT_ALT_ORTHS
 endif # HAVE_ALT_ORTHS
 
 

@@ -42,7 +42,8 @@ ALT_ORTH_GENERATORS=
 # before building *.hfstol target. This also makes sure that the .hfst files
 # are retained, which is necessary for tokeniser dependencies.
 GT_FSTs_NO_INSTALL=$(subst hfstol,hfst,$(filter %.hfstol, \
-		$(GT_ANALYSERS) $(GT_GENERATORS) $(ALT_ORTH_ANALYSERS) ))
+		$(GT_ANALYSERS) $(GT_GENERATORS) $(ALT_ORTH_ANALYSERS) \
+		$(GT_PROOF_ANALYSERS) $(GT_PROOF_GENERATORS) ))
 
 # Add other targets that should be built but not installed,
 # such as the URL analyser, to the GT_FSTs_NO_INSTALL variable:

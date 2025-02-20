@@ -425,7 +425,7 @@ remove-all_dialects_but_%-strings.regex:
 # Remove strings specific to other areas than the requested one:
 remove-all_areas_but_%-strings.regex:
 	$(AM_V_GEN)$(GTCORE)/scripts/generate-area-filter-regex.sh \
-		$@ $* "$(AREAS)"
+		$@ `echo $* | sed -e 's:.generated/::'` "$(AREAS)"
 
 # Remove strings with mixed area orthografies:
 remove-mixed_area-strings.regex:

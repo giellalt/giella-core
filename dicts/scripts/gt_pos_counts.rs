@@ -49,7 +49,11 @@ struct Lemma {
 }
 
 pub fn main() {
-    std::path::Path::new("src/")
+    std::env::args()
+        .skip(1)
+        .next()
+        .map(|p| std::path::PathBuf::from(&p))
+        .unwrap_or(std::env::current_dir().expect("can get cwd"))
         .read_dir()
         .expect("can read src directory")
         .flat_map(|direntry_result| direntry_result)

@@ -7,6 +7,8 @@
 
 import xml.etree.ElementTree as ET
 from pathlib import Path
+import sys
+import os
 from collections import defaultdict
 import json
 
@@ -30,8 +32,9 @@ def handle_file(file):
 
 
 def main():
+    src_dir = os.getcwd() if len(sys.argv) == 1 else sys.argv[1]
     nlemmas = defaultdict(int)
-    for file in Path("src/").glob("*.xml"):
+    for file in Path(src_dir).glob("*.xml"):
         if result := handle_file(file):
             for k, v in result.items():
                 nlemmas[k] += v

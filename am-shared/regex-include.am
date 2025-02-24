@@ -58,4 +58,7 @@ $(OFST_REGEX_TARGETS): \
 .generated/%.regex: %.regex $(GENDIR)
 	$(AM_V_CP)cp -v $< $@
 
+%.hfst: .generated/%.hfst
+	$(AM_V_CP)cp -v $< $@
+
 # vim: set ft=automake:

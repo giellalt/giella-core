@@ -39,7 +39,8 @@ CLEAN       = @echo "Cleaning files."
 
 # Todo: 
 
-../../$(GOAL).hfst: ../../$(LP)/bin/$(GOAL).hfst ../../$(GOAL).fst
+# hfst, comment out if you want to compile with xfst instead
+../../$(GOAL).hfst: ../../$(LP)/bin/$(GOAL).hfst #../../$(GOAL).fst
 ../../$(LP)/bin/$(GOAL).hfst: ../../$(LP)/bin/$(GOAL).lexc
 	@echo
 	@echo "*** Building $@ ***"
@@ -47,17 +48,18 @@ CLEAN       = @echo "Cleaning files."
 	hfst-lexc  $< -o $@
 
 
-../../$(GOAL).fst: ../../$(LP)/bin/$(GOAL).fst
-../../$(LP)/bin/$(GOAL).fst: ../../$(LP)/bin/$(GOAL).lexc
-	@echo
-	@echo "*** Building $@ ***"
-	@echo
-	@printf "read lexc $<  \n\
-	invert net  \n\
-	save stack $@ \n\
-	quit \n" > $(GOAL)-fst-script
-	$(XFST)  < $(GOAL)-fst-script
-	@rm -f $(GOAL)-fst-script
+# xfst, comment in if you want to compile with xfst
+#../../$(GOAL).fst: ../../$(LP)/bin/$(GOAL).fst
+#../../$(LP)/bin/$(GOAL).fst: ../../$(LP)/bin/$(GOAL).lexc
+#	@echo
+#	@echo "*** Building $@ ***"
+#	@echo
+#	@printf "read lexc $<  \n\
+#	invert net  \n\
+#	save stack $@ \n\
+#	quit \n" > $(GOAL)-fst-script
+#	$(XFST)  < $(GOAL)-fst-script
+#	@rm -f $(GOAL)-fst-script
 
 ../../$(LP)/bin/$(GOAL).lexc: ../../$(LP)/$(SRC) $(SCRIPTS)/$(L1_L2)
 	@echo 
@@ -70,5 +72,5 @@ CLEAN       = @echo "Cleaning files."
 ###############
 
 clean:
-	@rm -vf ../../$(LP)/bin/*.txt $(LP)/bin/*.lexc $(LP)/bin/*.fst	
+	@rm -vf ../../$(LP)/bin/*.txt $(LP)/bin/*.lexc $(LP)/bin/*.hfst	 $(LP)/bin/*.fst	
 

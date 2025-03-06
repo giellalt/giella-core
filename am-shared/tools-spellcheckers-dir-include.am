@@ -92,7 +92,7 @@ analyser-%.hfst: generator-%.hfst
             initial_letters.all.default.hfst \
             final_strings.default.hfst
 
-CLEANFILES=$(GT_COMMON_SPELLER_HFST)
+CLEANFILES=$(GT_COMMON_SPELLER_HFST) *.hfst easteregg.*
 
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-dir-include.am 
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-dir-include.am 

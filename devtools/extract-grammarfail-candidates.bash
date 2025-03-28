@@ -56,21 +56,16 @@ ccat -l "$LANGCODE" "$CORPUSDIR" |\
         $VARIANT |\
     grep -F -v '"errs":[]' > "candidates-$LANGCODE.json"
 echo "intermediate results saved in candidates-$LANGCODE.json"
-if test -f taglist.txt ; then
-    for t in $(<taglist.txt) ; do
-        printf -- "---\nConfig:\n  Spec: ../pipespec.xml\n" > "candidates-$t.yaml"
-        printf "  Variant: %sgram-dev\n\n" "$LANGCODE" >> "candidates-$t.yaml"
-        printf "Tests:\n" >> "candidates-$t.yaml"
-        grep -F "$t" < "candidates-$LANGCODE.json" |\
-            rev | cut -d '"' -f 2 | rev |\
-            sed -e 's/^/ - "/' -e 's/$/"/' >> "candidates-$t.yaml"
-        echo "yaml test candidates for $t saved in candidates-$t.yaml"
-    done
-else
-    printf -- "---\nConfig:\n  Spec: ../pipespec.xml\n" > "candidates-$LANGCODE.yaml"
-    printf "  Variant: %sgram-dev\n\n" "$LANGCODE" >> "candidates-$LANGCODE.yaml"
-    printf "Tests:\n" >> "candidates-$LANGCODE.yaml"
-    rev < "candidates-$LANGCODE.json" | cut -d '"' -f 2 | rev |\
-        sed -e 's/^/ - "/' -e 's/$/"/' >> "candidates-$LANGCODE.yaml"
-    echo "yaml test candidates saved in candidates-$LANGCODE.yaml"
+if ! test -f taglist.txt ; then
+    echo "automatically creating taglist.txt for candidates per type"
+    jq .errs[][3] candidates-$LANGCODE.json | sort | uniq | tr -d '"' > taglist.txt
 fi
+for t in $(<taglist.txt) ; do
+    printf -- "---\nConfig:\n  Spec: ../pipespec.xml\n" > "candidates-$t.yaml"
+    printf "  Variant: %sgram-dev\n\n" "$LANGCODE" >> "candidates-$t.yaml"
+    printf "Tests:\n" >> "candidates-$t.yaml"
+    grep -F "$t" < "candidates-$LANGCODE.json" |\
+        rev | cut -d '"' -f 2 | rev |\
+        sed -e 's/^/ - "/' -e 's/$/"/' >> "candidates-$t.yaml"
+    echo "yaml test candidates for $t saved in candidates-$t.yaml"
+done

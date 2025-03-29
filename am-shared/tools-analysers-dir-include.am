@@ -112,10 +112,10 @@ $(GIELLA_ANL_VALENCY_SRC): \
 %.cg3: $(top_srcdir)/src/cg3/%.cg3
 	$(AM_V_CP)cp -f $< $@
 
-# Finally build the .zglt file:
+# Finally build the .zpipe file:
 $(GIELLA_ANL_ZDISTRO): $(GIELLA_ANL_ZIPFILES)
 	$(AM_V_at)rm -f $@
-	$(AM_V_ZIP)$(ZIP) $(ZIPFLAGS) $(MORE_VERBOSITY) $@ $^
+	gtgramtool build-archive pipespec.xml $@
 
 # Additional developer tools:
 dev: modes/$(GLANG)-analyser.mode schemas.xml

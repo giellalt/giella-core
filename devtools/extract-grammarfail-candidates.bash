@@ -32,7 +32,7 @@ if ! test -d $CORPUSDIR ; then
     exit 1
 fi
 if test $# -ge 1 ; then
-    VARIANT=-n $1
+    VARIANT="-n $1"
     shift
 else
     VARIANT=

@@ -1089,6 +1089,9 @@ define giella_default_morphers
 endef
 $(foreach fst,hfst xfst foma,$(eval $(call giella_default_morphers,$(fst))))
 
+analyser-%.hfst: .generated/analyser-%.hfst
+	$(AM_V_CP) cp -f $< $@
+
 include $(top_srcdir)/../giella-core/am-shared/src_dictionary-include.am
 include $(top_srcdir)/../giella-core/am-shared/src_disamb-include.am
 include $(top_srcdir)/../giella-core/am-shared/src_oahpa-include.am

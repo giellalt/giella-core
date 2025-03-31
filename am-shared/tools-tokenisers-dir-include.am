@@ -26,15 +26,11 @@
 hfstdatadir=$(datadir)/giella/$(GTLANG)
 hfstdata_DATA=
 
-if CAN_XFST
-GENERATOR=generator-gt-desc.xfst
-else
 if CAN_HFST
 GENERATOR=generator-gt-desc.hfstol
 else
 GENERATOR=false
 endif # CAN_HFST
-endif # CAN_XFST
 
 GIELLA_PMHFSTS=
 GIELLA_TOKEN_DIS=

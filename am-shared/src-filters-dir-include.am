@@ -176,12 +176,6 @@ GIELLA_FILTER_TARGETS+=$(patsubst %.xfscript,%.hfst,$(XFSCRIPT_SRCS))
 GIELLA_FILTER_TARGETS+=$(patsubst %.lexc,%.hfst,$(LEXC_SRCS))
 endif # CAN_HFST
 
-if CAN_XFST
-GIELLA_FILTER_TARGETS+=$(patsubst %.regex,%.xfst,$(REGEX_SRCS))
-GIELLA_FILTER_TARGETS+=$(patsubst %.xfscript,%.xfst,$(XFSCRIPT_SRCS))
-GIELLA_FILTER_TARGETS+=$(patsubst %.lexc,%.xfst,$(LEXC_SRCS))
-endif # CAN_XFST
-
 if CAN_FOMA
 GIELLA_FILTER_TARGETS+=$(patsubst %.regex,%.foma,$(REGEX_SRCS))
 GIELLA_FILTER_TARGETS+=$(patsubst %.xfscript,%.foma,$(XFSCRIPT_SRCS))

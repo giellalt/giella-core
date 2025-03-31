@@ -14,18 +14,6 @@ endif # WANT_TTS
 endif # CAN_HFST
 ##### END Hfst target list #####
 
-##### BEGIN Xerox target list #####
-if CAN_XFST
-
-if WANT_TTS
-GT_ANALYSERS+=analyser-tts-gt-output.xfst \
-			  analyser-tts-gt-input.xfst \
-			  generator-tts-gt-norm.xfst
-endif # WANT_TTS
-
-endif # CAN_XFST
-##### END Xerox target list #####
-
 ##### BEGIN Foma target list #####
 if CAN_FOMA
 
@@ -132,13 +120,6 @@ else
 		| $(HFST_MINIMIZE)    $(MORE_VERBOSITY) $(HFST_FLAGS) \
 		-o $@
 endif # WANT_REVERSED_INTERSECT
-
-# XEROX
-.generated/analyser-tts-gt-output.tmp.xfst: morphology/lexicon.xfst \
-			 morphology/phonology.compose.xfst $(GENDIR)
-	$(AM_V_LEXC)$(PRINTF) \
-		"read-source morphology/lexicon.xfst\nread-rules morphology/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
-		| $(LEXC) $(VERBOSITY)
 
 # Language independent processing for TTS analyser, after
 # TWOLC rules have been applied:

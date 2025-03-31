@@ -40,11 +40,6 @@ GT_FSTSPELLER_FILTER_TARGETS+=\
         $(patsubst %.regex,%.hfst,$(GT_FSTSPELLER_FILTER_ALL_SRCS))
 endif # CAN_HFST
 
-# if CAN_XFST
-# GT_FSTSPELLER_FILTER_TARGETS+=\
-#         $(patsubst %.regex,%.xfst,$(GT_FSTSPELLER_FILTER_ALL_SRCS))
-# endif # CAN_XFST
-# 
 # if CAN_FOMA
 # GT_FSTSPELLER_FILTER_TARGETS+=\
 #         $(patsubst %.regex,%.foma,$(GT_FSTSPELLER_FILTER_ALL_SRCS))

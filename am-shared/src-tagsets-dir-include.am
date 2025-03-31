@@ -39,9 +39,6 @@ if CAN_HFST
 GT_TAGSETS+=$(patsubst %.regex,%.hfst,$(GT_ALL_TAGSET_RGX_SRCS))
 endif # CAN_HFST
 
-if CAN_XFST
-GT_TAGSETS+=$(patsubst %.regex,%.xfst,$(GT_ALL_TAGSET_RGX_SRCS))
-endif # CAN_XFST
 
 ####### HFST build rules: ########
 

@@ -39,11 +39,6 @@ ERROR_LOG_FILE=hfst-twolc-error-log.txt
 		"$(HFST_TWOLC)" -v $(HFSTFLAGS) $(HFSTTWOLCFLAGS) $(HFST_FORMAT) \
 			-i $< -o $@ 2> >(tee -a $(ERROR_LOG_FILE) >&2) ; fi
 
-####### Xerox build rules: #######
-.generated/%.xfst: %.twolc $(GENDIR)
-	$(AM_V_TWOLC)$(PRINTF) "read-grammar $<\ncompile\nsave-binary $@\nquit\n" \
-		| "$(TWOLC)" $(VERBOSITY)
-
 ######## Foma build rules (based on Hfst): #######
 ### Commented out for now, they interfere with proper Foma builds, and do not
 ### work for the Hfst + Foma combo.

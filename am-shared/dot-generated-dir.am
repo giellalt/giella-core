@@ -14,9 +14,6 @@ $(GENDIR):
 %.hfst: .generated/%.hfst
 	$(AM_V_CP)cp $< $@
 
-%.xfst: .generated/%.xfst
-	$(AM_V_CP)cp $< $@
-
 %.foma: .generated/%.foma
 	$(AM_V_CP)cp $< $@
 

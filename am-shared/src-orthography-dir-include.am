@@ -44,13 +44,6 @@ GIELLA_ORTH_TARGETS+=$(patsubst %.regex,%.lookup.hfst,$(GT_ORTHOGRAPHIC_REGEX_SR
 GIELLA_ORTH_TARGETS+=$(patsubst %.regex,%.compose.hfst,$(GT_ORTHOGRAPHIC_REGEX_SRCS))
 endif
 
-if CAN_XFST
-GIELLA_ORTH_TARGETS+=$(patsubst %.xfscript,%.lookup.xfst,$(GT_ORTHOGRAPHIC_XFSCRIPT_SRCS))
-GIELLA_ORTH_TARGETS+=$(patsubst %.xfscript,%.compose.xfst,$(GT_ORTHOGRAPHIC_XFSCRIPT_SRCS))
-GIELLA_ORTH_TARGETS+=$(patsubst %.regex,%.lookup.xfst,$(GT_ORTHOGRAPHIC_REGEX_SRCS))
-GIELLA_ORTH_TARGETS+=$(patsubst %.regex,%.compose.xfst,$(GT_ORTHOGRAPHIC_REGEX_SRCS))
-endif
-
 if CAN_FOMA
 GIELLA_ORTH_TARGETS+=$(patsubst %.xfscript,%.lookup.foma,$(GT_ORTHOGRAPHIC_XFSCRIPT_SRCS))
 GIELLA_ORTH_TARGETS+=$(patsubst %.xfscript,%.compose.foma,$(GT_ORTHOGRAPHIC_XFSCRIPT_SRCS))

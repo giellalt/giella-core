@@ -42,16 +42,6 @@ endif # WANT_GENERATION
 endif # CAN_HFST
 ##### END Hfst target list #####
 
-##### BEGIN Xerox target list #####
-if CAN_XFST
-if WANT_MORPHOLOGY
-ALT_ORTH_ANALYSERS+=$(addsuffix .xfst,$(ALT_ORTH_ANALYSERS_TMP))
-endif # WANT_MORPHOLOGY
-if WANT_GENERATION
-ALT_ORTH_GENERATORS+=$(addsuffix .xfst,$(ALT_ORTH_GENERATORS_TMP))
-endif # WANT_GENERATION
-endif # CAN_XFST
-##### END Xerox target list #####
 
 ##### BEGIN Foma target list #####
 if CAN_FOMA
@@ -182,11 +172,6 @@ if LEXREF_IN_PHONOLOGY
 	$$(AM_V_HXFST)printf "save stack $$@\nquit\n" | cat $$< - \
 		| $$(HFST_XFST) -p $$(MORE_VERBOSITY) $$(HFST_FORMAT)
 
-# XEROX
-.generated/analyser-raw-gt-desc.$(1).tmp1.xfst: morphology/.generated/phonology.$(1).xfst.xfscript \
-			 morphology/.generated/lexicon.xfst $$(GENDIR)
-	$$(AM_V_XFST)$$(XFST) $$(VERBOSITY) -l $$< -e "save stack $$@" -stop
-
 # FOMA
 .genereated/analyser-raw-gt-desc.$(1).tmp1.foma: morphology/phonology.$(1).foma.xfscript \
 			 morphology/.generated/lexicon.foma $$(GENDIR)
@@ -223,13 +208,6 @@ else
 		| $$(HFST_MINIMIZE) $$(MORE_VERBOSITY) $$(HFST_FLAGS) \
 		-o $$@
 endif # WANT_REVERSED_INTERSECT
-
-# XEROX
-.generated/analyser-raw-gt-desc.$(1).tmp1.xfst: morphology/.generated/lexicon.xfst \
-			 morphology/.generated/phonology.$(1).compose.xfst $$(GENDIR)
-	$$(AM_V_LEXC)$$(PRINTF) \
-		"read-source morphology/.generated/lexicon.xfst\nread-rules morphology/.generated/phonology.$(1).compose.xfst\ncompose-result\nsave-result $$@\nquit\n" \
-		| $$(LEXC) $$(VERBOSITY)
 
 # FOMA
 .generated/analyser-raw-gt-desc.$(1).tmp1.foma: morphology/.generated/lexicon.foma \

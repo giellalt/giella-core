@@ -575,6 +575,6 @@ define giella_gramcheck_analysers
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call giella_gramcheck_analysers,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call giella_gramcheck_analysers,$(fst))))
 
 # vim: set ft=automake:

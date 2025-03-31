@@ -43,17 +43,6 @@ endif # WANT_GENERATION
 endif # CAN_HFST
 ##### END Hfst target list #####
 
-##### BEGIN Xerox target list #####
-if CAN_XFST
-if WANT_MORPHOLOGY
-AREA_ANALYSERS+=$(addsuffix .xfst,$(AREA_ANALYSERS_TMP))
-endif # WANT_MORPHOLOGY
-if WANT_GENERATION
-AREA_GENERATORS+=$(addsuffix .xfst,$(AREA_GENERATORS_TMP))
-endif # WANT_GENERATION
-endif # CAN_XFST
-##### END Xerox target list #####
-
 ##### BEGIN Foma target list #####
 if CAN_FOMA
 if WANT_MORPHOLOGY

@@ -56,16 +56,6 @@ GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(TXT2EMOJIS))
 GT_TRANSCRIPTORS+=$(addsuffix .hfstol,$(EMOJIS2TXT))
 endif # CAN_HFST
 
-if CAN_XFST
-GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(DIGIT2TXT))
-GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2DIGIT))
-GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(REGEX2TXT))
-GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(ABBREV2TXT))
-GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2ABBREV))
-GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(EMOJIS2TXT))
-GT_TRANSCRIPTORS+=$(addsuffix .xfst,$(TXT2EMOJIS))
-endif # CAN_XFST
-
 if CAN_FOMA
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(DIGIT2TXT))
 GT_TRANSCRIPTORS+=$(addsuffix .foma,$(TXT2DIGIT))
@@ -99,7 +89,7 @@ define digit2txt_transcriptors
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call digit2txt_transcriptors,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call digit2txt_transcriptors,$(fst))))
 
 # The text-to-digit transducers are built here:
 define txt2digit_transcriptors
@@ -119,7 +109,7 @@ define txt2digit_transcriptors
 		save stack $$@\n\
 		quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call txt2digit_transcriptors,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call txt2digit_transcriptors,$(fst))))
 
 # The abbrevs-to-text transducers are built here:
 define abbrevs2txt_transcriptors
@@ -139,7 +129,7 @@ define abbrevs2txt_transcriptors
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call abbrevs2txt_transcriptors,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call abbrevs2txt_transcriptors,$(fst))))
 
 # The text-to-abbrevs transducers are built here:
 define txt2abbrevs_transcriptors
@@ -159,7 +149,7 @@ define txt2abbrevs_transcriptors
 		save stack $$@\n\
 		quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call txt2abbrevs_transcriptors,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call txt2abbrevs_transcriptors,$(fst))))
 
 # just copy from hidden build dir to here for final prods
 

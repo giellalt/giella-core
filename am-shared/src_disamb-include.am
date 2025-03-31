@@ -28,16 +28,6 @@ endif # WANT_MORPHOLOGY
 endif # CAN_HFST
 ##### END Hfst target list #####
 
-##### BEGIN Xerox target list #####
-if CAN_XFST
-
-if WANT_MORPHOLOGY
-GT_ANALYSERS+=analyser-disamb-gt-desc.xfst
-endif # WANT_MORPHOLOGY
-
-endif # CAN_XFST
-##### END Xerox target list #####
-
 ##### BEGIN Foma target list #####
 if CAN_FOMA
 
@@ -274,7 +264,7 @@ define disambs
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call disambs,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call disambs,$(fst))))
 
 # We build a special variant of the disamb analyser for use with pmatch, where
 # the only diff from regular disamb is that we have removed strings and tags
@@ -295,4 +285,4 @@ define pmatch_disambs
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call pmatch_disambs,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call pmatch_disambs,$(fst))))

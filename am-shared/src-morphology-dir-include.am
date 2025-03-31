@@ -1,4 +1,4 @@
-## Include this file to lexc directory to build lexical automata
+# Include this file to lexc directory to build lexical automata
 
 ## Copyright (C) 2011 Samediggi
 
@@ -64,9 +64,6 @@ GT_LEXICAL+=.generated/lexicon.rev.hfst
 endif # WANT_REVERSED_INTERSECT
 endif # CAN_HFST
 
-if CAN_XFST
-GT_LEXICAL+=.generated/lexicon.xfst
-endif # CAN_XFST
 if CAN_FOMA
 GT_LEXICAL+=.generated/lexicon.foma
 endif # CAN_FOMA
@@ -83,14 +80,6 @@ GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.hfst,$(GT_LOCAL_XFSCRIPT_SRCS)
 GIELLA_LOCAL_SRC_TARGETS+=.generated/url.hfst .generated/emojis.hfst
 endif # CAN_HFST
 
-if CAN_XFST
-GIELLA_LOCAL_SRC_TARGETS+=\
-        $(patsubst %.lexc,%.xfst,$(GT_LOCAL_SRCS) $(GT_SHARED_SRCS))
-GIELLA_LOCAL_SRC_TARGETS+=$(patsubst %.xfscript,%.xfst,$(GT_LOCAL_XFSCRIPT_SRCS))
-# We need to explicitly add url.?fst here, as the generated targets only cover
-# url.tmp.?fst
-GIELLA_LOCAL_SRC_TARGETS+=.generated/url.xfst .generated/emojis.xfst
-endif # CAN_XFST
 
 if CAN_FOMA
 GIELLA_LOCAL_SRC_TARGETS+=\
@@ -108,10 +97,6 @@ endif # CAN_HFST
 if WANT_REVERSED_INTERSECT
 GT_LEXICAL+=.generated/lexicon-L2.rev.hfst
 endif # WANT_REVERSED_INTERSECT
-
-if CAN_XFST
-GT_LEXICAL+=.generated/lexicon-L2.xfst
-endif # CAN_XFST
 if CAN_FOMA
 GT_LEXICAL+=.generated/lexicon-L2.foma
 endif # CAN_FOMA
@@ -175,7 +160,6 @@ endif
 DEPGEN=$(AM_V_CP)mv -f $< $@
 .generated/%.foma: .generated/%.tmp.foma ; $(DEPGEN)
 .generated/%.hfst: .generated/%.tmp.hfst ; $(DEPGEN)
-.generated/%.xfst: .generated/%.tmp.xfst ; $(DEPGEN)
 
 ####### Phonology source file defs: ########
 
@@ -206,15 +190,6 @@ endif # WANT_REVERSED_INTERSECT
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_HFST
 
-if CAN_XFST
-if LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=$(addsuffix .xfst.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
-else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .compose.xfst, $(basename $(GT_PHONOLOGY_SRCS))))
-GT_PHONOLOGY+=$(addprefix .generated/, $(addsuffix .lookup.xfst,  $(basename $(GT_PHONOLOGY_SRCS))))
-endif !LEXREF_IN_PHONOLOGY
-endif # CAN_XFST
-
 if CAN_FOMA
 if LEXREF_IN_PHONOLOGY
 GT_PHONOLOGY+=$(addsuffix .foma.xfscript, $(basename $(GT_PHONOLOGY_SRCS)))
@@ -236,15 +211,6 @@ GT_PHONOLOGY+=$(GTLANG)-phon-L2.rev.hfst
 endif # WANT_REVERSED_INTERSECT
 endif !LEXREF_IN_PHONOLOGY
 endif # CAN_HFST
-
-if CAN_XFST
-if LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=$(GTLANG)-phon-L2.xfst.xfscript
-else !LEXREF_IN_PHONOLOGY
-GT_PHONOLOGY+=$(GTLANG)-phon-L2.compose.xfst
-GT_PHONOLOGY+=$(GTLANG)-phon-L2.lookup.xfst
-endif !LEXREF_IN_PHONOLOGY
-endif # CAN_XFST
 
 if CAN_FOMA
 if LEXREF_IN_PHONOLOGY
@@ -282,7 +248,7 @@ define giella_phon_w_lex_ref
 %.$(1).xfscript: %.xfscript
 	$$(AM_V_GEN)sed 's/&FST&/$(1)/' $$< > $$@
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call giella_phon_w_lex_ref,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call giella_phon_w_lex_ref,$(fst))))
 
 ## XXX for now
 noinst_DATA+=lexicon.hfst

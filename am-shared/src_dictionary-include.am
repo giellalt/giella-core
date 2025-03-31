@@ -11,12 +11,6 @@ GT_ANALYSERS+=analyser-dict-gt-desc.hfstol \
 GT_GENERATORS+=generator-dict-gt-norm.hfstol
 endif # CAN_HFST
 
-if CAN_XFST
-GT_ANALYSERS+=analyser-dict-gt-desc.xfst \
-				   analyser-dict-gt-desc-mobile.xfst
-GT_GENERATORS+=generator-dict-gt-norm.xfst
-endif # CAN_XFST
-
 if CAN_FOMA
 GT_ANALYSERS+=analyser-dict-gt-desc.foma \
 				   analyser-dict-gt-desc-mobile.foma
@@ -460,7 +454,7 @@ define giella_dict_alt_ws_mobile_analysers
 .generated/analyser-dict-gt-desc-mobile.%.tmp.$(1): .generated/analyser-dict-gt-desc.%.$(1)
 	$$(AM_V_CP)cp -f $$< $$@
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call giella_dict_alt_ws_mobile_analysers,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call giella_dict_alt_ws_mobile_analysers,$(fst))))
 
 ###############################################################
 # Additional targets to support area / country specific fst's:

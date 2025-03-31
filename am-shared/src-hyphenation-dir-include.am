@@ -41,10 +41,6 @@ GIELLA_HYPH_TARGETS+=$(patsubst %.xfscript,%.lookup.hfst,$(GT_HYPHENATION_SRCS))
 GIELLA_HYPH_TARGETS+=$(patsubst %.xfscript,%.compose.hfst,$(GT_HYPHENATION_SRCS))
 endif
 
-if CAN_XFST
-GIELLA_HYPH_TARGETS+=$(patsubst %.xfscript,%.lookup.xfst,$(GT_HYPHENATION_SRCS))
-GIELLA_HYPH_TARGETS+=$(patsubst %.xfscript,%.compose.xfst,$(GT_HYPHENATION_SRCS))
-endif
 
 if CAN_FOMA
 GIELLA_HYPH_TARGETS+=$(patsubst %.xfscript,%.lookup.foma,$(GT_HYPHENATION_SRCS))

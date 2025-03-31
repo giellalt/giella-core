@@ -49,11 +49,6 @@ GIELLA_SPELLER_FILTER_TARGETS+=\
         $(patsubst %.regex,%.hfst,$(GIELLA_SPELLER_FILTER_ALL_SRCS))
 endif # CAN_HFST
 
-# if CAN_XFST
-# GIELLA_SPELLER_FILTER_TARGETS+=\
-#         $(patsubst %.regex,%.xfst,$(GIELLA_SPELLER_FILTER_ALL_SRCS))
-# endif # CAN_XFST
-# 
 # if CAN_FOMA
 # GIELLA_SPELLER_FILTER_TARGETS+=\
 #         $(patsubst %.regex,%.foma,$(GIELLA_SPELLER_FILTER_ALL_SRCS))

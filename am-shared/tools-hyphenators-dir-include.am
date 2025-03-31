@@ -304,7 +304,7 @@ define giella_raw_fsts
 %raw-gt-desc.$(1): %raw-gt-desc.tmp.$(1)
 	$$(AM_V_CP)cp -f $$< $$@
 endef
-$(foreach fst,hfst xfst foma,$(eval $(call giella_raw_fsts,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call giella_raw_fsts,$(fst))))
 
 ####### Other targets: ###########
 clean-local:

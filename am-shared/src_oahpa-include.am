@@ -14,11 +14,6 @@ GT_ANALYSERS+=analyser-oahpa-gt-norm.hfstol
 GT_GENERATORS+=generator-oahpa-gt-norm.hfstol
 endif # CAN_HFST
 
-if CAN_XFST
-GT_ANALYSERS+=analyser-oahpa-gt-norm.xfst
-GT_GENERATORS+=generator-oahpa-gt-norm.xfst
-endif # CAN_XFST
-
 if CAN_FOMA
 GT_ANALYSERS+=analyser-oahpa-gt-norm.foma
 GT_GENERATORS+=generator-oahpa-gt-norm.foma
@@ -29,7 +24,6 @@ endif # WANT_OAHPA
 if HAVE_DIALECTS
 OAHPA_DIALECT_TARGETS=$(addprefix generator-oahpa-gt-norm-dial_,$(DIALECTS))
 OAHPA_DIALECT_TARGETS_HFST=$(addsuffix .hfstol,$(OAHPA_DIALECT_TARGETS))
-OAHPA_DIALECT_TARGETS_XFST=$(addsuffix .xfst,$(OAHPA_DIALECT_TARGETS))
 OAHPA_DIALECT_TARGETS_FOMA=$(addsuffix .foma,$(OAHPA_DIALECT_TARGETS))
 endif # HAVE_DIALECTS
 
@@ -38,9 +32,6 @@ if CAN_HFST
 GT_ANALYSERS+=analyser-oahpa-gt-error.hfstol
 GT_RAW+=analyser-raw-gt-error.hfst
 endif # CAN_HFST
-if CAN_XFST
-GT_ANALYSERS+=analyser-oahpa-gt-error.xfst
-endif # CAN_XFST
 if CAN_FOMA
 GT_ANALYSERS+=analyser-oahpa-gt-error.foma
 endif # CAN_FOMA
@@ -50,9 +41,6 @@ if WANT_DOWNCASEERROR
 if CAN_HFST
 GT_ANALYSERS+=analyser-oahpa-gt-downcaseerror.hfstol
 endif # CAN_HFST
-if CAN_XFST
-GT_ANALYSERS+=analyser-oahpa-gt-downcaseerror.xfst
-endif # CAN_XFST
 if CAN_FOMA
 GT_ANALYSERS+=analyser-oahpa-gt-downcaseerror.foma
 endif # CAN_FOMA
@@ -265,18 +253,6 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 		-2 morphology/phonology.compose.hfst |\
 		$(HFST_MINIMIZE) $(HFST_FLAGS) -o $@
 
-# The same for Xerox:
-.generated/analyser-raw-gt-%.tmp1.xfst: morphology/lexicon-%.xfst \
-			 morphology/phonology-%.compose.xfst $(GENDIR)
-	$(AM_V_LEXC)$(PRINTF) \
-		"read-source morphology/lexicon-$*.xfst\nread-rules morphology/phonology-$*.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
-		| $(LEXC) $(VERBOSITY)
-
-.generated/analyser-raw-gt-%.tmp1.xfst: morphology/lexicon-%.xfst \
-			 morphology/phonology.compose.xfst $(GENDIR)
-	$(AM_V_LEXC)$(PRINTF) \
-		"read-source morphology/lexicon-$*.xfst\nread-rules morphology/phonology.compose.xfst\ncompose-result\nsave-result $@\nquit\n" \
-		| $(LEXC) $(VERBOSITY)
 
 # FOMA
 .generated/analyser-raw-gt-%.tmp1.foma: morphology/lexicon-%.foma \

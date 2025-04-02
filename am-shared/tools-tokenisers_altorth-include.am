@@ -43,7 +43,7 @@ define alt_orth_tokenisers
 # Take the analyser file from src/*.hfst, and replace the Giella tags with
 # CG compatible ones:
 # a) for pmatchdisamb:
-analyser-%-gt-desc.$(1).hfst: $(top_builddir)/src/analyser-pmatch%-gt-desc.$(1).hfst \
+analyser-%-gt-desc.$(1).hfst: $(top_builddir)/src/fst/analyser-pmatch%-gt-desc.$(1).hfst \
 						 filters/make-%-CG-tags.$(1).hfst
 	$$(AM_V_HXFST)$$(PRINTF) "read regex \
 				@\"$$<\" \
@@ -53,7 +53,7 @@ analyser-%-gt-desc.$(1).hfst: $(top_builddir)/src/analyser-pmatch%-gt-desc.$(1).
 		 quit\n" | $$(HFST_XFST) -p $$(MORE_VERBOSITY)
 
 # b. for (regular disamb &) and gramcheck:
-analyser-%-gt-desc.$(1).hfst: $(top_builddir)/src/analyser-%-gt-desc.$(1).hfst \
+analyser-%-gt-desc.$(1).hfst: $(top_builddir)/src/fst/analyser-%-gt-desc.$(1).hfst \
 						 filters/make-%-CG-tags.$(1).hfst
 	$$(AM_V_HXFST)$$(PRINTF) "read regex \
 				@\"$$<\" \

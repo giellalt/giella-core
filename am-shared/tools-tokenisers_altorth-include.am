@@ -8,6 +8,8 @@
 # IFF alternative orthographies are defined:
 if HAVE_ALT_ORTHS
 
+if WANT_ALT_ORTHS
+
 # Define variable before use:
 BASENAME_TOKENISERS_ORTH=
 
@@ -32,6 +34,8 @@ if CAN_HFST
 ALT_ORTH_TOKENISERS+=$(addsuffix .pmhfst,$(ALT_ORTH_TOKENISERS_TMP))
 endif # CAN_HFST
 ##### END Hfst target list #####
+
+endif # WANT_ALT_ORTHS
 
 endif # HAVE_ALT_ORTHS
 

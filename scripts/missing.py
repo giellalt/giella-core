@@ -434,7 +434,7 @@ def get_shortest_matching_lexc_entries(
     ]
 
 
-def print_typos(descriptive_typos: dict[str, list[str]]) -> None:
+def print_typos(descriptive_typos: dict[str, list[str]]) -> str:
     """Print typos with their analyses.
 
     Args:
@@ -442,20 +442,20 @@ def print_typos(descriptive_typos: dict[str, list[str]]) -> None:
             descriptive analyser, but not in the normative analyser.
     """
     if descriptive_typos:
-        print("\n\n!!! Typos !!!")
-        "\n".join(
+        return "\n\n!!! Typos !!!\n" + "\n".join(
             f"! {hfst_stem}\n"
             + "\n".join(f"!\t{analysis}" for analysis in analyses)
             + "\n"
             for hfst_stem, analyses in descriptive_typos.items()
         )
+    return ""
 
 
 def print_lexicalised_compounds(
     lexc_dict: dict[str, list[LexcEntry]],
     compounds_and_derivations_only: dict[str, list[str]],
     comment_string: str,
-) -> None:
+) -> str:
     """Lexicalise compounds and derivations
 
     Present tentive lexc entries to the linguist.
@@ -466,25 +466,22 @@ def print_lexicalised_compounds(
             lexicalised.
     """
     if compounds_and_derivations_only:
-        print("\n\n!!! Compounds and derivations only !!!")
-        print(
-            "\n".join(
-                [
-                    str(lexc_entry) + comment_string
-                    for hfst_stem, analyses in compounds_and_derivations_only.items()
-                    for lexc_entry in lexicalise_compound(
-                        hfst_stem, analyses, lexc_dict
-                    )
-                ]
-            )
+        return "\n\n!!! Compounds and derivations only !!!\n" + "\n".join(
+            [
+                str(lexc_entry) + comment_string
+                for hfst_stem, analyses in compounds_and_derivations_only.items()
+                for lexc_entry in lexicalise_compound(hfst_stem, analyses, lexc_dict)
+            ]
         )
+
+    return ""
 
 
 def print_missing_suggestions(
     lexc_dict: dict[str, list[LexcEntry]],
     missing_desc_words: set[str],
     comment_string: str,
-) -> None:
+) -> Iterator[str]:
     """Print suggestions for missing words in the descriptive analyser.
 
     Match the missing words with the lexc dictionary and present tentive lexc
@@ -506,18 +503,15 @@ def print_missing_suggestions(
                 for lexc_entry in lexc_dict[stem]
             ]
         )
-        print(
-            "\n".join(
-                str(
-                    make_missing_lexc_entry(
-                        desc_missing_word, common_ending, matching_entry
-                    )
+        yield "\n".join(
+            str(
+                make_missing_lexc_entry(
+                    desc_missing_word, common_ending, matching_entry
                 )
-                + comment_string
-                for matching_entry in matching_entries
             )
-        )
-        print()
+            + comment_string
+            for matching_entry in matching_entries
+        ) + "\n"
 
 
 def parse_args():
@@ -539,7 +533,12 @@ def parse_args():
         help="The language to analyse. This should be the language code, e.g., 'sme' for Northern Sami.",
     )
     parser.add_argument(
-        "-o", "--output", default=sys.stdout, type=Path, help="output file"
+        "-o",
+        "--output",
+        default=sys.stdout,
+        type=Path,
+        dest="outfile",
+        help="output file",
     )
     parser.add_argument(
         "-t",
@@ -668,25 +667,39 @@ def main():
 
     # The words unknown to both the normative and the descriptive analyser
     # are given as the second argument.
-    print_missing_suggestions(
-        lexc_dict=lexc_dict,
-        missing_desc_words={
-            line.split("\t")[0] for line in descriptive_output if line.endswith("inf")
-        },
-        comment_string=comment + input_filename,
-    )
-    print_lexicalised_compounds(
-        lexc_dict,
-        compounds_and_derivations_only=filter_derivations_and_compounds(
-            parse_hfst_output(
-                {line for line in norm_output if not line.endswith("inf")}
+    output_stream = sys.stdout if args.outfile == sys.stdout else args.outfile.open("w")
+    print(
+        "\n".join(
+            print_missing_suggestions(
+                lexc_dict=lexc_dict,
+                missing_desc_words={
+                    line.split("\t")[0]
+                    for line in descriptive_output
+                    if line.endswith("inf")
+                },
+                comment_string=comment + input_filename,
             )
         ),
-        comment_string=comment + input_filename,
+        file=output_stream,
+    )
+    print(
+        print_lexicalised_compounds(
+            lexc_dict,
+            compounds_and_derivations_only=filter_derivations_and_compounds(
+                parse_hfst_output(
+                    {line for line in norm_output if not line.endswith("inf")}
+                )
+            ),
+            comment_string=comment + input_filename,
+        ),
+        file=output_stream,
     )
     if not args.no_typos:
-        print_typos(
-            descriptive_typos=remove_typos(parse_hfst_output(descriptive_output))
+        print(
+            print_typos(
+                descriptive_typos=remove_typos(parse_hfst_output(descriptive_output))
+            ),
+            file=output_stream,
         )
 
 

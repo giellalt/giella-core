@@ -313,9 +313,15 @@ def lexicalise_compound(
     Returns:
         An iterator of lexicalised lexc entries.
     """
-    longest_last_stem = get_longest_cmp_stem(
-        suffix=unlexicalised_compound_stem[-1], analyses=analyses
-    )
+    try:
+        longest_last_stem = get_longest_cmp_stem(
+            suffix=unlexicalised_compound_stem[-1], analyses=analyses
+        )
+    except ValueError:
+        logging.debug(
+            f"Could not find a compound stem for {unlexicalised_compound_stem}"
+        )
+        return iter([])
 
     if longest_last_stem not in lexc_dict:
         raise ValueError(f"Longest stem {longest_last_stem} not found in lexc")

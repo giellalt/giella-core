@@ -225,7 +225,7 @@ def parse_hfst_output(
 
 
 def filter_derivations_and_compounds(
-    parsed_hfst_output: dict[str, list[str]]
+    parsed_hfst_output: dict[str, list[str]],
 ) -> dict[str, list[str]]:
     """Pick stems that are unlexicalised compounds or derivations.
 
@@ -288,6 +288,7 @@ def get_longest_cmp_stem(suffix: str, analyses: list[str]) -> str:
     """Get the longest last compound stem from a list of analyses."""
     for analysis in analyses:
         logging.debug(f"{analysis=}")
+
     return max(
         [
             analysis.split("#")[-1].split("+")[0]
@@ -647,7 +648,7 @@ def main():
     if args.infile == sys.stdin:
         input_filename = ""
     else:
-        f = str(args.infile.absolute()).replace(str(lang_parent), '$GTLANGS')
+        f = str(args.infile.absolute()).replace(str(lang_parent), "$GTLANGS")
         input_filename = f" Inputfile: {f}"
 
     comment = f" Comment: {args.comment}" if args.comment else ""

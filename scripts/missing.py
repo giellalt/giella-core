@@ -571,6 +571,11 @@ def parse_args():
         default=None,
         type=Path,
     )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Print debug information",
+    )
 
     return parser.parse_args()
 
@@ -616,6 +621,8 @@ def get_analysers(
 def main():
     # Setup
     args = parse_args()
+
+    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
 
     lang_parent = get_language_parent(args.lang_root)
     lang_directory = lang_parent / f"lang-{args.language}"

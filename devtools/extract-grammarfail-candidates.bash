@@ -4,6 +4,17 @@
 # https://giellalt.github.io/proof/gramcheck/extracting-precision-sentences.html
 #set -x
 
+# todo:
+# - remove space at end of sents
+# - fix pilcrow sign stuff
+# - actually bracketise otputtesd yam,e
+
+function rebrack_errs() {
+    #rev | cut -d '"' -f 2 | rev |\
+    python "$GTCORE/devtools/testify.py" |\
+        sed -e 's/^/ - "/' -e 's/ *$/"/'
+}
+
 if test $# -lt 1 ; then
     echo "Usage: $0 LANGCODE [CORPUS-DIR [VARIANT]]"
     echo
@@ -47,25 +58,33 @@ if ! test -f "$LANGDIR/tools/grammarcheckers/$LANGCODE.zcheck" ; then
     echo "$LANGDIR must be built with --enable-grammarchecker"
     exit 1
 fi
-ccat -l "$LANGCODE" "$CORPUSDIR" |\
-    hfst-tokenise -i "$LANGDIR/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" |\
-    sed 's/ \([.?!] \)/\1£/g;'|\
-    sed 's/£/\n/g' |\
-    sed 's/ \([:;,]\)/\1/g;' |\
-    divvun-checker -a "$LANGDIR/tools/grammarcheckers/$LANGCODE.zcheck" \
-        $VARIANT |\
-    grep -F -v '"errs":[]' > "candidates-$LANGCODE.json"
-echo "intermediate results saved in candidates-$LANGCODE.json"
-if ! test -f taglist.txt ; then
-    echo "automatically creating taglist.txt for candidates per type"
-    jq .errs[][3] candidates-$LANGCODE.json | sort | uniq | tr -d '"' > taglist.txt
+if ! test -f "$GTCORE/devtools/testify.py" ; then
+    echo "missing $GTCORE/devtools/testify.py, maybe update giella-core"
+    exit 1
 fi
+
+if ! test -f candidates-$LANGCODE.json ; then
+    ccat -l "$LANGCODE" "$CORPUSDIR" |\
+        hfst-tokenise -i "$LANGDIR/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" |\
+        sed 's/ \([.?!] \)/\1£/g;'|\
+        sed 's/£/\n/g' |\
+        sed 's/ \([:;,]\)/\1/g;' |\
+        divvun-checker -a "$LANGDIR/tools/grammarcheckers/$LANGCODE.zcheck" \
+            $VARIANT |\
+        grep -F -v '"errs":[]' > "candidates-$LANGCODE.json"
+else
+    echo "skipped creating candidates-$LANGCODE.json already exists"
+fi
+echo "intermediate results saved in candidates-$LANGCODE.json"
+echo "automatically creating taglist.txt for candidates per type"
+jq .errs[][3] "candidates-$LANGCODE.json" |\
+    sort | uniq | tr -d '"' |\
+    grep -F -v "DELETE" > taglist.txt
 for t in $(<taglist.txt) ; do
     printf -- "---\nConfig:\n  Spec: ../pipespec.xml\n" > "candidates-$t.yaml"
     printf "  Variant: %sgram-dev\n\n" "$LANGCODE" >> "candidates-$t.yaml"
     printf "Tests:\n" >> "candidates-$t.yaml"
     grep -F "$t" < "candidates-$LANGCODE.json" |\
-        rev | cut -d '"' -f 2 | rev |\
-        sed -e 's/^/ - "/' -e 's/$/"/' >> "candidates-$t.yaml"
+        rebrack_errs "$t" >> "candidates-$t.yaml"
     echo "yaml test candidates for $t saved in candidates-$t.yaml"
 done

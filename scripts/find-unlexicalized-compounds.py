@@ -1,9 +1,22 @@
 #!/usr/bin/env python3
+
+# /// script
+# dependencies = [
+#     "lxml",
+#     "pyhfst",
+# ]
+# ///
+# anders: ^ this is called "inline script metadata", and is used by a tool
+# called "uv" to run the script without having to manually manage dependencies.
+# with this, if you have uv, you can just run "uv run SCRIPT ...SCRIPT-ARGS",
+# without having to think about dependencies
+
 """
-Find compound lemmas which are not lexicalized. 
+Find compound lemmas which are not lexicalized.
 They should be for Neahttadigisánit lemma sorting to function properly.
 The output list may be read by missing.py to create possible lexc entries.
 """
+
 import sys
 import os
 import argparse
@@ -39,7 +52,7 @@ class Analyzer:
 
     def is_lexc_lemma(self, word):
         """
-        Returns True if at least one lemma analysis of the word is the word 
+        Returns True if at least one lemma analysis of the word is the word
         itself (not a compound/derivation), False otherwise.
         """
         anls = self.tr.lookup(word)
@@ -50,47 +63,111 @@ class Analyzer:
         return False
 
 
-def get_language_parent():
-    lang_parent = os.getenv("GTLANGS")
-    if not lang_parent:
-        raise SystemExit("GTLANGS environment variable not set")
+def find_analyser_hfstol(input_lang: str, overridden_analyser: Path = None):
+    if overridden_analyser is not None:
+        if overridden_analyser.exists():
+            return overridden_analyser
+        else:
+            sys.exit(
+                "specific analyser given in --analyser was not found\n"
+                f"{overridden_analyser}"
+            )
 
-    lang_path = Path(lang_parent)
-    if not lang_path.exists():
-        raise SystemExit(f"Could not find the language directory {lang_path}")
+    GTLANGS = os.environ["GTLANGS"]
+    if GTLANGS:
+        self_compiled_path = (
+            Path(GTLANGS)
+            / f"lang-{input_lang}"
+            / "src"
+            / "fst"
+            / "analyser-gt-desc.hfstol"
+        )
+        if self_compiled_path.exists():
+            return self_compiled_path
 
-    return lang_path
+    nightly = Path(f"/usr/share/giella/{input_lang}/analyser-gt-desc.hfstol")
+    if nightly.exists():
+        return nightly
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("-l", "--lang", required=True, help="three-letter iso code of the input language")
-    parser.add_argument("-i", "--input", required=True, type=Path, help="dictionary xml file to extract lemmas from")
-    parser.add_argument("-o", "--output", type=Path, help="file name to write output to. If not set, STDOUT is used.")
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Use verbose output (will be written to stderr)",
+    )
+    parser.add_argument(
+        "-l",
+        "--lang",
+        required=True,
+        help="input language (in 3-letter iso-639-3 format",
+    )
+    parser.add_argument(
+        "-i",
+        "--input",
+        required=True,
+        type=Path,
+        help=(
+            "dictionary xml file, or src/ directory in dict-xxx-yyy directory "
+            "to extract lemmas from"
+        ),
+    )
+    parser.add_argument(
+        "--analyser",
+        type=Path,
+        help=(
+            "Path to analyser hfstol file. If unspecified, will try to find "
+            "it on the system. Tries to find self-compiled in $GTLANGS, or "
+        ),
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=argparse.FileType("w"),
+        default="-",
+        help="file name to write output to. If not set, STDOUT is used.",
+    )
 
     return parser.parse_args()
 
 
 def main(args):
-    lang_parent = get_language_parent()
-    lang_directory = lang_parent / f"lang-{args.lang}"
-    desc_analyzer_path = lang_directory / "src/fst/analyser-gt-desc.hfstol"
+    desc_analyzer_path = find_analyser_hfstol(
+        args.lang,
+        overridden_analyser=args.analyser,
+    )
+    if desc_analyzer_path is None:
+        sys.exit("cannot find analyser")
+
+    if args.input.is_dir():
+        files = args.input.glob("*.xml")
+    elif args.input.is_file():
+        files = [args.input]
+    else:
+        sys.exit(f"error: cannot find input file(s): {args.input}")
+
+    if args.verbose:
+        print(f"Loading analyser {desc_analyzer_path}...", file=sys.stderr)
     desc_analyzer = Analyzer(desc_analyzer_path)
 
-    unlex_comp = []
+    n = 0
 
-    tree = ET.parse(args.input)
-    root = tree.getroot()
-    for lemma in root.findall("./e/lg/l"):
-        if desc_analyzer.is_compound(lemma.text) and not desc_analyzer.is_lexc_lemma(lemma.text):
-            unlex_comp.append(lemma.text)
-    
-    print(f"Found {len(unlex_comp)} possible unlexicalized compounds")
+    for file in files:
+        if args.verbose:
+            print(f"Processing file {file}...", file=sys.stderr)
+        tree = ET.parse(file)
+        root = tree.getroot()
+        for lemma in root.findall("./e/lg/l"):
+            is_compound = desc_analyzer.is_compound(lemma.text)
+            is_lexc_lemma = desc_analyzer.is_lexc_lemma(lemma.text)
+            if is_compound and not is_lexc_lemma:
+                args.output.write(f"{lemma.text}\n")
+                n += 1
 
-    if args.output is None:
-        sys.stdout.write("\n".join(l for l in unlex_comp))
-    else:
-        with open(args.output, "w") as f:
-            f.write("\n".join(l for l in unlex_comp))
+    if args.verbose:
+        print(f"Found {n} possible unlexicalized compounds", file=sys.stderr)
 
 
 if __name__ == "__main__":

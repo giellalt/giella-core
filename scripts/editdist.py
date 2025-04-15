@@ -145,9 +145,9 @@ def maketrans(from_st, to_st, from_sy, to_sy, weight):
         + "\t"
         + str(to_st)
         + "\t"
-        + p(from_sy)
+        + from_sy
         + "\t"
-        + p(to_sy)
+        + to_sy
         + "\t"
         + str(weight)
     )
@@ -598,7 +598,7 @@ def main():
                         alphabet[sym] = weight
 
     if len(options.alphabetstring) == 1:
-        for c in str(options.alphabetstring[0], "utf-8"):
+        for c in options.alphabetstring[0]:
             if c not in list(alphabet.keys()) and c not in exclusions:
                 alphabet[c] = 0.0
     if options.alphabetfile is not None:
@@ -631,7 +631,7 @@ def main():
         transducer.generate()
         transducer.make_transitions()
         for transition in transducer.transitions:
-            outputfile.write(transition.decode("utf-8"))
+            outputfile.write(transition)
             outputfile.write("\n")
 
         stderr_u8 = sys.stderr

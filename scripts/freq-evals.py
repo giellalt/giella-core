@@ -57,6 +57,8 @@ def main():
                    help="if coverage is less than THOLD exit with error")
     a.add_argument("-Q", "--no-hacks", action="store_true", default=False,
                    help="Some ccat and giellalt specific corpus hacks")
+    a.add_argument("-q", "--quiet", action="store_true", default=False,
+                   help="be more quiet")
     options = a.parse_args()
     try:
         if not options.outfile:
@@ -110,11 +112,14 @@ def main():
         surf = fields[1]
         if not options.no_hacks:
             if surf == "¶":
-                print(f"WARN: skipping paragraph marker {fields}",
-                      file=sys.stderr)
+                if not options.quiet:
+                    print(f"WARN: skipping paragraph marker {fields}",
+                          file=sys.stderr)
+                continue
             elif len(surf) > 120:
-                print(f"WARN: Skipping overlong token {fields}",
-                      file=sys.stderr)
+                if not options.quiet:
+                    print(f"WARN: Skipping overlong token {fields}",
+                          file=sys.stderr)
                 continue
         tokens += freq
         types += 1

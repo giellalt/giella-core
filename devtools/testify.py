@@ -11,6 +11,8 @@ def errtype2sym(errtype: str):
         return "£"
     elif errtype.startswith("syn"):
         return "¥"
+    elif errtype.startswith("space"):
+        return "‰"
     else:
         return "§"
 

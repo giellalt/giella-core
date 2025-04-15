@@ -15,6 +15,15 @@ function rebrack_errs() {
         sed -e 's/^/ - "/' -e 's/ *$/"/'
 }
 
+function plain_yaml() {
+    rev | cut -d '"' -f 2 | rev |\
+        sed -e 's^/ - "/' -e 's/ *$/"/'
+}
+
+function plain_sents() {
+    rev | cut -d '"' -f 2 | rev
+}
+
 if test $# -lt 1 ; then
     echo "Usage: $0 LANGCODE [CORPUS-DIR [VARIANT]]"
     echo
@@ -85,6 +94,13 @@ for t in $(<taglist.txt) ; do
     printf "  Variant: %sgram-dev\n\n" "$LANGCODE" >> "candidates-$t.yaml"
     printf "Tests:\n" >> "candidates-$t.yaml"
     grep -F "$t" < "candidates-$LANGCODE.json" |\
-        rebrack_errs "$t" >> "candidates-$t.yaml"
+        rebrack_errs "$t" | sed -e 's/ *¶ *//g'  >> "candidates-$t.yaml"
     echo "yaml test candidates for $t saved in candidates-$t.yaml"
 done
+for t in $(<taglist.txt) ; do
+    echo > "sents-$t.txt"
+    grep -F "$t" < "candidates-$LANGCODE.json" |\
+        plain_sents "$t" | sed -e 's/ *¶ *//g' >> "sents-$t.txt"
+    echo "plain sentences for $t saved in sents-$t.txt"
+done
+echo "see files named candidates-[errorcode].yaml and sents-[errorcode].txt"

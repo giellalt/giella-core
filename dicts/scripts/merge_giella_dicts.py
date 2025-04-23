@@ -34,8 +34,33 @@ from pathlib import Path
 # n_entries = merge_giella_dicts("path/to/dict-xxx-yyy/src", "/some/output/file")
 # ```
 
+def xmllint(file, valid=True):
+    """Run `xmllint`, optionally with `--valid` if the `valid` argument is
+    True on `file`. Returns the returncode from the `xmllint` command.
+    0 means no error. >0 indicate which error it was. Refer to `man xmllint`
+    to see the error codes."""
+    import subprocess
+    prog = ["xmllint"]
+    if valid:
+        prog.append("--valid")
+    prog.append(file)
+    proc = subprocess.run(prog, capture_output=True)
+    return proc.returncode
 
-def merge_giella_dicts(directory, out_file):
+
+# changelog:
+# 2025-04-22 (anders): added return_errors, dtd_validate optional arguments
+def merge_giella_dicts(
+    directory,
+    out_file,
+    print_errors=True,
+    # still write to the out_file even though there are some errors?
+    write_file_on_errors=True,
+    # if True, return value will be a tuple, with (n_entries, errors)
+    return_errors=False,
+    # Run `xmllint --valid` on each file, to make sure it's dtd-valid.
+    dtd_validate=False,
+):
     if isinstance(directory, str):
         directory = Path(directory)
     if not isinstance(directory, Path):
@@ -53,21 +78,36 @@ def merge_giella_dicts(directory, out_file):
 
     r = ET.Element("r")
     n_entries = 0
+    errors = []
     for file in xml_files:
         with open(file) as f:
             text = f.read()
         try:
             tree = ET.fromstring(text)
         except ET.ParseError as e:
-            print(f"Warning: XML error in file {file}", file=sys.stderr)
-            print("The process continues, but the contents of this file will "
-                  "not be included in the merged output")
-            print(e, file=sys.stderr)
+            errors.append([file, "XMLError"])
+            if print_errors:
+                print(
+                    f"Warning: XML error in file {file}\nThe process "
+                    "continues, but the contents of this file will not be"
+                    f"included in the merged output\n{e}",
+                    file=sys.stderr,
+                )
             continue
         if tree.tag != "r":
             # root node not <r>, not a giella xml dictionary
             # (this can be the meta.xml file, for example)
             continue
+        if dtd_validate:
+            ret = xmllint(file, valid=True)
+            if ret != 0:
+                errors.append([file, f"xmllint {ret}"])
+                if print_errors:
+                    print(
+                        f"xmllint returned {ret} for {file}",
+                        file=sys.stderr,
+                    )
+                continue
         es = list(tree.iter("e"))
         n_entries += len(es)
         r.extend(es)
@@ -79,7 +119,10 @@ def merge_giella_dicts(directory, out_file):
         with open(out_file, "w") as f:
             f.write(merged_tree_s)
 
-    return n_entries
+    if return_errors:
+        return n_entries, errors
+    else:
+        return n_entries
 
 
 if __name__ == "__main__":

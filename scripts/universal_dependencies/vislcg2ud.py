@@ -111,6 +111,8 @@ def get_ufeats(tags: list, lemma: str = "", surf: str = ""):
             feats.append("Case=Nom")
         elif tag == "Gen":
             feats.append("Case=Gen")
+        elif tag == "Ela":
+            feats.append("Case=Ela")
         elif tag == "Ine":
             feats.append("Case=Ine")
         elif tag == "Loc":

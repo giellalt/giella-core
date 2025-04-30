@@ -49,7 +49,7 @@ grep -F 'is NOT in the lexicon' "$checked_lemmas" > "$rejected_lemmas"
 
 if [ -s "$rejected_lemmas" ] ; then
     printf "%sFAIL%s: " "$red" "$reset"
-    wc -l < "$rejected_lemmas" | sed 's/$/ words missing, here’s first ones:'
+    wc -l < "$rejected_lemmas" | sed 's/$/ words missing, here’s first ones:/'
     head "$rejected_lemmas"
     echo see "$rejected_lemmas" for more
     exit 1

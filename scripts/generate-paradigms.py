@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import tempfile
 from argparse import ArgumentParser
 
 import hfst
@@ -59,6 +60,9 @@ def main():
     argp.add_argument("-Z", "--acceptable-forms", type=open,
                       help="do not count oov if analysis contained in file")
     options = argp.parse_args()
+    logfile = tempfile.NamedTemporaryFile(prefix="paradigm", suffix=".txt",
+                                          delete=False, encoding="UTF-8",
+                                          mode="w+")
     generator = load_hfst(options.generatorfilename)
     paradigms = [l.strip() for l in options.paradigmfile.readlines() if
                  l.strip() != ""]
@@ -89,7 +93,9 @@ def main():
             lemma = analysis.split("+")[0]
             lemmas.add(lemma)
         else:
-            lemma = unhidelexcescapes(lexcline.split()[0])
+            idstringy = unhidelexcescapes(lexcline.split()[0])
+            lemma = idstringy.split("+")[0]
+            lemmas.add(lemma)
     lines = 0
     forms = 0
     oovs = 0
@@ -98,16 +104,18 @@ def main():
             generations = generator.lookup(lemma + paradigm)
             if len(generations) == 0:
                 ignoring = False
-                for skip in skiptags:
-                    if skip in paradigm.split("+"):
-                        ignoring = True
-                        break
+                if skiptags:
+                    for skip in skiptags:
+                        if skip in paradigm.split("+"):
+                            ignoring = True
+                            break
                 if skipforms:
                     if lemma + paradigm in skipforms:
                         ignoring = True
                 if not ignoring:
                     if options.verbose:
                         print(f"{lemma}{paradigm} does not generate!")
+                    print(f"{lemma}{paradigm}", file=logfile)
                     oovs += 1
             lines += 1
             forms += len(generations)
@@ -115,14 +123,19 @@ def main():
                 print(f"{lemma}{paradigm}:")
                 for g in generations:
                     print(f"\t{g}")
+    if lines == 0:
+        print(f"SKIP: could not find lemmas in {options.lexcfile.name}")
+        sys.exit(77)
     coverage = (1.0 - (float(oovs) / float(lines))) * 100.0
-    print("Generation statistics:")
-    print(f"\t{len(lemmas)} lemmas × {len(paradigms)} paradigm slots")
-    print(f"\t(should be minimum {len(lemmas)*len(paradigms)} forms then)")
-    print(f"\t{forms} generated, {coverage} % success")
+    if options.verbose:
+        print("Generation statistics:")
+        print(f"\t{len(lemmas)} lemmas × {len(paradigms)} paradigm slots")
+        print(f"\t(should be minimum {len(lemmas)*len(paradigms)} forms then)")
+        print(f"\t{forms} generated, {coverage} % success")
     if coverage < options.threshold:
         print("FAIL: too many lemmas weren't generating!",
               f"{coverage} < {options.threshold}")
+        print(f"see {logfile.name} for details ({oovs} ungenerated strings)")
         sys.exit(1)
 
 

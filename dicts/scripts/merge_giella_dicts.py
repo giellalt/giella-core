@@ -116,7 +116,7 @@ def merge_giella_dicts(
     if out_file is None:
         print(merged_tree_s)
     else:
-        if write_file_on_errors:
+        if not errors or write_file_on_errors:
             with open(out_file, "w") as f:
                 f.write(merged_tree_s)
 

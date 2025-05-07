@@ -19,8 +19,11 @@ GENERATION_TESTS+=generate-adjective-lemmas.sh \
 				  generate-noun-lemmas.sh \
 				  generate-propernoun-lemmas.sh \
 				  generate-verb-lemmas.sh
+PARADIGM_TESTS=generate-adjective-paradigm.sh \
+			   generate-noun-paradigm.sh \
+			   generate-verb-paradigm.sh
 endif
 
-TESTS+=$(GENERATION_TESTS)
+TESTS+=$(GENERATION_TESTS) $(PARADIGM_TESTS)
 
 # vim: set ft=automake:

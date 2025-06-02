@@ -17,6 +17,7 @@
 
 GT_SPELLER_HFST=generator-desktopspeller-gt-norm.hfst
 GT_SPELLER_ACCEPTOR=.generated/acceptor.default.hfst
+GT_SPELLER_ANALYSER=.generated/analyser.default.hfst
 
 # Max compression for zipped files:
 ZIPFLAGS=-9 $(VERBOSITY)
@@ -455,6 +456,19 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps) $(GENDIR)
 		| $(HFST_FST2FST) $(MORE_VERBOSITY) $(HFST_FLAGS) -f olw          \
 		-o $@
 
+# testings
+.generated/analyser.%.hfst: $(GT_SPELLER_HFST) filters/remove-error-strings.hfst \
+				 $(MAYBE_EMOJIS) \
+				 .generated/easteregg.%.desktop.hfst
+	$(AM_V_GEN)$(HFST_COMPOSE) -1 filters/remove-error-strings.hfst -2 $< -F \
+		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) $(MAYBE_EMOJIS) \
+		| $(HFST_INVERT) \
+		| $(HFST_MINIMIZE_SPELLER)                      \
+		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) - .generated/easteregg.$*.desktop.hfst  \
+		| $(HFST_PUSH_WEIGHTS) $(MORE_VERBOSITY) --push=initial           \
+		| $(HFST_FST2FST) $(MORE_VERBOSITY) $(HFST_FLAGS) -f olw          \
+		-o $@
+
 .generated/emojis.hfst: $(top_builddir)/src/fst/analyser-emojis-gt-desc.hfst
 	$(AM_V_PROJECT)$(HFST_PROJECT) $(HFST_FLAGS) -i $< --project=input \
 		| $(HFST_MINIMIZE) \
@@ -486,6 +500,22 @@ $(GT_SPELLING_HFST): index.xml \
 $(ALL_DESKTOP_ZHFST_FILES): \
 %-desktop.zhfst: %.zhfst
 	$(AM_V_GEN)ln -f $< $@
+
+# testing analyser spellers...
+%-analyser.zhfst: index.xml \
+					 $(GT_ERRMODELS) \
+					 $(GT_SPELLER_ANALYSER)
+	$(AM_V_at)rm -f $@
+	$(AM_V_at)$(MKDIR_P) build/$@
+	$(AM_V_at)rm -f build/$@/*
+	$(AM_V_at)sed 's/acceptor.default/analyser.default/g' < index.xml > build/$@/index.xml
+	$(AM_V_at)cp $(GT_SPELLER_ANALYSER) build/$@/
+	$(AM_V_at)cp $(GT_ERRMODELS) build/$@/$(GT_ERRMODELS)
+	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
+	$(AM_V_at)$(MKDIR_P) 3
+	$(AM_V_at)cp -f $@ 3/
+
+
 
 ####### Other targets: ###########
 

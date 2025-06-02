@@ -26,7 +26,7 @@ def main():
     for line in options.infile:
         if "{" not in line:
             continue
-        yamlets = re.finditer(r"{([^}]*)}([£$¥]){([^}]*)}", line)
+        yamlets = re.finditer(r"{([^}]*)}([£$¥€¢]){([^}]*)}", line)
         for error in yamlets:
             orig = error.group(1)
             sigil = error.group(2)

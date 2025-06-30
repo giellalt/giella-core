@@ -1,6 +1,6 @@
 ## Process this file with autoconf to produce the configure script
 
-## Copyright (C) 2018 Samediggi (Norway) & UiT The Arctic University of Norway
+## Copyright (C) 2018-2025 Samediggi (Norway) & UiT The Arctic University of Norway
 
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

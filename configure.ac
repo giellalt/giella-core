@@ -75,6 +75,14 @@ AS_IF([test x$UCONV = xfalse],
                                        i.e. set your PATH if necessary)
        ])])
 AC_PATH_PROG([PRECOMMIT], [pre-commit], [false])
+AC_PATH_PROG([ASTRAL_UV], [uv], [false])
+AS_IF([test x$ASTRAL_UV = xfalse], 
+      [AC_MSG_ERROR([needs uv to run lemma/paradigm generation
+       on ubuntu: sudo snap install --classic astral_uv
+       on macports: port install uv
+       on macbrew: brew install uv
+       otherwise: pipx install uv
+       ])])
 
 # check for shared version (not fatal yet)
 #

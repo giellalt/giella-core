@@ -1,16 +1,14 @@
-#!/usr/bin/env -S uv run --script
-#
-# /// script
-# requires-python = "==3.12"
-# dependencies = [
-#     "hfst",]
-# ///
+#!/usr/bin/env python3
 
 import sys
 import tempfile
 from argparse import ArgumentParser
 
-import hfst
+try:
+    import hfst
+except ImportError:
+    print("skip - missing python hfst libary")
+    sys.exit(77)
 
 
 def load_hfst(filename: str):

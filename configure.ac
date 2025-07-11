@@ -14,7 +14,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [1.2.4], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
+AC_INIT([giella-core], [1.2.5], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
@@ -59,6 +59,7 @@ AC_PATH_PROG([LOOKUP], [lookup], [false], $PATH)
 AC_PATH_PROG([FLOOKUP], [flookup], [false], $PATH)
 AC_PATH_PROG([SEE], [see], [head], $PATH)
 AC_PATH_PROG([HFST_OSPELL], [hfst-ospell], [false], $PATH)
+AC_PATH_PROG([DIVVUN_CHECKER], [divvun-checker], [false], $PATH)
 
 # easter eggs
 AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
@@ -120,6 +121,8 @@ AC_CONFIG_FILES([scripts/accept-all-lemmas.sh],
                 [chmod +x scripts/accept-all-lemmas.sh])
 AC_CONFIG_FILES([scripts/missing-multichars.sh],
                 [chmod +x scripts/missing-multichars.sh])
+AC_CONFIG_FILES([scripts/regresstest-pipespec.sh],
+                [chmod +x scripts/regresstest-pipespec.sh])
 
 AC_OUTPUT
 

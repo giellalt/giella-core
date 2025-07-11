@@ -18,6 +18,7 @@
 /scripts/run-morph-tester.sh
 /scripts/run-yaml-testcases.sh
 /scripts/missing-multichars.sh
+/scripts/regresstest-pipespec.sh
 Makefile
 Makefile.in
 __pycache__/

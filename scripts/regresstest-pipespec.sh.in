@@ -1,0 +1,63 @@
+#!/bin/bash
+# @configure_input@
+
+# Test that running pipespec from archive has same results as gold standard
+# (from previous runs)
+
+if ! test $# -ge 4 ; then
+    echo
+    echo "Usage: $0 ARCHIVE TESTFILE GOLD VARIANT"
+    echo
+    echo "were:"
+    echo " ARCHIVE is the .zhfst/.zspell/.zpipe file"
+    echo " TESTFILE is input text"
+    echo " GOLD is expected output"
+    echo " VARIANT is the variant in archive to run"
+    echo
+    exit 77
+fi
+
+runner=@DIVVUN_CHECKER@
+archive=$1
+testfile=$2
+goldfile=$3
+variant=$4
+
+. "@GIELLA_CORE@/scripts/termcolors.bash"
+
+if ! test -f $runner ; then
+    printf "%sskip%s missing pipespec runner from libdivvun" \
+        "$light_blue" "$reset" 
+    exit 77
+fi
+if ! test -f $archive ; then
+    printf "%sskip%s missing pipespec archive %s\n" "$light_blue" "$reset" \
+        "$archive"
+    exit 77
+fi
+if ! test -f $testfile ; then
+    printf "%sskip%s missing test data %s\n" "$light_blue" "$reset" \
+        "$testfile"
+    exit 77
+fi
+if ! test -f $goldfile ; then
+    printf "%sskip%s missing gold data %s\n" "$light_blue" "$reset" \
+        "$goldfile"
+    echo "hint: $runner -a $archive -n $variant < $testfile > $goldfile"
+    exit 77
+fi
+
+outfile=$(mktemp -t giella-pipe-test.XXXXXXXXXXX)
+
+$runner -a "$archive" -n "$variant" < "$testfile" > "$outfile"
+rv=$?
+if test $rv -gt 0 ; then
+    printf "%sfail%s running $runner failed (see above?)\n" "$red" "$reset"
+   exit $rv
+fi
+if ! diff -u "$goldfile" "$outfile" ; then
+    printf "%sfail%s outputs differ (see above)\n" "$red" "$reset"
+    exit 1
+else
+    printf "%spass%s\n" "$green" "$reset"
+fi

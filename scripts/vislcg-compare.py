@@ -175,18 +175,25 @@ def main():
                 alltag_matches += 1
             elif found_alltags_subset:
                 alltag_matches += 1
-                print(f"ALLTAGS~\t{goldreading["alltags"]}", file=options.log)
+                print(f"ALLTAGS~\t{goldreading["alltags"]}",
+                      file=options.logfile)
+                for hypothesis in hyp["readings"]:
+                    print(f"\t~\t{hypothesis["alltags"]}",
+                          file=options.logfile)
             else:
                 alltag_misses += 1
                 print(f"ALLTAGS\t{goldreading["alltags"]}",
                       file=options.logfile)
                 for hypothesis in hyp["readings"]:
-                    print(f"\t!=\t{hypothesis["alltags"]}", file=options.logfile)
+                    print(f"\t!=\t{hypothesis["alltags"]}",
+                          file=options.logfile)
             if found_tags:
                 tag_matches += 1
             elif found_tags_subset:
                 tag_matches += 1
                 print(f"TAGS~\t{goldreading["tags"]}", file=options.logfile)
+                for hypothesis in hyp["readings"]:
+                    print(f"\t~\t{hypothesis["tags"]}", file=options.logfile)
             else:
                 tag_misses += 1
                 print(f"TAGS\t{goldreading["tags"]}", file=options.logfile)

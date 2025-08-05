@@ -167,47 +167,58 @@ def main():
                 lemma_matches += 1
             else:
                 lemma_misses += 1
-                print(f"LEMMA\t{goldreading["lemma"]}\t",
-                      file=options.logfile)
-                for hypothesis in hyp["readings"]:
-                    print(f"\t\t{hypothesis["lemma"]}", file=options.logfile)
+                if options.level == "lemma" or options.level == "all":
+                    print(f"LEMMA\t{goldreading["lemma"]}\t",
+                          file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        print(f"\t\t{hypothesis["lemma"]}",
+                              file=options.logfile)
             if found_alltags:
                 alltag_matches += 1
             elif found_alltags_subset:
                 alltag_matches += 1
-                print(f"ALLTAGS~\t{goldreading["alltags"]}",
-                      file=options.logfile)
-                for hypothesis in hyp["readings"]:
-                    print(f"\t~\t{hypothesis["alltags"]}",
+                if options.level == "alltags" or options.level == "all":
+                    print(f"ALLTAGS~\t{goldreading["alltags"]}",
                           file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        print(f"\t~\t{hypothesis["alltags"]}",
+                              file=options.logfile)
             else:
                 alltag_misses += 1
-                print(f"ALLTAGS\t{goldreading["alltags"]}",
-                      file=options.logfile)
-                for hypothesis in hyp["readings"]:
-                    print(f"\t!=\t{hypothesis["alltags"]}",
+                if options.level == "alltags" or options.level == "all":
+                    print(f"ALLTAGS\t{goldreading["alltags"]}",
                           file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        print(f"\t!=\t{hypothesis["alltags"]}",
+                              file=options.logfile)
             if found_tags:
                 tag_matches += 1
             elif found_tags_subset:
                 tag_matches += 1
-                print(f"TAGS~\t{goldreading["tags"]}", file=options.logfile)
-                for hypothesis in hyp["readings"]:
-                    print(f"\t~\t{hypothesis["tags"]}", file=options.logfile)
+                if options.level == "tags" or options.level == "all":
+                    print(f"TAGS~\t{goldreading["tags"]}",
+                          file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        print(f"\t~\t{hypothesis["tags"]}",
+                              file=options.logfile)
             else:
                 tag_misses += 1
-                print(f"TAGS\t{goldreading["tags"]}", file=options.logfile)
-                for hypothesis in hyp["readings"]:
-                    print(f"\t!=\t{hypothesis["tags"]}", file=options.logfile)
+                if options.level == "tags" or options.level == "all":
+                    print(f"TAGS\t{goldreading["tags"]}",
+                          file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        print(f"\t!=\t{hypothesis["tags"]}",
+                              file=options.logfile)
             if found_suffixed:
                 suffixed_matches += 1
             else:
                 suffixed_misses += 1
-                print("SUFFIX", ",".join(goldreading["suffixed"]), sep="\t",
-                      file=options.logfile)
-                for hypothesis in hyp["readings"]:
-                    print(f"\t!=\t{hypothesis["suffixed"]}",
-                          file=options.logfile)
+                if options.level == "suffixed":
+                    print("SUFFIX", ",".join(goldreading["suffixed"]),
+                          sep="\t", file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        print(f"\t!=\t{hypothesis["suffixed"]}",
+                              file=options.logfile)
     # stats
     if max(len(refcohorts), len(hypcohorts)) <= 0:
         print("could not read gold and/or hypothesis data")
@@ -229,21 +240,28 @@ def main():
           f"({alltag_matches} of {readings})")
     print(f"Suffixed tags recall: {suffixed_recall} % "
           f"({suffixed_matches} of {readings})")
-    if options.level == "tags" and tag_recall < options.threshold:
+    if options.level == "all" and recall < options.threshold:
+        print("FAIL: too many missing cohorts "
+              f"{tag_recall} < {options.threshold}")
+        sys.exit(1)
+    elif options.level == "tags" and tag_recall < options.threshold:
         print("FAIL: too many missing tags "
               f"{tag_recall} < {options.threshold}")
         sys.exit(1)
     elif options.level == "lemma":
         print("FAIL: too many missing lemmas "
               f"{lemma_recall} < {options.threshold}")
+        print(f"see {options.logfile.name} for details")
         sys.exit(1)
     elif options.level == "suffixed" and suffixed_recall < options.threshold:
         print("FAIL: too many missing suffixed tags "
               f"{suffixed_recall} < {options.threshold}")
+        print(f"see {options.logfile.name} for details")
         sys.exit(1)
     elif options.level == "alltags" and alltag_recall < options.threshold:
         print("FAIL: too many missing tags overall "
               f"{alltag_recall} < {options.threshold}")
+        print(f"see {options.logfile.name} for details")
         sys.exit(1)
     else:
         print(f"PASS: see {options.logfile.name} for details")

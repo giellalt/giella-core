@@ -70,6 +70,9 @@ def read_cohorts(f: TextIO) -> list[dict]:
                 cohort["readings"] = [reading]
             else:
                 cohort["readings"].append(reading)
+        elif line.startswith("\t"):
+            print("cannot parse analysis line:\n", line, file=sys.stderr)
+            sys.exit(2)
         else:
             print("Unparsable in VISLCG3 line:\n", line, file=sys.stderr)
             sys.exit(2)

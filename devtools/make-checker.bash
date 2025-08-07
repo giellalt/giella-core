@@ -22,15 +22,16 @@ for f in lang-* ; do
         popd || exit 1
         continue
     fi
-    make check
-    echo repeat?
-    select answer in yes no ; do
-        if test $answer == yes ; then
-            make check
-        else
-            break
-        fi
-    done
+    if ! make check ; then
+        echo repeat?
+        select answer in yes no ; do
+            if test $answer == yes ; then
+                make check
+            else
+                break
+            fi
+        done
+    fi
     popd || exit 1
 done
 if test -s broken-makes ; then

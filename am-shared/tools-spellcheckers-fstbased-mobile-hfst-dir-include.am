@@ -214,10 +214,10 @@ mobilespellerdir=$(datadir)/giella/mobilespellers/
 #! @param GT_VOIKKO optional, set to spell checker automata names if
 #!					installable
 mobilespeller_DATA=$(MOB_GIELLA_SPELLING_HFST) $(MOB_GIELLA_PREDICT_HFST) \
-				   $(ALT_WS_ZHFST_FILES) $(ALT_ORTH_ZHFST_FILES)
+				   $(MOB_ALT_WS_ZHFST_FILES) $(MOB_ALT_ORTH_ZHFST_FILES)
 
 CLEANFILES+=$(MOB_GIELLA_SPELLING_HFST) $(MOB_GIELLA_PREDICT_HFST) \
-			$(ALT_WS_ZHFST_FILES) $(ALT_ORTH_ZHFST_FILES)
+			$(MOB_ALT_WS_ZHFST_FILES) $(MOB_ALT_ORTH_ZHFST_FILES)
 
 endif # WANT_HFST_MOBILE_SPELLER
 endif # CAN_HFST
@@ -497,5 +497,8 @@ CLEANFILES+=$(MOB_GT_SPELLER_ACCEPTOR) $(MOB_GT_PREDICT_ACCEPTOR)
             initial_letters.regex.default.hfst \
             initial_letters.all.default.hfst \
             final_strings.default.hfst
+
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile-hfst_alt_orth-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile-hfst_alt_ws-dir-include.am
 
 # vim: set ft=automake:

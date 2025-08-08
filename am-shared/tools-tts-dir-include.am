@@ -78,7 +78,7 @@ GIELLA_ANL_ZIPFILES=$(GIELLA_ANL_IPA)            \
 					$(GIELLA_ANL_MWEDIS)         \
 					$(GIELLA_ANL_DISAMBIGUATOR)  \
 					$(GIELLA_ANL_FUNCTIONS)      \
-					$(GIELLA_ANL_SEMSETS)      \
+					$(GIELLA_ANL_SEMSETS)        \
 					$(GIELLA_ANL_DEPENDENCY)     \
 					$(GIELLA_ANL_PIPESPEC)       \
 					$(LOCAL_ANL_ZIP_FILES)

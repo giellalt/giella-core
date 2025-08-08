@@ -21,8 +21,7 @@
 GIELLA_TTS_ZDISTRO=$(GLANG2)-tts.zpipe
 
 # Various text conversion fst's - normalisers/expanders and IPA:
-GIELLA_ANL_IPA=txt2ipa.lookup.hfstol
-GIELLA_ANL_IPA_RAW=txt2ipa.lookup.hfst
+GIELLA_ANL_IPA=$(GIELLA_ANL_IPA_FST_FILE)
 
 # List of transcriptors: all files in src/transcriptions/ matching the file name
 # pattern:
@@ -103,7 +102,7 @@ $(GIELLA_ANL_TOKENISER): \
 
 # Compile the IPA conversion fst:
 $(GIELLA_ANL_IPA): \
-			$(top_builddir)/src/fst/phonetics/$(GIELLA_ANL_IPA_RAW)
+			$(top_builddir)/src/fst/phonetics/$(GIELLA_ANL_IPA)
 	$(AM_V_FST2FST)$(HFST_FST2FST) -f olw -i $< -o $@
 
 # Compile the various transcriptor fst's:

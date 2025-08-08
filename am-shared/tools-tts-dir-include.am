@@ -110,6 +110,11 @@ transcriptor-%.hfst: \
 			$(top_builddir)/src/fst/transcriptions/transcriptor-%.hfstol
 	$(AM_V_FST2FST)$(HFST_FST2FST) $(HFST_FORMAT) -i $< -o $@
 
+# copy the various transcriptor fst's
+transcriptor-%.hfstol: \
+			$(top_builddir)/src/fst/transcriptions/transcriptor-%.hfstol
+	$(AM_V_CP)cp -f $< $@
+
 # Compile the normaliser fst by looping over all individual transcriptors,
 # and unionise them one at a time with the result of the preceding step.
 # The first in the list is used as the base. Finally, make all final full

@@ -105,7 +105,8 @@ $(GIELLA_ANL_IPA): \
 			$(top_builddir)/src/fst/phonetics/$(GIELLA_ANL_IPA)
 	$(AM_V_FST2FST)$(HFST_FST2FST) -f olw -i $< -o $@
 
-# Compile the various transcriptor fst's:
+# Copy all transcriptor files from their src/fst/ dir, and turn them into
+# regular FSTs for further processing:
 transcriptor-%.hfst: \
 			$(top_builddir)/src/fst/transcriptions/transcriptor-%.hfstol
 	$(AM_V_FST2FST)$(HFST_FST2FST) $(HFST_FORMAT) -i $< -o $@

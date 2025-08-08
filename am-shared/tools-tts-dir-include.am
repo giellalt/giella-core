@@ -33,6 +33,7 @@ FILTER_OUT_FILES=$(addsuffix %, $(GIELLA_ANL_REMOVE_TRANSCRIPTORS))
 GIELLA_XSC_TRANSCIPTOR_LIST=$(basename $(notdir $(wildcard $(top_builddir)/src/fst/transcriptions/*2text.filtered.lookup.hfstol)))
 GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST=$(filter-out $(FILTER_OUT_FILES), $(GIELLA_XSC_TRANSCIPTOR_LIST))
 GIELLA_XSC_TRANSCIPTORS=$(addsuffix .hfst, $(GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST))
+GIELLA_XSC_OL_TRANSCIPTORS=$(addsuffix .hfstol, $(GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST))
 
 GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfstol
 GIELLA_XSC_ANALYSER=analyser-gt-norm.hfstol
@@ -80,7 +81,7 @@ GIELLA_ANL_ZIPFILES=$(GIELLA_ANL_IPA)            \
 					$(GIELLA_ANL_SEMSETS)        \
 					$(GIELLA_ANL_DEPENDENCY)     \
 					$(GIELLA_ANL_PIPESPEC)       \
-					$(GIELLA_XSC_TRANSCIPTORS)   \
+					$(GIELLA_XSC_OL_TRANSCIPTORS)\
 					$(LOCAL_ANL_ZIP_FILES)
 
 noinst_DATA=$(GIELLA_ANL_SPELLER)
@@ -111,10 +112,10 @@ transcriptor-%.hfst: \
 			$(top_builddir)/src/fst/transcriptions/transcriptor-%.hfstol
 	$(AM_V_FST2FST)$(HFST_FST2FST) $(HFST_FORMAT) -i $< -o $@
 
-# copy the various transcriptor fst's
+# Make the individual trancriptors into optimised lookup format, for inclusion in the zip archive:
 transcriptor-%.hfstol: \
-			$(top_builddir)/src/fst/transcriptions/transcriptor-%.hfstol
-	$(AM_V_CP)cp -f $< $@
+			transcriptor-%.hfst
+	$(AM_V_FST2FST)$(HFST_FST2FST) --optimized-lookup-unweighted -i $< -o $@
 
 # Compile the normaliser fst by looping over all individual transcriptors,
 # and unionise them one at a time with the result of the preceding step.

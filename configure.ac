@@ -50,6 +50,8 @@ AC_SUBST([GAWK], [$ac_cv_path_GAWK])
 
 # lots of things
 AM_PATH_PYTHON([3.5],, [:])
+AC_PATH_PROG([PIPX], [pipx], [false], $PATH)
+
 
 # testing
 AC_PATH_PROG([HFST_LOOKUP], [hfst-lookup], [false], $PATH)
@@ -137,3 +139,11 @@ AS_IF([test x$PRECOMMIT = xfalse],
 
        on mac: brew install pre-commit
        others: python3 -m pip install pre-commit])])
+AS_IF([test x$PIPX = xfalse],
+      [AC_MSG_WARN([we recommend using pipx to keep updated python scripts:
+       on debian/ubuntu run: sudo apt update
+            sudo apt install pipx
+            pipx ensurepath
+       on mac (brew) run: brew install pipx
+            pipx ensurepath
+       ])])

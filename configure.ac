@@ -58,13 +58,13 @@ AC_PATH_PROG([GTSPELLTEST], [gtspelltest], [false])
 AC_PATH_PROG([GTPARADIGMTEST], [gtparadigmtest], [false])
 AC_PATH_PROG([GTMORPHTEST], [gtmorphtest], [false])
 AS_IF([test x$GTGRAMTOOL = xfalse],
-      [AC_MSG_WARN([gtgramtool is needed for grammar checker tests
+      [AC_MSG_ERROR([gtgramtool is needed for grammar checker tests
        do: pipx install git+https://github.com/divvun/GiellaLTGramTools/])])
 AS_IF([test x$GTLEMMATEST = xfalse],
-      [AC_MSG_WARN([gtlemmatest is needed for HFST generation tests
+      [AC_MSG_ERROR([gtlemmatest is needed for HFST generation tests
        do: pipx install git+https://github.com/divvun/GiellaLTLexTools/])])
 AS_IF([test x$GTMORPHTEST = xfalse],
-      [AC_MSG_WARN([gtmorphtest is needed for YAML-based morphology tests
+      [AC_MSG_ERROR([gtmorphtest is needed for YAML-based morphology tests
        do: pipx install git+https://github.com/divvun/morph-test])])
 
 # testing

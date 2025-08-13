@@ -27,5 +27,5 @@ sed '/\+$/ s/\+/\+€/g'            | # if ends with +, insert newlines after + 
 tr '€' '\n'                       | # insert newlines
 grep '[\+@].'                     | # keep only interesting stuff
 grep -E -o '@[^@]*@|\+[^+@]*'       | # output only taggy flaggy parts
-sed -e 's/[-–%]*$//' -e 's/^[–-%]*//' | # Get rid of final stuff that is odd
+sed -e 's/[-–%]*$//' -e 's/^[-–%]*//' | # Get rid of final stuff that is odd
 sed -e 's/%\([_/]\)/\1/g'  # some de-escaping

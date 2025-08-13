@@ -48,10 +48,24 @@ AC_CACHE_CHECK([for awk that supports gensub], [ac_cv_path_GAWK],
     [AC_MSG_ERROR([could not find awk that supports gensub - please install GNU awk. hint: sudo port install gawk])])])
 AC_SUBST([GAWK], [$ac_cv_path_GAWK])
 
-# lots of things
+# pythony things
 AM_PATH_PYTHON([3.5],, [:])
 AC_PATH_PROG([PIPX], [pipx], [false], $PATH)
-
+# duplicate all pipx tests from template here, just in case
+AC_PATH_PROG([GTGRAMTOOL], [gtgramtool], [false])
+AC_PATH_PROG([GTLEMMATEST], [gtlemmatest], [false])
+AC_PATH_PROG([GTSPELLTEST], [gtspelltest], [false])
+AC_PATH_PROG([GTPARADIGMTEST], [gtparadigmtest], [false])
+AC_PATH_PROG([GTMORPHTEST], [gtmorphtest], [false])
+AS_IF([test x$GTGRAMTOOL = xfalse],
+      [AC_MSG_WARN([gtgramtool is needed for grammar checker tests
+       do: pipx install git+https://github.com/divvun/GiellaLTGramTools/])])
+AS_IF([test x$GTLEMMATEST = xfalse],
+      [AC_MSG_WARN([gtlemmatest is needed for HFST generation tests
+       do: pipx install git+https://github.com/divvun/GiellaLTLexTools/])])
+AS_IF([test x$GTMORPHTEST = xfalse],
+      [AC_MSG_WARN([gtmorphtest is needed for YAML-based morphology tests
+       do: pipx install git+https://github.com/divvun/morph-test])])
 
 # testing
 AC_PATH_PROG([HFST_LOOKUP], [hfst-lookup], [false], $PATH)

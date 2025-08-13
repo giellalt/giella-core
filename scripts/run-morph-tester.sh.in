@@ -77,7 +77,12 @@ analyserfile=$fstdir/analyser-$transducer
 generatorfile=$fstdir/generator-$transducer
 bare_fst_file=$fstdir/$transducer
 pythonbin=@PYTHON@
-runtests="$pythonbin $relpath/morph-test.py"
+runtests="@GTMORPHTEST@"
+if ! test -x $runtests; then
+    printf "%sskip%s - missing gtmorphtest runner" "$light_blue" "$reset"
+    echo "you can install it with:"
+    echo "  pipx install git+https://github.com/divvun/morph-test/"
+fi
 if test -z "$testtotalsfile" ; then
     testtotalsfile=$(mktemp -t giella-yaml_test.XXXXXXXXXXX)
 fi

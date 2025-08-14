@@ -334,7 +334,7 @@ for f in $fsttype; do
 done
 
 if test $transducer_found = 0 ; then
-    printf "%sSKIP%s: no transducers found for at %s:" "$light_blue" "$reset" "$fstdir"
+    printf "%sSKIP%s: no transducers found for at %s: " "$light_blue" "$reset" "$fstdir"
     echo "$analyserfile $generatorfile $bare_fst_file?"
     exit 77
 fi

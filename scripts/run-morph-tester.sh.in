@@ -77,7 +77,7 @@ fstdir=${abs_builddir%/test*}
 analyserfile=$fstdir/analyser-$transducer
 generatorfile=$fstdir/generator-$transducer
 bare_fst_file=$fstdir/$transducer
-pythonbin=@PYTHON@
+
 runtests="@GTMORPHTEST@"
 if ! test -x $runtests; then
     printf "%sskip%s - missing gtmorphtest runner" "$light_blue" "$reset"

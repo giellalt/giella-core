@@ -84,6 +84,10 @@ if ! test -x $runtests; then
     echo "you can install it with:"
     echo "  pipx install git+https://github.com/divvun/morph-test/"
 fi
+# Make sure we use the fastest version of the Rust morph-test2:
+if test "$runtests" == "morph-test2"; then
+	runtests="$runtests --pool"
+fi
 if test -z "$testtotalsfile" ; then
     testtotalsfile=$(mktemp -t giella-yaml_test.XXXXXXXXXXX)
 fi

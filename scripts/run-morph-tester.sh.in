@@ -63,11 +63,12 @@ testfileshort="$(basename \ "$(dirname "$testfile")")/$(basename "$testfile")"
 . "$relpath/termcolors.bash"
 
 
-# getting the absolute path of the $srcdir of the test script:
-abs_srcdir=$(cd "$srcdir" && pwd)
+# getting the absolute path of the $builddir of the test shell script
+# (builddir because of VPATH builds):
+abs_builddir=$(pwd)
 # at the moment relevant FST files should be above the nearest test/ directory,
 # i.e. we always yaml test the most local automata
-fstdir=${abs_srcdir%/test*}
+fstdir=${abs_builddir%/test*}
 # temp hacks
 #fstdir=${fstdir%/apertium}
 

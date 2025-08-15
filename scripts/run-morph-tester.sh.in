@@ -2,7 +2,7 @@
 # @configure_input@
 
 # This is a shell script that will take one test file
-# and run it through the Apertium Quality morph-test.py tool, using Xerox
+# and run it through the Apertium Quality morph-test.py tool, using Foma
 # or Hfst transducers to the extent found.
 #
 # It takes three arguments: the transducer type, the file to be tested
@@ -204,11 +204,7 @@ for f in $fsttype; do
 	# Remember to empty the variables between each for loop:
 	analyser=""
 	generator=""
-	if test "$f" == "xfst"; then
-		lookuptool="@LOOKUP@ -flags mbTT"
-		section="xerox"
-		fstsuffix="xfst"
-	elif test "$f" == "foma"; then
+	if test "$f" == "foma"; then
 		lookuptool="@FLOOKUP@"
 		section="xfst"
 		fstsuffix="foma"

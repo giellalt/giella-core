@@ -83,6 +83,8 @@ if ! test -x $runtests; then
     printf "%sskip%s - missing gtmorphtest runner" "$light_blue" "$reset"
     echo "you can install it with:"
     echo "  pipx install git+https://github.com/divvun/morph-test/"
+    echo "(giella-core needs a ./configure afterwards to pick it up)"
+    exit 77
 fi
 # Make sure we use the fastest version of the Rust morph-test2:
 if test "$runtests" == "morph-test2"; then

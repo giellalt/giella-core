@@ -1,18 +1,23 @@
 #!/bin/bash
 
+ask=always
 if ! test -d lang-zxx ; then
     echo "run this script in giellalt gut root that has lang-* subdirs!"
     exit 2
 fi
 for f in lang-* ; do
-    echo "skip $f?"
-    select answer in yes no ; do
-        if test $answer == yes ; then
-            continue 2
-        else
-            break
-        fi
-    done
+    if test $ask = always ; then
+        echo "skip $f?"
+        select answer in yes no never ; do
+            if test $answer == yes ; then
+                continue 2
+            elif test $answer = never ; then
+                ask=never
+            else
+                break
+            fi
+        done
+    fi
     pushd "$f" || exit 1
     ./autogen.sh || exit 1
     ./configure "$@" || exit 1

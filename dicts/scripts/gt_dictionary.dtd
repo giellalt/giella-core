@@ -19,7 +19,7 @@
 <!ELEMENT a (#PCDATA)>
 <!ELEMENT i (#PCDATA)>
 
-<!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+) >
+<!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+, ig*) >
 <!ATTLIST e
       usage ( mt | vd | dict | other | nds | fad | KB ) #IMPLIED
       src ( nj | sk | SvSt | gt_fad | gt | fad | other | gg | SK |
@@ -189,6 +189,13 @@
 
 <!ELEMENT dg ( d ) >
 <!ELEMENT d (#PCDATA) >
+
+<!-- Idiom phrases, faste uttrykk -->
+<!ELEMENT ig ( i+, id?, it+)+ >
+<!ELEMENT i (#PCDATA) >
+<!ELEMENT id (#PCDATA) >
+<!ELEMENT it (#PCDATA) >
+
 
 <!ELEMENT tg (semantics?, re?,  ( ((t, stem*, l_ref?, morph_expl?) | tf | te ))+, xg*, syng?) >
 <!ATTLIST tg

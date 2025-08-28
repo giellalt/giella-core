@@ -121,11 +121,11 @@ else
   # This way locally installed programs will appear before system instaled ones
 
   PATH=$PATH:/usr/local/bin
-  prepend_path PATH "$HOME"/.local/bin
   prepend_path PATH "$HOME"/bin
   prepend_path PATH "$GTHOME"/gt/script
   prepend_path PATH "$GTHOME"/gt/script/corpus
   prepend_path PATH "$GIELLA_CORE"/scripts
+  prepend_path PATH "$HOME"/.local/bin
 fi
 
 # setup the path to private bins if $GTPRIV is defined:

@@ -77,6 +77,7 @@ AC_PATH_PROG([FLOOKUP], [flookup], [false], $PATH)
 AC_PATH_PROG([SEE], [see], [head], $PATH)
 AC_PATH_PROG([HFST_OSPELL], [hfst-ospell], [false], $PATH)
 AC_PATH_PROG([DIVVUN_CHECKER], [divvun-checker], [false], $PATH)
+AC_PATH_PROG([DIVVUN_RUNTIME], [divvun-runtime], [false], $PATH)
 
 # easter eggs
 AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
@@ -140,6 +141,9 @@ AC_CONFIG_FILES([scripts/missing-multichars.sh],
                 [chmod +x scripts/missing-multichars.sh])
 AC_CONFIG_FILES([scripts/regresstest-pipespec.sh],
                 [chmod +x scripts/regresstest-pipespec.sh])
+
+# Enable .drb support if divvun-runtime is available
+AM_CONDITIONAL([HAVE_DIVVUN_RUNTIME], [test x$DIVVUN_RUNTIME != xfalse])
 
 AC_OUTPUT
 

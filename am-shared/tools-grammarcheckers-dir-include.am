@@ -19,6 +19,8 @@
 
 # set this to the filename of the grammar checker archive:
 GIELLA_GC_ZDISTRO=$(GTLANG2).zcheck
+# set this to the filename of the new runtime bundle:
+GIELLA_GC_DRBDISTRO=$(GTLANG2).drb
 
 # set this to the filename of the speller archive:
 GIELLA_GC_SPELLER=$(GTLANG2).zhfst
@@ -36,6 +38,7 @@ GIELLA_GC_SPELLER_ERRMOD=errmodel.default.hfst
 GIELLA_GC_GENERATOR=generator-gramcheck-gt-norm.hfstol
 GIELLA_GC_ERRORS=errors.xml
 GIELLA_GC_PIPESPEC=pipespec.xml
+GIELLA_GC_PIPELINE=pipeline.ts
 
 #! @var GIELLA_GC_GRAMCHECKER_SRC source for rules of vislcg3 grammar checker
 GC_SRC_FILES=$(GIELLA_GC_MWEDIS_SRC) \
@@ -47,7 +50,22 @@ GC_SRC_FILES=$(GIELLA_GC_MWEDIS_SRC) \
 
 EXTRA_DIST=$(GC_SRC_FILES) \
 		   $(GIELLA_GC_ERRORS) \
-		   $(GIELLA_GC_PIPESPEC)
+		   $(GIELLA_GC_PIPESPEC) \
+		   $(GIELLA_GC_PIPELINE)
+
+# Asset files for .drb build (all files except pipespec.xml):
+GIELLA_GC_ASSETS = assets/$(GIELLA_GC_TOKENISER)      \
+				   assets/$(GIELLA_GC_VALENCY)        \
+				   assets/$(GIELLA_GC_MWEDIS)         \
+				   assets/$(GIELLA_GC_DISAMBIGUATOR)  \
+				   assets/$(GIELLA_GC_GRAMCHECKER)    \
+				   assets/$(GIELLA_GC_ANAL_SPELLER)   \
+				   assets/$(GIELLA_GC_SPELLER_ERRMOD) \
+				   assets/$(GIELLA_GC_SPELLER_CG)     \
+				   assets/$(GIELLA_GC_GENERATOR)      \
+				   assets/$(GIELLA_GC_ERRORS)         \
+				   assets/$(GIELLA_GC_WHSPACE_ANAL)   \
+				   $(addprefix assets/,$(LOCAL_GC_ZIP_FILES))
 
 ####### Automake targets: ########
 
@@ -144,6 +162,35 @@ $(GIELLA_GC_ZDISTRO): $(GIELLA_GC_ZIPFILES)
 	$(AM_V_at)rm -f $@
 	gtgramtool build-archive pipespec.xml $@
 
+# Build .drb file if we have divvun-runtime and pipeline.ts
+if HAVE_DIVVUN_RUNTIME
+# Prepare assets directory for .drb build
+assets-dir:
+	$(AM_V_at)$(MKDIR_P) assets
+
+assets/%.hfst: %.hfst | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+assets/%.hfstol: %.hfstol | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+assets/%.bin: %.bin | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+assets/%.pmhfst: %.pmhfst | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+assets/%.xml: %.xml | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+# Build the .drb bundle
+$(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) $(GIELLA_GC_ASSETS)
+	$(AM_V_at)if test -f "$(srcdir)/$(GIELLA_GC_PIPELINE)"; then \
+		$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle; \
+	fi
+
+endif # HAVE_DIVVUN_RUNTIME
+
 # Additional developer tools:
 dev: modes/$(GTLANG)gram.mode schemas.xml
 
@@ -164,10 +211,10 @@ endif # WANT_GRAMCHECK
 
 ### Clean target:
 clean-local:
-	-rm -f *.bin schemas.xml *.zcheck *.hfst *.hfstol *.zip *.zhfst
+	-rm -f *.bin schemas.xml *.zcheck *.drb *.hfst *.hfstol *.zip *.zhfst
 	-rm -f mwe-dis.cg3 valency.cg3
 	-rm -f $(GIELLA_GC_ZIPFILES)
-	-rm -rf modes
+	-rm -rf modes assets
 
 ### Include the following
 

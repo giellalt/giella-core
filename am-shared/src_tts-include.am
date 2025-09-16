@@ -223,6 +223,7 @@ endif # WANT_REVERSED_INTERSECT
 			.o. @\"filters/remove-infl_deriv-borders.$*\"       \
 			.o. @\"filters/remove-word-boundary.$*\"            \
 			; \n\
+		 twosided flag-diacritics\n\
 		 save stack $@\n\
 		 quit\n" | $(XFST_TOOL)
 
@@ -291,6 +292,7 @@ define alt_ws_tts_fsts
 			read regex fst \
 			.o. @\"orthography/$(DEFAULT_WS)-to-$(1).compose.$$*\" \
 			; \n\
+		 twosided flag-diacritics\n\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
@@ -361,6 +363,7 @@ define alt_orth_tts_fst
 			read regex fst \
 			.o. @\"orthography/$(DEFAULT_ORTH)-to-$(1).compose.$$*\" \
 			; \n\
+		 twosided flag-diacritics\n\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 
@@ -428,6 +431,7 @@ define alt_orth_tts_fst
 			read regex fst \
 			.o. @\"orthography/raw-to-$(1).compose.$$*\"        \
 			; \n\
+		 twosided flag-diacritics\n\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
@@ -492,6 +496,7 @@ define area_tts_fsts
 			.o. @\"filters/remove-infl_deriv-borders.$$*\"       \
 			.o. @\"filters/remove-word-boundary.$$*\"            \
 			; \n\
+		 twosided flag-diacritics\n\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef

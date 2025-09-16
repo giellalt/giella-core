@@ -44,6 +44,7 @@ endif # CAN_FOMA
 #					filters/remove-mwe-tags.%                 
 
 # First we create the filtered lexicon, ie the analysis/output part of the cascade:
+### NB!! THIS IS LANGUAGE SPECIFIC, AND MUST BE CLEANED UP/REORGANISED!!! ###
 .generated/analyser-tts-gt-output.tmp.%: morphology/lexicon.% \
 					filters/remove-derivation-position-tags.% \
 					filters/rename-POS_before_Der-tags.%      \

@@ -189,6 +189,7 @@ $(GIELLA_GC_PIPELINE): $(srcdir)/$(GIELLA_GC_PIPELINE)
 
 # Build the .drb bundle
 $(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) $(GIELLA_GC_ASSETS)
+	$(AM_V_at)test -f $(GIELLA_GC_PIPELINE) || cp -f $(srcdir)/$(GIELLA_GC_PIPELINE) $(GIELLA_GC_PIPELINE)
 	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
 
 endif # HAVE_DIVVUN_RUNTIME

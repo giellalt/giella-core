@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# This is a script that runs yaml tester for a list of files.
+# The settings in yaml file need to be correct.
+
+# Wrong usage - short instruction:
+if ! test $# -ge 2 ; then
+    echo
+    echo "Usage: $0 FSA YAMLS..."
+    echo
+    echo "were:"
+    echo " FSA     is the automaton"
+    echo " YAMLS   is the YAML test files"
+    exit 77
+fi
+
+. "$GIELLA_CORE/termcolors.bash"
+tester="@GTMORPHTEST@"
+if ! test -x $tester ; then
+    printf "%sskip%s - missing gtmorphtest runner %s" "$light_blue" "$reset" \
+        "$tester"
+    exit 77
+fi
+if ! test -f "$1" ; then
+    printf "%sskip%s missing FSA file %s\n" "$light_blue" "$reset" "$1"
+    exit 77
+fi
+fsa=$1
+shift 1
+
+for yaml in "$@" ; do
+    if ! test -f "$yaml" ; then
+        printf "%sskip%s missing YAML file(s) %s\n" "$light_blue" "$reset" \
+            "$yaml"
+        exit 77
+    else
+        $tester --colour -l --morph "$fsa" "$yaml"
+        rv=$?
+        if test $rv -eq 77 ; then
+            printf "%sskip%s" "$light_blue" "$reset"
+            exit 77
+        elif $rv -ge 1 ; then
+            printf "%sfail%s" "$red" "$reset"
+            exit 1
+        fi
+    fi
+done
+
+
+

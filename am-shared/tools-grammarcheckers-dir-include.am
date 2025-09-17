@@ -183,11 +183,13 @@ assets/%.pmhfst: %.pmhfst | assets-dir
 assets/%.xml: %.xml | assets-dir
 	$(AM_V_CP)cp -f $< $@
 
+# Copy pipeline.ts to build directory for out-of-source builds
+$(GIELLA_GC_PIPELINE): $(srcdir)/$(GIELLA_GC_PIPELINE)
+	$(AM_V_CP)cp -f $< $@
+
 # Build the .drb bundle
 $(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) $(GIELLA_GC_ASSETS)
-	$(AM_V_at)if test -f "$(srcdir)/$(GIELLA_GC_PIPELINE)"; then \
-		$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle; \
-	fi
+	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
 
 #endif # HAVE_DIVVUN_RUNTIME
 
@@ -214,6 +216,7 @@ clean-local:
 	-rm -f *.bin schemas.xml *.zcheck *.drb *.hfst *.hfstol *.zip *.zhfst
 	-rm -f mwe-dis.cg3 valency.cg3
 	-rm -f $(GIELLA_GC_ZIPFILES)
+	-rm -f $(GIELLA_GC_PIPELINE)
 	-rm -rf modes assets
 
 ### Include the following

@@ -79,6 +79,9 @@ AC_PATH_PROG([HFST_OSPELL], [hfst-ospell], [false], $PATH)
 AC_PATH_PROG([DIVVUN_CHECKER], [divvun-checker], [false], $PATH)
 AC_PATH_PROG([DIVVUN_RUNTIME], [divvun-runtime], [false], $PATH)
 
+# Enable .drb support if divvun-runtime is available
+AM_CONDITIONAL([HAVE_DIVVUN_RUNTIME], [test x$DIVVUN_RUNTIME != xfalse])
+
 # easter eggs
 AC_PATH_PROG([HFST_INFO], [hfst-info], [false], $PATH)
 # alphabets
@@ -116,8 +119,6 @@ AS_IF([test -d "$THIS_TOP_SRC_DIR"/../shared-mul],
              [AC_MSG_RESULT([NB using system shared-mul])],
              [AC_MSG_WARN([shared-mul needs to be updated and installed])])])
 
-
-
 AC_CONFIG_FILES([Makefile \
                  $PACKAGE.pc \
                  scripts/Makefile])
@@ -143,9 +144,6 @@ AC_CONFIG_FILES([scripts/regresstest-pipespec.sh],
                 [chmod +x scripts/regresstest-pipespec.sh])
 AC_CONFIG_FILES([scripts/simpler-yaml-runner.sh],
                 [chmod +x scripts/simpler-yaml-runner.sh])
-
-# Enable .drb support if divvun-runtime is available
-AM_CONDITIONAL([HAVE_DIVVUN_RUNTIME], [test x$DIVVUN_RUNTIME != xfalse])
 
 AC_OUTPUT
 

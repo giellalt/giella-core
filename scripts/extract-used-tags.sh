@@ -13,7 +13,9 @@ tr '\t' ' '                       | # translate all tabs to spaces
 tr -s ' '                         | # squeeze all spaces
 sed 's/ [0-9A-Za-z/#_-]* ;//'     | # get rid of all contlexes
 cut -d':' -f1                     | # get rid of the surface side
-sed -e 's/ /_/g'                  | # we don't care about mwe with spaces here
+sed 's/% /§_§/g'                  | # prevent lexcyesced spaces from meddling
+sed -e 's/ /§_§/g'                | # we don't care about mwe with spaces here
+fgrep -v '§_§'                    | # throw spaces away again
 grep -E '[@+][0-9A-Za-z][0-9A-Za-z@+]' |  # Only keep interesting strings
 sed 's/@@/@€@/g'                  | # insert newline placeholder between flag diacritics
 sed 's/@+/@€+/g'                  | # insert newline placeholder between flag and tag

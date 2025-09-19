@@ -95,6 +95,12 @@ voikkosharedir=$(datadir)/voikko/4/
 voikkoshare_DATA=$(GIELLA_GC_ZDISTRO)
 
 endif # CAN_VISLCG
+
+# Build .drb file when divvun-runtime is available
+if HAVE_DIVVUN_RUNTIME
+all-local: $(GIELLA_GC_DRBDISTRO)
+endif
+
 endif # WANT_GRAMCHECK
 
 ####### Build rules - locally and via include: ########

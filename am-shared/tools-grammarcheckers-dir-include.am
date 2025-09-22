@@ -64,7 +64,6 @@ GIELLA_GC_ASSETS = $(addprefix assets/,$(GIELLA_GC_TOKENISER)      \
 				   $(GIELLA_GC_SPELLER_ERRMOD) \
 				   $(GIELLA_GC_SPELLER_CG)     \
 				   $(GIELLA_GC_GENERATOR)      \
-				   $(GIELLA_GC_ERRORS)         \
 				   $(GIELLA_GC_WHSPACE_ANAL)   \
 				   $(LOCAL_GC_ZIP_FILES)       \
 				   errors.json                 \
@@ -190,9 +189,6 @@ assets/%.pmhfst: %.pmhfst | assets-dir
 	$(AM_V_CP)cp -f $< $@
 
 assets/errors.json: errors.json | assets-dir
-	$(AM_V_CP)cp -f $< $@
-
-assets/errors.xml: errors.xml | assets-dir
 	$(AM_V_CP)cp -f $< $@
 
 assets/errors-%.ftl: errors-%.ftl | assets-dir

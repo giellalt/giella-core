@@ -192,6 +192,9 @@ assets/%.pmhfst: %.pmhfst | assets-dir
 assets/errors.json: errors.json | assets-dir
 	$(AM_V_CP)cp -f $< $@
 
+assets/errors.xml: errors.xml | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
 assets/errors-%.ftl: errors-%.ftl | assets-dir
 	$(AM_V_CP)cp -f $< $@
 

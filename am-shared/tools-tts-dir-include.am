@@ -191,6 +191,7 @@ clean-local:
 ### Include the following
 
 include $(top_srcdir)/../giella-core/am-shared/hfst-format-include.am
+include $(top_srcdir)/../giella-core/am-shared/xfscript-include.am
 include $(top_srcdir)/../giella-core/am-shared/vislcg3-include.am
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 

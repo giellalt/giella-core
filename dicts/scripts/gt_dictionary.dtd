@@ -17,7 +17,6 @@
 <!ELEMENT ref (#PCDATA|a|i)*>
 <!ELEMENT sourcenote (#PCDATA|a)*>
 <!ELEMENT a (#PCDATA)>
-<!ELEMENT i (#PCDATA)>
 
 <!ELEMENT e (lg, source?, semantics?, stem*, sources?, mg+, ig*) >
 <!ATTLIST e

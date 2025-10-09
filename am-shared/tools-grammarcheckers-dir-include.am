@@ -55,7 +55,8 @@ EXTRA_DIST=$(GC_SRC_FILES) \
 		   $(GIELLA_GC_PIPELINE)
 
 # Asset files for .drb build (all files except pipespec.xml):
-GIELLA_GC_ASSETS = $(addprefix assets/,$(GIELLA_GC_TOKENISER)      \
+GIELLA_GC_ASSETS = $(addprefix assets/,\
+				   $(GIELLA_GC_TOKENISER)      \
 				   $(GIELLA_GC_VALENCY)        \
 				   $(GIELLA_GC_MWEDIS)         \
 				   $(GIELLA_GC_DISAMBIGUATOR)  \
@@ -67,7 +68,7 @@ GIELLA_GC_ASSETS = $(addprefix assets/,$(GIELLA_GC_TOKENISER)      \
 				   $(GIELLA_GC_WHSPACE_ANAL)   \
 				   $(LOCAL_GC_ZIP_FILES)       \
 				   errors.json                 \
-				   $(GIELLA_GC_ERROR_FTLS))
+				   $(GIELLA_GC_ERROR_FTLS)     )
 
 ####### Automake targets: ########
 

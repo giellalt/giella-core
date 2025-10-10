@@ -51,6 +51,14 @@ AC_SUBST([GAWK], [$ac_cv_path_GAWK])
 # pythony things
 AM_PATH_PYTHON([3.5],, [:])
 AC_PATH_PROG([PIPX], [pipx], [false], $PATH)
+AS_IF([test x$PIPX = xfalse],
+      [AC_MSG_WARN([we recommend using pipx to keep updated python scripts:
+       on debian/ubuntu run: sudo apt update
+            sudo apt install pipx
+            pipx ensurepath
+       on mac (brew) run: brew install pipx
+            pipx ensurepath
+       ])])
 # duplicate all pipx tests from template here, just in case
 AC_PATH_PROG([GTGRAMTOOL], [gtgramtool], [false])
 AC_PATH_PROG([GTLEMMATEST], [gtlemmatest], [false])
@@ -59,17 +67,17 @@ AC_PATH_PROG([GTPARADIGMTEST], [gtparadigmtest], [false])
 AC_PATH_PROG([GTMULTICHARTEST], [gtmultichartest], [false])
 AC_PATH_PROGS([GTMORPHTEST], [gtmorphtest morph-test2], [false])
 AS_IF([test x$GTGRAMTOOL = xfalse],
-      [AC_MSG_WARN([gtgramtool is needed for grammar checker tests
+      [AC_MSG_ERROR([gtgramtool is needed for grammar checker tests
        do: pipx install git+https://github.com/divvun/GiellaLTGramTools/])])
 AS_IF([test x$GTLEMMATEST = xfalse],
-      [AC_MSG_WARN([gtlemmatest is needed for HFST generation tests
+      [AC_MSG_ERROR([gtlemmatest is needed for HFST generation tests
        do: pipx install git+https://github.com/divvun/GiellaLTLexTools/])])
 AS_IF([test x$GTMULTICHARTEST = xfalse],
       [AC_MSG_ERROR([gtmultichartest is needed for lexc Multichar_Symbols tests
        do: pipx install git+https://github.com/divvun/GiellaLTLexTools/
        (or: pipx upgrade giellaltlextools)])])
 AS_IF([test x$GTMORPHTEST = xfalse],
-      [AC_MSG_WARN([ Either gtmorphtest or morph-test2 is needed for YAML-based morphology tests
+      [AC_MSG_ERROR([Either gtmorphtest or morph-test2 is needed for YAML-based morphology tests
        do: pipx install git+https://github.com/divvun/morph-test
        or install https://github.com/divvun/morph-test-rs])])
 
@@ -163,11 +171,3 @@ AS_IF([test x$PRECOMMIT = xfalse],
 
        on mac: brew install pre-commit
        others: python3 -m pip install pre-commit])])
-AS_IF([test x$PIPX = xfalse],
-      [AC_MSG_WARN([we recommend using pipx to keep updated python scripts:
-       on debian/ubuntu run: sudo apt update
-            sudo apt install pipx
-            pipx ensurepath
-       on mac (brew) run: brew install pipx
-            pipx ensurepath
-       ])])

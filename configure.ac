@@ -56,6 +56,7 @@ AC_PATH_PROG([GTGRAMTOOL], [gtgramtool], [false])
 AC_PATH_PROG([GTLEMMATEST], [gtlemmatest], [false])
 AC_PATH_PROG([GTSPELLTEST], [gtspelltest], [false])
 AC_PATH_PROG([GTPARADIGMTEST], [gtparadigmtest], [false])
+AC_PATH_PROG([GTMULTICHARTEST], [gtmultichartest], [false])
 AC_PATH_PROGS([GTMORPHTEST], [gtmorphtest morph-test2], [false])
 AS_IF([test x$GTGRAMTOOL = xfalse],
       [AC_MSG_WARN([gtgramtool is needed for grammar checker tests
@@ -63,6 +64,10 @@ AS_IF([test x$GTGRAMTOOL = xfalse],
 AS_IF([test x$GTLEMMATEST = xfalse],
       [AC_MSG_WARN([gtlemmatest is needed for HFST generation tests
        do: pipx install git+https://github.com/divvun/GiellaLTLexTools/])])
+AS_IF([test x$GTMULTICHARTEST = xfalse],
+      [AC_MSG_ERROR([gtmultichartest is needed for lexc Multichar_Symbols tests
+       do: pipx install git+https://github.com/divvun/GiellaLTLexTools/
+       (or: pipx upgrade giellaltlextools)])])
 AS_IF([test x$GTMORPHTEST = xfalse],
       [AC_MSG_WARN([ Either gtmorphtest or morph-test2 is needed for YAML-based morphology tests
        do: pipx install git+https://github.com/divvun/morph-test

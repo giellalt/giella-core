@@ -9,19 +9,16 @@ import sys
 from argparse import ArgumentParser, FileType
 from time import perf_counter, process_time
 
-import libhfst
+import pyhfst
 
 
 def load_hfst(filename: str):
     """Load an HFST model from file with error handling."""
-    try:
-        his = libhfst.HfstInputStream(filename)
-        return his.read()
-    except libhfst.NotTransducerStreamException:
-        raise IOError(2, filename) from None
+    his = pyhfst.HfstInputStream(filename)
+    return his.read()
 
 
-def fsa_analyse(fsa: libhfst.HfstTransducer, surf: str):
+def fsa_analyse(fsa: pyhfst.Transducer, surf: str):
     """Analyse wordform with FSA, with optional recasing."""
     res = fsa.lookup(surf)
     if not res:
@@ -86,7 +83,7 @@ def main():
         if not options.missfile:
             options.missfile = sys.stdout
     except IOError:
-        print(f"Could not process file{options.analyser}",
+        print(f"Could not process file {options.analyser}",
               file=sys.stderr)
         sys.exit(2)
     # basic statistics

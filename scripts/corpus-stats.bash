@@ -6,25 +6,44 @@ if test $# -lt 1 ; then
     exit 1
 fi
 
+if test -z $GTLANGS ; then
+    echo set GTLANGS to parent of corpus dir plz
+    exit 2
+fi
+
 
 for ll in "$@" ; do
+    TOKENISER="$GTLANGS/lang-$ll/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst"
+    ANALYSER="$GTLANGS/lang-$ll/src/fst/analyser-gt-desc.hfstol"
+    if ! test -f $TOKENISER ; then
+        echo missing tokeniser $TOKENISER, plz enable-tokenisesr and compile
+        exit 2
+    fi
+    if ! test -f $ANALYSER ; then
+        echo missing analuyser $ANALYSER, plz recompile in lang-$ll
+        exit 2
+    fi
     for copyright in "" -x-closed ; do
         CORPUS="$GTLANGS/corpus-$ll$copyright/converted/"
-        TOKENISER="$GTLANGS/lang-$ll/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst"
-        ANALYSER="$GTLANGS/lang-$ll/src/fst/analyser-gt-desc.hfstol"
         echo "$ll$copyright"
         if ! test -f "$ll$copyright.text" ; then
             ccat -l "$ll" "$CORPUS" > "$ll$copyright.text"
+        else
+            echo $ll$copyright.text exists not remaking
         fi
         if ! test -f "$ll$copyright.tokens" ; then
             cat "$ll$copyright.text" | hfst-tokenise "$TOKENISER" > "$ll$copyright.tokens"
+        else
+            echo $ll$copyright.tokens exists not remaking
         fi
         if ! test -f "$ll$copyright.freqs" ; then
             sort < "$ll$copyright.tokens" | uniq -c | sort -nr > "$ll$copyright.freqs"
+        else
+            echo $ll$copyright.freqs exists not remaking
         fi
         printf "paragraphs tokens characters\n"
         wc "$ll$copyright.text"
-        python "$GTHOME/scripts/freq-evals.py" -a "$ANALYSER" -i "$ll$copyright.freqs" \
+        python3 "$GTHOME/scripts/freq-evals.py" -a "$ANALYSER" -i "$ll$copyright.freqs" \
             -m "$ll$copyright.missinglist" -n "$ll$copyright.prodlist"
     done
     for gecs in goldstandard correct-no-gs ; do
@@ -43,7 +62,7 @@ for ll in "$@" ; do
         fi
         printf "paragraphs tokens characters\n"
         wc "$ll$gecs.text"
-        python "$GTHOME/scripts/freq-evals.py" -a "$ANALYSER" -i "$ll$gecs.freqs" \
+        python3 "$GTHOME/scripts/freq-evals.py" -a "$ANALYSER" -i "$ll$gecs.freqs" \
             -m "$ll$copyright.missinglist" -n "$ll$copyright.prodlist"
 
     done

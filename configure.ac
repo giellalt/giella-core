@@ -19,10 +19,24 @@ AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
 
+AC_ARG_ENABLE([configure-errors],
+              [AS_HELP_STRING([--disable-configure-errors].
+                              [disables fatal errors in configure script @<:@default=enabled@:>@])],
+                              [enable_configure_errors=$enableval],
+                              [enable_configure_errors=yes])
+AC_DEFUN([gt_MSG_ERROR],
+          [AS_IF([test x$enable_configure_errors != xno],
+                 [tput setaf 1
+                  AC_MSG_ERROR([$1])
+                  tput sgr0],
+                 [AC_MSG_NOTICE([ignored error: $1])])])
+
+
+
 AC_MSG_CHECKING([whether we can define GIELLA_CORE])
 AS_IF([test "x$GIELLA_CORE"  = x], [GIELLA_CORE=$(pwd); AC_MSG_RESULT([yes - from pwd])],
 	  [test "x$GIELLA_CORE" != x], [AC_MSG_RESULT([yes - from env])],
-      [AC_MSG_ERROR([no - could not define GIELLA_CORE])])
+      [gt_MSG_ERROR([no - could not define GIELLA_CORE])])
 AC_ARG_VAR([GIELLA_CORE], [directory holding core scripts and data for the Giella infrastructure])
 
 SVNREVISION="$Revision$"
@@ -36,7 +50,7 @@ AC_CACHE_CHECK([for sed that supports newlines and pipes], [ac_cv_path_SED],
               [[m4out=`echo aaa | $ac_path_SED 's/a/\n/g' | wc -l | tr -d '[:space:] '`
                 test "x$m4out" = x4\
       && ac_cv_path_SED=$ac_path_SED ac_path_SED_found=:]],
-    [AC_MSG_ERROR([could not find sed that supports newlines - please install GNU sed. Hint: sudo port install gsed./c])])])
+    [gt_MSG_ERROR([could not find sed that supports newlines - please install GNU sed. Hint: sudo port install gsed./c])])])
 AC_SUBST([SED], [$ac_cv_path_SED])
 
 # Check for awk with required feature:
@@ -45,7 +59,7 @@ AC_CACHE_CHECK([for awk that supports gensub], [ac_cv_path_GAWK],
     [[awkout=`$ac_path_GAWK 'BEGIN{gensub(/a/,"b","g");}'; exvalue=$?; echo $exvalue`
       test "x$awkout" = x0 \
       && ac_cv_path_GAWK=$ac_path_GAWK ac_path_GAWK_found=:]],
-    [AC_MSG_ERROR([could not find awk that supports gensub - please install GNU awk. hint: sudo port install gawk])])])
+    [gt_MSG_ERROR([could not find awk that supports gensub - please install GNU awk. hint: sudo port install gawk])])])
 AC_SUBST([GAWK], [$ac_cv_path_GAWK])
 
 # pythony things
@@ -67,17 +81,17 @@ AC_PATH_PROG([GTPARADIGMTEST], [gtparadigmtest], [false])
 AC_PATH_PROG([GTMULTICHARTEST], [gtmultichartest], [false])
 AC_PATH_PROGS([GTMORPHTEST], [gtmorphtest morph-test2], [false])
 AS_IF([test x$GTGRAMTOOL = xfalse],
-      [AC_MSG_ERROR([gtgramtool is needed for grammar checker tests
+      [gt_MSG_ERROR([gtgramtool is needed for grammar checker tests
        do: pipx install git+https://github.com/divvun/GiellaLTGramTools/])])
 AS_IF([test x$GTLEMMATEST = xfalse],
-      [AC_MSG_ERROR([gtlemmatest is needed for HFST generation tests
+      [gt_MSG_ERROR([gtlemmatest is needed for HFST generation tests
        do: pipx install git+https://github.com/divvun/GiellaLTLexTools/])])
 AS_IF([test x$GTMULTICHARTEST = xfalse],
-      [AC_MSG_ERROR([gtmultichartest is needed for lexc Multichar_Symbols tests
+      [gt_MSG_ERROR([gtmultichartest is needed for lexc Multichar_Symbols tests
        do: pipx install git+https://github.com/divvun/GiellaLTLexTools/
        (or: pipx upgrade giellaltlextools)])])
 AS_IF([test x$GTMORPHTEST = xfalse],
-      [AC_MSG_ERROR([Either gtmorphtest or morph-test2 is needed for YAML-based morphology tests
+      [gt_MSG_ERROR([Either gtmorphtest or morph-test2 is needed for YAML-based morphology tests
        do: pipx install git+https://github.com/divvun/morph-test
        or install https://github.com/divvun/morph-test-rs])])
 
@@ -102,7 +116,7 @@ AC_PATH_PROG([HFST_SUMMARISE], [hfst-summarize], [false], $PATH)
 # unicode normalisation filters
 AC_PATH_PROG([UCONV], [uconv], [false])
 AS_IF([test x$UCONV = xfalse], 
-      [AC_MSG_ERROR([needs uconv for unicode support
+      [gt_MSG_ERROR([needs uconv for unicode support
        uconv is a part of ICU 
        on debian/ubuntu: apt install icu-devtools
        on macports: port install icu
@@ -171,3 +185,5 @@ AS_IF([test x$PRECOMMIT = xfalse],
 
        on mac: brew install pre-commit
        others: python3 -m pip install pre-commit])])
+AS_IF([test x$enable_configure_errors = xno],
+      [AC_MSG_NOTICE([THIS BUILD HAS CONFIGURE ERRORS DISABLED AND YOU MAY NOT REPORT BUGS ABOUT IT])])

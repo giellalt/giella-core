@@ -3,4 +3,4 @@
 # gut apply script to revert last commit:
 
 # git command:
-git reset --hard HEAD^
+git reset --hard HEAD~

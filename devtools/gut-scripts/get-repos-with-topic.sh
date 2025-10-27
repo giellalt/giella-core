@@ -10,8 +10,8 @@ fi
 
 TOPIC="$1"
 
-# Get all repositories matching ^lang-s and their topics
-gut topic get -r ^lang-s | while read -r line; do
+# Get all repositories matching ^lang- and their topics
+gut topic get -r ^lang- | while read -r line; do
     # Extract repository name from lines like:
     # List of topics for lang-sma is: ["topic1", "topic2", ...]
     if [[ "$line" =~ ^List\ of\ topics\ for\ ([^\ ]+)\ is:\ \[(.+)\] ]]; then

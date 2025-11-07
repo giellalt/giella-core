@@ -230,7 +230,6 @@ clean-local:
 	-rm -f *.bin schemas.xml *.zcheck *.drb *.hfst *.hfstol *.zip *.zhfst
 	-rm -f mwe-dis.cg3 valency.cg3
 	-rm -f $(GIELLA_GC_ZIPFILES)
-	-rm -f $(GIELLA_GC_PIPELINE)
 	-rm -rf modes assets
 
 ### Include the following

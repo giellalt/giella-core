@@ -44,7 +44,7 @@ lg='lang-'
 abbr='$GTLANGS/$lg$l/tools/tokenisers/abbr.txt'
 
 #long_lang_list
-long_lang_list=(bxr chp ciw cor crk fao fin fit fkv
+long_lang_list=(bxr chp ciw cor crk fao fin fit fkv gle
                 hdn ipk izh kal kca kpv liv mdf
                 mhr mrj myv ndl nio nob olo ron rus
                 sjd sje sma sme smj smn sms som tat tku

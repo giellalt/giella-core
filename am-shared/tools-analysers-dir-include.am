@@ -19,6 +19,7 @@
 
 # set this to the filename of the analyser archive:
 GIELLA_ANL_ZDISTRO=$(GLANG2).zpipe
+GIELLA_ANL_DRBDISTRO=$(GLANG2).drb
 
 GIELLA_ANL_VALENCY=$(GIELLA_ANL_VALENCY_SRC:.cg3=.bin)
 GIELLA_ANL_WHSPACE_ANAL=$(GIELLA_ANL_WHSPACE_ANAL_SRC:.regex=.hfst)
@@ -30,6 +31,7 @@ GIELLA_ANL_SEMSETS=$(GIELLA_ANL_SEMSETS_SRC:.cg3=.bin)
 
 GIELLA_ANL_TOKENISER=tokeniser-disamb-gt-desc.pmhfst
 GIELLA_ANL_PIPESPEC=pipespec.xml
+GIELLA_ANL_PIPELINE=pipeline.ts
 
 #! @var GIELLA_ANL_GRAMCHECKER_SRC source for rules of vislcg3 analyser
 GC_SRC_FILES=$(GIELLA_ANL_MWEDIS_SRC) \
@@ -43,28 +45,44 @@ GIELLA_CG_INCLUDES=$(GC_SRC_FILES)
 
 EXTRA_DIST=$(GC_SRC_FILES) \
 		   $(GIELLA_ANL_ERRORS) \
-		   $(GIELLA_ANL_PIPESPEC)
+		   $(GIELLA_ANL_PIPESPEC) \
+		   $(GIELLA_ANL_PIPELINE)
+
+GIELLA_ANL_ASSETS=$(addprefix assets/,\
+					$(GIELLA_ANL_TOKENISER) \
+					$(GIELLA_ANL_VALENCY) \
+					$(GIELLA_ANL_WHSPACE_ANAL) \
+					$(GIELLA_ANL_MWEDIS) \
+					$(GIELLA_ANL_DISAMBIGUATOR) \
+					$(GIELLA_ANL_FUNCTIONS) \
+					$(GIELLA_ANL_DEPENDENCY) \
+					$(GIELLA_ANL_SEMSETS) \
+					$(LOCAL_ANL_ZIP_FILES) )
 
 ####### Automake targets: ########
 
 if WANT_ANL_TOOL
 if CAN_VISLCG
 
-GIELLA_ANL_ZIPFILES=$(GIELLA_ANL_TOKENISER)     \
-				   $(GIELLA_ANL_VALENCY)        \
-				   $(GIELLA_ANL_WHSPACE_ANAL)   \
-				   $(GIELLA_ANL_MWEDIS)         \
-				   $(GIELLA_ANL_DISAMBIGUATOR)  \
-				   $(GIELLA_ANL_FUNCTIONS)      \
-				   $(GIELLA_ANL_DEPENDENCY)     \
-				   $(GIELLA_ANL_PIPESPEC)       \
-				   $(GIELLA_ANL_SEMSETS)        \
+GIELLA_ANL_ZIPFILES=$(GIELLA_ANL_TOKENISER)		\
+				   $(GIELLA_ANL_VALENCY)		\
+				   $(GIELLA_ANL_WHSPACE_ANAL)	\
+				   $(GIELLA_ANL_MWEDIS)			\
+				   $(GIELLA_ANL_DISAMBIGUATOR)	\
+				   $(GIELLA_ANL_FUNCTIONS)		\
+				   $(GIELLA_ANL_DEPENDENCY)		\
+				   $(GIELLA_ANL_PIPESPEC)		\
+				   $(GIELLA_ANL_SEMSETS)		\
 				   $(LOCAL_ANL_ZIP_FILES)
 
 noinst_DATA=$(GIELLA_ANL_SPELLER)
 
 voikkosharedir=$(datadir)/giella/$(GLANG)/
 voikkoshare_DATA=$(GIELLA_ANL_ZDISTRO)
+
+if HAVE_DIVVUN_RUNTIME
+noinst_DATA+=$(GIELLA_ANL_DRBDISTRO)
+endif
 
 endif # CAN_VISLCG
 endif # WANT_ANL_TOOL
@@ -113,6 +131,34 @@ $(GIELLA_ANL_VALENCY_SRC): \
 $(GIELLA_ANL_ZDISTRO): $(GIELLA_ANL_ZIPFILES)
 	$(AM_V_at)rm -f $@
 	gtgramtool build-archive pipespec.xml $@
+
+#########################
+# Build .drb file if we have divvun-runtime and pipeline.ts
+if HAVE_DIVVUN_RUNTIME
+# Prepare assets directory for .drb build
+assets-dir:
+	$(AM_V_at)$(MKDIR_P) assets
+
+assets/%.hfst: %.hfst | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+assets/%.hfstol: %.hfstol | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+assets/%.bin: %.bin | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+assets/%.pmhfst: %.pmhfst | assets-dir
+	$(AM_V_CP)cp -f $< $@
+
+# Build the .drb bundle
+$(GIELLA_ANL_DRBDISTRO): $(GIELLA_ANL_PIPELINE) $(GIELLA_ANL_ASSETS)
+	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
+
+endif # HAVE_DIVVUN_RUNTIME
+###########################
+
+
 
 # Additional developer tools:
 dev: modes/$(GLANG)-analyser.mode schemas.xml

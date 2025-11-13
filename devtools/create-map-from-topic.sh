@@ -2,6 +2,7 @@
 
 # Script to create a map from repositories with a specific topic
 # Usage: create-map-from-topic.sh <topic>
+# Use it from the giellalt/ directory / the mother directory of giella-core
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <topic>" >&2

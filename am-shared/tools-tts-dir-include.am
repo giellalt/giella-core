@@ -23,7 +23,7 @@ GIELLA_TTS_ZDISTRO=$(GLANG2)-tts.zpipe
 GIELLA_TTS_DRBDISTRO=$(GTLANG2)-tts.drb
 
 # Various text conversion fst's - normalisers/expanders and IPA:
-GIELLA_ANL_IPA=$(GIELLA_ANL_IPA_FST_FILE)
+GIELLA_TTS_IPA=$(GIELLA_TTS_IPA_FST_FILE)
 
 # List of transcriptors: all files in src/transcriptions/ matching the file name
 # pattern:
@@ -31,81 +31,79 @@ GIELLA_ANL_IPA=$(GIELLA_ANL_IPA_FST_FILE)
 # Makes it flexible and easily adaptable to the needs of each language.
 # For additional flexibility, one can filter out files that should not be
 # included, by specifying them in tools/tts/Makefile.am (without suffix).
-FILTER_OUT_FILES=$(addsuffix %, $(GIELLA_ANL_REMOVE_TRANSCRIPTORS))
-GIELLA_XSC_TRANSCIPTOR_LIST=$(basename $(notdir $(wildcard $(top_builddir)/src/fst/transcriptions/*2text.filtered.lookup.hfstol)))
-GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST=$(filter-out $(FILTER_OUT_FILES), $(GIELLA_XSC_TRANSCIPTOR_LIST))
-GIELLA_XSC_TRANSCIPTORS=$(addsuffix .hfst, $(GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST))
-GIELLA_XSC_OL_TRANSCIPTORS=$(addsuffix .hfstol, $(GIELLA_XSC_TRANSCIPTOR_FILTERED_LIST))
+FILTER_OUT_FILES=$(addsuffix %, $(GIELLA_TTS_REMOVE_TRANSCRIPTORS))
+GIELLA_TTS_TRANSCIPTOR_LIST=$(basename $(notdir $(wildcard $(top_builddir)/src/fst/transcriptions/*2text.filtered.lookup.hfstol)))
+GIELLA_TTS_TRANSCIPTOR_FILTERED_LIST=$(filter-out $(FILTER_OUT_FILES), $(GIELLA_TTS_TRANSCIPTOR_LIST))
+GIELLA_TTS_TRANSCIPTORS=$(addsuffix .hfst, $(GIELLA_TTS_TRANSCIPTOR_FILTERED_LIST))
+GIELLA_TTS_OL_TRANSCIPTORS=$(addsuffix .hfstol, $(GIELLA_TTS_TRANSCIPTOR_FILTERED_LIST))
 
-GIELLA_XSC_NORMALISER=transcriptor-gt-desc.hfstol
-GIELLA_XSC_ANALYSER=analyser-gt-norm.hfstol
-GIELLA_XSC_GENERATOR=generator-tts-gt-norm.hfstol
+GIELLA_TTS_NORMALISER=transcriptor-gt-desc.hfstol
+GIELLA_TTS_ANALYSER=analyser-gt-norm.hfstol
+GIELLA_TTS_GENERATOR=generator-tts-gt-norm.hfstol
 
 # Disamb and syntax analysis files, including whitespace analysis:
-GIELLA_ANL_VALENCY=$(GIELLA_ANL_VALENCY_SRC:.cg3=.bin)
-GIELLA_ANL_WHSPACE_ANAL=$(GIELLA_ANL_WHSPACE_ANAL_SRC:.regex=.hfst)
-GIELLA_ANL_MWEDIS=$(GIELLA_ANL_MWEDIS_SRC:.cg3=.bin)
-GIELLA_ANL_DISAMBIGUATOR=$(GIELLA_ANL_DISAMBIGUATOR_SRC:.cg3=.bin)
-GIELLA_ANL_FUNCTIONS=$(GIELLA_ANL_FUNCTIONS_SRC:.cg3=.bin)
-GIELLA_ANL_DEPENDENCY=$(GIELLA_ANL_DEPENDENCY_SRC:.cg3=.bin)
-GIELLA_ANL_SEMSETS=$(GIELLA_ANL_SEMSETS_SRC:.cg3=.bin)
+GIELLA_TTS_VALENCY=$(GIELLA_TTS_VALENCY_SRC:.cg3=.bin)
+GIELLA_TTS_WHSPACE_ANAL=$(GIELLA_TTS_WHSPACE_ANAL_SRC:.regex=.hfst)
+GIELLA_TTS_MWEDIS=$(GIELLA_TTS_MWEDIS_SRC:.cg3=.bin)
+GIELLA_TTS_DISAMBIGUATOR=$(GIELLA_TTS_DISAMBIGUATOR_SRC:.cg3=.bin)
+GIELLA_TTS_FUNCTIONS=$(GIELLA_TTS_FUNCTIONS_SRC:.cg3=.bin)
+GIELLA_TTS_DEPENDENCY=$(GIELLA_TTS_DEPENDENCY_SRC:.cg3=.bin)
+GIELLA_TTS_SEMSETS=$(GIELLA_TTS_SEMSETS_SRC:.cg3=.bin)
 
 # Pipeline specification:
-GIELLA_ANL_PIPESPEC=pipespec.xml
-GIELLA_ANL_PIPELINE=pipeline.ts
+GIELLA_TTS_PIPESPEC=pipespec.xml
+GIELLA_TTS_PIPELINE=pipeline.ts
 
-#! @var GIELLA_ANL_GRAMCHECKER_SRC source for rules of vislcg3 analyser
-TTSPIPE_SRC_FILES=$(GIELLA_ANL_MWEDIS_SRC) \
-			 $(GIELLA_ANL_DISAMBIGUATOR_SRC) \
-			 $(GIELLA_ANL_WHSPACE_ANAL_SRC) \
-			 $(GIELLA_ANL_SEMSETS_SRC) \
-			 $(GIELLA_ANL_VALENCY)
+#! @var GIELLA_TTS_GRAMCHECKER_SRC source for rules of vislcg3 analyser
+TTSPIPE_SRC_FILES=$(GIELLA_TTS_MWEDIS_SRC) \
+			 $(GIELLA_TTS_DISAMBIGUATOR_SRC) \
+			 $(GIELLA_TTS_WHSPACE_ANAL_SRC) \
+			 $(GIELLA_TTS_SEMSETS_SRC) \
+			 $(GIELLA_TTS_VALENCY)
 
 #! @var INCLUDES need to be copied over before compiling main cg file
 GIELLA_CG_INCLUDES=$(TTSPIPE_SRC_FILES)
 
 EXTRA_DIST=$(TTSPIPE_SRC_FILES) \
-		   $(GIELLA_ANL_PIPESPEC) \
-		   $(GIELLA_ANL_PIPELINE)
+		   $(GIELLA_TTS_PIPESPEC) \
+		   $(GIELLA_TTS_PIPELINE)
 
 # Asset files for .drb build (all files except pipespec.xml):
 GIELLA_TTS_ASSETS= $(addprefix assets/,\
-				   $(GIELLA_ANL_IPA)            \
-				   $(GIELLA_ANL_TOKENISER)      \
-				   $(GIELLA_XSC_NORMALISER)     \
-				   $(GIELLA_XSC_ANALYSER)       \
-				   $(GIELLA_XSC_GENERATOR)      \
-				   $(GIELLA_ANL_VALENCY)        \
-				   $(GIELLA_ANL_WHSPACE_ANAL)   \
-				   $(GIELLA_ANL_MWEDIS)         \
-				   $(GIELLA_ANL_DISAMBIGUATOR)  \
-				   $(GIELLA_ANL_FUNCTIONS)      \
-				   $(GIELLA_ANL_SEMSETS)        \
-				   $(GIELLA_ANL_DEPENDENCY)     \
-				   $(GIELLA_XSC_OL_TRANSCIPTORS)\
-				   $(LOCAL_ANL_ZIP_FILES)       )
+				   $(GIELLA_TTS_IPA)            \
+				   $(GIELLA_TTS_TOKENISER)      \
+				   $(GIELLA_TTS_NORMALISER)     \
+				   $(GIELLA_TTS_ANALYSER)       \
+				   $(GIELLA_TTS_GENERATOR)      \
+				   $(GIELLA_TTS_VALENCY)        \
+				   $(GIELLA_TTS_WHSPACE_ANAL)   \
+				   $(GIELLA_TTS_MWEDIS)         \
+				   $(GIELLA_TTS_DISAMBIGUATOR)  \
+				   $(GIELLA_TTS_FUNCTIONS)      \
+				   $(GIELLA_TTS_SEMSETS)        \
+				   $(GIELLA_TTS_DEPENDENCY)     \
+				   $(GIELLA_TTS_OL_TRANSCIPTORS)\
+				   $(LOCAL_TTS_ZIP_FILES)       )
 
 ####### Automake targets: ########
 
 if WANT_TTS
 if CAN_VISLCG
-GIELLA_ANL_ZIPFILES=$(GIELLA_ANL_IPA)            \
-					$(GIELLA_ANL_TOKENISER)      \
-					$(GIELLA_XSC_NORMALISER)     \
-					$(GIELLA_XSC_ANALYSER)       \
-					$(GIELLA_XSC_GENERATOR)      \
-					$(GIELLA_ANL_VALENCY)        \
-					$(GIELLA_ANL_WHSPACE_ANAL)   \
-					$(GIELLA_ANL_MWEDIS)         \
-					$(GIELLA_ANL_DISAMBIGUATOR)  \
-					$(GIELLA_ANL_FUNCTIONS)      \
-					$(GIELLA_ANL_SEMSETS)        \
-					$(GIELLA_ANL_DEPENDENCY)     \
-					$(GIELLA_ANL_PIPESPEC)       \
-					$(GIELLA_XSC_OL_TRANSCIPTORS)\
-					$(LOCAL_ANL_ZIP_FILES)
-
-noinst_DATA=$(GIELLA_ANL_SPELLER)
+GIELLA_TTS_ZIPFILES=$(GIELLA_TTS_IPA)            \
+					$(GIELLA_TTS_TOKENISER)      \
+					$(GIELLA_TTS_NORMALISER)     \
+					$(GIELLA_TTS_ANALYSER)       \
+					$(GIELLA_TTS_GENERATOR)      \
+					$(GIELLA_TTS_VALENCY)        \
+					$(GIELLA_TTS_WHSPACE_ANAL)   \
+					$(GIELLA_TTS_MWEDIS)         \
+					$(GIELLA_TTS_DISAMBIGUATOR)  \
+					$(GIELLA_TTS_FUNCTIONS)      \
+					$(GIELLA_TTS_SEMSETS)        \
+					$(GIELLA_TTS_DEPENDENCY)     \
+					$(GIELLA_TTS_PIPESPEC)       \
+					$(GIELLA_TTS_OL_TRANSCIPTORS)\
+					$(LOCAL_TTS_ZIP_FILES)
 
 voikkosharedir=$(datadir)/giella/$(GLANG)/
 voikkoshare_DATA=$(GIELLA_TTS_ZDISTRO)
@@ -124,13 +122,13 @@ endif # WANT_TTS
 ZIPFLAGS=-j
 
 # Copy tokeniser:
-$(GIELLA_ANL_TOKENISER): \
-			$(top_builddir)/tools/tokenisers/$(GIELLA_ANL_TOKENISER)
+$(GIELLA_TTS_TOKENISER): \
+			$(top_builddir)/tools/tokenisers/$(GIELLA_TTS_TOKENISER)
 	$(AM_V_CP)cp -f $< $@
 
 # Compile the IPA conversion fst:
-$(GIELLA_ANL_IPA): \
-			$(top_builddir)/src/fst/phonetics/$(GIELLA_ANL_IPA)
+$(GIELLA_TTS_IPA): \
+			$(top_builddir)/src/fst/phonetics/$(GIELLA_TTS_IPA)
 	$(AM_V_FST2FST)$(HFST_FST2FST) -f olw -i $< -o $@
 
 # Copy all transcriptor files from their src/fst/ dir, and turn them into
@@ -148,14 +146,14 @@ transcriptor-%.hfstol: \
 # and unionise them one at a time with the result of the preceding step.
 # The first in the list is used as the base. Finally, make all final full
 # stops optional, so that both 'dr.' and 'dr' will return 'doktor'.
-$(GIELLA_XSC_NORMALISER).tmp: $(GIELLA_XSC_TRANSCIPTORS)
+$(GIELLA_TTS_NORMALISER).tmp: $(GIELLA_TTS_TRANSCIPTORS)
 	$(AM_V_GEN)cp -f $< $@
 	$(AM_V_UNION)for f in $(filter-out $<, $^); do \
 		$(HFST_DISJUNCT) -1 $@ -2 $$f -o $@.tmp; mv -f $@.tmp $@ ; \
 		done
 
-$(GIELLA_XSC_NORMALISER): $(top_builddir)/src/fst/filters/make-optional-final_full_stops.hfst \
-                          $(GIELLA_XSC_NORMALISER).tmp
+$(GIELLA_TTS_NORMALISER): $(top_builddir)/src/fst/filters/make-optional-final_full_stops.hfst \
+                          $(GIELLA_TTS_NORMALISER).tmp
 	$(AM_V_FST2FST)$(HFST_COMPOSE) -1 $< -2 $@.tmp \
 		| $(HFST_MINIMIZE) \
 		| $(HFST_FST2FST) -f olw -o $@
@@ -163,39 +161,39 @@ $(GIELLA_XSC_NORMALISER): $(top_builddir)/src/fst/filters/make-optional-final_fu
 
 # Copy analyser and generator for divvun-normaliser:
 # Copy mwe-dis:
-$(GIELLA_XSC_ANALYSER) \
-$(GIELLA_XSC_GENERATOR): \
+$(GIELLA_TTS_ANALYSER) \
+$(GIELLA_TTS_GENERATOR): \
 %.hfstol: $(top_builddir)/src/fst/%.hfstol
 	$(AM_V_CP)cp -f $< $@
 
 
 # Compile the whitespace analyser:
-$(GIELLA_ANL_WHSPACE_ANAL): $(GIELLA_ANL_WHSPACE_ANAL_SRC)
+$(GIELLA_TTS_WHSPACE_ANAL): $(GIELLA_TTS_WHSPACE_ANAL_SRC)
 	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) --disjunct -i $< \
 		| $(HFST_FST2FST) -O -o $@
 
 # Copy mwe-dis:
-$(GIELLA_ANL_MWEDIS_SRC): \
-		$(top_srcdir)/tools/tokenisers/$(GIELLA_ANL_MWEDIS_SRC)
+$(GIELLA_TTS_MWEDIS_SRC): \
+		$(top_srcdir)/tools/tokenisers/$(GIELLA_TTS_MWEDIS_SRC)
 	$(AM_V_CP)cp -f $< $@
 
 # cg3 files from common sources:
-$(GIELLA_ANL_VALENCY_SRC) \
-$(GIELLA_ANL_FUNCTIONS_SRC) \
-$(GIELLA_ANL_DEPENDENCY_SRC): \
+$(GIELLA_TTS_VALENCY_SRC) \
+$(GIELLA_TTS_FUNCTIONS_SRC) \
+$(GIELLA_TTS_DEPENDENCY_SRC): \
 %.cg3: $(top_builddir)/src/cg3/%.cg3
 	$(AM_V_CP)cp -f $< $@
 
-$(GIELLA_ANL_SEMSETS_SRC): $(top_builddir)/src/cg3/$(GIELLA_ANL_SEMSETS_SRC)
+$(GIELLA_TTS_SEMSETS_SRC): $(top_builddir)/src/cg3/$(GIELLA_TTS_SEMSETS_SRC)
 	$(AM_V_CP)cp -f $< $@
 
 # Disambiguator:
-$(GIELLA_ANL_DISAMBIGUATOR_SRC): \
-%.cg3: $(top_srcdir)/src/cg3/%.cg3 $(GIELLA_ANL_SEMSETS_SRC)
+$(GIELLA_TTS_DISAMBIGUATOR_SRC): \
+%.cg3: $(top_srcdir)/src/cg3/%.cg3 $(GIELLA_TTS_SEMSETS_SRC)
 	$(AM_V_CP)cp -f $< $@
 
 # Finally build the .zpipe file:
-$(GIELLA_TTS_ZDISTRO): $(GIELLA_ANL_ZIPFILES)
+$(GIELLA_TTS_ZDISTRO): $(GIELLA_TTS_ZIPFILES)
 	$(AM_V_at)rm -f $@
 	$(AM_V_ZIP)$(ZIP) $(ZIPFLAGS) $(MORE_VERBOSITY) $@ $^
 
@@ -219,13 +217,13 @@ assets/%.pmhfst: %.pmhfst | assets-dir
 	$(AM_V_CP)cp -f $< $@
 
 # Copy pipeline.ts to build directory for out-of-source builds
-$(GIELLA_ANL_PIPELINE): $(srcdir)/$(GIELLA_ANL_PIPELINE)
+$(GIELLA_TTS_PIPELINE): $(srcdir)/$(GIELLA_TTS_PIPELINE)
 	$(AM_V_CP)cp -f $< $@
 
 # Build the .drb bundle
-$(GIELLA_TTS_DRBDISTRO): $(GIELLA_ANL_PIPELINE) \
+$(GIELLA_TTS_DRBDISTRO): $(GIELLA_TTS_PIPELINE) \
 						$(GIELLA_TTS_ASSETS)
-	$(AM_V_at)test -f $(GIELLA_ANL_PIPELINE) || cp -f $(srcdir)/$(GIELLA_ANL_PIPELINE) $(GIELLA_ANL_PIPELINE)
+	$(AM_V_at)test -f $(GIELLA_TTS_PIPELINE) || cp -f $(srcdir)/$(GIELLA_TTS_PIPELINE) $(GIELLA_TTS_PIPELINE)
 	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
 
 endif # HAVE_DIVVUN_RUNTIME
@@ -244,7 +242,7 @@ schemas.xml:
 ### Clean target:
 clean-local:
 	-rm -f *.bin schemas.xml *.zcheck *.hfst *.hfstol *.zip *.zhfst generated-*
-	-rm -f $(GIELLA_ANL_ZIPFILES)
+	-rm -f $(GIELLA_TTS_ZIPFILES)
 	-rm -rf modes
 
 ### Include the following

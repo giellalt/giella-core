@@ -4,6 +4,11 @@
 
 ######## Test targets: ###########
 
+# Do not run tests in this directory in parallel, it can crash the system.
+# The tests are run by Python, and the tests are parallelised there, so
+# there is no need to further parallelise in make, to the contrary.
+.NOTPARALLEL:
+
 if WANT_GRAMCHECK
 
 # Default variable for all languages

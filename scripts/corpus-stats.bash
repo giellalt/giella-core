@@ -35,7 +35,7 @@ for ll in "$@" ; do
             echo $ll$copyright.text exists not remaking
         fi
         if ! test -f "$ll$copyright.tokens" ; then
-            cat "$ll$copyright.text" | hfst-tokenise "$TOKENISER" > "$ll$copyright.tokens"
+            cat "$ll$copyright.text" | hfst-tokenise -t 5 "$TOKENISER" > "$ll$copyright.tokens"
         else
             echo $ll$copyright.tokens exists not remaking
         fi

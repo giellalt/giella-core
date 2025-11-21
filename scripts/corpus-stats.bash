@@ -10,7 +10,10 @@ if test -z $GTLANGS ; then
     echo set GTLANGS to parent of corpus dir plz
     exit 2
 fi
-
+if test -z $GTHOME ; then
+    echo set GTHOME to giella-core plz
+    exit 2
+fi
 
 for ll in "$@" ; do
     TOKENISER="$GTLANGS/lang-$ll/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst"

@@ -36,7 +36,7 @@ Options:
 Examples:
   ${process.argv[1]}
   ${process.argv[1]} --word test --env beta
-  ${process.argv[1]} -w "min tekst" -g
+  ${process.argv[1]} -w "my text" -g
   ${process.argv[1]} --json
 `);
     process.exit(0);

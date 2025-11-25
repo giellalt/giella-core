@@ -79,7 +79,7 @@ function httpsGet(hostname, path) {
     
     req.on('timeout', () => {
       req.destroy();
-      reject(new Error('Timeout - ingen respons etter 3 sekund'));
+      reject(new Error('Timeout - no response after 3 seconds'));
     });
     
     req.on('error', reject);
@@ -117,7 +117,7 @@ function httpsPost(hostname, path, postData) {
 
     req.on('timeout', () => {
       req.destroy();
-      reject(new Error('Timeout - ingen respons etter 3 sekund'));
+      reject(new Error('Timeout - no response after 3 seconds'));
     });
 
     req.on('error', reject);
@@ -172,32 +172,32 @@ async function main() {
           
           if (serviceType === 'speller' && result.results && result.results.length > 0) {
             const wordResult = result.results[0];
-            console.log(`  ${wordResult.word} - ${wordResult.is_correct ? 'riktig' : 'feil'}`);
+            console.log(`  ${wordResult.word} - ${wordResult.is_correct ? 'correct' : 'wrong'}`);
             
             if (wordResult.suggestions && wordResult.suggestions.length > 0) {
               wordResult.suggestions.forEach(suggestion => {
                 console.log(`    ${suggestion.value}`);
               });
             } else if (!wordResult.is_correct) {
-              console.log(`  (Ingen forslag tilgjengeleg)`);
+              console.log(`  (No suggestions given)`);
             }
           } else if (serviceType === 'grammar' && result.errs) {
             if (result.errs.length === 0) {
-              console.log(`  Ingen feil funne`);
+              console.log(`  No errors found`);
             } else {
               result.errs.forEach(err => {
-                console.log(`  ${err.error_text || testWord} - ${err.title || 'feil'}`);
+                console.log(`  ${err.error_text || testWord} - ${err.title || 'wrong'}`);
                 if (err.suggestions && err.suggestions.length > 0) {
                   err.suggestions.forEach(suggestion => {
                     console.log(`    ${suggestion}`);
                   });
                 } else {
-                  console.log(`  (Ingen forslag tilgjengeleg)`);
+                  console.log(`  (No suggestions given)`);
                 }
               });
             }
           } else {
-            console.log(`  Ukjent responsformat`);
+            console.log(`  Unknown response format`);
           }
           
           console.log('');

@@ -41,6 +41,9 @@ GIELLA_TTS_NORMALISER=transcriptor-gt-desc.hfstol
 GIELLA_TTS_ANALYSER=analyser-gt-norm.hfstol
 GIELLA_TTS_GENERATOR=generator-tts-gt-norm.hfstol
 
+GIELLA_TTS_PHONEMISER=$(if $(findstring .regex,$(GIELLA_TTS_PHONEMISER_SRC)),$(GIELLA_TTS_PHONEMISER_SRC:.regex=.hfstol),$(GIELLA_TTS_PHONEMISER_SRC:.xfscript=.hfstol))
+GIELLA_TTS_ACRO_PHONEMISER=$(if $(findstring .regex,$(GIELLA_TTS_ACRO_PHONEMISER_SRC)),$(GIELLA_TTS_ACRO_PHONEMISER_SRC:.regex=.hfstol),$(GIELLA_TTS_ACRO_PHONEMISER_SRC:.xfscript=.hfstol))
+
 # Disamb and syntax analysis files, including whitespace analysis:
 GIELLA_TTS_VALENCY=$(GIELLA_TTS_VALENCY_SRC:.cg3=.bin)
 GIELLA_TTS_WHSPACE_ANAL=$(GIELLA_TTS_WHSPACE_ANAL_SRC:.regex=.hfst)
@@ -83,6 +86,8 @@ GIELLA_TTS_ASSETS= $(addprefix assets/,\
 				   $(GIELLA_TTS_SEMSETS)        \
 				   $(GIELLA_TTS_DEPENDENCY)     \
 				   $(GIELLA_TTS_OL_TRANSCIPTORS)\
+				   $(GIELLA_TTS_PHONEMISER)     \
+				   $(GIELLA_TTS_ACRO_PHONEMISER)\
 				   $(LOCAL_TTS_ZIP_FILES)       )
 
 ####### Automake targets: ########
@@ -103,6 +108,8 @@ GIELLA_TTS_ZIPFILES=$(GIELLA_TTS_IPA)            \
 					$(GIELLA_TTS_DEPENDENCY)     \
 					$(GIELLA_TTS_PIPESPEC)       \
 					$(GIELLA_TTS_OL_TRANSCIPTORS)\
+					$(GIELLA_TTS_PHONEMISER)     \
+					$(GIELLA_TTS_ACRO_PHONEMISER)\
 					$(LOCAL_TTS_ZIP_FILES)
 
 voikkosharedir=$(datadir)/giella/$(GLANG)/
@@ -141,6 +148,19 @@ transcriptor-%.hfst: \
 transcriptor-%.hfstol: \
 			transcriptor-%.hfst
 	$(AM_V_FST2FST)$(HFST_FST2FST) --optimized-lookup-unweighted -i $< -o $@
+
+# Compile acro conversion to spelled out letters - acro2text.regex
+# Convert normalised text to some sort of phonemic form - text2phontext.regex
+%.hfstol: %.regex
+	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S -i $< \
+		| $(HFST_FST2FST) -O -o $@
+
+# The same as above, but now using xfscript source files
+%.hfstol: %.xfscript
+	$(AM_V_HXFST)printf "\n\nsave stack $@.tmp\nquit\n" | cat $< - \
+		| "$(HFST_XFST)" -p $(MORE_VERBOSITY) $(HFST_FORMAT)
+	$(AM_V_RGX2FST)$(HFST_FST2FST) -O -i $@.tmp -o $@
+	$(AM_V_at)rm -f $@.tmp
 
 # Compile the normaliser fst by looping over all individual transcriptors,
 # and unionise them one at a time with the result of the preceding step.

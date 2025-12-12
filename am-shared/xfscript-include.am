@@ -35,18 +35,15 @@
 # xfst-tool for %.hfstol pattern which won't work, solve it by static pattern
 # that bloxks the hfstol like:
 # foobar.hfst \
-# foobar.xfst \
 # foobar.foma: \
 # foobar.%: foobar.tmp.%
 %.hfstol : XFST_TOOL    = false THIS IS A BUG IN MAKEFILE see xfscript-include.am
 
 
 %.hfst : AM_V_XFST_TOOL = $(AM_V_HXFST)
-%.xfst : AM_V_XFST_TOOL = $(AM_V_XFST)
 %.foma : AM_V_XFST_TOOL = $(AM_V_FOMA)
 
 %.hfst : INVERT_HFST = invert net\n
-%.xfst : INVERT_XFST = invert net\n
 %.foma : INVERT_FOMA = invert net\n
 
 # vim: set ft=automake:

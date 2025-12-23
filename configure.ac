@@ -14,7 +14,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-AC_INIT([giella-core], [1.5.0], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
+AC_INIT([giella-core], [1.5.1], [feedback@divvun.no], [giella-core], [https://github.com/giellalt/giella-core])
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
@@ -169,6 +169,8 @@ AC_CONFIG_FILES([scripts/missing-multichars.sh],
                 [chmod +x scripts/missing-multichars.sh])
 AC_CONFIG_FILES([scripts/regresstest-pipespec.sh],
                 [chmod +x scripts/regresstest-pipespec.sh])
+AC_CONFIG_FILES([scripts/difftest-pipeline.sh],
+                [chmod +x scripts/difftest-pipeline.sh])
 AC_CONFIG_FILES([scripts/simpler-yaml-runner.sh],
                 [chmod +x scripts/simpler-yaml-runner.sh])
 

@@ -10,7 +10,7 @@ tg + tg:before {
     content: "; ";
 }
 dg {
-    display: inline;
+    display: block;
 }
 
 dg d {
@@ -61,8 +61,9 @@ xg x {
     font-style: italic;
 }
 
+/* inline */
 ig + ig:before {
-    display: inline;
+    display: block;
     content: "Dajaldagat: ";
     content: "; ";
 }

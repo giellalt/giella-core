@@ -152,6 +152,12 @@ xt {
 }
 
 /* xg, x, xt styling: */
+ig:before {
+    display: inline;
+    content: "Dajaldagat: ";
+    font-style: bold;
+}    
+
 ig {
     display: block;
     margin-left: 2.33ex;

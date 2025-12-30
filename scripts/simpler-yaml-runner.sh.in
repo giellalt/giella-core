@@ -14,7 +14,7 @@ if ! test $# -ge 2 ; then
     exit 77
 fi
 
-. "$GIELLA_CORE/termcolors.bash"
+. "$GIELLA_CORE/scripts/termcolors.bash"
 tester="@GTMORPHTEST@"
 if ! test -x $tester ; then
     printf "%sskip%s - missing gtmorphtest runner %s" "$light_blue" "$reset" \
@@ -27,8 +27,9 @@ if ! test -f "$1" ; then
 fi
 fsa=$1
 shift 1
+yamls=("$@")
 
-for yaml in "$@" ; do
+for yaml in "${yamls[@]}" ; do
     if ! test -f "$yaml" ; then
         printf "%sskip%s missing YAML file(s) %s\n" "$light_blue" "$reset" \
             "$yaml"
@@ -39,7 +40,7 @@ for yaml in "$@" ; do
         if test $rv -eq 77 ; then
             printf "%sskip%s" "$light_blue" "$reset"
             exit 77
-        elif $rv -ge 1 ; then
+        elif test $rv -ge 1 ; then
             printf "%sfail%s" "$red" "$reset"
             exit 1
         fi

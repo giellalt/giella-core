@@ -5,6 +5,6 @@
 ######## Test targets: ###########
 
 if WANT_ANL_TOOL
-TESTS+=regresstest.sh
+TESTS+=regresstest.sh run-yaml-testcases.sh
 endif
 

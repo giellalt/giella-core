@@ -50,7 +50,10 @@ if ! test -f $goldfile ; then
     echo "hint: $runner -a $archive -n $variant < $testfile > $goldfile"
     exit 77
 fi
-
+DIFF="diff -u"
+if test -x @WDIFF@ ; then
+    DIFF=@WDIFF@
+fi
 outfile=$(mktemp -t giella-pipeline-test.XXXXXXXXXXX)
 
 $runner run -p "$archive" < "$testfile" > "$outfile"
@@ -63,6 +66,6 @@ if cmp "$goldfile" "$outfile" > /dev/null ; then
     printf "%spass%s - exact match\n" "$green" "$reset"
 else
     printf "%sfail%s - outputs differ from expectations:\n" "$red" "$reset"
-    diff -u "$outfile" "$goldfile"
+    $DIFF "$outfile" "$goldfile"
     exit 1
 fi

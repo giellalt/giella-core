@@ -105,6 +105,7 @@ AC_PATH_PROG([SEE], [see], [head], $PATH)
 AC_PATH_PROG([HFST_OSPELL], [hfst-ospell], [false], $PATH)
 AC_PATH_PROG([DIVVUN_CHECKER], [divvun-checker], [false], $PATH)
 AC_PATH_PROG([DIVVUN_RUNTIME], [divvun-runtime], [false], $PATH)
+AC_PATH_PROG([WDIFF], [wdiff], [cat], $PATH)
 
 # Enable .drb support if divvun-runtime is available
 AM_CONDITIONAL([HAVE_DIVVUN_RUNTIME], [test x$DIVVUN_RUNTIME != xfalse])

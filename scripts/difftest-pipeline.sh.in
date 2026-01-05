@@ -63,6 +63,6 @@ if cmp "$goldfile" "$outfile" > /dev/null ; then
     printf "%spass%s - exact match\n" "$green" "$reset"
 else
     printf "%sfail%s - outputs differ from expectations:\n" "$red" "$reset"
-    diff -u "$goldfile" "$outfile"
+    diff -u "$outfile" "$goldfile"
     exit 1
 fi

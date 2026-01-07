@@ -19,6 +19,7 @@
 /scripts/run-yaml-testcases.sh
 /scripts/missing-multichars.sh
 /scripts/regresstest-pipespec.sh
+/scripts/difftest-pipeline.sh
 Makefile
 Makefile.in
 __pycache__/

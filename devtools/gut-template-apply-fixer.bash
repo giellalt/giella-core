@@ -2,7 +2,13 @@
 # when you do gut template apply and it just fails and you manually merge and
 # have to update the template.toml afterwards anyways...
 
-revision=$(fgrep 'rev_id =' "$GTLANGS"/template-lang-und/.gut/template.toml |\
+if ! test -f template-lang-und/.gut/template.toml ; then
+    echo "missing template-lang-und/.gut/template.toml, try:"
+    echo "cd \$GTLANGS"
+    exit 1
+fi
+
+revision=$(fgrep 'rev_id =' template-lang-und/.gut/template.toml |\
     sed -e 's/.*rev_id = //')
 prev=$((revision - 1))
 pushd template-lang-und || return 1

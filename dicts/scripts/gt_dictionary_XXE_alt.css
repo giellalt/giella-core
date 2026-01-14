@@ -1,7 +1,7 @@
 @charset "utf-8";
 @import "gt_dictionary_XXE_shared.css";
 
-/* This is the css file for the dictionary tree view */
+/* This is the css file for the XXE "Hierarchical view" */
 
 r, rootdict, lexicon {
     background-color: #bcd;
@@ -84,8 +84,8 @@ geography:after {
 /* tg styling: */
 tg:before {
 	display: inline;
-	counter-increment: translationgroup;
-    content: counter(translationgroup, lower-alpha) ". ";
+/*	counter-increment: translationgroup;
+    content: counter(translationgroup, lower-alpha) ". ";*/
 }
 tg {
     display: block;
@@ -117,8 +117,12 @@ re {
 
 /* t styling: */
 t, tf {
-    display: list-item;
-    margin-left: 2.33ex;
+    /*    display: list-item;*/
+    display: inline;
+    margin-left: 1.33ex;
+}
+t:after {
+    content: ", "
 }
 tf:after {
     display: inline;
@@ -155,8 +159,13 @@ xt {
 ig:before {
     display: inline;
     content: "Dajaldagat: ";
-    font-style: bold;
+    font-weight: bold;
 }    
+
+ig + ig {
+    display: block;
+    margin-left: 2.33ex;
+}
 
 ig {
     display: block;
@@ -174,7 +183,7 @@ id {
 }
 
 it {
-    display: block;
+    display: inline;
     margin-left: 1.33ex;
 }
 

@@ -256,7 +256,7 @@ t:after {
     margin-left: 0.5ex;
 }
 t[pos]:after {
-    content: attr(pos);
+    content: attr(pos) " ";
 }
 t[pos][type]:after {
     content: attr(pos) ", " attr(type) ;
@@ -310,7 +310,7 @@ l_ref:after {
 xt:before {
     display: inline;
     color: gray;
-    content: "⇒ ";
+    content: " ⇒ ";
 }
 
 syng:before {

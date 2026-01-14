@@ -1,6 +1,8 @@
 @charset "utf-8";
 @import "gt_dictionary_XXE_shared.css";
 
+/* This is the css file for the XXE "Dictionary view" */
+
 r, rootdict {
     background-color: #fff;
 }
@@ -10,7 +12,7 @@ tg + tg:before {
     content: "; ";
 }
 dg {
-    display: block;
+    display: inline;
 }
 
 dg d {
@@ -21,6 +23,9 @@ d:after {
         content: "; ";
 }
 
+dg + tg {
+    display: block;
+}
 tg {
     display: inline;
 }
@@ -38,6 +43,9 @@ t  + tf:before,
 te + tf:before,
 tf + tf:before {
     content: ", ";
+}
+t:after {
+    content: ", "
 }
 d, t, tf, te, orig {
     display: inline;
@@ -67,6 +75,12 @@ ig + ig:before {
     content: "Dajaldagat: ";
     content: "; ";
 }
+
+/*
+ig {
+    display: inline;
+    content: "; ";
+}*/
 
 ig i {
     font-style: italic;

@@ -150,6 +150,7 @@ analyser-%-cggt-output.hfst: $(top_builddir)/src/fst/analyser-%-gt-output.hfst \
 tokeniser-tts-cggt-desc.pmhfst: tokeniser-tts-cggt-desc.pmscript \
 					analyser_relabelled-tts-cggt-input.hfst \
 					analyser_relabelled-tts-cggt-output.hfst \
+					analyser-emojis-gt-desc.hfst \
 					analyser-url-gt-desc.hfst
 	$(AM_V_PM2FST)$(HFST_PMATCH2FST) < $< > $@.tmp
 	$(AM_V_at)mv -f $@.tmp $@

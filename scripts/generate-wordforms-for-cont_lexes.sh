@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Debug:
-#set -x
+set -x
 
 # This shell script takes five or six options, and produce (with the help of a)
 # perl script and some html fragment files) an html table containing up to N
@@ -35,8 +35,8 @@ lemmacount=$5
 exception_lexicons="$6"
 
 #### Script-internal variables: ####
-lexicon_filename=$(basename $source_file .lexc)
-generator_filename=$(basename $generator_file)
+lexicon_filename=$(basename "$source_file" .lexc)
+generator_filename=$(basename "$generator_file")
 fst_types="hfst hfstol xfst foma"
 
 #Filenames:
@@ -65,7 +65,7 @@ suffix=
 lookuptool=
 # Loop through the fst suffixes, and find the newest fst:
 for suff in $fst_types ; do
-    if test -e $generator_file.$suff ; then
+    if test -e "$generator_file.$suff" ; then
         # If it is the first fst found, use it:
         if test "x$fst_file" = "x" ; then
             fst_file="$generator_file.$suff"
@@ -103,7 +103,7 @@ fi
 exclgrep () {
     # Check that the grep pattern isn't empty:
     if test "x$@" != "x"; then
-        egrep -v "$@"
+        grep -E -v "$@"
     # If it is, just let everything pass through using cat:
     else
         cat
@@ -114,8 +114,8 @@ exclgrep () {
 ######## $exception_lexicons:
 lexicon_extraction () {
 grep ";" $@ \
-   | egrep -v "^[[:space:]]*(\!|\@|<)" \
-   | egrep -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
+   | grep -E -v "^[[:space:]]*(!|@|<)" \
+   | grep -E -v "^[[:space:]]*[[:alpha:]]+[[:space:]]*;" \
    | sed 's/% /€/g' \
    | tr -s ' ' \
    | cut -d' ' -f2 \
@@ -127,18 +127,18 @@ grep ";" $@ \
 ######## For each lexicon found, extract the N(=$lemmacount) first entries:
 lemma_extraction () {
 for lexicon in $@; do
-    ${giella_core}/scripts/extract-lemmas.sh \
+    "${giella_core}/scripts/extract-lemmas.sh" \
         --include "($lexicon)" \
         --keep-contlex \
         --keep-homonyms \
-        $source_file \
-        | head -n $lemmacount
+        "$source_file" \
+        | head -n "$lemmacount"
 done
 }
 
 ######## Add the morphosyntactic codes to each lemma:
 add_morf_codes () {
-lemmalist=$(printf "$@" | sed 's/ /__XXYYZZ__/g')
+lemmalist=$(printf "%s" "$@" | sed 's/ /__XXYYZZ__/g')
 for lemma in $lemmalist; do
     for code in $morf_codes; do
         echo "$lemma$code"
@@ -148,7 +148,7 @@ done
 
 ######## Generate the word forms:
 generate_word_forms () {
-    printf "$@\n" | $lookuptool -q $fst_file
+    printf "%s" "$@\n" | $lookuptool -q "$fst_file"
 }
 
 ######## Open in default browser if on Mac:
@@ -172,31 +172,31 @@ lexicon_list=$(lexicon_extraction "$source_file")
 lemma_lex_list_tmp=$(lemma_extraction "$lexicon_list")
 lemma_lex_list=$(echo "$lemma_lex_list_tmp" | sort --key=2)
 
-echo "$lemma_lex_list" > $lemma_lexicon_list
+echo "$lemma_lex_list" > "$lemma_lexicon_list"
 
-lemma_list=$(printf "$lemma_lex_list\n" | cut -f1 )
+lemma_list=$(printf "%s" "$lemma_lex_list\n" | cut -f1 )
 #echo "$lemma_list" > lemma_list.txt
 
 lemma_code_list=$(add_morf_codes "$lemma_list" | sed 's/__XXYYZZ__/ /g')
 #echo "$lemma_code_list" > lemma_code_list.txt
 
 find_generator
-generate_word_forms "$lemma_code_list" > $generated_word_forms
+generate_word_forms "$lemma_code_list" > "$generated_word_forms"
 
-$giella_core/scripts/word_form_cohorts-to-table.pl   \
+"$giella_core/scripts/word_form_cohorts-to-table.pl"   \
             --input    "$generated_word_forms"  \
             --output   "${generated_table}.tmp" \
             --lemlex   "$lemma_lexicon_list"    \
             --codelist "$morf_codes"
 
 # Add html header & footer with css styling:
-cat $html_header \
-    ${generated_table}.tmp \
-    $html_footer \
-    > ${generated_table}
+cat "$html_header" \
+    "${generated_table}.tmp" \
+    "$html_footer" \
+    > "${generated_table}"
 
 # Open html file in default browser (only on MacOSX(?))
-macopen ${generated_table}
+macopen "${generated_table}"
 
 # Remove temporary files:
 rm -f "${generated_table}.tmp" \

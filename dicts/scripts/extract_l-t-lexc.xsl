@@ -102,18 +102,19 @@
 	  <!--xsl:variable name="cl" select="normalize-space(./lg/l)"/-->
 	  <!-- if needed due to mwe in the l-value whitespaces can be
 	       replaced by underscore such in t-value -->
-	  <xsl:variable name="cl" select="translate(normalize-space(./lg/l), ' ','_')"/>
+    <!-- The translate is used to escape special characters such as ! or : appearing in lemmas or translations -->
+	  <xsl:variable name="cl" select="replace(translate(normalize-space(./lg/l), ' ','_'), '([!:])', '%$1')"/>
 
 	  <xsl:if test="$TNUM='first'">
 	    <xsl:value-of
-		select="concat($cl,':',translate(normalize-space(./mg[1]/tg[1][./@xml:lang=$TLANG]/t[1]),
-			' ','_') , ' # ;',$nl)"/>
+		select="concat($cl,':',replace(translate(normalize-space(./mg[1]/tg[1][./@xml:lang=$TLANG]/t[1]),
+			' ','_'), '([!:])', '%$1') , ' # ;',$nl)"/>
 	  </xsl:if>
 	  <xsl:if test="$TNUM='all'">
 	    <xsl:for-each select=".//tg[./@xml:lang=$TLANG]/t">
 	      <xsl:value-of
-		  select="concat($cl,':',translate(normalize-space(.),
-			  ' ', '_') , ' # ;',$nl)"/>
+		  select="concat($cl,':',replace(translate(normalize-space(.),
+			  ' ', '_'), '([!:])', '%$1') , ' # ;',$nl)"/>
 	    </xsl:for-each>
 	  </xsl:if>
 	</xsl:for-each>

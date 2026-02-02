@@ -270,13 +270,20 @@ def analyse_expressions(fst: Path, lines: Iterable[str]) -> list[str]:
     Returns:
         The analyses of the expressions.
     """
-    command = ["hfst-lookup", fst.as_posix()]
+    # Use shell=True to avoid macOS sandbox restrictions
+    # The shell will find hfst-lookup in PATH
+    command = f"hfst-lookup '{fst.as_posix()}'"
     result = subprocess.run(
         command,
+        shell=True,
         capture_output=True,
         check=False,
         input="\n".join(lines).encode("utf-8"),
     )
+
+    if result.returncode != 0 and b"not found" in result.stderr:
+        raise SystemExit("Could not find hfst-lookup. Please install HFST tools (e.g., via Homebrew: brew install hfst)")
+
     return [
         line.strip()
         for line in result.stdout.decode("utf-8").split("\n")

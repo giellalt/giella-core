@@ -2,7 +2,7 @@
 #
 # to use the Giellatekno tools, please run the script
 #
-#  gt/script/gtsetup.sh
+#  giella-core/script/gtsetup.sh
 #
 # That script will set up a number of environmental variables,
 # and make sure this file is read as part of the login process.
@@ -55,9 +55,6 @@ alias svnup="svn up \$GTBIG \$GTFREE \$GTPRIV \$GTHOME/ \$GTHOME/art"
 
 
 # Standardised aliases for Giellatekno work:
-alias victorio='ssh    gtsvn.uit.no'
-alias      vic='ssh    gtsvn.uit.no'
-alias       xs='ssh    divvun.no'
 alias    gtlab='ssh    gtlab.uit.no'
 alias    gtsvn='ssh    gtsvn.uit.no'
 alias    gtweb='ssh    gtweb.uit.no'
@@ -79,7 +76,6 @@ alias xsl2="saxonXSL"
 alias rev="perl -nle 'print scalar reverse \$_'"
 alias sortr='LC_ALL="ru" sort'
 
-
 # utility command
 alias path='echo -e ${PATH//:/\\n}'
 
@@ -100,38 +96,27 @@ prepend_path()
   fi
 }
 
-# setup the GiellaLT path. We assume that the GiellaLT gt/ directory exists.
-if [ -z "$PATH" ]; then
-  PATH=$GTHOME/gt/script:/bin:/sbin:/usr/bin:/usr/sbin
-else
-  # If MacPorts is installed, make sure it is also available in the environment.
-  # This is especially important on the XServe.
-  if [ -d /opt/local ]; then
-    prepend_path PATH /opt/local/sbin
-    prepend_path PATH /opt/local/bin
-    /opt/local/bin/python3 -c "" 2>/dev/null && prepend_path PATH $(/opt/local/bin/python3 -c "import site;print(site.USER_SITE.replace('lib/python/site-packages', 'bin'))")
-    export MANPATH=/opt/local/share/man:${MANPATH}
-    export INFOPATH=/opt/local/share/info:${INFOPATH}
-    export CPATH=/opt/local/include:/usr/local/include:/usr/include:${CPATH}
-  else
-    python3 -c "" 2>/dev/null && prepend_path PATH $(python3 -c "import site;print(site.USER_SITE.replace('lib/python/site-packages', 'bin'))")
-  fi
-
-  # Make sure these paths are inserted before any "system" paths
-  # This way locally installed programs will appear before system instaled ones
-
-  PATH=$PATH:/usr/local/bin
-  prepend_path PATH "$HOME"/bin
-  prepend_path PATH "$GTHOME"/gt/script
-  prepend_path PATH "$GTHOME"/gt/script/corpus
-  prepend_path PATH "$GIELLA_CORE"/scripts
-  prepend_path PATH "$HOME"/.local/bin
+# If MacPorts is installed, make sure it is also available in the environment.
+# This is especially important on the XServe.
+if [ -d /opt/local ]; then
+  prepend_path PATH /opt/local/sbin
+  prepend_path PATH /opt/local/bin
+  /opt/local/bin/python3 -c "" 2>/dev/null && prepend_path PATH $(/opt/local/bin/python3 -c "import site;print(site.USER_SITE.replace('lib/python/site-packages', 'bin'))")
+  export MANPATH=/opt/local/share/man:${MANPATH}
+  export INFOPATH=/opt/local/share/info:${INFOPATH}
+  export CPATH=/opt/local/include:/usr/local/include:/usr/include:${CPATH}
 fi
 
-# setup the path to private bins if $GTPRIV is defined:
-if [ -n "$GTPRIV" ]; then
-  prepend_path PATH "$GTPRIV"/polderland/bin
-fi
+HOMEBREW_PREFIX="/opt/homebrew"
+PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
+ 
+# Make sure these paths are inserted before any "system" paths
+# This way locally installed programs will appear before system instaled ones
+
+PATH=$PATH:/usr/local/bin
+prepend_path PATH "$HOME"/bin
+prepend_path PATH "$GIELLA_CORE"/scripts
+prepend_path PATH "$HOME"/.local/bin
 
 export PATH
 
@@ -145,27 +130,3 @@ else
   CLASSPATH=/opt/local/share/java/saxon9he.jar:"$HOME"/lib/saxon9he.jar:"$HOME"/lib/saxon9.jar:${CLASSPATH}
 fi
 export CLASSPATH
-
-# Perl setup:
-export PERL_UNICODE=""
-if [ -z "$PERL5LIB" ]; then
-  PERL5LIB="$GTHOME"/gt/script
-else
-  prepend_path PERL5LIB "$GTHOME"/gt/script
-fi
-export PERL5LIB
-
-# This environment variable will by default exclude the .svn subdirs from being
-# searched when grepping files, which is almost always what you want.
-# It requires at least GNU grep 2.5.3. Default on Snow Leopard is 2.5.0, via
-# MacPorts GNU grep 2.7.0 or newer is available
-#export GREP_OPTIONS="--exclude-dir=\.svn"
-
-# If we are on the XServe or victorio, then set GTBOUND:
-HOSTN=$(hostname)
-if [ "$HOSTN" = "giellatekno.uit.no" ] ; then
-    export GTBOUND="/Users/hoavda/Public/corp/boundcorpus"
-elif [ "$HOSTN" = "gtsvn.uit.no" ] ; then
-    export GTBOUND=/home/apache_corpus/boundcorpus
-fi
-

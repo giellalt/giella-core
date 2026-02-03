@@ -101,7 +101,7 @@ def main():
                    help="Print verbosely while processing")
     a.add_argument("-t", "--threshold", metavar="THOLD", default=99,
                    type=int,
-                   help="require THOLD % for LEVEL or exit 1 (for testing)")
+                   help="require THOLD per cent for LEVEL or FAIL")
     options = a.parse_args()
     if not options.logfile:
         options.logfile = sys.stdout

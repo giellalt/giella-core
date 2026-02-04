@@ -260,6 +260,112 @@ def remove_typos(parsed_hfst_output: dict[str, list[str]]) -> dict[str, list[str
     }
 
 
+class HfstLookupProcess:
+    """Persistent hfst-lookup process that keeps FST in memory for better performance."""
+    
+    def __init__(self, fst_path: Path):
+        """Start a persistent hfst-lookup process with -q flag.
+        
+        Args:
+            fst_path: Path to the HFST FST file.
+        """
+        self.fst_path = fst_path
+        self.process = None
+        self._start_process()
+    
+    def _start_process(self):
+        """Start the hfst-lookup subprocess."""
+        command = ["hfst-lookup", "-q", str(self.fst_path)]
+        try:
+            self.process = subprocess.Popen(
+                command,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                bufsize=0  # Unbuffered for immediate response
+            )
+        except FileNotFoundError:
+            raise SystemExit(
+                "Could not find hfst-lookup. Please install HFST tools "
+                "(e.g., via Homebrew: brew install hfst)"
+            )
+    
+    def lookup(self, lines: Iterable[str]) -> list[str]:
+        """Analyse a list of expressions using the persistent process.
+        
+        Args:
+            lines: The expressions to analyse.
+        
+        Returns:
+            The analyses of the expressions.
+        """
+        if not self.process or self.process.poll() is not None:
+            self._start_process()
+        
+        lines_list = list(lines)
+        if not lines_list:
+            return []
+        
+        # Send all words
+        for line in lines_list:
+            self.process.stdin.write(line.strip() + "\n")
+        self.process.stdin.flush()
+        
+        # Read responses - with -q flag, output format is cleaner (no "> " prefix)
+        # Each word produces one or more output lines, separated by blank lines
+        results = []
+        words_processed = 0
+        current_word_output = []
+        
+        while words_processed < len(lines_list):
+            line = self.process.stdout.readline()
+            if not line:
+                break
+            
+            line = line.rstrip('\n')
+            
+            if line == "":
+                # Blank line marks end of current word's output
+                if current_word_output:
+                    results.extend(current_word_output)
+                    current_word_output = []
+                    words_processed += 1
+            else:
+                current_word_output.append(line)
+        
+        # Handle last word if no trailing blank line
+        if current_word_output:
+            results.extend(current_word_output)
+        
+        return results
+    
+    def close(self):
+        """Close the persistent process."""
+        if self.process:
+            try:
+                self.process.stdin.close()
+                self.process.stdout.close()
+                self.process.stderr.close()
+            except:
+                pass
+            try:
+                self.process.terminate()
+                self.process.wait(timeout=1)
+            except:
+                try:
+                    self.process.kill()
+                except:
+                    pass
+            self.process = None
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
+
 def analyse_expressions(fst: Path, lines: Iterable[str]) -> list[str]:
     """Analyse a list of expressions using a HFST FST.
 
@@ -269,26 +375,14 @@ def analyse_expressions(fst: Path, lines: Iterable[str]) -> list[str]:
 
     Returns:
         The analyses of the expressions.
+    
+    Note:
+        This function creates a new HfstLookupProcess for each call.
+        For better performance when calling multiple times, use
+        HfstLookupProcess directly in a context manager.
     """
-    # Use shell=True to avoid macOS sandbox restrictions
-    # The shell will find hfst-lookup in PATH
-    command = f"hfst-lookup '{fst.as_posix()}'"
-    result = subprocess.run(
-        command,
-        shell=True,
-        capture_output=True,
-        check=False,
-        input="\n".join(lines).encode("utf-8"),
-    )
-
-    if result.returncode != 0 and b"not found" in result.stderr:
-        raise SystemExit("Could not find hfst-lookup. Please install HFST tools (e.g., via Homebrew: brew install hfst)")
-
-    return [
-        line.strip()
-        for line in result.stdout.decode("utf-8").split("\n")
-        if line.strip()
-    ]
+    with HfstLookupProcess(fst) as lookup:
+        return lookup.lookup(lines)
 
 
 def get_longest_cmp_stem(suffix: str, analyses: list[str]) -> str:
@@ -637,14 +731,17 @@ def main():
         args.normative_fst, args.descriptive_fst, lang_directory, args.language
     )
 
+    # Start persistent lookup processes for much better performance
+    # This keeps FST files loaded in memory instead of reloading for each call
+    norm_lookup = HfstLookupProcess(normative_analyser)
+    desc_lookup = HfstLookupProcess(descriptive_analyser)
+
     # Read lexc files
     lexc_dict = read_lexc_files(lang_directory)
 
     # Save output from the normative analyser.
     input_stream = sys.stdin if args.infile == sys.stdin else args.infile.open()
-    norm_output = analyse_expressions(
-        fst=normative_analyser, lines={line for line in input_stream if line.strip()}
-    )
+    norm_output = norm_lookup.lookup({line for line in input_stream if line.strip()})
 
     # Save the words unknown to the normative analyser.
     missing_norm_words = {
@@ -654,9 +751,11 @@ def main():
     # The words that are missing in the normative analyser may be typos.
     # Sending those words through the descriptive analyser gives us a list of
     # typos and really unknown words.
-    descriptive_output = analyse_expressions(
-        fst=descriptive_analyser, lines=missing_norm_words
-    )
+    descriptive_output = desc_lookup.lookup(missing_norm_words)
+
+    # Close persistent processes
+    norm_lookup.close()
+    desc_lookup.close()
 
     if args.infile == sys.stdin:
         input_filename = ""

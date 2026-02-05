@@ -704,6 +704,45 @@ def get_analysers(
     if normative_analyser is not None and descriptive_analyser is not None:
         return Path(normative_analyser), Path(descriptive_analyser)
 
+    # Find all analyser pairs in build directories and standard locations
+    analyser_pairs = []
+    
+    # Check build directories up to 2 levels down
+    if lang_directory.exists():
+        # Check 1 level down
+        for item in lang_directory.iterdir():
+            if item.is_dir():
+                if (item / "config.log").exists():
+                    prefix = item / "src/fst/"
+                    normative_path = prefix / "analyser-gt-norm.hfstol"
+                    descriptive_path = prefix / "analyser-gt-desc.hfstol"
+                    
+                    if normative_path.exists() and descriptive_path.exists():
+                        newest_time = max(
+                            normative_path.stat().st_mtime,
+                            descriptive_path.stat().st_mtime
+                        )
+                        analyser_pairs.append((newest_time, normative_path, descriptive_path))
+                
+                # Check 2 levels down
+                try:
+                    for subitem in item.iterdir():
+                        if subitem.is_dir() and (subitem / "config.log").exists():
+                            prefix = subitem / "src/fst/"
+                            normative_path = prefix / "analyser-gt-norm.hfstol"
+                            descriptive_path = prefix / "analyser-gt-desc.hfstol"
+                            
+                            if normative_path.exists() and descriptive_path.exists():
+                                newest_time = max(
+                                    normative_path.stat().st_mtime,
+                                    descriptive_path.stat().st_mtime
+                                )
+                                analyser_pairs.append((newest_time, normative_path, descriptive_path))
+                except (PermissionError, OSError):
+                    # Skip directories we can't read
+                    pass
+    
+    # Check standard locations
     for prefix in [
         lang_directory / "src/fst/",
         Path("/usr/local/share/giella/") / language,
@@ -711,9 +750,18 @@ def get_analysers(
     ]:
         normative_path = prefix / "analyser-gt-norm.hfstol"
         descriptive_path = prefix / "analyser-gt-desc.hfstol"
-
+        
         if normative_path.exists() and descriptive_path.exists():
-            return normative_path, descriptive_path
+            newest_time = max(
+                normative_path.stat().st_mtime,
+                descriptive_path.stat().st_mtime
+            )
+            analyser_pairs.append((newest_time, normative_path, descriptive_path))
+    
+    # Return the newest pair
+    if analyser_pairs:
+        analyser_pairs.sort(key=lambda x: x[0], reverse=True)
+        return analyser_pairs[0][1], analyser_pairs[0][2]
 
     raise SystemExit("Could not find the normative and descriptive analyser.")
 

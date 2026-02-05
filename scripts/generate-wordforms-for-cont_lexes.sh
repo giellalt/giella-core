@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Debug:
-set -x
+#set -x
 
 # This shell script takes five or six options, and produce (with the help of a)
 # perl script and some html fragment files) an html table containing up to N
@@ -170,7 +170,8 @@ lexicon_list=$(lexicon_extraction "$source_file")
 #echo "$lexicon_list" > lexicon_list.txt
 
 lemma_lex_list_tmp=$(lemma_extraction "$lexicon_list")
-lemma_lex_list=$(echo "$lemma_lex_list_tmp" | sort --key=2)
+lemma_lex_list=$(echo "$lemma_lex_list_tmp" | sort --key=2 |\
+    grep -E -v '^[[:space:]]')
 
 echo "$lemma_lex_list" > "$lemma_lexicon_list"
 

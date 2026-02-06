@@ -159,8 +159,9 @@ def main():
                     found_tags = True
                 elif set(goldreading["tags"]).issubset(set(hypreading["tags"])):
                     found_tags_subset = True
-                if hypreading["suffixed"] == goldreading["suffixed"]:
-                    found_suffixed = True
+                if "suffixed" in hypreading and "suffixed" in goldreading:
+                    if hypreading["suffixed"] == goldreading["suffixed"]:
+                        found_suffixed = True
             if matched:
                 reading_matches += 1
             else:
@@ -170,8 +171,9 @@ def main():
                 lemma_matches += 1
             else:
                 lemma_misses += 1
-                if options.level == "lemma" or options.level == "all":
+                if options.level in ["lemma", "all"]:
                     print(f"LEMMA\t{goldreading["lemma"]}\t",
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
                           file=options.logfile)
                     for hypothesis in hyp["readings"]:
                         print(f"\t\t{hypothesis["lemma"]}",
@@ -180,16 +182,18 @@ def main():
                 alltag_matches += 1
             elif found_alltags_subset:
                 alltag_matches += 1
-                if options.level == "alltags" or options.level == "all":
+                if options.level in ["alltags", "all"]:
                     print(f"ALLTAGS~\t{goldreading["alltags"]}",
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
                           file=options.logfile)
                     for hypothesis in hyp["readings"]:
                         print(f"\t~\t{hypothesis["alltags"]}",
                               file=options.logfile)
             else:
                 alltag_misses += 1
-                if options.level == "alltags" or options.level == "all":
+                if options.level in ["alltags", "all"]:
                     print(f"ALLTAGS\t{goldreading["alltags"]}",
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
                           file=options.logfile)
                     for hypothesis in hyp["readings"]:
                         print(f"\t!=\t{hypothesis["alltags"]}",
@@ -198,16 +202,18 @@ def main():
                 tag_matches += 1
             elif found_tags_subset:
                 tag_matches += 1
-                if options.level == "tags" or options.level == "all":
+                if options.level in ["tags", "all"]:
                     print(f"TAGS~\t{goldreading["tags"]}",
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
                           file=options.logfile)
                     for hypothesis in hyp["readings"]:
                         print(f"\t~\t{hypothesis["tags"]}",
                               file=options.logfile)
             else:
                 tag_misses += 1
-                if options.level == "tags" or options.level == "all":
+                if options.level in ["tags", "all"]:
                     print(f"TAGS\t{goldreading["tags"]}",
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
                           file=options.logfile)
                     for hypothesis in hyp["readings"]:
                         print(f"\t!=\t{hypothesis["tags"]}",
@@ -218,6 +224,7 @@ def main():
                 suffixed_misses += 1
                 if options.level == "suffixed":
                     print("SUFFIX", ",".join(goldreading["suffixed"]),
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
                           sep="\t", file=options.logfile)
                     for hypothesis in hyp["readings"]:
                         print(f"\t!=\t{hypothesis["suffixed"]}",

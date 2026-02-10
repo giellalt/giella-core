@@ -5,6 +5,6 @@
 ######## Test targets: ###########
 
 if WANT_TTS
-TESTS+=regresstest.sh run-yaml-testcases.sh
+TESTS+=unittest.sh regresstest.sh run-yaml-testcases.sh
 endif
 

@@ -20,12 +20,12 @@ from typing import List, Tuple, Optional
 class Word:
     """Represents a word with its dependency information."""
     
-    def __init__(self, word_id: int, form: str, lemma: str, pos: str, 
+    def __init__(self, word_id: int, form: str, lemma: str, morph_tags: str, 
                  dep_rel: str, head_id: int):
         self.word_id = word_id
         self.form = form
         self.lemma = lemma
-        self.pos = pos
+        self.morph_tags = morph_tags
         self.dep_rel = dep_rel
         self.head_id = head_id
     
@@ -53,10 +53,10 @@ def parse_cg3_line(line: str) -> Optional[Tuple[str, str]]:
 
 
 def extract_dependency_info(analysis_line: str) -> Optional[Tuple[str, str, str, str, int, int]]:
-    """Extract lemma, POS, dependency relation and IDs from analysis line.
+    """Extract lemma, morphological tags, dependency relation and IDs from analysis line.
     
     Returns:
-        Tuple of (lemma, pos, full_analysis, dep_rel, word_id, head_id)
+        Tuple of (lemma, morph_tags, full_analysis, dep_rel, word_id, head_id)
     """
     # Extract lemma (between quotes)
     lemma_match = re.search(r'^"([^"]+)"', analysis_line)
@@ -64,9 +64,26 @@ def extract_dependency_info(analysis_line: str) -> Optional[Tuple[str, str, str,
         return None
     lemma = lemma_match.group(1)
     
-    # Extract POS (first word-like tag after lemma)
+    # Extract all tags between lemma and weight tag <W:X.Y>
+    # Exclude tags on <tag> format (but keep the weight stop point)
     parts = analysis_line.split()
-    pos = parts[1] if len(parts) > 1 else ""
+    morph_tags = []
+    
+    # Start after the lemma (parts[0] is the lemma with quotes)
+    for i in range(1, len(parts)):
+        part = parts[i]
+        # Stop when we hit the weight tag
+        if re.match(r'<W:', part):
+            break
+        # Skip tags on <tag> format (semantic/syntactic tags)
+        if re.match(r'<[^@#].*>', part):
+            continue
+        # Stop at @ and # tags
+        if part.startswith('@') or part.startswith('#'):
+            break
+        morph_tags.append(part)
+    
+    morph_tags_str = ' '.join(morph_tags)
     
     # Extract dependency relation (@...)
     dep_match = re.search(r'@([^\s]+)', analysis_line)
@@ -80,7 +97,7 @@ def extract_dependency_info(analysis_line: str) -> Optional[Tuple[str, str, str,
     word_id = int(id_match.group(1))
     head_id = int(id_match.group(2))
     
-    return (lemma, pos, analysis_line, dep_rel, word_id, head_id)
+    return (lemma, morph_tags_str, analysis_line, dep_rel, word_id, head_id)
 
 
 def parse_cg3_input(lines: List[str]) -> List[Word]:
@@ -108,8 +125,8 @@ def parse_cg3_input(lines: List[str]) -> List[Word]:
         elif line_type == 'analysis' and current_form:
             dep_info = extract_dependency_info(content)
             if dep_info:
-                lemma, pos, full_analysis, dep_rel, word_id, head_id = dep_info
-                word = Word(word_id, current_form, lemma, pos, dep_rel, head_id)
+                lemma, morph_tags, full_analysis, dep_rel, word_id, head_id = dep_info
+                word = Word(word_id, current_form, lemma, morph_tags, dep_rel, head_id)
                 words.append(word)
                 # Use first analysis only
                 current_form = None
@@ -159,15 +176,33 @@ def generate_dot(words: List[Word], title: str = "") -> str:
     
     dot_lines.append('')
     
-    # Add word nodes (bottom level)
-    dot_lines.append('    // Word nodes')
+    # Add morphology nodes (lemma + tags, between syntax and word)
+    dot_lines.append('    // Morphology nodes (lemma + tags)')
+    for word in words:
+        # Escape quotes in labels
+        lemma = word.lemma.replace('"', '\\"')
+        morph_tags = word.morph_tags.replace('"', '\\"')
+        label = f'{lemma}\\n{morph_tags}'
+        dot_lines.append(f'    m{word.word_id} [label="{label}", style=filled, fillcolor=lightyellow];')
+    
+    dot_lines.append('')
+    
+    # Add word nodes (word forms only, bottom level)
+    dot_lines.append('    // Word nodes (word forms)')
     for word in words:
         # Escape quotes in labels
         form = word.form.replace('"', '\\"')
-        lemma = word.lemma.replace('"', '\\"')
-        label = f'{form}\\n{lemma} ({word.pos})'
-        dot_lines.append(f'    w{word.word_id} [label="{label}"];')
+        dot_lines.append(f'    w{word.word_id} [label="{form}"];')
     
+    dot_lines.append('')
+    
+    # Keep morphology nodes in horizontal order on same level
+    dot_lines.append('    // Keep morphology nodes in text order')
+    dot_lines.append('    {')
+    dot_lines.append('        rank=same;')
+    for i in range(len(words) - 1):
+        dot_lines.append(f'        m{words[i].word_id} -> m{words[i+1].word_id} [style=invis];')
+    dot_lines.append('    }')
     dot_lines.append('')
     
     # Keep word nodes in horizontal order on same level
@@ -190,10 +225,17 @@ def generate_dot(words: List[Word], title: str = "") -> str:
     
     dot_lines.append('')
     
-    # Vertical edges from syntax nodes to word nodes (keep vertical alignment)
-    dot_lines.append('    // Vertical edges from syntax to words (keep in same column)')
+    # Vertical edges from syntax nodes to morphology nodes
+    dot_lines.append('    // Vertical edges from syntax to morphology (keep in same column)')
     for word in words:
-        dot_lines.append(f'    s{word.word_id} -> w{word.word_id} [weight=10];')
+        dot_lines.append(f'    s{word.word_id} -> m{word.word_id} [weight=10];')
+    
+    dot_lines.append('')
+    
+    # Vertical edges from morphology nodes to word nodes
+    dot_lines.append('    // Vertical edges from morphology to words (keep in same column)')
+    for word in words:
+        dot_lines.append(f'    m{word.word_id} -> w{word.word_id} [weight=10];')
     
     dot_lines.append('}')
     

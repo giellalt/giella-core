@@ -153,6 +153,7 @@ assets/%.pmhfst: %.pmhfst | assets-dir
 
 # Build the .drb bundle
 $(GIELLA_ANL_DRBDISTRO): $(GIELLA_ANL_PIPELINE) $(GIELLA_ANL_ASSETS)
+	$(AM_V_at)test -f $(GIELLA_ANL_PIPELINE) || cp -f $(srcdir)/$(GIELLA_ANL_PIPELINE) $(GIELLA_ANL_PIPELINE)
 	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
 
 endif # HAVE_DIVVUN_RUNTIME

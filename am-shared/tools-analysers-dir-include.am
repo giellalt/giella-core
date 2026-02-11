@@ -19,7 +19,7 @@
 
 # set this to the filename of the analyser archive:
 GIELLA_ANL_ZDISTRO=$(GLANG2).zpipe
-GIELLA_ANL_DRBDISTRO=$(GLANG2).drb
+GIELLA_ANL_DRBDISTRO=bundle.drb
 
 GIELLA_ANL_VALENCY=$(GIELLA_ANL_VALENCY_SRC:.cg3=.bin)
 GIELLA_ANL_WHSPACE_ANAL=$(GIELLA_ANL_WHSPACE_ANAL_SRC:.regex=.hfst)

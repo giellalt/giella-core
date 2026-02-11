@@ -20,7 +20,7 @@
 # set this to the filename of the analyser archive:
 GIELLA_TTS_ZDISTRO=$(GLANG2)-tts.zpipe
 # set this to the filename of the new runtime bundle:
-GIELLA_TTS_DRBDISTRO=$(GTLANG2)-tts.drb
+GIELLA_TTS_DRBDISTRO=bundle.drb
 
 # Various text conversion fst's - normalisers/expanders and IPA:
 GIELLA_TTS_IPA=$(GIELLA_TTS_IPA_FST_FILE)

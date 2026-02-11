@@ -236,10 +236,6 @@ assets/%.bin: %.bin | assets-dir
 assets/%.pmhfst: %.pmhfst | assets-dir
 	$(AM_V_CP)cp -f $< $@
 
-# Copy pipeline.ts to build directory for out-of-source builds
-$(GIELLA_TTS_PIPELINE): $(srcdir)/$(GIELLA_TTS_PIPELINE)
-	$(AM_V_CP)cp -f $< $@
-
 # Build the .drb bundle
 $(GIELLA_TTS_DRBDISTRO): $(GIELLA_TTS_PIPELINE) \
 						$(GIELLA_TTS_ASSETS)

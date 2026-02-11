@@ -114,7 +114,7 @@
 	    <xsl:for-each select=".//dg/d">
 	      <xsl:value-of
 		  select="concat($cl,':',replace(translate(normalize-space(.),
-			  ' ', '_'), '([!:;])', '%$1') , ' # ;',$nl)"/>
+			  ' ', ' '), '([!:;])', '%$1') , ' # ;',$nl)"/>
 	    </xsl:for-each>
 	  </xsl:if>
 	</xsl:for-each>

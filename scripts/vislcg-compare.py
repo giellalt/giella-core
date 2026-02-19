@@ -102,6 +102,8 @@ def main():
     a.add_argument("-t", "--threshold", metavar="THOLD", default=99,
                    type=int,
                    help="require THOLD per cent for LEVEL or FAIL")
+    a.add_argument("-Z", "--skip-punctuation", action="store_true",
+                   default=False, help="do not include puncts in stats")
     options = a.parse_args()
     if not options.logfile:
         options.logfile = sys.stdout
@@ -119,6 +121,10 @@ def main():
     tag_misses = 0
     suffixed_matches = 0
     suffixed_misses = 0
+    deptag_matches = 0
+    deptag_misses = 0
+    deparrow_matches = 0
+    deparrow_misses = 0
     refcohorts = read_cohorts(options.reffile)
     hypcohorts = read_cohorts(options.hypfile)
     cohorts = max(len(refcohorts), len(hypcohorts))
@@ -146,6 +152,8 @@ def main():
             found_tags = "tags" not in goldreading
             found_tags_subset = found_tags
             found_suffixed = "suffixed" not in goldreading
+            found_deptag = "deptag" not in goldreading
+            found_deparrow = "deparrow" not in goldreading
             for hypreading in hyp["readings"]:
                 if hypreading == goldreading:
                     matched = True
@@ -162,6 +170,12 @@ def main():
                 if "suffixed" in hypreading and "suffixed" in goldreading:
                     if hypreading["suffixed"] == goldreading["suffixed"]:
                         found_suffixed = True
+                if "deptag" in hypreading and "deptag" in goldreading:
+                    if hypreading["deptag"] == goldreading["deptag"]:
+                        found_deptag = True
+                if "deparrow" in hypreading and "deparrow" in goldreading:
+                    if hypreading["deparrow"] == goldreading["deparrow"]:
+                        found_deparrow = True
             if matched:
                 reading_matches += 1
             else:
@@ -229,6 +243,35 @@ def main():
                     for hypothesis in hyp["readings"]:
                         print(f"\t!=\t{hypothesis["suffixed"]}",
                               file=options.logfile)
+            if found_deptag:
+                deptag_matches += 1
+            else:
+                deptag_misses += 1
+                if options.level in ["deps", "all"]:
+                    print(f"DEPTAG\t{goldreading["deptag"]}",
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
+                          sep="\t", file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        if "deptag" in hypothesis:
+                            print(f"\t!={hypothesis["deptag"]}",
+                                  file=options.logfile)
+                        else:
+                            print("\t!= (MISSING DEP)", file=options.logfile)
+            if found_deparrow:
+                deparrow_matches += 1
+            else:
+                deparrow_misses += 1
+                if options.level in ["deps", "all"]:
+                    print(f"DEPTO\t{goldreading["deparrow"]}",
+                          f" (surf: {gold["surf"]}\t{hyp["surf"]})",
+                          sep="\t", file=options.logfile)
+                    for hypothesis in hyp["readings"]:
+                        if "deparrow" in hypothesis:
+                            print(f"\t != {hypothesis["deparrow"]}",
+                                  file=options.logfile)
+                        else:
+                            print("\t != (DEPARROW missing)",
+                                  file=options.logfile)
     # stats
     if max(len(refcohorts), len(hypcohorts)) <= 0:
         print("could not read gold and/or hypothesis data")
@@ -239,6 +282,8 @@ def main():
     alltag_recall = alltag_matches / readings * 100
     tag_recall = tag_matches / readings * 100
     suffixed_recall = suffixed_matches / readings * 100
+    deptag_recall = deptag_matches / readings * 100
+    deparrow_recall = deparrow_matches / readings * 100
     print(f"Total recall: {recall} % ({cohort_matches} of {cohorts})")
     print(f"Reading recall: {reading_recall} % "
           f"({reading_matches} of {readings})")
@@ -250,6 +295,10 @@ def main():
           f"({alltag_matches} of {readings})")
     print(f"Suffixed tags recall: {suffixed_recall} % "
           f"({suffixed_matches} of {readings})")
+    print(f"Deptags recall: {deptag_recall} % "
+          f"({deptag_matches} of {readings})")
+    print(f"Deparrows recall: {deparrow_recall} % "
+          f"({deparrow_matches} of {readings})")
     if options.level == "all" and recall < options.threshold:
         print("FAIL: too many missing cohorts "
               f"{tag_recall} < {options.threshold}")

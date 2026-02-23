@@ -60,9 +60,6 @@ alias xquery "saxonXQ"
 alias xslt2 "saxonXSL"
 alias xsl2 "saxonXSL"
 
-# Unicode/UTF-8 aware rev:
-alias rev "perl -nle 'print scalar reverse \$_'"
-
 # utility command
 alias path "echo $PATH | tr ':' '\n'"
 

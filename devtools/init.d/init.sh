@@ -72,10 +72,6 @@ alias xquery="saxonXQ"
 alias xslt2="saxonXSL"
 alias xsl2="saxonXSL"
 
-# Unicode/UTF-8 aware rev:
-alias rev="perl -nle 'print scalar reverse \$_'"
-alias sortr='LC_ALL="ru" sort'
-
 # utility command
 alias path='echo -e ${PATH//:/\\n}'
 

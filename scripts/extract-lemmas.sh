@@ -86,7 +86,7 @@ cat $inputfiles | grep ";"                              | # grep only lines cont
     grep -E -v "^[[:space:]]*(!|@|<|\+)"                | # do NOT grep lines beginning with (space +) !, @ or <
     keep_hom_tags                                       | # treat homonyms special
     grep -E -v "^[[:space:]]*[[:alnum:]_-]+[[:space:]]*;" | # do NOT grep lines containing ONLY a continuation lexicon ref
-    grep -E -v "(LEXICON| K |ENDLEX|\+Err/|DerSub)"      | # do NOT grep lines containing a number of generally known wrong stuff
+    grep -E -v "(LEXICON| K |ENDLEX|\+Err/Lex|DerSub)"      | # do NOT grep lines containing a number of generally known wrong stuff
     exclgrep "$excludepattern"                          | # do NOT grep things specified in each test script
     grep -E  "$includepattern"                          | # DO grep things specified in each test script if specified
     sed 's/^[ 	]*//'                             | # Remove initial whitespace

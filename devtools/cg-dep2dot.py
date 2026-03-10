@@ -230,14 +230,14 @@ def generate_dot(words: List[Word], title: str = "") -> str:
     # Vertical edges from syntax nodes to morphology nodes
     dot_lines.append('    // Vertical edges from syntax to morphology (keep in same column)')
     for word in words:
-        dot_lines.append(f'    s{word.word_id} -> m{word.word_id} [weight=10];')
+        dot_lines.append(f'    s{word.word_id} -> m{word.word_id} [weight=1000, group=g{word.word_id}];')
 
     dot_lines.append('')
 
     # Vertical edges from morphology nodes to word nodes
     dot_lines.append('    // Vertical edges from morphology to words (keep in same column)')
     for word in words:
-        dot_lines.append(f'    m{word.word_id} -> w{word.word_id} [weight=10];')
+        dot_lines.append(f'    m{word.word_id} -> w{word.word_id} [weight=1000, group=g{word.word_id}];')
 
     dot_lines.append('}')
 

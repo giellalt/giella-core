@@ -84,4 +84,5 @@ elif ! $python $comparator -r "$goldfile" -H "$outfile" \
 else
     printf "%spass%s - small regressions:\n" "$green" "$reset"
     diff -u "$goldfile" "$outfile"
+    exit 0
 fi

@@ -10,11 +10,11 @@ Usage:
     cg-dep2dot.py input.cg3 -o output.dot
 """
 
-import sys
 import re
+import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from pathlib import Path
-from typing import List, Tuple, Optional
+from typing import List, Optional, Tuple
 
 
 class Word:
@@ -49,6 +49,7 @@ def parse_cg3_line(line: str) -> Optional[Tuple[str, str]]:
     if line.startswith('\t"'):
         return ('analysis', line.strip())
     elif line.startswith('    "'):
+        print(f"WARN: spaces instead of tabs on line:\n{line}", file=sys.stderr)
         return ('analysis', line.strip())
 
     return None

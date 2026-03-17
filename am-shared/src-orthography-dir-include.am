@@ -80,7 +80,7 @@ $(GT_NFD2NFC): $(top_builddir)/src/fst/morphology/lexicon.hfst \
 
 ####### Other targets: ###########
 # The "clean" target:
-CLEANFILES=$(GIELLA_ORTH_TARGETS)
+CLEANFILES=$(GIELLA_ORTH_TARGETS) $(GT_NFC2NFD) $(GT_NFD2NFC)
 
 ##########################################
 # General build rules included from here:#

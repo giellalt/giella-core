@@ -35,7 +35,7 @@ for yaml in "${yamls[@]}" ; do
             "$yaml"
         exit 77
     else
-        $tester --colour -l --morph "$fsa" "$yaml"
+        $tester --colour -l --gen "$fsa" --morph "$fsa" "$yaml"
         rv=$?
         if test $rv -eq 77 ; then
             printf "%sskip%s" "$light_blue" "$reset"

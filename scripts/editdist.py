@@ -585,17 +585,27 @@ def main():
                         "Got swap-specification with incorrect number "
                         "of comma separators:\n"
                     )
-                if (frompair, topair) not in pair_info["swaps"]:
-                    pair_info["swaps"][(frompair, topair)] = weight
+                # Check if all symbols are in alphabet before adding swap
+                missing_symbols = []
                 for sym in [frompair[0], frompair[1], topair[0], topair[1]]:
                     if sym != "" and sym not in alphabet:
-                        alphabet[sym] = weight
+                        missing_symbols.append(sym)
+                
+                if missing_symbols:
+                    print(f"Warning: Skipping swap {frompair} → {topair}: symbols not in alphabet: {', '.join(missing_symbols)}", file=sys.stderr)
+                elif (frompair, topair) not in pair_info["swaps"]:
+                    pair_info["swaps"][(frompair, topair)] = weight
             else:
-                if (parts[0], parts[1]) not in pair_info["edits"]:
-                    pair_info["edits"][(parts[0], parts[1])] = weight
+                # Check if symbols are in alphabet before adding edit
+                missing_symbols = []
                 for sym in [parts[0], parts[1]]:
                     if sym != "" and sym not in alphabet:
-                        alphabet[sym] = weight
+                        missing_symbols.append(sym)
+                
+                if missing_symbols:
+                    print(f"Warning: Skipping edit {parts[0]} → {parts[1]}: symbols not in alphabet: {', '.join(missing_symbols)}", file=sys.stderr)
+                elif (parts[0], parts[1]) not in pair_info["edits"]:
+                    pair_info["edits"][(parts[0], parts[1])] = weight
 
     if len(options.alphabetstring) == 1:
         for c in options.alphabetstring[0]:

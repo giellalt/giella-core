@@ -49,9 +49,9 @@ $(OFST_REGEX_TARGETS): \
 
 # XXX
 .generated/%.regex: %.regex $(GENDIR)
-	$(AM_V_CP)cp -v $< $@
+	$(AM_V_CP)cp $< $@
 
 %.hfst: .generated/%.hfst
-	$(AM_V_CP)cp -v $< $@
+	$(AM_V_CP)cp $< $@
 
 # vim: set ft=automake:

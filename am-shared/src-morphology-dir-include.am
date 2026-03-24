@@ -254,7 +254,7 @@ $(foreach fst,hfst foma,$(eval $(call giella_phon_w_lex_ref,$(fst))))
 noinst_DATA+=lexicon.hfst
 
 lexicon.hfst: .generated/lexicon.hfst
-	$(AM_V_CP)cp -v $< $@
+	$(AM_V_CP)cp $< $@
 
 clean-local:
 	-rm -f lexicon.hfst .generated/lexicon.hfst $(GIELLA_LOCAL_TARGETS)

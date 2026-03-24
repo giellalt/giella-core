@@ -46,6 +46,6 @@
 
 # XXX 
 .generated/%.lexc: %.lexc $(GENDIR)
-	$(AM_V_CP)cp -v -f $< $@
+	$(AM_V_CP)cp -f $< $@
 
 # vim: set ft=automake:

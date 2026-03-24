@@ -467,7 +467,7 @@ index.predict.xml: index.mobile.xml
 		< $< > $@
 else
 index.predict.xml: index.mobile.xml
-	cp -v $< $@
+	$(AM_V_CP)cp $< $@
 endif
 
 $(MOB_GIELLA_PREDICT_HFST): index.predict.xml \

@@ -56,8 +56,8 @@ $(srcdir)/lemmacount.json:
 $(srcdir)/maturity.json:
 	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
 
-$(srcdir)/spellersuggs.json: $(srcdir)/typosreport/report.json
-	$(AM_V_GEN)$(GTCORE)/scripts/make-spellerbadge-json.sh $< > $@
+$(srcdir)/spellersuggs.json:
+	$(AM_V_GEN)$(GTCORE)/scripts/make-spellerbadge-json.sh $(srcdir)/typosreport/report.json > $@
 
 # Define all doccomment source files in a variable:
 DOCSRC_XEROX := $(shell fgrep -rl \

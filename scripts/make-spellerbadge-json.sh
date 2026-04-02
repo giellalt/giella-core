@@ -57,16 +57,16 @@ elif test "$true_positive" -eq 0 ; then
     colour=grey
     message="N/A"
 else
-    # Calculate percentage: (first_position / true_positive) * 100
-    firstpercentage=$(echo "scale=1; ($first_position * 100) / $true_positive" | bc)
-    # Calculate percentage: (top_five / true_positive) * 100
-    top5percentage=$(echo "scale=1; ($top_five * 100) / $true_positive" | bc)
+    # Calculate percentage with proper rounding to 1 decimal: (first_position / true_positive) * 100
+    firstpercentage=$(awk "BEGIN {printf \"%.1f\", ($first_position * 100) / $true_positive}")
+    # Calculate percentage with proper rounding to 1 decimal: (top_five / true_positive) * 100
+    top5percentage=$(awk "BEGIN {printf \"%.1f\", ($top_five * 100) / $true_positive}")
     
     message="${firstpercentage}% / ${top5percentage}%"
     
-    # Convert to integer for comparison (bc can't compare decimals directly in test)
-    firstpercentage_int=$(echo "($firstpercentage + 0.5) / 1" | bc)
-    top5percentage_int=$(echo "($top5percentage + 0.5) / 1" | bc)
+    # Convert to integer for comparison
+    firstpercentage_int=$(awk "BEGIN {printf \"%.0f\", $firstpercentage}")
+    top5percentage_int=$(awk "BEGIN {printf \"%.0f\", $top5percentage}")
     
     # Set color based on percentage thresholds (test both percentages)
     if test "$firstpercentage_int" -lt 40 -o "$top5percentage_int" -lt 50 ; then

@@ -47,7 +47,7 @@ top_five=$(jq -r '.summary.top_five // 0' "$reportfile")
 # Default values
 colour=grey
 message="N/A"
-label="Typostest"
+label="Speller sug. quality"
 
 # Check if we got valid values
 if test -z "$true_positive" -o -z "$first_position" -o -z "$top_five" ; then

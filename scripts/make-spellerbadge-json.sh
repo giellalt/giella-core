@@ -39,10 +39,10 @@ if test ! -f "$reportfile" ; then
     message="N/A"
 fi
 
-# Extract values from JSON using grep and sed
-true_positive=$(grep -o '"true_positive": [0-9]*' "$reportfile" | sed 's/.*: //')
-first_position=$(grep -o '"first_position": [0-9]*' "$reportfile" | sed 's/.*: //')
-top_five=$(grep -o '"top_five": [0-9]*' "$reportfile" | sed 's/.*: //')
+# Extract values from JSON using jq
+true_positive=$(jq -r '.summary.true_positive // 0' "$reportfile")
+first_position=$(jq -r '.summary.first_position // 0' "$reportfile")
+top_five=$(jq -r '.summary.top_five // 0' "$reportfile")
 
 # Default values
 colour=grey

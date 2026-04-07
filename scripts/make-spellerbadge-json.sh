@@ -69,13 +69,13 @@ else
     top5percentage_int=$(awk "BEGIN {printf \"%.0f\", $top5percentage}")
     
     # Set color based on percentage thresholds (test both percentages)
-    if test "$firstpercentage_int" -lt 40 -o "$top5percentage_int" -lt 50 ; then
+    if test "$firstpercentage_int" -lt 40 -o "$top5percentage_int" -lt 50 -o "$true_positive" -lt 100 ; then
         # Very poor
         colour=black
-    elif test "$firstpercentage_int" -lt 60 -o "$top5percentage_int" -lt 70 ; then
+    elif test "$firstpercentage_int" -lt 60 -o "$top5percentage_int" -lt 70 -o "$true_positive" -lt 500 ; then
         # Poor
         colour=red
-    elif test "$firstpercentage_int" -lt 80 -o "$top5percentage_int" -lt 90 ; then
+    elif test "$firstpercentage_int" -lt 80 -o "$top5percentage_int" -lt 90 -o "$true_positive" -lt 1000 ; then
         # Medium
         colour=yellow
     else

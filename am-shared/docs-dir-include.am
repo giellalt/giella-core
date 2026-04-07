@@ -12,7 +12,7 @@ REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 # " reset syntax colouring - gets confused by the single double quote in the previous line
 
 # no regenerations while debugging
-doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json maturity.json spellersuggs.json
+doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json maturity.json spellersuggs.json typossize.json
 
 .PHONY: generate-markdown regenerate-markdown FORCE
 
@@ -58,6 +58,9 @@ $(srcdir)/maturity.json: FORCE
 
 $(srcdir)/spellersuggs.json: FORCE
 	$(AM_V_GEN)$(GTCORE)/scripts/make-spellerbadge-json.sh $(srcdir)/typosreport/report.json > $@
+
+$(srcdir)/typossize.json: FORCE
+	$(AM_V_GEN)$(GTCORE)/scripts/make-typossize-json.sh $(srcdir)/typosreport/report.json > $@
 
 # Define all doccomment source files in a variable:
 DOCSRC_XEROX := $(shell fgrep -rl \

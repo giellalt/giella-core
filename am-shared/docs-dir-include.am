@@ -14,7 +14,7 @@ REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) lemmacount.json maturity.json spellersuggs.json
 
-.PHONY: generate-markdown regenerate-markdown
+.PHONY: generate-markdown regenerate-markdown $(srcdir)/lemmacount.json $(srcdir)/maturity.json $(srcdir)/spellersuggs.json
 
 regenerate-markdown: generate-markdown
 

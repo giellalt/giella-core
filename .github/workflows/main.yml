@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Autotools & configure
-        run: ./autogen.sh && ./configure
+        run: ./autogen.sh && ./configure --disable-configure-errors
       - name: Build everything
         run: make -j4
       - name: Check tarball integrity

@@ -75,7 +75,7 @@ else
     # Format true_positive count
     formatted_count=$(format_count "$true_positive")
     
-    message="${firstpercentage}%/${top5percentage}%/${formatted_count}"
+    message="${firstpercentage}%|${top5percentage}%|${formatted_count}"
     
     # Convert to integer for comparison
     firstpercentage_int=$(awk "BEGIN {printf \"%.0f\", $firstpercentage}")

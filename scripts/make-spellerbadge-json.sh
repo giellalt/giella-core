@@ -39,6 +39,16 @@ if test ! -f "$reportfile" ; then
     message="N/A"
 fi
 
+# Function to format number as k with 1 decimal (e.g. 1000 -> 1.0k, 1234 -> 1.2k)
+format_count() {
+    local count=$1
+    if test "$count" -ge 1000 ; then
+        awk "BEGIN {printf \"%.1fk\", $count / 1000}"
+    else
+        echo "$count"
+    fi
+}
+
 # Extract values from JSON using jq
 true_positive=$(jq -r '.summary.true_positive // 0' "$reportfile")
 first_position=$(jq -r '.summary.first_position // 0' "$reportfile")
@@ -62,7 +72,10 @@ else
     # Calculate percentage with proper rounding to 1 decimal: (top_five / true_positive) * 100
     top5percentage=$(awk "BEGIN {printf \"%.1f\", ($top_five * 100) / $true_positive}")
     
-    message="${firstpercentage}% / ${top5percentage}%"
+    # Format true_positive count
+    formatted_count=$(format_count "$true_positive")
+    
+    message="${firstpercentage}%/${top5percentage}%/${formatted_count}"
     
     # Convert to integer for comparison
     firstpercentage_int=$(awk "BEGIN {printf \"%.0f\", $firstpercentage}")

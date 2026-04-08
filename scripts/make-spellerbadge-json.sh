@@ -22,7 +22,7 @@ while test $# -ge 1 ; do
     if test x$1 = x--help -o x$1 = x-h ; then
         print_usage
         exit 0
-    elif test -f "$1"; then
+    elif test -n "$1"; then
         reportfile="$1"
     else
         echo "$0: unknown option $1"
@@ -32,11 +32,16 @@ while test $# -ge 1 ; do
     shift
 done
 
+# Default values
+colour=grey
+message="N/A"
+label="Speller sugg."
+
 # Check if report file exists
 if test ! -f "$reportfile" ; then
-    echo "$0: Error: Report file not found: $reportfile" >&2
-    colour=grey
-    message="N/A"
+    # Report file not found - output N/A badge and exit successfully
+    echo "{ \"schemaVersion\": 1, \"label\": \"$label\", \"message\": \"$message\", \"color\": \"$colour\" }"
+    exit 0
 fi
 
 # Function to format number as k with 1 decimal (e.g. 1000 -> 1.0k, 1234 -> 1.2k)
@@ -53,11 +58,6 @@ format_count() {
 true_positive=$(jq -r '.summary.true_positive // 0' "$reportfile")
 first_position=$(jq -r '.summary.first_position // 0' "$reportfile")
 top_five=$(jq -r '.summary.top_five // 0' "$reportfile")
-
-# Default values
-colour=grey
-message="N/A"
-label="Speller sugg."
 
 # Check if we got valid values
 if test -z "$true_positive" -o -z "$first_position" -o -z "$top_five" ; then

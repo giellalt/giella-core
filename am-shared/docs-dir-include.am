@@ -15,7 +15,9 @@ REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/fst-lemmacount.json \
 	badgedata/fst-maturity.json \
-	badgedata/speller-suggestions.json
+	badgedata/fst-version.json \
+	badgedata/speller-suggestions.json \
+	badgedata/speller-version.json
 
 .PHONY: generate-markdown regenerate-markdown FORCE
 
@@ -61,9 +63,17 @@ $(srcdir)/badgedata/fst-maturity.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
 
+$(srcdir)/badgedata/fst-version.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) FST > $@
+
 $(srcdir)/badgedata/speller-suggestions.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-spellerbadge-json.sh $(srcdir)/typosreport/report.json > $@
+
+$(srcdir)/badgedata/speller-version.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) SPELLER > $@
 
 # Define all doccomment source files in a variable:
 DOCSRC_XEROX := $(shell fgrep -rl \

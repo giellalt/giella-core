@@ -9,12 +9,18 @@ function print_usage() {
     echo
     echo "  -h, --help              Print this usage info"
     echo "  -m, --merge-homonyms    Count homonyms as one entry, default=count each homonym"
-    echo "  -c, --giella-core PATH  Path to giella-core, if not given will try to find from $0"
+    echo "  -c, --giella-core PATH  Path to giella-core, if not given will try to find from \$0"
+    echo "  -s, --custom-script SCRIPT  Use custom script to count lemmas instead of default"
+    echo "                          The script will be called with INPUTDIR as argument and"
+    echo "                          should output the lemma count to stdout"
+    echo
+    echo "Note: If INPUTDIR/src/fst/morphology/lemma-count.sh exists and is executable,"
+    echo "      it will be used automatically (unless --custom-script overrides it)."
     echo
 }
 
 # Wrong usage - short instruction:
-if (( $# < 1 || $# > 3)) ; then
+if (( $# < 1 )) ; then
     print_usage
     exit 1
 fi
@@ -28,6 +34,9 @@ while test $# -ge 1 ; do
         merge_homonyms="true"
     elif test x$1 = x--giella-core -o x$1 = x-c ; then
         giella_core=$2
+        shift
+    elif test x$1 = x--custom-script -o x$1 = x-s ; then
+        custom_script=$2
         shift
     elif test -d "$1"; then
         inputdir="$1"
@@ -54,7 +63,24 @@ else
     homonyms="-H"
 fi
 
+# Initialise:
 lemmacount=0
+
+# Check for custom counting script
+# Priority: 1) --custom-script option, 2) language repo's lemma-count.sh, 3) default logic
+if test -n "$custom_script" ; then
+    # Use manually specified custom script
+    if test ! -x "$custom_script" ; then
+        echo "$0: Error: Custom script not found or not executable: $custom_script" >&2
+        exit 1
+    fi
+    lemmacount=$("$custom_script" "$inputdir")
+elif test -x "$inputdir/src/fst/morphology/lemma-count.sh" ; then
+    # Use language repo's lemma-count.sh if it exists
+    lemmacount=$("$inputdir/src/fst/morphology/lemma-count.sh" "$inputdir")
+fi
+
+# Default logic for standard repository structures
 if compgen -G "$inputdir/src/fst/morphology/stems/*.lexc" > /dev/null; then
     lemmacounts=$(for f in "$inputdir"/src/fst/morphology/stems/*.lexc ; do
         "$GIELLA_CORE"/scripts/extract-lemmas.sh $homonyms "$f" | # extract all lemmas for each stem file

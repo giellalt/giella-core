@@ -63,6 +63,7 @@ label=Lemmas
 colour=grey
 message="N/A"
 
+lemmacount=0
 lemmacount=$($GIELLA_CORE/scripts/count-all-lemmas.sh $inputdir)
 
 if test "$lemmacount" -eq 0 ; then

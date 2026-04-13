@@ -51,7 +51,7 @@ endif # HAVE_ALT_ORTHS
 		  -2 $(top_builddir)/src/fst/orthography/raw-to-$*.compose.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER) $(HFST_FLAGS)        \
-		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst             \
+		| $(HFST_DISJUNCT) - .generated/easteregg.$*.desktop.hfst             \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
 		-o $@
 
@@ -65,7 +65,7 @@ endif # HAVE_ALT_ORTHS
 		  -2 $(top_builddir)/src/fst/orthography/$(DEFAULT_ORTH)-to-$*.compose.hfst \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower \
 		| $(HFST_MINIMIZE_SPELLER) $(HFST_FLAGS)        \
-		| $(HFST_DISJUNCT) - easteregg.$*.desktop.hfst             \
+		| $(HFST_DISJUNCT) - .generated/easteregg.$*.desktop.hfst             \
 		| $(HFST_FST2FST) $(HFST_FLAGS) -f olw          \
 		-o $@
 

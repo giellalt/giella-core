@@ -209,7 +209,8 @@ GT_ERRMODELS+=errmodel.default.hfst
 # errmodel.ocr.hfst
 
 ALL_ERRMODELS=$(GT_ERRMODELS) \
-              $(GT_ALT_ORTH_ERRMODELS) \
+			  $(GT_ALT_ORTH_ERRMODELS) \
+			  $(GT_DIALECT_ERRMODELS) \
 			  $(GT_ALT_WS_ERRMODELS) \
 			  $(GT_AREA_ERRMODELS)
 
@@ -220,6 +221,7 @@ GT_SPELLING_HFST=$(GTLANG2).zhfst
 ALL_ZHFST_FILES=$(GT_SPELLING_HFST) \
 				 $(ALT_WS_ZHFST_FILES) \
 				 $(ALT_ORTH_ZHFST_FILES) \
+				 $(DIALECT_ZHFST_FILES) \
 				 $(AREA_ZHFST_FILES)
 
 # Suffix substitution to get *-desktop.zhfst for all desktop zhfst files:
@@ -519,6 +521,7 @@ $(ALL_DESKTOP_ZHFST_FILES): \
 
 ####### Other targets: ###########
 
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_dialects-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_orth-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_ws-dir-include.am
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_area-dir-include.am

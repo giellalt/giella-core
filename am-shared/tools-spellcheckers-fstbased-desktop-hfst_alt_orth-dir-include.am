@@ -42,6 +42,7 @@ endif # HAVE_ALT_ORTHS
 #### Build rules: ####
 
 # Alternative based on the raw fst instead of the standard orthography:
+$(GT_ALT_ORTH_SPELLER_ACCEPTORS): \
 .generated/acceptor.%.hfst: \
 		$(GT_SPELLER_HFST) \
 		.generated/easteregg.%.desktop.hfst \
@@ -56,6 +57,7 @@ endif # HAVE_ALT_ORTHS
 		-o $@
 
 # Build rule for acceptors for alternate writing systems:
+$(GT_ALT_ORTH_SPELLER_ACCEPTORS): \
 .generated/acceptor.%.hfst: \
 		$(GT_SPELLER_HFST) \
 		.generated/easteregg.%.desktop.hfst \

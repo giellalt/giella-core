@@ -39,7 +39,7 @@ report.json: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfs
 	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -o $@
 
 spell-tests.tsv:
-	$(AM_V_GEN)cut -f 1,2 `find $(top_srcdir) -name typos.txt` |\
+	$(AM_V_GEN)cut -f 1,2 `find $(top_srcdir) -name typos.tsv` |\
 		egrep -v '^#' > $@
 
 else

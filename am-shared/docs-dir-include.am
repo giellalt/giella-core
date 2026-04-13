@@ -259,7 +259,7 @@ clean-local:
 	$(AM_V_at)-rm -f *-src.md src-*.md $(srcdir)/*-src.md $(srcdir)/src-*.md
 	$(AM_V_at)-rm -f *-tools.md tools-*.md $(srcdir)/*-tools.md $(srcdir)/tools-*.md
 	$(AM_V_at)-rm -f generated-markdowns.*
-	$(AM_V_at)-rm -f docsrc.tmp mdfiles.tmp empty.md
+	$(AM_V_at)-rm -f docsrc.tmp mdfiles.tmp empty.md lemmacount.json maturity.json
 
 include $(top_srcdir)/../giella-core/am-shared/silent_build-include.am
 # vim: set ft=automake:

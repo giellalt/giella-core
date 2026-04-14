@@ -88,8 +88,7 @@ if compgen -G "$inputdir/src/fst/morphology/stems/*.lexc" > /dev/null; then
     lemmacount=$(echo $lemmacounts | tr ' ' '+' | bc)
 elif compgen -G "$inputdir/src/fst/morphology/stems/*.lexd" > /dev/null; then
     # approximate
-    lemmacount=$(cat "$inputdir"/src/fst/morphology/stems/*.lexd |\
-        grep -F -v LEXICON |\
+    lemmacount=$(grep -h -F -v LEXICON "$inputdir"/src/fst/morphology/stems/*.lexd |\
         grep -E -v "^[[:space:]]*\$" |
         wc -l)
 fi

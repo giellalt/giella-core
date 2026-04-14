@@ -92,4 +92,5 @@ elif compgen -G "$inputdir/src/fst/morphology/stems/*.lexd" > /dev/null; then
         grep -E -v "^[[:space:]]*\$" |
         wc -l)
 fi
+lemmacount=$(echo "$lemmacount" | tr -d '[:space:]') # remove whitespace
 echo "$lemmacount"

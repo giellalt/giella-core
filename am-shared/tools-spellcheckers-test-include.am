@@ -13,6 +13,194 @@ endif
 AM_TESTS_ENVIRONMENT= export GIELLA_CORE=$(GIELLA_CORE) ; export TOOLKITS=$(TOOLKITS) ;
 
 if WANT_SPELLERS
+
+# ========================================
+# Variant testing support
+# ========================================
+
+# Build list of all variants that need testing:
+SPELLER_TEST_VARIANTS=
+
+# Add dialects if defined:
+if HAVE_DIALECTS
+if WANT_DIALECT_PROOFTOOLS
+SPELLER_TEST_VARIANTS+=$(DIALECTS)
+endif
+endif
+
+# Add areas if defined:
+if HAVE_AREAS
+SPELLER_TEST_VARIANTS+=$(AREAS)
+endif
+
+# Add alternative orthographies if defined:
+if HAVE_ALT_ORTHS
+if WANT_ALT_ORTH_PROOFTOOLS
+SPELLER_TEST_VARIANTS+=$(ALT_ORTHS)
+endif
+endif
+
+# TODO: Alternative writing systems need special handling
+# (they don't combine with typos.tsv)
+
+# ========================================
+# Variant test data generation
+# ========================================
+
+# Keep generated test files (don't delete as intermediate files):
+.SECONDARY: $(patsubst %,typos-%-generated.tsv,$(SPELLER_TEST_VARIANTS)) typos-default-generated.tsv
+
+# Generate combined test file for default speller (all variants combined):
+typos-default-generated.tsv: typos.tsv $(patsubst %,typos-%.tsv,$(SPELLER_TEST_VARIANTS))
+	$(AM_V_GEN)cat $^ > $@
+
+# Generate combined test files for each variant (base + variant-specific):
+typos-%-generated.tsv: typos.tsv typos-%.tsv
+	$(AM_V_GEN)cat $^ > $@
+
+# ========================================
+# Variant test execution
+# ========================================
+
+# Generate test reports for default speller:
+if HAVE_DIALECTS
+$(top_srcdir)/docs/typosreport/report.json: typos-default-generated.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG).zhfst
+	@echo "*** Testing default speller with combined variant data ***"
+	@mkdir -p $(top_srcdir)/docs/typosreport
+	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $@ \
+		$< \
+		$(top_builddir)/tools/spellcheckers/$(GTLANG).zhfst
+else
+if HAVE_AREAS
+$(top_srcdir)/docs/typosreport/report.json: typos-default-generated.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG).zhfst
+	@echo "*** Testing default speller with combined variant data ***"
+	@mkdir -p $(top_srcdir)/docs/typosreport
+	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $@ \
+		$< \
+		$(top_builddir)/tools/spellcheckers/$(GTLANG).zhfst
+else
+if HAVE_ALT_ORTHS
+$(top_srcdir)/docs/typosreport/report.json: typos-default-generated.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG).zhfst
+	@echo "*** Testing default speller with combined variant data ***"
+	@mkdir -p $(top_srcdir)/docs/typosreport
+	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $@ \
+		$< \
+		$(top_builddir)/tools/spellcheckers/$(GTLANG).zhfst
+endif
+endif
+endif
+
+# Pattern rule for variant-specific reports:
+$(top_srcdir)/docs/typosreport/report-%.json: typos-%-generated.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG)-x-%.zhfst
+	@echo "*** Testing variant speller: $(GTLANG)-x-$* ***"
+	@mkdir -p $(top_srcdir)/docs/typosreport
+	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $@ \
+		$< \
+		$(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$*.zhfst
+
+# Phony target to build all variant reports:
+if HAVE_DIALECTS
+speller-variant-reports: $(patsubst %,$(top_srcdir)/docs/typosreport/report-%.json,$(SPELLER_TEST_VARIANTS)) $(top_srcdir)/docs/typosreport/report.json
+else
+if HAVE_AREAS
+speller-variant-reports: $(patsubst %,$(top_srcdir)/docs/typosreport/report-%.json,$(SPELLER_TEST_VARIANTS)) $(top_srcdir)/docs/typosreport/report.json
+else
+if HAVE_ALT_ORTHS
+speller-variant-reports: $(patsubst %,$(top_srcdir)/docs/typosreport/report-%.json,$(SPELLER_TEST_VARIANTS)) $(top_srcdir)/docs/typosreport/report.json
+else
+speller-variant-reports: $(patsubst %,$(top_srcdir)/docs/typosreport/report-%.json,$(SPELLER_TEST_VARIANTS))
+endif
+endif
+endif
+
+# ========================================
+# Variant test script generation
+# ========================================
+
+# Generate a single test runner that tests all variants:
+test-speller-variants.sh:
+	$(AM_V_GEN)( \
+	  echo '#!/bin/bash' ; \
+	  echo 'if test -f "$${GIELLA_CORE}/scripts/termcolors.bash" ; then' ; \
+	  echo '    . "$${GIELLA_CORE}/scripts/termcolors.bash"' ; \
+	  echo 'fi' ; \
+	  echo 'TESTER=$(DIVVUNSPELL)' ; \
+	  echo 'THRESHOLD=75' ; \
+	  echo 'CONFIG="$(srcdir)/../config.json"' ; \
+	  echo 'VARIANTS="$(SPELLER_TEST_VARIANTS)"' ; \
+	  echo 'if test x"$$TESTER" = x"false" ; then' ; \
+	  echo '    printf "%sSKIP%s: missing divvunspell accuracy\\n" "$${light_blue}" "$${reset}"' ; \
+	  echo '    exit 77' ; \
+	  echo 'fi' ; \
+	  echo 'if test -z "$$VARIANTS" ; then' ; \
+	  echo '    printf "%sSKIP%s: no variants configured\\n" "$${light_blue}" "$${reset}"' ; \
+	  echo '    exit 77' ; \
+	  echo 'fi' ; \
+	  echo 'failed=0' ; \
+	  echo 'passed=0' ; \
+	  echo 'skipped=0' ; \
+	  echo 'for variant in $$VARIANTS; do' ; \
+	  echo '    TYPOS="$(builddir)/typos-$$variant-generated.tsv"' ; \
+	  echo '    ZHFST="$(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$$variant.zhfst"' ; \
+	  echo '    REPORT="$(top_srcdir)/docs/typosreport/report-$$variant.json"' ; \
+	  echo '    if test ! -f "$$ZHFST" ; then' ; \
+	  echo '        printf "%sSKIP%s: $$variant (spellchecker not found)\\n" "$${light_blue}" "$${reset}"' ; \
+	  echo '        skipped=$$((skipped + 1))' ; \
+	  echo '        continue' ; \
+	  echo '    fi' ; \
+	  echo '    if test ! -f "$$TYPOS" ; then' ; \
+	  echo '        printf "%sSKIP%s: $$variant (test data not found)\\n" "$${light_blue}" "$${reset}"' ; \
+	  echo '        skipped=$$((skipped + 1))' ; \
+	  echo '        continue' ; \
+	  echo '    fi' ; \
+	  echo '    if test -f "$$CONFIG" ; then' ; \
+	  echo '        CONFIGOPTION=" -c $$CONFIG "' ; \
+	  echo '    else' ; \
+	  echo '        CONFIGOPTION=""' ; \
+	  echo '    fi' ; \
+	  echo '    "$$TESTER" accuracy -T "$$THRESHOLD" --verbose $$CONFIGOPTION -o "$$REPORT" "$$TYPOS" "$$ZHFST" > /dev/null 2>&1' ; \
+	  echo '    rv=$$?' ; \
+	  echo '    if test $$rv = 77 ; then' ; \
+	  echo '        printf "%sSKIP%s: $$variant\\n" "$${light_blue}" "$${reset}"' ; \
+	  echo '        skipped=$$((skipped + 1))' ; \
+	  echo '    elif test $$rv -gt 0 ; then' ; \
+	  echo '        printf "%sFAIL%s: $$variant\\n" "$${red}" "$${reset}"' ; \
+	  echo '        failed=$$((failed + 1))' ; \
+	  echo '    else' ; \
+	  echo '        printf "%sPASS%s: $$variant\\n" "$${green}" "$${reset}"' ; \
+	  echo '        passed=$$((passed + 1))' ; \
+	  echo '    fi' ; \
+	  echo 'done' ; \
+	  echo 'printf "\\nVariant tests: $$passed passed, $$failed failed, $$skipped skipped\\n"' ; \
+	  echo 'if test $$failed -gt 0 ; then' ; \
+	  echo '    exit 1' ; \
+	  echo 'elif test $$passed -eq 0 && test $$skipped -gt 0 ; then' ; \
+	  echo '    exit 77' ; \
+	  echo 'else' ; \
+	  echo '    exit 0' ; \
+	  echo 'fi' ; \
+	) > $@
+	@chmod +x $@
+
+# Add variant test runner if we have variants
+if HAVE_DIALECTS
+OTHER_TEST_RUNNERS+=test-speller-variants.sh
+else
+if HAVE_AREAS
+OTHER_TEST_RUNNERS+=test-speller-variants.sh
+else
+if HAVE_ALT_ORTHS
+if WANT_ALT_ORTH_PROOFTOOLS
+OTHER_TEST_RUNNERS+=test-speller-variants.sh
+endif
+endif
+endif
+endif
+
+# ========================================
+# Test script generation
+# ========================================
+
 OTHER_TEST_RUNNERS+=test-zhfst-file.sh \
 					test-zhfst-basic-sugg-speed.sh \
 					suggestion-quality.sh \
@@ -21,6 +209,8 @@ if CAN_YAML_TEST
 YAML_TEST_RUNNERS+=run-desktopspeller-gt-norm-yaml-testcases.sh
 endif
 endif
+
+.PHONY: speller-variant-reports
 
 TESTS+=$(YAML_TEST_RUNNERS) $(OTHER_TEST_RUNNERS)
 

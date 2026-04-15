@@ -18,6 +18,9 @@ if WANT_SPELLERS
 # Variant testing support
 # ========================================
 
+# Initialize variables:
+check_SCRIPTS=
+
 # Build list of all variants that need testing:
 SPELLER_TEST_VARIANTS=
 
@@ -113,93 +116,122 @@ endif
 endif
 endif
 
+TEST_SPELLER_VARIANT_SCR::=$(addsuffix .sh,$(addprefix test-speller-variant-,$(SPELLER_TEST_VARIANTS)))
+
 # ========================================
 # Variant test script generation
 # ========================================
 
+define test-speller-variants
+
 # Generate a single test runner that tests all variants:
-test-speller-variants.sh:
-	$(AM_V_GEN)( \
+test-speller-variant-$(1).sh:
+	$$(AM_V_GEN)( \
 	  echo '#!/bin/bash' ; \
-	  echo 'if test -f "$${GIELLA_CORE}/scripts/termcolors.bash" ; then' ; \
-	  echo '    . "$${GIELLA_CORE}/scripts/termcolors.bash"' ; \
+	  echo 'if test -f "$$$${GIELLA_CORE}/scripts/termcolors.bash" ; then' ; \
+	  echo '    . "$$$${GIELLA_CORE}/scripts/termcolors.bash"' ; \
 	  echo 'fi' ; \
 	  echo 'TESTER=$(DIVVUNSPELL)' ; \
 	  echo 'THRESHOLD=75' ; \
 	  echo 'CONFIG="$(srcdir)/../config.json"' ; \
-	  echo 'VARIANTS="$(SPELLER_TEST_VARIANTS)"' ; \
-	  echo 'if test x"$$TESTER" = x"false" ; then' ; \
-	  echo '    printf "%sSKIP%s: missing divvunspell accuracy\\n" "$${light_blue}" "$${reset}"' ; \
+	  echo 'if test x"$$$$TESTER" = x"false" ; then' ; \
+	  echo '    printf "%sSKIP%s: missing divvunspell accuracy\\n" "$$$${light_blue}" "$$$${reset}"' ; \
 	  echo '    exit 77' ; \
 	  echo 'fi' ; \
-	  echo 'if test -z "$$VARIANTS" ; then' ; \
-	  echo '    printf "%sSKIP%s: no variants configured\\n" "$${light_blue}" "$${reset}"' ; \
+	  echo 'if test -z "$$$$VARIANTS" ; then' ; \
+	  echo '    printf "%sSKIP%s: no variants configured\\n" "$$$${light_blue}" "$$$${reset}"' ; \
 	  echo '    exit 77' ; \
 	  echo 'fi' ; \
 	  echo 'failed=0' ; \
 	  echo 'passed=0' ; \
 	  echo 'skipped=0' ; \
-	  echo 'for variant in $$VARIANTS; do' ; \
-	  echo '    TYPOS="$(builddir)/typos-$$variant-generated.tsv"' ; \
-	  echo '    ZHFST="$(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$$variant.zhfst"' ; \
-	  echo '    REPORT="$(top_srcdir)/docs/typosreport/report-$$variant.json"' ; \
-	  echo '    if test ! -f "$$ZHFST" ; then' ; \
-	  echo '        printf "%sSKIP%s: $$variant (spellchecker not found)\\n" "$${light_blue}" "$${reset}"' ; \
-	  echo '        skipped=$$((skipped + 1))' ; \
-	  echo '        continue' ; \
-	  echo '    fi' ; \
-	  echo '    if test ! -f "$$TYPOS" ; then' ; \
-	  echo '        printf "%sSKIP%s: $$variant (test data not found)\\n" "$${light_blue}" "$${reset}"' ; \
-	  echo '        skipped=$$((skipped + 1))' ; \
-	  echo '        continue' ; \
-	  echo '    fi' ; \
-	  echo '    if test -f "$$CONFIG" ; then' ; \
-	  echo '        CONFIGOPTION=" -c $$CONFIG "' ; \
-	  echo '    else' ; \
-	  echo '        CONFIGOPTION=""' ; \
-	  echo '    fi' ; \
-	  echo '    "$$TESTER" accuracy -T "$$THRESHOLD" --verbose $$CONFIGOPTION -o "$$REPORT" "$$TYPOS" "$$ZHFST" > /dev/null 2>&1' ; \
-	  echo '    rv=$$?' ; \
-	  echo '    if test $$rv = 77 ; then' ; \
-	  echo '        printf "%sSKIP%s: $$variant\\n" "$${light_blue}" "$${reset}"' ; \
-	  echo '        skipped=$$((skipped + 1))' ; \
-	  echo '    elif test $$rv -gt 0 ; then' ; \
-	  echo '        printf "%sFAIL%s: $$variant\\n" "$${red}" "$${reset}"' ; \
-	  echo '        failed=$$((failed + 1))' ; \
-	  echo '    else' ; \
-	  echo '        printf "%sPASS%s: $$variant\\n" "$${green}" "$${reset}"' ; \
-	  echo '        passed=$$((passed + 1))' ; \
-	  echo '    fi' ; \
-	  echo 'done' ; \
-	  echo 'printf "\\nVariant tests: $$passed passed, $$failed failed, $$skipped skipped\\n"' ; \
-	  echo 'if test $$failed -gt 0 ; then' ; \
+	  echo 'TYPOS="$(builddir)/typos-$(1)-generated.tsv"' ; \
+	  echo 'ZHFST="$(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$(1).zhfst"' ; \
+	  echo 'REPORT="$(top_srcdir)/docs/typosreport/report-$(1).json"' ; \
+	  echo 'if test ! -f "$$$$ZHFST" ; then' ; \
+	  echo '    printf "%sSKIP%s: $(1) (spellchecker not found)\\n" "$$$${light_blue}" "$$$${reset}"' ; \
+	  echo '    skipped=$$$$((skipped + 1))' ; \
+	  echo '    continue' ; \
+	  echo 'fi' ; \
+	  echo 'if test ! -f "$$$$TYPOS" ; then' ; \
+	  echo '    printf "%sSKIP%s: $(1) (test data not found)\\n" "$$$${light_blue}" "$$$${reset}"' ; \
+	  echo '    skipped=$$$$((skipped + 1))' ; \
+	  echo '    continue' ; \
+	  echo 'fi' ; \
+	  echo 'if test -f "$$$$CONFIG" ; then' ; \
+	  echo '    CONFIGOPTION=" -c $$$$CONFIG "' ; \
+	  echo 'else' ; \
+	  echo '    CONFIGOPTION=""' ; \
+	  echo 'fi' ; \
+	  echo '"$$$$TESTER" accuracy -T "$$$$THRESHOLD" --verbose $$$$CONFIGOPTION -o "$$$$REPORT" "$$$$TYPOS" "$$$$ZHFST" > /dev/null 2>&1' ; \
+	  echo 'rv=$$$$?' ; \
+	  echo 'if test $$$$rv = 77 ; then' ; \
+	  echo '    printf "%sSKIP%s: $(1)\\n" "$$$${light_blue}" "$$$${reset}"' ; \
+	  echo '    skipped=$$$$((skipped + 1))' ; \
+	  echo 'elif test $$$$rv -gt 0 ; then' ; \
+	  echo '    printf "%sFAIL%s: $(1)\\n" "$$$${red}" "$$$${reset}"' ; \
+	  echo '    failed=$$$$((failed + 1))' ; \
+	  echo 'else' ; \
+	  echo '    printf "%sPASS%s: $(1)\\n" "$$$${green}" "$$$${reset}"' ; \
+	  echo '    passed=$$$$((passed + 1))' ; \
+	  echo 'fi' ; \
+	  echo 'printf "\\nVariant tests: $$$$passed passed, $$$$failed failed, $$$$skipped skipped\\n"' ; \
+	  echo 'if test $$$$failed -gt 0 ; then' ; \
 	  echo '    exit 1' ; \
-	  echo 'elif test $$passed -eq 0 && test $$skipped -gt 0 ; then' ; \
+	  echo 'elif test $$$$passed -eq 0 && test $$$$skipped -gt 0 ; then' ; \
 	  echo '    exit 77' ; \
 	  echo 'else' ; \
 	  echo '    exit 0' ; \
 	  echo 'fi' ; \
+	) > $$@
+	@chmod +x $$@
+
+endef
+$(foreach variant,$(SPELLER_TEST_VARIANTS),$(eval $(call test-speller-variants,$(variant))))
+
+# Generate a wrapper script that runs all variant tests in sequence:
+# This has a fixed name so Automake can track it in TESTS at automake-time.
+test-speller-variants.sh: $(TEST_SPELLER_VARIANT_SCR)
+	$(AM_V_GEN)( \
+	  echo '#!/bin/bash' ; \
+	  echo 'if test -f "$${GIELLA_CORE}/scripts/termcolors.bash" ; then' ; \
+	  echo '    . "$${GIELLA_CORE}/scripts/termcolors.bash"' ; \
+	  echo 'fi' ; \
+	  echo 'failed=0 ; passed=0 ; skipped=0' ; \
+	  for v in $(SPELLER_TEST_VARIANTS) ; do \
+	    echo "if test -x \"$(builddir)/test-speller-variant-$$v.sh\" ; then" ; \
+	    echo "    bash \"$(builddir)/test-speller-variant-$$v.sh\"" ; \
+	    echo '    rv=$$?' ; \
+	    echo '    if test $$rv = 77 ; then skipped=$$((skipped + 1))' ; \
+	    echo '    elif test $$rv -gt 0 ; then failed=$$((failed + 1))' ; \
+	    echo '    else passed=$$((passed + 1)) ; fi' ; \
+	    echo 'fi' ; \
+	  done ; \
+	  echo 'if test $$failed -gt 0 ; then exit 1' ; \
+	  echo 'elif test $$passed -eq 0 && test $$skipped -gt 0 ; then exit 77' ; \
+	  echo 'else exit 0 ; fi' ; \
 	) > $@
 	@chmod +x $@
 
 # Add variant test runner if we have variants
 if HAVE_DIALECTS
+if WANT_DIALECT_PROOFTOOLS
+check_SCRIPTS+=test-speller-variants.sh $(TEST_SPELLER_VARIANT_SCR)
 OTHER_TEST_RUNNERS+=test-speller-variants.sh
+endif # WANT_DIALECT_PROOFTOOLS
 else
 if HAVE_AREAS
+check_SCRIPTS+=test-speller-variants.sh $(TEST_SPELLER_VARIANT_SCR)
 OTHER_TEST_RUNNERS+=test-speller-variants.sh
 else
 if HAVE_ALT_ORTHS
 if WANT_ALT_ORTH_PROOFTOOLS
+check_SCRIPTS+=test-speller-variants.sh $(TEST_SPELLER_VARIANT_SCR)
 OTHER_TEST_RUNNERS+=test-speller-variants.sh
 endif
 endif
 endif
 endif
-
-# ========================================
-# Test script generation
-# ========================================
 
 OTHER_TEST_RUNNERS+=test-zhfst-file.sh \
 					test-zhfst-basic-sugg-speed.sh \

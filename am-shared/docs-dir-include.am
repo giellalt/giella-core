@@ -15,6 +15,7 @@ REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/fst-lemmacount.json \
 	badgedata/fst-maturity.json \
+	badgedata/fst-variants.json \
 	badgedata/fst-version.json \
 	badgedata/speller-suggestions.json \
 	badgedata/speller-version.json
@@ -27,6 +28,19 @@ DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2ghpages.awk
 DOCC2MDWIKI_CG3=$(GTCORE)/scripts/doccomments2ghpages-vislcg.awk
 
 GRAPHPLOTTER=$(GTCORE)/scripts/plot-speller-progress.R
+
+# Set flags for variant prooftools availability:
+if WANT_DIALECT_PROOFTOOLS
+WANT_DIALECT_PROOFTOOLS_FLAG=yes
+else
+WANT_DIALECT_PROOFTOOLS_FLAG=no
+endif
+
+if WANT_ALT_ORTH_PROOFTOOLS
+WANT_ALT_ORTH_PROOFTOOLS_FLAG=yes
+else
+WANT_ALT_ORTH_PROOFTOOLS_FLAG=no
+endif
 
 if WANT_SPELLERS
 speller-report.svg: speller-report.tsv $(GRAPHPLOTTER)
@@ -62,6 +76,20 @@ $(srcdir)/badgedata/fst-lemmacount.json: FORCE
 $(srcdir)/badgedata/fst-maturity.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
+
+$(srcdir)/badgedata/fst-variants.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-fst-variants-json.sh \
+		--dialects "$(DIALECTS)" \
+		--areas "$(AREAS)" \
+		--orthographies "$(ALT_ORTHS)" \
+		--default-orth "$(DEFAULT_ORTH)" \
+		--writing-systems "$(ALT_WSS)" \
+		--default-ws "$(DEFAULT_WS)" \
+		--want-dialect-prooftools "$(WANT_DIALECT_PROOFTOOLS_FLAG)" \
+		--want-alt-orth-prooftools "$(WANT_ALT_ORTH_PROOFTOOLS_FLAG)" \
+		--build-config "$(top_srcdir)/.build-config.yml" \
+		--output $@
 
 $(srcdir)/badgedata/fst-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata

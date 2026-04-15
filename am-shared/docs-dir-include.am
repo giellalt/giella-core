@@ -11,6 +11,24 @@ INDEX=$(srcdir)/index.md
 REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 # " reset syntax colouring - gets confused by the single double quote in the previous line
 
+# Variant badge files to generate when variant prooftools are enabled:
+SPELLER_BADGE_VARIANTS=
+if HAVE_DIALECTS
+if WANT_DIALECT_PROOFTOOLS
+SPELLER_BADGE_VARIANTS+=$(DIALECTS)
+endif
+endif
+if HAVE_AREAS
+SPELLER_BADGE_VARIANTS+=$(AREAS)
+endif
+if HAVE_ALT_ORTHS
+if WANT_ALT_ORTH_PROOFTOOLS
+SPELLER_BADGE_VARIANTS+=$(ALT_ORTHS)
+endif
+endif
+
+SPELLER_VARIANT_BADGE_FILES=$(patsubst %,badgedata/speller-suggestions-%.json,$(SPELLER_BADGE_VARIANTS))
+
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/fst-lemmacount.json \
@@ -18,6 +36,7 @@ doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/fst-variants.json \
 	badgedata/fst-version.json \
 	badgedata/speller-suggestions.json \
+	$(SPELLER_VARIANT_BADGE_FILES) \
 	badgedata/speller-version.json
 
 .PHONY: generate-markdown regenerate-markdown FORCE
@@ -98,6 +117,10 @@ $(srcdir)/badgedata/fst-version.json: FORCE
 $(srcdir)/badgedata/speller-suggestions.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-spellerbadge-json.sh $(srcdir)/typosreport/report.json > $@
+
+$(srcdir)/badgedata/speller-suggestions-%.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-spellerbadge-json.sh $(srcdir)/typosreport/report-$*.json > $@
 
 $(srcdir)/badgedata/speller-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata

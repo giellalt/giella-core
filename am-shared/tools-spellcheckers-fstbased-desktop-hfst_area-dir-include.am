@@ -29,7 +29,7 @@ GT_AREA_SPELLER_ACCEPTORS=$(shell for ld in $(AREAS); do\
 done)
 
 AREA_ZHFST_FILES=$(shell for ld in $(AREAS); do\
-    echo "$(GTLANG2)_$$ld.zhfst" ; \
+	echo "$(GTLANG2)-$$ld.zhfst" ; \
 done)
 AREA_ZHFST_BASENAMES=$(basename $(AREA_ZHFST_FILES))
 
@@ -55,7 +55,7 @@ endif # HAVE_AREAS
 
 # Build rule for zhfst files for specific areas/countries:
 $(AREA_ZHFST_FILES): \
-	$(GTLANG2)_%.zhfst: \
+	$(GTLANG2)-%.zhfst: \
 		index.%.xml \
 		.generated/acceptor.%.hfst \
 		.generated/errmodel.%.hfst

@@ -138,10 +138,6 @@ test-speller-variant-$(1).sh:
 	  echo '    printf "%sSKIP%s: missing divvunspell accuracy\\n" "$$$${light_blue}" "$$$${reset}"' ; \
 	  echo '    exit 77' ; \
 	  echo 'fi' ; \
-	  echo 'if test -z "$$$$VARIANTS" ; then' ; \
-	  echo '    printf "%sSKIP%s: no variants configured\\n" "$$$${light_blue}" "$$$${reset}"' ; \
-	  echo '    exit 77' ; \
-	  echo 'fi' ; \
 	  echo 'failed=0' ; \
 	  echo 'passed=0' ; \
 	  echo 'skipped=0' ; \
@@ -247,3 +243,4 @@ endif
 TESTS+=$(YAML_TEST_RUNNERS) $(OTHER_TEST_RUNNERS)
 
 # vim: set ft=automake:
+

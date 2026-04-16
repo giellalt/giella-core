@@ -147,12 +147,12 @@ test-speller-variant-$(1).sh:
 	  echo 'if test ! -f "$$$$ZHFST" ; then' ; \
 	  echo '    printf "%sSKIP%s: $(1) (spellchecker not found)\\n" "$$$${light_blue}" "$$$${reset}"' ; \
 	  echo '    skipped=$$$$((skipped + 1))' ; \
-	  echo '    continue' ; \
+	  echo '    exit 77' ; \
 	  echo 'fi' ; \
 	  echo 'if test ! -f "$$$$TYPOS" ; then' ; \
 	  echo '    printf "%sSKIP%s: $(1) (test data not found)\\n" "$$$${light_blue}" "$$$${reset}"' ; \
 	  echo '    skipped=$$$$((skipped + 1))' ; \
-	  echo '    continue' ; \
+	  echo '    exit 77' ; \
 	  echo 'fi' ; \
 	  echo 'if test -f "$$$$CONFIG" ; then' ; \
 	  echo '    CONFIGOPTION=" -c $$$$CONFIG "' ; \

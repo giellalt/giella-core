@@ -94,6 +94,17 @@ analyser-%.hfst: generator-%.hfst
 
 CLEANFILES=$(GT_COMMON_SPELLER_HFST) *.hfst easteregg.*
 
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop_weights-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile_weights-dir-include.am
+
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile-hfst_alt_orth-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile-hfst_alt_ws-dir-include.am
+
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_dialects-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_orth-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_ws-dir-include.am
+include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_area-dir-include.am
+
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-dir-include.am 
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-dir-include.am 
 include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst-dir-include.am

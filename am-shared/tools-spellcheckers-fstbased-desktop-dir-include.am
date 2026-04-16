@@ -109,4 +109,3 @@ analyser-desktopspeller-gt-norm.hfst: generator-desktopspeller-gt-norm.hfst
 	| $(HFST_REMOVE_EPSILONS) $(MORE_VERBOSITY) -o $@
 
 ####### Other targets: ###########
-include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop_weights-dir-include.am

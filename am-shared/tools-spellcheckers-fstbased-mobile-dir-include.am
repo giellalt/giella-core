@@ -108,4 +108,3 @@ CLEANFILES+=$(GIELLA_MOBILE_SPELLER_HFST)
 	$(AM_V_INVERT)$(HFST_INVERT) $(MORE_VERBOSITY) $(HFST_FLAGS) -i $< -o $@
 
 ####### Other targets: ###########
-include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-mobile_weights-dir-include.am

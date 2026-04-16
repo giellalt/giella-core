@@ -449,8 +449,7 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps) $(GENDIR)
 				 $(MAYBE_EMOJIS) \
 				 .generated/easteregg.%.desktop.hfst
 	$(AM_V_PROJECT)$(HFST_COMPOSE) -1 filters/remove-error-strings.hfst -2 $< -F \
-		| $(HFST_PROJECT) $(HFST_FLAGS) \
-			$(MORE_VERBOSITY) --project=lower \
+		| $(HFST_PROJECT) $(HFST_FLAGS) $(MORE_VERBOSITY) --project=lower \
 		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) $(MAYBE_EMOJIS) \
 		| $(HFST_MINIMIZE_SPELLER)                      \
 		| $(HFST_DISJUNCT) $(MORE_VERBOSITY) - .generated/easteregg.$*.desktop.hfst  \
@@ -520,10 +519,5 @@ $(ALL_DESKTOP_ZHFST_FILES): \
 
 
 ####### Other targets: ###########
-
-include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_dialects-dir-include.am
-include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_orth-dir-include.am
-include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_alt_ws-dir-include.am
-include $(top_srcdir)/../giella-core/am-shared/tools-spellcheckers-fstbased-desktop-hfst_area-dir-include.am
 
 # vim: set ft=automake:

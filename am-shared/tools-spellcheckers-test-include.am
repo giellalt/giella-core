@@ -22,30 +22,42 @@ if WANT_SPELLERS
 check_SCRIPTS=
 CLEANFILES=
 
-# Build list of all variants that need testing:
+# Build lists of variants that need testing:
+# - private variants map to $(GTLANG)-x-<variant>.zhfst
+# - standardized variants (areas, writing systems) map to $(GTLANG)-<variant>.zhfst
+SPELLER_TEST_X_VARIANTS=
+SPELLER_TEST_AREA_VARIANTS=
+SPELLER_TEST_WSS_VARIANTS=
+SPELLER_TEST_STD_VARIANTS=
 SPELLER_TEST_VARIANTS=
 
 # Add dialects if defined:
 if HAVE_DIALECTS
 if WANT_DIALECT_PROOFTOOLS
-SPELLER_TEST_VARIANTS+=$(DIALECTS)
+SPELLER_TEST_X_VARIANTS+=$(DIALECTS)
 endif
 endif
 
 # Add areas if defined:
 if HAVE_AREAS
-SPELLER_TEST_VARIANTS+=$(AREAS)
+SPELLER_TEST_AREA_VARIANTS+=$(AREAS)
 endif
 
 # Add alternative orthographies if defined:
 if HAVE_ALT_ORTHS
 if WANT_ALT_ORTH_PROOFTOOLS
-SPELLER_TEST_VARIANTS+=$(ALT_ORTHS)
+SPELLER_TEST_X_VARIANTS+=$(ALT_ORTHS)
 endif
 endif
 
-# TODO: Alternative writing systems need special handling
-# (they don't combine with typos.tsv)
+# Add alternative writing systems if defined:
+if HAVE_ALT_WSS
+SPELLER_TEST_WSS_VARIANTS+=$(ALT_WSS)
+endif
+
+SPELLER_TEST_STD_VARIANTS+=$(SPELLER_TEST_AREA_VARIANTS) $(SPELLER_TEST_WSS_VARIANTS)
+
+SPELLER_TEST_VARIANTS+=$(SPELLER_TEST_X_VARIANTS) $(SPELLER_TEST_STD_VARIANTS)
 
 # ========================================
 # Variant test data generation
@@ -70,9 +82,21 @@ if HAVE_ALT_WSS
 	fi
 endif
 
-# Generate combined test files for each variant (base + variant-specific):
-typos-%-generated.tsv: typos.tsv typos-%.tsv
-	$(AM_V_GEN)cat $^ > $@
+# Generate combined test files for variants that share default-script testdata
+# (dialects, areas, alternative orthographies): base + variant-specific.
+define variant-typos-combined-rule
+typos-$(1)-generated.tsv: typos.tsv typos-$(1).tsv
+	$$(AM_V_GEN)cat $$^ > $$@
+endef
+$(foreach variant,$(SPELLER_TEST_X_VARIANTS) $(SPELLER_TEST_AREA_VARIANTS),$(eval $(call variant-typos-combined-rule,$(variant))))
+
+# Generate variant test files for alternative writing systems:
+# do not mix in typos.tsv from the default writing system.
+define variant-typos-specific-rule
+typos-$(1)-generated.tsv: typos-$(1).tsv
+	$$(AM_V_GEN)cat $$< > $$@
+endef
+$(foreach variant,$(SPELLER_TEST_WSS_VARIANTS),$(eval $(call variant-typos-specific-rule,$(variant))))
 
 # Ensure default test data is generated before default speller quality test.
 suggestion-quality.sh: typos-default-generated.tsv
@@ -117,13 +141,17 @@ endif
 endif
 endif
 
-# Pattern rule for variant-specific reports:
-$(top_srcdir)/docs/typosreport/report-%.json: typos-%-generated.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG)-x-%.zhfst
-	@echo "*** Testing variant speller: $(GTLANG)-x-$* ***"
+# Variant-specific report rules:
+define variant-report-rule
+$(top_srcdir)/docs/typosreport/report-$(1).json: typos-$(1)-generated.tsv $(top_builddir)/tools/spellcheckers/$(2)$(1).zhfst
+	@echo "*** Testing variant speller: $(2)$(1) ***"
 	@mkdir -p $(top_srcdir)/docs/typosreport
-	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $@ \
-		$< \
-		$(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$*.zhfst
+	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $$@ \
+		$$< \
+		$(top_builddir)/tools/spellcheckers/$(2)$(1).zhfst
+endef
+$(foreach variant,$(SPELLER_TEST_X_VARIANTS),$(eval $(call variant-report-rule,$(variant),$(GTLANG)-x-)))
+$(foreach variant,$(SPELLER_TEST_STD_VARIANTS),$(eval $(call variant-report-rule,$(variant),$(GTLANG)-)))
 
 # Phony target to build all variant reports:
 if HAVE_DIALECTS
@@ -135,7 +163,11 @@ else
 if HAVE_ALT_ORTHS
 speller-variant-reports: $(patsubst %,$(top_srcdir)/docs/typosreport/report-%.json,$(SPELLER_TEST_VARIANTS)) $(top_srcdir)/docs/typosreport/report.json
 else
+if HAVE_ALT_WSS
+speller-variant-reports: $(patsubst %,$(top_srcdir)/docs/typosreport/report-%.json,$(SPELLER_TEST_VARIANTS)) $(top_srcdir)/docs/typosreport/report.json
+else
 speller-variant-reports: $(patsubst %,$(top_srcdir)/docs/typosreport/report-%.json,$(SPELLER_TEST_VARIANTS))
+endif
 endif
 endif
 endif
@@ -149,7 +181,7 @@ TEST_SPELLER_VARIANT_SCR::=$(addsuffix .sh,$(addprefix test-speller-variant-,$(S
 define test-speller-variants
 
 # Generate a single test runner that tests all variants:
-test-speller-variant-$(1).sh: typos-$(1)-generated.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$(1).zhfst
+test-speller-variant-$(1).sh: typos-$(1)-generated.tsv $(top_builddir)/tools/spellcheckers/$(2)$(1).zhfst
 	$$(AM_V_GEN)( \
 	  echo '#!/bin/bash' ; \
 	  echo 'if test -f "$$$${GIELLA_CORE}/scripts/termcolors.bash" ; then' ; \
@@ -166,7 +198,7 @@ test-speller-variant-$(1).sh: typos-$(1)-generated.tsv $(top_builddir)/tools/spe
 	  echo 'passed=0' ; \
 	  echo 'skipped=0' ; \
 	  echo 'TYPOS="$(builddir)/typos-$(1)-generated.tsv"' ; \
-	  echo 'ZHFST="$(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$(1).zhfst"' ; \
+	  echo 'ZHFST="$(top_builddir)/tools/spellcheckers/$(2)$(1).zhfst"' ; \
 	  echo 'REPORT="$(top_srcdir)/docs/typosreport/report-$(1).json"' ; \
 	  echo 'if test ! -f "$$$$ZHFST" ; then' ; \
 	  echo '    printf "%sSKIP%s: $(1) (spellchecker not found)\\n" "$$$${light_blue}" "$$$${reset}"' ; \
@@ -207,7 +239,8 @@ test-speller-variant-$(1).sh: typos-$(1)-generated.tsv $(top_builddir)/tools/spe
 	@chmod +x $$@
 
 endef
-$(foreach variant,$(SPELLER_TEST_VARIANTS),$(eval $(call test-speller-variants,$(variant))))
+$(foreach variant,$(SPELLER_TEST_X_VARIANTS),$(eval $(call test-speller-variants,$(variant),$(GTLANG)-x-)))
+$(foreach variant,$(SPELLER_TEST_STD_VARIANTS),$(eval $(call test-speller-variants,$(variant),$(GTLANG)-)))
 
 # Generate a wrapper script that runs all variant tests in sequence:
 # This has a fixed name so Automake can track it in TESTS at automake-time.

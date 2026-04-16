@@ -26,6 +26,9 @@ if WANT_ALT_ORTH_PROOFTOOLS
 SPELLER_BADGE_VARIANTS+=$(ALT_ORTHS)
 endif
 endif
+if HAVE_ALT_WSS
+SPELLER_BADGE_VARIANTS+=$(ALT_WSS)
+endif
 
 SPELLER_VARIANT_BADGE_FILES=$(patsubst %,$(srcdir)/badgedata/speller-suggestions-%.json,$(SPELLER_BADGE_VARIANTS))
 

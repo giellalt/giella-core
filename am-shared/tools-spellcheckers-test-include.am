@@ -71,6 +71,13 @@ SPELLER_TEST_VARIANTS+=$(SPELLER_TEST_X_VARIANTS) $(SPELLER_TEST_STD_VARIANTS)
 # when alternatives are configured.
 typos-default-generated.tsv: typos.tsv
 	$(AM_V_GEN)cat $< > $@
+if HAVE_AREAS
+	@for area in $(AREAS) ; do \
+		if test -f "$(srcdir)/typos-$$area.tsv" ; then \
+			cat "$(srcdir)/typos-$$area.tsv" >> $@ ; \
+		fi ; \
+	done
+endif
 if HAVE_ALT_ORTHS
 	@if test -f "$(srcdir)/typos-$(DEFAULT_ORTH).tsv" ; then \
 		cat "$(srcdir)/typos-$(DEFAULT_ORTH).tsv" >> $@ ; \

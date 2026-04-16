@@ -86,7 +86,6 @@ report.json:
 endif
 
 # Generate endpoint json file for shield.io lemma count badge.
-# Only to be stored in the gh-pages branch, ignored in main.
 $(srcdir)/badgedata/fst-lemmacount.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-lemmacount.json.sh $(abs_top_srcdir) > $@

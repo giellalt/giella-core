@@ -20,6 +20,7 @@ if WANT_SPELLERS
 
 # Initialize variables:
 check_SCRIPTS=
+CLEANFILES=
 
 # Build list of all variants that need testing:
 SPELLER_TEST_VARIANTS=
@@ -51,15 +52,38 @@ endif
 # ========================================
 
 # Keep generated test files (don't delete as intermediate files):
-.SECONDARY: $(patsubst %,typos-%-generated.tsv,$(SPELLER_TEST_VARIANTS)) typos-default-generated.tsv
+.SECONDARY: $(patsubst %,typos-%-generated.tsv,$(SPELLER_TEST_VARIANTS))
 
-# Generate combined test file for default speller (all variants combined):
-typos-default-generated.tsv: typos.tsv $(patsubst %,typos-%.tsv,$(SPELLER_TEST_VARIANTS))
-	$(AM_V_GEN)cat $^ > $@
+# Generate combined test file for default speller:
+# always common data, plus default orthography / default writing-system data
+# when alternatives are configured.
+typos-default-generated.tsv: typos.tsv
+	$(AM_V_GEN)cat $< > $@
+if HAVE_ALT_ORTHS
+	@if test -f "$(srcdir)/typos-$(DEFAULT_ORTH).tsv" ; then \
+		cat "$(srcdir)/typos-$(DEFAULT_ORTH).tsv" >> $@ ; \
+	fi
+endif
+if HAVE_ALT_WSS
+	@if test -f "$(srcdir)/typos-$(DEFAULT_WS).tsv" ; then \
+		cat "$(srcdir)/typos-$(DEFAULT_WS).tsv" >> $@ ; \
+	fi
+endif
 
 # Generate combined test files for each variant (base + variant-specific):
 typos-%-generated.tsv: typos.tsv typos-%.tsv
 	$(AM_V_GEN)cat $^ > $@
+
+# Ensure default test data is generated before default speller quality test.
+suggestion-quality.sh: typos-default-generated.tsv
+
+# Explicitly ensure typos-default-generated.tsv is built before check target runs.
+# This depends on check-local being available in the including Makefile.am
+check-local: typos-default-generated.tsv
+
+# Remove generated test data files on make clean.
+CLEANFILES+=$(patsubst %,typos-%-generated.tsv,$(SPELLER_TEST_VARIANTS)) typos-default-generated.tsv
+CLEANFILES+=test-speller-variants.sh $(TEST_SPELLER_VARIANT_SCR)
 
 # ========================================
 # Variant test execution
@@ -125,7 +149,7 @@ TEST_SPELLER_VARIANT_SCR::=$(addsuffix .sh,$(addprefix test-speller-variant-,$(S
 define test-speller-variants
 
 # Generate a single test runner that tests all variants:
-test-speller-variant-$(1).sh:
+test-speller-variant-$(1).sh: typos-$(1)-generated.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG)-x-$(1).zhfst
 	$$(AM_V_GEN)( \
 	  echo '#!/bin/bash' ; \
 	  echo 'if test -f "$$$${GIELLA_CORE}/scripts/termcolors.bash" ; then' ; \
@@ -208,6 +232,9 @@ test-speller-variants.sh: $(TEST_SPELLER_VARIANT_SCR)
 	  echo 'else exit 0 ; fi' ; \
 	) > $@
 	@chmod +x $@
+
+# Ensure default suggestion-quality prerequisites are built in make check.
+check_SCRIPTS+=suggestion-quality.sh
 
 # Add variant test runner if we have variants
 if HAVE_DIALECTS

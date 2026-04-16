@@ -27,7 +27,7 @@ SPELLER_BADGE_VARIANTS+=$(ALT_ORTHS)
 endif
 endif
 
-SPELLER_VARIANT_BADGE_FILES=$(patsubst %,badgedata/speller-suggestions-%.json,$(SPELLER_BADGE_VARIANTS))
+SPELLER_VARIANT_BADGE_FILES=$(patsubst %,$(srcdir)/badgedata/speller-suggestions-%.json,$(SPELLER_BADGE_VARIANTS))
 
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \

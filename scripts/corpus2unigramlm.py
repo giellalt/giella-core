@@ -23,7 +23,10 @@ def main():
                       help="prints some outputs")
     options = argp.parse_args()
     configuration = json.load(options.config)
-    alpha = configuration["alpha"]
+    if configuration["alpha"]:
+        alpha = configuration["alpha"]
+    else:
+        alpha = 1
     freqs = Counter()
     for line in options.input:
         tokens = re.split(r"\W+", line)
@@ -31,7 +34,10 @@ def main():
     corpussize = freqs.total()
     vocabsize = len(freqs)
     unkprob = alpha / (corpussize + vocabsize * alpha)
-    coeff = configuration["maxweight"] / -log10(unkprob)
+    if configuration["maxweight"]:
+        coeff = configuration["maxweight"] / -log10(unkprob)
+    else:
+        coeff = 1
     for wordform in freqs:
         hatprob = (freqs[wordform] + alpha) / (corpussize + vocabsize * alpha)
         print(wordform, -log10(hatprob) * coeff, sep="\t")

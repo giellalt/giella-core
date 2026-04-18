@@ -29,7 +29,8 @@ def main():
         alpha = 1
     freqs = Counter()
     for line in options.input:
-        tokens = re.split(r"\W+", line)
+        tokens = re.split(r"[0-9.?!/\"“”’':,(){}¶]*\s+[0-9.(){}\"’'/“”¶]*",
+                          line)
         freqs.update(tokens)
     corpussize = freqs.total()
     vocabsize = len(freqs)

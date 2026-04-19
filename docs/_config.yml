@@ -1,1 +1,19 @@
-theme: jekyll-theme-minimal
+remote_theme: giellalt/jekyll-theme-giellalt@main
+title: giella-core
+description: Core tools and resources for the GiellaLT infrastructure
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
+  - jemoji
+
+defaults:
+  - scope: { path: "" }
+    values:
+      layout: default
+
+markdown: kramdown
+kramdown:
+  syntax_highlighter_opts:
+    disable: true

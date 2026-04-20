@@ -3,7 +3,7 @@
 
 import json
 import re
-from argparse import ArgumentParser
+from argparse import ArgumentParser, FileType
 from collections import Counter
 from math import log10
 
@@ -19,6 +19,11 @@ def main():
                       help="read config.json from CONFFILE", required=True)
     argp.add_argument("-d", "--debug", action="store_true", default=False,
                       help="prints debugging outputs")
+    argp.add_argument("-w", "--weights", action=FileType("w"), required=True,
+                      help="print weights in AT&T format in WFILE",
+                      metavar="WFILE")
+    argp.add_argument("-m", "--max-weight", action=FileType("w"), required=True,
+                      help="print max weight in MWFILE", metavar="MWFILE")
     argp.add_argument("-v", "--verbose", action="store_true", default=False,
                       help="prints some outputs")
     options = argp.parse_args()
@@ -29,7 +34,7 @@ def main():
         alpha = 1
     freqs = Counter()
     for line in options.input:
-        tokens = re.split(r"[0-9.?!/\"“”’':,(){}¶]*\s+[0-9.(){}\"’'/“”¶]*",
+        tokens = re.split(r"[0-9.?!*/\"“”’':,(){}¶]*\s+[0-9.(){}*\"’'/“”¶]*",
                           line)
         freqs.update(tokens)
     corpussize = freqs.total()
@@ -41,8 +46,9 @@ def main():
         coeff = 1
     for wordform in freqs:
         hatprob = (freqs[wordform] + alpha) / (corpussize + vocabsize * alpha)
-        print(wordform, -log10(hatprob) * coeff, sep="\t")
-    print("<unk>", -log10(unkprob) * coeff, sep="\t")
+        print(wordform, -log10(hatprob) * coeff, sep="\t",
+              file=options.weightfile)
+    print(-log10(unkprob) * coeff, sep="\t", file=options.mawfile)
 
 
 if __name__ == "__main__":

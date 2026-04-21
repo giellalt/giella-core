@@ -7,8 +7,12 @@ from argparse import ArgumentParser, FileType
 from collections import Counter
 from math import log10
 
-from termcolor import colored, cprint
-
+try:
+    from termcolor import colored
+except ImportError:
+    def colored(s, _):
+        """just give uncoloured strings if package is missing."""
+        return s
 
 def main():
     """CLI for GiellaLT lemma generation tests."""
@@ -47,10 +51,9 @@ def main():
         coeff = 1
     for wordform in freqs:
         hatprob = (freqs[wordform] + alpha) / (corpussize + vocabsize * alpha)
-        print(wordform, -log10(hatprob) * coeff, sep="\t",
+        print(wordform.replace(":", "\\:"), -log10(hatprob) * coeff, sep="\t",
               file=options.weights)
     print(-log10(unkprob) * coeff, sep="\t", file=options.max_weight)
-    print(freqs.most_common(1)[0][1])
     topword = freqs.most_common(1)[0][0]
     topfreq = freqs.most_common(1)[0][1]
     tophatprob = (topfreq + alpha) / (corpussize + vocabsize * alpha)

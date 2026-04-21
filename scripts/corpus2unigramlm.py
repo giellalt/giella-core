@@ -36,6 +36,7 @@ def main():
     for line in options.input:
         tokens = re.split(r"[0-9.?!*/\"“”’':,(){}¶]*\s+[0-9.(){}*\"’'/“”¶]*",
                           line)
+        tokens = list(filter(None, tokens))
         freqs.update(tokens)
     corpussize = freqs.total()
     vocabsize = len(freqs)
@@ -58,7 +59,7 @@ def main():
     bottomfreq = freqs.most_common()[-1][1]
     bottomhatprob = (bottomfreq + alpha) / (corpussize + vocabsize * alpha)
     bottomweight = -log10(bottomhatprob) * coeff
-    oovweight = -log10(unkprob)
+    oovweight = -log10(unkprob) * coeff
     print(colored("***", "cyan"), "Weighting statistics:")
     print(colored("***", "cyan"),
           colored(f"High: {topweight} (={topword} {topfreq}),", "green"))

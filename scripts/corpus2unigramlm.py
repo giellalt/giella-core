@@ -19,10 +19,10 @@ def main():
                       help="read config.json from CONFFILE", required=True)
     argp.add_argument("-d", "--debug", action="store_true", default=False,
                       help="prints debugging outputs")
-    argp.add_argument("-w", "--weights", action=FileType("w"), required=True,
+    argp.add_argument("-w", "--weights", type=FileType("w"), required=True,
                       help="print weights in AT&T format in WFILE",
                       metavar="WFILE")
-    argp.add_argument("-m", "--max-weight", action=FileType("w"), required=True,
+    argp.add_argument("-m", "--max-weight", type=FileType("w"), required=True,
                       help="print max weight in MWFILE", metavar="MWFILE")
     argp.add_argument("-v", "--verbose", action="store_true", default=False,
                       help="prints some outputs")
@@ -47,8 +47,28 @@ def main():
     for wordform in freqs:
         hatprob = (freqs[wordform] + alpha) / (corpussize + vocabsize * alpha)
         print(wordform, -log10(hatprob) * coeff, sep="\t",
-              file=options.weightfile)
-    print(-log10(unkprob) * coeff, sep="\t", file=options.mawfile)
+              file=options.weights)
+    print(-log10(unkprob) * coeff, sep="\t", file=options.max_weight)
+    print(freqs.most_common(1)[0][1])
+    topword = freqs.most_common(1)[0][0]
+    topfreq = freqs.most_common(1)[0][1]
+    tophatprob = (topfreq + alpha) / (corpussize + vocabsize * alpha)
+    topweight = -log10(tophatprob) * coeff
+    bottomword = freqs.most_common()[-1][0]
+    bottomfreq = freqs.most_common()[-1][1]
+    bottomhatprob = (bottomfreq + alpha) / (corpussize + vocabsize * alpha)
+    bottomweight = -log10(bottomhatprob) * coeff
+    oovweight = -log10(unkprob)
+    print(colored("***", "cyan"), "Weighting statistics:")
+    print(colored("***", "cyan"),
+          colored(f"High: {topweight} (={topword} {topfreq}),", "green"))
+    print(colored("***", "cyan"),
+          colored(f"low: {bottomweight} (={bottomword} {bottomfreq}),",
+                  "yellow"))
+    print(colored("***", "cyan"),
+          colored(f"OOV: {oovweight} (=<unk> 0)", "red"))
+    print(colored("***", "cyan"),
+          f"corpus: {corpussize}, vocab: {vocabsize}, coeff: {coeff}")
 
 
 if __name__ == "__main__":

@@ -20,59 +20,12 @@
 MOB_SURFWEIGHTS=mob_$(MOBILE_CORPUSNAME).surfweights.hfst
 MOB_UNITWEIGHT=mob_$(MOBILE_CORPUSNAME).unitweight.txt
 
-# We use same ALPHA for both mobile and desktop spellers, simplifies fst builds
-# # ALPHA for additive smoothing, [0, 1.0] seems good
-# ALPHA=1.0
-
-#NORMALISED_MAXWEIGHT=1000
-
-mob_corpus_size_limit_command=$(shell \
-	if [[ x$(MOB_CORPUS_SIZE) != x ]] ; \
-	then \
-		echo "| head -n $(MOB_CORPUS_SIZE)"; \
-	else \
-		echo ""; \
-	fi)
-
-    %.hfst: weights/%.att
-	$(AM_V_GEN)$(HFST_TXT2FST) $(HFST_FLAGS) -f openfst-tropical $< -o $@
-
-# sort the clean corpus:
-.generated/%.sort.txt: weights/%.clean.txt $(GENDIR)
-	$(AM_V_GEN)LC_ALL=C.utf8 sort < $< > $@
-
-# token count:
-.generated/%.wordcount.txt: .generated/%.sort.txt
-	$(AM_V_GEN)wc -l < $< > $@
-
-# Unique the sorted, clean corpus:
-.generated/mob_%.uniq.txt: .generated/%.sort.txt
-	$(AM_V_GEN)uniq -c < $< | sort -nr $(mob_corpus_size_limit_command) > $@
-
-# type count:
-.generated/mob_%.typecount.txt: .generated/mob_%.uniq.txt
-	$(AM_V_GEN)wc -l < $< > $@
-
-# calculate unit weight, smoothed using ALPHA:
-#%.unitweight.txt: %.wordcount.txt %.typecount.txt
-#	$(AM_V_GEN)paste $^ |\
-#		sed -e "s/^/scale=5; -l($(ALPHA)\/(/" \
-#		    -e "s/	/ + ($(ALPHA) */" -e "s/$$/)))/" \
-#		| $(BC) -l > $@
-
-## Alternative unit weight: highest tropical weight + ALPHA:
-#%.unitweight.txt: %.tropical.txt
-#	$(AM_V_GEN)echo "$$(cut -f2 < $^ | sort -nru | head -n1) + $(ALPHA)" \
-#		| $(BC) -l > $@
-#
 # add tropical weights to the corpus:
-.generated/mob_%.tropical.txt: .generated/mob_%.uniq.txt .generated/%.wordcount.txt .generated/mob_%.typecount.txt
-	$(AM_V_GEN)cat $< |\
-		$(GAWK) -v CS="$$(cat .generated/$*.wordcount.txt)" \
-				-v DS="$$(cat .generated/mob_$*.typecount.txt)" \
-				-v ALPHA=$(ALPHA)                \
-				-f $(GTCORE)/scripts/uniq_count2tropical_weight.awk \
-				> $@
+.generated/mob_%.tropical.txt: .generated/%.raw.txt weights/config.json $(GENDIR)
+	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
+		-m .generated/$(MOB_UNITWEIGHT) -c weights/config.json
+
+.generated/$(MOB_UNITWEIGHT): .generated/mob_$(MOBILE_CORPUSNAME).tropical.txt
 
 # build an fst of surface forms with tropical weights for each word form:
 .generated/mob_%.surfs.hfst: .generated/mob_%.tropical.txt
@@ -109,3 +62,5 @@ mob_corpus_size_limit_command=$(shell \
             generator-fstspeller-gt-norm-tag_weighted.hfst  \
             $(MOB_SURFWEIGHTS) \
             $(MOB_UNITWEIGHT)
+
+# vim: set ft=automake:

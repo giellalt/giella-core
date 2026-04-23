@@ -26,9 +26,9 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 
 
 # add tropical weights to the corpus:
-.generated/%.tropical.txt: weights/%.raw.txt weights/config.json $(GENDIR)
+.generated/%.tropical.txt: weights/%.raw.txt $(srcdir)/weights/config.json $(GENDIR)
 	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
-		-m .generated/$(UNITWEIGHT) -c weights/config.json
+		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json
 
 # $(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< \
 #		-w $@ -m .generated/$(UNITWEIGHT)

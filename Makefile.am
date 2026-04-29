@@ -19,6 +19,14 @@ SUBDIRS = . scripts
 
 EXTRA_DIST = $(PACKAGE).pc.in
 
+.PHONY: FORCE
+
+all-local: $(srcdir)/docs/version.json
+
+$(srcdir)/docs/version.json: FORCE
+	@mkdir -p $(srcdir)/docs
+	$(AM_V_GEN)$(abs_top_srcdir)/scripts/make-version-json.sh $(abs_top_srcdir) FST --label "Version" > $@
+
 pkgconfigdir = $(prefix)/share/pkgconfig
 pkgconfig_DATA = $(PACKAGE).pc
 

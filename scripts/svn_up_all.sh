@@ -14,7 +14,7 @@ echo "\n svn up i  chp (Chipewyan)"
 cd ~/git/giellalt/lang-chp && svn up
 echo "\n svn up i  chr (Cherokee)"
 cd ~/git/giellalt/lang-chr && svn up
-echo "\n svn up i  ciw (Chippewa)"
+echo "\n svn up i  ciw (Southwestern Ojibwe (Anishinaabemowin))"
 cd ~/git/giellalt/lang-ciw && svn up
 echo "\n svn up i  ckt (Chukot)"
 cd ~/git/giellalt/lang-ckt && svn up

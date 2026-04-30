@@ -31,7 +31,7 @@ echo "\nHentar frå chp (Chipewyan)"
 cd ~/git/giellalt/lang-chp &&   git config pull.rebase false  && git pull
 echo "\nHentar frå chr (Cherokee)"
 cd ~/git/giellalt/lang-chr &&   git config pull.rebase false  && git pull
-echo "\nHentar frå ciw (Chippewa)"
+echo "\nHentar frå ciw (Southwestern Ojibwe (Anishinaabemowin))"
 cd ~/git/giellalt/lang-ciw &&   git config pull.rebase false  && git pull
 echo "\nHentar frå ckt (Chukot)"
 cd ~/git/giellalt/lang-ckt &&   git config pull.rebase false  && git pull

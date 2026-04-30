@@ -20,7 +20,7 @@
 # set this to the filename of the grammar checker archive:
 GIELLA_GC_ZDISTRO=$(GTLANG2).zcheck
 # set this to the filename of the new runtime bundle:
-GIELLA_GC_DRBDISTRO=$(GTLANG2).drb
+GIELLA_GC_DRBDISTRO=bundle.drb
 
 # set this to the filename of the speller archive:
 GIELLA_GC_SPELLER=$(GTLANG2).zhfst
@@ -97,8 +97,10 @@ voikkoshare_DATA=$(GIELLA_GC_ZDISTRO)
 endif # CAN_VISLCG
 
 # Build .drb file when divvun-runtime is available
+# install .drb file to tell distributors that this is a usable end target
 if HAVE_DIVVUN_RUNTIME
-all-local: $(GIELLA_GC_DRBDISTRO)
+divvunsharedir=$(datadir)/giella/$(GLANG)/
+divvunshare_DATA=$(GIELLA_GC_DRBDISTRO)
 endif
 
 endif # WANT_GRAMCHECK

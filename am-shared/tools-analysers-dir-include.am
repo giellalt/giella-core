@@ -80,8 +80,11 @@ noinst_DATA=$(GIELLA_ANL_SPELLER)
 voikkosharedir=$(datadir)/giella/$(GLANG)/
 voikkoshare_DATA=$(GIELLA_ANL_ZDISTRO)
 
+# build drb files if runtime is available
+# install drb files to tell distributors that this is a usable end target
 if HAVE_DIVVUN_RUNTIME
-noinst_DATA+=$(GIELLA_ANL_DRBDISTRO)
+divvunsharedir=$(datadir)/giella/$(GLANG)/
+divvunshare_DATA=$(GIELLA_ANL_DRBDISTRO)
 endif
 
 endif # CAN_VISLCG

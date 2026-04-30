@@ -118,8 +118,10 @@ voikkoshare_DATA=$(GIELLA_TTS_ZDISTRO)
 endif # CAN_VISLCG
 
 # Build .drb file when divvun-runtime is available
+# install drb to hint distributors that it is end target
 if HAVE_DIVVUN_RUNTIME
-all-local: $(GIELLA_TTS_DRBDISTRO)
+divvunsharedir=$(datadir)/giella/$(GLANG)/
+divvunshare_DATA=$(GIELLA_TTS_DRBDISTRO)
 endif
 
 endif # WANT_TTS

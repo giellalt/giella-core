@@ -2,6 +2,9 @@
 ## Copyright: Sámediggi/Divvun/UiT
 ## Licence: GPL v3+
 
+# Ensure reproducible numeric formatting in generated JSON badge files.
+export LC_NUMERIC = C
+
 # Variables:
 ALLINONE_MD_PAGE=$(srcdir)/$(GTLANG).md
 LINKS=$(srcdir)/Links.md

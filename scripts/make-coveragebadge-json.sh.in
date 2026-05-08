@@ -1,0 +1,57 @@
+#!/bin/bash
+
+if test $# -lt 1 ; then
+    echo "Usage: $0 LANGUAGECODE"
+    echo
+    exit 1
+fi
+
+DIVVUNRUNTIME=@DIVVUN_RUNTIME@
+CCAT=@CCAT@
+ANSIFILTER=@ANSIFILTER@
+if ! test -x "$DIVVUNRUNTIME" ; then
+    echo "missing divvun-runtime please install divvun-runtime"
+    exit 2
+fi
+if ! test -x $CCAT ; then
+    echo "missing ccat please instal divvuns corpustools e.g.:"
+    echo "  pipx install git+https://github.com/divvun/corpustools"
+    exit 2
+fi
+if test -z "$GTLANGS" ; then
+    echo set GTLANGS to parent of corpus dir plz
+    exit 2
+fi
+LANGDIR=$GTLANGS/lang-$1
+CORPUSDIR=$GTLANGS/corpus-$1
+ANALYSER=$LANGDIR/tools/analysers/bundle.drb
+if ! test -d "$LANGDIR" ; then
+    echo "missing $LANGDIR please clone and build it"
+    exit 2
+fi
+if ! test -d "$CORPUSDIR" ; then
+    echo "missing corpus $CORPUSDIR please clone it"
+    exit 2
+fi
+tempfile=$(mktemp -t "corpus-$1.XXXXXXXXXXX")
+"$CCAT" -l "$1" "$CORPUSDIR" |\
+    "$DIVVUNRUNTIME" run -p "$ANALYSER" 2> /dev/null |\
+    "$ANSIFILTER" > "$tempfile"
+tokens=$(grep -E -c '^"<' "$tempfile")
+oov=$(grep -F -c ' ? ' "$tempfile")
+coverage=$(echo "scale=2; (1 - $oov / $tokens) * 100" | bc | sed -e 's/[,.].*//')
+colour=gray
+if test "$coverage" -gt 100 -o "$coverage" -lt 0 ; then
+    echo "coverage calculations broke $coverage is not valid coverage"
+    exit 1
+elif test "$coverage" -gt 90 ; then
+    colour="green"
+elif test "$coverage" -gt 80 ; then
+    colour="orange"
+elif test "$coverage" -gt 50 ; then
+    colour="red"
+else
+    colour="black"
+fi
+printf '{"schemaVersion": 1, "label": "Coverage", "message": "%d %%", "color": "%s"}' \
+    "$coverage" "$colour"

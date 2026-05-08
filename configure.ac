@@ -94,6 +94,7 @@ AS_IF([test x$GTMORPHTEST = xfalse],
       [gt_MSG_ERROR([Either gtmorphtest or morph-test2 is needed for YAML-based morphology tests
        do: pipx install git+https://github.com/divvun/morph-test
        or install https://github.com/divvun/morph-test-rs])])
+AC_PATH_PROG([CCAT], [ccat], [false])
 
 # testing
 AC_PATH_PROG([HFST_LOOKUP], [hfst-lookup], [false], $PATH)
@@ -106,6 +107,7 @@ AC_PATH_PROG([HFST_OSPELL], [hfst-ospell], [false], $PATH)
 AC_PATH_PROG([DIVVUN_CHECKER], [divvun-checker], [false], $PATH)
 AC_PATH_PROG([DIVVUN_RUNTIME], [divvun-runtime], [false], $PATH)
 AC_PATH_PROG([WDIFF], [wdiff], [cat], $PATH)
+AC_PATH_PROG([ANSIFILTER], [ansifilter], [cat], $PATH)
 
 # Enable .drb support if divvun-runtime is available
 AM_CONDITIONAL([HAVE_DIVVUN_RUNTIME], [test x$DIVVUN_RUNTIME != xfalse])
@@ -174,6 +176,8 @@ AC_CONFIG_FILES([scripts/difftest-pipeline.sh],
                 [chmod +x scripts/difftest-pipeline.sh])
 AC_CONFIG_FILES([scripts/simpler-yaml-runner.sh],
                 [chmod +x scripts/simpler-yaml-runner.sh])
+AC_CONFIG_FILES([scripts/make-coveragebadge-json.sh],
+                [chmod +x scripts/make-coveragebadge-json.sh])
 
 AC_OUTPUT
 

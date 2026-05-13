@@ -83,6 +83,7 @@ define digit2txt_transcriptors
 			.o. @\"../filters/remove-NA-strings.$(1)\" \
 			.o. @\"../filters/remove-NG-strings.$(1)\" \
 			.o. @\"$$<\" \
+			.o. @\"../filters/remove-NA-strings.$(1)\" \
 			.o. @\"../filters/remove-NG-strings.$(1)\".i \
 			.o. @\"../filters/remove-usage-tags.$(1)\".i \
 			;\n\
@@ -123,6 +124,7 @@ define abbrevs2txt_transcriptors
 			.o. @\"../filters/remove-NA-strings.$(1)\" \
 			.o. @\"../filters/remove-NG-strings.$(1)\" \
 			.o. @\"$$<\" \
+			.o. @\"../filters/remove-NA-strings.$(1)\" \
 			.o. @\"../filters/remove-NG-strings.$(1)\".i \
 			.o. @\"../filters/remove-usage-tags.$(1)\".i \
 			;\n\

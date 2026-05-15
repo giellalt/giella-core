@@ -131,6 +131,11 @@ $(srcdir)/badgedata/speller-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) SPELLER > $@
 
+$(srcdir)/badgedata/fst-coverage.json:
+	@$(MKDIR_P) $(srcdir)/badgedata
+	@echo this can take some hours...
+	$(AM_V_GEN)$(GTCORE)/scripts/make-coveragebadge-json.sh $(GLANG) > $@
+
 # Define all doccomment source files in a variable:
 DOCSRC_XEROX := $(shell fgrep -rl \
 		--include '*.lexc' \

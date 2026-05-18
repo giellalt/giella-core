@@ -3,7 +3,7 @@ if test $# -lt 2 ; then
     echo "Usage: $0 LANGS..."
     exit 1
 fi
-echo '# Map genereated from $@"'
+echo '# Map generated from $@"'
 echo
 echo '```geojson
 {

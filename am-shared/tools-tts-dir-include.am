@@ -241,7 +241,11 @@ assets/%.pmhfst: %.pmhfst | assets-dir
 # Build the .drb bundle
 $(GIELLA_TTS_DRBDISTRO): $(GIELLA_TTS_PIPELINE) \
 						$(GIELLA_TTS_ASSETS)
-	$(AM_V_at)test -f $(GIELLA_TTS_PIPELINE) || cp -f $(srcdir)/$(GIELLA_TTS_PIPELINE) $(GIELLA_TTS_PIPELINE)
+	$(AM_V_at)if test -f $(srcdir)/$(GIELLA_TTS_PIPELINE) && \
+					  ( test ! -f $(GIELLA_TTS_PIPELINE) || \
+					    test $(srcdir)/$(GIELLA_TTS_PIPELINE) -nt $(GIELLA_TTS_PIPELINE) ); then \
+					cp -f $(srcdir)/$(GIELLA_TTS_PIPELINE) $(GIELLA_TTS_PIPELINE); \
+				fi
 	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
 
 endif # HAVE_DIVVUN_RUNTIME

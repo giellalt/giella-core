@@ -2,6 +2,7 @@
 
 - shared build resources:
     - automake scripts
+        - [notes on some fst tags and flags in core scripts](tags-flags.html)
     - Xerox-style regexes for FST filtering
 - other tools and scripts
     - [apertium conversion scripts](apertium.html)

@@ -11,6 +11,16 @@ LINKS=$(srcdir)/Links.md
 HEADER=$(srcdir)/index-header.md
 INDEX=$(srcdir)/index.md
 
+# Mark a generated doc page so the Jekyll theme (jekyll-theme-giellalt)
+# suppresses its "Edit on GitHub" link. MARK_GENERATED ensures the page's
+# leading YAML front matter contains `generated: true`, preserving any keys it
+# already has (used on whatever becomes a page's top-level front matter).
+# STRIP_FRONTMATTER removes a leading front-matter block of any length and is
+# used only on fragments concatenated into the *body* of an aggregate page, so
+# their front matter doesn't leak in as a stray YAML fence.
+MARK_GENERATED = $(GTCORE)/scripts/mark-generated.awk
+STRIP_FRONTMATTER = $(GAWK) 'NR==1 && $$0=="---" {infm=1; next} infm && $$0=="---" {infm=0; next} !infm'
+
 REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 # " reset syntax colouring - gets confused by the single double quote in the previous line
 
@@ -200,7 +210,8 @@ $$(top_srcdir)/docs/$$(call src2md,$(1)): $(1)
 		tr '\n' '@' |\
 		$(SED) -e 's/@@@*/@@/g' |\
 		tr '@' '\n' |\
-		$(SED) -e 's/REALLY_AT/@/g' > $$@
+		$(SED) -e 's/REALLY_AT/@/g' |\
+		"$(GAWK)" -f $(MARK_GENERATED) > $$@
 endef
 define make_md_files_cg3
 $$(top_srcdir)/docs/$$(call src2md,$(1)): $(1)
@@ -209,7 +220,8 @@ $$(top_srcdir)/docs/$$(call src2md,$(1)): $(1)
 		tr '\n' '@' |\
 		$(SED) -e 's/@@@*/@@/g' |\
 		tr '@' '\n' |\
-		$(SED) -e 's/REALLY_AT/@/g' > $$@
+		$(SED) -e 's/REALLY_AT/@/g' |\
+		"$(GAWK)" -f $(MARK_GENERATED) > $$@
 endef
 
 # Build each MD file:
@@ -248,15 +260,17 @@ REPOURL=$(shell if test "x$(GH_REPO)" != x ; then \
 # Collect all target files into one big MD file:
 # Remove the VPATH prefix to create the header for each file/chapter:
 $(ALLINONE_MD_PAGE): $(VPATH_MDFILES)
-	$(AM_V_GEN)printf "# $(GLANGUAGE) language model documentation\n\nAll doc-comment documentation in one large file.\n" > $@
-	$(AM_V_GEN)for f in $(VPATH_MDFILES); do \
-		header=$${f#"$(top_srcdir)/docs/"};\
-		printf "\n---\n\n## $$header \n\n" >> $@ ;\
-		sed -e 's|^#|##|g' $$f >> $@ ;\
-	done
+	$(AM_V_GEN){ \
+		printf "# $(GLANGUAGE) language model documentation\n\nAll doc-comment documentation in one large file.\n" ;\
+		for f in $(VPATH_MDFILES); do \
+			header=$${f#"$(top_srcdir)/docs/"};\
+			printf "\n---\n\n## $$header \n\n" ;\
+			$(STRIP_FRONTMATTER) $$f | $(SED) -e 's|^#|##|g' ;\
+		done ;\
+	} | "$(GAWK)" -f $(MARK_GENERATED) > $@
 
 $(LINKS):
-	$(AM_V_GEN)for doc2md in $(DOCSRC_MDFILES) ; do \
+	$(AM_V_GEN){ for doc2md in $(DOCSRC_MDFILES) ; do \
 		doc=`echo "$$doc2md" | cut -d '@' -f 1` ;\
 		md=`echo "$$doc2md" | cut -d '@' -f 2` ;\
 		d=`dirname "$$doc"` ;\
@@ -304,14 +318,15 @@ $(LINKS):
 			echo "                * \`$$d5/\`" ;\
 			oldd5=$$d5 ;\
 		fi ; \
-	done > $@
+	done ; } | "$(GAWK)" -f $(MARK_GENERATED) > $@
 
-empty.md:
-	$(AM_V_GEN)echo > $@
-
-# FIXME: some temporary stuff to have index page
-$(INDEX): $(HEADER) empty.md $(LINKS)
-	$(AM_V_GEN)cat $^ > $@
+# Mark the header (preserving any front matter it has), then a blank-line
+# separator, then the link list with its front matter stripped so it doesn't
+# become a stray YAML fence mid-page.
+$(INDEX): $(HEADER) $(LINKS)
+	$(AM_V_GEN)"$(GAWK)" -f $(MARK_GENERATED) $(HEADER) > $@
+	$(AM_V_GEN)printf '\n' >> $@
+	$(AM_V_GEN)$(STRIP_FRONTMATTER) $(LINKS) >> $@
 
 clean-local:
 	$(AM_V_at)-rm -rf $(builddir)/build

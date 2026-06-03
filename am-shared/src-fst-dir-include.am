@@ -473,7 +473,6 @@ endif !SKIP_PHONOLOGY
 					filters/remove-orthography-tags.%         \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-Use_GC-strings.%           \
-					filters/remove-NG-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
@@ -498,7 +497,6 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
-			.o. @\"filters/remove-NG-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
@@ -701,7 +699,6 @@ endif !SKIP_PHONOLOGY
 					filters/remove-orthography-tags.%         \
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-error-strings.%            \
-					filters/remove-NG-strings.%           \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
 					filters/remove-Use_minus_PMatch-tags.%    \
@@ -728,7 +725,6 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
-			.o. @\"filters/remove-NG-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \

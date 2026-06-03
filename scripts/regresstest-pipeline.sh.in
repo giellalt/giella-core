@@ -1,0 +1,89 @@
+#!/bin/bash
+# @configure_input@
+
+# Test that running pipeline from bundle has same results as gold standard
+# (from previous runs)
+
+if ! test $# -ge 4 ; then
+    echo
+    echo "Usage: $0 ARCHIVE TESTFILE GOLD VARIANT [LEVEL [THRESHOLD]]"
+    echo
+    echo "were:"
+    echo " ARCHIVE is the .drb/.ts file"
+    echo " TESTFILE is input text"
+    echo " GOLD is expected output"
+    echo " VARIANT is the variant in the pipeline"
+    echo " LEVEL is the things to match: tags, lemmas, suffixed, all"
+    echo " THRESHOLD is needed recall %"
+    echo
+    echo "LEVEL defaults to maintags if not given"
+    echo "THRESHOLD defaults to 99 % if not given"
+    exit 77
+fi
+
+ANSIFILTER="@ANSIFILTER@"
+runner="@DIVVUN_RUNTIME@"
+python="@PYTHON@"
+comparator="@GIELLA_CORE@/scripts/vislcg-compare.py"
+archive=$1
+testfile=$2
+goldfile=$3
+variant=$4
+level=tags
+threshold=99
+if test $# -ge 5 ; then
+    level=$5
+fi
+if test $# -ge 6 ; then
+    threshold=$6
+fi
+
+
+. "@GIELLA_CORE@/scripts/termcolors.bash"
+
+if ! test -f $comparator ; then
+    printf "%sskip%s missing comparation script %s" "$light_blue" "$reset" \
+        "$comparator"
+fi
+if ! test -f $runner ; then
+    printf "%sskip%s missing pipespec runner from libdivvun" \
+        "$light_blue" "$reset" 
+    exit 77
+fi
+if ! test -f $archive ; then
+    printf "%sskip%s missing pipespec archive %s\n" "$light_blue" "$reset" \
+        "$archive"
+    exit 77
+fi
+if ! test -f $testfile ; then
+    printf "%sskip%s missing test data %s\n" "$light_blue" "$reset" \
+        "$testfile"
+    exit 77
+fi
+if ! test -f $goldfile ; then
+    printf "%sskip%s missing gold data %s\n" "$light_blue" "$reset" \
+        "$goldfile"
+    echo "hint: $runner -a $archive -n $variant < $testfile > $goldfile"
+    exit 77
+fi
+
+outfile=$(mktemp -t giella-pipe-test.XXXXXXXXXXX)
+
+$runner run -p "$archive" -P "$variant" < "$testfile" | $ANSIFILTER > "$outfile"
+rv=$?
+if test $rv -gt 0 ; then
+    printf "%sfail%s running $runner failed (see above?)\n" "$red" "$reset"
+   exit $rv
+fi
+if cmp "$goldfile" "$outfile" > /dev/null ; then
+    printf "%spass%s - exact match\n" "$green" "$reset"
+elif ! $python $comparator -r "$goldfile" -H "$outfile" \
+        -t "$threshold" -L "$level" ; then
+    printf "%sfail%s - outputs differ too muchly:\n" "$red" "$reset"
+    diff -u "$goldfile" "$outfile"
+    exit 1
+else
+    printf "%spass%s - small regressions:\n" "$green" "$reset"
+    diff -u "$goldfile" "$outfile"
+    exit 0
+fi

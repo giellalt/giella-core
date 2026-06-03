@@ -8,9 +8,9 @@ automata in `fst-filters/` directory and called from `am-shared/`.
 
 ## Use tags
 
-* `+Use/NG` - *no generation*
-    * filtered out from all generator automata,
-      `src/fst/generator-*.hfst??`
+* `+Use/NG` - *no MT / TTS / oahpa*
+    * filtered out from some MT automata. some TTS automata and oahpa automata
+      but included in all generators and analysers otherwise?
 * `+Use/NA` - *no analysis*
     * filtered out from all analysis automata, `src/fst/analyser-*.hfst??`
 * `+Use/-Spell` - *no spell checking*

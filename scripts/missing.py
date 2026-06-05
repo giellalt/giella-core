@@ -48,9 +48,9 @@ class LexcEntry:
 
     def escape_lexc(self, s):
         """
-        Escape spaces and lexc special characters !, 0 and %
+        Escape spaces and lexc special character 0
         """
-        return re.sub(r"([ 0!%])", r"%\1", s)
+        return re.sub(r"([ 0])", r"%\1", s)
 
 
 LEXC_LINE_RE = re.compile(

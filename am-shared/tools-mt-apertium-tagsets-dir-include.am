@@ -49,7 +49,10 @@ TAG_EXTRACTION_TTS_FST=$(top_builddir)/tools/mt/analyser-%-gt-desc
 # Convert GT-tags to Apertium-tags:
 .generated/apertiumtags.txt: .generated/mt-tags.txt
 	$(AM_V_GEN)tr -d '+' < $< \
-		| tr '/[:upper:]' '_[:lower:]' \
+		| tr '/ABCDEFGHIJKLMNOPQRSTUVWXYZ' '_abcdefghijklmnopqrstuvwxyz' \
+		| $(SED) -e 's/Å/å/g' -e 's/Ä/ä/g' -e 's/Ö/ö/g' -e 's/Æ/æ/g' \
+			-e 's/Ø/ø/g' -e 's/Š/š/g' -e 's/Á/á/g' -e 's/Ž/ž/g' \
+			-e 's/Đ/đ/g' \
 		| awk '{print "%<"$$0"%>"}' > $@
 
 # Generate relabel file for replacing Giella tags with Apertium tags:

@@ -75,9 +75,13 @@ if test -n "$custom_script" ; then
         exit 1
     fi
     lemmacount=$("$custom_script" "$inputdir")
+    echo "$lemmacount"
+    exit
 elif test -x "$inputdir/src/fst/morphology/lemma-count.sh" ; then
     # Use language repo's lemma-count.sh if it exists
     lemmacount=$("$inputdir/src/fst/morphology/lemma-count.sh" "$inputdir")
+    echo "$lemmacount"
+    exit
 fi
 
 # Default logic for standard repository structures

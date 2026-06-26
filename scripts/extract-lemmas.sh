@@ -109,7 +109,7 @@ cat $inputfiles | grep ";"                              | # grep only lines cont
     sed 's/¢/:/g'                      | # restore lexc escapes to their lexical form
     sed 's/£/@/g'                      | # restore lexc escapes to their lexical form
     sed 's/¥/#/g'                      | # restore lexc escapes to their lexical form
-    grep -E -v "(^$|^;|^[0-9]$|^!)"     | # remove useless lines
+    grep -E -v "(^$|^;|^[0-9]$|^!)"    | # remove useless lines
     perl -pe 's/__(Hom[0-9]+)__/\+\1/' | # restore homonym tags if kept
     perl -pe 's/__(G[37]+)__/\+\1/'    | # restore homonym tags if kept
     sed 's/xxplussxx/\+/g'             | # restore literal, escaped + sign

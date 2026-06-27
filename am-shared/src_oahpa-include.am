@@ -257,7 +257,7 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 # FOMA
 .generated/analyser-raw-gt-%.tmp1.foma: morphology/lexicon-%.foma \
 			 morphology/phonology-%.compose.foma
-	$(MAKE) $(GENDIR)
+	$(AM_V_at)$(MAKE) $(GENDIR)
 	$(AM_V_FOMA)$(PRINTF) \
 		"read regex \
 				@\"$<\" \
@@ -269,7 +269,7 @@ $(foreach dialect,$(DIALECTS),$(eval $(call dial_oahpa_generators,$(dialect))))
 
 .generated/analyser-raw-gt-%.tmp1.foma: morphology/lexicon-%.foma \
 			 morphology/phonology.compose.foma
-	$(MAKE) $(GENDIR)
+	$(AM_V_at)$(MAKE) $(GENDIR)
 	$(AM_V_FOMA)$(PRINTF) \
 		"read regex \
 				@\"$<\" \

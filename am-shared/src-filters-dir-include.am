@@ -477,7 +477,7 @@ reorder-semantic-tags.hfst: reorder-semantic-tags.regex
 
 ####### Copy regex files from giella-core if not found locally: ########
 %.regex: $(GIELLA_CORE)/fst-filters/%.regex
-	$(MAKE) $(GENDIR)
+	$(AM_V_at)$(MAKE) $(GENDIR)
 	$(AM_V_CP)cp -f $< `echo $@ | sed 's:$(GIELLA_CORE)/fst-filters/::'`
 
 ####### Other targets: ###########

@@ -30,7 +30,7 @@
 
 
 ####### Foma build rules: #######
-.generated/%.foma: .generated.generated//%.lexc $(GENDIR)
+.generated/%.foma: .generated/%.lexc $(GENDIR)
 	$(AM_V_FOMA)"$(FOMA)" $(VERBOSITY) \
 			-e "set lexc-align ON" \
 			-e "read lexc $<" \

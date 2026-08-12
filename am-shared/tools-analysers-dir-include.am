@@ -109,9 +109,9 @@ $(GIELLA_ANL_MWEDIS_SRC): \
 		$(top_srcdir)/tools/tokenisers/$(GIELLA_ANL_MWEDIS_SRC)
 	$(AM_V_CP)cp -f $< $@
 
-# Copy semsets:
+# Copy semsets - the semsets.cg3 file is generated, so copy from build dir:
 $(GIELLA_ANL_SEMSETS_SRC): \
-		$(top_srcdir)/src/cg3/$(GIELLA_ANL_SEMSETS_SRC)
+		$(top_builddir)/src/cg3/$(GIELLA_ANL_SEMSETS_SRC)
 	$(AM_V_CP)cp -f $< $@
 
 # cg3 files from common sources:

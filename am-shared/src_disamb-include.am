@@ -263,13 +263,10 @@ define disambs
 			;\n\
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
-endef
-$(foreach fst,hfst foma,$(eval $(call disambs,$(fst))))
 
 # We build a special variant of the disamb analyser for use with pmatch, where
 # the only diff from regular disamb is that we have removed strings and tags
 # not relevant to the pmatch version (and kept the pmatch counterpart w/o tags):
-define pmatch_disambs
 .generated/analyser-pmatchdisamb-gt-desc%tmp.$(1): .generated/analyser-disamb-gt-desc%tmp1.$(1) \
 					 filters/remove-Use_minusGC-tags.$(1)         \
 					 filters/remove-Use_GC-strings.$(1)           \
@@ -285,4 +282,4 @@ define pmatch_disambs
 		 save stack $$@\n\
 		 quit\n" | $$(XFST_TOOL)
 endef
-$(foreach fst,hfst foma,$(eval $(call pmatch_disambs,$(fst))))
+$(foreach fst,hfst foma,$(eval $(call disambs,$(fst))))

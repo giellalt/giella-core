@@ -50,9 +50,27 @@ fi
 
 # Tokenize and disambiguate sentence
 if [ "$trace" = true ]; then
-  echo "$sentence" | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
-    | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3" -t
+  if [ -f "$GTLANGS/lang-$lang/tools/tokenisers/mwe-dis.cg3" ]; then
+    echo "$sentence" \
+      | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
+      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/mwe-dis.cg3" -t \
+      | cg-mwesplit \
+      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3" -t
+  else
+    echo "$sentence" \
+      | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
+      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3" -t
+  fi
 else
-  echo "$sentence" | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
-    | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3"
+  if [ -f "$GTLANGS/lang-$lang/tools/tokenisers/mwe-dis.cg3" ]; then
+    echo "$sentence" \
+      | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
+      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/mwe-dis.cg3" \
+      | cg-mwesplit \
+      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3"
+  else
+    echo "$sentence" \
+      | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
+      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3"
+  fi
 fi

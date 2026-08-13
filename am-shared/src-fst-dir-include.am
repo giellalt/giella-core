@@ -412,8 +412,10 @@ endif !SKIP_PHONOLOGY
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_minus_PMatch-tags.%    \
+					filters/remove-Use_TTS-strings.%          \
+					filters/remove-Use_minusTTS-tags.%        \
 					filters/remove-Use_PMatch-strings.%       \
+					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-mwe-tags.%                 \
 					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
 					$(GIELLA_ALTORTH_TAG_FILTER)              \
@@ -429,10 +431,12 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-orig_lang-tags.$*\"           \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
-			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
+			.o. @\"filters/remove-Use_TTS-strings.$*\"          \
+			.o. @\"filters/remove-Use_minusTTS-tags.$*\"        \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
 				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
@@ -474,8 +478,10 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_minus_PMatch-tags.%    \
+					filters/remove-Use_TTS-strings.%          \
+					filters/remove-Use_minusTTS-tags.%        \
 					filters/remove-Use_PMatch-strings.%       \
+					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-mwe-tags.%                 \
 					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
 					$(GIELLA_ALTORTH_TAG_FILTER)              \
@@ -495,10 +501,12 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-number-string-tags.$*\"       \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
-			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
+			.o. @\"filters/remove-Use_TTS-strings.$*\"          \
+			.o. @\"filters/remove-Use_minusTTS-tags.$*\"        \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
 				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
@@ -524,8 +532,10 @@ endif !SKIP_PHONOLOGY
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_minus_PMatch-tags.%    \
+					filters/remove-Use_TTS-strings.%          \
+					filters/remove-Use_minusTTS-tags.%        \
 					filters/remove-Use_PMatch-strings.%       \
+					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-mwe-tags.%                 \
 					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
 					$(GIELLA_ALTORTH_TAG_FILTER)              \
@@ -541,10 +551,12 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-orig_lang-tags.$*\"           \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
-			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
+			.o. @\"filters/remove-Use_TTS-strings.$*\"          \
+			.o. @\"filters/remove-Use_minusTTS-tags.$*\"        \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
 				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
@@ -585,8 +597,10 @@ endif !SKIP_PHONOLOGY
 					filters/remove-Orth_IPA-strings.%         \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_minus_PMatch-tags.%    \
+					filters/remove-Use_TTS-strings.%          \
+					filters/remove-Use_minusTTS-tags.%        \
 					filters/remove-Use_PMatch-strings.%       \
+					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-mwe-tags.%                 \
 					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
 					$(GIELLA_ALTORTH_TAG_FILTER)              \
@@ -606,10 +620,12 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-number-string-tags.$*\"       \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
-			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
+			.o. @\"filters/remove-Use_TTS-strings.$*\"          \
+			.o. @\"filters/remove-Use_minusTTS-tags.$*\"        \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
 				$(GIELLA_ALTORTH_DEFAULT_COMPOSE)               \
@@ -639,8 +655,10 @@ endif !SKIP_PHONOLOGY
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_minus_PMatch-tags.%    \
+					filters/remove-Use_TTS-strings.%          \
+					filters/remove-Use_minusTTS-tags.%        \
 					filters/remove-Use_PMatch-strings.%       \
+					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-mwe-tags.%                 \
 					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
 					$(GIELLA_ALTORTH_TAG_FILTER)              \
@@ -657,10 +675,12 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-orig_lang-tags.$*\"           \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
-			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
+			.o. @\"filters/remove-Use_TTS-strings.$*\"          \
+			.o. @\"filters/remove-Use_minusTTS-tags.$*\"        \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_MIXED_AREA_COMPOSE)                    \
 				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \
@@ -701,8 +721,10 @@ endif !SKIP_PHONOLOGY
 					filters/remove-error-strings.%            \
 					filters/remove-Use_GC-strings.%           \
 					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_minus_PMatch-tags.%    \
+					filters/remove-Use_TTS-strings.%          \
+					filters/remove-Use_minusTTS-tags.%        \
 					filters/remove-Use_PMatch-strings.%       \
+					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-mwe-tags.%                 \
 					$(GIELLA_ALTORTH_DEFAULT_FILTER)          \
 					$(GIELLA_ALTORTH_TAG_FILTER)              \
@@ -723,10 +745,12 @@ endif !SKIP_PHONOLOGY
 			.o. @\"filters/remove-error-strings.$*\"            \
 			.o. @\"filters/remove-orthography-tags.$*\"         \
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
-			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-Use_GC-strings.$*\"           \
 			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
+			.o. @\"filters/remove-Use_TTS-strings.$*\"          \
+			.o. @\"filters/remove-Use_minusTTS-tags.$*\"        \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
+			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_MIXED_AREA_COMPOSE)                    \
 				$(GIELLA_ALTORTH_TAG_COMPOSE)                   \

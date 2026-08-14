@@ -80,7 +80,7 @@ else:
     all_lexc = " ".join(lexc_file)
     cmd = "cat " + all_lexc + "> all_lexc.lexc"
     p = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
-    out, err = p.communicate()
+    _out, _err = p.communicate()
     try:
         lf = open("all_lexc.lexc", "r")
     except IOError:
@@ -212,6 +212,6 @@ dfi.close()
 dfo.close()
 
 p = Popen("rm all_lexc.lexc", shell=True, stdout=PIPE, stderr=PIPE)
-out, err = p.communicate()
+_out, _err = p.communicate()
 
 print(colored("** Done", "green"))

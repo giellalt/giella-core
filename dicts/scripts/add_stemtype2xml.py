@@ -210,4 +210,8 @@ while line_dd:
 
 dfi.close()
 dfo.close()
+
+p = Popen("rm all_lexc.lexc", shell=True, stdout=PIPE, stderr=PIPE)
+out, err = p.communicate()
+
 print(colored("** Done", "green"))

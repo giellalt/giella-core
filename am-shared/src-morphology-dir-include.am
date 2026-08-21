@@ -131,7 +131,7 @@ endif
 ####### when something doesn't work); hfst does the concatenation automatically
 ####### but by doing it explicitly we have a source file to relate line numbers
 ####### in error messages to. Foma can only read a single lexc file.
-.generated/lexicon.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS) $(GENDIR)
+.generated/lexicon.catted.lexc: $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS) $(GENDIR)
 	$(AM_V_at)echo "! automatically generated combined lexc file!!!" > $@
 	$(AM_V_GEN)cat $^ >> $@
 

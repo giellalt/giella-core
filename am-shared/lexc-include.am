@@ -20,9 +20,13 @@
 ###########################################
 
 ####### HFST build rules: ########
-.generated/%.hfst: .generated/%.lexc $(GENDIR)
+
+# hfst can build multiple lexc files and provide accurate error messages
+VPATH_LEXCS=$(addprefix $(srcdir)/,$(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS))
+.generated/lexicon.hfst: $(GENDIR) $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
 	$(AM_V_HLEXC)"$(HFST_LEXC)" \
-		$(MORE_VERBOSITY) $(HFST_FORMAT) $(HFST_LEXC_FLAGS) -o $@ $<
+		$(MORE_VERBOSITY) $(HFST_FORMAT) $(HFST_LEXC_FLAGS) -o $@ \
+		$(GT_LEXC_ROOT) $(VPATH_LEXCS)
 
 .generated/%.hfst: .generated/%.tmp.lexc $(GENDIR)
 	$(AM_V_HLEXC)"$(HFST_LEXC)" \
@@ -30,7 +34,9 @@
 
 
 ####### Foma build rules: #######
-.generated/%.foma: .generated/%.lexc $(GENDIR)
+
+# foma cannot build multiple lexc files
+.generated/%.foma: .generated/%.catted.lexc $(GENDIR)
 	$(AM_V_FOMA)"$(FOMA)" $(VERBOSITY) \
 			-e "set lexc-align ON" \
 			-e "read lexc $<" \

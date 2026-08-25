@@ -103,6 +103,8 @@ endif # CAN_FOMA
 endif # WANT_L2
 
 noinst_DATA=$(GT_LEXICAL) $(GIELLA_LOCAL_SRC_TARGETS) $(GIELLA_LOCAL_TARGETS)
+# XXX: temporary workround
+noinst_DATA+=.generated/lexicon.catted.lexc
 
 ####### XML2LEXC build rules: ####
 XSLDIR = $(GTCORE)/scripts/xsl

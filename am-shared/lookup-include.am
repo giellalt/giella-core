@@ -26,12 +26,17 @@
 ####### HFST build rules: ########
 
 # The fst used for composition should be taken as is, just copy:
+.generated/%.hfst: %.lexc $(GENDIR)
+	$(AM_V_HLEXC)"$(HFST_LEXC)" \
+		$(MORE_VERBOSITY) $(HFST_FORMAT) $(HFST_LEXC_FLAGS) -o $@ $<
+
 %.compose.hfst: %.hfst
 	$(AM_V_CP)cp $< $@
 
 # Lookup in Hfst is done in the same direction as it is written, just copy:
 %.lookup.hfst: %.hfst
 	$(AM_V_CP)cp $< $@
+
 
 # We also want a generic build rule for making optimised lookup hfst's:
 %.hfstol: %.hfst

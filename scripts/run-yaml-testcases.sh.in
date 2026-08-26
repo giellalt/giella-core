@@ -131,7 +131,7 @@ done
 # http://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash
 
 # Define all possible fst types:
-allfsttypes="hfst foma xfst"
+allfsttypes="hfst foma"
 
 # Define fst types currently being enabled, to be replaced with autoconf stuff:
 current_fsttypes=$tk

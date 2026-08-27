@@ -255,8 +255,21 @@ $(foreach fst,hfst foma,$(eval $(call giella_phon_w_lex_ref,$(fst))))
 ## XXX for now
 noinst_DATA+=lexicon.hfst
 
-lexicon.hfst: .generated/lexicon.hfst
+#! @param GT_LEXICON_COPY_DEPS optional, @param GT_LEXICON_COPY_RECIPE
+#! optional. Same mechanism as GT_LEXICON_HFST_RECIPE/_DEPS in
+#! lexc-include.am, for the final "lexicon.hfst" target itself: override
+#! these in your own Makefile.am, before the include of this file, if
+#! lexicon.hfst isn't simply a copy of .generated/lexicon.hfst for your
+#! language (e.g. because you already override GT_LEXICON_HFST_RECIPE to
+#! build lexicon.hfst directly, and never need .generated/lexicon.hfst).
+define GT_LEXICON_COPY_RECIPE_DEFAULT
 	$(AM_V_CP)cp $< $@
+endef
+GT_LEXICON_COPY_RECIPE ?= $(GT_LEXICON_COPY_RECIPE_DEFAULT)
+GT_LEXICON_COPY_DEPS ?= .generated/lexicon.hfst
+
+lexicon.hfst: $(GT_LEXICON_COPY_DEPS)
+	$(GT_LEXICON_COPY_RECIPE)
 
 clean-local:
 	-rm -f lexicon.hfst .generated/lexicon.hfst $(GIELLA_LOCAL_TARGETS)

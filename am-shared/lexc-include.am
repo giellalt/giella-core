@@ -24,10 +24,31 @@
 # hfst can build multiple lexc files and provide accurate error messages
 VPATH_LEXCS=$(addprefix $(srcdir)/,$(GT_LEXC_SRCS)) \
 			$(addprefix $(builddir)/,$(GENERATED_LEXC_SRCS))
-.generated/lexicon.hfst: $(GENDIR) $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
+
+#! @param GT_LEXICON_HFST_DEPS optional, @param GT_LEXICON_HFST_RECIPE
+#! optional. Override these (with `define ... endef` for the recipe) in
+#! your own Makefile.am, in the normal "Local processing" section *before*
+#! the include of this file, if you build .generated/lexicon.hfst some
+#! other way than the generic hfst-lexc-from-GT_LEXC_ROOT/GT_LEXC_SRCS
+#! pipeline below (e.g. a language built from an external subtree analyzer
+#! via foma/xfst). Since there's only one rule definition for the target
+#! (this one; it just reads its deps/recipe from these two variables), your
+#! override can live in the normal "Local processing" section near the top
+#! of your Makefile.am -- the section that's safe to keep across template
+#! updates -- instead of having to be placed *after* the include just to
+#! win a duplicate-target override race, which is fragile and breaks
+#! silently (with only a "overriding recipe" warning) whenever this shared
+#! file gains a same-named rule.
+define GT_LEXICON_HFST_RECIPE_DEFAULT
 	$(AM_V_HLEXC)"$(HFST_LEXC)" \
 		$(MORE_VERBOSITY) $(HFST_FORMAT) $(HFST_LEXC_FLAGS) -o $@ \
 		$(GT_LEXC_ROOT) $(VPATH_LEXCS)
+endef
+GT_LEXICON_HFST_RECIPE ?= $(GT_LEXICON_HFST_RECIPE_DEFAULT)
+GT_LEXICON_HFST_DEPS ?= $(GENDIR) $(GT_LEXC_ROOT) $(GT_LEXC_SRCS) $(GENERATED_LEXC_SRCS)
+
+.generated/lexicon.hfst: $(GT_LEXICON_HFST_DEPS)
+	$(GT_LEXICON_HFST_RECIPE)
 
 .generated/%.hfst: .generated/%.lexc
 	$(AM_V_HLEXC)"$(HFST_LEXC)" \

@@ -62,8 +62,6 @@ regenerate-markdown: generate-markdown
 DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2ghpages.awk
 DOCC2MDWIKI_CG3=$(GTCORE)/scripts/doccomments2ghpages-vislcg.awk
 
-GRAPHPLOTTER=$(GTCORE)/scripts/plot-speller-progress.R
-
 # Set flags for variant prooftools availability:
 if WANT_DIALECT_PROOFTOOLS
 WANT_DIALECT_PROOFTOOLS_FLAG=yes
@@ -78,12 +76,6 @@ WANT_ALT_ORTH_PROOFTOOLS_FLAG=no
 endif
 
 if WANT_SPELLERS
-speller-report.svg: speller-report.tsv $(GRAPHPLOTTER)
-	$(AM_V_GEN)"$(R)" --no-save < $(GRAPHPLOTTER)
-
-speller-report.tsv: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
-	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -t $@
-
 report.json: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
 	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -o $@
 
@@ -92,11 +84,7 @@ spell-tests.tsv:
 		egrep -v '^#' > $@
 
 else
-speller-report.svg: 
-	@echo need to configure --enable-spellers to generate statistics
-	touch $@
-
-report.json: 
+report.json:
 	@echo need to configure --enable-spellers to generate statistics
 	touch $@
 endif

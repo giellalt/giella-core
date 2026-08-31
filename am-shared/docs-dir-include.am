@@ -76,8 +76,11 @@ WANT_ALT_ORTH_PROOFTOOLS_FLAG=no
 endif
 
 if WANT_SPELLERS
+# $(DIVVUN_ACCURACY) was never defined by configure; the accuracy tool is the
+# `accuracy` subcommand of divvunspell, which m4 already probes as $(DIVVUNSPELL)
+# (see am-shared/tools-spellcheckers-test-include.am, which uses it directly).
 report.json: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
-	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -o $@
+	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $@ $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
 
 spell-tests.tsv:
 	$(AM_V_GEN)cut -f 1,2 `find $(top_srcdir) -name typos.tsv` |\

@@ -21,7 +21,10 @@ MOB_SURFWEIGHTS=mob_$(MOBILE_CORPUSNAME).surfweights.hfst
 MOB_UNITWEIGHT=mob_$(MOBILE_CORPUSNAME).unitweight.txt
 
 # add tropical weights to the corpus:
-.generated/mob_%.tropical.txt: weights/%.raw.txt weights/config.json $(GENDIR)
+# The input is the assembled corpus text (the corpus repos when they are there,
+# the in-tree weights/%.raw.txt when they are not) built by the desktop weights
+# fragment, so both weightings see the same text and it is extracted once.
+.generated/mob_%.tropical.txt: .generated/%.corpus.txt weights/config.json $(GENDIR)
 	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
 		-m .generated/$(MOB_UNITWEIGHT) -c $(srcdir)/weights/config.json
 

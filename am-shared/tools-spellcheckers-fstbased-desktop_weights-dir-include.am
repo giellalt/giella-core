@@ -20,13 +20,86 @@
 SURFWEIGHTS=$(CORPUSNAME).surfweights.hfst
 UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 
+####### Where the corpus text for the weighting comes from: #######
+# The frequency weighting needs running text. It can come from two places:
+#
+#  1. the corpus repos corpus-$(GLANG) and corpus-$(GLANG)-x-closed, checked
+#     out beside this repo;
+#  2. the copy of some corpus text committed under weights/*.raw.txt.
+#
+# (1) is preferred: it is the whole corpus instead of a slice of it that has to
+# be refreshed by hand, and corpus-*-x-closed must never be committed into a
+# language repo at all, so reading it at build time is the only way to use it.
+# (2) is the fallback, so a checkout with no corpus repos beside it still
+# builds a speller -- a missing corpus repo is never an error.
+#
+# The repos are looked for by make rather than by configure, because whether
+# they are there is a fact about the moment the speller is built, not about the
+# moment the tree was configured: CI clones them in a step of its own, often
+# after configuring, and a developer who clones one afterwards should not have
+# to know to reconfigure. Only the two directories are stat'ed, never their
+# contents.
+#
+# Override with either of:
+#   make GIELLA_CORPUS_ROOT=/path/to/checkouts
+#   make GIELLA_CORPUS_DIRS="/path/to/corpus-xxx /path/to/corpus-xxx-x-closed"
+#   make GIELLA_CORPUS_DIRS=              # force the in-tree copy
+#
+# In CI: clone the corpus repos beside the language repo, exactly where
+# giella-core and shared-mul already are, before running make --
+#
+#   git clone --depth 1 https://github.com/giellalt/corpus-$(GLANG).git \
+#       ../corpus-$(GLANG)
+#   git clone --depth 1 git@github.com:giellalt/corpus-$(GLANG)-x-closed.git \
+#       ../corpus-$(GLANG)-x-closed     # only where credentials allow
+#
+# Shallow is enough: only the working tree is read, never the history. A runner
+# without access to the closed corpus should skip that clone and let the build
+# use whatever it does have -- a failed clone must not fail the job. Note the
+# consequence: a public runner and a runner with the closed corpus produce
+# different, both-valid spellers, so a release build should be pinned to a
+# runner that has the closed corpus rather than left to whichever picks it up.
+GIELLA_CORPUS_ROOT = $(top_srcdir)/..
+GIELLA_CORPUS_REPOS = corpus-$(GLANG) corpus-$(GLANG)-x-closed
+GIELLA_CORPUS_DIRS = $(patsubst %/converted,%,$(wildcard \
+    $(foreach d,$(GIELLA_CORPUS_REPOS),$(GIELLA_CORPUS_ROOT)/$(d)/converted)))
+CORPUS2RAWTEXT = $(GTCORE)/scripts/corpus2rawtext.py
+
+# The resolved source list, as a file, so that a tree which gains or loses a
+# corpus repo rebuilds the weighting instead of silently keeping the text it
+# assembled last time. The recipe always runs; the file only changes, and so
+# only triggers a rebuild, when the answer changes.
+.generated/$(CORPUSNAME).corpussrc: FORCE $(GENDIR)
+	$(AM_V_at)printf '%s\n' '$(GIELLA_CORPUS_DIRS)' > $@.tmp
+	$(AM_V_at)if cmp -s $@.tmp $@ ; then rm -f $@.tmp ; else mv -f $@.tmp $@ ; fi
+
+FORCE:
+.PHONY: FORCE
+
+# Assemble the corpus text. Extraction from the corpus XML lives in giella-core
+# next to corpus2unigramlm.py, not in the language repo: it is the same job for
+# every language, and it is a step of the weighting pipeline whose other steps
+# are already here. It is a stdlib-only script rather than a call to ccat so
+# that "no corpus repo" stays the only way this step can decline to run -- a
+# build must not start failing because CorpusTools is not installed.
+.generated/%.corpus.txt: $(srcdir)/weights/%.raw.txt \
+                         .generated/$(CORPUSNAME).corpussrc $(GENDIR)
+	$(AM_V_at)if test -n '$(strip $(GIELLA_CORPUS_DIRS))' ; then \
+	    echo "  CORPUS   $@ <- $(GIELLA_CORPUS_DIRS)" ; \
+	    $(PYTHON) $(CORPUS2RAWTEXT) -l $(GLANG) -o $@ $(GIELLA_CORPUS_DIRS) \
+	      || { echo "  CORPUS   $@ <- $< (extraction found no $(GLANG) text)" ; \
+	           cp $< $@ ; } ; \
+	else \
+	    echo "  CORPUS   $@ <- $< (no corpus-$(GLANG) checkout beside $(abs_top_srcdir))" ; \
+	    cp $< $@ ; \
+	fi
 
 .generated/%.hfst: weights/%.att $(GENDIR)
 	$(AM_V_GEN)$(HFST_TXT2FST) $(HFST_FLAGS) -f openfst-tropical $< -o $@
 
 
 # add tropical weights to the corpus:
-.generated/%.tropical.txt: $(srcdir)/weights/%.raw.txt $(srcdir)/weights/config.json $(GENDIR)
+.generated/%.tropical.txt: .generated/%.corpus.txt $(srcdir)/weights/config.json $(GENDIR)
 	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
 		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json
 
@@ -77,6 +150,8 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 .SECONDARY: .generated/spellercorpus.sort.txt \
             .generated/spellercorpus.uniq.txt \
             .generated/spellercorpus.surfs.hfst \
+            .generated/spellercorpus.corpus.txt \
+            .generated/spellercorpus.corpussrc \
             .generated/spellercorpus.tropical.txt \
             .generated/spellercorpus.typecount.txt \
             .generated/pellercorpus.wordcount.txt \

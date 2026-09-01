@@ -53,7 +53,7 @@ if [ "$trace" = true ]; then
   if [ -f "$GTLANGS/lang-$lang/tools/tokenisers/mwe-dis.cg3" ]; then
     echo "$sentence" \
       | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
-      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/mwe-dis.cg3" -t \
+      | vislcg3 -g "$GTLANGS/lang-$lang/tools/tokenisers/mwe-dis.cg3" -t \
       | cg-mwesplit \
       | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3" -t
   else
@@ -65,7 +65,7 @@ else
   if [ -f "$GTLANGS/lang-$lang/tools/tokenisers/mwe-dis.cg3" ]; then
     echo "$sentence" \
       | hfst-tokenise -cg "$GTLANGS/lang-$lang/tools/tokenisers/tokeniser-disamb-gt-desc.pmhfst" \
-      | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/mwe-dis.cg3" \
+      | vislcg3 -g "$GTLANGS/lang-$lang/tools/tokenisers/mwe-dis.cg3" \
       | cg-mwesplit \
       | vislcg3 -g "$GTLANGS/lang-$lang/src/cg3/disambiguator.cg3"
   else

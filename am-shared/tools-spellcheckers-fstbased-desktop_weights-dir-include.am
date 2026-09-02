@@ -55,10 +55,10 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 #
 # Shallow is enough: only the working tree is read, never the history. A runner
 # without access to the closed corpus should skip that clone and let the build
-# use whatever it does have -- a failed clone must not fail the job. Note the
-# consequence: a public runner and a runner with the closed corpus produce
-# different, both-valid spellers, so a release build should be pinned to a
-# runner that has the closed corpus rather than left to whichever picks it up.
+# use whatever it does have -- a failed clone must not fail the job. A build
+# with the closed corpus and one without both produce a valid speller, and a
+# measurably different one, which is worth knowing when comparing numbers
+# between machines.
 GIELLA_CORPUS_ROOT = $(top_srcdir)/..
 GIELLA_CORPUS_REPOS = corpus-$(GLANG) corpus-$(GLANG)-x-closed
 GIELLA_CORPUS_DIRS = $(patsubst %/converted,%,$(wildcard \

@@ -345,9 +345,27 @@ class Transducer:
         )
 
 
+def collect_pair_only_symbols(alphabet, pair_info):
+    """Sort explicit edits into the ones the cross product already covers and
+    the ones naming a symbol outside the alphabet.
+
+    A symbol named only by an explicit pair takes part in that pair alone and
+    never joins the generated cross product, so one confusion pair costs a
+    single arc instead of enlarging the alphabet for every other symbol."""
+    sources = {}
+    targets = {}
+    for (src, tgt), pair_weight in sorted(pair_info["edits"].items()):
+        if src != "" and src not in alphabet:
+            sources.setdefault(src, []).append((tgt, pair_weight))
+        elif src != "" and tgt != "" and tgt not in alphabet:
+            targets.setdefault(src, []).append((tgt, pair_weight))
+    return sources, targets
+
+
 def replace_rules(alphabet, pair_info, weight, swap):
     corr = ' "<CORR>" '
     unk = OTHER
+    pair_sources, pair_targets = collect_pair_only_symbols(alphabet, pair_info)
     corrections = "["
     # first, the empty string may become the empty string anywhere
     corrections += '"" -> \t[ "" |\n'
@@ -357,6 +375,10 @@ def replace_rules(alphabet, pair_info, weight, swap):
         if ("", a) in pair_info["edits"]:
             this_weight = pair_info["edits"][("", a)] + alphabet[a]
         corrections += f'\t[ "{a}" {corr} ]::{this_weight} |\n'
+    # insertions of symbols named only by an explicit pair
+    for (src, tgt), pair_weight in sorted(pair_info["edits"].items()):
+        if src == "" and tgt != "" and tgt not in alphabet:
+            corrections += f'\t[ "{tgt}" {corr} ]::{pair_weight} |\n'
     # trim the extra left by the last pass
     corrections = corrections[:-3]
     corrections += " ] ,,\n"
@@ -367,10 +389,11 @@ def replace_rules(alphabet, pair_info, weight, swap):
         # identity
         corrections += f'"{a}" |\n'
         # deletion
+        del_weight = weight
         if (a, "") in pair_info["edits"]:
-            this_weight = pair_info["edits"][(a, "")]
+            del_weight = pair_info["edits"][(a, "")]
         # the actual deletion expression
-        corrections += f'\t[ ""{corr}]::{weight} |\n'
+        corrections += f'\t[ ""{corr}]::{del_weight} |\n'
         # substitutions
         for b in alphabet:
             this_weight = alphabet[b]  # old: weight + alphabet[b]
@@ -380,7 +403,18 @@ def replace_rules(alphabet, pair_info, weight, swap):
             if (a, b) in pair_info["edits"]:
                 this_weight = pair_info["edits"][(a, b)]  # + alphabet[b] # xxx
             corrections += f'\t[ "{b}"{corr}]::{this_weight} |\n'
+        # targets named only by an explicit pair
+        for b, pair_weight in pair_targets.get(a, []):
+            corrections += f'\t[ "{b}"{corr}]::{pair_weight} |\n'
 
+        corrections = corrections[:-3]
+        corrections += " ] ,,\n"
+    # sources named only by an explicit pair: identity plus those pairs alone
+    for a in pair_sources:
+        corrections += f'"{a}" ->\t[ "{a}" |\n'
+        for b, pair_weight in pair_sources[a]:
+            target = '""' if b == "" else f'"{b}"'
+            corrections += f'\t[ {target}{corr}]::{pair_weight} |\n'
         corrections = corrections[:-3]
         corrections += " ] ,,\n"
     # now the unknown symbol
@@ -411,6 +445,14 @@ def replace_rules(alphabet, pair_info, weight, swap):
                 else:
                     corrections += f'["{a}" "{b}"] -> [ "{b}" "{a}"' + \
                             f'{corr}]::{weight} ,\n'
+        # swaps naming a symbol outside the alphabet, which the cross product
+        # above cannot reach
+        for (frompair, topair), this_weight in sorted(pair_info["swaps"].items()):
+            if frompair[0] in alphabet and frompair[1] in alphabet:
+                continue
+            corrections += \
+                f'["{frompair[0]}" "{frompair[1]}"] -> ' + \
+                f'[ "{topair[0]}" "{topair[1]}"{corr}]::{this_weight} ,\n'
         corrections = corrections[:-3]
         corrections += " ]"
     return corrections
@@ -588,12 +630,13 @@ def main():
                 # Check if all symbols are in alphabet before adding swap
                 missing_symbols = []
                 for sym in [frompair[0], frompair[1], topair[0], topair[1]]:
-                    if sym != "" and sym not in alphabet:
+                    if sym != "" and sym not in alphabet \
+                            and sym not in missing_symbols:
                         missing_symbols.append(sym)
-                
+
                 if missing_symbols:
-                    print(f"Warning: Skipping swap {frompair} → {topair}: symbols not in alphabet: {', '.join(missing_symbols)}", file=sys.stderr)
-                elif (frompair, topair) not in pair_info["swaps"]:
+                    print(f"Note: swap {frompair} -> {topair} names symbols outside the alphabet ({', '.join(missing_symbols)}); it applies as an explicit rule only", file=sys.stderr)
+                if (frompair, topair) not in pair_info["swaps"]:
                     pair_info["swaps"][(frompair, topair)] = weight
             else:
                 # Check if symbols are in alphabet before adding edit
@@ -603,8 +646,8 @@ def main():
                         missing_symbols.append(sym)
                 
                 if missing_symbols:
-                    print(f"Warning: Skipping edit {parts[0]} → {parts[1]}: symbols not in alphabet: {', '.join(missing_symbols)}", file=sys.stderr)
-                elif (parts[0], parts[1]) not in pair_info["edits"]:
+                    print(f"Note: edit {parts[0]} -> {parts[1]} names symbols outside the alphabet ({', '.join(missing_symbols)}); it applies as an explicit rule only", file=sys.stderr)
+                if (parts[0], parts[1]) not in pair_info["edits"]:
                     pair_info["edits"][(parts[0], parts[1])] = weight
 
     if len(options.alphabetstring) == 1:

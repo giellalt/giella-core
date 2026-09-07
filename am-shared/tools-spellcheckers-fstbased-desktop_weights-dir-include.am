@@ -30,6 +30,13 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
 		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json
 
+# add tropical weights to the corpus
+# - alternative VPOATH safe build target, for cases where the raw file is
+# generated from another source:
+.generated/%.tropical.txt: weights/%.raw.txt $(srcdir)/weights/config.json $(GENDIR)
+	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
+		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json
+
 # $(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< \
 #		-w $@ -m .generated/$(UNITWEIGHT)
 

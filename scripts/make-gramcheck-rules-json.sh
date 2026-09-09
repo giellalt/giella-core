@@ -56,15 +56,15 @@ if test "$rulecount" -eq 0 ; then
     # Invalid = N/A
     colour=grey
     message="N/A"
-elif test "$rulecount" -gt 0 && test "$rulecount" -lt 50 ; then
+elif test "$rulecount" -gt 0 && test "$rulecount" -lt 5 ; then
     # Experiment
     colour=black
     message=$rulecount
-elif test "$rulecount" -ge 50 && test "$rulecount" -lt 200 ; then
+elif test "$rulecount" -ge 5 && test "$rulecount" -le 10 ; then
     # Alpha
     colour=red
     message=$rulecount
-elif test "$rulecount" -ge 200 && test "$rulecount" -lt 500 ; then
+elif test "$rulecount" -gt 10 && test "$rulecount" -lt 50 ; then
     # Beta
     colour=yellow
     message=$rulecount

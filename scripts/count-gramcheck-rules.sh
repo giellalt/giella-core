@@ -49,6 +49,9 @@ fi
 # Error-detection rules add an error tag (an ampersand-prefixed set, e.g.
 # "&msyn-compound") to a reading, following the "RULETYPE:rule-name
 # (&errortag) ..." convention used throughout giellalt grammarcheckers.
-# Comment lines (starting with #) are ignored.
+# Comment lines (starting with #) are ignored. Only the rule name part
+# is kept, uniqued and counted, and experimental rules are excluded:
 grep -Ev '^[[:space:]]*#' "$cg3file" \
-    | grep -Ec '^[A-Za-z]+:[A-Za-z0-9_.-]+[[:space:]]*\(&'
+    | grep -E '^[A-Za-z]+:[A-Za-z0-9_.-]+[[:space:]]*\(&' \
+    | cut -d' ' -f1 | grep -v 'ADD:x' \
+    | uniq | wc -l | tr -d ' '

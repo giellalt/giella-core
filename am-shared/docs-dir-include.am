@@ -53,7 +53,9 @@ doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/fst-version.json \
 	badgedata/speller-suggestions.json \
 	$(SPELLER_VARIANT_BADGE_FILES) \
-	badgedata/speller-version.json
+	badgedata/speller-version.json \
+	badgedata/gramcheck-version.json \
+	badgedata/gramcheck-rules.json
 
 .PHONY: generate-markdown regenerate-markdown FORCE
 
@@ -131,6 +133,14 @@ $(srcdir)/badgedata/speller-suggestions-%.json: FORCE
 $(srcdir)/badgedata/speller-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) SPELLER > $@
+
+$(srcdir)/badgedata/gramcheck-version.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) GRAMCHECK > $@
+
+$(srcdir)/badgedata/gramcheck-rules.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-gramcheck-rules-json.sh $(abs_top_srcdir) > $@
 
 $(srcdir)/badgedata/fst-coverage.json:
 	@$(MKDIR_P) $(srcdir)/badgedata

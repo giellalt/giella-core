@@ -160,6 +160,15 @@ def load_typos(path):
     return corrections, lowered
 
 
+def match_casing(surface, correction):
+    """Apply the surface token's casing style to the correction."""
+    if surface.isupper():
+        return correction.upper()
+    if surface[:1].isupper() and surface[1:].islower():
+        return correction[:1].upper() + correction[1:]
+    return correction
+
+
 def match_sentence(sentence, corrections, lowered):
     """Return (error, correction, how) for each error form in `sentence`.
 
@@ -173,21 +182,22 @@ def match_sentence(sentence, corrections, lowered):
         if token in corrections:
             for correction in corrections[token]:
                 if correction != token:
-                    hits.append((token, correction, "exact"))
+                    hits.append((token, match_casing(token, correction), "exact"))
             continue
         # A lowercase error form is written capitalised when it opens a
         # sentence. Only accept that in first position -- accepting it anywhere
         # makes every capitalised proper noun match its lowercase entry.
         if index != 0:
             continue
-        if token[:1].isupper() and token[1:].islower():
+        if token[:1].isupper() and (token[1:].islower() or token.isupper()):
             for error in lowered.get(token.lower(), []):
                 if error == token or not error.islower():
                     continue
                 for correction in corrections[error]:
                     if correction in (token, error):
                         continue
-                    hits.append((token, correction, "sentence-initial"))
+                    hits.append((token, match_casing(token, correction),
+                                 "sentence-initial"))
     return hits
 
 

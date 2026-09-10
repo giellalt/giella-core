@@ -99,6 +99,14 @@ FORCE:
 
 
 # add tropical weights to the corpus:
+#
+# There are two pattern rules for this target and which one fires depends on
+# what can be built. GNU make takes the first rule whose prerequisites exist or
+# can be made, so this one wins whenever `$(srcdir)/weights/%.raw.txt` is there:
+# `%.corpus.txt` is always makeable, and it is the step that prefers the corpus
+# repos over the in-tree file. The rule below only fires when the raw file is
+# generated into the build directory instead of shipped in srcdir, which is the
+# case it was added for, and no corpus discovery is wanted there.
 .generated/%.tropical.txt: .generated/%.corpus.txt $(srcdir)/weights/config.json $(GENDIR)
 	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
 		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json

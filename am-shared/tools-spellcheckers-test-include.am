@@ -69,8 +69,9 @@ SPELLER_TEST_VARIANTS+=$(SPELLER_TEST_X_VARIANTS) $(SPELLER_TEST_STD_VARIANTS)
 # Generate combined test file for default speller:
 # always common data, plus default orthography / default writing-system data
 # when alternatives are configured.
-typos-default-generated.tsv: typos.tsv
-	$(AM_V_GEN)cat $< > $@
+typos-default-generated.tsv: typos.tsv $(wildcard $(srcdir)/typos-corpus.tsv)
+	$(AM_V_at)rm -f $@
+	$(AM_V_GEN)cat $^ > $@
 if HAVE_AREAS
 	@for area in $(AREAS) ; do \
 		if test -f "$(srcdir)/typos-$$area.tsv" ; then \
@@ -92,7 +93,8 @@ endif
 # Generate combined test files for variants that share default-script testdata
 # (dialects, areas, alternative orthographies): base + variant-specific.
 define variant-typos-combined-rule
-typos-$(1)-generated.tsv: typos.tsv typos-$(1).tsv
+typos-$(1)-generated.tsv: typos.tsv typos-$(1).tsv $$(wildcard $$(srcdir)/typos-$(1)-corpus.tsv)
+	$$(AM_V_at)rm -f $$@
 	$$(AM_V_GEN)cat $$^ > $$@
 endef
 $(foreach variant,$(SPELLER_TEST_X_VARIANTS) $(SPELLER_TEST_AREA_VARIANTS),$(eval $(call variant-typos-combined-rule,$(variant))))
@@ -100,8 +102,9 @@ $(foreach variant,$(SPELLER_TEST_X_VARIANTS) $(SPELLER_TEST_AREA_VARIANTS),$(eva
 # Generate variant test files for alternative writing systems:
 # do not mix in typos.tsv from the default writing system.
 define variant-typos-specific-rule
-typos-$(1)-generated.tsv: typos-$(1).tsv
-	$$(AM_V_GEN)cat $$< > $$@
+typos-$(1)-generated.tsv: typos-$(1).tsv $$(wildcard $$(srcdir)/typos-$(1)-corpus.tsv)
+	$$(AM_V_at)rm -f $$@
+	$$(AM_V_GEN)cat $$^ > $$@
 endef
 $(foreach variant,$(SPELLER_TEST_WSS_VARIANTS),$(eval $(call variant-typos-specific-rule,$(variant))))
 

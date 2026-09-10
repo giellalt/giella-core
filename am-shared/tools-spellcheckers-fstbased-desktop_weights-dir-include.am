@@ -82,7 +82,12 @@ FORCE:
 # are already here. It is a stdlib-only script rather than a call to ccat so
 # that "no corpus repo" stays the only way this step can decline to run -- a
 # build must not start failing because CorpusTools is not installed.
-.generated/%.corpus.txt: $(srcdir)/weights/%.raw.txt \
+# The raw-file prerequisite is deliberately NOT $(srcdir)-qualified: VPATH then
+# accepts either the copy shipped in the source tree or one generated into the
+# build directory by a language-local rule, and both get the same treatment --
+# preferred-over by the corpus repos when those are present, used verbatim when
+# they are not.
+.generated/%.corpus.txt: weights/%.raw.txt \
                          .generated/$(CORPUSNAME).corpussrc $(GENDIR)
 	$(AM_V_at)if test -n '$(strip $(GIELLA_CORPUS_DIRS))' ; then \
 	    echo "  CORPUS   $@ <- $(GIELLA_CORPUS_DIRS)" ; \
@@ -98,22 +103,27 @@ FORCE:
 	$(AM_V_GEN)$(HFST_TXT2FST) $(HFST_FLAGS) -f openfst-tropical $< -o $@
 
 
-# add tropical weights to the corpus:
+# add tropical weights to the corpus.
 #
-# There are two pattern rules for this target and which one fires depends on
-# what can be built. GNU make takes the first rule whose prerequisites exist or
-# can be made, so this one wins whenever `$(srcdir)/weights/%.raw.txt` is there:
-# `%.corpus.txt` is always makeable, and it is the step that prefers the corpus
-# repos over the in-tree file. The rule below only fires when the raw file is
-# generated into the build directory instead of shipped in srcdir, which is the
-# case it was added for, and no corpus discovery is wanted there.
-.generated/%.tropical.txt: .generated/%.corpus.txt $(srcdir)/weights/config.json $(GENDIR)
+# The speller corpus goes through .corpus.txt, the corpus-discovery step, and
+# that rule is EXPLICIT, not a pattern. It has to be: as a pattern rule it
+# loses the implicit-rule search to the raw-file fallback below, because GNU
+# make prefers a candidate whose prerequisites already exist (weights/%.raw.txt
+# does, via VPATH) over one that needs another implicit rule chained in front
+# (.corpus.txt does not exist on a clean tree and, being only a pattern target,
+# does not "ought to exist" either). Rule order in this file cannot save it --
+# an earlier comment here claimed it could, and was wrong: on every clean tree
+# the fallback won and the speller was silently weighted from the small in-tree
+# file. An explicit rule for the concrete target skips that contest entirely,
+# and naming .corpus.txt as an explicit prerequisite is what lets its own
+# pattern rule fire.
+.generated/$(CORPUSNAME).tropical.txt: .generated/$(CORPUSNAME).corpus.txt \
+		$(srcdir)/weights/config.json $(GENDIR)
 	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
 		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json
 
-# add tropical weights to the corpus
-# - alternative VPATH safe build target, for cases where the raw file is
-# generated from another source:
+# Any other stem takes the raw file directly, shipped or generated into the
+# build directory (VPATH covers both); no corpus discovery for those:
 .generated/%.tropical.txt: weights/%.raw.txt $(srcdir)/weights/config.json $(GENDIR)
 	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
 		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json

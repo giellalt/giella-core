@@ -77,16 +77,25 @@ if HAVE_AREAS
 		if test -f "$(srcdir)/typos-$$area.tsv" ; then \
 			cat "$(srcdir)/typos-$$area.tsv" >> $@ ; \
 		fi ; \
+		if test -f "$(srcdir)/typos-corpus-$$area.tsv" ; then \
+			cat "$(srcdir)/typos-corpus-$$area.tsv" >> $@ ; \
+		fi ; \
 	done
 endif
 if HAVE_ALT_ORTHS
 	@if test -f "$(srcdir)/typos-$(DEFAULT_ORTH).tsv" ; then \
 		cat "$(srcdir)/typos-$(DEFAULT_ORTH).tsv" >> $@ ; \
 	fi
+	@if test -f "$(srcdir)/typos-corpus-$(DEFAULT_ORTH).tsv" ; then \
+		cat "$(srcdir)/typos-corpus-$(DEFAULT_ORTH).tsv" >> $@ ; \
+	fi
 endif
 if HAVE_ALT_WSS
 	@if test -f "$(srcdir)/typos-$(DEFAULT_WS).tsv" ; then \
 		cat "$(srcdir)/typos-$(DEFAULT_WS).tsv" >> $@ ; \
+	fi
+	@if test -f "$(srcdir)/typos-corpus-$(DEFAULT_WS).tsv" ; then \
+		cat "$(srcdir)/typos-corpus-$(DEFAULT_WS).tsv" >> $@ ; \
 	fi
 endif
 

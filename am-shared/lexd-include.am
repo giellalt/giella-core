@@ -22,7 +22,7 @@
 ####### HFST build rules: ########
 .generated/lexicon.tmp.lexd: $(GENDIR) $(GT_LEXD_ROOT) $(GT_LEXD_SRCS)
 	$(AM_V_at)echo "# automatically generated combined lexd do not touch" > $@
-	$(AM_V_GEN)cat $(GT_LEXD_ROOT) $(GT_LEXD_SRCS) >> $@
+	$(AM_V_GEN)cat $^ >> $@
 
 .generated/lexicon.tmp.att: .generated/lexicon.tmp.lexd
 	$(AM_V_LEXD)"$(LEXD)" $< $@

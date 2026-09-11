@@ -102,7 +102,7 @@ endif
 # Generate combined test files for variants that share default-script testdata
 # (dialects, areas, alternative orthographies): base + variant-specific.
 define variant-typos-combined-rule
-typos-$(1)-generated.tsv: typos.tsv typos-$(1).tsv $$(wildcard $$(srcdir)/typos-$(1)-corpus.tsv)
+typos-$(1)-generated.tsv: typos.tsv typos-$(1).tsv $$(wildcard $$(srcdir)/typos-corpus-$(1).tsv)
 	$$(AM_V_at)rm -f $$@
 	$$(AM_V_GEN)cat $$^ > $$@
 endef
@@ -111,7 +111,7 @@ $(foreach variant,$(SPELLER_TEST_X_VARIANTS) $(SPELLER_TEST_AREA_VARIANTS),$(eva
 # Generate variant test files for alternative writing systems:
 # do not mix in typos.tsv from the default writing system.
 define variant-typos-specific-rule
-typos-$(1)-generated.tsv: typos-$(1).tsv $$(wildcard $$(srcdir)/typos-$(1)-corpus.tsv)
+typos-$(1)-generated.tsv: typos-$(1).tsv $$(wildcard $$(srcdir)/typos-corpus-$(1).tsv)
 	$$(AM_V_at)rm -f $$@
 	$$(AM_V_GEN)cat $$^ > $$@
 endef

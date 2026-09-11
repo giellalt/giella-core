@@ -22,6 +22,34 @@ GT_COMMON_SPELLER_NAME=speller-gt-norm
 GT_COMMON_SPELLER_ANALYSER=analyser-$(GT_COMMON_SPELLER_NAME).hfst
 GT_COMMON_SPELLER_GENERATOR=generator-$(GT_COMMON_SPELLER_NAME).hfst
 
+####### Speller runtime configuration: #######
+# Runtime parameters for the speller library (n-best, beam, reweighting, ...).
+# When the language provides this file, it is bundled verbatim in every zhfst
+# file built from this dir, as the zip member 'speller-config.json'. A language
+# without the file builds exactly as before.
+#
+# NB! The member is deliberately NOT listed in index.xml: speller libraries
+# ignore zip members they do not know about, but a third party index.xml parser
+# might not tolerate an unknown entry.
+#
+# NB! This is tools/spellcheckers/config.json, NOT tools/spellcheckers/weights/
+# config.json - the latter configures corpus based weighting at build time.
+GT_SPELLER_CONFIG=$(top_srcdir)/tools/spellcheckers/config.json
+
+# Expands to the empty string when the language has no config.json, so that it
+# can be used as a prerequisite of the zhfst targets unconditionally:
+GT_SPELLER_CONFIG_DEP=$(wildcard $(GT_SPELLER_CONFIG))
+
+# Validate the speller config, and add it to the zhfst file staged in build/$@/.
+# A malformed config must fail the build here, and never reach the archive:
+ZHFST_ADD_SPELLER_CONFIG=\
+	if test -f "$(GT_SPELLER_CONFIG)" ; then \
+		$(PYTHON) -c 'import json,sys; json.load(open(sys.argv[1]))' \
+				"$(GT_SPELLER_CONFIG)" \
+			|| { echo "ERROR: $(GT_SPELLER_CONFIG) is not valid JSON - fix it before building spellers" 1>&2 ; exit 1 ; } ; \
+		cp -f "$(GT_SPELLER_CONFIG)" build/$@/speller-config.json ; \
+	fi
+
 ####### Automake targets: ########
 if WANT_SPELLERS
 if CAN_HFST

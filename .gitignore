@@ -26,3 +26,4 @@ Makefile
 Makefile.in
 __pycache__/
 /scripts/simpler-yaml-runner.sh
+/docs/badgedata/

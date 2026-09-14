@@ -50,7 +50,7 @@ doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/fst-lemmacount.json \
 	badgedata/fst-maturity.json \
 	badgedata/fst-variants.json \
-	badgedata/fst-version.json \
+	badgedata/version.json \
 	badgedata/speller-suggestions.json \
 	$(SPELLER_VARIANT_BADGE_FILES) \
 	badgedata/speller-version.json \
@@ -118,7 +118,7 @@ $(srcdir)/badgedata/fst-variants.json: FORCE
 		--build-config "$(top_srcdir)/.build-config.yml" \
 		--output $@
 
-$(srcdir)/badgedata/fst-version.json: FORCE
+$(srcdir)/badgedata/version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) FST > $@
 

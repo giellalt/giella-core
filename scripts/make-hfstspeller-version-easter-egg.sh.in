@@ -24,7 +24,14 @@ Version=$3
 Platform=$4
 Variant=$5
 
-Date=$(date +%d.%m.%Y-%H%M)
+# SOURCE_DATE_EPOCH makes the easter egg, and with it the speller
+# archives, reproducible byte for byte.
+if test -n "${SOURCE_DATE_EPOCH:-}"; then
+    Date=$(date -u -r "$SOURCE_DATE_EPOCH" +%d.%m.%Y-%H%M 2>/dev/null \
+        || date -u -d "@$SOURCE_DATE_EPOCH" +%d.%m.%Y-%H%M)
+else
+    Date=$(date +%d.%m.%Y-%H%M)
+fi
 HfstVersion=$( $HFST_INFO | grep 'HFST version' | grep -Eo '[0-9.]+')
 
 if test x$Variant == 'xdefault' -o "x$Variant" == 'x'; then

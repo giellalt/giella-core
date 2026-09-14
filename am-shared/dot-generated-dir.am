@@ -10,15 +10,17 @@ GENDIR=.generated/.stamp
 # hfst tool version); mtime moves only when the content changes.
 GIELLA_BUILD_INPUTS=.generated/build-inputs
 
+# Concurrent makes can run this recipe at once ($(MAKE) $(GENDIR) in recipes
+# under -j), so the temp file must be per-process.
 $(GIELLA_BUILD_INPUTS): GIELLA-BUILD-INPUTS-FORCE
 	$(AM_V_at)$(MKDIR_P) .generated
-	$(AM_V_at){ \
+	$(AM_V_at)t=$@.tmp.$$$$; { \
 	  echo "giella-core: `git -C '$(GTCORE)' rev-parse HEAD 2>/dev/null || echo no-git`"; \
 	  if test -n "$(HFST_FST2FST)"; then \
 	    echo "hfst: `$(HFST_FST2FST) --version 2>/dev/null | head -n 1 || echo unknown`"; \
 	  fi; \
-	} > $@.tmp
-	$(AM_V_at)if cmp -s $@.tmp $@; then rm -f $@.tmp; else mv -f $@.tmp $@; fi
+	} > $$t; \
+	if cmp -s $$t $@; then rm -f $$t; else mv -f $$t $@; fi
 
 .PHONY: GIELLA-BUILD-INPUTS-FORCE
 GIELLA-BUILD-INPUTS-FORCE:

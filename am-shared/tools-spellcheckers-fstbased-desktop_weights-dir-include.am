@@ -117,10 +117,22 @@ FORCE:
 # file. An explicit rule for the concrete target skips that contest entirely,
 # and naming .corpus.txt as an explicit prerequisite is what lets its own
 # pattern rule fire.
-.generated/$(CORPUSNAME).tropical.txt: .generated/$(CORPUSNAME).corpus.txt \
+# One pass writes both the weights file and the unit weight, so both are named
+# here: as separate rules the unit weight had no recipe of its own, a value
+# left over from an older maxweight or a smaller corpus was never refreshed,
+# and every compound was priced against it while simplex words looked correct.
+# Temporaries because make before 4.3 ignores the grouping and may run this
+# once per output under -j.
+.generated/$(CORPUSNAME).tropical.txt .generated/$(UNITWEIGHT) &: \
+		.generated/$(CORPUSNAME).corpus.txt \
 		$(srcdir)/weights/config.json $(GENDIR)
-	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w $@ \
-		-m .generated/$(UNITWEIGHT) -c $(srcdir)/weights/config.json
+	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< \
+		-w .generated/$(CORPUSNAME).tropical.txt.$$$$ \
+		-m .generated/$(UNITWEIGHT).$$$$ \
+		-c $(srcdir)/weights/config.json && \
+	mv -f .generated/$(CORPUSNAME).tropical.txt.$$$$ \
+		.generated/$(CORPUSNAME).tropical.txt && \
+	mv -f .generated/$(UNITWEIGHT).$$$$ .generated/$(UNITWEIGHT)
 
 # Any other stem takes the raw file directly, shipped or generated into the
 # build directory (VPATH covers both); no corpus discovery for those:
@@ -131,15 +143,6 @@ FORCE:
 # $(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< \
 #		-w $@ -m .generated/$(UNITWEIGHT)
 
-# corpus2unigramlm writes the unit weight as a side effect of the weights file.
-# A prerequisite without a recipe never refreshes it, so a value left over from
-# an older maxweight or a smaller corpus survives every rebuild and silently
-# prices every compound against it. Deriving it here from the same inputs as
-# the weights file keeps the two in step.
-.generated/$(UNITWEIGHT): .generated/$(CORPUSNAME).corpus.txt \
-		$(srcdir)/weights/config.json $(GENDIR)
-	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w /dev/null -m $@ \
-		-c $(srcdir)/weights/config.json
 
 # build an fst of surface forms with tropical weights for each word form:
 .generated/%.surfs.hfst: .generated/%.tropical.txt

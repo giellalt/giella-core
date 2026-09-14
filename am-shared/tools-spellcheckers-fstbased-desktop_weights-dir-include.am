@@ -131,7 +131,15 @@ FORCE:
 # $(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< \
 #		-w $@ -m .generated/$(UNITWEIGHT)
 
-.generated/$(UNITWEIGHT): .generated/$(CORPUSNAME).tropical.txt
+# corpus2unigramlm writes the unit weight as a side effect of the weights file.
+# A prerequisite without a recipe never refreshes it, so a value left over from
+# an older maxweight or a smaller corpus survives every rebuild and silently
+# prices every compound against it. Deriving it here from the same inputs as
+# the weights file keeps the two in step.
+.generated/$(UNITWEIGHT): .generated/$(CORPUSNAME).corpus.txt \
+		$(srcdir)/weights/config.json $(GENDIR)
+	$(AM_V_GEN)$(CORPUS2UNIGRAMLM) -i $< -w /dev/null -m $@ \
+		-c $(srcdir)/weights/config.json
 
 # build an fst of surface forms with tropical weights for each word form:
 .generated/%.surfs.hfst: .generated/%.tropical.txt

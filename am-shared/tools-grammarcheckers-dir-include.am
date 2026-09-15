@@ -201,8 +201,19 @@ assets/errors-%.ftl: errors-%.ftl | assets-dir
 $(GIELLA_GC_PIPELINE): $(srcdir)/$(GIELLA_GC_PIPELINE)
 	$(AM_V_CP)cp -f $< $@
 
+# The pipeline imports the speller's runtime config by a path relative to
+# itself, and it is the copy above that gets bundled, so out of source that
+# import resolves inside the build tree. Put the file where it lands. A
+# language without a config.json has nothing to copy, hence the test.
+GIELLA_GC_SPELLER_CONFIG=$(top_builddir)/tools/spellcheckers/config.json
+
+$(GIELLA_GC_SPELLER_CONFIG): $(wildcard $(top_srcdir)/tools/spellcheckers/config.json)
+	$(AM_V_at)$(MKDIR_P) `dirname $@`
+	$(AM_V_at)test -z "$<" || cp -f $< $@
+
 # Build the .drb bundle
 $(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) \
+						$(GIELLA_GC_SPELLER_CONFIG) \
 						$(GIELLA_GC_ASSETS)
 	$(AM_V_at)test -f $(GIELLA_GC_PIPELINE) || cp -f $(srcdir)/$(GIELLA_GC_PIPELINE) $(GIELLA_GC_PIPELINE)
 	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle

@@ -203,19 +203,25 @@ $(GIELLA_GC_PIPELINE): $(srcdir)/$(GIELLA_GC_PIPELINE)
 
 # The pipeline imports the speller's runtime config by a path relative to
 # itself, and it is the copy above that gets bundled, so out of source that
-# import resolves inside the build tree. Put the file where it lands. A
-# language without a config.json has nothing to copy, hence the test.
-GIELLA_GC_SPELLER_CONFIG=$(top_builddir)/tools/spellcheckers/config.json
-
-$(GIELLA_GC_SPELLER_CONFIG): $(wildcard $(top_srcdir)/tools/spellcheckers/config.json)
-	$(AM_V_at)$(MKDIR_P) `dirname $@`
-	$(AM_V_at)test -z "$<" || cp -f $< $@
+# import resolves inside the build tree and the file has to be there.
+#
+# Copied by the recipe rather than built as a target: VPATH search resolves
+# the build-tree path against srcdir, finds the config sitting there, and
+# declares the target already made -- so the copy never happens and only the
+# out-of-source build, which is the one that needs it, goes without. Naming
+# the source file as a prerequisite still rebuilds the bundle when it changes.
+# Empty for a language that has no config.json, hence the test.
+GIELLA_GC_SPELLER_CONFIG_SRC=$(wildcard $(top_srcdir)/tools/spellcheckers/config.json)
 
 # Build the .drb bundle
 $(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) \
-						$(GIELLA_GC_SPELLER_CONFIG) \
+						$(GIELLA_GC_SPELLER_CONFIG_SRC) \
 						$(GIELLA_GC_ASSETS)
 	$(AM_V_at)test -f $(GIELLA_GC_PIPELINE) || cp -f $(srcdir)/$(GIELLA_GC_PIPELINE) $(GIELLA_GC_PIPELINE)
+	$(AM_V_at)test -z "$(GIELLA_GC_SPELLER_CONFIG_SRC)" || { \
+	  $(MKDIR_P) $(top_builddir)/tools/spellcheckers && \
+	  cp -f $(GIELLA_GC_SPELLER_CONFIG_SRC) \
+	        $(top_builddir)/tools/spellcheckers/config.json ; }
 	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
 
 endif # HAVE_DIVVUN_RUNTIME

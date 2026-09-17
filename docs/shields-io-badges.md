@@ -14,6 +14,7 @@ primary FST/package version, unprefixed since every repo has exactly one).
 ### Prefixes
 
 - **fst**: Lexicon and FST-related data
+- **pkg**: Package-level data, not specific to the FST
 - **speller**: Spell checker related data
 - **gramcheck**: Grammar checker related data
 
@@ -22,8 +23,11 @@ primary FST/package version, unprefixed since every repo has exactly one).
 ### FST-related
 
 - `fst-lemmacount.json`: Number of lemmas in the lexicon
-- `fst-maturity.json`: Maturity level of the language resources
 - `version.json`: FST/package version number (from AC_INIT in configure.ac)
+
+### Package-related
+
+- `pkg-maturity.json`: Maturity level of the language resources
 
 ### Speller-related
 

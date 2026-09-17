@@ -48,8 +48,8 @@ SPELLER_VARIANT_BADGE_FILES=$(patsubst %,$(srcdir)/badgedata/speller-suggestions
 # no regenerations while debugging
 doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/fst-lemmacount.json \
-	badgedata/fst-maturity.json \
-	badgedata/fst-variants.json \
+	badgedata/pkg-maturity.json \
+	badgedata/pkg-variants.json \
 	badgedata/version.json \
 	badgedata/speller-suggestions.json \
 	$(SPELLER_VARIANT_BADGE_FILES) \
@@ -100,13 +100,13 @@ $(srcdir)/badgedata/fst-lemmacount.json: FORCE
 	$(AM_V_GEN)$(GTCORE)/scripts/make-lemmacount.json.sh $(abs_top_srcdir) > $@
 
 # Generate a maturity.json file as endpoint for the maturity badge.
-$(srcdir)/badgedata/fst-maturity.json: FORCE
+$(srcdir)/badgedata/pkg-maturity.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
 
-$(srcdir)/badgedata/fst-variants.json: FORCE
+$(srcdir)/badgedata/pkg-variants.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
-	$(AM_V_GEN)$(GTCORE)/scripts/make-fst-variants-json.sh \
+	$(AM_V_GEN)$(GTCORE)/scripts/make-pkg-variants-json.sh \
 		--dialects "$(DIALECTS)" \
 		--areas "$(AREAS)" \
 		--orthographies "$(ALT_ORTHS)" \

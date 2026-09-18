@@ -18,6 +18,7 @@ AC_INIT([giella-core], [1.15.11], [feedback@divvun.no], [giella-core], [https://
 AC_REVISION([$Revision$])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9 tar-pax -Wall -Werror foreign])
+AM_SILENT_RULES([yes])
 
 AC_ARG_ENABLE([configure-errors],
               [AS_HELP_STRING([--disable-configure-errors].

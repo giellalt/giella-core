@@ -19,9 +19,9 @@ SUBDIRS = . scripts
 
 EXTRA_DIST = $(PACKAGE).pc.in
 
-.PHONY: FORCE
+.PHONY: docs FORCE
 
-all-local: $(srcdir)/docs/badgedata/version.json
+docs: $(srcdir)/docs/badgedata/version.json
 
 $(srcdir)/docs/badgedata/version.json: FORCE
 	@mkdir -p $(srcdir)/docs/badgedata

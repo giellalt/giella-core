@@ -44,196 +44,198 @@
 # hfst-compose:
 AM_V_COMPOSE    = $(AM_V_COMPOSE_@AM_V@)
 AM_V_COMPOSE_   = $(AM_V_COMPOSE_@AM_DEFAULT_V@)
-AM_V_COMPOSE_0  = @echo "  HCOMPOSE $@";
+AM_V_COMPOSE_0  = @echo "`tput setaf 2`  HCOMPOSE `tput setaf 4`$@`tput sgr0`";
 
 # hfst-concatenate:
 AM_V_HCONCAT    = $(AM_V_HCONCAT_@AM_V@)
 AM_V_HCONCAT_   = $(AM_V_HCONCAT_@AM_DEFAULT_V@)
-AM_V_HCONCAT_0  = @echo "  HCONCAT  $@";
+AM_V_HCONCAT_0  = @echo "`tput setaf 2`  HCONCAT  `tput setaf 4`$@`tput sgr0`";
 
 # hfst-conjunct /
 # hfst-intersect:
 AM_V_CONJCT     = $(AM_V_CONJCT_@AM_V@)
 AM_V_CONJCT_    = $(AM_V_CONJCT_@AM_DEFAULT_V@)
-AM_V_CONJCT_0   = @echo "  HCONJCT  $@";
+AM_V_CONJCT_0   = @echo "`tput setaf 2`  HCONJCT  `tput setaf 4`$@`tput sgr0`";
 
 # hfst-fst2fst:
 AM_V_FST2FST    = $(AM_V_FST2FST_@AM_V@)
 AM_V_FST2FST_   = $(AM_V_FST2FST_@AM_DEFAULT_V@)
-AM_V_FST2FST_0  = @echo "  HFST2FST $@";
+AM_V_FST2FST_0  = @echo "`tput setaf 2`  HFST2FST `tput setaf 4`$@`tput sgr0`";
 
 # hfst-minimize
 AM_V_HMINIM     = $(AM_V_HMINIM_@AM_V@)
 AM_V_HMINIM_    = $(AM_V_HMINIM_@AM_DEFAULT_V@)
-AM_V_HMINIM_0   = @echo "  HMINIM   $@";
+AM_V_HMINIM_0   = @echo "`tput setaf 2`  HMINIM   `tput setaf 4`$@`tput sgr0`";
 
 # hfst-fst2txt:
 AM_V_FST2TXT    = $(AM_V_FST2TXT_@AM_V@)
 AM_V_FST2TXT_   = $(AM_V_FST2TXT_@AM_DEFAULT_V@)
-AM_V_FST2TXT_0  = @echo "  HFST2TXT $@";
+AM_V_FST2TXT_0  = @echo "`tput setaf 2`  HFST2TXT `tput setaf 4`$@`tput sgr0`";
 
 # hfst-foma:
 AM_V_HFOMA      = $(AM_V_HFOMA_@AM_V@)
 AM_V_HFOMA_     = $(AM_V_HFOMA_@AM_DEFAULT_V@)
-AM_V_HFOMA_0    = @echo "  HFOMA    $@";
+AM_V_HFOMA_0    = @echo "`tput setaf 2`  HFOMA    `tput setaf 4`$@`tput sgr0`";
 
 # hfst-optimized-lookup:
 AM_V_HFSTOL     = $(AM_V_HFSTOL_@AM_V@)
 AM_V_HFSTOL_    = $(AM_V_HFSTOL_@AM_DEFAULT_V@)
-AM_V_HFSTOL_0   = @echo "  HFSTOL   $@";
+AM_V_HFSTOL_0   = @echo "`tput setaf 2`  HFSTOL   `tput setaf 4`$@`tput sgr0`";
 
 # hfst-lexc:
 AM_V_HLEXC      = $(AM_V_HLEXC_@AM_V@)
 AM_V_HLEXC_     = $(AM_V_HLEXC_@AM_DEFAULT_V@)
-AM_V_HLEXC_0    = @echo "  HLEXC    $@";
+AM_V_HLEXC_0    = @echo "`tput setaf 2`  HLEXC    `tput setaf 4`$@`tput sgr0`";
 
 # hfst-split:
 AM_V_HSPLIT     = $(AM_V_HSPLIT_@AM_V@)
 AM_V_HSPLIT_    = $(AM_V_HSPLIT_@AM_DEFAULT_V@)
-AM_V_HSPLIT_0   = @echo "  HSPLIT   $@";
+AM_V_HSPLIT_0   = @echo "`tput setaf 2`  HSPLIT   `tput setaf 4`$@`tput sgr0`";
 
 # hfst-substitute:
 AM_V_HSUBST     = $(AM_V_HSUBST_@AM_V@)
 AM_V_HSUBST_    = $(AM_V_HSUBST_@AM_DEFAULT_V@)
-AM_V_HSUBST_0   = @echo "  HSUBST   $@";
+AM_V_HSUBST_0   = @echo "`tput setaf 2`  HSUBST   `tput setaf 4`$@`tput sgr0`";
 
 # hfst-twolc:
 AM_V_HTWOLC     = $(AM_V_HTWOLC_@AM_V@)
 AM_V_HTWOLC_    = $(AM_V_HTWOLC_@AM_DEFAULT_V@)
-AM_V_HTWOLC_0   = @echo "  HTWOLC   $@";
+AM_V_HTWOLC_0   = @echo "`tput setaf 2`  HTWOLC   `tput setaf 4`$@`tput sgr0`";
 
 # hfst-xfst:
 AM_V_HXFST      = $(AM_V_HXFST_@AM_V@)
 AM_V_HXFST_     = $(AM_V_HXFST_@AM_DEFAULT_V@)
-AM_V_HXFST_0    = @echo "  HXFST    $@";
+AM_V_HXFST_0    = @echo "`tput setaf 2`  HXFST    `tput setaf 4`$@`tput sgr0`";
 
 # hfst-compose-intersect:
 AM_V_INTRSCT    = $(AM_V_INTRSCT_@AM_V@)
 AM_V_INTRSCT_   = $(AM_V_INTRSCT_@AM_DEFAULT_V@)
-AM_V_INTRSCT_0  = @echo "  HINTRSCT $@";
+AM_V_INTRSCT_0  = @echo "`tput setaf 2`  HINTRSCT `tput setaf 4`$@`tput sgr0`";
 
 # hfst-invert:
 AM_V_INVERT     = $(AM_V_INVERT_@AM_V@)
 AM_V_INVERT_    = $(AM_V_INVERT_@AM_DEFAULT_V@)
-AM_V_INVERT_0   = @echo "  HINVERT  $@";
+AM_V_INVERT_0   = @echo "`tput setaf 2`  HINVERT  `tput setaf 4`$@`tput sgr0`";
 
 # hfst-pmatch2fst
 AM_V_PM2FST     = $(AM_V_PM2FST_@AM_V@)
 AM_V_PM2FST_    = $(AM_V_PM2FST_@AM_DEFAULT_V@)
-AM_V_PM2FST_0   = @echo "  HPM2FST  $@";
+AM_V_PM2FST_0   = @echo "`tput setaf 2`  HPM2FST  `tput setaf 4`$@`tput sgr0`";
 
 # hfst-project:
 AM_V_PROJECT    = $(AM_V_PROJECT_@AM_V@)
 AM_V_PROJECT_   = $(AM_V_PROJECT_@AM_DEFAULT_V@)
-AM_V_PROJECT_0  = @echo "  HPROJECT $@";
+AM_V_PROJECT_0  = @echo "`tput setaf 2`  HPROJECT `tput setaf 4`$@`tput sgr0`";
 
 # hfst-prune-alphabet
 AM_V_HPRUNE     = $(AM_V_HPRUNE_@AM_V@)
 AM_V_HPRUNE_    = $(AM_V_HPRUNE_@AM_DEFAULT_V@)
-AM_V_HPRUNE_0   = @echo "  HPRUNE   $@";
+AM_V_HPRUNE_0   = @echo "`tput setaf 2`  HPRUNE   `tput setaf 4`$@`tput sgr0`";
 
 # hfst-reverse
 AM_V_REVERSE    = $(AM_V_REVERSE_@AM_V@)
 AM_V_REVERSE_   = $(AM_V_REVERSE_@AM_DEFAULT_V@)
-AM_V_REVERSE_0  = @echo "  HREVERSE $@";
+AM_V_REVERSE_0  = @echo "`tput setaf 2`  HREVERSE `tput setaf 4`$@`tput sgr0`";
 
 # hfst-reweight:
 AM_V_REWEIGHT   = $(AM_V_REWEIGHT_@AM_V@)
 AM_V_REWEIGHT_  = $(AM_V_REWEIGHT_@AM_DEFAULT_V@)
-AM_V_REWEIGHT_0 = @echo "  HREWGHT  $@";
+AM_V_REWEIGHT_0 = @echo "`tput setaf 2`  HREWGHT  `tput setaf 4`$@`tput sgr0`";
 
 # hfst-regexp2fst:
 AM_V_RGX2FST    = $(AM_V_RGX2FST_@AM_V@)
 AM_V_RGX2FST_   = $(AM_V_RGX2FST_@AM_DEFAULT_V@)
-AM_V_RGX2FST_0  = @echo "  HRGX2FST $@";
+AM_V_RGX2FST_0  = @echo "`tput setaf 2`  HRGX2FST `tput setaf 4`$@`tput sgr0`";
 
 # hfst-repeat
 AM_V_REPEAT     = $(AM_V_REPEAT_@AM_V@)
 AM_V_REPEAT_    = $(AM_V_REPEAT_@AM_DEFAULT_V@)
-AM_V_REPEAT_0   = @echo "  HREPEAT  $@";
+AM_V_REPEAT_0   = @echo "`tput setaf 2`  HREPEAT  `tput setaf 4`$@`tput sgr0`";
 
 # hfst-strings2fst:
 AM_V_STR2FST    = $(AM_V_STR2FST_@AM_V@)
 AM_V_STR2FST_   = $(AM_V_STR2FST_@AM_DEFAULT_V@)
-AM_V_STR2FST_0  = @echo "  HSTR2FST $@";
+AM_V_STR2FST_0  = @echo "`tput setaf 2`  HSTR2FST `tput setaf 4`$@`tput sgr0`";
 
 # hfst-txt2fst:
 AM_V_TXT2FST    = $(AM_V_TXT2FST_@AM_V@)
 AM_V_TXT2FST_   = $(AM_V_TXT2FST_@AM_DEFAULT_V@)
-AM_V_TXT2FST_0  = @echo "  HTXT2FST $@";
+AM_V_TXT2FST_0  = @echo "`tput setaf 2`  HTXT2FST `tput setaf 4`$@`tput sgr0`";
 
 # hfst-union / hfst-disjunct:
 AM_V_UNION      = $(AM_V_UNION_@AM_V@)
 AM_V_UNION_     = $(AM_V_UNION_@AM_DEFAULT_V@)
-AM_V_UNION_0    = @echo "  HUNION   $@";
+AM_V_UNION_0    = @echo "`tput setaf 2`  HUNION   `tput setaf 4`$@`tput sgr0`";
 
 #### LexD (Apertium)
 AM_V_LEXD       = $(AM_V_LEXD_@AM_V@)
 AM_V_LEXD_      = $(AM_V_LEXD_@AM_DEFAULT_V@)
-AM_V_LEXD_0     = @echo "  LEXD     $@";
+AM_V_LEXD_0     = @echo "`tput setaf 2`  LEXD     `tput setaf 4`$@`tput sgr0`";
 
 #### Foma
 AM_V_FOMA       = $(AM_V_FOMA_@AM_V@)
 AM_V_FOMA_      = $(AM_V_FOMA_@AM_DEFAULT_V@)
-AM_V_FOMA_0     = @echo "  FOMA     $@";
+AM_V_FOMA_0     = @echo "`tput setaf 2`  FOMA     `tput setaf 4`$@`tput sgr0`";
 
 #### Xerox tools
 AM_V_TWOLC      = $(AM_V_TWOLC_@AM_V@)
 AM_V_TWOLC_     = $(AM_V_TWOLC_@AM_DEFAULT_V@)
-AM_V_TWOLC_0    = @echo "  TWOLC    $@";
+AM_V_TWOLC_0    = @echo "`tput setaf 2`  TWOLC    `tput setaf 4`$@`tput sgr0`";
 
 AM_V_LEXC       = $(AM_V_LEXC_@AM_V@)
 AM_V_LEXC_      = $(AM_V_LEXC_@AM_DEFAULT_V@)
-AM_V_LEXC_0     = @echo "  LEXC     $@";
+AM_V_LEXC_0     = @echo "`tput setaf 2`  LEXC     `tput setaf 4`$@`tput sgr0`";
 
 AM_V_XFST       = $(AM_V_XFST_@AM_V@)
 AM_V_XFST_      = $(AM_V_XFST_@AM_DEFAULT_V@)
-AM_V_XFST_0     = @echo "  XFST     $@";
+AM_V_XFST_0     = @echo "`tput setaf 2`  XFST     `tput setaf 4`$@`tput sgr0`";
 
 #### VislCG3
 AM_V_CGCOMP     = $(AM_V_CGCOMP_@AM_V@)
 AM_V_CGCOMP_    = $(AM_V_CGCOMP_@AM_DEFAULT_V@)
-AM_V_CGCOMP_0   = @echo "  CG3COMP  $@";
+AM_V_CGCOMP_0   = @echo "`tput setaf 6`  CG3COMP  `tput setaf 4`$@`tput sgr0`";
 
 #### Other tools
 AM_V_CP         = $(AM_V_CP_@AM_V@)
 AM_V_CP_        = $(AM_V_CP_@AM_DEFAULT_V@)
-AM_V_CP_0       = @echo "  CP       $@";
+AM_V_CP_0       = @echo "`tput setaf 8`  CP       `tput setaf 4`$@`tput sgr0`";
 
 AM_V_MV         = $(AM_V_MV_@AM_V@)
 AM_V_MV_        = $(AM_V_MV_@AM_DEFAULT_V@)
-AM_V_MV_0       = @echo "  MV       $@";
+AM_V_MV_0       = @echo "`tput setaf 8`  MV       `tput setaf 4`$@`tput sgr0`";
 
 AM_V_GZIP       = $(AM_V_GZIP_@AM_V@)
 AM_V_GZIP_      = $(AM_V_GZIP_@AM_DEFAULT_V@)
-AM_V_GZIP_0     = @echo "  GZIP     $@";
+AM_V_GZIP_0     = @echo "`tput setaf 9`  GZIP     `tput setaf 4`$@`tput sgr0`";
 
 AM_V_ZIP        = $(AM_V_ZIP_@AM_V@)
 AM_V_ZIP_       = $(AM_V_ZIP_@AM_DEFAULT_V@)
-AM_V_ZIP_0      = @echo "  ZIP      $@";
+AM_V_ZIP_0      = @echo "`tput setaf 9`  ZIP      `tput setaf 4`$@`tput sgr0`";
 
 AM_V_SAXON      = $(AM_V_SAXON_@AM_V@)
 AM_V_SAXON_     = $(AM_V_SAXON_@AM_DEFAULT_V@)
-AM_V_SAXON_0    = @echo "  SAXON    $@";
+AM_V_SAXON_0    = @echo "`tput setaf 1`  SAXON    `tput setaf 4`$@`tput sgr0`";
 
 AM_V_XSLPROC    = $(AM_V_XSLPROC_@AM_V@)
 AM_V_XSLPROC_   = $(AM_V_XSLPROC_@AM_DEFAULT_V@)
-AM_V_XSLPROC_0  = @echo "  XSLPROC  $@";
+AM_V_XSLPROC_0  = @echo "`tput setaf 1`  XSLPROC  `tput setaf 4`$@`tput sgr0`";
 
 AM_V_AWK        = $(AM_V_AWK_@AM_V@)
 AM_V_AWK_       = $(AM_V_AWK_@AM_DEFAULT_V@)
-AM_V_AWK_0      = @echo "  AWK      $@";
+AM_V_AWK_0      = @echo "`tput setaf 8`  AWK      `tput setaf 4`$@`tput sgr0`";
 
 AM_V_SED        = $(AM_V_SED_@AM_V@)
 AM_V_SED_       = $(AM_V_SED_@AM_DEFAULT_V@)
-AM_V_SED_0      = @echo "  SED      $@";
+AM_V_SED_0      = @echo "`tput setaf 8`  SED      `tput setaf 4`$@`tput sgr0`";
 
 AM_V_FORREST    = $(AM_V_FORREST_@AM_V@)
 AM_V_FORREST_   = $(AM_V_FORREST_@AM_DEFAULT_V@)
-AM_V_FORREST_0  = @echo "  FORREST  $@";
+AM_V_FORREST_0  = @echo "`tput setaf 1`  FORREST  `tput setaf 4`$@`tput sgr0`";
 
 # Let the verbosity of some command line tools follow the automake verbosity.
 # VERBOSITY       = be quiet if V=0, unspecified otherwise
 # MORE_VERBOSITY  = be quiet if V=0, be verbose otherwise
 VERBOSITY=$(if $(strip $(filter-out false,$(AM_V_P))), ,-q)
 MORE_VERBOSITY=$(if $(strip $(filter-out false,$(AM_V_P))),-v,-q)
+
+# vim: set ft=automake:

@@ -46,7 +46,8 @@ endif
 SPELLER_VARIANT_BADGE_FILES=$(patsubst %,$(srcdir)/badgedata/speller-suggestions-%.json,$(SPELLER_BADGE_VARIANTS))
 
 # no regenerations while debugging
-doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
+doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
+DOCFILES=\
 	badgedata/fst-lemmacount.json \
 	badgedata/pkg-maturity.json \
 	badgedata/pkg-variants.json \
@@ -57,7 +58,9 @@ doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
 	badgedata/gramcheck-version.json \
 	badgedata/gramcheck-rules.json
 
-.PHONY: generate-markdown regenerate-markdown FORCE
+.PHONY: generate-markdown regenerate-markdown docs FORCE
+
+docs: $(DOCFILES)
 
 regenerate-markdown: generate-markdown
 
@@ -142,7 +145,7 @@ $(srcdir)/badgedata/gramcheck-rules.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-gramcheck-rules-json.sh $(abs_top_srcdir) > $@
 
-$(srcdir)/badgedata/fst-coverage.json:
+$(srcdir)/badgedata/fst-coverage.json: FORCE
 	@$(MKDIR_P) $(srcdir)/badgedata
 	@echo this can take some hours...
 	$(AM_V_GEN)$(GTCORE)/scripts/make-coveragebadge-json.sh $(GLANG) > $@
@@ -332,7 +335,6 @@ $(INDEX): $(HEADER) $(LINKS)
 clean-local:
 	$(AM_V_at)-rm -rf $(builddir)/build
 	$(AM_V_at)-rm -rf $(srcdir)/build
-	$(AM_V_at)-rm -f $(doc_DATA)
 	$(AM_V_at)-rm -f *-src.md src-*.md $(srcdir)/*-src.md $(srcdir)/src-*.md
 	$(AM_V_at)-rm -f *-tools.md tools-*.md $(srcdir)/*-tools.md $(srcdir)/tools-*.md
 	$(AM_V_at)-rm -f generated-markdowns.*

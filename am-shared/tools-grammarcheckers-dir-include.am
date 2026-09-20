@@ -222,7 +222,21 @@ $(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) \
 	  $(MKDIR_P) $(top_builddir)/tools/spellcheckers && \
 	  cp -f $(GIELLA_GC_SPELLER_CONFIG_SRC) \
 	        $(top_builddir)/tools/spellcheckers/config.json ; }
-	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
+# divvun-runtime before 0.4.0 executes the pipeline by writing its source text,
+# and nothing else, into a directory under TMPDIR -- so an import of a file
+# beside the pipeline resolves against that directory and dangles, while
+# `deno check` on the real file passes. Point TMPDIR at a directory of our own
+# with the config staged where the copied pipeline will look for it: one level
+# up from the directory the pipeline is written into. Harmless on a runtime new
+# enough to execute pipelines in place, which never looks here.
+	$(AM_V_at)rm -rf $(builddir)/.drb-tmp
+	$(AM_V_at)test -z "$(GIELLA_GC_SPELLER_CONFIG_SRC)" || { \
+	  $(MKDIR_P) $(builddir)/.drb-tmp/spellcheckers && \
+	  cp -f $(GIELLA_GC_SPELLER_CONFIG_SRC) \
+	        $(builddir)/.drb-tmp/spellcheckers/config.json ; }
+	$(AM_V_at)$(MKDIR_P) $(builddir)/.drb-tmp
+	$(AM_V_GEN)cd $(builddir) && TMPDIR=$(abs_builddir)/.drb-tmp $(DIVVUN_RUNTIME) bundle
+	$(AM_V_at)rm -rf $(builddir)/.drb-tmp
 
 endif # HAVE_DIVVUN_RUNTIME
 

@@ -46,23 +46,26 @@ endif
 SPELLER_VARIANT_BADGE_FILES=$(patsubst %,$(srcdir)/badgedata/speller-suggestions-%.json,$(SPELLER_BADGE_VARIANTS))
 
 # no regenerations while debugging
-doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE) \
+doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
+DOCFILES=\
 	badgedata/fst-lemmacount.json \
-	badgedata/fst-maturity.json \
-	badgedata/fst-variants.json \
-	badgedata/fst-version.json \
+	badgedata/pkg-maturity.json \
+	badgedata/pkg-variants.json \
+	badgedata/version.json \
 	badgedata/speller-suggestions.json \
 	$(SPELLER_VARIANT_BADGE_FILES) \
-	badgedata/speller-version.json
+	badgedata/speller-version.json \
+	badgedata/gramcheck-version.json \
+	badgedata/gramcheck-rules.json
 
-.PHONY: generate-markdown regenerate-markdown FORCE
+.PHONY: generate-markdown regenerate-markdown docs FORCE
+
+docs: $(DOCFILES)
 
 regenerate-markdown: generate-markdown
 
 DOCC2MDWIKI=$(GTCORE)/scripts/doccomments2ghpages.awk
 DOCC2MDWIKI_CG3=$(GTCORE)/scripts/doccomments2ghpages-vislcg.awk
-
-GRAPHPLOTTER=$(GTCORE)/scripts/plot-speller-progress.R
 
 # Set flags for variant prooftools availability:
 if WANT_DIALECT_PROOFTOOLS
@@ -78,25 +81,18 @@ WANT_ALT_ORTH_PROOFTOOLS_FLAG=no
 endif
 
 if WANT_SPELLERS
-speller-report.svg: speller-report.tsv $(GRAPHPLOTTER)
-	$(AM_V_GEN)"$(R)" --no-save < $(GRAPHPLOTTER)
-
-speller-report.tsv: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
-	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -t $@
-
+# $(DIVVUN_ACCURACY) was never defined by configure; the accuracy tool is the
+# `accuracy` subcommand of divvunspell, which m4 already probes as $(DIVVUNSPELL)
+# (see am-shared/tools-spellcheckers-test-include.am, which uses it directly).
 report.json: spell-tests.tsv $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
-	$(AM_V_GEN)$(DIVVUN_ACCURACY) $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst -o $@
+	$(AM_V_GEN)$(DIVVUNSPELL) accuracy -o $@ $< $(top_builddir)/tools/spellcheckers/$(GTLANG2).zhfst
 
 spell-tests.tsv:
 	$(AM_V_GEN)cut -f 1,2 `find $(top_srcdir) -name typos.tsv` |\
 		egrep -v '^#' > $@
 
 else
-speller-report.svg: 
-	@echo need to configure --enable-spellers to generate statistics
-	touch $@
-
-report.json: 
+report.json:
 	@echo need to configure --enable-spellers to generate statistics
 	touch $@
 endif
@@ -107,13 +103,13 @@ $(srcdir)/badgedata/fst-lemmacount.json: FORCE
 	$(AM_V_GEN)$(GTCORE)/scripts/make-lemmacount.json.sh $(abs_top_srcdir) > $@
 
 # Generate a maturity.json file as endpoint for the maturity badge.
-$(srcdir)/badgedata/fst-maturity.json: FORCE
+$(srcdir)/badgedata/pkg-maturity.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-maturity.json.sh $(REPONAME) > $@
 
-$(srcdir)/badgedata/fst-variants.json: FORCE
+$(srcdir)/badgedata/pkg-variants.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
-	$(AM_V_GEN)$(GTCORE)/scripts/make-fst-variants-json.sh \
+	$(AM_V_GEN)$(GTCORE)/scripts/make-pkg-variants-json.sh \
 		--dialects "$(DIALECTS)" \
 		--areas "$(AREAS)" \
 		--orthographies "$(ALT_ORTHS)" \
@@ -125,7 +121,7 @@ $(srcdir)/badgedata/fst-variants.json: FORCE
 		--build-config "$(top_srcdir)/.build-config.yml" \
 		--output $@
 
-$(srcdir)/badgedata/fst-version.json: FORCE
+$(srcdir)/badgedata/version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) FST > $@
 
@@ -141,7 +137,15 @@ $(srcdir)/badgedata/speller-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) SPELLER > $@
 
-$(srcdir)/badgedata/fst-coverage.json:
+$(srcdir)/badgedata/gramcheck-version.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) GRAMCHECK > $@
+
+$(srcdir)/badgedata/gramcheck-rules.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-gramcheck-rules-json.sh $(abs_top_srcdir) > $@
+
+$(srcdir)/badgedata/fst-coverage.json: FORCE
 	@$(MKDIR_P) $(srcdir)/badgedata
 	@echo this can take some hours...
 	$(AM_V_GEN)$(GTCORE)/scripts/make-coveragebadge-json.sh $(GLANG) > $@
@@ -331,7 +335,6 @@ $(INDEX): $(HEADER) $(LINKS)
 clean-local:
 	$(AM_V_at)-rm -rf $(builddir)/build
 	$(AM_V_at)-rm -rf $(srcdir)/build
-	$(AM_V_at)-rm -f $(doc_DATA)
 	$(AM_V_at)-rm -f *-src.md src-*.md $(srcdir)/*-src.md $(srcdir)/src-*.md
 	$(AM_V_at)-rm -f *-tools.md tools-*.md $(srcdir)/*-tools.md $(srcdir)/tools-*.md
 	$(AM_V_at)-rm -f generated-markdowns.*

@@ -62,6 +62,12 @@ if test -z "$label" ; then
         GRAMCHECK)
             label="GramCheck version"
             ;;
+        HYPH)
+            label="Hyphenator version"
+            ;;
+        TTSTEXTPROC)
+            label="TTS textproc version"
+            ;;
         *)
             label="${varname} version"
             ;;

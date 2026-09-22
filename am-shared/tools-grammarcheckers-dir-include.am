@@ -201,11 +201,42 @@ assets/errors-%.ftl: errors-%.ftl | assets-dir
 $(GIELLA_GC_PIPELINE): $(srcdir)/$(GIELLA_GC_PIPELINE)
 	$(AM_V_CP)cp -f $< $@
 
+# The pipeline imports the speller's runtime config by a path relative to
+# itself, and it is the copy above that gets bundled, so out of source that
+# import resolves inside the build tree and the file has to be there.
+#
+# Copied by the recipe rather than built as a target: VPATH search resolves
+# the build-tree path against srcdir, finds the config sitting there, and
+# declares the target already made -- so the copy never happens and only the
+# out-of-source build, which is the one that needs it, goes without. Naming
+# the source file as a prerequisite still rebuilds the bundle when it changes.
+# Empty for a language that has no config.json, hence the test.
+GIELLA_GC_SPELLER_CONFIG_SRC=$(wildcard $(top_srcdir)/tools/spellcheckers/config.json)
+
 # Build the .drb bundle
 $(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) \
+						$(GIELLA_GC_SPELLER_CONFIG_SRC) \
 						$(GIELLA_GC_ASSETS)
 	$(AM_V_at)test -f $(GIELLA_GC_PIPELINE) || cp -f $(srcdir)/$(GIELLA_GC_PIPELINE) $(GIELLA_GC_PIPELINE)
-	$(AM_V_GEN)cd $(builddir) && $(DIVVUN_RUNTIME) bundle
+	$(AM_V_at)test -z "$(GIELLA_GC_SPELLER_CONFIG_SRC)" || { \
+	  $(MKDIR_P) $(top_builddir)/tools/spellcheckers && \
+	  cp -f $(GIELLA_GC_SPELLER_CONFIG_SRC) \
+	        $(top_builddir)/tools/spellcheckers/config.json ; }
+# divvun-runtime before 0.4.0 executes the pipeline by writing its source text,
+# and nothing else, into a directory under TMPDIR -- so an import of a file
+# beside the pipeline resolves against that directory and dangles, while
+# `deno check` on the real file passes. Point TMPDIR at a directory of our own
+# with the config staged where the copied pipeline will look for it: one level
+# up from the directory the pipeline is written into. Harmless on a runtime new
+# enough to execute pipelines in place, which never looks here.
+	$(AM_V_at)rm -rf $(builddir)/.drb-tmp
+	$(AM_V_at)test -z "$(GIELLA_GC_SPELLER_CONFIG_SRC)" || { \
+	  $(MKDIR_P) $(builddir)/.drb-tmp/spellcheckers && \
+	  cp -f $(GIELLA_GC_SPELLER_CONFIG_SRC) \
+	        $(builddir)/.drb-tmp/spellcheckers/config.json ; }
+	$(AM_V_at)$(MKDIR_P) $(builddir)/.drb-tmp
+	$(AM_V_GEN)cd $(builddir) && TMPDIR=$(abs_builddir)/.drb-tmp $(DIVVUN_RUNTIME) bundle
+	$(AM_V_at)rm -rf $(builddir)/.drb-tmp
 
 endif # HAVE_DIVVUN_RUNTIME
 

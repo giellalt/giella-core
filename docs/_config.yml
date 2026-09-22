@@ -1,12 +1,12 @@
-remote_theme: giellalt/jekyll-theme-giellalt@main
+theme: jekyll-theme-giellalt
+
 title: giella-core
 description: Core tools and resources for the GiellaLT infrastructure
-plugins:
-  - jekyll-remote-theme
-  - jekyll-seo-tag
-  - jekyll-github-metadata
-  - jekyll-include-cache
-  - jemoji
+
+# repository: fallback for jekyll-github-metadata when PAGES_REPO_NWO isn't
+# set (e.g. a local build run with JEKYLL_ENV=production, which skips its
+# git-origin-remote autodetection).
+repository: giellalt/giella-core
 
 defaults:
   - scope: { path: "" }

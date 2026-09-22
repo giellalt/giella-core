@@ -59,13 +59,15 @@ $(ALT_WS_ZHFST_FILES): \
 	$(GTLANG2)-%.zhfst: \
 		index.%.xml \
 		.generated/acceptor.%.hfst \
-		.generated/errmodel.%.hfst
+		.generated/errmodel.%.hfst \
+		$(GT_SPELLER_CONFIG_DEP)
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
 	$(AM_V_at)cp index.$*.xml build/$@/index.xml
 	$(AM_V_at)cp .generated/acceptor.$*.hfst build/$@/acceptor.default.hfst
 	$(AM_V_at)cp .generated/errmodel.$*.hfst build/$@/errmodel.default.hfst
+	$(AM_V_at)$(ZHFST_ADD_SPELLER_CONFIG)
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/

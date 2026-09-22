@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script to generate fst-variants.json with information about available variants
-# Usage: make-fst-variants-json.sh [OPTIONS]
+# Script to generate pkg-variants.json with information about available variants
+# Usage: make-pkg-variants-json.sh [OPTIONS]
 #   --dialects "Jok Por Var"
 #   --areas "NO SE"
 #   --orthographies "macron circumfl"
@@ -21,7 +21,7 @@ WRITING_SYSTEMS=""
 DEFAULT_WS=""
 DEFAULT_ORTH=""
 BUILD_CONFIG=""
-OUTPUT="fst-variants.json"
+OUTPUT="pkg-variants.json"
 WANT_DIALECT_PROOFTOOLS="no"
 WANT_ALT_ORTH_PROOFTOOLS="no"
 

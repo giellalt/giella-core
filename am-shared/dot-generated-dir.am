@@ -6,9 +6,59 @@
 # gendir.
 GENDIR=.generated/.stamp
 
-$(GENDIR):
+# Content stamp of the non-file build inputs (giella-core recipes/scripts,
+# hfst tool version); mtime moves only when the content changes.
+GIELLA_BUILD_INPUTS=.generated/build-inputs
+
+# Concurrent makes can run this recipe at once ($(MAKE) $(GENDIR) in recipes
+# under -j), so the temp file must be per-process.
+$(GIELLA_BUILD_INPUTS): GIELLA-BUILD-INPUTS-FORCE
+	$(AM_V_at)$(MKDIR_P) .generated
+	$(AM_V_at)t=$@.tmp.$$$$; { \
+	  echo "giella-core: `git -C '$(GTCORE)' rev-parse HEAD 2>/dev/null || echo no-git`"; \
+	  if test -n "$(HFST_FST2FST)"; then \
+	    echo "hfst: `$(HFST_FST2FST) --version 2>/dev/null | head -n 1 || echo unknown`"; \
+	  fi; \
+	} > $$t; \
+	if cmp -s $$t $@; then rm -f $$t; else mv -f $$t $@; fi
+
+.PHONY: GIELLA-BUILD-INPUTS-FORCE
+GIELLA-BUILD-INPUTS-FORCE:
+
+$(GENDIR): $(GIELLA_BUILD_INPUTS)
 	$(AM_V_at)$(MKDIR_P) `dirname $@`
 	$(AM_V_GEN)touch $@
+
+# Refuse a VPATH build while the SOURCE tree carries a .generated directory
+# from an old in-tree build. VPATH search finds those stale products, decides
+# targets are up to date, and silently reuses them: the speller gets weighted
+# from an old corpus, rule edits do not reach the error model, and nothing in
+# the output says so. Every observed case looked like a successful build.
+#
+# The check is a prerequisite of all-local rather than of $(GENDIR), because
+# $(GENDIR) is itself VPATH-shadowable: with a stale .generated beside the
+# sources, make finds the old .stamp there and never runs the recipe -- the
+# guard would be skipped in exactly the situation it exists for.
+#
+# In-tree builds (srcdir == builddir) legitimately own .generated and are not
+# checked. Escape hatch, at your own risk: GIELLA_ALLOW_DIRTY_SRCDIR=1.
+all-local: giella-srcdir-clean-guard
+check-local: giella-srcdir-clean-guard
+.PHONY: giella-srcdir-clean-guard
+giella-srcdir-clean-guard:
+	$(AM_V_at)if test -z "$$GIELLA_ALLOW_DIRTY_SRCDIR" \
+	    && test "$(abs_srcdir)" != "$(abs_builddir)" \
+	    && test -d "$(srcdir)/.generated"; then \
+	  echo "*** ERROR: $(abs_srcdir)/.generated exists." ; \
+	  echo "*** The source tree carries build products from an old in-tree" ; \
+	  echo "*** build. A VPATH build here would silently reuse them instead" ; \
+	  echo "*** of rebuilding, so results would not match the sources." ; \
+	  echo "*** Clean the source tree first:" ; \
+	  echo "***     git -C $(abs_top_srcdir) clean -fdX    (preview: -ndX)" ; \
+	  echo "*** or remove the directory: rm -rf $(abs_srcdir)/.generated" ; \
+	  echo "*** To build anyway: GIELLA_ALLOW_DIRTY_SRCDIR=1 make" ; \
+	  exit 1 ; \
+	fi
 
 # XXX while split between temporary and final targets isn't cleaned up
 %.hfst: .generated/%.hfst

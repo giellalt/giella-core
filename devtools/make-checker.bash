@@ -5,6 +5,9 @@ if ! test -d lang-zxx ; then
     echo "run this script in giellalt gut root that has lang-* subdirs!"
     exit 2
 fi
+if test -f broken-makes ; then
+    rm -v broken-makes
+fi
 for f in lang-* ; do
     if test $ask = always ; then
         echo "skip $f?"
@@ -23,6 +26,7 @@ for f in lang-* ; do
     ./configure "$@" || exit 1
     if ! make ; then
         echo this needs to be fixed later...
+        date >> ../broken-makes
         echo "$f" >> ../broken-makes
         popd || exit 1
         continue
@@ -42,4 +46,5 @@ done
 if test -s broken-makes ; then
     echo these need to be fixed:
     cat broken-makes
+    rm -v broken-makes
 fi

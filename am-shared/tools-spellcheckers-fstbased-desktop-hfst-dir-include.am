@@ -484,13 +484,15 @@ editdist.%.regex: editdist.%.txt $(initial_letter_deps) $(GENDIR)
 # we can test it without installing it (the '3' dir is a voikko requirement):
 $(GT_SPELLING_HFST): index.xml \
 					 $(GT_ERRMODELS) \
-					 $(GT_SPELLER_ACCEPTOR)
+					 $(GT_SPELLER_ACCEPTOR) \
+					 $(GT_SPELLER_CONFIG_DEP)
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
 	$(AM_V_at)cp index.xml build/$@/index.xml
 	$(AM_V_at)cp $(GT_SPELLER_ACCEPTOR) build/$@/
 	$(AM_V_at)cp $(GT_ERRMODELS) build/$@/$(GT_ERRMODELS)
+	$(AM_V_at)$(ZHFST_ADD_SPELLER_CONFIG)
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/
@@ -502,16 +504,60 @@ $(ALL_DESKTOP_ZHFST_FILES): \
 %-desktop.zhfst: %.zhfst
 	$(AM_V_GEN)ln -f $< $@
 
+####### *.bhfst file (opt-in): #######
+# Compact divvunspell speller, error model left un-expanded. Requires
+# divvun-hfst and a divvunspell that determinises during search.
+HFST_BHFST=$(dir $(HFST_FST2FST))hfst-bhfst
+
+.generated/errmodel.compact.%.hfst: .generated/words.%.desktop.hfst \
+				 $(MAYBE_WORDS2EMOJIS) \
+				 $(initial_letter_deps) \
+				 .generated/editdist.all.%.desktop.hfst \
+				 $(final_strings_deps) \
+				 $(GENDIR)
+	$(AM_V_GEN)m=.generated/errmodel.compact.$*.work.hfst; \
+	cp .generated/editdist.all.$*.desktop.hfst $$m; \
+	if test -f .generated/final_strings.all.$*.desktop.hfst; then \
+	  $(HFST_REPEAT) -f 0 -t 1 .generated/final_strings.all.$*.desktop.hfst \
+	    | $(HFST_CONCATENATE) $$m - -o $$m.2 && mv -f $$m.2 $$m; \
+	fi; \
+	if test -f .generated/initial_letters.all.$*.desktop.hfst; then \
+	  $(HFST_REPEAT) -f 0 -t 1 .generated/initial_letters.all.$*.desktop.hfst \
+	    | $(HFST_CONCATENATE) - $$m -o $$m.2 && mv -f $$m.2 $$m; \
+	fi; \
+	$(HFST_DISJUNCT) .generated/words.$*.desktop.hfst $$m -o $$m.2 \
+	  && mv -f $$m.2 $$m; \
+	if test -n "$(MAYBE_WORDS2EMOJIS)" && test -f "$(MAYBE_WORDS2EMOJIS)"; then \
+	  $(HFST_DISJUNCT) $$m $(MAYBE_WORDS2EMOJIS) -o $$m.2 && mv -f $$m.2 $$m; \
+	fi; \
+	$(HFST_PUSH_WEIGHTS) --push=initial -i $$m -o $@; \
+	rm -f $$m $$m.2
+
+$(GTLANG2).bhfst: .generated/acceptor.default.hfst \
+		.generated/errmodel.compact.default.hfst \
+		index.xml \
+		$(GT_SPELLER_CONFIG_DEP)
+	$(AM_V_GEN)$(HFST_BHFST) \
+		-a .generated/acceptor.default.hfst \
+		-e .generated/errmodel.compact.default.hfst \
+		-X index.xml \
+		$(if $(GT_SPELLER_CONFIG_DEP),-c $(GT_SPELLER_CONFIG)) \
+		-o $@
+
+CLEANFILES+=$(GTLANG2).bhfst
+
 # testing analyser spellers...
 %-analyser.zhfst: index.xml \
 					 $(GT_ERRMODELS) \
-					 $(GT_SPELLER_ANALYSER)
+					 $(GT_SPELLER_ANALYSER) \
+					 $(GT_SPELLER_CONFIG_DEP)
 	$(AM_V_at)rm -f $@
 	$(AM_V_at)$(MKDIR_P) build/$@
 	$(AM_V_at)rm -f build/$@/*
 	$(AM_V_at)sed 's/acceptor.default/analyser.default/g' < index.xml > build/$@/index.xml
 	$(AM_V_at)cp $(GT_SPELLER_ANALYSER) build/$@/
 	$(AM_V_at)cp $(GT_ERRMODELS) build/$@/$(GT_ERRMODELS)
+	$(AM_V_at)$(ZHFST_ADD_SPELLER_CONFIG)
 	$(AM_V_ZIP)cd build/$@/ && $(ZIP) $(ZIPFLAGS) ../../$@ *
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/

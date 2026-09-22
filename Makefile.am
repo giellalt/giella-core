@@ -19,9 +19,9 @@ SUBDIRS = . scripts
 
 EXTRA_DIST = $(PACKAGE).pc.in
 
-.PHONY: FORCE
+.PHONY: docs FORCE
 
-all-local: $(srcdir)/docs/badgedata/version.json
+docs: $(srcdir)/docs/badgedata/version.json
 
 $(srcdir)/docs/badgedata/version.json: FORCE
 	@mkdir -p $(srcdir)/docs/badgedata
@@ -108,6 +108,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/clean_weight_corpus.sh \
    scripts/convert-divvunsuggest-to-almostplain.awk \
    scripts/count-all-lemmas.sh \
+   scripts/count-gramcheck-rules.sh \
    scripts/data/cohort_to_table_footer.html \
    scripts/data/cohort_to_table_header.html \
    scripts/doccomments2ghpages.awk \
@@ -139,6 +140,7 @@ nobase_dist_pkgdata_SCRIPTS = \
    scripts/iso-639-3.txt \
    scripts/lookup2cg \
    scripts/make-hfstspeller-version-easter-egg.sh \
+   scripts/make-gramcheck-rules-json.sh \
    scripts/make-lemmacount.json.sh \
    scripts/make-maturity.json.sh \
    scripts/merge-templates.sh \

@@ -5,7 +5,7 @@
 
 function print_usage() {
     echo "Usage: $0 INPUTDIR VARNAME [--label LABEL]"
-    echo "Build version.json for INPUTDIR (language root dir)"
+    echo "Build a version badge JSON (e.g. pkg-version.json) for INPUTDIR (language root dir)"
     echo
     echo "  VARNAME                 Version variable name (e.g., FST, SPELLER, GRAMCHECK)"
     echo "  -h, --help              Print this usage info"

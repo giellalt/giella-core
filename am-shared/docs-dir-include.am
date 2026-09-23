@@ -51,7 +51,7 @@ DOCFILES=\
 	badgedata/fst-lemmacount.json \
 	badgedata/pkg-maturity.json \
 	badgedata/pkg-variants.json \
-	badgedata/version.json \
+	badgedata/pkg-version.json \
 	badgedata/speller-suggestions.json \
 	$(SPELLER_VARIANT_BADGE_FILES) \
 	badgedata/speller-version.json \
@@ -121,7 +121,7 @@ $(srcdir)/badgedata/pkg-variants.json: FORCE
 		--build-config "$(top_srcdir)/.build-config.yml" \
 		--output $@
 
-$(srcdir)/badgedata/version.json: FORCE
+$(srcdir)/badgedata/pkg-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) FST > $@
 

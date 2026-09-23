@@ -8,8 +8,7 @@ Badge JSON files are generated in the `docs/badgedata/` directory of each langua
 
 ## File Naming Convention
 
-Files follow the pattern: `prefix-datatype.json`, except `version.json` (the
-primary FST/package version, unprefixed since every repo has exactly one).
+Files follow the pattern: `prefix-datatype.json`.
 
 ### Prefixes
 
@@ -23,11 +22,11 @@ primary FST/package version, unprefixed since every repo has exactly one).
 ### FST-related
 
 - `fst-lemmacount.json`: Number of lemmas in the lexicon
-- `version.json`: FST/package version number (from AC_INIT in configure.ac)
 
 ### Package-related
 
 - `pkg-maturity.json`: Maturity level of the language resources
+- `pkg-version.json`: Package version number (from AC_INIT in configure.ac)
 
 ### Speller-related
 

@@ -21,9 +21,9 @@ EXTRA_DIST = $(PACKAGE).pc.in
 
 .PHONY: docs FORCE
 
-docs: $(srcdir)/docs/badgedata/version.json
+docs: $(srcdir)/docs/badgedata/pkg-version.json
 
-$(srcdir)/docs/badgedata/version.json: FORCE
+$(srcdir)/docs/badgedata/pkg-version.json: FORCE
 	@mkdir -p $(srcdir)/docs/badgedata
 	$(AM_V_GEN)$(abs_top_srcdir)/scripts/make-version-json.sh $(abs_top_srcdir) FST --label "Version" > $@
 

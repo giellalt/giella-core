@@ -12,6 +12,12 @@ e > mg {
     counter-reset: translationgroup;
 }
 
+mg > re {
+    display: inline;
+    font-size: 1.05em;
+    margin-left: 2ex;
+}
+
 apps:before {
     display: block;
     content: "Apps: ";

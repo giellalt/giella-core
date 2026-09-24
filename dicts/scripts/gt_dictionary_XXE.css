@@ -7,6 +7,15 @@ r, rootdict {
     background-color: #fff;
 }
 
+
+/* mg styling: */
+mg > re {
+    display: inline;
+    font-size: 1.05em;
+    margin-left: 2ex;
+}
+
+
 /* tg styling: */
 tg + tg:before {
     content: "; ";

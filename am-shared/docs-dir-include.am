@@ -55,7 +55,9 @@ DOCFILES=\
 	badgedata/speller-suggestions.json \
 	$(SPELLER_VARIANT_BADGE_FILES) \
 	badgedata/speller-version.json \
+	badgedata/hyphenator-version.json \
 	badgedata/gramcheck-version.json \
+	badgedata/tts-textproc-version.json \
 	badgedata/gramcheck-rules.json
 
 .PHONY: generate-markdown regenerate-markdown docs FORCE
@@ -137,9 +139,17 @@ $(srcdir)/badgedata/speller-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) SPELLER > $@
 
+$(srcdir)/badgedata/hyphenator-version.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) HYPH > $@
+
 $(srcdir)/badgedata/gramcheck-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
 	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) GRAMCHECK > $@
+
+$(srcdir)/badgedata/tts-textproc-version.json: FORCE
+	@mkdir -p $(srcdir)/badgedata
+	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) TTSTEXTPROC > $@
 
 $(srcdir)/badgedata/gramcheck-rules.json: FORCE
 	@mkdir -p $(srcdir)/badgedata

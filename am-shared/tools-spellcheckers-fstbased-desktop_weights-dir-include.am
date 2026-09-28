@@ -42,34 +42,58 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 #
 # Override with either of:
 #   make GIELLA_CORPUS_ROOT=/path/to/checkouts
+#   make GIELLA_CORPUS_REPOS="corpus-xxx"   # (or in the environment) only these
 #   make GIELLA_CORPUS_DIRS="/path/to/corpus-xxx /path/to/corpus-xxx-x-closed"
 #   make GIELLA_CORPUS_DIRS=              # force the in-tree copy
 #
-# In CI: clone the corpus repos beside the language repo, exactly where
-# giella-core and shared-mul already are, before running make --
-#
-#   git clone --depth 1 https://github.com/giellalt/corpus-$(GLANG).git \
-#       ../corpus-$(GLANG)
-#   git clone --depth 1 git@github.com:giellalt/corpus-$(GLANG)-x-closed.git \
-#       ../corpus-$(GLANG)-x-closed     # only where credentials allow
-#
-# Shallow is enough: only the working tree is read, never the history. A runner
-# without access to the closed corpus should skip that clone and let the build
-# use whatever it does have -- a failed clone must not fail the job. A build
-# with the closed corpus and one without both produce a valid speller, and a
-# measurably different one, which is worth knowing when comparing numbers
-# between machines.
+# In CI (the CI environment variable set, as Buildkite and GitHub Actions do)
+# nothing is guessed. Which corpus a speller was weighted from must not depend
+# on which directories happen to be on the runner: a step that reuses a built
+# tree without the corpus repos would otherwise rebuild the speller from the
+# in-tree copy and test that instead of the one shipped. So in CI the build
+# must say which corpus repos it uses -- GIELLA_CORPUS_REPOS, from the
+# environment or the command line, empty meaning the in-tree copy (most
+# languages have no corpus repo) -- every one it names must be checked out
+# beside the language repo, and a corpus with no text for the language is an
+# error rather than a quiet fallback. divvun-actions clones the repos it can,
+# sets GIELLA_CORPUS_REPOS to those, and gives later steps the same ones.
+# Shallow clones are enough: only the working tree is read, never the history.
+# A build with the closed corpus and one without both produce a valid
+# speller, and a measurably different one.
 GIELLA_CORPUS_ROOT = $(top_srcdir)/..
-GIELLA_CORPUS_REPOS = corpus-$(GLANG) corpus-$(GLANG)-x-closed
+GIELLA_CORPUS_REPOS ?= corpus-$(GLANG) corpus-$(GLANG)-x-closed
 GIELLA_CORPUS_DIRS = $(patsubst %/converted,%,$(wildcard \
     $(foreach d,$(GIELLA_CORPUS_REPOS),$(GIELLA_CORPUS_ROOT)/$(d)/converted)))
 CORPUS2RAWTEXT = $(GTCORE)/scripts/corpus2rawtext.py
 
+# Shell test: true on a CI runner.
+GIELLA_IN_CI = { test -n "$$CI" && test "$$CI" != false && test "$$CI" != 0 ; }
+# Whether the corpus was named from outside this file, and the directories that
+# naming asks for (missing ones included, unlike GIELLA_CORPUS_DIRS's default).
+GIELLA_CORPUS_NAMED = $(strip \
+    $(if $(filter-out file,$(origin GIELLA_CORPUS_REPOS)),yes) \
+    $(if $(filter-out file,$(origin GIELLA_CORPUS_DIRS)),yes))
+GIELLA_CORPUS_WANTED = $(if $(filter file,$(origin GIELLA_CORPUS_DIRS)),\
+    $(foreach r,$(GIELLA_CORPUS_REPOS),$(GIELLA_CORPUS_ROOT)/$(r)),\
+    $(GIELLA_CORPUS_DIRS))
+
 # The resolved source list, as a file, so that a tree which gains or loses a
 # corpus repo rebuilds the weighting instead of silently keeping the text it
 # assembled last time. The recipe always runs; the file only changes, and so
-# only triggers a rebuild, when the answer changes.
+# only triggers a rebuild, when the answer changes. In CI it first checks that
+# the corpus was named and is all there (see "In CI" above).
 .generated/$(CORPUSNAME).corpussrc: FORCE $(GENDIR)
+	$(AM_V_at)if $(GIELLA_IN_CI) ; then \
+	    if test -z '$(GIELLA_CORPUS_NAMED)' ; then \
+	        echo "$@: CI is set, so the speller corpus is not guessed from what is checked out: set GIELLA_CORPUS_REPOS to the corpus repos this build uses (empty for the in-tree weights/*.raw.txt)" >&2 ; \
+	        exit 1 ; \
+	    fi ; \
+	    for d in $(GIELLA_CORPUS_WANTED) ; do \
+	        test -d "$$d/converted" || { \
+	            echo "$@: CI is set and the speller corpus names $$d, which has no converted/ directory" >&2 ; \
+	            exit 1 ; } ; \
+	    done ; \
+	fi
 	$(AM_V_at)printf '%s\n' '$(GIELLA_CORPUS_DIRS)' > $@.tmp
 	$(AM_V_at)if cmp -s $@.tmp $@ ; then rm -f $@.tmp ; else mv -f $@.tmp $@ ; fi
 
@@ -92,10 +116,14 @@ FORCE:
 	$(AM_V_at)if test -n '$(strip $(GIELLA_CORPUS_DIRS))' ; then \
 	    echo "  CORPUS   $@ <- $(GIELLA_CORPUS_DIRS)" ; \
 	    $(PYTHON) $(CORPUS2RAWTEXT) -l $(GLANG) -o $@ $(GIELLA_CORPUS_DIRS) \
-	      || { echo "  CORPUS   $@ <- $< (extraction found no $(GLANG) text)" ; \
+	      || { if $(GIELLA_IN_CI) ; then \
+	               echo "$@: CI is set and $(GIELLA_CORPUS_DIRS) holds no $(GLANG) text" >&2 ; \
+	               exit 1 ; \
+	           fi ; \
+	           echo "  CORPUS   $@ <- $< (extraction found no $(GLANG) text)" ; \
 	           cp $< $@ ; } ; \
 	else \
-	    echo "  CORPUS   $@ <- $< (no corpus-$(GLANG) checkout beside $(abs_top_srcdir))" ; \
+	    echo "  CORPUS   $@ <- $< ($(if $(GIELLA_CORPUS_NAMED),no corpus repo named,no corpus-$(GLANG) checkout beside $(abs_top_srcdir)))" ; \
 	    cp $< $@ ; \
 	fi
 

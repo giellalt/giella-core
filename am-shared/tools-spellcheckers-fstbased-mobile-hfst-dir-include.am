@@ -90,11 +90,11 @@ mob_initial_letter_all_deps=$(shell \
 ## Set file name to the empty string or initial_letters.all depending on variable:
 mob_initial_letter_all_build=$(shell \
 	if   [[ $(MOB_INITIAL_EDITS) == 'regex' ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(MOB_INITIAL_EDITS) == 'txt'   ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(MOB_INITIAL_EDITS) == 'both'  ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@'; \
 	else \
 		echo ""; \
 	fi)
@@ -111,9 +111,9 @@ mob_strings_deps=$(shell \
 ## Set build command for mob_strings.all depending on variable value:
 mob_strings_fst_include=$(shell \
 	if [[ $(MOB_STRING_EDITS) != 'no' ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^'; \
 	else \
-		echo "$(AM_V_GEN)cat $^"; \
+		echo '$(AM_V_GEN)cat $^'; \
 	fi)
 
 # Set dependency file name(s) depending on variable value:
@@ -131,11 +131,11 @@ mob_strings_all_deps=$(shell \
 # Set build command depending on variable:
 mob_strings_all_build=$(shell \
 	if   [[ $(MOB_STRING_EDITS) == 'regex' ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(MOB_STRING_EDITS) == 'txt'   ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(MOB_STRING_EDITS) == 'both'  ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@'; \
 	else \
 		echo ""; \
 	fi)
@@ -172,11 +172,11 @@ mob_final_strings_all_deps=$(shell \
 # Set build command depending on variable:
 mob_final_strings_all_build=$(shell \
 	if   [[ $(MOB_FINAL_STRING_EDITS) == 'regex' ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(MOB_FINAL_STRING_EDITS) == 'txt'   ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(MOB_FINAL_STRING_EDITS) == 'both'  ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@'; \
 	else \
 		echo ""; \
 	fi)

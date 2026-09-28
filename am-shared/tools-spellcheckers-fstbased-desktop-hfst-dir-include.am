@@ -84,11 +84,11 @@ initial_letter_all_deps=$(shell \
 # Set file name to the empty string or initial_letters.all depending on variable:
 initial_letter_all_build=$(shell \
 	if   [[ $(INITIAL_EDITS) == 'regex' ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(INITIAL_EDITS) == 'txt'   ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(INITIAL_EDITS) == 'both'  ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@'; \
 	else \
 		echo ""; \
 	fi)
@@ -105,9 +105,9 @@ strings_deps=$(shell \
 # Set build command for strings.all depending on variable value:
 strings_fst_include=$(shell \
 	if [[ $(STRING_EDITS) != 'no' ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^'; \
 	else \
-		echo "$(AM_V_GEN)cat $^"; \
+		echo '$(AM_V_GEN)cat $^'; \
 	fi)
 
 # Set dependency file name(s) depending on variable value:
@@ -125,11 +125,11 @@ strings_all_deps=$(shell \
 # Set build command depending on variable:
 strings_all_build=$(shell \
 	if   [[ $(STRING_EDITS) == 'regex' ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(STRING_EDITS) == 'txt'   ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(STRING_EDITS) == 'both'  ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@'; \
 	else \
 		echo ""; \
 	fi)
@@ -166,11 +166,11 @@ final_strings_all_deps=$(shell \
 # Set build command depending on variable:
 final_strings_all_build=$(shell \
 	if   [[ $(FINAL_STRING_EDITS) == 'regex' ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(FINAL_STRING_EDITS) == 'txt'   ]] ; then \
-		echo "$(AM_V_CP)cp -f $< $@"; \
+		echo '$(AM_V_CP)cp -f $< $@'; \
 	elif [[ $(FINAL_STRING_EDITS) == 'both'  ]] ; then \
-		echo "$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@"; \
+		echo '$(AM_V_UNION)$(HFST_DISJUNCT) $^ -o $@'; \
 	else \
 		echo ""; \
 	fi)

@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# Print the lines of the nuvviDspeller easter egg: the suggestions a speller
+# gives for "nuvviDspeller", which say what it was built from. Each line is
+# "key: value", readable by a person and parseable by a tool. Any speller
+# found in the wild, and any accuracy report scored on one, can then be traced
+# to its exact inputs.
+#
+# The build rules pass what only they know in the environment; anything not
+# given is left out rather than guessed:
+#   EGG_HFST_TOOL       an hfst tool of this build (its --version names the
+#                       toolchain: Divvun HFST or the C++ HFST)
+#   EGG_CORPUS_SRC      .generated/<corpus>.corpussrc, the resolved corpus repos
+#   EGG_CORPUS_TEXT     .generated/<corpus>.corpus.txt, the text weighted from
+#   EGG_CORPUS_RAW      the in-tree weights/<corpus>.raw.txt
+#   EGG_WEIGHTS_CONFIG  weights/config.json
+#   EGG_ERRMODEL        the error model settings, formatted
+# The EGG_CORPUS_* variables are set only when the speller has corpus weights.
+# A CI build identifies itself through the CI's own variables.
+
 HFST_INFO=@HFST_INFO@
 giella_core=@GIELLA_CORE@
 
@@ -10,7 +28,7 @@ if ! test $# -eq 4 -o $# -eq 5 ; then
     echo
     echo "where:"
     echo "   LANGUAGE_CODE=iso639 code of the wanted language"
-    echo "   TOPSRCDIR=Obsolete"
+    echo "   TOPSRCDIR=top source directory of the language repo"
     echo "   VERSION=speller version info"
     echo "   PLATFORM=target platform, one of 'mobile' or 'desktop'"
     echo "   VARIANT=variant tag (script code, country code, alt. spelling)"
@@ -19,20 +37,10 @@ if ! test $# -eq 4 -o $# -eq 5 ; then
 fi
 
 Language=$($giella_core/scripts/iso639-to-name.sh $1)
-RevisionPath=$2
+TopSrcDir=$2
 Version=$3
 Platform=$4
 Variant=$5
-
-# SOURCE_DATE_EPOCH makes the easter egg, and with it the speller
-# archives, reproducible byte for byte.
-if test -n "${SOURCE_DATE_EPOCH:-}"; then
-    Date=$(date -u -r "$SOURCE_DATE_EPOCH" +%d.%m.%Y-%H%M 2>/dev/null \
-        || date -u -d "@$SOURCE_DATE_EPOCH" +%d.%m.%Y-%H%M)
-else
-    Date=$(date +%d.%m.%Y-%H%M)
-fi
-HfstVersion=$( $HFST_INFO | grep 'HFST version' | grep -Eo '[0-9.]+')
 
 if test x$Variant == 'xdefault' -o "x$Variant" == 'x'; then
     VariantText=""
@@ -42,6 +50,95 @@ else
     Variant="-$Variant"
 fi
 
-echo "Divvun speller for $Language$VariantText"
-echo "$1$Variant, $Platform, version $Version, ${Date}"
-echo "Built using HFST $HfstVersion"
+# "<short commit> <commit date>" of the checkout at $1, with a note when
+# tracked files differ from that commit. manifest.toml is left out: configure
+# rewrites it in place. Fails when $1 is not a git checkout.
+git_state() {
+    local rev
+    rev=$(git -C "$1" log -1 --format='%h %cs' --abbrev=8 2>/dev/null)
+    test -n "$rev" || return 1
+    if test -n "$(git -C "$1" status --porcelain --untracked-files=no \
+            -- . ':(exclude)manifest.toml' 2>/dev/null)"; then
+        rev="$rev + local changes"
+    fi
+    echo "$rev"
+}
+
+# SOURCE_DATE_EPOCH makes the easter egg, and with it the speller
+# archives, reproducible byte for byte.
+if test -n "${SOURCE_DATE_EPOCH:-}"; then
+    Build=$(date -u -r "$SOURCE_DATE_EPOCH" '+%Y-%m-%d %H:%M UTC' 2>/dev/null \
+        || date -u -d "@$SOURCE_DATE_EPOCH" '+%Y-%m-%d %H:%M UTC')
+else
+    Build=$(date -u '+%Y-%m-%d %H:%M UTC')
+fi
+if test -n "${BUILDKITE_BUILD_NUMBER:-}"; then
+    Build="$Build, buildkite ${BUILDKITE_PIPELINE_SLUG:-} build $BUILDKITE_BUILD_NUMBER"
+elif test -n "${GITHUB_RUN_ID:-}"; then
+    Build="$Build, github ${GITHUB_REPOSITORY:-} run $GITHUB_RUN_ID"
+elif test -n "${CI:-}" && test "$CI" != false && test "$CI" != 0; then
+    Build="$Build, CI"
+else
+    Build="$Build, local"
+fi
+
+# The language repo, named after its origin when it has one.
+LangName=$(git -C "$TopSrcDir" remote get-url origin 2>/dev/null)
+LangName=${LangName%.git}
+LangName=${LangName##*[/:]}
+test -n "$LangName" || LangName=$(basename "$(cd "$TopSrcDir" && pwd -P)")
+LangState=$(git_state "$TopSrcDir") || LangState="(not a git checkout)"
+
+# The corpus the frequency weights came from: the corpus repos when the
+# weighting found them (and extracted text from them), else the in-tree file.
+if test -n "${EGG_CORPUS_TEXT:-}"; then
+    Corpus=""
+    if test -s "${EGG_CORPUS_SRC:-/dev/null}" \
+            && ! cmp -s "$EGG_CORPUS_TEXT" "${EGG_CORPUS_RAW:-/dev/null}"; then
+        for dir in $(cat "$EGG_CORPUS_SRC"); do
+            state=$(git_state "$dir") || state="(not a git checkout)"
+            Corpus="${Corpus:+$Corpus, }$(basename "$dir") $state"
+        done
+    fi
+    test -n "$Corpus" || Corpus="in-tree weights/$(basename "${EGG_CORPUS_RAW:-}")"
+    Words=$(wc -w < "$EGG_CORPUS_TEXT" 2>/dev/null | tr -d ' ')
+    Corpus="$Corpus, ${Words:-?} words"
+    MaxWeight=$(grep -o '"maxweight"[^,}]*' "${EGG_WEIGHTS_CONFIG:-/dev/null}" 2>/dev/null \
+        | grep -Eo '[0-9.]+$')
+    test -z "$MaxWeight" || Corpus="$Corpus, maxweight $MaxWeight"
+else
+    Corpus="none (no corpus weights)"
+fi
+
+# The toolchain, as its first --version line: "Divvun HFST v0.1.0 (date,
+# commit)" for Divvun HFST, "hfst-strings2fst 0.1 (hfst 3.17.1)" for the C++
+# one.
+Hfst=$("${EGG_HFST_TOOL:-$HFST_INFO}" --version 2>/dev/null | head -n 1)
+
+# giella-core, found from this script's own location, which stays right when
+# the tree is unpacked somewhere other than where it was configured.
+GiellaCoreDir=$(cd "$(dirname "$0")/.." && pwd -P)
+GiellaCoreVersion=$(sed -n 's/^AC_INIT(\[giella-core\], *\[\([^]]*\)\].*/\1/p' \
+    "$GiellaCoreDir/configure.ac" 2>/dev/null)
+GiellaCoreState=$(git_state "$GiellaCoreDir") || GiellaCoreState="(not a git checkout)"
+
+# The sibling repos configure.ac builds against, in the order it lists them.
+Deps=""
+for repo in $(sed -n 's/^gt_[A-Z]*_SHARED(\[[^]]*\], *\[\([^]]*\)\].*/\1/p' \
+        "$TopSrcDir/configure.ac" 2>/dev/null | awk '!seen[$0]++'); do
+    if test -d "$TopSrcDir/../$repo"; then
+        state=$(git_state "$TopSrcDir/../$repo") || state="(not a git checkout)"
+    else
+        state="absent"
+    fi
+    Deps="${Deps:+$Deps, }$repo $state"
+done
+
+echo "speller: Divvun speller for $Language$VariantText, $1$Variant, $Platform, version $Version"
+echo "build: $Build"
+echo "lang: $LangName $LangState"
+echo "corpus: $Corpus"
+test -z "$Hfst" || echo "hfst: $Hfst"
+echo "giella-core: ${GiellaCoreVersion:+$GiellaCoreVersion }$GiellaCoreState"
+test -z "${EGG_ERRMODEL:-}" || echo "errmodel: $EGG_ERRMODEL"
+test -z "$Deps" || echo "deps: $Deps"

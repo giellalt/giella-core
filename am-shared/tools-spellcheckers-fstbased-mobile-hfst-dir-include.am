@@ -230,11 +230,28 @@ noinst_DATA+=$(MOB_GIELLA_ERRMODELS) \
 ####### HFST build rules: #########
 
 ####### Easter egg version info: #######
+# What the easter egg is told beyond what its script finds itself: the corpus
+# weights when the mobile speller has them, the toolchain, and the error model
+# settings (see make-hfstspeller-version-easter-egg.sh). The corpus text is
+# assembled by the desktop weights fragment, from the same resolved repos:
+MOB_EASTEREGG_CORPUS_DEPS = $(if $(filter yes,$(ENABLE_MOB_CORPUS_WEIGHTS)),\
+    .generated/$(MOBILE_CORPUSNAME).corpus.txt)
+MOB_EASTEREGG_ENV = $(if $(filter yes,$(ENABLE_MOB_CORPUS_WEIGHTS)),\
+    EGG_CORPUS_SRC=.generated/$(CORPUSNAME).corpussrc \
+    EGG_CORPUS_TEXT=.generated/$(MOBILE_CORPUSNAME).corpus.txt \
+    EGG_CORPUS_RAW=$(firstword $(wildcard weights/$(MOBILE_CORPUSNAME).raw.txt \
+        $(srcdir)/weights/$(MOBILE_CORPUSNAME).raw.txt)) \
+    EGG_WEIGHTS_CONFIG=$(srcdir)/weights/config.json) \
+    EGG_HFST_TOOL=$(HFST_STRINGS2FST) \
+    EGG_ERRMODEL='edit distance $(MOB_EDIT_DISTANCE), initial edits $(MOB_INITIAL_EDITS), strings $(MOB_STRING_EDITS), final strings $(MOB_FINAL_STRING_EDITS), words $(MOB_WORD_REPLACEMENTS)'
+
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
 $(GIELLA_MOBILE_EASTEREGGS): \
-.generated/easteregg.%.mobile.txt: $(MOB_GT_SPELLER_HFST) $(GENDIR)
-	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
+.generated/easteregg.%.mobile.txt: $(MOB_GT_SPELLER_HFST) \
+		$(MOB_EASTEREGG_CORPUS_DEPS) $(GENDIR)
+	$(AM_V_GEN)$(MOB_EASTEREGG_ENV) \
+		$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \
 		$(SPELLERVERSION) \
@@ -242,8 +259,10 @@ $(GIELLA_MOBILE_EASTEREGGS): \
 		$* \
 		> $@
 
-.generated/easteregg.predict.mobile.txt: $(MOB_GT_SPELLER_HFST) $(GENDIR)
-	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
+.generated/easteregg.predict.mobile.txt: $(MOB_GT_SPELLER_HFST) \
+		$(MOB_EASTEREGG_CORPUS_DEPS) $(GENDIR)
+	$(AM_V_GEN)$(MOB_EASTEREGG_ENV) \
+		$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \
 		$(SPELLERVERSION) \
@@ -251,9 +270,11 @@ $(GIELLA_MOBILE_EASTEREGGS): \
 		$* \
 		> $@
 
-# Easter egg suggestions:
+# Easter egg suggestions, weighted by line so they keep their order. The
+# lines are "key: value", and a colon separates the two sides of a pair in
+# hfst-strings2fst input, so theirs are escaped:
 .generated/easteregg.%.mobile.suggtxt: .generated/easteregg.%.mobile.txt
-	$(AM_V_GEN)sed -e 's/^/nuvviDspeller:/' < $< \
+	$(AM_V_GEN)sed -e 's/:/\\:/g' -e 's/^/nuvviDspeller:/' < $< \
 		| sed = \
 		| sed 'N;s/\n/	/' \
 		| perl -pe 's/(.)\t(.+)/\2\t\1/' \
@@ -261,7 +282,8 @@ $(GIELLA_MOBILE_EASTEREGGS): \
 
 # Easter egg string acceptor:
 .generated/easteregg.%.mobile.hfst: .generated/easteregg.%.mobile.txt
-	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
+	$(AM_V_GEN)sed -e 's/:/\\:/g' < $< \
+		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		| $(HFST_PROJECT) $(HFST_FLAGS) --project=lower > $@
 
 ####### Error model: #######

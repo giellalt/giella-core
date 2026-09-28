@@ -245,10 +245,26 @@ CLEANFILES+=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 ####### HFST build rules: #########
 
 ####### Easter egg version info: #######
+# What the easter egg is told beyond what its script finds itself: the corpus
+# weights when the speller has them, the toolchain, and the error model
+# settings (see make-hfstspeller-version-easter-egg.sh):
+EASTEREGG_CORPUS_DEPS = $(if $(filter yes,$(ENABLE_CORPUS_WEIGHTS)),\
+    .generated/$(CORPUSNAME).corpus.txt)
+EASTEREGG_ENV = $(if $(filter yes,$(ENABLE_CORPUS_WEIGHTS)),\
+    EGG_CORPUS_SRC=.generated/$(CORPUSNAME).corpussrc \
+    EGG_CORPUS_TEXT=.generated/$(CORPUSNAME).corpus.txt \
+    EGG_CORPUS_RAW=$(firstword $(wildcard weights/$(CORPUSNAME).raw.txt \
+        $(srcdir)/weights/$(CORPUSNAME).raw.txt)) \
+    EGG_WEIGHTS_CONFIG=$(srcdir)/weights/config.json) \
+    EGG_HFST_TOOL=$(HFST_STRINGS2FST) \
+    EGG_ERRMODEL='edit distance $(EDIT_DISTANCE), initial edits $(INITIAL_EDITS), strings $(STRING_EDITS), final strings $(FINAL_STRING_EDITS), words $(WORD_REPLACEMENTS)'
+
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
-.generated/easteregg.%.desktop.txt: $(GT_COMMON_SPELLER_ANALYSER) $(GENDIR)
-	$(AM_V_GEN)$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
+.generated/easteregg.%.desktop.txt: $(GT_COMMON_SPELLER_ANALYSER) \
+		$(EASTEREGG_CORPUS_DEPS) $(GENDIR)
+	$(AM_V_GEN)$(EASTEREGG_ENV) \
+		$(GTCORE)/scripts/make-hfstspeller-version-easter-egg.sh \
 		$(GTLANG2) \
 		$(top_srcdir) \
 		$(SPELLERVERSION) \
@@ -256,9 +272,11 @@ CLEANFILES+=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 		$* \
 		> $@
 
-# Easter egg suggestions:
+# Easter egg suggestions, weighted by line so they keep their order. The
+# lines are "key: value", and a colon separates the two sides of a pair in
+# hfst-strings2fst input, so theirs are escaped:
 .generated/easteregg.%.desktop.suggtxt: .generated/easteregg.%.desktop.txt
-	$(AM_V_GEN)sed -e 's/^/nuvviDspeller:/' < $< \
+	$(AM_V_GEN)sed -e 's/:/\\:/g' -e 's/^/nuvviDspeller:/' < $< \
 		| sed = \
 		| sed 'N;s/\n/	/' \
 		| perl -pe 's/(.)\t(.+)/\2\t\1/' \
@@ -279,7 +297,8 @@ CLEANFILES+=$(ALL_ZHFST_FILES) $(ALL_DESKTOP_ZHFST_FILES)
 # Easter egg string acceptor:
 # easteregg.%.desktop.temp.hfst: easteregg.%.desktop.txt
 .generated/easteregg.%.desktop.hfst: .generated/easteregg.%.desktop.txt
-	$(AM_V_GEN)$(HFST_STRINGS2FST) $(HFST_FLAGS) -j < $< \
+	$(AM_V_GEN)sed -e 's/:/\\:/g' < $< \
+		| $(HFST_STRINGS2FST) $(HFST_FLAGS) -j \
 		> $@
 
 # easteregg.%.desktop.hfst: easteregg.%.desktop.temp.hfst \

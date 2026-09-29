@@ -19,6 +19,7 @@ if ! test $# -ge 4 ; then
 fi
 
 runner="@DIVVUN_RUNTIME@"
+giella_core="$(cd "$(dirname "$0")/.." && pwd)"
 archive=$1
 testfile=$2
 goldfile=$3
@@ -27,7 +28,7 @@ if test $# -ge 4 ; then
 fi
 
 
-. "@GIELLA_CORE@/scripts/termcolors.bash"
+. "$giella_core/scripts/termcolors.bash"
 
 if ! test -f $runner ; then
     printf "%sskip%s missing pipeline runner from divvun-runtime" \

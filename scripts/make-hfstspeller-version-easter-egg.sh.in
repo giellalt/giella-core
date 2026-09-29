@@ -19,7 +19,7 @@
 # A CI build identifies itself through the CI's own variables.
 
 HFST_INFO=@HFST_INFO@
-giella_core=@GIELLA_CORE@
+giella_core="$(cd "$(dirname "$0")/.." && pwd)"
 
 # Wrong usage - short instruction:
 if ! test $# -eq 4 -o $# -eq 5 ; then

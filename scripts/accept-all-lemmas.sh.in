@@ -28,7 +28,7 @@ lemmas=$outdir/filtered-lemmas.txt
 rejected_lemmas=$outdir/rejected_lemmas.txt
 checked_lemmas=$outdir/checked_lemmas.txt
 
-@abs_builddir@/extract-lemmas.sh \
+"$(dirname "$0")"/extract-lemmas.sh \
     --exclude "$exclusion" \
     $source_files > "$lemmas"
 rv=$?

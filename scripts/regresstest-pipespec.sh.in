@@ -23,7 +23,8 @@ fi
 
 runner="@DIVVUN_CHECKER@"
 python="@PYTHON@"
-comparator="@GIELLA_CORE@/scripts/vislcg-compare.py"
+giella_core="$(cd "$(dirname "$0")/.." && pwd)"
+comparator="$giella_core/scripts/vislcg-compare.py"
 archive=$1
 testfile=$2
 goldfile=$3
@@ -38,7 +39,7 @@ if test $# -ge 6 ; then
 fi
 
 
-. "@GIELLA_CORE@/scripts/termcolors.bash"
+. "$giella_core/scripts/termcolors.bash"
 
 if ! test -f $comparator ; then
     printf "%sskip%s missing comparation script %s" "$light_blue" "$reset" \

@@ -60,7 +60,7 @@ EXTEDITOR=@SEE@
 ##### Extract lemmas - add additional egrep pattern as parameters: #####
 ##### --include "(pattern1|pattern2|...)"                          #####
 ##### --exclude "(pattern1|pattern2|...)"                          #####
-@abs_builddir@/extract-lemmas.sh \
+"$(dirname "$0")"/extract-lemmas.sh \
     --include "$inclusion" --exclude "$exclusion" \
     "$source_file" > "$lemmas"
 rv=$?

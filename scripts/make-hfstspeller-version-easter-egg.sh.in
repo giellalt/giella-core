@@ -91,13 +91,18 @@ LangState=$(git_state "$TopSrcDir") || LangState="(not a git checkout)"
 
 # The corpus the frequency weights came from: the corpus repos when the
 # weighting found them (and extracted text from them), else the in-tree file.
+# A sensitive corpus repo is not named: the speller ships to the public.
 if test -n "${EGG_CORPUS_TEXT:-}"; then
     Corpus=""
     if test -s "${EGG_CORPUS_SRC:-/dev/null}" \
             && ! cmp -s "$EGG_CORPUS_TEXT" "${EGG_CORPUS_RAW:-/dev/null}"; then
         for dir in $(cat "$EGG_CORPUS_SRC"); do
+            name=$(basename "$dir")
+            case $name in
+                *-x-sensitive) name="${name%-x-sensitive}-xxx" ;;
+            esac
             state=$(git_state "$dir") || state="(not a git checkout)"
-            Corpus="${Corpus:+$Corpus, }$(basename "$dir") $state"
+            Corpus="${Corpus:+$Corpus, }$name $state"
         done
     fi
     test -n "$Corpus" || Corpus="in-tree weights/$(basename "${EGG_CORPUS_RAW:-}")"

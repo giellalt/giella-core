@@ -23,13 +23,14 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 ####### Where the corpus text for the weighting comes from: #######
 # The frequency weighting needs running text. It can come from two places:
 #
-#  1. the corpus repos corpus-$(GLANG) and corpus-$(GLANG)-x-closed, checked
-#     out beside this repo;
+#  1. the corpus repos corpus-$(GLANG), corpus-$(GLANG)-x-closed and
+#     corpus-$(GLANG)-x-sensitive, checked out beside this repo;
 #  2. the copy of some corpus text committed under weights/*.raw.txt.
 #
 # (1) is preferred: it is the whole corpus instead of a slice of it that has to
-# be refreshed by hand, and corpus-*-x-closed must never be committed into a
-# language repo at all, so reading it at build time is the only way to use it.
+# be refreshed by hand, and the non-public corpora must never be committed into
+# a language repo at all, so reading them at build time is the only way to use
+# them.
 # (2) is the fallback, so a checkout with no corpus repos beside it still
 # builds a speller -- a missing corpus repo is never an error.
 #
@@ -37,7 +38,7 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 # they are there is a fact about the moment the speller is built, not about the
 # moment the tree was configured: CI clones them in a step of its own, often
 # after configuring, and a developer who clones one afterwards should not have
-# to know to reconfigure. Only the two directories are stat'ed, never their
+# to know to reconfigure. Only the directories are stat'ed, never their
 # contents.
 #
 # Override with either of:
@@ -61,7 +62,8 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 # A build with the closed corpus and one without both produce a valid
 # speller, and a measurably different one.
 GIELLA_CORPUS_ROOT = $(top_srcdir)/..
-GIELLA_CORPUS_REPOS ?= corpus-$(GLANG) corpus-$(GLANG)-x-closed
+GIELLA_CORPUS_REPOS ?= corpus-$(GLANG) corpus-$(GLANG)-x-closed \
+    corpus-$(GLANG)-x-sensitive
 GIELLA_CORPUS_DIRS = $(patsubst %/converted,%,$(wildcard \
     $(foreach d,$(GIELLA_CORPUS_REPOS),$(GIELLA_CORPUS_ROOT)/$(d)/converted)))
 CORPUS2RAWTEXT = $(GTCORE)/scripts/corpus2rawtext.py

@@ -75,8 +75,8 @@ endif # CAN_HFST
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-orthography-tags.%         \
 					filters/remove-error-strings.%            \
-					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_GC-strings.%           \
+					filters/remove-Use_GC-tags.%              \
+					filters/remove-Use_minusGC-strings.%      \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					$(GIELLA_INSERT_AREATAG_FILTER)           \
@@ -98,8 +98,8 @@ endif # CAN_HFST
 			.o. @\"filters/remove-Orth_IPA-strings.$*\"         \
 			.o. @\"filters/remove-error-strings.$*\"            \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$*\"    \
-			.o. @\"filters/remove-Use_minusGC-tags.$*\"         \
-			.o. @\"filters/remove-Use_GC-strings.$*\"           \
+			.o. @\"filters/remove-Use_GC-tags.$*\"              \
+			.o. @\"filters/remove-Use_minusGC-strings.$*\"      \
 			.o. @\"filters/remove-Use_PMatch-strings.$*\"       \
 			.o. @\"filters/remove-mwe-tags.$*\"                 \
 				$(GIELLA_INSERT_AREATAG_COMPOSE)                \
@@ -174,8 +174,8 @@ define alt_ws_gramchk_fsts
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-orthography-tags.%         \
 					filters/remove-error-strings.%            \
-					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_GC-strings.%           \
+					filters/remove-Use_GC-tags.%              \
+					filters/remove-Use_minusGC-strings.%      \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/$(DEFAULT_WS)-to-$(1).compose.% \
@@ -198,8 +198,8 @@ define alt_ws_gramchk_fsts
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
-			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
-			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
+			.o. @\"filters/remove-Use_GC-tags.$$*\"              \
+			.o. @\"filters/remove-Use_minusGC-strings.$$*\"      \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 				$(GIELLA_INSERT_AREATAG_COMPOSE_DEF)             \
@@ -329,8 +329,8 @@ define alt_orth_disamb_fst
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-orthography-tags.%         \
 					filters/remove-error-strings.%            \
-					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_GC-strings.%           \
+					filters/remove-Use_GC-tags.%              \
+					filters/remove-Use_minusGC-strings.%      \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/$(DEFAULT_ORTH)-to-$(1).compose.% \
@@ -353,8 +353,8 @@ define alt_orth_disamb_fst
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
-			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
-			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
+			.o. @\"filters/remove-Use_GC-tags.$$*\"              \
+			.o. @\"filters/remove-Use_minusGC-strings.$$*\"      \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 				$(GIELLA_INSERT_AREATAG_COMPOSE_DEF)             \
@@ -391,8 +391,8 @@ define alt_orth_disamb_fst
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-orthography-tags.%         \
 					filters/remove-error-strings.%            \
-					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_GC-strings.%           \
+					filters/remove-Use_GC-tags.%              \
+					filters/remove-Use_minusGC-strings.%      \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					orthography/raw-to-$(1).compose.%         \
@@ -415,8 +415,8 @@ define alt_orth_disamb_fst
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
-			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
-			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
+			.o. @\"filters/remove-Use_GC-tags.$$*\"              \
+			.o. @\"filters/remove-Use_minusGC-strings.$$*\"      \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
 				$(GIELLA_INSERT_AREATAG_COMPOSE_DEF)             \
@@ -459,8 +459,8 @@ define area_gramchk_fsts
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-orthography-tags.%         \
 					filters/remove-error-strings.%            \
-					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_GC-strings.%           \
+					filters/remove-Use_GC-tags.%              \
+					filters/remove-Use_minusGC-strings.%      \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-all_areas_but_$(1)-strings.% \
@@ -481,8 +481,8 @@ define area_gramchk_fsts
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
-			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
-			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
+			.o. @\"filters/remove-Use_GC-tags.$$*\"              \
+			.o. @\"filters/remove-Use_minusGC-strings.$$*\"      \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-all_areas_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \
@@ -517,8 +517,8 @@ define dial_gramchk_fsts
 					filters/remove-orig_lang-tags.%           \
 					filters/remove-orthography-tags.%         \
 					filters/remove-error-strings.%            \
-					filters/remove-Use_minusGC-tags.%         \
-					filters/remove-Use_GC-strings.%           \
+					filters/remove-Use_GC-tags.%              \
+					filters/remove-Use_minusGC-strings.%      \
 					filters/remove-Use_minus_PMatch-tags.%    \
 					filters/remove-Use_PMatch-strings.%       \
 					filters/remove-all_dialects_but_$(1)-strings.% \
@@ -539,8 +539,8 @@ define dial_gramchk_fsts
 			.o. @\"filters/remove-Orth_IPA-strings.$$*\"         \
 			.o. @\"filters/remove-error-strings.$$*\"            \
 			.o. @\"filters/remove-Use_minus_PMatch-tags.$$*\"    \
-			.o. @\"filters/remove-Use_minusGC-tags.$$*\"         \
-			.o. @\"filters/remove-Use_GC-strings.$$*\"           \
+			.o. @\"filters/remove-Use_GC-tags.$$*\"              \
+			.o. @\"filters/remove-Use_minusGC-strings.$$*\"      \
 			.o. @\"filters/remove-Use_PMatch-strings.$$*\"       \
 			.o. @\"filters/remove-all_dialects_but_$(1)-strings.$$*\" \
 			.o. @\"filters/remove-mwe-tags.$$*\"                 \

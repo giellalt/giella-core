@@ -276,6 +276,9 @@ clean-local:
 maintainer-clean-local:
 	-rm -f $(GENERATED_LEXC_SRCS) url.lexc
 
+distclean-local:
+	-rm -f $(GENERATED_LEXC_SRCS) url.lexc
+
 ##########################################
 # General build rules included from here:#
 include $(top_srcdir)/../giella-core/am-shared/lexc-include.am

@@ -524,41 +524,71 @@ $(ALL_DESKTOP_ZHFST_FILES): \
 	$(AM_V_GEN)ln -f $< $@
 
 ####### *.bhfst file (opt-in): #######
-# Compact divvunspell speller, error model left un-expanded. Requires
-# divvun-hfst and a divvunspell that determinises during search.
+# Compact divvunspell speller: the acceptor as THFST, the error model as
+# DHFST. The error model is never determinised: its parts are only unioned
+# and concatenated, and DHFST stores the substitution, deletion and insertion
+# fans as default arcs. Requires Divvun HFST, and a divvunspell that reads
+# DHFST.
 HFST_BHFST=$(dir $(HFST_FST2FST))hfst-bhfst
+
+# Set STRING_REGEX_PASS=yes in Makefile.mod-desktop-hfst.am to compile the
+# strings regex file as one rewrite pass: the same relation as ?* . rule . ?*,
+# at a small fraction of the size. It needs every rule in the file to be an
+# optional (->) rule without real contexts; hfst-regexp2fst names any rule
+# that isn't. Otherwise the bhfst error model uses the strings compiled for
+# the zhfst.
+compact_strings=$(if $(filter yes,$(STRING_REGEX_PASS)),pass,desktop)
+
+# Strings regex file as one rewrite pass, repeated as in the zhfst model:
+.generated/strings.regex.%.pass.hfst: strings.%.regex $(GENDIR)
+	$(AM_V_RGX2FST)$(HFST_REGEXP2FST) -S --replace-pass $(HFST_FLAGS) -i $< \
+		--format=openfst-tropical \
+		| $(HFST_REPEAT) -f 1 -t $(STRING_REGEX_EDIT_DISTANCE) \
+		-o $@
+
+.generated/strings.all.%.pass.hfst: \
+		$(subst .regex.%.desktop.,.regex.%.pass.,$(strings_all_deps))
+	$(strings_all_build)
+
+.generated/editdist.all.%.pass.hfst: \
+		$(subst .all.%.desktop.,.all.%.pass.,$(strings_deps)) \
+		.generated/editdist.%.hfst
+	$(strings_fst_include) \
+		| $(HFST_REPEAT) -f 1 -t $(EDIT_DISTANCE) \
+		-o $@
 
 .generated/errmodel.compact.%.hfst: .generated/words.%.desktop.hfst \
 				 $(MAYBE_WORDS2EMOJIS) \
 				 $(initial_letter_deps) \
-				 .generated/editdist.all.%.desktop.hfst \
+				 .generated/editdist.all.%.$(compact_strings).hfst \
 				 $(final_strings_deps) \
 				 $(GENDIR)
-	$(AM_V_GEN)m=.generated/errmodel.compact.$*.work.hfst; \
-	cp .generated/editdist.all.$*.desktop.hfst $$m; \
-	if test -f .generated/final_strings.all.$*.desktop.hfst; then \
+	$(AM_V_GEN)set -e; m=.generated/errmodel.compact.$*.work.hfst; \
+	cp .generated/editdist.all.$*.$(compact_strings).hfst $$m; \
+	$(if $(final_strings_deps), \
 	  $(HFST_REPEAT) -f 0 -t 1 .generated/final_strings.all.$*.desktop.hfst \
-	    | $(HFST_CONCATENATE) $$m - -o $$m.2 && mv -f $$m.2 $$m; \
-	fi; \
-	if test -f .generated/initial_letters.all.$*.desktop.hfst; then \
+	    | $(HFST_CONCATENATE) $$m - -o $$m.2; mv -f $$m.2 $$m;) \
+	$(if $(initial_letter_deps), \
 	  $(HFST_REPEAT) -f 0 -t 1 .generated/initial_letters.all.$*.desktop.hfst \
-	    | $(HFST_CONCATENATE) - $$m -o $$m.2 && mv -f $$m.2 $$m; \
-	fi; \
-	$(HFST_DISJUNCT) .generated/words.$*.desktop.hfst $$m -o $$m.2 \
-	  && mv -f $$m.2 $$m; \
-	if test -n "$(MAYBE_WORDS2EMOJIS)" && test -f "$(MAYBE_WORDS2EMOJIS)"; then \
-	  $(HFST_DISJUNCT) $$m $(MAYBE_WORDS2EMOJIS) -o $$m.2 && mv -f $$m.2 $$m; \
-	fi; \
+	    | $(HFST_CONCATENATE) - $$m -o $$m.2; mv -f $$m.2 $$m;) \
+	$(HFST_DISJUNCT) .generated/words.$*.desktop.hfst $$m -o $$m.2; \
+	mv -f $$m.2 $$m; \
+	$(if $(filter .generated/words2emojis.hfst,$(MAYBE_WORDS2EMOJIS)), \
+	  $(HFST_DISJUNCT) $$m .generated/words2emojis.hfst -o $$m.2; \
+	  mv -f $$m.2 $$m;) \
 	$(HFST_PUSH_WEIGHTS) --push=initial -i $$m -o $@; \
-	rm -f $$m $$m.2
+	rm -f $$m
+
+.generated/errmodel.%.dhfst: .generated/errmodel.compact.%.hfst
+	$(AM_V_GEN)$(HFST_FST2FST) $(HFST_FLAGS) -f dhfst -i $< -o $@
 
 $(GTLANG2).bhfst: .generated/acceptor.default.hfst \
-		.generated/errmodel.compact.default.hfst \
+		.generated/errmodel.default.dhfst \
 		index.xml \
 		$(GT_SPELLER_CONFIG_DEP)
 	$(AM_V_GEN)$(HFST_BHFST) \
 		-a .generated/acceptor.default.hfst \
-		-e .generated/errmodel.compact.default.hfst \
+		-e .generated/errmodel.default.dhfst \
 		-X index.xml \
 		$(if $(GT_SPELLER_CONFIG_DEP),-c $(GT_SPELLER_CONFIG)) \
 		-o $@

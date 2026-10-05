@@ -523,14 +523,12 @@ $(ALL_DESKTOP_ZHFST_FILES): \
 %-desktop.zhfst: %.zhfst
 	$(AM_V_GEN)ln -f $< $@
 
-####### *.dhfst speller archive (opt-in): #######
+####### *.bhfst file (opt-in): #######
 # Compact divvunspell speller: the acceptor as THFST, the error model as
-# DHFST, in the same box container as a bhfst. Archives with DHFST members are
-# named .dhfst so they are never mistaken for a .bhfst, which older
-# divvunspell versions load. The error model is never determinised: its parts
-# are only unioned and concatenated, and DHFST stores the substitution,
-# deletion and insertion fans as default arcs. Requires Divvun HFST, and a
-# divvunspell that reads .dhfst archives.
+# DHFST. The error model is never determinised: its parts are only unioned
+# and concatenated, and DHFST stores the substitution, deletion and insertion
+# fans as default arcs. Requires Divvun HFST, and a divvunspell that reads
+# DHFST.
 HFST_BHFST=$(dir $(HFST_FST2FST))hfst-bhfst
 
 # Set STRING_REGEX_PASS=yes in Makefile.mod-desktop-hfst.am to compile the
@@ -584,7 +582,7 @@ compact_strings=$(if $(filter yes,$(STRING_REGEX_PASS)),pass,desktop)
 .generated/errmodel.%.dhfst: .generated/errmodel.compact.%.hfst
 	$(AM_V_GEN)$(HFST_FST2FST) $(HFST_FLAGS) -f dhfst -i $< -o $@
 
-$(GTLANG2).dhfst: .generated/acceptor.default.hfst \
+$(GTLANG2).bhfst: .generated/acceptor.default.hfst \
 		.generated/errmodel.default.dhfst \
 		index.xml \
 		$(GT_SPELLER_CONFIG_DEP)
@@ -595,7 +593,7 @@ $(GTLANG2).dhfst: .generated/acceptor.default.hfst \
 		$(if $(GT_SPELLER_CONFIG_DEP),-c $(GT_SPELLER_CONFIG)) \
 		-o $@
 
-CLEANFILES+=$(GTLANG2).dhfst
+CLEANFILES+=$(GTLANG2).bhfst
 
 # testing analyser spellers...
 %-analyser.zhfst: index.xml \

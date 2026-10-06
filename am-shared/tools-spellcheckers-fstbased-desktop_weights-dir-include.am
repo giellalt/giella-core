@@ -34,6 +34,12 @@ UNITWEIGHT=$(CORPUSNAME).unitweight.txt
 # (2) is the fallback, so a checkout with no corpus repos beside it still
 # builds a speller -- a missing corpus repo is never an error.
 #
+# A language whose in-tree text is not a slice of its corpus repos, but text
+# found in none of them, sets GIELLA_CORPUS_ADD_INTREE = yes (in
+# tools/spellcheckers/Makefile.mod-spellcheckers.am) to weight from both: the
+# corpus repos' text followed by the in-tree file. Without corpus repos it is
+# the in-tree file alone, as usual.
+#
 # The repos are looked for by make rather than by configure, because whether
 # they are there is a fact about the moment the speller is built, not about the
 # moment the tree was configured: CI clones them in a step of its own, often
@@ -78,12 +84,16 @@ GIELLA_CORPUS_NAMED = $(strip \
 GIELLA_CORPUS_WANTED = $(if $(filter file,$(origin GIELLA_CORPUS_DIRS)),\
     $(foreach r,$(GIELLA_CORPUS_REPOS),$(GIELLA_CORPUS_ROOT)/$(r)),\
     $(GIELLA_CORPUS_DIRS))
+# The in-tree file, when it is added to the corpus repos' text.
+GIELLA_CORPUS_INTREE_ADDED = $(if $(and $(strip $(GIELLA_CORPUS_DIRS)),\
+    $(filter yes,$(GIELLA_CORPUS_ADD_INTREE))),weights/$(CORPUSNAME).raw.txt)
 
 # The resolved source list, as a file, so that a tree which gains or loses a
-# corpus repo rebuilds the weighting instead of silently keeping the text it
-# assembled last time. The recipe always runs; the file only changes, and so
-# only triggers a rebuild, when the answer changes. In CI it first checks that
-# the corpus was named and is all there (see "In CI" above).
+# corpus repo, or turns GIELLA_CORPUS_ADD_INTREE on or off, rebuilds the
+# weighting instead of silently keeping the text it assembled last time. The
+# recipe always runs; the file only changes, and so only triggers a rebuild,
+# when the answer changes. In CI it first checks that the corpus was named and
+# is all there (see "In CI" above).
 .generated/$(CORPUSNAME).corpussrc: FORCE $(GENDIR)
 	$(AM_V_at)if $(GIELLA_IN_CI) ; then \
 	    if test -z '$(GIELLA_CORPUS_NAMED)' ; then \
@@ -96,7 +106,7 @@ GIELLA_CORPUS_WANTED = $(if $(filter file,$(origin GIELLA_CORPUS_DIRS)),\
 	            exit 1 ; } ; \
 	    done ; \
 	fi
-	$(AM_V_at)printf '%s\n' '$(GIELLA_CORPUS_DIRS)' > $@.tmp
+	$(AM_V_at)printf '%s\n' '$(strip $(GIELLA_CORPUS_DIRS) $(GIELLA_CORPUS_INTREE_ADDED))' > $@.tmp
 	$(AM_V_at)if cmp -s $@.tmp $@ ; then rm -f $@.tmp ; else mv -f $@.tmp $@ ; fi
 
 FORCE:
@@ -116,14 +126,17 @@ FORCE:
 .generated/%.corpus.txt: weights/%.raw.txt \
                          .generated/$(CORPUSNAME).corpussrc $(GENDIR)
 	$(AM_V_at)if test -n '$(strip $(GIELLA_CORPUS_DIRS))' ; then \
-	    echo "  CORPUS   $@ <- $(GIELLA_CORPUS_DIRS)" ; \
-	    $(PYTHON) $(CORPUS2RAWTEXT) -l $(GLANG) -o $@ $(GIELLA_CORPUS_DIRS) \
-	      || { if $(GIELLA_IN_CI) ; then \
-	               echo "$@: CI is set and $(GIELLA_CORPUS_DIRS) holds no $(GLANG) text" >&2 ; \
-	               exit 1 ; \
-	           fi ; \
-	           echo "  CORPUS   $@ <- $< (extraction found no $(GLANG) text)" ; \
-	           cp $< $@ ; } ; \
+	    echo "  CORPUS   $@ <- $(GIELLA_CORPUS_DIRS)$(if $(GIELLA_CORPUS_INTREE_ADDED), + $<)" ; \
+	    if $(PYTHON) $(CORPUS2RAWTEXT) -l $(GLANG) -o $@ $(GIELLA_CORPUS_DIRS) ; then \
+	        $(if $(GIELLA_CORPUS_INTREE_ADDED),{ echo ; cat $< ; } >> $@ ;) : ; \
+	    else \
+	        if $(GIELLA_IN_CI) ; then \
+	            echo "$@: CI is set and $(GIELLA_CORPUS_DIRS) holds no $(GLANG) text" >&2 ; \
+	            exit 1 ; \
+	        fi ; \
+	        echo "  CORPUS   $@ <- $< (extraction found no $(GLANG) text)" ; \
+	        cp $< $@ ; \
+	    fi ; \
 	else \
 	    echo "  CORPUS   $@ <- $< ($(if $(GIELLA_CORPUS_NAMED),no corpus repo named,no corpus-$(GLANG) checkout beside $(abs_top_srcdir)))" ; \
 	    cp $< $@ ; \

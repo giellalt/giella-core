@@ -11,6 +11,7 @@
 #   EGG_HFST_TOOL       an hfst tool of this build (its --version names the
 #                       toolchain: Divvun HFST or the C++ HFST)
 #   EGG_CORPUS_SRC      .generated/<corpus>.corpussrc, the resolved corpus repos
+#                       (and weights/<corpus>.raw.txt when that is added)
 #   EGG_CORPUS_TEXT     .generated/<corpus>.corpus.txt, the text weighted from
 #   EGG_CORPUS_RAW      the in-tree weights/<corpus>.raw.txt
 #   EGG_WEIGHTS_CONFIG  weights/config.json
@@ -91,12 +92,18 @@ LangState=$(git_state "$TopSrcDir") || LangState="(not a git checkout)"
 
 # The corpus the frequency weights came from: the corpus repos when the
 # weighting found them (and extracted text from them), else the in-tree file.
+# With GIELLA_CORPUS_ADD_INTREE the source list ends with the in-tree file.
 # A sensitive corpus repo is not named: the speller ships to the public.
 if test -n "${EGG_CORPUS_TEXT:-}"; then
     Corpus=""
     if test -s "${EGG_CORPUS_SRC:-/dev/null}" \
             && ! cmp -s "$EGG_CORPUS_TEXT" "${EGG_CORPUS_RAW:-/dev/null}"; then
         for dir in $(cat "$EGG_CORPUS_SRC"); do
+            case $dir in
+                weights/*.raw.txt)
+                    Corpus="${Corpus:+$Corpus, }in-tree $dir"
+                    continue ;;
+            esac
             name=$(basename "$dir")
             case $name in
                 *-x-sensitive) name="${name%-x-sensitive}-xxx" ;;

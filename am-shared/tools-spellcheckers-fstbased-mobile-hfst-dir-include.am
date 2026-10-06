@@ -243,7 +243,7 @@ MOB_EASTEREGG_ENV = $(if $(filter yes,$(ENABLE_MOB_CORPUS_WEIGHTS)),\
         $(srcdir)/weights/$(MOBILE_CORPUSNAME).raw.txt)) \
     EGG_WEIGHTS_CONFIG=$(srcdir)/weights/config.json) \
     EGG_HFST_TOOL=$(HFST_STRINGS2FST) \
-    EGG_ERRMODEL='edit distance $(MOB_EDIT_DISTANCE), initial edits $(MOB_INITIAL_EDITS), strings $(MOB_STRING_EDITS), final strings $(MOB_FINAL_STRING_EDITS), words $(MOB_WORD_REPLACEMENTS)'
+    EGG_ERRMODEL='edit distance $(MOB_EDIT_DISTANCE), initial edits $(MOB_INITIAL_EDITS), strings $(STRING_EDITS), final strings $(MOB_FINAL_STRING_EDITS), words $(MOB_WORD_REPLACEMENTS)'
 
 # Easter egg content - depends also on the fst, to
 # make sure the easter egg is rebuilt every time the fst is rebuilt:
@@ -369,7 +369,9 @@ predict.%.regex: editdist.%.txt
 # variable setting in Makefile.am.
 # Then combine it with keyboard layout error model:
 .generated/editdist.all.%.mobile.hfst.tmp: $(strings_deps) .generated/editdist.%.hfst
-	$(strings_fst_include) > $@
+	$(strings_fst_include) \
+		| $(HFST_REPEAT) -f 1 -t $(MOB_EDIT_DISTANCE) \
+		> $@
 
 .generated/editdist.all.%.mobile.hfst: .generated/editdist.all.%.mobile.hfst.tmp
 	$(AM_V_CP)cp -f $< $@

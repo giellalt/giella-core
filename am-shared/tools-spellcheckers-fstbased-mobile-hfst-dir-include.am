@@ -509,6 +509,51 @@ $(MOB_GIELLA_PREDICT_HFST): index.predict.xml \
 	$(AM_V_at)$(MKDIR_P) 3
 	$(AM_V_at)cp -f $@ 3/
 
+####### *-mobile.bhfst file (opt-in): #######
+# Compact divvunspell mobile speller: the mobile acceptor and the mobile error
+# model as DHFST, with the index and speller config of the mobile zhfst. As in
+# the desktop <lang>.bhfst, the error model is never determinised: its parts
+# are only unioned and concatenated. Requires Divvun HFST, and a divvunspell
+# that reads DHFST.
+.generated/errmodel.compact.%.mobile.hfst: .generated/words.%.mobile.hfst \
+				 $(mob_initial_letter_deps) \
+				 .generated/editdist.all.%.mobile.hfst \
+				 $(mob_final_strings_deps) \
+				 $(GENDIR)
+	$(AM_V_GEN)set -e; m=.generated/errmodel.compact.$*.mobile.work.hfst; \
+	cp .generated/editdist.all.$*.mobile.hfst $$m; \
+	$(if $(mob_final_strings_deps), \
+	  $(HFST_REPEAT) -f 0 -t 1 .generated/final_strings.all.$*.mobile.hfst \
+	    | $(HFST_CONCATENATE) $$m - -o $$m.2; mv -f $$m.2 $$m;) \
+	$(if $(mob_initial_letter_deps), \
+	  $(HFST_REPEAT) -f 0 -t 1 .generated/initial_letters.all.$*.mobile.hfst \
+	    | $(HFST_CONCATENATE) - $$m -o $$m.2; mv -f $$m.2 $$m;) \
+	$(HFST_DISJUNCT) .generated/words.$*.mobile.hfst $$m -o $$m.2; \
+	mv -f $$m.2 $$m; \
+	$(HFST_PUSH_WEIGHTS) --push=initial -i $$m -o $@; \
+	rm -f $$m
+
+.generated/errmodel.%.mobile.dhfst: .generated/errmodel.compact.%.mobile.hfst
+	$(AM_V_GEN)$(HFST_FST2FST) $(HFST_FLAGS) -f dhfst --dhfst-type errmodel \
+		-i $< -o $@
+
+.generated/acceptor.%.mobile.dhfst: acceptor.%.mobile.hfst
+	$(AM_V_GEN)$(HFST_FST2FST) $(HFST_FLAGS) -f dhfst --dhfst-type acceptor \
+		-i $< -o $@
+
+$(GTLANG2)-mobile.bhfst: .generated/acceptor.default.mobile.dhfst \
+		.generated/errmodel.default.mobile.dhfst \
+		index.mobile.xml \
+		$(GT_SPELLER_CONFIG_DEP)
+	$(AM_V_GEN)$(HFST_BHFST) \
+		-a .generated/acceptor.default.mobile.dhfst \
+		-e .generated/errmodel.default.mobile.dhfst \
+		-X index.mobile.xml \
+		$(if $(GT_SPELLER_CONFIG_DEP),-c $(GT_SPELLER_CONFIG)) \
+		-o $@
+
+CLEANFILES+=$(GTLANG2)-mobile.bhfst
+
 ####### Other targets: ###########
 
 CLEANFILES+=$(MOB_GT_SPELLER_ACCEPTOR) $(MOB_GT_PREDICT_ACCEPTOR)

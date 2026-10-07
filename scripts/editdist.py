@@ -362,9 +362,25 @@ def collect_pair_only_symbols(alphabet, pair_info):
     return sources, targets
 
 
+def with_reverse_pairs(alphabet, pair_info):
+    """The edits and swaps with each listed pair of alphabet symbols also
+    standing for its reverse, unless the reverse is listed itself: a pair
+    listed once is used both ways."""
+    edits = dict(pair_info["edits"])
+    for (src, tgt), pair_weight in pair_info["edits"].items():
+        if src in alphabet and tgt in alphabet:
+            edits.setdefault((tgt, src), pair_weight)
+    swaps = dict(pair_info["swaps"])
+    for (frompair, topair), pair_weight in pair_info["swaps"].items():
+        if all(sym in alphabet for sym in frompair + topair):
+            swaps.setdefault((topair, frompair), pair_weight)
+    return {"edits": edits, "swaps": swaps}
+
+
 def replace_rules(alphabet, pair_info, weight, swap):
     corr = ' "<CORR>" '
     unk = OTHER
+    pair_info = with_reverse_pairs(alphabet, pair_info)
     pair_sources, pair_targets = collect_pair_only_symbols(alphabet, pair_info)
     corrections = "["
     # first, the empty string may become the empty string anywhere
@@ -373,7 +389,7 @@ def replace_rules(alphabet, pair_info, weight, swap):
         this_weight = alphabet[a]
         # insertions
         if ("", a) in pair_info["edits"]:
-            this_weight = pair_info["edits"][("", a)] + alphabet[a]
+            this_weight = pair_info["edits"][("", a)]
         corrections += f'\t[ "{a}" {corr} ]::{this_weight} |\n'
     # insertions of symbols named only by an explicit pair
     for (src, tgt), pair_weight in sorted(pair_info["edits"].items()):

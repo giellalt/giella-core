@@ -220,7 +220,8 @@ $(GIELLA_GC_DRBDISTRO): $(GIELLA_GC_PIPELINE) \
 	$(AM_V_at)test -f $(GIELLA_GC_PIPELINE) || cp -f $(srcdir)/$(GIELLA_GC_PIPELINE) $(GIELLA_GC_PIPELINE)
 	$(AM_V_at)test -z "$(GIELLA_GC_SPELLER_CONFIG_SRC)" || { \
 	  $(MKDIR_P) $(top_builddir)/tools/spellcheckers && \
-	  cp -f $(GIELLA_GC_SPELLER_CONFIG_SRC) \
+	  test "$(GIELLA_GC_SPELLER_CONFIG_SRC)" == "$(top_builddir)/tools/spellcheckers/config.json" ||\
+		cp -f $(GIELLA_GC_SPELLER_CONFIG_SRC) \
 	        $(top_builddir)/tools/spellcheckers/config.json ; }
 # divvun-runtime before 0.4.0 executes the pipeline by writing its source text,
 # and nothing else, into a directory under TMPDIR -- so an import of a file

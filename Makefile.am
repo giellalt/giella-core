@@ -25,7 +25,7 @@ docs: $(srcdir)/docs/badgedata/pkg-version.json
 
 $(srcdir)/docs/badgedata/pkg-version.json: FORCE
 	@mkdir -p $(srcdir)/docs/badgedata
-	$(AM_V_GEN)$(abs_top_srcdir)/scripts/make-version-json.sh $(abs_top_srcdir) FST --label "Version" > $@
+	$(AM_V_GEN)$(abs_top_srcdir)/scripts/make-version-json.sh $(abs_top_srcdir) PKG --label "Version" > $@
 
 pkgconfigdir = $(prefix)/share/pkgconfig
 pkgconfig_DATA = $(PACKAGE).pc

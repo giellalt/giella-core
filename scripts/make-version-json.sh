@@ -7,12 +7,14 @@ function print_usage() {
     echo "Usage: $0 INPUTDIR VARNAME [--label LABEL]"
     echo "Build a version badge JSON (e.g. pkg-version.json) for INPUTDIR (language root dir)"
     echo
-    echo "  VARNAME                 Version variable name (e.g., FST, SPELLER, GRAMCHECK)"
+    echo "  VARNAME                 Which version to read: PKG for the package version"
+    echo "                          (AC_INIT), or X for AC_SUBST([XVERSION]), e.g."
+    echo "                          SPELLER, GRAMCHECK, HYPH, TTSTEXTPROC"
     echo "  -h, --help              Print this usage info"
     echo "  -l, --label LABEL       Badge label (default: derived from VARNAME)"
     echo
     echo "Examples:"
-    echo "  $0 /path/to/lang-sme FST"
+    echo "  $0 /path/to/lang-sme PKG"
     echo "  $0 /path/to/lang-sme SPELLER --label 'Speller version'"
     echo
 }
@@ -50,11 +52,17 @@ while test $# -ge 1 ; do
     shift
 done
 
+# FST is the old name for PKG, from when the badge file was fst-version.json.
+# Kept so callers that still pass FST keep working.
+if test "$varname" = "FST" ; then
+    varname=PKG
+fi
+
 # Set default label if not provided
 if test -z "$label" ; then
     case "$varname" in
-        FST)
-            label="FST version"
+        PKG)
+            label="PKG version"
             ;;
         SPELLER)
             label="Speller version"
@@ -81,8 +89,8 @@ if test ! -f "$inputdir/configure.ac" ; then
     message="N/A"
 else
     # Extract version based on variable name
-    if test "$varname" = "FST" ; then
-        # Extract version from AC_INIT in configure.ac
+    if test "$varname" = "PKG" ; then
+        # Package version, from AC_INIT in configure.ac
         # AC_INIT([Giella sme], [0.2.0], ...)
         version=$(grep "^AC_INIT" "$inputdir/configure.ac" | sed 's/^AC_INIT(\[[^]]*\], *\[\([^]]*\)\].*/\1/')
     else

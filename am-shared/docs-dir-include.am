@@ -125,7 +125,7 @@ $(srcdir)/badgedata/pkg-variants.json: FORCE
 
 $(srcdir)/badgedata/pkg-version.json: FORCE
 	@mkdir -p $(srcdir)/badgedata
-	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) FST > $@
+	$(AM_V_GEN)$(GTCORE)/scripts/make-version-json.sh $(abs_top_srcdir) PKG > $@
 
 $(srcdir)/badgedata/speller-suggestions.json: FORCE
 	@mkdir -p $(srcdir)/badgedata

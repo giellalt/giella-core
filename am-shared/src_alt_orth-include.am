@@ -1008,3 +1008,5 @@ define alt_orth_tts_analysers
 		 quit\n" | $$(XFST_TOOL)
 endef
 $(foreach alt_orth,$(ALT_ORTHS),$(eval $(call alt_orth_tts_analysers,$(alt_orth))))
+
+CLEANFILES+=$(ALT_ORTH_ANALYSERS) $(ALT_ORTH_GENERATORS)

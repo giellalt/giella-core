@@ -210,3 +210,5 @@ define dialect_fsts
 endef
 
 $(foreach dialect,$(DIALECTS),$(eval $(call dialect_fsts,$(dialect))))
+
+CLEANFILES+=$(DIALECT_ANALYSERS) $(DIALECT_GENERATORS)

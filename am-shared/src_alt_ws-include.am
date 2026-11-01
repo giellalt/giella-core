@@ -299,3 +299,5 @@ $(foreach alt_ws,$(ALT_WSS),$(eval $(call alt_ws_fsts,$(alt_ws))))
 ##		done ; \
 ##	fi
 ##	cp analyser-gt-desc.COMBO.hfst.tmp $@
+
+CLEANFILES+=$(ALT_WS_ANALYSERS) $(ALT_WS_GENERATORS)

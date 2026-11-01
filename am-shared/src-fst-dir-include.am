@@ -882,7 +882,7 @@ analyser-emojis-gt-desc.%: morphology/.generated/emojis.%
 		quit\n" | $(XFST_TOOL)
 
 
-CLEANFILES=$(GT_FSTs_NO_INSTALL) $(GT_RAW)
+CLEANFILES=$(GT_FSTs_NO_INSTALL) $(GT_RAW) $(GT_ANALYSERS) $(GT_GENERATORS)
 
 ####### Other targets: ###########
 

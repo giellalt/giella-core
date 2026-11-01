@@ -156,3 +156,5 @@ define area_fsts
 		 quit\n" | $$(XFST_TOOL)
 endef
 $(foreach area,$(AREAS),$(eval $(call area_fsts,$(area))))
+
+CLEANFILES+=$(AREA_ANALYSERS) $(AREA_GENERATORS)

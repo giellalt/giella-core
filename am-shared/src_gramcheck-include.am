@@ -577,4 +577,5 @@ define giella_gramcheck_analysers
 endef
 $(foreach fst,hfst foma,$(eval $(call giella_gramcheck_analysers,$(fst))))
 
+CLEANFILES+=$(GT_PROOF_ANALYSERS) $(GT_PROOF_GENERATORS)
 # vim: set ft=automake:

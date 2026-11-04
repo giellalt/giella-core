@@ -25,15 +25,9 @@ REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 # " reset syntax colouring - gets confused by the single double quote in the previous line
 
 # Docs generation switch (issue #452). Docs pages are opt-in:
-# - GIELLA_DOCS is set by configure (--enable-docs, default no) in
-#   giella-macros.m4. Lang repos with older m4 don't define it at all; empty
-#   means enabled, so they keep building docs as before until they get the
-#   template update.
+# - built as part of `make` only when GIELLA_DOCS=yes (configure --enable-docs)
 # - `make docs` always builds the pages, whatever configure said.
-# - Override per run with `make GIELLA_DOCS=yes` or `make GIELLA_DOCS=no`.
-# Plain GNU make functions rather than an automake `if`, because an automake
-# conditional would break automake in langs whose configure doesn't define it.
-DOCS_ENABLED = $(if $(filter docs,$(MAKECMDGOALS)),yes,$(if $(filter no,$(GIELLA_DOCS)),,yes))
+DOCS_ENABLED = $(if $(filter docs,$(MAKECMDGOALS)),yes,$(filter yes,$(GIELLA_DOCS)))
 
 # Variant badge files to generate when variant prooftools are enabled:
 SPELLER_BADGE_VARIANTS=

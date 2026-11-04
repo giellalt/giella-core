@@ -21,7 +21,7 @@ pkgconfig_DATA = giella-$(GTLANG).pc
 
 configure: banner
 
-.PHONY: banner test dev docs
+.PHONY: banner test dev docs badgedata
 
 banner:
 	@echo
@@ -39,8 +39,13 @@ dev:
 	-$(MAKE) dev -C tools/grammarcheckers
 	-$(MAKE) dev -C tools/tts
 
-# docs in docs dir
+# docs in docs dir: documentation pages from source doccomments (on demand,
+# whether or not configure was given --enable-docs)
 docs:
 	$(MAKE) docs -C docs
+
+# badge endpoint JSON (needs network, jq, and `make check` reports)
+badgedata:
+	$(MAKE) badgedata -C docs
 
 # vim: set ft=automake:

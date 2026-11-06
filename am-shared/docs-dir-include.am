@@ -24,6 +24,11 @@ STRIP_FRONTMATTER = $(GAWK) 'NR==1 && $$0=="---" {infm=1; next} infm && $$0=="--
 REPONAME=$(shell  grep '__REPO__' $(top_srcdir)/.gut/delta.toml | cut -d'"' -f2)
 # " reset syntax colouring - gets confused by the single double quote in the previous line
 
+# Docs generation switch (issue #452). Docs pages are opt-in:
+# - built as part of `make` only when GIELLA_DOCS=yes (configure --enable-docs)
+# - `make docs` always builds the pages, whatever configure said.
+DOCS_ENABLED = $(if $(filter docs,$(MAKECMDGOALS)),yes,$(filter yes,$(GIELLA_DOCS)))
+
 # Variant badge files to generate when variant prooftools are enabled:
 SPELLER_BADGE_VARIANTS=
 if HAVE_DIALECTS
@@ -45,9 +50,16 @@ endif
 
 SPELLER_VARIANT_BADGE_FILES=$(patsubst %,$(srcdir)/badgedata/speller-suggestions-%.json,$(SPELLER_BADGE_VARIANTS))
 
-# no regenerations while debugging
-doc_DATA=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
-DOCFILES=\
+# Documentation pages extracted from source doccomments. Part of `all` (and
+# installed) only when docs are enabled; `make docs` builds them on demand.
+DOCS_PAGES=$(INDEX) $(LINKS) $(ALLINONE_MD_PAGE)
+doc_DATA=$(if $(DOCS_ENABLED),$(DOCS_PAGES))
+
+# Badge endpoint JSON files. Never part of `all`: they need network access
+# (curl to the GitHub API), jq, and speller reports from `make check`. CI
+# (divvun-actions) runs the generator scripts directly; `make badgedata` is
+# for local preview.
+BADGEFILES=\
 	badgedata/fst-lemmacount.json \
 	badgedata/pkg-maturity.json \
 	badgedata/pkg-variants.json \
@@ -60,9 +72,11 @@ DOCFILES=\
 	badgedata/tts-textproc-version.json \
 	badgedata/gramcheck-rules.json
 
-.PHONY: generate-markdown regenerate-markdown docs FORCE
+.PHONY: generate-markdown regenerate-markdown docs badgedata FORCE
 
-docs: $(DOCFILES)
+docs: $(DOCS_PAGES)
+
+badgedata: $(BADGEFILES)
 
 regenerate-markdown: generate-markdown
 
@@ -160,8 +174,11 @@ $(srcdir)/badgedata/fst-coverage.json: FORCE
 	@echo this can take some hours...
 	$(AM_V_GEN)$(GTCORE)/scripts/make-coveragebadge-json.sh $(GLANG) > $@
 
-# Define all doccomment source files in a variable:
-DOCSRC_XEROX := $(shell fgrep -rl \
+# Define all doccomment source files in a variable.
+# Skipped entirely when docs are disabled: these run at parse time on every
+# make invocation, and an empty DOCSRC also means the per-file rules below
+# (which expand REPOURL, and so call git) are never generated.
+DOCSRC_XEROX := $(if $(DOCS_ENABLED),$(shell fgrep -rl \
 		--include '*.lexc' \
 		--include '*.twolc' \
 		--include '*.pmscript' \
@@ -172,8 +189,8 @@ DOCSRC_XEROX := $(shell fgrep -rl \
 		--exclude-dir 'orig' \
 		--exclude-dir 'incoming' \
 		'!! ' $(top_srcdir)/src/* $(top_srcdir)/tools/* |\
-		fgrep -v incoming/ )
-DOCSRC_CG3 := $(shell fgrep -rl \
+		fgrep -v incoming/ ))
+DOCSRC_CG3 := $(if $(DOCS_ENABLED),$(shell fgrep -rl \
 		--include '*.cg3' \
 		--exclude 'Makefile*' \
 		--exclude 'lexicon.tmp.lexc' \
@@ -181,7 +198,7 @@ DOCSRC_CG3 := $(shell fgrep -rl \
 		--exclude-dir 'orig' \
 		--exclude-dir 'incoming' \
 		'!! ' $(top_srcdir)/src/* $(top_srcdir)/tools/* |\
-		fgrep -v incoming/ )
+		fgrep -v incoming/ ))
 DOCSRC=$(sort $(DOCSRC_XEROX) $(DOCSRC_CG3) )
 
 # Remove vpath prefix for nested list construction:
